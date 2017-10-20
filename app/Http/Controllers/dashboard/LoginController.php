@@ -16,11 +16,10 @@ class LoginController extends Controller{
      */
     public function display()
     {
-
-        $encrypted = Crypt::encryptString('admin123');
-        $key = config("app.encrypt_key");
-
-        dump(md5("lingyikeji".$encrypted.$key));
+        /*测试加密模式*/
+        //$encrypted = Crypt::encryptString('admin123');
+        //$key = config("app.encrypt_key");
+        //dump(md5("lingyikeji".$encrypted.$key));
         //$decrypted = Crypt::decryptString($encrypted);
         //echo $decrypted;
 

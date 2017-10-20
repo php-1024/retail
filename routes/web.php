@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('checkIsLogin');
 
 //Route::get('login/captcha/{tmp}','dashboard\LoginController@captcha');
 //Route::get('login','dashboard\LoginController@display');
