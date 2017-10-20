@@ -27,7 +27,7 @@
 
             </div>
             <h3>欢饮使用零壹新科技后台管理系统</h3>
-            <form class="m-t" role="form" action="index.html" action="{{route('checklogin')}}">
+            <form class="m-t" role="form" action="index.html" action="{{ url('login/checklogin') }}">
                 <div class="form-group">
                     <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" required>
                 </div>
