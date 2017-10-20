@@ -67,7 +67,7 @@
 					buttons: [{
 						label: '确定',
 						action: function(dialog) {
-							dialog.close
+							dialog.close();
 						}
 					}]
 				});
