@@ -38,6 +38,11 @@
                     <input type="password" class="form-control" placeholder="验证码" required>
                 	
                 </div>
+                <div class="form-group col-md-6">
+                	
+                    <input type="password" class="form-control" placeholder="验证码" required>
+                	
+                </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
             </form>
             <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-10-20</small> </p>
