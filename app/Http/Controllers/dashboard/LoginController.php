@@ -46,5 +46,10 @@ class LoginController extends Controller{
         header('Content-Type: image/jpeg');
         $builder->output();
     }
+
+    //检测登录
+    public function checkLogin(){
+        return response()->json(['data' => '测试返回', 'status' => '1']);
+    }
 }
 ?>
