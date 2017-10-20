@@ -63,7 +63,8 @@
 				BootstrapDialog.show({
 					title: title,
 					message: message,
-					type:BootstrapDialog.TYPE_SUCCESS,
+					type:BootstrapDialog.TYPE_DANGER,
+					size:BootstrapDialog.SIZE_WIDE,
 					buttons: [{
 						label: '确定',
 						action: function(dialog) {
