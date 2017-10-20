@@ -7,6 +7,7 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 
 use Gregwar\Captcha\CaptchaBuilder;
+use Illuminate\Support\Facades\Crypt;
 use Session;
 
 class LoginController extends Controller{
