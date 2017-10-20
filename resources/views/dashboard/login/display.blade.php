@@ -38,7 +38,7 @@
                     <input type="password" class="form-control" placeholder="验证码" required>
                 	
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" style="padding-left:0px;">
                 	
                     <input type="password" class="form-control" placeholder="验证码" required>
                 	
