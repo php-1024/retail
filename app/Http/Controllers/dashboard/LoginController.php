@@ -16,7 +16,11 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        //echo assets('public/dashboard/library/bootstrap/test.js');
+
+        $encrypted = Crypt::encryptString('Hello world.');
+
+        $decrypted = Crypt::decryptString($encrypted);
+        echo $decrypted;
         $data['random']=time();
         return view('dashboard/login/display',$data);
 
