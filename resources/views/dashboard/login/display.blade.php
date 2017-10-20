@@ -22,7 +22,7 @@
         <div>
             <div>
 
-                <h1 class="logo-name">01</h1>
+                <h1 class="logo-name">ZERONE</h1>
 
             </div>
             <h3>欢饮使用零壹新科技后台管理系统</h3>
