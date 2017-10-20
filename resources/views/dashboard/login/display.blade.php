@@ -33,10 +33,10 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="密码" required>
                 </div>
-                <div class="form-group">
-                	<div class="col-md-6">
+                <div class="form-group col-md-6">
+                	
                     <input type="password" class="form-control" placeholder="验证码" required>
-                	</div>
+                	
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
             </form>
