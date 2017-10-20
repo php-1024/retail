@@ -17,10 +17,10 @@ class LoginController extends Controller{
     public function display()
     {
 
-        $encrypted = Crypt::encryptString('Hello world.');
+        //$encrypted = Crypt::encryptString('Hello world.');
+        //$decrypted = Crypt::decryptString($encrypted);
+        //echo $decrypted;
 
-        $decrypted = Crypt::decryptString($encrypted);
-        echo $decrypted;
         $data['random']=time();
         return view('dashboard/login/display',$data);
 
