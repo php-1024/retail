@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group col-md-6" >
                 	<input type="hidden" id="captcha_url" value="{{ URL('login/captcha') }}">
-                    <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="function change_captcha();">
+                    <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="return change_captcha();">
                 	
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
