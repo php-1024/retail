@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller{
     public function display(){
-        echo asset('public/dashboard/library/bootstrap/test.js');
+        echo assets('public/dashboard/library/bootstrap/test.js');
         return "123456";
     }
 }
