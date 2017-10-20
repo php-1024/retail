@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'login'], function () {
     Route::get('/', 'dashboard\LoginController@display');
     Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
-    Route::post('checklogin');
+    Route::post('checklogin','dashboard\LoginController@checkLogin');
 });
 
 Route::get('tt',function(){

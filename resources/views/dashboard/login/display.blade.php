@@ -9,6 +9,7 @@
     <title>零壹新科技后台管理系统| 登陆界面</title>
 
     <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap-dialog.css" rel="stylesheet">
     <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
     <link href="{{asset('public/dashboard')}}/css/animate.css" rel="stylesheet">
@@ -43,19 +44,25 @@
                     <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="return change_captcha();">
                 	
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
+                <button type="button" class="btn btn-primary block full-width m-b" onClick="return showMessage();">登陆</button>
             </form>
             <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-10-20</small> </p>
         </div>
     </div>
     <script src="{{asset('public/dashboard/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap.min.js"></script>
+	<script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap-dialog.js"></script>
     <script>
 			//修改验证码
     		function change_captcha(){
 				var url = $("#captcha_url").val();
 				url = url + "/" + Math.random();
 				$("#login_captcha").attr("src",url);
+			}
+			function showMessage(){
+				BootstrapDialog.show({
+					message: 'Hi Apple!'
+				});
 			}
     </script>
 </body>
