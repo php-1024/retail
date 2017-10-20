@@ -16,7 +16,7 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="green-bg">
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
