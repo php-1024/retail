@@ -89,7 +89,6 @@
 				var target = $("#currentForm");
 				var url = target.attr("action");
 				var data = target.serialize();
-				alert(data);
 				$.post(url,data,function(json){
 						showMessage("提示消息",json.data);
 				});
