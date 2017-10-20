@@ -6,7 +6,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 
-class CheckIsLogin{
+class DashBoardLoginPost {
     public function handle($request,Closure $next){
         if($request->input('username')){
            return response()->json(['data' => '请输入用户名', 'status' => '0']);
