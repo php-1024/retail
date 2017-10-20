@@ -18,10 +18,10 @@ Route::get('/', function () {
 //Route::get('login/captcha/{tmp}','dashboard\LoginController@captcha');
 //Route::get('login','dashboard\LoginController@display');
 //登陆页面路由组
-Route::group(['prefix' => 'login'], function () {
+Route::group(['prefix' => 'login','middleware' => 'checkNotLogin'], function () {
     Route::get('/', 'dashboard\LoginController@display');
     Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
-    Route::any('checklogin','dashboard\LoginController@checkLogin');
+    Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware('DashBoardLoginPost');
 });
 
 Route::get('tt',function(){

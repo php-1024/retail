@@ -90,7 +90,11 @@
 				var url = target.attr("action");
 				var data = target.serialize();
 				$.post(url,data,function(json){
+					if(json==1){
+						window.location.reload();
+					}else{
 						showMessage("提示消息",json.data);
+					}
 				});
 			}
     </script>

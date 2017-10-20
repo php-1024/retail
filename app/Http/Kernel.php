@@ -56,6 +56,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        //检测是否登录
         'checkIsLogin'=> \App\Http\Middleware\CheckIsLogin::class,
+        //检测用户登录后台提交的数据是否一致
+        'DashBoardLoginPost'=>\App\Http\Middleware\DashBoardLoginPost::class,
     ];
 }
