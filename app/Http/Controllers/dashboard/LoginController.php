@@ -18,7 +18,7 @@ class LoginController extends Controller{
     {
 
         $encrypted = Crypt::encryptString('admin123');
-        $key = config(app.encrypt_key);
+        $key = config(app.name);
         var_dump($key);
         //$decrypted = Crypt::decryptString($encrypted);
         //echo $decrypted;
