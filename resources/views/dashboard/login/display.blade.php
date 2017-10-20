@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group col-md-6" >
                 	
-                    <img src="{{ URL('login/captcha/'.time()); }}">
+                    <img src="{{ URL('login/captcha/'.$random) }}">
                 	
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
