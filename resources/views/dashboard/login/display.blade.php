@@ -53,7 +53,7 @@
     <script>
 			//修改验证码
     		function change_captcha(){
-				var url = $("#captcha").val();
+				var url = $("#captcha_url").val();
 				url = url + "/" + Math.random();
 				$("#login_captcha").attr("src",url);
 			}
