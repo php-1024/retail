@@ -17,7 +17,7 @@ Route::get('/', function () {
 //Route::get('login','dashboard\LoginController@display');
 //Route::get('login/captcha/{tmp}','dashboard\LoginController@captcha');
 //登陆页面路由组
-Route::group(['as' => 'login'], function () {
+Route::group(['prefix' => 'login'], function () {
     Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
 });
 
