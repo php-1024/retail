@@ -8,11 +8,11 @@
 
     <title>零壹新科技后台管理系统| 登陆界面</title>
 
-    <link href="{{asset('public/dashboard/library/bootstrap/')}}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/dashboard/library/font/')}}/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
-    <link href="{{asset('public/dashboard/')}}css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/dashboard/')}}css/style.css" rel="stylesheet">
+    <link href="{{asset('public/dashboard')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/dashboard')}}/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -48,8 +48,8 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="{{asset('public/dashboard/library/jquery/')}}js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/dashboard/library/bootstrap/')}}js/bootstrap.min.js"></script>
+    <script src="{{asset('public/dashboard/library/jquery')}}/js/jquery-2.1.1.js"></script>
+    <script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap.min.js"></script>
 
 </body>
 
