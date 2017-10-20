@@ -47,6 +47,7 @@
                 </div>
                 <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登陆</button>
             </form>
+			
             <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027</small> </p>
         </div>
     </div>
@@ -87,7 +88,7 @@
 			function postForm(){
 				var target = $("#currentForm");
 				var url = target.attr("action");
-				var data = target.serializes();
+				var data = target.serialize();
 				alert(data);
 				$.post(url,data,function(json){
 						showMessage("提示消息",json.data);
