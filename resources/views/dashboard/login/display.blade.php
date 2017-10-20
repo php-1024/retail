@@ -34,7 +34,7 @@
                     <input type="password" class="form-control" placeholder="密码" required>
                 </div>
                 <div class="form-group">
-                	<div class="col-md-2">
+                	<div class="col-md-6">
                     <input type="password" class="form-control" placeholder="验证码" required>
                 	</div>
                 </div>
