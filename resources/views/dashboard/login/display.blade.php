@@ -64,7 +64,7 @@
 					title: title,
 					message: message,
 					type:BootstrapDialog.TYPE_DANGER,
-					size:BootstrapDialog.SIZE_LARGE,
+					size:BootstrapDialog.SIZE_NORMAL,
 					buttons: [{
 						label: '确定',
 						action: function(dialog) {
