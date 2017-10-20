@@ -8,13 +8,13 @@ use Session;
 
 class DashBoardLoginPost {
     public function handle($request,Closure $next){
-        if($request->input('username')){
+        if(empty($request->input('username'))){
            return response()->json(['data' => '请输入用户名', 'status' => '0']);
         }
-        if($request->input('password')){
+        if(empty($request->input('password'))){
             return response()->json(['data' => '请输入登录密码', 'status' => '0']);
         }
-        if($request->input('captcha')){
+        if(empty($request->input('captcha'))){
             return response()->json(['data' => '请输入验证码', 'status' => '0']);
         }
         if (Session::get('milkcaptcha') == $request->input('captcha')) {
