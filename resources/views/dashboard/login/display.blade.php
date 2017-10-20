@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group col-md-6" >
                 	
-                    <input type="password" class="form-control" placeholder="验证码" required>
+                    <img src="{{ URL('login/captcha/'.time()); }}">
                 	
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>

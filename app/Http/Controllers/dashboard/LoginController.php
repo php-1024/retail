@@ -20,7 +20,7 @@ class LoginController extends Controller{
 
     }
     /*
-     * 验证码
+     * 生成验证码
      */
     public function captcha()
     {
