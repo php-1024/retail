@@ -57,9 +57,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         //检测是否登录
-        'checkIsLogin'=> \App\Http\Middleware\CheckIsLogin::class,
+        'CheckIsLogin'=> \App\Http\Middleware\CheckIsLogin::class,
         //检测是否登录 - 登录页面 防止重复使用登录页面
-        'checkIsLogin'=> \App\Http\Middleware\CheckNotLogin::class,
+        'CheckNotLogin'=> \App\Http\Middleware\CheckNotLogin::class,
         //检测用户登录后台提交的数据是否一致
         'DashBoardLoginPost'=>\App\Http\Middleware\DashBoardLoginPost::class,
     ];
