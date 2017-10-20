@@ -10,7 +10,7 @@ class CheckNotLogin{
     public function handle($request,Closure $next){
         //获取用户登陆存储的SessionId
         $sess_key = Session::get('zerone_admin_id');
-        //如果不为空跳转到登陆页面
+        //如果不为空跳转到首页
         if(!empty($sess_key)) {
             return redirect('/');
         }
