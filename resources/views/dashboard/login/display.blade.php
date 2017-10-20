@@ -35,12 +35,12 @@
                 </div> 
                 <div class="form-group col-md-6" style="padding-left:0px;">
                 	
-                    <input type="password" class="form-control" placeholder="验证码" required>
+                    <input type="text" class="form-control" placeholder="验证码" required>
                 	
                 </div>
                 <div class="form-group col-md-6" >
-                	
-                    <img src="{{ URL('login/captcha/'.$random) }}">
+                	<input type="hidden" id="captcha_url" value="{{ URL('login/captcha') }}">
+                    <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="function change_captcha();">
                 	
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
@@ -50,5 +50,13 @@
     </div>
     <script src="{{asset('public/dashboard/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap.min.js"></script>
+    <script>
+			//修改验证码
+    		function change_captcha(){
+				var url = $("#captcha").val();
+				url = url + "/" + Math.random();
+				$("#login_captcha").attr("src",url);
+			}
+    </script>
 </body>
 </html>
