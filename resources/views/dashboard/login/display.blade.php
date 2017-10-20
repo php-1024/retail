@@ -44,7 +44,7 @@
                     <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="return change_captcha();">
                 	
                 </div>
-                <button type="button" class="btn btn-primary block full-width m-b" onClick="return showMessage();">登陆</button>
+                <button type="button" class="btn btn-primary block full-width m-b" onClick="return showMessage('你好','再见');">登陆</button>
             </form>
             <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-10-20</small> </p>
         </div>
@@ -59,19 +59,15 @@
 				url = url + "/" + Math.random();
 				$("#login_captcha").attr("src",url);
 			}
-			function showMessage(){
+			function showMessage(title,message){
 				BootstrapDialog.show({
-					title: 'Default Title',
-					message: 'Click buttons below.',
+					title: title,
+					message: message,
+					type:BootstrapDialog.TYPE_SUCCESS,
 					buttons: [{
-						label: 'Message 1',
+						label: '确定',
 						action: function(dialog) {
-							dialog.setMessage('Message 1');
-						}
-					}, {
-						label: 'Message 2',
-						action: function(dialog) {
-							dialog.setMessage('Message 2');
+							dialog.close
 						}
 					}]
 				});
