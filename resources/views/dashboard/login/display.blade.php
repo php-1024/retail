@@ -30,14 +30,14 @@
             <form class="m-t" role="form" action="{{ url('login/checklogin') }}">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
-                    <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" required>
+                    <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" >
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="密码" required>
+                    <input type="password" name="password" class="form-control" placeholder="密码" >
                 </div> 
                 <div class="form-group col-md-6" style="padding-left:0px;">
                 	
-                    <input type="text" name="captcha" class="form-control" placeholder="验证码" required>
+                    <input type="text" name="captcha" class="form-control" placeholder="验证码" >
                 	
                 </div>
                 <div class="form-group col-md-6" >
