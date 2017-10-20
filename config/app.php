@@ -2,6 +2,7 @@
 
 return [
 
+    'encrypt_key'=>'1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',
     /*
     |--------------------------------------------------------------------------
     | Application Name
