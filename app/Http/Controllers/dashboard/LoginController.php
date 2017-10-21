@@ -3,11 +3,12 @@
  *新版本登陆界面
  *
  **/
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Admin;
 use Session;
 
 class LoginController extends Controller{
@@ -22,7 +23,8 @@ class LoginController extends Controller{
         //dump(md5("lingyikeji".$encrypted.$key));
         //$decrypted = Crypt::decryptString($encrypted);
         //echo $decrypted;
-
+        $info = Admin::get();
+        dump($info);
         $data['random']=time();
         return view('dashboard/login/display',$data);
 
@@ -49,7 +51,7 @@ class LoginController extends Controller{
 
     //检测登录
     public function checkLogin(){
-        return response()->json(['data' => '测试返回', 'status' => '1']);
+        //return response()->json(['data' => '测试返回', 'status' => '1']);
     }
 }
 ?>
