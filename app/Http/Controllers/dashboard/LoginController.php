@@ -23,8 +23,6 @@ class LoginController extends Controller{
         //dump(md5("lingyikeji".$encrypted.$key));
         //$decrypted = Crypt::decryptString($encrypted);
         //echo $decrypted;
-        $info = Admin::get();
-        dump($info);
         $data['random']=time();
         return view('dashboard/login/display',$data);
 
