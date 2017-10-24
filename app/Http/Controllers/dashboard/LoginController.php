@@ -49,7 +49,7 @@ class LoginController extends Controller{
 
     //检测登录
     public function checkLogin(){
-        //return response()->json(['data' => '测试返回', 'status' => '1']);
+        return response()->json(['data' => '登录成功', 'status' => '1']);
     }
 }
 ?>
