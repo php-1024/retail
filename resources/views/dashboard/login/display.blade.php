@@ -96,8 +96,8 @@
 						window.location.reload();
 					}else{
 						swal({
-							title: "Welcome in Alerts",
-							text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+							title: "提示信息",
+							text: json.data
 						});
 					}
 				});
