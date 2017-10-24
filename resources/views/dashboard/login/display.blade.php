@@ -93,6 +93,8 @@
 								confirmButtonText: "确定",
 								type: "success"
 
+							},function(){
+								window.location.reload();
 							});
 						});
 					}
