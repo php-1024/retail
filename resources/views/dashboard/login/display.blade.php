@@ -83,7 +83,7 @@
 							text: json.data,
 							confirmButtonColor:"#DD6B55",
 							confirmButtonText: "确定",
-							type: "warning"
+							//type: "warning"
 						});
 						/*
 						swal({
