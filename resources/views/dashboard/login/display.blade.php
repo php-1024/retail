@@ -9,7 +9,6 @@
 	
     <title>零壹新科技后台管理系统| 登陆界面</title>
     <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-	<link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap-dialog.css" rel="stylesheet">
 	<link href="{{asset('public/dashboard/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
@@ -54,7 +53,6 @@
     </div>
     <script src="{{asset('public/dashboard/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap.min.js"></script>
-	<script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap-dialog.js"></script>
 	<script src="{{asset('public/dashboard/library/sweetalert')}}/js/sweetalert.min.js"></script>
     <script>
 			$(function(){
@@ -71,21 +69,6 @@
 				url = url + "/" + Math.random();
 				$("#login_captcha").attr("src",url);
 			}
-			//提示消息
-			function showMessage(title,message){
-				BootstrapDialog.show({
-					title: title,
-					message: message,
-					type:BootstrapDialog.TYPE_DANGER,
-					size:BootstrapDialog.SIZE_NORMAL,
-					buttons: [{
-						label: '确定',
-						action: function(dialog) {
-							dialog.close();
-						}
-					}]
-				});
-			}
 			//提交表单
 			function postForm(){
 				var target = $("#currentForm");
@@ -99,7 +82,8 @@
 							title: "提示信息",
 							text: json.data,
 							confirmButtonColor:"#DD6B55",
-							confirmButtonText: "确定"
+							confirmButtonText: "确定",
+							type: "warning"
 						});
 					}
 				});
