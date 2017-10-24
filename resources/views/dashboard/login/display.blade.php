@@ -98,6 +98,7 @@
 						swal({
 							title: "提示信息",
 							text: json.data,
+							confirmButtonColor:"#DD6B55",
 							confirmButtonText: "确定"
 						});
 					}
