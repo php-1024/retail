@@ -97,7 +97,8 @@
 					}else{
 						swal({
 							title: "提示信息",
-							text: json.data
+							text: json.data,
+							confirmButtonText: "确定"
 						});
 					}
 				});
