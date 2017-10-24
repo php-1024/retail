@@ -86,7 +86,14 @@
 							type: "warning",
 							closeOnConfirm: false
 						},function(){
-							swal("提示信息", "你已陈宫登录", "success");
+							swal({
+								title: "提示信息",
+								text: json.data,
+								confirmButtonColor:"#DD6B55",
+								confirmButtonText: "确定",
+								type: "success"
+
+							});
 						});
 					}
 				});
