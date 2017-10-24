@@ -55,7 +55,7 @@
     <script src="{{asset('public/dashboard/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap.min.js"></script>
 	<script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap-dialog.js"></script>
-	<script src="{{asset('public/dashboard/library/sweetalert')}}/js/sweetalert.js"></script>
+	<script src="{{asset('public/dashboard/library/sweetalert')}}/js/sweetalert.min.js"></script>
     <script>
 			$(function(){
 				//设置CSRF令牌
