@@ -24,6 +24,15 @@ Route::group(['prefix' => 'login','middleware' => 'CheckNotLogin'], function () 
     Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware('DashBoardLoginPost');
 });
 
+Route::group(['prefix' => 'login','middleware' => 'CheckNotLogin'], function () {
+    Route::get('/', 'dashboard\LoginController@display');
+    Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
+});
+
+Route::group(['prefix' => 'ajax'],function(){
+    Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware(['CheckNotLogin','DashBoardLoginPost']);
+});
+
 Route::get('tt',function(){
     $data = ['这是Laravel框架优美的打印函数','忙活了一天终于搭建成功啦。已将公司所有码农拉进码云项目组','码云地址：https://gitee.com/dzckzeo/lingyikeji_mvc.git','码农们准备撸起袖子干吧'];
     dump($data);
