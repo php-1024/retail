@@ -10,6 +10,7 @@
     <title>零壹新科技后台管理系统| 登陆界面</title>
     <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap-dialog.css" rel="stylesheet">
+	<link href="{{asset('public/dashboard/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
     <link href="{{asset('public/dashboard')}}/css/animate.css" rel="stylesheet">
@@ -54,6 +55,7 @@
     <script src="{{asset('public/dashboard/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap.min.js"></script>
 	<script src="{{asset('public/dashboard/library/bootstrap')}}/js/bootstrap-dialog.js"></script>
+	<script src="{{asset('public/dashboard/library/sweetalert')}}/js/sweetalert.js"></script>
     <script>
 			$(function(){
 				//设置CSRF令牌
@@ -93,7 +95,10 @@
 					if(json==1){
 						window.location.reload();
 					}else{
-						showMessage("提示消息",json.data);
+						swal({
+							title: "Welcome in Alerts",
+							text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+						});
 					}
 				});
 			}
