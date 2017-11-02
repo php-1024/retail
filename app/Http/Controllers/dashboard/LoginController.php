@@ -19,7 +19,7 @@ class LoginController extends Controller{
     public function display()
     {
         /*测试加密模式*/
-        $encrypted = Crypt::encryptString('admin123');
+        $encrypted = md5('admin123');
         $key = config("app.encrypt_key");
         dump(md5("lingyikeji".$encrypted.$key));
         //$decrypted = Crypt::decryptString($encrypted);
@@ -56,7 +56,7 @@ class LoginController extends Controller{
         dump($ip);
         $password = Input::get('password');//接收用户密码
         $key = config("app.encrypt_key");//获取加密盐
-        $encrypted = Crypt::encryptString($password);//加密密码第一重
+        $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $admininfo = Admin::where('username',$username)->first()->toArray();
         if(!empty($admininfo)){
