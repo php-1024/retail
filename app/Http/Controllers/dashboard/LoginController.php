@@ -19,7 +19,8 @@ class LoginController extends Controller{
     public function display()
     {
         $request = new Request();
-        $ip = $request->getClientIps();
+        Request::setTrustedProxies(['192.168.0.1']);
+        $ip = $request->getClientIp();
         dump($ip);
         $data['random']=time();
         return view('dashboard/login/display',$data);
