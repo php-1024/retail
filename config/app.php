@@ -2,7 +2,8 @@
 
 return [
 
-    'encrypt_key'=>'1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',
+    'encrypt_key'=>'1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',//加密盐
+    'allowed_error_times'=>5,//允许登录错误次数
     /*
     |--------------------------------------------------------------------------
     | Application Name
