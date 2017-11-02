@@ -43,6 +43,8 @@ class LoginController extends Controller{
     //检测登录
     public function checkLogin(){
         $ip = Request::getClientIp();
+        $allowed_error_times = config("app.encrypt_key");//允许登录错误次数
+
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
         $key = config("app.encrypt_key");//获取加密盐
