@@ -18,12 +18,9 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        /*测试加密模式*/
-        $encrypted = md5('admin123');
-        $key = config("app.encrypt_key");
-        dump(md5("lingyikeji".$encrypted.$key));
-        //$decrypted = Crypt::decryptString($encrypted);
-        //echo $decrypted;
+        $request = new Request();
+        $ip = $request->ip();
+        dump($ip);
         $data['random']=time();
         return view('dashboard/login/display',$data);
 
@@ -51,9 +48,9 @@ class LoginController extends Controller{
     //检测登录
     public function checkLogin(){
         $request = new Request();
-        $username = Input::get('username');//接收用户名
-        $ip = $request->getClientIp();
+        $ip = $request->ip();
         dump($ip);
+        $username = Input::get('username');//接收用户名
         $password = Input::get('password');//接收用户密码
         $key = config("app.encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
