@@ -18,8 +18,8 @@ class LoginController extends Controller{
      */
     public function display()
     {
-
-        $ip = Request::getClientIp();
+        $request = new Request();
+        $ip = $request->getClientIp();
         dump($ip);
         $data['random']=time();
         return view('dashboard/login/display',$data);
