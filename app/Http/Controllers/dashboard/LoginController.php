@@ -5,7 +5,7 @@
  **/
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Admin;
