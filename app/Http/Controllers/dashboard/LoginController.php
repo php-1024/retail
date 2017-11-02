@@ -6,7 +6,7 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Admin;
@@ -18,10 +18,9 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $request = new Request();
-        $qq=$request->all();
-        $ip = $request->getClientIp();
-        dump($qq);
+
+        $ip = Request::getClientIp();
+
         dump($ip);
         $data['random']=time();
         return view('dashboard/login/display',$data);
