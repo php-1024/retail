@@ -5,7 +5,7 @@
  **/
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Admin;
@@ -49,14 +49,13 @@ class LoginController extends Controller{
 
     //检测登录
     public function checkLogin(){
-        $request = new Request();
-        $username = $request->input('username');//接收用户名
+        $username = Input::get('username');//接收用户名
         dump($username);
-        $password = $request->input('password');//接收用户密码
+        $password = Input::get('password');//接收用户密码
         $key = config("app.encrypt_key");//获取加密盐
         $encrypted = Crypt::encryptString($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        $admininfo = Admin::where('username',$username)->firstOrFail();
+        $admininfo = Admin::where('username',$username)->get()->toArray;
         dump($admininfo);
 
        // return response()->json(['data' => '登录成功', 'status' => '1']);
