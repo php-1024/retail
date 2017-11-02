@@ -19,9 +19,9 @@ class LoginController extends Controller{
     public function display()
     {
         /*测试加密模式*/
-        //$encrypted = Crypt::encryptString('admin123');
-        //$key = config("app.encrypt_key");
-        //dump(md5("lingyikeji".$encrypted.$key));
+        $encrypted = Crypt::encryptString('admin123');
+        $key = config("app.encrypt_key");
+        dump(md5("lingyikeji".$encrypted.$key));
         //$decrypted = Crypt::decryptString($encrypted);
         //echo $decrypted;
         $data['random']=time();
