@@ -55,7 +55,7 @@ class LoginController extends Controller{
         $key = config("app.encrypt_key");//获取加密盐
         $encrypted = Crypt::encryptString($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        $admininfo = Admin::where('username',$username)->get()->toArray;
+        $admininfo = Admin::where('username',$username)->get()->toArray();
         dump($admininfo);
 
        // return response()->json(['data' => '登录成功', 'status' => '1']);
