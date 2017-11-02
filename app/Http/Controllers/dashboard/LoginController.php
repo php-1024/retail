@@ -5,10 +5,8 @@
  **/
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
-use Illuminate\Support\Facades\Crypt;
 use App\Models\Admin;
 use Session;
 
@@ -18,10 +16,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-
-        $ip = Request::getClientIp();
-
-        dump($ip);
         $data['random']=time();
         return view('dashboard/login/display',$data);
 
@@ -48,11 +42,9 @@ class LoginController extends Controller{
 
     //检测登录
     public function checkLogin(){
-        $request = new Request();
-        $ip = $request->ip();
-        dump($ip);
-        $username = Input::get('username');//接收用户名
-        $password = Input::get('password');//接收用户密码
+        $ip = Request::getClientIp();
+        $username = Request::input('username');//接收用户名
+        $password = Request::input('password');//接收用户密码
         $key = config("app.encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
