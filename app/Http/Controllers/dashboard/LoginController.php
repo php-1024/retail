@@ -49,8 +49,9 @@ class LoginController extends Controller{
 
     //检测登录
     public function checkLogin(){
-        $username = Request::input('username');//接收用户名
-        $password = Requset::input('password');//接收用户密码
+        $request = new Request();
+        $username = $request->input('username');//接收用户名
+        $password = $request->input('password');//接收用户密码
         $key = config("app.encrypt_key");//获取加密盐
         $encrypted = Crypt::encryptString($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
