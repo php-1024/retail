@@ -10,6 +10,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 class RedisController extends Controller{
     public function study(){
-
+        echo "开始学习Redis了";
     }
 }
