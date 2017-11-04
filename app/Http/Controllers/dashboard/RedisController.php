@@ -27,7 +27,7 @@ class RedisController extends Controller{
         dump("同时存储多个key-value");
         $list = array(
             'zeo:0001' => '第一个值',
-            'zeo:0002' => '第二个值r',
+            'zeo:0002' => '第二个值',
             'zeo:0003' => '第三个值'
         );
         Redis::mset($list);
