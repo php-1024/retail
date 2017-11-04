@@ -8,8 +8,18 @@
  */
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
+use Illuminate\Redis\RedisManager;
 class RedisController extends Controller{
     public function study(){
-        echo "开始学习Redis了";
+        dd("开始学习Redis了");
+        //app('redis.connection') 默认连接default
+        //app('redis')->connection('zeo') 连接到我定义的redis服务器
+        //app('redis')->connection('lingyikeji') //连接到lingyikeji集群对象
+
+        dd("最简单的Redis的存取");
+        $redis = app('zeo');//连接到我的redis服务器
+        $redis->set('test1', '这是第一个Redis示例');
+        $test1 = $redis->get('test1');
+        dd($test1);
     }
 }
