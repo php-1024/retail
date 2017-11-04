@@ -34,7 +34,7 @@ Route::group(['prefix' => 'ajax'],function(){
 });
 
 Route::group(['prefix'=>'redis'],function(){
-    Route::post('study','dashboard\RedisController@study');
+    Route::get('study','dashboard\RedisController@study');
 });
 
 Route::get('tt',function(){
