@@ -35,6 +35,7 @@ class RedisController extends Controller{
             'zeo:0003' => '第三个值'
         );
         Redis::mset($list);
-        dump(array_keys( $list));
+        $ll = Redis::mget(array_keys($list));
+        dump($ll);
     }
 }
