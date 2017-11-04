@@ -22,7 +22,7 @@ class RedisController extends Controller{
         Redis::connection('zeo');//连接到我的redis服务器
         Redis::set('test1', '这是第一个Redis示例');
         $test1 = Redis::get('test1');
-        dd($test1);
+        dump($test1);
 
         dump("同时存储多个key-value");
         $list = array(
@@ -32,10 +32,10 @@ class RedisController extends Controller{
         );
         Redis::mset($list);
         $ll = Redis::mget(array_keys($list));
-        dd($ll);
+        dump($ll);
 
         dump('存储待时效的key-values');
       //  Redis::setex('name', 10, '薛志豪');//存10秒
-        dd(Redis::get('name'));
+        dump(Redis::get('name'));
     }
 }
