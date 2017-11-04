@@ -27,5 +27,12 @@ class RedisController extends Controller{
         Redis::set('test1', '这是第一个Redis示例');
         $test1 = Redis::get('test1');
         dump($test1);
+
+        dump("同时存储多个key-value");
+        $list = array(
+            'zeo:0001' => '第一个值',
+            'zeo:0002' => '第二个值r',
+            'zeo:0003' => '第三个值'
+        );
     }
 }
