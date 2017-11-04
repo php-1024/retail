@@ -33,5 +33,9 @@ class RedisController extends Controller{
         Redis::mset($list);
         $ll = Redis::mget(array_keys($list));
         dump($ll);
+
+        dump('存储待时效的key-values');
+        Redis::setex('name', 10, '薛志豪');
+        dump(Redis::get('name'));
     }
 }
