@@ -17,7 +17,7 @@ class RedisController extends Controller{
         //app('redis')->connection('lingyikeji') //连接到lingyikeji集群对象
 
         dump("最简单的Redis的存取");
-        $redis = app('redis.connection.zeo');//连接到我的redis服务器
+        $redis = app('redis.connection');//连接到我的redis服务器
         $redis->set('test1', '这是第一个Redis示例');
         $test1 = $redis->get('test1');
         dump($test1);
