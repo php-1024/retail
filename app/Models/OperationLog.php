@@ -4,7 +4,7 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-class LoginLog extends Model{
+class OperationLog extends Model{
     protected $table = 'operation_log';
     protected $primaryKey = 'id';
     public $timestamps = false;

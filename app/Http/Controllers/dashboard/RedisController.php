@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Redis\RedisManager;
+use Illuminate\Support\Facades\Redis;
+
 class RedisController extends Controller{
     public function study(){
         dump("开始学习Redis了");
@@ -17,9 +19,13 @@ class RedisController extends Controller{
         //app('redis')->connection('lingyikeji') //连接到lingyikeji集群对象
 
         dump("最简单的Redis的存取");
-        $redis = app('zeo');//连接到我的redis服务器
-        $redis->set('test1', '这是第一个Redis示例');
-        $test1 = $redis->get('test1');
+        //$redis = app('zeo');//连接到我的redis服务器
+        //$redis->set('test1', '这是第一个Redis示例');
+        //$test1 = $redis->get('test1');
+        //dump($test1);
+        Redis::connection('zeo');//连接到我的redis服务器
+        Redis::set('test1', '这是第一个Redis示例');
+        $test1 = Redis::get('test1');
         dump($test1);
     }
 }
