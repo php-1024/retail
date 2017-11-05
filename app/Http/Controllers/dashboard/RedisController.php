@@ -92,6 +92,9 @@ class RedisController extends Controller{
         dump('rename()/renamenx()方法对key进行改名，所不同的是renamenx不允许改成已存在的key');
         //Redis::rename('test1','zzz');
         //Redus::get('zzz');
-
+        dump('expire 设置 key-value 的时效性');
+        dump(Redis::expire('test1',100));
+        dump('ttl 获取有效时间还有多久');
+        dump(Redis::ttl('test1'));
     }
 }
