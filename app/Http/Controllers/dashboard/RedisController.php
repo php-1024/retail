@@ -93,8 +93,8 @@ class RedisController extends Controller{
         //Redis::rename('test1','zzz');
         //Redus::get('zzz');
         dump('expire 设置 key-value 的时效性');
-        Redis::set('zzz','nihao');
-       dump(Redis::expire('zzz',100));
+        //Redis::set('zzz','nihao');
+       //dump(Redis::expire('zzz',100));
         dump('ttl 获取有效时间还有多久');
         dump(Redis::ttl('zzz'));
     }
