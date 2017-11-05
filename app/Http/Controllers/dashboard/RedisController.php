@@ -100,7 +100,6 @@ class RedisController extends Controller{
        dump('persist() 设为永久存储');
        // dump(Redis::persist('zzz'));
         //dump(Redis::ttl('zzz'));
-        Redis::del('zzz');
-        dump(Redis::ttl('zzz'));
+        dump(redis::get('zzz'));
     }
 }
