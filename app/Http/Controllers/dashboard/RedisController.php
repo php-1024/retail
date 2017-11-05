@@ -101,5 +101,7 @@ class RedisController extends Controller{
        // dump(Redis::persist('zzz'));
         //dump(Redis::ttl('zzz'));
         dump(redis::get('zzz'));
+        dump('dbsize()获取Redis数据库记录总量');
+        dump(redis::dbsize());
     }
 }
