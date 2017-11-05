@@ -48,7 +48,7 @@ class RedisController extends Controller{
         */
 
         dump('替换一个值，并换回替换前的值');
-        $foo = Redis::getset('foo',66);
+        $foo = Redis::getset('foo',88);
         dump($foo);
     }
 }
