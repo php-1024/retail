@@ -75,5 +75,8 @@ class RedisController extends Controller{
         dump(Redis::get('test1'));
         Redis::setRange('test1',1,'hi');
         dump(Redis::get('test1'));
+
+        dump('substr()部分获取操作');
+        dump(Redis::substr('test1',0,5));
     }
 }
