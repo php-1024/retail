@@ -78,5 +78,8 @@ class RedisController extends Controller{
 
         dump('substr()部分获取操作');
         dump(Redis::substr('test1',1,5));
+
+        dump('strlen() 获取字符串长度');
+        dump(Redis::strlen('test1'));
     }
 }
