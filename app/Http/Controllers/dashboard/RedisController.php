@@ -87,7 +87,6 @@ class RedisController extends Controller{
         dump(Redis::get(Redis::keys('t?s??')[0]));
 
         dump('randomkey(),随机返回一个key');
-        dump(Redis::get('zeo:0001'));
         dump(Redis::randomKey());
     }
 }
