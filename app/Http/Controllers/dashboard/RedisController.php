@@ -71,9 +71,9 @@ class RedisController extends Controller{
         dump(Redis::get('test1'));
 
         dump('setrange()部分替换操作,第二个参数为0时等同于set操作');
-        dump(Redis::setrange('test1',0,'hello world zeo'));
+        dump(Redis::setRange('test1',0,'hello world zeo'));
         dump(Redis::get('test1'));
-        Redis::setrange('test1',11,'hi');
+        Redis::setRange('test1',11,'hi');
         dump(Redis::get('test1'));
     }
 }
