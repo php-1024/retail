@@ -90,7 +90,7 @@ class RedisController extends Controller{
         dump(Redis::randomKey());
 
         dump('rename()/renamenx()方法对key进行改名，所不同的是renamenx不允许改成已存在的key');
-        Redis::rename('test1','test');
-        Redus::get('test');
+        Redis::rename('test1','zzz');
+        Redus::get('zzz');
     }
 }
