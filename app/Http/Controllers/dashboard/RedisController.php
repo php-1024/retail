@@ -43,6 +43,6 @@ class RedisController extends Controller{
         $bb=Redis::setnx('foo', 34) ;  // 返回 false， 添加失败，因为已经存在键名为 foo 的记录
         dump($aa);
         dump($bb);
-        dump(Regis::get('foo'));
+        dump(Redis::get('foo'));
     }
 }
