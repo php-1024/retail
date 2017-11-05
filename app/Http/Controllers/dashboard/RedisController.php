@@ -85,5 +85,9 @@ class RedisController extends Controller{
         dump('keys() 模糊查找功能,支持 * 号以及 ? 号 (匹配一个字符)');
         dump(Redis::keys('test*'));
         dump(Redis::get(Redis::keys('t?s??')[0]));
+
+        dump('randomkey(),随机返回一个key');
+        dump(Redis::get('zeo:0001'));
+        dump(Redis::randomKey());
     }
 }
