@@ -81,5 +81,9 @@ class RedisController extends Controller{
 
         dump('strlen() 获取字符串长度');
         dump(Redis::strlen('test1'));
+
+        dump('keys() 模糊查找功能,支持 * 号以及 ? 号 (匹配一个字符)');
+        dump(Redis::keys('test*'));
+        dump(Redis::keys('t?s??'));
     }
 }
