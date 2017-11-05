@@ -97,9 +97,10 @@ class RedisController extends Controller{
        //Redis::expire('zzz',100);
         dump('ttl() 获取有效时间还有多久');
         dump(Redis::ttl('zzz'));
-        dump('persist() 设为永久存储');
-        dump(Redis::persist('zzz'));
-        dump(Redis::ttl('zzz'));
+       dump('persist() 设为永久存储');
+       // dump(Redis::persist('zzz'));
+        //dump(Redis::ttl('zzz'));
         Redis::del('zzz');
+        dump(Redis::ttl('zzz'));
     }
 }
