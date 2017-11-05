@@ -57,5 +57,7 @@ class RedisController extends Controller{
         dump('foo递减1，同时返回递减后的值',Redis::decr('foo'));
         dump('foo递减N，同时返回递减后的值,N为你定义的值，如2',Redis::decrby('foo',2));
 
+        dump('exists检测是否存在值');
+        dump(Redis::exists('foo'));
     }
 }
