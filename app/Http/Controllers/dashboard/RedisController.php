@@ -62,5 +62,8 @@ class RedisController extends Controller{
 
         dump('type()检测类型');
         dump(Redis::type('foo'));
+
+        dump('del()删除键值');
+        dump(Redis::del('foo'));
     }
 }
