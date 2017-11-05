@@ -34,8 +34,15 @@ class RedisController extends Controller{
         $ll = Redis::mget(array_keys($list));
         dump($ll);
 
-        dump('存储待时效的key-values');
-      //  Redis::setex('name', 10, '薛志豪');//存10秒
-        dump(Redis::get('name'));
+        dump('存储带时效的key-values');
+        //Redis::setex('name', 10, '薛志豪');//存10秒
+        //dump(Redis::get('name'));
+
+        dump('添加值时不覆盖原有值');
+        $aa=Redis::setnx('foo', 12) ;  // 返回 true ， 添加成功
+        $bb=Redis::setnx('foo', 34) ;  // 返回 false， 添加失败，因为已经存在键名为 foo 的记录
+        dump($aa);
+        dump($bb);
+        dump(Regis::get('foo'));
     }
 }
