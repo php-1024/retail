@@ -65,5 +65,9 @@ class RedisController extends Controller{
 
         dump('del()删除键值');
         dump(Redis::del('foo'));
+
+        dump('append()拼接到已有的字符串');
+        Redis::append('test1','_hello world zeo');
+        dump(Redis::get('test1'));
     }
 }
