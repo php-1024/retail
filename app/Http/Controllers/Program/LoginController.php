@@ -20,14 +20,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $ip = Request::getClientIp();//获取访问者IP
-        $addr_arr = IP::find($ip);//获取访问者地址
-        $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
-        $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
-        $error = new ProgramErrorLog();
-        $error_time = $error->where('ip',$ip)->first();//获取该IP的错误次数
-        dump($error_time);
-        exit();
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
     }
@@ -66,8 +58,14 @@ class LoginController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
-
-
+        $error = new ProgramErrorLog();
+        $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
+        if(empty($error_log)){
+            $error->ip = $ip;
+            $error->error_time = time();
+            $error->save();
+        }
+        exit();
         $admininfo = ProgramAdmin::where('account',$username)->first()->toArray();
         if(!empty($admininfo)){
             if($encryptPwd != $admininfo['password']){//查询密码是否对的上
