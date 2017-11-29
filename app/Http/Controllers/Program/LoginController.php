@@ -19,8 +19,8 @@ class LoginController extends Controller{
     {
         $ip = Request::getClientIp();
         dump($ip);
-        $ip2attr = new ip2attr();
-        $ip2attr->getAttr($ip);
+
+        ip2attr($ip);
         exit();
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
