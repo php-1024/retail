@@ -12,6 +12,7 @@ use App\Models\ProgramErrorLog;
 use App\Models\ProgramLoginLog;
 use App\Libraries\IP2Attr\IP;
 use Session;
+use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller{
     /*
