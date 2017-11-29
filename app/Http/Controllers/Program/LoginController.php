@@ -18,9 +18,7 @@ class LoginController extends Controller{
     public function display()
     {
         $ip = Request::getClientIp();
-        $addr = Ip::find($ip);
         dump($ip);
-        dump($addr);
         $ip2attr = new ip2attr();
         $ip2attr->getAttr($ip);
         exit();
