@@ -17,8 +17,11 @@ class IP2Attr{
     public static function sina_api($ip){
         $url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$ip;
         $response = HttpCurl::doGet($url);
-        if(preg_match('/{.*}/iUs',$response,$arr)){
-            dump($arr);
+        if(preg_match('/{.*}/iUs',$response,$arr)) {
+            $response = json_decode(trim($arr[0]), true);
+            dump($response);
+        }else{
+            return false;
         }
     }
 }
