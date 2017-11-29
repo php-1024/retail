@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ea477afa060792ed7d405e3f1550d46",
+    "content-hash": "eb5538e5f58e3f9ed0a4cad133e00613",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -854,48 +854,6 @@
                 "schedule"
             ],
             "time": "2017-01-23T04:29:33+00:00"
-        },
-        {
-            "name": "mylukin/ip2city",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mylukin/ip2city.git",
-                "reference": "c082dbf262c9fad401c90c07831e4b94df76ff44"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/mylukin/ip2city/c082dbf262c9fad401c90c07831e4b94df76ff44.zip",
-                "reference": "c082dbf262c9fad401c90c07831e4b94df76ff44",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MyLukin\\IP2City\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lukin",
-                    "email": "mylukin@gmail.com"
-                }
-            ],
-            "description": "ip to city for 17mon.cn",
-            "keywords": [
-                "17mon",
-                "IP",
-                "city",
-                "ip2city"
-            ],
-            "time": "2015-05-21T06:01:09+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2296,6 +2254,47 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "zhuzhichao/ip-location-zh",
+            "version": "v1.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zhuzhichao/ip-location-zh.git",
+                "reference": "426079e6c78fc1c8029792fcc10e9f1d8c7b5b86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/zhuzhichao/ip-location-zh/426079e6c78fc1c8029792fcc10e9f1d8c7b5b86.zip",
+                "reference": "426079e6c78fc1c8029792fcc10e9f1d8c7b5b86",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/IpLocationZh.php"
+                ],
+                "psr-4": {
+                    "Zhuzhichao\\IpLocationZh\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zhuzhichao",
+                    "email": "me@zhuzhichao.com"
+                }
+            ],
+            "description": "get the ip's true location with Chinese",
+            "keywords": [
+                "Chinese",
+                "IP",
+                "location"
+            ],
+            "time": "2017-01-09T09:47:42+00:00"
         }
     ],
     "packages-dev": [
@@ -3981,9 +3980,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mylukin/ip2city": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

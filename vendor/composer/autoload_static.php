@@ -16,12 +16,17 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '9d172ae573e41b4662cc89f9097505e6' => __DIR__ . '/..' . '/zhuzhichao/ip-location-zh/src/IpLocationZh.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'Z' => 
+        array (
+            'Zhuzhichao\\IpLocationZh\\' => 24,
         ),
         'X' => 
         array (
@@ -67,7 +72,6 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         ),
         'M' => 
         array (
-            'MyLukin\\IP2City\\' => 16,
             'Monolog\\' => 8,
         ),
         'L' => 
@@ -116,6 +120,10 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'Zhuzhichao\\IpLocationZh\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zhuzhichao/ip-location-zh/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -212,10 +220,6 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
-        ),
-        'MyLukin\\IP2City\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mylukin/ip2city/src',
         ),
         'Monolog\\' => 
         array (
@@ -1959,9 +1963,6 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
-        'MyLukin\\IP2City\\Facade' => __DIR__ . '/..' . '/mylukin/ip2city/src/Facade.php',
-        'MyLukin\\IP2City\\IP2City' => __DIR__ . '/..' . '/mylukin/ip2city/src/IP2City.php',
-        'MyLukin\\IP2City\\ServiceProvider' => __DIR__ . '/..' . '/mylukin/ip2city/src/ServiceProvider.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -3807,6 +3808,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
+        'Zhuzhichao\\IpLocationZh\\IP' => __DIR__ . '/..' . '/zhuzhichao/ip-location-zh/src/IpLocationZh.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',
