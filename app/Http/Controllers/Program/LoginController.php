@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ProgramAdmin;
+use zeo\ip2attr\ip2attr;
 use Session;
 
 class LoginController extends Controller{
@@ -20,6 +21,8 @@ class LoginController extends Controller{
         $addr = Ip::find($ip);
         dump($ip);
         dump($addr);
+        $ip2attr = new ip2attr();
+        $ip2attr->getAttr($ip);
         exit();
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
