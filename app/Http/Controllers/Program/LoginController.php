@@ -86,7 +86,7 @@ class LoginController extends Controller{
     }
 
     //错误次数记录
-    public function setErrorLog($ip){
+    private function setErrorLog($ip){
         $error = new ProgramErrorLog();
         $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
 
@@ -99,7 +99,7 @@ class LoginController extends Controller{
         }
     }
     //清除错误记录
-    public function clearErrorLog($ip){
+    private function clearErrorLog($ip){
         $error = new ProgramErrorLog();
         $error->where('ip',$ip)->update(['error_time'=>0]);
     }
