@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ProgramAdmin;
+use App\Models\ProgramErrorLog;
+use App\Models\ProgramLoginLog;
 use App\Libraries\IP2Attr\IP;
+
 use Session;
 
 class LoginController extends Controller{
@@ -45,6 +48,7 @@ class LoginController extends Controller{
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = IP::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
+        $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
 
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
        ;
@@ -53,6 +57,11 @@ class LoginController extends Controller{
         $key = config("app.program_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $error = new ProgramErrorLog();
+
+        $error_time = $error->where('ip',$ip)->pluck('error_time');//获取该IP的错误次数
+        dump($error_time);
+        exit();
         $admininfo = ProgramAdmin::where('account',$username)->first()->toArray();
         if(!empty($admininfo)){
             if($encryptPwd != $admininfo['password']){//查询密码是否对的上

@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramErrorLog extends Model{
     protected $table = 'program_error_log';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
 }
 ?>
