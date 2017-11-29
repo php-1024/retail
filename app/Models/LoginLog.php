@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LoginLog extends Model{
     protected $table = 'login_log';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
+
 }
 ?>

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramLoginLog extends Model{
     protected $table = 'program_login_log';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
+
+    public function fromDateTime($value){
+        return strtotime(parent::fromDateTime($value));
+    }
 }
 ?>
