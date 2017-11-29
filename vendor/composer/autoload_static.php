@@ -12,8 +12,8 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
     );
@@ -67,7 +67,6 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         ),
         'M' => 
         array (
-            'MyLukin\\IP2City\\' => 16,
             'Monolog\\' => 8,
         ),
         'L' => 
@@ -213,10 +212,6 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
-        'MyLukin\\IP2City\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mylukin/ip2city/src',
-        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -348,6 +343,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Models\\ModuleNode' => __DIR__ . '/../..' . '/app/Models/ModuleNode.php',
         'App\\Models\\Node' => __DIR__ . '/../..' . '/app/Models/Node.php',
         'App\\Models\\OperationLog' => __DIR__ . '/../..' . '/app/Models/OperationLog.php',
+        'App\\Models\\PragramOperationLog' => __DIR__ . '/../..' . '/app/Models/ProgramOperationLog.php',
         'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
         'App\\Models\\ProgramAdmin' => __DIR__ . '/../..' . '/app/Models/ProgramAdmin.php',
         'App\\Models\\ProgramErrorLog' => __DIR__ . '/../..' . '/app/Models/ProgramErrorLog.php',
@@ -1402,6 +1398,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'Illuminate\\Foundation\\Testing\\Concerns\\InteractsWithContainer' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/InteractsWithContainer.php',
         'Illuminate\\Foundation\\Testing\\Concerns\\InteractsWithDatabase' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/InteractsWithDatabase.php',
         'Illuminate\\Foundation\\Testing\\Concerns\\InteractsWithExceptionHandling' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/InteractsWithExceptionHandling.php',
+        'Illuminate\\Foundation\\Testing\\Concerns\\InteractsWithRedis' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/InteractsWithRedis.php',
         'Illuminate\\Foundation\\Testing\\Concerns\\InteractsWithSession' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/InteractsWithSession.php',
         'Illuminate\\Foundation\\Testing\\Concerns\\MakesHttpRequests' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php',
         'Illuminate\\Foundation\\Testing\\Concerns\\MocksApplicationServices' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MocksApplicationServices.php',
@@ -1957,9 +1954,6 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
-        'MyLukin\\IP2City\\Facade' => __DIR__ . '/..' . '/mylukin/ip2city/src/Facade.php',
-        'MyLukin\\IP2City\\IP2City' => __DIR__ . '/..' . '/mylukin/ip2city/src/IP2City.php',
-        'MyLukin\\IP2City\\ServiceProvider' => __DIR__ . '/..' . '/mylukin/ip2city/src/ServiceProvider.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
