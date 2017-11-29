@@ -9,10 +9,8 @@ use Session;
 class ProgramIsLogin{
     public function handle($request,Closure $next){
         //获取用户登陆存储的SessionId
-        session('zerone_program_account_id',1);//存储登录session_id为当前用户ID
-        $sess_key = session('zerone_program_account_id');
-        dump($sess_key);
-        exit();
+        $sess_key = Session::get('zerone_program_account_id');
+
         //如果不为空跳转到首页
         if(!empty($sess_key)) {
             return redirect('program');
