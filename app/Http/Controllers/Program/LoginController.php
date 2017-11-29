@@ -99,7 +99,7 @@ class LoginController extends Controller{
         }
     }
     //清除错误记录
-    public function cleatErrorLog($ip){
+    public function clearErrorLog($ip){
         $error = new ProgramErrorLog();
         $error->where('ip',$ip)->update(['error_time'=>0]);
     }
