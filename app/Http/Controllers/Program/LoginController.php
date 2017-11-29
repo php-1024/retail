@@ -17,10 +17,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $ip = Request::getClientIp();
-        $addr = IP::find($ip);
-        var_dump($addr[0].$addr[1].$addr[2].$addr[3]);
-        exit();
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
     }
@@ -46,10 +42,12 @@ class LoginController extends Controller{
 
     //检测登录
     public function checkLogin(){
-        $ip = Request::getClientIp();
+        $ip = Request::getClientIp();//获取访问者IP
+        $addr_arr = IP::find($ip);//获取访问者地址
+        $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
+
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
-        dump($ip);
-        exit();
+       ;
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
         $key = config("app.program_encrypt_key");//获取加密盐
