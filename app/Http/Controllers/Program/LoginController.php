@@ -19,7 +19,7 @@ class LoginController extends Controller{
     {
         $ip = Request::getClientIp();
         $addr = IP::find($ip);
-        var_dump($addr);
+        var_dump($addr[0].$addr[1].$addr[2].$addr[3]);
         exit();
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
