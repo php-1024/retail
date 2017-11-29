@@ -58,19 +58,33 @@ class LoginController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
+        //实例化错误记录表模型
         $error = new ProgramErrorLog();
         $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
-        dump($error_log->toArray());
-        exit();
-        $admininfo = ProgramAdmin::where('account',$username)->first()->toArray();
-        if(!empty($admininfo)){
-            if($encryptPwd != $admininfo['password']){//查询密码是否对的上
+
+        //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
+        if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || ($error_log['error_time'] >= $allowed_error_times && time()-$error_log['updated_at'] >= 600)) {
+            $admininfo = ProgramAdmin::where('account', $username)->first()->toArray();
+            if (!empty($admininfo)) {
+                if ($encryptPwd != $admininfo['password']) {//查询密码是否对的上
+                    return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
+                } elseif($admininfo['status']=='0'){//查询账号状态
+                    return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
+                }else{
+                    return response()->json(['data' => '登录成功', 'status' => '1']);
+                }
+            } else {
+                if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
+                    $error->ip = $ip;
+                    $error->error_time = 1;
+                    $error->save();
+                }else{
+                    $error->where('ip',$ip)->increment('error_time');
+                }
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
-            }else{
-                return response()->json(['data' => '登录成功', 'status' => '1']);
             }
         }else{
-            return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
+            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登陆 ','status' => '0']);
         }
     }
 }
