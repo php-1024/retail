@@ -67,6 +67,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         ),
         'M' => 
         array (
+            'MyLukin\\IP2City\\' => 16,
             'Monolog\\' => 8,
         ),
         'L' => 
@@ -212,6 +213,10 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'MyLukin\\IP2City\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mylukin/ip2city/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -323,11 +328,15 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Dashboard\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/LoginController.php',
         'App\\Http\\Controllers\\Dashboard\\RedisController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/RedisController.php',
+        'App\\Http\\Controllers\\Program\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Program/LoginController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\CheckIsLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckIsLogin.php',
         'App\\Http\\Middleware\\CheckNotLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckNotLogin.php',
         'App\\Http\\Middleware\\DashBoardLoginPost' => __DIR__ . '/../..' . '/app/Http/Middleware/DashBoardLoginPost.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\ProgramCheckIsLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/ProgramCheckIsLogin.php',
+        'App\\Http\\Middleware\\ProgramIsLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/ProgramIsLogin.php',
+        'App\\Http\\Middleware\\ProgramLoginPost' => __DIR__ . '/../..' . '/app/Http/Middleware/ProgramLoginPost.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
@@ -335,6 +344,15 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\LoginErrorLog' => __DIR__ . '/../..' . '/app/Models/LoginErrorLog.php',
         'App\\Models\\LoginLog' => __DIR__ . '/../..' . '/app/Models/LoginLog.php',
+        'App\\Models\\Module' => __DIR__ . '/../..' . '/app/Models/Module.php',
+        'App\\Models\\ModuleNode' => __DIR__ . '/../..' . '/app/Models/ModuleNode.php',
+        'App\\Models\\Node' => __DIR__ . '/../..' . '/app/Models/Node.php',
+        'App\\Models\\OperationLog' => __DIR__ . '/../..' . '/app/Models/OperationLog.php',
+        'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
+        'App\\Models\\ProgramAdmin' => __DIR__ . '/../..' . '/app/Models/ProgramAdmin.php',
+        'App\\Models\\ProgramErrorLog' => __DIR__ . '/../..' . '/app/Models/ProgramErrorLog.php',
+        'App\\Models\\ProgramLoginLog' => __DIR__ . '/../..' . '/app/Models/ProgramLoginLog.php',
+        'App\\Models\\ProgramModuleNode' => __DIR__ . '/../..' . '/app/Models/ProgramModuleNode.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -1939,6 +1957,9 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'MyLukin\\IP2City\\Facade' => __DIR__ . '/..' . '/mylukin/ip2city/src/Facade.php',
+        'MyLukin\\IP2City\\IP2City' => __DIR__ . '/..' . '/mylukin/ip2city/src/IP2City.php',
+        'MyLukin\\IP2City\\ServiceProvider' => __DIR__ . '/..' . '/mylukin/ip2city/src/ServiceProvider.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
