@@ -42,6 +42,9 @@ Route::group(['prefix'=>'program'],function(){
     Route::get('/', function () {
         return '你好世界';
     });
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Program\LoginController@display');
+    });
 });
 
 
