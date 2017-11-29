@@ -73,8 +73,25 @@ class LoginController extends Controller{
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
                     $this->clearErrorLog($ip);//清除掉错误记录
-
-                    return response()->json(['data' => '登录成功', 'status' => '1']);
+                    //插入登录记录
+                    $loginlog = new ProgramLoginLog();
+                    $loginlog->account_id = $admininfo['id'];
+                    $loginlog->ip = $ip;
+                    $loginlog->ip_position = $addr;
+                    $loginlog->save();
+                    $id = $loginlog->id;
+                    if(!empty($id)) {
+                        session('zerone_program_account_id',$admininfo['id']);//存储登录session_id为当前用户ID
+                        //构造用户缓存数据
+                        $admin_data = ['admin_id'=>$admininfo['id'],'admin_account'=>$admininfo['account'],'admin_is_super'=>$admininfo['is_super'],'admin_login_ip'=>$ip,'admin_login_position'=>$addr,'admin_login_time'=>time()];
+                        $admin_data = serialize($admin_data);
+                        Redis::connection('zeo');//连接到我的redis服务器
+                        $data_key = 'program_system_admin_data_'.$admininfo['id'];
+                        Redis::set($data_key,$admin_data);
+                        return response()->json(['data' => '登录成功', 'status' => '1']);
+                    }else{
+                        return response()->json(['data' => '登录失败', 'status' => '0']);
+                    }
                 }
             } else {
                 $this->setErrorLog($ip);//记录错误次数
