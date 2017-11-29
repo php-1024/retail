@@ -16,11 +16,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $key = config("app.program_encrypt_key");//获取加密盐
-        $encrypted = md5('admin123');//加密密码第一重
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        echo $encryptPwd;
-        dump(time());
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
     }
