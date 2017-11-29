@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ProgramAdmin;
-use Zeo\IP2Attr\ip2attr;
 use Session;
 
 class LoginController extends Controller{
