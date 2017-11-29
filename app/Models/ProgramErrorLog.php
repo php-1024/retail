@@ -9,5 +9,9 @@ class ProgramErrorLog extends Model{
     protected $table = 'program_error_log';
     protected $primaryKey = 'id';
     public $timestamps = true;
+
+    public function fromDateTime($value){
+        return strtotime(parent::fromDateTime($value));
+    }
 }
 ?>
