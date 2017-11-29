@@ -41,7 +41,7 @@ Route::get('tt',function(){
 Route::group(['prefix'=>'program'],function(){
     Route::get('/', function () {
         return '你好世界';
-    });
+    })->middleware('ProgramCheckIsLogin');
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Program\LoginController@display');
     });

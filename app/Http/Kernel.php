@@ -62,5 +62,8 @@ class Kernel extends HttpKernel
         'CheckNotLogin'=> \App\Http\Middleware\CheckNotLogin::class,
         //检测用户登录后台提交的数据是否一致
         'DashBoardLoginPost'=>\App\Http\Middleware\DashBoardLoginPost::class,
+        /**************************零壹程序管理系统*******************************/
+        'ProgramCheckIsLogin'=>\App\Http\Middleware\ProgramCheckIsLogin::class,
+        /**************************零壹程序管理系统*******************************/
     ];
 }
