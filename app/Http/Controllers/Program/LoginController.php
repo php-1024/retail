@@ -64,28 +64,38 @@ class LoginController extends Controller{
 
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || ($error_log['error_time'] >= $allowed_error_times && time()-$error_log['updated_at'] >= 600)) {
-            $admininfo = ProgramAdmin::where('account', $username)->first()->toArray();
-            if (!empty($admininfo)) {
+            $admininfo = ProgramAdmin::where('account', $username)->first()->toArray();//根据账户查询用户信息
+            if (!empty($admininfo)) {//如果查询不到，则提示账号或密码错误
                 if ($encryptPwd != $admininfo['password']) {//查询密码是否对的上
+                    $this->setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
                 } elseif($admininfo['status']=='0'){//查询账号状态
+                    $this->setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
                     return response()->json(['data' => '登录成功', 'status' => '1']);
                 }
             } else {
-                if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
-                    $error->ip = $ip;
-                    $error->error_time = 1;
-                    $error->save();
-                }else{
-                    $error->where('ip',$ip)->increment('error_time');
-                }
+                $this->setErrorLog($ip);//记录错误次数
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
             }
         }else{
             return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登陆 ','status' => '0']);
         }
     }
+
+    //错误次数记录
+    public function setErrorLog($ip){
+        $error = new ProgramErrorLog();
+        $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
+        if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
+            $error->ip = $ip;
+            $error->error_time = 1;
+            $error->save();
+        }else{
+            $error->where('ip',$ip)->increment('error_time');
+        }
+    }
+
 }
 ?>
