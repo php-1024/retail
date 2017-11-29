@@ -94,7 +94,6 @@ class LoginController extends Controller{
             $error->error_time = 1;
             $error->save();
         }else{
-            dump($ip);
             $error->where('ip',$ip)->increment('error_time');
         }
     }
