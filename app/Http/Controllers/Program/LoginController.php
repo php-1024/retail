@@ -62,7 +62,7 @@ class LoginController extends Controller{
         $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
         if(empty($error_log)){
             $error->ip = $ip;
-            $error->error_time = time();
+            $error->error_time = 1;
             $error->save();
         }
         exit();
