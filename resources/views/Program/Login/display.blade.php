@@ -75,7 +75,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){
-            if(json==1){
+            if(json.status==1){
                 window.location.reload();
             }else{
                 swal({
