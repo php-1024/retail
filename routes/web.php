@@ -50,7 +50,7 @@ Route::group(['prefix'=>'program'],function(){
     });
 
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('checklogin','Program\LoginController@checkLogin');//提交登陆数据
+        Route::post('checklogin','Program\LoginController@checkLogin')->middleware('PromgramLoginPost');//提交登陆数据
     });
 });
 /********************程序管理系统*************************/
