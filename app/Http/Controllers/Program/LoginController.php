@@ -3,7 +3,7 @@
  *新版本登陆界面
  *
  **/
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Program;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
