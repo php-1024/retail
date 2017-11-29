@@ -9,7 +9,7 @@ use Session;
 class ProgramIsLogin{
     public function handle($request,Closure $next){
         //获取用户登陆存储的SessionId
-        Session::set('zerone_program_account_id',1);//存储登录session_id为当前用户ID
+        session('zerone_program_account_id',1);//存储登录session_id为当前用户ID
         $sess_key = session('zerone_program_account_id');
         dump($sess_key);
         exit();

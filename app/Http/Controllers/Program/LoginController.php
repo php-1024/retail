@@ -82,7 +82,7 @@ class LoginController extends Controller{
                     $loginlog->save();
                     $id = $loginlog->id;
                     if(!empty($id)) {
-                        Session::set('zerone_program_account_id',$admininfo['id']);//存储登录session_id为当前用户ID
+                        session('zerone_program_account_id',$admininfo['id']);//存储登录session_id为当前用户ID
                         //构造用户缓存数据
                         $admin_data = ['admin_id'=>$admininfo['id'],'admin_account'=>$admininfo['account'],'admin_is_super'=>$admininfo['is_super'],'admin_login_ip'=>$ip,'admin_login_position'=>$addr,'admin_login_time'=>time()];
                         $admin_data = serialize($admin_data);
