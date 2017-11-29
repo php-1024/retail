@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Program;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
-use App\Models\Admin;
+use App\Models\ProgramAdmin;
 use Session;
 
 class LoginController extends Controller{
@@ -46,15 +46,14 @@ class LoginController extends Controller{
 
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        $key = config("app.encrypt_key");//获取加密盐
+        $key = config("app.program_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        $admininfo = Admin::where('username',$username)->first()->toArray();
+        $admininfo = ProgramAdmin::where('account',$username)->first()->toArray();
         if(!empty($admininfo)){
             if($encryptPwd != $admininfo['password']){//查询密码是否对的上
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
             }else{
-
                 return response()->json(['data' => '登录成功', 'status' => '1']);
             }
         }else{
