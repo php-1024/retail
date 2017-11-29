@@ -19,7 +19,7 @@ class IP2Attr{
         $response = HttpCurl::doGet($url);
         if(preg_match('/{.*}/iUs',$response,$arr)) {
             $response = json_decode(trim($arr[0]), true);
-            dump($response);
+            return $response['country'].$response['province'].$response['city'];
         }else{
             return false;
         }
