@@ -97,6 +97,9 @@ class LoginController extends Controller{
             $error->where('ip',$ip)->increment('error_time');
         }
     }
+    public function cleatErrorLog(){
+
+    }
 
 }
 ?>
