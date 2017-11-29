@@ -6,7 +6,7 @@ use App\Libraries\Curl\HttpCurl;
  */
 class IP2Attr{
     public static function getAttr($ip){
-        echo $ip;
+        return self::sina_api($ip);
     }
     public static function sina_api($ip){
         $url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$ip;
