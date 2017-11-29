@@ -25,7 +25,7 @@ class LoginController extends Controller{
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
         $error = new ProgramErrorLog();
-        $error_time = $error->where('ip',$ip)->first()->toArray();//获取该IP的错误次数
+        $error_time = $error->where('ip',$ip)->first();//获取该IP的错误次数
         dump($error_time);
         exit();
         $data['random']=time();//生成调用验证码的随机数
