@@ -49,7 +49,7 @@ Route::group(['prefix'=>'program'],function(){
         Route::get('captcha/{tmp}', 'Program\LoginController@captcha');//验证码路由
     });
 
-    Route::group(['prefix'=>'program_ajax'],function(){
+    Route::group(['prefix'=>'ajax'],function(){
         Route::post('checklogin','Program\LoginController@checkLogin');//提交登陆数据
     });
 });
