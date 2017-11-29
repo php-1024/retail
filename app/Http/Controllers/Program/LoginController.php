@@ -60,11 +60,7 @@ class LoginController extends Controller{
 
         $error = new ProgramErrorLog();
         $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
-        if(empty($error_log)){
-            $error->ip = $ip;
-            $error->error_time = 1;
-            $error->save();
-        }
+        dump($error_log);
         exit();
         $admininfo = ProgramAdmin::where('account',$username)->first()->toArray();
         if(!empty($admininfo)){
