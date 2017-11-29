@@ -73,6 +73,7 @@ class LoginController extends Controller{
                     $this->setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
+                    $this->clearErrorLog($ip);//清除掉错误记录
                     return response()->json(['data' => '登录成功', 'status' => '1']);
                 }
             } else {
@@ -97,8 +98,10 @@ class LoginController extends Controller{
             $error->where('ip',$ip)->increment('error_time');
         }
     }
-    public function cleatErrorLog(){
-
+    //清除错误记录
+    public function cleatErrorLog($ip){
+        $error = new ProgramErrorLog();
+        $error->where('ip',$ip)->update(['error_time'=>0]);
     }
 
 }
