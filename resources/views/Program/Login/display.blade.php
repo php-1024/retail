@@ -85,6 +85,7 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
+                changeCaptcha();
                 /*
                  swal({
                  title: "提示信息",
