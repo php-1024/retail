@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ProgramAdmin;
+use App\Libraries\IP2Attr\IP2Attr;
 use Session;
 
 class LoginController extends Controller{
@@ -19,7 +20,7 @@ class LoginController extends Controller{
         $ip = Request::getClientIp();
         dump($ip);
 
-        ip2attr($ip);
+        IP2Attr::getAttr($ip);
         exit();
         $data['random']=time();//生成调用验证码的随机数
         return view('Program/Login/display',$data);
