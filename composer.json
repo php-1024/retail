@@ -9,7 +9,7 @@
         "fideloper/proxy": "~3.3",
         "gregwar/captcha": "1.*",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",g
+        "laravel/tinker": "~1.0",
         "predis/predis": "^1.0"
     },
     "require-dev": {
