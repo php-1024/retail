@@ -37,10 +37,10 @@ Route::get('tt',function(){
 });
 
 /*程序管理系统*/
+Route::get('program',function(){
+    return "你好世界";
+});
 Route::group(['prefix'=>'pro'],function(){
-    Route::get('/',function(){
-        return "你好世界";
-    });
 
 });
 
