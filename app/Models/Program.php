@@ -1,17 +1,13 @@
 <?php
 /**
- * admin表的模型
+ * program表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-class Admin extends Model{
-    protected $table = 'admin';
+class Program extends Model{
+    protected $table = 'program';
     protected $primaryKey = 'id';
     public $timestamps = false;
-
-    public static function getOne($id){
-
-    }
 }
 ?>

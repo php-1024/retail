@@ -23,18 +23,19 @@ Route::group(['prefix' => 'login','middleware' => 'CheckNotLogin'], function () 
     Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
     Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware('DashBoardLoginPost');
 });
-
-Route::group(['prefix' => 'login','middleware' => 'CheckNotLogin'], function () {
-    Route::get('/', 'dashboard\LoginController@display');
-    Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
-});
-
 Route::group(['prefix' => 'ajax'],function(){
     Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware(['CheckNotLogin','DashBoardLoginPost']);
 });
-
 Route::group(['prefix'=>'redis'],function(){
     Route::get('study','dashboard\RedisController@study');
+});
+
+/*程序管理系统*/
+Route::group(['prefix'=>'program'],function(){
+    Route::get('/',function(){
+        return "你好世界";
+    });
+
 });
 
 Route::get('tt',function(){
