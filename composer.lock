@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "88175535d4cc6a57bc8db5774cca456d",
+    "content-hash": "7ea477afa060792ed7d405e3f1550d46",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -854,6 +854,48 @@
                 "schedule"
             ],
             "time": "2017-01-23T04:29:33+00:00"
+        },
+        {
+            "name": "mylukin/ip2city",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mylukin/ip2city.git",
+                "reference": "c082dbf262c9fad401c90c07831e4b94df76ff44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/mylukin/ip2city/c082dbf262c9fad401c90c07831e4b94df76ff44.zip",
+                "reference": "c082dbf262c9fad401c90c07831e4b94df76ff44",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyLukin\\IP2City\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukin",
+                    "email": "mylukin@gmail.com"
+                }
+            ],
+            "description": "ip to city for 17mon.cn",
+            "keywords": [
+                "17mon",
+                "IP",
+                "city",
+                "ip2city"
+            ],
+            "time": "2015-05-21T06:01:09+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -3939,7 +3981,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mylukin/ip2city": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
