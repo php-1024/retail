@@ -11,7 +11,6 @@ use App\Models\ProgramAdmin;
 use App\Models\ProgramErrorLog;
 use App\Models\ProgramLoginLog;
 use App\Libraries\IP2Attr\IP;
-
 use Session;
 
 class LoginController extends Controller{
@@ -74,7 +73,7 @@ class LoginController extends Controller{
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
                     $this->clearErrorLog($ip);//清除掉错误记录
-                    session(['zerone_program_account_id'=>$admininfo['id']]);
+
                     return response()->json(['data' => '登录成功', 'status' => '1']);
                 }
             } else {
