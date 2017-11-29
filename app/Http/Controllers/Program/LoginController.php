@@ -17,7 +17,7 @@ class LoginController extends Controller{
     public function display()
     {
         $data['random']=time();//生成调用验证码的随机数
-        return view('dashboard/login/display',$data);
+        return view('Program/login/display',$data);
     }
     /*
      * 生成验证码
