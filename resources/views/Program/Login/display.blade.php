@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>零壹新科技后台管理系统| 登陆界面</title>
+    <title>零壹程序管理系统| 登陆界面</title>
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
@@ -26,8 +26,8 @@
             <h1 class="logo-name">ZERONE</h1>
 
         </div>
-        <h3>欢饮使用零壹新科技后台管理系统</h3>
-        <form class="m-t" role="form" id="currentForm" action="{{ url('ajax/checklogin') }}">
+        <h3>欢饮使用零壹程序管理系统</h3>
+        <form class="m-t" role="form" id="currentForm" action="{{ url('program_ajax/checklogin') }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
                 <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" >
@@ -41,8 +41,8 @@
 
             </div>
             <div class="form-group col-md-6" >
-                <input type="hidden" id="captcha_url" value="{{ URL('login/captcha') }}">
-                <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="return changeCaptcha();">
+                <input type="hidden" id="captcha_url" value="{{ URL('program/login/captcha') }}">
+                <img src="{{ URL('program/login/captcha/'.$random) }}" id="login_captcha" onClick="return changeCaptcha();">
 
             </div>
             <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登陆</button>

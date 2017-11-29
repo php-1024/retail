@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*********************测试路由****************************/
 Route::get('/', function () {
     return view('welcome');
 })->middleware('CheckIsLogin');
@@ -21,7 +21,6 @@ Route::get('/', function () {
 Route::group(['prefix' => 'login','middleware' => 'CheckNotLogin'], function () {
     Route::get('/', 'dashboard\LoginController@display');
     Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
-    Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware('DashBoardLoginPost');
 });
 Route::group(['prefix' => 'ajax'],function(){
     Route::post('checklogin','dashboard\LoginController@checkLogin')->middleware(['CheckNotLogin','DashBoardLoginPost']);
@@ -35,16 +34,24 @@ Route::get('tt',function(){
     dump($data);
     return "零壹新科技Larael框架测试环境搭建成功啦";
 });
+/*********************测试路由****************************/
 
-/*程序管理系统*/
+/***********************程序管理系统*********************/
 
 Route::group(['prefix'=>'program'],function(){
     Route::get('/', function () {
         return '你好世界';
     })->middleware('ProgramCheckIsLogin');
+
+
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Program\LoginController@display');
+        Route::get('/', 'Program\LoginController@display')->middleware('ProgramIsLogin');//登陆页面路由
+        Route::get('captcha/{tmp}', 'Program\LoginController@captcha');//验证码路由
+    });
+
+    Route::group(['prefix'=>'program_ajax'],function(){
+        Route::post('checklogin','Program\LoginController@checkLogin');//提交登陆数据
     });
 });
-
+/********************程序管理系统*************************/
 

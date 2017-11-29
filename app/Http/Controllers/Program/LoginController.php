@@ -16,9 +16,8 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $data['random']=time();
+        $data['random']=time();//生成调用验证码的随机数
         return view('dashboard/login/display',$data);
-
     }
     /*
      * 生成验证码
@@ -33,7 +32,7 @@ class LoginController extends Controller{
         $phrase = $builder->getPhrase();
 
         //把内容存入session
-        Session::flash('milkcaptcha', $phrase);
+        Session::flash('program_system_captcha', $phrase);
         //生成图片
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');

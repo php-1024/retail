@@ -63,7 +63,8 @@ class Kernel extends HttpKernel
         //检测用户登录后台提交的数据是否一致
         'DashBoardLoginPost'=>\App\Http\Middleware\DashBoardLoginPost::class,
         /**************************零壹程序管理系统*******************************/
-        'ProgramCheckIsLogin'=>\App\Http\Middleware\ProgramCheckIsLogin::class,
+        'ProgramCheckIsLogin'=>\App\Http\Middleware\ProgramCheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
+        'ProgramIsLogin'=>\App\Http\Middleware\ProgramIsLogin::class,//登录页面判断如果登陆了就跳转到首页
         /**************************零壹程序管理系统*******************************/
     ];
 }
