@@ -44,7 +44,7 @@ Route::group(['prefix'=>'program'],function(){
 
     //系统管理组
     Route::group(['prefix'=>'dashboard'],function(){
-        Route::get('add_account', 'Program\SystemController@add_account')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//登陆页面路由
+        Route::get('account_add', 'Program\SystemController@account_add')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//登陆页面路由
     });
 
     //登陆页面组
