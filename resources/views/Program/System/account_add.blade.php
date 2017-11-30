@@ -42,12 +42,12 @@
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>添加账号</h5>
-                        </div>
-                        <form role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <form role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>添加账号</h5>
+                            </div>
                             <div class="ibox-content">
                                 <form method="get" class="form-horizontal">
                                     <div class="form-group">
@@ -72,8 +72,8 @@
                                     </div>
                                 </form>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
