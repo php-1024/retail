@@ -16,9 +16,7 @@ class SystemController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $admin = new ProgramAdmin();//重新实例化模型，避免重复
-        $info = $admin->where('account','zeo')->pluck('id')->toArray();//查询是否有相同的账号存在
-        dump($info);
-        exit();
+
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
 
@@ -41,9 +39,8 @@ class SystemController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$encrypt_key);//加密密码第二重
 
         $admin = new ProgramAdmin();//实例化模型
-        $info = $admin->where('account',$account)->pluck('id');//查询是否有相同的账号存在
-        dump($info);
-        exit();
+        $info = $admin->where('account',$account)->pluck('id')->toArray();//查询是否有相同的账号存在
+
         if(!empty($info)){//如果存在报错
             return response()->json(['data' => '该账号已存在', 'status' => '0']);
         }else{
