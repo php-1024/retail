@@ -17,7 +17,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='program')class="active"@endif><a href="{{ url('program') }}">管理首页</a></li>
                     @if($admin_data['admin_is_super']==1)
-                    <li><a href="addaccount.html">添加账号</a></li>
+                    <li><a href="{{ url('program/dashboard/add_account') }}">添加账号</a></li>
                     <li><a href="addaccount.html">账号列表</a></li>
                     <li><a href="allctrllog.html">所有操作记录</a></li>
                     <li><a href="allloginlog.html">所有登陆记录</a></li>
