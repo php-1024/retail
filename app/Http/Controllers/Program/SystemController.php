@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Program;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
