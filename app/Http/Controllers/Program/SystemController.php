@@ -54,6 +54,7 @@ class SystemController extends Controller{
                 return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
             }
         }
+        return response()->json(['data' => '添加账号成功', 'status' => '1']);
     }
 
     public function quit(Request $request){
