@@ -14,9 +14,11 @@ class SystemController extends Controller{
         return view('Program/System/dashboard',['admin_data'=>$admin_data]);
     }
 
-    public function quit(){
-        Session::put('zerone_program_account_id','');
-        return redirect('program/login');
+    public function quit(Request $request){
+        //Session::put('zerone_program_account_id','');
+        $uri = $request->path();
+        dump($uri);
+        //return redirect('program/login');
     }
 }
 ?>
