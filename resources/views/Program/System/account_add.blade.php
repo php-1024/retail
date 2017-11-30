@@ -113,7 +113,6 @@ function postForm() {
                 text: json.data,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-                //type: "warning"
             },function(){
                 window.location.reload();
             });
