@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProgramAdmin;
+use App\Libraries\ZeroneLog\ProgramLog;
 
 class SystemController extends Controller{
     //后台首页
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
@@ -25,9 +28,32 @@ class SystemController extends Controller{
 
     //提交新增账号数据
     public function account_add_check(Request $request){
-        $account = $request->input('account');
-        $password = $request->input('password');
+        $account = $request->input('account');//获取账号
+        $password = $request->input('password');//获取密码
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
 
+        $encrypt_key = config("app.program_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$encrypt_key);//加密密码第二重
+
+        $admin = new ProgramAdmin();//实例化模型
+        $info = $admin->where('account',$account)->pluck('id');//查询是否有相同的账号存在
+        if(!empty($info)){//如果存在报错
+            return response()->json(['data' => '该账号已存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $admin = new ProgramAdmin();//重新实例化模型，避免重复
+                $admin->account = $account;
+                $admin->password = $account;
+                $admin->save();//添加账号
+                ProgramLog::setOperationLog($admin_data);
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
+            }
+        }
     }
 
     public function quit(Request $request){

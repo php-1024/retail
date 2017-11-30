@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramAdmin extends Model{
     protected $table = 'program_admin';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
+    public function fromDateTime($value){
+        return strtotime(parent::fromDateTime($value));
+    }
 }
 ?>

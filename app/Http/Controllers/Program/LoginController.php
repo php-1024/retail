@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ProgramAdmin;
 use App\Models\ProgramErrorLog;
-use App\Models\ProgramLoginLog;
 use App\Libraries\IP2Attr\IP;
 use App\Libraries\ZeroneLog\ProgramLog;
 use Session;
@@ -76,6 +75,7 @@ class LoginController extends Controller{
                 }else{
                     ProgramLog::clearErrorLog($ip);//清除掉错误记录
                     //插入登录记录
+
                     if(ProgramLog::setLoginLog($admininfo['id'],$ip,$addr)) {
                         Session::put('zerone_program_account_id',encrypt($admininfo['id']));//存储登录session_id为当前用户ID
                         //构造用户缓存数据

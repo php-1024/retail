@@ -2,7 +2,16 @@
 namespace App\Libraries\ZeroneLog;
 use App\Models\ProgramErrorLog;
 use App\Models\ProgramLoginLog;
+use App\Models\ProgramOperationLog;
 class ProgramLog{
+    //记录操作日志
+    public static function setOperationLog($account_id,$route_name,$info){
+        $operation_log = new ProgramOperationLog();
+        $operation_log->account_id = $account_id;
+        $operation_log->route_name = $route_name;
+        $operation_log->operation_info = $info;
+        $operation_log->save();
+    }
     //记录登陆日志
     public static function setLoginLog($account_id,$ip,$addr){
         $loginlog = new ProgramLoginLog();
