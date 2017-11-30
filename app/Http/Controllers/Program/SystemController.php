@@ -3,6 +3,7 @@
  * 系统管理
  */
 namespace App\Http\Controllers\Program;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class SystemController extends Controller{
     public function dashboard(Request $request){
