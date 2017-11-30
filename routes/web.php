@@ -61,6 +61,7 @@ Route::group(['prefix'=>'program'],function(){
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('checklogin','Program\LoginController@checkLogin')->middleware('ProgramLoginPost');//提交登陆数据
         Route::post('check_account_add','Program\SystemController@account_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountAddCheck');//提交增加账号数据
+        Route::post('check_edit_password','Program\Personal@check_edit_password')->middleware('ProgramCheckIsLoginAjax','ProgramAccountAddCheck');//提交增加账号数据
     });
 });
 /********************程序管理系统*************************/

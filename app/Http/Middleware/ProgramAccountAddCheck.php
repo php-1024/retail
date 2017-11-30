@@ -1,6 +1,6 @@
 <?php
 /**
- * 检测是否登陆的中间件
+ * 检测添加账号数据中间件
  */
 namespace App\Http\Middleware;
 use Closure;
