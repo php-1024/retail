@@ -15,10 +15,8 @@ class SystemController extends Controller{
     }
 
     public function quit(Request $request){
-        //Session::put('zerone_program_account_id','');
-        $uri = $request->path();
-        dump($uri);
-        //return redirect('program/login');
+        Session::put('zerone_program_account_id','');
+        return redirect('program/login');
     }
 }
 ?>
