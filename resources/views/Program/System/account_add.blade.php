@@ -26,255 +26,50 @@
         @include('Program/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>管理首页</h2>
+                <h2>添加账号</h2>
                 <ol class="breadcrumb">
-                    <li>
+                    <li class="active">
                         <a href="JavaScript:;">系统管理</a>
                     </li>
-                    <li class="active">
-                        <strong>管理首页</strong>
+                    <li >
+                        <strong>添加账号</strong>
                     </li>
                 </ol>
             </div>
 
         </div>
 
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row ">
+        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+            <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox-content forum-container">
-
-                        <div class="forum-title">
-
-                            <h3>管理人员统计</h3>
-                        </div>
-
-                        <div class="forum-item active">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="forum-icon">
-                                        <i class="fa fa-area-chart"></i>
-                                    </div>
-                                    <a href="javascript:;" class="forum-item-title">程序数量</a>
-                                    <div class="forum-sub-title">零壹开发的所有程序数量</div>
-                                </div>
-
-
-                                <div class="col-md-3 forum-info">
-                                            <span class="views-number">
-                                                14套
-                                            </span>
-                                    <div>
-                                        <small>总计</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="forum-item active">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="forum-icon">
-                                        <i class="fa fa-area-chart"></i>
-                                    </div>
-                                    <a href="javascript:;" class="forum-item-title">功能模块数量</a>
-                                    <div class="forum-sub-title">零壹开发的所有功能模块的数量</div>
-                                </div>
-
-                                <div class="col-md-3 forum-info">
-                                            <span class="views-number">
-                                                150个
-                                            </span>
-                                    <div>
-                                        <small>总计</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="forum-item active">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="forum-icon">
-                                        <i class="fa fa-area-chart"></i>
-                                    </div>
-                                    <a href="javascript:;" class="forum-item-title">功能节点数量</a>
-                                    <div class="forum-sub-title">组成零壹所有系统的程序节点数量</div>
-                                </div>
-                                <div class="col-md-3 forum-info">
-                                            <span class="views-number">
-                                                1300
-                                            </span>
-                                    <div>
-                                        <small>总计</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="row wrapper wrapper-content animated fadeInRight">
-                <div class="col-lg-7">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>用户登陆日志</h5>
+                            <h5>添加账号</h5>
+
                         </div>
                         <div class="ibox-content">
-                            <table class="table table-hover no-margins">
-                                <thead>
-                                <tr>
-                                    <th>用户</th>
-                                    <th>登陆IP</th>
-                                    <th>登陆地址</th>
-                                    <th>登陆时间</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>用户操作日志</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <table class="table table-hover no-margins">
-                                <thead>
-                                <tr>
-                                    <th>用户</th>
+                            <form method="get" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">登陆账号</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">登陆密码</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">重复登陆密码</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
 
-                                    <th>操作</th>
-                                    <th>时间</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>admin</td>
+                                <div class="hr-line-dashed"></div>
 
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                <div class="form-group ">
+                                    <div class="col-sm-4 col-sm-offset-5">
+                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
