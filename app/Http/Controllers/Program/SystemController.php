@@ -14,7 +14,6 @@ class SystemController extends Controller{
     //后台首页
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
@@ -46,9 +45,9 @@ class SystemController extends Controller{
             try{
                 $admin = new ProgramAdmin();//重新实例化模型，避免重复
                 $admin->account = $account;
-                $admin->password = $account;
+                $admin->password = $encryptPwd;
                 $admin->save();//添加账号
-                ProgramLog::setOperationLog($admin_data);
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'新增了管理员账号'.$account);
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
