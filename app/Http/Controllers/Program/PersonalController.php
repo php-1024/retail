@@ -29,7 +29,7 @@ class PersonalController extends Controller{
         $admin = new ProgramAdmin();
         $sql_password = $admin->find($admin_data['admin_id']);//查询当前用户的登录密码
         $sql_password = $sql_password[0];//数组转化为字符串
-
+        var_dump($sql_password);
         if($old_encryptPwd != $sql_password){//判断原登录密码是否输入正确
             return response()->json(['data' => '原登录密码输入错误', 'status' => '0']);
         }
