@@ -26,7 +26,7 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">  
                     	<span>
-                            <img alt="image"  src="img/zerone_logo.png" />
+                            <img alt="image"  src="{{asset('public/Program')}}/images/zerone_logo.png" />
                          </span>
 
                     </div>
