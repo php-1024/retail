@@ -8,9 +8,9 @@
                 欢迎登录！
                 <strong>
                     @if ($admin_data['admin_is_super']==1)
-                        超级管理员-{{ $admin_data['account'] }}
+                        超级管理员-{{ $admin_data['admin_account'] }}
                     @else
-                        管理员-{{ $admin_data['account'] }}
+                        管理员-{{ $admin_data['admin_account'] }}
                     @endif
                 </strong>
             </span>
