@@ -38,6 +38,8 @@ class SystemController extends Controller{
 
         $admin = new ProgramAdmin();//实例化模型
         $info = $admin->where('account',$account)->pluck('id');//查询是否有相同的账号存在
+        dump($info);
+        exit();
         if(!empty($info)){//如果存在报错
             return response()->json(['data' => '该账号已存在', 'status' => '0']);
         }else{
