@@ -38,44 +38,43 @@
             </div>
 
         </div>
-        <form role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>添加账号</h5>
-                            </div>
-                            <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">登陆账号</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" placeholder="登陆账号"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">登陆密码</label>
-                                        <div class="col-sm-10"><input type="password" class="form-control" placeholder="登陆密码"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">重复登陆密码</label>
-                                        <div class="col-sm-10"><input type="password" class="form-control" placeholder="重复登陆密码"></div>
-                                    </div>
 
-                                    <div class="hr-line-dashed"></div>
+        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>添加账号</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" class="form-horizontal">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">登陆账号</label>
+                                    <div class="col-sm-10"><input type="text" name="account" class="form-control" placeholder="登陆账号"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">登陆密码</label>
+                                    <div class="col-sm-10"><input type="password" name="password" class="form-control" placeholder="登陆密码"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">重复登陆密码</label>
+                                    <div class="col-sm-10"><input type="password" name="repassword" class="form-control" placeholder="重复登陆密码"></div>
+                                </div>
 
-                                    <div class="form-group ">
-                                        <div class="col-sm-4 col-sm-offset-5">
-                                            <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
-                                        </div>
+                                <div class="hr-line-dashed"></div>
+
+                                <div class="form-group ">
+                                    <div class="col-sm-4 col-sm-offset-5">
+                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         @include('Program/Public/Footer')
     </div>
 </div>
