@@ -9,6 +9,8 @@ class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         dump($admin_data);
+        echo datetime("Y-m-d H:i:s");
+        exit();
         return view('Program/System/dashboard',['admin_data'=>$admin_data]);
     }
 }
