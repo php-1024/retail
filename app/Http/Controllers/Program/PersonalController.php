@@ -46,7 +46,7 @@ class PersonalController extends Controller{
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
         }
-
+        return response()->json(['data' => '修改密码成功', 'status' => '1']);
     }
 }
 ?>
