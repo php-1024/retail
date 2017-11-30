@@ -17,7 +17,8 @@ class SystemController extends Controller{
     public function account_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Program/System/account_add',['admin_data'=>$admin_data,'route_name'=>$route_name]);
+        dump($route_name);
+        //return view('Program/System/account_add',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
 
     public function quit(Request $request){
