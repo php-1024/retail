@@ -17,6 +17,9 @@ class ProgramEditPasswordCheck{
         if(empty($request->input('repassword'))){
             return response()->json(['data' => '请再次输入新登陆密码', 'status' => '0']);
         }
+        if($request->input('password')==$request->input('oldpassword')){
+            return response()->json(['data' => '新旧密码不能相同', 'status' => '0']);
+        }
         if($request->input('password')!=$request->input('repassword')){
             return response()->json(['data' => '两次输入的新密码不一致', 'status' => '0']);
         }
