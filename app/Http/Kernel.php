@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'DashBoardLoginPost'=>\App\Http\Middleware\DashBoardLoginPost::class,
         /**************************零壹程序管理系统*******************************/
         'ProgramCheckIsLogin'=>\App\Http\Middleware\ProgramCheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
+        'ProgramCheckIsLoginAjax'=>\App\Http\Middleware\ProgramCheckIsLoginAjax::class,//判断页面是否登陆，若未登陆提示未登录错误。
         'ProgramIsLogin'=>\App\Http\Middleware\ProgramIsLogin::class,//登录页面判断如果登陆了就跳转到首页
         'ProgramLoginPost'=>\App\Http\Middleware\ProgramLoginPost::class,//登陆提交信息检测是否合法
         'ProgramCheckIsSuper'=>\App\Http\Middleware\ProgramCheckIsSuper::class,//检测是否超级管理员，若不是超级管理员，不能使用超级管理员的一些功能
