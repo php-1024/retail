@@ -39,16 +39,7 @@ Route::get('tt',function(){
 /***********************程序管理系统*********************/
 
 Route::group(['prefix'=>'program'],function(){
-    Route::get('/', function () {
-        $sess_key = Session::get('zerone_program_account_id');
-        $sess_key = decrypt($sess_key);
-        Redis::connect('zeo');
-        $admin_data = Redis::get('program_system_admin_data_'.$sess_key);
-        dump($admin_data);
-        $admin_data = unserialize($admin_data);
-        dump($admin_data);
-        return '你好世界';
-    })->middleware('ProgramCheckIsLogin');
+    Route::get('/', 'Program\SystemController@dashboard')->middleware('ProgramCheckIsLogin','ProgramAdminData');
 
 
     Route::group(['prefix'=>'login'],function(){
