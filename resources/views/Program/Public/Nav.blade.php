@@ -54,7 +54,7 @@
                 </ul>
             </li>
             <li>
-                <a href="layouts.html"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>
+                <a href="{{ url('program/quit') }}"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>
             </li>
 
 

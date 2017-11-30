@@ -7,7 +7,7 @@
             <span class="m-r-sm text-muted welcome-message">欢迎登录！<strong>超级管理员-薛志豪</strong></span>
         </li>
         <li>
-            <a href="JavaScript:;">
+            <a href="{{ url('program/quit') }}">
                 <i class="fa fa-sign-out"></i>退出系统
             </a>
         </li>

@@ -40,7 +40,7 @@ Route::get('tt',function(){
 
 Route::group(['prefix'=>'program'],function(){
     Route::get('/', 'Program\SystemController@dashboard')->middleware('ProgramCheckIsLogin','ProgramAdminData');
-
+    Route::get('quit','Program\SystemController@quit');
 
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Program\LoginController@display')->middleware('ProgramIsLogin');//登陆页面路由
