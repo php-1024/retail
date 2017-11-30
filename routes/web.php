@@ -42,9 +42,14 @@ Route::group(['prefix'=>'program'],function(){
     Route::get('/', 'Program\SystemController@dashboard')->middleware('ProgramCheckIsLogin');//系统首页
     Route::get('quit','Program\SystemController@quit');//退出系统
 
-    //系统管理组
+    //系统管理组(功能只有超级管理员能用)
     Route::group(['prefix'=>'dashboard'],function(){
-        Route::get('account_add', 'Program\SystemController@account_add')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//登陆页面路由
+        Route::get('account_add', 'Program\SystemController@account_add')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
+    });
+
+    //个人中心组
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('edit_password', 'Program\Personal\Controller@edit_password')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
     //登陆页面组

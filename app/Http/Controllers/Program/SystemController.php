@@ -60,6 +60,7 @@ class SystemController extends Controller{
         return response()->json(['data' => '添加账号成功', 'status' => '1']);
     }
 
+    //退出登录
     public function quit(Request $request){
         Session::put('zerone_program_account_id','');
         return redirect('program/login');
