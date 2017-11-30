@@ -105,9 +105,11 @@ function postForm() {
     var url = target.attr("action");
     var data = target.serialize();
     $.post(url, data, function (json) {
-        if (json.status == 1) {
+        if (json.status == -1) {
             window.location.reload();
-        } else {
+        } else if(json.status == 1) {
+
+        }else{
             swal({
                 title: "提示信息",
                 text: json.data,
