@@ -49,7 +49,7 @@ Route::group(['prefix'=>'program'],function(){
 
     //个人中心组
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('edit_password', 'Program\Personal\Controller@edit_password')->middleware('ProgramCheckIsLogin');//修改密码路由
+        Route::get('edit_password', 'Program\PersonalController@edit_password')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
     //登陆页面组
