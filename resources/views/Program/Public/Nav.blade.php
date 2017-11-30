@@ -12,7 +12,7 @@
                     01
                 </div>
             </li>
-            <li class="active">
+            <li @if ($action_name=='system')class="active"@endif>
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='program')class="active"@endif><a href="{{ url('program') }}">管理首页</a></li>
@@ -24,7 +24,7 @@
                     @endif
                 </ul>
             </li>
-            <li>
+            <li @if ($action_name=='personal')class="active"@endif>
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='program/personal/edit_password')class="active"@endif><a href="{{ url('program/personal/edit_password') }}">登录密码修改</a></li>
