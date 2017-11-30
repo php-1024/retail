@@ -23,21 +23,7 @@
     @include('Program/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-            <div class="navbar-header">
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="javascript:;"><i class="fa fa-bars"></i> </a>
-            </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">欢迎登录！<strong>超级管理员-薛志豪</strong></span>
-                </li>
-                <li>
-                    <a href="JavaScript:;">
-                        <i class="fa fa-sign-out"></i>退出系统
-                    </a>
-                </li>
-            </ul>
-        </div>
+        @include('Program/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>管理首页</h2>
@@ -294,17 +280,7 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="footer" >
-            <div class="pull-right">
-                您登陆的时间是：2017-10-24 16:26:30
-            </div>
-            <div>
-                <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
-            </div>
-        </div>
-
+        @include('Program/Public/Footer')
     </div>
 </div>
 
