@@ -48,6 +48,7 @@ class SystemController extends Controller{
                 $admin->password = $encryptPwd;
                 $admin->save();//添加账号
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'新增了管理员账号'.$account);
+                DB::commit();
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
