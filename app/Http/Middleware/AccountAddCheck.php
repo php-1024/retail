@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Redis;
 
 class AccountAddCheck{
     public function handle($request,Closure $next){
-        if(empty($request->input('username'))){
+        if(empty($request->input('account'))){
             return response()->json(['data' => '请输入登陆账号', 'status' => '0']);
         }
         if(empty($request->input('password'))){
