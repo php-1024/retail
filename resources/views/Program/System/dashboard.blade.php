@@ -375,7 +375,7 @@
 <script src="{{asset('public/Program/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Program/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Program/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Program/library/slimscroll')}}/js/query.slimscroll.min.js"></script>
+<script src="{{asset('public/Program/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
