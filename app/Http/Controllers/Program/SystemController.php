@@ -14,7 +14,7 @@ class SystemController extends Controller{
 
     public function quit(){
         Session::put('zerone_program_account_id','');
-        return redirect('Program/login');
+        return redirect('program/login');
     }
 }
 ?>
