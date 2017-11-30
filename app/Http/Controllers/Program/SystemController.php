@@ -11,6 +11,7 @@ class SystemController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();
         dump($admin_data);
+        exit;
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
 
