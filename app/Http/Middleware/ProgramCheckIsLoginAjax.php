@@ -11,10 +11,9 @@ class ProgramCheckIsLoginAjax{
     public function handle($request,Closure $next){
         //获取用户登陆存储的SessionId
         $sess_key = Session::get('zerone_program_account_id');
-        return response()->json(['data' => '登陆状态失效', 'status' => '-1']);
         //如果为空返回登陆失效
         if(empty($sess_key)) {
-
+            return response()->json(['data' => '登陆状态失效', 'status' => '-1']);
         }else{
             $sess_key = Session::get('zerone_program_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID

@@ -15,6 +15,12 @@ class AccountAddCheck{
         if(empty($request->input('password'))){
             return response()->json(['data' => '请输入登陆密码', 'status' => '0']);
         }
+        if(empty($request->input('repassword'))){
+            return response()->json(['data' => '请再次输入登陆密码', 'status' => '0']);
+        }
+        if($request->input('password')!=$request->input('repassword')){
+            return response()->json(['data' => '请再次输入登陆密码', 'status' => '0']);
+        }
         return $next($request);
     }
 }
