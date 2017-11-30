@@ -9,6 +9,8 @@ use Session;
 class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->route()->getName();
+        dump($route_name);
         return view('Program/System/dashboard',['admin_data'=>$admin_data]);
     }
 

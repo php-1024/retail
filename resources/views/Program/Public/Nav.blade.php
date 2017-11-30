@@ -26,7 +26,6 @@
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="editpassword.html">登陆密码修改</a></li>
-
                     <li><a href="ctrllog.html">我的操作日志</a></li>
                     <li><a href="loginlog.html">我的登录日志</a></li>
                 </ul>
