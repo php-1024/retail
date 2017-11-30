@@ -10,6 +10,7 @@ class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();
+        dump($admin_data);
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
 
