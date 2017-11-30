@@ -9,6 +9,7 @@
     <title>零壹新科技程序管理平台</title>
 
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
     <link href="{{asset('public/Program')}}/css/animate.css" rel="stylesheet">
