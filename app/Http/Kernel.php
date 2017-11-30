@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'ProgramCheckIsLogin'=>\App\Http\Middleware\ProgramCheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
         'ProgramIsLogin'=>\App\Http\Middleware\ProgramIsLogin::class,//登录页面判断如果登陆了就跳转到首页
         'ProgramLoginPost'=>\App\Http\Middleware\ProgramLoginPost::class,//登陆提交信息检测是否合法
+        'ProgramAdminData'=>\App\Http\Middleware\ProgramAdminData::class,//登陆提交信息检测是否合法
         /**************************零壹程序管理系统*******************************/
     ];
 }
