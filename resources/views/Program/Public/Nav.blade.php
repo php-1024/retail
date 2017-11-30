@@ -18,7 +18,7 @@
                     <li @if ($route_name=='program')class="active"@endif><a href="{{ url('program') }}">管理首页</a></li>
                     @if($admin_data['admin_is_super']==1)
                     <li  @if ($route_name=='program/dashboard/account_add')class="active"@endif><a href="{{ url('program/dashboard/account_add') }}">添加账号</a></li>
-                    <li @if ($route_name=='program/personal/edit_password')class="active"@endif><a href="{{ url('program/personal/edit_password') }}">账号列表</a></li>
+                    <li><a href="javascript:;">账号列表</a></li>
                     <li><a href="allctrllog.html">所有操作记录</a></li>
                     <li><a href="allloginlog.html">所有登陆记录</a></li>
                     @endif
@@ -27,7 +27,7 @@
             <li>
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="editpassword.html">登陆密码修改</a></li>
+                    <li @if ($route_name=='program/personal/edit_password')class="active"@endif><a href="{{ url('program/personal/edit_password') }}">登录密码修改</a></li>
                     <li><a href="ctrllog.html">我的操作日志</a></li>
                     <li><a href="loginlog.html">我的登录日志</a></li>
                 </ul>
