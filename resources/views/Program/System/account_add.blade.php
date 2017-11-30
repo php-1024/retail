@@ -46,7 +46,7 @@
                         <div class="ibox-title">
                             <h5>添加账号</h5>
                         </div>
-                        <form class="m-t" role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
+                        <form role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="ibox-content">
                                 <form method="get" class="form-horizontal">
