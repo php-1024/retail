@@ -47,7 +47,7 @@
                             <h5>添加账号</h5>
                         </div>
                         <div class="ibox-content">
-                            <form method="get" class="form-horizontal">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/check_account_add') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">登陆账号</label>
@@ -66,7 +66,7 @@
 
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
+                                        <button class="btn btn-primary" id="addbtn" type="button" onclick="return postForm();">确认添加</button>
                                     </div>
                                 </div>
                             </form>
@@ -90,7 +90,33 @@
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
-
+$(function(){
+    //设置CSRF令牌
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+//提交表单
+function postForm() {
+    var target = $("#currentForm");
+    var url = target.attr("action");
+    var data = target.serialize();
+    $.post(url, data, function (json) {
+        if (json.status == 1) {
+            window.location.reload();
+        } else {
+            swal({
+                title: "提示信息",
+                text: json.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                //type: "warning"
+            });
+        }
+    });
+}
 </script>
 </body>
 
