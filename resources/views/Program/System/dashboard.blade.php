@@ -280,7 +280,7 @@
                 </div>
             </div>
         </div>
-        @include('Program/Public/Footer',['admin_data'=>$admin_data])
+        @include('Program/Public/Footer')
     </div>
 </div>
 
