@@ -7,7 +7,7 @@ use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
-class ProgramCheckIsLogin{
+class ProgramCheckIsSuper{
     public function handle($request,Closure $next){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         dump($admin_data);
