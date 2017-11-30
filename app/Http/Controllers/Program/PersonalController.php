@@ -43,8 +43,6 @@ class PersonalController extends Controller{
             ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'修改了登录密码');
             DB::commit();
         }catch (\Exception $e) {
-            dump($e);
-            exit();
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
         }
