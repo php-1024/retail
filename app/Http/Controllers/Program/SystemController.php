@@ -6,11 +6,13 @@ namespace App\Http\Controllers\Program;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
+use Illuminate\Routing\Route;
 class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->route()->getName();
-        dump($route_name);
+        $route = new Route();
+
+        dump($route->getName());
         return view('Program/System/dashboard',['admin_data'=>$admin_data]);
     }
 
