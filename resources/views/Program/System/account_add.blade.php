@@ -42,8 +42,7 @@
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="row">
                 <div class="col-lg-12">
-                    <form role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>添加账号</h5>
@@ -73,7 +72,7 @@
                                 </form>
                             </div>
                         </div>
-                    </form>
+
                 </div>
             </div>
         </div>
