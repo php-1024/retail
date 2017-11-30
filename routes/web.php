@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Redis;
+use Crypt;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +42,7 @@ Route::get('tt',function(){
 Route::group(['prefix'=>'program'],function(){
     Route::get('/', function () {
         $sess_key = Session::get('zerone_program_account_id');
+        $sess_key = Crypt::decrypt($sess_key);
         Redis::connect('zeo');
         $admin_data = Redis::get('program_system_admin_data_'.$sess_key);
         dump($admin_data);
