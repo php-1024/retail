@@ -5,7 +5,7 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-class PragramOperationLog extends Model{
+class ProgramOperationLog extends Model{
     protected $table = 'program_operation_log';
     protected $primaryKey = 'id';
     public $timestamps = true;
