@@ -13,7 +13,6 @@ use App\Models\ProgramLoginLog;
 use App\Libraries\IP2Attr\IP;
 use Session;
 use Illuminate\Support\Facades\Redis;
-use Crypt;
 
 class LoginController extends Controller{
     /*
