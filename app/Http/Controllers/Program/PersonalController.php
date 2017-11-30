@@ -13,7 +13,7 @@ class PersonalController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $program_admin = new ProgramAdmin();
-        $sql_password = $program_admin->wehre('',$admin_data['admin_id'])->pluck('password')->toArray();
+        $sql_password = $program_admin->where('',$admin_data['admin_id'])->pluck('password')->toArray();
         dump($sql_password);
         return view('Program/Personal/edit_password',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
