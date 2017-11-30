@@ -15,7 +15,7 @@
             <li class="active">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="active"><a href="{{ url('program/quit') }}">管理首页</a></li>
+                    <li class="active"><a href="{{ url('program') }}">管理首页</a></li>
                     <li><a href="addaccount.html">添加账号</a></li>
                     <li><a href="addaccount.html">账号列表</a></li>
                     <li><a href="allctrllog.html">所有操作记录</a></li>
