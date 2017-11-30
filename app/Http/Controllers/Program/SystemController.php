@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class SystemController extends Controller{
     public function dashboard(Request $request){
+        phpinfo();
+        exit();
         echo date_default_timezone_get();
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         dump(date('Y-m-d H:i:s'));
