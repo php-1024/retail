@@ -11,6 +11,7 @@ use App\Models\ProgramAdmin;
 use App\Models\ProgramErrorLog;
 use App\Models\ProgramLoginLog;
 use App\Libraries\IP2Attr\IP;
+use App\Libraries\ZeroneLog\ProgramLog;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
@@ -67,21 +68,15 @@ class LoginController extends Controller{
             $admininfo = ProgramAdmin::where('account', $username)->first()->toArray();//根据账户查询用户信息
             if (!empty($admininfo)) {//如果查询不到，则提示账号或密码错误
                 if ($encryptPwd != $admininfo['password']) {//查询密码是否对的上
-                    $this->setErrorLog($ip);//记录错误次数
+                    ProgramLog::setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
                 } elseif($admininfo['status']=='0'){//查询账号状态
-                    $this->setErrorLog($ip);//记录错误次数
+                    ProgramLog::setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
-                    $this->clearErrorLog($ip);//清除掉错误记录
+                    ProgramLog::clearErrorLog($ip);//清除掉错误记录
                     //插入登录记录
-                    $loginlog = new ProgramLoginLog();
-                    $loginlog->account_id = $admininfo['id'];
-                    $loginlog->ip = $ip;
-                    $loginlog->ip_position = $addr;
-                    $loginlog->save();
-                    $id = $loginlog->id;
-                    if(!empty($id)) {
+                    if(ProgramLog::setLoginLog($admininfo['id'],$ip,$addr)) {
                         Session::put('zerone_program_account_id',encrypt($admininfo['id']));//存储登录session_id为当前用户ID
                         //构造用户缓存数据
                         $admin_data = ['admin_id'=>$admininfo['id'],'admin_account'=>$admininfo['account'],'admin_is_super'=>$admininfo['is_super'],'admin_login_ip'=>$ip,'admin_login_position'=>$addr,'admin_login_time'=>time()];
@@ -95,7 +90,7 @@ class LoginController extends Controller{
                     }
                 }
             } else {
-                $this->setErrorLog($ip);//记录错误次数
+                ProgramLog::setErrorLog($ip);//记录错误次数
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
             }
         }else{
@@ -103,24 +98,7 @@ class LoginController extends Controller{
         }
     }
 
-    //错误次数记录
-    private function setErrorLog($ip){
-        $error = new ProgramErrorLog();
-        $error_log = $error->where('ip',$ip)->first();//获取该IP的错误记录
 
-        if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
-            $error->ip = $ip;
-            $error->error_time = 1;
-            $error->save();
-        }else{
-            $error->where('ip',$ip)->increment('error_time');
-        }
-    }
-    //清除错误记录
-    private function clearErrorLog($ip){
-        $error = new ProgramErrorLog();
-        $error->where('ip',$ip)->update(['error_time'=>0]);
-    }
 
 }
 ?>
