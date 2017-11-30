@@ -5,7 +5,6 @@
 namespace App\Http\Middleware;
 use Closure;
 use Session;
-use Illuminate\Support\Facades\Redis;
 
 class ProgramAccountAddCheck{
     public function handle($request,Closure $next){
