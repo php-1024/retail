@@ -1,6 +1,6 @@
 <div class="footer" >
     <div class="pull-right">
-        您本次登陆信息 ：<?php echo datetime('Y-m-d H:i:s',$admin_data['admin_login_time']); ?>&nbsp;&nbsp;{{ $admin_data['admin_login_position'] }}
+        您本次登陆信息 ：{{ with($var)->format('Y-m-d H:i:s'); }}&nbsp;&nbsp;{{ $admin_data['admin_login_position'] }}
     </div>
     <div>
         <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
