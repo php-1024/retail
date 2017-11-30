@@ -12,6 +12,8 @@ class PersonalController extends Controller{
     public function edit_password(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $action_name = $request->getAction();
+        dump($action_name);
         return view('Program/Personal/edit_password',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
     //提交修改个人密码数据
