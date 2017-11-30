@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Program;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
+use Illuminate\Support\Facades\DB;
+
 class SystemController extends Controller{
     //后台首页
     public function dashboard(Request $request){
@@ -23,7 +25,9 @@ class SystemController extends Controller{
 
     //提交新增账号数据
     public function account_add_check(Request $request){
-        dump($request->input());
+        $account = $request->input('account');
+        $password = $request->input('password');
+
     }
 
     public function quit(Request $request){
