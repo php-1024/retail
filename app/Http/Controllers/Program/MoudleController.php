@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Node;
 use App\Libraries\ZeroneLog\ProgramLog;
 
-class MoudleController extends Controller{
+class ModuleController extends Controller{
     //修改个人密码
     public function add_moudle(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
