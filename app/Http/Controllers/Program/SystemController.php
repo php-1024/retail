@@ -70,7 +70,7 @@ class SystemController extends Controller{
         if(!empty($account)){
             $admin = $admin->where('account','like','%'.$account.'%');
         }
-        $list = $admin->where('id','!=',$admin_data['id'])->paginate(15);
+        $list = $admin->where('id','!=',$admin_data['admin_id'])->paginate(15);
 
         return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
