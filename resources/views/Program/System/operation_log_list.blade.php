@@ -9,9 +9,10 @@
     <title>零壹新科技程序管理平台</title>
 
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Program/library/datepicker3')}}/css/datepicker3.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
-    <link href="{{asset('public/Program/library/footable')}}/css/footable.core.css" rel="stylesheet">
+
+
     <link href="{{asset('public/Program')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Program')}}/css/style.css" rel="stylesheet">
 
@@ -197,9 +198,7 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<!-- FooTable -->
-<script src="{{asset('public/Program/library/footable')}}/js/footable.all.min.js"></script>
+<script src="{{asset('public/Program/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
@@ -207,6 +206,23 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        $('#date_added').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+
+        $('#date_modified').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
         });
     });
 </script>
