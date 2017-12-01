@@ -127,9 +127,9 @@ class SystemController extends Controller{
         }catch (\Exception $e) {
             dump($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '冻结账号失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '操作失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '冻结账号成功', 'status' => '1']);
+        return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
 
