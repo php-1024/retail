@@ -44,7 +44,7 @@
 
 
             <div class="ibox-content m-b-sm border-bottom">
-                <form method="get" role="form" id="currentForm" action="">
+                <form method="get" role="form" action="">
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <input type="hidden" name="account_edit_url" id="account_edit_url" value="{{ url('program/ajax/account_edit') }}">
                     <div class="row">
