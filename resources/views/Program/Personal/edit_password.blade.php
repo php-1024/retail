@@ -56,15 +56,15 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原登陆密码</label>
-                                    <div class="col-sm-10"><input type="password" name="oldpassword" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="password" name="oldpassword" class="form-control" placeholder="原登陆密码"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">新登陆密码</label>
-                                    <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="password" name="password" class="form-control" placeholder="新登陆密码"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
-                                    <div class="col-sm-10"><input type="password" name="repassword" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="password" name="repassword" class="form-control" placeholder="重复新密码"></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
