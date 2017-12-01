@@ -52,7 +52,12 @@ Route::group(['prefix'=>'program'],function(){
         Route::get('edit_password', 'Program\PersonalController@edit_password')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
-    //添加节点组
+    //功能模块组
+    Route::group(['prefix'=>'module'],function(){
+        Route::get('add_module', 'Program\NodeController@add_module')->middleware('ProgramCheckIsLogin');//修改密码路由
+    });
+
+    //节点管理组
     Route::group(['prefix'=>'node'],function(){
         Route::get('add_node', 'Program\NodeController@add_node')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
