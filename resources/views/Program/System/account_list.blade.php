@@ -107,7 +107,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="4" class="footable-visible">
+                                    <td colspan="99" class="footable-visible">
 
                                     </td>
                                 </tr>
