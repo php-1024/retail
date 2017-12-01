@@ -13,11 +13,11 @@
                 </div>
                 <div class="form-group">
                     <label>新登陆密码</label>
-                    <input type="password" placeholder="请输入新登陆密码" class="form-control">
+                    <input type="password" placeholder="请输入新登陆密码" name="password" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>重复新密码</label>
-                    <input type="password" placeholder="请再次输入新登陆密码" class="form-control">
+                    <input type="password" placeholder="请再次输入新登陆密码" name="repassword" class="form-control">
                 </div>
             </div>
 
