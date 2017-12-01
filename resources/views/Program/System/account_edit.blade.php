@@ -1,6 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('program/ajax/check_edit_password') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" value="{{ $id }}">
+    <input type="hidden" name="id" value="{{ $info->id }}">
     <div class="modal-dialog modal-sm">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>用户账号</label>
-                    admin
+                    {{ $info->account }}
                 </div>
                 <div class="form-group">
                     <label>新登陆密码</label>
