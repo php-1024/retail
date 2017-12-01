@@ -68,9 +68,9 @@ class SystemController extends Controller{
         $search_data = ['account'=>$account];
         $admin = new ProgramAdmin();//实例化模型
         if(!empty($account)){
-            $list = $admin->where('account','like','%'.$account.'%');
+            $admin = $admin->where('account','like','%'.$account.'%');
         }
-        $list = $list->paginate(1);
+        $list = $admin->paginate(1);
 
         return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
