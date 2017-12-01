@@ -64,7 +64,7 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $account = $request->input('account');//通过登录页账号查询
-
+        dump($account);
         $search_data = ['account'=>$account];
         $admin = new ProgramAdmin();//实例化模型
         $list = $admin->paginate(1);
