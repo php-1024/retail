@@ -101,8 +101,9 @@ class SystemController extends Controller{
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '编辑账号失败，请检查', 'status' => '0']);
         }
+        return response()->json(['data' => '编辑账号成功', 'status' => '1']);
     }
 
     //退出登录
