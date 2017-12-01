@@ -138,7 +138,7 @@ class SystemController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $log = new OperationLog();//实例化模型
+        $log = new ProgramOperationLog();//实例化模型
 
         $list = $log->paginate(15);
         dump($list);
