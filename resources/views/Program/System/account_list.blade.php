@@ -79,7 +79,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($list['data'] as $ll)
+                                @foreach ($list as $ll)
                                 <tr>
                                     <td>
                                         {{ $ll['id'] }}
