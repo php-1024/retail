@@ -79,15 +79,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach ($list as $ll)
                                 <tr>
                                     <td>
-                                        2
+                                        {{ $ll['id'] }}
                                     </td>
                                     <td>
-                                        系统首页
+                                        {{ $ll['account'] }}
                                     </td>
                                     <td>
-                                        <label class="label label-danger">超级管理员</label>
+                                        @if ($ll['is_super']==1)
+                                            <label class="label label-danger">超级管理员</label>
+                                        @else
+                                            <label class="label label-info">普通管理员</label>
+                                        @endif
                                     </td>
                                     <td >
                                         dashboard/index
@@ -98,6 +103,7 @@
                                         <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;冻结</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
