@@ -3,6 +3,7 @@
  * 系统管理
  */
 namespace App\Http\Controllers\Program;
+use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
@@ -132,7 +133,18 @@ class SystemController extends Controller{
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
+    //所有操作记录
+    public function operation_log_list(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
 
+        $log = new OperationLog();//实例化模型
+
+        $list = $log->paginate(15);
+        dump($list);
+        exit();
+        return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+    }
 
     //退出登录
     public function quit(Request $request){

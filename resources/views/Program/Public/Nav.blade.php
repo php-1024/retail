@@ -19,7 +19,7 @@
                     @if($admin_data['admin_is_super']==1)
                     <li @if ($route_name=='program/dashboard/account_add')class="active"@endif><a href="{{ url('program/dashboard/account_add') }}">添加账号</a></li>
                     <li @if ($route_name=='program/dashboard/account_list')class="active"@endif><a href="{{ url('program/dashboard/account_list') }}">账号列表</a></li>
-                    <li><a href="allctrllog.html">所有操作记录</a></li>
+                    <li @if ($route_name=='program/dashboard/operation_log')class="active"@endif><a href="{{ url('program/dashboard/operation_log') }}">所有操作记录</a></li>
                     <li><a href="allloginlog.html">所有登陆记录</a></li>
                     @endif
                 </ul>
