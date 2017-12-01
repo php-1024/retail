@@ -131,7 +131,7 @@
         @include('Program/Public/Footer')
     </div>
 </div>
-
+<div id="zero_modalbox"></div>
 <!-- Mainly scripts -->
 <script src="{{asset('public/Program/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Program/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -170,7 +170,20 @@
         }
         var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
-            alert(response);
+            if(response.status=='0'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#zero_modalbox').html(response);
+                $('#zero_modalbox').modal();
+            }
         });
     }
 
