@@ -114,7 +114,7 @@
                                         @if ($admin_data['admin_is_super']==1)
                                             <button type="button" onclick="return getEditForm({{ $ll->id }});" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;修改密码</button>
                                             @if($admin_data['admin_id']==1)
-                                                @if($admin_data['status']==1)
+                                                @if($ll->status==1)
                                                     <button type="button" onclick="return lockAccount('{{ $ll->id }}','{{ $ll->account }}','{{  $ll->status }}');" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                                  @else
                                                     <button type="button" onclick="return lockAccount('{{ $ll->id }}','{{ $ll->account }}','{{  $ll->status }}');" class="btn  btn-xs btn-primary"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
