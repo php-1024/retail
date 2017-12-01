@@ -87,7 +87,7 @@
                                         系统首页
                                     </td>
                                     <td>
-                                        超级管理员
+                                        <label class="label label-danger">超级管理员</label>
                                     </td>
                                     <td >
                                         dashboard/index
