@@ -54,7 +54,7 @@ Route::group(['prefix'=>'program'],function(){
 
     //功能模块组
     Route::group(['prefix'=>'module'],function(){
-        Route::get('add_module', 'Program\NodeController@add_module')->middleware('ProgramCheckIsLogin');//修改密码路由
+        Route::get('add_module', 'Program\ModuleController@add_module')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
     //节点管理组
