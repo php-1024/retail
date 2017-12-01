@@ -106,6 +106,25 @@ class SystemController extends Controller{
         return response()->json(['data' => '编辑账号成功', 'status' => '1']);
     }
 
+    //冻结管理员
+    public function account_lock(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要操作的管理员的ID
+        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        DB::beginTransaction();
+        try{
+            $admin = new ProgramAdmin();//重新实例化模型，避免重复
+            $admin->where('id',$id)->update(['status'=>0]);//添加账号
+            ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'冻结了管理员账号'.$account.'');
+            DB::commit();
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑账号失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑账号成功', 'status' => '1']);
+    }
+
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_program_account_id','');
