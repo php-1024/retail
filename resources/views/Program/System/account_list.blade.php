@@ -95,7 +95,7 @@
                                         @endif
                                     </td>
                                     <td >
-                                        dashboard/index
+                                        {{ $ll->created_at }}
                                     </td>
 
                                     <td class="text-right">
