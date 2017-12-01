@@ -11,7 +11,7 @@
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
+    <link href="{{asset('public/Program/library/footable')}}/css/footable.core.css" rel="stylesheet">
     <link href="{{asset('public/Program')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Program')}}/css/style.css" rel="stylesheet">
 
@@ -46,8 +46,7 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-                    <form method="get" class="form-horizontal"  role="form" id="currentForm" action="">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">登陆账号</label>
@@ -60,7 +59,7 @@
                             <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                         </div>
                     </div>
-                    </form>
+
                 </div>
 
             </div>
@@ -137,6 +136,8 @@
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<!-- FooTable -->
+<script src="{{asset('public/Program/library/footable')}}/js/footable.all.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
