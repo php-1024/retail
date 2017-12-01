@@ -1,6 +1,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('program/ajax/check_account_edit') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{ $info->id }}">
+    <input type="hidden" name="account" value="{{ $info->account }}">
     <div class="modal-dialog modal-sm">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">

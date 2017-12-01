@@ -86,9 +86,9 @@ class SystemController extends Controller{
     public function check_account_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $id = $request->input('id');
-        $password = $request->input('password');
+        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        $id = $request->input('id');//要操作的管理员的ID
+        $password = $request->input('password');//新登录页密码
         $encrypt_key = config("app.program_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$encrypt_key);//加密密码第二重
@@ -97,7 +97,7 @@ class SystemController extends Controller{
         try{
             $admin = new ProgramAdmin();//重新实例化模型，避免重复
             $admin->where('id',$id)->update(['password'=>$encryptPwd]);//添加账号
-            ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'修改了'.$admin->account.'的密码');
+            ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'修改了'.$account.'的密码');
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
