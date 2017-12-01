@@ -115,7 +115,7 @@ class SystemController extends Controller{
         DB::beginTransaction();
         try{
             $admin = new ProgramAdmin();//重新实例化模型，避免重复
-            $admin->where('id',$id)->update(['status'=>0]);//添加账号
+            $admin->where('id',$id)->update(['status'=>'0']);//添加账号
             ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'冻结了管理员账号'.$account.'');
             DB::commit();
         }catch (\Exception $e) {
