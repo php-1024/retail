@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Node extends Model{
     protected $table = 'node';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
+
+    public function fromDateTime($value){
+        return strtotime(parent::fromDateTime($value));
+    }
 }
 ?>

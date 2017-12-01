@@ -47,10 +47,10 @@
                     <li><a href="funcmodule.html">模块列表</a></li>
                 </ul>
             </li>
-            <li>
+            <li  @if ($action_name=='node')class="active"@endif>
                 <a href="index.html"><i class="fa fa-steam"></i> <span class="nav-label">功能节点管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="addnode.html">添加节点</a></li>
+                    <li @if ($route_name=='program/node/add_node')class="active"@endif><a href="{{ url('program/node/add_node') }}">添加节点</a></li>
                     <li><a href="node.html">节点列表</a></li>
                 </ul>
             </li>
