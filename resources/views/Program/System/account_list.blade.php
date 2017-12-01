@@ -108,7 +108,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="footable-visible">
-                                        {!! $list->append(['account'=>$search_data['account']])->links() !!}
+                                        {!! $list->appends(['account'=>$search_data['account']])->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
