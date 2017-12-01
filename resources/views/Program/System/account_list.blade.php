@@ -72,8 +72,8 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>节点名称</th>
-                                    <th>路由名称</th>
+                                    <th>登陆账号</th>
+                                    <th>添加时间</th>
                                     <th class="text-right">操作</th>
                                 </tr>
                                 </thead>
@@ -107,41 +107,7 @@
 
                                     <td class="text-right">
                                         <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        系统首页
-                                    </td>
-                                    <td >
-                                        dashboard/index
-                                    </td>
-
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        系统首页
-                                    </td>
-                                    <td >
-                                        dashboard/index
-                                    </td>
-
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;冻结</button>
                                         <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
