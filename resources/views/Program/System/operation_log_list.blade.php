@@ -9,7 +9,7 @@
     <title>零壹新科技程序管理平台</title>
 
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Program/library/datepicker3')}}/css/datepicker3.css" rel="stylesheet">
+    <link href="{{asset('public/Program/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
 
