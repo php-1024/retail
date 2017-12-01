@@ -102,7 +102,7 @@
 
                                     <td class="text-right">
                                         <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;冻结</button>
+                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                     </td>
                                 </tr>
                                 @endforeach
