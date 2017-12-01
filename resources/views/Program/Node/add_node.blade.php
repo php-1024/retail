@@ -49,7 +49,8 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/check_edit_password') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/check_add_node') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group"><label class="col-sm-2 control-label">节点名称</label>
 
                                     <div class="col-sm-10"><input type="text" name="node_name" class="form-control"  placeholder="节点名称"></div>
