@@ -45,6 +45,7 @@ Route::group(['prefix'=>'program'],function(){
     //系统管理组(功能只有超级管理员能用)
     Route::group(['prefix'=>'dashboard'],function(){
         Route::get('account_add', 'Program\SystemController@account_add')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
+        Route::get('account_list', 'Program\SystemController@account_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
     });
 
     //个人中心组

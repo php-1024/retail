@@ -15,9 +15,6 @@ class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $admin = new ProgramAdmin();//重新实例化模型，避免重复
-
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
@@ -59,6 +56,16 @@ class SystemController extends Controller{
             }
         }
         return response()->json(['data' => '添加账号成功', 'status' => '1']);
+    }
+
+    //账号列表
+    public function account_list(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $admin = new ProgramAdmin();//实例化模型
+        $list = $admin->pagenation(15);
+        dump($list);
+        return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //退出登录
