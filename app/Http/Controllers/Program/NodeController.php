@@ -23,7 +23,7 @@ class NodeController extends Controller{
         $route_name = $request->input('route_name');//提交上来的路由名称
 
         $node = new Node();
-        $info = $node->where('node',$node_name)->orWhere('route_name',$route_name)->pluck('id')->toArray();//查询是否有相同的节点名称或路由名称存在
+        $info = $node->where('node_name',$node_name)->orWhere('route_name',$route_name)->pluck('id')->toArray();//查询是否有相同的节点名称或路由名称存在
         if(!empty($info)){
             return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
         }else{
@@ -39,6 +39,7 @@ class NodeController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
             }
+            return response()->json(['data' => '添加节点成功', 'status' => '1']);
         }
     }
 }
