@@ -119,6 +119,7 @@ class SystemController extends Controller{
             ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'冻结了管理员账号'.$account.'');
             DB::commit();
         }catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '冻结账号失败，请检查', 'status' => '0']);
         }
