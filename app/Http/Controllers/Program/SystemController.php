@@ -142,7 +142,7 @@ class SystemController extends Controller{
         $log = new ProgramOperationLog();//实例化模型
         $search_data = [];
         $list = $log->paginate(15);
-        return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Program/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //退出登录
