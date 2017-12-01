@@ -43,7 +43,7 @@
             <li @if ($action_name=='module')class="active"@endif>
                 <a href="index.html"><i class="fa fa-slack"></i> <span class="nav-label">功能模块管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="addfuncmodule.html">添加模块</a></li>
+                    <li  @if ($route_name=='program/module/add_module')class="active"@endif><a href="{{ url('program/personal/edit_password') }}">添加模块</a></li>
                     <li><a href="funcmodule.html">模块列表</a></li>
                 </ul>
             </li>
