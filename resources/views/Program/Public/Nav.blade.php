@@ -40,7 +40,7 @@
                     <li><a href="system.html">程序列表</a></li>
                 </ul>
             </li>
-            <li>
+            <li @if ($action_name=='module')class="active"@endif>
                 <a href="index.html"><i class="fa fa-slack"></i> <span class="nav-label">功能模块管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="addfuncmodule.html">添加模块</a></li>
