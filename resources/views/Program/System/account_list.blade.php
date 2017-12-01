@@ -50,7 +50,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">登陆账号</label>
-                            <input type="text" id="account" name="account" value="" placeholder="登陆账号" class="form-control">
+                            <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="登陆账号" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -108,7 +108,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="footable-visible">
-                                        {!! $list->links() !!}
+                                        {!! $list->append(['account'=>$search_data['account']])->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
