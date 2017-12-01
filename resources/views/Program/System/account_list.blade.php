@@ -46,7 +46,7 @@
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="currentForm" action="">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                    <input type="hidden" id="account_edit_url" value="{{  }}">
+                    <input type="hidden" id="account_edit_url" value="{{ url('program/ajax/account_edit') }}">
                     <div class="row">
 
                         <div class="col-sm-3">
@@ -103,7 +103,7 @@
 
                                     <td class="text-right">
                                         @if ($admin_data['admin_is_super']==1)
-                                            <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;修改密码</button>
+                                            <button type="button" onclick="return getEditForm({{ $ll->id }});" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;修改密码</button>
                                             @if($admin_data['admin_id']==1)
                                             <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             @endif
@@ -154,8 +154,23 @@
         });
     });
 
-    function getEditForm(){
-        var url = $('')
+    function getEditForm(id){
+        var url = $('#account_edit_url').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {id:id};
+        $.post(url,data,function(response){
+            alert(response);
+        });
     }
 
     //提交表单
