@@ -49,7 +49,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label class="control-label" for="amount">节点名称</label>
+                            <label class="control-label" for="amount">商户账号</label>
                             <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
                         </div>
                     </div>
