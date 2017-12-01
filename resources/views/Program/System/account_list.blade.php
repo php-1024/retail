@@ -45,8 +45,8 @@
 
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="currentForm" action="">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                    <input type="hidden" id="account_edit_url" value="{{ url('program/ajax/account_edit') }}">
+                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="account_edit_url" id="account_edit_url" value="{{ url('program/ajax/account_edit') }}">
                     <div class="row">
 
                         <div class="col-sm-3">
@@ -156,6 +156,7 @@
 
     function getEditForm(id){
         var url = $('#account_edit_url').val();
+        var token = $('#_token').val();
         if(id==''){
             swal({
                 title: "提示信息",
@@ -167,7 +168,7 @@
             });
             return;
         }
-        var data = {id:id};
+        var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
             alert(response);
         });
