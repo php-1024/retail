@@ -64,7 +64,7 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $admin = new ProgramAdmin();//实例化模型
         $list = $admin->paginate(15)->toArray();
-        return view('Program/System/dashboard',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Program/System/account_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //退出登录
