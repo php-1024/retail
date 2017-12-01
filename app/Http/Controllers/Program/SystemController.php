@@ -75,6 +75,12 @@ class SystemController extends Controller{
         return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
+    //编辑账号
+    public function account_edit(Request $request){
+
+
+        return view('Program/System/account_edit');
+    }
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_program_account_id','');

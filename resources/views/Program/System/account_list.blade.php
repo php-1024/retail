@@ -46,22 +46,23 @@
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="currentForm" action="">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <div class="row">
+                    <input type="hidden" name="account_edit_url" value="{{  }}">
+                    <div class="row">
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount">登陆账号</label>
-                            <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="登陆账号" class="form-control">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount">登陆账号</label>
+                                <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="登陆账号" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount"> &nbsp;</label>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div>
                 </form>
             </div>
 
@@ -152,6 +153,11 @@
             }
         });
     });
+
+    function getEditForm(){
+
+    }
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
