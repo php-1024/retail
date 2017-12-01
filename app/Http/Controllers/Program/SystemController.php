@@ -140,10 +140,8 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $log = new ProgramOperationLog();//实例化模型
-
+        $search_data = [];
         $list = $log->paginate(15);
-        dump($list);
-        exit();
         return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
