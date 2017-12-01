@@ -44,7 +44,7 @@
 
 
             <div class="ibox-content m-b-sm border-bottom">
-                <form method="get" class="form-horizontal"  role="form" id="currentForm" action="">
+                <form method="get" role="form" id="currentForm" action="">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="row">
 
