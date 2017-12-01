@@ -65,7 +65,7 @@ class SystemController extends Controller{
         $admin = new ProgramAdmin();//实例化模型
         $list = $admin->paginate(15);
         dump($list);
-        return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+
     }
 
     //退出登录
