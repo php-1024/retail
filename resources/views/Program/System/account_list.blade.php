@@ -153,7 +153,7 @@
             }
         });
     });
-
+    //获取用户信息，编辑密码框
     function getEditForm(id){
         var url = $('#account_edit_url').val();
         var token = $('#_token').val();
