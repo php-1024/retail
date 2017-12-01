@@ -131,7 +131,7 @@
         @include('Program/Public/Footer')
     </div>
 </div>
-<div id="zero_modalbox" style="display: none;"></div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!-- Mainly scripts -->
 <script src="{{asset('public/Program/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Program/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -181,7 +181,7 @@
                 });
                 return;
             }else{
-                $('#zero_modalbox').html(response);
+                $('#myModal').html(response);
                 $('#myModal').modal();
             }
         });
