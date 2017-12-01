@@ -77,6 +77,9 @@ class SystemController extends Controller{
 
     //编辑账号
     public function account_edit(Request $request){
+        $id = $request->input('id');
+        $info = ProgramAdmin::find($id);
+        dump($info);
         return view('Program/System/account_edit');
     }
     //退出登录
