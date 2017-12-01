@@ -82,13 +82,13 @@
                                 @foreach ($list as $ll)
                                 <tr>
                                     <td>
-                                        {{ $ll['id'] }}
+                                        {{ $ll->id }}
                                     </td>
                                     <td>
-                                        {{ $ll['account'] }}
+                                        {{ $ll->account }}
                                     </td>
                                     <td>
-                                        @if ($ll['is_super']==1)
+                                        @if ($ll->is_super==1)
                                             <label class="label label-danger">超级管理员</label>
                                         @else
                                             <label class="label label-info">普通管理员</label>
