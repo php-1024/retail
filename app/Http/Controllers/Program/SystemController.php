@@ -77,8 +77,6 @@ class SystemController extends Controller{
 
     //编辑账号
     public function account_edit(Request $request){
-
-
         return view('Program/System/account_edit');
     }
     //退出登录

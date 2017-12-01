@@ -46,7 +46,7 @@
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="currentForm" action="">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                    <input type="hidden" name="account_edit_url" value="{{  }}">
+                    <input type="hidden" id="account_edit_url" value="{{  }}">
                     <div class="row">
 
                         <div class="col-sm-3">
@@ -155,7 +155,7 @@
     });
 
     function getEditForm(){
-
+        var url = $('')
     }
 
     //提交表单
