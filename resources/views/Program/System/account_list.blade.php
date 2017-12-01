@@ -108,7 +108,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="footable-visible">
-                                        {{ $list->link() }}
+                                        {!! $list->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
