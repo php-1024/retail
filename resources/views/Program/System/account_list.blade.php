@@ -78,6 +78,7 @@
                                     <th>ID</th>
                                     <th>登陆账号</th>
                                     <th>账号类型</th>
+                                    <th>账号状态</th>
                                     <th>添加时间</th>
                                     <th class="text-right">操作</th>
                                 </tr>
@@ -96,6 +97,13 @@
                                             <label class="label label-danger">超级管理员</label>
                                         @else
                                             <label class="label label-info">普通管理员</label>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($ll->status==1)
+                                            <label class="label label-primary">正常</label>
+                                        @else
+                                            <label class="label label-warning">已冻结</label>
                                         @endif
                                     </td>
                                     <td >
