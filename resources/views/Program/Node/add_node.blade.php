@@ -25,29 +25,52 @@
 
     <div id="page-wrapper" class="gray-bg">
         @include('Program/Public/Header')
-        <div class="ibox-title">
-            <h5>添加节点</h5>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>添加节点</h2>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <a href="JavaScript:;">功能节点管理</a>
+                    </li>
+                    <li >
+                        <strong>添加节点</strong>
+                    </li>
+                </ol>
+            </div>
 
         </div>
-        <div class="ibox-content">
-            <form method="get" class="form-horizontal">
-                <div class="form-group"><label class="col-sm-2 control-label">节点名称</label>
 
-                    <div class="col-sm-10"><input type="text" class="form-control"></div>
-                </div>
-                <div class="hr-line-dashed"></div>
-                <div class="form-group"><label class="col-sm-2 control-label">路由名称</label>
+        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>添加节点</h5>
 
-                    <div class="col-sm-10"><input type="text" class="form-control"></div>
-                </div>
-                <div class="hr-line-dashed"></div>
-                <div class="form-group ">
-                    <div class="col-sm-4 col-sm-offset-5">
-                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
-                        <button class="btn btn-write" onClick="location.href='node.html'" type="button">回到列表</button>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-2 control-label">节点名称</label>
+
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">路由名称</label>
+
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group ">
+                                    <div class="col-sm-4 col-sm-offset-5">
+                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
+                                        <button class="btn btn-write" onClick="location.href='node.html'" type="button">回到列表</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
         @include('Program/Public/Footer')
     </div>
