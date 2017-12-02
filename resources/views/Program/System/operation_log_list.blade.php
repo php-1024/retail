@@ -168,6 +168,7 @@
                tag = true;
             }
         });
+        alert(tag);
         if(tag) {
             return true;
         }else{
