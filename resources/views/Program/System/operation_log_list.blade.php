@@ -167,6 +167,7 @@
                 return true;
             }
         });
+        return false;
     }
 </script>
 </body>
