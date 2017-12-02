@@ -65,7 +65,7 @@ Route::group(['prefix'=>'program'],function(){
     //节点管理组
     Route::group(['prefix'=>'node'],function(){
         Route::get('add_node', 'Program\NodeController@add_node')->middleware('ProgramCheckIsLogin');//修改密码路由
-        Route::get('node_list', 'Program\NodeController@node_list')->middleware('ProgramCheckIsLogin');//修改密码路由
+        Route::get('node_list','Program\NodeController@node_list')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
     //登陆页面组
