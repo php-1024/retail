@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label class="control-label" for="date_modified">用户账号</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['accunt']}}">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="account" class="form-control zerodate"  value="{{$search_data['account']}}">
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {!! $list->links() !!}
+                                        {!! $list->appends($search_data)->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>

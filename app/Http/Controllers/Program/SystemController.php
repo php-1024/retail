@@ -140,7 +140,13 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $log = new ProgramOperationLog();//实例化模型
-        $search_data = [];
+
+        $account = $request->input('account');//通过登录页账号查询
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
+
+
 
         $list = $log->join('program_admin',function($join){
             $join->on('program_operation_log.account_id','=','program_admin.id');
