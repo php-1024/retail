@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label class="control-label" for="date_modified">用户账号</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="account" class="form-control"  value="{{$search_data['account']}}">
+                                <input type="text" name="account" class="form-control"  value="{{$search_data['account']}}">
                             </div>
                         </div>
                     </div>
