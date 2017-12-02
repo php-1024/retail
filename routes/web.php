@@ -47,12 +47,14 @@ Route::group(['prefix'=>'program'],function(){
         Route::get('account_add', 'Program\SystemController@account_add')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
         Route::get('account_list', 'Program\SystemController@account_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
         Route::get('operation_log','Program\SystemController@operation_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper','ProgramCheckSearchDate');//所有操作记录
-        Route::get('login_log','Program\SystemController@login_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper','ProgramCheckSearchDate');//所有操作记录
+        Route::get('login_log','Program\SystemController@login_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper','ProgramCheckSearchDate');//所有登陆记录
     });
 
     //个人中心组
     Route::group(['prefix'=>'personal'],function(){
         Route::get('edit_password', 'Program\PersonalController@edit_password')->middleware('ProgramCheckIsLogin');//修改密码路由
+        Route::get('operation_log','Program\PersonalController@operation_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckSearchDate');//我的操作记录
+        Route::get('login_log','Program\PersonalController@login_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckSearchDate');//所有登陆记录
     });
 
     //功能模块组
