@@ -152,6 +152,7 @@
 
         var url = $('#node_edit_url').val();
         var token = $('#_token').val();
+        alert(id);
         if(id==''){
             swal({
                 title: "提示信息",
