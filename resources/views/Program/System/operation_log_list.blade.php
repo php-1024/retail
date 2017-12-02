@@ -11,7 +11,7 @@
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
+    <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
     <link href="{{asset('public/Program')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Program')}}/css/style.css" rel="stylesheet">
@@ -134,6 +134,7 @@
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Program/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+<script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
