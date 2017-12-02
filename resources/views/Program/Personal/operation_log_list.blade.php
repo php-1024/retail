@@ -46,6 +46,7 @@
 
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
+                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group">

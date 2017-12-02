@@ -47,19 +47,21 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-
+                    <form method="get" role="form" id="searchForm" action="">
+                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
-                            <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
+                            <input type="text" id="node_name" name="node_name" value="" placeholder="请输入节点名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                         </div>
                     </div>
+                    </form>
                 </div>
 
             </div>
@@ -107,7 +109,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {{ $list->links() }}
+                                        {{ $list->appends($node_name)->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
