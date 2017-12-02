@@ -51,7 +51,7 @@
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="account_edit_url" value="{{ url('program/ajax/node_edit') }}">
                         <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_delete') }}">
-                        <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_sure_delete') }}">
+                        <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_deleted') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
