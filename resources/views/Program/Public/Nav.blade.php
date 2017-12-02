@@ -28,8 +28,8 @@
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='program/personal/edit_password')class="active"@endif><a href="{{ url('program/personal/edit_password') }}">登录密码修改</a></li>
-                    <li><a href="ctrllog.html">我的操作日志</a></li>
-                    <li><a href="loginlog.html">我的登录日志</a></li>
+                    <li @if ($route_name=='program/personal/operation_log')class="active"@endif><a href="{{ url('program/dashboard/operation_log') }}">我的操作日志</a></li>
+                    <li @if ($route_name=='program/personal/login_log')class="active"@endif><a href="{{ url('program/dashboard/operation_log') }}">我的登录日志</a></li>
                 </ul>
             </li>
 

@@ -164,7 +164,7 @@ class SystemController extends Controller{
         return view('Program/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
-    //所有d登陆记录
+    //所有登陆记录
     public function login_log_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
