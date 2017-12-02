@@ -17,7 +17,6 @@ class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = ProgramAdmin::find(1)->operation_log;
         return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
@@ -142,7 +141,9 @@ class SystemController extends Controller{
 
         $log = new ProgramOperationLog();//实例化模型
         $search_data = [];
-        $list = $log->paginate(15);
+        $list = $log->join('program_admin',function($join){
+            $join->on('program_operation_log.account_id','=','program_admin.id');
+        })->paginate(15);
         return view('Program/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
