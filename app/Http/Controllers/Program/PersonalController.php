@@ -11,13 +11,13 @@ use App\Models\ProgramLoginLog;
 
 class PersonalController extends Controller{
     //修改个人密码
-    public function edit_password(Request $request){
+    public function password_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Program/Personal/edit_password',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
+        return view('Program/Personal/password_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
     //提交修改个人密码数据
-    public function check_edit_password(Request $request){
+    public function password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $oldpassword = $request->input('oldpassword');//原登录密码
