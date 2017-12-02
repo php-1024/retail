@@ -152,7 +152,7 @@
 
         var url = $('#node_edit_url').val();
         var token = $('#_token').val();
-        alert(id);
+
         if(id==''){
             swal({
                 title: "提示信息",
@@ -164,6 +164,7 @@
             });
             return;
         }
+        alert(id);
         var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='0'){
