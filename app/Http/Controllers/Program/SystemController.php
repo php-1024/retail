@@ -143,7 +143,7 @@ class SystemController extends Controller{
         $search_data = [];
         $list = $log->join('program_admin',function($join){
             $join->on('program_operation_log.account_id','=','program_admin.id');
-        })->paginate(15);
+        })->select('program_admin.account','program_operation_log.*')->paginate(15);
         return view('Program/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
