@@ -27,7 +27,7 @@
             <li @if ($action_name=='personal')class="active"@endif>
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li @if ($route_name=='program/personal/edit_password')class="active"@endif><a href="{{ url('program/personal/edit_password') }}">登录密码修改</a></li>
+                    <li @if ($route_name=='program/personal/password_edit')class="active"@endif><a href="{{ url('program/personal/password_edit') }}">登录密码修改</a></li>
                     <li @if ($route_name=='program/personal/operation_log')class="active"@endif><a href="{{ url('program/personal/operation_log') }}">我的操作日志</a></li>
                     <li @if ($route_name=='program/personal/login_log')class="active"@endif><a href="{{ url('program/personal/login_log') }}">我的登录日志</a></li>
                 </ul>
