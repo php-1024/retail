@@ -47,16 +47,6 @@ class NodeController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $search_data = ['node_name'=>'订单编辑','route_name'=>'order/search'];
-
-        $node = new Node();
-        $node = $node->where('id','!=',1);
-        $info = $node->where(function($query) use($search_data){
-            $query->where('node_name',$search_data['node_name']);
-            $query->orWhere('route_name',$search_data['route_name']);
-        })->pluck('id')->toArray();//查询是否有相同的节点名称或路由名称存在
-        dump($info);
-        exit();
         $node = new Node();
         $node_name = $request->input('node_name');
         $search_data = ['node_name'=>$node_name];
@@ -89,7 +79,7 @@ class NodeController extends Controller{
         $info = $node->where(function($query) use($search_data){
             $query->where('node_name',$search_data['node_name']);
             $query->orWhere('route_name',$search_data['route_name']);
-        })->pluck('id')->toArray();//查询是否有相同的节点名称或路由名称存在
+        })->pluck('id')->toArray();//查询除了本ID的是否有相同的节点名称或路由名称存在
 
         if(!empty($info)){
             return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
@@ -97,16 +87,14 @@ class NodeController extends Controller{
             DB::beginTransaction();
             try{
                 $node = new Node();//重新实例化模型，避免重复
-                $node->node_name = $node_name;//节点名称
-                $node->route_name = $route_name;//路由名称
-                $node->save();//添加账号
-                ProgramLog::setOperationLog($admin_data['admin_id'],$current_route_name,'新增了节点'.$node_name);//保存操作记录
+                $node->where('id',$id)->update(['node_name'=>$node_name,'route_name'=>$route_name]);//添加账号
+                ProgramLog::setOperationLog($admin_data['admin_id'],$current_route_name,'修改了节点'.$node_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '修改节点失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加节点成功', 'status' => '1']);
+            return response()->json(['data' => '修改节点成功', 'status' => '1']);
         }
     }
 }
