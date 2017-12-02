@@ -144,18 +144,22 @@ class SystemController extends Controller{
         $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
+        $time_st_format = strtotime($time_st);
+        $time_nd_format = strtotime($time_nd);
 
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
 
         if(!empty($account)){
             $log = $log->where('account','like','%'.$account.'%');
         }
-
+        if(!empty($time_st) && !empty($time_nd)){
+            $log = $log->where('account','like','%'.$account.'%');
+        }
 
 
         $list = $log->join('program_admin',function($join){
             $join->on('program_operation_log.account_id','=','program_admin.id');
-        })->select('program_admin.account','program_operation_log.*')->paginate(1);
+        })->select('program_admin.account','program_operation_log.*')->paginate(15);
         return view('Program/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
