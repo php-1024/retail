@@ -100,7 +100,7 @@
                                         {{ $val->created_at }}
                                     </td>
                                     <td class="text-right">
-                                        <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="return getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
@@ -149,8 +149,7 @@
     });
     //获取用户信息，编辑密码框
     function getEditForm(id){
-        alert(123);
-        return ;
+
         var url = $('#node_edit_url').val();
         var token = $('#_token').val();
         if(id==''){
