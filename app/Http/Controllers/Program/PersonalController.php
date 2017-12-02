@@ -60,8 +60,8 @@ class PersonalController extends Controller{
 
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = strtotime($time_st);
-        $time_nd_format = strtotime($time_nd);
+        $time_st_format = strtotime($time_st.' 00:00:00');
+        $time_nd_format = strtotime($time_nd.' 23:59:59');
 
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
 
@@ -83,8 +83,8 @@ class PersonalController extends Controller{
 
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = strtotime($time_st);
-        $time_nd_format = strtotime($time_nd);
+        $time_st_format = strtotime($time_st.' 00:00:00');
+        $time_nd_format = strtotime($time_nd.' 23:59:59');
 
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
 
