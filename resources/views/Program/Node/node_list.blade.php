@@ -48,9 +48,9 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                        <input type="hidden" id="node_edit_url" value="{{ url('program/ajax/edit_node') }}">
-                        <input type="hidden" id="node_delete_url" value="{{ url('program/ajax/delete_node') }}">
-                        <input type="hidden" id="node_deleted_url" value="{{ url('program/ajax/deleted_node') }}">
+                        <input type="hidden" id="node_edit_url" value="{{ url('program/ajax/node_edit') }}">
+                        <input type="hidden" id="node_delete_url" value="{{ url('program/ajax/node_delete') }}">
+                        <input type="hidden" id="node_deleted_url" value="{{ url('program/ajax/node_deleted') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
