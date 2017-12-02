@@ -64,12 +64,6 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label class="control-label" for="date_modified">用户账号</label>
-                                <input type="text" name="account" class="form-control"  value="{{$search_data['account']}}" placeholder="请输入用户账号">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
                                 <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                             </div>
@@ -87,7 +81,6 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>用户账号</th>
                                     <th>登陆IP</th>
                                     <th>登陆区域</th>
                                     <th class="col-sm-2">登陆时间</th>
@@ -98,7 +91,6 @@
                                 @foreach($list as $key=>$val)
                                     <tr>
                                         <td>{{  $val->id }}</td>
-                                        <td>{{  $val->account }}</td>
                                         <td>{{  long2ip($val->ip) }}</td>
                                         <td>{{  $val->ip_position }}</td>
                                         <td>{{  $val->created_at }}0</td>
