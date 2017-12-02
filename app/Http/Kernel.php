@@ -74,6 +74,7 @@ class Kernel extends HttpKernel
         'ProgramAddNodeCheck'=>\App\Http\Middleware\ProgramAddNodeCheck::class,//添加表单时的表单检测中间件
         'ProgramAccountEditCheck'=>\App\Http\Middleware\ProgramAccountEditCheck::class,//修改账号信息时的表单检测中间件
         'ProgramAccountLockCheck'=>\App\Http\Middleware\ProgramAccountLockCheck::class,//修改账号信息时的表单检测中间件
+        'ProgramCheckSearchDate'=>\App\Http\Middleware\ProgramAccountLockCheck::class,//检测查询时日期范围格式的中间件
         /**************************零壹程序管理系统*******************************/
     ];
 }
