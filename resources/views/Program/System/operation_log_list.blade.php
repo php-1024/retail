@@ -102,7 +102,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {!! $list->appends()->links() !!}
+                                        {!! $list->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
