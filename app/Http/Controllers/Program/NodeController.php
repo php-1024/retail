@@ -31,8 +31,8 @@ class NodeController extends Controller{
     //编辑节点
     public function node_edit(Request $request){
         $id = $request->input('id');
-        $info = ProgramAdmin::find($id);
-        return view('Program/System/account_edit',['info'=>$info]);
+        $info = Node::find($id);
+        return view('Program/Node/node_edit',['info'=>$info]);
     }
 
     //提交添加节点数据
