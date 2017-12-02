@@ -45,7 +45,7 @@
 
 
             <div class="ibox-content m-b-sm border-bottom">
-
+                <form method="get" role="form" action="">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-
+                </form>
             </div>
 
             <div class="row">
