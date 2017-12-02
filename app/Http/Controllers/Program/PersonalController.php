@@ -71,7 +71,7 @@ class PersonalController extends Controller{
         }
         $list = $log->paginate(15);
 
-        return view('Program/Personal/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Program/Personal/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
 
     //所有登陆记录
@@ -99,7 +99,7 @@ class PersonalController extends Controller{
         $list = $log->join('program_admin',function($join){
             $join->on('program_login_log.account_id','=','program_admin.id');
         })->select('program_admin.account','program_login_log.*')->paginate(15);
-        return view('Program/System/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Program/System/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
 }
 ?>
