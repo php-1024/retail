@@ -12,5 +12,6 @@ class ProgramOperationLog extends Model{
     public function fromDateTime($value){
         return strtotime(parent::fromDateTime($value));
     }
+
 }
 ?>
