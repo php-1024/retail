@@ -66,7 +66,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="date_modified">用户账号</label>
-                            <input type="text" name="account" class="form-control"  value="{{$search_data['account']}}">
+                            <input type="text" name="account" class="form-control"  value="{{$search_data['account']}}" placeholder="请输入用户账号">
                         </div>
                     </div>
                     <div class="col-sm-3">
