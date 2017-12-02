@@ -71,7 +71,8 @@ class Kernel extends HttpKernel
         'ProgramCheckIsSuperAjax'=>\App\Http\Middleware\ProgramCheckIsSuperAjax::class,//检测是否超级管理员，若不是超级管理员，不能使用超级管理员的一些功能
         'ProgramAccountAddCheck'=>\App\Http\Middleware\ProgramAccountAddCheck::class,//添加系统管理员时的表单检测中间件
         'ProgramEditPasswordCheck'=>\App\Http\Middleware\ProgramEditPasswordCheck::class,//修改登录密码时的表单检测中间件
-        'ProgramAddNodeCheck'=>\App\Http\Middleware\ProgramAddNodeCheck::class,//添加表单时的表单检测中间件
+        'ProgramNodeAddCheck'=>\App\Http\Middleware\ProgramNodeAddCheck::class,//添加节点时的表单检测中间件
+        'ProgramNodeEditCheck'=>\App\Http\Middleware\ProgramNodeAddCheck::class,//编辑节点时的表单检测中间件
         'ProgramAccountEditCheck'=>\App\Http\Middleware\ProgramAccountEditCheck::class,//修改账号信息时的表单检测中间件
         'ProgramAccountLockCheck'=>\App\Http\Middleware\ProgramAccountLockCheck::class,//修改账号信息时的表单检测中间件
         'ProgramCheckSearchDate'=>\App\Http\Middleware\ProgramCheckSearchDate::class,//检测查询时日期范围格式的中间件

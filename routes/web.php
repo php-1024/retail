@@ -81,9 +81,9 @@ Route::group(['prefix'=>'program'],function(){
         Route::post('account_edit_check','Program\SystemController@account_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountEditCheck');//提交编辑账号数据
         Route::post('account_lock','Program\SystemController@account_lock')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountLockCheck');//提交编辑账号数据;
         Route::post('password_edit_check','Program\PersonalController@password_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramEditPasswordCheck');//提交增加账号数据
-        Route::post('node_add_check','Program\NodeController@node_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramAddNodeCheck');//提交节点数据
+        Route::post('node_add_check','Program\NodeController@node_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramNodeAddCheck');//提交节点数据
         Route::post('node_edit','Program\NodeController@node_edit')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax');//获取节点数据并编辑
-        Route::post('node_edit_check','Program\NodeController@node_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramNodeEditCheck');;//检测编辑节点数据
+        Route::post('node_edit_check','Program\NodeController@node_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramNodeEditCheck');;//检测编辑节点数据
     });
 });
 /********************程序管理系统*************************/
