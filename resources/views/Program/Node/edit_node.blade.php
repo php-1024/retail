@@ -1,7 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('program/ajax/check_account_edit') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{ $info->id }}">
-    <input type="hidden" name="account" value="{{ $info->account }}">
     <div class="modal-dialog modal-sm">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -11,11 +10,11 @@
 
                 <div class="form-group">
                     <label>节点名称</label>
-                    <input type="email" placeholder="Enter your email" value="系统首页" class="form-control">
+                    <input type="text" placeholder="请输入节点名称" value="{{ $info->node_name }}" name="node_name" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>路由名称</label>
-                    <input type="email" placeholder="Enter your email" value="dashboard/index" class="form-control">
+                    <input type="text" placeholder="请输入模型名称" value="{{ $info->route_name }}" name="route_name" class="form-control">
                 </div>
             </div>
 
