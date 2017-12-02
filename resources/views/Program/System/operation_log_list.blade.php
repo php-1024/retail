@@ -154,7 +154,7 @@
     function searchFormCheck(){
         var url = $('#searchForm').attr('action');
         var data = $('#searchForm').serialize();
-        $.get(url+'&'+data,function(json){
+        $.get(url+'?'+data,function(json){
             if(json.status==0){
                 swal({
                     title: "提示信息",
