@@ -83,6 +83,7 @@ Route::group(['prefix'=>'program'],function(){
         Route::post('check_edit_password','Program\PersonalController@check_edit_password')->middleware('ProgramCheckIsLoginAjax','ProgramEditPasswordCheck');//提交增加账号数据
         Route::post('check_add_node','Program\NodeController@check_add_node')->middleware('ProgramCheckIsLoginAjax','ProgramAddNodeCheck');//提交节点数据
         Route::post('node_edit','Program\NodeController@edit_node')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax');//获取节点数据并编辑
+        Route::post('check_node_edit','Program\NodeController@check_edit_node')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramNodeEditCheck');;//检测编辑节点数据
     });
 });
 /********************程序管理系统*************************/
