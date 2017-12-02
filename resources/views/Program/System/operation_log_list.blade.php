@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label class="control-label" for="date_added">操作时间</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="@if(empty($search_data['time_st'])){{ date('Y-m-d') }}@else {{$search_data['time_st']}}@endif">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="@if(empty($search_data['time_st'])){{ date('Y-m-d') }}@else{{$search_data['time_st']}}@endif">
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label class="control-label" for="date_modified">到</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="@if(empty($search_data['time_nd'])){{ date('Y-m-d') }}@else {{$search_data['time_nd']}}@endif">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="@if(empty($search_data['time_nd'])){{ date('Y-m-d') }}@else{{$search_data['time_nd']}}@endif">
                             </div>
                         </div>
                     </div>
