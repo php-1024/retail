@@ -155,6 +155,7 @@
     function searchFormCheck(){
         var url = $('#searchForm').attr('action');
         var data = $('#searchForm').serialize();
+        var tag = false;
         $.get(url+'?'+data,function(json){
             if(json.status==0){
                 swal({
@@ -163,12 +164,15 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 });
-                return false;
             }else{
-                return true;
+               tag = true;
             }
         });
-        return true;
+        if(tag) {
+            return true;
+        }else{
+            return false;
+        }
     }
 </script>
 </body>
