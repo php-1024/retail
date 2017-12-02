@@ -165,14 +165,10 @@
                 });
                 return false;
             }else{
-                success_function();
+                location.href=url+'?'+data;
             }
         });
         return false;
-    }
-    function success_function(info)
-    {
-        return true;
     }
 </script>
 </body>
