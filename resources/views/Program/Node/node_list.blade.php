@@ -28,54 +28,40 @@
         @include('Program/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>所有登陆日志</h2>
+                <h2>节点列表</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">系统管理</a>
+                        <a href="JavaScript:;">功能节点管理</a>
                     </li>
                     <li >
-                        <strong>所有登陆日志</strong>
+                        <strong>节点列表</strong>
                     </li>
                 </ol>
             </div>
+
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
 
             <div class="ibox-content m-b-sm border-bottom">
-                <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="date_added">操作时间</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="date_modified">到</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="date_modified">用户账号</label>
-                                <input type="text" name="account" class="form-control"  value="{{$search_data['account']}}" placeholder="请输入用户账号">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
-                            </div>
+
+                <div class="row">
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label" for="amount">节点名称</label>
+                            <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
                         </div>
                     </div>
-                </form>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label" for="amount"> &nbsp;</label>
+                            <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="row">
@@ -87,28 +73,113 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>用户账号</th>
-                                    <th>登陆IP</th>
-                                    <th>登陆区域</th>
-                                    <th class="col-sm-2">登陆时间</th>
-
+                                    <th>节点名称</th>
+                                    <th>路由名称</th>
+                                    <th class="text-right">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($list as $key=>$val)
-                                    <tr>
-                                        <td>{{  $val->id }}</td>
-                                        <td>{{  $val->account }}</td>
-                                        <td>{{  long2ip($val->ip) }}</td>
-                                        <td>{{  $val->ip_position }}</td>
-                                        <td>{{  $val->created_at }}0</td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        系统首页
+                                    </td>
+                                    <td >
+                                        dashboard/index
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        2
+                                    </td>
+                                    <td>
+                                        系统首页
+                                    </td>
+                                    <td >
+                                        dashboard/index
+                                    </td>
+
+                                    <td class="text-right">
+                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        3
+                                    </td>
+                                    <td>
+                                        系统首页
+                                    </td>
+                                    <td >
+                                        dashboard/index
+                                    </td>
+
+                                    <td class="text-right">
+                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        系统首页
+                                    </td>
+                                    <td >
+                                        dashboard/index
+                                    </td>
+
+                                    <td class="text-right">
+                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                    </td>
+                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="99" class="text-right">
-                                        {!! $list->appends($search_data)->links() !!}
+                                    <td colspan="4" class="footable-visible">
+                                        <ul class="pagination pull-right">
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="first" href="#first">«</a>
+                                            </li>
+
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="prev" href="#prev">‹</a>
+                                            </li>
+                                            <li class="footable-page active">
+                                                <a data-page="0" href="#">1</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">2</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">3</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">4</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">5</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="next" href="#next">›</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="last" href="#last">»</a>
+                                            </li>
+                                        </ul>
                                     </td>
                                 </tr>
                                 </tfoot>
