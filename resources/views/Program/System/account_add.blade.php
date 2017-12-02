@@ -48,7 +48,7 @@
                             <h5>添加账号</h5>
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/check_account_add') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/account_add_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">登陆账号</label>
