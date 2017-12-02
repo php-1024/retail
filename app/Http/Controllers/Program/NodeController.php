@@ -20,7 +20,7 @@ class NodeController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $node = new Node();
         $node_name = $request->input('node_name');
-        $search_data = ['node_name',$node_name];
+        $search_data = ['node_name'=>$node_name];
         if(!empty($node_name)){
             $node->where('node_name','like','%'.$node_name.'%');
         }
