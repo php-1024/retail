@@ -29,10 +29,10 @@ class NodeController extends Controller{
     }
 
     //编辑节点
-    public function node_edit(Request $request){
+    public function edit_node(Request $request){
         $id = $request->input('id');
         $info = Node::find($id);
-        return view('Program/Node/node_edit',['info'=>$info]);
+        return view('Program/Node/edit_node',['info'=>$info]);
     }
 
     //提交添加节点数据
