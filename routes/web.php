@@ -78,7 +78,7 @@ Route::group(['prefix'=>'program'],function(){
         Route::post('checklogin','Program\LoginController@checkLogin')->middleware('ProgramLoginPost');//提交登陆数据
         Route::post('account_add_check','Program\SystemController@account_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountAddCheck');//提交增加账号数据
         Route::post('account_edit','Program\SystemController@account_edit')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax');//获取账号数据并编辑
-        Route::post('check_account_edit','Program\SystemController@check_account_edit')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountEditCheck');//提交编辑账号数据
+        Route::post('account_edit_check','Program\SystemController@account_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountEditCheck');//提交编辑账号数据
         Route::post('account_lock','Program\SystemController@account_lock')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountLockCheck');//提交编辑账号数据;
         Route::post('password_edit_check','Program\PersonalController@password_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramEditPasswordCheck');//提交增加账号数据
         Route::post('node_add_check','Program\NodeController@node_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramAddNodeCheck');//提交节点数据
