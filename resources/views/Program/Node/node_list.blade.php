@@ -75,19 +75,25 @@
                                     <th>ID</th>
                                     <th>节点名称</th>
                                     <th>路由名称</th>
+                                    <th>添加时间</th>
                                     <th class="text-right">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                @foreach($list as $key=>$val)
                                 <tr>
                                     <td>
-                                        1
+                                        {{ $val->id }}
                                     </td>
                                     <td>
-                                        系统首页
+                                        {{ $val->node_name }}
                                     </td>
                                     <td >
-                                        dashboard/index
+                                        {{ $val->route_name }}
+                                    </td>
+                                    <td >
+                                        {{ $val->created_at }}
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
@@ -95,57 +101,8 @@
                                         <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        系统首页
-                                    </td>
-                                    <td >
-                                        dashboard/index
-                                    </td>
+                                @endforeach
 
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        系统首页
-                                    </td>
-                                    <td >
-                                        dashboard/index
-                                    </td>
-
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        系统首页
-                                    </td>
-                                    <td >
-                                        dashboard/index
-                                    </td>
-
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
