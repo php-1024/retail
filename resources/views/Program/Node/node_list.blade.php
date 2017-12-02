@@ -49,6 +49,9 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                        <input type="hidden" id="account_edit_url" value="{{ url('program/ajax/node_edit') }}">
+                        <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_delete') }}">
+                        <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_sure_delete') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
@@ -154,24 +157,7 @@
             format: 'yyyy-mm-dd'
         });
     });
-    function searchFormCheck(){
-        var url = $('#searchForm').attr('action');
-        var data = $('#searchForm').serialize();
-        $.get(url+'?'+data,function(json){
-            if(json.status==0){
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                });
-                return false;
-            }else{
-                location.href=url+'?'+data;
-            }
-        });
-        return false;
-    }
+
 </script>
 </body>
 
