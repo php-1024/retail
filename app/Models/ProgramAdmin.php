@@ -14,7 +14,7 @@ class ProgramAdmin extends Model{
     }
     public function operation_log()
     {
-        return $this->hasMany('App\Models\ProgramOperationLog','program_operation_log','account_id');
+        return $this->hasMany('App\Models\ProgramOperationLog','account_id');
     }
 }
 ?>
