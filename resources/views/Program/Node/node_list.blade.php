@@ -52,7 +52,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
-                            <input type="text" id="node_name" name="node_name" value="" placeholder="请输入节点名称" class="form-control">
+                            <input type="text" id="node_name" name="node_name" value="{{ $search_data['node_name'] }}" placeholder="请输入节点名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -109,7 +109,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {{ $list->appends($node_name)->links() }}
+                                        {{ $list->appends($search_data['node_name'])->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
