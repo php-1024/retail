@@ -9,7 +9,6 @@
     <title>零壹新科技程序管理平台</title>
 
     <link href="{{asset('public/Program/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Program/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
@@ -49,9 +48,9 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                        <input type="hidden" id="account_edit_url" value="{{ url('program/ajax/node_edit') }}">
-                        <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_delete') }}">
-                        <input type="hidden" id="account_lock_url" value="{{ url('program/ajax/node_deleted') }}">
+                        <input type="hidden" id="node_edit_url" value="{{ url('program/ajax/node_edit') }}">
+                        <input type="hidden" id="node_delete_url" value="{{ url('program/ajax/node_delete') }}">
+                        <input type="hidden" id="node_deleted_url" value="{{ url('program/ajax/node_deleted') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
@@ -138,7 +137,6 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Program/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
 <script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(function(){
@@ -148,14 +146,40 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('.zerodate').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true,
-            format: 'yyyy-mm-dd'
-        });
+
+        //获取用户信息，编辑密码框
+        function getEditForm(id){
+            var url = $('#node_edit_url').val();
+            var token = $('#_token').val();
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+            var data = {'id':id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='0'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
     });
 
 </script>
