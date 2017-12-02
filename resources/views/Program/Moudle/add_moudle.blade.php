@@ -27,13 +27,13 @@
         @include('Program/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>添加节点</h2>
+                <h2>添加模块</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">功能节点管理</a>
+                        <a href="JavaScript:;">功能模块管理</a>
                     </li>
                     <li >
-                        <strong>添加节点</strong>
+                        <strong>添加模块</strong>
                     </li>
                 </ol>
             </div>
@@ -45,25 +45,57 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>添加节点</h5>
+                            <h5>添加模块</h5>
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/check_add_node') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <div class="form-group"><label class="col-sm-2 control-label">节点名称</label>
+                            <form method="get" class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-2 control-label">模块名称</label>
 
-                                    <div class="col-sm-10"><input type="text" name="node_name" class="form-control"  placeholder="节点名称"></div>
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group"><label class="col-sm-2 control-label">路由名称</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">模块功能节点</label>
+                                    <div class="col-sm-4">
+                                        <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
+                                            <option value="1" data-position="1">零壹后台管理首页</option>
+                                            <option value="2" data-position="2">零壹后台添加功能节点</option>
+                                            <option value="3" data-position="3">零壹后台提交添加功能节点</option>
+                                            <option value="4" data-position="4">零壹后台编辑功能节点</option>
+                                            <option value="5" data-position="5">零壹后台提交编辑功能节点</option>
+                                            <option value="1" data-position="1">零壹后台管理首页</option>
+                                            <option value="2" data-position="2">零壹后台添加功能节点</option>
+                                            <option value="3" data-position="3">零壹后台提交添加功能节点</option>
+                                            <option value="4" data-position="4">零壹后台编辑功能节点</option>
+                                            <option value="5" data-position="5">零壹后台提交编辑功能节点</option>
+                                            <option value="1" data-position="1">零壹后台管理首页</option>
+                                            <option value="2" data-position="2">零壹后台添加功能节点</option>
+                                            <option value="3" data-position="3">零壹后台提交添加功能节点</option>
+                                            <option value="4" data-position="4">零壹后台编辑功能节点</option>
+                                            <option value="5" data-position="5">零壹后台提交编辑功能节点</option>
+                                            <option value="1" data-position="1">零壹后台管理首页</option>
+                                            <option value="2" data-position="2">零壹后台添加功能节点</option>
+                                            <option value="3" data-position="3">零壹后台提交添加功能节点</option>
+                                            <option value="4" data-position="4">零壹后台编辑功能节点</option>
+                                            <option value="5" data-position="5">零壹后台提交编辑功能节点</option>
+                                        </select>
+                                    </div>
 
-                                    <div class="col-sm-10"><input type="text" name="route_name" class="form-control"  placeholder="路由名称"></div>
+                                    <div class="col-sm-2">
+                                        <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+                                        <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                        <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                                        <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <select name="to" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
+                                    </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button" onclick="return postForm();">确认添加</button>
+                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
                                         <button class="btn btn-write" onClick="location.href='node.html'" type="button">回到列表</button>
                                     </div>
                                 </div>
