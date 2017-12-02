@@ -84,7 +84,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>操作详情</th>
-                                    <th class="col-sm-1">操作时间</th>
+                                    <th class="col-sm-2">操作时间</th>
 
                                 </tr>
                                 </thead>
