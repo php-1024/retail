@@ -12,7 +12,7 @@ class NodeController extends Controller{
     public function node_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Program/Node/add_node',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
+        return view('Program/Node/node_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
     }
     //提交添加节点数据
     public function node_add_check(Request $request){
@@ -60,7 +60,7 @@ class NodeController extends Controller{
     public function node_edit(Request $request){
         $id = $request->input('id');
         $info = Node::find($id);
-        return view('Program/Node/edit_node',['info'=>$info]);
+        return view('Program/Node/node_edit',['info'=>$info]);
     }
 
     //提交编辑节点数据
