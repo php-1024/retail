@@ -64,7 +64,7 @@
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
                                         <button class="btn btn-primary" id="addbtn" type="button" onclick="return postForm();">确认添加</button>
-                                        <button class="btn btn-write" onClick="location.href='{{ url('program/ajax/node_list') }}'" type="button">回到列表</button>
+                                        <button class="btn btn-write" onClick="location.href='{{ url('program/node/node_list') }}'" type="button">回到列表</button>
                                     </div>
                                 </div>
                             </form>
