@@ -47,6 +47,7 @@ Route::group(['prefix'=>'program'],function(){
         Route::get('account_add', 'Program\SystemController@account_add')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
         Route::get('account_list', 'Program\SystemController@account_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper');//添加账号路由
         Route::get('operation_log','Program\SystemController@operation_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper','ProgramCheckSearchDate');//所有操作记录
+        Route::get('login_log','Program\SystemController@login_log_list')->middleware('ProgramCheckIsLogin','ProgramCheckIsSuper','ProgramCheckSearchDate');//所有操作记录
     });
 
     //个人中心组
