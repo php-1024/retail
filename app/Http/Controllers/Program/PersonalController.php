@@ -81,24 +81,19 @@ class PersonalController extends Controller{
 
         $log = new ProgramLoginLog();//实例化模型
 
-        $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
         $time_st_format = strtotime($time_st);
         $time_nd_format = strtotime($time_nd);
 
-        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
 
-        if(!empty($account)){
-            $log = $log->where('account','like','%'.$account.'%');
-        }
+        $log = $log->where('account_id',$admin_data['admin_id']);
         if(!empty($time_st) && !empty($time_nd)){
-            $log = $log->whereBetween('program_login_log.created_at',[$time_st_format,$time_nd_format]);
+            $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
 
-        $list = $log->join('program_admin',function($join){
-            $join->on('program_login_log.account_id','=','program_admin.id');
-        })->select('program_admin.account','program_login_log.*')->paginate(15);
+        $list = $log->paginate(15);
         return view('Program/System/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
 }
