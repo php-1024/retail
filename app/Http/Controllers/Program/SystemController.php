@@ -146,7 +146,17 @@ class SystemController extends Controller{
         $time_nd = $request->input('time_nd');//查询时间结束
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
 
+        if(!empty($account)){
+            $log = $log->where('account','like','%'.$account.'%');
+        }
 
+        if(!empty($time_st)){
+            $log = $log->where('account','like','%'.$account.'%');
+        }
+
+        if(!empty($time_nd)){
+            $log = $log->where('account','like','%'.$account.'%');
+        }
 
         $list = $log->join('program_admin',function($join){
             $join->on('program_operation_log.account_id','=','program_admin.id');
