@@ -65,7 +65,7 @@ class PersonalController extends Controller{
 
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
 
-        $log = $log->where('account_id',$admin_data['id']);
+        $log = $log->where('account_id',$admin_data['admin_id']);
         if(!empty($time_st) && !empty($time_nd)){
             $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
