@@ -45,7 +45,7 @@
 
 
             <div class="ibox-content m-b-sm border-bottom">
-                <form method="get" role="form" action="">
+                <form method="get" role="form" id="searchForm" action="">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -151,6 +151,23 @@
             format: 'yyyy-mm-dd'
         });
     });
+    function searchFormCheck(){
+        var url = $('#searchForm').attr('action');
+        var data = $('#searchForm').serialize();
+        $.get(url+'&'+data,function(json){
+            if(json.status==0){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                });
+                return false;
+            }else{
+                return true;
+            }
+        });
+    }
 </script>
 </body>
 
