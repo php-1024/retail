@@ -63,7 +63,14 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label" for="date_modified">用户账号</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['accunt']}}">
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
