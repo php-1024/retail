@@ -66,15 +66,12 @@ class PersonalController extends Controller{
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
 
         $log = $log->where('account_id',$admin_data['id']);
-
         if(!empty($time_st) && !empty($time_nd)){
-            $log = $log->whereBetween('program_operation_log.created_at',[$time_st_format,$time_nd_format]);
+            $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
+        $list = $log->paginate(15);
 
-        $list = $log->join('program_admin',function($join){
-            $join->on('program_operation_log.account_id','=','program_admin.id');
-        })->select('program_admin.account','program_operation_log.*')->paginate(15);
-        return view('Program/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Program/Personal/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //所有登陆记录

@@ -28,13 +28,13 @@
         @include('Program/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>所有操作日志</h2>
+                <h2>我的操作日志</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">系统管理</a>
+                        <a href="JavaScript:;">个人中心</a>
                     </li>
                     <li >
-                        <strong>所有操作日志</strong>
+                        <strong>我的操作日志</strong>
                     </li>
                 </ol>
             </div>
@@ -46,36 +46,30 @@
 
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="date_added">操作时间</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="date_added">操作时间</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="date_modified">到</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount"> &nbsp;</label>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="date_modified">到</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="date_modified">用户账号</label>
-                            <input type="text" name="account" class="form-control"  value="{{$search_data['account']}}" placeholder="请输入用户账号">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
-                        </div>
-                    </div>
-                </div>
                 </form>
             </div>
 
@@ -91,17 +85,16 @@
                                     <th>操作人</th>
                                     <th>操作详情</th>
                                     <th class="col-sm-2">操作时间</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($list as $key=>$val)
-                                <tr>
-                                    <td>{{  $val->id }}</td>
-                                    <td>{{  $val->account }}</td>
-                                    <td>{{  $val->operation_info }}</td>
-                                    <td>{{  $val->created_at }}0</td>
-                                </tr>
+                                    <tr>
+                                        <td>{{  $val->id }}</td>
+                                        <td>您</td>
+                                        <td>{{  $val->operation_info }}</td>
+                                        <td>{{  $val->created_at }}0</td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>

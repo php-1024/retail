@@ -28,17 +28,16 @@
         @include('Program/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>所有操作日志</h2>
+                <h2>所有登陆日志</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">个人中心</a>
+                        <a href="JavaScript:;">系统管理</a>
                     </li>
                     <li >
-                        <strong>我的操作日志</strong>
+                        <strong>所有登陆日志</strong>
                     </li>
                 </ol>
             </div>
-
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
