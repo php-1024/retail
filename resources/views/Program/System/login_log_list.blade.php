@@ -100,7 +100,7 @@
                                     <tr>
                                         <td>{{  $val->id }}</td>
                                         <td>{{  $val->account }}</td>
-                                        <td>{{  $val->ip }}</td>
+                                        <td>{{  long2ip($val->ip) }}</td>
                                         <td>{{  $val->ip_position }}</td>
                                         <td>{{  $val->created_at }}0</td>
                                     </tr>
