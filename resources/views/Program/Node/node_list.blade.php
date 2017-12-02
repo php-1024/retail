@@ -164,8 +164,9 @@
             });
             return;
         }
-        alert(id);
+
         var data = {'id':id,'_token':token};
+        alert(url);
         $.post(url,data,function(response){
             if(response.status=='0'){
                 swal({
