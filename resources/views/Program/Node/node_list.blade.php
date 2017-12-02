@@ -149,6 +149,8 @@
     });
     //获取用户信息，编辑密码框
     function getEditForm(id){
+        alert(123);
+        return ;
         var url = $('#node_edit_url').val();
         var token = $('#_token').val();
         if(id==''){
