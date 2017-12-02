@@ -153,7 +153,7 @@ class SystemController extends Controller{
             $log = $log->where('account','like','%'.$account.'%');
         }
         if(!empty($time_st) && !empty($time_nd)){
-            $log = $log->where('account','like','%'.$account.'%');
+            $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
 
 
