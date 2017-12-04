@@ -15,7 +15,7 @@ class ModuleController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $node_list = Node::all();
-        return view('Program/Moudle/module_add',['node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
+        return view('Program/Module/module_add',['node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //提交添加功能模块数据
     public function module_add_check(Request $request){
