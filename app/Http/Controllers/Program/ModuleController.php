@@ -44,9 +44,9 @@ class ModuleController extends Controller{
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '修改节点失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '修改节点成功', 'status' => '1']);
+            return response()->json(['data' => '添加功能模块成功', 'status' => '1']);
         }
     }
 }
