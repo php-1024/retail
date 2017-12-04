@@ -31,7 +31,7 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $modue_node = new ModuleNode();//重新实例化模型，避免重复
+                $module_node = new ModuleNode();//重新实例化模型，避免重复
                 $module = new Module();
                 $module->module_name=$module_name;
                 $module->save();
@@ -39,7 +39,7 @@ class ModuleController extends Controller{
                 foreach($nodes as $key=>$val){
                     $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];
                 }
-                $modue_node->insert($module_node_data);
+                $module_node->insert($module_node_data);
 
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
@@ -103,24 +103,33 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $modue_node = new ModuleNode();//重新实例化模型，避免重复
+                $module_node = new ModuleNode();//重新实例化模型，避免重复
                 $module = new Module();
-                $module->module_name=$module_name;
-                $module->save();
-                $module_id = $module->id;
-                foreach($nodes as $key=>$val){
-                    $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];
-                }
-                $modue_node->insert($module_node_data);
+                $module->where('id',$id)->update('module_name',$module_name);
 
-                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
+                foreach($nodes as $key=>$val){
+                    $vo = $module_node->where('node_id',$val)->where('is_delete',0)->first();//查询是否存在数据
+                    if(empty($vo)){
+                        $module_node_data[] = ['module_id'=>id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];//不存在则添加数据
+                    }else{
+                        continue;//存在则跳过;
+                    }
+                }
+
+                //首先删除这次删除的数据的数据
+                 $module_node->whereNotIn('node_id',$nodes)->delete();
+                //如果插入的数据不为空,则插入
+                if(count($module_node_data) > 0){
+                    $module_node->insert($module_node_data);
+                }
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 dump($e);
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '编辑功能模块失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加功能模块成功', 'status' => '1']);
+            return response()->json(['data' => '编辑功能模块成功', 'status' => '1']);
         }
     }
 }
