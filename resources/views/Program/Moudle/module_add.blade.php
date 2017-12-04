@@ -124,6 +124,9 @@
         var module_name = $('#module_name').val();
         var node = '';
 
+        $('#node option').each(function(i,v){
+            node += $(v).val()+'&';
+        });
 
         $.post(url, data, function (json) {
             if (json.status == -1) {
