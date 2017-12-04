@@ -137,7 +137,7 @@
             radioClass: 'iradio_square-green',
         });
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            alert($(this).val());
+            alert($(this).parent().parent().parent().find('.checkbox_node_name').val());
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             alert(234567);
         });
