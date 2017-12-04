@@ -81,135 +81,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        订单管理模块
-                                    </td>
-                                    <td >
-                                        <label class="label label-success" style="display:inline-block">零壹后台管理首页</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零零壹后台添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        2017-08-08 10:30:30
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        订单管理模块
-                                    </td>
-                                    <td >
-                                        <label class="label label-success" style="display:inline-block">零壹后台管理首页</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零零壹后台添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        2017-08-08 10:30:30
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        订单管理模块
-                                    </td>
-                                    <td >
-                                        <label class="label label-success" style="display:inline-block">零壹后台管理首页</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零零壹后台添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        2017-08-08 10:30:30
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        订单管理模块
-                                    </td>
-                                    <td >
-                                        <label class="label label-success" style="display:inline-block">零壹后台管理首页</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零零壹后台添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交添加功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">零壹后台提交编辑功能节点</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        2017-08-08 10:30:30
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
+                                    @foreach($list as $key=>$val)
+                                    <tr>
+                                        <td>{{ $val->id }}</td>
+                                        <td>{{ $val->module_name }}</td>
+                                        <td>节点列表</td>
+                                        <td>{{ $val->created_at }}</td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                            <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="4" class="footable-visible">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                    <td colspan="99" class="text-right">
+                                        {{ $list->appends($search_data['node_name'])->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
