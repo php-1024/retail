@@ -64,8 +64,9 @@ class ModuleController extends Controller{
         }
         $list = $module->paginate(15);
         foreach($list as $key=>$val){
-            $node[$val->id] = ModuleNode::where('module_id',$val->id)->join('module_node',function($json){
-                $json->on('');
+            $node[$val->id] = ModuleNode::where('module_id',$val->id)->join('node',function($json){
+                $json->on('node.id','=','module_node.node_id');
+                $json->select('module_node.*','node.node_name');
             })->get();
 
         }
