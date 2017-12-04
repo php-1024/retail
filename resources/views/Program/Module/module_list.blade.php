@@ -147,12 +147,6 @@
     });
     //获取用户信息，编辑密码框
     function getEditForm(id){
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
         var url = $('#module_edit_url').val();
         var token = $('#_token').val();
 
