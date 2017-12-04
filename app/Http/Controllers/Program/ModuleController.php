@@ -96,12 +96,7 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
-        $module_node = new ModuleNode();//重新实例化模型，避免重复
-        DB::connection()->enableQueryLog();
-        $ll = $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->get()->toArray();
-        //dd($ll);
-        var_dump(DB::getQueryLog());
-        exit();
+
         $module = new Module();
         $info = $module->where('module_name',$module_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
