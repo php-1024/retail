@@ -64,7 +64,7 @@ class ModuleController extends Controller{
         }
         $list = $module->paginate(15);
         foreach($list as $key=>$val){
-            $list->$key->node = 123;
+            dump($val->id);
         }
 
         dump($list);
