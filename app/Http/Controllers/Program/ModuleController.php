@@ -19,7 +19,7 @@ class ModuleController extends Controller{
     //提交添加功能模块数据
     public function module_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $current_route_name = $request->path();//获取当前的页面路由
+        $route_name = $request->path();//获取当前的页面路由
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
 
@@ -40,7 +40,7 @@ class ModuleController extends Controller{
                 }
                 $node->insert($module_node_data);
 
-                ProgramLog::setOperationLog($admin_data['admin_id'],$current_route_name,'添加了功能模块'.$module_name);//保存操作记录
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 dump($e);
