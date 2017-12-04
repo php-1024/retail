@@ -46,11 +46,11 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-
+                    <form method="get" role="form" id="searchForm" action="">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">模块名称</label>
-                            <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
+                            <input type="text" id="module_name" name="module_name" value="" placeholder="功能模块名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -59,6 +59,7 @@
                             <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                         </div>
                     </div>
+                    </form>
                 </div>
 
             </div>
