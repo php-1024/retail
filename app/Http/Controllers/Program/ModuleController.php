@@ -52,8 +52,18 @@ class ModuleController extends Controller{
         }
     }
     //功能模块列表
-    public function module_list(){
+    public function module_list(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
 
+        $module = new Module();
+        $module_name = $request->input('module_name');
+        $search_data = ['module_name'=>$module_name];
+        //if(!empty($node_name)){
+           // $node = $module->where('node_name','like','%'.$node_name.'%');
+        //}
+        $list = $module->paginate(15);
+        return view('Program/Node/node_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
     }
 }
 ?>
