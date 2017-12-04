@@ -27,7 +27,8 @@ class ProgramController extends Controller{
         $node_list = [];
         if (!empty($module_list)) {
             foreach ($module_list as $key => $val) {
-                $node_list[$val->id] = ModuleNode::where('module_id', $val->id)->where('is_delete', 0)->get()->toArray();
+                $module_node = new ModuleMode();
+                $node_list[$val->id] = $module_node->where('module_id', $val->id)->where('is_delete', 0)->get()->toArray();
             }
         }
         dump($module_list);
