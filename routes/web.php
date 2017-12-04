@@ -83,10 +83,11 @@ Route::group(['prefix'=>'program'],function(){
         Route::post('account_lock','Program\SystemController@account_lock')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax','ProgramAccountLockCheck');//提交编辑账号数据;
         Route::post('password_edit_check','Program\PersonalController@password_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramEditPasswordCheck');//提交增加账号数据
         Route::post('node_add_check','Program\NodeController@node_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramNodeAddCheck');//提交节点数据
-        Route::post('node_edit','Program\NodeController@node_edit')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax');//获取节点数据并编辑
+        Route::post('node_edit','Program\NodeController@node_edit')->middleware('ProgramCheckIsLoginAjax');//获取节点数据并编辑
         Route::post('node_edit_check','Program\NodeController@node_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramNodeEditCheck');//检测编辑节点数据
         Route::post('module_add_check','Program\ModuleController@module_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramModuleAddCheck');//提交功能模块数据
-        Route::post('module_edit','Program\ModuleController@module_edit')->middleware('ProgramCheckIsLoginAjax','ProgramCheckIsSuperAjax');//获取功能模块数据并提交
+        Route::post('module_edit','Program\ModuleController@module_edit')->middleware('ProgramCheckIsLoginAjax');//获取功能模块数据并提交
+        Route::post('module_edit_check','Program\ModuleController@module_edit_check')->middleware('ProgramCheckIsLoginAjax','');
     });
 });
 /********************程序管理系统*************************/
