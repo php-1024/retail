@@ -67,7 +67,7 @@ class ModuleController extends Controller{
             $node[$val->id] = ModuleNode::where('module_id',$val->id)->get();
         }
 
-        dump($list);
+        dump($node);
         return view('Program/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
 }
