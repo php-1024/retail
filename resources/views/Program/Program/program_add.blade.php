@@ -137,7 +137,7 @@
             radioClass: 'iradio_square-green',
         });
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            alert(event.type + ' callback');
+            alert(123456);
         });
 
         //设置CSRF令牌
