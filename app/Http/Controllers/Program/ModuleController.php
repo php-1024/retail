@@ -66,8 +66,7 @@ class ModuleController extends Controller{
         foreach($list as $key=>$val){
             $node[$val->id] = ModuleNode::where('module_id',$val->id)->join('node',function($json){
                 $json->on('node.id','=','module_node.node_id');
-                $json->select('module_node.*','node.node_name');
-            })->get();
+            })->select('module_node.*','node.node_name')->get();
         }
         return view('Program/Module/module_list',['list'=>$list,'node'=>$node,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
@@ -75,8 +74,16 @@ class ModuleController extends Controller{
     public function module_edit(Request $request){
         $id = $request->input('id');
         $info = Module::find($id);
-        $node_list_selected = ModuleNode::where('module_id',$id)->get()->toArray();
-        dump($node_list_selected);
+        $module_node = new ModuleNode();
+        $module_node = $module_node->join('node',function($json){
+            $json->on('node.id','=','module_node.node_id');
+        });
+        $node_list_selected = $module_node->where('module_id',$id)->select('module_node.*','node.name')->get()->toArray();
+        $selected_id[] = '';
+        foreach($node_list_selected as $key=>$val){
+            $selected_id[] = $val['node_id'];
+        }
+        var_dump($selected_id);
         //return view('Program/System/account_edit',['info'=>$info]);
     }
 }
