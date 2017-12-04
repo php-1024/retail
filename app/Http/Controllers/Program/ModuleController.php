@@ -120,7 +120,7 @@ class ModuleController extends Controller{
                  $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
                 //如果插入的数据不为空,则插入
                 if(count($module_node_data) > 0){
-                    $module_node->insert($module_node_data);
+                    //$module_node->insert($module_node_data);
                 }
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
