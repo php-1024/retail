@@ -64,7 +64,7 @@ class ModuleController extends Controller{
         }
         $list = $module->paginate(15);
         foreach($list as $key=>$val){
-            $node[$val->id] = Node::all();
+            $node[$val->id] = Node::where('module_id',$val->id)->get();
         }
 
         dump($list);
