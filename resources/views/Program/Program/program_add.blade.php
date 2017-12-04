@@ -14,7 +14,7 @@
 
     <link href="{{asset('public/Program')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Program')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Program')}}/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="{{asset('public/Program/library/switchery')}}/css/switchery.css" rel="stylesheet">
 </head>
 
 <body class="">
