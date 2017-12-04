@@ -58,9 +58,9 @@ class ModuleController extends Controller{
 
         $module = new Module();
         $module_name = $request->input('module_name');
-        $search_data = ['module_name'=>$module_name];
+        $search_data = ['module_name'=>module_name];
         if(!empty($module_name)){
-            $module = $module->where('node_name','like','%'.$module_name.'%');
+            $module = $module->where('module_name','like','%'.$module_name.'%');
         }
         $list = $module->paginate(15);
         return view('Program/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
