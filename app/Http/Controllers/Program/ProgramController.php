@@ -8,13 +8,13 @@ use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
-use Illuminate\Support\Facades\DB;
 use App\Models\ProgramAdmin;
 use App\Models\ProgramOperationLog;
 use App\Models\ProgramLoginLog;
 use App\Libraries\ZeroneLog\ProgramLog;
 use APP\Models\Program;
 use APP\Models\ModuleNode;
+
 class ProgramController extends Controller{
     public function program_add(Request $request)
     {
