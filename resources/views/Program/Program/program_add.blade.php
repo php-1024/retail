@@ -136,7 +136,7 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-        $('.checkbox_module_name').click(function(){
+        $('.i-checks').click(function(){
             alert(123);
            if($(this).checked){
                alert(123);
