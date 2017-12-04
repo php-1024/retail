@@ -102,7 +102,7 @@
                                                 </label>
                                             </div>
                                         </group>
-                                        <div class="hr-line-dashed"></div>
+                                        <div class="hr-line-dashed" style="clear: both;"></div>
                                         <group class="checked_box_group">
                                             <div>
                                                 <label class="i-checks">
