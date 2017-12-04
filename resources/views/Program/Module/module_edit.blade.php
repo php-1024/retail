@@ -52,6 +52,6 @@
 <script src="{{asset('public/Program/library/multiselect')}}/js/multiselect.js"></script>
 <script>
 $(function(){
-    $('#multiselect').multiselect({keepRenderingSort:true});
+    $('#multiselect').multiselect({keepRenderingSort:false});
 })
 </script>
