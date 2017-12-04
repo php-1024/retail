@@ -22,6 +22,7 @@ class ProgramController extends Controller{
 
         $module = new Module(); //实例化功能模块模型
         $module_list = $module->where('is_delete', '0')->get()->toArray();
+        dump($module_list);
         $node_list = [];
         if (!empty($module_list)) {
             foreach ($module_list as $key => $val) {
