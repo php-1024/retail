@@ -126,8 +126,7 @@
         $('#node option').each(function(i,v){
             node += $(v).val()+'&';
         });
-        alert(node);
-        return ;
+        return false;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
