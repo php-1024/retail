@@ -85,8 +85,8 @@ class ModuleController extends Controller{
         }
         $node = new Node();
         $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
-        var_dump($node_list_unselected);
-        return view('Program/System/module_edit',['info'=>$info,'']);
+
+        return view('Program/System/module_edit',['info'=>$info,'node_list_selected'=>$node_list_selected,'node_list_unselected'=>$node_list_unselected]);
     }
 }
 ?>
