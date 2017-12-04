@@ -24,7 +24,7 @@ class ModuleController extends Controller{
         $nodes = $request->input('nodes');//获取选择的节点
 
         $module = new Module();
-        $info = $module->where('module_name',$module_name)->pluck('id');
+        $info = $module->where('module_name',$module_name)->pluck('id')->toArray();
         if(!empty($info)){
             return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
         }else{
