@@ -53,7 +53,7 @@
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group"><label class="col-sm-2 control-label">模块名称</label>
 
-                                    <div class="col-sm-10"><input type="text" name="module_name" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="module_name" id="module_name" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">模块功能节点</label>
@@ -75,7 +75,7 @@
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <select name="nodes[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
+                                        <select name="nodes[]" id="node" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -121,8 +121,11 @@
     function postForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
-        var data = target.serialize();
-        alert(data);
+        var module_name = $('#module_name').val();
+        var node = '';
+        $('#node option').each(function(){
+
+        });
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
