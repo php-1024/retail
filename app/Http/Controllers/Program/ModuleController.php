@@ -83,7 +83,9 @@ class ModuleController extends Controller{
         foreach($node_list_selected as $key=>$val){
             $selected_id[] = $val['node_id'];
         }
-        var_dump($selected_id);
+        $node = new Node();
+        $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
+        var_dump($node_list_unselected);
         //return view('Program/System/account_edit',['info'=>$info]);
     }
 }
