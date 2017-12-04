@@ -86,21 +86,11 @@
                                                 </label>
                                             </div>
                                             <div>
+                                                @foreach($node_list as $kk=>$vv)
                                                 <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> 订单编辑
+                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> {{$vv['node_name']}}
                                                 </label>
-
-                                                <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" value="option2" id="inlineCheckbox2"> 订单查询
-                                                </label>
-
-                                                <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" value="option3" id="inlineCheckbox3"> 订单添加
-                                                </label>
-
-                                                <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" value="option3" id="inlineCheckbox3"> 订单删除
-                                                </label>
+                                                @endforeach;
                                             </div>
                                         </group>
                                         <div class="hr-line-dashed" style="clear: both;"></div>
