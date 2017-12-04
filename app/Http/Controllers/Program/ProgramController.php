@@ -4,7 +4,7 @@
  */
 namespace App\Http\Controllers\Program;
 use App\Models\Module;
-use APP\Models\ModuleNode;
+use App\Models\ModuleNode;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
