@@ -98,9 +98,9 @@ class ModuleController extends Controller{
         $nodes = $request->input('nodes');//获取选择的节点
         $module_node = new ModuleNode();//重新实例化模型，避免重复
         //首先删除这次删除的数据的数据
-        $ll = $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->get()->toArray();
-dump($ll);
-        exit();
+        //$ll = $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->get()->toArray();
+//dump($ll);
+        //exit();
         $module = new Module();
         $info = $module->where('module_name',$module_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
