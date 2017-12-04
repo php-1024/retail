@@ -6,7 +6,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 
-class ProgramNodeAddCheck{
+class ProgramModuleAddCheck{
     public function handle($request,Closure $next){
         dump($this->input());
         exit();
