@@ -96,6 +96,17 @@ class ModuleController extends Controller{
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
 
+        $module_node = new ModuleNode();//重新实例化模型，避免重复
+
+        foreach($nodes as $key=>$val){
+            $vo = $module_node->where('node_id',$val)->where('is_delete',0)->first();//查询是否存在数据
+            if(empty($vo)){
+                $module_node_data[] = ['module_id'=>$id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];//不存在则添加数据
+            }else{
+                continue;//存在则跳过;
+            }
+        }
+
         $module = new Module();
         $info = $module->where('module_name',$module_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
