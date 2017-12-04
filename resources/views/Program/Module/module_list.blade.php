@@ -87,7 +87,7 @@
                                         <td>{{ $val->module_name }}</td>
                                         <td>
                                             @foreach($node[$val->id] as $kk=>$vv)
-                                                <label class="label label-success" style="display:inline-block">{{ $node->node_name }}</label>&nbsp;&nbsp;
+                                                <label class="label label-success" style="display:inline-block">{{ $vv->node_name }}</label>&nbsp;&nbsp;
                                             @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
