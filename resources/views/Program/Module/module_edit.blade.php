@@ -1,6 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('program/ajax/module_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" value="{{ $info->id }}">
+    <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -60,13 +60,14 @@ function postForm() {
     var url = target.attr("action");
     var module_name = $('#module_name').val();
     var _token = $('#_token').val();
+    var id = $('#id').val();
     var node = '';
 
     $('#multiselect_to option').each(function(i,v){
         node += 'nodes[]='+$(v).val()+'&';
     });
     node = node.substring(0, node.length-1);
-    var data = '_token='+_token+'&module_name='+module_name+'&'+node;
+    var data = 'id='+id+'&_token='+_token+'&module_name='+module_name+'&'+node;
     $.post(url, data, function (json) {
         if (json.status == -1) {
             window.location.reload();
