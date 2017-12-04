@@ -8,7 +8,7 @@ use Session;
 
 class ProgramModuleAddCheck{
     public function handle($request,Closure $next){
-        dump($this->input());
+        dump($request->input());
         exit();
         if(empty($request->input('node_name'))){
             return response()->json(['data' => '请输入节点名称', 'status' => '0']);
