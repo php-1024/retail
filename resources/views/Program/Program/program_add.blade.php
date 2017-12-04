@@ -88,7 +88,7 @@
                                             <div>
                                                 @foreach($node_list[$val['id']] as $kk=>$vv)
                                                 <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" class="checkbox_node_name" name="module_node_id[]" value="{{ $val['module_id'].'_'.$val['node_id'] }}"> {{$vv['node_name']}}
+                                                    <input type="checkbox" class="checkbox_node_name" name="module_node_id[]" value="{{ $vv['module_id'].'_'.$vv['node_id'] }}"> {{$vv['node_name']}}
                                                 </label>
                                                 @endforeach;
                                             </div>
