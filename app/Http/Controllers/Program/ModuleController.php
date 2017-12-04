@@ -27,7 +27,7 @@ class ModuleController extends Controller{
         $module = new Module();
         $info = $module->where('module_name',$module_name)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
-            return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
+            return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
@@ -97,9 +97,9 @@ class ModuleController extends Controller{
         $nodes = $request->input('nodes');//获取选择的节点
 
         $module = new Module();
-        $info = $module->where('module_name',$module_name)->where('id',$id)->where('is_delete','0')->pluck('id')->toArray();
+        $info = $module->where('module_name',$module_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
-            return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
+            return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
