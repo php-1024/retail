@@ -33,8 +33,8 @@
 
                     <div class="col-sm-4">
                         <select name="to" id="multiselect_to" class="form-control" size="8" multiple="multiple">
-                            @foreach($node_list_unselected as $kk=>$vvl)
-                                <option value="{{ $val['id'] }}" data-position="{{ $kk }}">{{ $val['node_name'] }}</option>
+                            @foreach($node_list_unselected as $kk=>$vv)
+                                <option value="{{ vv['id'] }}" data-position="{{ $kk }}">{{ vv['node_name'] }}</option>
                             @endforeach
                         </select>
                     </div>
