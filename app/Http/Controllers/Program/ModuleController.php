@@ -6,6 +6,7 @@ use Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\Node;
 use App\Models\Module;
+use App\Models\ModuleNode;
 use App\Libraries\ZeroneLog\ProgramLog;
 
 class ModuleController extends Controller{
@@ -30,7 +31,7 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $node = new Node();//重新实例化模型，避免重复
+                $modue_node = new ModuleNode();//重新实例化模型，避免重复
                 $module = new Module();
                 $module->module_name=$module_name;
                 $module->save();
@@ -38,7 +39,7 @@ class ModuleController extends Controller{
                 foreach($nodes as $key=>$val){
                     $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val];
                 }
-                $node->insert($module_node_data);
+                $modue_node->insert($module_node_data);
 
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
