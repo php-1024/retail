@@ -20,14 +20,14 @@ class ProgramController extends Controller{
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $module_node = new ModuleNode();
+
         $module = new Module(); //实例化功能模块模型
         $module_list = $module->where('is_delete', '0')->get()->toArray();
-        dump($module_list);
         $node_list = [];
+
         if (!empty($module_list)) {
             foreach ($module_list as $key => $val) {
-
+                $module_node = new ModuleNode();
                 $node_list[$val->id] = $module_node->where('module_id', $val->id)->where('is_delete', 0)->get()->toArray();
             }
         }
