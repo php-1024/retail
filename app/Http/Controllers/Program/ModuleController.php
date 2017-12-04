@@ -70,8 +70,6 @@ class ModuleController extends Controller{
             })->get();
 
         }
-
-        dump($node);
         return view('Program/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
 }
