@@ -20,7 +20,6 @@ class ProgramController extends Controller{
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
         $module = new Module(); //实例化功能模块模型
         $module_list = $module->where('is_delete', '0')->get()->toArray();
         $node_list = [];
