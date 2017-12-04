@@ -75,7 +75,7 @@
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <select name="nodes" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
+                                        <select name="nodes[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
