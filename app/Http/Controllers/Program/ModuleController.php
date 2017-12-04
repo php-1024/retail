@@ -63,6 +63,9 @@ class ModuleController extends Controller{
             $module = $module->where('module_name','like','%'.$module_name.'%');
         }
         $list = $module->paginate(15);
+        foreach($list as $key=>$val){
+            dump($val);
+        }
         dump($list);
         return view('Program/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
