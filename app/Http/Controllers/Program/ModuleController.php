@@ -99,7 +99,7 @@ class ModuleController extends Controller{
         $module_node = new ModuleNode();//重新实例化模型，避免重复
         $ll = $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->get()->toArray();
         //dd($ll);
-        dd($module_node->getQueryLog());
+        dd(DB::getQueryLog());
         exit();
         $module = new Module();
         $info = $module->where('module_name',$module_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
