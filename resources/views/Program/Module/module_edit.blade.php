@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('program/ajax/node_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('program/ajax/module_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{ $info->id }}">
     <div class="modal-dialog modal-lg">
@@ -52,6 +52,42 @@
 <script src="{{asset('public/Program/library/multiselect')}}/js/multiselect.js"></script>
 <script>
 $(function(){
-    $('#multiselect').multiselect({keepRenderingSort:false});
-})
+    $('#multiselect').multiselect({keepRenderingSort:false});.
+});
+//提交表单
+function postForm() {
+    var target = $("#currentForm");
+    var url = target.attr("action");
+    var module_name = $('#module_name').val();
+    var _token = $('#_token').val();
+    var node = '';
+
+    $('#multiselect_to option').each(function(i,v){
+        node += 'nodes[]='+$(v).val()+'&';
+    });
+    node = node.substring(0, node.length-1);
+    var data = '_token='+_token+'&module_name='+module_name+'&'+node;
+    $.post(url, data, function (json) {
+        if (json.status == -1) {
+            window.location.reload();
+        } else if(json.status == 1) {
+            swal({
+                title: "提示信息",
+                text: json.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+        }else{
+            swal({
+                title: "提示信息",
+                text: json.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                //type: "warning"
+            });
+        }
+    });
+}
 </script>
