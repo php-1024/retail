@@ -118,12 +118,13 @@ class ModuleController extends Controller{
                     $vo = '';
                 }
 
-                //首先删除这次删除的数据的数据
-                 $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
+
                 //如果插入的数据不为空,则插入
                 if(!empty($module_node_data)){
                     $module_node->insert($module_node_data);
                 }
+                //首先删除这次删除的数据的数据
+                $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
