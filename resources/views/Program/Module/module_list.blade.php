@@ -98,7 +98,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {{ $list->appends($search_data['node_name'])->links() }}
+                                        {{ $list->appends($search_data['module_name'])->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
