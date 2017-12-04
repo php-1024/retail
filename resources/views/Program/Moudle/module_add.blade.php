@@ -125,10 +125,10 @@
         var node = '';
 
         $('#multiselect_to option').each(function(i,v){
-            node += $(v).val()+'&';
+            node += 'nodes[]='+$(v).val()+'&';
         });
-        alert(node);
-        return ;
+        var data = 'module_name'+module_name+'&'+node;
+        alert(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
