@@ -123,10 +123,8 @@
         var url = target.attr("action");
         var module_name = $('#module_name').val();
         var node = '';
-        $('#node option').each(function(i,v){
-            node += $(v).val()+'&';
-        });
-        return false;
+
+
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
