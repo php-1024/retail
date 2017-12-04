@@ -14,6 +14,7 @@ use App\Models\ProgramOperationLog;
 use App\Models\ProgramLoginLog;
 use App\Libraries\ZeroneLog\ProgramLog;
 use APP\Models\Program;
+use APP\Models\ModuleNode;
 class ProgramController extends Controller{
     public function program_add(Request $request)
     {
@@ -26,7 +27,7 @@ class ProgramController extends Controller{
         $node_list = [];
         if (!empty($module_list)) {
             foreach ($module_list as $key => $val) {
-                $node_list[$val->id] = ModuleNode::where('module_id', $val->id)->where('is_delete', 0)->get();
+                $node_list[$val->id] = ModuleNode::where('module_id', $val->id)->where('is_delete', 0)->get()->toArray();
             }
         }
         dump($module_list);
