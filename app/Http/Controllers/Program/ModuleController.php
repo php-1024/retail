@@ -22,6 +22,32 @@ class ModuleController extends Controller{
         $current_route_name = $request->path();//获取当前的页面路由
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
+
+        $module = new Module();
+        $info = $module_name->where('module_name',$module_name)->pluck('id');
+        if(!empty($info)){
+            return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $node = new Node();//重新实例化模型，避免重复
+                $module = new Module();
+                $module->module_name=$module_name;
+                $module->save();
+                $module_id = $module->id;
+                foreach($nodes as $key=>$val){
+                    $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val];
+                }
+                $node->insert($module_node_data);
+
+                ProgramLog::setOperationLog($admin_data['admin_id'],$current_route_name,'添加了功能模块'.$module_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '修改节点失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '修改节点成功', 'status' => '1']);
+        }
     }
 }
 ?>
