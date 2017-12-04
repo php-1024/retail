@@ -73,7 +73,11 @@ class ModuleController extends Controller{
     }
     //编辑功能模块列表
     public function module_edit(Request $request){
-
+        $id = $request->input('id');
+        $info = Module::find($id);
+        $node_list_selected = ModuleNode::where('module_id',$id)->all();
+        dump($node_list_selected);
+        //return view('Program/System/account_edit',['info'=>$info]);
     }
 }
 ?>
