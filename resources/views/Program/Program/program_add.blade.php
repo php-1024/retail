@@ -82,7 +82,7 @@
                                         <group class="checked_box_group">
                                             <div>
                                                 <label class="i-checks">
-                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> {{ $module['module_name'] }}
+                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> {{ $val['module_name'] }}
                                                 </label>
                                             </div>
                                             <div>
