@@ -46,7 +46,6 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>添加模块</h5>
-
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal" id="currentForm" action=" {{ url('program/ajax/module_add_check') }} ">
