@@ -10,7 +10,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">模块名称</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" id="module_name" name="module_name" value="{{ $info->module_name }}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" id="edit_module_name" name="module_name" value="{{ $info->module_name }}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -58,7 +58,7 @@ $(function(){
 function postForm() {
     var target = $("#currentForm");
     var url = target.attr("action");
-    var module_name = $('#module_name').val();
+    var module_name = $('#edit_module_name').val();
     var _token = $('#_token').val();
     var id = $('#id').val();
     var node = '';
