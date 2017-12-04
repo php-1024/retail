@@ -14,7 +14,7 @@ class ModuleController extends Controller{
     public function module_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $node_list = Node::all();
+        $node_list = Node::where('is_delete','0')->all();
         return view('Program/Module/module_add',['node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //提交添加功能模块数据
@@ -25,7 +25,7 @@ class ModuleController extends Controller{
         $nodes = $request->input('nodes');//获取选择的节点
 
         $module = new Module();
-        $info = $module->where('module_name',$module_name)->pluck('id')->toArray();
+        $info = $module->where('module_name',$module_name)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
             return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
         }else{
@@ -62,9 +62,9 @@ class ModuleController extends Controller{
         if(!empty($module_name)){
             $module = $module->where('module_name','like','%'.$module_name.'%');
         }
-        $list = $module->paginate(15);
+        $list = $module->where('is_delete','0')->paginate(15);
         foreach($list as $key=>$val){
-            $node[$val->id] = ModuleNode::where('module_id',$val->id)->join('node',function($json){
+            $node[$val->id] = ModuleNode::where('module_id',$val->id->where('is_delete','0')->join('node',function($json){
                 $json->on('node.id','=','module_node.node_id');
             })->select('module_node.*','node.node_name')->get();
         }
@@ -86,7 +86,7 @@ class ModuleController extends Controller{
         $node = new Node();
         $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
         var_dump($node_list_unselected);
-        //return view('Program/System/account_edit',['info'=>$info]);
+        return view('Program/System/module_edit',['info'=>$info,'']);
     }
 }
 ?>
