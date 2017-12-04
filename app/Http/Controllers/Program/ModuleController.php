@@ -75,7 +75,7 @@ class ModuleController extends Controller{
     public function module_edit(Request $request){
         $id = $request->input('id');
         $info = Module::find($id);
-        $node_list_selected = ModuleNode::where('module_id',$id)->get();
+        $node_list_selected = ModuleNode::where('module_id',$id)->get()->toArray();
         dump($node_list_selected);
         //return view('Program/System/account_edit',['info'=>$info]);
     }
