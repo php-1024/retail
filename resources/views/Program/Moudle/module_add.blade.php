@@ -127,7 +127,7 @@
         $('#multiselect_to option').each(function(i,v){
             node += 'nodes[]='+$(v).val()+'&';
         });
-        node = node.toString().RTrim('&');
+        node = node.substring(0, s.length-1);
         var data = 'module_name='+module_name+'&'+node;
         $.post(url, data, function (json) {
             if (json.status == -1) {
