@@ -18,6 +18,7 @@ class ModuleController extends Controller{
     public function module_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $current_route_name = $request->path();//获取当前的页面路由
+
     }
 }
 ?>
