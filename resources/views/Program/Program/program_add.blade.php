@@ -137,6 +137,7 @@
             radioClass: 'iradio_square-green',
         });
         $('.checkbox_module_name').click(function(){
+            alert(123);
            if($(this).is(':checked')){
                alert(123);
            }
