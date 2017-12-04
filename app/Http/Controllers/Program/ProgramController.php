@@ -33,9 +33,7 @@ class ProgramController extends Controller{
                 })->select('module_node.*','node.node_name')->get()->toArray();
             }
         }
-        dump($module_list);
-        dump($node_list);
-        return view('Program/Program/program_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Program/Program/program_add',['module_list'=>$module_list,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
 ?>
