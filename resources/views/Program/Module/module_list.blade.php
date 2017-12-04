@@ -127,6 +127,7 @@
 <script src="{{asset('public/Program/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Program/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
 <script src="{{asset('public/Program/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Program/library/switchery')}}js/switchery.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
@@ -146,7 +147,12 @@
     });
     //获取用户信息，编辑密码框
     function getEditForm(id){
-
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
         var url = $('#module_edit_url').val();
         var token = $('#_token').val();
 
