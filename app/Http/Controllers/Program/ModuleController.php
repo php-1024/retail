@@ -117,7 +117,7 @@ class ModuleController extends Controller{
                 }
 
                 //首先删除这次删除的数据的数据
-                 $module_node->whereNotIn('node_id',$nodes)->delete();
+                 $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
                 //如果插入的数据不为空,则插入
                 if(count($module_node_data) > 0){
                     $module_node->insert($module_node_data);
