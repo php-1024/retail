@@ -75,7 +75,7 @@
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <select name="nodes[]" id="node" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
+                                        <select name="nodes[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -124,10 +124,11 @@
         var module_name = $('#module_name').val();
         var node = '';
 
-        $('#node option').each(function(i,v){
+        $('#multiselect_to option').each(function(i,v){
             node += $(v).val()+'&';
         });
-
+        alert(node);
+        return ;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
