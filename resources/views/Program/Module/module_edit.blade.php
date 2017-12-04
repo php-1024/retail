@@ -68,7 +68,6 @@ function postForm() {
     });
     node = node.substring(0, node.length-1);
     var data = 'id='+id+'&_token='+_token+'&module_name='+module_name+'&'+node;
-    alert(data);
     $.post(url, data, function (json) {
         if (json.status == -1) {
             window.location.reload();

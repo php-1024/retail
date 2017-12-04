@@ -90,21 +90,38 @@ class ModuleController extends Controller{
     }
     //编辑功能模块列表
     public function module_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
-        $info = Module::find($id);
-        $module_node = new ModuleNode();
-        $module_node = $module_node->join('node',function($json){
-            $json->on('node.id','=','module_node.node_id');
-        });
-        $node_list_selected = $module_node->where('module_id',$id)->where('module_node.is_delete','0')->select('module_node.*','node.node_name')->get()->toArray();
-        $selected_id[] = '';
-        foreach($node_list_selected as $key=>$val){
-            $selected_id[] = $val['node_id'];
-        }
-        $node = new Node();
-        $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
+        $module_name  = $request->input('module_name');//获取功能模块名称
+        $nodes = $request->input('nodes');//获取选择的节点
 
-        return view('Program/Module/module_edit',['info'=>$info,'node_list_selected'=>$node_list_selected,'node_list_unselected'=>$node_list_unselected]);
+        $module = new Module();
+        $info = $module->where('module_name',$module_name)->where('id',$id)->where('is_delete','0')->pluck('id')->toArray();
+        if(!empty($info)){
+            return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $modue_node = new ModuleNode();//重新实例化模型，避免重复
+                $module = new Module();
+                $module->module_name=$module_name;
+                $module->save();
+                $module_id = $module->id;
+                foreach($nodes as $key=>$val){
+                    $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];
+                }
+                $modue_node->insert($module_node_data);
+
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                dump($e);
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加功能模块成功', 'status' => '1']);
+        }
     }
 }
 ?>
