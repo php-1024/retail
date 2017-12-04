@@ -37,7 +37,7 @@ class ModuleController extends Controller{
                 $module->save();
                 $module_id = $module->id;
                 foreach($nodes as $key=>$val){
-                    $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val,'created_at'=>time(),'deleted_at'=>time()];
+                    $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];
                 }
                 $modue_node->insert($module_node_data);
 
