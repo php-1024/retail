@@ -49,7 +49,7 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal" action=" {{ url('program/ajax/node_add_check') }} ">
+                            <form method="post" class="form-horizontal" action=" {{ url('program/ajax/module_add_check') }} ">
                                 <div class="form-group"><label class="col-sm-2 control-label">模块名称</label>
 
                                     <div class="col-sm-10"><input type="text" name="module_name" class="form-control"></div>
@@ -80,7 +80,7 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
+                                        <button class="btn btn-primary" id="addbtn" type="button" onclick="return postForm();">确认添加</button>
                                         <button class="btn btn-write" onClick="location.href='node.html'" type="button">回到列表</button>
                                     </div>
                                 </div>
