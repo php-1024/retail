@@ -69,6 +69,12 @@ Route::group(['prefix'=>'program'],function(){
         Route::get('node_list','Program\NodeController@node_list')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
+    //程序管理组
+    Route::group(['prefix'=>'program'],function(){
+        Route::get('program_add', 'Program\ProgramController@program_add')->middleware('ProgramCheckIsLogin');//修改密码路由
+        Route::get('node_list','Program\NodeController@node_list')->middleware('ProgramCheckIsLogin');//修改密码路由
+    });
+
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Program\LoginController@display')->middleware('ProgramIsLogin');//登陆页面路由
