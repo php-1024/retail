@@ -78,7 +78,7 @@ class ModuleController extends Controller{
         $module_node = $module_node->join('node',function($json){
             $json->on('node.id','=','module_node.node_id');
         });
-        $node_list_selected = $module_node->where('module_id',$id)->select('module_node.*','node.name')->get()->toArray();
+        $node_list_selected = $module_node->where('module_id',$id)->select('module_node.*','node.node_name')->get()->toArray();
         $selected_id[] = '';
         foreach($node_list_selected as $key=>$val){
             $selected_id[] = $val['node_id'];
