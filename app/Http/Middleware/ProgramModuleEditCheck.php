@@ -6,7 +6,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 
-class ProgramModuleAddCheck{
+class ProgramModuleEditCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('id'))){
             return response()->json(['data' => '数据传输错误', 'status' => '0']);
