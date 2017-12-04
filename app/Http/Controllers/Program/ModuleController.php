@@ -68,9 +68,8 @@ class ModuleController extends Controller{
                 $json->on('node.id','=','module_node.node_id');
                 $json->select('module_node.*','node.node_name');
             })->get();
-
         }
-        return view('Program/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
+        return view('Program/Module/module_list',['list'=>$list,'node'=>$node,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
 }
 ?>
