@@ -82,13 +82,13 @@
                                         <group class="checked_box_group">
                                             <div>
                                                 <label class="i-checks">
-                                                    <input type="checkbox" class="checkbox_module_name" value="option1"> {{ $val['module_name'] }}
+                                                    <input type="checkbox" class="checkbox_module_name" name="module_id[]" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
                                                 </label>
                                             </div>
                                             <div>
                                                 @foreach($node_list[$val['id']] as $kk=>$vv)
                                                 <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" class="checkbox_node_name" value="option1"> {{$vv['node_name']}}
+                                                    <input type="checkbox" class="checkbox_node_name" name="module_node_id[]" value="{{ $val['module_id'].'_'.$val['node_id'] }}"> {{$vv['node_name']}}
                                                 </label>
                                                 @endforeach;
                                             </div>
