@@ -138,6 +138,7 @@
         });
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
+            alert(id);
             $('checkbox_node_name_'+id).attr('checked',true);
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
