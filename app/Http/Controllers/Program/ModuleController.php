@@ -83,7 +83,6 @@ class ModuleController extends Controller{
         foreach($node_list_selected as $key=>$val){
             $selected_id[] = $val['node_id'];
         }
-        var_dump($node_list_selected);
         $node = new Node();
         $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
 
