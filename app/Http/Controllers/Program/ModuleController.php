@@ -59,11 +59,11 @@ class ModuleController extends Controller{
         $module = new Module();
         $module_name = $request->input('module_name');
         $search_data = ['module_name'=>$module_name];
-        //if(!empty($node_name)){
-           // $node = $module->where('node_name','like','%'.$node_name.'%');
-        //}
+        if(!empty($module_name)){
+            $module = $module->where('node_name','like','%'.$module_name.'%');
+        }
         $list = $module->paginate(15);
-        return view('Program/Node/node_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
+        return view('Program/Node/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
     }
 }
 ?>
