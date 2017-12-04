@@ -49,3 +49,4 @@
         </div>
     </div>
 </form>
+<script src="{{asset('public/Program/library/multiselect')}}/js/multiselect.js"></script>
