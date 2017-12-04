@@ -50,7 +50,7 @@
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal" id="currentForm" action=" {{ url('program/ajax/module_add_check') }} ">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <div class="form-group"><label class="col-sm-2 control-label">模块名称</label>
 
                                     <div class="col-sm-10"><input type="text" name="module_name" id="module_name" class="form-control"></div>
@@ -122,13 +122,14 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var module_name = $('#module_name').val();
+        var _token = $('#_token').val();
         var node = '';
 
         $('#multiselect_to option').each(function(i,v){
             node += 'nodes[]='+$(v).val()+'&';
         });
         node = node.substring(0, node.length-1);
-        var data = 'module_name='+module_name+'&'+node;
+        var data = '_token='+_token+'&module_name='+module_name+'&'+node;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
