@@ -105,7 +105,7 @@ class ModuleController extends Controller{
             try{
                 $module_node = new ModuleNode();//重新实例化模型，避免重复
                 $module = new Module();
-                $module->where('id',$id)->update('module_name',$module_name);
+                $module->where('id',$id)->update(['module_name'=>$module_name]);
 
                 foreach($nodes as $key=>$val){
                     $vo = $module_node->where('node_id',$val)->where('is_delete',0)->first();//查询是否存在数据
