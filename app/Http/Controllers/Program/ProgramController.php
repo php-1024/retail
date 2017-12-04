@@ -28,9 +28,9 @@ class ProgramController extends Controller{
         if (!empty($module_list)) {
             foreach ($module_list as $key => $val) {
                 $module_node = new ModuleNode();
-                $node_list[$val['id']] = $module_node->join('node',function($join){
-                    $join->on('node.id','=','module_node.node_id');
-                })->where('module_id', $val['id'])->where('module_node.is_delete', '0')->select('node.node_name,module_node.*')->get()->toArray();
+                $node_list[$val['id']] = $module_node->join('node',function($json){
+                    $json->on('node.id','=','module_node.node_id');
+                })->select('module_node.*','node.node_name')->where('module_id', $val['id'])->where('module_node.is_delete', '0')->get()->toArray();
             }
         }
         dump($module_list);
