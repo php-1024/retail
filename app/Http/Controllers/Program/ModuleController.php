@@ -64,7 +64,7 @@ class ModuleController extends Controller{
         }
         $list = $module->where('is_delete','0')->paginate(15);
         foreach($list as $key=>$val){
-            $node[$val->id] = ModuleNode::where('module_id',$val->id)->where('is_delete','0')->join('node',function($json){
+            $node[$val->id] = ModuleNode::where('module_id',$val->id)->where('module_node.is_delete','0')->join('node',function($json){
                 $json->on('node.id','=','module_node.node_id');
             })->select('module_node.*','node.node_name')->get();
         }
@@ -78,7 +78,7 @@ class ModuleController extends Controller{
         $module_node = $module_node->join('node',function($json){
             $json->on('node.id','=','module_node.node_id');
         });
-        $node_list_selected = $module_node->where('module_id',$id)->select('module_node.*','node.node_name')->get()->toArray();
+        $node_list_selected = $module_node->where('module_id',$id)->where('module_node.is_delete','0')->select('module_node.*','node.node_name')->get()->toArray();
         $selected_id[] = '';
         foreach($node_list_selected as $key=>$val){
             $selected_id[] = $val['node_id'];
