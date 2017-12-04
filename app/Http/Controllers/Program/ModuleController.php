@@ -110,10 +110,8 @@ class ModuleController extends Controller{
 
                 foreach($nodes as $key=>$val){
                     $vo = $module_node->where('node_id',$val)->where('is_delete','0')->first();//查询是否存在数据
-                    if(!empty($vo)){
-                        $vo = $vo->toArray();
-                    }
-                    if(empty($vo)){
+
+                    if($vo){
                         $module_node_data[] = ['module_id'=>$id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];//不存在则添加数据
                     }else{
                         continue;//存在则跳过;
