@@ -102,6 +102,31 @@
                                                 </label>
                                             </div>
                                         </group>
+
+                                        <group class="checked_box_group">
+                                            <div>
+                                                <label class="i-checks">
+                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> 订单模块
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> 订单编辑
+                                                </label>
+
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="checkbox" value="option2" id="inlineCheckbox2"> 订单查询
+                                                </label>
+
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="checkbox" value="option3" id="inlineCheckbox3"> 订单添加
+                                                </label>
+
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="checkbox" value="option3" id="inlineCheckbox3"> 订单删除
+                                                </label>
+                                            </div>
+                                        </group>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
