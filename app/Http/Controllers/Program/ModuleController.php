@@ -98,7 +98,7 @@ class ModuleController extends Controller{
         $nodes = $request->input('nodes');//获取选择的节点
         $module_node = new ModuleNode();//重新实例化模型，避免重复
         $ll = $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->get()->toArray();
-        dd($ll);
+        //dd($ll);
         dd($module_node->getQueryLog());
         exit();
         $module = new Module();
