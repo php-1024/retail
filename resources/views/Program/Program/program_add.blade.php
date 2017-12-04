@@ -136,12 +136,10 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-        $('.i-checks').click(function(){
-            alert(123);
-           if($(this).checked){
-               alert(123);
-           }
+        $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            alert(event.type + ' callback');
         });
+
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
