@@ -12,7 +12,7 @@ class ModuleController extends Controller{
     public function module_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Program/Moudle/add_moudle',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
+        return view('Program/Moudle/module_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //提交添加功能模块数据
     public function module_add_check(Request $request){

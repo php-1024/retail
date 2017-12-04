@@ -49,7 +49,7 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal" action="">
+                            <form method="post" class="form-horizontal" action=" {{ url('program/ajax/node_add_check') }} ">
                                 <div class="form-group"><label class="col-sm-2 control-label">模块名称</label>
 
                                     <div class="col-sm-10"><input type="text" name="module_name" class="form-control"></div>
