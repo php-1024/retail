@@ -180,6 +180,12 @@
 
 <script>
     $(function(){
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
