@@ -12,6 +12,7 @@
     <link href="{{asset('public/Program/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/font')}}/css/font-awesome.css" rel="stylesheet">
     <link href="{{asset('public/Program/library/switchery')}}/css/switchery.css" rel="stylesheet">
+    <link href="{{asset('public/Program/library/iCheck')}}/css/custom.css" rel="stylesheet">
 
     <link href="{{asset('public/Program')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Program')}}/css/style.css" rel="stylesheet">
@@ -178,6 +179,7 @@
 <script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Program/library/multiselect')}}/js/multiselect.js"></script>
 <script src="{{asset('public/Program/library/switchery')}}/js/switchery.js"></script>
+<script src="{{asset('public/Program/library/iCheck')}}/js/icheck.min.js"></script>
 
 <script>
     $(function(){
