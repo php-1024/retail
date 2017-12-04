@@ -114,6 +114,7 @@ class ModuleController extends Controller{
                     }else{
                         continue;//存在则跳过;
                     }
+                    $vo = '';
                 }
 
                 //首先删除这次删除的数据的数据
