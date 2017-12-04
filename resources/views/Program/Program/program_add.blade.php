@@ -79,7 +79,7 @@
                                     <label class="col-sm-2 control-label" >程序功能模块</label>
                                     <div class="col-sm-10">
                                         @foreach($module_list as $key=>$val)
-                                        <group class="checked_box_group">
+                                        <group class="checked_box_group_{{ $val['id'] }}">
                                             <div>
                                                 <label class="i-checks">
                                                     <input type="checkbox" class="checkbox_module_name" name="module_id[]" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
@@ -88,7 +88,7 @@
                                             <div>
                                                 @foreach($node_list[$val['id']] as $kk=>$vv)
                                                 <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" class="checkbox_node_name" name="module_node_id[]" value="{{ $vv['module_id'].'_'.$vv['node_id'] }}"> {{$vv['node_name']}}
+                                                    <input type="checkbox" class="checkbox_node_name_{{ $val['id'] }}" name="module_node_id[]" value="{{ $vv['module_id'].'_'.$vv['node_id'] }}"> {{$vv['node_name']}}
                                                 </label>
                                                 @endforeach;
                                             </div>
@@ -137,9 +137,11 @@
             radioClass: 'iradio_square-green',
         });
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            alert($(this).parent().parent().parent().find('.checkbox_node_name').val());
+            var id = $(this).val();
+            $('checkbox_node_name_'+id).attr('checked',true);
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            alert(234567);
+            var id = $(this).val();
+            $('checkbox_node_name_'+id).attr('checked',false);
         });
 
 
