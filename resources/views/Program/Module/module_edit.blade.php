@@ -10,7 +10,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">模块名称</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="订单管理模块"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="module_name" value="{{ $info->module_name }}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -18,16 +18,9 @@
                     <label class="col-sm-2 control-label">模块功能节点</label>
                     <div class="col-sm-4">
                         <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="8" multiple="multiple">
-                            <option value="6" data-position="6">零壹后台管理首页</option>
-                            <option value="7" data-position="7">零壹后台添加功能节点</option>
-                            <option value="8" data-position="8">零壹后台提交添加功能节点</option>
-                            <option value="9" data-position="9">零壹后台编辑功能节点</option>
-                            <option value="10" data-position="10">零壹后台提交编辑功能节点</option>
-                            <option value="11" data-position="11">零壹后台管理首页</option>
-                            <option value="12" data-position="12">零壹后台添加功能节点</option>
-                            <option value="13" data-position="13">零壹后台提交添加功能节点</option>
-                            <option value="14" data-position="14">零壹后台编辑功能节点</option>
-                            <option value="15" data-position="15">零壹后台提交编辑功能节点</option>
+                            @foreach($node_list_unselected as $key=>$val)
+                            <option value="{{ $val->$id }}" data-position="{{ $key }}">{{ $val->node_name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
