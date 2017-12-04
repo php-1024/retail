@@ -85,7 +85,11 @@
                                     <tr>
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->module_name }}</td>
-                                        <td>节点列表</td>
+                                        <td>
+                                            @foreach($node[$val->id] as $kk=>$vv)
+                                                <label class="label label-success" style="display:inline-block">{{ $node->node_name }}</label>&nbsp;&nbsp;
+                                            @endforeach
+                                        </td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
