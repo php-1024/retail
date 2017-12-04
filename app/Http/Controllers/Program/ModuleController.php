@@ -51,5 +51,9 @@ class ModuleController extends Controller{
             return response()->json(['data' => '添加功能模块成功', 'status' => '1']);
         }
     }
+    //功能模块列表
+    public function module_list(){
+
+    }
 }
 ?>
