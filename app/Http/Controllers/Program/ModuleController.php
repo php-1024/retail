@@ -71,5 +71,9 @@ class ModuleController extends Controller{
         }
         return view('Program/Module/module_list',['list'=>$list,'node'=>$node,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
+    //编辑功能模块列表
+    public function module_edit(Request $request){
+
+    }
 }
 ?>

@@ -48,6 +48,9 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                        <input type="hidden" id="module_edit_url" value="{{ url('program/ajax/module_edit') }}">
+                        <input type="hidden" id="module_delete_url" value="{{ url('program/ajax/node_delete') }}">
+                        <input type="hidden" id="module_deleted_url" value="{{ url('program/ajax/node_deleted') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">模块名称</label>
@@ -92,7 +95,7 @@
                                         </td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
-                                            <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit" onclick="getEditForm({{ $val->id }})"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                         </td>
