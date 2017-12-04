@@ -33,12 +33,9 @@
 
                     <div class="col-sm-4">
                         <select name="to" id="multiselect_to" class="form-control" size="8" multiple="multiple">
-
-                            <option value="1" data-position="1">零壹后台管理首页</option>
-                            <option value="2" data-position="2">零壹后台添加功能节点</option>
-                            <option value="3" data-position="3">零壹后台提交添加功能节点</option>
-                            <option value="4" data-position="4">零壹后台编辑功能节点</option>
-                            <option value="5" data-position="5">零壹后台提交编辑功能节点</option>
+                            @foreach($node_list_unselected as $kk=>$vvl)
+                                <option value="{{ $val['id'] }}" data-position="{{ $kk }}">{{ $val['node_name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div style="clear:both"></div>
