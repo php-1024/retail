@@ -138,7 +138,7 @@
         });
         $('.checkbox_module_name').click(function(){
             alert(123);
-           if($(this).is(':checked')){
+           if($(this).checked){
                alert(123);
            }
         });
