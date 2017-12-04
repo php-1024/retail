@@ -132,7 +132,7 @@
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script src="{{asset('public/Program/library/multiselect')}}/js/multiselect.js"></script>
+
 <script>
     $(function(){
         //设置CSRF令牌
