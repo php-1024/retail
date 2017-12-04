@@ -81,6 +81,7 @@ class ModuleController extends Controller{
         });
         $node_list_selected = $module_node->where('module_id',$id)->where('module_node.is_delete','0')->select('module_node.*','node.node_name')->get()->toArray();
         dump($node_list_selected);
+        exit();
         $selected_id[] = '';
         foreach($node_list_selected as $key=>$val){
             $selected_id[] = $val['node_id'];
