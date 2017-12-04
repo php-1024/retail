@@ -6,17 +6,7 @@
             <div class="modal-header">
                 修改功能节点
             </div>
-            <div class="modal-body">
 
-                <div class="form-group">
-                    <label>节点名称</label>
-                    <input type="text" placeholder="请输入节点名称" value="{{ $info->node_name }}" name="node_name" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>路由名称</label>
-                    <input type="text" placeholder="请输入模型名称" value="{{ $info->route_name }}" name="route_name" class="form-control">
-                </div>
-            </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
