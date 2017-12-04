@@ -62,7 +62,7 @@ class ModuleController extends Controller{
         if(!empty($module_name)){
             $module = $module->where('module_name','like','%'.$module_name.'%');
         }
-        $list = $module->paginate(15);
+        $list = $module->paginate(15)->toArray();
 
         return view('Program/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
