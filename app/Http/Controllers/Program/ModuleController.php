@@ -72,6 +72,9 @@ class ModuleController extends Controller{
     }
     //编辑功能模块列表
     public function module_edit(Request $request){
+        $module_node = new ModuleNode();
+        $vo = $module_node->where('node_id',1)->where('is_delete','0')->first()->toArray();
+        dump($vo);
         $id = $request->input('id');
         $info = Module::find($id);
         $module_node = new ModuleNode();
@@ -108,7 +111,7 @@ class ModuleController extends Controller{
                 $module->where('id',$id)->update(['module_name'=>$module_name]);
 
                 foreach($nodes as $key=>$val){
-                    $vo = $module_node->where('node_id',$val)->where('is_delete','0')->first();//查询是否存在数据
+                    $vo = $module_node->where('node_id',$val)->where('is_delete','0')->first()->toArray();//查询是否存在数据
                     if(empty($vo)){
                         $module_node_data[] = ['module_id'=>$id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];//不存在则添加数据
                     }else{
