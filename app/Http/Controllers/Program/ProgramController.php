@@ -163,7 +163,7 @@ class ProgramController extends Controller{
         $pid = $request->input('pid');//上级程序
         $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
-        $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id')->toArray();
+        $info = Program::where('program_name',$program_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
 
         if(!empty($info)){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
@@ -171,19 +171,21 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 $program = new Program();//实例化程序模型
-                $program->program_name = $program_name;//程序名称
-                $program->pid = $pid;//上级程序
-                $program->is_universal = $is_universal;//是否通用版本
-                $program->save();
-                $program_id = $program->id;
+                $program_module_node = new ProgramModuleNode();
+                $program->where('id',$id)->update(['program_name'=>$program_name,'pid'=>$pid,'is_universal'=>$is_universal,'updated_at'=>time()]);
 
+                $node_id = [];
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
-                    $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
+                    $program_module_node_data[] = ['program_id'=>$id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
+                    //删除数据库中不在这次插入的数据
+                    $node_ids[] = $node_id;
                 }
+
+                $program_module_node->where('program_id',$id)->whereNotIn('node_id',$node_ids)->delete();
 
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
                 //如果插入的数据不为空,则插入
