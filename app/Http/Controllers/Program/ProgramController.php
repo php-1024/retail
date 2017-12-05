@@ -21,21 +21,6 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $plist = Program::where('pid','0')->where('is_delete','0')->get();
 
-        $module_list = ProgramModuleNode::where('program_id',5)->join('module',function($join){
-            $join->on('program_module_node.module_id','=','module.id');
-        })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
-
-        $node_list = [];
-
-        if (!empty($module_list)) {
-            foreach ($module_list as $key => $val) {
-                $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
-                    $json->on('node.id','=','module_node.node_id');
-                })->select('module_node.*','node.node_name')->get()->toArray();
-            }
-        }
-        dump($module_list);
-        dump($node_list);
         return view('Program/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 
@@ -56,7 +41,18 @@ class ProgramController extends Controller{
                 }
             }
         }else{
-            $list = ProgramModuleNode::where('program_id',$pid)->groupBy('module_id')->get();
+            $module_list = ProgramModuleNode::where('program_id',$pid)->join('module',function($join){
+                $join->on('program_module_node.module_id','=','module.id');
+            })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
+
+            $node_list = [];
+            if (!empty($module_list)) {
+                foreach ($module_list as $key => $val) {
+                    $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
+                        $json->on('node.id','=','module_node.node_id');
+                    })->select('module_node.*','node.node_name')->get()->toArray();
+                }
+            }
         }
 
         return view('Program/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list]);
