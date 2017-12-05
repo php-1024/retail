@@ -27,7 +27,7 @@ class ProgramController extends Controller{
     //Ajax获取上级节点
     public function program_parents_node(Request $request){
         $pid = $request->input('pid');
-
+        $editid = $request->input('$editid');
         if(empty($pid) || $pid=='0'){
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
@@ -54,8 +54,14 @@ class ProgramController extends Controller{
                 }
             }
         }
-
-        return view('Program/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list]);
+        $selected_node = [];
+        $list = ProgramModuleNode::where('program_id',$editid)->get();
+        if(!empty($editid)) {
+            foreach ($list as $key => $val) {
+                $selected_node[] = $val->module_id . '_' . $val->node_id;
+            }
+        }
+        return view('Program/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list,'selected_node'=>$selected_node]);
     }
     //检测添加数据
     public function program_add_check(Request $request){

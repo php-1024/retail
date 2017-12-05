@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">选择主程序</label>
                         <div class="col-sm-10">
-                            <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val());">
+                            <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val(),'{{ $info->id }}');">
                                 <option value="0">独立主程序</option>
                                 @foreach($plist as $key=>$val)
                                     <option value="{{ $val->id }}" @if($val->id == $info['pid']) selected="selected"@endif;>{{ $val->program_name }}</option>
@@ -56,10 +56,10 @@
         var switchery = new Switchery(elem, { color: '#1AB394' });
     });
     //获取上级程序节点
-    function get_parents_node(pid){
+    function get_parents_node(pid,editid){
         var url =  $('#parent_nodes_url').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'pid':pid}
+        var data = {'_token':token,'pid':pid,'editid':editid}
         $.post(url,data,function(response){
             $('#node_box').html(response);
         });
