@@ -174,7 +174,7 @@ class ProgramController extends Controller{
                 $program_module_node = new ProgramModuleNode();
                 $program->where('id',$id)->update(['program_name'=>$program_name,'pid'=>$pid,'is_universal'=>$is_universal,'updated_at'=>time()]);
 
-                $node_id = [];
+                $node_ids = [];
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
