@@ -62,6 +62,8 @@ class ProgramController extends Controller{
                 $program_module_node->program_id = $program_id;
                 $program_module_node->module_id = $module_id;
                 $program_module_node->node_id = $node_id;
+                $program_module_node->save();
+
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块');//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
