@@ -95,6 +95,7 @@ Route::group(['prefix'=>'program'],function(){
         Route::post('module_edit','Program\ModuleController@module_edit')->middleware('ProgramCheckIsLoginAjax');//获取功能模块数据并提交
         Route::post('module_edit_check','Program\ModuleController@module_edit_check')->middleware('ProgramCheckIsLoginAjax','ProgramModuleEditCheck');
         Route::post('program_add_check','Program\ProgramController@program_add_check')->middleware('ProgramCheckIsLoginAjax','ProgramProgramAddCheck');//提交功能模块数据
+        Route::post('program_parents_node','Program\ProgramController@program_parents_node')->middleware('ProgramCheckIsLoginAjax');//获取上级程序ID
     });
 });
 /********************程序管理系统*************************/

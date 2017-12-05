@@ -52,7 +52,8 @@
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/program_add_check') }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                <input type="hidden" id="parent_nodes_url" value="{{ url('program/ajax/program_parents_node') }}">
                                 <div class="form-group"><label class="col-sm-2 control-label">程序名称</label>
                                     <div class="col-sm-10"><input type="text" name="program_name" class="form-control"></div>
                                 </div>
@@ -76,28 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" >程序功能模块</label>
-                                    <div class="col-sm-10">
-                                        @foreach($module_list as $key=>$val)
-                                        <group class="checked_box_group_{{ $val['id'] }}">
-                                            <div>
-                                                <label class="i-checks">
-                                                    <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" name="module_id[]" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
-                                                </label>
-                                            </div>
-                                            <div>
-                                                @foreach($node_list[$val['id']] as $kk=>$vv)
-                                                <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" data-group_id="{{ $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['module_id'].'_'.$vv['node_id'] }}"> {{$vv['node_name']}}
-                                                </label>
-                                                @endforeach
-                                            </div>
-                                        </group>
-                                        <div class="hr-line-dashed" style="clear: both;"></div>
-                                        @endforeach
-                                    </div>
-                                </div>
+                                <div class="form-group" id="node_box"></div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
@@ -131,6 +111,7 @@
 
 <script>
     $(function(){
+        get_parents_node(0);
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
         $('.i-checks').iCheck({
@@ -193,6 +174,15 @@
                     //type: "warning"
                 });
             }
+        });
+    }
+    //获取上级程序节点
+    function get_parents_node(pid){
+        var url =  $('#parent_nodes_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'pid':pid}
+        $.post(url,data,function(response){
+            $('#node_box').html(response);
         });
     }
 </script>
