@@ -110,7 +110,9 @@ class ProgramController extends Controller{
         $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
         $program = new Program();
-
+        if(!empty($program_name)){
+            $program = $program->where('program_name','%'.$program_name.'%');
+        }
         $list = $program->where('is_delete','0')->paginate(15);
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
