@@ -63,7 +63,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-control m-b" name="pid">
                                             <option value="0">独立主程序</option>
-                                            @foreah($plist as $key=>$val)
+                                            @foreaah($plist as $key=>$val)
                                             <option value="{{ $val->id }}">{{ $val->program_name }}</option>
                                             @endforeach
                                         </select>
