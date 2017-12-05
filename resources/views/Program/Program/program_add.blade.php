@@ -153,9 +153,7 @@
                      tag=true;
                  }
             });
-            alert(tag);
-            if(!tag){
-
+            if(tag==false){
                 $('.checkbox_node_name_'+group_id).iCheck('uncheck') ;
             }
         });
