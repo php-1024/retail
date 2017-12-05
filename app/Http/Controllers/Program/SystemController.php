@@ -40,7 +40,7 @@ class SystemController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$encrypt_key);//加密密码第二重
 
         $admin = new ProgramAdmin();//实例化模型
-        $info = $admin->where('account',$account)->pluck('id')->toArray();//查询是否有相同的账号存在
+        $info = $admin->where('account',$account)->where('is_delete','0')->pluck('id')->toArray();//查询是否有相同的账号存在
 
         if(!empty($info)){//如果存在报错
             return response()->json(['data' => '该账号已存在', 'status' => '0']);
@@ -73,7 +73,7 @@ class SystemController extends Controller{
         if(!empty($account)){
             $admin = $admin->where('account','like','%'.$account.'%');
         }
-        $list = $admin->where('id','!=',$admin_data['admin_id'])->paginate(15);
+        $list = $admin->where('is_delete','0')->where('id','!=',$admin_data['admin_id'])->paginate(15);
 
         return view('Program/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
