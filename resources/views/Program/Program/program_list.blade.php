@@ -48,6 +48,9 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                        <input type="hidden" id="program_edit_url" value="{{ url('program/ajax/program_edit') }}">
+                        <input type="hidden" id="program_delete_url" value="{{ url('program/ajax/program_delete') }}">
+                        <input type="hidden" id="program_deleted_url" value="{{ url('program/ajax/program_deleted') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">程序名称</label>
