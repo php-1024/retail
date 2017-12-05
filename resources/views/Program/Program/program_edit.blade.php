@@ -46,7 +46,7 @@
         </div>
     </div>
 </form>
-
+<script src="{{asset('public/Program/library/switchery')}}/js/switchery.js"></script>
 <script>
     $(function(){
         var elem = document.querySelector('.js-switch');
