@@ -28,7 +28,7 @@ class ProgramController extends Controller{
     public function program_parents_node(Request $request){
         $pid = $request->input('pid');
         $editid = $request->input('editid');
-        if(empty($pid) || $pid=='0'){
+        if(empty($pid) || $pid=='0'){//没有煮程序时
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
             $node_list = [];
@@ -40,7 +40,7 @@ class ProgramController extends Controller{
                     })->select('module_node.*','node.node_name')->get()->toArray();
                 }
             }
-        }else{
+        }else{//有主程序时
             $module_list = ProgramModuleNode::where('program_id',$pid)->where('program_module_node.is_delete','0')->join('module',function($join){
                 $join->on('program_module_node.module_id','=','module.id');
             })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
@@ -55,10 +55,13 @@ class ProgramController extends Controller{
             }
         }
         $selected_node = [];
-
+        $selected_module = [];
         if(!empty($editid)) {
             $list = ProgramModuleNode::where('program_id',$editid)->get();
             foreach ($list as $key => $val) {
+                if(!in_array($val,$selected_module)){
+                    $selected_module[] = $val->module_id;
+                }
                 $selected_node[] = $val->module_id . '_' . $val->node_id;
             }
         }
@@ -147,13 +150,9 @@ class ProgramController extends Controller{
     public function program_edit(Request $request){
         $id = $request->input('id');
         $info = Program::find($id);
-        $list = ProgramModuleNode::where('program_id',$id)->get();
         $plist = Program::where('pid','0')->where('is_delete','0')->get();
-        $selected_node = [];
-        foreach($list as $key=>$val){
-            $selected_node[] = $val->module_id.'_'.$val->node_id;
-        }
-        return view('Program/Program/program_edit',['info'=>$info,'plist'=>$plist,'selected_node'=>$selected_node]);
+
+        return view('Program/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
 
 }
