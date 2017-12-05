@@ -86,7 +86,7 @@
                                     <td>餐饮先吃后付版本（完整版）</td>
                                     <td>-</td>
                                     <td>
-                                        <label class="label label-info" style="display:inline-block">定制版本</label>
+                                        <label class="label label-danger" style="display:inline-block">定制版本</label>
                                     </td>
                                     <td>
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
