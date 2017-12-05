@@ -147,7 +147,7 @@
 
         $('.checkbox_node_name').on('ifUnchecked',function(event){
             var group_id = $(this).attr('data-group_id');
-            $('.checkbox_node_name_'+group_id).each(function(i,v){
+            $('.checkbox_node_name_'+group_id).each(function(v){
                  alert(v.attr('checked'));
             });
         });
