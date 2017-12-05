@@ -163,6 +163,7 @@ class ProgramController extends Controller{
         $pid = $request->input('pid');//上级程序
         $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
+        dump($module_node_ids);
     }
 }
 ?>
