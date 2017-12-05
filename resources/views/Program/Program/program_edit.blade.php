@@ -48,7 +48,19 @@
 </form>
 
 <script>
-
+    $(function(){
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+    });
+    //获取上级程序节点
+    function get_parents_node(pid){
+        var url =  $('#parent_nodes_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'pid':pid}
+        $.post(url,data,function(response){
+            $('#node_box').html(response);
+        });
+    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");

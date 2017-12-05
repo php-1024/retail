@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择主程序</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val());">
+                                        <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val()));">
                                             <option value="0">独立主程序</option>
                                             @foreach($plist as $key=>$val)
                                             <option value="{{ $val->id }}">{{ $val->program_name }}</option>
@@ -113,7 +113,6 @@
         get_parents_node(0);
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
-
 
         //设置CSRF令牌
         $.ajaxSetup({
