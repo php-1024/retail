@@ -181,7 +181,7 @@ class ProgramController extends Controller{
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
                     $node_ids[] = $node_id;//获取这次的ID
-                    $vo = $program_module_node->where('program_id',$id)->where('module_id',$id)->where('node_id',$val)->where('is_delete','0')->first();//查询是否存在数据
+                    $vo = $program_module_node->where('program_id',$id)->where('module_id',$module_id)->where('node_id',$node_id)->where('is_delete','0')->first();//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
                         $program_module_node_data[] = ['program_id' => $id, 'module_id' => $module_id, 'node_id' => $node_id, 'created_at' => time(), 'updated_at' => time()];
                     }else{
