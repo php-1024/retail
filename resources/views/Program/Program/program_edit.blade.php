@@ -15,7 +15,7 @@
                     <div class="form-group"><label class="col-sm-2 control-label">程序名称</label>
                         <div class="col-sm-10"><input type="text" name="program_name" class="form-control"></div>
                     </div>
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed" style="clear:both;"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">选择主程序</label>
                         <div class="col-sm-10">
@@ -27,14 +27,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed" style="clear:both;"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" >是否通用</label>
                         <div class="col-sm-10">
                             <input type="checkbox" name="is_universal" class="js-switch"  value="1"/>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed" style="clear:both;"></div>
                     <div class="form-group" id="node_box"></div>
                     <div class="hr-line-dashed" style="clear:both;"></div>
                 </form>
