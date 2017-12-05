@@ -109,7 +109,9 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $program = new Program();
 
-        $list = $program->where('is_delete','0')->paginate(15);
+        $list = $program->where('is_delete','0')->join('program as pp',function($json){
+            $json->on('pp.id','=','program.pid');
+        })->select(['program.*','pp.program_name as pp_name'])->paginate(15);
         $module_list = [];
         $node_list = [];
         foreach($list as $key=>$val){
