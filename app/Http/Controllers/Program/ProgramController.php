@@ -61,7 +61,7 @@ class ProgramController extends Controller{
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
-                    $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id];
+                    $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
                 }
 
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
