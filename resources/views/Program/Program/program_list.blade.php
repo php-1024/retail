@@ -51,7 +51,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">程序名称</label>
-                            <input type="text" id="program_name" name="program_name" value="" placeholder="程序名称" class="form-control">
+                            <input type="text" id="program_name" name="program_name" value="{{ $search_data['program_name'] }}" placeholder="程序名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
