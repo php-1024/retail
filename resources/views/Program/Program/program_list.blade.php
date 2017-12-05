@@ -81,9 +81,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($list as $key=>$val)
                                 <tr>
-                                    <td>1</td>
-                                    <td>餐饮先吃后付版本（完整版）</td>
+                                    <td>{{ $val->id }}</td>
+                                    <td>{{ $val->program_name }}</td>
                                     <td>-</td>
                                     <td>
                                         <label class="label label-danger" style="display:inline-block">定制版本</label>
@@ -109,6 +110,7 @@
                                         <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
