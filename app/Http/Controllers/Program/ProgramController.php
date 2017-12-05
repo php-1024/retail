@@ -20,7 +20,9 @@ class ProgramController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $plist = Program::where('pid','0')->where('is_delete','0')->get();
-        dump($plist);
+
+        $list = ProgramModuleNode::where('program_id',5)->groupBy('module_id')->get();
+        dump($list);
         return view('Program/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 
@@ -29,7 +31,6 @@ class ProgramController extends Controller{
         $pid = $request->input('pid');
 
         if(empty($pid) || $pid=='0'){
-
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
             $node_list = [];
@@ -42,7 +43,7 @@ class ProgramController extends Controller{
                 }
             }
         }else{
-
+            $list = ProgramModuleNode::where('program_id',$pid)->groupBy('module_id')->get();
         }
 
         return view('Program/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list]);
