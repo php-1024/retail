@@ -146,7 +146,8 @@
 
         $(".checkbox_node_name").on('ifChecked',function(event){
             var module_id = $(this).attr('data-group_id');
-            $('.checkbox_module_name_'+module_id).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+
+            $('.checkbox_module_name').on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
                 $('.checkbox_node_name_'+module_id).iCheck('uncheck');
             });
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
