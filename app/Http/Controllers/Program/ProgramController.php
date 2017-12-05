@@ -5,10 +5,10 @@
 namespace App\Http\Controllers\Program;
 use App\Models\Module;
 use App\Models\ModuleNode;
-use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
+use Illuminate\Support\Facades\DB;
 use App\Libraries\ZeroneLog\ProgramLog;
 use App\Models\Program;
 use App\Models\ProgramModuleNode;
