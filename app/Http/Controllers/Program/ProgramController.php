@@ -32,7 +32,7 @@ class ProgramController extends Controller{
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
             $node_list = [];
-            dump($module_list);
+
             if (!empty($module_list)) {
                 foreach ($module_list as $key => $val) {
                     $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
