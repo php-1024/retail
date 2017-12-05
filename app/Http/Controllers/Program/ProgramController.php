@@ -33,7 +33,6 @@ class ProgramController extends Controller{
 
             if (!empty($module_list)) {
                 foreach ($module_list as $key => $val) {
-                    $module_node = new ModuleNode();
                     $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
                         $json->on('node.id','=','module_node.node_id');
                     })->select('module_node.*','node.node_name')->get()->toArray();
