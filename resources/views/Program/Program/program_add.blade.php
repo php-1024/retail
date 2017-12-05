@@ -144,7 +144,9 @@
             $('.checkbox_node_name_'+id).iCheck('uncheck');
         });
 
+        $('.checkbox_node_name').on('ifUnchecked',function(event){
 
+        })
 
         //设置CSRF令牌
         $.ajaxSetup({
