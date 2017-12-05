@@ -122,7 +122,7 @@ class ProgramController extends Controller{
             if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
             }else{
-                $pname[$val->id] = $ppname;
+                $pname[$val->id] = $ppname[0];
             }
             foreach ( $module_list[$val->id] as $kk => $vv) {
                 $node_list[$vv['id']] = ProgramModuleNode::where('module_id',$vv['id'])->where('program_id',$val->id)->where('program_module_node.is_delete','0')->join('node',function($json){
