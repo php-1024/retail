@@ -129,7 +129,7 @@ class ProgramController extends Controller{
                 })->select('program_module_node.*','node.node_name')->get()->toArray();
             }
         }
-        dump($module_list);
+
         return view('Program/Program/program_list',['list'=>$list,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
