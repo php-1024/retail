@@ -78,6 +78,7 @@ class Kernel extends HttpKernel
         'ProgramCheckSearchDate'=>\App\Http\Middleware\ProgramCheckSearchDate::class,//检测查询时日期范围格式的中间件
         'ProgramModuleAddCheck'=>\App\Http\Middleware\ProgramModuleAddCheck::class,//检测查询时日期范围格式的中间件
         'ProgramModuleEditCheck'=>\App\Http\Middleware\ProgramModuleEditCheck::class,//检测查询时日期范围格式的中间件
+        'ProgramProgramAddCheck'=>\App\Http\Middleware\ProgramProgramAddCheck::class,//检测查询时日期范围格式的中间件
         /**************************零壹程序管理系统*******************************/
     ];
 }
