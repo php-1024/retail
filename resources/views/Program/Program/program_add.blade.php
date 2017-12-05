@@ -141,7 +141,7 @@
             $('.checkbox_node_name_'+id).iCheck('check');
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
-            $('.checkbox_node_name_'+id).iCheck('check');
+            $('.checkbox_node_name_'+id).iCheck('uncheck');
         });
 
 
