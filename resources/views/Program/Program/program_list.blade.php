@@ -86,13 +86,13 @@
                                     <td>{{ $val->id }}</td>
                                     <td>{{ $val->program_name }}</td>
                                     <td>
-                                        <label class="label label-danger" style="display:inline-block"> {{ $pname[$val->id] }}</label>
+                                        <label class="label label-info" style="display:inline-block"> {{ $pname[$val->id] }}</label>
                                     </td>
                                     <td>
                                         @if($val->is_universal==1)
-                                        <label class="label label-danger" style="display:inline-block">定制版本</label>
+                                        <label class="label label-waring" style="display:inline-block">定制版本</label>
                                         @else
-
+                                            <label class="label label-danger" style="display:inline-block">定制版本</label>
                                         @endif
                                     </td>
                                     <td>
