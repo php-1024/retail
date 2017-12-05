@@ -53,17 +53,14 @@
                         <div class="ibox-content">
                             <form method="get" class="form-horizontal">
                                 <div class="form-group"><label class="col-sm-2 control-label">程序名称</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="program_name" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择主程序</label>
                                     <div class="col-sm-10">
                                         <select class="form-control m-b" name="account">
-                                            <option>独立主程序</option>
-                                            <option>餐饮先吃后付版程序（完整版）</option>
-                                            <option>餐饮先付后吃版程序（无人餐厅版）</option>
-                                            <option>餐饮先付后吃版程序（外卖版）</option>
+                                            <option value="0">独立主程序</option>
                                         </select>
                                     </div>
                                 </div>
