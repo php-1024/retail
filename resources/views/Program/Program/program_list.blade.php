@@ -114,7 +114,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {{ $list->appends($search_data['program_name'])->links() }}
+                                        {{ $list->appends($search_data)->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
