@@ -146,6 +146,7 @@
 
         $(".checkbox_node_name").on('ifChecked',function(event){
             var module_id = $(this).attr('data-group_id');
+            alert(module_id);
             if(!$('.checkbox_node_name_'+module_id).is(":checked")){
                 $('.checkbox_node_name_'+module_id).iCheck('check');
             }
