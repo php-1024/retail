@@ -57,7 +57,7 @@ class ProgramController extends Controller{
 
         return view('Program/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list]);
     }
-
+    //检测添加数据
     public function program_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
