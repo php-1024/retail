@@ -190,7 +190,7 @@ class ProgramController extends Controller{
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
                 //如果插入的数据不为空,则插入
                 if(!empty($program_module_node_data)){
-                    $program_module_node->insert($program_module_node_data);
+                   // $program_module_node->insert($program_module_node_data);
                 }
 
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
