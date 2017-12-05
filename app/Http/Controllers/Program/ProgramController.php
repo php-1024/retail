@@ -113,7 +113,6 @@ class ProgramController extends Controller{
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
-
         foreach($list as $key=>$val){
             $module_list[$val->id] = ProgramModuleNode::where('program_id',$val->id)->where('program_module_node.is_delete','0')->join('module',function($join){
                 $join->on('program_module_node.module_id','=','module.id');
