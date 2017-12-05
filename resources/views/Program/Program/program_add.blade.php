@@ -139,9 +139,17 @@
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
             $('.checkbox_node_name_'+id).attr('checked',true);
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
             $('.checkbox_node_name_'+id).attr('checked',false);
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
         });
 
 
