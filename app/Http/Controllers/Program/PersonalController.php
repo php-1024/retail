@@ -29,7 +29,7 @@ class PersonalController extends Controller{
         $old_encryptPwd = md5("lingyikeji".$old_encrypted.$encrypt_key);//加密旧密码第二重
 
         $admin = new ProgramAdmin();
-        $sql_password = $admin->where('id',$admin_data['admin_id'])->pluck('password')->toArray();//查询当前用户的登录密码
+        $sql_password = $admin->where('id',$admin_data['admin_id'])->where('is_delete','0')->pluck('password')->toArray();//查询当前用户的登录密码
         $sql_password = $sql_password[0];//数组转化为字符串
 
         if($old_encryptPwd != $sql_password){//判断原登录密码是否输入正确
@@ -69,7 +69,7 @@ class PersonalController extends Controller{
         if(!empty($time_st) && !empty($time_nd)){
             $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
-        $list = $log->paginate(15);
+        $list = $log->where('is_delete','0')->paginate(15);
 
         return view('Program/Personal/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
@@ -94,7 +94,7 @@ class PersonalController extends Controller{
             $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
 
-        $list = $log->paginate(15);
+        $list = $log->where('is_delete','0')->paginate(15);
         return view('Program/Personal/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
 }
