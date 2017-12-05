@@ -74,6 +74,7 @@
                                     <th>ID</th>
                                     <th>程序名称</th>
                                     <th class="col-sm-1">上级程序</th>
+                                    <th class="col-sm-1">是否通用</th>
                                     <th>功能模块</th>
                                     <th class="col-sm-1">添加时间</th>
                                     <th class="col-sm-2 text-right" >操作</th>
@@ -84,6 +85,9 @@
                                     <td>1</td>
                                     <td>餐饮先吃后付版本（完整版）</td>
                                     <td>-</td>
+                                    <td>
+                                        <label class="label label-info" style="display:inline-block">定制版本</label>
+                                    </td>
                                     <td>
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
