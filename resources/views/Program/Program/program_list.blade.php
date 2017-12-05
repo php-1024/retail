@@ -89,7 +89,11 @@
                                         <label class="label label-danger" style="display:inline-block"> {{ $pname[$val->id] }}</label>
                                     </td>
                                     <td>
+                                        @if($val->is_universal==1)
                                         <label class="label label-danger" style="display:inline-block">定制版本</label>
+                                        @else
+
+                                        @endif
                                     </td>
                                     <td>
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
