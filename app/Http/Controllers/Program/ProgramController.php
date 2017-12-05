@@ -136,5 +136,17 @@ class ProgramController extends Controller{
 
         return view('Program/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
+    //获取编辑程序
+    public function program_edit(Request $request){
+        $id = $request->input('id');
+        $info = Program::find($id);
+        $list = Program::where('program_id',$id)->get();
+        $selected_node = [];
+        foreach($list as $key=>$val){
+            $selected_node[] = $val->module_id.'_'.$val->node_id;
+        }
+        return view('Program/Program/program_edit',['info'=>$info,'selected_node'=>$selected_node]);
+    }
+
 }
 ?>
