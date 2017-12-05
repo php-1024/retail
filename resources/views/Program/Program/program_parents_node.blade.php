@@ -1,3 +1,5 @@
+<link href="{{asset('public/Program/library/iCheck')}}/css/custom.css" rel="stylesheet">
+
 <label class="col-sm-2 control-label" >程序功能模块</label>
 <div class="col-sm-10">
     @foreach($module_list as $key=>$val)
@@ -18,6 +20,7 @@
     <div class="hr-line-dashed" style="clear: both;"></div>
     @endforeach
 </div>
+<script src="{{asset('public/Program/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
 $(function(){
     $('.i-checks').iCheck({
