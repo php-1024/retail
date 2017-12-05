@@ -140,7 +140,7 @@ class ProgramController extends Controller{
     public function program_edit(Request $request){
         $id = $request->input('id');
         $info = Program::find($id);
-        $list = Program::where('program_id',$id)->get();
+        $list = ProgramModuleNode::where('program_id',$id)->get();
         $selected_node = [];
         foreach($list as $key=>$val){
             $selected_node[] = $val->module_id.'_'.$val->node_id;
