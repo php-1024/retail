@@ -13,7 +13,7 @@
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <input type="hidden" id="parent_nodes_url" value="{{ url('program/ajax/program_parents_node') }}">
                     <div class="form-group"><label class="col-sm-2 control-label">程序名称</label>
-                        <div class="col-sm-10"><input type="text" name="program_name" class="form-control"></div>
+                        <div class="col-sm-10"><input type="text" name="program_name" value="{{ $info->program_name }}" class="form-control"></div>
                     </div>
                     <div class="hr-line-dashed" style="clear:both;"></div>
                     <div class="form-group">
@@ -22,7 +22,7 @@
                             <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val());">
                                 <option value="0">独立主程序</option>
                                 @foreach($plist as $key=>$val)
-                                    <option value="{{ $val->id }}">{{ $val->program_name }}</option>
+                                    <option value="{{ $val->id }}" @if($val->id == $info['pid']) selected="selected"@endif;>{{ $val->program_name }}</option>
                                 @endforeach
                             </select>
                         </div>
