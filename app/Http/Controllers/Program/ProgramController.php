@@ -103,5 +103,9 @@ class ProgramController extends Controller{
             return response()->json(['data' => '添加了程序成功', 'status' => '1']);
         }
     }
+    //程序数据列表
+    public function program_list(Request $request){
+
+    }
 }
 ?>
