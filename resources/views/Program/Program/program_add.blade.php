@@ -82,13 +82,13 @@
                                         <group class="checked_box_group_{{ $val['id'] }}">
                                             <div>
                                                 <label class="i-checks">
-                                                    <input type="checkbox" class="checkbox_module_name" name="module_id[]" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
+                                                    <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" name="module_id[]" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
                                                 </label>
                                             </div>
                                             <div>
                                                 @foreach($node_list[$val['id']] as $kk=>$vv)
                                                 <label class="checkbox-inline i-checks">
-                                                    <input type="checkbox" class="checkbox_node_name_{{ $val['id'] }}" name="module_node_id[]" value="{{ $vv['module_id'].'_'.$vv['node_id'] }}"> {{$vv['node_name']}}
+                                                    <input type="checkbox" data-group_id="{{ $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_id[]" value="{{ $vv['module_id'].'_'.$vv['node_id'] }}"> {{$vv['node_name']}}
                                                 </label>
                                                 @endforeach;
                                             </div>
@@ -142,6 +142,14 @@
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
             $('.checkbox_node_name_'+id).iCheck('uncheck');
+        });
+
+        $(".checkbox_node_name").on('ifChecked',function(event){
+            var module_id = $(this).attr('data-group_id');
+            alert(module_id);
+        }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var module_id = $(this).attr('data-group_id');
+            alert(module_id);
         });
 
         //设置CSRF令牌
