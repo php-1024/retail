@@ -86,7 +86,7 @@
                                     <td>{{ $val->id }}</td>
                                     <td>{{ $val->program_name }}</td>
                                     <td>
-                                        {{ $pname[$val->id] }}
+                                        <label class="label label-danger" style="display:inline-block"> {{ $pname[$val->id] }}</label>
                                     </td>
                                     <td>
                                         <label class="label label-danger" style="display:inline-block">定制版本</label>
