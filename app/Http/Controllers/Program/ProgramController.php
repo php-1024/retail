@@ -59,7 +59,7 @@ class ProgramController extends Controller{
         if(!empty($editid)) {
             $list = ProgramModuleNode::where('program_id',$editid)->get();
             foreach ($list as $key => $val) {
-                if(!in_array($val,$selected_module)){
+                if(!in_array($val->module_id,$selected_module)){
                     $selected_module[] = $val->module_id;
                 }
                 $selected_node[] = $val->module_id . '_' . $val->node_id;
