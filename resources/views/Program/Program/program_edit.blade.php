@@ -1,6 +1,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('program/ajax/program_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
+    <input type="hidden" name="current_pid" id="current_pid" value="{{ $info->pid }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -49,6 +50,7 @@
 <script src="{{asset('public/Program/library/switchery')}}/js/switchery.js"></script>
 <script>
     $(function(){
+        get_parents_node($('#current_pid').val());
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
     });
