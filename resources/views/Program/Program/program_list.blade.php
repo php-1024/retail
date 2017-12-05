@@ -46,7 +46,8 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-
+                    <form method="get" role="form" id="searchForm" action="">
+                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">程序名称</label>
@@ -56,9 +57,10 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                         </div>
                     </div>
+                    </form>
                 </div>
 
             </div>
