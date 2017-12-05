@@ -141,11 +141,12 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $list = ProgramModuleNode::where('program_id',$id)->get();
+        $plist = Program::where('pid','0')->where('is_delete','0')->get();
         $selected_node = [];
         foreach($list as $key=>$val){
             $selected_node[] = $val->module_id.'_'.$val->node_id;
         }
-        return view('Program/Program/program_edit',['info'=>$info,'selected_node'=>$selected_node]);
+        return view('Program/Program/program_edit',['info'=>$info,'plist'=>$plist,'selected_node'=>$selected_node]);
     }
 
 }
