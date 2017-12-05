@@ -21,7 +21,9 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $plist = Program::where('pid','0')->where('is_delete','0')->get();
 
-        $list = ProgramModuleNode::where('program_id',5)->distinct()->select('module_id')->get();
+        $list = ProgramModuleNode::where('program_id',5)->join('module',function($join){
+            $join->on('program_module_node.module_id','=','module.id');
+        })->distinct()->select('program_module_node.module_id','module.module_name')->get();
         dump($list);
         return view('Program/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
