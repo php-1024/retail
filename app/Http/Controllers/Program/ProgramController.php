@@ -119,7 +119,7 @@ class ProgramController extends Controller{
                 $join->on('program_module_node.module_id','=','module.id');
             })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
-            if(empty($pname)){
+            if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
             }else{
                 $pname[$val->id] = $ppname;
