@@ -23,7 +23,7 @@ class ProgramController extends Controller{
 
         $module_list = ProgramModuleNode::where('program_id',5)->join('module',function($join){
             $join->on('program_module_node.module_id','=','module.id');
-        })->distinct()->select('program_module_node.module_id','module.module_name')->get()->toArray();
+        })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
 
         $node_list = [];
 
