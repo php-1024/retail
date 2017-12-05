@@ -142,10 +142,6 @@
             var id = $(this).val();
             $('.checkbox_node_name_'+id).iCheck('uncheck') ;
         });
-        $('.checkbox_node_name').on('ifChecked',function(event){
-            var group_id = $(this).attr('data-group_id');
-            $('.checkbox_module_name_'+group_id).iCheck('check') ;
-        });
         $('.checkbox_node_name').on('ifUnchecked',function(event){
             var group_id = $(this).attr('data-group_id');
             var tag=false;
