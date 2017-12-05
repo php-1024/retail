@@ -97,7 +97,7 @@
                                     </td>
                                     <td>
                                         @foreach($module_list[$val->id] as $k=>$v)
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($node_list[$val->id] as $kk=>$vv){{ $vv['node_name'] }},@endforeach" style="display:inline-block">{{ $v['module_name'] }}</label>&nbsp;&nbsp;
+                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($node_list[$val->id] as $kk=>$vv){{ $vv['node_name'] }} &nbsp;&nbsp;@endforeach" style="display:inline-block">{{ $v['module_name'] }}</label>&nbsp;&nbsp;
                                        @endforeach
                                     </td>
                                     <td>2017-08-08 10:30:30</td>
