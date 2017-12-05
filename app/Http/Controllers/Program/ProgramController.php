@@ -43,7 +43,7 @@ class ProgramController extends Controller{
         $is_universal = empty($request->input('is_universal'))?0:1;//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
-        $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id');
+        $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
         }else{
