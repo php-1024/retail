@@ -181,10 +181,10 @@ class ProgramController extends Controller{
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
                     $program_module_node_data[] = ['program_id'=>$id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
-                    //删除数据库中不在这次插入的数据
+
                     $node_ids[] = $node_id;
                 }
-
+                //删除数据库中不在这次插入的数据
                 $program_module_node->where('program_id',$id)->whereNotIn('node_id',$node_ids)->delete();
 
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
