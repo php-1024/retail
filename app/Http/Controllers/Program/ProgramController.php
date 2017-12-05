@@ -40,7 +40,7 @@ class ProgramController extends Controller{
 
         $program_name = $request->input('program_name');//程序名称
         $pid = $request->input('pid');//上级程序
-        $is_universal = empty($request->input('is_universal'))?0:1;//是否通用版本
+        $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
         $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id')->toArray();
@@ -55,13 +55,15 @@ class ProgramController extends Controller{
                 $program->is_universal = $is_universal;//是否通用版本
                 $program->save();
                 $program_id = $program->id;
+
                 $arr = explode('-',$module_node_ids);
                 $module_id = $arr[0];//功能模块ID
                 $node_id = $arr[1];//功能节点ID
+
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
-                $program_module_node->program_id = $program_id;
-                $program_module_node->module_id = $module_id;
-                $program_module_node->node_id = $node_id;
+                $program_module_node->program_id = $program_id;//程序ID
+                $program_module_node->module_id = $module_id;//功能模块ID
+                $program_module_node->node_id = $node_id;//功能节点ID
                 $program_module_node->save();
 
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
