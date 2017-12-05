@@ -51,7 +51,8 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="get" class="form-horizontal">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('program/ajax/program_add_check') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group"><label class="col-sm-2 control-label">程序名称</label>
                                     <div class="col-sm-10"><input type="text" name="program_name" class="form-control"></div>
                                 </div>
