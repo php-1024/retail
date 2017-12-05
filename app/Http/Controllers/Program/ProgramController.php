@@ -180,9 +180,14 @@ class ProgramController extends Controller{
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
-                    $program_module_node_data[] = ['program_id'=>$id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
-
-                    $node_ids[] = $node_id;
+                    $node_ids[] = $node_id;//获取这次的ID
+                    $vo = $program_module_node->where('program_id',$id)->where('module_id',$id)->where('node_id',$val)->where('is_delete','0')->first();//查询是否存在数据
+                    if(is_null($vo)) {//不存在生成插入数据
+                        $program_module_node_data[] = ['program_id' => $id, 'module_id' => $module_id, 'node_id' => $node_id, 'created_at' => time(), 'updated_at' => time()];
+                    }else{
+                        continue;
+                    }
+                    $vo='';
                 }
                 //删除数据库中不在这次插入的数据
                 $program_module_node->where('program_id',$id)->whereNotIn('node_id',$node_ids)->delete();
@@ -190,7 +195,7 @@ class ProgramController extends Controller{
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
                 //如果插入的数据不为空,则插入
                 if(!empty($program_module_node_data)){
-                   // $program_module_node->insert($program_module_node_data);
+                    $program_module_node->insert($program_module_node_data);
                 }
 
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
