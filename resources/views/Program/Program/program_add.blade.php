@@ -146,7 +146,9 @@
 
         $('.checkbox_node_name').on('ifUnchecked',function(event){
             var group_id = $(this).attr('data-group_id');
-            alert(group_id);
+            $('.check_node_name_'+group_id).each(function(i,v){
+                alert(v.attr('checked'));
+            });
         });
 
         //设置CSRF令牌
