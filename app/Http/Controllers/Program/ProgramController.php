@@ -39,6 +39,15 @@ class ProgramController extends Controller{
     public function program_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+
+        $program_name = $request->input('program_name');
+        $pid = $request->input('pid');
+        $is_universal = $request->input('is_universal');
+        $module_node_ids = $request->input('module_node_ids');
+        dump($program_name);
+        dump($pid);
+        dump($is_universal);
+        dump($module_node_ids);
     }
 }
 ?>
