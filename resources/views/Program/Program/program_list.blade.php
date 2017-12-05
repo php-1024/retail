@@ -102,7 +102,7 @@
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($node_list[$val->id.'_'.$v['id']] as $kk=>$vv){{ $vv['node_name'] }} &nbsp;&nbsp;@endforeach" style="display:inline-block">{{ $v['module_name'] }}</label>&nbsp;&nbsp;
                                        @endforeach
                                     </td>
-                                    <td>2017-08-08 10:30:30</td>
+                                    <td>{{ $val->created_at }}</td>
                                     <td class="text-right">
                                         <button type="button" onclick="getEditForm({{ $val->id }})" id="editBtn"  class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="deleteBtn" class="btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
