@@ -154,7 +154,7 @@
                  }
             });
             if(tag==false){
-                $('.checkbox_node_name_'+group_id).iCheck('uncheck') ;
+                $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
             }
         });
 
