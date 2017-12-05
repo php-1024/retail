@@ -9,11 +9,9 @@ use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
-use App\Models\ProgramAdmin;
-use App\Models\ProgramOperationLog;
-use App\Models\ProgramLoginLog;
 use App\Libraries\ZeroneLog\ProgramLog;
 use App\Models\Program;
+use App\Models\ProgramModuleNode;
 
 
 class ProgramController extends Controller{
@@ -40,12 +38,39 @@ class ProgramController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $program_name = $request->input('program_name');
-        $pid = $request->input('pid');
-        $is_universal = empty($request->input('is_universal'))?0:1;
-        $module_node_ids = $request->input('module_node_ids');
+        $program_name = $request->input('program_name');//程序名称
+        $pid = $request->input('pid');//上级程序
+        $is_universal = empty($request->input('is_universal'))?0:1;//是否通用版本
+        $module_node_ids = $request->input('module_node_ids');//节点数组
 
-        $info = Program::where()->pluck('id');
+        $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id');
+        if(!empty($info)){
+            return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $program = new Program();//实例化程序模型
+                $program->program_name = $program_name;//程序名称
+                $program->pid = $pid;//上级程序
+                $program->is_universal = $is_universal;//是否通用版本
+                $program->save();
+                $program_id = $program->id;
+                $arr = explode('-',$module_node_ids);
+                $module_id = $arr[0];//功能模块ID
+                $node_id = $arr[1];//功能节点ID
+                $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
+                $program_module_node->program_id = $program_id;
+                $program_module_node->module_id = $module_id;
+                $program_module_node->node_id = $node_id;
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块');//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                dump($e);
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加功能模块成功', 'status' => '1']);
+        }
     }
 }
 ?>
