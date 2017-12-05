@@ -147,9 +147,13 @@
 
         $('.checkbox_node_name').on('ifUnchecked',function(event){
             var group_id = $(this).attr('data-group_id');
+            var tag=false;
             $('.checkbox_node_name_'+group_id).each(function(i,v){
-                 alert($('.checkbox_node_name_'+group_id+':eq('+i+')').is(":checked"));
+                 if($('.checkbox_node_name_'+group_id+':eq('+i+')').is(":checked")){
+                     tag=true;
+                 }
             });
+            alert(tag);
         });
 
         //设置CSRF令牌
