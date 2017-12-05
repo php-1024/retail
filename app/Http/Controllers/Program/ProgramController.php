@@ -159,7 +159,10 @@ class ProgramController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
-
+        $program_name = $request->input('program_name');//程序名称
+        $pid = $request->input('pid');//上级程序
+        $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
+        $module_node_ids = $request->input('module_node_ids');//节点数组
     }
 }
 ?>
