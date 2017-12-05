@@ -77,7 +77,7 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button" onclick="return postForm();">确认添加</button>
+                                        <button class="btn btn-primary" id="addbtn" type="button" onclick="return postForm();">确认添加</button>&nbsp;&nbsp;
                                         <button class="btn btn-write" onClick="location.href='{{ url('program/module/module_list') }}'" type="button">回到列表</button>
                                     </div>
                                 </div>
