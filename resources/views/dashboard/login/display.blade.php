@@ -11,7 +11,6 @@
     <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{asset('public/dashboard/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
     <link href="{{asset('public/dashboard')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/dashboard')}}/css/style.css" rel="stylesheet">
 
