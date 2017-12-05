@@ -97,7 +97,7 @@
                                     </td>
                                     <td>
                                         @foreach($module_list[$val->id] as $k=>$v)
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">{{ $v['module_name'] }}</label>&nbsp;&nbsp;
+                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($node_list[$v['id']] as $kk=>$vv){{ $vv['node_name'] }},@endforeach" style="display:inline-block">{{ $v['module_name'] }}</label>&nbsp;&nbsp;
                                        @endforeach
                                     </td>
                                     <td>2017-08-08 10:30:30</td>
