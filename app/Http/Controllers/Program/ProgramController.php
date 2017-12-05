@@ -108,9 +108,9 @@ class ProgramController extends Controller{
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加了程序失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加程序失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加了程序成功', 'status' => '1']);
+            return response()->json(['data' => '添加程序成功', 'status' => '1']);
         }
     }
     //程序数据列表
@@ -163,7 +163,42 @@ class ProgramController extends Controller{
         $pid = $request->input('pid');//上级程序
         $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
-        dump($module_node_ids);
+        $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id')->toArray();
+
+        if(!empty($info)){
+            return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $program = new Program();//实例化程序模型
+                $program->program_name = $program_name;//程序名称
+                $program->pid = $pid;//上级程序
+                $program->is_universal = $is_universal;//是否通用版本
+                $program->save();
+                $program_id = $program->id;
+
+                //循环节点生成多条数据
+                foreach($module_node_ids as $key=>$val){
+                    $arr = explode('_',$val);
+                    $module_id = $arr[0];//功能模块ID
+                    $node_id = $arr[1];//功能节点ID
+                    $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
+                }
+
+                $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
+                //如果插入的数据不为空,则插入
+                if(!empty($program_module_node_data)){
+                    $program_module_node->insert($program_module_node_data);
+                }
+
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '编辑程序失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '编辑程序成功', 'status' => '1']);
+        }
     }
 }
 ?>
