@@ -35,7 +35,7 @@
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group" id="node_box"></div>
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed" style="clear:both;"></div>
                 </form>
 
             </div>
