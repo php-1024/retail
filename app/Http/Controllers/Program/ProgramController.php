@@ -13,7 +13,7 @@ use App\Models\ProgramAdmin;
 use App\Models\ProgramOperationLog;
 use App\Models\ProgramLoginLog;
 use App\Libraries\ZeroneLog\ProgramLog;
-use APP\Models\Program;
+use App\Models\Program;
 
 
 class ProgramController extends Controller{
@@ -44,7 +44,8 @@ class ProgramController extends Controller{
         $pid = $request->input('pid');
         $is_universal = empty($request->input('is_universal'))?0:1;
         $module_node_ids = $request->input('module_node_ids');
-        ;
+
+        $info = Program::where()->pluck('id');
     }
 }
 ?>
