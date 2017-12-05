@@ -105,7 +105,6 @@
 <script src="{{asset('public/Program')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Program/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Program/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script src="{{asset('public/Program/library/multiselect')}}/js/multiselect.js"></script>
 <script src="{{asset('public/Program/library/switchery')}}/js/switchery.js"></script>
 <script src="{{asset('public/Program/library/iCheck')}}/js/icheck.min.js"></script>
 
@@ -114,30 +113,7 @@
         get_parents_node(0);
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
 
-        $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            var id = $(this).val();
-            $('.checkbox_node_name_'+id).iCheck('check') ;
-        }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            var id = $(this).val();
-            $('.checkbox_node_name_'+id).iCheck('uncheck') ;
-        });
-        $('.checkbox_node_name').on('ifUnchecked',function(event){
-            var group_id = $(this).attr('data-group_id');
-            var tag=false;
-            $('.checkbox_node_name_'+group_id).each(function(i,v){
-                 if($('.checkbox_node_name_'+group_id+':eq('+i+')').is(":checked")){
-                     tag=true;
-                 }
-            });
-            if(tag==false){
-                $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
-            }
-        });
 
         //设置CSRF令牌
         $.ajaxSetup({
@@ -145,7 +121,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#multiselect').multiselect({keepRenderingSort:true});
     });
     //提交表单
     function postForm() {
