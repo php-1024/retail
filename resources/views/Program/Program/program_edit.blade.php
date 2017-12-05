@@ -51,7 +51,7 @@
 <script src="{{asset('public/Program/library/switchery')}}/js/switchery.js"></script>
 <script>
     $(function(){
-        get_parents_node($('#current_pid').val());
+        get_parents_node($('#current_pid').val(),$('#id').val());
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
     });
