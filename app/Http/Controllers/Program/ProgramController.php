@@ -58,7 +58,7 @@ class ProgramController extends Controller{
 
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
-                    $arr = explode('-',$module_node_ids);
+                    $arr = explode('-',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
                     $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id];
