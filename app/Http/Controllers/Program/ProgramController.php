@@ -26,7 +26,9 @@ class ProgramController extends Controller{
     //Ajax获取上级节点
     public function program_parents_node(Request $request){
         $pid = $request->input('pid');
+
         if(empty($pid) || $pid=='0'){
+            dump(21);
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
             $node_list = [];
