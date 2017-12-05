@@ -118,14 +118,14 @@ class ProgramController extends Controller{
             $module_list[$val->id] = ProgramModuleNode::where('program_id',$val->id)->where('program_module_node.is_delete','0')->join('module',function($join){
                 $join->on('program_module_node.module_id','=','module.id');
             })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
-            $pname[$val->id] =
+            $pname[$val->id] = Program::where('id',$val->pid)->pluck('program_name')->toArray();
             foreach ( $module_list[$val->id] as $kk => $vv) {
                 $node_list[$vv['id']] = ProgramModuleNode::where('module_id',$vv['id'])->where('program_id',$val->id)->where('program_module_node.is_delete','0')->join('node',function($json){
                     $json->on('node.id','=','program_module_node.node_id');
                 })->select('program_module_node.*','node.node_name')->get()->toArray();
             }
         }
-
+        dump($pname);
         return view('Program/Program/program_list',['list'=>$list,'module_list'=>$module_list,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
