@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('program/ajax/module_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('program/ajax/program_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <div class="modal-dialog modal-lg">
