@@ -19,19 +19,29 @@ class ProgramController extends Controller{
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $module = new Module(); //实例化功能模块模型
-        $module_list = $module->where('is_delete', '0')->get()->toArray();
-        $node_list = [];
+        $plist = Program::where('pid',0)->where('is_delete',0)->get();
+        return view('Program/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+    }
 
-        if (!empty($module_list)) {
-            foreach ($module_list as $key => $val) {
-                $module_node = new ModuleNode();
-                $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
-                    $json->on('node.id','=','module_node.node_id');
-                })->select('module_node.*','node.node_name')->get()->toArray();
+    //Ajax获取上级节点
+    public function program_parents_node(Request $request){
+        $pid = $request->get('pid');
+        if(empty($pid) || $pid=='0'){
+            $module = new Module(); //实例化功能模块模型
+            $module_list = $module->where('is_delete', '0')->get()->toArray();
+            $node_list = [];
+
+            if (!empty($module_list)) {
+                foreach ($module_list as $key => $val) {
+                    $module_node = new ModuleNode();
+                    $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
+                        $json->on('node.id','=','module_node.node_id');
+                    })->select('module_node.*','node.node_name')->get()->toArray();
+                }
             }
         }
-        return view('Program/Program/program_add',['module_list'=>$module_list,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+
+        return view('Program/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list]);
     }
 
     public function program_add_check(Request $request){
@@ -73,7 +83,6 @@ class ProgramController extends Controller{
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加了程序失败，请检查', 'status' => '0']);
             }
