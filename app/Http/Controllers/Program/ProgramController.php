@@ -42,7 +42,7 @@ class ProgramController extends Controller{
 
         $program_name = $request->input('program_name');
         $pid = $request->input('pid');
-        $is_universal = $request->input('is_universal');
+        $is_universal = empty($request->input('is_universal'))?0:1;
         $module_node_ids = $request->input('module_node_ids');
         dump($program_name);
         dump($pid);
