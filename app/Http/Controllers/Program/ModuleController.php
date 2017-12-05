@@ -44,7 +44,6 @@ class ModuleController extends Controller{
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
             }
@@ -72,7 +71,6 @@ class ModuleController extends Controller{
     }
     //编辑功能模块列表
     public function module_edit(Request $request){
-        $module_node = new ModuleNode();
         $id = $request->input('id');
         $info = Module::find($id);
         $module_node = new ModuleNode();
@@ -96,11 +94,6 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
-        $module_node = new ModuleNode();//重新实例化模型，避免重复
-        //首先删除这次删除的数据的数据
-        //$ll = $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->get()->toArray();
-//dump($ll);
-        //exit();
         $module = new Module();
         $info = $module->where('module_name',$module_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
         if(!empty($info)){
@@ -132,7 +125,6 @@ class ModuleController extends Controller{
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑功能模块失败，请检查', 'status' => '0']);
             }
