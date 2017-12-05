@@ -72,7 +72,7 @@ Route::group(['prefix'=>'program'],function(){
     //程序管理组
     Route::group(['prefix'=>'program'],function(){
         Route::get('program_add', 'Program\ProgramController@program_add')->middleware('ProgramCheckIsLogin');//修改密码路由
-        Route::get('node_list','Program\NodeController@node_list')->middleware('ProgramCheckIsLogin');//修改密码路由
+        Route::get('program_list','Program\ProgramController@program_list')->middleware('ProgramCheckIsLogin');//修改密码路由
     });
 
     //登陆页面组

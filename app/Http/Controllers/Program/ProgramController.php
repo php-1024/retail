@@ -110,7 +110,7 @@ class ProgramController extends Controller{
         $program = new Program();
 
         $list = $program->where('is_delete','0')->paginate(15);
-        return view('Program/Program/program_add',['plist'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Program/Program/program_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
 ?>
