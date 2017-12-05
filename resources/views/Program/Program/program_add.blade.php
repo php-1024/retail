@@ -138,10 +138,10 @@
         });
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
-            $('.checkbox_node_name_'+id).iCheck('check');
+            $('.checkbox_node_name_'+id).iCheck('check').iCheck('update'); ;
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
-            $('.checkbox_node_name_'+id).iCheck('uncheck');
+            $('.checkbox_node_name_'+id).iCheck('uncheck').iCheck('update');
         });
 
         $('.checkbox_node_name').on('ifUnchecked',function(event){
