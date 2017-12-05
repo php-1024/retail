@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
-    <title>零壹新科技后台管理系统| 登陆界面</title>
+    <title>零壹新科技后台管理系统| 登陆界面0101</title>
     <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{asset('public/dashboard/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
