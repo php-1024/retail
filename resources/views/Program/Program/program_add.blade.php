@@ -92,7 +92,7 @@
                                             </div>
                                         </group>
                                         <div class="hr-line-dashed" style="clear: both;"></div>
-                                        @endforeach;
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
