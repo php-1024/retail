@@ -56,15 +56,19 @@ class ProgramController extends Controller{
                 $program->save();
                 $program_id = $program->id;
 
-                $arr = explode('-',$module_node_ids);
-                $module_id = $arr[0];//功能模块ID
-                $node_id = $arr[1];//功能节点ID
+                //循环节点生成多条数据
+                foreach($module_node_ids as $key=>$val){
+                    $arr = explode('-',$module_node_ids);
+                    $module_id = $arr[0];//功能模块ID
+                    $node_id = $arr[1];//功能节点ID
+                    $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id];
+                }
 
                 $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
-                $program_module_node->program_id = $program_id;//程序ID
-                $program_module_node->module_id = $module_id;//功能模块ID
-                $program_module_node->node_id = $node_id;//功能节点ID
-                $program_module_node->save();
+                //如果插入的数据不为空,则插入
+                if(!empty($program_module_node_data)){
+                    $program_module_node->insert($program_module_node_data);
+                }
 
                 ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
