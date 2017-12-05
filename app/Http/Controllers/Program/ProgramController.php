@@ -107,7 +107,7 @@ class ProgramController extends Controller{
     public function program_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        program_name = $request->input('program_name');
+        $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
         $program = new Program();
         if(!empty($program_name)){
