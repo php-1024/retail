@@ -135,13 +135,15 @@
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
-        }).iCheck('update');
+        });
 
         $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
             $('.checkbox_node_name_'+id).iCheck('check') ;
+            $('.checkbox_node_name_'+id).iCheck('update');
         }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
             var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('update');
         });
 
         $('.checkbox_node_name').on('ifUnchecked',function(event){
