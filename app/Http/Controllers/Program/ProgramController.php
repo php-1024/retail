@@ -107,6 +107,8 @@ class ProgramController extends Controller{
     public function program_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $program_name = $request->input('program_name');
+        $search_data['program_name'] = $program_name;
         $program = new Program();
 
         $list = $program->where('is_delete','0')->paginate(15);
@@ -130,7 +132,7 @@ class ProgramController extends Controller{
             }
         }
 
-        return view('Program/Program/program_list',['list'=>$list,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Program/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
 ?>
