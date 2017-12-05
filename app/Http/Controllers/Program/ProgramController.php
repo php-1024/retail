@@ -64,14 +64,14 @@ class ProgramController extends Controller{
                 $program_module_node->node_id = $node_id;
                 $program_module_node->save();
 
-                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块');//保存操作记录
+                ProgramLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 dump($e);
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加了程序失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加功能模块成功', 'status' => '1']);
+            return response()->json(['data' => '添加了程序成功', 'status' => '1']);
         }
     }
 }
