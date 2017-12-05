@@ -144,17 +144,7 @@
             $('.checkbox_node_name_'+id).iCheck('uncheck');
         });
 
-        $(".checkbox_node_name").on('ifChecked',function(event){
-            var module_id = $(this).attr('data-group_id');
 
-            $('.checkbox_module_name').on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-                alert(123);
-                $('.checkbox_module_name_'+module_id).iCheck('check');
-            });
-        }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
-            var module_id = $(this).attr('data-group_id');
-
-        });
 
         //设置CSRF令牌
         $.ajaxSetup({
