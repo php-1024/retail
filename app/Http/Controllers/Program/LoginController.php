@@ -51,8 +51,7 @@ class LoginController extends Controller{
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
 
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
-
-        $all = Request::input()->all();
+        
 
 
         $username = Request::input('username');//接收用户名
@@ -76,7 +75,6 @@ class LoginController extends Controller{
                     ProgramLog::setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
-                    dd($all);
                     ProgramLog::clearErrorLog($ip);//清除掉错误记录
                     //插入登录记录
 
