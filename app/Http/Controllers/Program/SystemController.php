@@ -18,7 +18,14 @@ class SystemController extends Controller{
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Program/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+
+
+        $log = new ProgramLoginLog();//实例化模型
+
+        $list = $log->join('program_admin',function($join){
+            $join->on('program_login_log.account_id','=','program_admin.id');
+        })->select('program_admin.account','program_login_log.*')->paginate(15);
+        return view('Program/System/dashboard',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //新增账号
