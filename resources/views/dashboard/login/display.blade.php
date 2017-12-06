@@ -26,7 +26,7 @@
 
             </div>
             <h3>欢迎使用零壹新科技后台管理系统0000000000000</h3>
-            <form class="m-t" role="form" id="currentForm1" action="{{ url('ajax/checklogin') }}">
+            <form class="m-t" role="form" id="currentForm" action="{{ url('ajax/checklogin') }}">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
                     <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" >
@@ -70,10 +70,11 @@
 			}
 			//提交表单
 			function postForm(){
-				var target = $("#currentForm1");
+				var target = $("#currentForm");
 				var url = target.attr("action");
 				console.log(url);
 				var data = target.serialize();
+				console.log(data);
 				$.post(url,data,function(json){
 					if(json==1){
 						window.location.reload();

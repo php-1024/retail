@@ -17,7 +17,6 @@ class LoginController extends Controller{
     public function display()
     {
         $data['random']=time();
-        dd($data);
         return view('dashboard/login/display',$data);
 
     }
