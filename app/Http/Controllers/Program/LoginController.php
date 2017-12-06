@@ -53,7 +53,7 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
 
         $all = Request::input()->all();
-        dd($all);
+
 
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
@@ -76,6 +76,7 @@ class LoginController extends Controller{
                     ProgramLog::setErrorLog($ip);//记录错误次数
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
+                    dd($all);
                     ProgramLog::clearErrorLog($ip);//清除掉错误记录
                     //插入登录记录
 
