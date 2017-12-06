@@ -17,6 +17,7 @@ class LoginController extends Controller{
     public function display()
     {
         $data['random']=time();
+        dd($data);
         return view('dashboard/login/display',$data);
 
     }
@@ -43,7 +44,6 @@ class LoginController extends Controller{
     //检测登录
     public function checkLogin(){
         $ip = Request::getClientIp();
-        dd($ip);
         $allowed_error_times = config("app.encrypt_key");//允许登录错误次数
 
         $username = Request::input('username');//接收用户名
