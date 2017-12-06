@@ -125,6 +125,7 @@
                             <table class="table table-hover no-margins">
                                 <thead>
                                 <tr>
+                                    <th>id</th>
                                     <th>用户</th>
                                     <th>登陆IP</th>
                                     <th>登陆地址</th>
@@ -132,13 +133,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-
                                 @foreach($list as $key=>$val)
                                     <tr>
                                         <td>{{  $val->id }}</td>
