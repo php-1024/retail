@@ -51,7 +51,10 @@ class LoginController extends Controller{
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
 
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
-       
+
+        $all = Request::input()->all();
+        dd($all);
+
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
         $key = config("app.program_encrypt_key");//获取加密盐
