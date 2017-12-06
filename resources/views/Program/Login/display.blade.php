@@ -26,7 +26,7 @@
             <h1 class="logo-name">ZERONE</h1>
 
         </div>
-        <h3>欢迎使用零壹程序管理系统01010101</h3>
+        <h3>欢迎使用零壹程序管理系统</h3>
         <form class="m-t" role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
@@ -48,7 +48,7 @@
             <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登陆</button>
         </form>
 
-        <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027................</small> </p>
+        <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027</small> </p>
     </div>
 </div>
 <script src="{{asset('public/Program/library/jquery')}}/js/jquery-2.1.1.js"></script>
@@ -69,11 +69,11 @@
         url = url + "/" + Math.random();
         $("#login_captcha").attr("src",url);
     }
+
     //提交表单
     function postForm(){
         var target = $("#currentForm");
         var url = target.attr("action");
-        console.log(url);
         var data = target.serialize();
         $.post(url,data,function(json){
             if(json.status==1){
