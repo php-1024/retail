@@ -48,7 +48,7 @@
             <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登陆</button>
         </form>
 
-        <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027..................</small> </p>
+        <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027................</small> </p>
     </div>
 </div>
 <script src="{{asset('public/Program/library/jquery')}}/js/jquery-2.1.1.js"></script>
