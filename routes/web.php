@@ -19,8 +19,7 @@ Route::get('/', function () {
 //Route::get('login','dashboard\LoginController@display');
 //登陆页面路由组
 Route::group(['prefix' => 'login','middleware' => 'CheckNotLogin'], function () {
-    Route::get('/', 'Program\LoginController@display');
-//    Route::get('/', 'dashboard\LoginController@display');
+    Route::get('/', 'dashboard\LoginController@display');
     Route::get('captcha/{tmp}', 'dashboard\LoginController@captcha');
 });
 Route::group(['prefix' => 'ajax'],function(){
