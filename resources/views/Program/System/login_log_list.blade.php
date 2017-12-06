@@ -96,9 +96,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @php(echo "<pre>";)
-                                @php(var_dump($list))
-                                @php(echo "</pre>";)
+                                @php
+                                echo "<pre>";
+                                var_dump($list);
+                                echo "</pre>";
+                                @endphp
                                 @foreach($list as $key=>$val)
                                     <tr>
                                         <td>{{  $val->id }}</td>
