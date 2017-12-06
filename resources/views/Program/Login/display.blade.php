@@ -79,8 +79,7 @@
         console.log(data);
         $.post(url,data,function(json){
             if(json.status==1){
-                console.log(data);
-//                window.location.reload();
+                window.location.reload();
             }else{
                 swal({
                     title: "提示信息",
