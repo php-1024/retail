@@ -26,7 +26,7 @@
             <h1 class="logo-name">ZERONE</h1>
 
         </div>
-        <h3>欢迎使用零壹程序管理系统</h3>
+        <h3>欢迎使用零壹程序管理系统--测试是否能提交</h3>
         <form class="m-t" role="form" id="currentForm" action="{{ url('program/ajax/checklogin') }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
