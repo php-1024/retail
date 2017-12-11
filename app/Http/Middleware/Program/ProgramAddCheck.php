@@ -2,7 +2,7 @@
 /**
  * 检测修改密码数据中间件
  */
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 

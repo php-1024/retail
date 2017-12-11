@@ -2,7 +2,7 @@
 /**
  * 检测中间件囖
  */
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
