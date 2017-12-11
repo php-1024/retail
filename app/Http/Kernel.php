@@ -56,9 +56,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        //检测是否登录
-        'CheckIsLogin'=> \App\Http\Middleware\CheckIsLogin::class,
-        //检测是否登录 - 登录页面 防止重复使用登录页面
+
 
         /**************************零壹程序管理系统*******************************/
         'ProgramCheckIsLogin'=>\App\Http\Middleware\Program\CheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
