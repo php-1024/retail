@@ -7,7 +7,7 @@ use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
-class ProgramCheckIsLoginAjax{
+class CheckIsLoginAjax{
     public function handle($request,Closure $next){
         //获取用户登陆存储的SessionId
         $sess_key = Session::get('zerone_program_account_id');

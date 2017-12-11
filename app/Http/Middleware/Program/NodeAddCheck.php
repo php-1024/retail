@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
-class ProgramNodeAddCheck{
+class NodeAddCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('node_name'))){
             return response()->json(['data' => '请输入节点名称', 'status' => '0']);

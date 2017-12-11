@@ -7,7 +7,7 @@ use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
-class ProgramCheckSearchDate{
+class CheckSearchDate{
     public function handle($request,Closure $next){
         $time_st = $request->input('time_st');
         $time_nd = $request->input('time_nd');

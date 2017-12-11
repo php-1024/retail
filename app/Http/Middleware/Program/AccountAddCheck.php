@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
-class ProgramAccountAddCheck{
+class AccountAddCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('account'))){
             return response()->json(['data' => '请输入登陆账号', 'status' => '0']);

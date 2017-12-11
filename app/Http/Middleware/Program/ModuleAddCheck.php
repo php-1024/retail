@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
-class ProgramModuleAddCheck{
+class ModuleAddCheck{
     public function handle($request,Closure $next){
 
         if(empty($request->input('module_name'))){

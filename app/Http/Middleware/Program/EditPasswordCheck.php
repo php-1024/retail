@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
-class ProgramEditPasswordCheck{
+class EditPasswordCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('oldpassword'))){
             return response()->json(['data' => '请输入原登陆密码', 'status' => '0']);

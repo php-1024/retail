@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
-class ProgramLoginPost {
+class LoginPost {
     public function handle($request,Closure $next){
         if(empty($request->input('username'))){
             return response()->json(['data' => '请输入用户名', 'status' => '0']);
