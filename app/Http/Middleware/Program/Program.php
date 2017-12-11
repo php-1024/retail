@@ -6,6 +6,18 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
+class ProgramAddCheck{
+    public function handle($request,Closure $next){
+        if(empty($request->input('program_name'))){
+            return response()->json(['data' => '请输入程序名称', 'status' => '0']);
+        }
+        if(empty($request->input('module_node_ids'))){
+            return response()->json(['data' => '请勾选功能模块', 'status' => '0']);
+        }
+        return $next($request);
+    }
+}
+
 class ProgramEditCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('id'))){
@@ -20,4 +32,5 @@ class ProgramEditCheck{
         return $next($request);
     }
 }
+
 ?>

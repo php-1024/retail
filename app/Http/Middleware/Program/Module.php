@@ -6,6 +6,21 @@ namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
+class ModuleAddCheck{
+    public function handle($request,Closure $next){
+
+        if(empty($request->input('module_name'))){
+            return response()->json(['data' => '请输入模块名称', 'status' => '0']);
+        }
+        if(empty($request->input('nodes'))){
+            return response()->json(['data' => '请选择该模块的功能节点到右边选框', 'status' => '0']);
+        }
+        
+        return $next($request);
+        
+    }
+}
+
 class ModuleEditCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('id'))){
