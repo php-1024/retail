@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redis;
 
 class ProgramCheckIsLogin{
     public function handle($request,Closure $next){
+
         //获取用户登陆存储的SessionId
         $sess_key = Session::get('zerone_program_account_id');
         //如果为空跳转到登陆页面

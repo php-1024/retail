@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Redis;
 /***********************程序管理系统*********************/
 
 Route::group(['prefix'=>'program'],function(){ 
-    Route::get('/', 'Program\SystemController@dashboard')->middleware('ProgramCheckIsLogin');//系统首页
+    Route::get('/', 'Program\SystemController@dashboard')->middleware('ProgramCheck');//系统首页
     Route::get('quit','Program\SystemController@quit');//退出系统
 
     //系统管理组(功能只有超级管理员能用)

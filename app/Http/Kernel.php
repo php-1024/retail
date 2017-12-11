@@ -80,6 +80,7 @@ class Kernel extends HttpKernel
         'ProgramModuleEditCheck'=>\App\Http\Middleware\Program\ProgramModuleEditCheck::class,//检测查询时日期范围格式的中间件
         'ProgramProgramAddCheck'=>\App\Http\Middleware\Program\ProgramProgramAddCheck::class,//检测查询时日期范围格式的中间件
         'ProgramProgramEditCheck'=>\App\Http\Middleware\Program\ProgramProgramEditCheck::class,//检测查询时日期范围格式的中间件
+        'ProgramCheck'=>\App\Http\Middleware\Program\Check::class,//判断页面是否登陆，若未登陆则跳转到登录页面
         /**************************零壹程序管理系统*******************************/
     ];
 }
