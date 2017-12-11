@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Redis;
 */
 
 
-
 /***********************程序管理系统*********************/
 
 Route::group(['prefix'=>'program'],function(){ 

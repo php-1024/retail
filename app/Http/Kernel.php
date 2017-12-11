@@ -57,7 +57,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-
         /**************************零壹程序管理系统*******************************/
         'ProgramCheckIsLogin'=>\App\Http\Middleware\Program\CheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
         'ProgramCheckIsLoginAjax'=>\App\Http\Middleware\Program\CheckIsLoginAjax::class,//判断页面是否登陆，若未登陆提示未登录错误。
