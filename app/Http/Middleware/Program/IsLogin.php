@@ -2,7 +2,7 @@
 /**
  * 登录页面检测是否已经登陆过的中间件
  */
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Program;
 use Closure;
 use Session;
 
