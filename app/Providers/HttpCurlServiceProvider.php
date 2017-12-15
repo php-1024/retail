@@ -8,5 +8,11 @@ class HttpCurlServiceProvider extends ServiceProvider {
             return new \App\Services\Curl\HttpCurl();
         });
     }
+    public function boot()
+    {
+        parent::boot();
+
+        //
+    }
 }
 ?>
