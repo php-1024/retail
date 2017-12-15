@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries\Curl;
+namespace App\Services\Curl;
 class HttpCurl{
     /**
      * @param string $url
