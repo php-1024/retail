@@ -160,7 +160,6 @@ class SystemController extends Controller{
     public function operation_log_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dd($route_name);
         $log = new ProgramOperationLog();//实例化模型
 
         $account = $request->input('account');//通过登录页账号查询
@@ -170,7 +169,7 @@ class SystemController extends Controller{
         $time_nd_format = strtotime($time_nd.' 23:59:59');
 
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
-
+        dd($search_data);
         if(!empty($account)){
             $log = $log->where('account','like','%'.$account.'%');
         }
