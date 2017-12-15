@@ -228,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'HttpCurl' => App\Facades\HttpCurlFacade::class,
+       // 'HttpCurl' => App\Facades\HttpCurlFacade::class,
     ],
 
 ];
