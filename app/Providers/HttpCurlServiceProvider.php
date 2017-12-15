@@ -4,9 +4,7 @@ use Illuminate\Support\ServiceProvider;
 class HttpCurlServiceProvider extends ServiceProvider {
     public function register()
     {
-        $this->app->singleton('HttpCurlService', function () {
-            return new \App\Services\Curl\HttpCurl();
-        });
+        $this->app->singleton('HttpCurlService',\App\Services\Curl\HttpCurl);
     }
     public function boot()
     {
