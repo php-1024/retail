@@ -159,10 +159,10 @@ class SystemController extends Controller{
     //所有操作记录
     public function operation_log_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
+
         $route_name = $request->path();//获取当前的页面路由
         $log = new ProgramOperationLog();//实例化模型
-
+        var_dump($log);
         $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
