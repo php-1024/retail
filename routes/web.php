@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
-Route::get('test','Program\TestController@index');
+Route::get('test','Program\TestController@test');
 /***********************程序管理系统*********************/
 
 Route::group(['prefix'=>'program'],function(){ 
