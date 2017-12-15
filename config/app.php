@@ -179,7 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\HttpCurlServiceProvider::class,
+        //App\Providers\HttpCurlServiceProvider::class,
     ],
 
     /*
