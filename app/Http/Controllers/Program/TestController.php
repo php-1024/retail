@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 class TestController extends Controller{
     public function test(){
 
-        $info = HttpCurl::doget('http://www.baidu.com');
+        $info = \HttpCurl::doget('http://www.baidu.com');
         dump($info);
     }
 }
