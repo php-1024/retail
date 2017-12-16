@@ -10,10 +10,18 @@ use Illuminate\Support\Facades\Redis;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/***************************框架学习整理资料部分***************************/
 Route::get('zeott','Program\TestController@test');
-/***********************程序管理系统*********************/
+Route::group(['prefic'=>'study'],function(){
+    //Sql基本使用
+    Route::group(['prefix'=>'basic'],function(){
+        Route::get('ins','Study\SqlBasicController@insertDb');//测试SQL基本使用插入数据
+    });
 
+});
+/***************************框架学习整理资料部分**************************/
+
+/***********************程序管理系统*********************/
 Route::group(['prefix'=>'program'],function(){ 
     Route::get('/', 'Program\SystemController@dashboard')->middleware('ProgramCheckIsLogin');//系统首页
     Route::get('quit','Program\SystemController@quit');//退出系统
