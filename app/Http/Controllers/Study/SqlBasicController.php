@@ -7,8 +7,8 @@ class SqlBasicController extends Controller{
     public function insertDb(){
         $db = new DB();
         $db = $db::connection('study');
-        for($i = 0 ; $i<10; $i++){
-            $db->insert("insert into test (name) VALUES (?)",['test'.$i]);
+        for($i = 1 ; $i<=10; $i++){
+            $db->insert("insert into study_test (name) VALUES (?)",['test'.$i]);
         }
     }
 }
