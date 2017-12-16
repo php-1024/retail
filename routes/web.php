@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redis;
 */
 /***************************框架学习整理资料部分***************************/
 Route::get('zeott','Program\TestController@test');
-Route::group(['prefic'=>'study'],function(){
+Route::group(['prefix'=>'study'],function(){
     //Sql基本使用
     Route::group(['prefix'=>'basic'],function(){
         Route::get('ins','Study\SqlBasicController@insertDb');//测试SQL基本使用插入数据
