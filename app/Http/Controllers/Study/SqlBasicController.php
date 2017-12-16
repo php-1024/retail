@@ -5,7 +5,11 @@ use DB;
 class SqlBasicController extends Controller{
     //Laravel数据库基本用法
     public function insertDb(){
-        echo "这里是学习页面";
+        $db = new DB();
+        $db = $db::connection('study');
+        for($i = 0 ; $i<10; $i++){
+            $db::insert("insert into test (name) VALUES (?)",['test'.$i]);
+        }
     }
 }
 ?>
