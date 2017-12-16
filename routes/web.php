@@ -16,7 +16,8 @@ Route::group(['prefix'=>'study'],function(){
     //Sql基本使用
     Route::group(['prefix'=>'basic'],function(){
         Route::get('ins','Study\SqlBasicController@insertDb');//测试SQL基本使用插入数据
-        Route::get('sel','Study\SqlBasicController@selectDb');//测试SQL基本使用插入数据
+        Route::get('sel','Study\SqlBasicController@selectDb');//测试SQL基本使用查询数据
+        Route::get('upd','Study\SqlBasicController@updateDb');//测试SQL基本使用更新数据
     });
 
 });
