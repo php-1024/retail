@@ -21,7 +21,7 @@ class SqlBasicController extends Controller{
     }
     //Laravel数据库基本用法删除
     public function deleteDb(){
-        $res = DB::connection('study')->delete("delete form study_test where id = :id",['id'=>11]);
+        $res = DB::connection('study')->delete("delete from study_test where id = :id",['id'=>11]);
         dump($res);
     }
 }
