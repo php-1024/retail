@@ -19,6 +19,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('sel','Study\SqlBasicController@selectDb');//测试SQL基本使用查询数据
         Route::get('upd','Study\SqlBasicController@updateDb');//测试SQL基本使用更新数据
         Route::get('del','Study\SqlBasicController@deleteDb');//测试SQL基本使用删除数据
+        Route::get('state','Study\SqlBasicController@statementDb');//测试SQL基本使用与一般数据库语句
     });
 
 });

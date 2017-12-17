@@ -24,5 +24,10 @@ class SqlBasicController extends Controller{
         $res = DB::connection('study')->delete("delete from study_test where id = :id",['id'=>11]);
         dump($res);
     }
+    //Laravel 执行一般查询语句
+    public function statementDb(){
+        $res = DB::connection('study')->statement("alter table study_test AUTO_INCREMENT=1");
+        dump($res);
+    }
 }
 ?>
