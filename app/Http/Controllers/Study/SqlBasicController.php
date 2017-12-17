@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Study;
 use App\Http\Controllers\Controller;
-use DB;
+use Illuminate\Support\Facades\DB;
 class SqlBasicController extends Controller{
     //Laravel数据库基本用法插入
     public function insertDb(){
