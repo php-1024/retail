@@ -23,8 +23,38 @@ class QueryBuliderController extends Controller{
     }
     //从数据库中获取多行中查询单一列值数据
     public function select_pluck(){
-        $row = DB::connection('study')->table('test')->where('name','like','%test%')->pluck('name','age');
+        $row = DB::connection('study')->table('test')->where('name','like','%test%')->pluck('name');
         dump($row);
+    }
+
+    //查询总数
+    public function select_count(){
+        $count = DB::connection('study')->table('test')->count();
+        dump($count);
+    }
+
+    //某列的最大值
+    public function select_max(){
+        $max = DB::connection('study')->table('test')->max('age');
+        dump($max);
+    }
+
+    //某列的最小值
+    public function select_min(){
+        $min = DB::connection('study')->table('test')->min('age');
+        dump($min);
+    }
+
+    //某列的平均值
+    public function select_avg(){
+        $avg = DB::connection('study')->table('test')->min('avg');
+        dump($avg);
+    }
+
+    //某列的总和
+    public function select_sum(){
+        $sum = DB::connection('study')->table('test')->min('sum');
+        dump($sum);
     }
 }
 ?>
