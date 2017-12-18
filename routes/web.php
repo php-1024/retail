@@ -28,6 +28,11 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('getfirst','Study\QueryBuliderController@select_first');//查询构造器，查询单条数据
         Route::get('getvalue','Study\QueryBuliderController@select_value');//查询构造器，查询单条数据的单个值
         Route::get('getpluck','Study\QueryBuliderController@select_pluck');//查询构造器，查询单条数据的单个值
+        Route::get('count','Study\QueryBuliderController@select_count');//总行数
+        Route::get('max','Study\QueryBuliderController@select_max');//列最大值
+        Route::get('min','Study\QueryBuliderController@select_min');//列最小值
+        Route::get('avg','Study\QueryBuliderController@select_avg');//列平均值
+        Route::get('sum','Study\QueryBuliderController@select_sum');//列总和
     });
 });
 /***************************框架学习整理资料部分**************************/
