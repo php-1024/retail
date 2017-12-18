@@ -38,7 +38,7 @@ class SystemController extends Controller{
 
         $list = $log->join('tooling_account',function($join){
             $join->on('tooling_login_log.account_id','=','tooling_account.id');
-        })->select('tooling_admin.account','tooling_login_log.*')->paginate(15);
+        })->select('tooling_account.account','tooling_login_log.*')->paginate(15);
         return view('Tooling/System/dashboard',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
@@ -181,7 +181,7 @@ class SystemController extends Controller{
 
         $list = $log->join('tooling_account',function($join){
             $join->on('tooling_operation_log.account_id','=','tooling_account.id');
-        })->select('tooling_admin.account','tooling_operation_log.*')->paginate(15);
+        })->select('tooling_account.account','tooling_operation_log.*')->paginate(15);
         return view('Tooling/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
@@ -209,7 +209,7 @@ class SystemController extends Controller{
 
 
         $list = $log->join('tooling_account',function($join){
-            $join->on('tooling_login_log.account_id','=','tooling_admin.id');
+            $join->on('tooling_login_log.account_id','=','tooling_account.id');
         })->select('tooling_account.account','tooling_login_log.*')->paginate(15);
         return view('Tooling/System/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
