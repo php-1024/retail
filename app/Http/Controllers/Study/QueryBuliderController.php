@@ -23,7 +23,7 @@ class QueryBuliderController extends Controller{
     }
     //从数据库中获取多行中查询单一列值数据
     public function select_pluck(){
-        $row = DB::connection('study')->table('test')->where('name','like','%test%')->pluck('name');
+        $row = DB::connection('study')->table('test')->where('name','like','%test%')->pluck('name')->pluck('age');
         dump($row);
     }
 }
