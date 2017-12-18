@@ -16,6 +16,6 @@ class QueryBuliderController extends Controller{
         $row = DB::connection('study')->table('test')->where('name','like','%test2%')->first();
         dump($row);
     }
-
+    //
 }
 ?>
