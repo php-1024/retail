@@ -16,6 +16,10 @@ class QueryBuliderController extends Controller{
         $row = DB::connection('study')->table('test')->where('name','like','%test2%')->first();
         dump($row);
     }
-    //
+    //从数据库中获取单一行单一值数据
+    public function select_value(){
+        $row = DB::connection('study')->table('test')->where('name','like','%test2%')->value('name');
+        dump($row);
+    }
 }
 ?>

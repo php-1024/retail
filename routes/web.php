@@ -25,7 +25,8 @@ Route::group(['prefix'=>'study'],function(){
     //查询构造器的使用
     Route::group(['prefix'=>'builder'],function(){
         Route::get('getall','Study\QueryBuliderController@select_all');//查询构造器，查询所有数据
-        Route::get('getfirst','Study\QueryBuliderController@select_first');//查询构造器，查询单挑数据
+        Route::get('getfirst','Study\QueryBuliderController@select_first');//查询构造器，查询单条数据
+        Route::get('getvalue','Study\QueryBuliderController@select_value');//查询构造器，查询单条数据的单个值
     });
 });
 /***************************框架学习整理资料部分**************************/
