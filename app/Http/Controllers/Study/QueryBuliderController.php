@@ -14,7 +14,7 @@ class QueryBuliderController extends Controller{
     //从数据库中获取一行数据
     public function select_first(){
         $row = DB::connection('study')->table('test')->where('name','like','%test2%')->first();
-
+        dump($row);
     }
 
 }
