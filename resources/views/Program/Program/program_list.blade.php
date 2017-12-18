@@ -91,7 +91,7 @@
                                         <label class="label label-info" style="display:inline-block"> {{ $pname[$val->id] }}</label>
                                     </td>
                                     <td>
-                                        @if($val->is_universal==1)
+                                        @if($val->is_classic==1)
                                             <label class="label label-warning" style="display:inline-block">通用版本</label>
                                         @else
                                             <label class="label label-danger" style="display:inline-block">定制版本</label>

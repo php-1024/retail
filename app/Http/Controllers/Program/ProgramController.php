@@ -74,7 +74,7 @@ class ProgramController extends Controller{
 
         $program_name = $request->input('program_name');//程序名称
         $pid = $request->input('pid');//上级程序
-        $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
+        $is_classic = empty($request->input('is_classic'))?'0':'1';//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
         $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id')->toArray();
@@ -86,7 +86,7 @@ class ProgramController extends Controller{
                 $program = new Program();//实例化程序模型
                 $program->program_name = $program_name;//程序名称
                 $program->pid = $pid;//上级程序
-                $program->is_universal = $is_universal;//是否通用版本
+                $program->is_classic = $is_classic;//是否通用版本
                 $program->save();
                 $program_id = $program->id;
 
@@ -161,7 +161,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $program_name = $request->input('program_name');//程序名称
         $pid = $request->input('pid');//上级程序
-        $is_universal = empty($request->input('is_universal'))?'0':'1';//是否通用版本
+        $is_classic = empty($request->input('is_classic'))?'0':'1';//是否通用版本
         $module_node_ids = $request->input('module_node_ids');//节点数组
         $info = Program::where('program_name',$program_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
 
@@ -172,7 +172,7 @@ class ProgramController extends Controller{
             try{
                 $program = new Program();//实例化程序模型
                 $program_module_node = new ProgramModuleNode();
-                $program->where('id',$id)->update(['program_name'=>$program_name,'pid'=>$pid,'is_universal'=>$is_universal,'updated_at'=>time()]);
+                $program->where('id',$id)->update(['program_name'=>$program_name,'pid'=>$pid,'is_classic'=>$is_classic,'updated_at'=>time()]);
 
                 $node_ids = [];
                 //循环节点生成多条数据
