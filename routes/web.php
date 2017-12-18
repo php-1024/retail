@@ -22,7 +22,10 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('state','Study\SqlBasicController@statementDb');//测试SQL基本使用与一般数据库语句
         Route::get('trans','Study\SqlBasicController@transactionDb');//测试数据库事务运作
     });
-
+    //查询构造器的使用
+    Route::group(['prefix'=>'builder'],function(){
+        Route::get('getAll','Study\QueryBuliderController@selectAll');//测试SQL基本使用插入数据
+    });
 });
 /***************************框架学习整理资料部分**************************/
 
