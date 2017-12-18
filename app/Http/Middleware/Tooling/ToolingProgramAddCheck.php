@@ -6,7 +6,7 @@ namespace App\Http\Middleware\Tooling;
 use Closure;
 use Session;
 
-class ToolingToolingAddCheck{
+class ToolingProgramAddCheck{
     public function handle($request,Closure $next){
         if(empty($request->input('program_name'))){
             return response()->json(['data' => '请输入程序名称', 'status' => '0']);
