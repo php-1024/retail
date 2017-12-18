@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 class QueryBuliderController extends Controller{
     //从数据表中查询所有数据
     public function selectAll(){
-        DB::connection('study')->table('test')->get();
+        $list = DB::connection('study')->table('test')->get();
+        dump($list);
     }
 }
 ?>
