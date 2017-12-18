@@ -29,5 +29,16 @@ class SqlBasicController extends Controller{
         $res = DB::connection('study')->statement("alter table study_test AUTO_INCREMENT=1");
         dump($res);
     }
+    //Laravel 数据库事务的使用
+    public function transactionDb(){
+        DB::beginTransaction();
+        try{
+            DB::connection('study')->update("update study_test set name='test10update' where id = :id",['id'=>10]);
+            DB::connection('study')->delete("delete from study_test where id > :id",['id'=>10]);
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+        }
+    }
 }
 ?>
