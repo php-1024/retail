@@ -24,7 +24,7 @@ Route::group(['prefix'=>'study'],function(){
     });
     //查询构造器的使用
     Route::group(['prefix'=>'builder'],function(){
-        Route::get('getAll','Study\QueryBuliderController@selectAll');//测试SQL基本使用插入数据
+        Route::get('getall','Study\QueryBuliderController@selectAll');//测试SQL基本使用插入数据
     });
 });
 /***************************框架学习整理资料部分**************************/
