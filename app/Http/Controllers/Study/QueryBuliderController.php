@@ -53,7 +53,7 @@ class QueryBuliderController extends Controller{
 
     //某列的总和
     public function select_sum(){
-        $sum = DB::connection('study')->table('test')->min('sum');
+        $sum = DB::connection('study')->table('test')->sum('age');
         dump($sum);
     }
 }
