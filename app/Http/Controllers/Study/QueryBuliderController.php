@@ -57,13 +57,19 @@ class QueryBuliderController extends Controller{
         dump($sum);
     }
 
-    //查询指定的列值
+    //使用select子句查询
     public function select_column(){
         $list = DB::connection('study')->table('test')->select('name','age as user_age')->get();
         dump($list);
     }
 
-    //查询数据库中非重复值
+    //多个select子句
+    public function select_column2(){
+        $list = DB::connection('study')->table('test')->select('name')->addSelect('age as u_age')->get();
+        dump($list);
+    }
+
+    //过滤查询结果中的重复值
     public function select_distinct(){
         $list = DB::connection('study')->table('test')->select('age')->distinct()->get();
         dump($list);
