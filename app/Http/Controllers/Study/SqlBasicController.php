@@ -29,8 +29,9 @@ class SqlBasicController extends Controller{
         $res = DB::connection('study')->statement("alter table study_test AUTO_INCREMENT=1");
         dump($res);
     }
-    //Laravel 数据库事务的使用
+    //Laravel 数据库事务的使用以及日志
     public function transactionDb(){
+        DB::connection('study')->enableQueryLog();
         DB::beginTransaction();
         try{
             DB::connection('study')->update("update study_test set name='test10update' where id = :id",['id'=>10]);
@@ -39,6 +40,8 @@ class SqlBasicController extends Controller{
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
         }
+        $queries = DB::connection('study')->getQueryLog();
+        dump($queries);
     }
 }
 ?>
