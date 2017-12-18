@@ -1,4 +1,7 @@
 <?php
+/*
+ * Laravel框架，数据库语句基本用法
+ */
 namespace App\Http\Controllers\Study;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -29,10 +32,10 @@ class SqlBasicController extends Controller{
         $res = DB::connection('study')->statement("alter table study_test AUTO_INCREMENT=1");
         dump($res);
     }
-    //Laravel 数据库事务的使用以及日志
+    //Laravel 数据库事务的使用以及获取数据库操作日志
     public function transactionDb(){
-        DB::connection('study')->enableQueryLog();
-        DB::beginTransaction();
+        DB::connection('study')->enableQueryLog();//开启日志
+        DB::beginTransaction();//开启事务
         try{
             DB::connection('study')->update("update study_test set name='test10update' where id = :id",['id'=>10]);
             DB::connection('study')->delete("delete from study_test where id > :id",['id'=>10]);
@@ -41,7 +44,7 @@ class SqlBasicController extends Controller{
             DB::rollBack();//事件回滚
         }
         $queries = DB::connection('study')->getQueryLog();
-        dump($queries);
+        dump($queries);//打印操作记录
     }
 }
 ?>
