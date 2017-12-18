@@ -59,7 +59,7 @@ class QueryBuliderController extends Controller{
 
     //查询指定的列值
     public function select_column(){
-        $list = DB::connection('study')->table('test')->select('name','age')->get();
+        $list = DB::connection('study')->table('test')->select('name','age as user_age')->get();
         dump($list);
     }
 }
