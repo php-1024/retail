@@ -47,7 +47,7 @@ class QueryBuliderController extends Controller{
 
     //某列的平均值
     public function select_avg(){
-        $avg = DB::connection('study')->table('test')->min('avg');
+        $avg = DB::connection('study')->table('test')->avg('age');
         dump($avg);
     }
 
