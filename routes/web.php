@@ -33,6 +33,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('min','Study\QueryBuliderController@select_min');//列最小值
         Route::get('avg','Study\QueryBuliderController@select_avg');//列平均值
         Route::get('sum','Study\QueryBuliderController@select_sum');//列总和
+        Route::get('column','Study\QueryBuliderController@select_column');
     });
 });
 /***************************框架学习整理资料部分**************************/

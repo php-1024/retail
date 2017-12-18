@@ -56,5 +56,11 @@ class QueryBuliderController extends Controller{
         $sum = DB::connection('study')->table('test')->sum('age');
         dump($sum);
     }
+
+    //查询指定的列值
+    public function select_column(){
+        $list = DB::connection('study')->table('test')->select('name','age')->get();
+        dump($list);
+    }
 }
 ?>
