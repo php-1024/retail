@@ -65,7 +65,7 @@ class QueryBuliderController extends Controller{
 
     //查询数据库中非重复值
     public function select_distinct(){
-        $list = DB::connection('study')->table('test')->distinct()->get();
+        $list = DB::connection('study')->table('test')->select('age')->distinct()->get();
         dump($list);
     }
 }
