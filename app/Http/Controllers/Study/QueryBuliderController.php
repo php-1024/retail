@@ -159,17 +159,24 @@ class QueryBuliderController extends Controller{
         })->get();
         dump($list);
     }
+
     //排序
     public function select_orderby(){
         //标准排序
         $db = DB::connection('study');
         $list = $db->table('test')->orderBy('id','desc')->get();
         dump($list);
-
         //随机排序
         $db = DB::connection('study');
         $list2 = $db->table('test')->inRandomOrder('id','desc')->get();
         dump($list2);
+    }
+
+    //groupBy分组
+    public function select_groupby(){
+        $db = DB::connection('study');
+        $list = $db->table('test')->groupby('age')->get();
+        dump($list);
     }
 }
 ?>
