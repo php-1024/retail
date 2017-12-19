@@ -45,6 +45,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('cc','Study\QueryBuliderController@select_cc');//whereColumn 对比两个字段的值
         Route::get('gjwhere','Study\QueryBuliderController@select_gjwhere');//whereColumn 对比两个字段的值
         Route::get('exists','Study\QueryBuliderController@select_exists');//whereColumn 对比两个字段的值
+        Route::get('orderby','Study\QueryBuliderController@select_orderby');//whereColumn 对比两个字段的值
     });
 });
 /***************************框架学习整理资料部分**************************/

@@ -160,7 +160,7 @@ class QueryBuliderController extends Controller{
         dump($list);
     }
     //排序
-    public function select_orderBy(){
+    public function select_orderby(){
         $db = DB::connection('study');
         $list = $db->table('test')->orderBy('id','desc')->get();
         dump($list);
