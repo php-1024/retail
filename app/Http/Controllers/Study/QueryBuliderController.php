@@ -203,7 +203,7 @@ class QueryBuliderController extends Controller{
     public function select_skip(){
         $db = DB::connection('study');
         $list = $db->table('test')->having('id','>',3)->skip(1)->take(5)->get();
-        $list2 = $db->table('test')->having('id','>',3)->offect(2)->limit(5)->get();
+        $list2 = $db->table('test')->having('id','>',3)->offset(2)->limit(5)->get();
         dump($list);
         dump($list2);
     }
