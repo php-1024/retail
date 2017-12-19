@@ -142,5 +142,14 @@ class QueryBuliderController extends Controller{
         $list = $db->table('test')->whereColumn('id','=','age')->get();
         dump($list);
     }
+    //高级where方法
+    public function select_gjwhere(){
+        $db = DB::connection('study');
+        //查询id = age的列
+        $list = $db->table('test')->where(function($query){
+            $query->where('id','>','2');
+        })->get();
+        dump($list);
+    }
 }
 ?>
