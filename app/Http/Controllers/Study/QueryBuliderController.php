@@ -109,5 +109,12 @@ class QueryBuliderController extends Controller{
         $list = $db->table('test')->where([['id','>','5'],['name','like','%te%']])->get();
         dump($list);
     }
+
+    //whereOr查询
+    public function select_orwhere(){
+        $db = DB::connection('study');
+        $list = $db->table('test_sex')->where('sex','男')->orWhere('sex','女')->get();
+        dump($list);
+    }
 }
 ?>
