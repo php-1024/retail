@@ -116,7 +116,7 @@ class QueryBuliderController extends Controller{
         $list = $db->table('test_sex')->where('sex','男')->orWhere('sex','女')->get();
         dump($list);
     }
-    //wherebetween查询
+    //between | not between查询
     public function select_between(){
         $db = DB::connection('study');
         $list = $db->table('test')->whereBetween('id',[1,3])->get();
@@ -124,6 +124,15 @@ class QueryBuliderController extends Controller{
 
 
         $list2 = $db->table('test')->whereNotBetween('id',[1,3])->get();
+        dump($list2);
+    }
+    //in | not in查询
+    public function select_in(){
+        $db = DB::connection('study');
+        $list = $db->table('test')->whereIn('id',[1,3])->get();
+        dump($list);
+
+        $list2 = $db->table('test')->whereNotIn('id',[1,3])->get();
         dump($list2);
     }
 }
