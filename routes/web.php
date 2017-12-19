@@ -39,7 +39,8 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('join','Study\QueryBuliderController@select_join');//关联查询
         Route::get('union','Study\QueryBuliderController@select_union');//联合查询
         Route::get('where','Study\QueryBuliderController@select_where');//子语句
-        Route::get('orwhere','Study\QueryBuliderController@select_orwhere');//或语句
+        Route::get('orwhere','Study\QueryBuliderController@select_orwhere');//or查询
+        Route::get('between','Study\QueryBuliderController@select_between');//between,not between语句
     });
 });
 /***************************框架学习整理资料部分**************************/

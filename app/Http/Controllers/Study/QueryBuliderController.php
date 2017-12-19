@@ -117,7 +117,7 @@ class QueryBuliderController extends Controller{
         dump($list);
     }
     //wherebetween查询
-    public function select_wherebetween(){
+    public function select_between(){
         $db = DB::connection('study');
         $list = $db->table('test')->whereBetween('id',[1,3])->get();
         dump($list);
