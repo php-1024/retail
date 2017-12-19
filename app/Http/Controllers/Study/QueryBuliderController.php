@@ -93,5 +93,12 @@ class QueryBuliderController extends Controller{
         })->select('test.*','test_sex.sex')->get();
         dump($list4);
     }
+
+    //联合查询
+    public function select_union(){
+        $first = DB::connection('study')->table('test_sex')->get();
+        $list = DB::connection('study')->table('test')->union($first)->get();
+        dump($list);
+    }
 }
 ?>
