@@ -212,7 +212,7 @@ class QueryBuliderController extends Controller{
         $id = 2;
         $db = DB::connection('study');
         $list = $db->table('test')->when($id , function($query) use ($id){
-            $query('id','>',$id);
+            return $query->where('id','>',$id);
         })->get();
         dump($list);
     }
