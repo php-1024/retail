@@ -175,7 +175,7 @@ class QueryBuliderController extends Controller{
     //groupBy分组 mysql中设置了only_full_group_by的话 需要把查询出来的值都包含在groupBy中，否则会报错
     public function select_groupby(){
         $db = DB::connection('study');
-        $list = $db->table('test')->groupBy('age')->select('id','age')->get();
+        $list = $db->table('test')->groupBy('age')->select('age')->get();
         dump($list);
     }
 }
