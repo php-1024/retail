@@ -102,5 +102,12 @@ class QueryBuliderController extends Controller{
         $list =  $db->table('test')->where('id','>','4')->union($first)->get();
         dump($list);
     }
+
+    //where多数组子查询
+    public function select_where(){
+        $db = DB::connection('study');
+        $list = $db->table('test')->where([['id','>','5'],['name','like','%te%']])->get();
+        dump($list);
+    }
 }
 ?>
