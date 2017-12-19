@@ -207,11 +207,13 @@ class QueryBuliderController extends Controller{
         dump($list);
         dump($list2);
     }
-    //带参数的条件语句
+    //带参数的条件语句,第二个闭包会在第一个闭包为false的时候执行
     public function select_when(){
         $id = 2;
         $db = DB::connection('study');
-        $list = $db->table('test')->when($id , function($query) use ($id){
+        $list = $db->table('test')->when($id ,function($query){
+            return false;
+        }, function($query) use ($id){
             return $query->where('id','>',$id);
         })->get();
         dump($list);
