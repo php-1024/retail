@@ -199,16 +199,13 @@ class QueryBuliderController extends Controller{
         $list = $db->table('test')->having('id','>',3)->get();
         dump($list);
     }
-
+    //
     public function select_skip(){
-        $str = '牛肉+水豆腐+鸡排+排骨汤水+牛排+鸡排+牛丸+鸡肉+玉米+白菜+青菜+豆腐+花生+鱼丸';
-        $arr = explode('+',$str);
-        dump($arr);
-        $str2 =implode(',',$arr);
-        dump($str2);
         $db = DB::connection('study');
         $list = $db->table('test')->having('id','>',3)->skip(1)->take(5)->get();
+        $list2 = $db->table('test')->having('id','>',3)->offect(2)->limit(5)->get();
         dump($list);
+        dump($list2);
     }
 }
 ?>
