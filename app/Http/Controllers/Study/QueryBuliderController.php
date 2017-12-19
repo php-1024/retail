@@ -178,5 +178,26 @@ class QueryBuliderController extends Controller{
         $list = $db->table('test')->groupBy('age')->select('age')->get();
         dump($list);
     }
+
+    /*
+     * having
+     * 数据库查询having 和 where 的区别
+        1.数据库或查询字段集中没有该字段 只能用where ，不能用having
+        2.查询字段集中有该字段但数据库中没有该字段 只能用having，不能用where
+        3.其余情况下效果一致。
+
+        只可以用where，不可以用having的情况
+        1. select goods_name,goods_number from sw_goods where goods_price > 100
+        2.select goods_name,goods_number from sw_goods having goods_price > 100 //报错！！！因为前面并没有筛选出goods_price 字段
+
+        只可以用having，不可以用where情况
+        1.select goods_category_id , avg(goods_price) as ag from sw_goods group by goods_category having ag > 1000
+        2.select goods_category_id , avg(goods_price) as ag from sw_goods where ag>1000 group by goods_category //报错！！因为from sw_goods 这张数据表里面没有ag这个字段
+     */
+    public function select_having(){
+        $db = DB::connection('study');
+        $list = $db->table('test')->having('id','>',2)->get();
+        dump($list);
+    }
 }
 ?>
