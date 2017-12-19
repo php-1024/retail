@@ -78,11 +78,14 @@ class QueryBuliderController extends Controller{
     //关联查询
     public function select_join(){
         $list =  DB::connection('study')->table('test')->join('test_sex','test_sex.test_id','=','test.id')->select('test.*','test_sex.sex')->get();
-        dump("inner join:".$list);
+        echo "inner join:";
+        dump($list);
         $list2 =  DB::connection('study')->table('test')->leftjoin('test_sex','test_sex.test_id','=','test.id')->select('test.*','test_sex.sex')->get();
-        dump("left join".$list2);
+        echo "left join";
+        dump($list2);
         $list3 =  DB::connection('study')->table('test')->rightjoin('test_sex','test_sex.test_id','=','test.id')->select('test.*','test_sex.sex')->get();
-        dump("right join".$list3);
+        echo "right join";
+        dump($list3);
     }
 }
 ?>
