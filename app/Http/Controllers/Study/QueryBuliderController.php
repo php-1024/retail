@@ -151,5 +151,13 @@ class QueryBuliderController extends Controller{
         })->get();
         dump($list);
     }
+    //Exists语句
+    public function select_exists(){
+        $db = DB::connection('study');
+        $list = $db->table('test')->whereExists(function($query){
+            $query->table('test_sex')->where('test_sex.test_id','=','test.id');
+        })->get();
+        dump($list);
+    }
 }
 ?>
