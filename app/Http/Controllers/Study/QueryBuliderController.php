@@ -94,7 +94,7 @@ class QueryBuliderController extends Controller{
         dump($list4);
     }
 
-    //联合查询
+    //联合查询查询时如果要用到 in  或者 or的 请改用union查询 会快很多
     public function select_union(){
         //table一定要再where前
         $db = DB::connection('study');
@@ -161,9 +161,15 @@ class QueryBuliderController extends Controller{
     }
     //排序
     public function select_orderby(){
+        //标准排序
         $db = DB::connection('study');
         $list = $db->table('test')->orderBy('id','desc')->get();
         dump($list);
+
+        //随机排序
+        $db = DB::connection('study');
+        $list2 = $db->table('test')->inRandomOrder('id','desc')->get();
+        dump($list2);
     }
 }
 ?>
