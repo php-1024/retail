@@ -86,6 +86,11 @@ class QueryBuliderController extends Controller{
         $list3 =  DB::connection('study')->table('test')->rightjoin('test_sex','test_sex.test_id','=','test.id')->select('test.age','test.name','test_sex.*')->get();
         echo "right join";
         dump($list3);
+        echo "高级关联语句";
+        $list3 =DB::connection('study')->table('test')->join('test_sex',function($join){
+            $join->on('test_sex.test_id','=','test.id')
+                 ->where('sex','男');
+        })->select('test.*','test_sex.sex')->get();
     }
 }
 ?>
