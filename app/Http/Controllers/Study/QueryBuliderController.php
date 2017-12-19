@@ -155,7 +155,7 @@ class QueryBuliderController extends Controller{
     public function select_exists(){
         $db = DB::connection('study');
         $list = $db->table('test')->whereExists(function($query){
-            $query->table('test_sex')->where('test_sex.test_id','=','test.id');
+            $query->where('age','>','10');
         })->get();
         dump($list);
     }
