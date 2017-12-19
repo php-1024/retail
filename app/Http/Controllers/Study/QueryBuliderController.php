@@ -96,8 +96,9 @@ class QueryBuliderController extends Controller{
 
     //联合查询
     public function select_union(){
-        $first = DB::connection('study')->where('sex','男')->table('test')->get();
-        $list = DB::connection('study')->where('sex','女')->table('test')->union($first)->get();
+        //table一定要再where前
+        $first = DB::connection('study')->table('test')->where('sex','男')->get();
+        $list = DB::connection('study')->table('test')->where('sex','女')->union($first)->get();
         dump($list);
     }
 }
