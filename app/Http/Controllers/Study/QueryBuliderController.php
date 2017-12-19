@@ -74,5 +74,10 @@ class QueryBuliderController extends Controller{
         $list = DB::connection('study')->table('test')->select('age')->distinct()->get();
         dump($list);
     }
+
+    public function select_join1(){
+        $list =  DB::connection('study')->table('test')->join('test_sex','test_sex.test_id','=','test.id')->get();
+        dump($list);
+    }
 }
 ?>
