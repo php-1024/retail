@@ -196,7 +196,7 @@ class QueryBuliderController extends Controller{
      */
     public function select_having(){
         $db = DB::connection('study');
-        $list = $db->table('test')->having('id','>',2)->get();
+        $list = $db->table('test')->having('id','>',3)->get();
         dump($list);
     }
 }
