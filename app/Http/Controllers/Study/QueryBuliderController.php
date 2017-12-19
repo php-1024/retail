@@ -135,5 +135,12 @@ class QueryBuliderController extends Controller{
         $list2 = $db->table('test')->whereNotIn('id',[1,3])->get();
         dump($list2);
     }
+    //whereColumn 对比两个字段的值
+    public function select_cc(){
+        $db = DB::connection('study');
+        //验证或者比较两个值是否相等
+        $list = $db->table('test')->whereColumn('id','age')->get();
+        dump($list);
+    }
 }
 ?>
