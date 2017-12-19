@@ -98,7 +98,7 @@ class QueryBuliderController extends Controller{
     public function select_union(){
         //table一定要再where前
         $db = DB::connection('study');
-        $first = $db->table('test')->where('id','<','2')->get();
+        $first = $db->table('test')->where('id','<','2');
         $list =  $db->table('test')->where('id','>','4')->union($first)->get();
         dump($list);
     }
