@@ -159,5 +159,11 @@ class QueryBuliderController extends Controller{
         })->get();
         dump($list);
     }
+    //排序
+    public function select_orderBy(){
+        $db = DB::connection('study');
+        $list = $db->table('test')->orderBy('id','desc')->get();
+        dump($list);
+    }
 }
 ?>
