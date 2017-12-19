@@ -83,7 +83,7 @@ class QueryBuliderController extends Controller{
         $list2 =  DB::connection('study')->table('test')->leftjoin('test_sex','test_sex.test_id','=','test.id')->select('test.*','test_sex.sex')->get();
         echo "left join";
         dump($list2);
-        $list3 =  DB::connection('study')->table('test')->rightjoin('test_sex','test_sex.test_id','=','test.id')->select('test.*','test_sex.sex')->get();
+        $list3 =  DB::connection('study')->table('test')->rightjoin('test_sex','test_sex.test_id','=','test.id')->select('test.age','test,name','test_sex.*')->get();
         echo "right join";
         dump($list3);
     }
