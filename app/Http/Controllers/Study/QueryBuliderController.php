@@ -199,13 +199,22 @@ class QueryBuliderController extends Controller{
         $list = $db->table('test')->having('id','>',3)->get();
         dump($list);
     }
-    //
+    //offect,limit的两种用法
     public function select_skip(){
         $db = DB::connection('study');
         $list = $db->table('test')->having('id','>',3)->skip(1)->take(5)->get();
         $list2 = $db->table('test')->having('id','>',3)->offset(2)->limit(5)->get();
         dump($list);
         dump($list2);
+    }
+    //带参数的条件语句
+    public function select_when(){
+        $id = 2;
+        $db = DB::connection('study');
+        $list = $db->table('test')->when($id , function($query) use ($id){
+            $query('id','>',$id);
+        })->get();
+        dump($list);
     }
 }
 ?>

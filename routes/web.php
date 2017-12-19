@@ -48,7 +48,8 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('orderby','Study\QueryBuliderController@select_orderby');//正常排序,随机排序
         Route::get('groupby','Study\QueryBuliderController@select_groupby');//分组
         Route::get('having','Study\QueryBuliderController@select_having');//having查询
-        Route::get('skip','Study\QueryBuliderController@select_skip');//返回指定条数
+        Route::get('skip','Study\QueryBuliderController@select_skip');//offect,limit的两种用法
+        Route::get('when','Study\QueryBuliderController@select_when');//offect,limit的两种用法
     });
 });
 /***************************框架学习整理资料部分**************************/
