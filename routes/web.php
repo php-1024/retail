@@ -47,7 +47,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('exists','Study\QueryBuliderController@select_exists');//exist 使用select语句作为where查询 与in使用方法雷士
         Route::get('orderby','Study\QueryBuliderController@select_orderby');//正常排序,随机排序
         Route::get('groupby','Study\QueryBuliderController@select_groupby');//分组
-        Route::get('having','Study\QueryBuliderController@select_groupby');//having查询
+        Route::get('having','Study\QueryBuliderController@select_having');//having查询
     });
 });
 /***************************框架学习整理资料部分**************************/
