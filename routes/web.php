@@ -38,7 +38,8 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('distinct','Study\QueryBuliderController@select_distinct');//过滤查询结果中的重复值
         Route::get('join','Study\QueryBuliderController@select_join');//关联查询
         Route::get('union','Study\QueryBuliderController@select_union');//联合查询
-        Route::get('where','Study\QueryBuliderController@select_where');
+        Route::get('where','Study\QueryBuliderController@select_where');//子语句
+        Route::get('orwhere','Study\QueryBuliderController@select_where');//或语句
     });
 });
 /***************************框架学习整理资料部分**************************/
