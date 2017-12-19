@@ -175,7 +175,7 @@ class QueryBuliderController extends Controller{
     //groupBy分组
     public function select_groupby(){
         $db = DB::connection('study');
-        $list = $db->table('test')->groupBy('id')->get();
+        $list = $db->table('test')->groupBy('age')->get();
         dump($list);
     }
 }
