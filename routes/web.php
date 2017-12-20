@@ -54,6 +54,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('update','Study\QueryBuliderController@updateDB');//更新数据，字段自增自减，字段自增自减同时更新数据
         Route::get('delete','Study\QueryBuliderController@deleteDB');//删除数据
         Route::get('truncate','Study\QueryBuliderController@truncateDB');//清空数据,自增ID改为0，慎用
+        Route::get('paginate','Study\QueryBuliderController@paginateDB');//清空数据,自增ID改为0，慎用
     });
 });
 /***************************框架学习整理资料部分**************************/
