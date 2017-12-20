@@ -271,9 +271,11 @@ class QueryBuliderController extends Controller{
         $db = DB::connection('study');
         $re = $db->table('test')->paginate(5);
         dump($re);
+        dump($re->link());
         //简单分页
         $re2 = $db->table('test')->simplePaginate(5);
         dump($re2);
+        dump($re2->link());
     }
 }
 ?>
