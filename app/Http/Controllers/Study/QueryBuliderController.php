@@ -247,7 +247,7 @@ class QueryBuliderController extends Controller{
         dump($re4);
         $re5 = $db->table('test')->where('id',5)->decrement('age',5);//字段自减5
         dump($re5);
-        $re6 = $db->table('test')->where('id',5)->decrement('age',5,['name'=>'tttt']);//字段自减5,同时更新字段
+        $re6 = $db->table('test')->where('id',6)->decrement('age',5,['name'=>'tttt']);//字段自减5,同时更新字段
         dump($re6);
     }
 }

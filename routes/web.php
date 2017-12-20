@@ -51,7 +51,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('skip','Study\QueryBuliderController@select_skip');//offect,limit的两种用法
         Route::get('when','Study\QueryBuliderController@select_when');//带参数的条件语句when
         Route::get('ins','Study\QueryBuliderController@insertDB');//插入单条数据,插入多条数据，插入数据并获取ID
-        Route::get('update','Study\QueryBuliderController@updateDB');//插入单条数据,插入多条数据，插入数据并获取ID
+        Route::get('update','Study\QueryBuliderController@updateDB');//更新数据，字段自增自减，字段自增自减同时更新数据
     });
 });
 /***************************框架学习整理资料部分**************************/
