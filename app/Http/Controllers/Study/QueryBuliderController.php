@@ -257,5 +257,12 @@ class QueryBuliderController extends Controller{
         $re = $db->table('test')->where('id','>',10)->delete();//删除数据
         dump($re);
     }
+
+    //清空数据
+    public function truncateDB(){
+        $db = DB::connection('study');
+        $re = $db->table('test')->truncate();
+        dump($re);
+    }
 }
 ?>
