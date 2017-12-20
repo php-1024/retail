@@ -207,7 +207,7 @@ class QueryBuliderController extends Controller{
         dump($list);
         dump($list2);
     }
-    //带参数的条件语句,第二个闭包会在第一个闭包为false的时候执行
+    //带参数的条件语句,第二个闭包会在第一个闭包为false的时候执行,可以用于判断是否有指定的值执行不同的查询。
     public function select_when(){
         $id = 2;
         $db = DB::connection('study');
@@ -217,6 +217,21 @@ class QueryBuliderController extends Controller{
             return $query->where('id','>',$id);
         })->get();
         dump($list);
+    }
+    //插入数据
+    public function insertDB(){
+        $db = DB::connection('study');
+        $re = $db->table('test')->insert(['name'=>'zhangsan','age'=>'21']);//插入数据
+        dump($re);
+        $id = $db->table('test')->insertGetId(
+            ['name'=>'lisi','age'=>'21']
+        );//插入数据同时获取自增ID
+        dump($id);
+        $re2 = $db->table('test')->insert([
+            ['name'=>'wangwu','age'=>'21'],
+            ['name'=>'zhaoliu','age'=>'21'],
+        ]);//插入数据
+        dump($re2);
     }
 }
 ?>

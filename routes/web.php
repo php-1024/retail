@@ -49,7 +49,8 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('groupby','Study\QueryBuliderController@select_groupby');//分组
         Route::get('having','Study\QueryBuliderController@select_having');//having查询
         Route::get('skip','Study\QueryBuliderController@select_skip');//offect,limit的两种用法
-        Route::get('when','Study\QueryBuliderController@select_when');//offect,limit的两种用法
+        Route::get('when','Study\QueryBuliderController@select_when');//带参数的条件语句when
+        Route::get('ins','Study\QueryBuliderController@insertDB');//插入单条数据,插入多条数据，插入数据并获取ID
     });
 });
 /***************************框架学习整理资料部分**************************/
