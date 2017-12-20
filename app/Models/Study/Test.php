@@ -11,7 +11,7 @@ class Test extends Model{
     protected $primaryKey = 'id';//主键
     public $timestamps = true;//是否使用时间戳created_at和updated_at
 
-    public function get_all(){
+    public static function get_all(){
        return self::all();
     }
 
