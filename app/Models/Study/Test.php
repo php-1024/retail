@@ -15,5 +15,8 @@ class Test extends Model{
        return self::all();
     }
 
+    public static function get_list(){
+        return self::where('id','>','3')->get();
+    }
 }
 ?>
