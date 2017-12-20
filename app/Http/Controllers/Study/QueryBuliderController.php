@@ -264,5 +264,13 @@ class QueryBuliderController extends Controller{
         $re = $db->table('test')->truncate();
         dump($re);
     }
+
+    //分页与简单分页
+    public function paginateDB(){
+        //常规分页
+        $db = DB::connection('study');
+        $re = $db->table('test')->paginate(5);
+        dump($re);
+    }
 }
 ?>
