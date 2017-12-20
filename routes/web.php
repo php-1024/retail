@@ -56,6 +56,11 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('truncate','Study\QueryBuliderController@truncateDB');//清空数据,自增ID改为0，慎用
         Route::get('paginate','Study\QueryBuliderController@paginateDB');//清空数据,自增ID改为0，慎用
     });
+
+    //ORM的使用
+    Route::group(['prefix'=>'ormstudy'],function(){
+        Route::get('getall','Study\QueryBuliderController@getAll');//测试SQL基本使用插入数据
+    });
 });
 /***************************框架学习整理资料部分**************************/
 
