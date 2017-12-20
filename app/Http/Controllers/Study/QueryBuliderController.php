@@ -233,5 +233,22 @@ class QueryBuliderController extends Controller{
         ]);//插入数据
         dump($re2);
     }
+
+    //更新数据
+    public function updateDB(){
+        $db = DB::connection('study');
+        $re = $db->table('test')->where('id',1)->update(['name'=>'zeo']);//普通修改
+        dump($re);
+        $re2 = $db->table('test')->where('id',2)->increment('age');//字段自增1
+        dump($re2);
+        $re3 = $db->table('test')->where('id',3)->increment('age',5);//字段自增5
+        dump($re3);
+        $re4 = $db->table('test')->where('id',4)->decrement('age');//字段自减1
+        dump($re4);
+        $re5 = $db->table('test')->where('id',5)->decrement('age',5);//字段自减5
+        dump($re5);
+        $re6 = $db->table('test')->where('id',5)->decrement('age',5,['name'=>'tttt']);//字段自减5,同时更新字段
+        dump($re6);
+    }
 }
 ?>
