@@ -250,5 +250,12 @@ class QueryBuliderController extends Controller{
         $re6 = $db->table('test')->where('id',6)->decrement('age',5,['name'=>'tttt']);//字段自减5,同时更新字段
         dump($re6);
     }
+
+    //删除数据
+    public function deleteDB(){
+        $db = DB::connection('study');
+        $re = $db->table('test')->where('id','>',10)->delete();//删除数据
+        dump($re);
+    }
 }
 ?>
