@@ -14,4 +14,8 @@ class Role extends Model
     {
         return $this->belongsToMany('App\Models\Study\User','user_role','user_id','role_id');
     }
+
+    public function getUsers(){
+        return $this->find(2)->users;
+    }
 }

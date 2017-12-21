@@ -91,6 +91,10 @@ class OrmStudyController extends Controller{
         $user = new User();
         $list = $user->getRoles();
         dump($list);
+
+        $role = new Role();
+        $list2 = $role->getUsers();
+        dump($list2);
     }
 }
 ?>
