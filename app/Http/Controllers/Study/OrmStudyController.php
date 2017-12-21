@@ -46,6 +46,13 @@ class OrmStudyController extends Controller{
         dump($re);
     }
 
-
+    public function orm_delete(){
+        $id = 18;
+        $re = Test::select_delete($id);
+        dump($re);
+        $id = 19;
+        $re = Test::do_delete($id);
+        dump($re);
+    }
 }
 ?>

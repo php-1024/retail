@@ -64,7 +64,8 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('getone','Study\OrmStudyController@getOne');//获取单条数据
         Route::get('getpage','Study\OrmStudyController@getPage');//获取分页
         Route::get('inssave','Study\OrmStudyController@ins_save');//插入或更新
-        Route::get('update','Study\OrmStudyController@do_update');//插入或更新
+        Route::get('update','Study\OrmStudyController@do_update');//批量更新
+        Route::get('delete','Study\OrmStudyController@do_delete');//删除的几种方式
     });
 });
 /***************************框架学习整理资料部分**************************/
