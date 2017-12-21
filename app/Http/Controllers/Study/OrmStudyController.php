@@ -54,5 +54,12 @@ class OrmStudyController extends Controller{
         dump($re);
     }
 
+    //ORM关联一对一的关系
+    public function one_one(){
+        $test = new Test();
+        $row = new $test->getSexRelation();
+        dump($row);
+    }
+
 }
 ?>
