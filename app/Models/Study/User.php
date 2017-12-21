@@ -16,7 +16,7 @@ class User extends Model
     }
 
     public function getRoles(){
-        return $this->find(1)->roles;
+        return $this->find(2)->roles;
     }
 
 }
