@@ -34,7 +34,7 @@ class Test extends Model{
     public static function ins_update($data,$id=0){
         $db = new Test();
         if(!empty($id)){
-            $db->id = $id;
+            $db = Test::find($id);
         }
         foreach($data as $key=>$val) {
             $db->$key = $val;
