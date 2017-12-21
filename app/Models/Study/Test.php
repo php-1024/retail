@@ -31,7 +31,8 @@ class Test extends Model{
         return self::where('id',2)->first();
     }
 
-    public static function ins_update($data,$id=0){
+    //插入或更新单条数据
+    public static function ins_save($data,$id=0){
         $db = new Test();
         if(!empty($id)){
             $db = Test::find($id);
@@ -41,6 +42,11 @@ class Test extends Model{
         }
         $res = $db->save();
         return $res;
+    }
+
+    //更新多跳数据
+    public static function do_update($whereparam , $data){
+       return self::where($whereparam)->update($data);
     }
 }
 ?>

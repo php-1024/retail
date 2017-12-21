@@ -28,10 +28,21 @@ class OrmStudyController extends Controller{
         dump($row2);
     }
 
-    public function ins_update(){
+    public function ins_save(){
         $id = 1;
         $data = ['name'=>'helloworld','age'=>99];
         $re = Test::ins_update($data,$id);
+        dump($re);
+    }
+
+    public function do_update(){
+        $whereparam = [
+            'normal'=>['id','>','1'],
+        ];
+
+        $data = ['created_at'=>time(),'updated_at'=>time()];
+
+        $re = Test::do_update($whereparam,$data);
         dump($re);
     }
 }
