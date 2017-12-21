@@ -19,10 +19,10 @@ class Province extends Model
     }
 
     public function getCitys(){
-        return $this->find(1)->citys;
+        return $this->find(19)->citys;
     }
 
     public function getAreas(){
-        return $this->find(1)->areas;
+        return $this->find(19)->areas;
     }
 }
