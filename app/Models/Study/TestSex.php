@@ -15,6 +15,6 @@ class TestSex extends Model
     }
 
     public function getUser(){
-        return $this->user->find(2);
+        return $this->test->find(2);
     }
 }
