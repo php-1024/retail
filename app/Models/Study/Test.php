@@ -16,7 +16,7 @@ class Test extends Model{
 
     //和sex表一对一的关系
     public function sex(){
-        return $this->hasOne('App\Models\Study\TextSex', 'test_id');
+        return $this->hasOne('App\Models\Study\TestSex', 'test_id');
     }
 
     public function getSexRelation(){
