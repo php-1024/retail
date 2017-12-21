@@ -46,7 +46,7 @@ class OrmStudyController extends Controller{
         dump($re);
     }
 
-    public function orm_delete(){
+    public function do_delete(){
         $id = 18;
         $re = Test::select_delete($id);
         dump($re);
