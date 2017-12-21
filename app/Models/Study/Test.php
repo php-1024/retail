@@ -20,8 +20,8 @@ class Test extends Model{
     }
 
     public function getSex(){
-        $model = new Test();
-        return $model->sex()->find(1);
+
+        return $this->sex()->find(1);
     }
 
     public static function get_all(){
