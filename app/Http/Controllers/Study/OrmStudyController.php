@@ -110,7 +110,7 @@ class OrmStudyController extends Controller{
         dump($re1);
 
         $re2 = $province->getAreas();
-        dump($re2);
+        dd($re2);
 
         $re3 = $city->getAreas();
         dump($re3);
