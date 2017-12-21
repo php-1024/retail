@@ -31,6 +31,16 @@ class Test extends Model{
         return self::where('id',2)->first();
     }
 
-    public static function get_count(){}
+    public static function ins_update($data,$id=0){
+        $db = self;
+        if(!empty($id)){
+            $db->id = $data['id'];
+        }
+        foreach($data as $key=>$val) {
+            $db->$key = $val;
+        }
+        $res = $db->save();
+        return $res;
+    }
 }
 ?>

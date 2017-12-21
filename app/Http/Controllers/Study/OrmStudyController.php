@@ -27,5 +27,11 @@ class OrmStudyController extends Controller{
         $row2 = Test::get_first();
         dump($row2);
     }
+
+    public function ins_update(){
+        $id = 1;
+        $data = ['name'=>'helloworld','age'=>99];
+        $re = Test::ins_update($data);
+    }
 }
 ?>
