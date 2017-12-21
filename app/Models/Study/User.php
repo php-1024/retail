@@ -12,7 +12,7 @@ class User extends Model
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Study\Roles')->using('App\Models\Study\UserRole');
+        return $this->belongsToMany('App\Models\Study\Role')->using('App\Models\Study\UserRole');
     }
 
     public function getRoles(){
