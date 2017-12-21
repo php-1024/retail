@@ -59,8 +59,9 @@ Route::group(['prefix'=>'study'],function(){
 
     //ORM的使用
     Route::group(['prefix'=>'ormstudy'],function(){
-        Route::get('getall','Study\OrmStudyController@getAll');//测试SQL基本使用插入数据
-        Route::get('getlist','Study\OrmStudyController@getList');//测试SQL基本使用插入数据
+        Route::get('getall','Study\OrmStudyController@getAll');//获取列表数据
+        Route::get('getlist','Study\OrmStudyController@getList');//获取多条数据
+        Route::get('getone','Study\OrmStudyController@getOne');//获取单条数据
     });
 });
 /***************************框架学习整理资料部分**************************/
