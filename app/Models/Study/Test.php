@@ -19,6 +19,10 @@ class Test extends Model{
         return self::where('id','>','3')->get();
     }
 
+    public static function get_paginate(){
+        return self::paginage(5);
+    }
+
     public static function get_find(){
         return self::find(1);
     }

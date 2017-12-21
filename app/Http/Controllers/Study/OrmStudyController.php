@@ -13,6 +13,13 @@ class OrmStudyController extends Controller{
         $list = Test::get_list();
         dump($list);
     }
+
+    //调用model的paginate获取分页数据
+    public function getPage(){
+        $list = Test::get_paginate();
+        dump($list);
+    }
+
     //调用model里的获取单条数据
     public function getOne(){
         $row = Test::get_find();

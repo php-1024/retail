@@ -62,6 +62,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('getall','Study\OrmStudyController@getAll');//获取列表数据
         Route::get('getlist','Study\OrmStudyController@getList');//获取多条数据
         Route::get('getone','Study\OrmStudyController@getOne');//获取单条数据
+        Route::get('getpage','Study\OrmStudyController@getPage');//获取分页
     });
 });
 /***************************框架学习整理资料部分**************************/
