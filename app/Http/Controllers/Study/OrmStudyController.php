@@ -15,7 +15,10 @@ class OrmStudyController extends Controller{
     }
     //调用model里的获取单条数据
     public function getOne(){
-
+        $row = Test::get_find();
+        dump($row);
+        $row2 = Test::get_first();
+        dump($row2);
     }
 }
 ?>

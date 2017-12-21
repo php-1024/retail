@@ -18,5 +18,15 @@ class Test extends Model{
     public static function get_list(){
         return self::where('id','>','3')->get();
     }
+
+    public static function get_find(){
+        return self::find(1);
+    }
+
+    public static function get_first(){
+        return self::where('id',2)->first();
+    }
+
+    public static function get_count(){}
 }
 ?>
