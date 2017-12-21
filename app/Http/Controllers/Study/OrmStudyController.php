@@ -112,6 +112,10 @@ class OrmStudyController extends Controller{
         $re2 = $province->getAreas();
         dd($re2);
 
+        foreach($re2 as $key=>$val){
+            dump($val->name);
+        }
+
         $re3 = $city->getAreas();
         dump($re3);
     }
