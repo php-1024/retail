@@ -37,7 +37,7 @@ class OrmStudyController extends Controller{
 
     public function do_update(){
         $whereparam = [
-            'normal'=>['id','>','1'],
+           ['id','>','1'],
         ];
 
         $data = ['created_at'=>time(),'updated_at'=>time()];
