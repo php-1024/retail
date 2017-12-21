@@ -19,6 +19,10 @@ class Test extends Model{
         return $this->hasOne('App\Models\Study\TextSex', 'test_id');
     }
 
+    public function getSexRelation(){
+        return $this->find(1)->sex;
+    }
+
     public static function get_all(){
        return self::all();
     }
