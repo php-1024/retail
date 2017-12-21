@@ -58,7 +58,9 @@ class OrmStudyController extends Controller{
     public function one_one(){
         $test = new Test();
         $row = $test->getSex();
+
         dump($row);
+        dump($row->sex);
     }
 
 }
