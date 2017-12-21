@@ -32,7 +32,7 @@ class Test extends Model{
     }
 
     public static function ins_update($data,$id=0){
-        $db = self;
+        $db = Test;
         if(!empty($id)){
             $db->id = $data['id'];
         }
