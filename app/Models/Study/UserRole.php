@@ -9,12 +9,4 @@ class UserRole extends Pivot
     protected $primaryKey = 'id';//主键
     public $timestamps = true;//是否使用时间戳created_at和updated_at
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-
-    public function users(){
-        return $this->hasMany('App\Models\Study\User', 'user_id');
-    }
-
-    public function roles(){
-        return $this->hasMany('App\Models\Study\role', 'role_id');
-    }
 }
