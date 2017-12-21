@@ -103,13 +103,17 @@ class OrmStudyController extends Controller{
 
     //ORM关联远程一对多模型 ， 通过关系表关联两张表
     public function one_through_many(){
-        $user = new User();
-        $list = $user->getRoles();
-        dump($list);
+        $province = new Province();
+        $city = new City();
 
-        $role = new Role();
-        $list2 = $role->getUsers();
-        dump($list2);
+        $re1 = $province->getCitys();
+        dump($re1);
+
+        $re2 = $province->getAreas();
+        dump($re2);
+
+        $re3 = $city->getAreas();
+        dump($re3);
     }
 }
 ?>
