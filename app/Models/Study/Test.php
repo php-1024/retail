@@ -19,7 +19,7 @@ class Test extends Model{
         return $this->hasOne('App\Models\Study\TestSex', 'test_id');
     }
 
-    public function getSexRelation(){
+    public function getSex(){
         return $this->sex()->find(1);
     }
 
