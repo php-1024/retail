@@ -13,6 +13,12 @@ class Test extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
     // protected $fillable = ['name','age'];//白名单列属性，可以赋值
     // protected $guarded = [];//黑名单列属性，不可以被赋值 比如管理员表不能设置是否超级管理员之歌属性
+
+    //和sex表一对一的关系
+    public function sex(){
+        return $this->hasOne('App\Models\Study\TextSex', 'test_id');
+    }
+
     public static function get_all(){
        return self::all();
     }
@@ -51,7 +57,7 @@ class Test extends Model{
        return self::where($whereparam)->update($data);
     }
 
-    //查询出模型，再删除模型
+    //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
         $model = Self::find($id);
         return $model->delete();

@@ -28,24 +28,23 @@ class OrmStudyController extends Controller{
         dump($row2);
     }
 
+    //插入|保存数据
     public function ins_save(){
         $id = 1;
         $data = ['name'=>'helloworld','age'=>99];
         $re = Test::ins_update($data,$id);
         dump($re);
     }
-
+    //批量更新数据
     public function do_update(){
         $whereparam = [
            ['id','>','1'],
         ];
-
         $data = ['created_at'=>time(),'updated_at'=>time()];
-
         $re = Test::do_update($whereparam,$data);
         dump($re);
     }
-
+    //删除
     public function do_delete(){
         $id = 18;
         $re = Test::select_delete($id);
@@ -54,5 +53,6 @@ class OrmStudyController extends Controller{
         $re = Test::do_delete($id);
         dump($re);
     }
+
 }
 ?>
