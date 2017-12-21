@@ -16,6 +16,6 @@ class Role extends Model
     }
 
     public function getUsers(){
-        return $this->find(2)->users;
+        return $this->find(1)->users;
     }
 }
