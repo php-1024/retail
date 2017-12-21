@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Study;
 use App\Http\Controllers\Controller;
 use App\Models\Study\Test;
 use App\Models\Study\TestSex;
+use App\Models\Study\TestComment;
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
     public function getAll(){
@@ -65,6 +66,22 @@ class OrmStudyController extends Controller{
 
         $sex = new TestSex();
         $row2 = $sex->getUser();
+        dump($row2);
+        dump($row2->name);
+    }
+
+    //ORM关联一对多的模型;
+    public function one_many(){
+        $test = new Test();
+        $list = $test->getComment();
+
+        dump($list);
+        foreach($list as $key=>$val){
+            dump($val->comment_value);
+        }
+
+        $comment = new TestComment();
+        $row2 = $comment->getUser();
         dump($row2);
         dump($row2->name);
     }

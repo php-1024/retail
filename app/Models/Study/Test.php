@@ -18,11 +18,20 @@ class Test extends Model{
     public function sex(){
         return $this->hasOne('App\Models\Study\TestSex', 'test_id');
     }
+    //和comment表一对多的关系
+    public function comment(){
+        return $this->hasMany('App\Models\Study\TestComment', 'test_id');
+    }
 
     public function getSex(){
-
         return $this->find(1)->sex;
     }
+
+
+    public function getComment(){
+        return $this->find(1)->comment;
+    }
+
 
     public static function get_all(){
        return self::all();
