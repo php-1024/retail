@@ -13,4 +13,8 @@ class TestSex extends Model
     public function test(){
         return $this->belongsTo('App\Models\Study\Test', 'test_id');
     }
+
+    public function getUser(){
+        return $this->user->find(2);
+    }
 }

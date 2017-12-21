@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Study;
 use App\Http\Controllers\Controller;
 use App\Models\Study\Test;
+use App\Models\Study\TestSex;
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
     public function getAll(){
@@ -61,6 +62,10 @@ class OrmStudyController extends Controller{
 
         dump($row);
         dump($row->sex);
+
+        $sex = new TestSex();
+        $list = $sex->getUser();
+        dump($list);
     }
 
 }
