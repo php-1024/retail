@@ -1,8 +1,8 @@
 <?php
 namespace App\Models\Study;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class User extends Model
+class User extends Pivot
 {
     protected $connection = 'study';//设置数据库连接，默认连接到database.php mysql设置的数据库.
     protected $table = 'user';//数据表名
