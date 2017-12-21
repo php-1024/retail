@@ -68,6 +68,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('delete','Study\OrmStudyController@do_delete');//删除的几种方式
         Route::get('oneone','Study\OrmStudyController@one_one');//ORM关联一对一的关系
         Route::get('onemany','Study\OrmStudyController@one_many');//ORM关联一对多的关系
+        Route::get('manymany','Study\OrmStudyController@many_many');//ORM关联多对多的关系
     });
 });
 /***************************框架学习整理资料部分**************************/

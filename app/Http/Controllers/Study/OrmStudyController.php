@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Study\Test;
 use App\Models\Study\TestSex;
 use App\Models\Study\TestComment;
+use App\Models\Study\User;
+use App\Models\Study\Role;
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
     public function getAll(){
@@ -74,17 +76,21 @@ class OrmStudyController extends Controller{
     public function one_many(){
         $test = new Test();
         $list = $test->getComment();
-
         dump($list);
         foreach($list as $key=>$val){
             dump($val->comment_value);
         }
-
         $comment = new TestComment();
         $row2 = $comment->getUser();
         dump($row2);
         dump($row2->name);
     }
 
+    //ORM关联多对多模型 ， 通过关系表关联两张表
+    public function many_many(){
+        $user = new User();
+        $list = $user->getRoles();
+        dump($list);
+    }
 }
 ?>
