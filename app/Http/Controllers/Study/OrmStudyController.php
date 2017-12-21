@@ -64,8 +64,8 @@ class OrmStudyController extends Controller{
         dump($row->sex);
 
         $sex = new TestSex();
-        $list = $sex->getUser();
-        dump($list);
+        $row2 = $sex->getUser();
+        dump($row2);
     }
 
 }
