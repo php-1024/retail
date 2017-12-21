@@ -20,7 +20,7 @@ class Test extends Model{
     }
 
     public function getSexRelation(){
-        return $this->find(1)->sex();
+        return $this->sex()->find(1);
     }
 
     public static function get_all(){
