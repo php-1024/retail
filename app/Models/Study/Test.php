@@ -20,7 +20,7 @@ class Test extends Model{
     }
 
     public static function get_paginate(){
-        return self::paginage(5);
+        return self::paginate(5);
     }
 
     public static function get_find(){
