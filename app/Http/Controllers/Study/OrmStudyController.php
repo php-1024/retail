@@ -6,6 +6,10 @@ use App\Models\Study\TestSex;
 use App\Models\Study\TestComment;
 use App\Models\Study\User;
 use App\Models\Study\Role;
+use App\Models\Study\Province;
+use App\Models\Study\City;
+use App\Models\Study\Area;
+
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
     public function getAll(){
@@ -88,6 +92,17 @@ class OrmStudyController extends Controller{
 
     //ORM关联多对多模型 ， 通过关系表关联两张表
     public function many_many(){
+        $user = new User();
+        $list = $user->getRoles();
+        dump($list);
+
+        $role = new Role();
+        $list2 = $role->getUsers();
+        dump($list2);
+    }
+
+    //ORM关联远程一对多模型 ， 通过关系表关联两张表
+    public function one_through_many(){
         $user = new User();
         $list = $user->getRoles();
         dump($list);
