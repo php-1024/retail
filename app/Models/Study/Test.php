@@ -12,7 +12,7 @@ class Test extends Model{
     public $timestamps = true;//是否使用时间戳created_at和updated_at
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
     // protected $fillable = ['name','age'];//白名单列属性，可以赋值
-    // protected $guarded = [];//黑名单列属性，不可以被赋值
+    // protected $guarded = [];//黑名单列属性，不可以被赋值 比如管理员表不能设置是否超级管理员之歌属性
     public static function get_all(){
        return self::all();
     }
@@ -37,7 +37,7 @@ class Test extends Model{
     public static function ins_save($data,$id=0){
         $db = new Test();
         if(!empty($id)){
-            $db = Test::find($id);
+            $db = Self::find($id);
         }
         foreach($data as $key=>$val) {
             $db->$key = $val;
@@ -49,6 +49,17 @@ class Test extends Model{
     //更新多跳数据
     public static function do_update($whereparam , $data){
        return self::where($whereparam)->update($data);
+    }
+
+    //查询出模型，再删除模型
+    public static function select_delete($id){
+        $model = Self::find($id);
+        return $model->delete();
+    }
+
+    //知道主键ID ，直接删除模型
+    public static function do_delete($id){
+        return Self::destroy($id);
     }
 }
 ?>

@@ -45,5 +45,7 @@ class OrmStudyController extends Controller{
         $re = Test::do_update($whereparam,$data);
         dump($re);
     }
+
+
 }
 ?>
