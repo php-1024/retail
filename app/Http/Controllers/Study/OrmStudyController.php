@@ -113,7 +113,7 @@ class OrmStudyController extends Controller{
         dd($re2);
 
         foreach($re2 as $key=>$val){
-            dump($val->name);
+            dump($val->city_name);
         }
 
         $re3 = $city->getAreas();
