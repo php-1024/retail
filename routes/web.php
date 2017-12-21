@@ -66,6 +66,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('inssave','Study\OrmStudyController@ins_save');//插入或更新
         Route::get('update','Study\OrmStudyController@do_update');//批量更新
         Route::get('delete','Study\OrmStudyController@do_delete');//删除的几种方式
+        Route::get('oneone','Study\OrmStudyController@one_one');//ORM关联一对一的关系
     });
 });
 /***************************框架学习整理资料部分**************************/
