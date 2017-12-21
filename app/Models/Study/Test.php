@@ -10,7 +10,7 @@ class Test extends Model{
     protected $table = 'test';//数据表名
     protected $primaryKey = 'id';//主键
     public $timestamps = true;//是否使用时间戳created_at和updated_at
-    public $dateFormat = 'U';
+    public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
     public static function get_all(){
        return self::all();
     }
