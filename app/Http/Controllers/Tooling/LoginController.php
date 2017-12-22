@@ -19,8 +19,7 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $data['random']=time();//生成调用验证码的随机数
-        return view('Tooling/Login/display',$data);
+        return view('Tooling/Login/display');
     }
     /*
      * 生成验证码
@@ -33,7 +32,6 @@ class LoginController extends Controller{
         $builder->build($width = 150, $height = 35, $font = null);
         //获取验证码的内容
         $phrase = $builder->getPhrase();
-
         //把内容存入session
         Session::flash('tooling_system_captcha', $phrase);
         //生成图片
