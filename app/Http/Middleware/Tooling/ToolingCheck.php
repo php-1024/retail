@@ -17,7 +17,7 @@ class ToolingCheck{
     }
 
     //普通页面检测用户是否登陆
-    public function checkIsLogin($request,Closure $next){
+    public function checkIsLogin($request){
         //获取用户登陆存储的SessionId
         $sess_key = Session::get('zerone_tooling_account_id');
         //如果为空跳转到登陆页面
@@ -31,7 +31,7 @@ class ToolingCheck{
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
             //把参数传递到下一个中间件
-            return $next($request);
+            return $request;
         }
     }
 }
