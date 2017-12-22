@@ -39,7 +39,7 @@ class ToolingCheck{
         $sess_key = Session::get('zerone_tooling_account_id');
         //如果为空跳转到登陆页面
         if(empty($sess_key)) {
-            return self::response(0,redirect('tooling/login'));
+            return self::res(0,redirect('tooling/login'));
         }else{
             $sess_key = Session::get('zerone_tooling_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
@@ -48,12 +48,12 @@ class ToolingCheck{
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
             //把参数传递到下一个中间件
-            return self::response(1,$request);
+            return self::res(1,$request);
         }
     }
 
     //工厂方法返回结果
-    public static function response($status,$response){
+    public static function res($status,$response){
         return ['status'=>$status,'response'=>$response];
     }
 

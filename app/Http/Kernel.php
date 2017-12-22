@@ -65,7 +65,6 @@ class Kernel extends HttpKernel
         /**************************零壹程序管理系统*******************************/
         'ToolingCheckIsLogin'=>\App\Http\Middleware\Tooling\ToolingCheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
         'ToolingCheckIsLoginAjax'=>\App\Http\Middleware\Tooling\ToolingCheckIsLoginAjax::class,//判断页面是否登陆，若未登陆提示未登录错误。
-        'ToolingIsLogin'=>\App\Http\Middleware\Tooling\ToolingIsLogin::class,//登录页面判断如果登陆了就跳转到首页
         'ToolingLoginPost'=>\App\Http\Middleware\Tooling\ToolingLoginPost::class,//登陆提交信息检测是否合法
         'ToolingCheckIsSuper'=>\App\Http\Middleware\Tooling\ToolingCheckIsSuper::class,//检测是否超级管理员，若不是超级管理员，不能使用超级管理员的一些功能
         'ToolingCheckIsSuperAjax'=>\App\Http\Middleware\Tooling\ToolingCheckIsSuperAjax::class,//检测是否超级管理员，若不是超级管理员，不能使用超级管理员的一些功能
@@ -80,7 +79,8 @@ class Kernel extends HttpKernel
         'ToolingModuleEditCheck'=>\App\Http\Middleware\Tooling\ToolingModuleEditCheck::class,//检测查询时日期范围格式的中间件
         'ToolingProgramAddCheck'=>\App\Http\Middleware\Tooling\ToolingProgramAddCheck::class,//检测查询时日期范围格式的中间件
         'ToolingProgramEditCheck'=>\App\Http\Middleware\Tooling\ToolingProgramEditCheck::class,//检测查询时日期范围格式的中间件
-        'ToolingCheck'=>\App\Http\Middleware\Tooling\ToolingCheck::class,//检测
+        'ToolingCheck'=>\App\Http\Middleware\Tooling\ToolingCheck::class,//检测普通页面跳转的中间件
+        'ToolingCheckAjax'=>\App\Http\Middleware\Tooling\ToolingCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹程序管理系统*******************************/
     ];
 }

@@ -120,7 +120,7 @@ Route::group(['prefix'=>'tooling'],function(){
     });
 
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('checklogin','Tooling\LoginController@checkLogin')->middleware('ToolingLoginPost');//提交登陆数据
+        Route::post('checklogin','Tooling\LoginController@checkLogin')->middleware('ToolingCheckAjax');//提交登陆数据
         Route::post('account_add_check','Tooling\SystemController@account_add_check')->middleware('ToolingCheckIsLoginAjax','ToolingCheckIsSuperAjax','ToolingAccountAddCheck');//提交增加账号数据
         Route::post('account_edit','Tooling\SystemController@account_edit')->middleware('ToolingCheckIsLoginAjax','ToolingCheckIsSuperAjax');//获取账号数据并编辑
         Route::post('account_edit_check','Tooling\SystemController@account_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingCheckIsSuperAjax','ToolingAccountEditCheck');//提交编辑账号数据
