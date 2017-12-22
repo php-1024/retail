@@ -21,8 +21,22 @@ class ToolingCheck{
                 }
                 break;
 
+            case "tooling/dashboard/account_add"://添加账号
+                $re = $this->checkIsLogin($request);//判断是否登陆
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    $re2 = $this->checkIsSuper($re['response']);//判断是否超级管理员
+                    if($re2['status']=='0'){
+                        return $re2['response'];
+                    }else{
+                        return $next($re2['response']);
+                    }
+                }
+                break;
+
             case "tooling"://后台首页
-                $re = $this->checkIsLogin($request);
+                $re = $this->checkIsLogin($request);//判断是否登陆
                 if($re['status']=='0'){
                     return $re['response'];
                 }else{
@@ -31,6 +45,16 @@ class ToolingCheck{
                    break;
         }
         return $next($request);
+    }
+
+    //部分页面检测用户是否超级管理员
+    public function checkIsSuper($request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        if($admin_data['admin_is_super']!=1){
+            return self::res(0,redirect('tooling'));
+        }else{
+            return self::res(1,$request);
+        }
     }
 
     //普通页面检测用户是否登陆

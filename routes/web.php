@@ -82,7 +82,7 @@ Route::group(['prefix'=>'tooling'],function(){
 
     //系统管理组(功能只有超级管理员能用)
     Route::group(['prefix'=>'dashboard'],function(){
-        Route::get('account_add', 'Tooling\SystemController@account_add')->middleware('ToolingCheckIsLogin','ToolingCheckIsSuper');//添加账号路由
+        Route::get('account_add', 'Tooling\SystemController@account_add')->middleware('ToolingCheck');//添加账号路由
         Route::get('account_list', 'Tooling\SystemController@account_list')->middleware('ToolingCheckIsLogin','ToolingCheckIsSuper');//添加账号路由
         Route::get('operation_log','Tooling\SystemController@operation_log_list')->middleware('ToolingCheckIsLogin','ToolingCheckIsSuper','ToolingCheckSearchDate');//所有操作记录
         Route::get('login_log','Tooling\SystemController@login_log_list')->middleware('ToolingCheckIsLogin','ToolingCheckIsSuper','ToolingCheckSearchDate');//所有登陆记录
