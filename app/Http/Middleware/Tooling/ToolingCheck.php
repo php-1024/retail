@@ -33,7 +33,8 @@ class ToolingCheck{
                 break;
 
             /****超级管理员操作页面，带日期搜索****/
-            case "tooling/dashboard/operation_log"://添加账号
+            case "tooling/dashboard/operation_log"://操作日志
+            case "tooling/dashboard/operation_log"://登陆日志
                 $re = $this->checkLoginAndSuperAndDate($request);//检测用户是否登陆 是否超级管理员 日期输入是否正确
                 if($re['status']=='0'){
                     return $re['response'];
@@ -42,6 +43,11 @@ class ToolingCheck{
                 }
                 break;
 
+            /****超级管理员操作页面，检测是否登陆****/
+            case "tooling/personal/password_edit"://修改登陆密码
+            case "tooling/module/module_add"://添加模块
+            case "tooling/module/module_list"://模块列表
+            case "tooling/personal/password_edit"://修改登陆密码
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);//判断是否登陆
                 if($re['status']=='0'){
@@ -69,6 +75,21 @@ class ToolingCheck{
         }
     }
 
+    //检测是否登陆后检测是否超级管理员
+    public function checkLoginAndSuper($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkIsSuper($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //get查询检测日期是否输入正确
     public function checkDate($request){
         $time_st = $request->input('time_st');
@@ -83,21 +104,6 @@ class ToolingCheck{
             return self::res(0,response()->json(['data' => '错误的日期格式！', 'status' => '0']));
         }
         return self::res(1,$request);
-    }
-
-    //检测是否登陆后检测是否超级管理员
-    public function checkLoginAndSuper($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
-        if($re['status']=='0'){
-            return $re;
-        }else{
-            $re2 = $this->checkIsSuper($re['response']);//判断是否超级管理员
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
     }
 
     //部分页面检测用户是否超级管理员
