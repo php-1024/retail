@@ -80,6 +80,7 @@ class Kernel extends HttpKernel
         'ToolingModuleEditCheck'=>\App\Http\Middleware\Tooling\ToolingModuleEditCheck::class,//检测查询时日期范围格式的中间件
         'ToolingProgramAddCheck'=>\App\Http\Middleware\Tooling\ToolingProgramAddCheck::class,//检测查询时日期范围格式的中间件
         'ToolingProgramEditCheck'=>\App\Http\Middleware\Tooling\ToolingProgramEditCheck::class,//检测查询时日期范围格式的中间件
+        'ToolingCheck'=>\App\Http\Middleware\Tooling\ToolingCheck::class,//检测
         /**************************零壹程序管理系统*******************************/
     ];
 }
