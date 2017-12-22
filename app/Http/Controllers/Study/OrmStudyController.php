@@ -115,5 +115,14 @@ class OrmStudyController extends Controller{
         $re3 = $city->getAreas();
         dump($re3);
     }
+
+    //多态关联，多态多对多关联，作用不大，暂时略过
+
+    //关联查询
+    public function orm_search(){
+        $user = new User();
+        $list = $user->searchRoles();
+        dump($list);
+    }
 }
 ?>

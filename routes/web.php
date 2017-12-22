@@ -70,6 +70,7 @@ Route::group(['prefix'=>'study'],function(){
         Route::get('onemany','Study\OrmStudyController@one_many');//ORM关联一对多的关系
         Route::get('manymany','Study\OrmStudyController@many_many');//ORM关联多对多的关系
         Route::get('onethroughmany','Study\OrmStudyController@one_through_many');//ORM远程一对多的关系
+        Route::get('ormsearch','Study\OrmStudyController@orm_search');
     });
 });
 /***************************框架学习整理资料部分**************************/

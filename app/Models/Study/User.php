@@ -19,4 +19,8 @@ class User extends Model
         return $this->find(2)->roles;
     }
 
+    public function searchRoles(){
+        $list = $this->roles()->where('name','zh1')->get();
+        return $list;
+    }
 }
