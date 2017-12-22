@@ -124,8 +124,11 @@ class OrmStudyController extends Controller{
         $list = $user->searchRoles();
         dump($list);
 
+        //查询存在用户与角色关系的数据
         $list = $user::has('roles')->get();
-        dump($list);
+        foreach($list as $key=>$val){
+            dump($val->roles);
+        }
     }
 }
 ?>
