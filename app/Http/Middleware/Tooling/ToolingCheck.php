@@ -34,7 +34,12 @@ class ToolingCheck{
 
             /****超级管理员操作页面，带日期搜索****/
             case "tooling/dashboard/operation_log"://添加账号
-
+                $re = $this->checkLoginAndSuperAndDate($request);//检测用户是否登陆 是否超级管理员 日期输入是否正确
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
                 break;
 
             case "tooling"://后台首页
@@ -47,6 +52,21 @@ class ToolingCheck{
                    break;
         }
         return $next($request);
+    }
+
+    //检测用户是否登陆 是否超级管理员 日期输入是否正确
+    public function checkLoginAndSuperAndDate($request){
+        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkDate($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
     }
 
     //get查询检测日期是否输入正确
