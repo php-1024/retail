@@ -90,15 +90,15 @@ Route::group(['prefix'=>'tooling'],function(){
 
     //个人中心组
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('password_edit', 'Tooling\PersonalController@password_edit')->middleware('ToolingCheckIsLogin');//修改密码路由
+        Route::get('password_edit', 'Tooling\PersonalController@password_edit')->middleware('ToolingCheck');//修改密码路由
         Route::get('operation_log','Tooling\PersonalController@operation_log_list')->middleware('ToolingCheckIsLogin','ToolingCheckSearchDate');//我的操作记录
         Route::get('login_log','Tooling\PersonalController@login_log_list')->middleware('ToolingCheckIsLogin','ToolingCheckSearchDate');//所有登陆记录
     });
 
     //功能模块组
     Route::group(['prefix'=>'module'],function(){
-        Route::get('module_add', 'Tooling\ModuleController@module_add')->middleware('ToolingCheckIsLogin');//修改密码路由
-        Route::get('module_list', 'Tooling\ModuleController@module_list')->middleware('ToolingCheckIsLogin');//修改密码路由
+        Route::get('module_add', 'Tooling\ModuleController@module_add')->middleware('ToolingCheck');//修改密码路由
+        Route::get('module_list', 'Tooling\ModuleController@module_list')->middleware('ToolingCheck');//修改密码路由
     });
 
     //节点管理组
