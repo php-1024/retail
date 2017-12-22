@@ -134,7 +134,7 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::post('module_edit_check','Tooling\ModuleController@module_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingModuleEditCheck');
         Route::post('program_add_check','Tooling\ProgramController@program_add_check')->middleware('ToolingCheckIsLoginAjax','ToolingProgramAddCheck');//提交功能模块数据
         Route::post('program_parents_node','Tooling\ProgramController@program_parents_node')->middleware('ToolingCheckIsLoginAjax');//获取上级程序ID
-        Route::post('program_edit','Tooling\ProgramController@program_edit')->middleware('ToolingCheckIsLoginAjax');//获取功能模块数据并提交
+        Route::post('program_edit','Tooling\ProgramController@program_edit')->middleware('ToolingCheckAjax');//获取功能模块数据并提交
         Route::post('program_edit_check','Tooling\ProgramController@program_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingProgramEditCheck');//获取功能模块数据并提交
     });
 });
