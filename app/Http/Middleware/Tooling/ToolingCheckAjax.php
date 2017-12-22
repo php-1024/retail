@@ -137,7 +137,27 @@ class ToolingCheckAjax {
         }
     }
 
-    //检测账号添加数据提交
+    //检测密码修改数据提交
+    public function checkPasswordEdit($request){
+        if(empty($request->input('oldpassword'))){
+            return  self::res(0,response()->json(['data' => '请输入原登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return  self::res(0,response()->json(['data' => '请输入新登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('repassword'))){
+            return  self::res(0,response()->json(['data' => '请再次输入新登陆密码', 'status' => '0']));
+        }
+        if($request->input('password')==$request->input('oldpassword')){
+            return  self::res(0,response()->json(['data' => '新旧密码不能相同', 'status' => '0']));
+        }
+        if($request->input('password')!=$request->input('repassword')){
+            return  self::res(0,response()->json(['data' => '两次输入的新密码不一致', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测冻结账号数据提交
     public function checkAccountLock($request){
         if(empty($request->input('id'))){
             return self::res(0,esponse()->json(['data' => '数据传输错误', 'status' => '0']));
@@ -148,7 +168,7 @@ class ToolingCheckAjax {
         return self::res(1,$request);
     }
 
-    //检测账号添加数据提交
+    //检测编辑账号数据提交
     public function checkAccountEdit($request){
         if(empty($request->input('id'))){
             return self::res(0, response()->json(['data' => '数据传输错误', 'status' => '0']));
