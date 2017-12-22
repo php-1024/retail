@@ -65,7 +65,7 @@ class ToolingCheckAjax {
     public function checkIsSuper($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['admin_is_super']==1){
-            return self::res(0,response()->json(['data' => '您没有该功能的权限！', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
         }else{
             return self::res(1,$request);
         }
