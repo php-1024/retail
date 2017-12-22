@@ -11,6 +11,7 @@ class ToolingCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
+
             case "tooling/login"://登录页,如果已经登陆则不需要再次登陆
                 //获取用户登陆存储的SessionId
                 $sess_key = Session::get('zerone_tooling_account_id');
@@ -19,6 +20,7 @@ class ToolingCheck{
                     return redirect('tooling');
                 }
                 break;
+
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);
                 if($re['status']=='0'){
