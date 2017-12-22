@@ -23,4 +23,5 @@ class User extends Model
         $list = $this->where('name','zh1')->first()->roles;
         return $list;
     }
+    
 }

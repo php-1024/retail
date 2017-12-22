@@ -123,6 +123,9 @@ class OrmStudyController extends Controller{
         $user = new User();
         $list = $user->searchRoles();
         dump($list);
+
+        $list = $user::has('roles')->get();
+        dump($list);
     }
 }
 ?>
