@@ -51,7 +51,7 @@ class ToolingCheck{
     //部分页面检测用户是否超级管理员
     public function checkIsSuper($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if($admin_data['admin_is_super']==1){
+        if($admin_data['admin_is_super']!=1){
             return self::res(0,redirect('tooling'));
         }else{
             return self::res(1,$request);
