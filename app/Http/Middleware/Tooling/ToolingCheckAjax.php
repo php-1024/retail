@@ -12,7 +12,7 @@ class ToolingCheckAjax {
         switch($route_name){
 
             case "tooling/ajax/checklogin"://后台首页
-                $re = $this->checkIsLogin($request);
+                $re = $this->checkLoginPost($request);
                 if($re['status']=='0'){
                     return $re['response'];
                 }else{
