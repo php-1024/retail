@@ -19,7 +19,21 @@ class ToolingCheckAjax {
                 }
                 break;
 
-            case "tooling/ajax/program_edit"://修改程序
+            //检测是否登陆且是否登陆且是否超级管理员
+            case "tooling/ajax/account_edit":
+                $re = $this->checkLoginAndSuper($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            //仅检测是否登陆
+            case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
+            case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
+            case "tooling/ajax/program_parents_node"://获取上级程序ID
+            case "tooling/ajax/program_edit"://是否允许弹出修改程序页面
                 $re = $this->checkIsLogin($request);
                 if($re['status']=='0'){
                     return $re['response'];
@@ -31,11 +45,36 @@ class ToolingCheckAjax {
         }
     }
 
+    //检测是否登陆且是否超级管理员
+    public function checkLoginAndSuper($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkIsSuper($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测是否超级管理员
+    public function checkIsSuper($request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        if($admin_data['admin_is_super']==1){
+            return self::res(0,response()->json(['data' => '您没有该功能的权限！', 'status' => '0']));
+        }else{
+            return self::res(1,$request);
+        }
+    }
+
     //检测是否登陆
     public function checkIsLogin($request){
         $sess_key = Session::get('zerone_tooling_account_id');
         //如果为空返回登陆失效
-        if(empty($sess_key)) {
+        if(!empty($sess_key)) {
             return self::res(0,response()->json(['data' => '登陆状态失效', 'status' => '-1']));
         }else{
             $sess_key = Session::get('zerone_tooling_account_id');//获取管理员ID
