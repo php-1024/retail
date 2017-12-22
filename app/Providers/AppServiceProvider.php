@@ -23,5 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton('IP2Attr', function () {
+            return new \App\Services\IP2Attr\IP();
+        });
     }
 }

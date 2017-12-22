@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ToolingAccount;
 use App\Models\ToolingErrorLog;
-use App\Libraries\IP2Attr\IP;
 use App\Libraries\ZeroneLog\ToolingLog;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -20,6 +19,11 @@ class LoginController extends Controller{
      */
     public function display()
     {
+        $ip = Request::getClientIp();//获取访问者IP
+        $addr_arr = \IP::find($ip);//获取访问者地址
+        $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
+        $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
+        dump($ip);
         $data['random']=time();//生成调用验证码的随机数
         return view('Tooling/Login/display',$data);
     }
