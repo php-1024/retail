@@ -77,7 +77,7 @@ Route::group(['prefix'=>'study'],function(){
 
 /***********************程序管理系统*********************/
 Route::group(['prefix'=>'tooling'],function(){
-    Route::get('/', 'Tooling\SystemController@dashboard')->middleware('ToolingCheckIsLogin');//系统首页
+    Route::get('/', 'Tooling\SystemController@dashboard')->middleware('ToolingCheck');//系统首页
     Route::get('quit','Tooling\SystemController@quit');//退出系统
 
     //系统管理组(功能只有超级管理员能用)
