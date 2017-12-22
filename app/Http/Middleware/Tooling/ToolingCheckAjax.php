@@ -68,8 +68,9 @@ class ToolingCheckAjax {
                 }else{
                     return $next($re['response']);
                 }
-                break; //检测冻结账号提交数据是否正确
+                break;
 
+            //检测添加节点提交数据是否正确
             case "tooling/ajax/node_add_check":
                 $re = $this->checkLoginAndNodeAdd($request);
                 if($re['status']=='0'){
@@ -77,7 +78,57 @@ class ToolingCheckAjax {
                 }else{
                     return $next($re['response']);
                 }
-                break; //检测冻结账号提交数据是否正确
+                break;
+
+            //检测编辑节点提交数据是否正确
+            case "tooling/ajax/node_edit_check":
+                $re = $this->checkLoginAndNodeEdit($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            //检测添加模块提交数据是否正确
+            case "tooling/ajax/module_add_check":
+                $re = $this->checkLoginAndModuleAdd($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            //检测编辑模块提交数据是否正确
+            case "tooling/ajax/module_edit_check":
+                $re = $this->checkLoginAndModuleEdit($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            //检测添加程序提交数据是否正确
+            case "tooling/ajax/program_add_check":
+                $re = $this->checkLoginAndProgramAdd($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            //检测编辑程序提交数据是否正确
+            case "tooling/ajax/program_edit_check":
+                $re = $this->checkLoginAndProgramEdit($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
 
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
@@ -170,6 +221,95 @@ class ToolingCheckAjax {
         }
     }
 
+    //添加节点 检测是否登陆 输入数据是否正确
+    public function checkLoginAndNodeAdd($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkNodeAdd($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //编辑节点 检测是否登陆 输入数据是否正确
+    public function checkLoginAndNodeEdit($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkNodeEdit($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //添加模块 检测是否登陆 输入数据是否正确
+    public function checkLoginAndModuleAdd($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkModuleAdd($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //编辑模块 检测是否登陆 输入数据是否正确
+    public function checkLoginAndModuleEdit($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkModuleEdit($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //添加程序 检测是否登陆 输入数据是否正确
+    public function checkLoginAndProgramAdd($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkProgramAdd($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //编辑程序 检测是否登陆 输入数据是否正确
+    public function checkLoginAndProgramEdit($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkProgramEdit($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     /**********************单项检测************************/
     //检测提交节点数据提交
@@ -183,6 +323,7 @@ class ToolingCheckAjax {
         return self::res(1,$request);
     }
 
+    //检测编辑节点数据提交
     public function checkNodeEdit($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
@@ -196,6 +337,55 @@ class ToolingCheckAjax {
         return self::res(1,$request);
     }
 
+    //检测添加模块数据提交
+    public function checkModuleAdd($request){
+        if(empty($request->input('module_name'))){
+            return self::res(0,response()->json(['data' => '请输入模块名称', 'status' => '0']));
+        }
+        if(empty($request->input('nodes'))){
+            return self::res(0,response()->json(['data' => '请选择该模块的功能节点到右边选框', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑模块数据提交
+    public function checkModuleEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('module_name'))){
+            return self::res(0,response()->json(['data' => '请输入模块名称', 'status' => '0']));
+        }
+        if(empty($request->input('nodes'))){
+            return self::res(0,response()->json(['data' => '请选择该模块的功能节点到右边选框', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测添加程序数据提交
+    public function checkProgramAdd($request){
+        if(empty($request->input('program_name'))){
+            return self::res(0,response()->json(['data' => '请输入程序名称', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选功能模块', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑程序数据提交
+    public function checkProgramEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('program_name'))){
+            return self::res(0,response()->json(['data' => '请输入程序名称', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选功能模块', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
 
     //检测密码修改数据提交
     public function checkPasswordEdit($request){

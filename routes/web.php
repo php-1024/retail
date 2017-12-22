@@ -126,16 +126,16 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::post('account_edit_check','Tooling\SystemController@account_edit_check')->middleware('ToolingCheckAjax');//提交编辑账号数据
         Route::post('account_lock','Tooling\SystemController@account_lock')->middleware('ToolingCheckAjax');//提交编辑账号数据;
         Route::post('password_edit_check','Tooling\PersonalController@password_edit_check')->middleware('ToolingCheckAjax');//提交增加账号数据
-        Route::post('node_add_check','Tooling\NodeController@node_add_check')->middleware('ToolingCheckIsLoginAjax','ToolingNodeAddCheck');//提交节点数据
+        Route::post('node_add_check','Tooling\NodeController@node_add_check')->middleware('ToolingCheckAjax');//提交节点数据
         Route::post('node_edit','Tooling\NodeController@node_edit')->middleware('ToolingCheckAjax');//获取节点数据并编辑
-        Route::post('node_edit_check','Tooling\NodeController@node_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingNodeEditCheck');//检测编辑节点数据
-        Route::post('module_add_check','Tooling\ModuleController@module_add_check')->middleware('ToolingCheckIsLoginAjax','ToolingModuleAddCheck');//提交功能模块数据
+        Route::post('node_edit_check','Tooling\NodeController@node_edit_check')->middleware('ToolingCheckAjax');//检测编辑节点数据
+        Route::post('module_add_check','Tooling\ModuleController@module_add_check')->middleware('ToolingCheckAjax');//提交功能模块数据
         Route::post('module_edit','Tooling\ModuleController@module_edit')->middleware('ToolingCheckAjax');//获取功能模块数据并提交
-        Route::post('module_edit_check','Tooling\ModuleController@module_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingModuleEditCheck');
-        Route::post('program_add_check','Tooling\ProgramController@program_add_check')->middleware('ToolingCheckIsLoginAjax','ToolingProgramAddCheck');//提交功能模块数据
+        Route::post('module_edit_check','Tooling\ModuleController@module_edit_check')->middleware('ToolingCheckAjax');
+        Route::post('program_add_check','Tooling\ProgramController@program_add_check')->middleware('ToolingCheckAjax');//提交功能模块数据
         Route::post('program_parents_node','Tooling\ProgramController@program_parents_node')->middleware('ToolingCheckAjax');//获取上级程序ID
         Route::post('program_edit','Tooling\ProgramController@program_edit')->middleware('ToolingCheckAjax');//获取功能模块数据并提交
-        Route::post('program_edit_check','Tooling\ProgramController@program_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingProgramEditCheck');//获取功能模块数据并提交
+        Route::post('program_edit_check','Tooling\ProgramController@program_edit_check')->middleware('ToolingCheckAjax');//获取功能模块数据并提交
     });
 });
 /********************程序管理系统*************************/
