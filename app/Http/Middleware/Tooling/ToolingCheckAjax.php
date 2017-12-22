@@ -35,7 +35,7 @@ class ToolingCheckAjax {
     public function checkIsLogin($request){
         $sess_key = Session::get('zerone_tooling_account_id');
         //如果为空返回登陆失效
-        if(!empty($sess_key)) {
+        if(empty($sess_key)) {
             return self::res(0,response()->json(['data' => '登陆状态失效', 'status' => '-1']));
         }else{
             $sess_key = Session::get('zerone_tooling_account_id');//获取管理员ID
