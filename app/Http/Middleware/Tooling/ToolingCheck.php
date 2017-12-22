@@ -44,7 +44,6 @@ class ToolingCheck{
                 break;
 
             /****超级管理员操作页面，检测是否登陆****/
-            case "tooling/personal/password_edit"://修改登陆密码
             case "tooling/module/module_add"://添加模块
             case "tooling/module/module_list"://模块列表
             case "tooling/personal/password_edit"://修改登陆密码
