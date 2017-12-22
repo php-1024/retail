@@ -115,7 +115,7 @@ Route::group(['prefix'=>'tooling'],function(){
 
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Tooling\LoginController@display')->middleware('ToolingIsLogin');//登陆页面路由
+        Route::get('/', 'Tooling\LoginController@display')->middleware('ToolingCheck');//登陆页面路由
         Route::get('captcha/{tmp}', 'Tooling\LoginController@captcha');//验证码路由
     });
 
