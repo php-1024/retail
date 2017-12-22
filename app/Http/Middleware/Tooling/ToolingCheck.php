@@ -10,8 +10,15 @@ use Illuminate\Support\Facades\Redis;
 class ToolingCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
-        dump($route_name);
         switch($route_name){
+            case "tooling/login"://登录页,如果已经登陆则不需要再次登陆
+                //获取用户登陆存储的SessionId
+                $sess_key = Session::get('zerone_tooling_account_id');
+                //如果不为空跳转到首页
+                if(!empty($sess_key)) {
+                    return redirect('tooling');
+                }
+                break;
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);
                 if($re['status']=='0'){
@@ -21,6 +28,7 @@ class ToolingCheck{
                 }
                    break;
         }
+        return $next($request);
     }
 
     //普通页面检测用户是否登陆
