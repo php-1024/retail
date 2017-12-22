@@ -16,7 +16,7 @@ class ToolingCheck{
                 //获取用户登陆存储的SessionId
                 $sess_key = Session::get('zerone_tooling_account_id');
                 //如果不为空跳转到首页
-                if(empty($sess_key)) {
+                if(!empty($sess_key)) {
                     return redirect('tooling');
                 }
                 break;
