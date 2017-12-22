@@ -21,6 +21,7 @@ class ToolingCheck{
                 }
                 break;
 
+            case "tooling/dashboard/account_list"://账号列表
             case "tooling/dashboard/account_add"://添加账号
                 $re = $this->checkIsLogin($request);//判断是否登陆
                 if($re['status']=='0'){
