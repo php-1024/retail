@@ -70,6 +70,14 @@ class ToolingCheckAjax {
                 }
                 break; //检测冻结账号提交数据是否正确
 
+            case "tooling/ajax/node_add_check":
+                $re = $this->checkLoginAndNodeAdd($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break; //检测冻结账号提交数据是否正确
 
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
@@ -87,7 +95,7 @@ class ToolingCheckAjax {
         }
     }
 
-
+    /**********************组合检测************************/
     //添加账号检测是否登陆 是否超级管理员 输入数据是否正确
     public function checkLoginAndSuperAndAccountEdit($request){
         $re = $this->checkLoginAndSuper($request);//判断是否登陆
@@ -161,6 +169,33 @@ class ToolingCheckAjax {
             }
         }
     }
+
+
+    /**********************单项检测************************/
+    //检测提交节点数据提交
+    public function checkNodeAdd($request){
+        if(empty($request->input('node_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        }
+        if(empty($request->input('route_name'))){
+            return self::res(0,response()->json(['data' => '请输入路由名称', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    public function checkNodeEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('node_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        }
+        if(empty($request->input('route_name'))){
+            return self::res(0,response()->json(['data' => '请输入路由名称', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
 
     //检测密码修改数据提交
     public function checkPasswordEdit($request){
