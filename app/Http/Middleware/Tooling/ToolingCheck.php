@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Redis;
 class ToolingCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
-        dump($route_name);
+
         switch($route_name){
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);
+                dump($re);
                 return $next($re);
                 break;
         }
