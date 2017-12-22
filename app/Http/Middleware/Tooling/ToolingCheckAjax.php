@@ -136,6 +136,20 @@ class ToolingCheckAjax {
             }
         }
     }
+    //修改密码 检测是否登陆 输入数据是否正确
+    public function checkLoginAndPasswordEdit($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkPasswordEdit($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     //检测密码修改数据提交
     public function checkPasswordEdit($request){

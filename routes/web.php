@@ -125,7 +125,7 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::post('account_edit','Tooling\SystemController@account_edit')->middleware('ToolingCheckAjax');//获取账号数据并编辑
         Route::post('account_edit_check','Tooling\SystemController@account_edit_check')->middleware('ToolingCheckAjax');//提交编辑账号数据
         Route::post('account_lock','Tooling\SystemController@account_lock')->middleware('ToolingCheckAjax');//提交编辑账号数据;
-        Route::post('password_edit_check','Tooling\PersonalController@password_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingEditPasswordCheck');//提交增加账号数据
+        Route::post('password_edit_check','Tooling\PersonalController@password_edit_check')->middleware('ToolingCheckAjax');//提交增加账号数据
         Route::post('node_add_check','Tooling\NodeController@node_add_check')->middleware('ToolingCheckIsLoginAjax','ToolingNodeAddCheck');//提交节点数据
         Route::post('node_edit','Tooling\NodeController@node_edit')->middleware('ToolingCheckAjax');//获取节点数据并编辑
         Route::post('node_edit_check','Tooling\NodeController@node_edit_check')->middleware('ToolingCheckIsLoginAjax','ToolingNodeEditCheck');//检测编辑节点数据
