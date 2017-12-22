@@ -4,7 +4,7 @@ namespace App\Services\IP2Attr;
     全球 IPv4 地址归属地数据库(IPIP.NET 版)
 */
 
-class IP
+class IP2Attr
 {
     private static $ip     = NULL;
 
