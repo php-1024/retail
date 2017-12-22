@@ -11,7 +11,7 @@ class ToolingCheckAjax {
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
-            case "tooling/ajax/checklogin"://后台首页
+            case "tooling/ajax/checklogin"://检测登陆数据提交
                 $re = $this->checkLoginPost($request);
                 if($re['status']=='0'){
                     return $re['response'];
@@ -23,6 +23,16 @@ class ToolingCheckAjax {
             //检测是否登陆且是否登陆且是否超级管理员
             case "tooling/ajax/account_edit":
                 $re = $this->checkLoginAndSuper($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            //检测添加账号提交数据是否正确
+            case "tooling/ajax/account_add_check":
+                $re = $this->checkLoginAndSuperAndAccountAdd($request);
                 if($re['status']=='0'){
                     return $re['response'];
                 }else{
@@ -46,6 +56,22 @@ class ToolingCheckAjax {
         }
     }
 
+
+    //添加账号检测是否登陆 是否超级管理员 输入数据是否正确
+    public function checkLoginAndSuperAndAccountAdd($request){
+        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkAccountAdd($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测是否登陆且是否超级管理员
     public function checkLoginAndSuper($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
@@ -59,6 +85,23 @@ class ToolingCheckAjax {
                 return self::res(1,$re2['response']);
             }
         }
+    }
+
+    //检测账号添加数据提交
+    public function checkAccountAdd($request){
+        if(empty($request->input('account'))){
+            return self::res(0,response()->json(['data' => '请输入登陆账号', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('repassword'))){
+            return self::res(0,response()->json(['data' => '请再次输入登陆密码', 'status' => '0']));
+        }
+        if($request->input('password')!=$request->input('repassword')){
+            return self::res(0,response()->json(['data' => '两次输入密码不一致', 'status' => '0']));
+        }
+        return self::res(1,$request);
     }
 
     //检测是否超级管理员
