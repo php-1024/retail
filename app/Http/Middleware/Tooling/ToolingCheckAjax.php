@@ -5,6 +5,7 @@
 namespace App\Http\Middleware\Tooling;
 use Closure;
 use Session;
+use Illuminate\Support\Facades\Redis;
 
 class ToolingCheckAjax {
     public function handle($request,Closure $next){
