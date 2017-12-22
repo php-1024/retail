@@ -41,7 +41,7 @@ class ToolingCheckAjax {
                 break;
 
             //检测编辑账号提交数据是否正确
-            case "tooling/ajax/account_add_check":
+            case "tooling/ajax/account_edit_check":
                 $re = $this->checkLoginAndSuperAndAccountAdd($request);
                 if($re['status']=='0'){
                     return $re['response'];
@@ -115,7 +115,7 @@ class ToolingCheckAjax {
     //检测账号添加数据提交
     public function checkAccountEdit($request){
         if(empty($request->input('id'))){
-            return self::res(response()->json(['data' => '数据传输错误', 'status' => '0']));
+            return self::res( response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
         if(empty($request->input('password'))){
             return self::res(response()->json(['data' => '请输入登陆密码', 'status' => '0']));
