@@ -25,8 +25,8 @@ class LoginController extends Controller{
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
         dump($ip);
         echo 123;
-        $data['random']=time();//生成调用验证码的随机数
-        return view('Tooling/Login/display',$data);
+        //$data['random']=time();//生成调用验证码的随机数
+        //return view('Tooling/Login/display',$data);
     }
     /*
      * 生成验证码
