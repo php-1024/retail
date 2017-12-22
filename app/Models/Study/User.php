@@ -20,7 +20,7 @@ class User extends Model
     }
 
     public function searchRoles(){
-        $list = $this->roles()->where('role_name','管理员')->get();
+        $list = $this->where('name','zh1')->roles()->get();
         return $list;
     }
 }
