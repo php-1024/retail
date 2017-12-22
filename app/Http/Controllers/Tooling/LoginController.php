@@ -24,6 +24,7 @@ class LoginController extends Controller{
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
         dump($ip);
+        echo 123;
         $data['random']=time();//生成调用验证码的随机数
         return view('Tooling/Login/display',$data);
     }
