@@ -60,6 +60,17 @@ class ToolingCheckAjax {
                 }
                 break;
 
+            //检测冻结账号提交数据是否正确
+            case "tooling/ajax/password_edit_check":
+                $re = $this->checkLoginAndPasswordEdit($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break; //检测冻结账号提交数据是否正确
+
+
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
