@@ -91,8 +91,8 @@ Route::group(['prefix'=>'tooling'],function(){
     //个人中心组
     Route::group(['prefix'=>'personal'],function(){
         Route::get('password_edit', 'Tooling\PersonalController@password_edit')->middleware('ToolingCheck');//修改密码路由
-        Route::get('operation_log','Tooling\PersonalController@operation_log_list')->middleware('ToolingCheckIsLogin','ToolingCheckSearchDate');//我的操作记录
-        Route::get('login_log','Tooling\PersonalController@login_log_list')->middleware('ToolingCheckIsLogin','ToolingCheckSearchDate');//所有登陆记录
+        Route::get('operation_log','Tooling\PersonalController@operation_log_list')->middleware('ToolingCheck');//我的操作记录
+        Route::get('login_log','Tooling\PersonalController@login_log_list')->middleware('ToolingCheck');//所有登陆记录
     });
 
     //功能模块组
@@ -103,14 +103,14 @@ Route::group(['prefix'=>'tooling'],function(){
 
     //节点管理组
     Route::group(['prefix'=>'node'],function(){
-        Route::get('node_add', 'Tooling\NodeController@node_add')->middleware('ToolingCheckIsLogin');//修改密码路由
-        Route::get('node_list','Tooling\NodeController@node_list')->middleware('ToolingCheckIsLogin');//修改密码路由
+        Route::get('node_add', 'Tooling\NodeController@node_add')->middleware('ToolingCheck');//修改密码路由
+        Route::get('node_list','Tooling\NodeController@node_list')->middleware('ToolingCheck');//修改密码路由
     });
 
     //程序管理组
     Route::group(['prefix'=>'program'],function(){
-        Route::get('program_add', 'Tooling\ProgramController@program_add')->middleware('ToolingCheckIsLogin');//修改密码路由
-        Route::get('program_list','Tooling\ProgramController@program_list')->middleware('ToolingCheckIsLogin');//修改密码路由
+        Route::get('program_add', 'Tooling\ProgramController@program_add')->middleware('ToolingCheck');//修改密码路由
+        Route::get('program_list','Tooling\ProgramController@program_list')->middleware('ToolingCheck');//修改密码路由
     });
 
     //登陆页面组

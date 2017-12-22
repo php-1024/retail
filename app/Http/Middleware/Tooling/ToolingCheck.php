@@ -21,7 +21,7 @@ class ToolingCheck{
                 }
                 break;
 
-            /****超级管理员操作页面，不带日期搜索****/
+            /****检测用户是否登陆 是否超级管理员****/
             case "tooling/dashboard/account_list"://账号列表
             case "tooling/dashboard/account_add"://添加账号
                 $re = $this->checkLoginAndSuper($request);//判断是否登陆和是否超级管理员
@@ -32,10 +32,10 @@ class ToolingCheck{
                 }
                 break;
 
-            /****超级管理员操作页面，带日期搜索****/
+            /****检测用户是否登陆 是否超级管理员 日期输入是否正确****/
             case "tooling/dashboard/operation_log"://操作日志
-            case "tooling/dashboard/operation_log"://登陆日志
-                $re = $this->checkLoginAndSuperAndDate($request);//检测用户是否登陆 是否超级管理员 日期输入是否正确
+            case "tooling/dashboard/login_log"://登陆日志
+                $re = $this->checkLoginAndSuperAndDate($request);
                 if($re['status']=='0'){
                     return $re['response'];
                 }else{
@@ -43,9 +43,24 @@ class ToolingCheck{
                 }
                 break;
 
-            /****超级管理员操作页面，检测是否登陆****/
+            /****普通页面，检测是否登陆，日期输入是否正确****/
+            case "tooling/personal/operation_log"://我的操作日志
+            case "tooling/personal/login_log"://我的登陆日志
+                $re = $this->checkLoginAndDate($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
+            /****仅检测是否登陆****/
             case "tooling/module/module_add"://添加模块
             case "tooling/module/module_list"://模块列表
+            case "tooling/node/node_add"://添加节点
+            case "tooling/node/node_list"://节点列表
+            case "tooling/program/program_add"://添加程序
+            case "tooling/program/program_list"://程序列表
             case "tooling/personal/password_edit"://修改登陆密码
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);//判断是否登陆
@@ -62,6 +77,21 @@ class ToolingCheck{
     //检测用户是否登陆 是否超级管理员 日期输入是否正确
     public function checkLoginAndSuperAndDate($request){
         $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkDate($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测用户是否登陆 日期输入是否正确
+    public function checkLoginAndDate($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
         if($re['status']=='0'){
             return $re;
         }else{
