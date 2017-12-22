@@ -40,6 +40,16 @@ class ToolingCheckAjax {
                 }
                 break;
 
+            //检测编辑账号提交数据是否正确
+            case "tooling/ajax/account_add_check":
+                $re = $this->checkLoginAndSuperAndAccountAdd($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -56,6 +66,21 @@ class ToolingCheckAjax {
         }
     }
 
+
+    //添加账号检测是否登陆 是否超级管理员 输入数据是否正确
+    public function checkLoginAndSuperAndAccountEdit($request){
+        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkAccountEdit($re['response']);//判断是否超级管理员
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     //添加账号检测是否登陆 是否超级管理员 输入数据是否正确
     public function checkLoginAndSuperAndAccountAdd($request){
@@ -85,6 +110,23 @@ class ToolingCheckAjax {
                 return self::res(1,$re2['response']);
             }
         }
+    }
+
+    //检测账号添加数据提交
+    public function checkAccountEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return self::res(response()->json(['data' => '请输入登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('repassword'))){
+            return self::res(response()->json(['data' => '请再次输入登陆密码', 'status' => '0']));
+        }
+        if($request->input('password')!=$request->input('repassword')){
+            return self::res(response()->json(['data' => '两次输入密码不一致', 'status' => '0']));
+        }
+        return self::res(1,$request);
     }
 
     //检测账号添加数据提交
