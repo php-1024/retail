@@ -17,7 +17,7 @@ class ToolingLoginLog extends Model{
     }
 
     public static function getList($where,$limit,$orderby,$sort='DESC'){
-        return self::where($where)->limit($limit)->orderBy($orderby,$sort)->get();
+        return self::with('accounts')->where($where)->limit($limit)->orderBy($orderby,$sort)->get();
     }
 
     public static function addLoginLog($account_id,$ip,$addr){
