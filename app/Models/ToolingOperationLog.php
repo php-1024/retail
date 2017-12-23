@@ -20,5 +20,14 @@ class ToolingOperationLog extends Model{
     public static function getList($where,$limit,$orderby,$sort='DESC'){
         return self::with('accounts')->where($where)->where('is_delete','0')->limit($limit)->orderBy($orderby,$sort)->get();
     }
+
+    //添加操作日志
+    public static function addOperationLog($account_id,$route_name,$info){
+        $operation_log = new ToolingOperationLog();
+        $operation_log->account_id = $account_id;
+        $operation_log->route_name = $route_name;
+        $operation_log->operation_info = $info;
+        $operation_log->save();
+    }
 }
 ?>
