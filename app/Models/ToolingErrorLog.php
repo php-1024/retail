@@ -25,6 +25,7 @@ class ToolingErrorLog extends Model{
         dump($ip);
         $error_log = self::where('ip',$ip)->first();//获取该IP的错误记录
         dump($error_log);
+        /*
         exit;
         if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
             $this->ip = $ip;
@@ -33,6 +34,7 @@ class ToolingErrorLog extends Model{
         }else{
             $this->where('ip',$ip)->increment('error_time');
         }
+        */
     }
 }
 ?>
