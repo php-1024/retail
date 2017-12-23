@@ -42,13 +42,8 @@ class NodeController extends Controller{
     public function node_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $node = new Node();
         $node_name = $request->input('node_name');
         $search_data = ['node_name'=>$node_name];
-        if(!empty($node_name)){
-            $node = $node->where('node_name','like','%'.$node_name.'%');
-        }
         $list = Node::getPaginage([[ 'node_name','like','%'.$node_name.'%' ]],15,'id');
         return view('Tooling/Node/node_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
     }
@@ -74,9 +69,8 @@ class NodeController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $node = new Node();//重新实例化模型，避免重复
-                $node->where('id',$id)->update(['node_name'=>$node_name,'route_name'=>$route_name]);//添加账号
-                ToolingLog::setOperationLog($admin_data['admin_id'],$current_route_name,'修改了节点'.$node_name);//保存操作记录
+                Node::editNote([['id',$id]],['node_name'=>$node_name,'route_name'=>$route_name]);//编辑节点
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'修改了节点'.$node_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
