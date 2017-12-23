@@ -23,7 +23,8 @@ class LoginController extends Controller{
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
-        ToolingErrorLog::addErrorTimes($ip);
+        $error = new ToolingErrorLog();
+        $error->addErrorTimes($ip);
         return view('Tooling/Login/display');
     }
     /*
