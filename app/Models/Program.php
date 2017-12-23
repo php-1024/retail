@@ -9,8 +9,10 @@ class Program extends Model{
     protected $table = 'program';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    public function fromDateTime($value){
-        return strtotime(parent::fromDateTime($value));
+    public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+
+    public static function getCount(){
+        return self::where('is_delete','0')->count();
     }
 
 }

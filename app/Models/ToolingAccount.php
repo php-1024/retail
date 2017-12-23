@@ -21,7 +21,7 @@ class ToolingAccount extends Model{
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::where($where)->first();
+        return self::where($where)->where('is_delete','0')->first();
     }
 
 }

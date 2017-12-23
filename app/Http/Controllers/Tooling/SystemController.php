@@ -19,6 +19,8 @@ class SystemController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+
+
         $where = [];
         if($admin_data['admin_is_super']!=1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
