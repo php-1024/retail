@@ -32,7 +32,7 @@ class ToolingOperationLog extends Model{
 
     //获取不联表的分页数据
     public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
-        $model = self::where('is_delete',0)->where($where);
+        $model = self::where('is_delete','0')->where($where);
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
