@@ -148,14 +148,13 @@ class SystemController extends Controller{
         $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = $time_nd_format = 0; //初始化
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
-            $time_st_format = strtotime($time_st . ' 00:00:00');
-            $time_nd_format = strtotime($time_nd . ' 23:59:59');
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
-
-        $list = ToolingOperationLog::getPaginage($account,$time_st_format,$time_nd_format,15,'id');
+        $list=ToolingOperationLog::getPaginage($account,$time_st_format,$time_nd_format,15,'id');
         return view('Tooling/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 

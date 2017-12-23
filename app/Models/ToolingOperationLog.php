@@ -32,15 +32,16 @@ class ToolingOperationLog extends Model{
 
     //获取分页数据
     public static function getPaginage($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
-        $model = self::where('is_delete','0');
+        $model = self::join('tooling_account',function($join){
+            $join->on('tooling_operation_log.account_id','=','tooling_account.id');
+        })->select('tooling_account.account','tooling_operation_log.*');
         if(!empty($account)){
-            $model=$model->with(['accounts'=>function($query) use ($account){
-                $query->where('account','like','%'.$account.'%');
-            }]);
+            $model =$model->where('account','like','%'.$account.'%');
         }
         if(!empty($time_st_format) && !empty($time_nd_format)){
-            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+            $model = $model->whereBetween('tooling_operation_log.created_at',[$time_st_format,$time_nd_format]);
         }
+        $model = $model->paginate(15);
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
