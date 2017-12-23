@@ -11,10 +11,6 @@ class ToolingLoginLog extends Model{
     public $timestamps = true;//是否使用时间戳
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    public function fromDateTime($value){
-        return strtotime(parent::fromDateTime($value));
-    }
-
     public static function addLoginLog($account_id,$ip,$addr){
         $loginlog = new ToolingLoginLog();//新建模型
         $loginlog->account_id = $account_id;//用户账号ID
