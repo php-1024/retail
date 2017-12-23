@@ -61,7 +61,7 @@ class SystemController extends Controller{
         $admin = new ToolingAccount();//实例化模型
         $info = $admin->where('account',$account)->where('is_delete','0')->pluck('id')->toArray();//查询是否有相同的账号存在
 
-        if(!empty($info)){//如果存在报错
+        if(ToolingAccount::checkRowExists([[ $account , 'account' ]])){//如果存在相同的账号则报错
             return response()->json(['data' => '该账号已存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
