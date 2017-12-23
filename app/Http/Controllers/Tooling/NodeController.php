@@ -28,7 +28,7 @@ class NodeController extends Controller{
             DB::beginTransaction();
             try{
                 Node::addNode(['node_name'=>$node_name,'route_name'=>$route_name]);
-                ToolingLog::setOperationLog($admin_data['admin_id'],$current_route_name,'新增了节点'.$node_name);//保存操作记录
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'新增了节点'.$node_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
