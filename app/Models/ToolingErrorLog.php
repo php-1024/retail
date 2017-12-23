@@ -23,8 +23,9 @@ class ToolingErrorLog extends Model{
     //根据用户IP增加错误次数
     public function addErrorTimes($ip){
         $model = new ToolingErrorLog();
-        $error_log = $this->where('ip',$ip)->first();//获取该IP的错误记录
+        $error_log = $model->where('ip',$ip)->first();//获取该IP的错误记录
         if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
+            $model->ip = $ip;
             $model->error_time = 1;
             $model->save();
         }else{
