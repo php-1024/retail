@@ -46,7 +46,7 @@
 
                         <div class="forum-title">
 
-                            <h3>管理人员统计</h3>
+                            <h3>程序统计</h3>
                         </div>
 
                         <div class="forum-item active">
@@ -62,7 +62,7 @@
 
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                14套
+                                                {{ $count_data['program_count'] }}套
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -82,7 +82,7 @@
 
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                150个
+                                                {{ $count_data['module_count'] }}个
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                1300
+                                                {{ $count_data['node_count'] }}个
                                             </span>
                                     <div>
                                         <small>总计</small>
