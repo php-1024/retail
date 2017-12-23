@@ -154,12 +154,8 @@ class SystemController extends Controller{
             $time_nd_format = strtotime($time_nd . ' 23:59:59');
         }
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
-        $where = [];
-        if(!empty($account)){
-            $where[] = ['account','like','%'.$account.'%'];
-        }
 
-        $list = ToolingOperationLog::getPaginage($where,$time_st_format,$time_nd_format,15,'id');
+        $list = ToolingOperationLog::getPaginage($account,$time_st_format,$time_nd_format,15,'id');
         return view('Tooling/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 

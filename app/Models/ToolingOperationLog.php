@@ -31,8 +31,13 @@ class ToolingOperationLog extends Model{
     }
 
     //获取分页数据
-    public static function getPaginage($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('accounts')->where('is_delete','0');
+    public static function getPaginage($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::where('is_delete','0');
+        if(!empty($account)){
+            $model=$model->with(['accounts'=>function($query) use ($account){
+                $query->where('account','like','%'.$account.'%');
+            }]);
+        }
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
