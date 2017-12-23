@@ -70,7 +70,7 @@ class LoginController extends Controller{
                     ToolingErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
-                    ToolingLog::clearErrorLog($ip);//清除掉错误记录
+                    ToolingErrorLog::clearErrorTimes($ip);//清除掉错误记录
                     //插入登录记录
                     if(ToolingLog::setLoginLog($admininfo['id'],$ip,$addr)) {
                         Session::put('zerone_tooling_account_id',encrypt($admininfo['id']));//存储登录session_id为当前用户ID
