@@ -33,5 +33,11 @@ class ToolingErrorLog extends Model{
             $error_log->save();
         }
     }
+
+    //登录成功错误记录清0
+    public static function clearErrorTimes($ip){
+        self::where('ip',$ip)->update(['error_time'=>0]);
+    }
+
 }
 ?>
