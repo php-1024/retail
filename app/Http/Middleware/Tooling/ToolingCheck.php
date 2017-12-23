@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redis;
 class ToolingCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
-        dump($route_name);
         switch($route_name){
             /*****登录页,如果已经登陆则不需要再次登陆*****/
             case "tooling/login"://登录页,如果已经登陆则不需要再次登陆
