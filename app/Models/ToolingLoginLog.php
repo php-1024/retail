@@ -11,8 +11,13 @@ class ToolingLoginLog extends Model{
     public $timestamps = true;//是否使用时间戳
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //关联程序管理工具账户表
     public function accounts(){
         return $this->belongsTo('App\Models\ToolingAccount', 'account_id');
+    }
+
+    public static function getList($where,$limit,$orderby,$sort='DESC'){
+        return self::where($where)->limit($limit)->orderBy($orderby,$sort)->get();
     }
 
     public static function addLoginLog($account_id,$ip,$addr){
