@@ -56,8 +56,7 @@ class LoginController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
         //实例化错误记录表模型
-        $error = new ToolingErrorLog();
-        $error_log = $error::getOne([['ip',$ip]]);//查询该IP下的错误记录
+        $error_log = ToolingErrorLog::getOne([['ip',$ip]]);//查询该IP下的错误记录
 
 
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
@@ -65,15 +64,14 @@ class LoginController extends Controller{
             $admininfo = ToolingAccount::getOne([['account', $username]])->toArray();//根据账户查询用户信息
             if (!empty($admininfo)) {//如果查询不到，则提示账号或密码错误
                 if ($encryptPwd != $admininfo['password']) {//查询密码是否对的上
-                    $error
+                    ToolingErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
                 } elseif($admininfo['status']=='0'){//查询账号状态
-                    ToolingLog::setErrorLog($ip);//记录错误次数
+                    ToolingErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
                     ToolingLog::clearErrorLog($ip);//清除掉错误记录
                     //插入登录记录
-
                     if(ToolingLog::setLoginLog($admininfo['id'],$ip,$addr)) {
                         Session::put('zerone_tooling_account_id',encrypt($admininfo['id']));//存储登录session_id为当前用户ID
                         //构造用户缓存数据
@@ -88,7 +86,7 @@ class LoginController extends Controller{
                     }
                 }
             } else {
-                ToolingLog::setErrorLog($ip);//记录错误次数
+                ToolingErrorLog::addErrorTimes($ip);
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
             }
         }else{
