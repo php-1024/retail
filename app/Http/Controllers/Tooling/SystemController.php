@@ -20,7 +20,7 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $login_log_list = ToolingLoginLog::getList([],10,'id');
-        dump($login_log_list);
+
         return view('Tooling/System/dashboard',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
