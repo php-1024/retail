@@ -99,7 +99,7 @@
                                 @foreach($list as $key=>$val)
                                 <tr>
                                     <td>{{  $val->id }}</td>
-                                    <td>{{  }}</td>
+                                    <td></td>
                                     <td>{{  $val->operation_info }}</td>
                                     <td>{{  $val->created_at }}0</td>
                                 </tr>
