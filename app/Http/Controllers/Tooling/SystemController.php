@@ -38,7 +38,7 @@ class SystemController extends Controller{
 
         $list = $log->join('tooling_account',function($join){
             $join->on('tooling_login_log.account_id','=','tooling_account.id');
-        })->select('tooling_account.account','tooling_login_log.*')->orderBy('id','desc')->paginate(15);
+        })->select('tooling_account.account','tooling_login_log.*')->orderBy('id','desc')->paginate(10);
         return view('Tooling/System/dashboard',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
