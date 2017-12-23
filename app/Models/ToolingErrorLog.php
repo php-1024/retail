@@ -20,6 +20,7 @@ class ToolingErrorLog extends Model{
     public static function addErrorTimes($ip){
         $error_log = self::where('ip',$ip)->first();//获取该IP的错误记录
         if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
+            $error_log = self;
             $error_log->ip = $ip;
             $error_log->error_time = 1;
             $error_log->save();
