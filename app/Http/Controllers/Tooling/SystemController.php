@@ -144,28 +144,22 @@ class SystemController extends Controller{
     //所有操作记录
     public function operation_log_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-
         $route_name = $request->path();//获取当前的页面路由
-        $log = new ToolingOperationLog();//实例化模型
         $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
         $time_st_format = strtotime($time_st.' 00:00:00');
         $time_nd_format = strtotime($time_nd.' 23:59:59');
-
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
-
+        $where = [];
+        $whereBetween = [];
         if(!empty($account)){
-            $log = $log->where('account','like','%'.$account.'%');
+            $where[] = ['account','like','%'.$account.'%'];
         }
         if(!empty($time_st) && !empty($time_nd)){
-            $log = $log->whereBetween('tooling_operation_log.created_at',[$time_st_format,$time_nd_format]);
+            $whereBetween[] = ['tooling_operation_log.created_at',[$time_st_format,$time_nd_format]];
         }
-
-
-        $list = $log->join('tooling_account',function($join){
-            $join->on('tooling_operation_log.account_id','=','tooling_account.id');
-        })->select('tooling_account.account','tooling_operation_log.*')->paginate(15);
+        $list = ToolingOperationLog::getPaginage($where,$whereBetween,15,'id');
         return view('Tooling/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 

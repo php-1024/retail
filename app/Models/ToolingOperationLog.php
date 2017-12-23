@@ -29,5 +29,10 @@ class ToolingOperationLog extends Model{
         $operation_log->operation_info = $info;
         $operation_log->save();
     }
+
+    //获取分页数据
+    public static function getPaginage($where,$whereBetween,$paginate,$orderby,$sort='DESC'){
+        return self::where($where)->where('is_delete','0')->whereBetween($whereBetween)->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
