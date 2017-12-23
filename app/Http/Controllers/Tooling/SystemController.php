@@ -148,6 +148,7 @@ class SystemController extends Controller{
         $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
+        $time_st_format = $time_nd_format = 0; //初始化
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');
             $time_nd_format = strtotime($time_nd . ' 23:59:59');
