@@ -22,10 +22,8 @@ class NodeController extends Controller{
         $node_name = $request->input('node_name');//提交上来的节点名称
         $route_name = $request->input('route_name');//提交上来的路由名称
 
-        $node = new Node();
-        $info = $node->where('node_name',$node_name)->orWhere('route_name',$route_name)->pluck('id')->toArray();//查询是否有相同的节点名称或路由名称存在
-        if(!empty($info)){
-            return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
+        if(Node::checkRowExists([[ 'node_name',$node_name ]])){
+            return response()->json(['data' => '节点名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
