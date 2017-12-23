@@ -29,9 +29,9 @@ class PersonalController extends Controller{
         $old_encryptPwd = md5("lingyikeji".$old_encrypted.$encrypt_key);//加密旧密码第二重
 
         $admin = new ToolingAccount();
-        $sql_password = $admin->where('id',$admin_data['admin_id'])->where('is_delete','0')->pluck('password')->toArray();//查询当前用户的登录密码
+        $sql_password = ToolingAccount::getPluck([[ 'id',$admin_data['admin_id'] ]] , 'password');
         $sql_password = $sql_password[0];//数组转化为字符串
-
+        dump($sql_password);
         if($old_encryptPwd != $sql_password){//判断原登录密码是否输入正确
             return response()->json(['data' => '原登录密码输入错误', 'status' => '0']);
         }

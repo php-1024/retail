@@ -25,7 +25,7 @@ class ToolingAccount extends Model{
     }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
-        $row = self::where($where)->where('is_delete','0')->pluck('id')->toArray();
+        $row = self::getPluck($where,'id')->toArray();
         if(empty($row)){
             return false;
         }else{
@@ -58,5 +58,9 @@ class ToolingAccount extends Model{
         return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->where('is_delete','0')->pluck($pluck);
+    }
 }
 ?>
