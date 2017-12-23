@@ -126,7 +126,6 @@ class SystemController extends Controller{
         $account_status = $request->input('account_status');//当前用户的状态
         DB::beginTransaction();
         try{
-
             if($account_status==1) {
                 ToolingAccount::editAccount([['id',$id]],['status'=>'0']);
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'], $route_name, '冻结了管理员账号' . $account . '');
@@ -136,7 +135,6 @@ class SystemController extends Controller{
             }
             DB::commit();
         }catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败，请检查', 'status' => '0']);
         }
