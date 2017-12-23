@@ -49,7 +49,7 @@ class NodeController extends Controller{
         if(!empty($node_name)){
             $node = $node->where('node_name','like','%'.$node_name.'%');
         }
-        $list = $node->paginate(15);
+        $list = Node::getPaginage([[ 'node_name','like','%'.$node_name.'%' ]],15,'id');
         return view('Tooling/Node/node_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
     }
 
