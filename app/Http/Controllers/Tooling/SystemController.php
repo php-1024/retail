@@ -25,9 +25,10 @@ class SystemController extends Controller{
                 ['account_id'=>$admin_data['admin_id']]
             ];
         }
-        $login_log_list = ToolingLoginLog::getList($where,10,'id');
+        $login_log_list = ToolingLoginLog::getList($where,10,'id');//登录记录
+        $operation_log_list = ToolingLoginLog::getList($where,10,'id');//操作记录
 
-        return view('Tooling/System/dashboard',['login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Tooling/System/dashboard',['operation_log_list'=>$operation_log_list,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //新增账号

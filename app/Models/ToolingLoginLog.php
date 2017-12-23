@@ -16,6 +16,7 @@ class ToolingLoginLog extends Model{
         return $this->belongsTo('App\Models\ToolingAccount', 'account_id');
     }
 
+    //查询获取列表
     public static function getList($where,$limit,$orderby,$sort='DESC'){
         return self::with('accounts')->where($where)->limit($limit)->orderBy($orderby,$sort)->get();
     }
