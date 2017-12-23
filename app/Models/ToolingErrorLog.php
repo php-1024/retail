@@ -30,7 +30,7 @@ class ToolingErrorLog extends Model{
             $model->error_time = 1;
             $model->save();
         }else{
-            $error_log->error_time = $this->error_time+1;
+            $error_log->error_time = $error_log->error_time+1;
             $error_log->save();
         }
     }
