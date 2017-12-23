@@ -24,14 +24,14 @@ class ToolingErrorLog extends Model{
     public function addErrorTimes($ip){
         $model = new ToolingErrorLog();
         $error_log = $model->where('ip',$ip)->first();//获取该IP的错误记录
-        dump($error_log);
+
         if(empty($error_log)){//没有错误记录，插入错误记录，有错误记录，更新错误记录
             $model->ip = $ip;
             $model->error_time = 1;
             $model->save();
         }else{
-            $model->error_time = $this->error_time+1;
-            $model->save();
+            $error_log->error_time = $this->error_time+1;
+            $error_log->save();
         }
     }
 }
