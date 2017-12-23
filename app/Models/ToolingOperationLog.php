@@ -41,7 +41,6 @@ class ToolingOperationLog extends Model{
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('tooling_operation_log.created_at',[$time_st_format,$time_nd_format]);
         }
-
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
