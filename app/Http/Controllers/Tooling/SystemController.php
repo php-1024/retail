@@ -83,7 +83,7 @@ class SystemController extends Controller{
         if(!empty($account)){
             $where[] = ['account','like','%'.$account.'%'];
         }
-        $list = ToolingAccount::getPaginage($where,15,'id');
+        $list = ToolingAccount::getPaginage($where,1,'id');
 
         return view('Tooling/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
