@@ -9,9 +9,11 @@ class Node extends Model{
     protected $table = 'node';
     protected $primaryKey = 'id';
     public $timestamps = true;
+    public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    public function fromDateTime($value){
-        return strtotime(parent::fromDateTime($value));
+    public static function getCount(){
+        return self::where('is_delete','0')->count();
     }
+
 }
 ?>

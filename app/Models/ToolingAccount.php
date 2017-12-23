@@ -21,7 +21,16 @@ class ToolingAccount extends Model{
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::where($where)->first();
+        return self::where($where)->where('is_delete','0')->first();
+    }
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where){
+        $row = self::where($where)->where('is_delete','0')->pluck('id')->toArray();
+        if(empty($row)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

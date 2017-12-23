@@ -46,7 +46,7 @@
 
                         <div class="forum-title">
 
-                            <h3>管理人员统计</h3>
+                            <h3>程序统计</h3>
                         </div>
 
                         <div class="forum-item active">
@@ -62,7 +62,7 @@
 
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                14套
+                                                {{ $count_data['program_count'] }}套
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -82,7 +82,7 @@
 
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                150个
+                                                {{ $count_data['module_count'] }}个
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                1300
+                                                {{ $count_data['node_count'] }}个
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -125,7 +125,6 @@
                             <table class="table table-hover no-margins">
                                 <thead>
                                 <tr>
-                                    <th>id</th>
                                     <th>用户</th>
                                     <th>登陆IP</th>
                                     <th>登陆地址</th>
@@ -135,7 +134,6 @@
                                 <tbody>
                                 @foreach($login_log_list as $key=>$val)
                                     <tr>
-                                        <td>{{  $val->id }}</td>
                                         <td>{{  $val->accounts->account }}</td>
                                         <td>{{  long2ip($val->ip) }}</td>
                                         <td>{{  $val->ip_position }}</td>
@@ -163,66 +161,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($operation_log_list as $key=>$val)
                                 <tr>
-                                    <td>admin</td>
+                                    <td>{{ $val->accounts->account }}</td>
 
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
+                                    <td>{{ $val->operation_info }}</td>
+                                    <td>{{ $val->created_at }}</td>
                                 </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

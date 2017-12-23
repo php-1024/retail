@@ -3,6 +3,7 @@
  * 系统管理
  */
 namespace App\Http\Controllers\Tooling;
+use App\Models\ModuleNode;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ToolingAccount;
 use App\Models\ToolingOperationLog;
 use App\Models\ToolingLoginLog;
+use App\Models\Node;
+use App\Models\Module;
+use App\Models\Program;
 use App\Libraries\ZeroneLog\ToolingLog;
 
 class SystemController extends Controller{
@@ -19,15 +23,21 @@ class SystemController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+        $count_data = [];//统计数据
+        $count_data['node_count'] = Node::getCount();//节点数量统计
+        $count_data['module_count'] = Module::getCount();//模块数量统计
+        $count_data['program_count'] = Program::getCount();//程序数量统计
+
         $where = [];
         if($admin_data['admin_is_super']!=1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
                 ['account_id'=>$admin_data['admin_id']]
             ];
         }
-        $login_log_list = ToolingLoginLog::getList($where,10,'id');
+        $login_log_list = ToolingLoginLog::getList($where,10,'id');//登录记录
+        $operation_log_list = ToolingOperationLog::getList($where,10,'id');//操作记录
 
-        return view('Tooling/System/dashboard',['login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
+        return view('Tooling/System/dashboard',['count_data'=>$count_data,'operation_log_list'=>$operation_log_list,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //新增账号
@@ -48,10 +58,7 @@ class SystemController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$encrypt_key);//加密密码第二重
 
-        $admin = new ToolingAccount();//实例化模型
-        $info = $admin->where('account',$account)->where('is_delete','0')->pluck('id')->toArray();//查询是否有相同的账号存在
-
-        if(!empty($info)){//如果存在报错
+        if(ToolingAccount::checkRowExists([[ 'account' , $account  ]])){//如果存在相同的账号则报错
             return response()->json(['data' => '该账号已存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
