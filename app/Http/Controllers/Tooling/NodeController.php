@@ -29,10 +29,7 @@ class NodeController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $node = new Node();//重新实例化模型，避免重复
-                $node->node_name = $node_name;//节点名称
-                $node->route_name = $route_name;//路由名称
-                $node->save();//添加账号
+                Node::addNode(['node_name'=>$node_name,'route_name'=>$route_name]);
                 ToolingLog::setOperationLog($admin_data['admin_id'],$current_route_name,'新增了节点'.$node_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
