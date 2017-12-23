@@ -32,6 +32,7 @@ class PersonalController extends Controller{
         $sql_password = ToolingAccount::getPluck([[ 'id',$admin_data['admin_id'] ]] , 'password');
         $sql_password = $sql_password[0];//数组转化为字符串
         dump($sql_password);
+        exit();
         if($old_encryptPwd != $sql_password){//判断原登录密码是否输入正确
             return response()->json(['data' => '原登录密码输入错误', 'status' => '0']);
         }
