@@ -15,7 +15,7 @@ class ToolingLoginLog extends Model{
         return strtotime(parent::fromDateTime($value));
     }
 
-    public function addLoginLog($account_id,$ip,$addr){
+    public static function addLoginLog($account_id,$ip,$addr){
         $loginlog = new ToolingLoginLog();//新建模型
         $loginlog->account_id = $account_id;//用户账号ID
         $loginlog->ip = $ip;//登录IP
