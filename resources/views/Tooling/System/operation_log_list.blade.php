@@ -101,7 +101,7 @@
                                     <td>{{  $val->id }}</td>
                                     <td></td>
                                     <td>{{  $val->operation_info }}</td>
-                                    <td>{{  $val->created_at }}0</td>
+                                    <td>{{  $val->created_at }}</td>
                                 </tr>
                                 @endforeach
                                 </tbody>
