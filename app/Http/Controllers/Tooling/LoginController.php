@@ -19,12 +19,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $ip = Request::getClientIp();//获取访问者IP
-        $addr_arr = \IP2Attr::find($ip);//获取访问者地址
-        $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
-        $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
-        $error = new ToolingErrorLog();
-        $error->addErrorTimes($ip);
         return view('Tooling/Login/display');
     }
     /*
@@ -62,14 +56,16 @@ class LoginController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
         //实例化错误记录表模型
-        $error_log = ToolingErrorlog::getOne([['ip',$ip]]);//查询该IP下的错误记录
+        $error = new ToolingErrorLog();
+        $error_log = $error::getOne([['ip',$ip]]);//查询该IP下的错误记录
+
 
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
             $admininfo = ToolingAccount::getOne([['account', $username]])->toArray();//根据账户查询用户信息
             if (!empty($admininfo)) {//如果查询不到，则提示账号或密码错误
                 if ($encryptPwd != $admininfo['password']) {//查询密码是否对的上
-                    ToolingLog::setErrorLog($ip);//记录错误次数
+                    $error
                     return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
                 } elseif($admininfo['status']=='0'){//查询账号状态
                     ToolingLog::setErrorLog($ip);//记录错误次数
