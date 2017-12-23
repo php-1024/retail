@@ -11,8 +11,9 @@ class Program extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    public static function getCount(){
-        return self::where('is_delete','0')->count();
+    //获取总数
+    public static function getCount($where=[]){
+        return self::where($where)->where('is_delete','0')->count();
     }
 
 }
