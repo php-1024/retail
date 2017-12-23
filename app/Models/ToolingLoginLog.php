@@ -21,6 +21,7 @@ class ToolingLoginLog extends Model{
         return self::with('accounts')->where($where)->where('is_delete','0')->limit($limit)->orderBy($orderby,$sort)->get();
     }
 
+    //添加登录日志
     public static function addLoginLog($account_id,$ip,$addr){
         $loginlog = new ToolingLoginLog();//新建模型
         $loginlog->account_id = $account_id;//用户账号ID
@@ -35,6 +36,14 @@ class ToolingLoginLog extends Model{
         }
     }
 
+    //获取不联表的分页数据
+    public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::where('is_delete','0')->where($where);
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
+    }
 
     //获取联表分页数据
     public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){

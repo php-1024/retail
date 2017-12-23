@@ -50,9 +50,6 @@ class PersonalController extends Controller{
     public function operation_log_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $log = new ToolingOperationLog();//实例化模型
-
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
         $time_st_format = $time_nd_format = 0;//实例化时间格式
@@ -61,9 +58,7 @@ class PersonalController extends Controller{
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
-
         $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
-
         return view('Tooling/Personal/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
 
@@ -71,23 +66,14 @@ class PersonalController extends Controller{
     public function login_log_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $log = new ToolingLoginLog();//实例化模型
-
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = strtotime($time_st.' 00:00:00');
-        $time_nd_format = strtotime($time_nd.' 23:59:59');
-
-        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
-
-        $log = $log->where('account_id',$admin_data['admin_id']);
-
-        if(!empty($time_st) && !empty($time_nd)){
-            $log = $log->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-
-        $list = $log->where('is_delete','0')->paginate(15);
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
+        $list = ToolingLoginLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
         return view('Tooling/Personal/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'personal']);
     }
 }
