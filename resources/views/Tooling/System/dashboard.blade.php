@@ -161,7 +161,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($login_log_list as $key=>$val)
+                                @foreach($operation_log_list as $key=>$val)
                                 <tr>
                                     <td>{{ $val->accounts->account }}</td>
 
