@@ -43,7 +43,6 @@ class LoginController extends Controller{
     //检测登录
     public function checkLogin(){
         $ip = Request::getClientIp();//获取访问者IP
-        dump($ip);
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
