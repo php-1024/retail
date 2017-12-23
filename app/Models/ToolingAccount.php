@@ -32,6 +32,17 @@ class ToolingAccount extends Model{
             return true;
         }
     }
+    //添加数据
+    public static function addAccount($param){
+        $model = new ToolingAccount();
+        if(!empty($param['account'])){
+            $model->account = $param['account'];
+        }
+        if(!empty($param['password'])){
+            $model->password = $param['password'];
+        }
+        $model->save();
+    }
 
 }
 ?>

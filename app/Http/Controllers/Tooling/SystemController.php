@@ -3,7 +3,6 @@
  * 系统管理
  */
 namespace App\Http\Controllers\Tooling;
-use App\Models\ModuleNode;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,11 +62,8 @@ class SystemController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $admin = new ToolingAccount();//重新实例化模型，避免重复
-                $admin->account = $account;
-                $admin->password = $encryptPwd;
-                $admin->save();//添加账号
-                ToolingLog::setOperationLog($admin_data['admin_id'],$route_name,'新增了管理员账号'.$account);
+                ToolingAccount::addAccount(['account'=>$account,'password'=>$encryptPwd]);
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'新增了管理员账号'.$account);
                 DB::commit();
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
