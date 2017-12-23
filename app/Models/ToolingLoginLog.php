@@ -16,12 +16,12 @@ class ToolingLoginLog extends Model{
     }
 
     public function addLoginLog($account_id,$ip,$addr){
-        $loginlog = new ToolingLoginLog();
-        $loginlog->account_id = $account_id;
-        $loginlog->ip = $ip;
-        $loginlog->ip_position = $addr;
-        $loginlog->save();
-        $id = $loginlog->id;
+        $loginlog = new ToolingLoginLog();//新建模型
+        $loginlog->account_id = $account_id;//用户账号ID
+        $loginlog->ip = $ip;//登录IP
+        $loginlog->ip_position = $addr;//登录地址
+        $loginlog->save();//保存数据
+        $id = $loginlog->id;//获取插入ID
         if(empty($id)){
             return false;
         }else{
