@@ -125,7 +125,6 @@
                             <table class="table table-hover no-margins">
                                 <thead>
                                 <tr>
-                                    <th>id</th>
                                     <th>用户</th>
                                     <th>登陆IP</th>
                                     <th>登陆地址</th>
@@ -135,7 +134,6 @@
                                 <tbody>
                                 @foreach($login_log_list as $key=>$val)
                                     <tr>
-                                        <td>{{  $val->id }}</td>
                                         <td>{{  $val->accounts->account }}</td>
                                         <td>{{  long2ip($val->ip) }}</td>
                                         <td>{{  $val->ip_position }}</td>
