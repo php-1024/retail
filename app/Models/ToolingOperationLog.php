@@ -34,7 +34,7 @@ class ToolingOperationLog extends Model{
     public static function getPaginage($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
         $model = self::where($where)->where('is_delete','0');
         if(!empty($time_st_format) && !empty($time_nd_format)){
-            $model = $model->whereBetween('tooling_login_log.created_at',[$time_st_format,$time_nd_format]);
+            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
