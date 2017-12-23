@@ -18,7 +18,7 @@ class ToolingOperationLog extends Model{
 
     //查询获取列表
     public static function getList($where,$limit,$orderby,$sort='DESC'){
-        return self::with('accounts')->where($where)->limit($limit)->orderBy($orderby,$sort)->get();
+        return self::with('accounts')->where($where)->where('is_delete','0')->limit($limit)->orderBy($orderby,$sort)->get();
     }
 }
 ?>
