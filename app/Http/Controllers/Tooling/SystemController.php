@@ -157,7 +157,9 @@ class SystemController extends Controller{
             $where[] = ['account','like','%'.$account.'%'];
         }
         if(!empty($time_st) && !empty($time_nd)){
-            $whereBetween = ['created_at',[$time_st_format,$time_nd_format]];
+            $whereBetween = function($query) use ($time_st_format,$time_nd_format){
+                $query->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+            };
         }
         $list = ToolingOperationLog::getPaginage($where,$whereBetween,15,'id');
         return view('Tooling/System/operation_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
