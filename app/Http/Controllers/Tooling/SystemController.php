@@ -77,15 +77,13 @@ class SystemController extends Controller{
     public function account_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
         $account = $request->input('account');//通过登录页账号查询
-
-        $search_data = ['account'=>$account];
-        $admin = new ToolingAccount();//实例化模型
+        $search_data = ['account'=>$account];//分页带的数据
+        $where = [];
         if(!empty($account)){
-            $admin = $admin->where('account','like','%'.$account.'%');
+            $where[] = ['account','like','%'.$account.'%'];
         }
-        $list = $admin->where('is_delete','0')->where('id','!=',$admin_data['admin_id'])->paginate(15);
+        $list = ToolingAccount::getPaginage($where,15,'id');
 
         return view('Tooling/System/account_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
