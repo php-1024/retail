@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\ToolingAccount;
 use App\Models\ToolingErrorLog;
-use App\Libraries\ZeroneLog\ToolingLog;
+use App\Models\ToolingLoginLog;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
