@@ -56,7 +56,7 @@ class ToolingLoginLog extends Model{
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('tooling_login_log.created_at',[$time_st_format,$time_nd_format]);
         }
-        return $model->where('tooling_login_log.is_delete',0)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->where('tooling_login_log.is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
