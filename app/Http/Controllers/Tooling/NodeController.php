@@ -70,7 +70,7 @@ class NodeController extends Controller{
         $route_name = $request->input('route_name');//提交上来的路由名称
 
         if(Node::checkRowExists([['id','<>',$id],[ 'node_name',$node_name ]])){
-            return response()->json(['data' => '节点名称或路由名称已经存在', 'status' => '0']);
+            return response()->json(['data' => '节点名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
