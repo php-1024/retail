@@ -46,7 +46,7 @@ class ToolingAccount extends Model{
 
     //修改数据
     public static function editAccount($where,$param){
-        $model = self::$where($where)->first();
+        $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
         }
