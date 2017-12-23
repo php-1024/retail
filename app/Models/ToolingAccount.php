@@ -16,7 +16,7 @@ class ToolingAccount extends Model{
     }
 
     //简易型查询单条数据
-    public function getOne($where)
+    public static function getOne($where)
     {
         return self::where($where)->first();
     }
