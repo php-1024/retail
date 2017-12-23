@@ -126,13 +126,13 @@ class SystemController extends Controller{
         $account_status = $request->input('account_status');//当前用户的状态
         DB::beginTransaction();
         try{
-            $admin = new ToolingAccount();//重新实例化模型，避免重复
+
             if($account_status==1) {
-                $admin->where('id', $id)->update(['status' => '0']);//添加账号
-                ToolingLog::setOperationLog($admin_data['admin_id'], $route_name, '冻结了管理员账号' . $account . '');
+                ToolingAccount::editAccount([['id',$id]],['status'=>'0']);
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'], $route_name, '冻结了管理员账号' . $account . '');
             }else{
-                $admin->where('id', $id)->update(['status' => '1']);//添加账号
-                ToolingLog::setOperationLog($admin_data['admin_id'], $route_name, '解冻了管理员账号' . $account . '');
+                ToolingAccount::editAccount([['id',$id]],['status'=>'1']);
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'], $route_name, '解冻了管理员账号' . $account . '');
             }
             DB::commit();
         }catch (\Exception $e) {
