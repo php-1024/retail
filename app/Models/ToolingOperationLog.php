@@ -30,8 +30,17 @@ class ToolingOperationLog extends Model{
         $operation_log->save();
     }
 
-    //获取分页数据
-    public static function getPaginage($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+    //获取不联表的分页数据
+    public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::where('is_delete',0)->where($where);
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
+    //获取联表的分页数据
+    public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
         $model = self::join('tooling_account',function($join){
             $join->on('tooling_operation_log.account_id','=','tooling_account.id');
         })->select('tooling_account.account','tooling_operation_log.*');
@@ -41,7 +50,9 @@ class ToolingOperationLog extends Model{
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('tooling_operation_log.created_at',[$time_st_format,$time_nd_format]);
         }
-        return $model->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->where('tooling_operation_log.is_delete',0)->orderBy($orderby,$sort)->paginate($paginate);
     }
+
+    //获取带永固ID查询的
 }
 ?>

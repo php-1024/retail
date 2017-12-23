@@ -35,8 +35,9 @@ class ToolingLoginLog extends Model{
         }
     }
 
-    //获取分页数据
-    public static function getPaginage($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+
+    //获取联表分页数据
+    public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
         $model = self::join('tooling_account',function($join){
             $join->on('tooling_login_log.account_id','=','tooling_account.id');
         })->select('tooling_account.account','tooling_login_log.*');
@@ -46,7 +47,7 @@ class ToolingLoginLog extends Model{
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('tooling_login_log.created_at',[$time_st_format,$time_nd_format]);
         }
-        return $model->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->where('tooling_login_log.is_delete',0)>orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
