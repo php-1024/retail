@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\Node;
-use App\Libraries\ZeroneLog\ToolingLog;
+use App\Models\ToolingOperationLog;
 
 class NodeController extends Controller{
     //添加节点
@@ -32,7 +32,7 @@ class NodeController extends Controller{
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加账号失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加节点失败，请检查', 'status' => '0']);
             }
             return response()->json(['data' => '添加节点成功', 'status' => '1']);
         }
