@@ -34,5 +34,19 @@ class ToolingLoginLog extends Model{
             return true;
         }
     }
+
+    //获取分页数据
+    public static function getPaginage($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::join('tooling_account',function($join){
+            $join->on('tooling_operation_log.account_id','=','tooling_account.id');
+        })->select('tooling_account.account','tooling_operation_log.*');
+        if(!empty($account)){
+            $model =$model->where('account','like','%'.$account.'%');
+        }
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('tooling_operation_log.created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
