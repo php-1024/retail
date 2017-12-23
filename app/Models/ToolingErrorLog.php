@@ -19,5 +19,12 @@ class ToolingErrorLog extends Model{
     public static function getOne($where){
         return self::where($where)->first();
     }
+
+    //根据用户IP增加错误次数
+    public static function addErrorTimes($ip){
+        $error = self::where('ip',$ip)->first();//获取该IP的错误记录
+        $error->error_time = $error->error_time+1;
+        $error->save();
+    }
 }
 ?>

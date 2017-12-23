@@ -40,7 +40,7 @@ class OrmStudyController extends Controller{
     public function ins_save(){
         $id = 1;
         $data = ['name'=>'helloworld','age'=>99];
-        $re = Test::ins_update($data,$id);
+        $re = Test::ins_save($data,$id);
         dump($re);
     }
     //批量更新数据
