@@ -27,23 +27,17 @@ class PersonalController extends Controller{
 
         $old_encrypted = md5($oldpassword);//加密j旧密码第一重
         $old_encryptPwd = md5("lingyikeji".$old_encrypted.$encrypt_key);//加密旧密码第二重
-
-        $admin = new ToolingAccount();
-        $sql_password = ToolingAccount::getPluck([[ 'id',$admin_data['admin_id'] ]] , 'password');
+        $sql_password = ToolingAccount::getPluck([[ 'id',$admin_data['admin_id'] ]] , 'password');//获取当前用户密码
         $sql_password = $sql_password[0];//数组转化为字符串
-        dump($sql_password);
-        exit();
         if($old_encryptPwd != $sql_password){//判断原登录密码是否输入正确
             return response()->json(['data' => '原登录密码输入错误', 'status' => '0']);
         }
-
         $encrypted = md5($password);//加密新密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$encrypt_key);//加密新密码第二重
-
         DB::beginTransaction();
         try{
-            ToolingAccount::where('id',$admin_data['admin_id'])->update(['password'=>$encryptPwd]);//更新用户密码为新密码
-            ToolingLog::setOperationLog($admin_data['admin_id'],$route_name,'修改了登录密码');
+            ToolingAccount::editAccount([[ 'id',$admin_data['admin_id'] ]],['password'=>$encryptPwd]);
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了登录密码');
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
