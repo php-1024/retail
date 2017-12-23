@@ -22,6 +22,7 @@ class ToolingErrorLog extends Model{
 
     //根据用户IP增加错误次数
     public static function addErrorTimes($ip){
+        dump($ip);
         $error_log = self::where('ip',$ip)->first();//获取该IP的错误记录
         dump($error_log);
         exit;
