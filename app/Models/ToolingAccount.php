@@ -44,6 +44,15 @@ class ToolingAccount extends Model{
         $model->save();
     }
 
+    //修改数据
+    public static function editAccount($where,$param){
+        $model = self::$where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);

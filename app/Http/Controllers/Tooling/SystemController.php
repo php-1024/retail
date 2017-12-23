@@ -107,9 +107,8 @@ class SystemController extends Controller{
 
         DB::beginTransaction();
         try{
-            $admin = new ToolingAccount();//重新实例化模型，避免重复
-            $admin->where('id',$id)->update(['password'=>$encryptPwd]);//添加账号
-            ToolingLog::setOperationLog($admin_data['admin_id'],$route_name,'修改了'.$account.'的密码');
+            ToolingAccount::editAccount([['id',$id]],['password'=>$encryptPwd]);
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$account.'的密码');
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
