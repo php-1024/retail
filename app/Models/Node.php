@@ -22,8 +22,8 @@ class Node extends Model{
         if(!empty($param['node_name'])) {
             $node->node_name = $param['node_name'];//节点名称
         }
-        if(!empty($param['node_name'])) {
-            $node->route_name = $param['$route_name'];//路由名称
+        if(!empty($param['route_name'])) {
+            $node->route_name = $param['route_name'];//路由名称
         }
         $node->save();//添加账号
     }
