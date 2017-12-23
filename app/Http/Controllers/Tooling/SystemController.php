@@ -25,7 +25,6 @@ class SystemController extends Controller{
                 ['account_id'=>$admin_data['admin_id']]
             ];
         }
-
         $login_log_list = ToolingLoginLog::getList($where,10,'id');
 
         return view('Tooling/System/dashboard',['login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);

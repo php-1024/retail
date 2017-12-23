@@ -14,6 +14,10 @@ class ToolingAccount extends Model{
     public function login_logs(){
         return $this->hasMany('App\Models\ToolingLoginLog', 'account_id');
     }
+
+    public function operation_logs(){
+        return $this->hasMany('App\Models\ToolingOperationLog', 'account_id');
+    }
     //简易型查询单条数据
     public static function getOne($where)
     {
