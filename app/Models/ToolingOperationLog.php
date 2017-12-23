@@ -32,7 +32,7 @@ class ToolingOperationLog extends Model{
 
     //获取分页数据
     public static function getPaginage($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
-        $model = self::where($where)->where('is_delete','0');
+        $model = self::with('accounts')->where('is_delete','0');
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
