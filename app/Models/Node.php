@@ -15,5 +15,16 @@ class Node extends Model{
         return self::where('is_delete','0')->count();
     }
 
+    public static function addNode($param){
+        $node = new Node();//重新实例化模型，避免重复
+        if(!empty($param['node_name'])) {
+            $node->node_name = $param['node_name'];//节点名称
+        }
+        if(!empty($param['node_name'])) {
+            $node->route_name = $param['$route_name'];//路由名称
+        }
+        $node->save();//添加账号
+    }
+
 }
 ?>
