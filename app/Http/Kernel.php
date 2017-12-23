@@ -56,30 +56,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        //检测是否登录
-        'CheckIsLogin'=> \App\Http\Middleware\CheckIsLogin::class,
-        //检测是否登录 - 登录页面 防止重复使用登录页面
-        'CheckNotLogin'=> \App\Http\Middleware\CheckNotLogin::class,
-        //检测用户登录后台提交的数据是否一致
-        'DashBoardLoginPost'=>\App\Http\Middleware\DashBoardLoginPost::class,
         /**************************零壹程序管理系统*******************************/
-        'ProgramCheckIsLogin'=>\App\Http\Middleware\Program\ProgramCheckIsLogin::class,//判断页面是否登陆，若未登陆则跳转到登录页面
-        'ProgramCheckIsLoginAjax'=>\App\Http\Middleware\Program\ProgramCheckIsLoginAjax::class,//判断页面是否登陆，若未登陆提示未登录错误。
-        'ProgramIsLogin'=>\App\Http\Middleware\Program\ProgramIsLogin::class,//登录页面判断如果登陆了就跳转到首页
-        'ProgramLoginPost'=>\App\Http\Middleware\Program\ProgramLoginPost::class,//登陆提交信息检测是否合法
-        'ProgramCheckIsSuper'=>\App\Http\Middleware\Program\ProgramCheckIsSuper::class,//检测是否超级管理员，若不是超级管理员，不能使用超级管理员的一些功能
-        'ProgramCheckIsSuperAjax'=>\App\Http\Middleware\Program\ProgramCheckIsSuperAjax::class,//检测是否超级管理员，若不是超级管理员，不能使用超级管理员的一些功能
-        'ProgramAccountAddCheck'=>\App\Http\Middleware\Program\ProgramAccountAddCheck::class,//添加系统管理员时的表单检测中间件
-        'ProgramEditPasswordCheck'=>\App\Http\Middleware\Program\ProgramEditPasswordCheck::class,//修改登录密码时的表单检测中间件
-        'ProgramNodeAddCheck'=>\App\Http\Middleware\Program\ProgramNodeAddCheck::class,//添加节点时的表单检测中间件
-        'ProgramNodeEditCheck'=>\App\Http\Middleware\Program\ProgramNodeAddCheck::class,//编辑节点时的表单检测中间件
-        'ProgramAccountEditCheck'=>\App\Http\Middleware\Program\ProgramAccountEditCheck::class,//修改账号信息时的表单检测中间件
-        'ProgramAccountLockCheck'=>\App\Http\Middleware\Program\ProgramAccountLockCheck::class,//修改账号信息时的表单检测中间件
-        'ProgramCheckSearchDate'=>\App\Http\Middleware\Program\ProgramCheckSearchDate::class,//检测查询时日期范围格式的中间件
-        'ProgramModuleAddCheck'=>\App\Http\Middleware\Program\ProgramModuleAddCheck::class,//检测查询时日期范围格式的中间件
-        'ProgramModuleEditCheck'=>\App\Http\Middleware\Program\ProgramModuleEditCheck::class,//检测查询时日期范围格式的中间件
-        'ProgramProgramAddCheck'=>\App\Http\Middleware\Program\ProgramProgramAddCheck::class,//检测查询时日期范围格式的中间件
-        'ProgramProgramEditCheck'=>\App\Http\Middleware\Program\ProgramProgramEditCheck::class,//检测查询时日期范围格式的中间件
+        'ToolingCheck'=>\App\Http\Middleware\Tooling\ToolingCheck::class,//检测普通页面跳转的中间件
+        'ToolingCheckAjax'=>\App\Http\Middleware\Tooling\ToolingCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹程序管理系统*******************************/
     ];
 }

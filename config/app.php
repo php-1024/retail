@@ -3,7 +3,7 @@
 return [
 
     'encrypt_key'=>'1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',//加密盐
-    'program_encrypt_key'=>'1asdfnonlkj324jtsdfmio2o3immro43imio34om5om4om5',//程序管理系统加密盐
+    'tooling_encrypt_key'=>'1asdfnonlkj324jtsdfmio2o3immro43imio34om5om4om5',//程序管理系统加密盐
     'allowed_error_times'=>5,//允许登录错误次数
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        App\Providers\HttpCurlServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -180,6 +180,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\HttpCurlServiceProvider::class,
+        App\Providers\IP2AttrServiceProvider::class,
     ],
 
     /*
@@ -228,7 +230,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-       'HttpCurl' => App\Facades\HttpCurlFacade::class,
+        'HttpCurl' => App\Facades\HttpCurlFacade::class,
+        'IP2Attr' => App\Facades\IP2AttrFacade::class,
     ],
 
 ];
