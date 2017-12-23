@@ -139,7 +139,7 @@
                                         <td>{{  $val->accounts->account }}</td>
                                         <td>{{  long2ip($val->ip) }}</td>
                                         <td>{{  $val->ip_position }}</td>
-                                        <td>{{  $val->created_at }}0</td>
+                                        <td>{{  $val->created_at }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
