@@ -46,22 +46,11 @@ class ModuleController extends Controller{
     public function module_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $module = new Module();
         $module_name = $request->input('module_name');
         $search_data = ['module_name'=>$module_name];
-        if(!empty($module_name)){
-            $module = $module->where('module_name','like','%'.$module_name.'%');
-        }
-        $list = $module->with('nodes')->where('is_delete','0')->paginate(15);
 
-        foreach($list as $key=>$val){
-            dump($val->nodes);
-            $node[$val->id] = ModuleNode::where('module_id',$val->id)->where('module_node.is_delete','0')->join('node',function($json){
-                $json->on('node.id','=','module_node.node_id');
-            })->select('module_node.*','node.node_name')->get();
-        }
-        return view('Tooling/Module/module_list',['list'=>$list,'node'=>$node,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
+        $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
+        return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //编辑功能模块列表
     public function module_edit(Request $request){

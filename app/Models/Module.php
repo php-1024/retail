@@ -43,5 +43,10 @@ class Module extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->where('is_delete','0')->pluck($pluck);
     }
+
+    //获取分页数据
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
