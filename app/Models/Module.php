@@ -10,6 +10,20 @@ class Module extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+    //添加数据
+    public static function addModule($param){
+        $model = new ToolingAccount();
+        if(!empty($param['module_name'])){
+            $model->module_name = $param['module_name'];
+        }
+        $model->save();
+        return $model->id;
+    }
+    //和功能节点关联，多对多
+    public function nodes()
+    {
+        return $this->belongsToMany('App\Models\Node','module_node','module_id','node_id');
+    }
 
     //获取总数
     public static function getCount($where=[]){

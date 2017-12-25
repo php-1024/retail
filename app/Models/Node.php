@@ -11,6 +11,12 @@ class Node extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和功能模块关联，多对多
+    public function modules()
+    {
+        return $this->belongsToMany('App\Models\Module','module_node','node_id','module_id');
+    }
+
     //获取总数
     public static function getCount($where=[]){
         return self::where($where)->where('is_delete','0')->count();

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Node;
 use App\Models\Module;
 use App\Models\ModuleNode;
-use App\Libraries\ZeroneLog\ToolingLog;
+use App\Models\ToolingOperationLog;
 
 class ModuleController extends Controller{
     //添加功能模块
@@ -33,13 +33,11 @@ class ModuleController extends Controller{
                 $module = new Module();
                 $module->module_name=$module_name;
                 $module->save();
-                $module_id = $module->id;
+                $module_id = Module::addModule(['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
-                    $module_node_data[] = ['module_id'=>$module_id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];
+                    ModuleNode::addModuleNode(['module_id'=>$module_id,'node_id'=>$val]);
                 }
-                $module_node->insert($module_node_data);
-
-                ToolingLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
