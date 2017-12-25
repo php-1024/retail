@@ -16,6 +16,9 @@ class Node extends Model{
         return self::where($where)->where('is_delete','0')->count();
     }
 
+    public static function getList($where,$orderby,$sort='DESC'){
+
+    }
     //添加节点
     public static function addNode($param){
         $node = new Node();//重新实例化模型，避免重复
