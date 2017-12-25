@@ -14,12 +14,8 @@ class ModuleNode extends Model{
     //添加数据
     public static function addModuleNode($param){
         $model = new ModuleNode();
-        if(!empty($param['module_id'])){
-            $model->module_id = $param['module_id'];
-        }
-        if(!empty($param['node_id'])){
-            $model->node_id = $param['node_id'];
-        }
+        $model->module_id = $param['module_id'];
+        $model->node_id = $param['node_id'];
         $model->save();
     }
 }
