@@ -18,11 +18,11 @@ class Node extends Model{
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::with('accounts');
+        $model = self::where($where)->where('is_delete','0')->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
+        return $model->get();
     }
 
     //添加节点
