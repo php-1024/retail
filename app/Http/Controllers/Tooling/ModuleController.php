@@ -53,7 +53,7 @@ class ModuleController extends Controller{
         if(!empty($module_name)){
             $module = $module->where('module_name','like','%'.$module_name.'%');
         }
-        $list = $module->where('is_delete','0')->paginate(15);
+        $list = $module->with('nodes')->where('is_delete','0')->paginate(15);
         dump($list->nodes);
         foreach($list as $key=>$val){
             $node[$val->id] = ModuleNode::where('module_id',$val->id)->where('module_node.is_delete','0')->join('node',function($json){
