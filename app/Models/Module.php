@@ -12,7 +12,7 @@ class Module extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
     //添加数据
     public static function addModule($param){
-        $model = new ToolingAccount();
+        $model = new Module();
         if(!empty($param['module_name'])){
             $model->module_name = $param['module_name'];
         }
