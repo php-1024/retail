@@ -36,7 +36,6 @@ class ModuleController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加功能模块失败，请检查', 'status' => '0']);
             }
@@ -55,6 +54,7 @@ class ModuleController extends Controller{
             $module = $module->where('module_name','like','%'.$module_name.'%');
         }
         $list = $module->where('is_delete','0')->paginate(15);
+        dump($list->nodes);
         foreach($list as $key=>$val){
             $node[$val->id] = ModuleNode::where('module_id',$val->id)->where('module_node.is_delete','0')->join('node',function($json){
                 $json->on('node.id','=','module_node.node_id');
