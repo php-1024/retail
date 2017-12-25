@@ -29,10 +29,6 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $module_node = new ModuleNode();//重新实例化模型，避免重复
-                $module = new Module();
-                $module->module_name=$module_name;
-                $module->save();
                 $module_id = Module::addModule(['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
                     ModuleNode::addModuleNode(['module_id'=>$module_id,'node_id'=>$val]);
