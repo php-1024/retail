@@ -24,9 +24,7 @@ class ModuleController extends Controller{
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
 
-        $module = new Module();
-        $info = $module->where('module_name',$module_name)->where('is_delete','0')->pluck('id')->toArray();
-        if(!empty($info)){
+        if(Module::checkRowExists([[ 'module_name',$module_name ]])){
             return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
