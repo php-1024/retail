@@ -16,9 +16,15 @@ class Node extends Model{
         return self::where($where)->where('is_delete','0')->count();
     }
 
-    public static function getList($where,$orderby,$sort='DESC'){
-
+    //查询获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::with('accounts');
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
     }
+
     //添加节点
     public static function addNode($param){
         $node = new Node();//重新实例化模型，避免重复
