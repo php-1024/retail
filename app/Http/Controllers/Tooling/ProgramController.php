@@ -29,10 +29,8 @@ class ProgramController extends Controller{
         $editid = $request->input('editid');
         if(empty($pid) || $pid=='0'){//没有主程序时
             $module_list = Module::getListSimple([],0,'id');
-
         }else{//有主程序时
            $module_list = Module::getListProgram($pid,[],0,'id');
-
         }
         $selected_node = [];
         $selected_module = [];
