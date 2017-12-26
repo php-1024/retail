@@ -10,6 +10,14 @@ class Module extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+
+    //和功能节点关联，多对多
+    public function nodes()
+    {
+        return $this->belongsToMany('App\Models\Node','module_node','module_id','node_id');
+    }
+
+
     //添加数据
     public static function addModule($param){
         $model = new Module();
@@ -19,10 +27,13 @@ class Module extends Model{
         $model->save();
         return $model->id;
     }
-    //和功能节点关联，多对多
-    public function nodes()
-    {
-        return $this->belongsToMany('App\Models\Node','module_node','module_id','node_id');
+    //修改数据
+    public static function editModule($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
     }
 
     //获取总数

@@ -74,11 +74,9 @@ class ModuleController extends Controller{
             DB::beginTransaction();
             try{
                 $module_node = new ModuleNode();//重新实例化模型，避免重复
-                $module = new Module();
-                $module->where('id',$id)->update(['module_name'=>$module_name]);
-
+                ModuleNode::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
-                    $vo = $module_node->where('module_id',$id)->where('node_id',$val)->where('is_delete','0')->first();//查询是否存在数据
+                    $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
                     if(is_null($vo)){
                         $module_node_data[] = ['module_id'=>$id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];//不存在则添加数据
                     }else{
@@ -88,12 +86,10 @@ class ModuleController extends Controller{
                 }
                 //首先删除这次删除的数据的数据
                 $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
-
                 //如果插入的数据不为空,则插入
                 if(!empty($module_node_data)){
                     $module_node->insert($module_node_data);
                 }
-
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
