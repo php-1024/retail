@@ -94,7 +94,7 @@ class ProgramController extends Controller{
             $module_list[$val->id] =Module::getListProgram($program_id,[],0,'id');
             $ppname = Program::getPluck([['id',$val->complete_id]],'program_name');//获取用户名称
 
-            if(empty($ppname)){
+            if(is_null($ppname)){
                 $pname[$val->id] = '独立主程序';
             }else{
                 $pname[$val->id] = $ppname;
