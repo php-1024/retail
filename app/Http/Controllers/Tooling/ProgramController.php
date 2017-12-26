@@ -93,7 +93,7 @@ class ProgramController extends Controller{
         foreach($list as $key=>$val){
 
             $program_id = $val->id;
-            $module_list[$val->id] =Module::whereIn('id',[1,2,3,4])->where('is_delete',0)->get();
+            $module_list[$val->id] =Module::where('id',1)->where('is_delete',0)->get();
 
             dump($module_list[$val->id]);
 
