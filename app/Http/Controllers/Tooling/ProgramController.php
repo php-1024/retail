@@ -31,8 +31,21 @@ class ProgramController extends Controller{
             $module_list = Module::getListSimple([],0,'id');
             $node_list = '';
         }else{//有主程序时
-            $module_list = Module::getListProgram([],0,'id');
-            $node_list = '';
+           $module_list = Module::getListProgram($pid,[],0,'id');
+            /*
+            $module_list = ProgramModuleNode::where('program_id',$pid)->where('program_module_node.is_delete','0')->join('module',function($join){
+                $join->on('program_module_node.module_id','=','module.id');
+            })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
+
+            $node_list = [];
+            if (!empty($module_list)) {
+                foreach ($module_list as $key => $val) {
+                    $node_list[$val['id']] = ProgramModuleNode::where('module_id',$val['id'])->where('program_id',$pid)->where('program_module_node.is_delete','0')->join('node',function($json){
+                        $json->on('node.id','=','program_module_node.node_id');
+                    })->select('program_module_node.*','node.node_name')->get()->toArray();
+                }
+            }
+            */
         }
         $selected_node = [];
         $selected_module = [];
