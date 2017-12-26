@@ -93,9 +93,7 @@ class ProgramController extends Controller{
         foreach($list as $key=>$val){
 
             $program_id = $val->id;
-            $module_list[$val->id] =Module::whereIn('id',function($query) use ($program_id){
-                $query->from('program_module_node')->where('program_id',$program_id)->select('module_id')->groupBy('module_id');
-            })->where('is_delete',0)->get();
+            $module_list[$val->id] =Module::whereIn('id',['1,2,3,4'])->where('is_delete',0)->get();
 
             dump($module_list[$val->id]);
 
