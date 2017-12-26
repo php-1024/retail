@@ -23,12 +23,6 @@ class Program extends Model{
         return $this->belongsToMany('App\Models\Node','program_module_node','program_id','node_id');
     }
 
-    //和程序关联，多对多
-    public function program_parents()
-    {
-        return $this->belongsToMany('App\Models\Program','program as program_parent','id','node_id');
-    }
-
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Program();
