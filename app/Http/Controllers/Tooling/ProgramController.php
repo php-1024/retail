@@ -97,7 +97,7 @@ class ProgramController extends Controller{
             $module_list[$val->id] =Module::whereIn('id',function($query) use ($program_id){
                 $query->from('program_module_node')->where('program_id',$program_id)->select('module_id')->groupBy('module_id');
             })->where('is_delete',0)->get();
-
+            dump($module_list[$val->id]);
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
