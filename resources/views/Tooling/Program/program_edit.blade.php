@@ -19,10 +19,10 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">选择主程序</label>
                         <div class="col-sm-10">
-                            <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val(),'{{ $info->id }}');">
+                            <select class="form-control m-b" name="complete_id" onchange="get_parents_node($(this).val(),'{{ $info->id }}');">
                                 <option value="0">独立主程序</option>
                                 @foreach($plist as $key=>$val)
-                                    <option value="{{ $val->id }}" @if($val->id == $info['pid']) selected="selected"@endif;>{{ $val->program_name }}</option>
+                                    <option value="{{ $val->id }}" @if($val->id == $info['complete_id']) selected="selected"@endif;>{{ $val->program_name }}</option>
                                 @endforeach
                             </select>
                         </div>
