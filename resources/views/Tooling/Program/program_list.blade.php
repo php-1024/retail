@@ -79,7 +79,6 @@
                                     <th class="col-sm-1">是否通用</th>
                                     <th class="col-sm-1">是否资产程序</th>
                                     <th class="col-sm-1">是否配套程序</th>
-                                    <th class="col-sm-1">是否通用</th>
                                     <th>功能模块</th>
                                     <th class="col-sm-1">添加时间</th>
                                     <th class="col-sm-2 text-right" >操作</th>
