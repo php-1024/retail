@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
 use Illuminate\Support\Facades\DB;
-use App\Libraries\ZeroneLog\ToolingLog;
+use App\Models\ToolingOperationLog;
 use App\Models\Program;
 use App\Models\ProgramModuleNode;
 
@@ -69,16 +69,9 @@ class ProgramController extends Controller{
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
-                    $program_module_node_data[] = ['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id,'created_at'=>time(),'updated_at'=>time()];
+                    ProgramModuleNode::addProgramModuleNode(['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id]);
                 }
-
-                $program_module_node = new ProgramModuleNode();//实例化程序模块关系表模型
-                //如果插入的数据不为空,则插入
-                if(!empty($program_module_node_data)){
-                    $program_module_node->insert($program_module_node_data);
-                }
-
-                ToolingLog::setOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 dump($e);

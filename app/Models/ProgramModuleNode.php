@@ -18,5 +18,13 @@ class ProgramModuleNode extends Model{
         }
         return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
     }
+
+    public static function addProgramModuleNode($param){
+        $model = new ProgramModuleNode();
+        $model->program_id = $param['program_id'];
+        $model->module_id = $param['module_id'];
+        $model->node_id = $param['node_id'];
+        $model->save();
+    }
 }
 ?>
