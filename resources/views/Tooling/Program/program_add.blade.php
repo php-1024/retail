@@ -80,14 +80,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否通用</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="is_classic" class="js-switch"  value="1"/>
+                                        <input type="checkbox" name="is_classic" class="js-switch2"  value="1"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否通用</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="is_classic" class="js-switch"  value="1"/>
+                                        <input type="checkbox" name="is_classic" class="js-switch3"  value="1"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -126,7 +126,7 @@
     $(function(){
         get_parents_node(0);
         var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
+        var switchery = new Switchery($('.js-switch'), { color: '#1AB394' });
 
         //设置CSRF令牌
         $.ajaxSetup({
