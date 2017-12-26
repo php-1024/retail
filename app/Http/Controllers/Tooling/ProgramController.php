@@ -72,8 +72,10 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $program_name = $request->input('program_name');//程序名称
-        $pid = $request->input('pid');//上级程序
+        $complete_id = $request->input('complete_id');//上级程序
         $is_classic = empty($request->input('is_classic'))?'0':'1';//是否通用版本
+        $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
+        $is_coupled = empty($request->input('is_coupled'))?'0':'1';//是否夫妻程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
         $info = Program::where('program_name',$program_name)->where('is_delete','0')->pluck('id')->toArray();
@@ -84,8 +86,10 @@ class ProgramController extends Controller{
             try{
                 $program = new Program();//实例化程序模型
                 $program->program_name = $program_name;//程序名称
-                $program->pid = $pid;//上级程序
+                $program->complete_id = $complete_id;//上级程序
                 $program->is_classic = $is_classic;//是否通用版本
+                $program->is_asset = $is_asset;//是否资产程序
+                $program->is_coupled = $is_coupled;//是否夫妻程序
                 $program->save();
                 $program_id = $program->id;
 
