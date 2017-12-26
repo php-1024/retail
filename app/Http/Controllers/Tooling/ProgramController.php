@@ -29,9 +29,10 @@ class ProgramController extends Controller{
         $editid = $request->input('editid');
         if(empty($pid) || $pid=='0'){//没有主程序时
             $module_list = Module::getListSimple([],0,'id');
-            $node_list = '';
+            $node_list = [];
         }else{//有主程序时
            $module_list = Module::getListProgram($pid,[],0,'id');
+            $node_list = [];
             /*
             $module_list = ProgramModuleNode::where('program_id',$pid)->where('program_module_node.is_delete','0')->join('module',function($join){
                 $join->on('program_module_node.module_id','=','module.id');
