@@ -19,14 +19,17 @@ class ModuleNode extends Model{
         $model->save();
     }
 
-    //和节点是一对多的关系
     public function test(){
+        dump($this->nodes);
+    }
+    //和节点是一对多的关系
+    public function nodes(){
         return $this->belongsTo('App\Models\Node', 'node_id');
     }
 
     //和模型是一对多的关系
     public function modules(){
-        return $this->hasMany('App\Models\Module', 'module_id');
+        return $this->belongsTo('App\Models\Module', 'module_id');
     }
 }
 ?>
