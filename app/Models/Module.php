@@ -43,7 +43,7 @@ class Module extends Model{
         $model = self::with(['program_nodes'=>function($query) use ($program_id){
             $query->where('program_id',$program_id);
         }])->whereIn('id',function($query) use ($program_id){
-            $query->from('program_module_node')->select('module_id')->whereIn('program_id',$program_id);
+            $query->from('program_module_node')->select('module_id')->where('program_id',$program_id);
         })->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
 
         if(!empty($limit)){
