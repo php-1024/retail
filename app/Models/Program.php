@@ -12,13 +12,13 @@ class Program extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和程序关联，多对多
-    public function Modules()
+    public function modules()
     {
         return $this->belongsToMany('App\Models\Module','program_module_node','program_id','module_id');
     }
 
     //和程序关联，多对多
-    public function Nodes()
+    public function nodes()
     {
         return $this->belongsToMany('App\Models\Node','program_module_node','program_id','node_id');
     }
@@ -57,6 +57,11 @@ class Program extends Model{
         }else{
             return true;
         }
+    }
+
+    //获取程序分页列表
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('modules')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列

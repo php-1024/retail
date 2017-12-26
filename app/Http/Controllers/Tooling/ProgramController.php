@@ -91,7 +91,7 @@ class ProgramController extends Controller{
         if(!empty($program_name)){
             $program = $program->where('program_name','like','%'.$program_name.'%');
         }
-        $list = $program->where('is_delete','0')->paginate(15);
+        $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
