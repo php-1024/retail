@@ -87,12 +87,7 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
-        $program = new Program();
-        if(!empty($program_name)){
-            $program = $program->where('program_name','like','%'.$program_name.'%');
-        }
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
-        dump($list);
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
