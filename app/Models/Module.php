@@ -100,5 +100,6 @@ class Module extends Model{
             $query->from('program_module_node')->select('module_id')->where('program_id',$program_id)->groupBy('module_id')->get();
         })->get();
     }
+
 }
 ?>
