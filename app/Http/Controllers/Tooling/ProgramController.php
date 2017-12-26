@@ -94,7 +94,7 @@ class ProgramController extends Controller{
 
             $program_id = $val->id;
             $module_list[$val->id] =Module::whereNotIn('id',function($query) use ($program_id){
-                $query->from('program_module_node')->where('program_id',$program_id)->select('module_id')->groupBy('module_id');
+                $query->from('program_module_node')->where('program_id',$program_id)->select('module_id')->distinct();
             })->where('is_delete',0)->get();
 
             dump($module_list[$val->id]);
