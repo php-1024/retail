@@ -26,7 +26,7 @@ class Program extends Model{
     //和程序关联，多对多
     public function program_parents()
     {
-        return $this->belongsToMany('App\Models\Program','program','id','node_id');
+        return $this->belongsToMany('App\Models\Program','program as program_parent','id','node_id');
     }
 
     //获取列表
