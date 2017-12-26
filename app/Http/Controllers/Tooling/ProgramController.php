@@ -92,7 +92,7 @@ class ProgramController extends Controller{
         foreach($list as $key=>$val){
             $program_id = $val->id;
             $module_list[$val->id] =Module::getListProgram($program_id,[],0,'id');
-            $ppname = Program::getPluck([['id',$val->complete_id]],'program_name');//获取用户名称
+            $ppname = Program::getPluck([['id',$val->complete_id]],'program_name')->toArray();//获取用户名称
 
             if(is_null($ppname)){
                 $pname[$val->id] = '独立主程序';
