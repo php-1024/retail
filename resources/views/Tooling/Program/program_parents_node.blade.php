@@ -12,7 +12,7 @@
         <div>
             @foreach($val->nodes as $kk=>$vv)
             <label class="checkbox-inline i-checks">
-                <input type="checkbox" @if(in_array($vv['module_id'].'_'.$vv['node_id'],$selected_node))checked="checked"@endif data-group_id="{{ $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $val['id'].'_'.$vv['node_id'] }}"> {{$vv->node_name}}
+                <input type="checkbox" @if(in_array($val->id.'_'.$vv->id,$selected_node))checked="checked"@endif data-group_id="{{ $val->id }}" class="checkbox_node_name checkbox_node_name_{{ $val->id }}" name="module_node_ids[]" value="{{ $val->id.'_'.$vv->id }}"> {{$vv->node_name}}
             </label>
             @endforeach
         </div>
