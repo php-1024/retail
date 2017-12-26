@@ -62,7 +62,6 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 $program_id = Program::addProgram(['program_name'=>$program_name,'complete_id'=>$complete_id,'is_classic'=>$is_classic,'is_asset'=>$is_asset,'is_coupled'=>$is_coupled]);
-
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
@@ -91,11 +90,8 @@ class ProgramController extends Controller{
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
         foreach($list as $key=>$val){
-
             $program_id = $val->id;
             $module_list[$val->id] =Module::getProgramModules($program_id);
-            dump($module_list[$val->id]);
-
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
