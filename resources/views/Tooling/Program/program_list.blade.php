@@ -75,7 +75,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>程序名称</th>
-                                    <th class="col-sm-1">上级程序</th>
+                                    <th class="col-sm-1">所属主程序</th>
+                                    <th class="col-sm-1">是否通用</th>
+                                    <th class="col-sm-1">是否资产程序</th>
+                                    <th class="col-sm-1">是否配套程序</th>
                                     <th class="col-sm-1">是否通用</th>
                                     <th>功能模块</th>
                                     <th class="col-sm-1">添加时间</th>
@@ -91,10 +94,23 @@
                                         <label class="label label-info" style="display:inline-block"> {{ $pname[$val->id] }}</label>
                                     </td>
                                     <td>
+                                        @if($val->is_asset==1)
+                                            <label class="label label-warning" style="display:inline-block">资产程序</label>
+                                        @else
+                                            <label class="label label-danger" style="display:inline-block">管理程序</label>
+                                        @endif
+                                    </td>
+                                    <td>
                                         @if($val->is_classic==1)
                                             <label class="label label-warning" style="display:inline-block">通用版本</label>
                                         @else
-                                            <label class="label label-danger" style="display:inline-block">定制版本</label>
+                                            <label class="label label-danger" style="display:inline-block">定制版本</label>@endif
+                                        </td>
+                                    <td>
+                                        @if($val->is_coupled==1)
+                                            <label class="label label-warning" style="display:inline-block">配套程序</label>
+                                        @else
+                                            <label class="label label-danger" style="display:inline-block">独立程序</label>
                                         @endif
                                     </td>
                                     <td>
