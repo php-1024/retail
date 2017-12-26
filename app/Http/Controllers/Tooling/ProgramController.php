@@ -32,8 +32,7 @@ class ProgramController extends Controller{
             $node_list = [];
         }else{//有主程序时
            $module_list = Module::getListProgram($pid,[],0,'id');
-            $module_list->nodes = $module_list->program_nodes ;
-            dump($module_list);
+
             $node_list = [];
             /*
             $module_list = ProgramModuleNode::where('program_id',$pid)->where('program_module_node.is_delete','0')->join('module',function($join){
