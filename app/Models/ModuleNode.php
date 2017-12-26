@@ -18,5 +18,15 @@ class ModuleNode extends Model{
         $model->node_id = $param['node_id'];
         $model->save();
     }
+
+    //和节点是一对多的关系
+    public function test(){
+        return $this->belongsTo('App\Models\Node', 'node_id');
+    }
+
+    //和模型是一对多的关系
+    public function modules(){
+        return $this->hasMany('App\Models\Module', 'module_id');
+    }
 }
 ?>
