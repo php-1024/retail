@@ -93,5 +93,12 @@ class Module extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
+
+    //去重后获取程序的模型
+    public static function getProgramModules($program_id){
+        return self::whereIn('id',function($query) use ($program_id){
+            $query->from('program_module_node')->where('program_id',$program_id)->select('module_id');
+        })->where('is_delete',0)->get();
+    }
 }
 ?>
