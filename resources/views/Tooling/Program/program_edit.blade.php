@@ -2,7 +2,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('tooling/ajax/program_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
-    <input type="hidden" name="current_pid" id="current_pid" value="{{ $info->pid }}">
+    <input type="hidden" name="current_pid" id="current_pid" value="{{ $info->complete_id }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
