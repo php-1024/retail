@@ -57,7 +57,6 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $info = Module::find($id);
         $module_node = new ModuleNode();
-        $module_node->test();
         $module_node = $module_node->join('node',function($json){
             $json->on('node.id','=','module_node.node_id');
         });
