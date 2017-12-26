@@ -99,7 +99,6 @@ class ProgramController extends Controller{
                 $pname[$val->id] = $ppname[0];
             }
         }
-
         return view('Tooling/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //获取编辑程序
