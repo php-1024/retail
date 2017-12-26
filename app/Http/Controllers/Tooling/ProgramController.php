@@ -90,12 +90,13 @@ class ProgramController extends Controller{
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
+        $tt =Module::find(1);
+        dump($tt);
         foreach($list as $key=>$val){
 
             $program_id = $val->id;
             $module_list[$val->id] =Module::where('id',1)->where('is_delete',0)->get();
-            $tt =Module::find(1);
-            dump($tt);
+
 
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
