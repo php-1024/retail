@@ -56,19 +56,6 @@ class ModuleController extends Controller{
     public function module_edit(Request $request){
         $id = $request->input('id');
         $info = Module::find($id);
-        $module_node = new ModuleNode();
-        /*
-        $module_node = $module_node->join('node',function($json){
-            $json->on('node.id','=','module_node.node_id');
-        });
-        $node_list_selected = $module_node->where('module_id',$id)->where('module_node.is_delete','0')->select('module_node.*','node.node_name')->get()->toArray();
-        $selected_id[] = '';
-        foreach($node_list_selected as $key=>$val){
-            $selected_id[] = $val['node_id'];
-        }
-        $node = new Node();
-        $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
-        */
         $node_list_selected = Node::node_selected($id);
         $node_list_unselected = Node::node_unselected($id);
         return view('Tooling/Module/module_edit',['info'=>$info,'node_list_selected'=>$node_list_selected,'node_list_unselected'=>$node_list_unselected]);
