@@ -94,8 +94,8 @@ class ProgramController extends Controller{
 
             $program_id = $val->id;
             $module_list[$val->id] =Module::where('id',1)->where('is_delete',0)->get();
-
-            dump($module_list[$val->id]);
+            $tt =Module::where('id',1)->where('is_delete',0)->get();
+            dump($tt);
 
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
