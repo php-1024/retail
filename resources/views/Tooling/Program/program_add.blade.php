@@ -61,12 +61,26 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择主程序</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val()));">
+                                        <select class="form-control m-b" name="pid" onchange="get_parents_node($(this).val());">
                                             <option value="0">独立主程序</option>
                                             @foreach($plist as $key=>$val)
                                             <option value="{{ $val->id }}">{{ $val->program_name }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" >是否通用</label>
+                                    <div class="col-sm-10">
+                                        <input type="checkbox" name="is_classic" class="js-switch"  value="1"/>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" >是否通用</label>
+                                    <div class="col-sm-10">
+                                        <input type="checkbox" name="is_classic" class="js-switch"  value="1"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
