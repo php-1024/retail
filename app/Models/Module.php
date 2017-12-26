@@ -38,6 +38,15 @@ class Module extends Model{
         return $model->get();
     }
 
+    //获取新建独立主程序时的模块列表
+    public static function getListProgram($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::with('program_nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->get();
+    }
+
     //添加数据
     public static function addModule($param){
         $model = new Module();
