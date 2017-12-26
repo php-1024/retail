@@ -61,7 +61,7 @@ class ProgramController extends Controller{
                 $selected_node[] = $val->module_id . '_' . $val->node_id;
             }
         }
-        return view('Tooling/Program/program_parents_node',['module_list'=>$module_list,'node_list'=>$node_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
+        return view('Tooling/Program/program_parents_node',['pid'=>$pid,'module_list'=>$module_list,'node_list'=>$node_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
     }
     //检测添加数据
     public function program_add_check(Request $request){
