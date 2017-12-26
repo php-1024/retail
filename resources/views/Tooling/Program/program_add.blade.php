@@ -125,8 +125,9 @@
 <script>
     $(function(){
         get_parents_node(0);
-        new Switchery($('.js-switch'), { color: '#1AB394' });
-
+        new Switchery(document.querySelector('.js-switch'), { color: '#1AB394' });
+        new Switchery(document.querySelector('.js-switch2'), { color: '#1AB394' });
+        new Switchery(document.querySelector('.js-switch3'), { color: '#1AB394' });
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
