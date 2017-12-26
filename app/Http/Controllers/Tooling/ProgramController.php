@@ -32,6 +32,7 @@ class ProgramController extends Controller{
             $node_list = [];
         }else{//有主程序时
            $module_list = Module::getListProgram($pid,[],0,'id');
+            $module_list->nodes = $module_list->program_nodes ;
             dump($module_list);
             $node_list = [];
             /*
