@@ -72,8 +72,7 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $module_node = new ModuleNode();//重新实例化模型，避免重复
-                ModuleNode::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
+                Module::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
                     $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
                     if(is_null($vo)){
