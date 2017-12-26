@@ -23,6 +23,12 @@ class Program extends Model{
         return $this->belongsToMany('App\Models\Node','program_module_node','program_id','node_id');
     }
 
+    //和程序关联，多对多
+    public function program_parents()
+    {
+        return $this->belongsToMany('App\Models\Program','program','id','node_id');
+    }
+
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Program();
@@ -61,7 +67,7 @@ class Program extends Model{
 
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('modules')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('modules')->with('program_parents')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
