@@ -12,10 +12,10 @@ class Module extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和功能节点关联，多对多
-    public function nodes()
-    {
-        return $this->belongsToMany('App\Models\Node','module_node','module_id','node_id');
-    }
+   // public function nodes()
+    //{
+      //  return $this->belongsToMany('App\Models\Node','module_node','module_id','node_id');
+    //}
 
     //在程序中和功能节点的关联，多对多
     public function program_nodes()
