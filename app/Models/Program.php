@@ -61,7 +61,7 @@ class Program extends Model{
 
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('modules')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
