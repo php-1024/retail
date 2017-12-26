@@ -42,9 +42,9 @@ class Module extends Model{
     public static function getListProgram($program_id,$where,$limit=0,$orderby,$sort='DESC'){
         $model = self::with(['program_nodes'=>function($query) use ($program_id){
             $query->where('program_id',$program_id);
-        }])->with(['programs'=>function($query) use ($program_id){
-            $query->where('program_id',$program_id);
-        }])->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
+        }])->whereIn('id',function($query) use ($program_id){
+            $query->from('program_module_node')->select('module_id')->whereIn('program_id',$program_id);
+        })->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
 
         if(!empty($limit)){
             $model = $model->limit($limit);
