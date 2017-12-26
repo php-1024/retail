@@ -78,18 +78,14 @@ class ModuleController extends Controller{
                 foreach($nodes as $key=>$val){
                     $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
                     if(is_null($vo)){
-                        $module_node_data[] = ['module_id'=>$id,'node_id'=>$val,'created_at'=>time(),'updated_at'=>time()];//不存在则添加数据
+                        ModuleNode::addModuleNode(['module_id'=>$id,'node_id'=>$val]);//不存在则添加数据
                     }else{
                         continue;//存在则跳过;
                     }
                     $vo = '';
                 }
-                //首先删除这次删除的数据的数据
+                //删除这次编辑去除的节点
                 $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
-                //如果插入的数据不为空,则插入
-                if(!empty($module_node_data)){
-                    $module_node->insert($module_node_data);
-                }
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
