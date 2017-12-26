@@ -30,12 +30,12 @@ class ProgramController extends Controller{
         if(empty($pid) || $pid=='0'){//没有主程序时
             $module_list = Module::getListSimple([],0,'id');
         }else{//有主程序时
-           $module_list = Module::getListProgram($pid,[],0,'id');
+            $module_list = Module::getListProgram($pid,[],0,'id');
         }
         $selected_node = [];
         $selected_module = [];
         if(!empty($editid)) {
-            $list = ProgramModuleNode::where('program_id',$editid)->get();
+            $list = ProgramModuleNode::getList([[ 'program_id',$editid ]],0,'id');
             foreach ($list as $key => $val) {
                 if(!in_array($val->module_id,$selected_module)){
                     $selected_module[] = $val->module_id;
