@@ -43,7 +43,14 @@ class Program extends Model{
         $program->save();
         return $program->id;
     }
-
+    //修改数据
+    public static function editProgram($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
     //获取总数
     public static function getCount($where=[]){
         return self::where($where)->where('is_delete','0')->count();

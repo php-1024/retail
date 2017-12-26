@@ -87,7 +87,6 @@ class ProgramController extends Controller{
         $search_data['program_name'] = $program_name;
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
         $module_list = [];//功能模块列表
-        $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
         foreach($list as $key=>$val){
             $program_id = $val->id;
@@ -99,15 +98,13 @@ class ProgramController extends Controller{
                 $pname[$val->id] = $ppname[0];
             }
         }
-
-        return view('Tooling/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Tooling/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //获取编辑程序
     public function program_edit(Request $request){
         $id = $request->input('id');
         $info = Program::find($id);
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
-
         return view('Tooling/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
     //提交编辑程序数据
@@ -116,19 +113,19 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $program_name = $request->input('program_name');//程序名称
-        $pid = $request->input('pid');//上级程序
+        $complete_id = $request->input('complete_id');//上级程序
         $is_classic = empty($request->input('is_classic'))?'0':'1';//是否通用版本
+        $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
+        $is_coupled = empty($request->input('is_coupled'))?'0':'1';//是否夫妻程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
-        $info = Program::where('program_name',$program_name)->where('id','!=',$id)->where('is_delete','0')->pluck('id')->toArray();
 
-        if(!empty($info)){
+        if(Program::checkRowExists([[ 'program_name',$program_name],['id','!=',$id]])){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-                $program = new Program();//实例化程序模型
                 $program_module_node = new ProgramModuleNode();
-                $program->where('id',$id)->update(['program_name'=>$program_name,' '=>$pid,'is_classic'=>$is_classic,'updated_at'=>time()]);
+                Program::editProgram([[ 'id',$id ]],['program_name'=>$program_name,'complete_id'=>$complete_id,'is_classic'=>$is_classic,'is_asset'=>$is_asset,'is_coupled'=>$is_coupled]);
 
                 $node_ids = [];
                 //循环节点生成多条数据
