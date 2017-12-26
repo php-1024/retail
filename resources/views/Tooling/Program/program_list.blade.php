@@ -96,20 +96,20 @@
                                         @if($val->is_asset==1)
                                             <label class="label label-warning" style="display:inline-block">资产程序</label>
                                         @else
-                                            <label class="label label-danger" style="display:inline-block">管理程序</label>
+                                            <label class="label label-info" style="display:inline-block">管理程序</label>
                                         @endif
                                     </td>
                                     <td>
                                         @if($val->is_classic==1)
                                             <label class="label label-warning" style="display:inline-block">通用版本</label>
                                         @else
-                                            <label class="label label-danger" style="display:inline-block">定制版本</label>@endif
+                                            <label class="label label-info" style="display:inline-block">定制版本</label>@endif
                                         </td>
                                     <td>
                                         @if($val->is_coupled==1)
                                             <label class="label label-warning" style="display:inline-block">配套程序</label>
                                         @else
-                                            <label class="label label-danger" style="display:inline-block">独立程序</label>
+                                            <label class="label label-info" style="display:inline-block">独立程序</label>
                                         @endif
                                     </td>
                                     <td>
