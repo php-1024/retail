@@ -90,7 +90,7 @@ class ProgramController extends Controller{
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
-        $tt =Module::find(1);
+        $tt =Module::find(10);
         dump($tt);
         foreach($list as $key=>$val){
 
