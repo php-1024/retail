@@ -63,13 +63,13 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 $program_id = Program::addProgram(['program_name'=>$program_name,'complete_id'=>$complete_id,'is_classic'=>$is_classic,'is_asset'=>$is_asset,'is_coupled'=>$is_coupled]);
-
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
                     ProgramModuleNode::addProgramModuleNode(['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id]);
+                    unset($arr);
                 }
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
