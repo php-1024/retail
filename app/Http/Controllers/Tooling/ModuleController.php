@@ -57,6 +57,10 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $info = Module::find($id);
         $module_node = new ModuleNode();
+        $tt = Node::whereIn('id',function($query) use ($id){
+            $query->select('node_id')->from('module_node')->where('module_id',$id)->get();
+        })->get();
+        dump($tt);
         $module_node = $module_node->join('node',function($json){
             $json->on('node.id','=','module_node.node_id');
         });
