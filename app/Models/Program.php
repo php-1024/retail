@@ -32,10 +32,36 @@ class Program extends Model{
         return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
     }
 
+    //添加数据
+    public static function addProgram($param){
+        $program = new Program();//实例化程序模型
+        $program->program_name = $param['program_name'];//程序名称
+        $program->complete_id = $param['complete_id'];//上级程序
+        $program->is_classic = $param['is_classic'];//是否通用版本
+        $program->is_asset = $param['is_asset'];//是否资产程序
+        $program->is_coupled = $param['is_coupled'];//是否夫妻程序
+        $program->save();
+        return $program->id;
+    }
+
     //获取总数
     public static function getCount($where=[]){
         return self::where($where)->where('is_delete','0')->count();
     }
 
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where){
+        $row = self::getPluck($where,'id')->toArray();
+        if(empty($row)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->where('is_delete','0')->pluck($pluck);
+    }
 }
 ?>
