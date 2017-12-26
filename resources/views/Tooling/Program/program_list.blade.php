@@ -99,8 +99,7 @@
                                     </td>
                                     <td>
                                         @foreach($module_list[$val->id] as $k=>$v)
-                                            <?dump($v);?>
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="" style="display:inline-block">{{ $v->module_name }}</label>&nbsp;&nbsp;
+                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($v->program_nodes as $kk=>$vv) {{ $vv->node_nmame }} @endforeach" style="display:inline-block">{{ $v->module_name }}</label>&nbsp;&nbsp;
                                        @endforeach
                                     </td>
                                     <td>{{ $val->created_at }}</td>
