@@ -30,15 +30,7 @@ class ProgramController extends Controller{
         if(empty($pid) || $pid=='0'){//没有主程序时
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
-            $node_list = [];
 
-            if (!empty($module_list)) {
-                foreach ($module_list as $key => $val) {
-                    $node_list[$val['id']] = ModuleNode::where('module_id',$val['id'])->where('module_node.is_delete','0')->join('node',function($json){
-                        $json->on('node.id','=','module_node.node_id');
-                    })->select('module_node.*','node.node_name')->get()->toArray();
-                }
-            }
         }else{//有主程序时
             $module_list = ProgramModuleNode::where('program_id',$pid)->where('program_module_node.is_delete','0')->join('module',function($join){
                 $join->on('program_module_node.module_id','=','module.id');
