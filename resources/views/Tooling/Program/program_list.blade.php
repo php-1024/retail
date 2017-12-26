@@ -98,7 +98,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @foreach($val->modules as $k=>$v)
+                                        @foreach($module_list[$val->id] as $k=>$v)
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($v->nodes as $kk=>$vv){{ $vv['node_name'] }} &nbsp;&nbsp;@endforeach" style="display:inline-block">{{ $v->module_name }}</label>&nbsp;&nbsp;
                                        @endforeach
                                     </td>
