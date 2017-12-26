@@ -57,10 +57,7 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $info = Module::find($id);
         $module_node = new ModuleNode();
-        $tt = Node::whereIn('id',function($query) use ($id){
-            $query->select('node_id')->from('module_node')->where('module_id',$id)->get();
-        })->get();
-        dump($tt);
+        /*
         $module_node = $module_node->join('node',function($json){
             $json->on('node.id','=','module_node.node_id');
         });
@@ -71,7 +68,9 @@ class ModuleController extends Controller{
         }
         $node = new Node();
         $node_list_unselected = $node->whereNotIn('id',$selected_id)->where('is_delete','0')->get();
-
+        */
+        $node_list_selected = Node::node_selected($id);
+        $node_list_unselected = Node::node_unselected($id);
         return view('Tooling/Module/module_edit',['info'=>$info,'node_list_selected'=>$node_list_selected,'node_list_unselected'=>$node_list_unselected]);
     }
     //编辑功能模块列表

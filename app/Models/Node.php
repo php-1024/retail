@@ -68,5 +68,19 @@ class Node extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
     }
+
+    //查询已被某个模块选中的节点
+    public static function node_selected($module_id){
+        return Node::whereIn('id',function($query) use ($module_id){
+            $query->select('node_id')->from('module_node')->where('module_id',$module_id)->get();
+        })->get();
+    }
+
+    //查询未被摸个模块选中的节点
+    public static function node_unselected($module_id){
+        return Node::whereNotIn('id',function($query) use ($module_id){
+            $query->select('node_id')->from('module_node')->where('module_id',$module_id)->get();
+        })->get();
+    }
 }
 ?>
