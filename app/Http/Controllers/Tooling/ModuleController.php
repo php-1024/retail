@@ -84,7 +84,7 @@ class ModuleController extends Controller{
                     $vo = '';
                 }
                 //删除这次编辑去除的节点
-                $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
+                ModuleNode::where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
