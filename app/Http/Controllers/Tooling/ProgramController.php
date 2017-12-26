@@ -63,13 +63,13 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 $program_id = Program::addProgram(['program_name'=>$program_name,'complete_id'=>$complete_id,'is_classic'=>$is_classic,'is_asset'=>$is_asset,'is_coupled'=>$is_coupled]);
+
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
                     ProgramModuleNode::addProgramModuleNode(['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id]);
-                    unset($arr);
                 }
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
@@ -87,18 +87,15 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
+        $program = new Program();
+        if(!empty($program_name)){
+            $program = $program->where('program_name','like','%'.$program_name.'%');
+        }
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
-        foreach($list as $key=>$val){
-            $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
-            if(empty($ppname)){
-                $pname[$val->id] = '独立主程序';
-            }else{
-                $pname[$val->id] = $ppname[0];
-            }
-        }
+
         return view('Tooling/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //获取编辑程序
@@ -106,6 +103,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
+
         return view('Tooling/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
     //提交编辑程序数据
