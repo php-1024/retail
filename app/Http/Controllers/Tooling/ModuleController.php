@@ -108,7 +108,7 @@ class ModuleController extends Controller{
                     $module_node->insert($module_node_data);
                 }
 
-                ToolingLog::setOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
