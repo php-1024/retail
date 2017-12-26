@@ -87,14 +87,17 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
-        $program = new Program();
-        if(!empty($program_name)){
-            $program = $program->where('program_name','like','%'.$program_name.'%');
-        }
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
-        $module_list = [];//功能模块列表
-        $node_list = [];//功能节点列表
+
         $pname = [];//上级程序名称列表
+        foreach($list as $key=>$val){
+            $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
+            if(empty($ppname)){
+                $pname[$val->id] = '独立主程序';
+            }else{
+                $pname[$val->id] = $ppname[0];
+            }
+        }
 
         return view('Tooling/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'node_list'=>$node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
