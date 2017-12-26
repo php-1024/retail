@@ -92,11 +92,11 @@ class ProgramController extends Controller{
             $program = $program->where('program_name','like','%'.$program_name.'%');
         }
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
+        dump($list);
         $module_list = [];//功能模块列表
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
         foreach($list as $key=>$val){
-
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
