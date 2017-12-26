@@ -17,7 +17,17 @@ class Module extends Model{
         return $this->belongsToMany('App\Models\Node','module_node','module_id','node_id');
     }
 
+    //在程序中和功能节点的关联，多对多
+    public function program_nodes()
+    {
+        return $this->belongsToMany('App\Models\Node','program_module_node','module_id','node_id');
+    }
 
+    //和程序关联，多对多
+    public function programs()
+    {
+        return $this->belongsToMany('App\Models\Program','program_module_node','module_id','program_id');
+    }
     //添加数据
     public static function addModule($param){
         $model = new Module();

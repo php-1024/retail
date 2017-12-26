@@ -17,6 +17,18 @@ class Node extends Model{
         return $this->belongsToMany('App\Models\Module','module_node','node_id','module_id');
     }
 
+    //和功能模块关联，多对多
+    public function program_modules()
+    {
+        return $this->belongsToMany('App\Models\Module','program_module_node','node_id','module_id');
+    }
+
+    //和程序的关联，多对多
+    public function programs()
+    {
+        return $this->belongsToMany('App\Models\Program','program_module_node','node_id','program_id');
+    }
+
     //获取总数
     public static function getCount($where=[]){
         return self::where($where)->where('is_delete','0')->count();

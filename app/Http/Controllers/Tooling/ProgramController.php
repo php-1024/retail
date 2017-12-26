@@ -27,7 +27,7 @@ class ProgramController extends Controller{
     public function program_parents_node(Request $request){
         $pid = $request->input('pid');
         $editid = $request->input('editid');
-        if(empty($pid) || $pid=='0'){//没有煮程序时
+        if(empty($pid) || $pid=='0'){//没有主程序时
             $module = new Module(); //实例化功能模块模型
             $module_list = $module->where('is_delete', '0')->get()->toArray();
             $node_list = [];

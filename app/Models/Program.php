@@ -11,6 +11,17 @@ class Program extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和程序关联，多对多
+    public function Modules()
+    {
+        return $this->belongsToMany('App\Models\Module','program_module_node','program_id','module_id');
+    }
+
+    //和程序关联，多对多
+    public function Nodes()
+    {
+        return $this->belongsToMany('App\Models\Node','program_module_node','program_id','node_id');
+    }
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
