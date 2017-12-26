@@ -19,7 +19,7 @@ class ProgramController extends Controller{
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $plist = Program::where('pid','0')->where('is_delete','0')->get();
+        $plist = Program::where('complete_id','0')->where('is_delete','0')->get();
 
         return view('Tooling/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
