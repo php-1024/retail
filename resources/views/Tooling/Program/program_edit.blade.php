@@ -35,6 +35,20 @@
                         </div>
                     </div>
                     <div class="hr-line-dashed" style="clear:both;"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" >是否资产程序</label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" name="is_asset" class="js-switch2"  value="1"/>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed" style="clear:both;"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" >是否夫妻程序</label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" name="is_coupled" class="js-switch3"  value="1"/>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed" style="clear:both;"></div>
                     <div class="form-group" id="node_box"></div>
                     <div class="hr-line-dashed" style="clear:both;"></div>
                 </form>
@@ -53,7 +67,9 @@
     $(function(){
         get_parents_node($('#current_pid').val(),$('#id').val());
         var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
+        new Switchery(document.querySelector('.js-switch'), { color: '#1AB394' });
+        new Switchery(document.querySelector('.js-switch2'), { color: '#1AB394' });
+        new Switchery(document.querySelector('.js-switch3'), { color: '#1AB394' });
     });
     //获取上级程序节点
     function get_parents_node(pid,editid){
