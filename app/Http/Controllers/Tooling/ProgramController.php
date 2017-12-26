@@ -4,7 +4,6 @@
  */
 namespace App\Http\Controllers\Tooling;
 use App\Models\Module;
-use App\Models\ModuleNode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
@@ -92,13 +91,13 @@ class ProgramController extends Controller{
         $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
         foreach($list as $key=>$val){
-            DB::connection('study')->enableQueryLog();//开启日志
+
             $program_id = $val->id;
             $module_list[$val->id] =Module::whereIn('id',function($query) use ($program_id){
                 $query->from('program_module_node')->where('program_id',$program_id)->select('module_id')->groupBy('module_id');
             })->where('is_delete',0)->get();
-            $queries = DB::connection('study')->getQueryLog();
-            dump($queries);//打印操作记录
+
+            dump($module_list[$val->id]);
 
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
