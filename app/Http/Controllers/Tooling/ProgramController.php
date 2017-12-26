@@ -133,7 +133,7 @@ class ProgramController extends Controller{
     public function program_edit(Request $request){
         $id = $request->input('id');
         $info = Program::find($id);
-        $plist = Program::where('pid','0')->where('is_delete','0')->get();
+        $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
 
         return view('Tooling/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
