@@ -29,7 +29,7 @@ class ProgramController extends Controller{
         $editid = $request->input('editid');
         if(empty($pid) || $pid=='0'){//没有主程序时
             $module = new Module(); //实例化功能模块模型
-            $module_list = $module->where('is_delete', '0')->get();
+            $module_list = Module::getListSimple([],0,'id');
 
             $node_list = '';
         }else{//有主程序时
