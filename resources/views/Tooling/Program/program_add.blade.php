@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择主程序</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control m-b" name="complete_id" onchange="get_parents_node($(this).val());">
+                                        <select class="form-control m-b" name="complete_id" id="complete_id" onchange="get_parents_node($(this).val());">
                                             <option value="0">独立主程序</option>
                                             @foreach($plist as $key=>$val)
                                             <option value="{{ $val->id }}">{{ $val->program_name }}</option>
@@ -124,7 +124,7 @@
 
 <script>
     $(function(){
-        get_parents_node(0);
+        get_parents_node($('#complete_id').val());
         new Switchery(document.querySelector('.js-switch'), { color: '#1AB394' });
         new Switchery(document.querySelector('.js-switch2'), { color: '#1AB394' });
         new Switchery(document.querySelector('.js-switch3'), { color: '#1AB394' });
