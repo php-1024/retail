@@ -24,7 +24,7 @@ class ModuleNode extends Model{
     }
     //和节点是一对多的关系
     public function nodes(){
-        return $this->belongsTo('App\Models\Node', 'node_id');
+        return $this->hasMany('App\Models\Node', 'node_id');
     }
 
     //和模型是一对多的关系
