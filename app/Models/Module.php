@@ -31,7 +31,7 @@ class Module extends Model{
 
     //获取新建独立主程序时的模块列表
     public static function getListSimple($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::with('program_nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
+        $model = self::with('nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
