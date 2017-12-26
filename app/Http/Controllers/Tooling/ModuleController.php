@@ -67,12 +67,14 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
+        $module = new Module();
         if(Module::checkRowExists([[ 'module_name',$module_name ],[ 'id','!=',$id ]])){
             return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-                Module::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
+                $module_node = new ModuleNode();//重新实例化模型，避免重复
+                ModuleNode::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
                     $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
                     if(is_null($vo)){
@@ -82,12 +84,15 @@ class ModuleController extends Controller{
                     }
                     $vo = '';
                 }
-                //删除这次编辑去除的节点
-                ModuleNode::where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
+                //删除这次
+                $module_node->where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
+                //如果插入的数据不为空,则插入
+                //if(!empty($module_node_data)){
+                   // $module_node->insert($module_node_data);
+                //}
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑功能模块失败，请检查', 'status' => '0']);
             }

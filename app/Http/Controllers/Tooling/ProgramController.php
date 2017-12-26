@@ -88,14 +88,23 @@ class ProgramController extends Controller{
         $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
-
+        $module_list = [];//功能模块列表
+        $node_list = [];//功能节点列表
         $pname = [];//上级程序名称列表
         foreach($list as $key=>$val){
+            $module_list[$val->id] = ProgramModuleNode::where('program_id',$val->id)->where('program_module_node.is_delete','0')->join('module',function($join){
+                $join->on('program_module_node.module_id','=','module.id');
+            })->distinct()->select('program_module_node.module_id as id','module.module_name')->get()->toArray();
             $ppname = Program::where('id',$val->pid)->pluck('program_name')->toArray();//获取用户名称
             if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
             }else{
                 $pname[$val->id] = $ppname[0];
+            }
+            foreach ( $module_list[$val->id] as $kk => $vv) {
+                $node_list[$val->id.'_'.$vv['id']] = ProgramModuleNode::where('module_id',$vv['id'])->where('program_id',$val->id)->where('program_module_node.is_delete','0')->join('node',function($json){
+                    $json->on('node.id','=','program_module_node.node_id');
+                })->select('program_module_node.*','node.node_name')->get()->toArray();
             }
         }
 
