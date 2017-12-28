@@ -70,13 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" >是否通用</label>
-                                    <div class="col-sm-10">
-                                        <input type="checkbox" name="is_classic" class="js-switch"  value="1"/>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否资产程序</label>
                                     <div class="col-sm-10">
@@ -84,13 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" >是否夫妻程序</label>
-                                    <div class="col-sm-10">
-                                        <input type="checkbox" name="is_coupled" class="js-switch3"  value="1"/>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
+
                                 <div class="form-group" id="node_box"></div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">

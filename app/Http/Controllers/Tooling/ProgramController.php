@@ -51,9 +51,7 @@ class ProgramController extends Controller{
 
         $program_name = $request->input('program_name');//程序名称
         $complete_id = $request->input('complete_id');//上级程序
-        $is_classic = empty($request->input('is_classic'))?'0':'1';//是否通用版本
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
-        $is_coupled = empty($request->input('is_coupled'))?'0':'1';//是否夫妻程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
         if(Program::checkRowExists([[ 'program_name',$program_name ]])){
@@ -61,7 +59,7 @@ class ProgramController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $program_id = Program::addProgram(['program_name'=>$program_name,'complete_id'=>$complete_id,'is_classic'=>$is_classic,'is_asset'=>$is_asset,'is_coupled'=>$is_coupled]);
+                $program_id = Program::addProgram(['program_name'=>$program_name,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
@@ -114,9 +112,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $program_name = $request->input('program_name');//程序名称
         $complete_id = $request->input('complete_id');//上级程序
-        $is_classic = empty($request->input('is_classic'))?'0':'1';//是否通用版本
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
-        $is_coupled = empty($request->input('is_coupled'))?'0':'1';//是否夫妻程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
         if(Program::checkRowExists([[ 'program_name',$program_name],['id','!=',$id]])){
@@ -124,7 +120,7 @@ class ProgramController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                Program::editProgram([[ 'id',$id ]],['program_name'=>$program_name,'complete_id'=>$complete_id,'is_classic'=>$is_classic,'is_asset'=>$is_asset,'is_coupled'=>$is_coupled]);
+                Program::editProgram([[ 'id',$id ]],['program_name'=>$program_name,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
 
                 $node_ids = [];
                 //循环节点生成多条数据
