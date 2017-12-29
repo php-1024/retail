@@ -11,7 +11,6 @@
     <link href="{{asset('public/Tooling/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Tooling/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Tooling/library/font')}}/css/font-awesome.css" rel="stylesheet">
-    <link href="{{asset('public/Tooling/library/switchery')}}/css/switchery.css" rel="stylesheet">
 
 
     <link href="{{asset('public/Tooling')}}/css/animate.css" rel="stylesheet">
