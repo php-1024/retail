@@ -79,7 +79,7 @@
                                     <th class="col-sm-1">是否资产程序</th>
                                     <th>功能模块</th>
                                     <th class="col-sm-1">添加时间</th>
-                                    <th class="col-sm-2 text-right" >操作</th>
+                                    <th class="col-sm-3 text-right" >操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -104,7 +104,7 @@
                                     </td>
                                     <td>{{ $val->created_at }}</td>
                                     <td class="text-right">
-                                        <button type="button" id="editBtn"  class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;菜单管理</button>
+                                        <button type="button" id="editBtn"  class="btn btn-xs btn-primary"><i class="fa fa-meun"></i>&nbsp;&nbsp;菜单管理</button>
                                         <button type="button" onclick="getEditForm({{ $val->id }})" id="editBtn"  class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="deleteBtn" class="btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         <button type="button" id="deleteBtn2" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
