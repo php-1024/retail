@@ -169,7 +169,7 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $program_id = $request->input('program_id');//所属程序ID
         $parent_id = $request->input('parent_id');//上级菜单ID
-        $parent_tree = $parent_id=='0' ? '0' : Program::getPluck([[ 'id',$parent_id]],'parent_tree').','.$parent_id;
+        $parent_tree = $parent_id=='0' ? '0' : ProgramMenu::getPluck([[ 'id',$parent_id]],'parent_tree').','.$parent_id;
         $menu_name = $request->input('menu_name');//菜单名称
         $is_root = $request->input('is_root');//是否根菜单
         $icon_class = $request->input("icon_class");//ICON样式名称
