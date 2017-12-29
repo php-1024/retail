@@ -237,6 +237,12 @@
 <script>
     $(function(){
         $('#nestable2').nestable();
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
+        });
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
         get_parents_node($('#complete_id').val());
         //设置CSRF令牌
         $.ajaxSetup({
