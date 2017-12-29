@@ -1,7 +1,10 @@
+<form method="post" role="form" id="currentForm" action="{{ url('tooling/ajax/menu_add_check') }}">
+<input type="hidden" name="_token" value="{{csrf_token()}}">
+<input type="hidden" name="program_id" id="id" value="{{ $info->id }}">
 <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
         <div class="modal-header">
-            添加/修改菜单
+            "{{$info->program_name}}"菜单添加
         </div>
         <div class="modal-body">
 
@@ -61,3 +64,4 @@
         </div>
     </div>
 </div>
+</form>
