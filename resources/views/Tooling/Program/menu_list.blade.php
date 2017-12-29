@@ -48,7 +48,7 @@
 
                 <div class="row">
                     <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_add') }}">
-                    <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_edit') }}">
+                    <input type="hidden" id="menu_edit_url" value="{{ url('tooling/ajax/menu_edit') }}">
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-1">
                         <div class="form-group">
