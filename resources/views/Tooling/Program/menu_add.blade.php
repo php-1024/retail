@@ -20,6 +20,9 @@
                 <div class="col-sm-10">
                     <select class="form-control m-b" name="parent_id">
                         <option value="0">一级菜单</option>
+                        @foreach($list as $key=>$val)
+                            <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

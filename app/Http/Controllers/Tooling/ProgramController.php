@@ -160,7 +160,8 @@ class ProgramController extends Controller{
     public function menu_add(Request $request){
         $id = $request->input('program_id');
         $info = Program::find($id);
-        return view('Tooling/Program/menu_add',['info'=>$info,'action_name'=>'program']);
+        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
+        return view('Tooling/Program/menu_add',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
     //添加菜单数据监测
     public function menu_add_check(Request $request){
