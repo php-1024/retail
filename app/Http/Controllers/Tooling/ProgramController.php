@@ -154,10 +154,11 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
+        $son_menu = [];
         foreach($list as $key=>$val){
-           dump($val->getSonMenu());
+            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
         }
-        return view('Tooling/Program/menu_list',['list'=>$list,'info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Tooling/Program/menu_list',['list'=>$list,'son_menu'=>$son_menu,'info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //添加菜单页面
     public function menu_add(Request $request){
