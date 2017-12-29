@@ -346,13 +346,13 @@ class ToolingCheckAjax {
         if (empty($request->input('menu_name'))) {
             return self::res(0, response()->json(['data' => '请输入菜单名称', 'status' => '0']));
         }
-        if($request->input('is_root')=='1') {
+        if($request->input('is_root')=='1') {//如果是跟节点的话一定要输入路由链接
             if (empty($request->input('menu_route'))) {
                 return self::res(0, response()->json(['data' => '请输入要跳转的路由链接', 'status' => '0']));
             }
-            if (empty($request->input('menu_routes_bind'))) {
-                return self::res(0, response()->json(['data' => '请输入关联路由列表', 'status' => '0']));
-            }
+        }
+        if (empty($request->input('menu_routes_bind'))) {//一级菜单一定要关联多个路由
+            return self::res(0, response()->json(['data' => '请输入关联路由列表', 'status' => '0']));
         }
         return self::res(1,$request);
     }
