@@ -16,6 +16,15 @@ class ProgramMenu extends Model{
         return $this->belongsTo('App\Models\Program', 'program_id');
     }
 
+    //获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = new Program();
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
+    }
+
     //添加菜单
     public static function addMenu($param){
         $model = new ProgramMenu();//实例化程序模型
