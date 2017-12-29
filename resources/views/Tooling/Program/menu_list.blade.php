@@ -159,7 +159,6 @@
         $('#collapse-all').click(function(){
             $('.dd').nestable('collapseAll');
         });
-        get_parents_node($('#complete_id').val());
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
@@ -206,7 +205,7 @@
         var url = $('#menu_edit_url').val();
         var token = $('#_token').val();
 
-        if(program_id==''){
+        if(id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
