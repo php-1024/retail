@@ -34,7 +34,7 @@
                         <a href="JavaScript:;">程序管理</a>
                     </li>
                     <li >
-                        <strong>添加程序</strong>
+                        <strong>"{{ $info->program_name }}"菜单结构</strong>
                     </li>
                 </ol>
             </div>
