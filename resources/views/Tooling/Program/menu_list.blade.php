@@ -88,6 +88,7 @@
                         <div class="ibox-content">
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
+                                    @foreach($list as $key=>$val)
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="fa fa-th-large"></i></span>
@@ -97,7 +98,7 @@
                                                     <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                 </div>
                                             </span>
-                                            系统管理
+                                            {{ $val->name }}
 
                                         </div>
                                         <ol class="dd-list">
@@ -147,65 +148,7 @@
                                             </li>
                                         </ol>
                                     </li>
-                                    <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            <span class="label label-primary"><i class="fa fa-th-large"></i></span>
-                                            <span class="pull-right">
-                                                <div class="btn-group">
-                                                    <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                    <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                </div>
-                                            </span>
-                                            系统管理
-
-                                        </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
+                                    @endforeach
                                 </ol>
                             </div>
 
