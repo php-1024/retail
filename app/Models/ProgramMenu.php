@@ -18,7 +18,7 @@ class ProgramMenu extends Model{
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new Program();
+        $model = new ProgramMenu();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
