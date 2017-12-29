@@ -161,7 +161,7 @@ class ProgramController extends Controller{
     public function menu_add(Request $request){
         $id = $request->input('program_id');
         $info = Program::find($id);
-        return view('Tooling/Program/program_add',['info'=>$info,'action_name'=>'program']);
+        return view('Tooling/Program/menu_add',['info'=>$info,'action_name'=>'program']);
     }
 }
 ?>
