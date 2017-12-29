@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ToolingOperationLog;
 use App\Models\Program;
 use App\Models\ProgramModuleNode;
-
+use App\Models\ProgramMenu;
 
 class ProgramController extends Controller{
     public function program_add(Request $request)
@@ -165,20 +165,21 @@ class ProgramController extends Controller{
     public function menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $program_id = $request->input('program_id');
-        $parent_id = $request->input('parent_id');
-        $menu_name = $request->input('menu_name');
-        $is_root = $request->input('is_root');
-        $icon_class = $request->input("icon_class");
-        $menu_route = $request->input('menu_route');
-        $menu_routes_bind = $request->input('menu_routes_bind');
+        $program_id = $request->input('program_id');//所属程序ID
+        $parent_id = $request->input('parent_id');//上级菜单ID
+        $parent_tree = $parent_id=='0'?'0':Program::getPluck([[ 'id',$parent_id]],'parent_tree').','.$parent_id;
+        $menu_name = $request->input('menu_name');//菜单名称
+        $is_root = $request->input('is_root');//是否根菜单
+        $icon_class = $request->input("icon_class");//ICON样式名称
+        $menu_route = $request->input('menu_route');//跳转路由
+        $menu_routes_bind = $request->input('menu_routes_bind');//关联路由字符串，使用逗号分隔
 
         if(Program::checkRowExists([[ 'menu_name',$menu_name ]])){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-
+                ProgramMenu::addMenu(['']);
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了菜单'.$menu_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
