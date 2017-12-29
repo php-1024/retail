@@ -167,14 +167,14 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $program_id = $request->input('program_id');//所属程序ID
         $parent_id = $request->input('parent_id');//上级菜单ID
-        $parent_tree = $parent_id=='0'?'0':Program::getPluck([[ 'id',$parent_id]],'parent_tree').','.$parent_id;
+        $parent_tree = $parent_id=='0' ? '0' : Program::getPluck([[ 'id',$parent_id]],'parent_tree').','.$parent_id;
         $menu_name = $request->input('menu_name');//菜单名称
         $is_root = $request->input('is_root');//是否根菜单
         $icon_class = $request->input("icon_class");//ICON样式名称
         $menu_route = $request->input('menu_route');//跳转路由
         $menu_routes_bind = $request->input('menu_routes_bind');//关联路由字符串，使用逗号分隔
 
-        if(Program::checkRowExists([[ 'menu_name',$menu_name ],['parent_id',$parent_id],['program_id',$program_id]])){
+        if(ProgramMenu::checkRowExists([[ 'menu_name',$menu_name ],['parent_id',$parent_id],['program_id',$program_id]])){
             return response()->json(['data' => '菜单组中菜单名称重复', 'status' => '0']);
         }else{
             DB::beginTransaction();
