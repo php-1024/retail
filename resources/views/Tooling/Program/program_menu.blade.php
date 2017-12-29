@@ -47,6 +47,7 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
+                    <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/program_edit') }}">
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
@@ -217,6 +218,7 @@
 
         @include('Tooling/Public/Footer')
     </div>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 </div>
 
 <!-- Mainly scripts -->
@@ -285,6 +287,41 @@
         var data = {'_token':token,'pid':pid}
         $.post(url,data,function(response){
             $('#node_box').html(response);
+        });
+    }
+
+    function getAddForm(program_id){
+        var url = $('#program_edit_url').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
     }
 </script>
