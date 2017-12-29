@@ -101,7 +101,9 @@
                                             {{ $val->menu_name }}
 
                                         </div>
+                                        @if(!empty($son_menu[$val->id]))
                                         <ol class="dd-list">
+                                            @foreach($son_menu[$val->id] as $kk=>$vv)
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
@@ -110,43 +112,12 @@
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                    系统管理
+                                                    {{$vv->menu_name}}
                                                 </div>
                                             </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right">
-                                                        <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                        </div>
-                                                    </span>
-                                                    系统管理
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ol>
+                                        @emdif
                                     </li>
                                     @endforeach
                                 </ol>
