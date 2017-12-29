@@ -62,6 +62,7 @@ class ToolingCheck{
             case "tooling/program/program_add"://添加程序
             case "tooling/program/program_list"://程序列表
             case "tooling/personal/password_edit"://修改登陆密码
+            case "tooling/program/menu_list"://修改登陆密码
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);//判断是否登陆
                 if($re['status']=='0'){
