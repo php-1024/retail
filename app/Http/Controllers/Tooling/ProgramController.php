@@ -70,7 +70,6 @@ class ProgramController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加程序失败，请检查', 'status' => '0']);
             }
@@ -142,7 +141,6 @@ class ProgramController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑程序失败，请检查', 'status' => '0']);
             }
@@ -165,7 +163,30 @@ class ProgramController extends Controller{
     }
     //添加菜单数据监测
     public function menu_add_check(Request $request){
-        dump($request->input());
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $program_id = $request->input('program_id');
+        $parent_id = $request->input('parent_id');
+        $menu_name = $request->input('menu_name');
+        $is_root = $request->input('is_root');
+        $icon_class = $request->input("icon_class");
+        $menu_route = $request->input('menu_route');
+        $menu_routes_bind = $request->input('menu_routes_bind');
+
+        if(Program::checkRowExists([[ 'menu_name',$menu_name ]])){
+            return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了菜单'.$menu_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加菜单失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加菜单成功', 'status' => '1']);
+        }
     }
 
 }

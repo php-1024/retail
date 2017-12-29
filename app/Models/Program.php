@@ -11,13 +11,18 @@ class Program extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和程序关联，多对多
+    //和程序菜单表一对多的关系
+    public function program_menus(){
+        return $this->hasMany('App\Models\PrograMenu', 'program_id');
+    }
+
+    //和模块关联，多对多
     public function modules()
     {
         return $this->belongsToMany('App\Models\Module','program_module_node','program_id','module_id');
     }
 
-    //和程序关联，多对多
+    //和节点关联，多对多
     public function nodes()
     {
         return $this->belongsToMany('App\Models\Node','program_module_node','program_id','node_id');
