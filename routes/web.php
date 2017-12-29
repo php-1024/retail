@@ -111,6 +111,7 @@ Route::group(['prefix'=>'tooling'],function(){
     Route::group(['prefix'=>'program'],function(){
         Route::get('program_add', 'Tooling\ProgramController@program_add')->middleware('ToolingCheck');//修改密码路由
         Route::get('program_list','Tooling\ProgramController@program_list')->middleware('ToolingCheck');//修改密码路由
+        Route::get('program_menu','Tooling\ProgramController@program_menu')->middleware('ToolingCheck');//程序菜单路由
     });
 
     //登陆页面组
