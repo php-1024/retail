@@ -98,7 +98,7 @@
                                                     <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                 </div>
                                             </span>
-                                            {{ $val->name }}
+                                            {{ $val->menu_name }}
 
                                         </div>
                                         <ol class="dd-list">
