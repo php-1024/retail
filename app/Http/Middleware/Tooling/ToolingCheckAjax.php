@@ -130,6 +130,16 @@ class ToolingCheckAjax {
                 }
                 break;
 
+            //检测添加菜单提交数据是否正确
+            case "tooling/ajax/menu_add_check":
+                $re = $this->checkLoginAndMenuAdd($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
+
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -213,7 +223,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkPasswordEdit($re['response']);//判断是否超级管理员
+            $re2 = $this->checkPasswordEdit($re['response']);//判断修改密码提交数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -228,7 +238,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkNodeAdd($re['response']);//判断是否超级管理员
+            $re2 = $this->checkNodeAdd($re['response']);//判断节点添加数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -243,7 +253,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkNodeEdit($re['response']);//判断是否超级管理员
+            $re2 = $this->checkNodeEdit($re['response']);//判断节点修改数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -258,7 +268,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkModuleAdd($re['response']);//判断是否超级管理员
+            $re2 = $this->checkModuleAdd($re['response']);//判断模块添加数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -273,7 +283,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkModuleEdit($re['response']);//判断是否超级管理员
+            $re2 = $this->checkModuleEdit($re['response']);//判断模块修改数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -288,7 +298,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkProgramAdd($re['response']);//判断是否超级管理员
+            $re2 = $this->checkProgramAdd($re['response']);//判断程序添加数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -303,7 +313,22 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkProgramEdit($re['response']);//判断是否超级管理员
+            $re2 = $this->checkProgramEdit($re['response']);//判断模块修改数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //编辑程序 检测是否登陆 输入数据是否正确
+    public function checkLoginAndMenuAdd($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkMenuAdd($re['response']);//判断菜单添加数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
