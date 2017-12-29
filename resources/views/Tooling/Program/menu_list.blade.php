@@ -101,7 +101,7 @@
                                             {{ $val->menu_name }}
 
                                         </div>
-                                        @if(count($son_menu[$val->id])>0)
+                                        @if(!empty($son_menu[$val->id]))
                                         <ol class="dd-list">
                                             @foreach($son_menu[$val->id] as $kk=>$vv)
                                             <li class="dd-item" data-id="2">
@@ -117,7 +117,7 @@
                                             </li>
                                             @endforeach
                                         </ol>
-                                        @emdif
+                                        @endif
                                     </li>
                                     @endforeach
                                 </ol>
