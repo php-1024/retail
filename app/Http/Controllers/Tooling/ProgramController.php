@@ -153,7 +153,7 @@ class ProgramController extends Controller{
     public function program_menu(Request $request){
         $id = $request->input('id');
         $info = Program::find($id);
-        $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
+        dump($info);
         return view('Tooling/Program/program_menu',['info'=>$info,'plist'=>$plist]);
     }
 }
