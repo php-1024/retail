@@ -170,7 +170,6 @@
     function getAddForm(program_id){
         var url = $('#menu_add_url').val();
         var token = $('#_token').val();
-        alert(token);
         if(program_id==''){
             swal({
                 title: "提示信息",
@@ -204,7 +203,7 @@
     function getEditForm(id){
         var url = $('#menu_edit_url').val();
         var token = $('#_token').val();
-
+        alert(token);
         if(id==''){
             swal({
                 title: "提示信息",
