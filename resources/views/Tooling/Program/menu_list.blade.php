@@ -203,7 +203,6 @@
     function getEditForm(id){
         var url = $('#menu_edit_url').val();
         var token = $('#_token').val();
-        alert(token);
         if(id==''){
             swal({
                 title: "提示信息",
