@@ -155,7 +155,7 @@ class ProgramController extends Controller{
         $info = Program::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
         foreach($list as $key=>$val){
-            dump($val->getSonMenu);
+           // dump($val->getSonMenu);
         }
         return view('Tooling/Program/menu_list',['list'=>$list,'info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
