@@ -48,6 +48,7 @@
 
                 <div class="row">
                     <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_add') }}">
+                    <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_edit') }}">
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-1">
                         <div class="form-group">
@@ -94,7 +95,7 @@
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
                                                 <div class="btn-group">
-                                                    <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
+                                                    <button type="button" id="editBtn" onclick="return getEditForm('{{ $val->id }}');" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                     <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                 </div>
                                             </span>
@@ -108,7 +109,7 @@
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
-                                                            <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
+                                                            <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
@@ -183,6 +184,40 @@
             return;
         }
         var data = {'program_id':program_id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    function getEditForm(id){
+        var url = $('#menu_edit_url').val();
+        var token = $('#_token').val();
+
+        if(program_id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
