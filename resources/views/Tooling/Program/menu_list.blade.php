@@ -101,7 +101,7 @@
                                             {{ $val->menu_name }}
 
                                         </div>
-                                        @if(!empty($son_menu[$val->id]))
+                                        @if(count($son_menu[$val->id])>0)
                                         <ol class="dd-list">
                                             @foreach($son_menu[$val->id] as $kk=>$vv)
                                             <li class="dd-item" data-id="2">
