@@ -151,10 +151,12 @@ class ProgramController extends Controller{
     }
     //获取编辑获取
     public function program_menu(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $info = Program::find($id);
         dump($info);
-        return view('Tooling/Program/program_menu',['info'=>$info,'plist'=>$plist]);
+        return view('Tooling/Program/program_menu',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
 ?>
