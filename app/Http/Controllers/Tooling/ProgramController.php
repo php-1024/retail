@@ -163,5 +163,10 @@ class ProgramController extends Controller{
         $info = Program::find($id);
         return view('Tooling/Program/menu_add',['info'=>$info,'action_name'=>'program']);
     }
+    //添加菜单数据监测
+    public function menu_add_check(Request $request){
+        dump($request->input());
+    }
+
 }
 ?>

@@ -313,6 +313,26 @@ class ToolingCheckAjax {
     }
 
     /**********************单项检测************************/
+    //检测提交菜单数据提交
+    public function checkMenuAdd($request){
+        if(empty($request->input('program_id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
+        }
+        if(empty($request->input('node_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        }
+        if(empty($request->input('node_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        }
+        if(empty($request->input('node_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        }
+        if(empty($request->input('node_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
     //检测提交节点数据提交
     public function checkNodeAdd($request){
         if(empty($request->input('node_name'))){
