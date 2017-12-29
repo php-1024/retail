@@ -91,7 +91,7 @@
                                     @foreach($list as $key=>$val)
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            <span class="label label-primary"><i class="fa fa-th-large"></i></span>
+                                            <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
                                                 <div class="btn-group">
                                                     <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
