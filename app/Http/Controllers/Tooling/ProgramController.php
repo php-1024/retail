@@ -157,5 +157,11 @@ class ProgramController extends Controller{
         $info = Program::find($id);
         return view('Tooling/Program/program_menu',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
+    //添加菜单页面
+    public function menu_add(Request $request){
+        $id = $request->input('program_id');
+        $info = Program::find($id);
+        return view('Tooling/Program/program_add',['info'=>$info,'action_name'=>'program']);
+    }
 }
 ?>

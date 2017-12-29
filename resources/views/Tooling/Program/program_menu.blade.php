@@ -47,7 +47,8 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-                    <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/program_edit') }}">
+                    <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_add') }}">
+                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
@@ -251,47 +252,9 @@
             }
         });
     });
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
-    //获取上级程序节点
-    function get_parents_node(pid){
-        var url =  $('#parent_nodes_url').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'pid':pid}
-        $.post(url,data,function(response){
-            $('#node_box').html(response);
-        });
-    }
 
     function getAddForm(program_id){
-        var url = $('#program_edit_url').val();
+        var url = $('#menu_add_url').val();
         var token = $('#_token').val();
 
         if(id==''){
