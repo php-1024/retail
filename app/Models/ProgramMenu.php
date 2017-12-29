@@ -18,7 +18,7 @@ class ProgramMenu extends Model{
 
     //添加菜单
     public static function addMenu($param){
-        $model = new PrograMenu();//实例化程序模型
+        $model = new ProgramMenu();//实例化程序模型
         $model->program_id = $param['program_id'];//所属程序ID
         $model->parent_id = $param['parent_id'];//上级菜单ID
         $model->parent_tree = $param['parent_tree'];//上级菜单树
