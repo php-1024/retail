@@ -174,8 +174,8 @@ class ProgramController extends Controller{
         $menu_route = $request->input('menu_route');//跳转路由
         $menu_routes_bind = $request->input('menu_routes_bind');//关联路由字符串，使用逗号分隔
 
-        if(Program::checkRowExists([[ 'menu_name',$menu_name ]])){
-            return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
+        if(Program::checkRowExists([[ 'menu_name',$menu_name ],['parent_id',$parent_id],['program_id',$program_id]])){
+            return response()->json(['data' => '菜单组中菜单名称重复', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
