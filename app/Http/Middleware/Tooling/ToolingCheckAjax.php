@@ -351,9 +351,6 @@ class ToolingCheckAjax {
                 return self::res(0, response()->json(['data' => '请输入要跳转的路由链接', 'status' => '0']));
             }
         }
-        if (empty($request->input('menu_routes_bind'))) {//一级菜单一定要关联多个路由
-            return self::res(0, response()->json(['data' => '请输入关联路由列表', 'status' => '0']));
-        }
         return self::res(1,$request);
     }
 
