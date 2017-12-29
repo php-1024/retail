@@ -28,7 +28,7 @@
         @include('Tooling/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>添加程序</h2>
+                <h2>"{{ $info->program_name }}"菜单结构</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">程序管理</a>
@@ -213,8 +213,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         @include('Tooling/Public/Footer')
