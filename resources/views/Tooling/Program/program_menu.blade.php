@@ -73,9 +73,6 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="row">
                 <div class="ibox ">
                     <div class="ibox-title">
                         <h5>"零壹管理程序”菜单结构</h5>
