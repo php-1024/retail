@@ -85,7 +85,7 @@
                             <h5>"零壹管理程序”菜单结构</h5>
                         </div>
                         <div class="ibox-content">
-                            <div class="dd" id="nestable2">
+                            <div class="dd" id="nestable">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
@@ -232,15 +232,13 @@
 <script src="{{asset('public/Tooling')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Tooling/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Tooling/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
+<script src="{{asset('public/Tooling/library/nestable')}}/js/jquery.nestable.js"></script>
 
 
 <script>
     $(function(){
+        $('#nestable').nestable();
         get_parents_node($('#complete_id').val());
-        new Switchery(document.querySelector('.js-switch'), { color: '#1AB394' });
-        new Switchery(document.querySelector('.js-switch2'), { color: '#1AB394' });
-        new Switchery(document.querySelector('.js-switch3'), { color: '#1AB394' });
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
