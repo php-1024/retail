@@ -153,7 +153,7 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $info = Program::find($id);
-        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]]);
+        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
         return view('Tooling/Program/menu_list',['list'=>$list,'info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //添加菜单页面
