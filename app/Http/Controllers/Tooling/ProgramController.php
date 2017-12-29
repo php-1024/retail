@@ -158,6 +158,7 @@ class ProgramController extends Controller{
         foreach($list as $key=>$val){
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
         }
+        dump($son_menu);
         return view('Tooling/Program/menu_list',['list'=>$list,'son_menu'=>$son_menu,'info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //添加菜单页面
