@@ -43,6 +43,8 @@
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
@@ -73,140 +75,149 @@
                         </div>
                     </div>
                 </div>
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>"零壹管理程序”菜单结构</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="dd" id="nestable2">
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">
-                                        <span class="label label-primary"><i class="fa fa-th-large"></i></span>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>"零壹管理程序”菜单结构</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="dd" id="nestable2">
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <span class="label label-primary"><i class="fa fa-th-large"></i></span>
                                             <span class="pull-right">
                                                 <div class="btn-group">
                                                     <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                     <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                 </div>
                                             </span>
-                                        系统管理
+                                            系统管理
 
-                                    </div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </li>
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">
-                                        <span class="label label-primary"><i class="fa fa-th-large"></i></span>
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <span class="label label-primary"><i class="fa fa-th-large"></i></span>
                                             <span class="pull-right">
                                                 <div class="btn-group">
                                                     <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                     <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                 </div>
                                             </span>
-                                        系统管理
+                                            系统管理
 
-                                    </div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
-                                                系统管理
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </li>
-                            </ol>
+                                                    系统管理
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+
+
                         </div>
 
-
                     </div>
-
                 </div>
             </div>
+
+
         </div>
+
         @include('Tooling/Public/Footer')
     </div>
 </div>
