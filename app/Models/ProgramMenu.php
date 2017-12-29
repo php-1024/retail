@@ -16,6 +16,10 @@ class ProgramMenu extends Model{
         return $this->belongsTo('App\Models\Program', 'program_id');
     }
 
+    public function getSonMenu(){
+        return $this->getSonMenu($this->id);
+    }
+
     public function son_menu($id){
         return self::getList([['parent_id'=>$id]],0,'id','asc');
     }

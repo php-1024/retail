@@ -154,6 +154,9 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
+        foreach($list as $key=>$val){
+            dump($val->getSonMenu);
+        }
         return view('Tooling/Program/menu_list',['list'=>$list,'info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //添加菜单页面
@@ -185,7 +188,6 @@ class ProgramController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了菜单'.$menu_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加菜单失败，请检查', 'status' => '0']);
             }
