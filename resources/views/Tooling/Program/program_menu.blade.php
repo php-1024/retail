@@ -84,7 +84,7 @@
                             <h5>"零壹管理程序”菜单结构</h5>
                         </div>
                         <div class="ibox-content">
-                            <div class="dd" id="nestable">
+                            <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
@@ -236,7 +236,7 @@
 
 <script>
     $(function(){
-        $('#nestable').nestable();
+        $('#nestable2').nestable();
         get_parents_node($('#complete_id').val());
         //设置CSRF令牌
         $.ajaxSetup({
