@@ -49,7 +49,7 @@
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">关联路由列表(以逗号分隔)</label>
+                <label class="col-sm-2 control-label">关联路由列表(以,分隔)</label>
                 <div class="col-sm-10"><input type="text" name="menu_routes_bind" class="form-control" value="" placeholder="关联路由列表"></div>
             </div>
             <div style="clear:both"></div>
