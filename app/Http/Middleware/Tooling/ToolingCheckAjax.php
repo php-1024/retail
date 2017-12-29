@@ -318,17 +318,14 @@ class ToolingCheckAjax {
         if(empty($request->input('program_id'))){
             return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
         }
-        if(empty($request->input('node_name'))){
-            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        if(empty($request->input('menu_name'))){
+            return self::res(0,response()->json(['data' => '请输入菜单名称', 'status' => '0']));
         }
-        if(empty($request->input('node_name'))){
-            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        if(empty($request->input('menu_route'))){
+            return self::res(0,response()->json(['data' => '请输入要跳转的路由链接', 'status' => '0']));
         }
-        if(empty($request->input('node_name'))){
-            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
-        }
-        if(empty($request->input('node_name'))){
-            return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
+        if(empty($request->input('menu_routes_bind'))){
+            return self::res(0,response()->json(['data' => '请输入关联路由列表', 'status' => '0']));
         }
         return self::res(1,$request);
     }
