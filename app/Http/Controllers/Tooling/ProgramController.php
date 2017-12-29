@@ -149,5 +149,12 @@ class ProgramController extends Controller{
             return response()->json(['data' => '编辑程序成功', 'status' => '1']);
         }
     }
+    //获取编辑获取
+    public function program_menu(Request $request){
+        $id = $request->input('id');
+        $info = Program::find($id);
+        $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
+        return view('Tooling/Program/program_menu',['info'=>$info,'plist'=>$plist]);
+    }
 }
 ?>
