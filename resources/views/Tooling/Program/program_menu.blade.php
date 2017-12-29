@@ -72,7 +72,7 @@
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" id="addBtn" class="block btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加菜单</button>
+                            <button type="button" id="addBtn" onclick="getAddForm('{{ $info->id }}')" class="block btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加菜单</button>
                         </div>
                     </div>
                 </div>
@@ -257,7 +257,7 @@
         var url = $('#menu_add_url').val();
         var token = $('#_token').val();
 
-        if(id==''){
+        if(program_id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
@@ -268,8 +268,7 @@
             });
             return;
         }
-
-        var data = {'id':id,'_token':token};
+        var data = {'program_id':program_id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
