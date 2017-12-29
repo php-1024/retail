@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">根菜单（带链接）</label>
                 <div class="col-sm-10">
-                    <select class="form-control m-b" name="account">
+                    <select class="form-control m-b" name="is_root">
                         <option>是</option>
                         <option>否</option>
                     </select>
@@ -38,19 +38,19 @@
             <div class="hr-line-dashed"></div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">ICON样式</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="" placeholder="ICON样式"></div>
+                <div class="col-sm-10"><input type="text" name="icon_class" class="form-control" value="" placeholder="ICON样式"></div>
             </div>
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">路由地址</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="" placeholder="路由地址"></div>
+                <div class="col-sm-10"><input type="text" name="menu_route" class="form-control" value="" placeholder="路由地址"></div>
             </div>
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">关联路由列表</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="" placeholder="关联路由列表"></div>
+                <div class="col-sm-10"><input type="text" name="menu_routes_bind" class="form-control" value="" placeholder="关联路由列表"></div>
             </div>
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
