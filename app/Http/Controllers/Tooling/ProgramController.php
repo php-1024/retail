@@ -232,5 +232,11 @@ class ProgramController extends Controller{
             return response()->json(['data' => '编辑菜单成功', 'status' => '1']);
         }
     }
+    //添加程序套餐
+    public function package_list(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Tooling/Program/menu_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+    }
 }
 ?>
