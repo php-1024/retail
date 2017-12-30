@@ -167,7 +167,7 @@ class ProgramController extends Controller{
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
         return view('Tooling/Program/menu_add',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
-    //添加菜单数据监测
+    //添加菜单数据检测
     public function menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -201,6 +201,10 @@ class ProgramController extends Controller{
         $info = ProgramMenu::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
         return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
+    }
+    //编辑菜单数据检测
+    public function menu_edit_check(Request $request){
+
     }
 }
 ?>
