@@ -28,7 +28,7 @@
                     <div class="col-sm-10">
                         <select data-placeholder="选择关联系统" name="program_ids[]" class="chosen-select" multiple style="width:350px;" tabindex="4">
                             @foreach($list as $key=>$val)
-                                <option value="{{ $val->id }}" @if(in_array($val->id,$select_ids))>{{ $val->program_name }}</option>
+                                <option value="{{ $val->id }}" @if(in_array($val->id,$selected_ids))>{{ $val->program_name }}</option>
                             @endforeach
                         </select>
                     </div>
