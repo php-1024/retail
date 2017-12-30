@@ -91,6 +91,10 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndMenuEdit($request);
                 return self::format_response($re,$next);
                 break;
+            case "tooling/ajax/package_add_check":
+                $re = $this->checkLoginAndPackageAdd($request);
+                return self::format_response($re,$next);
+                break;
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -299,9 +303,22 @@ class ToolingCheckAjax {
         }
     }
 
+    public function checkLoginAndPackageAdd($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkPackageAdd($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     /**********************单项检测************************/
     //检测添加程序配套数据提交
-    public function checkPackageEdit($request){
+    public function checkPackageAdd($request){
         if(empty($request->input('package_name'))){
             return self::res(0,response()->json(['data' => '请输入程序套餐名称', 'status' => '0']));
         }
