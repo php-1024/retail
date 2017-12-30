@@ -290,9 +290,11 @@ class ProgramController extends Controller{
     public function package_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
         $package_name = $request->input('package_name');
         $package_price = $request->input('package_price');
         $program_ids = $request->input('program_ids');
+
     }
 }
 ?>
