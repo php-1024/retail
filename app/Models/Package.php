@@ -40,5 +40,10 @@ class Package extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->where('is_delete','0')->pluck($pluck);
     }
+
+    //获取分页列表
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('programs')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>

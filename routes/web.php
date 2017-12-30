@@ -112,7 +112,8 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::get('program_add', 'Tooling\ProgramController@program_add')->middleware('ToolingCheck');//修改密码路由
         Route::get('program_list','Tooling\ProgramController@program_list')->middleware('ToolingCheck');//修改密码路由
         Route::get('menu_list','Tooling\ProgramController@menu_list')->middleware('ToolingCheck');//程序菜单路由
-        Route::get('package_add','Tooling\ProgramController@package_add')->middleware('ToolingCheck');//程序菜单路由
+        Route::get('package_add','Tooling\ProgramController@package_add')->middleware('ToolingCheck');//添加配套路由
+        Route::get('package_list','Tooling\ProgramController@package_list')->middleware('ToolingCheck');//配套列表路由
     });
 
     //登陆页面组
