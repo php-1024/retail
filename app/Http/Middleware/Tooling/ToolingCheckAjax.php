@@ -13,83 +13,83 @@ class ToolingCheckAjax {
         switch($route_name){
             case "tooling/ajax/checklogin"://检测登陆数据提交
                 $re = $this->checkLoginPost($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测是否登陆且是否登陆且是否超级管理员
             case "tooling/ajax/account_edit":
                 $re = $this->checkLoginAndSuper($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测添加账号提交数据是否正确
             case "tooling/ajax/account_add_check":
                 $re = $this->checkLoginAndSuperAndAccountAdd($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测编辑账号提交数据是否正确
             case "tooling/ajax/account_edit_check":
                 $re = $this->checkLoginAndSuperAndAccountAdd($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测冻结账号提交数据是否正确
             case "tooling/ajax/account_lock":
                 $re = $this->checkLoginAndSuperAndAccountLock($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测冻结账号提交数据是否正确
             case "tooling/ajax/password_edit_check":
                 $re = $this->checkLoginAndPasswordEdit($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测添加节点提交数据是否正确
             case "tooling/ajax/node_add_check":
                 $re = $this->checkLoginAndNodeAdd($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测编辑节点提交数据是否正确
             case "tooling/ajax/node_edit_check":
                 $re = $this->checkLoginAndNodeEdit($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测添加模块提交数据是否正确
             case "tooling/ajax/module_add_check":
                 $re = $this->checkLoginAndModuleAdd($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测编辑模块提交数据是否正确
             case "tooling/ajax/module_edit_check":
                 $re = $this->checkLoginAndModuleEdit($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测添加程序提交数据是否正确
             case "tooling/ajax/program_add_check":
                 $re = $this->checkLoginAndProgramAdd($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测编辑程序提交数据是否正确
             case "tooling/ajax/program_edit_check":
                 $re = $this->checkLoginAndProgramEdit($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
             //检测添加菜单提交数据是否正确
             case "tooling/ajax/menu_add_check":
                 $re = $this->checkLoginAndMenuAdd($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
             case "tooling/ajax/menu_edit_check":
                 $re = $this->checkLoginAndMenuEdit($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
@@ -99,7 +99,7 @@ class ToolingCheckAjax {
             case "tooling/ajax/menu_add"://是否允许弹出添加页面
             case "tooling/ajax/menu_edit"://是否允许弹出修改菜单页面
                 $re = $this->checkIsLogin($request);
-                self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
 
         }
