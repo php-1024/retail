@@ -9,7 +9,7 @@
             <div class="modal-body">
 
                 <div class="form-group"><label class="col-sm-2 control-label">套餐名称</label>
-                    <div class="col-sm-10"><input type="text" name="package_name" value="{{ $val->pack }}" class="form-control"></div>
+                    <div class="col-sm-10"><input type="text" name="package_name" value="{{ $val->package_name }}" class="form-control"></div>
                 </div>
 
                 <div style="clear:both"></div>
