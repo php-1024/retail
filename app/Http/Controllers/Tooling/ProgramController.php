@@ -12,6 +12,8 @@ use App\Models\ToolingOperationLog;
 use App\Models\Program;
 use App\Models\ProgramModuleNode;
 use App\Models\ProgramMenu;
+use App\Models\PackageProgram;
+use App\Models\Package;
 
 class ProgramController extends Controller{
     public function program_add(Request $request)
@@ -240,7 +242,29 @@ class ProgramController extends Controller{
     }
     //检测添加程序套餐数据
     public function package_add_cehck(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $package_name = $request->input('package_name');
+        $package_price = $request->input('package_price');
+        $program_ids = $request->input('program_ids');
 
+        if(Package::checkRowExists([[ 'package_name',$package_name ]])){
+            return response()->json(['data' => '重复的配套名称', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $id = Package::addPackage(['package_name'=>$package_name,'package_price'=>$package_price]);
+                foreach($program_ids as $key=>$val){
+                    PackageProgram::addPackageProgram(['package_id'=>$id,'program_id'=>$val]);
+                }
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$package_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '编辑菜单失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '编辑菜单成功', 'status' => '1']);
+        }
     }
 }
 ?>
