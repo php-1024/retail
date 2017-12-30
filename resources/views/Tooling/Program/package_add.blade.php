@@ -54,19 +54,19 @@
                             <form method="get" class="form-horizontal">
                                 <div class="form-group"><label class="col-sm-2 control-label">套餐名称</label>
 
-                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="package_name" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">套餐价格</label>
 
 
-                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text"  name="package_price" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">关联程序系统</label>
                                     <div class="col-sm-10">
-                                        <select data-placeholder="选择关联系统" class="chosen-select" multiple style="width:350px;" tabindex="4">
+                                        <select data-placeholder="选择关联系统" name="program_ids" class="chosen-select" multiple style="width:350px;" tabindex="4">
                                             <option value="Mayotte">零壹管理系统</option>
                                             <option value="Mexico">零壹服务商管理系统</option>
                                             <option value="Mexico">零壹商户管理系统</option>
