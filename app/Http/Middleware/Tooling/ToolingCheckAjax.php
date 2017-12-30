@@ -139,7 +139,14 @@ class ToolingCheckAjax {
                     return $next($re['response']);
                 }
                 break;
-
+            case "tooling/ajax/menu_edit_check":
+                $re = $this->checkLoginAndMenuEdit($request);
+                if($re['status']=='0'){
+                    return $re['response'];
+                }else{
+                    return $next($re['response']);
+                }
+                break;
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -338,8 +345,39 @@ class ToolingCheckAjax {
         }
     }
 
+    public function checkLoginAndMenuEdit($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkMenuEdit($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     /**********************单项检测************************/
     //检测提交菜单数据提交
+    public function checkMenuEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
+        }
+        if(empty($request->input('program_id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
+        }
+        if (empty($request->input('menu_name'))) {
+            return self::res(0, response()->json(['data' => '请输入菜单名称', 'status' => '0']));
+        }
+        if($request->input('is_root')=='1') {//如果是跟节点的话一定要输入路由链接
+            if (empty($request->input('menu_route'))) {
+                return self::res(0, response()->json(['data' => '请输入要跳转的路由链接', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
     public function checkMenuAdd($request){
         if(empty($request->input('program_id'))){
             return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
