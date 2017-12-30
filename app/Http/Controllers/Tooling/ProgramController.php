@@ -237,7 +237,7 @@ class ProgramController extends Controller{
     public function package_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Program::getList([['is_asset','1']],0,'id');
+        $list = Program::getList([['is_asset','1']],0,'id');//获取所有的资产程序
         return view('Tooling/Program/package_add',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //检测添加程序套餐数据
@@ -274,6 +274,17 @@ class ProgramController extends Controller{
         $list = Package::getPaginage([[ 'package_name','like','%'.$package_name.'%' ]],15,'id');
 
         return view('Tooling/Program/package_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+    }
+    //修改套餐
+    public function package_edit(Request $request){
+        $id = $request->input('id');
+        $info = Package::find($id);//获取单个套餐信息
+        $selected_ids = [];//获取该套餐关联的程序
+        foreach($info->programs as $key=>$val){
+            $selected_ids[] = $val->id;
+        }
+        $list = Program::getList([['is_asset','1']],0,'id');//获取所有的资产程序
+        return view('Tooling/Program/menu_edit',['list'=>$list,'selected_ids'=>$selected_ids,'info'=>$info,'action_name'=>'program']);
     }
 }
 ?>
