@@ -197,10 +197,11 @@ class ProgramController extends Controller{
     }
     //编辑菜单页面
     public function menu_edit(Request $request){
-        $id = $request->input('program_id');
-        $info = Program::find($id);
-        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
-        return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
+      dump(123);
+       // $id = $request->input('program_id');
+       // $info = Program::find($id);
+       // $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
+       // return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
 
 }
