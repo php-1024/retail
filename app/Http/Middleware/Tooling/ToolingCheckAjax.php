@@ -526,6 +526,7 @@ class ToolingCheckAjax {
     }
 
     public static function format_response($re,Closure $next){
+        dump($re);
         if($re['status']=='0'){
             return $re['response'];
         }else{
