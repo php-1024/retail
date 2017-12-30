@@ -51,7 +51,8 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="get" class="form-horizontal">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('tooling/ajax/package_add_check') }}">
+                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <div class="form-group"><label class="col-sm-2 control-label">套餐名称</label>
 
                                     <div class="col-sm-10"><input type="text" name="package_name" class="form-control"></div>
@@ -77,7 +78,7 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认添加</button>
                                         <button class="btn btn-write" onClick="location.href='node.html'" type="button">回到列表</button>
                                     </div>
                                 </div>
