@@ -295,6 +295,23 @@ class ProgramController extends Controller{
         $package_price = $request->input('package_price');
         $program_ids = $request->input('program_ids');
 
+        if(Package::checkRowExists([['id','<>',$id],[ 'package_name',$package_name ]])){
+            return response()->json(['data' => '重复的配套名称', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $id = Package::editPackage([['id',$id]],['package_name'=>$package_name,'package_price'=>$package_price]);
+                foreach($program_ids as $key=>$val){
+                    PackageProgram::addPackageProgram(['package_id'=>$id,'program_id'=>$val]);
+                }
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$package_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加配套失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加配套成功', 'status' => '1']);
+        }
     }
 }
 ?>
