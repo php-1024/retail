@@ -248,7 +248,7 @@ class ProgramController extends Controller{
         $package_price = $request->input('package_price');
         $program_ids = $request->input('program_ids');
         if(Package::checkRowExists([[ 'package_name',$package_name ]])){
-            return response()->json(['data' => '重复的配套名称', 'status' => '0']);
+            return response()->json(['data' => '重复的套餐名称', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
@@ -256,13 +256,13 @@ class ProgramController extends Controller{
                 foreach($program_ids as $key=>$val){
                     PackageProgram::addPackageProgram(['package_id'=>$id,'program_id'=>$val]);
                 }
-                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$package_name);//保存操作记录
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序套餐'.$package_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加配套失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加套餐失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加配套成功', 'status' => '1']);
+            return response()->json(['data' => '添加套餐成功', 'status' => '1']);
         }
     }
     //套餐列表
@@ -296,21 +296,28 @@ class ProgramController extends Controller{
         $program_ids = $request->input('program_ids');
 
         if(Package::checkRowExists([['id','<>',$id],[ 'package_name',$package_name ]])){
-            return response()->json(['data' => '重复的配套名称', 'status' => '0']);
+            return response()->json(['data' => '重复的套餐名称', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-                $id = Package::editPackage([['id',$id]],['package_name'=>$package_name,'package_price'=>$package_price]);
+                Package::editPackage([['id',$id]],['package_name'=>$package_name,'package_price'=>$package_price]);
                 foreach($program_ids as $key=>$val){
-                    PackageProgram::addPackageProgram(['package_id'=>$id,'program_id'=>$val]);
+                    $vo = PackageProgram::getOne([['package_id',$id],['program_id',$val]]);
+                    if(is_null($vo)){
+                        PackageProgram::addPackageProgram(['package_id'=>$id,'program_id'=>$val]);
+                    }else{
+                        continue;//存在则跳过;
+                    }
+                    unset($vo);
+
                 }
-                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$package_name);//保存操作记录
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序套餐'.$package_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加配套失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '编辑套餐失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加配套成功', 'status' => '1']);
+            return response()->json(['data' => '编辑套餐成功', 'status' => '1']);
         }
     }
 }

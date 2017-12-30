@@ -80,7 +80,7 @@ class ModuleController extends Controller{
                     }else{
                         continue;//存在则跳过;
                     }
-                    $vo = '';
+                    unset($vo);
                 }
                 //删除这次
                 ModuleNode::where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
