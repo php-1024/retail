@@ -145,7 +145,8 @@ class ToolingCheckAjax {
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
             case "tooling/ajax/program_parents_node"://获取上级程序ID
             case "tooling/ajax/program_edit"://是否允许弹出修改程序页面
-            case "tooling/ajax/menu_add"://是否允许弹出修改程序页面
+            case "tooling/ajax/menu_add"://是否允许弹出添加页面
+            case "tooling/ajax/menu_edit"://是否允许弹出修改菜单页面
                 $re = $this->checkIsLogin($request);
                 if($re['status']=='0'){
                     return $re['response'];
