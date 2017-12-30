@@ -300,7 +300,21 @@ class ToolingCheckAjax {
     }
 
     /**********************单项检测************************/
-    //检测提交菜单数据提交
+    //检测添加程序配套数据提交
+    public function checkPackageEdit($request){
+        if(empty($request->input('package_name'))){
+            return self::res(0,response()->json(['data' => '请输入程序套餐名称', 'status' => '0']));
+        }
+        if (empty($request->input('package_price'))) {
+            return self::res(0, response()->json(['data' => '请输入程序套餐价格', 'status' => '0']));
+        }
+        if (empty($request->input('program_ids'))) {
+            return self::res(0, response()->json(['data' => '请选择套餐程序', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑菜单数据提交
     public function checkMenuEdit($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
@@ -318,6 +332,7 @@ class ToolingCheckAjax {
         }
         return self::res(1,$request);
     }
+    //检测添加菜单数据提交
     public function checkMenuAdd($request){
         if(empty($request->input('program_id'))){
             return self::res(0,response()->json(['data' => '数据传输错误  ', 'status' => '0']));
@@ -524,7 +539,7 @@ class ToolingCheckAjax {
     public static function res($status,$response){
         return ['status'=>$status,'response'=>$response];
     }
-
+    //格式化返回值
     public static function format_response($re,Closure $next){
         if($re['status']=='0'){
             return $re['response'];

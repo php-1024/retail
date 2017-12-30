@@ -25,34 +25,22 @@ class ToolingCheck{
             case "tooling/dashboard/account_list"://账号列表
             case "tooling/dashboard/account_add"://添加账号
                 $re = $this->checkLoginAndSuper($request);//判断是否登陆和是否超级管理员
-                if($re['status']=='0'){
-                    return $re['response'];
-                }else{
-                    return $next($re['response']);
-                }
-                break;
+                return self::format_response($re,$next);
+            break;
 
             /****检测用户是否登陆 是否超级管理员 日期输入是否正确****/
             case "tooling/dashboard/operation_log"://操作日志
             case "tooling/dashboard/login_log"://登陆日志
                 $re = $this->checkLoginAndSuperAndDate($request);
-                if($re['status']=='0'){
-                    return $re['response'];
-                }else{
-                    return $next($re['response']);
-                }
-                break;
+                return self::format_response($re,$next);
+            break;
 
             /****普通页面，检测是否登陆，日期输入是否正确****/
             case "tooling/personal/operation_log"://我的操作日志
             case "tooling/personal/login_log"://我的登陆日志
                 $re = $this->checkLoginAndDate($request);
-                if($re['status']=='0'){
-                    return $re['response'];
-                }else{
-                    return $next($re['response']);
-                }
-                break;
+                return self::format_response($re,$next);
+            break;
 
             /****仅检测是否登陆****/
             case "tooling/module/module_add"://添加模块
@@ -66,12 +54,8 @@ class ToolingCheck{
             case "tooling/program/package_add"://添加程序配套
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);//判断是否登陆
-                if($re['status']=='0'){
-                    return $re['response'];
-                }else{
-                    return $next($re['response']);
-                }
-                   break;
+                return self::format_response($re,$next);
+            break;
         }
         return $next($request);
     }
@@ -170,6 +154,13 @@ class ToolingCheck{
     public static function res($status,$response){
         return ['status'=>$status,'response'=>$response];
     }
-
+    //格式化返回值
+    public static function format_response($re,Closure $next){
+        if($re['status']=='0'){
+            return $re['response'];
+        }else{
+            return $next($re['response']);
+        }
+    }
 }
 ?>
