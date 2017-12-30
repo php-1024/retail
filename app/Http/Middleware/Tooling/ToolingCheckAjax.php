@@ -275,7 +275,7 @@ class ToolingCheckAjax {
         }
     }
 
-    //编辑程序 检测是否登陆 输入数据是否正确
+    //添加程序菜单 检测是否登陆 输入数据是否正确
     public function checkLoginAndMenuAdd($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
         if($re['status']=='0'){
@@ -289,7 +289,7 @@ class ToolingCheckAjax {
             }
         }
     }
-
+    //编辑程序菜单 检测是否登陆 输入数据是否正确
     public function checkLoginAndMenuEdit($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
         if($re['status']=='0'){
@@ -304,6 +304,7 @@ class ToolingCheckAjax {
         }
     }
 
+    //添加程序套餐 检测是否登陆 输入数据是否正确
     public function checkLoginAndPackageAdd($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
         if($re['status']=='0'){
@@ -317,8 +318,38 @@ class ToolingCheckAjax {
             }
         }
     }
+    //编辑程序套餐 检测是否登陆 输入数据是否正确
+    public function checkLoginAndPackageEdit($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkPackageEdit($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     /**********************单项检测************************/
-    //检测添加程序配套数据提交
+    //检测编辑程序套餐数据提交
+    public function checkPackageEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('package_name'))){
+            return self::res(0,response()->json(['data' => '请输入程序套餐名称', 'status' => '0']));
+        }
+        if (empty($request->input('package_price'))) {
+            return self::res(0, response()->json(['data' => '请输入程序套餐价格', 'status' => '0']));
+        }
+        if (empty($request->input('program_ids'))) {
+            return self::res(0, response()->json(['data' => '请选择套餐程序', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测添加程序套餐数据提交
     public function checkPackageAdd($request){
         if(empty($request->input('package_name'))){
             return self::res(0,response()->json(['data' => '请输入程序套餐名称', 'status' => '0']));
