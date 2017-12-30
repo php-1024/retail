@@ -247,8 +247,6 @@ class ProgramController extends Controller{
         $package_name = $request->input('package_name');
         $package_price = $request->input('package_price');
         $program_ids = $request->input('program_ids');
-        var_dump($program_ids);
-        exit();
         if(Package::checkRowExists([[ 'package_name',$package_name ]])){
             return response()->json(['data' => '重复的配套名称', 'status' => '0']);
         }else{
