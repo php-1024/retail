@@ -89,7 +89,7 @@
                                         </td>
                                         <td>
                                             @foreach($val->programs as $k=>$v)
-                                                <label class="label label-info" style="display:inline-block">{{ $vv->program_name }}</label>
+                                                <label class="label label-info" style="display:inline-block">{{ $v->program_name }}</label>
                                             @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
