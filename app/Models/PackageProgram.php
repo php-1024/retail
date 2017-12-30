@@ -13,7 +13,7 @@ class PackageProgram extends Model{
 
     //添加配套
     public static function addPackageProgram($params){
-        $model = new Package();
+        $model = new PackageProgram();
         $model->package_id = $params['package_id'];
         $model->program_id = $params['program_id'];
         $model->save();
