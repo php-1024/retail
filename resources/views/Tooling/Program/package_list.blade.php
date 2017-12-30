@@ -146,7 +146,7 @@
     function getEditForm(id){
         var url = $('#program_edit_url').val();
         var token = $('#_token').val();
-
+        alert(token);
         if(id==''){
             swal({
                 title: "提示信息",
