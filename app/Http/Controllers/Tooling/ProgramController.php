@@ -236,7 +236,8 @@ class ProgramController extends Controller{
     public function package_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Tooling/Program/package_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        $list = Program::getList([['is_asset','1']],0,'id');
+        return view('Tooling/Program/package_add',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //检测添加程序套餐数据
     public function package_add_cehck(Request $request){

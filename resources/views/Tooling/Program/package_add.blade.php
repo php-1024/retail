@@ -68,9 +68,9 @@
                                     <label class="col-sm-2 control-label">关联程序系统</label>
                                     <div class="col-sm-10">
                                         <select data-placeholder="选择关联系统" name="program_ids" class="chosen-select" multiple style="width:350px;" tabindex="4">
-                                            <option value="Mayotte">零壹管理系统</option>
-                                            <option value="Mexico">零壹服务商管理系统</option>
-                                            <option value="Mexico">零壹商户管理系统</option>
+                                            @foreach($list as $key=>$val)
+                                            <option value="{{ $val->id }}">{{ $val->program_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div style="clear: both;"></div>
