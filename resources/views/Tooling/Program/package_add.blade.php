@@ -13,6 +13,7 @@
     <link href="{{asset('public/Tooling/library/font')}}/css/font-awesome.css" rel="stylesheet">
     <link href="{{asset('public/Tooling/library/switchery')}}/css/switchery.css" rel="stylesheet">
 
+    <link href="{{asset('public/Tooling/library/chosen')}}/css/chosen.css" rel="stylesheet">
 
     <link href="{{asset('public/Tooling')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Tooling')}}/css/style.css" rel="stylesheet">
@@ -101,14 +102,11 @@
 <script src="{{asset('public/Tooling/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Tooling/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
-
+<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
 
 <script>
     $(function(){
-        get_parents_node($('#complete_id').val());
-        new Switchery(document.querySelector('.js-switch'), { color: '#1AB394' });
-        new Switchery(document.querySelector('.js-switch2'), { color: '#1AB394' });
-        new Switchery(document.querySelector('.js-switch3'), { color: '#1AB394' });
+        $('.chosen-select').chosen({width:"100%"});
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
