@@ -199,9 +199,8 @@ class ProgramController extends Controller{
     public function menu_edit(Request $request){
         $id = $request->input('id');
         $info = ProgramMenu::find($id);
-        dump($info->program);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
-        //return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
+        return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
 
 }
