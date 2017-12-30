@@ -241,7 +241,7 @@ class ProgramController extends Controller{
         return view('Tooling/Program/package_add',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
     //检测添加程序套餐数据
-    public function package_add_cehck(Request $request){
+    public function package_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $package_name = $request->input('package_name');
