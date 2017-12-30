@@ -9,14 +9,14 @@
             <div class="modal-body">
 
                 <div class="form-group"><label class="col-sm-2 control-label">套餐名称</label>
-                    <div class="col-sm-10"><input type="text" name="package_name" value="{{ $val->package_name }}" class="form-control"></div>
+                    <div class="col-sm-10"><input type="text" name="package_name" value="{{ $info->package_name }}" class="form-control"></div>
                 </div>
 
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">套餐价格</label>
-                    <div class="col-sm-10"><input type="text"  name="package_price" value="{{ $val->package_price }}" class="form-control"></div>
+                    <div class="col-sm-10"><input type="text"  name="package_price" value="{{ $info->package_price }}" class="form-control"></div>
                 </div>
 
                 <div style="clear:both"></div>

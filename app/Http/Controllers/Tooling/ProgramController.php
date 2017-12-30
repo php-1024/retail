@@ -284,7 +284,6 @@ class ProgramController extends Controller{
             $selected_ids[] = $val->id;
         }
         $list = Program::getList([['is_asset','1']],0,'id');//获取所有的资产程序
-        dump($list);
         return view('Tooling/Program/package_edit',['list'=>$list,'selected_ids'=>$selected_ids,'info'=>$info,'action_name'=>'program']);
     }
 }
