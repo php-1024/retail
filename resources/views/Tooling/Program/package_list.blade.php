@@ -144,9 +144,8 @@
     });
     //获取用户信息，编辑密码框
     function getEditForm(id){
-        var url = $('#program_edit_url').val();
+        var url = $('#package_edit_url').val();
         var token = $('#_token').val();
-        alert(token);
         if(id==''){
             swal({
                 title: "提示信息",
