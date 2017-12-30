@@ -102,6 +102,7 @@ class ToolingCheckAjax {
             case "tooling/ajax/program_edit"://是否允许弹出修改程序页面
             case "tooling/ajax/menu_add"://是否允许弹出添加页面
             case "tooling/ajax/menu_edit"://是否允许弹出修改菜单页面
+            case "tooling/ajax/package_edit";//是否允许弹出修改套餐的页面
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re,$next);
                 break;
