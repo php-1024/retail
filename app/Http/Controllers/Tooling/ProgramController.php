@@ -204,7 +204,32 @@ class ProgramController extends Controller{
     }
     //编辑菜单数据检测
     public function menu_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $program_id = $request->input('program_id');//所属程序ID
+        $parent_id = $request->input('parent_id');//上级菜单ID
+        $parent_tree = $parent_id=='0' ? '0' : ProgramMenu::getPluck([[ 'id',$parent_id]],'parent_tree')->toArray()[0].','.$parent_id;
+        $menu_name = $request->input('menu_name');//菜单名称
+        $is_root = $request->input('is_root');//是否根菜单
+        $icon_class = empty($request->input("icon_class"))?'':$request->input("icon_class");//ICON样式名称
+        $menu_route = empty($request->input("menu_route"))?'':$request->input("menu_route");//跳转路由
+        $menu_routes_bind = empty($request->input("menu_routes_bind"))?'':$request->input("menu_routes_bind");//关联路由字符串，使用逗号分隔
 
+        if(ProgramMenu::checkRowExists([['id','<>',$id],[ 'menu_name',$menu_name ],['parent_id',$parent_id],['program_id',$program_id]])){
+            return response()->json(['data' => '菜单组中菜单名称重复', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                ProgramMenu::editMenu(['id',$id],['program_id'=>$program_id,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'menu_name'=>$menu_name,'is_root'=>$is_root,'icon_class'=>$icon_class,'menu_route'=>$menu_route,'menu_routes_bind'=>$menu_routes_bind]);
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$menu_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '编辑菜单失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '编辑菜单成功', 'status' => '1']);
+        }
     }
 }
 ?>

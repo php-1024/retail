@@ -44,6 +44,14 @@ class ProgramMenu extends Model{
         $model->save();
         return $model->id;
     }
+    //编辑戴丹
+    public static function editMenu($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
         $row = self::getPluck($where,'id')->toArray();
