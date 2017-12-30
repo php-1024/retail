@@ -273,7 +273,7 @@ class ProgramController extends Controller{
         $search_data['package_name'] = $package_name;
         $list = Package::getPaginage([[ 'package_name','like','%'.$package_name.'%' ]],15,'id');
 
-        return view('Tooling/Program/package_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Tooling/Program/package_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
 ?>

@@ -24,13 +24,13 @@
         @include('Tooling/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>程序列表</h2>
+                <h2>程序套餐列表</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">程序管理</a>
                     </li>
                     <li >
-                        <strong>程序列表</strong>
+                        <strong>程序套餐列表</strong>
                     </li>
                 </ol>
             </div>
@@ -45,13 +45,11 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                        <input type="hidden" id="program_edit_url" value="{{ url('tooling/ajax/program_edit') }}">
-                        <input type="hidden" id="program_delete_url" value="{{ url('tooling/ajax/program_delete') }}">
-                        <input type="hidden" id="program_deleted_url" value="{{ url('tooling/ajax/program_deleted') }}">
+                        <input type="hidden" id="package_edit_url" value="{{ url('tooling/ajax/package_edit') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label class="control-label" for="amount">程序名称</label>
-                                <input type="text" id="program_name" name="program_name" value="{{ $search_data['program_name'] }}" placeholder="程序名称" class="form-control">
+                                <label class="control-label" for="amount">套餐名称</label>
+                                <input type="text" id="program_name" name="package_name" value="{{ $search_data['package_name'] }}" placeholder="套餐名称" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -74,10 +72,9 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>程序名称</th>
-                                    <th class="col-sm-1">所属主程序</th>
-                                    <th class="col-sm-1">是否资产程序</th>
-                                    <th>功能模块</th>
+                                    <th>套餐名称</th>
+                                    <th>套餐价格</th>
+                                    <th>关联程序</th>
                                     <th class="col-sm-1">添加时间</th>
                                     <th class="col-sm-3 text-right" >操作</th>
                                 </tr>
@@ -86,25 +83,17 @@
                                 @foreach($list as $key=>$val)
                                     <tr>
                                         <td>{{ $val->id }}</td>
-                                        <td>{{ $val->program_name }}</td>
+                                        <td>{{ $val->package_name }}</td>
                                         <td>
-                                            <label class="label label-info" style="display:inline-block"> {{ $pname[$val->id] }}</label>
+                                            {{ $val->package_price }}
                                         </td>
                                         <td>
-                                            @if($val->is_asset==1)
-                                                <label class="label label-warning" style="display:inline-block">资产程序</label>
-                                            @else
-                                                <label class="label label-info" style="display:inline-block">管理程序</label>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @foreach($module_list[$val->id] as $k=>$v)
-                                                <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($v->program_nodes as $kk=>$vv)  {{ $vv->node_name }} @endforeach" style="display:inline-block">{{ $v->module_name }}</label>&nbsp;&nbsp;
+                                            @foreach($val->programs as $k=>$v)
+                                                <label class="label label-info" style="display:inline-block">{{ $vv->program_name }}</label>
                                             @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
-                                            <button type="button" id="menuBtn" onclick="location.href = '{{ url('tooling/program/menu_list') }}?id={{$val->id}}'"  class="btn btn-xs btn-info"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;菜单管理</button>
                                             <button type="button" onclick="getEditForm({{ $val->id }})" id="editBtn"  class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" id="deleteBtn" class="btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="button" id="deleteBtn2" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
