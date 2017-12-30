@@ -238,5 +238,9 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         return view('Tooling/Program/package_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
+    //检测添加程序套餐数据
+    public function package_add_cehck(Request $request){
+
+    }
 }
 ?>
