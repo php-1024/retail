@@ -286,5 +286,13 @@ class ProgramController extends Controller{
         $list = Program::getList([['is_asset','1']],0,'id');//获取所有的资产程序
         return view('Tooling/Program/package_edit',['list'=>$list,'selected_ids'=>$selected_ids,'info'=>$info,'action_name'=>'program']);
     }
+    //检测修改套餐数据
+    public function package_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $package_name = $request->input('package_name');
+        $package_price = $request->input('package_price');
+        $program_ids = $request->input('program_ids');
+    }
 }
 ?>
