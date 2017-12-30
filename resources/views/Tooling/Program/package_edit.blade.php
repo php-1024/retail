@@ -1,3 +1,4 @@
+<link href="{{asset('public/Tooling/library/chosen')}}/css/chosen.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('tooling/ajax/package_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
@@ -44,7 +45,12 @@
         </div>
     </div>
 </form>
+<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
 <script>
+    $(function(){
+        $('.chosen-select').chosen({width:"100%"});
+    });
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
