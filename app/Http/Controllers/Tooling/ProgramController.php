@@ -221,7 +221,7 @@ class ProgramController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                ProgramMenu::editMenu(['id',$id],['program_id'=>$program_id,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'menu_name'=>$menu_name,'is_root'=>$is_root,'icon_class'=>$icon_class,'menu_route'=>$menu_route,'menu_routes_bind'=>$menu_routes_bind]);
+                ProgramMenu::editMenu([['id',$id]],['program_id'=>$program_id,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'menu_name'=>$menu_name,'is_root'=>$is_root,'icon_class'=>$icon_class,'menu_route'=>$menu_route,'menu_routes_bind'=>$menu_routes_bind]);
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$menu_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
