@@ -202,6 +202,5 @@ class ProgramController extends Controller{
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
         return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
-
 }
 ?>
