@@ -75,7 +75,7 @@
                                     <th>套餐名称</th>
                                     <th>套餐价格</th>
                                     <th>关联程序</th>
-                                    <th class="col-sm-1">添加时间</th>
+                                    <th>添加时间</th>
                                     <th class="col-sm-3 text-right" >操作</th>
                                 </tr>
                                 </thead>
