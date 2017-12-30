@@ -233,10 +233,10 @@ class ProgramController extends Controller{
         }
     }
     //添加程序套餐
-    public function package_list(Request $request){
+    public function package_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Tooling/Program/menu_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
+        return view('Tooling/Program/package_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 }
 ?>
