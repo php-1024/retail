@@ -23,7 +23,7 @@ class ToolingAccount extends Model{
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::where($where)-first();
+        return self::where($where)->first();
     }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
