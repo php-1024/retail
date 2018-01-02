@@ -50,7 +50,7 @@
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="node_edit_url" value="{{ url('tooling/ajax/node_edit') }}">
                         <input type="hidden" id="node_delete_url" value="{{ url('tooling/ajax/node_delete') }}">
-                        <input type="hidden" id="node_deleted_url" value="{{ url('tooling/ajax/node_deleted') }}">
+                        <input type="hidden" id="node_remove_url" value="{{ url('tooling/ajax/node_remove') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">节点名称</label>
@@ -101,7 +101,7 @@
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning" onclick="deleteData();"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
@@ -181,6 +181,34 @@
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
+        });
+    }
+    //删除数据
+    function deleteData(id){
+        var url = $('#node_delete_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
         });
     }
     //提交表单
