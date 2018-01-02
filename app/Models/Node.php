@@ -12,7 +12,7 @@ class Node extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-    protected $dates = ['is_delete'];
+    protected $dates = ['delete_at'];
     //和功能模块关联，多对多
     public function modules()
     {
