@@ -148,8 +148,8 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::post('package_edit_check','Tooling\ProgramController@package_edit_check')->middleware('ToolingCheckAjax');//获取编辑套餐数据并提交
         Route::post('node_delete','Tooling\NodeController@node_delete')->middleware('ToolingCheckAjax');//软删除节点
         Route::post('node_remove','Tooling\NodeController@node_remove')->middleware('ToolingCheckAjax');//软删除节点
-        Route::post('module_delete','Tooling\NodeController@module_delete')->middleware('ToolingCheckAjax');//软删除模块
-        Route::post('module_remove','Tooling\NodeController@module_remove')->middleware('ToolingCheckAjax');//软删除模块
+        Route::post('module_delete','Tooling\ModuleController@module_delete')->middleware('ToolingCheckAjax');//软删除模块
+        Route::post('module_remove','Tooling\ModuleController@module_remove')->middleware('ToolingCheckAjax');//软删除模块
     });
 });
 /********************程序管理系统*************************/
