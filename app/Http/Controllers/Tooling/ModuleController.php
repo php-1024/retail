@@ -126,7 +126,7 @@ class ModuleController extends Controller{
             DB::rollBack();//事件回滚
             return response()->json(['data' => '强制删除了功能模块，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '强制删除了功能模块成功', 'status' => '1']);
+        return response()->json(['data' => '强制删除功能模块成功', 'status' => '1']);
     }
 }
 ?>
