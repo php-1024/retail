@@ -93,5 +93,22 @@ class ModuleController extends Controller{
             return response()->json(['data' => '编辑功能模块成功', 'status' => '1']);
         }
     }
+    //软删除模块
+    public function module_delete(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $current_route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        DB::beginTransaction();
+        try{
+            Module::where('id',$id)->delete();
+            ModuleNode::where('module_id',$id)->delete();
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'删除了节点，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除节点失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除节点成功', 'status' => '1']);
+    }
 }
 ?>
