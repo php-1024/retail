@@ -32,12 +32,12 @@ class Node extends Model{
 
     //获取总数
     public static function getCount($where=[]){
-        return self::where($where)->where('is_delete','0')->count();
+        return self::where($where)->count();
     }
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::where($where)->where('is_delete','0')->orderBy($orderby,$sort);
+        $model = self::where($where)->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -76,11 +76,11 @@ class Node extends Model{
     }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->where('is_delete','0')->pluck($pluck);
+        return self::where($where)->pluck($pluck);
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //查询已被某个模块选中的节点
@@ -95,11 +95,6 @@ class Node extends Model{
         return Node::whereNotIn('id',function($query) use ($module_id){
             $query->select('node_id')->from('module_node')->where('module_id',$module_id)->get();
         })->get();
-    }
-
-    //彻底删除节点
-    public static function removeNode($where){
-        return self::where($where)->delete();
     }
 }
 ?>

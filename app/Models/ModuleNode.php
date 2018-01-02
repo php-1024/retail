@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ModuleNode extends Model{
+    use SoftDeletes;
     protected $table = 'module_node';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -13,7 +15,7 @@ class ModuleNode extends Model{
 
     //获取单条数据
     public static function getOne($where){
-        return self::where($where)->where('is_delete','0')->first();
+        return self::where($where)->first();
     }
     
     //添加数据

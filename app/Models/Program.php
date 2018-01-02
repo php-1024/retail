@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Program extends Model{
+    use SoftDeletes;
     protected $table = 'program';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -40,7 +42,7 @@ class Program extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加数据
@@ -64,7 +66,7 @@ class Program extends Model{
     }
     //获取总数
     public static function getCount($where=[]){
-        return self::where($where)->where('is_delete','0')->count();
+        return self::where($where)->count();
     }
 
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
@@ -79,12 +81,12 @@ class Program extends Model{
 
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->where('is_delete','0')->pluck($pluck);
+        return self::where($where)->pluck($pluck);
     }
 }
 ?>

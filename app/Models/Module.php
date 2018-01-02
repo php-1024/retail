@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Module extends Model{
+    use SoftDeletes;
     protected $table = 'module';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -31,7 +33,7 @@ class Module extends Model{
 
     //获取新建独立主程序时的模块列表
     public static function getListSimple($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::with('nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
+        $model = self::with('nodes')->where($where)->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -44,7 +46,7 @@ class Module extends Model{
             $query->where('program_id',$program_id);
         }])->whereIn('id',function($query) use ($program_id){
             $query->from('program_module_node')->select('module_id')->where('program_id',$program_id);
-        })->where($where)->where('is_delete','0')->orderBy($orderby,$sort);
+        })->where($where)->orderBy($orderby,$sort);
 
         if(!empty($limit)){
             $model = $model->limit($limit);
@@ -72,7 +74,7 @@ class Module extends Model{
 
     //获取总数
     public static function getCount($where=[]){
-        return self::where($where)->where('is_delete','0')->count();
+        return self::where($where)->count();
     }
 
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
@@ -86,17 +88,17 @@ class Module extends Model{
     }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->where('is_delete','0')->pluck($pluck);
+        return self::where($where)->pluck($pluck);
     }
 
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('nodes')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //去重后获取程序的模型
     public static function getProgramModules($program_id){
-        return self::where('is_delete','0')->whereIn('id',function($query) use ($program_id){
+        return self::whereIn('id',function($query) use ($program_id){
             $query->from('program_module_node')->select('module_id')->where('program_id',$program_id)->groupBy('module_id')->get();
         })->get();
     }

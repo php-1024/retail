@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ProgramModuleNode extends Model{
+    use SoftDeletes;
     protected $table = 'program_module_node';
     protected $primaryKey = 'id';
     public $timestamps = true;

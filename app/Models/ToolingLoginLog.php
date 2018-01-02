@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ToolingLoginLog extends Model{
+    use SoftDeletes;
     protected $table = 'tooling_login_log';
     protected $primaryKey = 'id';//主键ID
     public $timestamps = true;//是否使用时间戳

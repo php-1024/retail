@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ToolingAccount extends Model{
+    use SoftDeletes;
     protected $table = 'tooling_account';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -21,7 +23,7 @@ class ToolingAccount extends Model{
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::where($where)->where('is_delete','0')->first();
+        return self::where($where)-first();
     }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
@@ -55,12 +57,12 @@ class ToolingAccount extends Model{
 
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->where('is_delete','0')->pluck($pluck);
+        return self::where($where)->pluck($pluck);
     }
 }
 ?>

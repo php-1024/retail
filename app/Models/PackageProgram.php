@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class PackageProgram extends Model{
+    use SoftDeletes;
     protected $table = 'package_program';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -13,7 +15,7 @@ class PackageProgram extends Model{
 
     //获取单条数据
     public static function getOne($where){
-        return self::where($where)->where('is_delete','0')->first();
+        return self::where($where)->first();
     }
 
     //添加配套

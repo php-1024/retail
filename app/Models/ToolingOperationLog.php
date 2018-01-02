@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ToolingOperationLog extends Model{
+    use SoftDeletes;
     protected $table = 'tooling_operation_log';
     protected $primaryKey = 'id';
     public $timestamps = true;

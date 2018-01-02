@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Package extends Model{
+    use SoftDeletes;
     protected $table = 'package';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -42,11 +44,11 @@ class Package extends Model{
     }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->where('is_delete','0')->pluck($pluck);
+        return self::where($where)->pluck($pluck);
     }
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('programs')->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('programs')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

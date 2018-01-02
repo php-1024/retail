@@ -5,7 +5,9 @@
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ProgramMenu extends Model{
+    use SoftDeletes;
     protected $table = 'program_menu';
     protected $primaryKey = 'id';
     public $timestamps = true;
@@ -27,7 +29,7 @@ class ProgramMenu extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加菜单
@@ -63,7 +65,7 @@ class ProgramMenu extends Model{
     }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->where('is_delete','0')->pluck($pluck);
+        return self::where($where)->pluck($pluck);
     }
 }
 ?>
