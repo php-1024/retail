@@ -5,7 +5,7 @@ class TestController extends Controller{
     public function test(){
 
         $info = \HttpCurl::doget('http://www.baidu.com');
-        dump('123');
+        dump($info);
     }
 }
 ?>
