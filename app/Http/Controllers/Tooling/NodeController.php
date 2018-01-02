@@ -110,10 +110,10 @@ class NodeController extends Controller{
         $id = $request->input('id');//提交上来的ID
         DB::beginTransaction();
         try{
-            Node::where('id',$id)->delete();
-            ModuleNode::where('node_id',$id)->delete();
-            RoleNode::where('node_id',$id)->delete();
-            ProgramModuleNode::where('node_id',$id)->delete();
+            Node::where('id',$id)->forceDelete();
+            ModuleNode::where('node_id',$id)->forceDelete();
+            RoleNode::where('node_id',$id)->forceDelete();
+            ProgramModuleNode::where('node_id',$id)->forceDelete();
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'删除了节点，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
