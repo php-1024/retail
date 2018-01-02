@@ -380,14 +380,14 @@ class ProgramController extends Controller{
         DB::beginTransaction();
         try{
             ProgramMenu::removeMenu([['id',$id]]);
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了菜单，ID为：'.$id);//保存操作记录
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'彻底删除了菜单，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dump($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '删除菜单失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '彻底删除菜单失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '删除菜单成功', 'status' => '1']);
+        return response()->json(['data' => '彻底删除菜单成功', 'status' => '1']);
     }
 }
 ?>

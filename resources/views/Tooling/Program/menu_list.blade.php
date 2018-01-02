@@ -99,7 +99,7 @@
                                                 <div class="btn-group">
                                                     <button type="button" id="editBtn" onclick="return getEditForm('{{ $val->id }}');" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                     <button type="button" id="deleteBtn" onclick="deleteData({{ $val->id }})" class="block btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
-                                                    <button type="button" id="deleteBtn" onclick="deleteData({{ $val->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                                    <button type="button" id="deleteBtn" onclick="removeData({{ $val->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                                 </div>
                                             </span>
                                             {{ $val->menu_name }}
