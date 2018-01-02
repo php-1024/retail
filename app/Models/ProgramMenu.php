@@ -76,8 +76,8 @@ class ProgramMenu extends Model{
     //彻底删除菜单
     public static function removeMenu($where){
         $target = self::where($where)->first();//要删除的目标菜单
-        self::where('parent_tree','like',$target['parent_tree'].','.$target['id']."%")->delete();//删除所有子菜单
-        self::where($where)->delete();//删除所有子菜单
+        self::where('parent_tree','like',$target['parent_tree'].','.$target['id']."%")->forceDelete();//删除所有子菜单
+        self::where($where)->forceDelete();//删除所有子菜单
     }
 }
 ?>
