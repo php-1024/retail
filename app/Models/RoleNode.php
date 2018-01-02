@@ -10,7 +10,6 @@ class RoleNode extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-
     //修改数据
     public static function editRoleNode($where,$param)
     {
