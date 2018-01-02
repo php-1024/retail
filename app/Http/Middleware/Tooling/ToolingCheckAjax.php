@@ -119,7 +119,7 @@ class ToolingCheckAjax {
                 break;
             //检测硬删除模块数据是否合法
             case "tooling/ajax/module_remove":
-                $re = $this->checkLoginAndSuperModuleRemove($request);
+                $re = $this->checkLoginAndSuperAndModuleRemove($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -415,7 +415,7 @@ class ToolingCheckAjax {
         }
     }
     //硬删除模块 检测是否登陆 输入数据是否正确
-    public function checkLoginAndSuperModuleRemove($request){
+    public function checkLoginAndSuperAndModuleRemove($request){
         $re = $this->checkLoginAndSuper($request);//判断是否登陆
         if($re['status']=='0'){
             return $re;
@@ -444,8 +444,8 @@ class ToolingCheckAjax {
         }
     }
     //硬删除套餐 检测是否登陆 输入数据是否正确
-    public function checkLoginAndPackageRemove($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+    public function checkLoginAndSuperAndPackageRemove($request){
+        $re = $this->checkLoginAndSuper($request);//判断是否登陆
         if($re['status']=='0'){
             return $re;
         }else{
