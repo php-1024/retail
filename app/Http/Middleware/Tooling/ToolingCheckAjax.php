@@ -125,12 +125,12 @@ class ToolingCheckAjax {
 
 
             //检测软删除套餐数据是否合法
-            case "tooling/ajax/module_delete":
+            case "tooling/ajax/package_delete":
                 $re = $this->checkLoginAndPackageDelete($request);
                 return self::format_response($re,$next);
                 break;
             //检测硬删除套餐数据是否合法
-            case "tooling/ajax/module_remove":
+            case "tooling/ajax/package_remove":
                 $re = $this->checkLoginAndPackageRemove($request);
                 return self::format_response($re,$next);
                 break;
