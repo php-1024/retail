@@ -49,6 +49,8 @@
                 <div class="row">
                     <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_add') }}">
                     <input type="hidden" id="menu_edit_url" value="{{ url('tooling/ajax/menu_edit') }}">
+                    <input type="hidden" id="menu_delete_url" value="{{ url('tooling/ajax/menu_delete') }}">
+                    <input type="hidden" id="menu_remove_url" value="{{ url('tooling/ajax/menu_remove') }}">
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-1">
                         <div class="form-group">
@@ -96,7 +98,7 @@
                                             <span class="pull-right">
                                                 <div class="btn-group">
                                                     <button type="button" id="editBtn" onclick="return getEditForm('{{ $val->id }}');" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                    <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
+                                                    <button type="button" id="deleteBtn" onclick="deleteData({{ $val->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                 </div>
                                             </span>
                                             {{ $val->menu_name }}
@@ -110,7 +112,7 @@
                                                     <span class="pull-right">
                                                         <div class="btn-group">
                                                             <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
-                                                            <button type="button" id="deleteBtn" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
+                                                            <button type="button" id="deleteBtn" onclick="deleteData({{ $vv->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
                                                         </div>
                                                     </span>
                                                     {{$vv->menu_name}}
@@ -230,6 +232,63 @@
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
+        });
+    }
+
+    //删除数据
+    function deleteData(id){
+        var url = $('#menu_delete_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+        });
+    }
+    //移除数据
+    function removeData(id){
+        var url = $('menu_remove_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
         });
     }
 </script>
