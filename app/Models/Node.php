@@ -54,8 +54,9 @@ class Node extends Model{
         }
         $node->save();//添加账号
     }
+
     //修改数据
-    public static function editNote($where,$param){
+    public static function editNode($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
@@ -93,6 +94,11 @@ class Node extends Model{
         return Node::whereNotIn('id',function($query) use ($module_id){
             $query->select('node_id')->from('module_node')->where('module_id',$module_id)->get();
         })->get();
+    }
+
+    //彻底删除节点
+    public static function removeNode($where){
+        return self::where($where)->delete();
     }
 }
 ?>

@@ -24,5 +24,14 @@ class ModuleNode extends Model{
         $model->save();
     }
 
+    //修改数据
+    public static function editModuleNode($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
 }
 ?>

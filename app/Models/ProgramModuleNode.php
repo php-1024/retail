@@ -31,5 +31,14 @@ class ProgramModuleNode extends Model{
         $model->node_id = $param['node_id'];
         $model->save();
     }
+
+    //修改数据
+    public static function editProgramModuleNode($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
 }
 ?>
