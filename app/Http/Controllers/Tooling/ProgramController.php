@@ -366,6 +366,7 @@ class ProgramController extends Controller{
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了套餐，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '删除套餐失败，请检查', 'status' => '0']);
         }
