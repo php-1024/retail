@@ -102,9 +102,14 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndPackageEdit($request);
                 return self::format_response($re,$next);
                 break;
-            //检测删除节点数据是否合法
+            //检测软删除节点数据是否合法
             case "tooling/ajax/node_delete":
                 $re = $this->checkLoginAndNodeDelete($request);
+                return self::format_response($re,$next);
+                break;
+            //检测硬删除节点数据是否合法
+            case "tooling/ajax/node_remove":
+                $re = $this->checkLoginAndNodeRemove($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -345,7 +350,7 @@ class ToolingCheckAjax {
             }
         }
     }
-    //编辑程序套餐 检测是否登陆 输入数据是否正确
+    //软删除节点 检测是否登陆 输入数据是否正确
     public function checkLoginAndNodeDelete($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
         if($re['status']=='0'){
@@ -359,8 +364,28 @@ class ToolingCheckAjax {
             }
         }
     }
+    //硬删除节点 检测是否登陆 输入数据是否正确
+    public function checkLoginAndNodeRemove($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkNodeRemove($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     /**********************单项检测************************/
-
+    //检测硬删除节点数据提交
+    public function checkNodeRemove($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测软删除节点数据提交
     public function checkNodeDelete($request){
         if(empty($request->input('id'))){

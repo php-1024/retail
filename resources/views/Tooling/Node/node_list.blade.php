@@ -102,7 +102,7 @@
                                     <td class="text-right">
                                         <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning" onclick="deleteData({{ $val->id }});"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                        <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger" onclick="removeData({{ $val->id }});"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -186,6 +186,34 @@
     //删除数据
     function deleteData(id){
         var url = $('#node_delete_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+        });
+    }
+    //删除数据
+    function removeData(id){
+        var url = $('#node_remove_url').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
