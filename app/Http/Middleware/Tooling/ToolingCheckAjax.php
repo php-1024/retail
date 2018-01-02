@@ -135,6 +135,17 @@ class ToolingCheckAjax {
                 return self::format_response($re,$next);
                 break;
 
+            //检测软删除套餐数据是否合法
+            case "tooling/ajax/menu_delete":
+                $re = $this->checkLoginAndMenuDelete($request);
+                return self::format_response($re,$next);
+                break;
+            //检测硬删除套餐数据是否合法
+            case "tooling/ajax/menu_remove":
+                $re = $this->checkLoginAndSuperAndMenuRemove($request);
+                return self::format_response($re,$next);
+                break;
+
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -457,15 +468,60 @@ class ToolingCheckAjax {
             }
         }
     }
+
+    //软删除套餐 检测是否登陆 输入数据是否正确
+    public function checkLoginAndMenuDelete($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkMenuDelete($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //硬删除套餐 检测是否登陆 输入数据是否正确
+    public function checkLoginAndSuperAndMenuRemove($request){
+        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkMenuRemove($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     /**********************单项检测************************/
+
     //检测硬删除模块数据提交
-    public function checkPackageRemove($request){
+    public function checkMenuRemove($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
         }
         return self::res(1,$request);
     }
     //检测软删除模块数据提交
+    public function checkMenuDelete($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测硬删除套餐数据提交
+    public function checkPackageRemove($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测软删除套餐数据提交
     public function checkPackageDelete($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
