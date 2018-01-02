@@ -8,7 +8,7 @@ use App\Models\Node;
 use App\Models\ModuleNode;
 use App\Models\ProgramModuleNode;
 use App\Models\ToolingOperationLog;
-
+use App\Models\RoleNode;
 class NodeController extends Controller{
     //添加节点
     public function node_add(Request $request){
@@ -94,7 +94,7 @@ class NodeController extends Controller{
             Node::editNode([['id',$id]],['is_delete','1']);//软删除节点表数据
             ModuleNode::editModuleNode([['node_id',$id]],['is_delete','1']);//软删除模块节点表对应数据
             ProgramModuleNode::editProgramModuleNode([['node_id',$id]],['is_delete','1']);//软删除程序模块节点表对应数据
-
+            ProgramRoleNode::editRoleNode();
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'软删除了节点，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {

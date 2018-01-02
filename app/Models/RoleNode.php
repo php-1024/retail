@@ -19,5 +19,7 @@ class RoleNode extends Model{
         }
         $model->save();
     }
+
+    //删除角色节点关系表
 }
 ?>
