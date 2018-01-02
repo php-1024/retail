@@ -86,9 +86,7 @@ class NodeController extends Controller{
     public function node_delete(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $current_route_name = $request->path();//获取当前的页面路由
-
         $id = $request->input('id');//提交上来的ID
-
         DB::beginTransaction();
         try{
             Node::editNode([['id',$id]],['is_delete','1']);//软删除节点表数据
