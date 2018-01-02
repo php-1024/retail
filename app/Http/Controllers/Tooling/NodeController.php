@@ -93,15 +93,15 @@ class NodeController extends Controller{
         try{
             Node::editNode([['id',$id]],['is_delete','1']);//软删除节点表数据
             ModuleNode::editModuleNode([['node_id',$id]],['is_delete','1']);//软删除模块节点表对应数据
+            RoleNode::editRoleNode([['node_id',$id]],['is_delete','1']);//软删除角色程序节点表对应数据
             ProgramModuleNode::editProgramModuleNode([['node_id',$id]],['is_delete','1']);//软删除程序模块节点表对应数据
-            ProgramRoleNode::editRoleNode();
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'软删除了节点，ID为：'.$id);//保存操作记录
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'删除了节点，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '修改节点失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '删除节点失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '修改节点成功', 'status' => '1']);
+        return response()->json(['data' => '删除节点成功', 'status' => '1']);
     }
 }
 ?>
