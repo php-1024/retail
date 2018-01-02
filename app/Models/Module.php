@@ -20,7 +20,7 @@ class Module extends Model{
     //在程序中和功能节点的关联，多对多
     public function program_nodes()
     {
-        return $this->belongsToMany('App\Models\Node','program_module_node','module_id','node_id');
+        return $this->with('is_delete','0')->belongsToMany('App\Models\Node','program_module_node','module_id','node_id');
     }
 
     //和程序关联，多对多
