@@ -267,7 +267,7 @@
     }
     //移除数据
     function removeData(id){
-        var url = $('menu_remove_url').val();
+        var url = $('#menu_remove_url').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
