@@ -109,7 +109,7 @@ class ToolingCheckAjax {
                 break;
             //检测硬删除节点数据是否合法
             case "tooling/ajax/node_remove":
-                $re = $this->checkLoginAndNodeRemove($request);
+                $re = $this->checkLoginAndSuperAndNodeRemove($request);
                 return self::format_response($re,$next);
                 break;
             //检测软删除模块数据是否合法
@@ -386,9 +386,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //硬删除节点 检测是否登陆 输入数据是否正确
-    public function checkLoginAndNodeRemove($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+    //硬删除节点 检测是否登陆 是否超级管理员 输入数据是否正确
+    public function checkLoginAndSuperAndNodeRemove($request){
+        $re = $this->checkLoginAndSuper($request);//判断是否登陆
         if($re['status']=='0'){
             return $re;
         }else{
