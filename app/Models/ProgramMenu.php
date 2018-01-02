@@ -67,5 +67,11 @@ class ProgramMenu extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
+    //删除菜单
+    public static function deleteMenu($where){
+        $target = self::where($where)->find();//要删除的目标菜单
+        self::where('parent_menu','like',$target['ptree'].','.$target['id'].',%')->delete();//删除所有子菜单
+        self::where($where)->delete();//删除所有子菜单
+    }
 }
 ?>
