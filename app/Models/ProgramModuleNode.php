@@ -15,7 +15,7 @@ class ProgramModuleNode extends Model{
 
     //获取单条数据
     public static function getOne($where){
-        return self::where($where)->where('is_delete','0')->first();
+        return self::where($where)->first();
     }
 
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
@@ -23,7 +23,7 @@ class ProgramModuleNode extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->where('is_delete','0')->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
     public static function addProgramModuleNode($param){
