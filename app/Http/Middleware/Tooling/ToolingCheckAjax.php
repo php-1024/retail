@@ -131,7 +131,7 @@ class ToolingCheckAjax {
                 break;
             //检测硬删除套餐数据是否合法
             case "tooling/ajax/package_remove":
-                $re = $this->checkLoginAndPackageRemove($request);
+                $re = $this->checkLoginAndSuperAndPackageRemove($request);
                 return self::format_response($re,$next);
                 break;
 
