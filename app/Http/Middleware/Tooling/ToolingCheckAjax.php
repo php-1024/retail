@@ -123,6 +123,18 @@ class ToolingCheckAjax {
                 return self::format_response($re,$next);
                 break;
 
+
+            //检测软删除套餐数据是否合法
+            case "tooling/ajax/module_delete":
+                $re = $this->checkLoginAndPackageDelete($request);
+                return self::format_response($re,$next);
+                break;
+            //检测硬删除套餐数据是否合法
+            case "tooling/ajax/module_remove":
+                $re = $this->checkLoginAndPackageRemove($request);
+                return self::format_response($re,$next);
+                break;
+
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -394,7 +406,7 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkNodeRemove($re['response']);//判断菜单添加数据
+            $re2 = $this->checkModuleDelete($re['response']);//判断菜单添加数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -408,7 +420,36 @@ class ToolingCheckAjax {
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkNodeRemove($re['response']);//判断菜单添加数据
+            $re2 = $this->checkModuleRemove($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //软删除套餐 检测是否登陆 输入数据是否正确
+    public function checkLoginAndPackageDelete($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkPackageDelete($re['response']);//判断菜单添加数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //硬删除套餐 检测是否登陆 输入数据是否正确
+    public function checkLoginAndPackageRemove($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkPackageRemove($re['response']);//判断菜单添加数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -417,6 +458,20 @@ class ToolingCheckAjax {
         }
     }
     /**********************单项检测************************/
+    //检测硬删除模块数据提交
+    public function checkPackageRemove($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测软删除模块数据提交
+    public function checkPackageDelete($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测硬删除模块数据提交
     public function checkModuleRemove($request){
         if(empty($request->input('id'))){

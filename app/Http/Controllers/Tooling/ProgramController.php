@@ -321,5 +321,39 @@ class ProgramController extends Controller{
             return response()->json(['data' => '编辑套餐成功', 'status' => '1']);
         }
     }
+    //软删除模块
+    public function package_delete(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        DB::beginTransaction();
+        try{
+            Package::where('id',$id)->delete();
+            PackageProgram::where('package_id',$id)->delete();
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了功能模块，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除功能模块失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除功能模块成功', 'status' => '1']);
+    }
+    //硬删除模块
+    public function package_remove(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        DB::beginTransaction();
+        try{
+            Package::where('id',$id)->forceDelete();
+            PackageProgram::where('package_id',$id)->forceDelete();
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'强制删除了功能模块，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '强制删除了功能模块，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '强制删除了功能模块成功', 'status' => '1']);
+    }
 }
 ?>
