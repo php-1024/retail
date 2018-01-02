@@ -211,7 +211,7 @@
             });
         });
     }
-    //删除数据
+    //移除数据
     function removeData(id){
         var url = $('#node_remove_url').val();
         var token = $('#_token').val();
