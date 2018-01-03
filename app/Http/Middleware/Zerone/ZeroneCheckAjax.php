@@ -54,7 +54,7 @@ class ZeroneCheckAjax
     public function checkLoginPost($request)
     {
         if (empty($request->input('username'))) {
-            return self::res(0, response()->json(['data' => '请输入用户名', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
         }
         if (empty($request->input('password'))) {
             return self::res(0, response()->json(['data' => '请输入登录密码', 'status' => '0']));
