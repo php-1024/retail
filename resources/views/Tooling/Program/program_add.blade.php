@@ -58,6 +58,10 @@
                                     <div class="col-sm-10"><input type="text" name="program_name" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">程序路由</label>
+                                    <div class="col-sm-10"><input type="text" name="program_url" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">选择主程序</label>
                                     <div class="col-sm-10">
@@ -130,26 +134,27 @@
         var data = target.serialize();
 
         $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
+            console.log(json)
+//            if (json.status == -1) {
+//                window.location.reload();
+//            } else if(json.status == 1) {
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//            }
         });
     }
     //获取上级程序节点

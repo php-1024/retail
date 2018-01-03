@@ -44,7 +44,7 @@ class ProgramController extends Controller{
                 $selected_node[] = $val->module_id . '_' . $val->node_id;
             }
         }
-   
+
         return view('Tooling/Program/program_parents_node',['pid'=>$pid,'module_list'=>$module_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
     }
     //检测添加数据
@@ -53,16 +53,16 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $program_name = $request->input('program_name');//程序名称
+        $program_url = $request->input('program_url');//程序路由
         $complete_id = $request->input('complete_id');//上级程序
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
-
         if(Program::checkRowExists([[ 'program_name',$program_name ]])){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-                $program_id = Program::addProgram(['program_name'=>$program_name,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
+                $program_id = Program::addProgram(['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
