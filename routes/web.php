@@ -169,7 +169,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('checklogin','Tooling\LoginController@checkLogin')->middleware('ToolingCheckAjax');//提交登陆数据
+        Route::post('login_check','Tooling\LoginController@zerone_login_check')->middleware();//提交登陆数据
     });
 });
 /********************零壹管理系统*************************/
