@@ -19,7 +19,7 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $account_info = Account::getOneForLogin('admin');
+        $account_info = Account::getOneForLogin('zeo');
         dump($account_info);
         dump($account_info->organization);
         return view('Zerone/Login/display');
