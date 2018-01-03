@@ -58,21 +58,33 @@ class LoginController extends Controller{
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
             if($account_info = Account::getOneForLogin($username)){
-                if ($encryptPwd != $account_info['password']) {//查询密码是否对的上
+                if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
-                } elseif($account_info['status']=='0'){//查询账号状态
+                } elseif($account_info->status=='0'){//查询账号状态
                     ErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else {
-                    if ($account_info['id'] <> 1) {//如果不是admin这个超级管理员
-                        if($account_info['program_id']!='1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
+                    if ($account_info->id <> 1) {//如果不是admin这个超级管理员
+                        if($account_info->program_id!='1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
                             ErrorLog::addErrorTimes($ip);
                             return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
                         }
                     }
                     ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-
+                    //插入登录记录
+                    if(LoginLog::addLoginLog($account_info['id'],$ip,$addr)) {
+                        Session::put('tooling_account_id',encrypt($account_info['id']));//存储登录session_id为当前用户ID
+                        //构造用户缓存数据
+                        $admin_data = ['admin_id'=>$account_info['id'],'admin_account'=>$account_info['account'],'admin_is_super'=>$account_info['is_super'],'admin_login_ip'=>$ip,'admin_login_position'=>$addr,'admin_login_time'=>time()];
+                        $admin_data = serialize($admin_data);
+                        Redis::connection('zeo');//连接到我的redis服务器
+                        $data_key = 'tooling_system_admin_data_'.$account_info['id'];
+                        Redis::set($data_key,$admin_data);
+                        return response()->json(['data' => '登录成功', 'status' => '1']);
+                    }else{
+                        return response()->json(['data' => '登录失败', 'status' => '0']);
+                    }
                 }
             }else{
                 ErrorLog::addErrorTimes($ip);
