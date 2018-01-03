@@ -18,8 +18,8 @@ class QueryBuliderController extends Controller{
     }
     //从数据库中获取单一行单一列值数据
     public function select_value(){
-        $row = DB::connection('study')->table('test')->where('name','like','%test2%')->value('id');
-        dump($row);
+        $row = DB::connection('study')->table('test')->where('name','like','%test2%')->value('created_at');
+        dump(date('Y-m-d H:i:s',$row));
     }
     //从数据库中获取多行中查询单一列值数据
     public function select_pluck(){
