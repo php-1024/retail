@@ -19,9 +19,9 @@ class ProgramController extends Controller{
     public function program_add(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
-        dump($plist);
         return view('Tooling/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 
