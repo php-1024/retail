@@ -34,15 +34,15 @@ class ZeroneCheckAjax
     //检测是否登陆
     public function checkIsLogin($request)
     {
-        $sess_key = Session::get('tooling_account_id');
+        $sess_key = Session::get('zerone_account_id');
         //如果为空返回登陆失效
         if (empty($sess_key)) {
             return self::res(0, response()->json(['data' => '登陆状态失效', 'status' => '-1']));
         } else {
-            $sess_key = Session::get('tooling_account_id');//获取管理员ID
+            $sess_key = Session::get('zerone_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('tooling_system_admin_data_' . $sess_key);//获取管理员信息
+            $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data' => $admin_data]);//添加参数
             //把参数传递到下一个中间件

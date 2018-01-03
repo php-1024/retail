@@ -22,5 +22,11 @@ class DashboardController extends Controller{
         echo "这里是零壹管理平台";
         //return view('Universal/Login/zerone_display');
     }
+
+    //退出登录
+    public function quit(Request $request){
+        Session::put('zerone_account_id','');
+        return redirect('zerone/login');
+    }
 }
 ?>

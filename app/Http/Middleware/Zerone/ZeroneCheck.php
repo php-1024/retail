@@ -17,7 +17,7 @@ class ZeroneCheck{
                 $sess_key = Session::get('zerone_account_id');
                 //如果不为空跳转到首页
                 if(!empty($sess_key)) {
-                    return redirect('tooling');
+                    return redirect('zerone');
                 }
                 break;
 
