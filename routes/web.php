@@ -170,7 +170,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Universal\LoginController@zerone_login_check')->middleware();//提交登陆数据
+        Route::post('login_check','Universal\LoginController@zerone_login_check')->middleware('ZeroneCheckAjax');//提交登陆数据
     });
 });
 /********************零壹管理系统*************************/
