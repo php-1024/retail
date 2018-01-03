@@ -47,7 +47,7 @@
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="program_edit_url" value="{{ url('tooling/ajax/program_edit') }}">
                         <input type="hidden" id="program_delete_url" value="{{ url('tooling/ajax/program_delete') }}">
-                        <input type="hidden" id="program_deleted_url" value="{{ url('tooling/ajax/program_deleted') }}">
+                        <input type="hidden" id="program_remove_url" value="{{ url('tooling/ajax/program_remove') }}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">程序名称</label>
