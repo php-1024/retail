@@ -14,7 +14,7 @@ class SqlBasicController extends Controller{
     }
     //Laravel数据库基本用法查询
     public function selectDb(){
-        $list = DB::connection('study')->select("select * from study_test where id > :id",['id'=2]);
+        $list = DB::connection('study')->select("select * from study_test where id = :id",['id'=>2]);
         dump($list);
     }
     //Laravel数据库基本用法更新
