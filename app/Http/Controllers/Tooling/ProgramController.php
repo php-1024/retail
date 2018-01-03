@@ -398,9 +398,9 @@ class ProgramController extends Controller{
         DB::beginTransaction();
         try{
             Program::where('id',$id)->delete();//删除该程序
-            ProgramModuleNode::where('program_id',$id)->forceDelete();//删除程序模块节点表相关数据
-            ProgramMenu::where('program_id',$id)->forceDelete();//删除程序菜单
-            PackageProgram::where('program_id',$id)->forceDelete();//删除套餐与关系间的关系
+            ProgramModuleNode::where('program_id',$id)->delete();//删除程序模块节点表相关数据
+            ProgramMenu::where('program_id',$id)->delete();//删除程序菜单
+            PackageProgram::where('program_id',$id)->delete();//删除套餐与关系间的关系
             Program::editProgram([[ 'complete_id',$id]],['complete_id'=>'0']);//解除子程序与父程序的关系
             /*
              * 未完毕，待其他程序功能完善以后增加
@@ -423,9 +423,9 @@ class ProgramController extends Controller{
         DB::beginTransaction();
         try{
             Program::where('id',$id)->delete();//删除该程序
-            ProgramModuleNode::where('program_id',$id)->delete();//删除程序模块节点表相关数据
-            ProgramMenu::where('program_id',$id)->delete();//删除程序菜单
-            PackageProgram::where('program_id',$id)->delete();//删除套餐与关系间的关系
+            ProgramModuleNode::where('program_id',$id)->forceDelete();//删除程序模块节点表相关数据
+            ProgramMenu::where('program_id',$id)->forceDelete();//删除程序菜单
+            PackageProgram::where('program_id',$id)->forceDelete();//删除套餐与关系间的关系
             Program::editProgram([[ 'complete_id',$id]],['complete_id'=>'0']);//解除子程序与父程序的关系
             /*
              * 未完毕，待其他程序功能完善以后增加
