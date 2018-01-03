@@ -13,10 +13,14 @@ class Account extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    public function organization(){
+        //和text表一对一的关系
+        return $this->belongsTo('App\Models\Organization', 'organization_id');
+    }
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::where($where)->first();
+        return self::with('organization')->where($where)->first();
     }
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
