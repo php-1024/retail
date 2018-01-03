@@ -54,6 +54,7 @@ class ProgramController extends Controller{
 
         $program_name = $request->input('program_name');//程序名称
         $program_url = $request->input('program_url');//程序路由
+        echo $program_url;exit;
         $complete_id = $request->input('complete_id');//上级程序
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
