@@ -401,8 +401,7 @@ class ProgramController extends Controller{
             ProgramModuleNode::where('program_id',$id)->delete();//删除程序模块节点表相关数据
             ProgramMenu::where('program_id',$id)->delete();//删除程序菜单
             PackageProgram::where('program_id',$id)->delete();//删除套餐与关系间的关系
-
-            $program_son_list = Program::editProgram([[ 'complete_id',$id]],['complete_id'=>'0']);//解除子程序与父程序的关系
+            Program::editProgram([[ 'complete_id',$id]],['complete_id'=>'0']);//解除子程序与父程序的关系
 
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了菜单，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
