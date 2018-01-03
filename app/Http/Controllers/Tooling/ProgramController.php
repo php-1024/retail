@@ -53,7 +53,7 @@ class ProgramController extends Controller{
         $route_name = $reque->path();//获取当前的页面路由
 
         $program_name = $reque->input('program_name');//程序名称
-        dd($program_name);exit;
+        echo $program_name;exit;
 //        $program_url = $request->input('program_url');//程序路由
 //        $complete_id = $request->input('complete_id');//上级程序
 //        $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
