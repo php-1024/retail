@@ -30,7 +30,7 @@
         <form class="m-t" role="form" id="currentForm" action="{{ url('zerone/ajax/login_check') }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
-                <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" >
+                <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名|手机号" >
             </div>
             <div class="form-group">
                 <input type="password" name="password" class="form-control" placeholder="密码" >
