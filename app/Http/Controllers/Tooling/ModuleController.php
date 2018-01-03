@@ -48,9 +48,9 @@ class ModuleController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $module_name = $request->input('module_name');
         $search_data = ['module_name'=>$module_name];
-
+        $aa = Module::first();
+        dump($aa);
         $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
-        dump($list);
         return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //编辑功能模块列表
