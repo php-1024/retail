@@ -49,6 +49,7 @@ class Program extends Model{
     public static function addProgram($param){
         $program = new Program();//实例化程序模型
         $program->program_name = $param['program_name'];//程序名称
+        $program->program_url = $param['program_url'];//程序名称
         $program->complete_id = $param['complete_id'];//上级程序
         $program->is_classic = $param['is_classic'];//是否通用版本
         $program->is_asset = $param['is_asset'];//是否资产程序
