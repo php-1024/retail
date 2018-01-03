@@ -33,7 +33,7 @@
                 <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名|手机号" >
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="密码" >
+                <input type="password" name="password" class="form-control" placeholder="登陆密码" >
             </div>
             <div class="form-group col-md-6" style="padding-left:0px;">
 
