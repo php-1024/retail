@@ -20,7 +20,7 @@ class DashboardController extends Controller{
     public function display()
     {
         echo "这里是零壹管理平台";
-        return view('Universal/Login/zerone_display');
+        //return view('Universal/Login/zerone_display');
     }
 }
 ?>
