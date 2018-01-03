@@ -60,5 +60,10 @@ class Kernel extends HttpKernel
         'ToolingCheck'=>\App\Http\Middleware\Tooling\ToolingCheck::class,//检测普通页面跳转的中间件
         'ToolingCheckAjax'=>\App\Http\Middleware\Tooling\ToolingCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹程序管理系统*******************************/
+
+        /**************************零壹平台管理系统*******************************/
+        'ZeroneCheck'=>\App\Http\Middleware\Zerone\ZeroneCheck::class,//检测普通页面跳转的中间件
+        'ZeroneCheckAjax'=>\App\Http\Middleware\Zerone\ZeroneCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************零壹平台管理系统*******************************/
     ];
 }

@@ -7,7 +7,7 @@ use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
-class ToolingCheck{
+class ZeroneCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
