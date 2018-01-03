@@ -162,6 +162,7 @@ Route::group(['prefix'=>'tooling'],function(){
 
 /**********************零壹管理系统*********************/
 Route::group(['prefix'=>'zerone'],function(){
+    Route::get('/', 'Universal\DashboardController@display')->middleware();//系统首页
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Universal\LoginController@zerone_display')->middleware();//登陆页面路由
