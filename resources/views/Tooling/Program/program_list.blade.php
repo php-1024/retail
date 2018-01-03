@@ -106,8 +106,8 @@
                                     <td class="text-right">
                                         <button type="button" id="menuBtn" onclick="location.href = '{{ url('tooling/program/menu_list') }}?id={{$val->id}}'"  class="btn btn-xs btn-info"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;菜单管理</button>
                                         <button type="button" onclick="getEditForm({{ $val->id }})" id="editBtn"  class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" class="btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" id="deleteBtn2" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                        <button type="button" onclick="deleteData({{ $val->id }})" id="deleteBtn" class="btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" onclick="removeData({{ $val->id }})" id="deleteBtn2" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -186,6 +186,62 @@
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
+        });
+    }
+    //删除数据
+    function deleteData(id){
+        var url = $('#program_delete_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+        });
+    }
+    //移除数据
+    function removeData(id){
+        var url = $('#program_remove_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
         });
     }
 </script>
