@@ -398,11 +398,38 @@ class ProgramController extends Controller{
         DB::beginTransaction();
         try{
             Program::where('id',$id)->delete();//删除该程序
+            ProgramModuleNode::where('program_id',$id)->forceDelete();//删除程序模块节点表相关数据
+            ProgramMenu::where('program_id',$id)->forceDelete();//删除程序菜单
+            PackageProgram::where('program_id',$id)->forceDelete();//删除套餐与关系间的关系
+            Program::editProgram([[ 'complete_id',$id]],['complete_id'=>'0']);//解除子程序与父程序的关系
+            /*
+             * 未完毕，待其他程序功能完善以后增加
+             */
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了菜单，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除菜单失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除菜单成功', 'status' => '1']);
+    }
+
+    //软删除程序
+    public function program_remove(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        DB::beginTransaction();
+        try{
+            Program::where('id',$id)->delete();//删除该程序
             ProgramModuleNode::where('program_id',$id)->delete();//删除程序模块节点表相关数据
             ProgramMenu::where('program_id',$id)->delete();//删除程序菜单
             PackageProgram::where('program_id',$id)->delete();//删除套餐与关系间的关系
             Program::editProgram([[ 'complete_id',$id]],['complete_id'=>'0']);//解除子程序与父程序的关系
-
+            /*
+             * 未完毕，待其他程序功能完善以后增加
+             */
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了菜单，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
