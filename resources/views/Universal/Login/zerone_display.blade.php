@@ -27,7 +27,7 @@
 
         </div>
         <h3>欢迎使用零壹平台管理系统</h3>
-        <form class="m-t" role="form" id="currentForm" action="{{ url('zerone/ajax/checklogin') }}">
+        <form class="m-t" role="form" id="currentForm" action="{{ url('zerone/ajax/login_check') }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
                 <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名" >
