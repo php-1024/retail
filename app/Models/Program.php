@@ -58,11 +58,12 @@ class Program extends Model{
     }
     //修改数据
     public static function editProgram($where,$param){
-        $model = self::where($where)->first();
-        foreach($param as $key=>$val){
-            $model->$key=$val;
+        if($model = self::where($where)->first()){
+            foreach($param as $key=>$val){
+                $model->$key=$val;
+            }
+            $model->save();
         }
-        $model->save();
     }
     //获取总数
     public static function getCount($where=[]){
