@@ -12,10 +12,5 @@ class Organization extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-
-    //获取列表
-    public static function getList(){
-
-    }
 }
 ?>
