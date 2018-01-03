@@ -75,6 +75,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>程序名称</th>
+                                    <th>程序路由</th>
                                     <th class="col-sm-1">所属主程序</th>
                                     <th class="col-sm-1">是否资产程序</th>
                                     <th>功能模块</th>
@@ -87,6 +88,7 @@
                                 <tr>
                                     <td>{{ $val->id }}</td>
                                     <td>{{ $val->program_name }}</td>
+                                    <td>{{ $val->program_url }}</td>
                                     <td>
                                         <label class="label label-info" style="display:inline-block"> {{ $pname[$val->id] }}</label>
                                     </td>
