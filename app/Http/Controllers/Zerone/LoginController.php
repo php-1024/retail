@@ -57,7 +57,7 @@ class LoginController extends Controller{
         $error_log = ErrorLog::getOne([['ip',$ip]]);//查询该IP下的错误记录
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
-
+            $account_info = Account::getOneForLogin();
         }else{
             return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登陆 ','status' => '0']);
         }
