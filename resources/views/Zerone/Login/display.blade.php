@@ -8,12 +8,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>零壹平台管理系统 | 登陆界面</title>
-    <link href="{{asset('public/Universal/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Universal/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-    <link href="{{asset('public/Universal/library/font')}}/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
-    <link href="{{asset('public/Universal')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Universal')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -51,9 +51,9 @@
         <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027</small> </p>
     </div>
 </div>
-<script src="{{asset('public/Universal/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Universal/library/bootstrap')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Universal/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
