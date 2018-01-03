@@ -3,7 +3,7 @@
  *新版本登陆界面
  *
  **/
-namespace App\Http\Controllers\Universal;
+namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
