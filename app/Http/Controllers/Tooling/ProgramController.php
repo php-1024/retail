@@ -48,38 +48,37 @@ class ProgramController extends Controller{
         return view('Tooling/Program/program_parents_node',['pid'=>$pid,'module_list'=>$module_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
     }
     //检测添加数据
-    public function program_add_check(Request $reque){
-        $admin_data = $reque->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $reque->path();//获取当前的页面路由
+    public function program_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
 
-        $program_name = $reque->input('program_name');//程序名称
-        echo $program_name;exit;
-//        $program_url = $request->input('program_url');//程序路由
-//        $complete_id = $request->input('complete_id');//上级程序
-//        $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
-//        $module_node_ids = $request->input('module_node_ids');//节点数组
-//        if(Program::checkRowExists([[ 'program_name',$program_name ]])){
-//            return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
-//        }else{
-//            DB::beginTransaction();
-//            try{
-//                $program_id = Program::addProgram(['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
-//
-//                //循环节点生成多条数据
-//                foreach($module_node_ids as $key=>$val){
-//                    $arr = explode('_',$val);
-//                    $module_id = $arr[0];//功能模块ID
-//                    $node_id = $arr[1];//功能节点ID
-//                    ProgramModuleNode::addProgramModuleNode(['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id]);
-//                }
-//                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
-//                DB::commit();//提交事务
-//            }catch (\Exception $e) {
-//                DB::rollBack();//事件回滚
-//                return response()->json(['data' => '添加程序失败，请检查', 'status' => '0']);
-//            }
-//            return response()->json(['data' => '添加程序成功', 'status' => '1']);
-//        }
+        $program_name = $request->input('program_name');//程序名称
+        $program_url = $request->input('program_url');//程序路由
+        $complete_id = $request->input('complete_id');//上级程序
+        $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
+        $module_node_ids = $request->input('module_node_ids');//节点数组
+        if(Program::checkRowExists([[ 'program_name',$program_name ]])){
+            return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
+        }else{
+            DB::beginTransaction();
+            try{
+                $program_id = Program::addProgram(['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
+
+                //循环节点生成多条数据
+                foreach($module_node_ids as $key=>$val){
+                    $arr = explode('_',$val);
+                    $module_id = $arr[0];//功能模块ID
+                    $node_id = $arr[1];//功能节点ID
+                    ProgramModuleNode::addProgramModuleNode(['program_id'=>$program_id,'module_id'=>$module_id,'node_id'=>$node_id]);
+                }
+                ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加程序失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加程序成功', 'status' => '1']);
+        }
     }
     //程序数据列表
     public function program_list(Request $request){
