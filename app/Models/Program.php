@@ -51,9 +51,7 @@ class Program extends Model{
         $program->program_name = $param['program_name'];//程序名称
         $program->program_url = $param['program_url'];//程序名称
         $program->complete_id = $param['complete_id'];//上级程序
-        $program->is_classic = $param['is_classic'];//是否通用版本
         $program->is_asset = $param['is_asset'];//是否资产程序
-        $program->is_coupled = $param['is_coupled'];//是否夫妻程序
         $program->save();
         return $program->id;
     }
