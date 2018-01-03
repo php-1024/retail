@@ -177,7 +177,7 @@ class SystemController extends Controller{
 
     //退出登录
     public function quit(Request $request){
-        Session::put('zerone_tooling_account_id','');
+        Session::put('tooling_account_id','');
         return redirect('tooling/login');
     }
 }
