@@ -160,3 +160,16 @@ Route::group(['prefix'=>'tooling'],function(){
 });
 /********************程序管理系统*************************/
 
+/**********************零壹管理系统*********************/
+Route::group(['prefix'=>'zerone'],function(){
+    //登陆页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Universal\LoginController@zero_display')->middleware('ToolingCheck');//登陆页面路由
+        Route::get('captcha/{tmp}', 'Tooling\LoginController@captcha');//验证码路由
+    });
+
+    Route::group(['prefix'=>'ajax'],function(){
+        Route::post('checklogin','Tooling\LoginController@checkLogin')->middleware('ToolingCheckAjax');//提交登陆数据
+    });
+});
+/********************零壹管理系统*************************/

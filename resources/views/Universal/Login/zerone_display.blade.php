@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>零壹程序管理系统| 登陆界面</title>
+    <title>零壹平台管理系统 | 登陆界面</title>
     <link href="{{asset('public/Universal/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Universal/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Universal/library/font')}}/css/font-awesome.css" rel="stylesheet">
@@ -26,7 +26,7 @@
             <h1 class="logo-name">ZERONE</h1>
 
         </div>
-        <h3>欢迎使用零壹程序管理系统</h3>
+        <h3>欢迎使用零壹平台管理系统</h3>
         <form class="m-t" role="form" id="currentForm" action="{{ url('tooling/ajax/checklogin') }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">

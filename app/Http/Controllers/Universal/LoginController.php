@@ -19,7 +19,7 @@ class LoginController extends Controller{
      */
     public function zerone_display()
     {
-        return view('Universal/Login/display');
+        return view('Universal/Login/zerone_display');
     }
     /*
      * 生成验证码
