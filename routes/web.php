@@ -164,8 +164,8 @@ Route::group(['prefix'=>'tooling'],function(){
 Route::group(['prefix'=>'zerone'],function(){
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Universal\LoginController@zero_display')->middleware('ToolingCheck');//登陆页面路由
-        Route::get('captcha/{tmp}', 'Tooling\LoginController@captcha');//验证码路由
+        Route::get('/', 'Universal\LoginController@zerone_display')->middleware();//登陆页面路由
+        Route::get('captcha/{tmp}', 'Tooling\LoginController@zerone_captcha');//验证码路由
     });
 
     Route::group(['prefix'=>'ajax'],function(){
