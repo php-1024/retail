@@ -19,10 +19,14 @@ class LoginController extends Controller{
      */
     public function zerone_display()
     {
-        $password = 'admin';
-        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $password = '123456';
+        //$key = config("app.zerone_encrypt_key");//获取加密盐
+        //$encrypted = md5($password);//加密密码第一重
+        //$encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        //echo $encryptPwd;
+        $key2 = config("app.zerone_safe_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key2);//加密密码第二重
         echo $encryptPwd;
         return view('Universal/Login/zerone_display');
     }
