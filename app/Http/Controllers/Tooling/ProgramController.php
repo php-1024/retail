@@ -48,11 +48,12 @@ class ProgramController extends Controller{
         return view('Tooling/Program/program_parents_node',['pid'=>$pid,'module_list'=>$module_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
     }
     //检测添加数据
-    public function program_add_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+    public function program_add_check(Request $reque){
+        $admin_data = $reque->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $reque->path();//获取当前的页面路由
 
-        $program_name = $request->input('program_name');//程序名称
+        $program_name = $reque->input('program_name');//程序名称
+        dd($program_name);exit;
         $program_url = $request->input('program_url');//程序路由
         $complete_id = $request->input('complete_id');//上级程序
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
