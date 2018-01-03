@@ -21,7 +21,7 @@ class LoginController extends Controller{
     {
         $account_info = Account::getOneForLogin('admin');
         dump($account_info);
-        dump($account_info->organization->organization_name);
+        dump($account_info->organization);
         return view('Zerone/Login/display');
     }
     /*
