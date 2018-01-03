@@ -54,7 +54,6 @@ class ProgramController extends Controller{
 
         $program_name = $request->input('program_name');//程序名称
         $program_url = $request->input('program_url');//程序路由
-        echo $program_url;exit;
         $complete_id = $request->input('complete_id');//上级程序
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
@@ -64,6 +63,7 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 $program_id = Program::addProgram(['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
+
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
@@ -74,6 +74,7 @@ class ProgramController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加程序失败，请检查', 'status' => '0']);
             }
