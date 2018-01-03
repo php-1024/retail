@@ -7,9 +7,9 @@ namespace App\Http\Controllers\Universal;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
-use App\Models\ToolingAccount;
-use App\Models\ToolingErrorLog;
-use App\Models\ToolingLoginLog;
+use App\Models\Account;
+use App\Models\ErrorLog;
+use App\Models\LoginLog;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
@@ -56,23 +56,23 @@ class LoginController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
         //实例化错误记录表模型
-        $error_log = ToolingErrorLog::getOne([['ip',$ip]]);//查询该IP下的错误记录
+        $error_log = ErrorLog::getOne([['ip',$ip]]);//查询该IP下的错误记录
 
 
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
-            $admininfo = ToolingAccount::getOne([['account', $username]])->toArray();//根据账户查询用户信息
+            $admininfo = Account::getOne([['account', $username]])->toArray();//根据账户查询用户信息
             if (!empty($admininfo)) {//如果查询不到，则提示账号或密码错误
                 if ($encryptPwd != $admininfo['password']) {//查询密码是否对的上
-                    ToolingErrorLog::addErrorTimes($ip);
+                    ErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
                 } elseif($admininfo['status']=='0'){//查询账号状态
-                    ToolingErrorLog::addErrorTimes($ip);
+                    ErrorLog::addErrorTimes($ip);
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else{
-                    ToolingErrorLog::clearErrorTimes($ip);//清除掉错误记录
+                    ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                     //插入登录记录
-                    if(ToolingLoginLog::addLoginLog($admininfo['id'],$ip,$addr)) {
+                    if(LoginLog::addLoginLog($admininfo['id'],$ip,$addr)) {
                         Session::put('tooling_account_id',encrypt($admininfo['id']));//存储登录session_id为当前用户ID
                         //构造用户缓存数据
                         $admin_data = ['admin_id'=>$admininfo['id'],'admin_account'=>$admininfo['account'],'admin_is_super'=>$admininfo['is_super'],'admin_login_ip'=>$ip,'admin_login_position'=>$addr,'admin_login_time'=>time()];
@@ -86,7 +86,7 @@ class LoginController extends Controller{
                     }
                 }
             } else {
-                ToolingErrorLog::addErrorTimes($ip);
+                ErrorLog::addErrorTimes($ip);
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
             }
         }else{
