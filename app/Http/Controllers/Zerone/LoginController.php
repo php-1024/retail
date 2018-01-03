@@ -19,9 +19,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $account_info = Account::getOneForLogin('zeo');
-        dump($account_info);
-        dump($account_info->organization->id);
         return view('Zerone/Login/display');
     }
     /*
@@ -73,20 +70,21 @@ class LoginController extends Controller{
                             ErrorLog::addErrorTimes($ip);
                             return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
                         }
-                    }
-                    ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                    //插入登录记录
-                    if(LoginLog::addLoginLog($account_info['id'],$ip,$addr)) {
-                        Session::put('tooling_account_id',encrypt($account_info['id']));//存储登录session_id为当前用户ID
-                        //构造用户缓存数据
-                        $admin_data = ['admin_id'=>$account_info['id'],'admin_account'=>$account_info['account'],'admin_is_super'=>$account_info['is_super'],'admin_login_ip'=>$ip,'admin_login_position'=>$addr,'admin_login_time'=>time()];
-                        $admin_data = serialize($admin_data);
-                        Redis::connection('zeo');//连接到我的redis服务器
-                        $data_key = 'tooling_system_admin_data_'.$account_info['id'];
-                        Redis::set($data_key,$admin_data);
-                        return response()->json(['data' => '登录成功', 'status' => '1']);
                     }else{
-                        return response()->json(['data' => '登录失败', 'status' => '0']);
+                        ErrorLog::clearErrorTimes($ip);//清除掉错误记录
+                        //插入登录记录
+                        if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登陆日志
+                            Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                            //构造用户缓存数据
+                            $admin_data = ['id'=>$account_info->id,'account'=>$account_info->account,'is_super'=>$account_info->is_super,'ip'=>$ip,'login_position'=>$addr,'login_time'=>time()];
+                            $admin_data = serialize($admin_data);
+                            Redis::connection('zeo');//连接到我的redis服务器
+                            $data_key = 'tooling_system_admin_data_'.$account_info['id'];
+                            Redis::set($data_key,$admin_data);
+                            return response()->json(['data' => '登录成功', 'status' => '1']);
+                        }else{
+                            return response()->json(['data' => '登录失败', 'status' => '0']);
+                        }
                     }
                 }
             }else{
