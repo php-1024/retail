@@ -19,7 +19,6 @@ class ProgramController extends Controller{
     public function program_add(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
         return view('Tooling/Program/program_add',['plist'=>$plist,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
@@ -45,6 +44,7 @@ class ProgramController extends Controller{
                 $selected_node[] = $val->module_id . '_' . $val->node_id;
             }
         }
+        dump($$module_list);
         return view('Tooling/Program/program_parents_node',['pid'=>$pid,'module_list'=>$module_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
     }
     //检测添加数据
