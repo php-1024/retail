@@ -162,10 +162,10 @@ Route::group(['prefix'=>'tooling'],function(){
 
 /**********************零壹管理系统*********************/
 Route::group(['prefix'=>'zerone'],function(){
-    Route::get('/', 'Zerone\DashboardController@display')->middleware();//系统首页
+    Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Universal\LoginController@zerone_display')->middleware();//登陆页面路由
+        Route::get('/', 'Universal\LoginController@zerone_display')->middleware('ZeroneCheck');//登陆页面路由
         Route::get('captcha/{tmp}', 'Universal\LoginController@zerone_captcha');//验证码路由
     });
 
