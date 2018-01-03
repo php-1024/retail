@@ -13,7 +13,7 @@ use App\Models\Study\Area;
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
     public function getAll(){
-        $list = Test::all();
+        $list = Test::get_all();
         dump($list);
     }
     //调用model里的get方法获取列表
