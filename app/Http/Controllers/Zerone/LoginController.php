@@ -17,14 +17,14 @@ class LoginController extends Controller{
     /*
      * 登陆页面
      */
-    public function zerone_display()
+    public function display()
     {
         return view('Universal/Login/zerone_display');
     }
     /*
      * 生成验证码
      */
-    public function zerone_captcha()
+    public function captcha()
     {
         //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder;
@@ -41,7 +41,7 @@ class LoginController extends Controller{
     }
 
     //检测登录
-    public function zerone_login_check(){
+    public function login_check(){
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址

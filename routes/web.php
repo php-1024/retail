@@ -165,12 +165,12 @@ Route::group(['prefix'=>'zerone'],function(){
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Zerone\LoginController@zerone_display')->middleware('ZeroneCheck');//登陆页面路由
-        Route::get('captcha/{tmp}', 'Zerone\LoginController@zerone_captcha');//验证码路由
+        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登陆页面路由
+        Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
     });
 
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Zerone\LoginController@zerone_login_check')->middleware('ZeroneCheckAjax');//提交登陆数据
+        Route::post('login_check','Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登陆数据
     });
 });
 /********************零壹管理系统*************************/
