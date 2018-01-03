@@ -69,17 +69,32 @@ class LoginController extends Controller{
                         if($account_info->program_id!='1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
                             ErrorLog::addErrorTimes($ip);
                             return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
+                        }else{
+                            ErrorLog::clearErrorTimes($ip);//清除掉错误记录
+                            //插入登录记录
+                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登陆日志
+                                Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                //构造用户缓存数据
+                                $admin_data = ['id'=>$account_info->id,'account'=>$account_info->account,'is_super'=>$account_info->is_super,'ip'=>$ip,'login_position'=>$addr,'login_time'=>time()];
+                                $admin_data = serialize($admin_data);
+                                Redis::connection('zeo');//连接到我的redis服务器
+                                $data_key = 'zerone_system_admin_data_'.$account_info['id'];
+                                Redis::set($data_key,$admin_data);
+                                return response()->json(['data' => '登录成功', 'status' => '1']);
+                            }else{
+                                return response()->json(['data' => '登录失败', 'status' => '0']);
+                            }
                         }
                     }else{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                         //插入登录记录
-                        if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登陆日志
+                        if(LoginLog::addLoginLog($account_info['id'],1,0,$ip,$addr)) {//admin,唯一超级管理员，不属于任何组织
                             Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             //构造用户缓存数据
                             $admin_data = ['id'=>$account_info->id,'account'=>$account_info->account,'is_super'=>$account_info->is_super,'ip'=>$ip,'login_position'=>$addr,'login_time'=>time()];
                             $admin_data = serialize($admin_data);
                             Redis::connection('zeo');//连接到我的redis服务器
-                            $data_key = 'tooling_system_admin_data_'.$account_info['id'];
+                            $data_key = 'zerone_system_admin_data_'.$account_info['id'];
                             Redis::set($data_key,$admin_data);
                             return response()->json(['data' => '登录成功', 'status' => '1']);
                         }else{
