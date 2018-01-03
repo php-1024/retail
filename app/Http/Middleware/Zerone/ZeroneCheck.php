@@ -30,8 +30,6 @@ class ZeroneCheck{
         return $next($request);
     }
 
-
-
     //部分页面检测用户是否超级管理员
     public function checkIsSuper($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
