@@ -3,7 +3,7 @@
  *新版本登陆界面
  *
  **/
-namespace App\Http\Controllers\Tooling;
+namespace App\Http\Controllers\Universal;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -17,14 +17,14 @@ class LoginController extends Controller{
     /*
      * 登陆页面
      */
-    public function display()
+    public function zerone_display()
     {
-        return view('Tooling/Login/display');
+        return view('Universal/Login/display');
     }
     /*
      * 生成验证码
      */
-    public function captcha()
+    public function zerone_captcha()
     {
         //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder;
