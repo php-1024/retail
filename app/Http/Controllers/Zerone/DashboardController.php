@@ -20,7 +20,7 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Zerone/Dashboard/display');
+        return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
     }
 
     //退出登录
