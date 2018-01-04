@@ -5,13 +5,9 @@
  **/
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request;
-use Gregwar\Captcha\CaptchaBuilder;
-use App\Models\ToolingAccount;
-use App\Models\ToolingErrorLog;
-use App\Models\ToolingLoginLog;
+use Illuminate\Http\Request;
 use Session;
-use Illuminate\Support\Facades\Redis;
+
 
 class DashboardController extends Controller{
     /*
@@ -26,6 +22,7 @@ class DashboardController extends Controller{
         dump($menu_data);
         dump($son_menu_data);
         dump($admin_data);
+        dump($route_name);
         return view('Zerone/Dashboard/display');
     }
 
