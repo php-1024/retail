@@ -25,7 +25,7 @@ class ToolingCheck{
             case "tooling/dashboard/account_list"://账号列表
             case "tooling/dashboard/account_add"://添加账号
                 $re = $this->checkLoginAndSuper($request);//判断是否登陆和是否超级管理员
-                dump($route_name);
+                dump($request);
                 return self::format_response($re,$next);
             break;
 
