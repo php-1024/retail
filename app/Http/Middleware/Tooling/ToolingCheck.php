@@ -138,6 +138,7 @@ class ToolingCheck{
         $sess_key = Session::get('tooling_account_id');
         //如果为空跳转到登陆页面
         if(empty($sess_key)) {
+            dump($sess_key);
             return self::res(0,redirect('tooling/login'));
         }else{
             $sess_key = Session::get('tooling_account_id');//获取管理员ID
