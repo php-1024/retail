@@ -12,13 +12,14 @@
                     01
                 </div>
             </li>
+            @foreach($menu_data as $key=>$val)
             <li class="active">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ $val->name }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="active"><a href="{{ url('tooling') }}">管理首页</a></li>
                 </ul>
             </li>
-
+            @endforeach
             <li>
                 <a href="{{ url('tooling/quit') }}"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>
             </li>
