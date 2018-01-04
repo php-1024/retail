@@ -10,6 +10,7 @@ use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;
 use App\Models\ErrorLog;
 use App\Models\LoginLog;
+use App\Models\ProgramMenu;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
@@ -85,6 +86,7 @@ class LoginController extends Controller{
                                     'login_time'=>time()//登陆时间
                                 ];
                                 $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
+                                $this->create_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             }else{
                                 return response()->json(['data' => '登录失败', 'status' => '0']);
@@ -106,6 +108,7 @@ class LoginController extends Controller{
                                 'login_time'=>time()//登陆时间
                             ];
                             $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
+                            $this->create_menu_cache($account_info->id);//生成对应账号的系统菜单
                             return response()->json(['data' => '登录成功', 'status' => '1']);
                         }else{
                             return response()->json(['data' => '登录失败', 'status' => '0']);
@@ -137,8 +140,24 @@ class LoginController extends Controller{
     /*
      * id - 用户的ID
      */
-    private function create_account_menu($id){
-
+    private function create_menu_cache($id){
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'id','asc');//获取零壹管理系统的一级菜单
+        $son_menu = [];
+        foreach($menu as $key=>$val){//获取一级菜单下的子菜单
+            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
+        }
+        if($id <> 1){
+            /**
+             * 未完成，这里准备查询用户权限。
+             */
+        }
+        $menu = serialize($menu);
+        $son_menu = serialize($son_menu);
+        Redis::connection('zeo');//连接到我的redis服务器
+        $menu_key = 'zerone_system_menu_'.$id;  //一级菜单的Redis主键。
+        $son_menu_key = 'zerone_system_son_menu_'.$id;//子菜单的Redis主键
+        Redis::set($menu_key,$menu);
+        Redis::set($son_menu_key,$son_menu);
     }
 }
 ?>

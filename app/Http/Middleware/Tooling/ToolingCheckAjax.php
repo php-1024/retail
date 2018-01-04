@@ -77,7 +77,7 @@ class ToolingCheckAjax {
                 break;
 
             //检测编辑程序提交数据是否正确
-            case "tooling/ajax/program_edit_check":
+            case "tooling/ajax/program_edit_chec":
                 $re = $this->checkLoginAndProgramEdit($request);
                 return self::format_response($re,$next);
                 break;

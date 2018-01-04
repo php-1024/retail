@@ -52,8 +52,12 @@ class ZeroneCheck{
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
+            $menu_data = Redis::get('zerone_system_menu_'.$sess_key);
+            $son_menu_data = Redis::get('zerone_system_son_menu_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
-            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
+            $menu_data =  unserialize($menu_data);//解序列一级菜单
+            $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
+            $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
             //把参数传递到下一个中间件
             return self::res(1,$request);
         }
