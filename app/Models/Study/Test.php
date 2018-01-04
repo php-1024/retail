@@ -74,7 +74,7 @@ class Test extends Model{
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
         $model = Self::find($id);
-        dd($model);
+        dump($model);
         return $model->delete();
     }
 
