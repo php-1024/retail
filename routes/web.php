@@ -134,7 +134,7 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::post('node_edit_check','Tooling\NodeController@node_edit_check')->middleware('ToolingCheckAjax');//检测编辑节点数据
         Route::post('module_add_check','Tooling\ModuleController@module_add_check')->middleware('ToolingCheckAjax');//提交功能模块数据
         Route::post('module_edit','Tooling\ModuleController@module_edit')->middleware('ToolingCheckAjax');//获取功能模块数据并提交
-        Route::post('module_edit_chec','Tooling\ModuleController@module_edit_check')->middleware('ToolingCheckAjax');
+        Route::post('module_edit_check','Tooling\ModuleController@module_edit_chec')->middleware('ToolingCheckAjax');
         Route::post('program_add_check','Tooling\ProgramController@program_add_check')->middleware('ToolingCheckAjax');//提交功能模块数据
         Route::post('program_parents_node','Tooling\ProgramController@program_parents_node')->middleware('ToolingCheckAjax');//获取上级程序ID
         Route::post('program_edit','Tooling\ProgramController@program_edit')->middleware('ToolingCheckAjax');//获取功能模块数据并提交

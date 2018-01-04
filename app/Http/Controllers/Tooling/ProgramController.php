@@ -48,7 +48,7 @@ class ProgramController extends Controller{
         return view('Tooling/Program/program_parents_node',['pid'=>$pid,'module_list'=>$module_list,'selected_node'=>$selected_node,'selected_module'=>$selected_module]);
     }
     //检测添加数据
-    public function program_add_check(Request $request){
+    public function program_add_chec(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
