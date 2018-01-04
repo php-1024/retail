@@ -14,7 +14,7 @@
             </li>
             @foreach($menu_data as $key=>$val)
             <li class="active">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ $val->name }}</span> <span class="fa arrow"></span></a>
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ $val->menu_name }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="active"><a href="{{ url('tooling') }}">管理首页</a></li>
                 </ul>
