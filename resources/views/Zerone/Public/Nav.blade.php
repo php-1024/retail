@@ -13,7 +13,7 @@
                 </div>
             </li>
             @foreach($menu_data as $key=>$val)
-            <li class="active">
+            <li @if(in_array($v->menu_route,explode(',',$val->menu_routes_bind))) class="active" @endif>
                 <a href="index.html"><i class="{{ $val->icon_class }}"></i> <span class="nav-label">{{ $val->menu_name }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @foreach($son_menu_data[$val->id] as $k=>$v)
