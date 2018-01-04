@@ -54,10 +54,10 @@ class OrmStudyController extends Controller{
     }
     //删除
     public function do_delete(){
-        $id = 18;
+        $id = 11;
         $re = Test::select_delete($id);
         dump($re);
-        $id = 19;
+        $id = 11;
         $re = Test::do_delete($id);
         dump($re);
     }
