@@ -13,6 +13,7 @@
                 </div>
             </li>
             @foreach($menu_data as $key=>$val)
+                {{dump($route_name)}}
                 {{ dump(in_array($route_name,explode(',',$val->menu_routes_bind))) }}
             <li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>
                 <a href="index.html"><i class="{{ $val->icon_class }}"></i> <span class="nav-label">{{ $val->menu_name }}</span> <span class="fa arrow"></span></a>
