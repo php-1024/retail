@@ -16,7 +16,9 @@
             <li class="active">
                 <a href="index.html"><i class="{{ $val->icon_class }}"></i> <span class="nav-label">{{ $val->menu_name }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="active"><a href="{{ url('tooling') }}">管理首页</a></li>
+                    @foreach($son_menu_data[$val->id] as $k=>$v)
+                    <li class="active"><a href="{{ url($v->route_name) }}">{{ $v->menu_name }}</a></li>
+                    @endforeach
                 </ul>
             </li>
             @endforeach
