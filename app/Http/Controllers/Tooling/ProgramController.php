@@ -205,6 +205,8 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = ProgramMenu::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
+        dump($list);
+        exit();
         return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
     //编辑菜单数据检测
