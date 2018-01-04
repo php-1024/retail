@@ -20,10 +20,10 @@
 
 <div id="wrapper">
 
-    @include('Tooling/Public/Nav')
+    @include('Zerone/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-        @include('Tooling/Public/Header')
+        @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>管理首页</h2>
@@ -40,7 +40,7 @@
         </div>
 
 
-        @include('Tooling/Public/Footer')
+        @include('Zerone/Public/Footer')
     </div>
 </div>
 
