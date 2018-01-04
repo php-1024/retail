@@ -23,7 +23,7 @@
             </li>
             @endforeach
             <li>
-                <a href="{{ url('tooling/quit') }}"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>
+                <a href="{{ url('zerone/quit') }}"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>
             </li>
 
 

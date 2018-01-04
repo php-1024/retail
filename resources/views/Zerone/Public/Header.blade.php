@@ -16,7 +16,7 @@
             </span>
         </li>
         <li>
-            <a href="{{ url('tooling/quit') }}">
+            <a href="{{ url('zerone/quit') }}">
                 <i class="fa fa-sign-out"></i>退出系统
             </a>
         </li>
