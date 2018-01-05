@@ -85,6 +85,7 @@ class ProgramController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $program_name = $request->input('program_name');
+        dd($program_name);
         $search_data['program_name'] = $program_name;
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
         $module_list = [];//功能模块列表
