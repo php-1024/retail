@@ -53,6 +53,7 @@ class ZeroneCheckAjax
     //检测登陆提交数据
     public function checkLoginPost($request)
     {
+        dd("ok");
         if (empty($request->input('username'))) {
             return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
         }
