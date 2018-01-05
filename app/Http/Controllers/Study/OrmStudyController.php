@@ -11,13 +11,11 @@ use App\Models\Study\City;
 use App\Models\Study\Area;
 
 use Illuminate\Http\Request;
-use App\Models\Node;
-use App\Models\Module;
-use App\Models\Program;
 
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
-    public function getAll(){
+    public function getAll(Request $request){
+        dump($request);
         $list = Test::get_all();
         dump($list);
     }
