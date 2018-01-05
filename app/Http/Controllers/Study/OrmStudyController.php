@@ -28,7 +28,7 @@ class OrmStudyController extends Controller{
 
 
 //        $list = Test::get_all();
-        dump($route_name);
+        dump($admin_data);
     }
     //调用model里的get方法获取列表
     public function getList(){
