@@ -74,7 +74,8 @@ class ModuleController extends Controller{
             try{
                 Module::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
-                    if(!ModuleNode::getOne([['module_id',$id],['node_id',$val]])){
+                    $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]])->toArray();
+                    if(empty($vo)){
                         ModuleNode::addModuleNode(['module_id'=>$id,'node_id'=>$val]);//不存在则添加数据
                     }else{
                         continue;//存在则跳过;
