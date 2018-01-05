@@ -20,10 +20,10 @@
 
 <div id="wrapper">
 
-    @include('Tooling/Public/Nav')
+    @include('Zerone/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-        @include('Tooling/Public/Header')
+        @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>管理首页</h2>
@@ -39,8 +39,303 @@
 
         </div>
 
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-info pull-right">零壹管理系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">168人</h1>
+                            <div class="stat-percent font-bold text-info">20人 <i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-primary pull-right">服务商系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">1680人</h1>
+                            <div class="stat-percent font-bold text-navy">88人 <i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-danger pull-right">商户系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">800人</h1>
+                            <div class="stat-percent font-bold text-danger">18人 <i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-success pull-right">所有业务系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">18888888人</h1>
+                            <div class="stat-percent font-bold text-success">1680人<i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="ibox-content forum-container">
 
-        @include('Tooling/Public/Footer')
+                        <div class="forum-title">
+
+                            <h3>服务商统计</h3>
+                        </div>
+
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <a href="javascript:;" class="forum-item-title">服务商数量</a>
+                                    <div class="forum-sub-title">进驻零壹平台的服务商的数量</div>
+                                </div>
+
+
+                                <div class="col-md-3 forum-info">
+                                            <span class="views-number">
+                                                80家
+                                            </span>
+                                    <div>
+                                        <small>总计</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <a href="javascript:;" class="forum-item-title">商户数量</a>
+                                    <div class="forum-sub-title">注册零壹平台的商户的数量</div>
+                                </div>
+
+                                <div class="col-md-3 forum-info">
+                                            <span class="views-number">
+                                                3600家
+                                            </span>
+                                    <div>
+                                        <small>总计</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <a href="javascript:;" class="forum-item-title">店铺数量</a>
+                                    <div class="forum-sub-title">商户在零壹平台开设的店铺数量</div>
+                                </div>
+                                <div class="col-md-3 forum-info">
+                                            <span class="views-number">
+                                                1300000
+                                            </span>
+                                    <div>
+                                        <small>总计</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row wrapper wrapper-content animated fadeInRight">
+                <div class="col-lg-7">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户登陆日志</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                <tr>
+                                    <th>用户</th>
+                                    <th>登陆IP</th>
+                                    <th>登陆地址</th>
+                                    <th>登陆时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>192.168.0.0.1</td>
+                                    <td>广东深圳</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户操作日志</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                <tr>
+                                    <th>用户</th>
+
+                                    <th>操作</th>
+                                    <th>时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+
+                                    <td>修改了登陆密码</td>
+                                    <td>2017-11-24 10:41:20</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        @include('Zerone/Public/Footer')
     </div>
 </div>
 
