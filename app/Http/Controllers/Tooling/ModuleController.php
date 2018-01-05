@@ -72,7 +72,7 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                ModuleNode::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
+                Module::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
                     $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
                     if(is_null($vo)){
@@ -83,10 +83,11 @@ class ModuleController extends Controller{
                     unset($vo);
                 }
                 //删除这次
-                ModuleNode::where('module_id',$id)->whereNotIn('node_id',$nodes)->delete();
+                ModuleNode::where('module_id',$id)->whereNotIn('node_id',$nodes)->forceDelete();
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑功能模块失败，请检查', 'status' => '0']);
             }

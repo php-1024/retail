@@ -746,6 +746,9 @@ class ToolingCheckAjax {
         if(empty($request->input('program_name'))){
             return self::res(0,response()->json(['data' => '请输入程序名称', 'status' => '0']));
         }
+        if(empty($request->input('program_url'))){
+            return self::res(0,response()->json(['data' => '请输入程序路由', 'status' => '0']));
+        }
         if(empty($request->input('module_node_ids'))){
             return self::res(0,response()->json(['data' => '请勾选功能模块', 'status' => '0']));
         }
