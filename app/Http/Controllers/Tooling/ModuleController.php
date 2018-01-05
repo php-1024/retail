@@ -67,6 +67,10 @@ class ModuleController extends Controller{
         $id = $request->input('id');
         $module_name  = $request->input('module_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
+        foreach($nodes as $key=>$val){
+            $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
+            dump($vo);
+        }
         if(Module::checkRowExists([[ 'module_name',$module_name ],[ 'id','!=',$id ]])){
             return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
         }else{
@@ -75,7 +79,7 @@ class ModuleController extends Controller{
                 Module::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
                 foreach($nodes as $key=>$val){
                     $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
-                    if(empty($vo->toArray())){
+                    if(is_null($vo)){
                         ModuleNode::addModuleNode(['module_id'=>$id,'node_id'=>$val]);//不存在则添加数据
                     }else{
                         continue;//存在则跳过;
