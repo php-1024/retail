@@ -13,8 +13,17 @@ use App\Models\Study\Area;
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
     public function getAll(){
-        $list = Test::get_all();
-        dump($list);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $count_data = [];//统计数据
+        $count_data['node_count'] = Node::getCount();//节点数量统计
+        $count_data['module_count'] = Module::getCount();//模块数量统计
+        $count_data['program_count'] = Program::getCount();//程序数量统计
+
+
+//        $list = Test::get_all();
+        dump($route_name);
     }
     //调用model里的get方法获取列表
     public function getList(){
