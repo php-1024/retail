@@ -127,6 +127,7 @@ class ProgramController extends Controller{
                 Program::editProgram([[ 'id',$id ]],['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
 
                 $node_ids = [];
+                $module_ids = [];
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
