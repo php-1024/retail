@@ -144,7 +144,7 @@ class ProgramController extends Controller{
                 }
 
                 //删除数据库中不在这次插入的数据
-                ProgramModuleNode::where('program_id', $id)->whereNotIn('module_id', $p_m_ns)->delete();
+                ProgramModuleNode::where('program_id', $id)->whereNotIn('p_m_n', $p_m_ns)->delete();
 
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
