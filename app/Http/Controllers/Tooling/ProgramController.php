@@ -132,7 +132,7 @@ class ProgramController extends Controller{
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
-                    $p_m_ns = $id.'_'.$module_id.'_'.$node_id;
+                    $p_m_ns[] = $id.'_'.$module_id.'_'.$node_id;
 
                     $vo = ProgramModuleNode::getOne([['program_id',$id],['module_id',$module_id],['node_id',$node_id]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
