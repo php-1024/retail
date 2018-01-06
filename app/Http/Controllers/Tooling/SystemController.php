@@ -20,6 +20,7 @@ class SystemController extends Controller{
     //后台首页
     public function dashboard(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data);
         $route_name = $request->path();//获取当前的页面路由
 
         $count_data = [];//统计数据
