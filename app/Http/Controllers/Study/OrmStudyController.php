@@ -10,12 +10,9 @@ use App\Models\Study\Province;
 use App\Models\Study\City;
 use App\Models\Study\Area;
 
-use Illuminate\Http\Request;
-
 class OrmStudyController extends Controller{
     //调用model里的all方法获取所有数据
-    public function getAll(Request $request){
-        dump($request);
+    public function getAll(){
         $list = Test::get_all();
         dump($list);
     }
