@@ -294,6 +294,12 @@ trait HasRelationships
      * @param  string  $relation
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+//    use SoftDeletes;
+//    protected $table = 'program';
+//    protected $primaryKey = 'id';
+//    public $timestamps = true;
+//    public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+
     public function belongsToMany($related, $table = null, $foreignPivotKey = null, $relatedPivotKey = null,
                                   $parentKey = null, $relatedKey = null, $relation = null)
     {

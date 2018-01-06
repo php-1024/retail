@@ -31,6 +31,7 @@ class ProgramModuleNode extends Model{
         $model->program_id = $param['program_id'];
         $model->module_id = $param['module_id'];
         $model->node_id = $param['node_id'];
+        $model->p_m_n = $param['program_id'].'_'.$param['module_id'].'_'.$param['node_id'];
         $model->save();
     }
 

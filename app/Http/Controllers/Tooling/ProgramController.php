@@ -126,13 +126,14 @@ class ProgramController extends Controller{
             try{
                 Program::editProgram([[ 'id',$id ]],['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
 
-                $node_ids = [];
+                $p_m_ns = [];
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
-                    $node_ids[] = $node_id;//获取这次的ID
+                    $p_m_ns[] = $id.'_'.$module_id.'_'.$node_id;
+
                     $vo = ProgramModuleNode::getOne([['program_id',$id],['module_id',$module_id],['node_id',$node_id]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
                         ProgramModuleNode::addProgramModuleNode(['program_id' => $id, 'module_id' => $module_id, 'node_id' => $node_id]);
@@ -141,11 +142,14 @@ class ProgramController extends Controller{
                     }
                     unset($vo);
                 }
+
                 //删除数据库中不在这次插入的数据
-                ProgramModuleNode::where('program_id',$id)->whereNotIn('node_id',$node_ids)->forceDelete();
+                ProgramModuleNode::where('program_id', $id)->whereNotIn('p_m_n', $p_m_ns)->forceDelete();
+
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑程序失败，请检查', 'status' => '0']);
             }
