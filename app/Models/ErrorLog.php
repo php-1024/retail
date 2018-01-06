@@ -19,14 +19,16 @@ class ErrorLog extends Model{
     }
 
     //根据用户IP增加错误次数
-    public static function addErrorTimes($ip){
+    public static function addErrorTimes($ip,$program_id){
         if($error_log = self::where('ip',$ip)->first()){//没有错误记录，插入错误记录，有错误记录，更新错误记录
             $error_log->error_time = $error_log->error_time+1;
+            $error_log->program_id = $program_id;
             $error_log->save();
         }else{
             $error_log = new ErrorLog();//没有记录，新建一个模型，然后保存
             $error_log->ip = $ip;
             $error_log->error_time = 1;
+            $error_log->program_id = $program_id;
             $error_log->save();
         }
     }
