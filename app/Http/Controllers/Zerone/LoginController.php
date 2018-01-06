@@ -60,15 +60,15 @@ class LoginController extends Controller{
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
             if($account_info = Account::getOneForLogin($username)){
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
-                    ErrorLog::addErrorTimes($ip);
+                    ErrorLog::addErrorTimes($ip,1);
                     return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif($account_info->status=='0'){//查询账号状态
-                    ErrorLog::addErrorTimes($ip);
+                    ErrorLog::addErrorTimes($ip,1);
                     return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
                 }else {
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->program_id!='1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
-                            ErrorLog::addErrorTimes($ip);
+                            ErrorLog::addErrorTimes($ip,1);
                             return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
@@ -116,7 +116,7 @@ class LoginController extends Controller{
                     }
                 }
             }else{
-                ErrorLog::addErrorTimes($ip);
+                ErrorLog::addErrorTimes($ip,1);
                 return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
             }
         }else{
