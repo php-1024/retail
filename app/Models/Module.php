@@ -43,7 +43,7 @@ class Module extends Model{
     //获取新建独立主程序时的模块列表
     public static function getListProgram($program_id,$where,$limit=0,$orderby,$sort='DESC'){
         $model = self::with(['program_nodes'=>function($query) use ($program_id){
-            $query->where('program_id',$program_id);
+            $query->where('program_id',$program_id)->where('deleted_at','<>',null);
         }])->whereIn('id',function($query) use ($program_id){
             $query->from('program_module_node')->select('module_id')->where('program_id',$program_id);
         })->where($where)->orderBy($orderby,$sort);
