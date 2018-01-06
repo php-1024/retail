@@ -142,6 +142,7 @@ class ToolingCheck{
         }else{
             $sess_key = Session::get('tooling_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
+            dd($sess_key);
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('tooling_system_admin_data_'.$sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
