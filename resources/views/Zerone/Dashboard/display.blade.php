@@ -334,7 +334,7 @@
                 </div>
             </div>
 
-            
+
         @include('Zerone/Public/Footer')
     </div>
 </div>
