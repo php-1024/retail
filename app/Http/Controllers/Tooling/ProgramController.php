@@ -132,7 +132,9 @@ class ProgramController extends Controller{
                     $arr = explode('_',$val);
                     $module_id = $arr[0];//功能模块ID
                     $node_id = $arr[1];//功能节点ID
+                    $module_ids[] = $module_id;
                     $node_ids[] = $node_id;//获取这次的ID
+
                     $vo = ProgramModuleNode::getOne([['program_id',$id],['module_id',$module_id],['node_id',$node_id]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
                         ProgramModuleNode::addProgramModuleNode(['program_id' => $id, 'module_id' => $module_id, 'node_id' => $node_id]);
@@ -141,8 +143,10 @@ class ProgramController extends Controller{
                     }
                     unset($vo);
                 }
+
                 //删除数据库中不在这次插入的数据
-                ProgramModuleNode::where('program_id',$id)->whereNotIn('node_id',$node_ids)->forceDelete();
+                ProgramModuleNode::where('program_id', $id)->whereNotIn('node_id', $node_ids)->delete();
+
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
