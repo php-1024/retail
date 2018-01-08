@@ -166,7 +166,7 @@
                                     <div class="col-sm-10"><input type="text" class="form-control"></div>
 
                                 </div>
-
+                                <div class="hr-line-dashed"></div>
 
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-5">
