@@ -68,6 +68,7 @@ class ZeroneCheckAjax
         Redis::connect('zeo');//连接到我的缓存服务器
         $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员参数
         $admin_data = unserialize($admin_data);//解序列我的信息
+        dump($admin_data);
         $safe_password = $request->input('safe_password');
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密密码第一重
