@@ -20,11 +20,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $safe_password = 'admin123';
-        $key = config("app.zerone_safe_encrypt_key");//获取加密盐
-        $encrypted = md5($safe_password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        dump($encryptPwd);
         return view('Zerone/Login/display');
     }
     /*
