@@ -20,6 +20,11 @@ class LoginController extends Controller{
      */
     public function display()
     {
+        $safe_password = 'admin123';
+        $key = config("app.zerone_safe_encrypt_key");//获取加密盐
+        $encrypted = md5($safe_password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        dump($encryptPwd);
         return view('Zerone/Login/display');
     }
     /*
@@ -81,6 +86,8 @@ class LoginController extends Controller{
                                     'account'=>$account_info->account,//用户账号
                                     'is_super'=>$account_info->is_super,//是否超级管理员
                                     'mobile'=>$account_info->mobile,//绑定手机号
+                                    'safe_password'=>$account_info->safe_password,//安全密码
+                                    'account_status'=>$account_info->status,//用户状态
                                     'ip'=>$ip,//登陆IP
                                     'login_position'=>$addr,//登陆地址
                                     'login_time'=>time()//登陆时间

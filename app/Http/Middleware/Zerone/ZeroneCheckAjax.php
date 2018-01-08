@@ -42,12 +42,19 @@ class ZeroneCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');//获取管理员参数
         $safe_password = $request->input('safe_password');
+        $key = config("app.zerone_safe_encrypt_key");//获取加密盐
+        $encrypted = md5($safe_password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         if(empty($admin_data['safe_password'])){
             return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
         }
+        if($encryptPwd != $admin_data['safe_password']){
+            return self::res(0,response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
+        }
+        return self::res(1,$request);
     }
 
     //部分页面检测用户是否admin，否则检测是否有权限
