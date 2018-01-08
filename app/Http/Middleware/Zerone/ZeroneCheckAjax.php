@@ -41,7 +41,8 @@ class ZeroneCheckAjax
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');//获取管理员参数
-        if(empty($request->input('safe_password'))){
+        $safe_password = $request->input('safe_password');
+        if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         if(empty($admin_data['safe_password'])){
