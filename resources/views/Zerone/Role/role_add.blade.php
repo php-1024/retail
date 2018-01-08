@@ -189,7 +189,12 @@
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
     <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
     <script>
-
+        $(document).ready(function() {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
     </script>
 </body>
 
