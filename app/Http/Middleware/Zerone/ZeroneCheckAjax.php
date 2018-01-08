@@ -19,9 +19,8 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测添加权限角色数据
-
-                //$re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
-               return self::format_response(self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0'])), $next);
+                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+                return self::format_response($re, $next);
                 break;
         }
     }
@@ -83,7 +82,7 @@ class ZeroneCheckAjax
 
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = $request->attributes->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['id']!=1){
             //暂定所有用户都有权限
             // return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
