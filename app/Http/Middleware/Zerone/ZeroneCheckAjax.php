@@ -86,8 +86,6 @@ class ZeroneCheckAjax
 
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
-        dump($request->input());
-        exit();
         $sess_key = Session::get('zerone_account_id');//获取管理员ID
         $sess_key = decrypt($sess_key);//解密管理员ID
         Redis::connect('zeo');//连接到我的缓存服务器
