@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+Use App\Models\Module;
 use Session;
 
 class RoleController extends Controller{
@@ -11,6 +12,8 @@ class RoleController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $module_node_list = Module::getProgramModules(1);
+        dump($module_node_list);
         return view('Zerone/Role/role_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
