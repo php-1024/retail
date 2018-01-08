@@ -52,11 +52,11 @@
                                 权限角色主要用于区分用户职责以及为用户快速分配权限
                             </p>
                             <div class="hr-line-dashed"></div>
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('tooling/ajax/account_add_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/role_add_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">角色名称</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="role_name" class="form-control"></div>
 
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -86,7 +86,7 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">安全密码</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="password" name="safepassword" class="form-control"></div>
 
                                 </div>
                                 <div class="hr-line-dashed"></div>
