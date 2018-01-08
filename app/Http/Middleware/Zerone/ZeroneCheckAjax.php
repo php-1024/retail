@@ -28,20 +28,18 @@ class ZeroneCheckAjax
     //检测登陆和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
-        dump($request->input());
-        exit();
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkHasRule($re);//检测是否具有权限
+            $re2 = $this->checkHasRule($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                $re3 = $this->checkSafePassword($re2);//检测安全密码是否具有权限
+                $re3 = $this->checkSafePassword($re2['response']);//检测安全密码是否具有权限
                 if($re3['status']=='0'){
                     return $re3;
                 }else{
-                    $re4 = $this->checkRoleAdd($re3);//检测添加权限角色数据
+                    $re4 = $this->checkRoleAdd($re3['response']);//检测添加权限角色数据
                     if($re4['status'] == '0'){
                         return $re4;
                     }else{
