@@ -19,8 +19,6 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测添加权限角色数据
-                dump($request->input());
-                exit();
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
@@ -107,6 +105,8 @@ class ZeroneCheckAjax
     //检测是否登陆
     public function checkIsLogin($request)
     {
+        dump($request->input());
+        exit();
         $sess_key = Session::get('zerone_account_id');
         //如果为空返回登陆失效
         if (empty($sess_key)) {
