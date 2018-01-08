@@ -30,6 +30,21 @@ class ZeroneCheck{
         return $next($request);
     }
 
+    //检测是否admin或是否有权限
+    public function checkLoginAndRule($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkHasRule($re['response']);//判断用户是否admin或是否有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
