@@ -85,6 +85,7 @@ class ZeroneCheckAjax
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $admin_data = unserialize($admin_data);//解序列我的信息
+        dump($admin_data);
         if($admin_data['id']!=1){
             //暂定所有用户都有权限
             // return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
