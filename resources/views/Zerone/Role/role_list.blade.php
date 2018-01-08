@@ -26,13 +26,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>管理首页</h2>
+                <h2>权限角色列表角色</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="JavaScript:;">系统管理</a>
+                        <a href="JavaScript:;">下级人员</a>
                     </li>
                     <li class="active">
-                        <strong>管理首页</strong>
+                        <strong>权限角色列表角色</strong>
                     </li>
                 </ol>
             </div>
