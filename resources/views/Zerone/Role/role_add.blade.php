@@ -66,14 +66,14 @@
                                         <group class="checked_box_group_{{ $val->id }}">
                                             <div>
                                                 <label class="i-checks">
-                                                    <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val->id }}" @if(in_array($val->id,$selected_module))checked="checked"@endif name="module_id[]" value="{{ $val->id }}"> {{ $val->module_name }}
+                                                    <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val->id }}" name="module_id[]" value="{{ $val->id }}"> {{ $val->module_name }}
                                                 </label>
                                             </div>
                                             <div>
                                                 @if(!empty($pid)) <? $val->nodes = $val->program_nodes ?>@endif
                                                 @foreach($val->nodes as $kk=>$vv)
                                                     <label class="checkbox-inline i-checks">
-                                                        <input type="checkbox" @if(in_array($val->id.'_'.$vv->id,$selected_node))checked="checked"@endif data-group_id="{{ $val->id }}" class="checkbox_node_name checkbox_node_name_{{ $val->id }}" name="module_node_ids[]" value="{{ $val->id.'_'.$vv->id }}"> {{$vv->node_name}}
+                                                        <input type="checkbox"  data-group_id="{{ $val->id }}" class="checkbox_node_name checkbox_node_name_{{ $val->id }}" name="module_node_ids[]" value="{{ $val->id.'_'.$vv->id }}"> {{$vv->node_name}}
                                                     </label>
                                                 @endforeach
                                             </div>
