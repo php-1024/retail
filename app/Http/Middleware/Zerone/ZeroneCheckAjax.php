@@ -19,7 +19,7 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测添加权限角色数据
-                $re = $this->checkLoginPost($request);
+                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
         }
@@ -30,9 +30,23 @@ class ZeroneCheckAjax
     //检测添加权限角色数据
     public function checkRoleAdd($request){
         if(empty($request->input('role_name'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
         }
         return self::res(1,$request);
+    }
+
+    //检测安全密码是否输入正确
+    public function checkSafePassword($request){
+        $admin_data = $request->get('admin_data');//获取管理员参数
+        if(empty($request->input('safe_password'))){
+            return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        }
+        if(empty($admin_data['safe_password'])){
+            return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
+        }
     }
 
     //部分页面检测用户是否admin，否则检测是否有权限
