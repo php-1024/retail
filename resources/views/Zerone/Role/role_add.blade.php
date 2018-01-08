@@ -93,7 +93,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认添加</button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认添加</button>
                                     </div>
                                 </div>
                             </form>
@@ -143,6 +143,34 @@
                 }
             });
         });
+        //提交表单
+        function postForm() {
+            var target = $("#currentForm");
+            var url = target.attr("action");
+            var data = target.serialize();
+            $.post(url, data, function (json) {
+                if (json.status == -1) {
+                    window.location.reload();
+                } else if(json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                }else{
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        //type: "warning"
+                    });
+                }
+            });
+        }
     </script>
 </body>
 
