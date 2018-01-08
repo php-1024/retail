@@ -63,7 +63,7 @@ class ZeroneCheckAjax
 
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
-        dump($request);
+        dump($request->input());
         exit();
         $sess_key = Session::get('zerone_account_id');//获取管理员ID
         $sess_key = decrypt($sess_key);//解密管理员ID
