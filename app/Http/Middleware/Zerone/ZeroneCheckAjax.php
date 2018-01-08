@@ -25,7 +25,30 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
-
+    //检测登陆和权限和安全密码和添加角色
+    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
+        $re = $this->checkIsLogin($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkHasRule($re);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                $re3 = $this->checkSafePassword($re2);//检测安全密码是否具有权限
+                if($re3['status']=='0'){
+                    return $re3;
+                }else{
+                    $re4 = $this->checkRoleAdd($re3);//检测添加权限角色数据
+                    if($re4['status'] == '0'){
+                        return $re4;
+                    }else{
+                        return self::res(1,$re4['response']);
+                    }
+                }
+            }
+        }
+    }
     /******************************单项检测*********************************/
     //检测添加权限角色数据
     public function checkRoleAdd($request){
