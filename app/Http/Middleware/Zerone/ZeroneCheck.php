@@ -21,9 +21,12 @@ class ZeroneCheck{
                 }
                 break;
 
-            /****仅检测是否登陆****/
-            case "zerone/role/role_add"://后台首页
-            case "zerone/role/role_list"://后台首页
+            /****仅检测是否登陆及是否具有权限****/
+            case "zerone/role/role_add"://添加权限角色
+            case "zerone/role/role_list"://权限角色列表
+            case "zerone/subordinate/subordinate_add"://添加下级人员
+            case "zerone/subordinate/subordinate_list"://下级人员列表
+            case "zerone/subordinate/subordinate_structure"://下级人员列表
             case "zerone"://后台首页
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);
