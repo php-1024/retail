@@ -13,7 +13,7 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/iCheck')}}/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -38,6 +38,7 @@
             </div>
 
         </div>
+
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="row">
                 <div class="col-lg-12">
@@ -174,8 +175,9 @@
             </div>
         </div>
 
+        @include('Tooling/Public/Footer')
     </div>
-
+</div>
     <!-- Mainly scripts -->
     <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -186,7 +188,9 @@
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
     <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+    <script>
 
+    </script>
 </body>
 
 </html>
