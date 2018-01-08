@@ -28,6 +28,8 @@ class ZeroneCheckAjax
     //检测登陆和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
+        dump($re->input());
+        exit();
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
@@ -63,8 +65,6 @@ class ZeroneCheckAjax
 
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
-        dump($request->input());
-        exit();
         $sess_key = Session::get('zerone_account_id');//获取管理员ID
         $sess_key = decrypt($sess_key);//解密管理员ID
         Redis::connect('zeo');//连接到我的缓存服务器
