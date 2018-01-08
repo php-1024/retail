@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        @include('Tooling/Public/Footer')
+        @include('Zerone/Public/Footer')
     </div>
 </div>
     <!-- Mainly scripts -->
