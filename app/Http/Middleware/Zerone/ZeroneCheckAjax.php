@@ -19,9 +19,9 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测添加权限角色数据
-                return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
+
                 //$re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
-               //return self::format_response($re, $next);
+               return self::format_response(self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0'])), $next);
                 break;
         }
     }
