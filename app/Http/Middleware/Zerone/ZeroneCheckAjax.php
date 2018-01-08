@@ -91,7 +91,6 @@ class ZeroneCheckAjax
         Redis::connect('zeo');//连接到我的缓存服务器
         $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员参数
         $admin_data = unserialize($admin_data);//解序列我的信息
-        dump($admin_data);
         if($admin_data['id']!=1){
             //暂定所有用户都有权限
             // return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
