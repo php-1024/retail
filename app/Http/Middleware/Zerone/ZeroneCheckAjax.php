@@ -63,7 +63,10 @@ class ZeroneCheckAjax
 
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
-        $admin_data = $request->get('admin_data');//获取管理员参数
+        $sess_key = Session::get('zerone_account_id');//获取管理员ID
+        $sess_key = decrypt($sess_key);//解密管理员ID
+        Redis::connect('zeo');//连接到我的缓存服务器
+        $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员参数
         $admin_data = unserialize($admin_data);//解序列我的信息
         $safe_password = $request->input('safe_password');
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
@@ -83,7 +86,10 @@ class ZeroneCheckAjax
 
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $sess_key = Session::get('zerone_account_id');//获取管理员ID
+        $sess_key = decrypt($sess_key);//解密管理员ID
+        Redis::connect('zeo');//连接到我的缓存服务器
+        $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员参数
         $admin_data = unserialize($admin_data);//解序列我的信息
         dump($admin_data);
         if($admin_data['id']!=1){
