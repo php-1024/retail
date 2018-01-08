@@ -176,12 +176,15 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('role_add','Zerone\RoleController@role_add')->middleware('ZeroneCheck');//添加权限角色
         Route::get('role_list','Zerone\RoleController@role_list');//权限角色列表
     });
+
+    //下级人员权限组
     Route::group(['prefix'=>'subordinate'],function(){
         Route::get('subordinate_add','Zerone\SubordinateController@subordinate_add');//添加下级人员
         Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list');//下级人员列表
         Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure');//下级人员结构
     });
 
+    //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登陆数据
     });
