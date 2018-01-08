@@ -19,6 +19,8 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测添加权限角色数据
+                dump($request->input());
+                exit();
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
