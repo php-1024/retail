@@ -179,9 +179,9 @@ Route::group(['prefix'=>'zerone'],function(){
 
     //下级人员权限组
     Route::group(['prefix'=>'subordinate'],function(){
-        Route::get('subordinate_add','Zerone\SubordinateController@subordinate_add');//添加下级人员
-        Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list');//下级人员列表
-        Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure');//下级人员结构
+        Route::get('subordinate_add','Zerone\SubordinateController@subordinate_add')->middleware('ZeroneCheck');//添加下级人员
+        Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list')->middleware('ZeroneCheck');//下级人员列表
+        Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure')->middleware('ZeroneCheck');//下级人员结构
     });
 
     //异步提交数据组
