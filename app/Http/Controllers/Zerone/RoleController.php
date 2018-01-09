@@ -89,7 +89,7 @@ class RoleController extends Controller{
             $selected_nodes[] = $val->id;
         }
         $module_node_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
-        return view('Zerone/Role/role_edit',['info'=>$info,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
+        return view('Zerone/Role/role_edit',['info'=>$info,'selected_nodes'=>$selected_nodes,'node_list'=>$module_node_list]);
     }
 
     //编辑权限角色提交
