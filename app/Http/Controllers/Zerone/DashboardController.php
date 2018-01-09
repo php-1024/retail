@@ -27,7 +27,7 @@ class DashboardController extends Controller{
         $where = [];
         if($admin_data['id']!=1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
-                ['account_id',$admin_data['admin_id']]
+                ['account_id',$admin_data['id']]
             ];
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
