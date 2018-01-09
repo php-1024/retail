@@ -186,7 +186,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($login_log_list as $val)
+                                @foreach($login_log_list as $key=>$val)
                                 <tr>
                                     <td>{{  $val->accounts->account }}</td>
                                     <td>{{  long2ip($val->ip) }}</td>
@@ -215,66 +215,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
+                                @foreach($operation_log_list as $key=>$val)
+                                    <tr>
+                                        <td>{{ $val->accounts->account }}</td>
+                                        <td>{{ $val->operation_info }}</td>
+                                        <td>{{ $val->created_at }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
