@@ -62,9 +62,9 @@ class LoginController extends Controller{
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip,1);
                     return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
-                } elseif($account_info->status=='0'){//查询账号状态
+                } elseif($account_info->status<>'1'){//查询账号状态
                     ErrorLog::addErrorTimes($ip,1);
-                    return response()->json(['data' => '您的账号已被冻结', 'status' => '0']);
+                    return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
@@ -104,8 +104,11 @@ class LoginController extends Controller{
                             $admin_data = [
                                 'id'=>$account_info->id,    //用户ID
                                 'account'=>$account_info->account,//用户账号
+                                'organization_id'=>$account_info->organization_id,//组织ID
                                 'is_super'=>$account_info->is_super,//是否超级管理员
                                 'mobile'=>$account_info->mobile,//绑定手机号
+                                'safe_password'=>$account_info->safe_password,//安全密码
+                                'account_status'=>$account_info->status,//用户状态
                                 'ip'=>$ip,//登陆IP
                                 'login_position'=>$addr,//登陆地址
                                 'login_time'=>time()//登陆时间
