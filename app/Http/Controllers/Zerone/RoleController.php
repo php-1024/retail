@@ -60,7 +60,7 @@ class RoleController extends Controller{
         $role_nodes = [] ;
         foreach($list as $key=>$val){
             foreach($val->nodes as $kk=>$vv){
-                $role_nodes[$val->id] = $vv->id;
+                $role_nodes[$val->id][] = $vv->id;
             }
         }
         dump($role_nodes);
