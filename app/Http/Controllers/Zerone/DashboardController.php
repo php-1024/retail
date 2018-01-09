@@ -23,7 +23,7 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $zerone_all = Statistics::all();//获取统计数据
-        dump($zerone_all['0']);
+        dump($zerone_all['0']['item_name']);
         dump($admin_data);
         $where = [];
         if($admin_data['id']!=1){   //不是超级管理员的时候，只查询自己相关的数据
