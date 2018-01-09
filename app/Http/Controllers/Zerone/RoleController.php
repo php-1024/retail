@@ -56,16 +56,22 @@ class RoleController extends Controller{
 
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
+        //查询所有角色列表
         $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+        //获取角色节点
         $role_nodes = [] ;
         foreach($list as $key=>$val){
             foreach($val->nodes as $kk=>$vv){
                 $role_nodes[$val->id][] = $vv->id;
             }
         }
+        //获取零壹管理程序的所有模块及节点并组成数组。
         $module_node_list = Module::getListProgram(1,[],0,'id');
-        dump($module_node_list);
-
+        $program_modules = [];
+        foreach($module_node_list as $key=>$val){
+            $program_modules[$val->name] = $val->program_nodes;
+        }
+        dump($program_modules);
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
