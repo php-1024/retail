@@ -72,7 +72,6 @@ class QueryBuliderController extends Controller{
     //过滤查询结果中的重复值
     public function select_distinct(){
         $list = DB::connection('study')->table('test')->select('age')->distinct()->get();
-        dump($list);
     }
 
     //关联查询
