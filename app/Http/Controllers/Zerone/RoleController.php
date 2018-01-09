@@ -60,9 +60,10 @@ class RoleController extends Controller{
         $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
         //获取角色节点
         $role_nodes = [] ;
+        $role_modules = [];
         foreach($list as $key=>$val){
             foreach($val->nodes as $kk=>$vv){
-                dump($vv->program_modules);
+                $role_modules[] = $vv->program_modules->module_name;
             }
         }
         //获取零壹管理程序的所有模块及节点并组成数组。
