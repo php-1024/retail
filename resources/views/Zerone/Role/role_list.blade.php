@@ -89,8 +89,9 @@
                                         <td>{{ $val->create_account->account }}</td>
                                         <td>{{ $val->role_name }}</td>
                                         <td>
-
-                                            <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
+                                            @foreach($role_module_nodes as $key=>$val)
+                                            <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($val as $k=>$v){{$v}},@endforeach" style="display:inline-block">{{$key}}</label>&nbsp;&nbsp;
+                                            @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
