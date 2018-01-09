@@ -71,7 +71,7 @@ class RoleController extends Controller{
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     private function getModuleNode($role_id){
-        $list = RoleNode::getModuleNodes($role_id);
+        $list = RoleNode::getModuleNodes($role_id,1);
         dump($list);
     }
     //编辑权限角色
