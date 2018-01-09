@@ -18,8 +18,13 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/role_add_check"://检测添加权限角色数据
+            case "zerone/ajax/role_add_check"://检测登陆和权限和安全密码和添加角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+                return self::format_response($re, $next);
+                break;
+
+            case "zerone/ajax/role_edit"://检测登陆和权限
+                $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
         }
@@ -27,6 +32,20 @@ class ZeroneCheckAjax
     /******************************复合检测*********************************/
     //检测登陆和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登录和权限
+    public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
@@ -35,17 +54,21 @@ class ZeroneCheckAjax
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                $re3 = $this->checkSafePassword($re2['response']);//检测安全密码是否具有权限
-                if($re3['status']=='0'){
-                    return $re3;
-                }else{
-                    $re4 = $this->checkRoleAdd($re3['response']);//检测添加权限角色数据
-                    if($re4['status'] == '0'){
-                        return $re4;
-                    }else{
-                        return self::res(1,$re4['response']);
-                    }
-                }
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafe($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
             }
         }
     }
