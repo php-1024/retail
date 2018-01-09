@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use Illuminate\Support\Facades\Session;
 
 
 class SetupController extends Controller{
