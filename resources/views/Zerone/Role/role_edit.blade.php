@@ -80,6 +80,10 @@
                 $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
             }
         });
+        $('.checkbox_node_name').on('ifChecked',function(event){
+            var group_id = $(this).attr('data-group_id');
+            $('.checkbox_module_name_'+group_id).iCheck('check');
+        });
     });
 
     //提交表单
