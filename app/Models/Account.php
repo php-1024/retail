@@ -18,7 +18,7 @@ class Account extends Model{
     }
     //和权限角色表创建者一对多的关系
     public function roles(){
-        return $this->hasMany('App\Models\OrganizationRole', 'create_by');
+        return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
     //简易型查询单条数据
     public static function getOne($where)
