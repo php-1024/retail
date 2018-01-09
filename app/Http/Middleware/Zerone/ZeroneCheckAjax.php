@@ -63,6 +63,7 @@ class ZeroneCheckAjax
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
+        dump();
         $safe_password = $request->input('safe_password');
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密密码第一重
