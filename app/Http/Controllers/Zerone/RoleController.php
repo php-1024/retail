@@ -62,7 +62,7 @@ class RoleController extends Controller{
         $role_nodes = [] ;
         foreach($list as $key=>$val){
             foreach($val->nodes as $kk=>$vv){
-                dump($vv->modules);
+                dump($vv->program_modules);
             }
         }
         //获取零壹管理程序的所有模块及节点并组成数组。
