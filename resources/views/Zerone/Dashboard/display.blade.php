@@ -186,16 +186,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($login_log_list as $v)
+                                @foreach($login_log_list as $val)
                                 <tr>
                                     <td>admin</td>
                                     <td>{{  long2ip($val->ip) }}</td>
                                     <td>{{  $val->ip_position }}</td>
                                     <td>{{  $val->created_at }}</td>
-                                    {{--<td>{{  $val->accounts->account }}</td>--}}
-                                    {{--<td>{{  long2ip($val->ip) }}</td>--}}
-                                    {{--<td>{{  $val->ip_position }}</td>--}}
-                                    {{--<td>{{  $val->created_at }}</td>--}}
                                 </tr>
                                 @endforeach
                                 </tbody>
