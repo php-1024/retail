@@ -73,6 +73,7 @@ class RoleController extends Controller{
                 $program_modules[$val->module_name][] = $v->node_name;
             }
         }
+        dump($role_nodes);
         dump($program_modules);
         foreach($role_nodes as $key=>$val){
 
