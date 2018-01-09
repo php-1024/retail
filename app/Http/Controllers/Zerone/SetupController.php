@@ -20,8 +20,8 @@ class SetupController extends Controller{
 
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
-        
-        return view('Zerone/Setup/setup_show',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+        return view('Zerone/Setup/setup_show',['search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //参数设置编辑
     public function setup_edit(Request $request){
