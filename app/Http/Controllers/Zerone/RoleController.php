@@ -36,7 +36,7 @@ class RoleController extends Controller{
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['admin_id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
                 dump($e);
