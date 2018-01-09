@@ -13,6 +13,11 @@ class OrganizationRole extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和创建者account表多对一的关系
+    public function create_account(){
+        return $this->belongsTo('App\Models\Account', 'create_by');
+    }
+
     //添加组织角色
     public static function addRole($param){
         $model = new OrganizationRole();
@@ -36,6 +41,12 @@ class OrganizationRole extends Model{
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
+    }
+
+
+    //获取分页列表
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

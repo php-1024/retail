@@ -12,10 +12,13 @@ class Account extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-
+    //和organization表多对一的关系
     public function organization(){
-        //和text表一对一的关系
         return $this->belongsTo('App\Models\Organization', 'organization_id');
+    }
+    //和权限角色表创建者一对多的关系
+    public function roles(){
+        return $this->hasMany('App\Models\OrganizationRole', 'create_by');
     }
     //简易型查询单条数据
     public static function getOne($where)

@@ -39,7 +39,81 @@
 
         </div>
 
+        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
+
+            <div class="ibox-content m-b-sm border-bottom">
+
+                <div class="row">
+                    <form method="get" role="form" id="searchForm" action="">
+                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                        <input type="hidden" id="module_edit_url" value="{{ url('zerone/ajax/role_edit') }}">
+                        <input type="hidden" id="module_delete_url" value="{{ url('zerone/ajax/role_delete') }}">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount">权限角色名称</label>
+                                <input type="text" id="role_name" name="role_name" value="{{ $search_data['role_name'] }}" placeholder="权限角色名称" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount"> &nbsp;</label>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-content">
+
+                            <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>角色名称</th>
+                                    <th>角色权限</th>
+                                    <th>添加时间</th>
+                                    <th class="text-right">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($list as $key=>$val)
+                                    <tr>
+                                        <td>{{ $val->id }}</td>
+                                        <td>{{ $val->module_name }}</td>
+                                        <td>
+                                            <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&
+                                        </td>
+                                        <td>{{ $val->created_at }}</td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" class="btn  btn-xs btn-warning" onclick="deleteData({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="99" class="text-right">
+                                        {{ $list->appends($search_data)->links() }}
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        @include('Zerone/Public/Footer')
     </div>
 
     <!-- Mainly scripts -->
