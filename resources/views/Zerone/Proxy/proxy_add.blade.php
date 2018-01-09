@@ -313,23 +313,23 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="js/jquery-2.1.1.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Zerone')}}js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone')}}js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="js/inspinia.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="{{asset('public/Zerone')}}js/inspinia.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/pace/pace.min.js"></script>
 <!-- Data picker -->
-<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <!-- Sweet alert -->
-<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/sweetalert/sweetalert.min.js"></script>
 <!-- FooTable -->
-<script src="js/plugins/footable/footable.all.min.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/footable/footable.all.min.js"></script>
 
-<script src="js/plugins/iCheck/icheck.min.js"></script>
-<script src="js/plugins/switchery/switchery.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/iCheck/icheck.min.js"></script>
+<script src="{{asset('public/Zerone')}}js/plugins/switchery/switchery.js"></script>
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
