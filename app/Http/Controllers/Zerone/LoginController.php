@@ -79,6 +79,7 @@ class LoginController extends Controller{
                                 $admin_data = [
                                     'id'=>$account_info->id,    //用户ID
                                     'account'=>$account_info->account,//用户账号
+                                    'organization_id'=>$account_info->organization_id,//组织ID
                                     'is_super'=>$account_info->is_super,//是否超级管理员
                                     'mobile'=>$account_info->mobile,//绑定手机号
                                     'safe_password'=>$account_info->safe_password,//安全密码
