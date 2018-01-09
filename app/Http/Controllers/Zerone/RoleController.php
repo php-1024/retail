@@ -67,6 +67,7 @@ class RoleController extends Controller{
                }
             }
         }
+        dump($role_module_nodes);
         //获取零壹管理程序的所有模块及节点并组成数组。
         return view('Zerone/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
