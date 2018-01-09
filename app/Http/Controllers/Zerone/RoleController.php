@@ -6,6 +6,7 @@ Use App\Models\Module;
 Use App\Models\OrganizationRole;
 Use App\Models\RoleNode;
 Use App\Models\OperationLog;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class RoleController extends Controller{
