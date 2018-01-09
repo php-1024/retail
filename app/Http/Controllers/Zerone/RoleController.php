@@ -84,8 +84,11 @@ class RoleController extends Controller{
     public function role_edit(Request $request){
         $id = $request->input('id');
         $info = OrganizationRole::getOne([['id',$id]]);
+        $node_list = ProgramModuleNode::getRoleModuleNodes(1,$id);
+        dump($node_list);
         $selected_nodes = [];//选中的节点
-        foreach($info->nodes as $key=>$val){
+        $selected_modules = [];//选中的模块
+        foreach($node_list as $key=>$val){
             $selected_nodes[] = $val->id;
         }
         $module_node_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
