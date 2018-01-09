@@ -57,11 +57,8 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
         $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
-        foreach($list as $key=>$val){
-            dump($val->create_account->account);
-        }
 
-        return view('Zerone/Role/role_list',['search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //编辑权限角色
