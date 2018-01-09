@@ -7,7 +7,7 @@ Use App\Models\Module;
 Use App\Models\OrganizationRole;
 Use App\Models\RoleNode;
 Use App\Models\OperationLog;
-
+Use App\Models\ProgramModuleNode;
 use Session;
 
 class RoleController extends Controller{
@@ -71,8 +71,7 @@ class RoleController extends Controller{
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     private function getModuleNode($role_id){
-        $list = RoleNode::getModuleNodes($role_id,1);
-        dump($list);
+        $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
     }
     //编辑权限角色
     public function role_edit(Request $request){
