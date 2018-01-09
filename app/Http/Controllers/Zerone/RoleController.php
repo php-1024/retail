@@ -2,11 +2,12 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 Use App\Models\Module;
 Use App\Models\OrganizationRole;
 Use App\Models\RoleNode;
 Use App\Models\OperationLog;
-use Illuminate\Support\Facades\DB;
+
 use Session;
 
 class RoleController extends Controller{
