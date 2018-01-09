@@ -89,9 +89,9 @@
                                         <td>{{ $val->create_account->account }}</td>
                                         <td>{{ $val->role_name }}</td>
                                         <td>
-                                            @foreach($role_module_nodes as $key=>$val)
-                                                {{ dump($val) }}
+                                            @foreach($role_module_nodes[$val->id] as $k=>$v)
 
+                                            <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($v as $kk=>$vv){{$vv}}&nbsp;&nbsp;@endforeach" style="display:inline-block">{{$k}}</label>&nbsp;&nbsp;
                                             @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
