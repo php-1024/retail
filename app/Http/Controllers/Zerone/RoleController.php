@@ -61,24 +61,18 @@ class RoleController extends Controller{
 
         //获取角色节点
         $role_node_ids = [];
+        $role_module_nodes = [];
         foreach($list as $key=>$val){
-            foreach($val->nodes as $k=>$v){
-                $role_node_ids[$val->id][] = $v->id;
-                unset($k);
-                unset($v);
-            }
-            unset($key);
-            unset($val);
+            $this->getModuleNode($val->id);
         }
-        foreach($role_node_ids as $key=>$val){
-            dump($val);
-        }
+
 
         //获取零壹管理程序的所有模块及节点并组成数组。
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    private function getModuleNode($program_id,$node_ids){
-
+    private function getModuleNode($role_id){
+        $list = RoleNode::getModuleNodes($role_id);
+        dump($list);
     }
     //编辑权限角色
     public function role_edit(Request $request){
