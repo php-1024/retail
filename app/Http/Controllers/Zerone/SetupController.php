@@ -11,13 +11,12 @@ Use App\Models\OperationLog;
 use Session;
 
 class SetupController extends Controller{
-    //权限角色列表
-    public function setup_edit(Request $request){
+    //参数设置展示
+    public function setup_show(Request $request){
         echo "这里参数设置展示页面！";
     }
-
-    //编辑权限角色
-    public function setup_show(Request $request){
+    //参数设置编辑
+    public function setup_edit(Request $request){
         echo "这里是参数设置编辑页面";
     }
 }
