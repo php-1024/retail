@@ -186,66 +186,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($login_log_list as $v)
                                 <tr>
                                     <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
+                                    <td>{{  long2ip($val->ip) }}</td>
+                                    <td>{{  $val->ip_position }}</td>
+                                    <td>{{  $val->created_at }}</td>
+                                    {{--<td>{{  $val->accounts->account }}</td>--}}
+                                    {{--<td>{{  long2ip($val->ip) }}</td>--}}
+                                    {{--<td>{{  $val->ip_position }}</td>--}}
+                                    {{--<td>{{  $val->created_at }}</td>--}}
                                 </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                <tr>
-                                    <td>admin</td>
-                                    <td>192.168.0.0.1</td>
-                                    <td>广东深圳</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
