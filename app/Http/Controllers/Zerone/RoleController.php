@@ -2,7 +2,12 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 Use App\Models\Module;
+Use App\Models\OrganizationRole;
+Use App\Models\RoleNode;
+Use App\Models\OperationLog;
+
 use Session;
 
 class RoleController extends Controller{
@@ -20,7 +25,24 @@ class RoleController extends Controller{
     public function role_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dump($request->input());
+        $role_name = $request->input('role_name');
+        $node_ids = $request->input('module_node_ids');
+        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){
+            return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+                $role_id = OrganizationRole::addRole(['organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                foreach ($node_ids as $key => $val) {
+                    RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                }
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['admin_id'],$route_name,'添加了角色'.$role_name);//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
+            }
+        }
     }
 
     //权限角色列表
