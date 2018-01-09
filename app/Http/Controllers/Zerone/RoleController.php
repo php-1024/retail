@@ -60,13 +60,19 @@ class RoleController extends Controller{
         $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
 
         //获取角色节点
-        $role_nodes = [];
+        $role_node_ids = [];
         foreach($list as $key=>$val){
-            foreach($val->nodes as $kk=>$vv){
-                $role_nodes[$val->id][] = $vv->id;
+            foreach($val->nodes as $k=>$v){
+                $role_node_ids[$val->id][] = $v->id;
+                unset($k);
+                unset($v);
             }
+            unset($key);
+            unset($val);
         }
-        dump($role_nodes);
+        foreach($role_node_ids as $key=>$val){
+
+        }
         //当前程序所有模块
         $module_node_list = Module::getListProgram(1,[],0,'id');
         foreach($module_node_list as $key=>$val){
