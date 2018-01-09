@@ -31,5 +31,14 @@ class RoleNode extends Model{
         $model->save();
         return $model->id;
     }
+
+    //获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = new RoleNode();
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
 }
 ?>
