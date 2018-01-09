@@ -63,7 +63,7 @@ class RoleController extends Controller{
         $role_modules = [];
         foreach($list as $key=>$val){
             foreach($val->nodes as $kk=>$vv){
-                $role_modules[] = $vv->program_modules;
+                $role_modules[] = $vv->program_modules->toArray();
             }
         }
         dump($role_modules);
