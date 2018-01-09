@@ -57,9 +57,7 @@ class Module extends Model{
     //添加数据
     public static function addModule($param){
         $model = new Module();
-        if(!empty($param['module_name'])){
-            $model->module_name = $param['module_name'];
-        }
+        $model->module_name = $param['module_name'];
         $model->save();
         return $model->id;
     }

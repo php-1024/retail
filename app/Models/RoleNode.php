@@ -23,6 +23,13 @@ class RoleNode extends Model{
         }
     }
 
-    //删除角色节点关系表
+    //添加角色节点
+    public static function addRoleNode($param){
+        $model = new RoleNode();
+        $model->role_id = $param['role_id'];
+        $model->node_id = $param['node_id'];
+        $model->save();
+        return $model->id;
+    }
 }
 ?>
