@@ -215,22 +215,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($operation_log_list as $key=>$val)
-                                <tr>
-                                    <td>admin</td>
-                                    <td>修改了登陆密码</td>
-                                    <td>2017-11-24 10:41:20</td>
-                                </tr>
-                                @endforeach
-
                                 {{--@foreach($operation_log_list as $key=>$val)--}}
-                                    {{--<tr>--}}
-                                        {{--<td>{{ $val->accounts->account }}</td>--}}
-
-                                        {{--<td>{{ $val->operation_info }}</td>--}}
-                                        {{--<td>{{ $val->created_at }}</td>--}}
-                                    {{--</tr>--}}
+                                {{--<tr>--}}
+                                    {{--<td>admin</td>--}}
+                                    {{--<td>修改了登陆密码</td>--}}
+                                    {{--<td>2017-11-24 10:41:20</td>--}}
+                                {{--</tr>--}}
                                 {{--@endforeach--}}
+
+                                @foreach($operation_log_list as $key=>$val)
+                                    <tr>
+                                        <td>{{ $val->accounts->account }}</td>
+
+                                        <td>{{ $val->operation_info }}</td>
+                                        <td>{{ $val->created_at }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
