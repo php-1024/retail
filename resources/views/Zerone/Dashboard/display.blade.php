@@ -44,7 +44,7 @@
                 <div class="col-lg-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-info pull-right">零壹管理系统</span>
+                            <span class="label label-info pull-right">{{$zerone_all['0']['item_name']}}</span>
                             <h5>管理人员</h5>
                         </div>
                         <div class="ibox-content">
