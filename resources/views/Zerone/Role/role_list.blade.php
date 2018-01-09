@@ -76,6 +76,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>角色名称</th>
+                                    <th>角色创建人</th>
                                     <th>角色权限</th>
                                     <th>添加时间</th>
                                     <th class="text-right">操作</th>
@@ -84,6 +85,7 @@
                                 <tbody>
                                 @foreach($list as $key=>$val)
                                     <tr>
+                                        <td>{{ $val->id }}</td>
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->module_name }}</td>
                                         <td>
