@@ -33,6 +33,12 @@ class RoleNode extends Model{
         return $model->id;
     }
 
+    //获取带程序模块节点名称的列表
+    public static function getModuleNodes($role_id,$program_id){
+        return self::where('role_id',$role_id)->join('program_module_node',function($query) use($program_id){
+            $query->on('program_module_node.node_id','role_node.node_id')->where('program_id',$program_id);
+        })->select('role_node.*','program_module_node.module_id')->get();
+    }
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new RoleNode();

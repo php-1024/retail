@@ -58,20 +58,22 @@ class RoleController extends Controller{
         $search_data = ['role_name'=>$role_name];
         //查询所有角色列表
         $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+
         //获取角色节点
+        $role_node_ids = [];
         $role_module_nodes = [];
         foreach($list as $key=>$val){
-            foreach($val->nodes as $kk=>$vv){
-               foreach($vv->program_modules as $k=>$v){
-                   $role_module_nodes[$val->id][$v->module_name][] = $vv->node_name;
-               }
-            }
+            $this->getModuleNode($val->id);
         }
-        dump($role_module_nodes);
-        //获取零壹管理程序的所有模块及节点并组成数组。
-        return view('Zerone/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-    }
 
+
+        //获取零壹管理程序的所有模块及节点并组成数组。
+        return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+    private function getModuleNode($role_id){
+        $list = RoleNode::getModuleNodes($role_id,1);
+        dump($list);
+    }
     //编辑权限角色
     public function role_edit(Request $request){
         echo "这里是编辑权限角色";
