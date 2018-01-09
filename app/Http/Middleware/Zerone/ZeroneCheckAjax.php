@@ -60,7 +60,6 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
@@ -79,7 +78,6 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');
@@ -91,7 +89,6 @@ class ZeroneCheckAjax
             return self::res(1,$request);
         }
     }
-
     //检测是否登陆
     public function checkIsLogin($request)
     {
@@ -110,7 +107,6 @@ class ZeroneCheckAjax
             return self::res(1, $request);
         }
     }
-
     //检测登陆提交数据
     public function checkLoginPost($request)
     {
@@ -131,13 +127,11 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
         }
     }
-
     //工厂方法返回结果
     public static function res($status, $response)
     {
         return ['status' => $status, 'response' => $response];
     }
-
     //格式化返回值
     public static function format_response($re, Closure $next)
     {
