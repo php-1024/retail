@@ -59,17 +59,15 @@ class RoleController extends Controller{
         //查询所有角色列表
         $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
         //获取角色节点
-        $role_module_nodes = [];
+        $role_nodes = [];
         foreach($list as $key=>$val){
             foreach($val->nodes as $kk=>$vv){
-               foreach($vv->program_modules as $k=>$v){
-                   $role_module_nodes[$val->id][$v->module_name][] = $vv->node_name;
-               }
+                $role_nodes[$val->id][]=['node_id'=>$vv->id,'node_name'=>$vv->node_name];
             }
         }
-        dump($role_module_nodes);
+        dump($role_nodes);
         //获取零壹管理程序的所有模块及节点并组成数组。
-        return view('Zerone/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //编辑权限角色
