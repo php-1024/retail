@@ -18,7 +18,9 @@ class RoleController extends Controller{
 
     //提交添加权限假设数据
     public function role_add_check(Request $request){
-        echo "这里是添加权限角色数据提交";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        dump($request->input());
     }
 
     //权限角色列表
