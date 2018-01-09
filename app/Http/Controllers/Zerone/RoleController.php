@@ -60,8 +60,9 @@ class RoleController extends Controller{
         $role_modules = [];
         $role_nodes = [] ;
         foreach($list as $key=>$val){
-            dump($val->nodes->id);
+            $role_nodes[$val->id]=$val->nodes;
         }
+
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
