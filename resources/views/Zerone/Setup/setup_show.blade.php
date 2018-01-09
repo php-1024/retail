@@ -18,18 +18,18 @@
 
 <body class="">
 
-<div id="wrapper">
+{{--<div id="wrapper">--}}
 
     {{--@include('Zerone/Public/Nav')--}}
 
-    <div id="page-wrapper" class="gray-bg">
-        @include('Zerone/Public/Header')
+    {{--<div id="page-wrapper" class="gray-bg">--}}
+        {{--@include('Zerone/Public/Header')--}}
 
 
 
-        @include('Zerone/Public/Footer')
-        </div>
-    </div>
+        {{--@include('Zerone/Public/Footer')--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
     <!-- Mainly scripts -->
     <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
