@@ -24,6 +24,11 @@ class OrganizationRole extends Model{
         return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
     }
 
+    //获取单条信息
+    public static function getOne($where){
+        return self::with('nodes')->where($where)->first();
+    }
+
     //添加组织角色
     public static function addRole($param){
         $model = new OrganizationRole();

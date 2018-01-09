@@ -17,7 +17,7 @@ class RoleController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $module_node_list = Module::getListProgram(1,[],0,'id');
+        $module_node_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
         return view('Zerone/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -67,6 +67,11 @@ class RoleController extends Controller{
         //获取零壹管理程序的所有模块及节点并组成数组。
         return view('Zerone/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
+    /***
+     * 私有方法：用于查询并组合角色拥有的权限模块和节点。
+     * $role_id 当前角色的ID
+     */
     private function getModuleNode($role_id){
         $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
         $module_nodes = [];
@@ -77,7 +82,14 @@ class RoleController extends Controller{
     }
     //编辑权限角色
     public function role_edit(Request $request){
-        echo "这里是编辑权限角色";
+        $id = $request->input('id');
+        $info = OrganizationRole::getOne([['id',$id]]);
+        $selected_nodes = [];//选中的节点
+        foreach($info->nodes as $key=>$val){
+            $selected_nodes[] = $val->id;
+        }
+        $module_node_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
+        return view('Zerone/Role/role_edit',['info'=>$info,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
     }
 
     //编辑权限角色提交
