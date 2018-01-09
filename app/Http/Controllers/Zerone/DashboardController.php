@@ -25,7 +25,7 @@ class DashboardController extends Controller{
 //        dump($admin_data['id']);
 //        dump($zerone_all);
         if( $admin_data['account_id'] == 1){
-            $loginlog = LoginLog::orderBy('created_at','DESC')->get();
+            $loginlog = LoginLog::all();
         }else{
             $loginlog = LoginLog::where('account_id',$admin_data['account_id'])->orderBy('created_at','DESC')->get();
         }
