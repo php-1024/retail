@@ -24,12 +24,15 @@ class DashboardController extends Controller{
 //        $zerone_all = Statistics::all();//获取统计数据
 //        dump($admin_data['id']);
 //        dump($zerone_all);
-        if( $admin_data['id'] == 1){
-            $loginlog = LoginLog::orderBy('created_at','DESC')->get();
-        }else{
-            $loginlog = LoginLog::where('account_id',$admin_data['account_id'])->orderBy('created_at','DESC')->get();
+        $where = [];
+        if($admin_data['admin_is_super']!=1){   //不是超级管理员的时候，只查询自己相关的数据
+            $where = [
+                ['account_id',$admin_data['admin_id']]
+            ];
         }
-        dump($loginlog);
+        $login_log_list = LoginLog::getList($where,10,'id');//登录记录
+//        $operation_log_list = LoginLog::getList($where,10,'id');//操作记录
+        dump($login_log_list);
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
