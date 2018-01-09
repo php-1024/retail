@@ -71,13 +71,9 @@ class RoleController extends Controller{
             unset($val);
         }
         foreach($role_node_ids as $key=>$val){
-
+            dump($val);
         }
-        //当前程序所有模块
-        $module_node_list = Module::getListProgram(1,[],0,'id');
-        foreach($module_node_list as $key=>$val){
 
-        }
         //获取零壹管理程序的所有模块及节点并组成数组。
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
