@@ -48,7 +48,7 @@
                             <h5>管理人员</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{$zerone_all['0']['item_valve']}}人</h1>
+                            <h1 class="no-margins">{{$zerone_all['0']['item_value']}}人</h1>
                             <div class="stat-percent font-bold text-info">20人 <i class="fa fa-level-up"></i></div>
                             <small>今日</small>
                         </div>
@@ -83,11 +83,11 @@
                 <div class="col-lg-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-success pull-right">所有业务系统</span>
+                            <span class="label label-success pull-right">{{$zerone_all['3']['item_name']}}</span>
                             <h5>管理人员</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">18888888人</h1>
+                            <h1 class="no-margins">{{$zerone_all['3']['item_value']}}人</h1>
                             <div class="stat-percent font-bold text-success">1680人<i class="fa fa-level-up"></i></div>
                             <small>今日</small>
                         </div>
@@ -109,14 +109,14 @@
                                     <div class="forum-icon">
                                         <i class="fa fa-line-chart"></i>
                                     </div>
-                                    <a href="javascript:;" class="forum-item-title">服务商数量</a>
+                                    <a href="javascript:;" class="forum-item-title">{{$zerone_all['4']['item_name']}}</a>
                                     <div class="forum-sub-title">进驻零壹平台的服务商的数量</div>
                                 </div>
 
 
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                80家
+                                                {{$zerone_all['4']['item_value']}}家
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -130,13 +130,13 @@
                                     <div class="forum-icon">
                                         <i class="fa fa-line-chart"></i>
                                     </div>
-                                    <a href="javascript:;" class="forum-item-title">商户数量</a>
+                                    <a href="javascript:;" class="forum-item-title">{{$zerone_all['5']['item_name']}}</a>
                                     <div class="forum-sub-title">注册零壹平台的商户的数量</div>
                                 </div>
 
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                3600家
+                                                {{$zerone_all['5']['item_value']}}家
                                             </span>
                                     <div>
                                         <small>总计</small>
@@ -150,12 +150,12 @@
                                     <div class="forum-icon">
                                         <i class="fa fa-line-chart"></i>
                                     </div>
-                                    <a href="javascript:;" class="forum-item-title">店铺数量</a>
+                                    <a href="javascript:;" class="forum-item-title">{{$zerone_all['6']['item_name']}}</a>
                                     <div class="forum-sub-title">商户在零壹平台开设的店铺数量</div>
                                 </div>
                                 <div class="col-md-3 forum-info">
                                             <span class="views-number">
-                                                1300000
+                                                {{$zerone_all['6']['item_value']}}
                                             </span>
                                     <div>
                                         <small>总计</small>
