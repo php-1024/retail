@@ -24,6 +24,7 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zerone_all = Statistics::all();//获取统计数据
         dump($zerone_all);
+        dump($admin_data);
         $where = [];
         if($admin_data['id']!=1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
