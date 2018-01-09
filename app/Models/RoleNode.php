@@ -37,7 +37,7 @@ class RoleNode extends Model{
     public static function getModuleNodes($role_id,$program_id){
         return self::where('role_id',$role_id)->join('program_module_node',function($query) use($program_id){
             $query->on('program_module_node.node_id','role_node.node_id')->join('module',function($query2){
-                $query2->on('module.id','program_module_node.module_id')->select('module.module_name');
+                $query2->on('module.id','program_module_node.module_id');
             })->where('program_id',$program_id);
         })->select('role_node.*','program_module_node.module_id')->get();
     }
