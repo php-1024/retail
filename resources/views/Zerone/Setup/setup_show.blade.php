@@ -20,7 +20,7 @@
 
 <div id="wrapper">
 
-    @include('Zerone/Public/Nav')
+    {{--@include('Zerone/Public/Nav')--}}
 
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
