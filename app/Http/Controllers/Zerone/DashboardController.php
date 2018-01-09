@@ -25,7 +25,7 @@ class DashboardController extends Controller{
 //        dump($admin_data['id']);
 //        dump($zerone_all);
         $where = [];
-        if($admin_data['admin_is_super']!=1){   //不是超级管理员的时候，只查询自己相关的数据
+        if($admin_data['id']!=1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
                 ['account_id',$admin_data['admin_id']]
             ];
