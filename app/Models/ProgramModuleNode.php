@@ -38,7 +38,7 @@ class ProgramModuleNode extends Model{
     //获取权限角色拥有的模块和节点
     public static function getRoleModuleNodes($program_id,$role_id){
         return self::where('program_id',$program_id)->whereIn('node_id',function($query) use($role_id){
-            $query->select('node_id')->where('role_id',$role_id);
+            $query->from('role_node')->select('node_id')->where('role_id',$role_id);
         })->get();
     }
 
