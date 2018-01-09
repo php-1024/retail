@@ -23,11 +23,11 @@
     {{--@include('Zerone/Public/Nav')--}}
 
     <div id="page-wrapper" class="gray-bg">
-        {{--@include('Zerone/Public/Header')--}}
+        @include('Zerone/Public/Header')
 
 
 
-        {{--@include('Zerone/Public/Footer')--}}
+        @include('Zerone/Public/Footer')
         </div>
     </div>
 
