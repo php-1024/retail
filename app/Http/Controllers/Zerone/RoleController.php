@@ -72,6 +72,7 @@ class RoleController extends Controller{
     }
     private function getModuleNode($role_id){
         $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
+        dump($list);
     }
     //编辑权限角色
     public function role_edit(Request $request){
