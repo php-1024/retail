@@ -23,7 +23,7 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $zerone_all = Statistics::all();//获取统计数据
-        dump($zerone_all);
+        dump($zerone_all['0']);
         dump($admin_data);
         $where = [];
         if($admin_data['id']!=1){   //不是超级管理员的时候，只查询自己相关的数据
@@ -33,7 +33,7 @@ class DashboardController extends Controller{
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
-        return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list]);
+        return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone_all'=>$zerone_all]);
     }
 
     //退出登录
