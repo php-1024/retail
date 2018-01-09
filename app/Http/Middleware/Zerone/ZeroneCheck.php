@@ -27,6 +27,8 @@ class ZeroneCheck{
             case "zerone/subordinate/subordinate_add"://添加下级人员
             case "zerone/subordinate/subordinate_list"://下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
+            case "zerone/setup/setup_edit"://参数设置权限
+            case "zerone/setup"://参数设置权限
             case "zerone"://后台首页
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);
