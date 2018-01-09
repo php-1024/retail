@@ -91,7 +91,6 @@ class RoleController extends Controller{
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
-        dump($selected_modules);
         $module_node_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
         return view('Zerone/Role/role_edit',['info'=>$info,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
     }
