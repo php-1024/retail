@@ -24,7 +24,11 @@ class DashboardController extends Controller{
 //        $zerone_all = Statistics::all();//获取统计数据
 //        dump($admin_data['id']);
 //        dump($zerone_all);
-        $loginlog = LoginLog::where('account_id',1)->orderBy('created_at','DESC')->get();
+        if( $admin_data['account_id'] == 1){
+            $loginlog = LoginLog::orderBy('created_at','DESC')->get();
+        }else{
+            $loginlog = LoginLog::where('account_id',$admin_data['account_id'])->orderBy('created_at','DESC')->get();
+        }
         dump($loginlog);
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
