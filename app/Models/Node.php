@@ -12,6 +12,13 @@ class Node extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+
+    //和权限角色关系表，多对多
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\RoleNode','role_node','node_id','role_id');
+    }
+
     //和功能模块关联，多对多
     public function modules()
     {

@@ -18,6 +18,12 @@ class OrganizationRole extends Model{
         return $this->belongsTo('App\Models\Account', 'created_by');
     }
 
+    //和功能节点关系表，多对多
+    public function nodes()
+    {
+        return $this->belongsToMany('App\Models\RoleNode','role_node','role_id','node_id');
+    }
+
     //添加组织角色
     public static function addRole($param){
         $model = new OrganizationRole();
