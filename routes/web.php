@@ -183,6 +183,13 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list')->middleware('ZeroneCheck');//下级人员列表
         Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure')->middleware('ZeroneCheck');//下级人员结构
     });
+    //服务商管理
+    Route::group(['prefix'=>'proxy'],function(){
+        Route::get('proxy_add','Zerone\ProxyController@proxy_add')->middleware('ZeroneCheck');//添加服务商
+        Route::get('proxy_examinelist','Zerone\ProxyController@proxy_examinelist')->middleware('ZeroneCheck');//服务商审核列表
+        Route::get('proxy_examine','Zerone\ProxyController@subordinate_structure')->middleware('ZeroneCheck');//服务商审核数据提交
+        Route::get('proxy_list','Zerone\ProxyController@proxy_list')->middleware('ZeroneCheck');//服务商列表
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
