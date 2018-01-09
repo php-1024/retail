@@ -89,7 +89,7 @@
                                         <td>{{ $val->create_account->account }}</td>
                                         <td>{{ $val->role_name }}</td>
                                         <td>
-                                            foreach()
+
                                             <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
                                         </td>
                                         <td>{{ $val->created_at }}</td>
