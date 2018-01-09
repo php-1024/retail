@@ -26,7 +26,7 @@
         @include('Zerone/Public/Header')
 
 
-        
+
         @include('Zerone/Public/Footer')
         </div>
     </div>
