@@ -43,7 +43,7 @@ class ProgramModuleNode extends Model{
             $query->on('program_module_node.node_id.','nodule.id');
         })->whereIn('node_id',function($query) use($role_id){
             $query->from('role_node')->select('node_id')->where('role_id',$role_id);
-        })->where('program_id',$program_id)->select('module.module_name','node.node_name')->get();
+        })->where('program_id',$program_id)->select('program_module_node.*','module.module_name','node.node_name')->get();
     }
 
     //修改数据
