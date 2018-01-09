@@ -91,7 +91,7 @@
                                         <td>
                                             @foreach($role_module_nodes as $key=>$val)
                                                 {{ dump($val) }}
-                                            <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($val as $k=>$v){{$v}}@endforeach" style="display:inline-block">{{$key}}</label>&nbsp;&nbsp;
+
                                             @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
