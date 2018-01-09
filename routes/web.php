@@ -165,6 +165,14 @@ Route::group(['prefix'=>'zerone'],function(){
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
 
+
+    //系统管理——参数设置
+    Route::group(['prefix'=>'setup'],function(){
+        Route::get('/','Zerone\SetupController@setup_show')->middleware('ZeroneCheck');//参数设置展示
+        Route::get('setup_edit','Zerone\SetupController@setup_edit')->middleware('ZeroneCheck');//参数设置编辑
+    });
+
+
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登陆页面路由
