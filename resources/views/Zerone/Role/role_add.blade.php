@@ -146,6 +146,7 @@
             });
             $('.checkbox_node_name').on('ifChecked',function(event){
                 var group_id = $(this).attr('data-group_id');
+                alert(group_id);
                 $('.checkbox_module_name_'+group_id).iCheck('check');
             });
         });
