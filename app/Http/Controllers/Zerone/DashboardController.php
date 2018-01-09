@@ -24,7 +24,7 @@ class DashboardController extends Controller{
 //        $zerone_all = Statistics::all();//获取统计数据
 //        dump($admin_data['id']);
 //        dump($zerone_all);
-        if( $admin_data['account_id'] == 1){
+        if( $admin_data['id'] == 1){
             $loginlog = LoginLog::all();
         }else{
             $loginlog = LoginLog::where('account_id',$admin_data['account_id'])->orderBy('created_at','DESC')->get();
