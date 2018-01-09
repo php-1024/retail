@@ -22,7 +22,7 @@
                             <group class="checked_box_group_{{ $val->id }}">
                                 <div>
                                     <label class="i-checks">
-                                        <input type="checkbox" @if(in_array($val->id,$selected_module)) checked="checked" @endif  class="checkbox_module_name checkbox_module_name_{{ $val->id }}" value="{{ $val->id }}"> {{ $val->module_name }}
+                                        <input type="checkbox" @if(in_array($val->id,$selected_modules)) checked="checked" @endif  class="checkbox_module_name checkbox_module_name_{{ $val->id }}" value="{{ $val->id }}"> {{ $val->module_name }}
                                     </label>
                                 </div>
                                 <div>
