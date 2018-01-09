@@ -16,6 +16,7 @@ class OrganizationRole extends Model{
     //添加组织角色
     public static function addRole($param){
         $model = new OrganizationRole();
+        $model->program_id = $param['program_id'];
         $model->organization_id = $param['organization_id'];
         $model->created_by = $param['created_by'];
         $model->role_name = $param['role_name'];

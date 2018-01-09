@@ -32,7 +32,7 @@ class RoleController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = OrganizationRole::addRole(['program_id'=>1,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
@@ -43,6 +43,7 @@ class RoleController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
             }
+            return response()->json(['data' => '添加权限角色成功', 'status' => '1']);
         }
     }
 
