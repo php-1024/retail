@@ -97,7 +97,7 @@
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" class="btn  btn-xs btn-warning" onclick="deleteData({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                            <button type="button" class="btn  btn-xs btn-danger" onclick="deleteData({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                 @endforeach
