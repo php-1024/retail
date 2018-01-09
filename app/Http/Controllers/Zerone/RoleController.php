@@ -73,7 +73,7 @@ class RoleController extends Controller{
                 $program_modules[$val->module_name][] = $v->node_name;
             }
         }
-        dump($program_modules);
+        dump($role_nodes);
         return view('Zerone/Role/role_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
