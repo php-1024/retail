@@ -21,7 +21,7 @@ class OrganizationRole extends Model{
     //和功能节点关系表，多对多
     public function nodes()
     {
-        return $this->belongsToMany('App\Models\RoleNode','role_node','role_id','node_id');
+        return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
     }
 
     //添加组织角色
