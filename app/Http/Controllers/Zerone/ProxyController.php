@@ -6,7 +6,7 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        echo "添加服务商";
+        return view('Zerone/Proxy/proxy_add');
     }
 
     //服务商审核列表
