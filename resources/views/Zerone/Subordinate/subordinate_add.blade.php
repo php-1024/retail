@@ -48,7 +48,7 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/program_add_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/quick_rule') }}">
                                 <input type="hidden" name="admin_id" id="admin_id" value="{{ $admin_data['id'] }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/program_parents_node') }}">
