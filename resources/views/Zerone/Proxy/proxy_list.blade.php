@@ -329,6 +329,51 @@
     <script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>
     <script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
     <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+            var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem, { color: '#1AB394' });
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            $('.footable').footable();
+
+            $('#date_added').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#date_modified').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+            $("#editBtn").click(function(){
+                $('#myModal').modal();
+            });
+            $('#lockBtn').click(function(){
+                $('#myModal3').modal();
+            });
+            $('#removeBtn').click(function(){
+                $('#myModal3').modal();
+            });
+            $('.saveBtn').click(function(){
+                swal({
+                    title: "温馨提示",
+                    text: "操作成功",
+                    type: "success"
+                },function(){
+                    window.location.reload();
+                });
+            });
+        });
+    </script>
 </div>
 </body>
 
