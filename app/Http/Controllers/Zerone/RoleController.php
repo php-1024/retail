@@ -125,6 +125,7 @@ class RoleController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑权限角色失败，请检查', 'status' => '0']);
             }
+            return response()->json(['data' => '编辑权限角色成功', 'status' => '1']);
         }
     }
 
