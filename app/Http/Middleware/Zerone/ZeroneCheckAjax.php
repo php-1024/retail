@@ -235,7 +235,7 @@ class ZeroneCheckAjax
         if (empty($request->input('safe_password'))) {
             return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }else{
-            self::checkSafePassword($request->input('safe_password'));
+            self::checkSafePassword(array('safe_password'=>$request->input('safe_password')));
         }
         if (empty($request->input('proxy_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
