@@ -155,8 +155,9 @@
             var role_id = $(obj).val();
             var account_id = $('#admin_id').val();
             var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+            $('#module_node_box').html('');
             $.post(url,data,function(response){
-                $('#node_box').html(response);
+                $('#module_node_box').html(response);
             });
         }
     </script>
