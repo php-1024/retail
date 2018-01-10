@@ -21,8 +21,6 @@ class SubordinateController extends Controller{
     public function quick_rule(Request $request){
         $account_id = $request->input('account_id');
         $role_id = $request->input('role_id');
-        $module_node_list = []; //当前程序的所有节点或当前用户在当前程序中拥有权限的所有节点，
-        $selected_node_list = [];
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
