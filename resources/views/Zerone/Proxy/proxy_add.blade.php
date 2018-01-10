@@ -26,8 +26,9 @@
 
 
 <div id="wrapper">
-
+    @include('Zerone/Public/Nav')
     <nav class="navbar-default navbar-static-side" role="navigation">
+        @include('Zerone/Public/Header')
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
