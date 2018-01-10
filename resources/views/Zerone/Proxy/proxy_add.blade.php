@@ -8,7 +8,6 @@
 
     <title>零壹新科技程序管理平台</title>
     <link href="{{asset('public/Zerone')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="{{asset('public/Zerone')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
