@@ -143,7 +143,7 @@ class RoleController extends Controller{
         try{
             OrganizationRole::where('id',$id)->delete();//删除权限角色
             RoleNode::where('role_id',$id)->delete();//删除角色节点关系
-            RoleAccount
+            RoleAccount::
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
