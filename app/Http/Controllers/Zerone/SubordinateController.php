@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OrganizationRole;
+use App\Models\Module;
 use Session;
 class SubordinateController extends Controller{
     //添加下级人员
