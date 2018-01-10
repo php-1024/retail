@@ -118,6 +118,11 @@
     <!-- Custom and plugin javascript -->
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+    <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+    <script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
+    <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function() {
             $('#addbtn').click(function(){
