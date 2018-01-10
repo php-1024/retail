@@ -36,6 +36,7 @@ class DashboardController extends Controller{
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone_all'=>$zerone_all]);
     }
 
+
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_account_id','');
