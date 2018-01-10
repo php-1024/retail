@@ -140,12 +140,7 @@
 
     <script>
         $(document).ready(function() {
-            alert(123);
             $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
             get_quick_rule('#role_id');
         });
         //获取上级程序节点

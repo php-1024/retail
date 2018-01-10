@@ -20,3 +20,11 @@
     @endforeach
 </div>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script>
+$(function(){
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+})
+</script>
