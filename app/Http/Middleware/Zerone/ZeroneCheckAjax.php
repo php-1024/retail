@@ -19,6 +19,11 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测登陆和权限和安全密码和添加角色
+                $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
+                return self::format_response($re, $next);
+                break;
+
+            case "zerone/ajax/role_edit_check"://检测登陆和权限和安全密码和编辑角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
@@ -30,6 +35,20 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测登陆和权限和安全密码和添加角色
+    public function checkLoginAndRuleAndSafeAndRoleEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测登陆和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
@@ -73,6 +92,19 @@ class ZeroneCheckAjax
         }
     }
     /******************************单项检测*********************************/
+    //检测编辑权限角色数据
+    public function checkRoleEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('role_name'))){
+            return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测添加权限角色数据
     public function checkRoleAdd($request){
         if(empty($request->input('role_name'))){
