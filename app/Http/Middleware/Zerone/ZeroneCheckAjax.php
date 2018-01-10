@@ -28,19 +28,39 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+            case "zerone/ajax/setup_edit"://检测登陆和权限和安全密码和编辑系统参数而设置
+                $re = $this->checkLoginAndRuleAndSafeAndSetupEeit($request);
+                return self::format_response($re, $next);
+                break;
+
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://检测登陆和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit"://检测登陆和权限和安全密码和编辑系统参数而设置
-                $re = $this->checkLoginAndRuleAndSafeAndSetupEeit($request);
+            case "zerone/ajax/role_delete"://删除权限角色 测 登陆 和 权限 和 安全密码 和 ID是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
         }
     }
     /******************************复合检测*********************************/
+    //检测登陆和权限和安全密码和ID是否为空
+    public function checkLoginAndRuleAndSafeAndID($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkID($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测登陆和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
@@ -69,7 +89,6 @@ class ZeroneCheckAjax
             }
         }
     }
-
     //检测登陆和权限和安全密码和编辑系统参数而设置
     public function checkLoginAndRuleAndSafeAndSetupEeit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
@@ -204,6 +223,14 @@ class ZeroneCheckAjax
             //用户输入验证码错误
             return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
         }
+    }
+    //检测登陆提交数据
+    public function checkID($request)
+    {
+        if (empty($request->input('id'))) {
+            return self::res(0, response()->json(['data' => '无效的数据传输', 'status' => '0']));
+        }
+        return self::res(1, $request);
     }
     //工厂方法返回结果
     public static function res($status, $response)
