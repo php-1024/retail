@@ -10,20 +10,23 @@
 
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+    <!-- Sweet Alert -->
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+
 
 </head>
 
 <body class="">
 
-<div id="wrapper">
 
+<div id="wrapper">
     @include('Zerone/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
+
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
 
@@ -168,6 +171,7 @@
         </div>
 
 
+
         <div class="footer" >
             <div class="pull-right">
                 您登陆的时间是：2017-10-24 16:26:30
@@ -199,24 +203,27 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-    <!-- Mainly scripts -->
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-
-    <script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
-
 </div>
-</body>
+<!-- Mainly scripts -->
+<script src="{{asset('public/Zerone')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>
+
+<!-- Data picker -->
+<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<!-- FooTable -->
+<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
+
+<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
+<!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
         var elem = document.querySelector('.js-switch');
@@ -259,5 +266,6 @@
         });
     });
 </script>
+</body>
 
 </html>
