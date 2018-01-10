@@ -25,7 +25,7 @@ class Warzone extends Model{
     //获取列表
     public static function getRepeat($where){
         $model = new Warzone();
-        return $model->or($where)->get()->find(1);
+        return $model->orWhere($where)->first();
     }
 
     //添加数据
