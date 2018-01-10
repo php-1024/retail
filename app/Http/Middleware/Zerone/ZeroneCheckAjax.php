@@ -43,6 +43,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
+            case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
+                $re = $this->checkLoginAndProxyAdd($request);
+                return self::format_response($re,$next);
+                break;
         }
     }
     /******************************复合检测*********************************/
@@ -215,6 +219,38 @@ class ZeroneCheckAjax
         }
         if (empty($request->input('captcha'))) {
             return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
+        }
+        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
+            //把参数传递到下一个程序
+            return self::res(1, $request);
+        } else {
+            //用户输入验证码错误
+            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
+        }
+    }
+    //检测服务商申请表信息
+    public function checkLoginAndProxyAdd($request)
+
+    {
+        if (empty($request->input('safe_password'))) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        }else{
+            self::checkSafePassword($request->input('safe_password'));
+        }
+        if (empty($request->input('proxy_name'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('proxy_owner'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('proxy_owner_idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('proxy_owner_mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        if (empty($request->input('proxy_password'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
         }
         if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
             //把参数传递到下一个程序

@@ -156,7 +156,6 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndSuperAndProgramRemove($request);
                 return self::format_response($re,$next);
                 break;
-
             //仅检测是否登陆
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面

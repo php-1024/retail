@@ -142,37 +142,30 @@
         var target = $("#proxyForm");
         var url = target.attr("action");
         var data = target.serialize();
-        alert(data);
-//        var proxy_name=$("#proxy_name").val();
-//        var proxy_owner=$("#proxy_owner").val();
-//        var proxy_owner_idcard=$("#proxy_owner_idcard").val();
-//        var proxy_owner_mobile=$("#proxy_owner_mobile").val();
-//        var proxy_password=$("#proxy_password").val();
-//        var re_proxy_password=$("#re_proxy_password").val();
-//        var safe_password=$("#safe_password").val();
-//
-//        $.post(url, data, function (json) {
+
+        $.post(url, data, function (json) {
 //            if (json.status == -1) {
 //                window.location.reload();
-//            } else if(json.status == 1) {
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                },function(){
-//                    window.location.reload();
-//                });
-//            }else{
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
-//            }
-//        });
+//            } else
+                if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
     }
 </script>
 </body>
