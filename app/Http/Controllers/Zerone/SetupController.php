@@ -15,7 +15,7 @@ class SetupController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 //        $setup_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
         $setup_list = Setup::all();
-        $setup = Setup::where('id','2')->first();
+        $setup = Setup::getOne([['id','2']]);
         dump($setup);
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
