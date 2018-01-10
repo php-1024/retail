@@ -116,7 +116,7 @@ class RoleController extends Controller{
                         continue;
                     }
                 }
-                ProgramModuleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
+                RoleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
 
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 DB::commit();
