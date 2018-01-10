@@ -1,18 +1,13 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Proxy_apply;
 use App\Models\Warzone;
 use Illuminate\Http\Request;
 use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        $where = ['id'=>'2'];
-        $list = Warzone::getPluck($where,'zone_name');
-        dd($list);
-        if(!empty($list)){
-            $re = ['data' => '商户名已存在', 'status' => '0'];
-        }
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -22,12 +17,17 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-        $where = ['proxy_name'=>$request->input('proxy_name')];
-        $list = Warzone::getPluck($where,'proxy_name');
-        if(!empty($list)){
-           $re = ['data' => '商户名已存在', 'status' => '0'];
+        $where = [['proxy_name',$request->input('proxy_name')]];
+        $name = Proxy_apply::getPluck($where,'proxy_name');
+        if(!empty($name)){
+           $re = ['data' => '商户名已注册', 'status' => '0'];
         }
-        return $re;
+        $data = [['proxy_owner_mobile',$request->input('proxy_owner_mobile')]];
+        $mobile = Proxy_apply::getPluck($data,'proxy_owner_mobile');
+        if(!empty($mobile)){
+            $re = ['data' => '手机号已注册', 'status' => '0'];
+        }
+        dump($re);
     }
 
     //服务商审核列表
