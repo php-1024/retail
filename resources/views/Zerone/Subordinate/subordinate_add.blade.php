@@ -147,6 +147,17 @@
                 radioClass: 'iradio_square-green',
             });
         });
+        //获取上级程序节点
+        function get_quick_rule(obj){
+            var url =  $('#quick_rule_url').val();
+            var token = $('#_token').val();
+            var role_id = $(obj).val();
+            var account_id = $('#admin_id').val();
+            var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+            $.post(url,data,function(response){
+                $('#node_box').html(response);
+            });
+        }
     </script>
 </body>
 
