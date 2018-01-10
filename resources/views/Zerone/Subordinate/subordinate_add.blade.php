@@ -62,17 +62,17 @@
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户账号</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="text" name="account" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户密码</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">重复密码</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="password" name="repassword" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
@@ -82,7 +82,7 @@
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">手机号码</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
 
@@ -105,7 +105,7 @@
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">安全密码</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                         </div>
