@@ -165,7 +165,6 @@ class ZeroneCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
-        echo $safe_password;exit;
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
@@ -236,7 +235,8 @@ class ZeroneCheckAjax
         if (empty($request->input('safe_password'))) {
             return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }else{
-            self::checkSafePassword($request->input('safe_password'));
+            $data=['safe_password'=>$request->input('safe_password')];
+            return self::checkSafePassword($data);
         }
         if (empty($request->input('proxy_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
