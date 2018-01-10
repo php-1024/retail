@@ -6,7 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Proxy_apply extends Model{
+class ProxyApply extends Model{
     use SoftDeletes;
     protected $table = 'proxy_apply';
     protected $primaryKey = 'id';
