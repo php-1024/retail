@@ -7,8 +7,8 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        $where = ['proxy_name'=>$request->input('proxy_name')];
-        $list = Warzone::getPluck($where,'proxy_name');
+        $where = ['id'=>$request->input('zone_name')];
+        $list = Warzone::getPluck($where,'id');
         dd($list);
         if(!empty($list)){
             $re = ['data' => '商户名已存在', 'status' => '0'];
