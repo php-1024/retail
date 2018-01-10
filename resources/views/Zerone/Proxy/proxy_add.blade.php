@@ -184,7 +184,7 @@
             </div>
         </div>
 
-    </div>
+
     <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated fadeIn">
@@ -206,8 +206,8 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
-
 <!-- Mainly scripts -->
 <script src="{{asset('public/Zerone')}}js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone')}}js/bootstrap.min.js"></script>
