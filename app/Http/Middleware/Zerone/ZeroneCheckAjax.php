@@ -29,12 +29,18 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/setup_edit"://检测登陆和权限和安全密码和编辑系统参数而设置
-                $re = $this->checkLoginAndRuleAndSafeAndSetupEeit($request);
+                $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
                 return self::format_response($re, $next);
                 break;
 
+            case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
+                $re = $this->checkLoginAndProxyAdd($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
-            case "zerone/ajax/role_edit"://检测登陆和权限
+            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
+            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -43,10 +49,9 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
-            case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
-                $re = $this->checkLoginAndProxyAdd($request);
-                return self::format_response($re,$next);
-                break;
+
+
+
         }
     }
     /******************************复合检测*********************************/
@@ -94,7 +99,7 @@ class ZeroneCheckAjax
         }
     }
     //检测登陆和权限和安全密码和编辑系统参数而设置
-    public function checkLoginAndRuleAndSafeAndSetupEeit($request){
+    public function checkLoginAndRuleAndSafeAndSetupEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
