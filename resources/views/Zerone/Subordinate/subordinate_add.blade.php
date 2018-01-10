@@ -238,6 +238,10 @@
     <script>
         $(document).ready(function() {
             $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
         });
     </script>
 </body>
