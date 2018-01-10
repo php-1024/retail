@@ -47,7 +47,8 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="get" class="form-horizontal">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/setup_edit_check') }}">
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
@@ -90,7 +91,7 @@
 
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认修改</button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认修改</button>
                                     </div>
                                 </div>
                             </form>
@@ -114,6 +115,36 @@
     <!-- Custom and plugin javascript -->
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+    <script>
+        //提交表单
+        function postForm() {
+            var target = $("#currentForm");
+            var url = target.attr("action");
+            var data = target.serialize();
+            $.post(url, data, function (json) {
+                if (json.status == -1) {
+                    window.location.reload();
+                } else if(json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                }else{
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        //type: "warning"
+                    });
+                }
+            });
+        }
+    </script>
 
 </body>
 
