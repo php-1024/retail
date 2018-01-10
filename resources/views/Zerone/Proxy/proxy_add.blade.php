@@ -13,7 +13,6 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
 
 
 </head>
