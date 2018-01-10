@@ -102,6 +102,7 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
+        alert(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
