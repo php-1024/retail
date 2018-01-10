@@ -90,10 +90,10 @@
                                                 <label class="col-sm-2 control-label">权限角色</label>
                                                 <div class="col-sm-3">
                                                     <select class="form-control m-b" name="account">
-                                                        <option>订单管理员</option>
-                                                        <option>装修员</option>
-                                                        <option>客服人员</option>
-                                                        <option>店铺管理员</option>
+                                                        <option value="0">请选择</option>
+                                                        @foreach($role_list as $k=>$v)
+                                                            <option value="{{ $v->id }}">{{ $v->role_name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-2"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
