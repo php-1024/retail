@@ -234,6 +234,12 @@
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
     <script src="{{asset('public/Zerone/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        });
+    </script>
 </body>
 
 </html>
