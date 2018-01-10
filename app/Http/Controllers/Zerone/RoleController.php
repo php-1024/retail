@@ -109,7 +109,12 @@ class RoleController extends Controller{
             try {
                 $role_id = OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
                 foreach ($node_ids as $key => $val) {
-                    RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                    $vo = RoleNode::getOne([['role_id',$id,'node_id',$val]]);//查询是否存在数据
+                    if(is_null($vo)) {//不存在生成插入数据
+                        RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                    }else{
+                        continue;
+                    }
                 }
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 DB::commit();
