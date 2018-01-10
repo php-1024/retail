@@ -24,7 +24,9 @@ class ProxyController extends Controller{
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $data = [['proxy_owner_mobile',$request->input('proxy_owner_mobile')]];
+        $aa = $request->input('proxy_owner_mobile');
+        dump($aa);
+        $data = [['proxy_owner_mobile','123456']];
         echo "123";
         exit;
         $mobile = Proxy_apply::getPluck($data,'proxy_owner_mobile');
