@@ -9,7 +9,7 @@ class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
         $where = ['proxy_owner_mobile'=>'15277049514'];
-        $list = Proxy_apply::getPluck($where,'proxy_name');
+        $list = Proxy_apply::getPluck($where,'proxy_owner_mobile');
         dump($list);
         if(!empty($list)) {
             $re = ['data' => '商户名已注册', 'status' => '0'];
