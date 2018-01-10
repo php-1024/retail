@@ -34,8 +34,8 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit"://检测登陆和权限
-                $re = $this->checkLoginAndRule($request);
+            case "zerone/ajax/setup_edit"://检测登陆和权限和安全密码和编辑系统参数而设置
+                $re = $this->checkLoginAndRuleAndSafeAndSetupEeit($request);
                 return self::format_response($re, $next);
                 break;
         }
@@ -69,6 +69,22 @@ class ZeroneCheckAjax
             }
         }
     }
+
+    //检测登陆和权限和安全密码和编辑系统参数而设置
+    public function checkLoginAndRuleAndSafeAndSetupEeit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测登录和权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登陆
@@ -121,6 +137,7 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
+
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');

@@ -169,7 +169,6 @@ Route::group(['prefix'=>'zerone'],function(){
     //系统管理——参数设置
     Route::group(['prefix'=>'setup'],function(){
         Route::get('/','Zerone\SetupController@display')->middleware('ZeroneCheck');//参数设置展示
-        Route::get('setup_edit','Zerone\SetupController@setup_edit')->middleware('ZeroneCheck');//参数设置编辑
     });
 
 
