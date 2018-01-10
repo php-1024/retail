@@ -27,7 +27,7 @@ class ProxyController extends Controller{
         if(!empty($mobile)){
             $re = ['data' => '手机号已注册', 'status' => '0'];
         }
-        return $re;
+        dump($re);
     }
 
     //服务商审核列表
