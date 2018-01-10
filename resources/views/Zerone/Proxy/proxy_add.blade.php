@@ -7,13 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>零壹新科技程序管理平台</title>
-
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/font')}}/css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="{{asset('public/Zerone/library/font')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-
+    <link href="{{asset('public/Zerone')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/plugins/iCheck/custom.css" rel="stylesheet">
