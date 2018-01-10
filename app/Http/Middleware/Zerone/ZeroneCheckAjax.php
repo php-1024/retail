@@ -232,7 +232,7 @@ class ZeroneCheckAjax
     public function checkLoginAndProxyAdd($request)
 
     {
-        $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+        $re = $this->checkLoginAndRuleAndSafe($request);//检测登录和权限和安全密码
         if($re['status']=='0'){
             return $re;
         }
@@ -250,6 +250,8 @@ class ZeroneCheckAjax
         }
         if (empty($request->input('proxy_password'))) {
             return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
+        }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
+            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
         }
         if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
             //把参数传递到下一个程序
