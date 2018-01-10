@@ -213,7 +213,7 @@
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
 
-    <script src="{{asset('public/Zerone')}}js/plugins/switchery/switchery.js"></script>
+    <script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
 
 </div>
 </body>
