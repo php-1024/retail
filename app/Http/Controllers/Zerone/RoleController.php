@@ -111,7 +111,7 @@ class RoleController extends Controller{
                 foreach ($node_ids as $key => $val) {
                     $vo = RoleNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
-                        RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                        RoleNode::addRoleNode(['role_id' => $id, 'node_id' => $val]);
                     }else{//存在数据则跳过
                         continue;
                     }
