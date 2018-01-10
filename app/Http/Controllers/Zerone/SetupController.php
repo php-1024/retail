@@ -18,7 +18,7 @@ class SetupController extends Controller{
         $setup = Setup::getOne([['id','1']]);
         dump($setup_list);
         dump($setup);
-        return view('Zerone/Setup/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
     public function setup_edit(Request $request){
