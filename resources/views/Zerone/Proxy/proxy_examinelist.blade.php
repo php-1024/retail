@@ -10,13 +10,10 @@
 
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/font')}}/css/plugins/footable/footable.core.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="{{asset('public/Zerone/library/font')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/plugins/iCheck/custom.css" rel="stylesheet">
 
 
 </head>
