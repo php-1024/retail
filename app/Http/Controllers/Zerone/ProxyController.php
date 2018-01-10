@@ -16,7 +16,6 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-        echo 1111;
 //        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 //        $current_route_name = $request->path();//获取当前的页面路由
 //
