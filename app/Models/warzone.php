@@ -13,6 +13,10 @@ class Warzone extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    public static function get_all(){
+        return self::all();
+    }
+
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Warzone();
