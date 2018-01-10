@@ -31,7 +31,7 @@ class SubordinateController extends Controller{
         if($role_id <> '0'){
             //后面补充
         }
-        view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list]);
+        return view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list]);
     }
 
     //添加下级人员数据提交
