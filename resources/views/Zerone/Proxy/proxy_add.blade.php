@@ -26,39 +26,11 @@
 
 
 <div id="wrapper">
-    @include('Zerone/Public/Nav')
-    <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-            <div class="navbar-header">
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="javascript:;"><i class="fa fa-bars"></i> </a>
-            </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">欢迎登录！<strong>超级管理员-薛志豪</strong></span>
-                </li>
-                <li>
-                    <a href="JavaScript:;">
-                        <i class="fa fa-sign-out"></i>退出系统
-                    </a>
-                </li>
-            </ul>
-        </div>
+        @include('Zerone/Public/Nav')
 
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-sm-4">
-                <h2>服务商注册审核</h2>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <a href="JavaScript:;">服务商管理</a>
-                    </li>
-                    <li >
-                        <strong>服务商注册审核</strong>
-                    </li>
-                </ol>
-            </div>
-
-        </div>
-
+        <div id="page-wrapper" class="gray-bg">
+            @include('Zerone/Public/Header')
+            
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
 
