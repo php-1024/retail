@@ -48,9 +48,10 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('tooling/ajax/program_add_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/program_add_check') }}">
+                                <input type="hidden" name="admin_id" id="admin_id" value="{{ $admin_data['id'] }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <input type="hidden" id="parent_nodes_url" value="{{ url('tooling/ajax/program_parents_node') }}">
+                                <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/program_parents_node') }}">
                                 <div id="rootwizard">
                                     <ul>
                                         <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> 填写用户基础资料</a></li>
@@ -91,7 +92,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">权限角色</label>
                                                 <div class="col-sm-3">
-                                                    <select class="form-control m-b" name="account">
+                                                    <select class="form-control m-b" name="role_id" id="role_id">
                                                         <option value="0">请选择</option>
                                                         @foreach($role_list as $k=>$v)
                                                             <option value="{{ $v->id }}">{{ $v->role_name }}</option>
@@ -145,7 +146,20 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
+            get_quick_rule('#role_id');
         });
+        //获取上级程序节点
+        function get_quick_rule(obj){
+            var url =  $('#quick_rule_url').val();
+            var token = $('#_token').val();
+            var role_id = $(obj).val();
+            var account_id = $('#admin_id').val();
+            var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+            $('#module_node_box').html('');
+            $.post(url,data,function(response){
+                $('#module_node_box').html(response);
+            });
+        }
     </script>
 </body>
 
