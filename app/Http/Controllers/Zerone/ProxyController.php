@@ -7,7 +7,7 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        $list = Warzone::where('id','or','1,2')->get();
+        $list = Warzone::where('id','2')->get();
         dump($list);
 //        Warzone::where(function ($query) {
 //            $query->where('a', 1)->where('b', 'like', '%123%');
