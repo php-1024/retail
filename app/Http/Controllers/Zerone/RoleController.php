@@ -129,7 +129,7 @@ class RoleController extends Controller{
     }
 
     //直接输入安全密码操作的页面
-    public function safe_password_comfirm(Request $request){
+    public function role_delete_comfirm(Request $request){
         $id = $request->input('id');
         return view('Zerone/Role/safe_password_confirm',['id'=>$id]);
     }

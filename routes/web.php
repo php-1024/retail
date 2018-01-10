@@ -205,7 +205,9 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('role_add_check','Zerone\RoleController@role_add_check')->middleware('ZeroneCheckAjax');//提交添加权限角色数据
         Route::post('role_edit','Zerone\RoleController@role_edit')->middleware('ZeroneCheckAjax');//编辑权限角色弹出框
         Route::post('role_edit_check','Zerone\RoleController@role_edit_check')->middleware('ZeroneCheckAjax');//提交编辑权限角色数据
+        Route::post('role_delete_comfirm','Zerone\RoleController@role_delete_comfirm')->middleware('ZeroneCheckAjax');//删除权限角色弹出安全密码框
         Route::post('setup_edit_check','Zerone\SetupController@setup_edit')->middleware('ZeroneCheckAjax');//提交编辑参数设置
+
     });
 });
 /********************零壹管理系统*************************/
