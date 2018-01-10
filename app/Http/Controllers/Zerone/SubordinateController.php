@@ -14,22 +14,24 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
-        $module_node_list = $this->getProgramModuleNode();
+        $module_node_list = $this->getModuleNode($admin_data['id']);
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //获取当前程序的功能模块和节点
     /**
      * $account_id 当前用户的ID
-     * $tag
+     * $toaccount_id 编辑用户的ID，用于查询编辑时该用户已勾选的权限
      *
      */
-    public function getModuleNode($account_id,$tag=true){
+    public function getModuleNode($account_id,$toaccount_id=0){
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
-
         }else{
-
+            $module_node_list = Module::getListProgram(1, [], 0, 'id');//暂时不做权限
+        }
+        if($toaccount_id <> '0'){
+            //后面补充
         }
         return $module_node_list;
     }
