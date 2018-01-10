@@ -7,10 +7,10 @@ class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Zerone/Proxy/proxy_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
+        return view('Zerone/Proxy/proxy_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module','menu_data'=>$menu_data]);
     }
 
     //服务商审核列表
@@ -31,29 +31,5 @@ class ProxyController extends Controller{
         echo "服务商列表";
     }
 
-    //编辑下级人员
-    public function subordinate_edit(Request $request){
-        echo "这里是编辑下级人员";
-    }
-
-    //编辑下级人员数据提交
-    public function subordinate_edit_check(Request $request){
-        echo "这里是编辑下级人员数据提交";
-    }
-
-    //冻结下级人员
-    public function subordinate_lock(Request $request){
-        echo "这里是冻结下级人员";
-    }
-
-    //删除下级人员
-    public function subordinate_delete(Request $request){
-        echo "这里是删除下级人员";
-    }
-
-    //下级人员结构
-    public function subordinate_structure(Request $request){
-
-    }
 }
 ?>
