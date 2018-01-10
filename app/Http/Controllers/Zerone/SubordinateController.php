@@ -14,24 +14,26 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
-        $module_node_list = $this->getProgramModuleNode();
+        //$module_node_list = $this->getModuleNode($admin_data['id']);
+        $module_node_list = Module::getListProgram(1, [], 0, 'id');//其他用户暂时不做权限
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //获取当前程序的功能模块和节点
-    /**
-     * $account_id 当前用户的ID
-     * $tag
-     *
-     */
-    public function getModuleNode($account_id,$tag=true){
+    //快速授权功能
+    public function quick_rule(Request $request){
+        $account_id = $request->input('account_id');
+        $role_id = $request->input('role_id');
+        $module_node_list = []; //当前程序的所有节点或当前用户在当前程序中拥有权限的所有节点，
+        $selected_node_list = [];
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
-
         }else{
-
+            $module_node_list = Module::getListProgram(1, [], 0, 'id');//其他用户暂时不做权限
         }
-        return $module_node_list;
+        if($role_id <> '0'){
+            //后面补充
+        }
+        view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list]);
     }
 
     //添加下级人员数据提交
