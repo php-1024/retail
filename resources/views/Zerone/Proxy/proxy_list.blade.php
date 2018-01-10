@@ -205,7 +205,82 @@
                         </div>
                     </div>
                 </div>
+                <div class="footer" >
+                    <div class="pull-right">
+                        您登陆的时间是：2017-10-24 16:26:30
+                    </div>
+                    <div>
+                        <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
+                    </div>
+                </div>
             </div>
+            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content animated fadeIn">
+                        <div class="modal-header">
+                            <h3>编辑服务商</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">所在战区</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" name="account">
+                                        <option>东部战区</option>
+                                        <option>西部战区</option>
+                                        <option>南部战区</option>
+                                        <option>北部战区</option>
+                                        <option>中部战区</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">负责人姓名</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">手机号码</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">服务商登陆密码</label>
+                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">安全密码</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="hr-line-dashed"></div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary saveBtn">保存</button>
+                        </div>
+                    </div>
+                </div>
 
         </div>
 
