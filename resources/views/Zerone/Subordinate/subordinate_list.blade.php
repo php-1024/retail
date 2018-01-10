@@ -36,10 +36,7 @@
                     </li>
                 </ol>
             </div>
-
         </div>
-
-
     </div>
 
     <!-- Mainly scripts -->
