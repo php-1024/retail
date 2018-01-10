@@ -54,7 +54,7 @@
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/setup_edit_check') }}">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" >{{$setup_list[0]['cfg_name']}}</label>
+                                    <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control"  value="{{$setup_list[0]['cfg_value']}}"/>
                                     </div>
@@ -71,7 +71,7 @@
                                 <div class="hr-line-dashed"></div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" >{{$setup_list[1]['cfg_name']}}</label>
+                                    <label class="col-sm-2 control-label" >商户通道链接</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control"  value="{{$setup_list[1]['cfg_value']}}"/>
                                     </div>
@@ -87,7 +87,7 @@
 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">{{$setup_list[2]['cfg_name']}}</label>
+                                    <label class="col-sm-2 control-label">人员构深度设置</label>
                                     <div class="col-sm-1"><input type="text" class="form-control"></div>
                                 </div>
 
