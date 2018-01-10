@@ -49,7 +49,7 @@
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/setup_edit_check') }}">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" >服务商通道链接</label>
+                                    <label class="col-sm-2 control-label" >{{$setup_list[0]['cfg_name']}}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control"  value="http://o2o.01nnt.com/123456.html"/>
                                     </div>
