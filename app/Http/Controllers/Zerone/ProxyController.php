@@ -7,7 +7,7 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        $where = ['id'=>$request->input('zone_name')];
+        $where = ['id'=>'1'];
         $list = Warzone::getPluck($where,'id');
         dd($list);
         if(!empty($list)){
