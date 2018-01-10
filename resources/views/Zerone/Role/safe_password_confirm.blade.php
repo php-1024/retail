@@ -1,11 +1,11 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/role_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/role_delete') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                输入安全密码确认操作
+                确认删除权限角色
             </div>
             <div class="modal-body">
                 <div class="form-group">
