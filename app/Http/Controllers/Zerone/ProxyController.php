@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 class ProxyController extends Controller{
     //添加服务商
@@ -26,11 +27,6 @@ class ProxyController extends Controller{
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $aa = $request->input('proxy_name');
-        dump($aa);
-        $data = [['proxy_owner_mobile','123456']];
-        echo "123";
-        exit;
         $mobile = ProxyApply::getPluck($data,'proxy_owner_mobile');
 
         if(!empty($mobile)){
