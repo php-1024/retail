@@ -109,18 +109,19 @@ class RoleController extends Controller{
             try {
                 $role_id = OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
                 foreach ($node_ids as $key => $val) {
-                    $vo = RoleNode::getOne([['role_id',$id,'node_id',$val]]);//查询是否存在数据
+                    $vo = RoleNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
-                        RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                        RoleNode::addRoleNode(['role_id' => $id, 'node_id' => $val]);
                     }else{//存在数据则跳过
                         continue;
                     }
                 }
-                ProgramModuleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
+                RoleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
 
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
+                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑权限角色失败，请检查', 'status' => '0']);
             }
