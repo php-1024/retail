@@ -24,5 +24,11 @@ class Setup extends Model{
         return self::where($where)->first();
 
     }
+    //简易型查询所有数据
+    public static function get_all()
+    {
+        return self::all();
+
+    }
 }
 ?>
