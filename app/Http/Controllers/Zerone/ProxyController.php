@@ -7,8 +7,9 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-       $aa = Warzone::where('zone_name','东部战区')->select('zone_name');
-       dump($aa->zone_name);
+        $where = ['zone_name'=>'东部战区','id'=>'2'];
+        $list = Warzone::getRepeat($where);
+        dump($list);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数

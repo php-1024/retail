@@ -22,6 +22,12 @@ class Warzone extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
+    //获取列表
+    public static function getRepeat($where){
+        $model = new Warzone();
+        return $model->or($where)->get()->find(1);
+    }
+
     //添加数据
     public static function addProgram($param){
         $program = new Program();//实例化程序模型
