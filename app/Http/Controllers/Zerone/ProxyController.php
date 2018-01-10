@@ -20,13 +20,14 @@ class ProxyController extends Controller{
         $where = [['proxy_name',$request->input('proxy_name')]];
 
         $name = Proxy_apply::getPluck($where,'proxy_name');
-        echo "123";
-        exit;
+
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
         $data = [['proxy_owner_mobile',$request->input('proxy_owner_mobile')]];
         $mobile = Proxy_apply::getPluck($data,'proxy_owner_mobile');
+        echo "123";
+        exit;
         if(!empty($mobile)){
             return response()->json(['data' => '手机号已注册', 'status' => '0']);
         }
