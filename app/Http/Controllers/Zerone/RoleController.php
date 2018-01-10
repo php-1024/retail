@@ -121,12 +121,17 @@ class RoleController extends Controller{
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑权限角色失败，请检查', 'status' => '0']);
             }
             return response()->json(['data' => '编辑权限角色成功', 'status' => '1']);
         }
+    }
+
+    //直接输入安全密码操作的页面
+    public function safe_password_comfirm(Request $request){
+        $id = $request->input('id');
+        return view('Zerone/Role/safe_password_confirm',['id'=>$id]);
     }
 
     //删除权限角色
