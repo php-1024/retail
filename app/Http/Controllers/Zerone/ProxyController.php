@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Study\Test;
-use App\Models\Study\Warzone;
+use App\Models\Warzone;
 use Illuminate\Http\Request;
 use Session;
 class ProxyController extends Controller{
