@@ -7,11 +7,10 @@ class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+
         $route_name = $request->path();//获取当前的页面路由
-        $module_name = $request->input('module_name');
-        $search_data = ['module_name'=>$module_name];
-        
-        return view('Zerone/Proxy/proxy_add',['search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
+
+        return view('Zerone/Proxy/proxy_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
 
     //服务商审核列表
