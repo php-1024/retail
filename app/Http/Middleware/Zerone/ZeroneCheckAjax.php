@@ -235,7 +235,7 @@ class ZeroneCheckAjax
         if (empty($request->input('safe_password'))) {
             return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }else{
-             return $this->checkLoginAndRuleAndSafeAndRoleAdd();
+             return $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
         }
         if (empty($request->input('proxy_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
