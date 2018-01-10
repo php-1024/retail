@@ -8,7 +8,7 @@ class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
         $where = ['id'=>'1'];
-        $list = Warzone::getPluck($where,'id');
+        $list = Warzone::getPluck($where,'name');
         dd($list);
         if(!empty($list)){
             $re = ['data' => '商户名已存在', 'status' => '0'];
