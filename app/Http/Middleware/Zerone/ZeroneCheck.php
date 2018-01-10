@@ -30,9 +30,9 @@ class ZeroneCheck{
             case "zerone/setup/setup_edit"://参数设置权限
             case "zerone/setup"://参数设置权限
             case "zerone"://后台首页
-            case "zerone/Proxy/proxy_add"://添加服务商
-            case "zerone/Proxy/proxy_examinelist"://服务商审核列表
-            case "zerone/Proxy/proxy_list"://服务商列表
+            case "zerone/proxy/proxy_add"://添加服务商
+            case "zerone/proxy/proxy_examinelist"://服务商审核列表
+            case "zerone/proxy/proxy_list"://服务商列表
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);
                 break;
