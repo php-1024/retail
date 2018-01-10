@@ -14,6 +14,11 @@
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
 
+    <!-- Sweet Alert -->
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/switchery')}}/css/switchery.css" rel="stylesheet">
+
 </head>
 
 <body class="">
@@ -114,6 +119,24 @@
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#addbtn').click(function(){
+                swal({
+                    title: "温馨提示",
+                    text: "修改成功",
+                    type: "success"
+                });
+            });
+            var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem, { color: '#1AB394' });
+
+            var elem = document.querySelector('.js-switch2');
+            var switchery2 = new Switchery(elem, { color: '#1AB394' });
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
         //提交表单
         function postForm() {
             var target = $("#currentForm");

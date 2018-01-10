@@ -28,6 +28,7 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://检测登陆和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
