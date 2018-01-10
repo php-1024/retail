@@ -36,7 +36,7 @@
 
                             </div>
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="get" id="proxyForm" class="form-horizontal" action="{{url('zerone/ajax/proxy_add_check')}}">
                                     <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
                                         <div class="col-sm-10">
                                             <select class="form-control m-b" name="zone_id">
@@ -77,7 +77,7 @@
 
                                     <div class="form-group ">
                                         <div class="col-sm-4 col-sm-offset-5">
-                                            <button class="btn btn-primary" id="addbtn" type="button">确认修改</button>
+                                            <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认申请</button>
                                         </div>
                                     </div>
                                 </form>
@@ -111,22 +111,61 @@
 <script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>cript>
 <!-- Page-Level Scripts -->
 <script>
-    $(document).ready(function() {
-        $('#addbtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "修改成功",
-                type: "success"
-            });
-        });
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
+//    $(document).ready(function() {
+//        $('#addbtn').click(function(){
+//            swal({
+//                title: "温馨提示",
+//                text: "修改成功",
+//                type: "success"
+//            });
+//        });
+//        var elem = document.querySelector('.js-switch');
+//        var switchery = new Switchery(elem, { color: '#1AB394' });
+//        $('.i-checks').iCheck({
+//            checkboxClass: 'icheckbox_square-green',
+//            radioClass: 'iradio_square-green',
+//        });
+//    });
+
+
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
     });
 
+    //提交表单
+    function postForm() {
+        var target = $("#proxyForm");
+        var url = target.attr("action");
+        alert(url);
+//        var data = target.serialize();
+//        $.post(url, data, function (json) {
+//            if (json.status == -1) {
+//                window.location.reload();
+//            } else if(json.status == 1) {
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//            }
+//        });
+    }
 </script>
 </body>
 
