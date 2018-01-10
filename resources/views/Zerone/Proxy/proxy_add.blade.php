@@ -30,7 +30,7 @@
 
         <div id="page-wrapper" class="gray-bg">
             @include('Zerone/Public/Header')
-            
+
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
 
