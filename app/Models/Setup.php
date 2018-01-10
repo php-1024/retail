@@ -21,7 +21,7 @@ class Setup extends Model{
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::with('id')->where($where)->first();
+        return self::where($where)->first();
 
     }
 }
