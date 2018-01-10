@@ -146,6 +146,7 @@
         function getDeleteComfirmForm(id){
             var url = $('#role_delete_comfirm').val();
             var token = $('#_token').val();
+            alert(token);
             if(id==''){
                 swal({
                     title: "提示信息",
