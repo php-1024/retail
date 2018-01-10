@@ -12,7 +12,7 @@ class Warzone extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-    
+
     //获取所有列表
     public static function get_all(){
         return self::all();
