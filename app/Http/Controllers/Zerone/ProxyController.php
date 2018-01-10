@@ -17,7 +17,7 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
         $where = $request->input('proxy_name');
-       $list = Warzone::getList($where,'1');
+       $list = Warzone::getCount();
         return $list;
 
     }
