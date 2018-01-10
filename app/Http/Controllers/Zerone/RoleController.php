@@ -1,14 +1,15 @@
 <?php
 namespace App\Http\Controllers\Zerone;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+Use App\Http\Controllers\Controller;
+Use Illuminate\Http\Request;
+Use Illuminate\Support\Facades\DB;
 Use App\Models\Module;
 Use App\Models\OrganizationRole;
 Use App\Models\RoleNode;
 Use App\Models\OperationLog;
 Use App\Models\ProgramModuleNode;
-use Session;
+Use App\Models\RoleAccount;
+Use Session;
 
 class RoleController extends Controller{
     //添加权限角色
@@ -143,7 +144,7 @@ class RoleController extends Controller{
         try{
             OrganizationRole::where('id',$id)->delete();//删除权限角色
             RoleNode::where('role_id',$id)->delete();//删除角色节点关系
-            RoleAccount::
+            RoleAccount::where('role_id',$id)->delete();
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
