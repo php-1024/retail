@@ -34,7 +34,7 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
-                $re = $this->checkLoginAndProxyAdd($request);
+                $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -56,7 +56,7 @@ class ZeroneCheckAjax
     }
     /******************************复合检测*********************************/
     //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
-    public function checkLoginAndRuleAndSafe($request){
+    public function checkLoginAndRuleAndSafeAndProxyAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
