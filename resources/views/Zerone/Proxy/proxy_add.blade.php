@@ -40,11 +40,9 @@
                                     <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
                                         <div class="col-sm-10">
                                             <select class="form-control m-b" name="account">
-                                                <option>东部战区</option>
-                                                <option>西部战区</option>
-                                                <option>南部战区</option>
-                                                <option>北部战区</option>
-                                                <option>中部战区</option>
+                                                @foreach($warzone_list as $key=>$value)
+                                                <option value="{{$value->id}}">{{$value->zone_name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
