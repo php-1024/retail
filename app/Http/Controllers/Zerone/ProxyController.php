@@ -22,7 +22,7 @@ class ProxyController extends Controller{
         $name = Proxy_apply::getPluck($where,'proxy_name');
 
         if(!empty($name)){
-            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
+            //return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
         $aa = $request->input('proxy_name');
         dump($aa);
