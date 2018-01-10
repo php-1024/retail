@@ -48,7 +48,6 @@
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/setup_edit_check') }}">
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
@@ -107,15 +106,13 @@
 </div>
 
     <!-- Mainly scripts -->
-
+    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
     <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
     <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-
     <!-- Custom and plugin javascript -->
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script>
         //提交表单
         function postForm() {
