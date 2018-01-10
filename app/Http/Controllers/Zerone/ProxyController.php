@@ -19,7 +19,6 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-        var_dump(123);
         return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
 
         $where = [['proxy_name',$request->input('proxy_name')]];
