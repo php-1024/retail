@@ -10,6 +10,7 @@ class ProxyController extends Controller{
     public function proxy_add(Request $request){
         $where = ['proxy_name'=>'测试商户'];
         $list = Proxy_apply::getPluck($where,'proxy_name');
+        dump($list);
         if(!empty($list)) {
             $re = ['data' => '商户名已注册', 'status' => '0'];
         }
