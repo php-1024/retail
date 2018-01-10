@@ -14,7 +14,7 @@
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/wizard')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
+
 </head>
 
 <body class="">
@@ -48,10 +48,10 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/program_add_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/') }}">
                                 <input type="hidden" name="admin_id" id="admin_id" value="{{ $admin_data['id'] }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/program_parents_node') }}">
+                                <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/quick_rule') }}">
                                 <div id="rootwizard">
                                     <ul>
                                         <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> 填写用户基础资料</a></li>
@@ -136,7 +136,6 @@
     <!-- Custom and plugin javascript -->
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
     <script src="{{asset('public/Zerone/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
 
     <script>
