@@ -44,6 +44,7 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
             case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
+                echo 111;exit;
                 $re = $this->checkLoginAndProxyAdd($request);
                 return self::format_response($re,$next);
                 break;
