@@ -37,6 +37,7 @@
                             </div>
                             <div class="ibox-content">
                                 <form method="get" id="proxyForm" class="form-horizontal" action="{{url('zerone/ajax/proxy_add_check')}}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
                                         <div class="col-sm-10">
                                             <select class="form-control m-b" name="zone_id">
@@ -142,19 +143,13 @@
         var target = $("#proxyForm");
         var url = target.attr("action");
         var data = target.serialize();
-        alert(data);
-//        var proxy_name=$("#proxy_name").val();
-//        var proxy_owner=$("#proxy_owner").val();
-//        var proxy_owner_idcard=$("#proxy_owner_idcard").val();
-//        var proxy_owner_mobile=$("#proxy_owner_mobile").val();
-//        var proxy_password=$("#proxy_password").val();
-//        var re_proxy_password=$("#re_proxy_password").val();
-//        var safe_password=$("#safe_password").val();
-//
-//        $.post(url, data, function (json) {
+
+        $.post(url, data, function (json) {
+            console.log(json);
 //            if (json.status == -1) {
 //                window.location.reload();
-//            } else if(json.status == 1) {
+//            } else
+//                if(json.status == 1) {
 //                swal({
 //                    title: "提示信息",
 //                    text: json.data,
@@ -172,7 +167,7 @@
 //                    //type: "warning"
 //                });
 //            }
-//        });
+        });
     }
 </script>
 </body>
