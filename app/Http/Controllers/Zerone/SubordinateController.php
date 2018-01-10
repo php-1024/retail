@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OrganizationRole;
 use App\Models\Module;
+use App\Models\ProgramModuleNode;
 use Session;
 class SubordinateController extends Controller{
     //添加下级人员
@@ -26,10 +27,16 @@ class SubordinateController extends Controller{
         }else{
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//其他用户暂时不做权限
         }
+        $selected_nodes = [];//选中的节点
+        $selected_modules = [];//选中的模块
         if($role_id <> '0'){
-            $selected_module_list = '';
+            $node_list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);//获取当前角色拥有权限的模块和节点
+            foreach($node_list as $key=>$val){
+                $selected_modules[] = $val->module_id;
+                $selected_nodes[] = $val->node_id;
+            }
         }
-        return view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list]);
+        return view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
     //添加下级人员数据提交
