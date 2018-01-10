@@ -217,9 +217,8 @@
 <script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <!-- Sweet alert -->
 <script src="{{asset('public/Zerone')}}/js/plugins/sweetalert/sweetalert.min.js"></script>
-<!-- FooTable -->
-<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
 
+<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>
 <script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
 <!-- Page-Level Scripts -->
 <script>
