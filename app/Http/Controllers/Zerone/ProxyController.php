@@ -46,7 +46,6 @@ class ProxyController extends Controller{
     }
     //服务商审核列表
     public function proxy_examine(Request $request){
-        return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         echo "服务商审核数据提交";
     }
 
