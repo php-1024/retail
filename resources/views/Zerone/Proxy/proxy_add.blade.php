@@ -35,8 +35,8 @@
 
                             </div>
                             <div class="ibox-content">
-                                <form method="post" id="currentForm" class="form-horizontal" action="{{url('zerone/ajax/proxy_add_check')}}">
-                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_add_check') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
                                         <div class="col-sm-10">
                                             <select class="form-control m-b" name="zone_id">
