@@ -210,11 +210,11 @@
 <script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>
-<!-- Data picker -->
-<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
 <!-- FooTable -->
 <script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
 
