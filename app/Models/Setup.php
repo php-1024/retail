@@ -28,6 +28,7 @@ class Setup extends Model{
     public static function getOne($where)
     {
         return self::with('cfg_name')->where($where)->first();
+        
     }
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
