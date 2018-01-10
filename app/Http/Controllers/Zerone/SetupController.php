@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Setup;
 use Illuminate\Http\Request;
 use Session;
 
@@ -13,6 +14,8 @@ class SetupController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 //        $setup_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
+        $setup_list = Setup::all();
+        dump($setup_list);
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //参数设置编辑
