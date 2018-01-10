@@ -48,10 +48,10 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/quick_rule') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/') }}">
                                 <input type="hidden" name="admin_id" id="admin_id" value="{{ $admin_data['id'] }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/program_parents_node') }}">
+                                <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/quick_rule') }}">
                                 <div id="rootwizard">
                                     <ul>
                                         <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> 填写用户基础资料</a></li>
