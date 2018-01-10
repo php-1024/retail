@@ -44,7 +44,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>登陆密码修改</h5>
+                            <h5>添加下级人员</h5>
 
                         </div>
                         <div class="ibox-content">
