@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
-use App\Models\Proxy_apply;
+use App\Models\ProxyApply;
 use App\Models\Warzone;
 use Illuminate\Http\Request;
 use Session;
@@ -17,17 +17,26 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
+        return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
+
         $where = [['proxy_name',$request->input('proxy_name')]];
-        $name = Proxy_apply::getPluck($where,'proxy_name');
+
+        $name = ProxyApply::getPluck($where,'proxy_name');
+
         if(!empty($name)){
-           $re = ['data' => '商户名已注册', 'status' => '0'];
+            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $data = [['proxy_owner_mobile',$request->input('proxy_owner_mobile')]];
-        $mobile = Proxy_apply::getPluck($data,'proxy_owner_mobile');
+        $aa = $request->input('proxy_name');
+        dump($aa);
+        $data = [['proxy_owner_mobile','123456']];
+        echo "123";
+        exit;
+        $mobile = ProxyApply::getPluck($data,'proxy_owner_mobile');
+
         if(!empty($mobile)){
-            $re = ['data' => '手机号已注册', 'status' => '0'];
+            return response()->json(['data' => '手机号已注册', 'status' => '0']);
         }
-        dump($re);
+
     }
 
     //服务商审核列表
