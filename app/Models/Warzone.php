@@ -16,7 +16,6 @@ class Warzone extends Model{
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Warzone();
-        dd($model);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
