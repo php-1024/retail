@@ -26,10 +26,10 @@ class SubordinateController extends Controller{
         }else{
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//其他用户暂时不做权限
         }
+        $selected_nodes = [];//选中的节点
+        $selected_modules = [];//选中的模块
         if($role_id <> '0'){
             $node_list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);//获取当前角色拥有权限的模块和节点
-            $selected_nodes = [];//选中的节点
-            $selected_modules = [];//选中的模块
             foreach($node_list as $key=>$val){
                 $selected_modules[] = $val->module_id;
                 $selected_nodes[] = $val->node_id;
