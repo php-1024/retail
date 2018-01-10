@@ -215,6 +215,8 @@
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>
 
+<!-- Data picker -->
+<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <!-- FooTable -->
 <script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
 
