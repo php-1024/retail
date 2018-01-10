@@ -39,7 +39,7 @@
                                 <form method="get" class="form-horizontal">
                                     <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control m-b" name="account">
+                                            <select class="form-control m-b" name="zone_id">
                                                 @foreach($warzone_list as $key=>$value)
                                                 <option value="{{$value->id}}">{{$value->zone_name}}</option>
                                                 @endforeach
@@ -47,31 +47,31 @@
                                         </div>
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="proxy_name" id="proxy_name" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">负责人姓名</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="proxy_owner" id="proxy_owner" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">负责人身份证号</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="proxy_owner_idcard" id="proxy_owner_idcard" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">手机号码</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="proxy_owner_mobile" id="proxy_owner_mobile" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">服务商登陆密码</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="proxy_password" id="proxy_password" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">重复登陆密码</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="re_proxy_password" id="re_proxy_password" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">安全密码</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="safe_password" id="safe_password" class="form-control"></div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
 
