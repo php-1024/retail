@@ -99,7 +99,7 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-2"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
+                                                <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
                                             </div>
                                             <div class="form-group" id="module_node_box"></div>
                                             <div class="hr-line-dashed"></div>
@@ -140,17 +140,11 @@
 
     <script>
         $(document).ready(function() {
-            alert(123);
             $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
             get_quick_rule('#role_id');
         });
         //获取上级程序节点
         function get_quick_rule(obj){
-
             var url =  $('#quick_rule_url').val();
             var token = $('#_token').val();
             var role_id = $(obj).val();
