@@ -19,8 +19,18 @@ class SubordinateController extends Controller{
     }
 
     //获取当前程序的功能模块和节点
+    /**
+     * $account_id 当前用户的ID
+     * $tag
+     *
+     */
     public function getModuleNode($account_id,$tag=true){
-        $module_node_list = Module::getListProgram(1,[],0,'id');//获取当前系统的所有模块和节点
+        if($account_id == 1) {//如果是超级管理员
+            $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+
+        }else{
+
+        }
         return $module_node_list;
     }
 
