@@ -96,19 +96,16 @@
             </div>
     </div>
 </div>
-<!-- Mainly scripts -->
-<script src="{{asset('public/Zerone')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Zerone')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>
-<!-- Sweet alert -->
-<script src="{{asset('public/Zerone')}}/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>cript>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
 //    $(document).ready(function() {
