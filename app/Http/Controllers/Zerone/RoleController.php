@@ -25,9 +25,9 @@ class RoleController extends Controller{
     public function role_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $role_name = $request->input('role_name');
-        $node_ids = $request->input('module_node_ids');
-        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){
+        $role_name = $request->input('role_name');//权限角色名称
+        $node_ids = $request->input('module_node_ids');//角色权限节点
+        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
             return response()->json(['data' => '您已经添加过相同的权限角色', 'status' => '0']);
         }else {
             DB::beginTransaction();
@@ -97,7 +97,17 @@ class RoleController extends Controller{
 
     //编辑权限角色提交
     public function role_edit_check(Request $request){
-        echo "这里是编辑权限角色数据提交";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要编辑的角色ID
+        $role_name = $request->input('role_name');//权限角色名称
+        $node_ids = $request->input('module_node_ids');//角色权限节点
+
+        if(OrganizationRole::checkRowExists([['id','<>',$id],['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断非本条数据是否有相同的的角色
+            return response()->json(['data' => '您已经添加过相同的权限角色', 'status' => '0']);
+        }else {
+
+        }
     }
 
     //删除权限角色
