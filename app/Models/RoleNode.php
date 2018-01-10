@@ -13,6 +13,11 @@ class RoleNode extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //获取单条数据
+    public static function getOne($where){
+        return self::where($where)->first();
+    }
+
     //修改数据
     public static function editRoleNode($where,$param)
     {
