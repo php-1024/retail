@@ -29,6 +29,15 @@ class OrganizationRole extends Model{
         return self::with('nodes')->where($where)->first();
     }
 
+    //获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = new OrganizationRole();
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
+
     //添加组织角色
     public static function addRole($param){
         $model = new OrganizationRole();
