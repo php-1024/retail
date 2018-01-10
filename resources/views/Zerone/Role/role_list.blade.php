@@ -97,7 +97,7 @@
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" class="btn  btn-xs btn-danger" onclick="deleteData({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                            <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -144,9 +144,8 @@
         });
         //获取删除权限角色删除密码确认框
         function getDeleteComfirmForm(id){
-            var url = $('#role_edit_url').val();
+            var url = $('#role_delete_comfirm').val();
             var token = $('#_token').val();
-
             if(id==''){
                 swal({
                     title: "提示信息",
