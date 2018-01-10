@@ -109,7 +109,7 @@ class RoleController extends Controller{
             try {
                 $role_id = OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
                 foreach ($node_ids as $key => $val) {
-                    $vo = RoleNode::getOne([['role_id',$id,'node_id',$val]]);//查询是否存在数据
+                    $vo = RoleNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
                         RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                     }else{//存在数据则跳过
