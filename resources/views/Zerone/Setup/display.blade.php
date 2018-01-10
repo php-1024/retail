@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control"  value="{{$setup_list[0]['cfg_value']}}"/>
+                                        <input type="text" class="form-control" name="cfg_value[]" value="{{$setup_list[0]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >商户通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control"  value="{{$setup_list[1]['cfg_value']}}"/>
+                                        <input type="text" class="form-control" name="cfg_value[]" value="{{$setup_list[1]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>

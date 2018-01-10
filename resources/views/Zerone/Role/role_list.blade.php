@@ -49,7 +49,7 @@
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="role_edit_url" value="{{ url('zerone/ajax/role_edit') }}">
-                        <input type="hidden" id="role_delete_url" value="{{ url('zerone/ajax/role_delete_comfirm') }}">
+                        <input type="hidden" id="role_delete_comfirm_url" value="{{ url('zerone/ajax/role_delete_comfirm') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">权限角色名称</label>
@@ -144,7 +144,7 @@
         });
         //获取删除权限角色删除密码确认框
         function getDeleteComfirmForm(id){
-            var url = $('#role_delete_comfirm').val();
+            var url = $('#role_delete_comfirm_url').val();
             var token = $('#_token').val();
             if(id==''){
                 swal({
