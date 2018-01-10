@@ -8,8 +8,12 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $where = ['proxy_name'=>'测试商户'];
+        $list = Proxy_apply::getPluck($where,'proxy_name');
+        if(!empty($list)) {
+            $re = ['data' => '商户名已注册', 'status' => '0'];
+        }
+            $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
