@@ -49,7 +49,7 @@
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="role_edit_url" value="{{ url('zerone/ajax/role_edit') }}">
-                        <input type="hidden" id="role_delete_url" value="{{ url('zerone/ajax/role_delete') }}">
+                        <input type="hidden" id="role_delete_url" value="{{ url('zerone/ajax/role_delete_comfirm') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">权限角色名称</label>
@@ -142,10 +142,11 @@
                 }
             });
         });
-        //删除数据
-        function deleteData(id){
-            var url = $('#role_delete_url').val();
+        //获取删除权限角色删除密码确认框
+        function getDeleteComfirmForm(id){
+            var url = $('#role_edit_url').val();
             var token = $('#_token').val();
+
             if(id==''){
                 swal({
                     title: "提示信息",
@@ -160,14 +161,20 @@
 
             var data = {'id':id,'_token':token};
             $.post(url,data,function(response){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
             });
         }
         //获取用户信息，编辑密码框
