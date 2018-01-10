@@ -32,6 +32,11 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
+
+            case "zerone/ajax/setup_edit"://检测登陆和权限
+                $re = $this->checkLoginAndRule($request);
+                return self::format_response($re, $next);
+                break;
         }
     }
     /******************************复合检测*********************************/
