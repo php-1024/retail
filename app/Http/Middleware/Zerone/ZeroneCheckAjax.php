@@ -232,10 +232,9 @@ class ZeroneCheckAjax
     public function checkLoginAndProxyAdd($request)
 
     {
-        if (empty($request->input('safe_password'))) {
-            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
-        }else{
-             return $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+        $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+        if($re['status']=='0'){
+            return $re;
         }
         if (empty($request->input('proxy_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
