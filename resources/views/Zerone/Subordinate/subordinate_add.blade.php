@@ -92,7 +92,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">权限角色</label>
                                                 <div class="col-sm-3">
-                                                    <select class="form-control m-b" name="account">
+                                                    <select class="form-control m-b" name="role_id" id="role_id">
                                                         <option value="0">请选择</option>
                                                         @foreach($role_list as $k=>$v)
                                                             <option value="{{ $v->id }}">{{ $v->role_name }}</option>
@@ -146,6 +146,7 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
+            get_quick_rule('#role_id');
         });
         //获取上级程序节点
         function get_quick_rule(obj){
