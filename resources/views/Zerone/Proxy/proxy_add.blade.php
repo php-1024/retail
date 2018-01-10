@@ -209,23 +209,23 @@
     </div>
 </div>
 <!-- Mainly scripts -->
-<script src="{{asset('public/Zerone')}}js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Zerone')}}js/bootstrap.min.js"></script>
-<script src="{{asset('public/Zerone')}}js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Zerone')}}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="{{asset('public/Zerone')}}js/inspinia.js"></script>
-<script src="{{asset('public/Zerone')}}js/plugins/pace/pace.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>
 <!-- Data picker -->
-<script src="{{asset('public/Zerone')}}js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <!-- Sweet alert -->
-<script src="{{asset('public/Zerone')}}js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/sweetalert/sweetalert.min.js"></script>
 <!-- FooTable -->
-<script src="{{asset('public/Zerone')}}js/plugins/footable/footable.all.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
 
-<script src="{{asset('public/Zerone')}}js/plugins/iCheck/icheck.min.js"></script>
-<script src="{{asset('public/Zerone')}}js/plugins/switchery/switchery.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
