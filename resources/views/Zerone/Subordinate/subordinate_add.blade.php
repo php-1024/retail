@@ -140,6 +140,7 @@
 
     <script>
         $(document).ready(function() {
+            alert(123);
             $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
@@ -149,7 +150,7 @@
         });
         //获取上级程序节点
         function get_quick_rule(obj){
-            alert(123);
+
             var url =  $('#quick_rule_url').val();
             var token = $('#_token').val();
             var role_id = $(obj).val();
