@@ -28,7 +28,7 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');//权限角色名称
         $node_ids = $request->input('module_node_ids');//角色权限节点
         if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
-            return response()->json(['data' => '您已经添加过相同的权限角色', 'status' => '0']);
+            return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
@@ -39,7 +39,6 @@ class RoleController extends Controller{
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
             }
@@ -104,9 +103,20 @@ class RoleController extends Controller{
         $node_ids = $request->input('module_node_ids');//角色权限节点
 
         if(OrganizationRole::checkRowExists([['id','<>',$id],['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断非本条数据是否有相同的的角色
-            return response()->json(['data' => '您已经添加过相同的权限角色', 'status' => '0']);
+            return response()->json(['data' => '存在另一个相同的权限角色名称', 'status' => '0']);
         }else {
-
+            DB::beginTransaction();
+            try {
+                $role_id = OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
+                foreach ($node_ids as $key => $val) {
+                    RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                }
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
+            }
         }
     }
 
