@@ -27,7 +27,7 @@ class SubordinateController extends Controller{
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//其他用户暂时不做权限
         }
         if($role_id <> '0'){
-            //后面补充
+            $selected_module_list = '';
         }
         return view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list]);
     }
