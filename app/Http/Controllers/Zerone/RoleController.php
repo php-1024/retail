@@ -136,6 +136,19 @@ class RoleController extends Controller{
 
     //删除权限角色
     public function role_delete(Request $request){
-        echo "这是是删除权限角色检测";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        DB::beginTransaction();
+        try{
+            OrganizationRole::where('id',$id)->delete();
+            RoleNode::where('role_id',$id)->delete();
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除功能模块失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除功能模块成功', 'status' => '1']);
     }
 }
