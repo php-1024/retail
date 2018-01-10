@@ -253,13 +253,6 @@ class ZeroneCheckAjax
         }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
             return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
         }
-        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
-            //把参数传递到下一个程序
-            return self::res(1, $request);
-        } else {
-            //用户输入验证码错误
-            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
-        }
     }
     //检测登陆提交数据
     public function checkID($request)
