@@ -14,6 +14,11 @@
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
 
+    <!-- Sweet Alert -->
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/switchery')}}/css/switchery.css" rel="stylesheet">
+
 </head>
 
 <body class="">
