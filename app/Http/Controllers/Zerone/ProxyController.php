@@ -22,7 +22,7 @@ class ProxyController extends Controller{
 
         $organization_name = $request->input('organization_name');//服务商名称
 
-        $where = [['organization_name',$organization_name]];
+        $where = ['organization_name',$organization_name];
 
         $name = Organization::checkRowExists($where);
 
