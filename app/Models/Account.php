@@ -31,7 +31,15 @@ class Account extends Model{
     }
 
     public static function addAccount($param){
-
+        $model = new Account();
+        $model->organization_id = $param['organization_id'];
+        $model->parent_id = $param['parent_id'];
+        $model->parent_tree = $param['parent_tree'];
+        $model->deepth = $param['deepth'];
+        $model->account = $param['account'];
+        $model->password = $param['password'];
+        $model->save();
+        return $model->id;
     }
 
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
