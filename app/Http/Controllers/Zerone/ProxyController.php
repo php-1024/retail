@@ -19,7 +19,7 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-
+            echo $request->input('organization_name');exit;
 //        $proxy_name = $request->input('organization_name');//服务商名称
 //
 //        $where = [['proxy_name',$proxy_name]];
