@@ -46,5 +46,6 @@ class Organization extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
+
 }
 ?>
