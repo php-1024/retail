@@ -114,7 +114,7 @@
                                             <li class="previous"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;上一步</button></li>
 
                                             <li class="next"><button type="button" class="btn btn-primary">下一步&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button></li>
-                                            <li class="finish"><button type="button" id="addbtn" class="btn btn-primary">完成&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button></li>
+                                            <li class="finish"><button type="button" id="addbtn" class="btn btn-primary" onclick="return postForm();">完成&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button></li>
                                         </ul>
                                     </div>
                                 </div>
