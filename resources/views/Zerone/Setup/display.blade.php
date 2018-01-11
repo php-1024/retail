@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" class="js-switch" checked  value="1"/>
+                                        <input type="checkbox" name="deleted_at[]" class="js-switch" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -82,7 +82,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" class="js-switch2" checked  value="1"/>
+                                        <input type="checkbox" name="deleted_at[]" class="js-switch2" checked  value="1"/>
                                     </div>
                                 </div>
 
