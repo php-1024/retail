@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\OrganizationRole;
 use App\Models\Module;
 use App\Models\ProgramModuleNode;
+use App\Models\Account;
 use Session;
 class SubordinateController extends Controller{
     //添加下级人员
@@ -41,7 +42,37 @@ class SubordinateController extends Controller{
 
     //添加下级人员数据提交
     public function subordinate_add_check(Request $request){
-        echo "这里是添加下级人员数据提交";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $account = $request->input('account');//用户账号
+        $password = $request->input('password');//登陆密码
+        $realname = $request->input('realname');//用户真实姓名
+        $mobile = $request->input('mobile');//用户手机号码
+        $role_id = $request->input('role_id');//用户角色ID
+        $module_node_ids = $request->input('module_node_ids');//用户权限节点
+
+        if(Account::checkRowExists([['organization_id','1'],[ 'account'=>$account ]])){//判断零壹管理平台中 ， 账号是否存在
+            return response()->json(['data' => '账号已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['organization_id','1'],[ 'mobile'=>$mobile ]])) {
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'account'=>$account ]])) {
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile'=>$mobile ]])) {
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色');//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '编辑权限角色失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '编辑权限角色成功', 'status' => '1']);
+        }
+
     }
 
     //下级人员列表

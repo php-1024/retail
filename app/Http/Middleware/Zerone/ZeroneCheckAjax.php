@@ -185,6 +185,9 @@ class ZeroneCheckAjax
         if(empty($request->input('repassword'))){
             return self::res(0,response()->json(['data' => '请再次输入用户登陆密码', 'status' => '0']));
         }
+        if($request->input('password')<>$request->input('repassword')){
+            return self::res(0,response()->json(['data' => '两次登陆密码输入不一致', 'status' => '0']));
+        }
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }

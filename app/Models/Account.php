@@ -30,6 +30,10 @@ class Account extends Model{
         return self::where('account',$username)->orWhere('mobile',$username)->first();
     }
 
+    public static function addAccount($param){
+
+    }
+
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
         $row = self::getPluck($where,'id')->toArray();
