@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
@@ -38,13 +39,13 @@ class ProxyController extends Controller{
             return response()->json(['data' => '手机号已存在', 'status' => '0']);
         }
 
+        $orgid = Organization::addProgram($request);
+        if(!empty($orgid)){
+            return response()->json(['data' => '注册成功', 'status' => '1']);
+        }else{
+            return response()->json(['data' => '注册失败', 'status' => '0']);
+        }
 
-
-//        $mobile = ProxyApply::getPluck($data,'proxy_owner_mobile');
-//
-//        if(!empty($mobile)){
-//            return response()->json(['data' => '手机号已注册', 'status' => '0']);
-//        }
 
     }
 
