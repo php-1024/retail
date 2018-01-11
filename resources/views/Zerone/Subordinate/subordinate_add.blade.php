@@ -66,18 +66,18 @@
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">用户密码</label>
+                                                <label class="col-sm-2 control-label">用户登陆密码</label>
                                                 <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">重复密码</label>
+                                                <label class="col-sm-2 control-label">重复登陆密码</label>
                                                 <div class="col-sm-10"><input type="password" name="repassword" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">真实姓名</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="text" name="realname" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
@@ -114,7 +114,7 @@
                                             <li class="previous"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;上一步</button></li>
 
                                             <li class="next"><button type="button" class="btn btn-primary">下一步&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button></li>
-                                            <li class="finish"><button type="button" id="addbtn" class="btn btn-primary">完成&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button></li>
+                                            <li class="finish"><button type="button" id="addbtn" class="btn btn-primary" onclick="return postForm();">完成&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button></li>
                                         </ul>
                                     </div>
                                 </div>
