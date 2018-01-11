@@ -31,5 +31,14 @@ class Organization extends Model{
         $organization->save();
         return $organization->id;
     }
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where){
+        $row = self::getPluck($where,'id')->toArray();
+        if(empty($row)){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
 ?>
