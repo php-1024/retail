@@ -19,6 +19,7 @@ class SetupController extends Controller{
     }
     //参数设置编辑
     public function setup_edit_check(Request $request){
+        dd($request);
         echo "这里是参数设置编辑页面";
     }
 }
