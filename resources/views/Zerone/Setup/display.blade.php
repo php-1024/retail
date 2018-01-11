@@ -93,6 +93,13 @@
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">安全密码</label>
+                                    <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
+
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
 
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">

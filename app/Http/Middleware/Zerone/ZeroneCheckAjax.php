@@ -28,7 +28,7 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit_check"://检测登陆和权限和安全密码和编辑系统参数而设置
+            case "zerone/ajax/setup_edit_check"://检测 登陆 和 权限 和 安全密码 和 编辑系统参数设置
                 $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
                 return self::format_response($re, $next);
                 break;
