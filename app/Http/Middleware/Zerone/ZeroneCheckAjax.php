@@ -38,6 +38,11 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
@@ -49,9 +54,6 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
-
-
-
         }
     }
     /******************************复合检测*********************************/
