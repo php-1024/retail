@@ -135,7 +135,7 @@ class ZeroneCheckAjax
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSetupEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -201,9 +201,22 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
+    //检测编辑网站设置数据
+    public function checkSetupEdit($request){
+        echo($request->input('cfg_value')['0']);
+        if(empty($request->input('cfg_value')['0'])){
+            return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
+        }
+        if(empty($request->input('cfg_value')['1'])){
+            return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测编辑权限角色数据
     public function checkRoleEdit($request){
-        dd($request);
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
