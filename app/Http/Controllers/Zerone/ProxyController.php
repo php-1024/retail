@@ -19,20 +19,21 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-        return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
 
-        $where = [['proxy_name',$request->input('proxy_name')]];
+        $proxy_name = $request->input('proxy_name');
 
-        $name = ProxyApply::getPluck($where,'proxy_name');
+        $where = [['proxy_name',$proxy_name]];
+
+        $name = ProxyApply::checkRowExists($where,'proxy_name');
 
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $mobile = ProxyApply::getPluck($data,'proxy_owner_mobile');
-
-        if(!empty($mobile)){
-            return response()->json(['data' => '手机号已注册', 'status' => '0']);
-        }
+//        $mobile = ProxyApply::getPluck($data,'proxy_owner_mobile');
+//
+//        if(!empty($mobile)){
+//            return response()->json(['data' => '手机号已注册', 'status' => '0']);
+//        }
 
     }
 
