@@ -30,5 +30,14 @@ class Setup extends Model{
         return self::all();
 
     }
+    //修改数据
+    public static function editSetup($where,$param){
+        if($model = self::where($where)->first()){
+            foreach($param as $key=>$val){
+                $model->$key=$val;
+            }
+            $model->save();
+        }
+    }
 }
 ?>
