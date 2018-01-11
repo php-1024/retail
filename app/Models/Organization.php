@@ -21,6 +21,7 @@ class Organization extends Model{
     //添加数据
     public static function addProgram($param){
         $organization = new Organization();//实例化程序模型
+
         $organization->organization_name = $param['organization_name'];//组织名称
         $organization->parent_id = $param['parent_id'];//多级组织的关系
         $organization->parent_tree = $param['parent_tree'];//上级程序

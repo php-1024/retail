@@ -38,13 +38,7 @@ class ProxyController extends Controller{
 //        if(!empty($mobile)){
 //            return response()->json(['data' => '手机号已存在', 'status' => '0']);
 //        }
-        $listdata[] = ['organization_name'=>$request->input('organization_name')];
-        $listdata[] = ['parent_id'=>0];
-        $listdata[] = ['parent_tree'=>0];
-        $listdata[] = ['program_id'=>0];
-        $listdata[] = ['type'=>2];
-        $listdata[] = ['status'=>1];
-        dump($listdata);exit;
+        $listdata = ['organization_name'=>$request->input('organization_name'),'parent_id'=>0,'parent_tree'=>0,'type'=>2,'status'=>1];
         $orgid = Organization::addProgram($listdata);
         if(!empty($orgid)){
             return response()->json(['data' => '注册成功', 'status' => '1']);
