@@ -294,7 +294,7 @@ class ZeroneCheckAjax
     }
     //检测服务商申请表信息
     public function checkProxyAdd($request){
-        if (empty($request->input('proxy_name'))) {
+        if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
         }
         if (empty($request->input('proxy_owner'))) {

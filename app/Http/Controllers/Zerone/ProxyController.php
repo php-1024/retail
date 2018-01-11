@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
@@ -19,32 +20,32 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
-        $proxy_name = $request->input('proxy_name');//服务商名称
-
-        $where = [['proxy_name',$proxy_name]];
-
-        $name = ProxyApply::checkRowExists($where);
-
-        if(!empty($name)){
-            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
-        }
-        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
-
-        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
-
-        $mobile = ProxyApply::checkRowExists($data);
-
-        if(!empty($mobile)){
-            return response()->json(['data' => '手机号已存在', 'status' => '0']);
-        }
-
-
-
-//        $mobile = ProxyApply::getPluck($data,'proxy_owner_mobile');
+//        $proxy_name = $request->input('organization_name');//服务商名称
+//
+//        $where = [['proxy_name',$proxy_name]];
+//
+//        $name = ProxyApply::checkRowExists($where);
+//
+//        if(!empty($name)){
+//            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
+//        }
+//        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
+//
+//        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
+//
+//        $mobile = ProxyApply::checkRowExists($data);
 //
 //        if(!empty($mobile)){
-//            return response()->json(['data' => '手机号已注册', 'status' => '0']);
+//            return response()->json(['data' => '手机号已存在', 'status' => '0']);
 //        }
+        $listdata = ['organization_name'=>$request->input('organization_name'),'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
+        $orgid = Organization::addProgram($listdata);
+        if(!empty($orgid)){
+            return response()->json(['data' => '注册成功', 'status' => '1']);
+        }else{
+            return response()->json(['data' => '注册失败', 'status' => '0']);
+        }
+
 
     }
 
