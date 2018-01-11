@@ -201,17 +201,15 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测编辑网站设置数据
+    //检测编辑系统参数设置数据
     public function checkSetupEdit($request){
         echo($request->input('cfg_value')['0']);
+        echo($request->input('cfg_value')['1']);
         if(empty($request->input('cfg_value')['0'])){
             return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
         }
         if(empty($request->input('cfg_value')['1'])){
             return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
         }
         return self::res(1,$request);
     }
