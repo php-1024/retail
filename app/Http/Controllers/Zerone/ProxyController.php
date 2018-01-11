@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use Session;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
 use Illuminate\Support\Facades\DB;
-use Session;
+
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){

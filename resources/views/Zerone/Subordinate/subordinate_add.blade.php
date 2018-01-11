@@ -66,12 +66,12 @@
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">用户密码</label>
+                                                <label class="col-sm-2 control-label">用户登陆密码</label>
                                                 <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">重复密码</label>
+                                                <label class="col-sm-2 control-label">重复登陆密码</label>
                                                 <div class="col-sm-10"><input type="password" name="repassword" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
