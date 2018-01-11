@@ -43,6 +43,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+                
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
@@ -183,6 +184,9 @@ class ZeroneCheckAjax
         }
         if(empty($request->input('repassword'))){
             return self::res(0,response()->json(['data' => '请再次输入用户登陆密码', 'status' => '0']));
+        }
+        if($request->input('password')<>$request->input('repassword')){
+            return self::res(0,response()->json(['data' => '两次登陆密码输入不一致', 'status' => '0']));
         }
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
