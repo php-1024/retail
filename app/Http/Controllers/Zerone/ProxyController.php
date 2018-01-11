@@ -22,10 +22,11 @@ class ProxyController extends Controller{
 
         $organization_name = $request->input('organization_name');//服务商名称
 
-        $where = ['organization_name',$organization_name];
+        $where = [['organization_name',$organization_name]];
 
-        $name = Organization::checkRowExists($where,'id');
-
+        $name = Organization::checkRowExists($where);
+        dump($name);
+        exit();
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
