@@ -1,5 +1,5 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<label class="col-sm-2 control-label">角色权限</label>
+<label class="col-sm-2 control-label">用户权限</label>
 <div class="col-sm-10">
     @foreach($module_node_list as $key=>$val)
         <group class="checked_box_group_{{ $val->id }}">

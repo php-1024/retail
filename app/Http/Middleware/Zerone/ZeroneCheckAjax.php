@@ -55,6 +55,21 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinate($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
     public function checkLoginAndRuleAndSafeAndProxyAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
@@ -156,6 +171,31 @@ class ZeroneCheckAjax
         }
     }
     /******************************单项检测*********************************/
+    //检测添加下级人员数据
+    public function checkSubordinateAdd($request){
+        if(empty($request->input('account'))){
+            return self::res(0,response()->json(['data' => '请输入用户账号', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入用户登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('repassword'))){
+            return self::res(0,response()->json(['data' => '请再次输入用户登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
+        }
+        if(empty($request->input('moble'))){
+            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        }
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测编辑权限角色数据
     public function checkRoleEdit($request){
         if(empty($request->input('id'))){
