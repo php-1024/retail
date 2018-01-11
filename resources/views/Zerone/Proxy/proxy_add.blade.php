@@ -47,7 +47,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_name" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="organization_name" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">负责人姓名</label>
