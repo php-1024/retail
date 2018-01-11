@@ -29,15 +29,15 @@ class ProxyController extends Controller{
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
-
-        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
-
-        $mobile = ProxyApply::checkRowExists($data);
-
-        if(!empty($mobile)){
-            return response()->json(['data' => '手机号已存在', 'status' => '0']);
-        }
+//        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
+//
+//        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
+//
+//        $mobile = ProxyApply::checkRowExists($data);
+//
+//        if(!empty($mobile)){
+//            return response()->json(['data' => '手机号已存在', 'status' => '0']);
+//        }
         $listdata[] = ['organization_name'=>$request->input('organization_name')];
         $listdata[] = ['parent_id'=>0];
         $listdata[] = ['parent_tree'=>0];
