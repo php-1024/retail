@@ -20,15 +20,15 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
-        $proxy_name = $request->input('proxy_name');//服务商名称
-
-        $where = [['proxy_name',$proxy_name]];
-
-        $name = ProxyApply::checkRowExists($where);
-
-        if(!empty($name)){
-            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
-        }
+//        $proxy_name = $request->input('organization_name');//服务商名称
+//
+//        $where = [['proxy_name',$proxy_name]];
+//
+//        $name = ProxyApply::checkRowExists($where);
+//
+//        if(!empty($name)){
+//            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
+//        }
 //        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
 //
 //        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
