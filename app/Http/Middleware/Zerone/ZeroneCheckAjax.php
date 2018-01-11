@@ -63,7 +63,7 @@ class ZeroneCheckAjax
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkSubordinate($re['response']);//检测是否具有权限
+            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
