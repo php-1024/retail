@@ -46,14 +46,6 @@ class Organization extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
-    //获取单行数据的其中一列(多条件)
-    public static function ergetPluck($where,$andWhere,$pluck){
-        $re = self::where($where)->where($andWhere)->pluck($pluck,'id')->toArray();
-        if(empty($re)){
-            return false;
-        }else{
-            return true;
-        }
-    }
+
 }
 ?>

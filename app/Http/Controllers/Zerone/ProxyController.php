@@ -31,9 +31,9 @@ class ProxyController extends Controller{
         }
         $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
 
-        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
-        $andData = [['type'=>2]];
-        $mobile = Organization::checkRowExists($data,$andData);
+        $data = [['proxy_owner_mobile',$proxy_owner_mobile],['type',2]];
+
+        $mobile = Organization::checkRowExists($data);
 
         if($mobile == 'true'){
             return response()->json(['data' => '手机号已存在', 'status' => '0']);
