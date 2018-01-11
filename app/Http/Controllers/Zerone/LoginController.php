@@ -81,6 +81,9 @@ class LoginController extends Controller{
                                     'account'=>$account_info->account,//用户账号
                                     'organization_id'=>$account_info->organization_id,//组织ID
                                     'is_super'=>$account_info->is_super,//是否超级管理员
+                                    'parent_id'=>$account_info->parent_id,//上级ID
+                                    'parent_tree'=>$account_info->parent_tree,//上级树
+                                    'deepth'=>$account_info->deepth,//账号在组织中的深度
                                     'mobile'=>$account_info->mobile,//绑定手机号
                                     'safe_password'=>$account_info->safe_password,//安全密码
                                     'account_status'=>$account_info->status,//用户状态

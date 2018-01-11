@@ -6,6 +6,7 @@ use App\Models\OrganizationRole;
 use App\Models\Module;
 use App\Models\ProgramModuleNode;
 use App\Models\Account;
+use App\Models\OperationLog;
 use Session;
 class SubordinateController extends Controller{
     //添加下级人员
@@ -52,13 +53,15 @@ class SubordinateController extends Controller{
         $role_id = $request->input('role_id');//用户角色ID
         $module_node_ids = $request->input('module_node_ids');//用户权限节点
 
-        if(Account::checkRowExists([['organization_id','1'],[ 'account'=>$account ]])){//判断零壹管理平台中 ， 账号是否存在
+
+        $organization_id = 1;//当前零壹管理平台就只有一个组织。
+        if(Account::checkRowExists([['organization_id',$organization_id],[ 'account'=>$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
             return response()->json(['data' => '账号已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id','1'],[ 'mobile'=>$mobile ]])) {
+        }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile'=>$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id','0'],[ 'account'=>$account ]])) {
-            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile'=>$mobile ]])) {
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'account'=>$account ]])) {//判断账号是否超级管理员账号
+            return response()->json(['data' => '账号已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile'=>$mobile ]])) {//判断手机号码是否超级管理员手机号码
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
         }else {
             DB::beginTransaction();
