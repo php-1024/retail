@@ -24,7 +24,7 @@ class ProxyController extends Controller{
 
         $where = [['organization_name',$organization_name]];
 
-        $name = Organization::checkRowExists($where);
+        $name = Organization::getPluck($where,'id');
 
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
