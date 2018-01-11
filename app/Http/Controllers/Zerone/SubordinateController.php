@@ -53,8 +53,15 @@ class SubordinateController extends Controller{
         $role_id = $request->input('role_id');//用户角色ID
         $module_node_ids = $request->input('module_node_ids');//用户权限节点
 
+        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
+        $parent_id = $admin_data['id'];//上级ID是当前用户ID
+        $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
+        $deepth = $admin_data['deepth']+1;
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
+
         if(Account::checkRowExists([['organization_id',$organization_id],[ 'account'=>$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
             return response()->json(['data' => '账号已存在', 'status' => '0']);
         }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile'=>$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
@@ -66,7 +73,16 @@ class SubordinateController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-
+                //添加账号
+                $account_id=Account::addAccount([
+                    'organization_id'=>$organization_id,
+                    'parent_id'=>$parent_id,
+                    'parent_tree'=>$parent_tree,
+                    'deepth'=>$deepth,
+                    'account'=>$account,
+                    'password'=>$password,
+                ]);
+                
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色');//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
