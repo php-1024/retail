@@ -40,5 +40,9 @@ class Organization extends Model{
             return true;
         }
     }
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
+    }
 }
 ?>
