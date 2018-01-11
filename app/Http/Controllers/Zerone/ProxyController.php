@@ -19,7 +19,7 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-            echo $request->input('organization_name');exit;
+
 //        $proxy_name = $request->input('organization_name');//服务商名称
 //
 //        $where = [['proxy_name',$proxy_name]];
@@ -44,6 +44,7 @@ class ProxyController extends Controller{
         $listdata[] = ['program_id'=>0];
         $listdata[] = ['type'=>2];
         $listdata[] = ['status'=>1];
+        dump($listdata);exit;
         $orgid = Organization::addProgram($listdata);
         if(!empty($orgid)){
             return response()->json(['data' => '注册成功', 'status' => '1']);
