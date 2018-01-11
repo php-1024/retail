@@ -24,12 +24,11 @@ class ProxyController extends Controller{
 
         $where = [['organization_name',$organization_name]];
 
-        $name = Organization::getPluck($where,'id');
-
+        $name = Organization::checkRowExists($where);
+        dump($name);
+        exit();
         if(!empty($name)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
-        }else{
-            return 1;
         }
 //        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
 //
