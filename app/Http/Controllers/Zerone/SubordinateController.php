@@ -53,6 +53,7 @@ class SubordinateController extends Controller{
         $role_id = $request->input('role_id');//用户角色ID
         $module_node_ids = $request->input('module_node_ids');//用户权限节点
 
+
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
         if(Account::checkRowExists([['organization_id',$organization_id],[ 'account'=>$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
             return response()->json(['data' => '账号已存在', 'status' => '0']);
