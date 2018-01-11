@@ -203,6 +203,7 @@ class ZeroneCheckAjax
     }
     //检测编辑权限角色数据
     public function checkRoleEdit($request){
+        dd($request);
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
