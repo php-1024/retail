@@ -14,6 +14,7 @@
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/wizard')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -137,7 +138,7 @@
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
     <script src="{{asset('public/Zerone/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
-
+    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
