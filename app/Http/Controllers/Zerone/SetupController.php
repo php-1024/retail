@@ -18,7 +18,7 @@ class SetupController extends Controller{
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
-    public function setup_edit(Request $request){
+    public function setup_edit_check(Request $request){
         dd($request);
         echo "这里是参数设置编辑页面";
     }
