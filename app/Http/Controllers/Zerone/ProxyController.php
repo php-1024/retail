@@ -23,21 +23,23 @@ class ProxyController extends Controller{
         $organization_name = $request->input('organization_name');//服务商名称
 
         $where = [['organization_name',$organization_name]];
-        echo 111;
+
         $name = Organization::checkRowExists($where);
 
-        if(!empty($name)){
+        if($name == 'true'){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-//        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
-//
-//        $data = [['proxy_owner_mobile',$proxy_owner_mobile]];
-//
-//        $mobile = ProxyApply::checkRowExists($data);
-//
-//        if(!empty($mobile)){
-//            return response()->json(['data' => '手机号已存在', 'status' => '0']);
-//        }
+        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
+
+        $data = [['proxy_owner_mobile',$proxy_owner_mobile,'type'=>2]];
+
+        $mobile = Organization::checkRowExists($data);
+
+        if($name == 'true'){
+            return response()->json(['data' => '手机号已存在', 'status' => '0']);
+        }else{
+            return 1;
+        }
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$request->input('organization_name'),'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];

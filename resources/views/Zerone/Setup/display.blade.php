@@ -53,7 +53,7 @@
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/setup_edit_check') }}">
-                                {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" class="js-switch" checked  value="1"/>
+                                        <input type="checkbox" name="deleted_at[]" class="js-switch" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -82,7 +82,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" class="js-switch2" checked  value="1"/>
+                                        <input type="checkbox" name="deleted_at[]" class="js-switch2" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -90,6 +90,13 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">人员构深度设置</label>
                                     <div class="col-sm-1"><input type="text" class="form-control"></div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">安全密码</label>
+                                    <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
+
                                 </div>
 
                                 <div class="hr-line-dashed"></div>

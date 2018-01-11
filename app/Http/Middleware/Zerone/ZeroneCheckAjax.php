@@ -28,7 +28,7 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit"://检测登陆和权限和安全密码和编辑系统参数而设置
+            case "zerone/ajax/setup_edit_check"://检测 登陆 和 权限 和 安全密码 和 编辑系统参数设置
                 $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
                 return self::format_response($re, $next);
                 break;
@@ -43,7 +43,6 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-                
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
@@ -136,7 +135,7 @@ class ZeroneCheckAjax
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSetupEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -199,6 +198,18 @@ class ZeroneCheckAjax
         }
         if(empty($request->input('module_node_ids'))){
             return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测编辑系统参数设置数据
+    public function checkSetupEdit($request){
+        echo($request->input('cfg_value')['0']);
+        echo($request->input('cfg_value')['1']);
+        if(empty($request->input('cfg_value')['0'])){
+            return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
+        }
+        if(empty($request->input('cfg_value')['1'])){
+            return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
         }
         return self::res(1,$request);
     }

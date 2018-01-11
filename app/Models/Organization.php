@@ -6,6 +6,8 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+
 class Organization extends Model{
     use SoftDeletes;
     protected $table = 'organization';
@@ -39,6 +41,10 @@ class Organization extends Model{
         }else{
             return true;
         }
+    }
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
     }
 }
 ?>
