@@ -16,7 +16,7 @@ class Account extends Model{
     //和账号多对多的关系
     public function account_roles()
     {
-        return $this->belongsToMany('App\Models\Role','role_account','account_id','role_id');
+        return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
 
     //和个人信息表一对一的关系
@@ -69,7 +69,7 @@ class Account extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('account_roles')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

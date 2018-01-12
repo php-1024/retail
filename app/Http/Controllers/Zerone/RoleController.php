@@ -82,8 +82,8 @@ class RoleController extends Controller{
     }
     //编辑权限角色
     public function role_edit(Request $request){
-        $id = $request->input('id');
-        $info = OrganizationRole::getOne([['id',$id]]);
+        $id = $request->input('id');//权限角色ID
+        $info = OrganizationRole::getOne([['id',$id]]);//获取该ID的信息
         $node_list = ProgramModuleNode::getRoleModuleNodes(1,$id);//获取当前角色拥有权限的模块和节点
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
