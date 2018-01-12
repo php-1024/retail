@@ -91,10 +91,10 @@
                                             @if($val->status == '1')
                                                 <label class="label label-primary">正常</label>
                                             @else
-                                                <label class="label label-primary">已冻结</label>
+                                                <label class="label label-warning">已冻结</label>
                                             @endif
                                         </td>
-                                        <td></td>
+                                        <td>第{{ $val->deepth }}层</td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
