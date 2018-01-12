@@ -16,6 +16,7 @@ class SetupController extends Controller{
         $setup_list = Setup::get_all();
 
         dump(Setup::getOne([['id','2']])->cfg_value);
+        Setup::getOne([['id','2']])->cfg_value = "123456";
 
 
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
@@ -25,6 +26,9 @@ class SetupController extends Controller{
         $cfg_value_arr = $request->input('cfg_value');//[0]服务商通道链接  [1]商户通道链接  [2]人员构深度设置
         $cfg_value_arr[1];
         $cfg_value_arr[2];
+        Setup::editSetup([['id',1]]);
+
+
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
 }
