@@ -14,9 +14,9 @@ class Account extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和账号多对多的关系
-    public function packages()
+    public function account_roles()
     {
-        return $this->belongsToMany('App\Models\Package','package_program','program_id','package_id');
+        return $this->belongsToMany('App\Models\Role','role_account','account_id','role_id');
     }
 
     //和个人信息表一对一的关系
@@ -69,7 +69,7 @@ class Account extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('account_roles')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

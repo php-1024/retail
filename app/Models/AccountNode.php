@@ -13,6 +13,7 @@ class AccountNode extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+    
 
     //添加用户权限节点关系
     public static function addAccountNode($param){
