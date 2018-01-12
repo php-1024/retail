@@ -190,7 +190,7 @@ class ZeroneCheckAjax
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
-        if(empty($request->input('moble'))){
+        if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
         }
         if(empty($request->input('role_id'))){

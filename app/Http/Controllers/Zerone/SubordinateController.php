@@ -2,10 +2,14 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\OrganizationRole;
 use App\Models\Module;
 use App\Models\ProgramModuleNode;
 use App\Models\Account;
+use App\Models\AccountNode;
+use App\Models\AccountInfo;
+use App\Models\RoleAccount;
 use App\Models\OperationLog;
 use Session;
 class SubordinateController extends Controller{
@@ -62,36 +66,34 @@ class SubordinateController extends Controller{
         $deepth = $admin_data['deepth']+1;
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
 
-        if(Account::checkRowExists([['organization_id',$organization_id],[ 'account'=>$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
+        if(Account::checkRowExists([[ 'account',$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
             return response()->json(['data' => '账号已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile'=>$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
+        }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id','0'],[ 'account'=>$account ]])) {//判断账号是否超级管理员账号
-            return response()->json(['data' => '账号已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile'=>$mobile ]])) {//判断手机号码是否超级管理员手机号码
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
-                //添加账号
-                $account_id=Account::addAccount([
-                    'organization_id'=>$organization_id,
-                    'parent_id'=>$parent_id,
-                    'parent_tree'=>$parent_tree,
-                    'deepth'=>$deepth,
-                    'account'=>$account,
-                    'password'=>$password,
-                ]);
-                
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色');//保存操作记录
+                //添加用户
+                $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$password,'mobile'=>$mobile]);
+                //添加用户个人信息
+                AccountInfo::addAccountInfo(['account_id'=>$account_id,'realname'=>$realname]);
+                //添加用户角色关系
+                RoleAccount::addRoleAccount(['account_id'=>$account_id,'role_id'=>$role_id]);
+                //添加用户权限节点关系
+                foreach($module_node_ids as $key=>$val){
+                    AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val]);
+                }
+                //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '编辑权限角色失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加了下级人员失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '编辑权限角色成功', 'status' => '1']);
+            return response()->json(['data' => '添加下级人员成功', 'status' => '1']);
         }
-
     }
 
     //下级人员列表

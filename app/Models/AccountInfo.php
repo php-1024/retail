@@ -13,5 +13,14 @@ class AccountInfo extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+
+    //添加用户个人信息
+    public static function addAccountInfo($param){
+        $model = new AccountInfo();
+        $model->account_id = $param['account_id'];
+        $model->realname = $param['realname'];
+        $model->save();
+        return $model->id;
+    }
 }
 ?>
