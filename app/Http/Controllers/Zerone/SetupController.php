@@ -20,7 +20,7 @@ class SetupController extends Controller{
     public function setup_edit_check(Request $request){
         $cfg_value_arr = $request->input('cfg_value');//[0]服务商通道链接  [1]商户通道链接  [2]人员构深度设置
         $cfg_value_arr[0];
-        dump(Setup::where('id','1')->first());
+        dump(Setup::where(['id'=>'1'])->first());
         dd(Setup::getOne([['id','2']]));
         $cfg_value_arr[1];
         $cfg_value_arr[2];
