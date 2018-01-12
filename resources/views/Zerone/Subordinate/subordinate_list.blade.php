@@ -84,7 +84,7 @@
                                     <tr>
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->account }}</td>
-                                        <td>@foreach($val->account_roles as $k->$v) {{$v->rolename}} @endforeach</td>
+                                        <td>@foreach($val->account_roles as $k=>$v) {{$v->rolename}} @endforeach</td>
                                         <td>{{ $val->account_info->realname }}</td>
                                         <td>{{ $val->mobile }}</td>
                                         <td>
