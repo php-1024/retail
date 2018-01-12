@@ -21,6 +21,7 @@ class SetupController extends Controller{
         $cfg_value_arr = $request->input('cfg_value');//[0]服务商通道链接  [1]商户通道链接  [2]人员构深度设置
         $cfg_value_arr[0];
         dump(Setup::all());
+        
         dd(Setup::getOne([['id','2']]));
         $cfg_value_arr[1];
         $cfg_value_arr[2];
