@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="deleted_at[]" class="js-switch" checked  value="1"/>
+                                        <input type="checkbox" name="deleted_at[]" id="js-switch" class="js-switch" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -78,7 +78,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="deleted_at[]" class="js-switch2" checked  value="1"/>
+                                        <input type="checkbox" name="deleted_at[]" id="js-switch2" class="js-switch2" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -144,6 +144,10 @@
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
+            });
+            $('#js-switch').click(function(){
+                $val = $(this).val();
+                alert($val);
             });
         });
         //提交表单
