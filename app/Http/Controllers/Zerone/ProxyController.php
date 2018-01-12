@@ -54,8 +54,7 @@ class ProxyController extends Controller{
             $realname = $request->input('realname');//负责人姓名
             $idcard = $request->input('idcard');//负责人身份证号
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
-           $aa= AccountInfo::addAccount($acinfodata);
-           echo $aa;
+            AccountInfo::addAccountInfo($acinfodata);
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
