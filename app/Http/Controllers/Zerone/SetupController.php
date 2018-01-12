@@ -39,7 +39,7 @@ class SetupController extends Controller{
         if(empty($merchanturl_deleted)){
             Setup::editSetup([['id',2]],['deleted_at'=>time()]);//修改保存商户通道链接开启状态
         }else{
-            Setup::editSetup([['id',1]],['deleted_at'=>null]);//修改保存服务商通道链接开启状态
+            Setup::editSetup([['id',2]],['deleted_at'=>null]);//修改保存服务商通道链接开启状态
         }
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
