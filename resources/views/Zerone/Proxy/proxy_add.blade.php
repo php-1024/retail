@@ -108,23 +108,6 @@
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
-//    $(document).ready(function() {
-//        $('#addbtn').click(function(){
-//            swal({
-//                title: "温馨提示",
-//                text: "修改成功",
-//                type: "success"
-//            });
-//        });
-//        var elem = document.querySelector('.js-switch');
-//        var switchery = new Switchery(elem, { color: '#1AB394' });
-//        $('.i-checks').iCheck({
-//            checkboxClass: 'icheckbox_square-green',
-//            radioClass: 'iradio_square-green',
-//        });
-//    });
-
-
     $(function(){
         //设置CSRF令牌
         $.ajaxSetup({
@@ -140,27 +123,26 @@ function postForm() {
     var url = target.attr("action");
     var data = target.serialize();
     $.post(url, data, function (json) {
-        console.log(json);
-//        if (json.status == -1) {
-//            window.location.reload();
-//        } else if(json.status == 1) {
-//            swal({
-//                title: "提示信息",
-//                text: json.data,
-//                confirmButtonColor: "#DD6B55",
-//                confirmButtonText: "确定",
-//            },function(){
-//                window.location.reload();
-//            });
-//        }else{
-//            swal({
-//                title: "提示信息",
-//                text: json.data,
-//                confirmButtonColor: "#DD6B55",
-//                confirmButtonText: "确定",
-//                //type: "warning"
-//            });
-//        }
+       if (json.status == -1) {
+           window.location.reload();
+       } else if(json.status == 1) {
+           swal({
+               title: "提示信息",
+               text: json.data,
+               confirmButtonColor: "#DD6B55",
+               confirmButtonText: "确定",
+           },function(){
+               window.location.reload();
+           });
+       }else{
+           swal({
+               title: "提示信息",
+               text: json.data,
+               confirmButtonColor: "#DD6B55",
+               confirmButtonText: "确定",
+               //type: "warning"
+           });
+       }
     });
 }
 </script>
