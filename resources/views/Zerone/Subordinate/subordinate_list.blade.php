@@ -85,7 +85,7 @@
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->account }}</td>
                                         <td>@foreach($val->account_roles as $k=>$v) {{$v->rolename}} @endforeach</td>
-                                        <td>{{ $val->account_info->realname }}</td>
+                                        <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@endif</td>
                                         <td>{{ $val->mobile }}</td>
                                         <td>
                                             @if($val->status == '1')
