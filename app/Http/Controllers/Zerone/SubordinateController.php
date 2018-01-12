@@ -65,11 +65,11 @@ class SubordinateController extends Controller{
         $deepth = $admin_data['deepth']+1;
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
 
-        if(Account::checkRowExists([[ 'account'=>$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
+        if(Account::checkRowExists([[ 'account',$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
             return response()->json(['data' => '账号已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile'=>$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
+        }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
-        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile'=>$mobile ]])) {//判断手机号码是否超级管理员手机号码
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
         }else {
             DB::beginTransaction();
