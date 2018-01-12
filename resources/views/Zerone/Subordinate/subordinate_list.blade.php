@@ -84,10 +84,16 @@
                                     <tr>
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->account }}</td>
-                                        <td>{{ $val->create_account->account }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>@foreach($val->account_roles as $k->$v) {{$v->rolename}} @endforeach</td>
+                                        <td>{{ $val->account_info->realname }}</td>
+                                        <td>{{ $val->mobile }}</td>
+                                        <td>
+                                            @if($val->status == '1')
+                                                <label class="label label-primary">正常</label>
+                                            @else
+                                                <label class="label label-primary">已冻结</label>
+                                            @endif
+                                        </td>
                                         <td></td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">

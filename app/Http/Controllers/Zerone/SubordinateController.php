@@ -103,7 +103,7 @@ class SubordinateController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account = $request->input('account');
-        $search_data = ['role_name'=>$account];
+        $search_data = ['account'=>$account];
         $organization_id = 1;//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'].','.$admin_data['id'];
         $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
