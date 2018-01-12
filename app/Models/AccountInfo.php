@@ -17,8 +17,9 @@ class AccountInfo extends Model
     //添加用户个人信息
     public static function addAccountInfo($param){
         $model = new AccountInfo();
-        $model->account_id = $param['account_id'];
-        $model->realname = $param['realname'];
+        $model->account_id = $param['account_id'];//组织id
+        $model->realname = $param['realname'];//用户名
+        $model->realname = $param['idcard'];//身份证号
         $model->save();
         return $model->id;
     }
