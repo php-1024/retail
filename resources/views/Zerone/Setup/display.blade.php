@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="deleted_at[]" id="js-switch" class="js-switch" checked  value="1"/>
+                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >商户通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="merchant" value="{{$setup_list[1]['cfg_value']}}"/>
+                                        <input type="text" class="form-control" name="merchanturl" value="{{$setup_list[1]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -78,7 +78,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="deleted_at[]" id="js-switch2" class="js-switch2" checked  value="1"/>
+                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" checked  value="1"/>
                                     </div>
                                 </div>
 
