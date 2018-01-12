@@ -16,7 +16,7 @@ class SetupController extends Controller{
         $setup_list = Setup::get_all();
 
         dump(Setup::getOne([['id','2']])->cfg_value);
-        Setup::getOne([['id','2']])->cfg_value = "123456";
+        dd($setup_list);
 
 
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
