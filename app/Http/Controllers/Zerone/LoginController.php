@@ -66,6 +66,22 @@ class LoginController extends Controller{
                     ErrorLog::addErrorTimes($ip,1);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
+                    //登陆成功要生成缓存的登陆信息
+                    $admin_data = [
+                        'id'=>$account_info->id,    //用户ID
+                        'account'=>$account_info->account,//用户账号
+                        'organization_id'=>$account_info->organization_id,//组织ID
+                        'is_super'=>$account_info->is_super,//是否超级管理员
+                        'parent_id'=>$account_info->parent_id,//上级ID
+                        'parent_tree'=>$account_info->parent_tree,//上级树
+                        'deepth'=>$account_info->deepth,//账号在组织中的深度
+                        'mobile'=>$account_info->mobile,//绑定手机号
+                        'safe_password'=>$account_info->safe_password,//安全密码
+                        'account_status'=>$account_info->status,//用户状态
+                        'ip'=>$ip,//登陆IP
+                        'login_position'=>$addr,//登陆地址
+                        'login_time'=>time()//登陆时间
+                    ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
                             ErrorLog::addErrorTimes($ip,1);
@@ -76,18 +92,6 @@ class LoginController extends Controller{
                             if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登陆日志
                                 Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
-                                $admin_data = [
-                                    'id'=>$account_info->id,    //用户ID
-                                    'account'=>$account_info->account,//用户账号
-                                    'organization_id'=>$account_info->organization_id,//组织ID
-                                    'is_super'=>$account_info->is_super,//是否超级管理员
-                                    'mobile'=>$account_info->mobile,//绑定手机号
-                                    'safe_password'=>$account_info->safe_password,//安全密码
-                                    'account_status'=>$account_info->status,//用户状态
-                                    'ip'=>$ip,//登陆IP
-                                    'login_position'=>$addr,//登陆地址
-                                    'login_time'=>time()//登陆时间
-                                ];
                                 $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 $this->create_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
@@ -101,18 +105,6 @@ class LoginController extends Controller{
                         if(LoginLog::addLoginLog($account_info['id'],1,0,$ip,$addr)) {//admin,唯一超级管理员，不属于任何组织
                             Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             //构造用户缓存数据
-                            $admin_data = [
-                                'id'=>$account_info->id,    //用户ID
-                                'account'=>$account_info->account,//用户账号
-                                'organization_id'=>$account_info->organization_id,//组织ID
-                                'is_super'=>$account_info->is_super,//是否超级管理员
-                                'mobile'=>$account_info->mobile,//绑定手机号
-                                'safe_password'=>$account_info->safe_password,//安全密码
-                                'account_status'=>$account_info->status,//用户状态
-                                'ip'=>$ip,//登陆IP
-                                'login_position'=>$addr,//登陆地址
-                                'login_time'=>time()//登陆时间
-                            ];
                             $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                             $this->create_menu_cache($account_info->id);//生成对应账号的系统菜单
                             return response()->json(['data' => '登录成功', 'status' => '1']);

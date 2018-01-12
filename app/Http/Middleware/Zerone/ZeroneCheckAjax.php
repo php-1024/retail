@@ -28,13 +28,18 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit"://检测登陆和权限和安全密码和编辑系统参数而设置
+            case "zerone/ajax/setup_edit_check"://检测 登陆 和 权限 和 安全密码 和 编辑系统参数设置
                 $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
                 return self::format_response($re, $next);
                 break;
 
             case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -49,12 +54,24 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
-
-
-
         }
     }
     /******************************复合检测*********************************/
+    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
     public function checkLoginAndRuleAndSafeAndProxyAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
@@ -118,7 +135,7 @@ class ZeroneCheckAjax
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSetupEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -156,6 +173,44 @@ class ZeroneCheckAjax
         }
     }
     /******************************单项检测*********************************/
+    //检测添加下级人员数据
+    public function checkSubordinateAdd($request){
+        if(empty($request->input('account'))){
+            return self::res(0,response()->json(['data' => '请输入用户账号', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入用户登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('repassword'))){
+            return self::res(0,response()->json(['data' => '请再次输入用户登陆密码', 'status' => '0']));
+        }
+        if($request->input('password')<>$request->input('repassword')){
+            return self::res(0,response()->json(['data' => '两次登陆密码输入不一致', 'status' => '0']));
+        }
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
+        }
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        }
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测编辑系统参数设置数据
+    public function checkSetupEdit($request){
+        if(empty($request->input('cfg_value')['0'])){
+            return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
+        }
+        if(empty($request->input('cfg_value')['1'])){
+            return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测编辑权限角色数据
     public function checkRoleEdit($request){
         if(empty($request->input('id'))){
@@ -249,16 +304,16 @@ class ZeroneCheckAjax
     }
     //检测服务商申请表信息
     public function checkProxyAdd($request){
-        if (empty($request->input('proxy_name'))) {
+        if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner'))) {
+        if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner_idcard'))) {
+        if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner_mobile'))) {
+        if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
         }
         if (empty($request->input('proxy_password'))) {

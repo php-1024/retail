@@ -47,19 +47,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_name" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="organization_name" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">负责人姓名</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_owner" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="realname" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">负责人身份证号</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_owner_idcard" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="idcard" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">手机号码</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_owner_mobile" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">服务商登陆密码</label>
@@ -108,23 +108,6 @@
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
-//    $(document).ready(function() {
-//        $('#addbtn').click(function(){
-//            swal({
-//                title: "温馨提示",
-//                text: "修改成功",
-//                type: "success"
-//            });
-//        });
-//        var elem = document.querySelector('.js-switch');
-//        var switchery = new Switchery(elem, { color: '#1AB394' });
-//        $('.i-checks').iCheck({
-//            checkboxClass: 'icheckbox_square-green',
-//            radioClass: 'iradio_square-green',
-//        });
-//    });
-
-
     $(function(){
         //设置CSRF令牌
         $.ajaxSetup({
@@ -140,26 +123,26 @@ function postForm() {
     var url = target.attr("action");
     var data = target.serialize();
     $.post(url, data, function (json) {
-        if (json.status == -1) {
-            window.location.reload();
-        } else if(json.status == 1) {
-            swal({
-                title: "提示信息",
-                text: json.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-        }else{
-            swal({
-                title: "提示信息",
-                text: json.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-                //type: "warning"
-            });
-        }
+       if (json.status == -1) {
+           window.location.reload();
+       } else if(json.status == 1) {
+           swal({
+               title: "提示信息",
+               text: json.data,
+               confirmButtonColor: "#DD6B55",
+               confirmButtonText: "确定",
+           },function(){
+               window.location.reload();
+           });
+       }else{
+           swal({
+               title: "提示信息",
+               text: json.data,
+               confirmButtonColor: "#DD6B55",
+               confirmButtonText: "确定",
+               //type: "warning"
+           });
+       }
     });
 }
 </script>
