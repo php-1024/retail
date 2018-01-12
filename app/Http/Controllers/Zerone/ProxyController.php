@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\LoginLog;
+use App\Models\OperationLog;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -25,6 +26,8 @@ class ProxyController extends Controller{
     public function proxy_add_check(Request $request){
 
         $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
+
+        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
 
         $organization_name = $request->input('organization_name');//服务商名称
 
@@ -55,6 +58,8 @@ class ProxyController extends Controller{
             $idcard = $request->input('idcard');//负责人身份证号
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$admin_this['account'],'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
