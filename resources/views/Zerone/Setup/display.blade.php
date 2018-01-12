@@ -145,10 +145,6 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
-            $('#js-switch').click(function(){
-                $val = $(this).val();
-                alert($val);
-            });
         });
         //提交表单
         function postForm() {
