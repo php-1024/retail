@@ -84,7 +84,7 @@ class SubordinateController extends Controller{
                 foreach($module_node_ids as $key=>$val){
                     AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val]);
                 }
-                //添加下级人员
+                //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
