@@ -85,7 +85,7 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">人员构深度设置</label>
-                                    <div class="col-sm-1"><input type="text" name="cfg_value[]" class="form-control"></div>
+                                    <div class="col-sm-1"><input type="text" name="depth" class="form-control"></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
