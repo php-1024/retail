@@ -12,6 +12,12 @@ class Account extends Model{
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+
+    //和个人信息表一对一的关系
+    public function account_info(){
+        return $this->hasOne('App\Models\AccountInfo', 'account_id');
+    }
+
     //和organization表多对一的关系
     public function organization(){
         return $this->belongsTo('App\Models\Organization', 'organization_id');
