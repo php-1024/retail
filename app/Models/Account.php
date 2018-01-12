@@ -38,6 +38,7 @@ class Account extends Model{
         $model->deepth = $param['deepth'];
         $model->account = $param['account'];
         $model->password = $param['password'];
+        $model->mobile = $param['mobile'];
         $model->save();
         return $model->id;
     }
