@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">手机号码</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_owner_mobile" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">服务商登陆密码</label>

@@ -313,7 +313,7 @@ class ZeroneCheckAjax
         if (empty($request->input('proxy_owner_idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner_mobile'))) {
+        if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
         }
         if (empty($request->input('proxy_password'))) {
