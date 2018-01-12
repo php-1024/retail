@@ -14,6 +14,12 @@ class AccountNode extends Model
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和账号多对多的关系
+    public function accounts()
+    {
+        return $this->belongsToMany('App\Models\Account','role_account','role_id','account_id');
+    }
+
     //添加用户权限节点关系
     public static function addAccountNode($param){
         $model = new AccountNode();
