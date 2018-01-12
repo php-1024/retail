@@ -74,13 +74,16 @@ class SubordinateController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-                //添加账号
+                //添加用户
                 $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$password]);
-                //添加账号信息
+                //添加用户个人信息
                 AccountInfo::addAccountInfo(['account_id'=>$account_id,'realname'=>$realname]);
-                //添加账号角色关系
+                //添加用户角色关系
                 RoleAccount::addRoleAccount(['account_id'=>$account_id,'role_id'=>$role_id]);
-
+                //添加用户权限节点关系
+                foreach($module_node_ids as $key=>$val){
+                    AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val]);
+                }
                 //添加下级人员
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
                 DB::commit();
