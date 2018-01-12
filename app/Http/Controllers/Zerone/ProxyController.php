@@ -26,9 +26,8 @@ class ProxyController extends Controller{
     public function proxy_add_check(Request $request){
 
         $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
-
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
-
+        $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//服务商名称
 
         $where = [['organization_name',$organization_name]];
@@ -59,7 +58,7 @@ class ProxyController extends Controller{
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$admin_this['account'],'添加了服务商：'.$organization_name);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
