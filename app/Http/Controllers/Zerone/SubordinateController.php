@@ -76,7 +76,7 @@ class SubordinateController extends Controller{
             DB::beginTransaction();
             try {
                 //添加用户
-                $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$password,'mobile'=>$mobile]);
+                $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$encryptPwd,'mobile'=>$mobile]);
                 //添加用户个人信息
                 AccountInfo::addAccountInfo(['account_id'=>$account_id,'realname'=>$realname]);
                 //添加用户角色关系
