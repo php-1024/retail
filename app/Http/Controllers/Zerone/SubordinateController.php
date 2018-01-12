@@ -102,7 +102,13 @@ class SubordinateController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Zerone/Subordinate/subordinate_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $account = $request->input('account');
+        $search_data = ['role_name'=>$account];
+        $organization_id = 1;//零壹管理平台只有一个组织
+        $parent_tree = $admin_data['parent_tree'].','.$admin_data['id'];
+        $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
+        dump($list);
+        return view('Zerone/Subordinate/subordinate_list',['search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //编辑下级人员
