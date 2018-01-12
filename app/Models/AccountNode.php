@@ -1,23 +1,24 @@
 <?php
 /**
- * role_node表的模型
+ * program_admin表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class RoleAccount extends Model{
+class AccountNode extends Model
+{
     use SoftDeletes;
-    protected $table = 'role_node';
+    protected $table = 'account_node';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //添加用户角色关系
-    public static function addRoleAccount($param){
-        $model = new RoleAccount();
+    //添加用户权限节点关系
+    public static function addAccountNode($param){
+        $model = new AccountNode();
         $model->account_id = $param['account_id'];
-        $model->role_id = $param['role_id'];
+        $model->node_id = $param['node_id'];
         $model->save();
         return $model->id;
     }

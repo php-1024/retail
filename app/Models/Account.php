@@ -29,7 +29,7 @@ class Account extends Model{
     public static function getOneForLogin($username){
         return self::where('account',$username)->orWhere('mobile',$username)->first();
     }
-
+    //添加用户
     public static function addAccount($param){
         $model = new Account();
         $model->organization_id = $param['organization_id'];
