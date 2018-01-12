@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\LoginLog;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -10,8 +11,9 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = LoginLog::where('id','1')->find(1);
         dd($admin_data);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -22,7 +24,6 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
         $organization_name = $request->input('organization_name');//服务商名称
 
