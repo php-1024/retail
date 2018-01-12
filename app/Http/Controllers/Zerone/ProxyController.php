@@ -13,7 +13,7 @@ class ProxyController extends Controller{
     public function proxy_add(Request $request){
         $admin_data = LoginLog::where('id',1)->first();
 
-        dd($admin_data);
+        dd($admin_data->id);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
