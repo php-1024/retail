@@ -7,6 +7,7 @@ use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
+use Illuminate\Support\Facades\DB;
 use Session;
 class ProxyController extends Controller{
     //添加服务商
@@ -42,7 +43,6 @@ class ProxyController extends Controller{
         $key = config("app.zerone_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
