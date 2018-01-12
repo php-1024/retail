@@ -19,11 +19,6 @@ class SetupController extends Controller{
     //参数设置编辑
     public function setup_edit_check(Request $request){
         $cfg_value_arr = $request->input('cfg_value');//[0]服务商通道链接  [1]商户通道链接  [2]人员构深度设置
-        return self::res(0,response()->json(['data' => '系统参数修改成功！', 'status' => '0']));
-    }
-    //工厂方法返回结果
-    public static function res($status, $response)
-    {
-        return ['status' => $status, 'response' => $response];
+        return response()->json(['data' => '系统参数修改成功！', 'status' => '0']);
     }
 }
