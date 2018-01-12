@@ -52,7 +52,9 @@ class ProxyController extends Controller{
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
             $realname = $request->input('realname');//负责人姓名
+            echo $realname;
             $idcard = $request->input('idcard');//负责人身份证号
+            echo $idcard;
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
 
             AccountInfo::addAccount($acinfodata);
