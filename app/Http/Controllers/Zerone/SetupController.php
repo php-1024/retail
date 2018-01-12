@@ -20,7 +20,7 @@ class SetupController extends Controller{
     public function setup_edit_check(Request $request){
         $cfg_value_arr = $request->input('cfg_value');//[0]服务商通道链接  [1]商户通道链接  [2]人员构深度设置
         Setup::getOne([['id',1]]) = $cfg_value_arr[0];
-        dd(Setup::getOne('id',1));
+        dd(Setup::getOne([['id',1]]));
         $cfg_value_arr[1];
         $cfg_value_arr[2];
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
