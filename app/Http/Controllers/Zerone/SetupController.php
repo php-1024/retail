@@ -26,7 +26,9 @@ class SetupController extends Controller{
         $serviceurl = $request->input('serviceurl');//[serviceurl]服务商通道链接
         $merchant = $request->input('merchant');//[merchant]商户通道链接
         $depth = $request->input('depth');//[depth]人员构深度设置
-        Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);//[0]修改保存服务商通道链接
+        Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);//修改保存服务商通道链接
+        Setup::editSetup([['id',2]],['cfg_value'=>$merchant]);//修改保存商户通道链接
+        Setup::editSetup([['id',3]],['cfg_value'=>$depth]);//修改保存人员构深度设置
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
 }
