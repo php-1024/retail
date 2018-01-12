@@ -205,6 +205,7 @@ class ZeroneCheckAjax
     public function checkSetupEdit($request){
         echo $request->input('serviceurl_deleted');
         echo $request->input('merchanturl_deleted');
+        exit();
         if(empty($request->input('serviceurl'))){
             return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
         }
