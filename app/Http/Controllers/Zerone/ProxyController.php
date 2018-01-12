@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -10,6 +11,7 @@ class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -20,6 +22,8 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+
         $organization_name = $request->input('organization_name');//服务商名称
 
         $where = [['organization_name',$organization_name]];
@@ -29,22 +33,16 @@ class ProxyController extends Controller{
         if($name == 'true'){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $proxy_owner_mobile = $request->input('proxy_owner_mobile');//手机号码
+        $parent_id = '1';//上级ID是当前用户ID
+        $parent_tree = '0'.','.'1';//树是上级的树拼接上级的ID；
+        $deepth = 1;  //用户在该组织里的深度
 
-        $data = [['proxy_owner_mobile',$proxy_owner_mobile],['type',2]];
-
-        $mobile = Organization::checkRowExists($data);
-
-        if($mobile == 'true'){
-            return response()->json(['data' => '手机号已存在', 'status' => '0']);
-        }else{
-            return 1;
-        }
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$request->input('organization_name'),'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
-            Organization::addProgram($listdata);
-            //OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
+            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+
+
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚

@@ -38,13 +38,13 @@ class Account extends Model{
     //添加用户
     public static function addAccount($param){
         $model = new Account();
-        $model->organization_id = $param['organization_id'];
-        $model->parent_id = $param['parent_id'];
-        $model->parent_tree = $param['parent_tree'];
-        $model->deepth = $param['deepth'];
-        $model->account = $param['account'];
-        $model->password = $param['password'];
-        $model->mobile = $param['mobile'];
+        $model->organization_id = $param['organization_id'];//组织ID
+        $model->parent_id = $param['parent_id'];//上级用户ID
+        $model->parent_tree = $param['parent_tree'];//组织树
+        $model->deepth = $param['deepth'];//用户在该组织里的深度
+        $model->account = $param['account'];//登陆账号（零壹平台,自动生成）
+        $model->password = $param['password'];//登陆密码（MD5默认32位长度）
+        $model->mobile = $param['mobile'];//管理员绑定的手机号码
         $model->save();
         return $model->id;
     }
