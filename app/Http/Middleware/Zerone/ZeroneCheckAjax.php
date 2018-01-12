@@ -206,7 +206,7 @@ class ZeroneCheckAjax
         if(empty($request->input('serviceurl'))){
             return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
         }
-        if(empty($request->input('merchant'))){
+        if(empty($request->input('merchanturl'))){
             return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
         }
         return self::res(1,$request);
