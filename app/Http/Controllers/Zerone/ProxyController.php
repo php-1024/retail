@@ -2,16 +2,17 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\LoginLog;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
+use Illuminate\Support\Facades\DB;
 use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -22,7 +23,7 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
 
         $organization_name = $request->input('organization_name');//服务商名称
 
@@ -33,21 +34,28 @@ class ProxyController extends Controller{
         if($name == 'true'){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
-        $parent_id = '1';//上级ID是当前用户ID
-        $parent_tree = '0'.','.'1';//树是上级的树拼接上级的ID；
-        $deepth = 1;  //用户在该组织里的深度
+        $parent_id = $admin_data['id'];//上级ID是当前用户ID
+        $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
+        $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
+        $mobile = $request->input('mobile');//手机号码
+        $password = $request->input('password');//用户密码
 
+        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$request->input('organization_name'),'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
-
-
+            $account  = 'P'.$organization_id.'_'.$mobile;//用户账号
+            $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
+            Account::addAccount($accdata);
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
+        return response()->json(['data' => '注册成功', 'status' => '1']);
 
     }
 
