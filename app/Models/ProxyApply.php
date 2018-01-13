@@ -39,6 +39,7 @@ class ProxyApply extends Model{
     }
     //修改数据
     public static function editProxyApply($where,$param){
+        dump($param);
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
