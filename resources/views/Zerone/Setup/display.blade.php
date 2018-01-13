@@ -61,11 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch"
-                                               @if($setup_list[4]['cfg_value']==1)
-                                               checked
-                                               @endif
-                                               value="{{$setup_list[4]['cfg_value']}}"/>
+                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" @if($setup_list[4]['cfg_value']==1) checked @endif value="{{$setup_list[4]['cfg_value']}}"/>
                                     </div>
                                 </div>
 
@@ -82,9 +78,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" @if($setup_list[5]['cfg_value']==1)
-                                        checked
-                                               @endif  value="{{$setup_list[5]['cfg_value']}}"/>
+                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" @if($setup_list[5]['cfg_value']==1) checked @endif value="{{$setup_list[5]['cfg_value']}}"/>
                                     </div>
                                 </div>
 
