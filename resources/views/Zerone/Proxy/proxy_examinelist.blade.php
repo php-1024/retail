@@ -88,14 +88,14 @@
                                     <td>{{$value->proxy_owner}}</td>
 
                                     <td>{{$value->proxy_owner_idcard}}</td>
-                                    <td>{{$value->proxy_owner_mobile}}<</td>
+                                    <td>{{$value->proxy_owner_mobile}}</td>
                                     <td>
                                         <label class="label label-primary">
-                                         @if($value->proxy_owner_mobile==0)
+                                         @if($value->status==0)
                                                 待审核
-                                         @elseif($value->proxy_owner_mobile==1)
+                                         @elseif($value->status==1)
                                                 已通过
-                                         @elseif($value->proxy_owner_mobile==-1)
+                                         @elseif($value->status==-1)
                                                 未通过
                                          @endif
                                         </label>
