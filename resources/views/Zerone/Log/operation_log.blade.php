@@ -98,11 +98,6 @@
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
                                 @endforeach
-                                {{--<tr>--}}
-                                    {{--<td>10</td>--}}
-                                    {{--<td>您修改了登陆密码</td>--}}
-                                    {{--<td>2017-08-08 10:30:30</td>--}}
-                                {{--</tr>--}}
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -142,7 +137,7 @@
                                 </tfoot>
 
                                 <td colspan="99" class="text-right">
-                                    {!! $operation_log_list->links() !!}
+                                    {!! $operation_log_list->link() !!}
                                 </td>
                             </table>
 
