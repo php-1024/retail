@@ -1,13 +1,18 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/role_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{ $info->id }}">
+    <input type="hidden" name="id" id="id" value="">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <h3>确认操作</h3>
             </div>
             <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务商名称</label>
+                    <div class="col-sm-10">kbzz</div>
+                </div>
+                <div style="clear:both"></div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
                     <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
