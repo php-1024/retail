@@ -19,6 +19,15 @@ class Account extends Model{
         return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
 
+    //修改账号
+    public static function editAccount($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
     //和个人信息表一对一的关系
     public function account_info(){
         return $this->hasOne('App\Models\AccountInfo', 'account_id');

@@ -120,7 +120,32 @@ class SubordinateController extends Controller{
 
     //编辑下级人员数据提交
     public function subordinate_edit_check(Request $request){
-        echo "这里是编辑下级人员数据提交";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要编辑的人员的ID
+        $password = $request->input('password');//登陆密码
+        $realname = $request->input('realname');//真实姓名
+        $mobile = $request->input('mobile');//手机号码
+        $organization_id = 1;
+       if(Account::checkRowExists([['id','<>',$id],['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['id','<>',$id],['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+                //添加用户
+                $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$encryptPwd,'mobile'=>$mobile]);
+
+                //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加了下级人员失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加下级人员成功', 'status' => '1']);
+        }
     }
 
     //冻结解冻下级人员
