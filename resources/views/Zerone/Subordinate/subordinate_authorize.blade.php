@@ -30,6 +30,8 @@
                     </div>
                     <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
                 </div>
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
 
                 <div class="form-group" id="module_node_box"></div>
                 <div style="clear:both"></div>
@@ -51,9 +53,6 @@
     </div>
 </form>
 <script>
-    $(document).ready(function() {
-        get_quick_rule('#role_id');
-    });
     //获取上级程序节点
     function get_quick_rule(obj){
         var url =  $('#quick_rule_url').val();
