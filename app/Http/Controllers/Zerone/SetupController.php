@@ -17,7 +17,7 @@ class SetupController extends Controller{
 
         dump(Setup::getOne([['id','2']])->cfg_value);
         dump($request);
-        $re = Setup::deleteSetup([['id','1']]);//修改保存服务商通道链接开启状态(软删除)
+        $re = Setup::deleteSetup(['id','1']);//修改保存服务商通道链接开启状态(软删除)
         if ($re){
             dump('删除成功');
         }else{
