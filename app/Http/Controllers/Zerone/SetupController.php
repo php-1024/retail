@@ -31,7 +31,7 @@ class SetupController extends Controller{
         Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);//修改保存服务商通道链接
         Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);//修改保存商户通道链接
         Setup::editSetup([['id',3]],['cfg_value'=>$depth]);//修改保存人员构深度设置
-        Setup::deleteSetup(['id',1]);//修改保存服务商通道链接开启状态(软删除)
+        Setup::where(['id'=>1])->delete();//修改保存服务商通道链接开启状态(软删除)
         if(empty($serviceurl_deleted)){
             Setup::editSetup([['id',1]],['deleted_at'=>time()]);//修改保存服务商通道链接开启状态
         }else{
