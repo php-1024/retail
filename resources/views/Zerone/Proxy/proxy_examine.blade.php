@@ -33,6 +33,7 @@
 <script>
     //提交表单
     function postForm() {
+        alert(1);
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
