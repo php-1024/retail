@@ -19,6 +19,15 @@ class RoleAccount extends Model{
         return $this->belongsToMany('App\Models\Account','role_account','role_id','account_id');
     }
 
+    //修改账号与角色间的关系
+    public static function editRoleAccount($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
     //添加用户角色关系
     public static function addRoleAccount($param){
         $model = new RoleAccount();
