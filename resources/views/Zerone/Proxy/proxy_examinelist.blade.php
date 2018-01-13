@@ -173,14 +173,7 @@
 
 
 <script>
-//    $(function(){
-//        //设置CSRF令牌
-//        $.ajaxSetup({
-//            headers: {
-//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//            }
-//        });
-//    });
+
 //    $(document).ready(function() {
 //        var elem = document.querySelector('.js-switch');
 //        var switchery = new Switchery(elem, { color: '#1AB394' });
@@ -232,39 +225,40 @@ $(function(){
 });
 
 //获取用户信息，编辑密码框
-function getEditForm(id){
-    var url = $('#role_edit_url').val();
-    var token = $('#_token').val();
-
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
-        });
-        return;
-    }
-
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }else{
-            $('#myModal').html(response);
-            $('#myModal').modal();
-        }
-    });
+function getEditForm(id,val){
+    alert(val);
+//    var url = $('#role_edit_url').val();
+//    var token = $('#_token').val();
+//
+//    if(id==''){
+//        swal({
+//            title: "提示信息",
+//            text: '数据传输错误',
+//            confirmButtonColor: "#DD6B55",
+//            confirmButtonText: "确定",
+//        },function(){
+//            window.location.reload();
+//        });
+//        return;
+//    }
+//
+//    var data = {'id':id,'_token':token};
+//    $.post(url,data,function(response){
+//        if(response.status=='-1'){
+//            swal({
+//                title: "提示信息",
+//                text: response.data,
+//                confirmButtonColor: "#DD6B55",
+//                confirmButtonText: "确定",
+//            },function(){
+//                window.location.reload();
+//            });
+//            return;
+//        }else{
+//            $('#myModal').html(response);
+//            $('#myModal').modal();
+//        }
+//    });
 }
 </script>
 </body>
