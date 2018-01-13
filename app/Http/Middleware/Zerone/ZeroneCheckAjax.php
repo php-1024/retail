@@ -57,8 +57,8 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-
-            case "zerone/ajax/role_delete"://删除权限角色 测 登陆 和 权限 和 安全密码 和 ID是否为空
+            case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登陆 和 权限 和 安全密码 和 ID是否为空
+            case "zerone/ajax/role_delete"://删除权限角色 检测 登陆 和 权限 和 安全密码 和 ID是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;

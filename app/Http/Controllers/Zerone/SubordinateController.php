@@ -162,12 +162,18 @@ class SubordinateController extends Controller{
 
     //输入安全密码判断是否能冻结的页面
     public function subordinate_lock_confirm(Request $request){
-        $id = $request->input('id');
-        return view('Zerone/Subordinate/subordinate_lock_confirm',['id'=>$id]);
+        $id = $request->input('id');//要操作的用户的ID
+        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        $status = $request->input('status');//当前用户的状态
+        return view('Zerone/Subordinate/subordinate_lock_confirm',['id'=>$id,'account'=>$account,'status'=>$status]);
     }
     //冻结解冻下级人员
     public function subordinate_lock(Request $request){
-        echo "这里是冻结下级人员";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要操作的用户的ID
+        $account = $request->input('account');//要操作的用户的账号,用于记录
+        $status = $request->input('status');//当前用户的状态
     }
 
     //删除下级人员
