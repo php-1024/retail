@@ -117,7 +117,7 @@ class ProxyController extends Controller{
                 $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
-                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'proxy_password'=>$proxylist['proxy_password'],'organization_id'=>$organization_id,'account'=>$account];
+                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$proxylist['proxy_password'],'organization_id'=>$organization_id,'account'=>$account];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
                 $realname = $proxylist['proxy_name'];//负责人姓名
