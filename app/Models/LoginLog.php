@@ -26,6 +26,10 @@ class LoginLog extends Model{
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
+    //分页查询获取列表
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
 
     //添加登录日志
     public static function addLoginLog($account_id,$program_id,$organization_id,$ip,$addr){
