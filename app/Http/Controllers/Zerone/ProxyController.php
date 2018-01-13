@@ -81,9 +81,8 @@ class ProxyController extends Controller{
     public function proxy_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        echo $sta;exit;
         $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Proxy/proxy_examine',['info'=>$info,'sta',$sta]);
+        return view('Zerone/Proxy/proxy_examine',['info'=>$info,'sta'=>$sta]);
     }
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
