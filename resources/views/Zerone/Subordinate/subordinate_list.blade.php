@@ -108,7 +108,7 @@
                                             @else
                                                 <button type="button" class="btn  btn-xs btn-warning"  onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
-                                            <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                            <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->acconut }}')"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -155,7 +155,7 @@
         });
         //获取删除权限角色删除密码确认框
         function getLockComfirmForm(id,account,status){
-            var url = $('#subordinate_lock_confirm_url').val();
+            var url = $('#subordinate_delte_confirm_url').val();
             var token = $('#_token').val();
 
             if(id==''){
@@ -189,6 +189,41 @@
             });
         }
 
+        //获取用户信息，编辑密码框
+        function getDeleteComfirmForm(id,acconut){
+            var url = $('#subordinate_authorize_url').val();
+            var token = $('#_token').val();
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var data = {'id':id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
 
         //获取用户信息，编辑密码框
         function getAuthorizeForm(id){
