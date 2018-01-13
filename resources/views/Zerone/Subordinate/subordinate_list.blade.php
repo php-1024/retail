@@ -99,7 +99,7 @@
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" class="btn  btn-xs btn-info"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
-                                            <button type="button" class="btn  btn-xs btn-success"  onclick="getLockComfirmForm({{ $val->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <button type="button" class="btn  btn-xs btn-success"  onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
@@ -146,7 +146,7 @@
             });
         });
         //获取删除权限角色删除密码确认框
-        function getLockComfirmForm(id){
+        function getLockComfirmForm(id,account,status){
             var url = $('#subordinate_lock_confirm_url').val();
             var token = $('#_token').val();
 
@@ -162,7 +162,7 @@
                 return;
             }
 
-            var data = {'id':id,'_token':token};
+            var data = {'id':id,'account':account,'status':status,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
                     swal({
