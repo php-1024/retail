@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">真实姓名</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{ $info->account_info->realname }}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="@if(empty($info->account_info)){{ $info->account_info->realname }}@endif"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
