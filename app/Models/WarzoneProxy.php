@@ -23,7 +23,7 @@ class WarzoneProxy extends Model{
     }
     //添加数据
     public static function addWarzoneProxy($param){
-        $program = new ProxyApply();//实例化程序模型
+        $program = new WarzoneProxy();//实例化程序模型
         $program->zone_id = $param['zone_id'];//程序名称
         $program->organization_id = $param['organization_id'];//程序名称
         $program->save();
