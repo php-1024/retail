@@ -142,12 +142,12 @@ class SubordinateController extends Controller{
             DB::beginTransaction();
             try {
                 //添加用户
-                $data = ['mobile'=>$mobile];
+                $data['mobile'] = $mobile;
                 if (!empty($password)) {
                     $data['password'] = $encryptPwd;
                 }
                 Account::editAccount([[ 'id',$id]],$data);
-                AccountInfo::editAccountInfo([['account_id',$id]],['realname',$realname]);
+                AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 DB::commit();
