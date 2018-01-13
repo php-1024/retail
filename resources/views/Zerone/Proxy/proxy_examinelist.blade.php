@@ -97,38 +97,6 @@
                                         <button type="button" id="notokBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>刘记新科技有限公司</td>
-                                    <td>东部战区</td>
-                                    <td>刘兴文</td>
-                                    <td>440*** **** **** 2713</td>
-                                    <td>13123456789</td>
-                                    <td>
-                                        <label class="label label-warning">待审核</label>
-                                    </td>
-                                    <td>2017-08-08 10:30:30</td>
-                                    <td class="text-right">
-                                        <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>刘记新科技有限公司</td>
-                                    <td>西部战区</td>
-                                    <td>刘兴文</td>
-                                    <td>440*** **** **** 2713</td>
-                                    <td>13123456789</td>
-                                    <td>
-                                        <label class="label label-danger">已拒绝</label>
-                                    </td>
-                                    <td>2017-08-08 10:30:30</td>
-                                    <td class="text-right">
-                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-primary"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                        <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
-                                    </td>
-                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
