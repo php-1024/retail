@@ -14,15 +14,6 @@ class SetupController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $setup_list = Setup::get_all();
-
-        dump(Setup::getOne([['id','2']])->cfg_value);
-        dump($request);
-//        $re = Setup::deleteSetup(1);//修改保存服务商通道链接开启状态(软删除)
-//        if ($re){
-//            dump('软删除恢复成功');
-//        }else{
-//            dump('软删除恢复失败');
-//        }
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
@@ -42,10 +33,10 @@ class SetupController extends Controller{
         }else{
             $merchanturl_status = 1;
         }
-        Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);//修改保存服务商通道链接
-        Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);//修改保存商户通道链接
-        Setup::editSetup([['id',3]],['cfg_value'=>$depth]);//修改保存人员构深度设置
-        Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]);//修改保存服务商通道链接开启状态
+        Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);        //修改保存服务商通道链接
+        Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);       //修改保存商户通道链接
+        Setup::editSetup([['id',3]],['cfg_value'=>$depth]);             //修改保存人员构深度设置
+        Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]); //修改保存服务商通道链接开启状态
         Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }

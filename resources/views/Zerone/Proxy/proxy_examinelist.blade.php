@@ -112,7 +112,7 @@
                                 <tr>
                                     <td colspan="9" class="footable-visible">
                                         <ul class="pagination pull-right">
-                                            {{link()}}
+                                            {{$list->links()}}
                                         </ul>
                                     </td>
                                 </tr>
