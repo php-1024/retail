@@ -46,6 +46,10 @@ class ProxyApply extends Model{
             $model->save();
         }
     }
+    //获取单条信息
+    public static function getOne($where){
+        return self::where($where)->first();
+    }
     //获取总数
     public static function getCount($where=[]){
         return self::where($where)->count();
