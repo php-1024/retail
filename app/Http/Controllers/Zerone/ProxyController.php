@@ -91,20 +91,21 @@ class ProxyController extends Controller{
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $proxylist = ProxyApply::getOne([['id',$id]]);
-        if($sta==-1){
-            DB::beginTransaction();
-            try{
-                ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//拒绝申请
-                //添加操作日志
-                $aa= OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
-                    echo $aa;exit;
-                DB::commit();//提交事务
-            }catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '拒绝失败', 'status' => '0']);
-            }
-            return response()->json(['data' => '拒绝成功', 'status' => '1']);
-        }
+        ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
+//        if($sta==-1){
+//            DB::beginTransaction();
+//            try{
+//
+//                //添加操作日志
+//                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
+//
+//                DB::commit();//提交事务
+//            }catch (\Exception $e) {
+//                DB::rollBack();//事件回滚
+//                return response()->json(['data' => '拒绝失败', 'status' => '0']);
+//            }
+//            return response()->json(['data' => '拒绝成功', 'status' => '1']);
+//        }
     }
 
 
