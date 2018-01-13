@@ -13,13 +13,6 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-
-
-
-    {{--<link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/footable/footable.core.css" rel="stylesheet">--}}
-    {{--<!-- Sweet Alert -->--}}
-    {{--<link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/iCheck/custom.css" rel="stylesheet">--}}
-    {{--<link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/switchery/switchery.css" rel="stylesheet">--}}
 </head>
 
 <body class="">
