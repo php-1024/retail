@@ -150,7 +150,7 @@ class SubordinateController extends Controller{
                 if(AccountInfo::checkRowExists([['account_id',$id]])) {
                     AccountInfo::editAccountInfo([['account_id', $id]], ['realname' => $realname]);
                 }else{
-                    AccountInfo::addAccountInfo([[]]);
+                    AccountInfo::addAccountInfo(['account_id'=>$id,'realname'=>$realname]);
                 }
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
