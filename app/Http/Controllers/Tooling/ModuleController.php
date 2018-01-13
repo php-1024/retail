@@ -47,7 +47,7 @@ class ModuleController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $module_name = $request->input('module_name');
-        dd($module_name);
+        dd($request);
         $search_data = ['module_name'=>$module_name];
         $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
 
