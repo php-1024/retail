@@ -119,12 +119,14 @@ class SubordinateController extends Controller{
     }
 
     public function subordinate_authorize(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
         $info = Account::getOne([['id',$id]]);
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info]);
+        $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+        return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
     public function subordinate_authorize_check(Request $request){
