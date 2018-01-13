@@ -15,8 +15,8 @@ class AccountNode extends Model
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //获取单条信息
-    public static function getOne(){
-
+    public static function getOne($where){
+        return self::where($where)->first();
     }
 
     //修改账号节点关系表
