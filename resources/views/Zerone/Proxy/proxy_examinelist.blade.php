@@ -90,21 +90,19 @@
 
                                     <td>{{$value->proxy_owner_idcard}}</td>
                                     <td>{{$value->proxy_owner_mobile}}</td>
-                                    <td>
-                                        <label class="label label-primary">
-                                         @if($value->status==0)
-                                                待审核
-                                         @elseif($value->status==1)
-                                                已通过
-                                         @elseif($value->status==-1)
-                                                未通过
-                                         @endif
-                                        </label>
+                                    <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
+                                        @elseif($value->status == 1)<label class="label label-primary">已通过</label>
+                                        @elseif($value->status == -1)<label class="label label-danger">未通过</label>
+                                        @endif
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
+                                        @if($value->status == 0)
                                         <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
                                         <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                        @else
+                                            <label class="label label-primary">已通过</label>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
