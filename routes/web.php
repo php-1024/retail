@@ -233,6 +233,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('subordinate_lock','Zerone\SubordinateController@subordinate_lock')->middleware('ZeroneCheckAjax');//提交冻结下级人员数据
         Route::post('subordinate_authorize','Zerone\SubordinateController@subordinate_authorize')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
         Route::post('subordinate_authorize_check','Zerone\SubordinateController@subordinate_authorize_check')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
+        Route::post('subordinate_delte_confirm','Zerone\SubordinateController@subordinate_delte_confirm')->middleware('ZeroneCheckAjax');//删除下级人员安全密码输入框
     });
 });
 /********************零壹管理系统*************************/
