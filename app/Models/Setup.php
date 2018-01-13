@@ -48,7 +48,7 @@ class Setup extends Model{
 
     //恢复指定软删除数据
     public static function restoreSetup($where){
-        self::where($where)->restore();//恢复指定软删除数据
+        self::where('id','=',$where)->restore();//恢复指定软删除数据
     }
 }
 ?>
