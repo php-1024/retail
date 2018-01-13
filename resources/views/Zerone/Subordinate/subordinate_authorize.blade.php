@@ -18,23 +18,19 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">登陆密码</label>
-                    <div class="col-sm-10"><input type="password" class="form-control" name="password" value=""></div>
+                    <label class="col-sm-2 control-label">权限角色</label>
+                    <div class="col-sm-3">
+                        <select class="form-control m-b" name="role_id" id="role_id">
+                            <option value="0">请选择</option>
+                            @foreach($role_list as $k=>$v)
+                                <option value="{{ $v->id }}">{{ $v->role_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
                 </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">真实姓名</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{ $info->account_info->realname }}"></div>
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">联系方式</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{ $info->mobile }}"></div>
-                </div>
+                <div class="form-group" id="module_node_box"></div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
