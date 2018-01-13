@@ -133,7 +133,7 @@ class SubordinateController extends Controller{
     }
 
     //获取下级人员当前已经选取的节点
-    public function authorize_selected_rule(Request $request){
+    public function selected_rule(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
         if($admin_data['id'] == 1) {//如果是超级管理员
