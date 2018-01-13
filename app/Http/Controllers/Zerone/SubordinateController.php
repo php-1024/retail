@@ -147,12 +147,16 @@ class SubordinateController extends Controller{
                     $data['password'] = $encryptPwd;
                 }
                 Account::editAccount([[ 'id',$id]],$data);
-
-                AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);
+                if(AccountInfo::checkRowExists([['account_id',$id]])) {
+                    AccountInfo::editAccountInfo([['account_id', $id]], ['realname' => $realname]);
+                }else{
+                    AccountInfo::addAccountInfo(['account_id'=>$id,'realname'=>$realname]);
+                }
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
+                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑下级人员失败，请检查', 'status' => '0']);
             }
