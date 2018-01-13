@@ -265,56 +265,55 @@
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
     <!-- Sweet alert -->
     <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
-    <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-    <script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
+    <script src="{{asset('public/Zerone/library/datapicker')}}/js/bootstrap-datepicker.js"></script>
+    <script src="{{asset('public/Zerone/library/footable')}}/js/footable.all.min.js"></script>
+    <script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
     <!-- Page-Level Scripts -->
+
+
     <script>
         $(document).ready(function() {
-            $('#addbtn').click(function(){
+
+            $('.chosen-select2').chosen({width:"100%"});
+            $('.chosen-select').chosen({width:"100%"});
+            $('#date_added').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('.gg').chosen();
+            $('#date_modified').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+            $('#deleteBtn').click(function(){
                 swal({
                     title: "温馨提示",
-                    text: "修改成功",
+                    text: "删除成功",
                     type: "success"
                 });
             });
-            var elem = document.querySelector('.js-switch');
-            var switchery = new Switchery(elem, { color: '#1AB394' });
+            $('#deleteBtn2').click(function(){
+                swal({
+                    title: "温馨提示",
+                    text: "删除失败,您没有操作权限",
+                    type: "error"
+                });
+            });
+            $('#addBtn').click(function(){
+                $('#myModal').modal();
+            });
+            $('#editBtn').click(function(){
+                $('#myModal2').modal();
+            });
 
-            var elem = document.querySelector('.js-switch2');
-            var switchery2 = new Switchery(elem, { color: '#1AB394' });
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
         });
-        //提交表单
-        function postForm() {
-            var target = $("#currentForm");
-            var url = target.attr("action");
-            var data = target.serialize();
-            $.post(url, data, function (json) {
-                if (json.status == -1) {
-                    window.location.reload();
-                } else if(json.status == 1) {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    },function(){
-                        window.location.reload();
-                    });
-                }else{
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                        //type: "warning"
-                    });
-                }
-            });
-        }
     </script>
 
 </body>
