@@ -40,6 +40,7 @@ class ProxyController extends Controller{
         }
 
         $zone_id = $request->input('zone_id');//战区id
+        echo $zone_id;exit;
         $parent_id = $admin_data['id'];//上级ID是当前用户ID
         $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
