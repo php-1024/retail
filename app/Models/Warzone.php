@@ -18,7 +18,7 @@ class Warzone extends Model{
         return $this->hasMany('App\Models\ProxyApply', 'zone_id');
     }
 
-    //和proxyappy表一对多的关系
+    //和WarzoneProvince表一对多的关系
     public function warzoneprovince(){
         return $this->hasMany('App\Models\WarzoneProvince', 'zone_id');
     }
