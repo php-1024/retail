@@ -149,6 +149,19 @@
         function getLockComfirmForm(id){
             var url = $('#subordinate_lock_confirm_url').val();
             var token = $('#_token').val();
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
             var data = {'id':id,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
