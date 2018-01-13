@@ -43,7 +43,7 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                        <input type="hidden" id="role_edit_url" value="{{ url('zerone/ajax/role_edit') }}">
+                        <input type="hidden" id="account_edit_url" value="{{ url('zerone/ajax/account_edit') }}">
                         <input type="hidden" id="role_delete_comfirm_url" value="{{ url('zerone/ajax/role_delete_comfirm') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -116,6 +116,7 @@
         @include('Zerone/Public/Footer')
     </div>
 </div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
     <!-- Mainly scripts -->
     <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
     <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -125,7 +126,86 @@
     <!-- Custom and plugin javascript -->
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+    <script>
+        $(function(){
 
+            //设置CSRF令牌
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+        //获取删除权限角色删除密码确认框
+        function getDeleteComfirmForm(id){
+            var url = $('#role_delete_comfirm_url').val();
+            var token = $('#_token').val();
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var data = {'id':id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
+        //获取用户信息，编辑密码框
+        function getEditForm(id){
+            var url = $('#account_edit_url').val();
+            var token = $('#_token').val();
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var data = {'id':id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

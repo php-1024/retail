@@ -107,7 +107,10 @@ class SubordinateController extends Controller{
 
     //编辑下级人员
     public function subordinate_edit(Request $request){
-        echo "这里是编辑下级人员";
+        $id = $request->input('id');
+        $info = Account::getOne([['id',$id]]);
+
+        return view('Zerone/Role/role_edit',['info'=>$info]);
     }
 
     //编辑下级人员数据提交
