@@ -133,9 +133,12 @@ class SubordinateController extends Controller{
         }
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
-        $module_node_list = ProgramModuleNode::getAccountModuleNodes(1,$id);
-        dump($module_node_list);
-        return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
+        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(1,$id);
+        foreach($selected_node_list as $key=>$val){
+            $selected_modules[] = $val->module_id;
+            $selected_nodes[] = $val->node_id;
+        }
+        return view('Zerone/Subordinate/subordinate_authorize',['module_node_list'=>$module_node_list,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'info'=>$info,'role_list'=>$role_list]);
     }
 
     public function subordinate_authorize_check(Request $request){
