@@ -236,7 +236,7 @@
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
 
 
 
