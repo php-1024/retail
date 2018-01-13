@@ -123,7 +123,7 @@ class SubordinateController extends Controller{
         echo "这里是编辑下级人员数据提交";
     }
 
-    //冻结下级人员
+    //冻结解冻下级人员
     public function subordinate_lock(Request $request){
         echo "这里是冻结下级人员";
     }

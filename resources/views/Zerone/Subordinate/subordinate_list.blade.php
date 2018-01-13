@@ -13,7 +13,7 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -134,6 +134,7 @@
     <!-- Custom and plugin javascript -->
     <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
     <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
     <script>
         $(function(){
 
