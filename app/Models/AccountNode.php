@@ -28,8 +28,6 @@ class AccountNode extends Model
         $model->save();
     }
 
-
-
     //添加用户权限节点关系
     public static function addAccountNode($param){
         $model = new AccountNode();
