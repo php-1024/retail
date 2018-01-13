@@ -103,7 +103,7 @@
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
                                         <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
                                     </td>
                                 </tr>
                                 @endforeach
