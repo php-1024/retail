@@ -119,14 +119,21 @@ class SubordinateController extends Controller{
     }
 
     //编辑下级人员数据提交
-    public function subordinate_edit_check(Request $request){
+    public function subordinate_edit_check(Request $request)
+    {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//要编辑的人员的ID
+        $account = $request->input('account');
         $password = $request->input('password');//登陆密码
         $realname = $request->input('realname');//真实姓名
         $mobile = $request->input('mobile');//手机号码
         $organization_id = 1;
+        if (!empty($password)) {
+            $key = config("app.zerone_encrypt_key");//获取加密盐
+            $encrypted = md5($password);//加密密码第一重
+            $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+        }
        if(Account::checkRowExists([['id','<>',$id],['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
         }elseif(Account::checkRowExists([['id','<>',$id],['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
@@ -135,9 +142,12 @@ class SubordinateController extends Controller{
             DB::beginTransaction();
             try {
                 //添加用户
-                $data = ['realname'=>$realname,'mobile'=>$mobile];
+                $data = ['mobile'=>$mobile];
+                if (!empty($password)) {
+                    $data['password'] = $encryptPwd;
+                }
                 Account::editAccount([[ 'id'=>$id]],$data);
-
+                AccountInfo::editAccountInfo([['account_id'=>$id]],['realname',$realname]);
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 DB::commit();
