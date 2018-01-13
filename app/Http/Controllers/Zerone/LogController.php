@@ -30,7 +30,7 @@ class LogController extends Controller{
                 ['account_id',$admin_data['id']]
             ];
         }
-        $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
+        $operation_log_list = OperationLog::getPaginage($where,5,'id');//操作记录
         return view('Zerone/Log/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone_all'=>$zerone_all]);
     }
 
