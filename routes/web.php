@@ -171,6 +171,10 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('/','Zerone\SetupController@display')->middleware('ZeroneCheck');//参数设置展示
     });
 
+    //系统管理——战区管理
+    Route::group(['prefix'=>'warzone'],function(){
+        Route::get('/','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
+    });
 
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
