@@ -126,11 +126,12 @@ class ProxyController extends Controller{
                 AccountInfo::addAccountInfo($acinfodata);
 
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dump($e);exit;
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '拒绝失败', 'status' => '0']);
+                return response()->json(['data' => '审核失败', 'status' => '0']);
             }
             return response()->json(['data' => '申请通过', 'status' => '1']);
         }
