@@ -30,6 +30,7 @@
                         </select>
                     </div>
                     <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
+                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-repeat"></i>&nbsp;&nbsp;恢复默认</button></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
