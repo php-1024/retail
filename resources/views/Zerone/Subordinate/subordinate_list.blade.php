@@ -45,6 +45,7 @@
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="subordinate_edit_url" value="{{ url('zerone/ajax/subordinate_edit') }}">
                         <input type="hidden" id="subordinate_lock_confirm_url" value="{{ url('zerone/ajax/subordinate_lock_confirm') }}">
+                        <input type="hidden" id="subordinate_authorize_url" value="{{ url('zerone/ajax/subordinate_authorize') }}}">
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">用户账号</label>
@@ -99,7 +100,7 @@
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
 
-                                            <button type="button" class="btn  btn-xs btn-info"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
+                                            <button type="button" class="btn  btn-xs btn-info"  onclick="getAuthorizeForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
 
                                             @if($val->status=='1')
                                             <button type="button" class="btn  btn-xs btn-success"  onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
@@ -186,6 +187,44 @@
                 }
             });
         }
+
+
+        //获取用户信息，编辑密码框
+        function getAuthorizeForm(id){
+            var url = $('#subordinate_authorize_url').val();
+            var token = $('#_token').val();
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var data = {'id':id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
+
         //获取用户信息，编辑密码框
         function getEditForm(id){
             var url = $('#subordinate_edit_url').val();

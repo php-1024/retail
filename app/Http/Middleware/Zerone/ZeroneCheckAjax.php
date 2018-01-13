@@ -48,6 +48,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
             case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
