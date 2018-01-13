@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\AccountInfo;
 use App\Models\LoginLog;
+use App\Models\OperationLog;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -24,7 +26,8 @@ class ProxyController extends Controller{
     public function proxy_add_check(Request $request){
 
         $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
-
+        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//服务商名称
 
         $where = [['organization_name',$organization_name]];
@@ -49,7 +52,13 @@ class ProxyController extends Controller{
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
             $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
-            Account::addAccount($accdata);
+            $account_id = Account::addAccount($accdata);//添加账号返回id
+            $realname = $request->input('realname');//负责人姓名
+            $idcard = $request->input('idcard');//负责人身份证号
+            $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
+            AccountInfo::addAccountInfo($acinfodata);
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚

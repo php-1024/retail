@@ -31,13 +31,19 @@ class Setup extends Model{
 
     }
     //修改数据
-    public static function editSetup($where,$param){
-        if($model = self::where($where)->first()){
-            foreach($param as $key=>$val){
-                $model->$key=$val;
+    public static function editSetup($where,$param)
+    {
+        if ($model = self::where($where)->first()) {
+            foreach ($param as $key => $val) {
+                $model->$key = $val;
             }
             $model->save();
         }
+    }
+
+    //软删除数据
+    public static function deleteSetup($where){
+        self::where($where)->delete();//软删除指定数据
     }
 }
 ?>

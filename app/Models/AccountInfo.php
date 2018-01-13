@@ -14,11 +14,17 @@ class AccountInfo extends Model
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和Account表是一对一的关系
+    public function account(){
+        return $this->belongsTo('App\Models\Account', 'account_id');
+    }
+
     //添加用户个人信息
     public static function addAccountInfo($param){
         $model = new AccountInfo();
-        $model->account_id = $param['account_id'];
-        $model->realname = $param['realname'];
+        $model->account_id = $param['account_id'];//组织id
+        $model->realname = $param['realname'];//用户名
+        $model->idcard = $param['idcard'];//身份证号
         $model->save();
         return $model->id;
     }
