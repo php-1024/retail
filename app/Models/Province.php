@@ -15,7 +15,8 @@ class Province extends Model{
 
     //和WarzoneProvince表一对一的关系
     public function warzoneprovince(){
-        return $this->belongsTo('App\Models\WarzoneProvince', 'id','province_name');
+        return $this->belongsTo('App\Models\WarzoneProvince','id','province_name');
     }
+
 }
 ?>
