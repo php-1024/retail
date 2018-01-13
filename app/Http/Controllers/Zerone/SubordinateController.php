@@ -124,7 +124,7 @@ class SubordinateController extends Controller{
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        return view('Zerone/Subordinate/subordinate_edit',['info'=>$info]);
+        return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info]);
     }
 
     public function subordinate_authorize_check(Request $request){
