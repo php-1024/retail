@@ -265,7 +265,7 @@ class SubordinateController extends Controller{
     public function subordinate_delete_confirm(Request $request){
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
-        return view('Zerone/Subordinate/subordinate_lock_confirm',['id'=>$id,'account'=>$account]);
+        return view('Zerone/Subordinate/subordinate_delete_confirm',['id'=>$id,'account'=>$account]);
     }
 
     //删除下级人员
