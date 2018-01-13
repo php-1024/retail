@@ -25,12 +25,12 @@
                         <select class="form-control m-b" name="role_id" id="role_id">
                             <option value="0">请选择</option>
                             @foreach($role_list as $k=>$v)
-                                <option value="{{ $v->id }}">{{ $v->role_name }}</option>
+                                <option @if($info->account_role->id == $v->id) selected @endif value="{{ $v->id }}">{{ $v->role_name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
-                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-repeat"></i>&nbsp;&nbsp;恢复默认</button></div>
+                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_selected_rule();"><i class="fa fa-repeat"></i>&nbsp;&nbsp;恢复默认</button></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -55,25 +55,27 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        get_selected_rule();
+    });
+
     //获取上级程序节点
     function get_quick_rule(obj){
         var url =  $('#quick_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
-        var account_id = $('#admin_id').val();
-        var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+        var data = {'_token':token,'role_id':role_id}
         $.post(url,data,function(response){
             $('#module_node_box').html(response);
         });
     }
 
     //获取默认已经选择了的程序节点
-    function get_selected_rule(obj){
+    function get_selected_rule(){
         var url =  $('#selected_rule_url').val();
         var token = $('#_token').val();
-        var role_id = $(obj).val();
-        var account_id = $('#admin_id').val();
-        var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+        var id = $("#id").val();
+        var data = {'_token':token,'id':id}
         $.post(url,data,function(response){
             $('#module_node_box').html(response);
         });
