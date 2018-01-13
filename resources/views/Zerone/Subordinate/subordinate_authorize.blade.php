@@ -1,7 +1,8 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_authorize_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
+    <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/quick_rule') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -50,6 +51,20 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        get_quick_rule('#role_id');
+    });
+    //获取上级程序节点
+    function get_quick_rule(obj){
+        var url =  $('#quick_rule_url').val();
+        var token = $('#_token').val();
+        var role_id = $(obj).val();
+        var account_id = $('#admin_id').val();
+        var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+        $.post(url,data,function(response){
+            $('#module_node_box').html(response);
+        });
+    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");
