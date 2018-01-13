@@ -55,7 +55,7 @@ class ProxyController extends Controller{
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
             $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
-            WarzoneProxy::addWarzoneProxy($proxydata);
+            WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
 
             $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
@@ -118,8 +118,11 @@ class ProxyController extends Controller{
                 //添加服务商
                 $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
-                $account  = 'P'.$proxylist['proxy_owner_mobile'].'_'.$organization_id;//用户账号
 
+                $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
+                WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
+
+                $account  = 'P'.$proxylist['proxy_owner_mobile'].'_'.$organization_id;//用户账号
                 $parent_id = $admin_data['id'];//上级ID是当前用户ID
                 $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
