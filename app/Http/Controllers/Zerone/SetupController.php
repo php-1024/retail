@@ -15,7 +15,7 @@ class SetupController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $setup_list = Setup::get_all();
 
-//        dump(Setup::getOne([['id','2']])->cfg_value);
+        dump(Setup::getOne([['id','2']])->cfg_value);
         dump($request);
 //        $re = Setup::deleteSetup(1);//修改保存服务商通道链接开启状态(软删除)
 //        if ($re){
@@ -32,19 +32,21 @@ class SetupController extends Controller{
         $depth = $request->input('depth');//[depth]人员构深度设置
         $serviceurl_deleted = $request->input('serviceurl_deleted');//是否开启服务商通道链接
         $merchanturl_deleted = $request->input('merchanturl_deleted');//是否开启商户通道链接
+        if(empty($serviceurl_deleted)){
+            $serviceurl_status = 0;
+        }else{
+            $serviceurl_status = 1;
+        }
+        if(empty($merchanturl_deleted)){
+            $merchanturl_status = 0;
+        }else{
+            $merchanturl_status = 1;
+        }
         Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);//修改保存服务商通道链接
         Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);//修改保存商户通道链接
         Setup::editSetup([['id',3]],['cfg_value'=>$depth]);//修改保存人员构深度设置
-        if(empty($serviceurl_deleted)){
-            Setup::deleteSetup([['id',1]]);//修改保存服务商通道链接开启状态
-        }else{
-            Setup::restoreSetup(1);//修改保存服务商通道链接开启状态
-        }
-        if(empty($merchanturl_deleted)){
-            Setup::deleteSetup([['id',2]]);//修改保存商户通道链接开启状态
-        }else{
-            Setup::restoreSetup(2);//修改保存服务商通道链接开启状态
-        }
+        Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]);//修改保存服务商通道链接开启状态
+        Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
 }
