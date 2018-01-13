@@ -167,7 +167,7 @@ function getEditForm(id,status){
 
     var url = $('#proxy_examine').val();
     var token = $('#_token').val();
-
+    alert(status);
     if(id==''){
         swal({
             title: "提示信息",
