@@ -19,6 +19,15 @@ class AccountInfo extends Model
         return $this->belongsTo('App\Models\Account', 'account_id');
     }
 
+    //修改账号
+    public static function editAccountInfo($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
     //添加用户个人信息
     public static function addAccountInfo($param){
         $model = new AccountInfo();
