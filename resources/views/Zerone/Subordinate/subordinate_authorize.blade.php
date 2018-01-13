@@ -67,7 +67,7 @@
 
     //获取默认已经选择了的程序节点
     function get_selected_rule(obj){
-        var url =  $('#quick_rule_url').val();
+        var url =  $('#selected_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
         var account_id = $('#admin_id').val();
@@ -76,6 +76,7 @@
             $('#module_node_box').html(response);
         });
     }
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
