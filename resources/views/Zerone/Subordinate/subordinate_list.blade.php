@@ -206,7 +206,7 @@
                 return;
             }
 
-            var data = {'id':id,'_token':token};
+            var data = {'id':id,'account':account,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
                     swal({
