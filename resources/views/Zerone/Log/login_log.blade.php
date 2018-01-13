@@ -10,9 +10,12 @@
 
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/switchery')}}/css/switchery.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
 
 </head>
 
