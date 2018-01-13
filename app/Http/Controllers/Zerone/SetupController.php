@@ -15,14 +15,14 @@ class SetupController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $setup_list = Setup::get_all();
 
-        dump(Setup::getOne([['id','2']])->cfg_value);
+//        dump(Setup::getOne([['id','2']])->cfg_value);
         dump($request);
-        $re = Setup::deleteSetup(['id','=',1]);//修改保存服务商通道链接开启状态(软删除)
-        if ($re){
-            dump('软删除恢复成功');
-        }else{
-            dump('软删除恢复失败');
-        }
+//        $re = Setup::deleteSetup(1);//修改保存服务商通道链接开启状态(软删除)
+//        if ($re){
+//            dump('软删除恢复成功');
+//        }else{
+//            dump('软删除恢复失败');
+//        }
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
@@ -38,12 +38,12 @@ class SetupController extends Controller{
         if(empty($serviceurl_deleted)){
             Setup::deleteSetup([['id',1]]);//修改保存服务商通道链接开启状态
         }else{
-            Setup::restoreSetup(['id','=',1])//修改保存服务商通道链接开启状态
+            Setup::restoreSetup(1);//修改保存服务商通道链接开启状态
         }
         if(empty($merchanturl_deleted)){
             Setup::deleteSetup([['id',2]]);//修改保存商户通道链接开启状态
         }else{
-            Setup::restoreSetup(['id','=',2]);//修改保存服务商通道链接开启状态
+            Setup::restoreSetup(2);//修改保存服务商通道链接开启状态
         }
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
