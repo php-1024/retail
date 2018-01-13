@@ -2,6 +2,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
+    <input type="hidden" name="account" id="account" value="{{ $info->account }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">

@@ -135,7 +135,8 @@ class SubordinateController extends Controller{
             DB::beginTransaction();
             try {
                 //添加用户
-                $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$encryptPwd,'mobile'=>$mobile]);
+                $data = ['realname'=>$realname,'mobile'=>$mobile];
+                Account::editAccount([[ 'id'=>$id]],$data);
 
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
