@@ -55,6 +55,11 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        get_quick_rule('#role_id');
+    });
+
     //获取上级程序节点
     function get_quick_rule(obj){
         var url =  $('#quick_rule_url').val();

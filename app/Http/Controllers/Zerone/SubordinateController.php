@@ -26,7 +26,8 @@ class SubordinateController extends Controller{
 
     //快速授权功能
     public function quick_rule(Request $request){
-        $account_id = $request->input('account_id');
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $account_id = $admin_data['id'];//当前登陆账号ID
         $role_id = $request->input('role_id');
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
