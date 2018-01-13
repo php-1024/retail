@@ -15,7 +15,7 @@ class ProxyApply extends Model{
 
     //和战区表多对一的关系
     public function warzone(){
-        return $this->hasOne('App\Models\Warzone', 'zone_id');
+        return $this->hasOne('App\Models\Warzone', 'zone_name');
     }
 
     //获取列表
