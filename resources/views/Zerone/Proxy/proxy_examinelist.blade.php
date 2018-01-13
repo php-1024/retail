@@ -80,23 +80,33 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($list as $key=>$value)
                                 <tr>
-                                    <td>1</td>
-                                    <td>刘记新科技有限公司</td>
-                                    <td>南部战区</td>
-                                    <td>刘兴文</td>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->proxy_name}}</td>
+                                    <td>{{$value->zone_id}}</td>
+                                    <td>{{$value->proxy_owner}}</td>
 
-                                    <td>440*** **** **** 2713</td>
-                                    <td>13123456789</td>
+                                    <td>{{$value->proxy_owner_idcard}}</td>
+                                    <td>{{$value->proxy_owner_mobile}}<</td>
                                     <td>
-                                        <label class="label label-primary">已通过</label>
+                                        <label class="label label-primary">
+                                         @if($value->proxy_owner_mobile==0)
+                                                待审核
+                                         @elseif($value->proxy_owner_mobile==1)
+                                                已通过
+                                         @elseif($value->proxy_owner_mobile==-1)
+                                                未通过
+                                         @endif
+                                        </label>
                                     </td>
-                                    <td>2017-08-08 10:30:30</td>
+                                    <td>{{date('Y-m-d h:s',$value->created_at)}}</td>
                                     <td class="text-right">
                                         <button type="button" id="okBtn" class="btn  btn-xs btn-primary"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
                                         <button type="button" id="notokBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>

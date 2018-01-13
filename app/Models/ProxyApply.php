@@ -15,7 +15,7 @@ class ProxyApply extends Model{
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new Program();
+        $model = new ProxyApply();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -23,8 +23,8 @@ class ProxyApply extends Model{
     }
 
     //添加数据
-    public static function addProgram($param){
-        $program = new Program();//实例化程序模型
+    public static function addProxyApply($param){
+        $program = new ProxyApply();//实例化程序模型
         $program->program_name = $param['program_name'];//程序名称
         $program->program_url = $param['program_url'];//程序名称
         $program->complete_id = $param['complete_id'];//上级程序
@@ -33,7 +33,7 @@ class ProxyApply extends Model{
         return $program->id;
     }
     //修改数据
-    public static function editProgram($where,$param){
+    public static function editProxyApply($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
