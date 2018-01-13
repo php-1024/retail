@@ -160,6 +160,11 @@ class SubordinateController extends Controller{
         }
     }
 
+    //输入安全密码判断是否能冻结的页面
+    public function subordinate_lock_comfirm(Request $request){
+        $id = $request->input('id');
+        return view('Zerone/Role/subordinate_lock_comfirm',['id'=>$id]);
+    }
     //冻结解冻下级人员
     public function subordinate_lock(Request $request){
         echo "这里是冻结下级人员";
