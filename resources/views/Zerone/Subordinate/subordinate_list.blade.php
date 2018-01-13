@@ -45,7 +45,7 @@
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="subordinate_edit_url" value="{{ url('zerone/ajax/subordinate_edit') }}">
                         <input type="hidden" id="subordinate_lock_confirm_url" value="{{ url('zerone/ajax/subordinate_lock_confirm') }}">
-                        <input type="hidden" id="subordinate_delte_confirm_url" value="{{ url('zerone/ajax/subordinate_delte_confirm') }}">
+                        <input type="hidden" id="subordinate_delete_confirm_url" value="{{ url('zerone/ajax/subordinate_delete_confirm') }}">
                         <input type="hidden" id="subordinate_authorize_url" value="{{ url('zerone/ajax/subordinate_authorize') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -191,7 +191,7 @@
 
         //获取用户信息，编辑密码框
         function getDeleteComfirmForm(id,acconut){
-            var url = $('#subordinate_delte_confirm_url').val();
+            var url = $('#subordinate_delete_confirm_url').val();
             var token = $('#_token').val();
 
             if(id==''){
