@@ -142,7 +142,7 @@
                                 </tfoot>
 
                                 <td colspan="99" class="text-right">
-                                    {{ $operation_log_list->links() }}
+                                    {{ $operation_log_list->appends($search_data)->links() }}
                                 </td>
                             </table>
 
