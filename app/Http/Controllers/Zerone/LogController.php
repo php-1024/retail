@@ -14,7 +14,7 @@ use App\Models\Statistics;
 
 class LogController extends Controller{
     /*
-     * 登陆页面
+     * 所有登录记录
      */
     public function login_log(Request $request)
     {
