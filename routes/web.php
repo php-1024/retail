@@ -209,7 +209,6 @@ Route::group(['prefix'=>'zerone'],function(){
     Route::group(['prefix'=>'proxy'],function(){
         Route::get('proxy_add','Zerone\ProxyController@proxy_add')->middleware('ZeroneCheck');//添加服务商
         Route::get('proxy_examinelist','Zerone\ProxyController@proxy_examinelist')->middleware('ZeroneCheck');//服务商审核列表
-        Route::get('proxy_examine','Zerone\ProxyController@subordinate_structure')->middleware('ZeroneCheck');//服务商审核数据提交
         Route::get('proxy_list','Zerone\ProxyController@proxy_list')->middleware('ZeroneCheck');//服务商列表
     });
 
@@ -224,6 +223,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('quick_rule','Zerone\SubordinateController@quick_rule')->middleware('ZeroneCheckAjax');//添加下级人员快速授权
         Route::post('setup_edit_check','Zerone\SetupController@setup_edit_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('proxy_add_check','Zerone\ProxyController@proxy_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
+        Route::post('proxy_examine','Zerone\ProxyController@subordinate_structure')->middleware('ZeroneCheck');//服务商审核数据提交
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
         Route::post('subordinate_edit_check','Zerone\SubordinateController@subordinate_edit_check')->middleware('ZeroneCheckAjax');//提交编辑下级人员数据提交
