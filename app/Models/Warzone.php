@@ -15,7 +15,7 @@ class Warzone extends Model{
 
     //和proxyappy表一对多的关系
     public function proxyappy(){
-        return $this->hasMany('App\Models\proxyappy', 'zone_id');
+        return $this->hasMany('App\Models\proxyappy', 'zone_name');
     }
 }
 ?>
