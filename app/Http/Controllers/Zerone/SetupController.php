@@ -23,7 +23,6 @@ class SetupController extends Controller{
         }else{
             dump('软删除恢复失败');
         }
-
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
