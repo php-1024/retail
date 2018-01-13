@@ -11,7 +11,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">用户账号</label>
-                    <div class="col-sm-10">{{ $admin_data['account'] }}</div>
+                    <div class="col-sm-10">{{ $info->account] }}</div>
                 </div>
 
                 <div style="clear:both"></div>
