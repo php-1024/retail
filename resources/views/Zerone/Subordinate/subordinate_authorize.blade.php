@@ -1,30 +1,50 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_lock') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{$id}}">
-    <input type="hidden" name="account" id="account" value="{{$account}}">
-    <input type="hidden" name="status" id="status" value="{{$status}}">
+    <input type="hidden" name="id" id="id" value="{{ $info->id }}">
+    <input type="hidden" name="account" id="account" value="{{ $info->account }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                确认冻结下级人员
+                修改用户
             </div>
             <div class="modal-body">
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">用户账号</label>
-                    <div class="col-sm-10">{{ $account }}</div>
+                    <div class="col-sm-10">{{ $info->account }}</div>
                 </div>
+
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限角色</label>
+                    <div class="col-sm-3">
+                        <select class="form-control m-b" name="role_id" id="role_id">
+                            <option value="0">请选择</option>
+                            @foreach($role_list as $k=>$v)
+                                <option value="{{ $v->id }}">{{ $v->role_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
+                </div>
+
+                <div class="form-group" id="module_node_box"></div>
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
                     <div class="col-sm-10"><input type="password" class="form-control" id="safe_password" name="safe_password"></div>
                 </div>
                 <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="return postForm();">确定</button>
+                <button type="button" class="btn btn-primary" onclick="return postForm();">保存</button>
             </div>
         </div>
     </div>

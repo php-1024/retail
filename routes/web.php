@@ -176,6 +176,17 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('/','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
     });
 
+    //系统管理——所有操作记录
+    Route::group(['prefix'=>'operation_log'],function(){
+        Route::get('/','Zerone\LogController@operation_log')->middleware('ZeroneCheck');//所有操作记录
+    });
+
+    //系统管理——所有登陆记录
+    Route::group(['prefix'=>'login_log'],function(){
+        Route::get('/','Zerone\LogController@login_log')->middleware('ZeroneCheck');//所有登陆记录
+    });
+
+
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登陆页面路由
@@ -218,6 +229,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('subordinate_edit_check','Zerone\SubordinateController@subordinate_edit_check')->middleware('ZeroneCheckAjax');//提交编辑下级人员数据提交
         Route::post('subordinate_lock_confirm','Zerone\SubordinateController@subordinate_lock_confirm')->middleware('ZeroneCheckAjax');//冻结下级人员安全密码输入框
         Route::post('subordinate_lock','Zerone\SubordinateController@subordinate_lock')->middleware('ZeroneCheckAjax');//提交冻结下级人员数据
+        Route::post('subordinate_authorize','Zerone\SubordinateController@subordinate_authorize')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
     });
 });
 /********************零壹管理系统*************************/
