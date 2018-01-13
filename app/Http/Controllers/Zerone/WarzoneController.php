@@ -17,8 +17,8 @@ class WarzoneController extends Controller{
         $warzone = Warzone::where('id',1)->get();
         foreach ($warzone as $key => $val){
             $zone_id[] = $val->id;
-            dump($zone_id);
         }
+        dump($zone_id);
         $warzone_province = WarzoneProvince::where('id',1)->get();
         dump($warzone_province);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
