@@ -203,9 +203,9 @@ class SubordinateController extends Controller{
         try {
             //修改账号与角色间的关系
             if(RoleAccount::checkRowExists([['account_id',$id ]])) {
-                RoleAccount::editRoleAccount([['account_id', $id]], ['role_id' => $role_id]);
+                RoleAccount::editRoleAccount([['account_id', $id]], ['role_id' => $role_id]);//修改账号角色关系
             }else{
-                RoleAccount::addRoleAccount(['role_id' => $role_id,'account_id'=>$id]);
+                RoleAccount::addRoleAccount(['role_id' => $role_id,'account_id'=>$id]);//添加账号角色关系
             }
             foreach($module_node_ids as $key=>$val){
                 $vo = AccountNode::getOne([['account_id',$id],['node_id',$val]]);//查询是否存在数据
