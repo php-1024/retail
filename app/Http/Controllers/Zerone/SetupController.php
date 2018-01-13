@@ -17,7 +17,7 @@ class SetupController extends Controller{
 
         dump(Setup::getOne([['id','2']])->cfg_value);
         dump($request);
-        $re = Setup::deleteSetup('id','=',1);//修改保存服务商通道链接开启状态(软删除)
+        $re = Setup::deleteSetup(['id','=',1]);//修改保存服务商通道链接开启状态(软删除)
         if ($re){
             dump('软删除恢复成功');
         }else{
@@ -38,12 +38,12 @@ class SetupController extends Controller{
         if(empty($serviceurl_deleted)){
             Setup::deleteSetup([['id',1]]);//修改保存服务商通道链接开启状态
         }else{
-            Setup::restoreSetup('id','=',1)//修改保存服务商通道链接开启状态
+            Setup::restoreSetup(['id','=',1])//修改保存服务商通道链接开启状态
         }
         if(empty($merchanturl_deleted)){
             Setup::deleteSetup([['id',2]]);//修改保存商户通道链接开启状态
         }else{
-            Setup::restoreSetup('id','=',2);//修改保存服务商通道链接开启状态
+            Setup::restoreSetup(['id','=',2]);//修改保存服务商通道链接开启状态
         }
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
