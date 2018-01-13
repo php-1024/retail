@@ -33,9 +33,7 @@ class AccountInfo extends Model
         $model = new AccountInfo();
         $model->account_id = $param['account_id'];//组织id
         $model->realname = $param['realname'];//用户名
-        if(!empty($param['idcard'])) {
-            $model->idcard = $param['idcard'];//身份证号
-        }
+        $model->idcard = $param['idcard'];//身份证号
         $model->save();
         return $model->id;
     }
