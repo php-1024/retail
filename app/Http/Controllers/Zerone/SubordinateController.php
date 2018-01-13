@@ -206,11 +206,12 @@ class SubordinateController extends Controller{
             foreach($module_node_ids as $key=>$val){
                 $vo = AccountNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
                 if(is_null($vo)) {//不存在生成插入数据
-                    AccountNode::editAccountNode(['role_id' => $id, 'node_id' => $val]);
+                    AccountNode::addAccountNode(['account_id' => $id, 'node_id' => $val]);
                 }else{//存在数据则跳过
                     continue;
                 }
             }
+            AccountNode::where('account_id', $id)->whereNotIn('node_id', $module_node_ids)->forceDelete();
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员的授权：'.$account);//保存操作记录
             DB::commit();
