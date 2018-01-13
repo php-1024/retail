@@ -133,7 +133,7 @@ class SubordinateController extends Controller{
     }
 
     //获取下级人员当前已经选取的节点
-    public function authorize_selected_rule(Request $request){
+    public function selected_rule(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
         if($admin_data['id'] == 1) {//如果是超级管理员
@@ -148,7 +148,7 @@ class SubordinateController extends Controller{
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
-        return view('Zerone/Subordinate/authorize_selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
+        return view('Zerone/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
 
