@@ -148,7 +148,7 @@ class SubordinateController extends Controller{
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
-        return view('Zerone/Subordinate/authorize_selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
+        return view('Zerone/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
 
