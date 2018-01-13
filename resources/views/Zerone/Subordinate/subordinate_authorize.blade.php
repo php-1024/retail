@@ -25,7 +25,7 @@
                         <select class="form-control m-b" name="role_id" id="role_id">
                             <option value="0">请选择</option>
                             @foreach($role_list as $k=>$v)
-                                <option value="{{ $v->id }}">{{ $v->role_name }}</option>
+                                <option @if($info->account_role->id == $v->id) selected @endif value="{{ $v->id }}">{{ $v->role_name }}</option>
                             @endforeach
                         </select>
                     </div>
