@@ -211,7 +211,7 @@ class SubordinateController extends Controller{
                     continue;
                 }
             }
-            AccountNode::where('role_id', $id)->whereNotIn('account_id', $id)->forceDelete();
+            AccountNode::where('account_id', $id)->whereNotIn('node_id', $module_node_ids)->forceDelete();
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员的授权：'.$account);//保存操作记录
             DB::commit();
