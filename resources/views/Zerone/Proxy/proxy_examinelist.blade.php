@@ -102,8 +102,8 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button type="button" id="okBtn" class="btn  btn-xs btn-primary"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                        <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
+                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this)" value="1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -180,54 +180,99 @@
 
 
 <script>
-    $(function(){
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+//    $(function(){
+//        //设置CSRF令牌
+//        $.ajaxSetup({
+//            headers: {
+//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//            }
+//        });
+//    });
+//    $(document).ready(function() {
+//        var elem = document.querySelector('.js-switch');
+//        var switchery = new Switchery(elem, { color: '#1AB394' });
+//        $('.i-checks').iCheck({
+//            checkboxClass: 'icheckbox_square-green',
+//            radioClass: 'iradio_square-green',
+//        });
+//        $('.footable').footable();
+//
+//        $('#date_added').datepicker({
+//            todayBtn: "linked",
+//            keyboardNavigation: false,
+//            forceParse: false,
+//            calendarWeeks: true,
+//            autoclose: true
+//        });
+//
+//        $('#date_modified').datepicker({
+//            todayBtn: "linked",
+//            keyboardNavigation: false,
+//            forceParse: false,
+//            calendarWeeks: true,
+//            autoclose: true
+//        });
+//        $('#notokBtn').click(function(){
+//            $('#myModal3').modal();
+//        });
+//        $('#okBtn').click(function(){
+//            $('#myModal3').modal();
+//        });
+//        $('.saveBtn').click(function(){
+//            swal({
+//                title: "温馨提示",
+//                text: "操作成功",
+//                type: "success"
+//            },function(){
+//                window.location.reload();
+//            });
+//        });
+//    });
+$(function(){
+
+    //设置CSRF令牌
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-    $(document).ready(function() {
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-        $('.footable').footable();
+});
 
-        $('#date_added').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
+//获取用户信息，编辑密码框
+function getEditForm(id){
+    var url = $('#role_edit_url').val();
+    var token = $('#_token').val();
 
-        $('#date_modified').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
+    if(id==''){
+        swal({
+            title: "提示信息",
+            text: '数据传输错误',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            window.location.reload();
         });
-        $('#notokBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#okBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('.saveBtn').click(function(){
+        return;
+    }
+
+    var data = {'id':id,'_token':token};
+    $.post(url,data,function(response){
+        if(response.status=='-1'){
             swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
             },function(){
                 window.location.reload();
             });
-        });
+            return;
+        }else{
+            $('#myModal').html(response);
+            $('#myModal').modal();
+        }
     });
+}
 </script>
 </body>
 
