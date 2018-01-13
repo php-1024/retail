@@ -87,13 +87,13 @@ class ProxyController extends Controller{
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
         $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
-        echo $admin_data['parent_tree'];exit;
+        dump($admin_data['parent_tree']);exit;
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $proxylist = ProxyApply::getOne([['id',$id]]);//查询申请服务商信息
-        if($sta == -1){
+        if($sta == -1 ){
             DB::beginTransaction();
             try{
                 ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
