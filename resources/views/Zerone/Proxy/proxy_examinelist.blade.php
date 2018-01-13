@@ -64,7 +64,8 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
-
+                            <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                            <input type="hidden" id="proxy_examine" value="{{ url('zerone/ajax/proxy_examine') }}">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
@@ -129,29 +130,7 @@
 
         @include('Zerone/Public/Footer')
 
-
-        <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content animated fadeIn">
-                    <div class="modal-header">
-                        <h3>确认操作</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安全密码</label>
-                            <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
-                        </div>
-                        <div style="clear:both"></div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary saveBtn">保存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
 </div>
 
@@ -173,47 +152,6 @@
 
 
 <script>
-
-//    $(document).ready(function() {
-//        var elem = document.querySelector('.js-switch');
-//        var switchery = new Switchery(elem, { color: '#1AB394' });
-//        $('.i-checks').iCheck({
-//            checkboxClass: 'icheckbox_square-green',
-//            radioClass: 'iradio_square-green',
-//        });
-//        $('.footable').footable();
-//
-//        $('#date_added').datepicker({
-//            todayBtn: "linked",
-//            keyboardNavigation: false,
-//            forceParse: false,
-//            calendarWeeks: true,
-//            autoclose: true
-//        });
-//
-//        $('#date_modified').datepicker({
-//            todayBtn: "linked",
-//            keyboardNavigation: false,
-//            forceParse: false,
-//            calendarWeeks: true,
-//            autoclose: true
-//        });
-//        $('#notokBtn').click(function(){
-//            $('#myModal3').modal();
-//        });
-//        $('#okBtn').click(function(){
-//            $('#myModal3').modal();
-//        });
-//        $('.saveBtn').click(function(){
-//            swal({
-//                title: "温馨提示",
-//                text: "操作成功",
-//                type: "success"
-//            },function(){
-//                window.location.reload();
-//            });
-//        });
-//    });
 $(function(){
 
     //设置CSRF令牌
@@ -224,41 +162,42 @@ $(function(){
     });
 });
 
-//获取用户信息，编辑密码框
-function getEditForm(id,val){
-    alert(val);
-//    var url = $('#role_edit_url').val();
-//    var token = $('#_token').val();
-//
-//    if(id==''){
-//        swal({
-//            title: "提示信息",
-//            text: '数据传输错误',
-//            confirmButtonColor: "#DD6B55",
-//            confirmButtonText: "确定",
-//        },function(){
-//            window.location.reload();
-//        });
-//        return;
-//    }
-//
-//    var data = {'id':id,'_token':token};
-//    $.post(url,data,function(response){
-//        if(response.status=='-1'){
-//            swal({
-//                title: "提示信息",
-//                text: response.data,
-//                confirmButtonColor: "#DD6B55",
-//                confirmButtonText: "确定",
-//            },function(){
-//                window.location.reload();
-//            });
-//            return;
-//        }else{
-//            $('#myModal').html(response);
-//            $('#myModal').modal();
-//        }
-//    });
+//审核
+function getEditForm(id,status){
+
+    var url = $('#proxy_examine').val();
+    var token = $('#_token').val();
+
+    if(id==''){
+        swal({
+            title: "提示信息",
+            text: '数据传输错误',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            window.location.reload();
+        });
+        return;
+    }
+
+    var data = {'id':id,'status':status,'_token':token};
+    $.post(url,data,function(response){
+        if(response.status=='-1'){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }else{
+
+            $('#myModal').html(response);
+            $('#myModal').modal();
+        }
+    });
 }
 </script>
 </body>

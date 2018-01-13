@@ -79,7 +79,7 @@ class ProxyController extends Controller{
     }
     //服务商审核列表
     public function proxy_examine(Request $request){
-        echo "服务商审核数据提交";
+        return view('Zerone/Proxy/proxy_examine');
     }
 
     //服务商列表
