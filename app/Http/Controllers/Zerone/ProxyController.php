@@ -70,8 +70,6 @@ class ProxyController extends Controller{
 
     //服务商审核列表
     public function proxy_examinelist(Request $request){
-        $info =  ProxyApply::getPluck([['id',1]])->toArray();//获取该ID的信息
-        dd($info);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -83,8 +81,7 @@ class ProxyController extends Controller{
     public function proxy_examine(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
-        $info =  ProxyApply::getPluck([['id',$id]])->toArray();//获取该ID的信息
-
+        $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
         return view('Zerone/Proxy/proxy_examine',['info'=>$info,'status',$status]);
     }
 
