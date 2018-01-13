@@ -84,11 +84,11 @@ class ProxyController extends Controller{
         $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
         return view('Zerone/Proxy/proxy_examine',['info'=>$info,'status',$status]);
     }
-    //服务商审核ajaxshow显示页面
+    //服务商审核数据提交
     public function proxy_examine_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $id = $request->input('id');//服务商id
+        $status = $request->input('status');//是否通过值 1为通过 -1为不通过
+        echo $id.'_'.$status;exit;
     }
 
 
