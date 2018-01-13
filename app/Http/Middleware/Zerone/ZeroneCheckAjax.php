@@ -54,6 +54,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
+            case "zerone/ajax/select_rule"://添加下架人员快速授权检测登陆和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

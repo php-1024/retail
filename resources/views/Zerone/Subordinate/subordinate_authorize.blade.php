@@ -3,6 +3,7 @@
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
     <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/quick_rule') }}">
+    <input type="hidden" id="selected_rule_url" value="{{ url('zerone/ajax/selected_rule') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
