@@ -38,7 +38,7 @@ class SetupController extends Controller{
         if(empty($serviceurl_deleted)){
             Setup::deleteSetup([['id',1]]);//修改保存服务商通道链接开启状态
         }else{
-            Setup::restoreSetup(1)//修改保存服务商通道链接开启状态
+            Setup::restoreSetup(1);//修改保存服务商通道链接开启状态
         }
         if(empty($merchanturl_deleted)){
             Setup::deleteSetup([['id',2]]);//修改保存商户通道链接开启状态
