@@ -87,6 +87,7 @@ class ProxyController extends Controller{
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
         $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
+        echo $admin_data['parent_tree'];exit;
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
