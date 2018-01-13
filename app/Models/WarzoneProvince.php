@@ -17,7 +17,6 @@ class WarzoneProvince extends Model{
     public function warzoneprovince(){
         return $this->belongsTo('App\Models\Warzone', 'zone_id');
     }
-
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
