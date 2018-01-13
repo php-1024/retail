@@ -43,7 +43,7 @@ class Setup extends Model{
 
     //软删除数据
     public static function deleteSetup($where){
-        self::where($where)->delete();//删除指定数据
+        self::where($where)->delete();//软删除指定数据
     }
 }
 ?>
