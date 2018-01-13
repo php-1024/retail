@@ -26,7 +26,8 @@ class SubordinateController extends Controller{
 
     //快速授权功能
     public function quick_rule(Request $request){
-        $account_id = $request->input('account_id');
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $account_id = $admin_data['id'];//当前登陆账号ID
         $role_id = $request->input('role_id');
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
@@ -117,6 +118,7 @@ class SubordinateController extends Controller{
         return view('Zerone/Subordinate/subordinate_edit',['info'=>$info]);
     }
 
+    //下级人员授权管理
     public function subordinate_authorize(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
@@ -126,6 +128,14 @@ class SubordinateController extends Controller{
         }
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
 
+
+        return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
+    }
+
+    //获取下级人员当前已经选取的节点
+    public function authorize_selected_rule(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $id = $request->input('id');
         if($admin_data['id'] == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
@@ -138,8 +148,9 @@ class SubordinateController extends Controller{
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
-        return view('Zerone/Subordinate/subordinate_authorize',['module_node_list'=>$module_node_list,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'info'=>$info,'role_list'=>$role_list]);
+        return view('Zerone/Subordinate/authorize_selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
+
 
     public function subordinate_authorize_check(Request $request){
 
