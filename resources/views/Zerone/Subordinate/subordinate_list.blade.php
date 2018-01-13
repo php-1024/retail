@@ -155,7 +155,7 @@
         });
         //获取删除权限角色删除密码确认框
         function getLockComfirmForm(id,account,status){
-            var url = $('#subordinate_delte_confirm_url').val();
+            var url = $('#subordinate_authorize_url').val();
             var token = $('#_token').val();
 
             if(id==''){
@@ -191,7 +191,7 @@
 
         //获取用户信息，编辑密码框
         function getDeleteComfirmForm(id,acconut){
-            var url = $('#subordinate_authorize_url').val();
+            var url = $('#subordinate_delte_confirm_url').val();
             var token = $('#_token').val();
 
             if(id==''){
