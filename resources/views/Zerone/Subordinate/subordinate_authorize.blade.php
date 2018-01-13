@@ -56,7 +56,7 @@
 </form>
 <script>
     $(document).ready(function() {
-        get_quick_rule('#role_id');
+        get_selected_rule();
     });
 
     //获取上级程序节点
@@ -71,12 +71,11 @@
     }
 
     //获取默认已经选择了的程序节点
-    function get_selected_rule(obj){
+    function get_selected_rule(){
         var url =  $('#selected_rule_url').val();
         var token = $('#_token').val();
-        var role_id = $(obj).val();
-        var account_id = $('#admin_id').val();
-        var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+        var id = $("#id").val();
+        var data = {'_token':token,'id':id}
         $.post(url,data,function(response){
             $('#module_node_box').html(response);
         });
