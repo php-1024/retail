@@ -47,7 +47,7 @@ class ProxyController extends Controller{
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
-            $account  = 'P'.$organization_id.'_'.$mobile;//用户账号
+            $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             Account::addAccount($accdata);
             DB::commit();//提交事务

@@ -7,19 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>零壹新科技程序管理平台</title>
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/style.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone')}}/css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/footable/footable.core.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="{{asset('public/Zerone')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/switchery/switchery.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -209,25 +207,35 @@
         </div>
     </div>
 </div>
-<!-- Mainly scripts -->
-<script src="{{asset('public/Zerone')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Zerone')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+{{--<!-- Mainly scripts -->--}}
+{{--<script src="{{asset('public/Zerone')}}/js/jquery-2.1.1.js"></script>--}}
+{{--<script src="{{asset('public/Zerone')}}/js/bootstrap.min.js"></script>--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>--}}
+
+{{--<!-- Custom and plugin javascript -->--}}
+{{--<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>--}}
+{{--<!-- Data picker -->--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>--}}
+{{--<!-- Sweet alert -->--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/sweetalert/sweetalert.min.js"></script>--}}
+{{--<!-- FooTable -->--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>--}}
+
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>--}}
+{{--<script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>--}}
+{{--<!-- Page-Level Scripts -->--}}
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>
-<!-- Data picker -->
-<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<!-- Sweet alert -->
-<script src="{{asset('public/Zerone')}}/js/plugins/sweetalert/sweetalert.min.js"></script>
-<!-- FooTable -->
-<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>
-
-<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>
-<script src="{{asset('public/Zerone')}}/js/plugins/switchery/switchery.js"></script>
-<!-- Page-Level Scripts -->
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
 <script>
     $(document).ready(function() {
