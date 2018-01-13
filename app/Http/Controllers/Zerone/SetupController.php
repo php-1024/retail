@@ -17,6 +17,12 @@ class SetupController extends Controller{
 
         dump(Setup::getOne([['id','2']])->cfg_value);
         dump($request);
+        $re = Setup::where('id','1')->delete();//修改保存服务商通道链接开启状态(软删除)
+        if ($re){
+            dump('删除成功');
+        }else{
+            dump('删除失败');
+        }
 
 
         return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
@@ -31,7 +37,6 @@ class SetupController extends Controller{
         Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);//修改保存服务商通道链接
         Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);//修改保存商户通道链接
         Setup::editSetup([['id',3]],['cfg_value'=>$depth]);//修改保存人员构深度设置
-        Setup::where(['id'=>1])->delete();//修改保存服务商通道链接开启状态(软删除)
         if(empty($serviceurl_deleted)){
             Setup::editSetup([['id',1]],['deleted_at'=>time()]);//修改保存服务商通道链接开启状态
         }else{
