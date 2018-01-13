@@ -221,6 +221,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('role_delete_comfirm','Zerone\RoleController@role_delete_comfirm');//删除权限角色弹出安全密码框
         Route::post('role_delete','Zerone\RoleController@role_delete')->middleware('ZeroneCheckAjax');//删除权限角色弹出安全密码框
         Route::post('quick_rule','Zerone\SubordinateController@quick_rule')->middleware('ZeroneCheckAjax');//添加下级人员快速授权
+        Route::post('selected_rule','Zerone\SubordinateController@selected_rule')->middleware('ZeroneCheckAjax');//下级人员已经选中的权限
         Route::post('setup_edit_check','Zerone\SetupController@setup_edit_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('proxy_add_check','Zerone\ProxyController@proxy_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('proxy_examine','Zerone\ProxyController@proxy_examine')->middleware('ZeroneCheck');//服务商审核数据提交
