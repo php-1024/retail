@@ -19,7 +19,7 @@ class WarzoneProvince extends Model{
     }
     //和战区省份表一对一的关系
     public function province(){
-        return $this->belongsTo('App\Models\Province', 'province_id');
+        return $this->belongsTo('App\Models\Province', 'id');
     }
     //获取战区分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
