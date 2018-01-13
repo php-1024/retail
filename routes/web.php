@@ -176,6 +176,17 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('/','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
     });
 
+    //系统管理——所有操作记录
+    Route::group(['prefix'=>'operation_log'],function(){
+        Route::get('/','Zerone\LogController@operation_log')->middleware('ZeroneCheck');//所有操作记录
+    });
+
+    //系统管理——所有登陆记录
+    Route::group(['prefix'=>'login_log'],function(){
+        Route::get('/','Zerone\LogController@login_log')->middleware('ZeroneCheck');//所有登陆记录
+    });
+
+
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登陆页面路由
