@@ -223,9 +223,7 @@
 {{--<!-- Sweet alert -->--}}
 {{--<script src="{{asset('public/Zerone')}}/js/plugins/sweetalert/sweetalert.min.js"></script>--}}
 {{--<!-- FooTable -->--}}
-{{--<script src="{{asset('public/Zerone')}}/js/plugins/footable/footable.all.min.js"></script>--}}
 
-{{--<script src="{{asset('public/Zerone')}}/js/plugins/iCheck/icheck.min.js"></script>--}}
 {{--<!-- Page-Level Scripts -->--}}
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -238,6 +236,8 @@
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
+<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
+
 
 
 <script>
