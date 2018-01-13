@@ -92,7 +92,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($login_log_list as $val)
+                                @foreach($login_log_list as $key=>$val)
                                     <tr>
                                         <td>{{  $val->accounts->account }}</td>
                                         <td>{{  long2ip($val->ip) }}</td>
