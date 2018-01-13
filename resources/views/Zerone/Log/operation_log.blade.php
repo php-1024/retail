@@ -140,6 +140,10 @@
                                     </td>
                                 </tr>
                                 </tfoot>
+
+                                <td colspan="99" class="text-right">
+                                    {{ $list->appends($search_data)->links() }}
+                                </td>
                             </table>
 
                         </div>
