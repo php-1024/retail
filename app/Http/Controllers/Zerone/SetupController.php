@@ -21,7 +21,7 @@ class SetupController extends Controller{
         if ($re){
             dump('删除成功');
         }else{
-            dump('删除失败');
+            dump($re);
         }
 
 
