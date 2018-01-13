@@ -46,6 +46,10 @@ class Organization extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
+    //获取分页数据
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
 
 }
 ?>

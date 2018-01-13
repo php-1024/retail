@@ -96,16 +96,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($listorg as $key=>$value)
                                     <tr>
-                                        <td>1</td>
-                                        <td>刘记新科技有限公司</td>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->organization_name}}</td>
                                         <td>南部战区</td>
                                         <td>刘兴文</td>
 
 
                                         <td>13123456789</td>
                                         <td>
-                                            <label class="label label-primary">正常</label>
+                                            @if($value->status == 1)
+                                                <label class="label label-primary">正常</label>
+                                            @elseif($value->status == 0)
+                                                <label class="label label-danger">已冻结</label>
+                                            @endif
                                         </td>
                                         <td>2017-08-08 10:30:30</td>
                                         <td class="text-right">
@@ -117,79 +122,13 @@
                                             <button type="button" id="companyBtn" onclick="location.href='proxycompany.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>刘记新科技有限公司</td>
-                                        <td>东部战区</td>
-                                        <td>刘兴文</td>
-
-                                        <td>13123456789</td>
-                                        <td>
-                                            <label class="label label-primary">正常</label>
-                                        </td>
-                                        <td>2017-08-08 10:30:30</td>
-                                        <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="unlockBtn" class="btn  btn-xs btn-info"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                            <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
-                                            <button type="button" id="programBtn" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                            <button type="button" id="companyBtn" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>刘记新科技有限公司</td>
-                                        <td>西部战区</td>
-                                        <td>刘兴文</td>
-
-                                        <td>13123456789</td>
-                                        <td>
-                                            <label class="label label-danger">已冻结</label>
-                                        </td>
-                                        <td>2017-08-08 10:30:30</td>
-                                        <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                            <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
-                                            <button type="button" id="programBtn" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                            <button type="button" id="companyBtn" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <td colspan="9" class="footable-visible">
                                             <ul class="pagination pull-right">
-                                                <li class="footable-page-arrow disabled">
-                                                    <a data-page="first" href="#first">«</a>
-                                                </li>
-
-                                                <li class="footable-page-arrow disabled">
-                                                    <a data-page="prev" href="#prev">‹</a>
-                                                </li>
-                                                <li class="footable-page active">
-                                                    <a data-page="0" href="#">1</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">2</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">3</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">4</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">5</a>
-                                                </li>
-                                                <li class="footable-page-arrow">
-                                                    <a data-page="next" href="#next">›</a>
-                                                </li>
-                                                <li class="footable-page-arrow">
-                                                    <a data-page="last" href="#last">»</a>
-                                                </li>
+                                           {{$listorg->links()}}
                                             </ul>
                                         </td>
                                     </tr>
@@ -319,13 +258,6 @@
     <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
     <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
     <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
-
-
-
-
-    <!-- Data picker -->
-    {{--<script src="{{asset('public/Zerone')}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>--}}
-
 
     <script>
         $(document).ready(function() {
