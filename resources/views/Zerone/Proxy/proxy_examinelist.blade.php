@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>零壹新科技程序管理平台</title>
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/style.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/footable/footable.core.css" rel="stylesheet">
-    <!-- Sweet Alert -->
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/switchery/switchery.css" rel="stylesheet">
+
+
+    {{--<link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/footable/footable.core.css" rel="stylesheet">--}}
+    {{--<!-- Sweet Alert -->--}}
+    {{--<link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/iCheck/custom.css" rel="stylesheet">--}}
+    {{--<link href="{{asset('public/Zerone/library/bootstrap')}}/css/plugins/switchery/switchery.css" rel="stylesheet">--}}
 </head>
 
 <body class="">
