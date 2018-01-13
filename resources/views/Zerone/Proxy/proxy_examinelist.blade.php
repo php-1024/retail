@@ -187,6 +187,7 @@
 
 
         <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content animated fadeIn">
                     <div class="modal-header">
@@ -209,18 +210,6 @@
         </div>
     </div>
 </div>
-{{--<!-- Mainly scripts -->--}}
-{{--<script src="{{asset('public/Zerone')}}/js/jquery-2.1.1.js"></script>--}}
-{{--<script src="{{asset('public/Zerone')}}/js/bootstrap.min.js"></script>--}}
-{{--<script src="{{asset('public/Zerone')}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>--}}
-{{--<script src="{{asset('public/Zerone')}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>--}}
-
-{{--<!-- Custom and plugin javascript -->--}}
-{{--<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>--}}
-{{--<script src="{{asset('public/Zerone')}}/js/plugins/pace/pace.min.js"></script>--}}
-{{--<!-- Data picker -->--}}
-{{--<!-- Sweet alert -->--}}
-{{--<!-- FooTable -->--}}
 
 {{--<!-- Page-Level Scripts -->--}}
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
@@ -240,6 +229,14 @@
 
 
 <script>
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
     $(document).ready(function() {
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
