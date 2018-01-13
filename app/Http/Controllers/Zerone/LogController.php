@@ -13,7 +13,9 @@ use App\Models\Statistics;
 
 
 class LogController extends Controller{
-
+    /*
+     * 所有操作记录
+     */
     public function operation_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -29,7 +31,7 @@ class LogController extends Controller{
             ];
         }
         $operation_log_list = OperationLog::getPaginage($where,5,'id');//操作记录
-        return view('Zerone/Log/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
+        return view('Zerone/Log/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
     }
     /*
      * 所有登录记录
@@ -48,7 +50,7 @@ class LogController extends Controller{
             ];
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
-        return view('Zerone/Log/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
+        return view('Zerone/Log/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
     }
 
 
