@@ -91,6 +91,7 @@ class ProxyController extends Controller{
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $proxylist = ProxyApply::getOne([['id',$id]]);
+        dump($proxylist);exit;
         if($sta==-1){
             DB::beginTransaction();
             try{
