@@ -86,9 +86,24 @@ class ProxyController extends Controller{
     }
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        echo $sta;exit;
+        $proxylist = ProxyApply::getOne([['id',$id]]);
+        if($sta==-1){
+            DB::beginTransaction();
+            try{
+                ProxyApply::editProxyApply(['id'=>$id],['status'=>-1]);
+                //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '拒绝失败', 'status' => '0']);
+            }
+            return response()->json(['data' => '拒绝成功', 'status' => '1']);
+        }
     }
 
 
