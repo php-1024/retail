@@ -37,6 +37,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/proxy_examine_check"://检测 登录 和 权限 和 安全密码
+                $re = $this->checkLoginAndRuleAndSafeAndID($request);
+                return self::format_response($re,$next);
+                break;
 
             case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
