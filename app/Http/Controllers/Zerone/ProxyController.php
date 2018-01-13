@@ -6,6 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
@@ -37,6 +38,8 @@ class ProxyController extends Controller{
         if($name == 'true'){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
+
+        $zone_id = $request->input('zone_id');//战区id
         $parent_id = $admin_data['id'];//上级ID是当前用户ID
         $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
@@ -50,6 +53,8 @@ class ProxyController extends Controller{
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+
+            WarzoneProxy::addWarzoneProxy(['organization_id'=>$organization_id,'zone_id'=>$zone_id]);
             $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
@@ -144,7 +149,7 @@ class ProxyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $listorg = Organization::getPaginage(['type'=>'2'],'2','id');
+        $listorg = Organization::getPaginage(['type'=>'2'],'5','id');
         return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
