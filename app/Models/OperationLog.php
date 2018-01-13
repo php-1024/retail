@@ -30,5 +30,16 @@ class OperationLog extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
+
+    //添加登录日志
+    public static function addOperationLog($program_id,$organization_id,$account_id,$route_name,$info){
+        $operation_log = new OperationLog();
+        $operation_log->program_id = $program_id;
+        $operation_log->organization_id = $organization_id;
+        $operation_log->account_id = $account_id;
+        $operation_log->route_name = $route_name;
+        $operation_log->operation_info = $info;
+        $operation_log->save();
+    }
 }
 ?>
