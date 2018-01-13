@@ -88,7 +88,7 @@ class ProxyController extends Controller{
     public function proxy_examine_check(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
-        echo $id.'_'.$status;exit;
+        echo $status;exit;
     }
 
 
