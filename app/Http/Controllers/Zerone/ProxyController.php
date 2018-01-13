@@ -53,8 +53,8 @@ class ProxyController extends Controller{
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
-
-            WarzoneProxy::addWarzoneProxy(['organization_id'=>$organization_id,'zone_id'=>$zone_id]);
+            $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
+            WarzoneProxy::addWarzoneProxy($proxydata);
             $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
