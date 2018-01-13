@@ -137,7 +137,7 @@
                                 </tfoot>
 
                                 <td colspan="99" class="text-right">
-                                    {!! $operation_log_list->link() !!}
+                                    {!! $operation_log_list->links() !!}
                                 </td>
                             </table>
 
