@@ -28,7 +28,7 @@ class OperationLog extends Model{
     }
     //分页查询获取列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
