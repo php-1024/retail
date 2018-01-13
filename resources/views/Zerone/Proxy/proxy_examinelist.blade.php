@@ -163,11 +163,10 @@ $(function(){
 });
 
 //审核
-function getEditForm(id,status){
+function getEditForm(id,sta){
 
     var url = $('#proxy_examine').val();
     var token = $('#_token').val();
-
     if(id==''){
         swal({
             title: "提示信息",
@@ -180,7 +179,7 @@ function getEditForm(id,status){
         return;
     }
 
-    var data = {'id':id,'status':status,'_token':token};
+    var data = {'id':id,'sta':sta,'_token':token};
     $.post(url,data,function(response){
         if(response.status=='-1'){
             swal({

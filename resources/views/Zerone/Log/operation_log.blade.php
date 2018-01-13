@@ -98,52 +98,14 @@
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
                                 @endforeach
-                                {{--<tr>--}}
-                                    {{--<td>10</td>--}}
-                                    {{--<td>您修改了登陆密码</td>--}}
-                                    {{--<td>2017-08-08 10:30:30</td>--}}
-                                {{--</tr>--}}
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="9" class="footable-visible">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                    <td colspan="99" class="text-right">
+                                        {!! $operation_log_list->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
-
-                                <td colspan="99" class="text-right">
-                                    {!! $operation_log_list->links() !!}
-                                </td>
                             </table>
 
                         </div>
