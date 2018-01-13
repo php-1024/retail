@@ -25,7 +25,7 @@ class ProxyController extends Controller{
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
-        $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
+        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//服务商名称
@@ -86,8 +86,7 @@ class ProxyController extends Controller{
     }
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
-        $admin_data = LoginLog::where('id',1)->first();//查找超级管理员的数据
-        dump($admin_data);exit;
+        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
