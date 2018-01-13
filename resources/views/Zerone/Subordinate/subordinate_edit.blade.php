@@ -39,13 +39,6 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">角色名称</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="role_name" value="{{ $info->role_name }}"></div>
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-
-                <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
                     <div class="col-sm-10"><input type="password" class="form-control" id="safe_password" name="safe_password"></div>
                 </div>
