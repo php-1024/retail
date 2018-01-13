@@ -63,7 +63,7 @@ class ProxyApply extends Model{
 
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::warzone('account_roles')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
