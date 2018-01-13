@@ -119,7 +119,7 @@ class SubordinateController extends Controller{
 
     //下级人员授权管理
     public function subordinate_authorize(Request $request){
-
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
         $info = Account::getOne([['id',$id]]);
         foreach($info->account_roles as $key=>$val){
@@ -128,7 +128,7 @@ class SubordinateController extends Controller{
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
 
 
-        return view('Zerone/Subordinate/subordinate_authorize',['module_node_list'=>$module_node_list,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'info'=>$info,'role_list'=>$role_list]);
+        return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
     //获取下级人员当前已经选取的节点
