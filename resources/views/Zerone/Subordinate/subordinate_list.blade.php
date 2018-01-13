@@ -99,7 +99,7 @@
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" class="btn  btn-xs btn-info"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
-                                            <button type="button" class="btn  btn-xs btn-success"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <button type="button" class="btn  btn-xs btn-success"  onclick="getLockComfirmForm({{ $val->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
@@ -149,6 +149,19 @@
         function getLockComfirmForm(id){
             var url = $('#subordinate_lock_confirm_url').val();
             var token = $('#_token').val();
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
             var data = {'id':id,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
