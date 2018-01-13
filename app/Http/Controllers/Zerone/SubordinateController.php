@@ -107,7 +107,6 @@ class SubordinateController extends Controller{
         $organization_id = 1;//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'].','.$admin_data['id'];
         $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
-
         return view('Zerone/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -126,6 +125,16 @@ class SubordinateController extends Controller{
             $info->account_role = $val->id;
         }
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+
+        if($admin_data['id'] == 1) {//如果是超级管理员
+            $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+        }else{
+            $module_node_list = Module::getListProgram(1, [], 0, 'id');//其他用户暂时不做权限
+        }
+        $selected_nodes = [];//选中的节点
+        $selected_modules = [];//选中的模块
+        $module_node_list = ProgramModuleNode::getAccountModuleNodes(1,$id);
+        dump($module_node_list);
         return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
