@@ -102,8 +102,8 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this)" value="1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                        <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
+                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -127,14 +127,7 @@
 
 
 
-        <div class="footer" >
-            <div class="pull-right">
-                您登陆的时间是：2017-10-24 16:26:30
-            </div>
-            <div>
-                <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
-            </div>
-        </div>
+        @include('Zerone/Public/Footer')
 
 
         <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
@@ -180,14 +173,7 @@
 
 
 <script>
-//    $(function(){
-//        //设置CSRF令牌
-//        $.ajaxSetup({
-//            headers: {
-//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//            }
-//        });
-//    });
+
 //    $(document).ready(function() {
 //        var elem = document.querySelector('.js-switch');
 //        var switchery = new Switchery(elem, { color: '#1AB394' });
@@ -239,39 +225,40 @@ $(function(){
 });
 
 //获取用户信息，编辑密码框
-function getEditForm(id){
-    var url = $('#role_edit_url').val();
-    var token = $('#_token').val();
-
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
-        });
-        return;
-    }
-
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }else{
-            $('#myModal').html(response);
-            $('#myModal').modal();
-        }
-    });
+function getEditForm(id,val){
+    alert(val);
+//    var url = $('#role_edit_url').val();
+//    var token = $('#_token').val();
+//
+//    if(id==''){
+//        swal({
+//            title: "提示信息",
+//            text: '数据传输错误',
+//            confirmButtonColor: "#DD6B55",
+//            confirmButtonText: "确定",
+//        },function(){
+//            window.location.reload();
+//        });
+//        return;
+//    }
+//
+//    var data = {'id':id,'_token':token};
+//    $.post(url,data,function(response){
+//        if(response.status=='-1'){
+//            swal({
+//                title: "提示信息",
+//                text: response.data,
+//                confirmButtonColor: "#DD6B55",
+//                confirmButtonText: "确定",
+//            },function(){
+//                window.location.reload();
+//            });
+//            return;
+//        }else{
+//            $('#myModal').html(response);
+//            $('#myModal').modal();
+//        }
+//    });
 }
 </script>
 </body>

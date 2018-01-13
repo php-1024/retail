@@ -1,6 +1,8 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_lock') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
+    <input type="hidden" name="account" id="account" value="{{$account}}">
+    <input type="hidden" name="status" id="status" value="{{$status}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -8,11 +10,16 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">用户账号</label>
+                    <div class="col-sm-10">{{ $account }}</div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
                     <div class="col-sm-10"><input type="password" class="form-control" id="safe_password" name="safe_password"></div>
                 </div>
                 <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
             </div>
 
             <div class="modal-footer">

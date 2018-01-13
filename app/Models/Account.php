@@ -44,7 +44,7 @@ class Account extends Model{
     //简易型查询单条数据
     public static function getOne($where)
     {
-        return self::with('organization')->with('account_info')->with('roles')->where($where)->first();
+        return self::with('organization')->with('account_info')->with('account_roles')->where($where)->first();
     }
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
