@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">用户账号</label>
-                                <input type="text" id="role_name" name="account" value="{{ $search_data['account'] }}" placeholder="用户账号" class="form-control">
+                                <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="用户账号" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -84,14 +84,22 @@
                                     <tr>
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->account }}</td>
-                                        <td>{{ $val->create_account->account }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
+                                        <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@endif</td>
+                                        <td>{{ $val->mobile }}</td>
+                                        <td>
+                                            @if($val->status == '1')
+                                                <label class="label label-primary">正常</label>
+                                            @else
+                                                <label class="label label-warning">已冻结</label>
+                                            @endif
+                                        </td>
+                                        <td>第{{ $val->deepth }}层</td>
                                         <td>{{ $val->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" class="btn  btn-xs btn-info"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
+                                            <button type="button" class="btn  btn-xs btn-success"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>

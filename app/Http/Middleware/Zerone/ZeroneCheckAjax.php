@@ -203,10 +203,10 @@ class ZeroneCheckAjax
     }
     //检测编辑系统参数设置数据
     public function checkSetupEdit($request){
-        if(empty($request->input('cfg_value')['0'])){
+        if(empty($request->input('serviceurl'))){
             return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
         }
-        if(empty($request->input('cfg_value')['1'])){
+        if(empty($request->input('merchanturl'))){
             return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
         }
         return self::res(1,$request);
@@ -307,13 +307,13 @@ class ZeroneCheckAjax
         if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner'))) {
+        if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner_idcard'))) {
+        if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('proxy_owner_mobile'))) {
+        if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
         }
         if (empty($request->input('proxy_password'))) {

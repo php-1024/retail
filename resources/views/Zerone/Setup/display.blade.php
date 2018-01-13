@@ -7,13 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>零壹新科技程序管理平台</title>
-
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-
     <!-- Sweet Alert -->
     <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
@@ -26,7 +23,6 @@
 <div id="wrapper">
 
     @include('Zerone/Public/Nav')
-
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -57,7 +53,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="cfg_value[]" value="{{$setup_list[0]['cfg_value']}}"/>
+                                        <input type="text" class="form-control" name="serviceurl" value="{{$setup_list[0]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -65,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="deleted_at[]" class="js-switch" checked  value="1"/>
+                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" checked  value="1"/>
                                     </div>
                                 </div>
 
@@ -74,7 +70,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >商户通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="cfg_value[]" value="{{$setup_list[1]['cfg_value']}}"/>
+                                        <input type="text" class="form-control" name="merchanturl" value="{{$setup_list[1]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -82,14 +78,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="deleted_at[]" class="js-switch2" checked  value="1"/>
+                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" checked  value="1"/>
                                     </div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">人员构深度设置</label>
-                                    <div class="col-sm-1"><input type="text" name="cfg_value[]" class="form-control"></div>
+                                    <div class="col-sm-1"><input type="text" name="depth" class="form-control"></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
