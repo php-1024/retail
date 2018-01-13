@@ -92,83 +92,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-
-                                </tr>
+                                @foreach($login_log_list as $val)
+                                    <tr>
+                                        <td>{{  $val->accounts->account }}</td>
+                                        <td>{{  long2ip($val->ip) }}</td>
+                                        <td>{{  $val->ip_position }}</td>
+                                        <td>{{  $val->created_at }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
