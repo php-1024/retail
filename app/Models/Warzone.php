@@ -13,5 +13,9 @@ class Warzone extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和proxyappy表一对多的关系
+    public function proxyappy(){
+        return $this->hasMany('App\Models\proxyappy', 'zone_id');
+    }
 }
 ?>
