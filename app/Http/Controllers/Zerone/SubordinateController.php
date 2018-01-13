@@ -142,7 +142,7 @@ class SubordinateController extends Controller{
             DB::beginTransaction();
             try {
                 //添加用户
-                $data = ['mobile'=>$mobile];
+                $data['mobile'] = $mobile;
                 if (!empty($password)) {
                     $data['password'] = $encryptPwd;
                 }
