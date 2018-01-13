@@ -13,6 +13,11 @@ class ProxyApply extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和战区表多对一的关系
+    public function warzone(){
+        return $this->hasOne('App\Models\Warzone', 'zone_id');
+    }
+
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new ProxyApply();
@@ -58,7 +63,7 @@ class ProxyApply extends Model{
 
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
