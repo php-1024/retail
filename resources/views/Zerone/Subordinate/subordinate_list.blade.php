@@ -43,8 +43,8 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                        <input type="hidden" id="account_edit_url" value="{{ url('zerone/ajax/subordinate_edit') }}">
-                        <input type="hidden" id="role_delete_comfirm_url" value="{{ url('zerone/ajax/role_delete_comfirm') }}">
+                        <input type="hidden" id="subordinate_edit_url" value="{{ url('zerone/ajax/subordinate_edit') }}">
+                        <input type="hidden" id="subordinate_lock_confirm_url" value="{{ url('zerone/ajax/subordinate_lock_confirm') }}">
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">用户账号</label>
@@ -146,21 +146,9 @@
             });
         });
         //获取删除权限角色删除密码确认框
-        function getDeleteComfirmForm(id){
-            var url = $('#role_delete_comfirm_url').val();
+        function getLockComfirmForm(id){
+            var url = $('#subordinate_lock_confirm_url').val();
             var token = $('#_token').val();
-            if(id==''){
-                swal({
-                    title: "提示信息",
-                    text: '数据传输错误',
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }
-
             var data = {'id':id,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
@@ -181,7 +169,7 @@
         }
         //获取用户信息，编辑密码框
         function getEditForm(id){
-            var url = $('#account_edit_url').val();
+            var url = $('#subordinate_edit_url').val();
             var token = $('#_token').val();
 
             if(id==''){
