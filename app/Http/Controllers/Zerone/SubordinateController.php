@@ -118,6 +118,19 @@ class SubordinateController extends Controller{
         return view('Zerone/Subordinate/subordinate_edit',['info'=>$info]);
     }
 
+    public function subordinate_authorize(Request $request){
+        $id = $request->input('id');
+        $info = Account::getOne([['id',$id]]);
+        foreach($info->account_roles as $key=>$val){
+            $info->account_role = $val->id;
+        }
+        return view('Zerone/Subordinate/subordinate_edit',['info'=>$info]);
+    }
+
+    public function subordinate_authorize_check(Request $request){
+
+    }
+
     //编辑下级人员数据提交
     public function subordinate_edit_check(Request $request)
     {
