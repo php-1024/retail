@@ -142,7 +142,7 @@
                                 </tfoot>
 
                                 <td colspan="99" class="text-right">
-                                    {{--{{ links() }}--}}
+                                    {{ $operation_log_list->links() }}
                                 </td>
                             </table>
 
