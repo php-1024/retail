@@ -14,7 +14,7 @@ class Warzone extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和proxyappy表一对多的关系
-    public function proxyappy(){
+    public function proxyapply(){
         return $this->hasMany('App\Models\ProxyApply', 'zone_name');
     }
 }
