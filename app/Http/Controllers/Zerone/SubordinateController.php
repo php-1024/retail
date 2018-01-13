@@ -174,6 +174,21 @@ class SubordinateController extends Controller{
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的用户的账号,用于记录
         $status = $request->input('status');//当前用户的状态
+        DB::beginTransaction();
+        try{
+            if($status==1) {
+                Account::editAccount([['id',$id]],['status'=>'0']);
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+            }else{
+                Account::editAccount([['id',$id]],['status'=>'1']);
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+            }
+            DB::commit();
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '操作失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
     //删除下级人员
