@@ -16,7 +16,7 @@ class WarzoneController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $warzone = Warzone::where('id',1)->get();
         foreach ($warzone as $key => $val){
-            $zone_id = $val->id;
+            $zone_id[] = $val->id;
             dump($zone_id);
         }
         $warzone_province = WarzoneProvince::where('id',1)->get();
