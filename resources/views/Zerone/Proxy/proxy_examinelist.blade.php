@@ -84,7 +84,7 @@
                                 <tr>
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->proxy_name}}</td>
-                                    <td>{{$value->zone_id}}</td>
+                                    <td>{{$value->zone_name}}</td>
                                     <td>{{$value->proxy_owner}}</td>
 
                                     <td>{{$value->proxy_owner_idcard}}</td>
