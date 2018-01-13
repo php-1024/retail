@@ -77,9 +77,13 @@ class ProxyController extends Controller{
         $list = ProxyApply::getPaginage([],'5','id');
         return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //服务商审核列表
+    //服务商审核ajaxshow显示页面
     public function proxy_examine(Request $request){
-        return view('Zerone/Proxy/proxy_examine');
+        $id = $request->input('id');//服务商id
+        $status = $request->input('status');//是否通过值 1为通过 -1为不通过
+        $info =  ProxyApply::getPluck([['id',$id]]);//获取该ID的信息
+        dd($info);
+        return view('Zerone/Proxy/proxy_examine',['info'=>$info,'status',$status]);
     }
 
     //服务商列表
