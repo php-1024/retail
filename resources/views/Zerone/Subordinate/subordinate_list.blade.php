@@ -43,7 +43,7 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                        <input type="hidden" id="account_edit_url" value="{{ url('zerone/ajax/account_edit') }}">
+                        <input type="hidden" id="account_edit_url" value="{{ url('zerone/ajax/subordinate_edit') }}">
                         <input type="hidden" id="role_delete_comfirm_url" value="{{ url('zerone/ajax/role_delete_comfirm') }}">
                         <div class="col-sm-3">
                             <div class="form-group">

@@ -210,7 +210,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('setup_edit_check','Zerone\SetupController@setup_edit_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('proxy_add_check','Zerone\ProxyController@proxy_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
-
+        Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
     });
 });
 /********************零壹管理系统*************************/
