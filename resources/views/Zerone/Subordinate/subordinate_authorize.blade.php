@@ -56,7 +56,6 @@
 </form>
 <script>
     $(document).ready(function() {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
         get_quick_rule('#role_id');
     });
 
@@ -65,8 +64,7 @@
         var url =  $('#quick_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
-        var account_id = $('#admin_id').val();
-        var data = {'_token':token,'role_id':role_id,'account_id':account_id}
+        var data = {'_token':token,'role_id':role_id}
         $.post(url,data,function(response){
             $('#module_node_box').html(response);
         });
