@@ -14,7 +14,7 @@ class WarzoneProvince extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和战区表一对一的关系
-    public function warzoneprovince(){
+    public function warzone(){
         return $this->belongsTo('App\Models\Warzone', 'zone_id');
     }
     //和战区省份表一对一的关系

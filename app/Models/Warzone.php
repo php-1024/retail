@@ -18,9 +18,10 @@ class Warzone extends Model{
         return $this->hasMany('App\Models\ProxyApply', 'zone_id');
     }
 
-    //和WarzoneProvince表一对多的关系
+    //和战区表一对一的关系
     public function warzoneprovince(){
-        return $this->hasMany('App\Models\WarzoneProvince', 'zone_id');
+        return $this->belongsTo('App\Models\WarzoneProvince', 'zone_id');
     }
+
 }
 ?>
