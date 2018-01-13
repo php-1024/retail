@@ -15,7 +15,7 @@ class SetupController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $setup_list = Setup::get_all();
 
-        dump(Setup::getOne([['id','2']])->cfg_value);
+//        dump(Setup::getOne([['id','2']])->cfg_value);
         dump($request);
 //        $re = Setup::deleteSetup(1);//修改保存服务商通道链接开启状态(软删除)
 //        if ($re){
