@@ -19,7 +19,7 @@ class WarzoneController extends Controller{
 //            $val->id
 //
 //        }
-        $warzone_province = WarzoneProvince::warzone();
+        $warzone_province = WarzoneProvince::all();
         dump($warzone);
         dump($warzone_province);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
