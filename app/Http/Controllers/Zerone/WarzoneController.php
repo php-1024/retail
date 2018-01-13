@@ -14,13 +14,10 @@ class WarzoneController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $warzone = Warzone::where('id',1)->get();
-//        foreach ($warzone as $key => $val){
-//            $val->id
-//
-//        }
-        $warzone_province = WarzoneProvince::where('id',1)->get();
-        dump($warzone);
+        $warzone = Warzone::all();
+        foreach ($warzone as $key => $val){
+            $warzone_province = WarzoneProvince::all();
+        }
         dump($warzone_province);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
