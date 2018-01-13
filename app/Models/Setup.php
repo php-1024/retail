@@ -45,5 +45,10 @@ class Setup extends Model{
     public static function deleteSetup($where){
         self::where($where)->delete();//软删除指定数据
     }
+
+    //恢复指定软删除数据
+    public static function deleteSetup($where){
+        self::where($where)->restore();//恢复指定软删除数据
+    }
 }
 ?>
