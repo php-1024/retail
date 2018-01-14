@@ -88,20 +88,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                @foreach($warzone as $key=>$val)
                                 <tr>
-                                    @foreach($warzone as $key=>$val)
                                     <td>
                                         {{$val->id}}
                                     </td>
                                     <td>
-                                        {{ $val->warzone->zone_name }}
+                                        {{ $val->zone_name }}
                                     </td>
-                                    @endforeach
                                     <td>
-                                        @foreach($warzone as $kk=>$vv)
-                                        <label class="label label-success" style="display:inline-block">{{ $vv->province->province_name }}</label>&nbsp;&nbsp;
-                                        @endforeach
+                                        {{--@foreach($val->province as $kk=>$vv)--}}
+                                        {{--<label class="label label-success" style="display:inline-block">{{ $vv->province_name }}</label>&nbsp;&nbsp;--}}
+                                        {{--@endforeach--}}
                                     </td>
                                     <td >
                                         23位服务商
@@ -112,6 +110,7 @@
                                         <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 {{--<tr>--}}
                                     {{--<td>--}}
                                         {{--2--}}
