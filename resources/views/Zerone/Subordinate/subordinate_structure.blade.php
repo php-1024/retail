@@ -76,7 +76,7 @@
                                             {{ $admin_data['account'] }}
                                         </div>
 
-                                       {{ $structure }}
+                                       {!! $structure  !!}
 
                                     </li>
                                 </ol>
