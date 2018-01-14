@@ -292,7 +292,7 @@ class SubordinateController extends Controller{
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
                 //$arr[] = $val;
-                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '"><div class="dd-handle"><span class="label label-info"><i class="fa fa-user"></i></span>' . $val['account']. '-'.$val['account_info']['realname'];
+                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '"><div class="dd-handle"><span class="pull-right">'.$val['created_at'].'</span><span class="label label-info"><i class="fa fa-user"></i></span>' . $val['account']. '-'.$val['account_info']['realname'];
                 if(!empty($val['account_roles'])){
                     $structure.='【'.$val['account_roles'][0]['role_name'].'】';
                 }
