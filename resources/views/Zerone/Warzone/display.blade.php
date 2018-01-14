@@ -102,13 +102,13 @@
                                         @endforeach
                                     </td>
                                     <td >
+                                        @if($val->proxyapply)
                                         @foreach($val->proxyapply as $kk=>$vv)
-                                            @if($vv->count())
                                                 {{$vv->count()}}位服务商
-                                            @else
-                                                {{$vv->count()}}位服务商
-                                            @endif
                                         @endforeach
+                                        @else
+                                        0位服务商
+                                        @endif
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
