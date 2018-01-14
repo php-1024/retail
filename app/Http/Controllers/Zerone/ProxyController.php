@@ -156,9 +156,10 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $listorg = Organization::getPaginage(['type'=>'2'],'5','id')->toArray();
         foreach ($listorg as $key=>$value){
-            dump($value);
-
-            // $listorg[$key]['zone_name']  = Warzone::getPluck([['id'=>$value['zone_id']]],'zone_name');
+            foreach ($value['warzone_proxy'] as $k=>$v){
+                $listorg[$key]['zone_name']  = Warzone::getPluck([['id'=>$v['zone_id']]],'zone_name');
+                dd($listorg[$key]['zone_name']);
+            }
         }
         return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
