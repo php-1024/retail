@@ -97,7 +97,9 @@
                                         {{ $val->warzone->zone_name }}
                                     </td>
                                     <td>
-                                        <label class="label label-success" style="display:inline-block">{{ $val->province->province_name }}</label>&nbsp;&nbsp;
+                                        @foreach($val->province as $kk=>$vv)
+                                        <label class="label label-success" style="display:inline-block">{{ $vv->province_name }}</label>&nbsp;&nbsp;
+                                        @endforeach
 
                                     </td>
                                     <td >
