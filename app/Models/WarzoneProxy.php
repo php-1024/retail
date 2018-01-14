@@ -13,14 +13,6 @@ class WarzoneProxy extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和战区表一对一的关系
-    public function warzone(){
-        return $this->belongsTo('App\Models\Warzone', 'zone_id');
-    }
-    //和战区省份表一对一的关系
-    public function province(){
-        return $this->belongsTo('App\Models\Province','province_name');
-    }
     //和Organization表一对一的关系
     public function organization(){
         $Warzone = new Warzone();
