@@ -102,7 +102,9 @@
                                         @endforeach
                                     </td>
                                     <td >
-                                        23位服务商
+                                        @foreach($val->proxyapply as $kk=>$vv)
+                                        {{$vv->total()}}位服务商
+                                        @endforeach
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
