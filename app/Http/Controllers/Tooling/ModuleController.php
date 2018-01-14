@@ -49,7 +49,6 @@ class ModuleController extends Controller{
         $module_name = $request->input('module_name');
         $search_data = ['module_name'=>$module_name];
         $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
-
         return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //编辑功能模块列表
@@ -87,7 +86,6 @@ class ModuleController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑功能模块失败，请检查', 'status' => '0']);
             }

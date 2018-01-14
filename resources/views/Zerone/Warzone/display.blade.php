@@ -88,19 +88,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 <tr>
+                                    @foreach($warzone as $key=>$val)
                                     <td>
-                                        1
+                                        {{$val->id}}
                                     </td>
                                     <td>
-                                        东北战区
+                                        {{ $val->warzone->zone_name }}
                                     </td>
+                                    @endforeach
                                     <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
+                                        @foreach($warzone as $kk=>$vv)
+                                        <label class="label label-success" style="display:inline-block">{{ $vv->province->province_name }}</label>&nbsp;&nbsp;
+                                        @endforeach
                                     </td>
                                     <td >
                                         23位服务商
@@ -111,102 +112,102 @@
                                         <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        东南战区
-                                    </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td >
-                                        46位服务商
-                                    </td>
+                                {{--<tr>--}}
+                                    {{--<td>--}}
+                                        {{--2--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--东南战区--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
+                                    {{--</td>--}}
+                                    {{--<td >--}}
+                                        {{--46位服务商--}}
+                                    {{--</td>--}}
 
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        西北战区
-                                    </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td >
-                                        58位服务商
-                                    </td>
+                                    {{--<td class="text-right">--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
+                                    {{--</td>--}}
+                                {{--</tr>--}}
+                                {{--<tr>--}}
+                                    {{--<td>--}}
+                                        {{--3--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--西北战区--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
+                                    {{--</td>--}}
+                                    {{--<td >--}}
+                                        {{--58位服务商--}}
+                                    {{--</td>--}}
 
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        西南战区
-                                    </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td >
-                                        66位服务商
-                                    </td>
+                                    {{--<td class="text-right">--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
+                                    {{--</td>--}}
+                                {{--</tr>--}}
+                                {{--<tr>--}}
+                                    {{--<td>--}}
+                                        {{--4--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--西南战区--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
+                                    {{--</td>--}}
+                                    {{--<td >--}}
+                                        {{--66位服务商--}}
+                                    {{--</td>--}}
 
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        中南战区
-                                    </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
-                                    </td>
-                                    <td >
-                                        83位服务商
-                                    </td>
+                                    {{--<td class="text-right">--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
+                                    {{--</td>--}}
+                                {{--</tr>--}}
+                                {{--<tr>--}}
+                                    {{--<td>--}}
+                                        {{--4--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--中南战区--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
+                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
+                                    {{--</td>--}}
+                                    {{--<td >--}}
+                                        {{--83位服务商--}}
+                                    {{--</td>--}}
 
-                                    <td class="text-right">
-                                        <button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
-                                    </td>
-                                </tr>
+                                    {{--<td class="text-right">--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
+                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
+                                    {{--</td>--}}
+                                {{--</tr>--}}
                                 </tbody>
                                 <tfoot>
                                 <tr>

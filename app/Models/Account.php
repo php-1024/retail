@@ -6,6 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 class Account extends Model{
     use SoftDeletes;
     protected $table = 'account';
@@ -46,6 +47,16 @@ class Account extends Model{
     {
         return self::with('organization')->with('account_info')->with('account_roles')->where($where)->first();
     }
+
+    //查询获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::with('organization')->with('account_info')->with('account_roles');
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
+
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
         return self::where('account',$username)->orWhere('mobile',$username)->first();
