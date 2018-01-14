@@ -106,7 +106,7 @@
                                             @if($vv->count())
                                                 {{$vv->count()}}位服务商
                                             @else
-                                                0位服务商
+                                                {{$vv->count()}}位服务商
                                             @endif
                                         @endforeach
                                     </td>
