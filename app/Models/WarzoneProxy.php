@@ -23,7 +23,8 @@ class WarzoneProxy extends Model{
     }
     //和Organization表一对一的关系
     public function organization(){
-        return $this->hasOne('App\Models\Organization', 'organization_id')->hasOne('App\Models\Warzone', 'zone_id');
+        $Warzone = new Warzone();
+        return $this->hasOne('App\Models\Organization', 'organization_id')->$Warzone->hasOne('App\Models\Warzone', 'zone_id');
     }
     //添加数据
     public static function addWarzoneProxy($param){
