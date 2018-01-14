@@ -287,7 +287,7 @@ class SubordinateController extends Controller{
 
     //对查询出来的集合做冒泡排序
     private function mp_sort($collection){
-        dump(count($collection));
+        dump($collection->items);
     }
 }
 ?>
