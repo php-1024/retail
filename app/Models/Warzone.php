@@ -27,13 +27,21 @@ class Warzone extends Model{
         return $this->belongsTo('App\Models\WarzoneProvince', 'zone_id');
     }
 
-    //和战区省份表一对一的关系
-    public function province(){
-        return $this->hasOne('App\Models\Province', 'id');
-    }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
+    }
+
+
+
+
+    /*
+     * New
+     */
+    //和战区节点关联，多对多
+    public function province()
+    {
+        return $this->belongsToMany('App\Models\Province','warzone_province','zone_id','province_id');
     }
 
     //获取战区分页列表
