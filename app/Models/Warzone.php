@@ -29,7 +29,6 @@ class Warzone extends Model{
 
     //和战区省份表一对一的关系
     public function province(){
-//        return $this->belongsTo('App\Models\Province','province_id');
         return $this->hasOne('App\Models\Province', 'id');
     }
     //获取单行数据的其中一列
