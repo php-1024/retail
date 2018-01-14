@@ -32,6 +32,10 @@ class Warzone extends Model{
 //        return $this->belongsTo('App\Models\Province','province_id');
         return $this->hasOne('App\Models\Province', 'id');
     }
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
+    }
 
     //获取战区分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
