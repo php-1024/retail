@@ -17,8 +17,8 @@ class WarzoneController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zone_id = $request->input('$zone_id');
         $warzone = WarzoneProvince::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],15,'id');
-        dump($warzone[0]['province']['province_name']);
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        dump($zone_id);
+        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
     }
 
     //功能模块列表
