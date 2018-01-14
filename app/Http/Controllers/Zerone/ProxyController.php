@@ -157,10 +157,13 @@ class ProxyController extends Controller{
         $listorg = Organization::getPaginage(['type'=>'2'],'5','id')->toArray();
         foreach ($listorg as $key=>$value){
             if(is_array($value)) {
-                dd($value);
-                foreach ($value['warzone_proxy'] as $k => $v) {
-                    $listorg[$key]['zone_name'] = Warzone::getPluck([['id' => $v['zone_id']]], 'zone_name');
-                    dd($listorg[$key]['zone_name']);
+                foreach ($value as $ki=>$vi){
+                    foreach ($vi['warzone_proxy'] as $k => $v) {
+                        dd($v);
+                        $listorg[$key]['zone_name'] = Warzone::getPluck([['id' => $v['zone_id']]], 'zone_name');
+                        dd($listorg[$key]['zone_name']);
+                    }
+
                 }
             }
         }
