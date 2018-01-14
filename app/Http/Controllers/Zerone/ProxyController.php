@@ -159,6 +159,7 @@ class ProxyController extends Controller{
             if(is_array($value)) {
                 foreach ($value as $ki=>$vi){
                     foreach ($vi['warzone_proxy'] as $k => $v) {
+                        dd($v);
                         $listorg[$key]['zone_name'] = Warzone::getPluck([['id' => $v['zone_id']]], 'zone_name');
                         dd($listorg[$key]['zone_name']);
                     }
