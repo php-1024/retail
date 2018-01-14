@@ -100,7 +100,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>南部战区</td>
+                                        <td>{{$value->warzoneProxy->zone_id}}</td>
                                         <td>刘兴文</td>
 
 
