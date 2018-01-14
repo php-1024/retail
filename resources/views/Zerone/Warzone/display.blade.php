@@ -100,7 +100,6 @@
                                         @foreach($val->province as $kk=>$vv)
                                         <label class="label label-success" style="display:inline-block">{{ $vv->province_name }}</label>&nbsp;&nbsp;
                                         @endforeach
-
                                     </td>
                                     <td >
                                         23位服务商
