@@ -293,7 +293,7 @@ class SubordinateController extends Controller{
                 unset($list[$key]);
                $arr[] = [
                    'id'=>$val,
-                   'son_list'=>$this->create_structure($list,$val['od']),
+                   'son_list'=>$this->create_structure($list,$val['id']),
                ];
             }
         }
