@@ -19,5 +19,10 @@ class Province extends Model{
         return $this->hasOne('App\Models\WarzoneProvince', 'id', 'province_id');
     }
 
+    //和战区表一对一的关系
+    public function warzone(){
+        return $this->belongsTo('App\Models\Warzone', 'zone_id');
+    }
+
 }
 ?>
