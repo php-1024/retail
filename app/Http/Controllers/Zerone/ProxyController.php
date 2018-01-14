@@ -156,6 +156,7 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $listorg = Organization::getPaginage(['type'=>'2'],'5','id')->toArray();
         foreach ($listorg as $key=>$value){
+            dd($value);
             foreach ($value['warzone_proxy'] as $k=>$v){
                 $listorg[$key]['zone_name']  = Warzone::getPluck([['id'=>$v['zone_id']]],'zone_name');
                 dd($listorg[$key]['zone_name']);
