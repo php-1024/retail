@@ -95,7 +95,7 @@
                                     </td>
                                     <td>
                                         @foreach($val as $kk=>$vv)
-                                        {{$vv->zone_name}}
+                                        {{$vv}}
                                         @endforeach
                                     </td>
                                     <td>
