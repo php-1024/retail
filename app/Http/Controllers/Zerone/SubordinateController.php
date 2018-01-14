@@ -282,6 +282,7 @@ class SubordinateController extends Controller{
         $organization_id = 1;//当前组织ID，零壹管理平台组织只能为1
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'tree_sort','asc');
         $list = $this->create_structure($list,$admin_data['id']);
+        dump($list);
         return view('Zerone/Subordinate/subordinate_structure',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
