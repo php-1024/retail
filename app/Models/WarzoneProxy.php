@@ -6,7 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class WarzoneProxy extends Model{
+class OrganizationWarzoneProxy extends Model{
     use SoftDeletes;
     protected $table = 'warzone_proxy';
     protected $primaryKey = 'id';
@@ -20,6 +20,10 @@ class WarzoneProxy extends Model{
     //和战区省份表一对一的关系
     public function province(){
         return $this->belongsTo('App\Models\Province','province_name');
+    }
+    //和Organization表一对一的关系
+    public function organization(){
+        return $this->belongsTo('App\Models\Organization', 'zone_id');
     }
     //添加数据
     public static function addWarzoneProxy($param){

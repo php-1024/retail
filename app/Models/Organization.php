@@ -19,6 +19,10 @@ class Organization extends Model{
     public function account(){
         return $this->hasMany('App\Models\Account', 'organization_id');
     }
+    //和WarzoneProxy表一对一的关系
+    public function warzoneProxy(){
+        return $this->belongsTo('App\Models\WarzoneProxy', 'zone_id');
+    }
 
     //添加数据
     public static function addProgram($param){
@@ -48,7 +52,7 @@ class Organization extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzoneProxy')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
