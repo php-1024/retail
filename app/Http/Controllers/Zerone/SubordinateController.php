@@ -290,8 +290,8 @@ class SubordinateController extends Controller{
         $arr = [];
         foreach($list as $key=>$val){
             if($val->parent_id == $id){
-                $arr[$id] = $val;
-                $arr[$id]['son_list'] = $this->create_structure($list,$val->id);
+                $arr[][$id] = $val;
+                $arr[][$id]['son_list'] = $this->create_structure($list,$val->id);
             }
         }
         return $arr;
