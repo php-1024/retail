@@ -97,11 +97,8 @@
                                         {{ $val->warzone->zone_name }}
                                     </td>
                                     <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
+                                        <label class="label label-success" style="display:inline-block">{{ $val->province->province_name }}</label>&nbsp;&nbsp;
+
                                     </td>
                                     <td >
                                         23位服务商
