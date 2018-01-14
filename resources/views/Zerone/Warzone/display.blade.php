@@ -94,7 +94,7 @@
                                         {{$val->id}}
                                     </td>
                                     <td>
-                                        东北战区
+                                        {{$val->zone_name}}
                                     </td>
                                     <td>
                                         <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
