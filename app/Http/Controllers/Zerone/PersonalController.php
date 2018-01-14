@@ -1,13 +1,8 @@
 <?php
-namespace App\Http\Controllers\Tooling;
+namespace App\Http\Controllers\Zerone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
-use Illuminate\Support\Facades\DB;
-use App\Models\ToolingAccount;
-use App\Libraries\ZeroneLog\ToolingLog;
-use App\Models\ToolingOperationLog;
-use App\Models\ToolingLoginLog;
 
 class PersonalController extends Controller{
     //个人中心——个人资料
