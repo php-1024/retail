@@ -94,8 +94,8 @@
                                         {{$val->id}}
                                     </td>
                                     <td>
-                                        @foreach($val as $kk=>$vv)
-                                        {{$vv}}
+                                        @foreach($val->warzone as $kk=>$vv)
+                                        {{ $vv->zone_name }}
                                         @endforeach
                                     </td>
                                     <td>
