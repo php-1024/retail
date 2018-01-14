@@ -94,16 +94,13 @@
                                         {{$val->id}}
                                     </td>
                                     <td>
-                                        @foreach($val->warzone as $kk=>$vv)
-                                        {{ $vv }}
-                                        @endforeach
+                                        {{ $val->warzone->zone_name }}
                                     </td>
                                     <td>
-                                        <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;
-                                        <label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;
+                                        @foreach($val->province as $kk=>$vv)
+                                        <label class="label label-success" style="display:inline-block">{{ $vv->province_name }}</label>&nbsp;&nbsp;
+                                        @endforeach
+
                                     </td>
                                     <td >
                                         23位服务商
