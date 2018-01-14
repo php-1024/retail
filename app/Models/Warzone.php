@@ -27,5 +27,10 @@ class Warzone extends Model{
         return $this->belongsTo('App\Models\WarzoneProvince', 'zone_id');
     }
 
+    //获取战区分页列表
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('province')->with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
 }
 ?>
