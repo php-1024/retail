@@ -292,7 +292,7 @@ class SubordinateController extends Controller{
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
                 //$arr[] = $val;
-                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '"><div class="dd-handle">' . $val['account'] . '</div>';
+                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '"><div class="dd-handle">' . $val['account']. '-'.$val['account_info']['realname'].'</div>';
                 $son_menu = $this->create_structure($list, $val['id']);
                 if (!empty($son_menu)) {
                     $structure .=  $son_menu;
