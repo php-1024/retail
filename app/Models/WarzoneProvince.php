@@ -13,18 +13,5 @@ class WarzoneProvince extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和战区表一对一的关系
-    public function warzone(){
-        return $this->belongsTo('App\Models\Warzone', 'id');
-    }
-    //和战区省份表一对一的关系
-    public function province(){
-        return $this->hasOne('App\Models\Province', 'id');
-    }
-    //获取战区分页列表
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('province')->with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
-    }
-
 }
 ?>

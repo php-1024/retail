@@ -13,13 +13,6 @@ class Province extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和WarzoneProvince表一对一的关系
-    public function warzoneprovince(){
-        return $this->belongsTo('App\Models\WarzoneProvince','province_id');
-    }
-
-
-
     //和战区节点关联，多对多
     public function warzone()
     {
