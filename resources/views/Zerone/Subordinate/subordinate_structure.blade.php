@@ -75,15 +75,9 @@
                                         <div class="dd-handle">
                                             {{ $admin_data['account'] }}
                                         </div>
-                                        @foreach($list as $key=>$val)
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="1">
-                                                <div class="dd-handle">
-                                                    {{ $val['account'] }}
-                                                </div>
-                                            </li>
-                                        </ol>
-                                        @endforeach;
+
+                                        {{ $structure }}
+
                                     </li>
                                 </ol>
                             </div>
