@@ -76,7 +76,7 @@
                                             {{ $admin_data['account'] }}
                                         </div>
 
-                                        <?php dump($structure);?>
+                                       {{ $structure }}
 
                                     </li>
                                 </ol>
