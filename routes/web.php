@@ -187,6 +187,29 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 
 
+
+    //个人中心——个人资料
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('/','Zerone\PersonalController@personal')->middleware('ZeroneCheck');//个人资料
+    });
+    //个人中心——登录密码修改
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('password_edit','Zerone\PersonalController@password_edit')->middleware('ZeroneCheck');//登录密码修改
+    });
+    //个人中心——安全密码设置
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('security_password','Zerone\PersonalController@security_password')->middleware('ZeroneCheck');//安全密码设置
+    });
+    //个人中心——我的操作日志
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('operation_log','Zerone\PersonalController@operation_log')->middleware('ZeroneCheck');//我的操作日志
+    });
+    //个人中心——我的登录日志
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('login_log','Zerone\PersonalController@login_log')->middleware('ZeroneCheck');//我的登录日志
+    });
+
+
     //登陆页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登陆页面路由
