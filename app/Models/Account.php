@@ -54,7 +54,7 @@ class Account extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->select(DB::raws('account.*,compact(parent_id,"-",id) as tree_sort'))->get();
+        return $model->where($where)->orderBy($orderby,$sort)->select(self::raw('account.*,compact(parent_id,"-",id) as tree_sort'))->get();
     }
 
     //登陆时通过输入的用户名或手机号查询用户
