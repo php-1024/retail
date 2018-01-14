@@ -280,7 +280,7 @@ class SubordinateController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = 1;//当前组织ID，零壹管理平台组织只能为1
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'tree_sort','asc');
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'tree_sort','asc')->toArray();
         $list = $this->create_structure($list,$admin_data['id']);
         dump($list);
         return view('Zerone/Subordinate/subordinate_structure',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -289,9 +289,12 @@ class SubordinateController extends Controller{
     private function create_structure($list,$id){
         $arr = [];
         foreach($list as $key=>$val){
-            if($val->parent_id == $id){
-                $arr[][$id] = $val;
-                $arr[][$id]['son_list'] = $this->create_structure($list,$val->id);
+            if($val['parent_id'] == $id){
+                unset($list[$key]);
+                $arr[] = [
+                    'id'=>$val,
+                    'son_list'=>$this->create_structure($list,$val['id'])
+                ];
             }
         }
         return $arr;
