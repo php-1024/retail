@@ -21,7 +21,7 @@ class Organization extends Model{
     }
     //和WarzoneProxy表一对一的关系
     public function warzoneProxy(){
-        return $this->belongsTo('App\Models\WarzoneProxy', 'id');
+        return $this->belongsTo('App\Models\WarzoneProxy', 'organization_id');
     }
 
     //添加数据
