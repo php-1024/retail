@@ -103,7 +103,7 @@
                                     </td>
                                     <td >
                                         @foreach($val->proxyapply as $kk=>$vv)
-                                            @if($vv->count()!=0)
+                                            @if($vv->count())
                                                 {{$vv->count()}}位服务商
                                             @else
                                                 0位服务商
