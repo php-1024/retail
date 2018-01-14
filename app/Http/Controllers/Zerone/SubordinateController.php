@@ -289,11 +289,11 @@ class SubordinateController extends Controller{
     private function create_structure($list,$id){
         $arr = [];
         foreach($list as $key=>$val){
-            if($val->parent_id == $id){
+            if($val['parent_id'] == $id){
                 unset($list[$key]);
                 $arr[] = [
                     'id'=>$val,
-                    'son_list'=>$this->create_structure($list,$val->id)
+                    'son_list'=>$this->create_structure($list,$val['id'])
                 ];
             }
         }
