@@ -76,13 +76,7 @@
                                             {{ $admin_data['account'] }}
                                         </div>
 
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="1">
-                                                <div class="dd-handle">
-                                                    {{ $val['account'] }}
-                                                </div>
-                                            </li>
-                                        </ol>
+                                        {{ $structure }}
 
                                     </li>
                                 </ol>
