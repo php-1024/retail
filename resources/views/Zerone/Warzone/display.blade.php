@@ -94,7 +94,9 @@
                                         {{$val->id}}
                                     </td>
                                     <td>
-                                        {{$val->warzone->zone_name}}
+                                        @foreach($val->warzone as $kk=>$vv)
+                                        {{$vv->zone_name}}
+                                        @endforeach
                                     </td>
                                     <td>
                                         <label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;
