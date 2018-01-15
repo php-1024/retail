@@ -113,69 +113,27 @@
                             {{--<div class="hr-line-dashed"></div>--}}
 
                             @foreach($account_node_list as $key=>$val)
-
+                                <div>
+                                    <label class="i-checks">
+                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
+                                        {{$account_node_list->module_name}} </label>
+                                </div>
+                                <div>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
+                                        订单编辑 </label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled="">
+                                        订单查询 </label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
+                                        订单添加 </label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
+                                        订单删除 </label>
+                                </div>
+                                <div class="hr-line-dashed"></div>
                             @endforeach
-
-                            <div>
-                                <label class="i-checks">
-                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                    订单模块 </label>
-                            </div>
-                            <div>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                    订单编辑 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled="">
-                                    订单查询 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
-                                    订单添加 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
-                                    订单删除 </label>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div>
-                                <label class="i-checks">
-                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                    订单模块 </label>
-                            </div>
-                            <div>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                    订单编辑 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled="">
-                                    订单查询 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
-                                    订单添加 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
-                                    订单删除 </label>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div>
-                                <label class="i-checks">
-                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                    订单模块 </label>
-                            </div>
-                            <div>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                    订单编辑 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled="">
-                                    订单查询 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
-                                    订单添加 </label>
-                                <label class="checkbox-inline i-checks">
-                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">
-                                    订单删除 </label>
-                            </div>
-                            <div class="hr-line-dashed"></div>
                         </div>
                     </div>
                 </div>
