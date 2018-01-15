@@ -139,7 +139,7 @@ class ProxyController extends Controller{
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
+                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']];
                 OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
