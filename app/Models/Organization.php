@@ -59,7 +59,7 @@ class Organization extends Model{
     }
     //批量修改数据
     public static function editOrganizationBatch($where,$param){
-        $model = self::where($where)->get();
+        $model = self::where($where)->all();
         dd($model);
         foreach ($model as $k=>$v){
             foreach($param as $key=>$val){
