@@ -167,6 +167,13 @@ class ProxyController extends Controller{
         $listorg = Organization::getPaginage(['type'=>'2'],'5','id');
         return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //服务商编辑ajaxshow显示页面
+    public function proxy_list_edit(Request $request){
+        $id = $request->input('id');//服务商id
+
+//        $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
+        return view('Zerone/Proxy/proxy_list_edit',[]);
+    }
 
 }
 ?>

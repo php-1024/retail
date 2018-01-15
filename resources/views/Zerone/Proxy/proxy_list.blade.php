@@ -36,7 +36,8 @@
                 </ol>
             </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
+                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                <input type="hidden" id="proxy_examine" value="{{ url('zerone/ajax/proxy_list_edit') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
@@ -114,7 +115,7 @@
                                         </td>
                                         <td>2017-08-08 10:30:30</td>
                                         <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="button" id="peoplesBtn" onclick="location.href='proxystructure.html'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
@@ -260,49 +261,97 @@
     <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
     <script>
-        $(document).ready(function() {
-            var elem = document.querySelector('.js-switch');
-            var switchery = new Switchery(elem, { color: '#1AB394' });
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-            $('.footable').footable();
+//        $(document).ready(function() {
+//            var elem = document.querySelector('.js-switch');
+//            var switchery = new Switchery(elem, { color: '#1AB394' });
+//            $('.i-checks').iCheck({
+//                checkboxClass: 'icheckbox_square-green',
+//                radioClass: 'iradio_square-green',
+//            });
+//            $('.footable').footable();
+//
+//            $('#date_added').datepicker({
+//                todayBtn: "linked",
+//                keyboardNavigation: false,
+//                forceParse: false,
+//                calendarWeeks: true,
+//                autoclose: true
+//            });
+//
+//            $('#date_modified').datepicker({
+//                todayBtn: "linked",
+//                keyboardNavigation: false,
+//                forceParse: false,
+//                calendarWeeks: true,
+//                autoclose: true
+//            });
+//            $("#editBtn").click(function(){
+//                $('#myModal').modal();
+//            });
+//            $('#lockBtn').click(function(){
+//                $('#myModal3').modal();
+//            });
+//            $('#removeBtn').click(function(){
+//                $('#myModal3').modal();
+//            });
+//            $('.saveBtn').click(function(){
+//                swal({
+//                    title: "温馨提示",
+//                    text: "操作成功",
+//                    type: "success"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            });
+//        });
 
-            $('#date_added').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
 
-            $('#date_modified').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
-            $("#editBtn").click(function(){
-                $('#myModal').modal();
-            });
-            $('#lockBtn').click(function(){
-                $('#myModal3').modal();
-            });
-            $('#removeBtn').click(function(){
-                $('#myModal3').modal();
-            });
-            $('.saveBtn').click(function(){
-                swal({
-                    title: "温馨提示",
-                    text: "操作成功",
-                    type: "success"
-                },function(){
-                    window.location.reload();
-                });
-            });
+$(function(){
+
+    //设置CSRF令牌
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+
+//审核
+function getEditForm(id,sta){
+
+    var url = $('#proxy_examine').val();
+    var token = $('#_token').val();
+    if(id==''){
+        swal({
+            title: "提示信息",
+            text: '数据传输错误',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            window.location.reload();
         });
+        return;
+    }
+
+    var data = {'id':id,'sta':sta,'_token':token};
+    $.post(url,data,function(response){
+        if(response.status=='-1'){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }else{
+
+            $('#myModal').html(response);
+            $('#myModal').modal();
+        }
+    });
+}
     </script>
 </div>
 </body>
