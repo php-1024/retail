@@ -36,12 +36,8 @@ class PersonalController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         if ($account['password'] == $encryptPwd){
-            $re = Account::editAccount_password([['id',$account['id']]],['password' => $encryptPwd]);
-            if ($re){
-                return response()->json(['data' => '密码修改成功！', 'status' => '1']);
-            }else{
-                return response()->json(['data' => '密码修改失败'.$re.'请稍后再试！', 'status' => '1']);
-            }
+            Account::editAccount_password([['id',$account['id']]],['password' => $encryptPwd]);
+            return response()->json(['data' => '密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
         }
