@@ -59,7 +59,6 @@ class PersonalController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $safe_password = $request->input('safe_password');           //安全密码
         $new_safe_password = $request->input('new_safe_password');   //新安全密码
-        $news_safe_password = $request->input('news_safe_password'); //重复新安全密码
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
