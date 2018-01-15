@@ -174,7 +174,7 @@ class ProxyController extends Controller{
         $warzone = Warzone::all();
         return view('Zerone/Proxy/proxy_list_edit',compact('listorg','warzone'));
     }
-    //服务商编辑ajaxshow显示页面
+    //服务商编辑功能提交
     public function proxy_list_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -195,7 +195,7 @@ class ProxyController extends Controller{
              }
              if($list['mobile']!=$mobile){
                  OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
-                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 用户名
+                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
              }
 
              if($list['organizationproxyinfo']['proxy_owner'] != $realname){
@@ -227,6 +227,14 @@ class ProxyController extends Controller{
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
         return response()->json(['data' => '修改成功', 'status' => '1']);
+    }
+
+    //服务商冻结ajaxshow显示页面
+    public function proxy_list_frozen(Request $request){
+//        $id = $request->input('id');//服务商id
+//        $listorg = Organization::getOne(['id'=>$id]);
+//        $warzone = Warzone::all();
+        return view('Zerone/Proxy/proxy_list_frozen');
     }
 
 
