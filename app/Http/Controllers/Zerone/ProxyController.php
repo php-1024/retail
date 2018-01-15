@@ -196,6 +196,13 @@ class ProxyController extends Controller{
                  $orginfodata = ['proxy_owner'=>$realname];
                  OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);
              }
+             if(!empty($password)){
+                 $key = config("app.zerone_encrypt_key");//获取加密盐
+                 $encrypted = md5($password);//加密密码第一重
+                 $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+                 $accountdata = ['password'=>$encryptPwd];
+                 Account::editAccount(['organization_id'=>$id],$accountdata);
+             }
 
 
 //            //添加操作日志
