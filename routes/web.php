@@ -189,7 +189,7 @@ Route::group(['prefix'=>'zerone'],function(){
 
 
     //个人中心——个人资料
-    Route::group(['prefix'=>'personal'],function(){
+    Route::group(['prefix'=>'persona'],function(){
         Route::get('/','Zerone\PersonalController@display')->middleware('ZeroneCheck');//个人资料
     });
     //个人中心——登录密码修改
