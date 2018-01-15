@@ -173,7 +173,6 @@ class ProxyController extends Controller{
         $listorg = Organization::getOne(['id'=>$id]);
         $warzone = Warzone::all();
         $password = Account::getPluck(['organization_id'=>$id, 'parent_id'=>'1'],'password');
-        dd($password);
         return view('Zerone/Proxy/proxy_list_edit',compact('listorg','warzone','password'));
     }
 
