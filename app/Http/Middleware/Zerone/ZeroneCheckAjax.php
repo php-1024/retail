@@ -113,15 +113,31 @@ class ZeroneCheckAjax
     /******************************复合检测*********************************/
     //检测安全密码
     public function checkLoginAndRuleAndSafeAndSafepasswordEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
-            return $re;
-        }else{
-            $re2 = $this->checkSafepasswordEdit($re['response']);//检测修改或者设置的安全密码是否正常
-            if($re2['status']=='0'){
-                return $re2;
+        $admin_data = $request->get('admin_data');
+        if($admin_data['safe_password'] == ''){
+            $re = $this->checkLoginAndRule($request);//判断是否登陆
+            if($re['status']=='0'){//检测是否登陆
+                return $re;
             }else{
-                return self::res(1,$re2['response']);
+                $re2 = $this->checkSafepassword($re['response']);//检测置的安全密码是否正常
+                if($re2['status']=='0'){
+                    return $re2;
+                }else{
+                    return self::res(1,$re2['response']);
+                }
+            }
+
+        }else{
+            $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+            if($re['status']=='0'){//检测是否登陆
+                return $re;
+            }else{
+                $re2 = $this->checkSafepasswordEdit($re['response']);//检测修改或者设置的安全密码是否正常
+                if($re2['status']=='0'){
+                    return $re2;
+                }else{
+                    return self::res(1,$re2['response']);
+                }
             }
         }
     }
@@ -339,6 +355,13 @@ class ZeroneCheckAjax
         }
         if($request->input('new_password') != $request->input('news_password')){
             return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //私有，设置安全密码专用
+    public function checkSafepassword($request){
+        if(empty($request->input('safe_password'))){
+            return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         return self::res(1,$request);
     }
