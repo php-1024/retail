@@ -43,6 +43,7 @@ class PersonalController extends Controller{
             if ($re){
                 return response()->json(['data' => '密码修改成功！', 'status' => '1']);
             }else{
+                dd($re);
                 return response()->json(['data' => '密码修改失败，请稍后再试！', 'status' => '1']);
             }
         }else{
