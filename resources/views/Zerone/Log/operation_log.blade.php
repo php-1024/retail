@@ -28,44 +28,41 @@
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
 
+
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>我的操作日志</h2>
+                <h2>所有操作记录</h2>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <a href="JavaScript:;">个人中心</a>
-                    </li>
-                    <li >
-                        <strong>我的操作日志</strong>
-                    </li>
+                    <li class="active"> <a href="JavaScript:;">系统管理</a> </li>
+                    <li > <strong>所有操作记录</strong> </li>
                 </ol>
             </div>
-
         </div>
-
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
-
             <div class="ibox-content m-b-sm border-bottom">
-
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="date_added">操作时间</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_added" type="text" class="form-control" value="2017-11-28">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input id="date_added" type="text" class="form-control" value="2017-11-28">
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="date_modified">到</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_modified" type="text" class="form-control" value="2017-11-28">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input id="date_modified" type="text" class="form-control" value="2017-11-28">
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label">操作账号</label>
+                            <input type="text" class="form-control" value="" placeholder="请输入操作人账号">
+                        </div>
+                    </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
@@ -73,26 +70,25 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
-
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>操作账号</th>
+                                    <th>账号角色</th>
                                     <th>操作详情</th>
                                     <th class="col-sm-1">操作时间</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($operation_log_list as $key=>$val)
                                     <tr>
+                                        <td>{{ $val->accounts->id }}</td>
                                         <td>{{ $val->accounts->account }}</td>
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
@@ -107,15 +103,11 @@
                                 </tr>
                                 </tfoot>
                             </table>
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
         @include('Zerone/Public/Footer')
     </div>
 </div>
