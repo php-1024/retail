@@ -19,12 +19,12 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/role_add_check"://检测登陆和权限和安全密码和添加角色
-                $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
+                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
 
             case "zerone/ajax/role_edit_check"://检测登陆和权限和安全密码和编辑角色
-                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+                $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
                 return self::format_response($re, $next);
                 break;
 
