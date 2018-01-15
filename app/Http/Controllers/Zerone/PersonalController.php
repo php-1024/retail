@@ -13,7 +13,7 @@ class PersonalController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         dump($admin_data);
-        $account_data = Account::getList([['organization_id',$admin_data['organization_id']],['id',$admin_data['id']]],'id','ASC');
+        $account_data = Account::getList([['id',$admin_data['id']]],'id','ASC');
 
         dump($account_data);
         return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
