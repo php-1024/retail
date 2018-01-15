@@ -32,6 +32,7 @@ class ZeroneCheck{
             case "zerone/warzone"://战区管理首页权限
             case "zerone/setup/setup_edit"://参数设置权限
             case "zerone/setup"://参数设置权限
+            case "zerone/password_edit": //个人中心——密码修改
             case "zerone"://后台首页
             case "zerone/personal"://个人中心——个人资料
             case "zerone/proxy/proxy_add"://添加服务商
@@ -39,9 +40,6 @@ class ZeroneCheck{
             case "zerone/proxy/proxy_list"://服务商列表
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);
-                break;
-            case "zerone/password_edit"://个人中心——登录密码修改
-                return $request;
                 break;
         }
         return $next($request);
