@@ -85,7 +85,20 @@ class ProxyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = ProxyApply::getPaginage([],'5','id');
+
+        $proxy_name = $request->input('proxy_name');
+        $proxy_owner_mobile = $request->input('proxy_owner_mobile');
+
+        $where[] = [];
+        if(!empty($proxy_name)){
+            $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
+        }
+
+        if(!empty($proxy_owner_mobile)){
+            $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
+        }
+
+        $list = ProxyApply::getPaginage($where,'15','id');
         return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
