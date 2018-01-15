@@ -23,7 +23,19 @@
 
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
-
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>服务商注册审核</h2>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <a href="JavaScript:;">服务商管理</a>
+                    </li>
+                    <li >
+                        <strong>服务商注册审核</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
 
