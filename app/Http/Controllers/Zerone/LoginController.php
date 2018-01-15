@@ -92,11 +92,20 @@ class LoginController extends Controller{
                             if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登陆日志
                                 Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
-                                $admin_data['realname'] = $account_info->account_info->realname;
-                                foreach($account_info->account_roles as $key=>$val){
-                                    $account_info->role = $val;
+                                if(!empty( $account_info->account_info->realname)) {
+                                    $admin_data['realname'] = $account_info->account_info->realname;
+                                }else{
+                                    $admin_data['realname'] = '未设置';
                                 }
-                                $admin_data['role_name'] = $account_info->role->role_name;
+                                if(!empty($account_info->account_roles)) {
+                                    foreach ($account_info->account_roles as $key => $val) {
+                                        $account_info->role = $val;
+                                    }
+                                    $admin_data['role_name'] = $account_info->role->role_name;
+                                }else{
+                                    $admin_data['role_name'] = '角色未设置';
+                                }
+
                                 $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 $this->create_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
