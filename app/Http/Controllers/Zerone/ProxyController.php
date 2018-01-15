@@ -131,10 +131,14 @@ class ProxyController extends Controller{
                 $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
-                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$proxylist['proxy_password'],'organization_id'=>$organization_id,'account'=>$account];
+                $key = config("app.zerone_encrypt_key");//获取加密盐
+                $encrypted = md5($proxylist['proxy_password']);//加密密码第一重
+                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+
+                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
-                $realname = $proxylist['proxy_name'];//负责人姓名
+                $realname = $proxylist['proxy_owner'];//负责人姓名
                 $idcard = $proxylist['proxy_owner_idcard'];//负责人身份证号
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
