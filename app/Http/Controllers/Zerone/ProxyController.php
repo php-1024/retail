@@ -187,16 +187,19 @@ class ProxyController extends Controller{
         DB::beginTransaction();
         try{
              $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
-
+             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
              if($list['organization_name']!=$organization_name){
-                 $orgdata = ['organization_name'=>$organization_name];
-                 Organization::editOrganization(['id'=>$id], $orgdata);//修改服务商表服务商名称
+                 Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
              }
+             if($list['mobile']!=$mobile){
+                Organization::editOrganization(['id'=>$id], ['mobile'=>$mobile]);//修改服务商表服务商手机号码
+                AccountInfo::editAccountInfo(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 用户名
+             }
+
              if($list['organizationproxyinfo']['proxy_owner'] != $realname){
                  $orginfodata = ['proxy_owner'=>$realname];
                  OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);//修改服务商用户信息表 用户姓名
-                 $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
-                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);
+                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
              }
              if(!empty($password)){
                  $key = config("app.zerone_encrypt_key");//获取加密盐
@@ -204,7 +207,9 @@ class ProxyController extends Controller{
                  $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
                  $accountdata = ['password'=>$encryptPwd];
                  Account::editAccount(['organization_id'=>$id,'parent_id'=>'1'],$accountdata);//修改管理员表登入密码
-
+             }
+             if($acc['idcard'] != $idcard){
+                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
              }
 
 
