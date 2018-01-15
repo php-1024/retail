@@ -13,13 +13,9 @@ class PersonalController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dump($admin_data);
-        $account_data = Account::get_module_node([['organization_id',$admin_data['organization_id']],['id',$admin_data['id']]],'1','id','ASC');
-        
         $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
-        dump($account_data);
         dump($account_node_list);
-        return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'account_node_list'=>$account_node_list]);
     }
     //个人中心——登录密码修改
     public function password_edit(Request $request){
