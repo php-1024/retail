@@ -41,7 +41,12 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 @if($admin_data['safe_password'] == '')
-                                    没有设置安全密码
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">设置安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="safe_password" class="form-control">
+                                        </div>
+                                    </div>
                                 @else
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原安全密码</label>
