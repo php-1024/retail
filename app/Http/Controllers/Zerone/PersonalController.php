@@ -32,11 +32,14 @@ class PersonalController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $account = Account::getOne([['id',$admin_data['id']]]);
         $password = $request->input('password');
+        $new_password = $request->input('new_password');
         $key = config("app.zerone_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $new_encrypted = md5($new_password);//加密新密码第一重
+        $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
         if ($account['password'] == $encryptPwd){
-            Account::editAccount_password([['id',$admin_data['id']]],['password' => $encryptPwd]);
+            Account::editAccount_password([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
             return response()->json(['data' => '密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
