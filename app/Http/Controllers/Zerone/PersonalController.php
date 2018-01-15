@@ -68,11 +68,11 @@ class PersonalController extends Controller{
         $new_safe_password = $request->input('new_safe_password');   //新安全密码
         $news_safe_password = $request->input('news_safe_password'); //重复新安全密码
 
-        $key = config("app.zerone_encrypt_key");//获取加密盐
-        $encrypted = md5($new_safe_password);//加密密码第一重
+
+        $key = config("app.zerone_safe_encrypt_key");//获取加密盐
+        $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        $new_encrypted = md5($new_safe_password);//加密新密码第一重
-        $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
+        
         echo '<br>'.$encryptPwd;
         if ($new_safe_password != $news_safe_password){
             return response()->json(['data' => '新安全密码和重复新密码不一致！', 'status' => '1']);
