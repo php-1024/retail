@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\OrganizationRole;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,7 +16,9 @@ class PersonalController extends Controller{
         dump($admin_data);
         $account_data = Account::get_module_node([['organization_id',$admin_data['organization_id']],['id',$admin_data['id']]],'1','id','ASC');
 
+        $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
         dump($account_data);
+        dump($role_list);
         return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //个人中心——登录密码修改
