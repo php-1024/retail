@@ -263,7 +263,7 @@ class ZeroneCheckAjax
     }
     //检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndOrgEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
