@@ -25,6 +25,12 @@ class PersonalController extends Controller{
         dump($admin_data);
         return view('Zerone/Personal/password_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
+
+    //个人中心——登录密码修改
+    public function password_edit_check(Request $request){
+        dump($request);
+    }
+
     //个人中心——安全密码设置
     public function security_password(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
