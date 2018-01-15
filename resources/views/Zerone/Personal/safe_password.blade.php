@@ -1,33 +1,21 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>零壹新科技程序管理平台</title>
-
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-
 </head>
-
 <body class="">
-
 <div id="wrapper">
-
     @include('Zerone/Public/Nav')
-
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
-
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>安全密码设置</h2>
