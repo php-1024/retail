@@ -195,10 +195,8 @@ class ProxyController extends Controller{
              if($list['organizationproxyinfo']['proxy_owner'] != $realname){
                  $orginfodata = ['proxy_owner'=>$realname];
                  OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);//修改服务商用户信息表 用户姓名
-                 $accid = Account::getPluck(['organization_id'=>$id,'parent_id'=>'1'],'id');
-                 if($accid== '13'){
-                     echo 11;
-                 }
+                 $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
+                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);
              }
              if(!empty($password)){
                  $key = config("app.zerone_encrypt_key");//获取加密盐
