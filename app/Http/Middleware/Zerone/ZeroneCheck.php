@@ -34,7 +34,7 @@ class ZeroneCheck{
             case "zerone/setup"://参数设置权限
             case "zerone/personal":                     //个人中心——个人资料
             case "zerone/personal/password_edit":       //个人中心——密码修改
-            case "zerone/personal/security_password":   //个人中心——安全密码设置
+            case "zerone/personal/safe_password":   //个人中心——安全密码设置
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
             case "zerone/personal/login_log":           //个人中心——我的登陆日志
             case "zerone"://后台首页
