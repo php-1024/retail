@@ -17,6 +17,10 @@ class WarzoneProxy extends Model{
     public function organization(){
         return $this->hasOne('App\Models\Organization', 'organization_id');
     }
+    //获取单条信息
+    public static function getOne($where){
+        return self::where($where)->first();
+    }
     //添加数据
     public static function addWarzoneProxy($param){
         $program = new WarzoneProxy();//实例化程序模型
@@ -24,6 +28,14 @@ class WarzoneProxy extends Model{
         $program->organization_id = $param['organization_id'];//程序名称
         $program->save();
         return $program->id;
+    }
+    //修改数据
+    public static function editWarzoneProxy($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
     }
 }
 ?>

@@ -177,7 +177,7 @@ class ProxyController extends Controller{
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit_check(Request $request){
         $id = $request->input('id');//服务商id
-        $organization_name = $request->input('zone_id');//战区id
+        $zone_id = $request->input('zone_id');//战区id
         $organization_name = $request->input('organization_name');//服务商名称
         $realname = $request->input('realname');//用户名字
         $idcard = $request->input('idcard');//用户身份证号
@@ -211,7 +211,10 @@ class ProxyController extends Controller{
              if($acc['idcard'] != $idcard){
                  AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
              }
-
+             $waprlist = WarzoneProxy::getOne(['organization_id'=>$id]);
+             if($waprlist['zone_id'] != $zone_id){
+                 WarzoneProxy::editWarzoneProxy(['organization_id'=>$id],['zone_id'=>$zone_id])
+             }
 
 //            //添加操作日志
 //            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
