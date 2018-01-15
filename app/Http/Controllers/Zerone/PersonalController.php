@@ -66,6 +66,7 @@ class PersonalController extends Controller{
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新安全密码第二重
         if ($admin_data['safe_password'] == $encryptPwd){
             Account::editAccount([['id',$admin_data['id']]],['safe_password' => $new_encryptPwd]);
+            Session::put('zerone_account_id','');
             return response()->json(['data' => '安全密码修改成功，请退出后重新登录！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
