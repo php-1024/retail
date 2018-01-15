@@ -35,7 +35,7 @@ class RoleController extends Controller{
             foreach($modules as $key=>$val){
                 $module = ['id'=>$key,'module_name'=>$val];
                 foreach($nodes[$key] as $k=>$v){
-                    $module['node_list'] = array('id'=>$k,'node_name'=>$v);
+                    $module['node_list'][] = array('id'=>$k,'node_name'=>$v);
                 }
                 $module_node_list[] = $module;
                 unset($module);
