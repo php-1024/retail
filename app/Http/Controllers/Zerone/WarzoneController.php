@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Warzone;
 use App\Models\Module;
-use App\Models\WarzoneProvince;
 use Illuminate\Http\Request;
 use Session;
 
