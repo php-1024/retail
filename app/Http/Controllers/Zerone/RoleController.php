@@ -80,7 +80,7 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
         //查询所有角色列表
-        $list = OrganizationRole::getPaginage([['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
 
         //获取角色节点
         $role_module_nodes = [];
