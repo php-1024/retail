@@ -202,7 +202,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
     //个人中心——我的操作日志
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('operation_log','Zerone\PersonalController@operation_log')->middl  eware('ZeroneCheck');//我的操作日志
+        Route::get('operation_log','Zerone\PersonalController@operation_log')->middleware('ZeroneCheck');//我的操作日志
     });
     //个人中心——我的登录日志
     Route::group(['prefix'=>'personal'],function(){
@@ -254,7 +254,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('proxy_list_edit','Zerone\ProxyController@proxy_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
         Route::post('proxy_list_edit_check','Zerone\ProxyController@proxy_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
         Route::post('proxy_list_frozen','Zerone\ProxyController@proxy_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
-        Route::post('proxy_list_frozen_check','Zerone\ProxyController@proxy_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结功能提交
         Route::post('proxy_list_delete','Zerone\ProxyController@proxy_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
