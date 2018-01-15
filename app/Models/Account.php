@@ -36,7 +36,7 @@ class Account extends Model{
             foreach ($param as $key => $val) {
                 $model->password = '123456';
             }
-            print_r($model);
+            $model->save();
     }
 
     //和个人信息表一对一的关系
