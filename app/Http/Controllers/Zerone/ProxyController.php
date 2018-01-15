@@ -210,7 +210,7 @@ class ProxyController extends Controller{
              }
              if($acc['idcard'] != $idcard){
                  AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id,'parent_id'=>'1'],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
              }
              $waprlist = WarzoneProxy::getOne(['organization_id'=>$id]);
              if($waprlist['zone_id'] != $zone_id){
