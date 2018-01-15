@@ -65,6 +65,11 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/password_edit_check"://检测 登录 和 权限 和 安全密码 和 修改登录密码权限数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndPasswordEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
             case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登陆和权限
@@ -85,6 +90,20 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
