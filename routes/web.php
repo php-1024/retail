@@ -198,7 +198,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
     //个人中心——安全密码设置
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('security_password','Zerone\PersonalController@security_password')->middleware('ZeroneCheck');//安全密码设置
+        Route::get('safe_password','Zerone\PersonalController@safe_password')->middleware('ZeroneCheck');//安全密码设置
     });
     //个人中心——我的操作日志
     Route::group(['prefix'=>'personal'],function(){
@@ -247,6 +247,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('selected_rule','Zerone\SubordinateController@selected_rule')->middleware('ZeroneCheckAjax');//下级人员已经选中的权限
         Route::post('setup_edit_check','Zerone\SetupController@setup_edit_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('password_edit_check','Zerone\PersonalController@password_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改密码
+        Route::post('safe_password_edit_check','Zerone\PersonalController@safe_password_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改密码
         Route::post('proxy_add_check','Zerone\ProxyController@proxy_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('proxy_examine','Zerone\ProxyController@proxy_examine')->middleware('ZeroneCheckAjax');//服务商审核页面显示
         Route::post('proxy_examine_check','Zerone\ProxyController@proxy_examine_check')->middleware('ZeroneCheckAjax');//服务商审核数据提交
