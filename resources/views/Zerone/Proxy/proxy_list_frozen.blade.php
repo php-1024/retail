@@ -26,7 +26,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary saveBtn">保存</button>
+                <button type="button" class="btn btn-primary saveBtn" onclick="postForm()">确定</button>
             </div>
         </div>
     </div>
