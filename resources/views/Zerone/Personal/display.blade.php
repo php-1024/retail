@@ -112,7 +112,7 @@
                             {{--</div>--}}
                             {{--<div class="hr-line-dashed"></div>--}}
 
-                            @foreach($module_node_list as $key=>$val)
+                            @foreach($account_node_list as $key=>$val)
                                 <group class="checked_box_group_{{ $val['id'] }}">
                                     <div>
                                         <label class="i-checks">
