@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\ProgramModuleNode;
 use Illuminate\Http\Request;
 use Session;
@@ -28,7 +29,22 @@ class PersonalController extends Controller{
 
     //个人中心——登录密码修改
     public function password_edit_check(Request $request){
-        dump($request);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $account = Account::getOne([['id',$admin_data['id']]]);
+        $password = $request->input('password');
+        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        if ($account['password'] == $encryptPwd){
+            $re = Account::editAccount([['id',$admin_data['id']]],[['password'=>$encryptPwd]]);
+            if ($re){
+                return response()->json(['data' => '密码修改成功！', 'status' => '1']);
+            }else{
+                return response()->json(['data' => '密码修改失败请稍后再试！', 'status' => '1']);
+            }
+        }else{
+            return response()->json(['data' => '原密码不正确！', 'status' => '1']);
+        }
     }
 
     //个人中心——安全密码设置

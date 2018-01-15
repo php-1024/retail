@@ -100,7 +100,7 @@ class ZeroneCheckAjax
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
+            $re2 = $this->checkPasswordEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -292,6 +292,22 @@ class ZeroneCheckAjax
         }
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测修改登陆密码
+    public function checkPasswordEdit($request){
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入原登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('new_password'))){
+            return self::res(0,response()->json(['data' => '新登陆密码不能为空', 'status' => '0']));
+        }
+        if(empty($request->input('news_password'))){
+            return self::res(0,response()->json(['data' => '请确认新登陆密码是否一致', 'status' => '0']));
+        }
+        if($request->input('new_password') != $request->input('news_password')){
+            return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
         }
         return self::res(1,$request);
     }
