@@ -139,14 +139,13 @@ class ProxyController extends Controller{
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
+                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']];
                 OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);exit;
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
