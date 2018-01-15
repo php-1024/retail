@@ -116,7 +116,7 @@
                                 <div>
                                     <label class="i-checks">
                                         <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                        {{$account_node_list['0']->module_name}} </label>
+                                        {{$val->module_name}} </label>
                                 </div>
                                 <div>
                                     <label class="checkbox-inline i-checks">
