@@ -162,17 +162,20 @@ Route::group(['prefix'=>'tooling'],function(){
 
 /**********************零壹管理系统*********************/
 Route::group(['prefix'=>'zerone'],function(){
+    Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
 
-    //系统管理分组
-    Route::group(['prefix'=>'system_management'],function(){
-        Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
-        Route::get('setup','Zerone\SetupController@display')->middleware('ZeroneCheck');//参数设置展示
-        Route::get('warzone','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
-        Route::get('operation_log','Zerone\LogController@operation_log')->middleware('ZeroneCheck');//所有操作记录
-        Route::get('login_log','Zerone\LogController@login_log')->middleware('ZeroneCheck');//所有登陆记录
-    });
-    
+    //系统管理——参数设置
+    Route::get('setup','Zerone\SetupController@display')->middleware('ZeroneCheck');//参数设置展示
+
+    //系统管理——战区管理
+    Route::get('warzone','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
+
+    //系统管理——所有操作记录
+    Route::get('operation_log','Zerone\LogController@operation_log')->middleware('ZeroneCheck');//所有操作记录
+
+    //系统管理——所有登陆记录
+    Route::get('login_log','Zerone\LogController@login_log')->middleware('ZeroneCheck');//所有登陆记录
 
 
     //个人中心组
@@ -228,7 +231,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('proxy_list_edit','Zerone\ProxyController@proxy_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
         Route::post('proxy_list_edit_check','Zerone\ProxyController@proxy_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
         Route::post('proxy_list_frozen','Zerone\ProxyController@proxy_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
-        Route::post('proxy_list_frozen_check','Zerone\ProxyController@proxy_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
         Route::post('proxy_list_delete','Zerone\ProxyController@proxy_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
