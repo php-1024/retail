@@ -100,7 +100,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->warzone->zone_name}}</td>
+                                        <td>{{$value->warzone['0']->zone_name}}</td>
                                         <td>刘兴文</td>
 
 
