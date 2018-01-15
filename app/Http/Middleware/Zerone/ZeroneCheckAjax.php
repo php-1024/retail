@@ -49,7 +49,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_list_frozen__check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+            case "zerone/ajax/proxy_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
