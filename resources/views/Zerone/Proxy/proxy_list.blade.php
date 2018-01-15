@@ -104,7 +104,7 @@
                                         <td>@foreach($value->account as $k=>$v) {{$v->id}}@endforeach</td>
 
 
-                                        <td>13123456789</td>
+                                        <td>@foreach($value->account as $k=>$v) {{$v->mobile}}@endforeach</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
