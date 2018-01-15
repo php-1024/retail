@@ -30,10 +30,10 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>登陆密码修改</h2>
+                <h2>安全密码设置</h2>
                 <ol class="breadcrumb">
                     <li class="active"> <a href="JavaScript:;">个人中心</a> </li>
-                    <li > <strong>登陆密码修改</strong> </li>
+                    <li > <strong>安全密码设置</strong> </li>
                 </ol>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>登陆密码修改</h5>
+                            <h5>安全密码设置</h5>
                         </div>
                         <div class="ibox-content">
                             <form method="get" class="form-horizontal">
@@ -52,25 +52,19 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">原登陆密码</label>
+                                    <label class="col-sm-2 control-label">原安全密码</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">新登陆密码</label>
+                                    <label class="col-sm-2 control-label">新安全密码</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">安全密码</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control">
                                     </div>
