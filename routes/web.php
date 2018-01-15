@@ -202,7 +202,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
     //个人中心——我的操作日志
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('operation_log','Zerone\PersonalController@operation_log')->middleware('ZeroneCheck');//我的操作日志
+        Route::get('operation_log','Zerone\PersonalController@operation_log')->middl  eware('ZeroneCheck');//我的操作日志
     });
     //个人中心——我的登录日志
     Route::group(['prefix'=>'personal'],function(){
