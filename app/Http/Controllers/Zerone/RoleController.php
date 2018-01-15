@@ -24,13 +24,9 @@ class RoleController extends Controller{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
 
             //遍历第一遍，过滤重复的模块
-            $modules = [];
-            $nodes = [];
-            foreach($account_node_list as $key=>$val){
-                $modules[$val->module_id] = $val->module_name;
+            $module_node_list = [];
 
-            }
-            dump($modules);
+
 
         }
 
