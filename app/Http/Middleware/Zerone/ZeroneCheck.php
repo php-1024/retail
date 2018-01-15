@@ -27,13 +27,13 @@ class ZeroneCheck{
             case "zerone/subordinate/subordinate_add"://添加下级人员
             case "zerone/subordinate/subordinate_list"://下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
-            case "zerone/personal"://个人中心——个人资料
             case "zerone/operation_log"://战区管理所有操作记录
             case "zerone/login_log"://战区管理所有登陆记录
             case "zerone/warzone"://战区管理首页权限
             case "zerone/setup/setup_edit"://参数设置权限
             case "zerone/setup"://参数设置权限
             case "zerone"://后台首页
+            case "zerone/personal"://个人中心——个人资料
             case "zerone/proxy/proxy_add"://添加服务商
             case "zerone/proxy/proxy_examinelist"://服务商审核列表
             case "zerone/proxy/proxy_list"://服务商列表
