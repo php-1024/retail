@@ -89,7 +89,7 @@ class ProxyController extends Controller{
         $proxy_name = $request->input('proxy_name');
         $proxy_owner_mobile = $request->input('proxy_owner_mobile');
 
-        $where[] = [];
+        $where = [];
         if(!empty($proxy_name)){
             $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
         }
