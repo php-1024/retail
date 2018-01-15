@@ -19,7 +19,7 @@ class Account extends Model{
     {
         return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
-    
+
 
     //修改账号
     public static function editAccount($where,$param){
@@ -51,12 +51,22 @@ class Account extends Model{
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::with('organization')->with('account_info')->with('account_roles');
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
+
+    //查询获取列表
+    public static function get_module_node($where,$limit=0,$orderby,$sort='DESC'){
         $model = self::with('organization')->with('account_info')->with('account_roles')->with('account_node');
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
+
 
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
