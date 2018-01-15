@@ -6,6 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationProxyinfo;
 use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -63,7 +64,10 @@ class ProxyController extends Controller{
             $realname = $request->input('realname');//负责人姓名
             $idcard = $request->input('idcard');//负责人身份证号
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
-            AccountInfo::addAccountInfo($acinfodata);
+            AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
+
+            $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
+            OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
@@ -133,7 +137,10 @@ class ProxyController extends Controller{
                 $realname = $proxylist['proxy_name'];//负责人姓名
                 $idcard = $proxylist['proxy_owner_idcard'];//负责人身份证号
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
-                AccountInfo::addAccountInfo($acinfodata);
+                AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
+
+                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
+                OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
