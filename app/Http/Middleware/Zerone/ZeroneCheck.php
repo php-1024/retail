@@ -41,7 +41,7 @@ class ZeroneCheck{
                 return self::format_response($re,$next);
                 break;
             case "zerone/password_edit"://个人中心——登录密码修改
-                return dd($request);
+                return $request;
                 break;
         }
         return $next($request);
