@@ -29,8 +29,6 @@ class RoleController extends Controller{
                 $modules[] = [
                     'module_id'=>$val->module_id,
                     'module_name'=>$val->module_name,
-                    'node_id'=>$val->node_id,
-                    'node_name'=>$val->node_name
                 ];
             }
 
