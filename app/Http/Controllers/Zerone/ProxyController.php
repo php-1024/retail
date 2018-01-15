@@ -97,7 +97,6 @@ class ProxyController extends Controller{
         if(!empty($proxy_owner_mobile)){
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
-        dump($where);
         $list = ProxyApply::getPaginage($where,'15','id');
         return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
