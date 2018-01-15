@@ -100,7 +100,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>@foreach($value->warzone as $k=>$v) {{$v['0']->warzone}} @endforeach</td>
+                                        <td>@foreach($value->warzone as $k=>$v) {{$v->warzone->zone_name}} @endforeach</td>
                                         <td>刘兴文</td>
 
 
