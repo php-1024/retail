@@ -7,16 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>零壹新科技程序管理平台</title>
-
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-
+    <link href="{{asset('public/Zerone/library/switchery')}}/css/switchery.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -176,17 +174,16 @@
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
 <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-<!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<!-- Data picker -->
+<script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+<script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
+<!-- Custom and plugin javascript -->
 <script>
-    $(document).ready(function(){
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
+    $(document).ready(function() {
         $('#addbtn').click(function(){
             swal({
                 title: "温馨提示",
@@ -194,6 +191,30 @@
                 type: "success"
             });
         });
+        $('#date_added').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+
+        $('#date_modified').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
     });
 </script>
 </body>
