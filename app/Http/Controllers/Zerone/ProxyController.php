@@ -250,8 +250,19 @@ class ProxyController extends Controller{
     //服务商冻结功能提交
     public function proxy_list_frozen_check(Request $request){
         $id = $request->input('id');//服务商id
-        $list = Organization::getOne(['id'=>$id]);//服务商信息
-        return view('Zerone/Proxy/proxy_list_frozen',compact('id','list'));
+        DB::beginTransaction();
+        try{
+            Organization::editOrganization(['id'=>$id],['status'=>'0']);
+            Account::editAccount(['organization'=>$id],['status'=>'0']);
+//            //添加操作日志
+//            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '冻结失败', 'status' => '0']);
+        }
+
     }
     //服务商删除ajaxshow显示页面
     public function proxy_list_delete(Request $request){
