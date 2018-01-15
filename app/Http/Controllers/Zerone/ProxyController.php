@@ -88,7 +88,7 @@ class ProxyController extends Controller{
 
         $proxy_name = $request->input('proxy_name');
         $proxy_owner_mobile = $request->input('proxy_owner_mobile');
-
+        $search_data = ['proxy_name'=>$proxy_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
         $where = [];
         if(!empty($proxy_name)){
             $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
@@ -98,7 +98,7 @@ class ProxyController extends Controller{
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
         $list = ProxyApply::getPaginage($where,'15','id');
-        return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
     public function proxy_examine(Request $request){

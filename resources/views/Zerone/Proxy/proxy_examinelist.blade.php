@@ -104,9 +104,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="9" class="footable-visible">
-                                        <ul class="pagination pull-right">
-                                            {{$list->links()}}
-                                        </ul>
+                                        {{ $list->appends($search_data)->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
