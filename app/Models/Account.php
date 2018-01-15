@@ -34,7 +34,7 @@ class Account extends Model{
     public static function editAccount_password($where,$param){
             $model = self::where($where)->first();
             foreach ($param as $key => $val) {
-                $model->password = '123456';
+                $model->password = $val;
             }
             $model->save();
     }
