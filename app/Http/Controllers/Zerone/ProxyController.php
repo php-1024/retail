@@ -253,7 +253,7 @@ class ProxyController extends Controller{
         DB::beginTransaction();
         try{
             Organization::editOrganization(['id'=>$id],['status'=>'0']);
-            Account::editAccount(['organization'=>$id],['status'=>'0']);
+            Account::editOrganizationBatch(['organization'=>$id],['status'=>'0']);
 //            //添加操作日志
 //            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
