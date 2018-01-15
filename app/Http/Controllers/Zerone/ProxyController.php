@@ -176,6 +176,8 @@ class ProxyController extends Controller{
     }
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $zone_id = $request->input('zone_id');//战区id
         $organization_name = $request->input('organization_name');//服务商名称
@@ -217,16 +219,16 @@ class ProxyController extends Controller{
                  WarzoneProxy::editWarzoneProxy(['organization_id'=>$id],['zone_id'=>$zone_id]);//修改战区关联表 战区id
              }
 
-//            //添加操作日志
-//            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了服务商：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '拒绝失败', 'status' => '0']);
+            return response()->json(['data' => '修改失败', 'status' => '0']);
         }
-
+        return response()->json(['data' => '修改成功', 'status' => '1']);
     }
+
 
 }
 ?>
