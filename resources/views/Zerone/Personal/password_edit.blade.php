@@ -48,7 +48,7 @@
                             <form method="get" class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">登陆账号</label>
-                                    <div class="col-sm-10" style="padding-top:7px;">admin</div>
+                                    <div class="col-sm-10" style="padding-top:7px;">{{$admin_data['account']}}</div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
