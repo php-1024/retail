@@ -35,12 +35,11 @@ class RoleController extends Controller{
             foreach($modules as $key=>$val){
                 $module = ['id'=>$key,'module_name'=>$val];
                 foreach($nodes[$key] as $k=>$v){
-                    $module['node_list'][] = array('id'=>$k,'node_name'=>$v);
+                    $module['program_nodes'][] = array('id'=>$k,'node_name'=>$v);
                 }
                 $module_node_list[] = $module;
                 unset($module);
             }
-            dump($module_node_list);
         }
 
         return view('Zerone/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
