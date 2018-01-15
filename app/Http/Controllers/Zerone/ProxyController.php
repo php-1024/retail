@@ -210,10 +210,11 @@ class ProxyController extends Controller{
              }
              if($acc['idcard'] != $idcard){
                  AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
+                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id,'parent_id'=>'1'],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
              }
              $waprlist = WarzoneProxy::getOne(['organization_id'=>$id]);
              if($waprlist['zone_id'] != $zone_id){
-                 WarzoneProxy::editWarzoneProxy(['organization_id'=>$id],['zone_id'=>$zone_id])
+                 WarzoneProxy::editWarzoneProxy(['organization_id'=>$id],['zone_id'=>$zone_id]);//修改战区关联表 战区id
              }
 
 //            //添加操作日志
