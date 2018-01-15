@@ -227,6 +227,7 @@ function getFrozenForm(id){
 
     var url = $('#proxy_list_frozen').val();
     var token = $('#_token').val();
+    alert(token);
     if(id==''){
         swal({
             title: "提示信息",
