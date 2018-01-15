@@ -27,6 +27,7 @@ class ZeroneCheck{
             case "zerone/subordinate/subordinate_add"://添加下级人员
             case "zerone/subordinate/subordinate_list"://下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
+            case "zerone/personal"://个人中心——个人资料
             case "zerone/operation_log"://战区管理所有操作记录
             case "zerone/login_log"://战区管理所有登陆记录
             case "zerone/warzone"://战区管理首页权限
