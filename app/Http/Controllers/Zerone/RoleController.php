@@ -25,13 +25,7 @@ class RoleController extends Controller{
 
             //遍历第一遍，过滤重复的模块
             $module_node_list = [];
-            foreach($account_node_list as $key=>$val){
-                $module_node_list[$val->module_id] = $val->module_name;
-                $module_node_list[$val->module_id]['nodes'][] = [
-                    'id'=>$val->node_id,
-                    'node_name'=>$val->node_name,
-                ];
-            }
+
 
 
         }
