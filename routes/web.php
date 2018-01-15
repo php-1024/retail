@@ -194,7 +194,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
     //个人中心——登录密码修改
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('password_edit','Zerone\PersonalController@password_edit')->middleware('ZeroneCheck');//登录密码修改
+        Route::get('password_edits','Zerone\PersonalController@password_edit')->middleware('ZeroneCheck');//登录密码修改
     });
     //个人中心——安全密码设置
     Route::group(['prefix'=>'personal'],function(){
