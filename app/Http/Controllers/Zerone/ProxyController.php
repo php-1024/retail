@@ -172,7 +172,6 @@ class ProxyController extends Controller{
 
     //服务商列表
     public function proxy_list(Request $request){
-        Account::editOrganizationBatch(['organization'=>'7'],['status'=>'0']);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -254,7 +253,7 @@ class ProxyController extends Controller{
         DB::beginTransaction();
         try{
             Organization::editOrganization(['id'=>$id],['status'=>'0']);
-            Account::editOrganizationBatch(['organization'=>$id],['status'=>'0']);
+//            Account::editOrganizationBatch(['organization'=>$id],['status'=>'0']);
 //            //添加操作日志
 //            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
