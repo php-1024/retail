@@ -190,8 +190,8 @@ class SubordinateController extends Controller{
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        dump($info);
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+        dump($role_list);
         return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
