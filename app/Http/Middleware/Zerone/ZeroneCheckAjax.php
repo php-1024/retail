@@ -45,6 +45,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/proxy_list_edit_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
+                return self::format_response($re,$next);
+                break;
             case "zerone/ajax/proxy_examine_check"://检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
@@ -249,6 +253,21 @@ class ZeroneCheckAjax
             }
         }
     }
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndOrgEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     /******************************单项检测*********************************/
     //检测编辑下级人员权限数据
     public function checkSubordinateAuthorize($request){
@@ -426,6 +445,23 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测服务商申请表信息
+    public function checkOrgEditData($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
     //检测登陆提交数据
     public function checkID($request)
     {

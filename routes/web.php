@@ -251,6 +251,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('proxy_examine','Zerone\ProxyController@proxy_examine')->middleware('ZeroneCheckAjax');//服务商审核页面显示
         Route::post('proxy_examine_check','Zerone\ProxyController@proxy_examine_check')->middleware('ZeroneCheckAjax');//服务商审核数据提交
         Route::post('proxy_list_edit','Zerone\ProxyController@proxy_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
+        Route::post('proxy_list_edit_check','Zerone\ProxyController@proxy_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
         Route::post('subordinate_edit_check','Zerone\SubordinateController@subordinate_edit_check')->middleware('ZeroneCheckAjax');//提交编辑下级人员数据提交

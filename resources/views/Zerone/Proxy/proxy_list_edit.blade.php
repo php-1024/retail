@@ -1,7 +1,7 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_examine_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="">
+    <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">所在战区</label>
                     <div class="col-sm-10">
-                        <select class="form-control m-b" name="account">
+                        <select class="form-control m-b" name="zone_id">
                             @foreach($warzone as $k=>$v)
                                 <option value="{{$v->id}}" @if($v->id == $listorg->warzoneProxy->zone_id)  selected @endif>{{$v->zone_name}}</option>
                             @endforeach
@@ -22,31 +22,31 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="{{$listorg->organization_name}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人姓名</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="{{$listorg->organizationproxyinfo->proxy_owner}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationproxyinfo->proxy_owner}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="{{$listorg->organizationproxyinfo->proxy_owner_idcard}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationproxyinfo->proxy_owner_idcard}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">手机号码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="{{$listorg->organizationproxyinfo->proxy_owner_mobile}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationproxyinfo->proxy_owner_mobile}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">服务商登陆密码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="{{$listorg->organization_name}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" value="" name="password"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -62,7 +62,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary saveBtn">保存</button>
+                <button type="button" class="btn btn-primary saveBtn" onclick="postForm()">保存</button>
             </div>
         </div>
     </div>
