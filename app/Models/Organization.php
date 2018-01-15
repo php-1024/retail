@@ -57,7 +57,7 @@ class Organization extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organizationproxyinfo','account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
