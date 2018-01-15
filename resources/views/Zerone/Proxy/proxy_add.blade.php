@@ -27,13 +27,13 @@
             @include('Zerone/Public/Header')
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
-                    <h2>服务商列表</h2>
+                    <h2>添加服务商</h2>
                     <ol class="breadcrumb">
                         <li class="active">
                             <a href="JavaScript:;">服务商管理</a>
                         </li>
                         <li >
-                            <strong>服务商列表</strong>
+                            <strong>添加服务商</strong>
                         </li>
                     </ol>
                 </div>
