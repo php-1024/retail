@@ -187,10 +187,14 @@ class ProxyController extends Controller{
         DB::beginTransaction();
         try{
              $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
-             echo $list['organizationproxyinfo']['proxy_owner'];exit;
+
              if($list['organization_name']!=$organization_name){
                  $orgdata = [['organization_name'=>$organization_name]];
                  Organization::editOrganization(['id'=>$id], $orgdata);
+             }
+             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
+                 $orginfodata = [['proxy_owner'=>$realname]];
+                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);
              }
 
 
