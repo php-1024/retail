@@ -101,10 +101,10 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->warzoneProxy->zone_id}}</td>
-                                        <td>@foreach($value->account as $k=>$v) {{$v->id}}@endforeach</td>
+                                        <td>{{$value->account->id}}</td>
 
 
-                                        <td>13123456789</td>
+                                        <td>{{$value->account->mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
