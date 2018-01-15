@@ -53,7 +53,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="safe_password" value=""></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>

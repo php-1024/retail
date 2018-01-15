@@ -49,6 +49,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/proxy_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
             case "zerone/ajax/proxy_list_delete"://检测 登录 和 权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re,$next);
@@ -263,7 +267,7 @@ class ZeroneCheckAjax
     }
     //检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndOrgEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{

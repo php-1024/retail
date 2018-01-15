@@ -243,10 +243,15 @@ class ProxyController extends Controller{
 
     //服务商冻结ajaxshow显示页面
     public function proxy_list_frozen(Request $request){
-//        $id = $request->input('id');//服务商id
-//        $listorg = Organization::getOne(['id'=>$id]);
-//        $warzone = Warzone::all();
-        return view('Zerone/Proxy/proxy_list_frozen');
+        $id = $request->input('id');//服务商id
+        $list = Organization::getOne(['id'=>$id]);//服务商信息
+        return view('Zerone/Proxy/proxy_list_frozen',compact('id','list'));
+    }
+    //服务商冻结功能提交
+    public function proxy_list_frozen_check(Request $request){
+        $id = $request->input('id');//服务商id
+        $list = Organization::getOne(['id'=>$id]);//服务商信息
+        return view('Zerone/Proxy/proxy_list_frozen',compact('id','list'));
     }
     //服务商删除ajaxshow显示页面
     public function proxy_list_delete(Request $request){
