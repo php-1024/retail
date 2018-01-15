@@ -250,6 +250,7 @@ class ProxyController extends Controller{
     //服务商冻结功能提交
     public function proxy_list_frozen_check(Request $request){
         $id = $request->input('id');//服务商id
+        echo $id;
         DB::beginTransaction();
         try{
             Organization::editOrganization(['id'=>$id],['status'=>'0']);
