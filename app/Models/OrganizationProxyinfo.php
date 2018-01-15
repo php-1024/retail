@@ -30,5 +30,13 @@ class OrganizationProxyinfo extends Model{
         $program->save();
         return $program->id;
     }
+    //修改数据
+    public static function editOrganizationProxyinfo($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
 }
 ?>
