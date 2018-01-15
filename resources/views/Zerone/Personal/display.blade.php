@@ -22,7 +22,7 @@
 
 <div id="wrapper">
 
-    {{--@include('Tooling/Public/Nav')--}}
+    @include('Tooling/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
         @include('Tooling/Public/Header')
