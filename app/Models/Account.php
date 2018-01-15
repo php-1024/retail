@@ -35,6 +35,11 @@ class Account extends Model{
         return $this->hasOne('App\Models\AccountInfo', 'account_id');
     }
 
+    //和账号节点表一对一的关系
+    public function account_node(){
+        return $this->hasOne('App\Models\AccountNode', 'account_id');
+    }
+
     //和organization表多对一的关系
     public function organization(){
         return $this->belongsTo('App\Models\Organization', 'organization_id');
@@ -58,9 +63,9 @@ class Account extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //查询获取列表
+    //查询获取账户的模块和节点列表
     public static function get_module_node($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::with('organization')->with('account_info')->with('account_roles')->with('account_node');
+        $model = self::with('account_node')->with('account_info');
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
