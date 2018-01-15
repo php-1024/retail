@@ -25,7 +25,7 @@ class Organization extends Model{
     }
     //和WarzoneProxy表 warzone表 一对一的关系
     public function warzoneProxyandwarzone(){
-        return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'id', 'zone_id');
+        return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'zone_id', 'id');
     }
 
 
