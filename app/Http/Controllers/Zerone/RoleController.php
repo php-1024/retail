@@ -25,14 +25,13 @@ class RoleController extends Controller{
 
             //遍历第一遍，过滤重复的模块
             $modules = [];
+            $nodes = [];
             foreach($account_node_list as $key=>$val){
-                $modules[] = [
-                    'module_id'=>$val->module_id,
-                    'module_name'=>$val->module_name,
-                ];
-            }
+                $modules[$val->module_id] = $val->module_name;
 
-            dump(array_unique($modules));
+            }
+            dump($modules);
+
         }
 
         return view('Zerone/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
