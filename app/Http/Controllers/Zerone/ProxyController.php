@@ -170,7 +170,8 @@ class ProxyController extends Controller{
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit(Request $request){
         $id = $request->input('id');//服务商id
-//        $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
+        $listorg = Organization::getOne(['id'=>$id]);
+        dd($listorg);
         return view('Zerone/Proxy/proxy_list_edit');
     }
 

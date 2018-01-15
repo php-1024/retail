@@ -28,6 +28,10 @@ class Organization extends Model{
         return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id')->select('zone_name');
     }
 
+    //获取单条信息
+    public static function getOne($where){
+        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
+    }
 
     //添加数据
     public static function addProgram($param){
