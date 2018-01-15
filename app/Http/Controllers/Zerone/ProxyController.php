@@ -236,6 +236,13 @@ class ProxyController extends Controller{
 //        $warzone = Warzone::all();
         return view('Zerone/Proxy/proxy_list_frozen');
     }
+    //服务商删除ajaxshow显示页面
+    public function proxy_list_delete(Request $request){
+//        $id = $request->input('id');//服务商id
+//        $listorg = Organization::getOne(['id'=>$id]);
+//        $warzone = Warzone::all();
+        return view('Zerone/Proxy/proxy_list_delete');
+    }
 
 
 }

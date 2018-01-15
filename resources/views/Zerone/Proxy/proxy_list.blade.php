@@ -39,6 +39,7 @@
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
                 <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
+                <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
@@ -118,7 +119,7 @@
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="button" id="peoplesBtn" onclick="location.href='proxystructure.html'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
                                             <button type="button" id="programBtn" onclick="location.href='proxyprogram.html'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
                                             <button type="button" id="companyBtn" onclick="location.href='proxycompany.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
@@ -156,6 +157,8 @@
             <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
             <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
 
     {{--<!-- Page-Level Scripts -->--}}
@@ -255,6 +258,42 @@ function getFrozenForm(id){
 
             $('#myModal3').html(response);
             $('#myModal3').modal();
+        }
+    });
+}
+//删除
+function getDeleteForm(id){
+
+    var url = $('#proxy_list_delete').val();
+    var token = $('#_token').val();
+    if(id==''){
+        swal({
+            title: "提示信息",
+            text: '数据传输错误',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            window.location.reload();
+        });
+        return;
+    }
+
+    var data = {'id':id,'_token':token};
+    $.post(url,data,function(response){
+        if(response.status=='-1'){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }else{
+
+            $('#myModal2').html(response);
+            $('#myModal2').modal();
         }
     });
 }
