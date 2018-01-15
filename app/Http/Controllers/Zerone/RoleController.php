@@ -32,7 +32,7 @@ class RoleController extends Controller{
                 ];
             }
 
-            dump($modules);
+            dump(array_unique($modules));
         }
 
         return view('Zerone/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
