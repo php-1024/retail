@@ -165,17 +165,13 @@ Route::group(['prefix'=>'zerone'],function(){
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
 
-    //系统管理——参数设置
-    Route::get('setup','Zerone\SetupController@display')->middleware('ZeroneCheck');//参数设置展示
-
-    //系统管理——战区管理
-    Route::get('warzone','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
-
-    //系统管理——所有操作记录
-    Route::get('operation_log','Zerone\LogController@operation_log')->middleware('ZeroneCheck');//所有操作记录
-
-    //系统管理——所有登陆记录
-    Route::get('login_log','Zerone\LogController@login_log')->middleware('ZeroneCheck');//所有登陆记录
+    //系统管理分组
+    Route::group(['prefix'=>'system_management'],function(){
+        Route::get('setup','Zerone\SetupController@display')->middleware('ZeroneCheck');//参数设置展示
+        Route::get('warzone','Zerone\WarzoneController@display')->middleware('ZeroneCheck');//战区管理展示
+        Route::get('operation_log','Zerone\LogController@operation_log')->middleware('ZeroneCheck');//所有操作记录
+        Route::get('login_log','Zerone\LogController@login_log')->middleware('ZeroneCheck');//所有登陆记录
+    });
 
 
     //个人中心组
