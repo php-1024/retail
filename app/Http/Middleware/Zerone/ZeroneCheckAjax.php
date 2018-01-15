@@ -41,6 +41,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/proxy_list_edit"://检测 登录 和 权限
+                $re = $this->checkLoginAndRule($request);
+                return self::format_response($re,$next);
+                break;
             case "zerone/ajax/proxy_examine_check"://检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
@@ -58,6 +62,11 @@ class ZeroneCheckAjax
 
             case "zerone/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "zerone/ajax/password_edit_check"://检测 登录 和 权限 和 安全密码 和 修改登录密码权限数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndPasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -81,6 +90,20 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkPasswordEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
@@ -250,6 +273,22 @@ class ZeroneCheckAjax
         }
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测修改登陆密码
+    public function checkPasswordEdit($request){
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入原登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('new_password'))){
+            return self::res(0,response()->json(['data' => '新登陆密码不能为空', 'status' => '0']));
+        }
+        if(empty($request->input('news_password'))){
+            return self::res(0,response()->json(['data' => '请确认新登陆密码是否一致', 'status' => '0']));
+        }
+        if($request->input('new_password') != $request->input('news_password')){
+            return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
         }
         return self::res(1,$request);
     }

@@ -6,6 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationProxyinfo;
 use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -63,7 +64,10 @@ class ProxyController extends Controller{
             $realname = $request->input('realname');//负责人姓名
             $idcard = $request->input('idcard');//负责人身份证号
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
-            AccountInfo::addAccountInfo($acinfodata);
+            AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
+
+            $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
+            OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
@@ -127,19 +131,25 @@ class ProxyController extends Controller{
                 $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
-                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$proxylist['proxy_password'],'organization_id'=>$organization_id,'account'=>$account];
+                $key = config("app.zerone_encrypt_key");//获取加密盐
+                $encrypted = md5($proxylist['proxy_password']);//加密密码第一重
+                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+
+                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
-                $realname = $proxylist['proxy_name'];//负责人姓名
+                $realname = $proxylist['proxy_owner'];//负责人姓名
                 $idcard = $proxylist['proxy_owner_idcard'];//负责人身份证号
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
-                AccountInfo::addAccountInfo($acinfodata);
+                AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
+
+                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']];
+                OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dump($e);exit;
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
@@ -155,8 +165,15 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $listorg = Organization::getPaginage(['type'=>'2'],'5','id');
-        dd($listorg);
         return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+    //服务商编辑ajaxshow显示页面
+    public function proxy_list_edit(Request $request){
+        $id = $request->input('id');//服务商id
+        $listorg = Organization::getOne(['id'=>$id]);
+        $warzone = Warzone::all();
+        $password = Account::getPluck(['organization_id'=>$id, 'parent_id'=>'1'],'password');
+        return view('Zerone/Proxy/proxy_list_edit',compact('listorg','warzone','password'));
     }
 
 }

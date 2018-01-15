@@ -36,5 +36,6 @@ class AccountNode extends Model
         $model->save();
         return $model->id;
     }
+
 }
 ?>

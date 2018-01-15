@@ -5,18 +5,15 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>零壹新科技程序管理平台</title>
-
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/switchery')}}/css/switchery.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
-
 </head>
 
 <body class="">
@@ -30,10 +27,10 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>所有登陆记录</h2>
+                <h2>我的操作日志</h2>
                 <ol class="breadcrumb">
-                    <li class="active"> <a href="JavaScript:;">系统管理</a> </li>
-                    <li > <strong>所有登陆记录</strong> </li>
+                    <li class="active"> <a href="JavaScript:;">个人中心</a> </li>
+                    <li > <strong>我的操作日志</strong> </li>
                 </ol>
             </div>
         </div>
@@ -42,7 +39,7 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label class="control-label" for="date_added">登陆时间</label>
+                            <label class="control-label" for="date_added">操作时间</label>
                             <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 <input id="date_added" type="text" class="form-control" value="2017-11-28">
                             </div>
@@ -54,12 +51,6 @@
                             <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 <input id="date_modified" type="text" class="form-control" value="2017-11-28">
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="date_modified">用户账号</label>
-                            <input id="date_modified" type="text" class="form-control" value="" placeholder="请输入用户账号">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -78,36 +69,75 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>登陆账号</th>
-                                    <th>登陆IP</th>
-                                    <th>登陆地址</th>
-                                    <th class="col-sm-1">登陆时间</th>
+                                    <th>操作详情</th>
+                                    <th class="col-sm-1">操作时间</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
                                 <tr>
                                     <td>1</td>
-                                    <td>admin</td>
-                                    <td>192.168.0.1</td>
-                                    <td>中国广东深圳</td>
+                                    <td>您修改了登陆密码</td>
                                     <td>2017-08-08 10:30:30</td>
                                 </tr>
-                                @foreach($login_log_list as $key=>$val)
-                                    <tr>
-                                        <td>{{  $val->accounts->id }}</td>
-                                        <td>{{  $val->accounts->account }}</td>
-                                        <td>{{  long2ip($val->ip) }}</td>
-                                        <td>{{  $val->ip_position }}</td>
-                                        <td>{{  $val->created_at }}</td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td>2</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>您修改了登陆密码</td>
+                                    <td>2017-08-08 10:30:30</td>
+                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="99" class="text-right">
-                                        {{ $login_log_list->links() }}
-                                    </td>
+                                    <td colspan="9" class="footable-visible"><ul class="pagination pull-right">
+                                            <li class="footable-page-arrow disabled"> <a data-page="first" href="#first">«</a> </li>
+                                            <li class="footable-page-arrow disabled"> <a data-page="prev" href="#prev">‹</a> </li>
+                                            <li class="footable-page active"> <a data-page="0" href="#">1</a> </li>
+                                            <li class="footable-page"> <a data-page="1" href="#">2</a> </li>
+                                            <li class="footable-page"> <a data-page="1" href="#">3</a> </li>
+                                            <li class="footable-page"> <a data-page="1" href="#">4</a> </li>
+                                            <li class="footable-page"> <a data-page="1" href="#">5</a> </li>
+                                            <li class="footable-page-arrow"> <a data-page="next" href="#next">›</a> </li>
+                                            <li class="footable-page-arrow"> <a data-page="last" href="#last">»</a> </li>
+                                        </ul></td>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -126,14 +156,14 @@
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
 <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-<!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<!-- Data picker -->
 <script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
 <script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
-<!-- Mainly scripts -->
+<!-- Custom and plugin javascript -->
 <script>
     $(document).ready(function() {
         $('#addbtn').click(function(){
@@ -168,7 +198,6 @@
         });
 
     });
-
 </script>
 </body>
 

@@ -36,7 +36,8 @@
                 </ol>
             </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
+                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
@@ -101,10 +102,10 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->warzoneProxy->zone_id}}</td>
-                                        <td>刘兴文</td>
+                                        <td>{{$value->organizationproxyinfo->proxy_owner}}</td>
 
 
-                                        <td>13123456789</td>
+                                        <td>{{$value->organizationproxyinfo->proxy_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
@@ -114,7 +115,7 @@
                                         </td>
                                         <td>2017-08-08 10:30:30</td>
                                         <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="button" id="peoplesBtn" onclick="location.href='proxystructure.html'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
@@ -150,75 +151,9 @@
                     </div>
                 </div>
             </div>
-            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content animated fadeIn">
-                        <div class="modal-header">
-                            <h3>编辑服务商</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">所在战区</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control m-b" name="account">
-                                        <option>东部战区</option>
-                                        <option>西部战区</option>
-                                        <option>南部战区</option>
-                                        <option>北部战区</option>
-                                        <option>中部战区</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
 
-                            <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
+            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
-                            <div class="form-group"><label class="col-sm-2 control-label">负责人姓名</label>
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group"><label class="col-sm-2 control-label">手机号码</label>
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group"><label class="col-sm-2 control-label">服务商登陆密码</label>
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">安全密码</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary saveBtn">保存</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content animated fadeIn">
@@ -260,49 +195,53 @@
     <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
     <script>
-        $(document).ready(function() {
-            var elem = document.querySelector('.js-switch');
-            var switchery = new Switchery(elem, { color: '#1AB394' });
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-            $('.footable').footable();
 
-            $('#date_added').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
+$(function(){
 
-            $('#date_modified').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
-            $("#editBtn").click(function(){
-                $('#myModal').modal();
-            });
-            $('#lockBtn').click(function(){
-                $('#myModal3').modal();
-            });
-            $('#removeBtn').click(function(){
-                $('#myModal3').modal();
-            });
-            $('.saveBtn').click(function(){
-                swal({
-                    title: "温馨提示",
-                    text: "操作成功",
-                    type: "success"
-                },function(){
-                    window.location.reload();
-                });
-            });
+    //设置CSRF令牌
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+
+//审核
+function getEditForm(id){
+
+    var url = $('#proxy_list_edit').val();
+    var token = $('#_token').val();
+    if(id==''){
+        swal({
+            title: "提示信息",
+            text: '数据传输错误',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            window.location.reload();
         });
+        return;
+    }
+
+    var data = {'id':id,'_token':token};
+    $.post(url,data,function(response){
+        if(response.status=='-1'){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }else{
+
+            $('#myModal').html(response);
+            $('#myModal').modal();
+        }
+    });
+}
     </script>
 </div>
 </body>

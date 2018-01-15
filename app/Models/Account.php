@@ -20,6 +20,7 @@ class Account extends Model{
         return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
 
+
     //修改账号
     public static function editAccount($where,$param){
         $model = self::where($where)->first();
@@ -34,6 +35,11 @@ class Account extends Model{
         return $this->hasOne('App\Models\AccountInfo', 'account_id');
     }
 
+    //和账号节点表一对一的关系
+    public function account_node(){
+        return $this->hasOne('App\Models\AccountNode', 'account_id');
+    }
+
     //和organization表多对一的关系
     public function organization(){
         return $this->belongsTo('App\Models\Organization', 'organization_id');
@@ -42,7 +48,7 @@ class Account extends Model{
     public function roles(){
         return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
-    //简易型查询单条数据
+    //简易型查询单条数据关联查询
     public static function getOne($where)
     {
         return self::with('organization')->with('account_info')->with('account_roles')->where($where)->first();
@@ -56,6 +62,16 @@ class Account extends Model{
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
+
+    //查询获取账户的模块和节点列表
+    public static function get_module_node($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::with('account_node')->with('account_info');
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
+
 
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
