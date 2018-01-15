@@ -32,7 +32,10 @@ class Organization extends Model{
     public static function getOne($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
     }
-
+    //获取单条信息和organizationproxyinfo的信息
+    public static function getOneAndorganizationproxyinfo($where){
+        return self::with('organizationproxyinfo')->where($where)->first();
+    }
     //添加数据
     public static function addProgram($param){
         $organization = new Organization();//实例化程序模型
