@@ -338,7 +338,7 @@ class ZeroneCheckAjax
         $admin_data = $request->get('admin_data');
         if($admin_data['id']!=1){
             //暂定除admin外所有用户都没有权限
-            return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
             //return self::res(1,$request);
         }else{
             return self::res(1,$request);
