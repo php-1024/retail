@@ -33,7 +33,11 @@ class PersonalController extends Controller{
         $account = Account::getOne([['id',$admin_data['id']]]);
         dump($account);
         $password = $request->input('password');
-        if ($account['password'] == $password){
+
+        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        if ($account['password'] == $encryptPwd){
             echo '密码输入正确';
         }else{
             echo $password."<br>".$account['password'];
