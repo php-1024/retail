@@ -61,12 +61,10 @@ class Organization extends Model{
     public static function editOrganizationBatch($where,$param){
         $model = self::where($where)->first();
         dd($model);
-        foreach ($model as $k=>$v){
             foreach($param as $key=>$val){
-                $v->$key=$val;
+                $model->$key=$val;
             }
-            $v->save();
-        }
+        $model->save();
     }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
