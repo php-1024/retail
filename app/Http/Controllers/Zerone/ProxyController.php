@@ -190,18 +190,19 @@ class ProxyController extends Controller{
 
              if($list['organization_name']!=$organization_name){
                  $orgdata = ['organization_name'=>$organization_name];
-                 Organization::editOrganization(['id'=>$id], $orgdata);
+                 Organization::editOrganization(['id'=>$id], $orgdata);//修改服务商表服务商名称
              }
              if($list['organizationproxyinfo']['proxy_owner'] != $realname){
                  $orginfodata = ['proxy_owner'=>$realname];
-                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);
+                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);//修改服务商用户信息表 用户姓名
              }
              if(!empty($password)){
                  $key = config("app.zerone_encrypt_key");//获取加密盐
                  $encrypted = md5($password);//加密密码第一重
                  $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
                  $accountdata = ['password'=>$encryptPwd];
-                 Account::editAccount(['organization_id'=>$id],$accountdata);
+                 Account::editAccount(['organization_id'=>$id,'parent_id'=>'1'],$accountdata);//修改管理员表登入密码
+
              }
 
 
