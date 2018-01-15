@@ -48,7 +48,7 @@ class Account extends Model{
     public function roles(){
         return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
-    //简易型查询单条数据
+    //简易型查询单条数据关联查询
     public static function getOne($where)
     {
         return self::with('organization')->with('account_info')->with('account_roles')->where($where)->first();
