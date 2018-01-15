@@ -30,29 +30,30 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-
+                    <form method="get" role="form" id="searchForm" action="">
+                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">服务商名称</label>
-                            <input type="text" id="amount" name="amount" value="" placeholder="请输入服务商名称" class="form-control">
+                            <input type="text" id="proxy_name" name="proxy_name" value="" placeholder="请输入服务商名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">手机号码</label>
-                            <input type="text" id="amount" name="amount" value="" placeholder="手机号码" class="form-control">
+                            <input type="text" id="proxy_owner_mobile" name="proxy_owner_mobile" value="" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                         </div>
                     </div>
+                    </form>
                 </div>
-
             </div>
-
+        </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
