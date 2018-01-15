@@ -195,6 +195,8 @@ class ProxyController extends Controller{
              if($list['organizationproxyinfo']['proxy_owner'] != $realname){
                  $orginfodata = ['proxy_owner'=>$realname];
                  OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);//修改服务商用户信息表 用户姓名
+                 $accid = Account::checkRowExists(['organization_id'=>$id,'parent_id'=>'1']);
+                 echo ($accid);
              }
              if(!empty($password)){
                  $key = config("app.zerone_encrypt_key");//获取加密盐
