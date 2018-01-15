@@ -40,7 +40,7 @@ class AccountNode extends Model
     //和账号多对多的关系
     public function account()
     {
-        return $this->belongsToMany('App\Models\Account','node','id');
+        return $this->belongsToMany('App\Models\Account','account','id');
     }
 }
 ?>
