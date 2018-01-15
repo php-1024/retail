@@ -192,10 +192,10 @@ class ProxyController extends Controller{
                  $orgdata = [['organization_name'=>$organization_name]];
                  Organization::editOrganization(['id'=>$id], $orgdata);
              }
-             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
-                 $orginfodata = [['proxy_owner'=>$realname]];
-                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);
-             }
+//             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
+//                 $orginfodata = [['proxy_owner'=>$realname]];
+//                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);
+//             }
 
 
 //            //添加操作日志
