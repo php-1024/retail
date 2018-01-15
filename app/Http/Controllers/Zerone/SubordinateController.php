@@ -223,7 +223,7 @@ class SubordinateController extends Controller{
         }
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
-        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(1,$id);
+        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(1,$id);//获取要操作的用户有的节点
         foreach($selected_node_list as $key=>$val){
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
