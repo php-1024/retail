@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\ProgramModuleNode;
 use Illuminate\Http\Request;
 use Session;
@@ -28,7 +29,14 @@ class PersonalController extends Controller{
 
     //个人中心——登录密码修改
     public function password_edit_check(Request $request){
-        dump($request);
+        $account = Account::getOne([['id',$admin_data['id']]]);
+        dump($account);
+        $password = $request->input('password');
+        if ($account['password'] == $password){
+            echo '密码输入正确';
+        }else{
+            echo '密码不正确';
+        }
     }
 
     //个人中心——安全密码设置
