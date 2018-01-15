@@ -57,17 +57,7 @@ class Organization extends Model{
         }
         $model->save();
     }
-    //批量修改数据
-    public static function editOrganizationBatch($where,$param){
-        $model = self::where($where)->first();
-        dd($model);
-        foreach ($model as $k=>$v){
-            foreach($param as $key=>$val){
-                $v->$key=$val;
-            }
-            $v->save();
-        }
-    }
+
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
         $row = self::getPluck($where,'id')->toArray();
