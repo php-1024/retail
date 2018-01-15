@@ -30,6 +30,16 @@ class Account extends Model{
         $model->save();
     }
 
+    //修改密码
+    public static function editAccount_password($where,$param){
+        if ($model = self::where($where)->first()) {
+            foreach ($param as $key => $val) {
+                $model->$key = $val;
+            }
+            $model->save();
+        }
+    }
+
     //和个人信息表一对一的关系
     public function account_info(){
         return $this->hasOne('App\Models\AccountInfo', 'account_id');
