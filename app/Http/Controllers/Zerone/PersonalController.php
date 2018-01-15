@@ -36,7 +36,7 @@ class PersonalController extends Controller{
         if ($account['password'] == $password){
             echo '密码输入正确';
         }else{
-            echo '密码不正确';
+            echo $password."<br>".$account['password'];
         }
     }
 
