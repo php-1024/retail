@@ -155,7 +155,7 @@ class RoleController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
+                OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
                 foreach ($node_ids as $key => $val) {
                     $vo = RoleNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
