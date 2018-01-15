@@ -20,6 +20,12 @@ class Account extends Model{
         return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
 
+    //和账号多对多的关系
+    public function account_node()
+    {
+        return $this->belongsToMany('App\Models\AccountNode','node','node_name');
+    }
+
     //修改账号
     public static function editAccount($where,$param){
         $model = self::where($where)->first();
@@ -50,7 +56,7 @@ class Account extends Model{
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::with('organization')->with('account_info')->with('account_roles');
+        $model = self::with('organization')->with('account_info')->with('account_roles')->with('account_node');
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
