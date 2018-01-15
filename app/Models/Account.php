@@ -33,7 +33,7 @@ class Account extends Model{
     //修改密码
     public static function editAccount_password($where,$param){
             $model = self::where($where)->first();
-            $model->password = $param->password;
+            $model->password = $param['password'];
             $model->save();
     }
 
