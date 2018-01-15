@@ -55,31 +55,31 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原登陆密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">新登陆密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="new_password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="news_password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="safe_password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认修改</button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认修改</button>
                                     </div>
                                 </div>
                             </form>
@@ -117,6 +117,34 @@
             });
         });
     });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
 </script>
 </body>
 
