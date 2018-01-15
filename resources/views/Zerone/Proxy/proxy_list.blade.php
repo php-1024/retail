@@ -59,11 +59,9 @@
                             <div class="form-group">
                                 <label class="control-label" for="amount">所在战区</label>
                                 <select class="form-control m-b" name="account">
-                                    <option>东部战区</option>
-                                    <option>西部战区</option>
-                                    <option>南部战区</option>
-                                    <option>北部战区</option>
-                                    <option>中部战区</option>
+                                    @foreach($warzone as $k=>$v)
+                                    <option value="{{$v->id}}">{{$v->zone_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

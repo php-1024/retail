@@ -171,7 +171,9 @@ class ProxyController extends Controller{
     public function proxy_list_edit(Request $request){
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOne(['id'=>$id]);
-        return view('Zerone/Proxy/proxy_list_edit',compact('listorg'));
+        $warzone = Warzone::all();
+        dd($warzone);
+        return view('Zerone/Proxy/proxy_list_edit',compact('listorg','warzone'));
     }
 
 }
