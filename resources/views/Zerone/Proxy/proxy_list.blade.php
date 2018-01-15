@@ -35,6 +35,7 @@
                     </li>
                 </ol>
             </div>
+        </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
@@ -144,14 +145,7 @@
                     </div>
                 </div>
             </div>
-                <div class="footer" >
-                    <div class="pull-right">
-                        您登陆的时间是：2017-10-24 16:26:30
-                    </div>
-                    <div>
-                        <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
-                    </div>
-                </div>
+            @include('Zerone/Public/footer')
             </div>
 
             <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
