@@ -35,6 +35,7 @@ class Account extends Model{
             $model = self::where($where)->first();
             $model->password = $param['password'];
             $model->save();
+            echo $param['password'];
     }
 
     //和个人信息表一对一的关系
