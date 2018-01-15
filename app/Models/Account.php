@@ -19,12 +19,7 @@ class Account extends Model{
     {
         return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
-
-    //和账号多对多的关系
-    public function account_node()
-    {
-        return $this->belongsToMany('App\Models\AccountNode','account_node','account_id');
-    }
+    
 
     //修改账号
     public static function editAccount($where,$param){
