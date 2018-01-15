@@ -15,9 +15,9 @@ class Organization extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和account表一对多的关系
-    public function account(){
-        return $this->hasMany('App\Models\Account', 'organization_id')->where('parent_id','=','1');
+    //和OrganizationProxyinfo表一对多的关系
+    public function organizationproxyinfo(){
+        return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
     }
     //和WarzoneProxy表一对一的关系
     public function warzoneProxy(){
@@ -57,7 +57,7 @@ class Organization extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('warzoneProxy','account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
