@@ -32,7 +32,7 @@ class RoleController extends Controller{
                     'node_name'=>$val->node_name,
                 ];
             }
-            dump($module_node_list);
+
 
         }
 
