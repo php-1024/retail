@@ -288,7 +288,7 @@ class ZeroneCheckAjax
             return self::res(0,response()->json(['data' => '请确认新登陆密码是否一致', 'status' => '0']));
         }
         if($request->input('new_password') != $request->input('news_password')){
-            return self::res(0,response()->json(['data' => '两次新密码不一致', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
         }
         return self::res(1,$request);
     }
