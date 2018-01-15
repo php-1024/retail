@@ -22,20 +22,20 @@
     @include('Zerone/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-        @include('Zerone/Public/Header')
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-sm-4">
-                <h2>服务商列表</h2>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <a href="JavaScript:;">服务商管理</a>
-                    </li>
-                    <li >
-                        <strong>服务商列表</strong>
-                    </li>
-                </ol>
+            @include('Zerone/Public/Header')
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <h2>服务商列表</h2>
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <a href="JavaScript:;">服务商管理</a>
+                        </li>
+                        <li >
+                            <strong>服务商列表</strong>
+                        </li>
+                    </ol>
+                </div>
             </div>
-        </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
@@ -145,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            @include('Zerone/Public/footer')
+            @include('Zerone/Public/Footer')
             </div>
 
             <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
