@@ -24,10 +24,14 @@ class RoleController extends Controller{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
 
             //遍历第一遍，过滤重复的模块
-            $module_node_list = [];
-
-
-
+            $modules = [];
+            $nodes = [];
+            foreach($account_node_list as $key=>$val){
+                $modules[$val->module_id] = $val->module_name;
+                $nodes[$val->module_id][$val->node_id] = $val->node_name;
+            }
+            dump($modules);
+            dump($nodes);
         }
 
         return view('Zerone/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
