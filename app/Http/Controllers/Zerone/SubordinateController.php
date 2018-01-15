@@ -191,7 +191,6 @@ class SubordinateController extends Controller{
             $info->account_role = $val->id;
         }
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
-        dump($role_list);
         return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
@@ -203,7 +202,7 @@ class SubordinateController extends Controller{
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
-
+            dump($account_node_list);
             $modules = [];
             $nodes = [];
             $module_node_list = [];
