@@ -65,7 +65,7 @@ class Account extends Model{
 
     //查询获取账户的模块和节点列表
     public static function get_module_node($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::with('organization')->with('account_info')->with('account_roles')->with('account_node');
+        $model = self::with('account_node')->with('account_info');
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
