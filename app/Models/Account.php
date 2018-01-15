@@ -32,12 +32,11 @@ class Account extends Model{
 
     //修改密码
     public static function editAccount_password($where,$param){
-        if ($model = self::where($where)->first()) {
+            $model = self::where($where)->first();
             foreach ($param as $key => $val) {
                 $model->$key = $val;
             }
             $model->save();
-        }
     }
 
     //和个人信息表一对一的关系
