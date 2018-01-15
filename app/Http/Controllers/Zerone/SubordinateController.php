@@ -191,6 +191,7 @@ class SubordinateController extends Controller{
             $info->account_role = $val->id;
         }
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+        dump($role_list);
         return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
