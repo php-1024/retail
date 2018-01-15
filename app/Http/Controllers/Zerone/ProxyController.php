@@ -186,10 +186,14 @@ class ProxyController extends Controller{
 
         DB::beginTransaction();
         try{
-             $list = Organization::getOne(['id'=>$id]);
-             dd($list);
-             $orgdata = [];
-             Organization::editOrganization(['id'=>$id]);
+             $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
+             echo $list['organizationproxyinfo']['proxy_owner'];exit;
+             if($list['organization_name']!=$organization_name){
+                 $orgdata = [['organization_name'=>$organization_name]];
+                 Organization::editOrganization(['id'=>$id], $orgdata);
+             }
+
+
 //            //添加操作日志
 //            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
             DB::commit();//提交事务
