@@ -40,7 +40,7 @@
                                     <div class="col-sm-10" style="padding-top:7px;">{{$admin_data['account']}}</div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                @if($admin_data->safe_password == '')
+                                @if($admin_data['safe_password'] == '')
                                     没有设置安全密码
                                 @else
                                 <div class="form-group">
