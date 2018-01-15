@@ -37,7 +37,7 @@
             </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="proxy_examine" value="{{ url('zerone/ajax/proxy_list_edit') }}">
+                <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
@@ -193,50 +193,6 @@
     <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
     <script>
-//        $(document).ready(function() {
-//            var elem = document.querySelector('.js-switch');
-//            var switchery = new Switchery(elem, { color: '#1AB394' });
-//            $('.i-checks').iCheck({
-//                checkboxClass: 'icheckbox_square-green',
-//                radioClass: 'iradio_square-green',
-//            });
-//            $('.footable').footable();
-//
-//            $('#date_added').datepicker({
-//                todayBtn: "linked",
-//                keyboardNavigation: false,
-//                forceParse: false,
-//                calendarWeeks: true,
-//                autoclose: true
-//            });
-//
-//            $('#date_modified').datepicker({
-//                todayBtn: "linked",
-//                keyboardNavigation: false,
-//                forceParse: false,
-//                calendarWeeks: true,
-//                autoclose: true
-//            });
-//            $("#editBtn").click(function(){
-//                $('#myModal').modal();
-//            });
-//            $('#lockBtn').click(function(){
-//                $('#myModal3').modal();
-//            });
-//            $('#removeBtn').click(function(){
-//                $('#myModal3').modal();
-//            });
-//            $('.saveBtn').click(function(){
-//                swal({
-//                    title: "温馨提示",
-//                    text: "操作成功",
-//                    type: "success"
-//                },function(){
-//                    window.location.reload();
-//                });
-//            });
-//        });
-
 
 $(function(){
 
@@ -251,7 +207,7 @@ $(function(){
 //审核
 function getEditForm(id){
 
-    var url = $('#proxy_examine').val();
+    var url = $('#proxy_list_edit').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
