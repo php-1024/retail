@@ -249,7 +249,7 @@ $(function(){
 });
 
 //审核
-function getEditForm(id,sta){
+function getEditForm(id){
 
     var url = $('#proxy_examine').val();
     var token = $('#_token').val();
@@ -265,7 +265,7 @@ function getEditForm(id,sta){
         return;
     }
 
-    var data = {'id':id,'sta':sta,'_token':token};
+    var data = {'id':id,'_token':token};
     $.post(url,data,function(response){
         if(response.status=='-1'){
             swal({
