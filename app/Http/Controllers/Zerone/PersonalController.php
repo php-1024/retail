@@ -61,7 +61,22 @@ class PersonalController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account = Account::getOne([['id',$admin_data['id']]]);
-        dump($request);
+        echo $account['safe_password'];
+
+
+        $safe_password = $request->input('safe_password');           //安全密码
+        $new_safe_password = $request->input('new_safe_password');   //新安全密码
+        $news_safe_password = $request->input('news_safe_password'); //重复新安全密码
+
+        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $encrypted = md5($new_safe_password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $new_encrypted = md5($new_password);//加密新密码第一重
+        $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
+        echo '<br>'.$encryptPwd;
+        if ($new_safe_password != $news_safe_password){
+            return response()->json(['data' => '新安全密码和重复新密码不一致！', 'status' => '1']);
+        }
         return response()->json(['data' => '密码修改成功！', 'status' => '1']);
     }
     //个人中心——我的操作日志
