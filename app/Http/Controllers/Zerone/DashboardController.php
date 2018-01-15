@@ -35,9 +35,6 @@ class DashboardController extends Controller{
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone_all'=>$zerone_all]);
     }
-
-
-
     //参数设置展示
     public function setup(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -71,7 +68,6 @@ class DashboardController extends Controller{
         Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
-
     //战区管理首页
     public function warzone(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -83,7 +79,6 @@ class DashboardController extends Controller{
         dump($warzone);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
     }
-
     //功能模块列表
     public function module_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -94,8 +89,6 @@ class DashboardController extends Controller{
         dump($list);
         return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
-
-
     /*
      * 所有操作记录
      */
@@ -134,13 +127,6 @@ class DashboardController extends Controller{
         $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
         return view('Zerone/Log/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
     }
-
-
-
-
-
-
-
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_account_id','');
