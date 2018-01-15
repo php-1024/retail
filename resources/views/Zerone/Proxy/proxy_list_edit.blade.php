@@ -13,7 +13,7 @@
                     <div class="col-sm-10">
                         <select class="form-control m-b" name="account">
                             @foreach($warzone as $k=>$v)
-                                <option value="{{$v->id}}" @if($v->id == $listorg->warzoneProxy->zone_id) type="radio" @endif>{{$v->zone_name}}</option>
+                                <option value="{{$v->id}}" @if($v->id == $listorg->warzoneProxy->zone_id)  selected @endif>{{$v->zone_name}}</option>
                             @endforeach
                         </select>
                     </div>
