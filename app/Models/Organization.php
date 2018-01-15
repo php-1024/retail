@@ -23,10 +23,10 @@ class Organization extends Model{
     public function warzoneProxy(){
         return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
     }
-//    //和WarzoneProxy表 warzone表 一对一的关系
-//    public function warzone(){
-//        return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id')->select('zone_name');
-//    }
+    //和WarzoneProxy表 warzone表 一对一的关系
+    public function warzone(){
+        return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id')->select('zone_name');
+    }
 
 
     //添加数据
@@ -57,7 +57,7 @@ class Organization extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('warzoneProxy')->has('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzoneProxy')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
