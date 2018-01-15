@@ -119,12 +119,7 @@ class ZeroneCheckAjax
             if($re['status']=='0'){//检测是否登陆
                 return $re;
             }else{
-                $re2 = $this->checkSafepassword($re['response']);//检测置的安全密码是否正常
-                if($re2['status']=='0'){
-                    return $re2;
-                }else{
-                    return self::res(1,$re2['response']);
-                }
+                return self::res(1,$request);
             }
 
         }else{
@@ -355,13 +350,6 @@ class ZeroneCheckAjax
         }
         if($request->input('new_password') != $request->input('news_password')){
             return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //私有，设置安全密码专用
-    public function checkSafepassword($request){
-        if(empty($request->input('safe_password'))){
-            return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         return self::res(1,$request);
     }
