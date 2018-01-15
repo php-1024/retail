@@ -59,7 +59,7 @@ class Account extends Model{
 
     //登陆时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
-        return self::where('account',$username)->orWhere('mobile',$username)->first();
+        return self::with('account_info')->with('account_roles')->where('account',$username)->orWhere('mobile',$username)->first();
     }
     //添加用户
     public static function addAccount($param){
