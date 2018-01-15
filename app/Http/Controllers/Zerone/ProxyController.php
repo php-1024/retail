@@ -193,7 +193,7 @@ class ProxyController extends Controller{
              }
              if($list['mobile']!=$mobile){
                  OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
-                 Accoun::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 用户名
+                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 用户名
              }
 
              if($list['organizationproxyinfo']['proxy_owner'] != $realname){
