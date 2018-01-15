@@ -101,7 +101,7 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->warzoneProxy->zone_id}}</td>
-                                        <td>刘兴文</td>
+                                        <td>@foreach($value->account as $k=>$v) {{$v}}@endforeach</td>
 
 
                                         <td>13123456789</td>
