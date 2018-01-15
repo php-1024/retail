@@ -79,7 +79,7 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" type="button">确认修改</button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认修改</button>
                                     </div>
                                 </div>
                             </form>
