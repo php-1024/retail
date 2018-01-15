@@ -36,5 +36,11 @@ class AccountNode extends Model
         $model->save();
         return $model->id;
     }
+
+    //和账号多对多的关系
+    public function account()
+    {
+        return $this->belongsToMany('App\Models\Account','node','id');
+    }
 }
 ?>
