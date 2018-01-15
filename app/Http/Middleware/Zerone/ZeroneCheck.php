@@ -32,11 +32,11 @@ class ZeroneCheck{
             case "zerone/warzone"://战区管理首页权限
             case "zerone/setup/setup_edit"://参数设置权限
             case "zerone/setup"://参数设置权限
-            case "zerone/personal"://个人中心——个人资料
-            case "zerone/personal/password_edit"://个人中心——密码修改
-            case "zerone/personal/security_password"://个人中心——安全密码设置
-            case "zerone/personal/operation_log"://个人中心——我的操作日志
-            case "zerone/personal/login_log"://个人中心——我的登陆日志
+            case "zerone/personal":                     //个人中心——个人资料
+            case "zerone/personal/password_edit":       //个人中心——密码修改
+            case "zerone/personal/security_password":   //个人中心——安全密码设置
+            case "zerone/personal/operation_log":       //个人中心——我的操作日志
+            case "zerone/personal/login_log":           //个人中心——我的登陆日志
             case "zerone"://后台首页
             case "zerone/proxy/proxy_add"://添加服务商
             case "zerone/proxy/proxy_examinelist"://服务商审核列表
