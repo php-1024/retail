@@ -9,11 +9,11 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">所在战区</label>
+                    <label class="col-sm-2 control-label">归属服务商</label>
                     <div class="col-sm-10">
                         <select class="form-control m-b" name="zone_id">
-                            @foreach($warzone as $k=>$v)
-                                <option value="{{$v->id}}">{{$v->zone_name}}</option>
+                            @foreach($proxy as $k=>$v)
+                                <option value="{{$v->id}}">{{$v->organization_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -21,7 +21,7 @@
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
-                <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
+                <div class="form-group"><label class="col-sm-2 control-label">商户名称</label>
                     <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
                 </div>
                 <div style="clear:both"></div>
@@ -45,7 +45,7 @@
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
-                <div class="form-group"><label class="col-sm-2 control-label">服务商登陆密码</label>
+                <div class="form-group"><label class="col-sm-2 control-label">商户陆密码</label>
                     <div class="col-sm-10"><input type="text" class="form-control" value="" name="password"></div>
                 </div>
                 <div style="clear:both"></div>
