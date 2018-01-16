@@ -13,5 +13,16 @@ class WarzoneProvince extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //修改战区包含省份
+    public static function WarzoneProvinceEdit($where,$param)
+    {
+        $model =  self::where($where)->get();
+        foreach ($model as $k=>$v){
+            foreach($param as $key=>$val){
+                $v->$key=$val;
+            }
+            $v->save();
+        }
+    }
 }
 ?>

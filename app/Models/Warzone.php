@@ -36,6 +36,7 @@ class Warzone extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='ASC'){
         return self::with('province')->with('proxyapply')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
+    //修改战区
     public static function WarzoneEdit($where,$param)
     {
         $model = self::where($where)->first();
