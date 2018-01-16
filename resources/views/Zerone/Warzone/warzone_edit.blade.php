@@ -11,20 +11,20 @@
                 @foreach($warzone as $key=>$val)
                 <div class="form-group">
                     <label>战区名称</label>
-                    <input type="text" placeholder="Enter your text" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
+                    <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>包含省份</label>
                     <div style="clear: both;"></div>
-                    <select data-placeholder="请选择省份" class="chosen-select2" multiple style="width:350px;" tabindex="2">
+                    <select data-placeholder="请选择省份" name="province_id[]" class="chosen-select2" multiple style="width:350px;" tabindex="2">
                         {{--所有战区当前选中的战区--}}
                         @foreach($val->province as $kk=>$vv)
-                            <option selected="selected" name="province_name[]" value="{{ $vv->id }}">{{ $vv->province_name }}</option>
+                            <option selected="selected" value="{{ $vv->id }}">{{ $vv->province_name }}</option>
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
                         @foreach($new_province_name as $k=>$v)
-                            <option name="province_name[]" value="{{$k}}">{{$v}}</option>
+                            <option value="{{$k}}">{{$v}}</option>
                         @endforeach
                         {{--所有战区未选中的战区--}}
                     </select>
