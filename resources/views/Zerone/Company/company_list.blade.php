@@ -221,7 +221,7 @@ function getEditForm(id){
 //冻结
 function getFrozenForm(id){
 
-    var url = $('#proxy_list_frozen').val();
+    var url = $('#company_list_frozen').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
@@ -257,7 +257,7 @@ function getFrozenForm(id){
 //删除
 function getDeleteForm(id){
 
-    var url = $('#proxy_list_delete').val();
+    var url = $('#company_list_delete').val();
     var token = $('#_token').val();
     if(id==''){
         swal({

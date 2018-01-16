@@ -116,6 +116,7 @@ class ZeroneCheckAjax
 
             case "zerone/ajax/company_examine"://商户审核检测弹出登陆和权限
             case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
+            case "zerone/ajax/company_list_frozen"://商户冻结检测弹出登入和权限
 
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);

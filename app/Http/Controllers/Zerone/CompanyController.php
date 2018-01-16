@@ -254,14 +254,14 @@ class CompanyController extends Controller{
         return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
-    //服务商冻结ajaxshow显示页面
-    public function proxy_list_frozen(Request $request){
+    //商户冻结ajaxshow显示页面
+    public function company_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $list = Organization::getOne(['id'=>$id]);//服务商信息
-        return view('Zerone/Proxy/proxy_list_frozen',compact('id','list'));
+        return view('Zerone/Company/conpany_list_frozen',compact('id','list'));
     }
-    //服务商冻结功能提交
-    public function proxy_list_frozen_check(Request $request){
+    //商户冻结功能提交
+    public function company_list_frozen_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
@@ -280,14 +280,14 @@ class CompanyController extends Controller{
         }
         return response()->json(['data' => '冻结成功', 'status' => '1']);
     }
-    //服务商删除ajaxshow显示页面
-    public function proxy_list_delete(Request $request){
+    //商户删除ajaxshow显示页面
+    public function company_list_delete(Request $request){
 //        $id = $request->input('id');//服务商id
 //        $listorg = Organization::getOne(['id'=>$id]);
 //        $warzone = Warzone::all();
-        return view('Zerone/Proxy/proxy_list_delete');
+        return view('Zerone/Company/company_list_delete');
     }
-//服务商下级人员架构
+//商户下级人员架构
     public function proxy_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -295,7 +295,7 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $list = Account::getList([['organization_id','7'],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'id','asc')->toArray();
         $structure = $this->proxy_str($list,$admin_data['id']);
-        return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Company/company_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
