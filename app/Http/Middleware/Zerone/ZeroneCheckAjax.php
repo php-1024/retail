@@ -37,26 +37,11 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_examine"://检测 登录 和 权限
-                $re = $this->checkLoginAndRule($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/proxy_list_edit"://检测 登录 和 权限
-                $re = $this->checkLoginAndRule($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/proxy_list_frozen"://检测 登录 和 权限
-                $re = $this->checkLoginAndRule($request);
-                return self::format_response($re,$next);
-                break;
             case "zerone/ajax/proxy_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_list_delete"://检测 登录 和 权限
-                $re = $this->checkLoginAndRule($request);
-                return self::format_response($re,$next);
-                break;
+
             case "zerone/ajax/proxy_list_edit_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
                 return self::format_response($re,$next);
@@ -108,6 +93,14 @@ class ZeroneCheckAjax
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
             case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登陆和权限
+
+                
+            case "zerone/ajax/proxy_examine"://服务商审核检测弹出登入和权限
+            case "zerone/ajax/proxy_list_edit"://服务商列表修改弹出检测登入和权限
+            case "zerone/ajax/proxy_list_frozen"://服务商列表冻结弹出检测登入和权限
+            case "zerone/ajax/proxy_list_delete"://服务商列表删除弹出检测登入和权限
+
+            case "zerone/ajax/company_examine"://商户审核检测弹出登陆和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

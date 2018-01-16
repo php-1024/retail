@@ -71,7 +71,7 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                            <input type="hidden" id="proxy_examine" value="{{ url('zerone/ajax/proxy_examine') }}">
+                            <input type="hidden" id="company_examine" value="{{ url('zerone/ajax/company_examine') }}">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
@@ -167,7 +167,7 @@ $(function(){
 //审核
 function getEditForm(id,sta){
 
-    var url = $('#proxy_examine').val();
+    var url = $('#company_examine').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
