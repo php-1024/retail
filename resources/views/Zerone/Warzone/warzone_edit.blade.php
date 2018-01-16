@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label>包含省份</label>
                     <div style="clear: both;"></div>
-                    <select data-placeholder="请选择省份" name="province_id[]" class="chosen-select2" multiple style="width:350px;" tabindex="2">
+                    {{--<select data-placeholder="请选择省份" name="province_id[]" class="chosen-select2" multiple style="width:350px;" tabindex="2">--}}
                         {{--所有战区当前选中的战区--}}
                         {{--@foreach($val->province as $kk=>$vv)--}}
                             {{--<option selected="selected" value="{{ $vv->id }}">{{ $vv->province_name }}</option>--}}
@@ -26,7 +26,7 @@
                             {{--<option value="{{$k}}">{{$v}}</option>--}}
                         {{--@endforeach--}}
                         {{--所有战区未选中的战区--}}
-                    </select>
+                    {{--</select>--}}
                     <div style="clear: both;"></div>
                 </div>
                 @endforeach
