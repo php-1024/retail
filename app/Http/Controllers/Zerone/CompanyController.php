@@ -8,6 +8,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationCompanyinfo;
 use App\Models\OrganizationProxyinfo;
+use App\Models\OrganizationRole;
 use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -200,7 +201,7 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $parent_id = $request->input('parent_id');//上级id
-        echo $parent_id;exit;
+
         $organization_name = $request->input('organization_name');//服务商名称
         $realname = $request->input('realname');//用户名字
         $idcard = $request->input('idcard');//用户身份证号
@@ -209,19 +210,19 @@ class CompanyController extends Controller{
 
         DB::beginTransaction();
         try{
-             $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
-             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
+             $list = Organization::getOneCompany(['id'=>$id]); //获取商户组织信息
+             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
              if($list['organization_name']!=$organization_name){
                  Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
              }
              if($list['mobile']!=$mobile){
-                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                 OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id], ['company_owner_mobile'=>$mobile]);//修改商户表商户手机号码
                  Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
              }
 
-             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
-                 $orginfodata = ['proxy_owner'=>$realname];
-                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);//修改服务商用户信息表 用户姓名
+             if($list['organizationcompanyinfo']['company_owner'] != $realname){
+                 $companydata = ['company_owner'=>$realname];
+                 OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],$companydata);//修改商户信息表 用户姓名
                  AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
              }
              if(!empty($password)){
@@ -233,17 +234,21 @@ class CompanyController extends Controller{
              }
              if($acc['idcard'] != $idcard){
                  AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                 OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+                 OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],['company_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
              }
-             $waprlist = WarzoneProxy::getOne(['organization_id'=>$id]);
-             if($waprlist['zone_id'] != $zone_id){
-                 WarzoneProxy::editWarzoneProxy(['organization_id'=>$id],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+
+             if($list['parent_id'] != $parent_id){
+                 $porxy = Organization::getOne(['id'=>$parent_id]); //获取选择更换的上级服务商信息
+                 $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
+                 $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
+                 Organization::editOrganization(['organization_id'=>$id],$data);//修改商户的上级服务商信息
              }
 
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了服务商：'.$list['organization_name']);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了商户：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            echo($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
