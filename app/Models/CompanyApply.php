@@ -15,7 +15,7 @@ class CompanyApply extends Model{
 
     //和organization表一对一的关系
     public function organization(){
-        return $this->hasOne('App\Models\Organization', 'proxy_id');
+        return $this->hasOne('App\Models\Organization', 'id');
     }
 
     //获取列表
