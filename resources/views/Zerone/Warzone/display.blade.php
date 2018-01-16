@@ -109,7 +109,7 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" id="editBtn" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         {{--<button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
                                     </td>
@@ -195,11 +195,49 @@
             $('#addBtn').click(function(){
                 $('#myModal').modal();
             });
+
+        });
+
+        //获取用户信息，编辑密码框
+        function getEditForm(id){
             $('#editBtn').click(function(){
                 $('#myModal2').modal();
             });
 
-        });
+
+//            var url = $('#role_edit_url').val();
+//            var token = $('#_token').val();
+//
+//            if(id==''){
+//                swal({
+//                    title: "提示信息",
+//                    text: '数据传输错误',
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//                return;
+//            }
+//
+//            var data = {'id':id,'_token':token};
+//            $.post(url,data,function(response){
+//                if(response.status=='-1'){
+//                    swal({
+//                        title: "提示信息",
+//                        text: response.data,
+//                        confirmButtonColor: "#DD6B55",
+//                        confirmButtonText: "确定",
+//                    },function(){
+//                        window.location.reload();
+//                    });
+//                    return;
+//                }else{
+//                    $('#myModal').html(response);
+//                    $('#myModal').modal();
+//                }
+//            });
+        }
     </script>
 
 </body>
