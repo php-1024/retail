@@ -206,7 +206,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('proxy_add','Zerone\ProxyController@proxy_add')->middleware('ZeroneCheck');//添加服务商
         Route::get('proxy_examinelist','Zerone\ProxyController@proxy_examinelist')->middleware('ZeroneCheck');//服务商审核列表
         Route::get('proxy_list','Zerone\ProxyController@proxy_list')->middleware('ZeroneCheck');//服务商列表
-        Route::get('proxy_structure/{id}','Zerone\ProxyController@proxy_structure')->middleware('ZeroneCheck');//服务商人员架构
+        Route::get('proxy_structure','Zerone\ProxyController@proxy_structure')->middleware('ZeroneCheck');//服务商人员架构
     });
 
     //异步提交数据组
