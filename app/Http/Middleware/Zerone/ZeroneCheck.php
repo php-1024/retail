@@ -32,6 +32,7 @@ class ZeroneCheck{
             case "zerone/dashboard/warzone"://战区管理首页权限
             case "zerone/dashboard/setup/setup_edit"://参数设置权限
             case "zerone/dashboard/setup"://参数设置权限
+            case "zerone/dashboard/structure":         //人员结构
             case "zerone/personal":                     //个人中心——个人资料
             case "zerone/personal/password_edit":       //个人中心——密码修改
             case "zerone/personal/safe_password":   //个人中心——安全密码设置
