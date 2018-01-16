@@ -30,6 +30,7 @@
                     <div style="clear: both;"></div>
                 </div>
                 @endforeach
+
                 <div class="form-group">
                     <label>安全密码</label>
                     <input type="text" placeholder="请输入安全密码" name="safe_password" value="" class="form-control">
@@ -43,6 +44,7 @@
         </div>
     </div>
 </form>
+
 <script>
     //提交表单
     function postForm() {
