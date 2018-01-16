@@ -200,23 +200,19 @@
 
         //获取用户信息，编辑密码框
         function getEditForm(id){
-                $('#myModal2').modal();
-            
-//            var url = $('#role_edit_url').val();
-//            var token = $('#_token').val();
-//
-//            if(id==''){
-//                swal({
-//                    title: "提示信息",
-//                    text: '数据传输错误',
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                },function(){
-//                    window.location.reload();
-//                });
-//                return;
-//            }
-//
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+            $('#myModal2').modal();
+
 //            var data = {'id':id,'_token':token};
 //            $.post(url,data,function(response){
 //                if(response.status=='-1'){
@@ -230,10 +226,10 @@
 //                    });
 //                    return;
 //                }else{
-//                    $('#myModal').html(response);
-//                    $('#myModal').modal();
+//                    $('#myModal2').modal();
 //                }
 //            });
+
         }
     </script>
 
