@@ -62,21 +62,21 @@
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">真实姓名：</label>
+                                        <label class="col-sm-3 control-label">真实姓名</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="relname" class="form-control" value="{{$admin_data['realname']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">联系方式：</label>
+                                        <label class="col-sm-3 control-label">手机号码</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="mobile" class="form-control" value="{{$admin_data['mobile']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">安全密码：</label>
+                                        <label class="col-sm-3 control-label">安全密码</label>
                                         <div class="col-sm-9">
                                             <input type="password" name="safe_password" class="form-control">
                                         </div>
@@ -84,7 +84,7 @@
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group ">
                                         <div class="col-sm-12 col-sm-offset-5">
-                                            <button class="btn btn-primary" id="addbtn" type="button">确认修改</button>
+                                            <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认修改</button>
                                         </div>
                                     </div>
                                 </form>
@@ -141,14 +141,35 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-        $('#addbtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "修改成功",
-                type: "success"
-            });
-        });
     });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
 </script>
 </body>
 

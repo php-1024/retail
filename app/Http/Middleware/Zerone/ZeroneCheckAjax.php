@@ -6,6 +6,7 @@ namespace App\Http\Middleware\Zerone;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
+use Symfony\Component\HttpFoundation\Request;
 
 class ZeroneCheckAjax
 {
@@ -82,6 +83,11 @@ class ZeroneCheckAjax
 
             case "zerone/ajax/dashboard_warzone_edit"://检测战区名称 战区省份 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "zerone/ajax/personal_edit_check"://检测是否登陆 权限 安全密码 及修改个人信息提交数据
+                $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -341,7 +347,32 @@ class ZeroneCheckAjax
         }
     }
 
+    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
+    public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkPersonalEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     /******************************单项检测*********************************/
+    //检测编辑个人信息数据
+    public function checkPersonalEdit(Request $request){
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
+        }
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测编辑下级人员权限数据
     public function checkSubordinateAuthorize($request){
         if(empty($request->input('id'))){
