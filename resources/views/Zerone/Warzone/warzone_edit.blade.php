@@ -20,7 +20,7 @@
                             <option selected="selected" value="{{ $vv->province_name }}">{{ $vv->province_name }}</option>
                         @endforeach
                         @foreach($province as $k=>$v)
-                            <option selected="selected" value="{{$v->province_name}}">{{$v->province_name}}</option>
+                            <option selected="selected" value="Morocco">{{$v->province_name}}</option>
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
