@@ -21,9 +21,9 @@
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
-                        @foreach($province as $k=>$v)
-                            <option value="{{$v->province_id}}">{{$v->province_name}}</option>
-                        @endforeach
+                        {{--@foreach($province as $k=>$v)--}}
+                            {{--<option value="{{$v->province_id}}">{{$v->province_name}}</option>--}}
+                        {{--@endforeach--}}
                         {{--所有战区未选中的战区--}}
 
                     </select>
