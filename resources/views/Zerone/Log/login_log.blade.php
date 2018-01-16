@@ -85,14 +85,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>admin</td>
-                                    <td>192.168.0.1</td>
-                                    <td>中国广东深圳</td>
-                                    <td>2017-08-08 10:30:30</td>
-                                </tr>
                                 @foreach($login_log_list as $key=>$val)
                                     <tr>
                                         <td>{{  $val->accounts->id }}</td>
