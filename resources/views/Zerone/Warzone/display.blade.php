@@ -135,7 +135,7 @@
 
 
         @include('Zerone/Public/Footer')
-        @include('Zerone/Warzone/warzone')
+        @include('Zerone/Warzone/warzone_edit')
 
 
 
