@@ -76,8 +76,8 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>服务商名称</th>
-                                    <th>所在战区</th>
+                                    <th>商户名称</th>
+                                    <th>归属服务商</th>
                                     <th>负责人姓名</th>
                                     <th>身份证号</th>
                                     <th>手机号码</th>

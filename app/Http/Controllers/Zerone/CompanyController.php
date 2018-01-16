@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\CompanyApply;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationCompanyinfo;
@@ -95,7 +96,8 @@ class CompanyController extends Controller{
         if(!empty($proxy_owner_mobile)){
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
-        $list = ProxyApply::getPaginage($where,'15','id');
+
+        $list = CompanyApply::getPaginage($where,'15','id');
         return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
