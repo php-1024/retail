@@ -44,6 +44,7 @@ class ZeroneCheck{
             case "zerone/proxy/proxy_structure":        //服务商人员架构
             case "zerone/company/company_add":          //添加商户
             case "zerone/company/company_examinelist":  //商户审核列表
+            case "zerone/company/company_list":         //商户列表
 
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);
