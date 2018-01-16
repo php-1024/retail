@@ -87,7 +87,7 @@ class CompanyController extends Controller{
 
         $company_name = $request->input('company_name');
         $company_owner_mobile = $request->input('company_owner_mobile');
-        $search_data = ['proxy_name'=>$company_name,'proxy_owner_mobile'=>$company_owner_mobile];
+        $search_data = ['company_name'=>$company_name,'company_owner_mobile'=>$company_owner_mobile];
         $where = [];
         if(!empty($company_name)){
             $where[] = ['company_name','like','%'.$company_name.'%'];
