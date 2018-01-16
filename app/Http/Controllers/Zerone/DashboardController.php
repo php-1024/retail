@@ -80,7 +80,7 @@ class DashboardController extends Controller{
         dump($warzone);
         $province = Province::getpluck('id');
         dump($province);
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
+        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province]);
     }
     //战区管理编辑弹出
     public function warzone_edit(){
