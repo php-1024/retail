@@ -92,9 +92,13 @@ class DashboardController extends Controller{
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
-        $zone_name = $request->input('zone_name');
+        $zone_name = $request->input('zone_name');//战区名称
+        $province_id = $request->input('province_id');//包含省份ID（array）
         if(empty($zone_name)){
             return response()->json(['data' => '请输入战区名称！', 'status' => '1']);
+        }
+        if(empty($province_id)){
+            return response()->json(['data' => '选择战区包含省份！', 'status' => '1']);
         }
 //        if ($account['password'] == $encryptPwd){
 //            Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
