@@ -180,7 +180,7 @@ class DashboardController extends Controller{
      * 系统人员结构
      */
     public function structure(Request $request){
-        dump(123);
+
     }
     //退出登录
     public function quit(Request $request){
