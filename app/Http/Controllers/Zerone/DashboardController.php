@@ -81,6 +81,7 @@ class DashboardController extends Controller{
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
+        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
