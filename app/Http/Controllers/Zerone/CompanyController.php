@@ -85,16 +85,16 @@ class CompanyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $proxy_name = $request->input('proxy_name');
-        $proxy_owner_mobile = $request->input('proxy_owner_mobile');
-        $search_data = ['proxy_name'=>$proxy_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
+        $company_name = $request->input('company_name');
+        $company_owner_mobile = $request->input('company_owner_mobile');
+        $search_data = ['proxy_name'=>$company_name,'proxy_owner_mobile'=>$company_owner_mobile];
         $where = [];
-        if(!empty($proxy_name)){
-            $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
+        if(!empty($company_name)){
+            $where[] = ['company_name','like','%'.$company_name.'%'];
         }
 
-        if(!empty($proxy_owner_mobile)){
-            $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
+        if(!empty($company_owner_mobile)){
+            $where[] = ['company_owner_mobile',$company_owner_mobile];
         }
 
         $list = CompanyApply::getPaginage($where,'15','id');
