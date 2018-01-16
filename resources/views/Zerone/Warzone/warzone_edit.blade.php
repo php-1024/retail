@@ -11,7 +11,7 @@
                 @foreach($warzone as $key=>$val)
                 <div class="form-group">
                     <label>战区名称</label>
-                    <input type="text" placeholder="Enter your text" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
+                    <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>包含省份</label>
