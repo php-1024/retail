@@ -90,11 +90,11 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>服务商名称</th>
-                                        <th>所在战区</th>
+                                        <th>归属服务商</th>
                                         <th>负责人姓名</th>
-
+                                        <th>商户账号</th>
                                         <th>手机号码</th>
-                                        <th>服务商状态</th>
+                                        <th>商户状态</th>
                                         <th class="col-sm-1">注册时间</th>
                                         <th class="col-sm-4 text-right" >操作</th>
                                     </tr>
@@ -106,8 +106,7 @@
                                         <td>{{$value->organization_name}}</td>
                                         <td></td>
                                         <td>{{$value->organizationCompanyinfo->company_owner}}</td>
-
-
+                                        <td></td>
                                         <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
