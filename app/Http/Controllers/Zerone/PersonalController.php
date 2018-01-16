@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\LoginLog;
+use App\Models\OperationLog;
 use App\Models\ProgramModuleNode;
 use Illuminate\Http\Request;
 use Session;
@@ -14,7 +16,6 @@ class PersonalController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
-        dump($account_node_list);
         return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'account_node_list'=>$account_node_list]);
     }
     //个人中心——登录密码修改
@@ -51,7 +52,6 @@ class PersonalController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dump($admin_data);
         return view('Zerone/Personal/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //个人中心——安全密码修改(设置)
@@ -88,7 +88,12 @@ class PersonalController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Zerone/Personal/operation_log',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        //只查询自己相关的数据
+        $where = [
+            ['account_id',$admin_data['id']]
+        ];
+        $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
+        return view('Zerone/Personal/operation_log',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'operation_log_list'=>$operation_log_list]);
     }
     //个人中心——我的登录日志
     public function login_log(Request $request){
@@ -96,7 +101,12 @@ class PersonalController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Zerone/Personal/login_log',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        //只查询自己相关的数据
+        $where = [
+            ['account_id',$admin_data['id']]
+        ];
+        $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
+        return view('Zerone/Personal/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
     }
 }
 ?>
