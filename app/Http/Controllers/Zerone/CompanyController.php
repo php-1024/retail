@@ -3,9 +3,9 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
-use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationCompanyinfo;
 use App\Models\OrganizationProxyinfo;
 use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
@@ -63,7 +63,8 @@ class CompanyController extends Controller{
             AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
             $comproxyinfo = ['organization_id'=>$organization_id, 'company_owner'=>$realname, 'company_owner_idcard'=>$idcard, 'company_owner_mobile'=>$mobile];
-            OrganizationProxyinfo::addOrganizationCmpanyinfo($comproxyinfo);  //添加到服务商组织信息表
+
+            OrganizationCompanyinfo::addOrganizationCompanyinfo($comproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务

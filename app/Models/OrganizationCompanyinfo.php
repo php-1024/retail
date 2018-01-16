@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-class OrganizationCmpanyinfo extends Model{
+class OrganizationCompanyinfo extends Model{
     use SoftDeletes;
     protected $table = 'organization_companyinfo';
     protected $primaryKey = 'id';
@@ -21,8 +21,8 @@ class OrganizationCmpanyinfo extends Model{
     }
 
     //添加数据
-    public static function addOrganizationCmpanyinfo($param){
-        $program = new OrganizationCmpanyinfo();//实例化程序模型
+    public static function addOrganizationCompanyinfo($param){
+        $program = new OrganizationCompanyinfo();//实例化程序模型
         $program->organization_id = $param['organization_id'];//组织id
         $program->company_owner = $param['company_owner'];//商户负责人姓名
         $program->company_owner_idcard = $param['company_owner_idcard'];//商户负责人身份证
