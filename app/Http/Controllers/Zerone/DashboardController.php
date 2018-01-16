@@ -87,7 +87,7 @@ class DashboardController extends Controller{
         $warzone = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],1,'id');
         $province = Province::getpluck([[ 'zone_id','like','%'.$zone_id.'%' ]],'id');
         dump($province);
-        return view('Zerone/Warzone/display',['warzone'=>$warzone]);
+        return view('Zerone/Warzone/warzone_edit',['warzone'=>$warzone]);
     }
     //功能模块列表
     public function module_list(Request $request){
