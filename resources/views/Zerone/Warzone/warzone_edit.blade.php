@@ -1,6 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/warzone_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="zone_id" id="zone_id" value="">
+    <input type="hidden" name="zone_id" id="zone_id" value="{{$zone_info->id}}">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -10,7 +10,7 @@
                 @foreach($zone_info as $key=>$val)
                 <div class="form-group">
                     <label>战区名称</label>
-                    <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
+                    <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}{{ $val->id }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>包含省份</label>
