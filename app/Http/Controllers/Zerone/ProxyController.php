@@ -172,7 +172,7 @@ class ProxyController extends Controller{
 
     //服务商列表
     public function proxy_list(Request $request){
-        Account::editAccoun(['organization_id'=>'7'],['status'=>'0']);
+
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -250,20 +250,23 @@ class ProxyController extends Controller{
     }
     //服务商冻结功能提交
     public function proxy_list_frozen_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
+        $list = Organization::getOne(['id'=>$id]);
         DB::beginTransaction();
         try{
             Organization::editOrganization(['id'=>$id],['status'=>'0']);
-//            Account::editOrganizationBatch(['organization'=>$id],['status'=>'0']);
+            Account::editOrganizationBatch(['organization_id'=>$id],['status'=>'0']);
 //            //添加操作日志
-//            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了了服务商：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '冻结失败', 'status' => '0']);
         }
-
+        return response()->json(['data' => '冻结成功', 'status' => '1']);
     }
     //服务商删除ajaxshow显示页面
     public function proxy_list_delete(Request $request){

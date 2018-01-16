@@ -21,8 +21,8 @@ class Account extends Model{
     }
 
 
-    //修改账号
-    public static function editAccoun($where,$param){
+    //冻结账号
+    public static function editOrganizationBatch($where,$param){
         $model =  self::where($where)->get();
         foreach ($model as $k=>$v){
             foreach($param as $key=>$val){
