@@ -76,7 +76,10 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');
-        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],1,'id');
+//        $zone_id = $request->input('zone_id');
+        $zone_id = '1';
+        $warzone_edit = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
+        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
@@ -88,21 +91,20 @@ class DashboardController extends Controller{
         }
         $new_province_name = array_diff($all_province_name,$province_name);
 
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'new_province_name'=>$new_province_name]);
+        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'warzone_edit'=>$warzone_edit,'new_province_name'=>$new_province_name]);
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
-        $zone_id = $request->input('zone_id');//包含省份ID（array）
-        dump($zone_id);
-//        if(empty($zone_name)){
-//            return response()->json(['data' => '请输入战'.$zone_id.'区名称！', 'status' => '1']);
-//        }
-//        if(empty($province_id)){
-//            return response()->json(['data' => '选择战区包含省份！', 'status' => '1']);
-//        }
+        $zone_id = $request->input('zone_id');//包含省份ID
+        if(empty($province_id)){
+            return response()->json(['data' => $zone_id.'选择战区包含省份！', 'status' => '1']);
+        }else{
+
+        }
     }
+
     //功能模块列表
     public function module_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
