@@ -81,7 +81,7 @@ class SubordinateController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
         $parent_id = $admin_data['id'];//上级ID是当前用户ID
-        $parent_tree = $admin_data['parent_tree'].','.$parent_id.',';//树是上级的树拼接上级的ID；
+        $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
 
