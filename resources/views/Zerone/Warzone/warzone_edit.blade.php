@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label>安全密码</label>
-                    <input type="text" placeholder="Enter your safe_password" name="safe_password" value="" class="form-control">
+                    <input type="text" placeholder="请输入安全密码" name="safe_password" value="" class="form-control">
                 </div>
 
                 <div class="modal-footer">
