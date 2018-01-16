@@ -12,6 +12,7 @@ use App\Models\Module;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 use App\Models\Statistics;
 
