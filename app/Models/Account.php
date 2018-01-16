@@ -25,11 +25,10 @@ class Account extends Model{
     public static function editAccoun($where,$param){
         $model =  self::where($where)->get();
         foreach ($model as $k=>$v){
-            return $v;
-//            foreach($param as $key=>$val){
-//                $v->$key=$val;
-//            }
-//            $v->save();
+            foreach($param as $key=>$val){
+                $v->$key=$val;
+            }
+            $v->save();
         }
     }
 
