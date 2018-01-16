@@ -29,7 +29,7 @@
                 <h2>下级人员结构</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="JavaScript:;">系统管理</a>
+                        <a href="JavaScript:;">下级人员</a>
                     </li>
                     <li class="active">
                         <strong>下级人员结构</strong>
