@@ -78,7 +78,7 @@ class DashboardController extends Controller{
         $zone_name = $request->input('zone_name');
 //        $zone_id = $request->input('zone_id');
         $zone_id = '1';
-        $warzone_edit = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],10,'id');
+        $warzone_edit = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
