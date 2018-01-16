@@ -101,11 +101,11 @@ class CompanyController extends Controller{
         return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户审核ajaxshow显示页面
-    public function proxy_examine(Request $request){
+    public function conpany_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $info =  CompanyApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Conpany/conpany_examine',['info'=>$info,'sta'=>$sta]);
+        return view('Zerone/Company/conpany_examine',['info'=>$info,'sta'=>$sta]);
     }
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
