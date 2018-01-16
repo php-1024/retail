@@ -32,7 +32,7 @@
                 @endforeach
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">{{$new_province_name[10]}}取消</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary">保存</button>
                 </div>
             </div>
