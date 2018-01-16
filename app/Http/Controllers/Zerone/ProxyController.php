@@ -277,11 +277,13 @@ class ProxyController extends Controller{
     }
 //服务商下级人员架构
     public function proxy_structure(Request $request){
+
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-//        $id = $request->input('id');
+        $id = $request->input('id');
+        dd($id);
 //        $list = Account::getList([['organization_id',$id],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'id','asc')->toArray();
 //        $structure = $this->create_structure($list,$admin_data['id']);
 //        dd($structure);
