@@ -83,7 +83,7 @@ class DashboardController extends Controller{
 
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
-                $province_name[] = $vv->province_name;
+                $province_name[$kk][] = $vv->province_name;
             }
         }
         foreach ($province as $key=>$val){
