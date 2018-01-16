@@ -211,6 +211,7 @@
                 });
                 return;
             }
+            $('#zone_id').val(id);
             $('#myModal2').modal();
 
 //            var data = {'id':id,'_token':token};

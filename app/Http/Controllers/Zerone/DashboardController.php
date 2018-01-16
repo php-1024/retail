@@ -98,7 +98,7 @@ class DashboardController extends Controller{
         if(empty($province_id)){
             return response()->json(['data' => $zone_id.'选择战区包含省份！', 'status' => '1']);
         }else{
-            
+
         }
     }
 
