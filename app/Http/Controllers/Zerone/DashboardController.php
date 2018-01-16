@@ -79,6 +79,13 @@ class DashboardController extends Controller{
         dump($warzone);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
     }
+    //战区管理编辑弹出
+    public function warzone_edit(){
+//        $zone_id = $request->input('zone_id');
+        $zone_id = '1';
+        $warzone = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],1,'id');
+        return view('Zerone/Warzone/display',['warzone'=>$warzone]);
+    }
     //功能模块列表
     public function module_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
