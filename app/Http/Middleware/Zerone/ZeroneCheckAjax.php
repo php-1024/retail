@@ -94,7 +94,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
             case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登陆和权限
 
-                
+
             case "zerone/ajax/proxy_examine"://服务商审核检测弹出登入和权限
             case "zerone/ajax/proxy_list_edit"://服务商列表修改弹出检测登入和权限
             case "zerone/ajax/proxy_list_frozen"://服务商列表冻结弹出检测登入和权限
