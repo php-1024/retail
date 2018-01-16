@@ -76,7 +76,7 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');
-        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],1,'id');
+        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
