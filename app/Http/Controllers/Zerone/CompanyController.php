@@ -37,8 +37,8 @@ class CompanyController extends Controller{
         if($name == 'true'){
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
-        $list = Organization::getOne(['organization_id'=>$id]);
-
+        $list = Organization::getOne(['id'=>$id]);
+        
         $parent_id = $request->input('organization_id');//零壹或者服务商organization_id
         $parent_tree = $list['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
         $deepth = $list['deepth']+1;  //用户在该组织里的深度
