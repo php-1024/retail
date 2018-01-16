@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>零壹新科技程序管理平台</title>
+    <title>零壹新科技管理平台</title>
 
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
@@ -29,7 +29,7 @@
                 <h2>下级人员列表</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="JavaScript:;">系统管理</a>
+                        <a href="JavaScript:;">下级人员</a>
                     </li>
                     <li class="active">
                         <strong>下级人员列表</strong>
