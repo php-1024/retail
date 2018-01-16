@@ -140,7 +140,7 @@
         @include('Zerone/Warzone/warzone_add')
         <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
         {{--编辑战区弹出图层--}}
-        @include('Zerone/Warzone/warzone_edit')
+        {{--@include('Zerone/Warzone/warzone_edit')--}}
 
 
 
