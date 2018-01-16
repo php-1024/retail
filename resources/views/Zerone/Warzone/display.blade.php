@@ -48,7 +48,10 @@
 
 
             <div class="ibox-content m-b-sm border-bottom">
-
+            <form method="get" role="form" id="searchForm" action="">
+                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                <input type="hidden" id="warzone_edit" value="{{ url('zerone/dashboard/warzone') }}">
+                <input type="hidden" id="warzone_delete_comfirm" value="{{ url('zerone/ajax/warzone_delete_comfirm') }}">
                 <div class="row">
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
@@ -69,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
 
             </div>
 
@@ -132,8 +136,6 @@
 
 
         </div>
-
-
         @include('Zerone/Public/Footer')
         {{--添加战区弹出图层--}}
         @include('Zerone/Warzone/warzone_add')
@@ -200,6 +202,8 @@
 
         //获取用户信息，编辑密码框
         function getEditForm(zone_id){
+            var url = $('#warzone_edit').val();//此地址用于接收战区ID
+            var token = $('#_token').val();
             if(zone_id==''){
                 swal({
                     title: "提示信息",
@@ -212,24 +216,24 @@
                 return;
             }
             $('#zone_id').val(zone_id);
-            $('#myModal2').modal();
+//            $('#myModal2').modal();
 
-//            var data = {'id':id,'_token':token};
-//            $.post(url,data,function(response){
-//                if(response.status=='-1'){
-//                    swal({
-//                        title: "提示信息",
-//                        text: response.data,
-//                        confirmButtonColor: "#DD6B55",
-//                        confirmButtonText: "确定",
-//                    },function(){
-//                        window.location.reload();
-//                    });
-//                    return;
-//                }else{
-//                    $('#myModal2').modal();
-//                }
-//            });
+            var data = {'zone_id':zone_id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal2').modal();
+                }
+            });
 
         }
     </script>
