@@ -111,140 +111,15 @@
                                     <td class="text-right">
                                         <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                        <button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                        {{--<button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
                                     </td>
                                 </tr>
                                 @endforeach
-                                {{--<tr>--}}
-                                    {{--<td>--}}
-                                        {{--2--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--东南战区--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
-                                    {{--</td>--}}
-                                    {{--<td >--}}
-                                        {{--46位服务商--}}
-                                    {{--</td>--}}
-
-                                    {{--<td class="text-right">--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td>--}}
-                                        {{--3--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--西北战区--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
-                                    {{--</td>--}}
-                                    {{--<td >--}}
-                                        {{--58位服务商--}}
-                                    {{--</td>--}}
-
-                                    {{--<td class="text-right">--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td>--}}
-                                        {{--4--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--西南战区--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
-                                    {{--</td>--}}
-                                    {{--<td >--}}
-                                        {{--66位服务商--}}
-                                    {{--</td>--}}
-
-                                    {{--<td class="text-right">--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td>--}}
-                                        {{--4--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--中南战区--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<label class="label label-success" style="display:inline-block">广东省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">湖北省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河南省</label>&nbsp;&nbsp;--}}
-                                        {{--<label class="label label-success" style="display:inline-block">河北省</label>&nbsp;&nbsp;--}}
-                                    {{--</td>--}}
-                                    {{--<td >--}}
-                                        {{--83位服务商--}}
-                                    {{--</td>--}}
-
-                                    {{--<td class="text-right">--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>--}}
-                                        {{--<button type="button" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="99" class="footable-visible">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                    <td colspan="99" class="text-right">
+                                        {!! $warzone->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
