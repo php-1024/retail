@@ -1,4 +1,7 @@
 <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/role_edit_check') }}">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="id" id="id" value="id">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -38,4 +41,5 @@
             </div>
         </div>
     </div>
+</form>
 </div>
