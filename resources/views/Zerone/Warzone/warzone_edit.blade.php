@@ -28,7 +28,6 @@
                             <option value="{{$k}}">{{$v}}</option>
                         @endforeach
                         {{--所有战区未选中的战区--}}
-
                     </select>
                     <div style="clear: both;"></div>
                 </div>
