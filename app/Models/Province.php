@@ -20,8 +20,8 @@ class Province extends Model{
     }
 
     //获取战区分页列表
-    public static function getpluck($where,$orderby,$sort='ASC'){
-        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->get();
+    public static function getpluck($orderby,$sort='ASC'){
+        return self::with('warzone')->orderBy($orderby,$sort)->get();
     }
 
 }

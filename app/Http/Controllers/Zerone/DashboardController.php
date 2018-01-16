@@ -87,7 +87,7 @@ class DashboardController extends Controller{
 //        $zone_id = $request->input('zone_id');
         $zone_id = '1';
         $warzone = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],1,'id');
-        $province = Province::getpluck([[ 'zone_id','like','%'.$zone_id.'%' ]],'id');
+        $province = Province::getpluck('id');
         dump($province);
         return view('Zerone/Warzone/warzone_edit',['warzone'=>$warzone]);
     }
