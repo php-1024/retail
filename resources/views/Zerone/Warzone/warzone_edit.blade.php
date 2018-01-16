@@ -21,18 +21,18 @@
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
-                        @php
-                        foreach ($new_province_name as $m=>$n){
-                            echo '<option value="'.$m.'">'.$n.'</option>';
-                        }
-                        @endphp
+
                         {{--所有战区未选中的战区--}}
 
                     </select>
                     <div style="clear: both;"></div>
                 </div>
                 @endforeach
-
+                    @php
+                        foreach ($new_province_name as $m=>$n){
+                            echo '<option value="'.$m.'">'.$n.'</option>';
+                        }
+                    @endphp
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary">保存</button>
