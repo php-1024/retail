@@ -95,6 +95,11 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/dashboard_warzone_edit"://检测战区名称 战区省份 安全密码是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
             case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登陆和权限
@@ -320,6 +325,21 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
+    public function checkLoginAndRuleAndSafeAndWarzoneEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkWarzoneEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -555,6 +575,16 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
         }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
             return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测战区编辑表信息
+    public function checkWarzoneEdit($request){
+        if (empty($request->input('zone_name'))) {
+            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
+        }
+        if (empty($request->input('safe_password'))) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         return self::res(1, $request);
     }
