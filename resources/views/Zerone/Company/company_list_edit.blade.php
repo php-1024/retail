@@ -12,9 +12,7 @@
                     <label class="col-sm-2 control-label">所在战区</label>
                     <div class="col-sm-10">
                         <select class="form-control m-b" name="zone_id">
-                            @foreach($warzone as $k=>$v)
-                                <option value="{{$v->id}}" @if($v->id == $listorg->warzoneProxy->zone_id)  selected @endif>{{$v->zone_name}}</option>
-                            @endforeach
+           
                         </select>
                     </div>
                 </div>
