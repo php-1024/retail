@@ -333,7 +333,7 @@ class ZeroneCheckAjax
         }
     }
 
-    //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
+    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
     public function checkLoginAndRuleAndSafeAndWarzoneEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
