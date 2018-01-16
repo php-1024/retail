@@ -73,7 +73,7 @@
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            {{ $admin_data['account'] }}
+                                            <span class="label label-info"><i class="fa fa-user"></i></span>{{ $admin_data['account'] }}
                                         </div>
 
                                        {!! $structure  !!}
