@@ -38,9 +38,9 @@
             </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
-                <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
-                <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
+                <input type="hidden" id="company_list_edit" value="{{ url('zerone/ajax/company_list_edit') }}">
+                <input type="hidden" id="company_list_frozen" value="{{ url('zerone/ajax/company_list_frozen') }}">
+                <input type="hidden" id="company_list_delete" value="{{ url('zerone/ajax/company_list_delete') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
@@ -90,11 +90,11 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>服务商名称</th>
-                                        <th>所在战区</th>
+                                        <th>归属服务商</th>
                                         <th>负责人姓名</th>
-
+                                        <th>商户账号</th>
                                         <th>手机号码</th>
-                                        <th>服务商状态</th>
+                                        <th>商户状态</th>
                                         <th class="col-sm-1">注册时间</th>
                                         <th class="col-sm-4 text-right" >操作</th>
                                     </tr>
@@ -104,11 +104,10 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->warzoneProxy->zone_id}}</td>
-                                        <td>{{$value->organizationproxyinfo->proxy_owner}}</td>
-
-
-                                        <td>{{$value->organizationproxyinfo->proxy_owner_mobile}}</td>
+                                        <td>{{$value->account['0']}}</td>
+                                        <td>{{$value->organizationCompanyinfo->company_owner}}</td>
+                                        <td>{{$value->account['0']}}</td>
+                                        <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
@@ -186,7 +185,7 @@ $(function(){
 //编辑
 function getEditForm(id){
 
-    var url = $('#proxy_list_edit').val();
+    var url = $('#company_list_edit').val();
     var token = $('#_token').val();
     if(id==''){
         swal({

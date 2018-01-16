@@ -50,7 +50,7 @@
             <div class="ibox-content m-b-sm border-bottom">
             <form method="get" role="form" id="searchForm" action="">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="warzone_edit" value="{{ url('zerone/dashboard/warzone') }}">
+                <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
                 <input type="hidden" id="warzone_delete_comfirm" value="{{ url('zerone/ajax/warzone_delete_comfirm') }}">
                 <div class="row">
                     <div class="pull-left padding_l_r_15">
@@ -75,7 +75,6 @@
             </form>
 
             </div>
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
@@ -139,8 +138,9 @@
         @include('Zerone/Public/Footer')
         {{--添加战区弹出图层--}}
         @include('Zerone/Warzone/warzone_add')
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
         {{--编辑战区弹出图层--}}
-        @include('Zerone/Warzone/warzone_edit')
+        {{--@include('Zerone/Warzone/warzone_edit')--}}
 
 
 
@@ -201,10 +201,11 @@
         });
 
         //获取用户信息，编辑密码框
-        function getEditForm(zone_id){
-            var url = $('#warzone_edit').val();//此地址用于接收战区ID
+        function getEditForm(id){
+            var url = $('#warzone_edit').val();
             var token = $('#_token').val();
-            if(zone_id==''){
+
+            if(id==''){
                 swal({
                     title: "提示信息",
                     text: '数据传输错误',
@@ -215,10 +216,8 @@
                 });
                 return;
             }
-            $('#zone_id').val(zone_id);
-//            $('#myModal2').modal();
 
-            var data = {'zone_id':zone_id,'_token':token};
+            var data = {'id':id,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
                     swal({
@@ -231,10 +230,10 @@
                     });
                     return;
                 }else{
-                    $('#myModal2').modal();
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
                 }
             });
-
         }
     </script>
 

@@ -181,14 +181,18 @@ class CompanyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $listorg = Organization::getCompany(['type'=>'3'],'5','id');
+        foreach ($listorg as $k=>$v){
+            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->toArray();
+            $listorg[$k]['organization_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->toArray();
+        }
         return view('Zerone/Company/company_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //服务商编辑ajaxshow显示页面
-    public function proxy_list_edit(Request $request){
+    //商户编辑ajaxshow显示页面
+    public function company_list_edit(Request $request){
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOne(['id'=>$id]);
+        $listorg = Organization::getOneCompany(['id'=>$id]);
         $warzone = Warzone::all();
-        return view('Zerone/Proxy/proxy_list_edit',compact('listorg','warzone'));
+        return view('Zerone/Company/company_list_edit',compact('listorg','warzone'));
     }
     //服务商编辑功能提交
     public function proxy_list_edit_check(Request $request){

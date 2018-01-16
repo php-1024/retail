@@ -252,7 +252,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('role_delete','Zerone\RoleController@role_delete')->middleware('ZeroneCheckAjax');//删除权限角色弹出安全密码框
 
 
-        Route::post('dashboard_warzone_edit','Zerone\DashboardController@warzone_edit')->middleware('ZeroneCheckAjax');//战区管理编辑战区
+        Route::post('warzone_edit','Zerone\DashboardController@warzone_edit')->middleware('ZeroneCheckAjax');//战区管理编辑战区
         Route::post('setup_edit_check','Zerone\DashboardController@setup_edit_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
 
 
@@ -286,6 +286,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('company_add_check','Zerone\CompanyController@company_add_check')->middleware('ZeroneCheckAjax');//商户申请提交编辑参数设置
         Route::post('company_examine','Zerone\CompanyController@company_examine')->middleware('ZeroneCheckAjax');//商户审核页面显示
         Route::post('company_examine_check','Zerone\CompanyController@company_examine_check')->middleware('ZeroneCheckAjax');//商户审核提交数据
+        Route::post('company_list_edit','Zerone\CompanyController@company_list_edit')->middleware('ZeroneCheckAjax');//商户编辑页面显示
 
     });
 });

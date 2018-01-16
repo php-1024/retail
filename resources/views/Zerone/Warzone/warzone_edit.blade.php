@@ -1,4 +1,3 @@
-<div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/dashboard_warzone_edit') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="zone_id" id="zone_id" value="">
@@ -8,7 +7,7 @@
                 修改战区
             </div>
             <div class="modal-body">
-                @foreach($warzone_edit as $key=>$val)
+                @foreach($zone_info as $key=>$val)
                 <div class="form-group">
                     <label>战区名称</label>
                     <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
@@ -31,7 +30,6 @@
                     <div style="clear: both;"></div>
                 </div>
                 @endforeach
-
                 <div class="form-group">
                     <label>安全密码</label>
                     <input type="text" placeholder="请输入安全密码" name="safe_password" value="" class="form-control">
@@ -45,7 +43,6 @@
         </div>
     </div>
 </form>
-</div>
 <script>
     //提交表单
     function postForm() {

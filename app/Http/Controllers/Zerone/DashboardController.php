@@ -75,10 +75,13 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $zone_name = $request->input('zone_name');
-//        $zone_id = $request->input('zone_id');
-        $zone_id = '1';
-        $warzone_edit = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
+        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
+        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
+        return view('Zerone/Warzone/display',['zone_name'=>$zone_name,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+    //战区管理编辑弹出
+    public function warzone_edit(Request $request){
+        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
@@ -91,10 +94,13 @@ class DashboardController extends Controller{
         }
         $new_province_name = array_diff($all_province_name,$province_name);
 
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'warzone_edit'=>$warzone_edit,'new_province_name'=>$new_province_name]);
+//        $zone_id = $request->input('zone_id');
+        $zone_id = '1';
+        $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
+        return view('Zerone/Warzone/subordinate_edit',['zone_info'=>$zone_info,'warzone_edit'=>$warzone_edit,'new_province_name'=>$new_province_name]);
     }
-    //战区管理编辑弹出
-    public function warzone_edit(Request $request){
+    //战区管理编辑数据提交
+    public function warzone_edit_check(Request $request){
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
         $zone_id = $request->input('zone_id');//包含省份ID
