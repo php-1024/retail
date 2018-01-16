@@ -65,7 +65,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">真实姓名</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="relname" class="form-control" value="{{$admin_data['realname']}}">
+                                            <input type="text" name="realname" class="form-control" value="{{$admin_data['realname']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
