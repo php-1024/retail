@@ -19,6 +19,10 @@ class Organization extends Model{
     public function organizationproxyinfo(){
         return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
     }
+//    //和CompanyApply表一对多的关系
+//    public function companyapply(){
+//        return $this->hasMany('App\Models\CompanyApply', 'id');
+//    }
     //和WarzoneProxy表一对一的关系
     public function warzoneProxy(){
         return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
