@@ -102,7 +102,7 @@ class DashboardController extends Controller{
     public function warzone_edit_check(Request $request){
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
-        $zone_id = $request->input('id');//战区ID
+        $zone_id = $request->input('zone_id');//战区ID
         if(empty($province_id)){
             return response()->json(['data' => $zone_id.'选择战区包含省份！', 'status' => '1']);
         }
