@@ -92,7 +92,7 @@ class DashboardController extends Controller{
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
-
+        dump($request);
     }
     //功能模块列表
     public function module_list(Request $request){
