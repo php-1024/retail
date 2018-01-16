@@ -33,9 +33,13 @@ class Organization extends Model{
         return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id')->select('zone_name');
     }
 
-    //获取单条信息
+    //获取单条信息-服务商
     public static function getOne($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
+    }
+    //获取单条信息-商户
+    public static function getOneCompany($where){
+        return self::with('organizationproxyinfo')->where($where)->first();
     }
     //获取单条信息和organizationproxyinfo的信息
     public static function getOneAndorganizationproxyinfo($where){

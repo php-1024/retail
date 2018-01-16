@@ -189,7 +189,7 @@ class CompanyController extends Controller{
     //商户编辑ajaxshow显示页面
     public function company_list_edit(Request $request){
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOne(['id'=>$id]);
+        $listorg = Organization::getOneCompany(['id'=>$id]);
         $warzone = Warzone::all();
         return view('Zerone/Company/company_list_edit',compact('listorg','warzone'));
     }
