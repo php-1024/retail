@@ -195,11 +195,12 @@ class CompanyController extends Controller{
         return view('Zerone/Company/company_list_edit',compact('listorg','proxy'));
     }
     //服务商编辑功能提交
-    public function proxy_list_edit_check(Request $request){
+    public function company_list_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
-        $zone_id = $request->input('zone_id');//战区id
+        $parent_id = $request->input('parent_id');//上级id
+        echo $parent_id;exit;
         $organization_name = $request->input('organization_name');//服务商名称
         $realname = $request->input('realname');//用户名字
         $idcard = $request->input('idcard');//用户身份证号

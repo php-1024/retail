@@ -43,15 +43,22 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/proxy_list_edit_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+            case "zerone/ajax/proxy_list_edit_check"://服务商 检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
                 return self::format_response($re,$next);
                 break;
+
+            case "zerone/ajax/company_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndComEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/proxy_examine_check"://服务商审核检测 登录 和 权限 和 安全密码
             case "zerone/ajax/company_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
+
             case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
@@ -306,13 +313,27 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码
+    //服务商 检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndOrgEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
             $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //商户 检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndComEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkComEditData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -615,10 +636,26 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
-    //检测服务商申请表信息
+    //检测服务商编辑表信息
     public function checkOrgEditData($request){
         if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测商户编辑表信息
+    public function checkComEditData($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入商户名称', 'status' => '0']));
         }
         if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
