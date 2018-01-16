@@ -24,52 +24,48 @@ class CompanyController extends Controller{
 
         return view('Zerone/Company/company_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
-    //提交服务商数据
+    //注册提交商户数据
     public function company_add_check(Request $request){
-        dd($request);
-        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
-        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $organization_name = $request->input('organization_name');//服务商名称
-
+        $organization_name = $request->input('organization_name');//商户名称
+        $id = $request->input('organization_id');//零壹或者服务商organization_id
         $where = [['organization_name',$organization_name]];
 
         $name = Organization::checkRowExists($where);
 
         if($name == 'true'){
-            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
+            return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
+        $list = Organization::getOne(['organization_id'=>$id]);
 
-        $zone_id = $request->input('zone_id');//战区id
-        $parent_id = $admin_data['id'];//上级ID是当前用户ID
-        $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
-        $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
+        $parent_id = $request->input('organization_id');//零壹或者服务商organization_id
+        $parent_tree = $list['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
+        $deepth = $list['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
-        $password = $request->input('password');//用户密码
 
+        $password = $request->input('password');//用户密码
         $key = config("app.zerone_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>0,'type'=>3,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
-            $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
-            WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
-
-            $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
+            $account  = 'C'.$mobile.'_'.$organization_id;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
+
             $realname = $request->input('realname');//负责人姓名
             $idcard = $request->input('idcard');//负责人身份证号
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-            $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
-            OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
+            $comproxyinfo = ['organization_id'=>$organization_id, 'company_owner'=>$realname, 'company_owner_idcard'=>$idcard, 'company_owner_mobile'=>$mobile];
+            OrganizationProxyinfo::addOrganizationCmpanyinfo($comproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
