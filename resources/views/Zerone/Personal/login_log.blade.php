@@ -76,86 +76,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>192.168.1.1</td>
-                                    <td>本机</td>
-                                    <td>2017-11-28 10:10:10</td>
-                                </tr>
+                                @foreach($login_log_list as $key=>$val)
+                                    <tr>
+                                        <td>{{  $val->accounts->id }}</td>
+                                        <td>{{  long2ip($val->ip) }}</td>
+                                        <td>{{  $val->ip_position }}</td>
+                                        <td>{{  $val->created_at }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="9" class="footable-visible"><ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled"> <a data-page="first" href="#first">«</a> </li>
-                                            <li class="footable-page-arrow disabled"> <a data-page="prev" href="#prev">‹</a> </li>
-                                            <li class="footable-page active"> <a data-page="0" href="#">1</a> </li>
-                                            <li class="footable-page"> <a data-page="1" href="#">2</a> </li>
-                                            <li class="footable-page"> <a data-page="1" href="#">3</a> </li>
-                                            <li class="footable-page"> <a data-page="1" href="#">4</a> </li>
-                                            <li class="footable-page"> <a data-page="1" href="#">5</a> </li>
-                                            <li class="footable-page-arrow"> <a data-page="next" href="#next">›</a> </li>
-                                            <li class="footable-page-arrow"> <a data-page="last" href="#last">»</a> </li>
-                                        </ul></td>
+                                    <td colspan="99" class="text-right">
+                                        {{ $login_log_list->links() }}
+                                    </td>
                                 </tr>
                                 </tfoot>
                             </table>
