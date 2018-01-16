@@ -155,7 +155,7 @@
         });
         //获取删除权限角色删除密码确认框
         function getLockComfirmForm(id,account,status){
-            var url = $('#subordinate_authorize_url').val();
+            var url = $('#subordinate_lock_confirm_url').val();
             var token = $('#_token').val();
 
             if(id==''){
