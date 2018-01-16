@@ -46,7 +46,8 @@
                         </div>
                         <div>
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/personal_edit_check') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">用户账号</label>
                                         <div class="col-sm-9">
