@@ -101,6 +101,8 @@ class DashboardController extends Controller{
     }
     //战区管理编辑数据提交
     public function warzone_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
         $zone_id = $request->input('zone_id');//战区ID
@@ -111,7 +113,7 @@ class DashboardController extends Controller{
         try {
             Warzone::WarzoneEdit([['id', $zone_id]], ['zone_name' => $zone_name]);
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$account);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
             dump($e);
