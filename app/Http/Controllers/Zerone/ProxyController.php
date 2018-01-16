@@ -276,7 +276,7 @@ class ProxyController extends Controller{
         return view('Zerone/Proxy/proxy_list_delete');
     }
 //服务商下级人员架构
-    public function proxy_structure(Request $request,$id){
+    public function proxy_structure(Request $request){
         dd($request);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
