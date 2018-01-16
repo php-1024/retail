@@ -42,6 +42,12 @@ class PersonalController extends Controller{
         }
         return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
     }
+
+    //个人中心 - 修改个人资料
+    public function personal_edit_check(Request $request){
+        echo "这里是修改个人资料";
+    }
+
     //个人中心——登录密码修改
     public function password_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

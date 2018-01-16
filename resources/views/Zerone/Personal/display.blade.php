@@ -64,14 +64,21 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">真实姓名：</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="{{$admin_data['realname']}}">
+                                            <input type="text" name="relname" class="form-control" value="{{$admin_data['realname']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">联系方式：</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="{{$admin_data['mobile']}}">
+                                            <input type="text" name="mobile" class="form-control" value="{{$admin_data['mobile']}}">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">安全密码：</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" name="safe_password" class="form-control">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
