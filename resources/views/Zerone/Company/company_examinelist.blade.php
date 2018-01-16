@@ -47,13 +47,13 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">服务商名称</label>
-                            <input type="text" id="proxy_name" name="proxy_name" value="{{ $search_data['proxy_name'] }}" placeholder="请输入服务商名称" class="form-control">
+                            <input type="text" id="proxy_name" name="proxy_name" value="{{ $search_data['company_name'] }}" placeholder="请输入服务商名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">手机号码</label>
-                            <input type="text" id="proxy_owner_mobile" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">
+                            <input type="text" id="proxy_owner_mobile" name="proxy_owner_mobile" value="{{ $search_data['company_owner_mobile'] }}" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -90,12 +90,12 @@
                                 @foreach($list as $key=>$value)
                                 <tr>
                                     <td>{{$value->id}}</td>
-                                    <td>{{$value->proxy_name}}</td>
-                                    <td>{{$value->warzone->zone_name}}</td>
-                                    <td>{{$value->proxy_owner}}</td>
+                                    <td>{{$value->company_name}}</td>
+                                    <td></td>
+                                    <td>{{$value->company_owner}}</td>
 
-                                    <td>{{$value->proxy_owner_idcard}}</td>
-                                    <td>{{$value->proxy_owner_mobile}}</td>
+                                    <td>{{$value->company_owner_idcard}}</td>
+                                    <td>{{$value->company_owner_mobile}}</td>
                                     <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
                                         @elseif($value->status == 1)<label class="label label-primary">已通过</label>
                                         @elseif($value->status == -1)<label class="label label-danger">未通过</label>
