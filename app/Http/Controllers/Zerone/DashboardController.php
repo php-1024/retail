@@ -186,9 +186,11 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = 1;//当前组织ID，零壹管理平台组织只能为1
+        //获取重Admin开始的的所有人员
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','0,1,%']],0,'id','asc')->toArray();
-        $structure = $this->create_structure($list,1);//获取重Admin开始的
-        return view('Zerone/Subordinate/subordinate_structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        //根据获取的人员组成结构树
+        $structure = $this->create_structure($list,1);
+        return view('Zerone/Dashboard/structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
