@@ -19,7 +19,7 @@
                     <select data-placeholder="请选择省份" class="chosen-select2" multiple style="width:350px;" tabindex="2">
                         {{--所有战区当前选中的战区--}}
                         @foreach($val->province as $kk=>$vv)
-                            <option selected="selected" name="province_name" value="{{ $vv->province_id }}">{{ $vv->province_name }}</option>
+                            <option selected="selected" name="province_name" value="{{ $vv->id }}">{{ $vv->province_name }}</option>
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
