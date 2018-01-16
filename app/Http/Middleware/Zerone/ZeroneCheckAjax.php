@@ -349,7 +349,6 @@ class ZeroneCheckAjax
 
     //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
     public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
-        dump(123);
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
