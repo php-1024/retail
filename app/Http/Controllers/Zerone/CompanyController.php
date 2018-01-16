@@ -100,12 +100,12 @@ class CompanyController extends Controller{
         $list = CompanyApply::getPaginage($where,'15','id');
         return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //服务商审核ajaxshow显示页面
+    //商户审核ajaxshow显示页面
     public function proxy_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Proxy/proxy_examine',['info'=>$info,'sta'=>$sta]);
+        $info =  CompanyApply::getOne([['id',$id]]);//获取该ID的信息
+        return view('Zerone/Conpany/conpany_examine',['info'=>$info,'sta'=>$sta]);
     }
     //服务商审核数据提交
     public function proxy_examine_check(Request $request){
