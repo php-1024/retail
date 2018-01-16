@@ -78,7 +78,7 @@ class CompanyController extends Controller{
     }
 
     //商户审核列表
-    public function company_examine(Request $request){
+    public function company_examinelist(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -96,7 +96,7 @@ class CompanyController extends Controller{
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
         $list = ProxyApply::getPaginage($where,'15','id');
-        return view('Zerone/Company/company_examine',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
     public function proxy_examine(Request $request){
