@@ -241,7 +241,7 @@ class CompanyController extends Controller{
                  $porxy = Organization::getOne(['id'=>$parent_id]); //获取选择更换的上级服务商信息
                  $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
                  $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
-                 Organization::editOrganization(['organization_id'=>$id],$data);//修改商户的上级服务商信息
+                 Organization::editOrganization(['id'=>$id],$data);//修改商户的上级服务商信息
              }
 
             //添加操作日志
