@@ -77,9 +77,15 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],1,'id');
-        dump($warzone);
+        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
+    }
+    //战区管理编辑弹出
+    public function warzone_edit(){
+//        $zone_id = $request->input('zone_id');
+        $zone_id = '1';
+        $warzone = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],1,'id');
+
         $province = Province::getpluck('id');
-        dump($province);
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
                 $province_name[$vv->id] = $vv->province_name;
@@ -89,16 +95,11 @@ class DashboardController extends Controller{
             $all_province_name[$val->id] = $val->province_name;
         }
         $new_province_name = array_diff($all_province_name,$province_name);
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province,'new_province_name',$new_province_name]);
-    }
-    //战区管理编辑弹出
-    public function warzone_edit(){
-//        $zone_id = $request->input('zone_id');
-        $zone_id = '1';
-        $warzone = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],1,'id');
-        $province = Province::getpluck('id');
-        dump($province);
-        return view('Zerone/Warzone/warzone_edit',['warzone'=>$warzone]);
+        dump($new_province_name);
+        foreach ($new_province_name as $m=>$n){
+            dump($n);
+        }
+        return view('Zerone/Warzone/warzone_edit',['warzone'=>$warzone],$new_province_name);
     }
     //功能模块列表
     public function module_list(Request $request){
