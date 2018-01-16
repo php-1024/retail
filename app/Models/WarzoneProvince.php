@@ -19,8 +19,8 @@ class WarzoneProvince extends Model{
         Self::where(['zone_id'=>$zone_id])->forceDelete();
         $warzone_province = [];
         foreach($data as $key=>$val) {
-            $warzone_province->zone_id = $zone_id;
-            $warzone_province->province_id = $val;
+            $warzone_province['zone_id'] = $zone_id;
+            $warzone_province['province_id'] = $val;
         }
         $warzone_province->save();
     }
