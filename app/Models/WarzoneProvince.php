@@ -13,14 +13,19 @@ class WarzoneProvince extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+
     //修改战区包含省份
-    public static function WarzoneProvinceEdit($where,$param)
-    {
-        $model =  self::where($where)->delete();
-//        foreach($param as $key=>$val){
-//            $model->$key=$val;
-//        }
-//        $model->save();
+    public static function WarzoneProvinceEdit($data,$id=0,$zone_id){
+        Self::where(['zone_id'=>$zone_id])->forceDelete();
+        $db = new WarzoneProvince();
+        if(!empty($id)){
+            $db = Self::find($id);
+        }
+        foreach($data as $key=>$val) {
+            $db->$key = $val;
+        }
+        $res = $db->save();
+        return $res;
     }
 }
 ?>
