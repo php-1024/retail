@@ -101,7 +101,7 @@ class DashboardController extends Controller{
         }
         $new_province_name = array_diff($all_province_name,$province_name);
         dump($new_province_name);
-        return view('Zerone/Warzone/warzone_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province,'new_province_name'=>$new_province_name]);
+        return view('Zerone/Warzone/warzone_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'new_province_name'=>$new_province_name]);
     }
     //功能模块列表
     public function module_list(Request $request){
