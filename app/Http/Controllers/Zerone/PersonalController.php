@@ -45,7 +45,9 @@ class PersonalController extends Controller{
 
     //个人中心 - 修改个人资料
     public function personal_edit_check(Request $request){
-        echo "这里是修改个人资料";
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
     }
 
     //个人中心——登录密码修改
