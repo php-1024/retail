@@ -89,6 +89,7 @@ class DashboardController extends Controller{
         foreach ($province as $key=>$val){
             $all_province_name[] = $val->province_name;
         }
+        dump($province_name);
         $arr = array_diff($all_province_name,$province_name);
         dump($arr);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province]);
