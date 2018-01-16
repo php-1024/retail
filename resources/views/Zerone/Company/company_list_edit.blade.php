@@ -13,7 +13,7 @@
                     <div class="col-sm-10">
                         <select class="form-control m-b" name="zone_id">
                             @foreach($proxy as $k=>$v)
-                                <option value="{{$v->id}}">{{$v->organization_name}}</option>
+                                <option value="{{$v->id}}" @if($listorg->parent_id == $v->id) selected @endif>{{$v->organization_name}}</option>
                             @endforeach
                         </select>
                     </div>
