@@ -38,11 +38,12 @@ class ZeroneCheck{
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
             case "zerone/personal/login_log":           //个人中心——我的登陆日志
             case "zerone"://后台首页
-            case "zerone/proxy/proxy_add":          //添加服务商
-            case "zerone/proxy/proxy_examinelist":  //服务商审核列表
-            case "zerone/proxy/proxy_list":         //服务商列表
-            case "zerone/proxy/proxy_structure":    //服务商人员架构
-            case "zerone/company/company_add":    //添加商户
+            case "zerone/proxy/proxy_add":              //添加服务商
+            case "zerone/proxy/proxy_examinelist":      //服务商审核列表
+            case "zerone/proxy/proxy_list":             //服务商列表
+            case "zerone/proxy/proxy_structure":        //服务商人员架构
+            case "zerone/company/company_add":          //添加商户
+            case "zerone/company/company_examinelist":  //商户审核列表
 
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);

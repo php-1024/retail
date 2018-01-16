@@ -211,7 +211,7 @@ Route::group(['prefix'=>'zerone'],function(){
     //商户管理
     Route::group(['prefix'=>'company'],function(){
         Route::get('company_add','Zerone\CompanyController@company_add')->middleware('ZeroneCheck');//添加商户
-        Route::get('company_examinelist','Zerone\CompanyController@company_examinelist')->middleware('ZeroneCheck');//服务商审核列表
+        Route::get('company_examinelist','Zerone\CompanyController@company_examinelist')->middleware('ZeroneCheck');//商户审核列表
         Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//服务商列表
         Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//服务商人员架构
     });
@@ -247,6 +247,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('subordinate_authorize_check','Zerone\SubordinateController@subordinate_authorize_check')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
         Route::post('subordinate_delete_confirm','Zerone\SubordinateController@subordinate_delete_confirm')->middleware('ZeroneCheckAjax');//删除下级人员安全密码输入框
         Route::post('company_add_check','Zerone\CompanyController@company_add_check')->middleware('ZeroneCheckAjax');//商户申请提交编辑参数设置
+        Route::post('company_examine','Zerone\CompanyController@company_examine')->middleware('ZeroneCheckAjax');//商户审核页面显示
     });
 });
 /********************零壹管理系统*************************/
