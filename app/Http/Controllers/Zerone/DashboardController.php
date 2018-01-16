@@ -105,9 +105,8 @@ class DashboardController extends Controller{
         $zone_id = $request->input('zone_id');//包含省份ID
         if(empty($province_id)){
             return response()->json(['data' => $zone_id.'选择战区包含省份！', 'status' => '1']);
-        }else{
-
         }
+        dump($request);
     }
 
     //功能模块列表
