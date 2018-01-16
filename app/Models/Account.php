@@ -22,6 +22,11 @@ class Account extends Model{
 
 
     //修改账号
+    public static function editAccoun($where){
+        return self::where($where)->first();
+    }
+
+    //修改账号
     public static function editAccount($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
