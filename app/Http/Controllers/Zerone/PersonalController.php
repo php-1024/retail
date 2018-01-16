@@ -8,6 +8,7 @@ use App\Models\ProgramModuleNode;
 use App\Models\Module;
 use App\Models\AccountInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class PersonalController extends Controller{
