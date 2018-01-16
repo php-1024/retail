@@ -96,7 +96,7 @@ class DashboardController extends Controller{
         $province_id = $request->input('province_id');//包含省份ID（array）
         $zone_id = $request->input('zone_id');//包含省份ID（array）
         if(empty($zone_name)){
-            return response()->json(['data' => $zone_id.'请输入战区名称！', 'status' => '1']);
+            return response()->json(['data' => '请输入战'.$zone_id.'区名称！', 'status' => '1']);
         }
         if(empty($province_id)){
             return response()->json(['data' => '选择战区包含省份！', 'status' => '1']);
