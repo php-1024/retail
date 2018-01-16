@@ -199,8 +199,8 @@
         });
 
         //获取用户信息，编辑密码框
-        function getEditForm(id){
-            if(id==''){
+        function getEditForm(zone_id){
+            if(zone_id==''){
                 swal({
                     title: "提示信息",
                     text: '数据传输错误',
@@ -211,7 +211,7 @@
                 });
                 return;
             }
-            $('#zone_id').val(id);
+            $('#zone_id').val(zone_id);
             $('#myModal2').modal();
 
 //            var data = {'id':id,'_token':token};
