@@ -104,7 +104,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->account['0']}}</td>
+                                        <td>{{$value->proxy_name['0']}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner}}</td>
                                         <td>{{$value->account['0']}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
