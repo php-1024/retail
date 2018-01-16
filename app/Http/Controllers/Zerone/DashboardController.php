@@ -77,22 +77,6 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],1,'id');
-        dump($warzone);
-//        $province = Province::getpluck('id');
-//        dump($province);
-//        foreach ($warzone as $key=>$val){
-//            foreach ($val->province as $kk=>$vv){
-//                $province_name[$vv->id] = $vv->province_name;
-//            }
-//        }
-//        foreach ($province as $key=>$val){
-//            $all_province_name[$val->id] = $val->province_name;
-//        }
-//        $new_province_name = array_diff($all_province_name,$province_name);
-//        dump($new_province_name);
-//        foreach ($new_province_name as $m=>$n){
-//            dump($n);
-//        }
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
     }
     //战区管理编辑弹出

@@ -59,7 +59,7 @@
                     <div class="col-sm-3 col-xs-6">
                         <div class="form-group">
                             <label class="control-label" for="amount">战区名称</label>
-                            <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
+                            <input type="text" id="amount" name="zone_name" value="" placeholder="战区名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
