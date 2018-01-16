@@ -91,39 +91,22 @@
                             <h5>我的权限</h5>
                         </div>
                         <div class="ibox-content">
-                            {{--<div>--}}
-                                {{--<label class="i-checks">--}}
-                                    {{--<input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">--}}
-                                    {{--订单模块 </label>--}}
-                            {{--</div>--}}
-                            {{--<div>--}}
-                                {{--<label class="checkbox-inline i-checks">--}}
-                                    {{--<input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">--}}
-                                    {{--订单编辑 </label>--}}
-                                {{--<label class="checkbox-inline i-checks">--}}
-                                    {{--<input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled="">--}}
-                                    {{--订单查询 </label>--}}
-                                {{--<label class="checkbox-inline i-checks">--}}
-                                    {{--<input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">--}}
-                                    {{--订单添加 </label>--}}
-                                {{--<label class="checkbox-inline i-checks">--}}
-                                    {{--<input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled="">--}}
-                                    {{--订单删除 </label>--}}
-                            {{--</div>--}}
-                            {{--<div class="hr-line-dashed"></div>--}}
-
-                            @foreach($account_node_list as $key=>$val)
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                        {{$val->module_name}} </label>
-                                </div>
-                                <div>
-                                    <label class="checkbox-inline i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled="">
-                                        {{$val->node_name}} </label>
-                                </div>
-                                <div class="hr-line-dashed"></div>
+                            @foreach($module_node_list as $key=>$val)
+                                <group class="checked_box_group_{{ $val['id'] }}">
+                                    <div>
+                                        <label class="i-checks">
+                                            <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" checked="checked"  value="{{ $val['id'] }}"> {{ $val['module_name'] }}
+                                        </label>
+                                    </div>
+                                    <div>
+                                        @foreach($val['program_nodes'] as $kk=>$vv)
+                                            <label class="checkbox-inline i-checks">
+                                                <input type="checkbox"  data-group_id="{{ $val['id'] }}" checked="checked"  class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </group>
+                                <div class="hr-line-dashed" style="clear: both;"></div>
                             @endforeach
                         </div>
                     </div>
