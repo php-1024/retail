@@ -200,11 +200,8 @@
 
         //获取用户信息，编辑密码框
         function getEditForm(id){
-            $('#editBtn').click(function(){
                 $('#myModal2').modal();
-            });
-
-
+            
 //            var url = $('#role_edit_url').val();
 //            var token = $('#_token').val();
 //
