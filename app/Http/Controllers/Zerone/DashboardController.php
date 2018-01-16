@@ -80,7 +80,6 @@ class DashboardController extends Controller{
         dump($warzone);
         $province = Province::getpluck('id');
         dump($province);
-
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
                 $province_name[$vv->id] = $vv->province_name;
@@ -89,11 +88,8 @@ class DashboardController extends Controller{
         foreach ($province as $key=>$val){
             $all_province_name[$val->id] = $val->province_name;
         }
-        dump($province_name);
-        dump($all_province_name);
-        $arr = array_diff($all_province_name,$province_name);
-        dump($arr);
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province]);
+        $new_province_name = array_diff($all_province_name,$province_name);
+        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province,'new_province_name',$new_province_name]);
     }
     //战区管理编辑弹出
     public function warzone_edit(){

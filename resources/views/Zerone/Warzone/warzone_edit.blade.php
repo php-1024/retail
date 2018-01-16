@@ -19,15 +19,11 @@
                         @foreach($val->province as $kk=>$vv)
                             <option selected="selected" value="{{ $vv->province_name }}">{{ $vv->province_name }}</option>
                         @endforeach
-                        @foreach($province as $k=>$v)
-                            <option selected="selected" value="Morocco">{{$v->province_name}}</option>
-                        @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
-                        {{--<option value="Mongolia">台湾省</option>--}}
-                        {{--<option value="Montenegro">浙江省</option>--}}
-                        {{--<option value="Montserrat">江西省</option>--}}
-                        {{--<option value="Morocco">黑龙江省</option>--}}
+                        @foreach($new_province_name as $k=>$v)
+                            <option value="{{$k}}">{{$v}}</option>
+                        @endforeach
                         {{--所有战区未选中的战区--}}
                     </select>
                     <div style="clear: both;"></div>
