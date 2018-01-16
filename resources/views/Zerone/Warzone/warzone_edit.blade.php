@@ -1,3 +1,4 @@
+<div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/dashboard_warzone_edit') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="zone_id" id="zone_id" value="">
@@ -43,6 +44,7 @@
         </div>
     </div>
 </form>
+</div>
 <script>
     //提交表单
     function postForm() {
