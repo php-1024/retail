@@ -95,10 +95,6 @@ class DashboardController extends Controller{
             $all_province_name[$val->id] = $val->province_name;
         }
         $new_province_name = array_diff($all_province_name,$province_name);
-        dump($new_province_name);
-        foreach ($new_province_name as $m=>$n){
-            dump($n);
-        }
         return view('Zerone/Warzone/warzone_edit',['warzone'=>$warzone,'new_province_name'=>$new_province_name]);
     }
     //功能模块列表
