@@ -26,13 +26,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>下级人员结构</h2>
+                <h2>人员结构</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="JavaScript:;">下级人员</a>
+                        <a href="JavaScript:;">系统管理</a>
                     </li>
                     <li class="active">
-                        <strong>下级人员结构</strong>
+                        <strong>人员结构</strong>
                     </li>
                 </ol>
             </div>
@@ -75,7 +75,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-info"><i class="fa fa-user"></i></span>{{ $admin_data['account'] }}
                                         </div>
-                                       {!! $structure  !!}
+                                        {!! $structure  !!}
                                     </li>
                                 </ol>
                             </div>
@@ -91,26 +91,26 @@
         @include('Zerone/Public/Footer')
     </div>
 </div>
-    <!-- Mainly scripts -->
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-    <script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script>
-        $(function(){
-            $('#nestable2').nestable();
-            $('#expand-all').click(function(){
-                $('.dd').nestable('expandAll');
-            });
-            $('#collapse-all').click(function(){
-                $('.dd').nestable('collapseAll');
-            });
+<!-- Mainly scripts -->
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script>
+    $(function(){
+        $('#nestable2').nestable();
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
         });
-    </script>
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
+    });
+</script>
 </body>
 
 </html>
