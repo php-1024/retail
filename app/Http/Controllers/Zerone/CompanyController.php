@@ -20,9 +20,9 @@ class CompanyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $warzone_list = Warzone::all();
+        $list = Organization::where(['type'=>'1'])->orwhere(['type'=>'2'])->get();
 
-        return view('Zerone/Company/company_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'warzone_list'=>$warzone_list]);
+        return view('Zerone/Company/company_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
