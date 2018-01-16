@@ -47,12 +47,6 @@
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" onclick="location.href='proxylist.html'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
                             <button type="button" id="expand-all" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;展开所有</button>
                         </div>
                     </div>
