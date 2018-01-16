@@ -19,5 +19,10 @@ class Province extends Model{
         return $this->belongsToMany('App\Models\Warzone','warzone_province','zone_id','province_id');
     }
 
+    //获取战区分页列表
+    public static function getpluck($where,$orderby,$sort='ASC'){
+        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->get();
+    }
+
 }
 ?>
