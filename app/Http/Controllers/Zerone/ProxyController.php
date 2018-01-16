@@ -283,10 +283,40 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $list = Account::getList([['organization_id',$id],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'id','asc')->toArray();
-        $structure = $this->create_structure($list,$admin_data['id']);
+
+        $structure = $this->proxy_str($list,$admin_data['id']);
+
         dd($structure);
         return view('Zerone/Proxy/proxy_structure',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
+
+    private function proxy_str($list,$id){
+        $structure = '';
+        foreach($list as $key=>$val){
+            if($val['parent_id'] == $id) {
+                unset($list[$key]);
+                $val['sonlist'] = $this->create_structure($list, $val['id']);
+                //$arr[] = $val;
+                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
+                $structure .= '<div class="dd-handle">';
+                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
+                $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
+                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
+                if(!empty($val['account_roles'])){
+                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
+                }
+                $structure .= '</div>';
+                $son_menu = $this->create_structure($list, $val['id']);
+                if (!empty($son_menu)) {
+                    $structure .=  $son_menu;
+                }
+                $structure .= '</li></ol>';
+            }
+        }
+        return $structure;
+    }
+
 
 }
 ?>
