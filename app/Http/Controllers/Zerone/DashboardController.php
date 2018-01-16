@@ -5,6 +5,7 @@
  **/
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Province;
 use App\Models\Setup;
 use App\Models\Warzone;
 use App\Models\Module;
@@ -84,6 +85,8 @@ class DashboardController extends Controller{
 //        $zone_id = $request->input('zone_id');
         $zone_id = '1';
         $warzone = Warzone::getPaginage([[ 'zone_id','like','%'.$zone_id.'%' ]],1,'id');
+        $province = Province::getpluck([[ 'zone_id','like','%'.$zone_id.'%' ]],'id');
+        dump($province);
         return view('Zerone/Warzone/display',['warzone'=>$warzone]);
     }
     //功能模块列表

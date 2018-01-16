@@ -135,6 +135,9 @@
 
 
         @include('Zerone/Public/Footer')
+        {{--添加战区弹出图层--}}
+        @include('Zerone/Warzone/warzone_add')
+        {{--编辑战区弹出图层--}}
         @include('Zerone/Warzone/warzone_edit')
 
 
