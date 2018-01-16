@@ -21,9 +21,11 @@
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
-                        @foreach($new_province_name as $k=>$v)
-                            <option value="{{$k}}">{{$v}}</option>
-                        @endforeach
+                        @php
+                        foreach ($new_province_name as $m=>$n){
+                            echo '<option value="'.$m.'">'.$n.'</option>';
+                        }
+                        @endphp
                         {{--所有战区未选中的战区--}}
 
                     </select>
