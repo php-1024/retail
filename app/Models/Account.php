@@ -23,7 +23,7 @@ class Account extends Model{
 
     //修改账号
     public static function editAccoun($where){
-        return self::where($where)->first();
+        return self::where($where)->all();
     }
 
     //修改账号
