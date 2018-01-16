@@ -17,13 +17,12 @@ class WarzoneProvince extends Model{
     //修改战区包含省份
     public static function WarzoneProvinceEdit($data,$zone_id){
         Self::where(['zone_id'=>$zone_id])->forceDelete();
-        $db = new WarzoneProvince();
+        $warzone_province = [];
         foreach($data as $key=>$val) {
-            $db->zone_id = $zone_id;
-            $db->province_id = $val;
+            $warzone_province->zone_id = $zone_id;
+            $warzone_province->province_id = $val;
         }
-        $res = $db->save();
-        return $res;
+        $warzone_province->save();
     }
 }
 ?>
