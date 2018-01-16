@@ -58,6 +58,7 @@ class PersonalController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了个人信息');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改个人信息失败，请检查', 'status' => '0']);
         }
