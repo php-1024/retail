@@ -33,6 +33,11 @@
                 </div>
                 @endforeach
 
+                <div class="form-group">
+                    <label>安全密码</label>
+                    <input type="text" placeholder="Enter your safe_password" name="safe_password" value="" class="form-control">
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" onclick="return postForm();">保存</button>
