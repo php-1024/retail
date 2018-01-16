@@ -75,7 +75,6 @@
             </form>
 
             </div>
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
@@ -140,7 +139,7 @@
         {{--添加战区弹出图层--}}
         @include('Zerone/Warzone/warzone_add')
         {{--编辑战区弹出图层--}}
-        @include('Zerone/Warzone/warzone_edit')
+        {{--@include('Zerone/Warzone/warzone_edit')--}}
 
 
 
@@ -216,24 +215,24 @@
                 return;
             }
             $('#zone_id').val(zone_id);
-//            $('#myModal2').modal();
+            $('#myModal2').modal();
 
-            var data = {'zone_id':zone_id,'_token':token};
-            $.post(url,data,function(response){
-                if(response.status=='-1'){
-                    swal({
-                        title: "提示信息",
-                        text: response.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    },function(){
-                        window.location.reload();
-                    });
-                    return;
-                }else{
-                    $('#myModal2').modal();
-                }
-            });
+//            var data = {'zone_id':zone_id,'_token':token};
+//            $.post(url,data,function(response){
+//                if(response.status=='-1'){
+//                    swal({
+//                        title: "提示信息",
+//                        text: response.data,
+//                        confirmButtonColor: "#DD6B55",
+//                        confirmButtonText: "确定",
+//                    },function(){
+//                        window.location.reload();
+//                    });
+//                    return;
+//                }else{
+//                    $('#myModal2').modal();
+//                }
+//            });
 
         }
     </script>
