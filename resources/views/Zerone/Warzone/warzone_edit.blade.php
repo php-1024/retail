@@ -44,6 +44,45 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+
+        $('.chosen-select2').chosen({width:"100%"});
+        $('.chosen-select').chosen({width:"100%"});
+        $('#date_added').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $('.gg').chosen();
+        $('#date_modified').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+        $('#deleteBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "删除成功",
+                type: "success"
+            });
+        });
+        $('#deleteBtn2').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "删除失败,您没有操作权限",
+                type: "error"
+            });
+        });
+        $('#addBtn').click(function(){
+            $('#myModal').modal();
+        });
+
+    });
     //提交表单
     function postForm() {
         var target = $("#currentForm");
