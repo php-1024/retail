@@ -39,8 +39,8 @@
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="company_list_edit" value="{{ url('zerone/ajax/company_list_edit') }}">
-                <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
-                <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
+                <input type="hidden" id="company_list_frozen" value="{{ url('zerone/ajax/company_list_frozen') }}">
+                <input type="hidden" id="company_list_delete" value="{{ url('zerone/ajax/company_list_delete') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
