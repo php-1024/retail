@@ -290,7 +290,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('company_list_edit','Zerone\CompanyController@company_list_edit')->middleware('ZeroneCheckAjax');//商户编辑页面显示
         Route::post('company_list_edit_check','Zerone\CompanyController@company_list_edit_check')->middleware('ZeroneCheckAjax');//商户编辑数据提交
         Route::post('company_list_frozen','Zerone\CompanyController@company_list_frozen')->middleware('ZeroneCheckAjax');//商户冻结页面显示
-        Route::post('company_list_frozen_check','Zerone\CompanyController@company_list_frozen')->middleware('ZeroneCheckAjax');//商户冻结数据提交
+        Route::post('company_list_frozen_check','Zerone\CompanyController@company_list_frozen_check');//商户冻结数据提交
         Route::post('company_list_delete','Zerone\CompanyController@company_list_delete')->middleware('ZeroneCheckAjax');//商户删除页面显示
 
     });
