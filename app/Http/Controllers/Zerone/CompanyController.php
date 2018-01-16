@@ -98,7 +98,6 @@ class CompanyController extends Controller{
         }
 
         $list = CompanyApply::getPaginage($where,'15','id');
-        dd($list);
         return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面

@@ -91,7 +91,7 @@
                                 <tr>
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->company_name}}</td>
-                                    <td></td>
+                                    <td>{{$value->organization->organization_name}}</td>
                                     <td>{{$value->company_owner}}</td>
 
                                     <td>{{$value->company_owner_idcard}}</td>
