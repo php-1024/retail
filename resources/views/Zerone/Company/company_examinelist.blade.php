@@ -90,12 +90,12 @@
                                 @foreach($list as $key=>$value)
                                 <tr>
                                     <td>{{$value->id}}</td>
-                                    <td>{{$value->proxy_name}}</td>
-                                    <td>{{$value->warzone->zone_name}}</td>
-                                    <td>{{$value->proxy_owner}}</td>
+                                    <td>{{$value->company_name}}</td>
+                                    <td></td>
+                                    <td>{{$value->company_owner}}</td>
 
-                                    <td>{{$value->proxy_owner_idcard}}</td>
-                                    <td>{{$value->proxy_owner_mobile}}</td>
+                                    <td>{{$value->company_owner_idcard}}</td>
+                                    <td>{{$value->company_owner_mobile}}</td>
                                     <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
                                         @elseif($value->status == 1)<label class="label label-primary">已通过</label>
                                         @elseif($value->status == -1)<label class="label label-danger">未通过</label>
