@@ -1,4 +1,7 @@
 <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/dashboard_warzone_edit') }}">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="id" id="id" value="id">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -21,11 +24,10 @@
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
-                        {{--@foreach($province as $k=>$v)--}}
-                            {{--<option value="{{$v->province_id}}">{{$v->province_name}}</option>--}}
-                        {{--@endforeach--}}
+                        @foreach($new_province_name as $k=>$v)
+                            <option value="{{$k}}">{{$v}}</option>
+                        @endforeach
                         {{--所有战区未选中的战区--}}
-
                     </select>
                     <div style="clear: both;"></div>
                 </div>
@@ -33,9 +35,40 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary" onclick="return postForm();">保存</button>
                 </div>
             </div>
         </div>
     </div>
+</form>
 </div>
+<script>
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
+</script>
