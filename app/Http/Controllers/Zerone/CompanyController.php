@@ -191,7 +191,7 @@ class CompanyController extends Controller{
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOne(['id'=>$id]);
         $warzone = Warzone::all();
-        return view('Zerone/Proxy/company_list_edit',compact('listorg','warzone'));
+        return view('Zerone/Company/company_list_edit',compact('listorg','warzone'));
     }
     //服务商编辑功能提交
     public function proxy_list_edit_check(Request $request){
