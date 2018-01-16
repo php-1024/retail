@@ -106,7 +106,7 @@
                                         <td>{{$value->organization_name}}</td>
                                         <td></td>
                                         <td>{{$value->organizationCompanyinfo->company_owner}}</td>
-                                        <td>{{$value->account}}</td>
+                                        <td>{{$value->account['0']}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
