@@ -88,7 +88,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/dashboard_warzone_edit"://检测战区名称 战区省份 安全密码是否为空
+            case "zerone/ajax/warzone_edit_check"://检测战区名称 战区省份 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
                 return self::format_response($re,$next);
                 break;
