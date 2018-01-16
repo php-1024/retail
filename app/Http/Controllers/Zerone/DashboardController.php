@@ -113,6 +113,7 @@ class DashboardController extends Controller{
         DB::beginTransaction();
         try {
             Warzone::WarzoneEdit([['id', $zone_id]], ['zone_name' => $zone_name]);//修改战区名称
+            //此方法行不通，先删除原有战区ID的数据然后在添加新的数据
             WarzoneProvince::WarzoneProvinceEdit([['zone_id', $zone_id]], ['province_id' => $province_id]);
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
