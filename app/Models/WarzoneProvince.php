@@ -16,8 +16,8 @@ class WarzoneProvince extends Model{
 
     //修改战区包含省份
     public static function WarzoneProvinceEdit($data,$zone_id){
-        $warzone_province = new WarzoneProvince();
         foreach($data as $key=>$val) {
+            $warzone_province = new WarzoneProvince();
             $warzone_province->zone_id = $zone_id;
             $warzone_province->province_id = $val;
             $warzone_province->save();
