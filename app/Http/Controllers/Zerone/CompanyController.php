@@ -191,7 +191,7 @@ class CompanyController extends Controller{
     public function company_list_edit(Request $request){
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOneCompany(['id'=>$id]);
-        $proxy = Organization::where(['status'=>'1','type'=>'2'])->all();
+        $proxy = Organization::where(['type'=>'1'])->orwhere(['type'=>'2'])->where(['status'=>'1'])->get();
         return view('Zerone/Company/company_list_edit',compact('listorg','proxy'));
     }
     //服务商编辑功能提交
