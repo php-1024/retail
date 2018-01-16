@@ -13,7 +13,6 @@
                     <label>战区名称</label>
                     <input type="text" placeholder="Enter your text" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
                 </div>
-
                 <div class="form-group">
                     <label>包含省份</label>
                     <div style="clear: both;"></div>
