@@ -155,6 +155,29 @@
     <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
     <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
     <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(document).ready(function() {
+            // activate Nestable for list 2
+            $('#nestable2').nestable();
+
+            $('#nestable-menu').on('click', function (e) {
+                var target = $(e.target),
+                    action = target.data('action');
+                if (action === 'expand-all') {
+                    $('.dd').nestable('expandAll');
+                }
+                if (action === 'collapse-all') {
+                    $('.dd').nestable('collapseAll');
+                }
+            });
+            $('#expand-all').click(function(){
+                $('.dd').nestable('expandAll');
+            });
+            $('#collapse-all').click(function(){
+                $('.dd').nestable('collapseAll');
+            });
+        });
+    </script>
 
 </div>
 </body>
