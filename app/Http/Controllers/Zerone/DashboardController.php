@@ -95,12 +95,13 @@ class DashboardController extends Controller{
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
         $zone_id = $request->input('zone_id');//包含省份ID（array）
-        if(empty($zone_name)){
-            return response()->json(['data' => $zone_id.'请输入战区名称！', 'status' => '1']);
-        }
-        if(empty($province_id)){
-            return response()->json(['data' => '选择战区包含省份！', 'status' => '1']);
-        }
+        dump($zone_id);
+//        if(empty($zone_name)){
+//            return response()->json(['data' => '请输入战'.$zone_id.'区名称！', 'status' => '1']);
+//        }
+//        if(empty($province_id)){
+//            return response()->json(['data' => '选择战区包含省份！', 'status' => '1']);
+//        }
     }
     //功能模块列表
     public function module_list(Request $request){
