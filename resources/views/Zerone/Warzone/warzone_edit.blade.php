@@ -21,10 +21,10 @@
                         @endforeach
                         {{--所有战区当前选中的战区--}}
                         {{--所有战区未选中的战区--}}
-                        <option value="Mongolia">台湾省</option>
-                        <option value="Montenegro">浙江省</option>
-                        <option value="Montserrat">江西省</option>
-                        <option value="Morocco">黑龙江省</option>
+                        {{--<option value="Mongolia">台湾省</option>--}}
+                        {{--<option value="Montenegro">浙江省</option>--}}
+                        {{--<option value="Montserrat">江西省</option>--}}
+                        {{--<option value="Morocco">黑龙江省</option>--}}
                         {{--所有战区未选中的战区--}}
                     </select>
                     <div style="clear: both;"></div>
