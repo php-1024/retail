@@ -174,14 +174,14 @@ class CompanyController extends Controller{
 
 
     //服务商列表
-    public function proxy_list(Request $request){
+    public function company_list(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $listorg = Organization::getPaginage(['type'=>'2'],'5','id');
-        return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Company/company_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit(Request $request){
