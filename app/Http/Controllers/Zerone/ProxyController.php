@@ -296,7 +296,7 @@ class ProxyController extends Controller{
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->create_structure($list, $val['id']);
+                $val['sonlist'] = $this->proxy_str($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
@@ -307,7 +307,7 @@ class ProxyController extends Controller{
                     $structure.='【'.$val['account_roles'][0]['role_name'].'】';
                 }
                 $structure .= '</div>';
-                $son_menu = $this->create_structure($list, $val['id']);
+                $son_menu = $this->proxy_str($list, $val['id']);
                 if (!empty($son_menu)) {
                     $structure .=  $son_menu;
                 }
