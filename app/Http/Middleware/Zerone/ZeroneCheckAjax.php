@@ -90,6 +90,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndSafepasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
+                return self::format_response($re,$next);
+                break;
 
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
@@ -309,6 +313,20 @@ class ZeroneCheckAjax
             }
         }
     }
+    //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
+    public function checkLoginAndRuleAndSafeAndCompanyAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     /******************************单项检测*********************************/
     //检测编辑下级人员权限数据
@@ -500,6 +518,27 @@ class ZeroneCheckAjax
     }
     //检测服务商申请表信息
     public function checkProxyAdd($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        if (empty($request->input('proxy_password'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
+        }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
+            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测商户申请表信息
+    public function checkCompanyAdd($request){
         if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
         }

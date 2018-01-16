@@ -25,8 +25,8 @@ class CompanyController extends Controller{
         return view('Zerone/Company/company_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
     //提交服务商数据
-    public function proxy_add_check(Request $request){
-
+    public function company_add_check(Request $request){
+        dd($request);
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
