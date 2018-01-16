@@ -38,7 +38,7 @@ class CompanyController extends Controller{
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
         $list = Organization::getOne(['id'=>$id]);
-        
+
         $parent_id = $request->input('organization_id');//零壹或者服务商organization_id
         $parent_tree = $list['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
         $deepth = $list['deepth']+1;  //用户在该组织里的深度
@@ -68,6 +68,7 @@ class CompanyController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            echo $e;exit;
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
