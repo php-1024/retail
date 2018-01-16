@@ -47,7 +47,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
             case "zerone/ajax/proxy_examine_check"://服务商审核检测 登录 和 权限 和 安全密码
-            case "zerone/ajax/proxy_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
+            case "zerone/ajax/company_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
