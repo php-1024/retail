@@ -1,5 +1,5 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_list_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/company_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
     <div class="modal-dialog modal-lg">
@@ -11,9 +11,9 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">归属服务商</label>
                     <div class="col-sm-10">
-                        <select class="form-control m-b" name="zone_id">
+                        <select class="form-control m-b" name="parent_id">
                             @foreach($proxy as $k=>$v)
-                                <option value="{{$v->id}}">{{$v->organization_name}}</option>
+                                <option value="{{$v->id}}" @if($listorg->parent_id == $v->id) selected @endif>{{$v->organization_name}}</option>
                             @endforeach
                         </select>
                     </div>
