@@ -241,14 +241,13 @@ class CompanyController extends Controller{
                  $porxy = Organization::getOne(['id'=>$parent_id]); //获取选择更换的上级服务商信息
                  $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
                  $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
-                 Organization::editOrganization(['organization_id'=>$id],$data);//修改商户的上级服务商信息
+                 Organization::editOrganization(['id'=>$id],$data);//修改商户的上级服务商信息
              }
 
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了商户：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            echo($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
