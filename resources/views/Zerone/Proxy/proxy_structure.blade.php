@@ -73,55 +73,15 @@
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
+                                            {{ $admin_data['account'] }}
                                         </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                            <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
-                                                        </div>
-                                                        <ol class="dd-list">
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
-                                                                </div>
-                                                            </li>
-                                                        </ol>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                            <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                            <li class="dd-item" data-id="3">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="4">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 【刘新文】-账号：【zop_13123456789】,手机:【1312345678】,角色：【服务商负责人】
-                                                </div>
-                                            </li>
-                                        </ol>
+
+                                        {!! $structure  !!}
+
                                     </li>
                                 </ol>
                             </div>
-
-
+                            
                         </div>
 
                     </div>
