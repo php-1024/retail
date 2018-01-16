@@ -41,7 +41,7 @@ class CompanyController extends Controller{
         $list = Organization::getOne(['id'=>$id]);
 
         $parent_id = $request->input('organization_id');//零壹或者服务商organization_id
-        $parent_tree = $list['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
+        $parent_tree = $list['parent_tree'].','.$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $list['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
 
@@ -101,26 +101,26 @@ class CompanyController extends Controller{
         return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户审核ajaxshow显示页面
-    public function conpany_examine(Request $request){
+    public function company_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $info =  CompanyApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Company/conpany_examine',['info'=>$info,'sta'=>$sta]);
+        return view('Zerone/Company/company_examine',['info'=>$info,'sta'=>$sta]);
     }
-    //服务商审核数据提交
-    public function proxy_examine_check(Request $request){
-        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
-        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
+    //商户审核数据提交
+    public function company_examine_check(Request $request){
+//        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $proxylist = ProxyApply::getOne([['id',$id]]);//查询申请服务商信息
+        $companylist = CompanyApply::getOne([['id',$id]]);//查询申请服务商信息
         if($sta == -1 ){
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
+                CompanyApply::editCompanyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
                 //添加操作日志
-                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
+                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
