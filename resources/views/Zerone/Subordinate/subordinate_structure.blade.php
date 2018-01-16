@@ -75,9 +75,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-info"><i class="fa fa-user"></i></span>{{ $admin_data['account'] }}
                                         </div>
-
                                        {!! $structure  !!}
-
                                     </li>
                                 </ol>
                             </div>
