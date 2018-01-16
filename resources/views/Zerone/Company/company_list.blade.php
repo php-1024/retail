@@ -38,7 +38,7 @@
             </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
+                <input type="hidden" id="company_list_edit" value="{{ url('zerone/ajax/company_list_edit') }}">
                 <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
                 <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
 
@@ -185,7 +185,7 @@ $(function(){
 //编辑
 function getEditForm(id){
 
-    var url = $('#proxy_list_edit').val();
+    var url = $('#company_list_edit').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
