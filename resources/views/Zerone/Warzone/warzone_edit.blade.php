@@ -8,7 +8,7 @@
                 修改战区
             </div>
             <div class="modal-body">
-                @foreach($warzone as $key=>$val)
+                @foreach($warzone_edit as $key=>$val)
                 <div class="form-group">
                     <label>战区名称</label>
                     <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
