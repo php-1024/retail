@@ -107,8 +107,8 @@ class CompanyController extends Controller{
         $info =  CompanyApply::getOne([['id',$id]]);//获取该ID的信息
         return view('Zerone/Company/company_examine',['info'=>$info,'sta'=>$sta]);
     }
-    //服务商审核数据提交
-    public function proxy_examine_check(Request $request){
+    //商户审核数据提交
+    public function company_examine_check(Request $request){
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
