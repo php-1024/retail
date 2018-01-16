@@ -27,13 +27,13 @@
             @include('Zerone/Public/Header')
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
-                    <h2>添加服务商</h2>
+                    <h2>添加商户</h2>
                     <ol class="breadcrumb">
                         <li class="active">
-                            <a href="JavaScript:;">服务商管理</a>
+                            <a href="JavaScript:;">商户管理</a>
                         </li>
                         <li >
-                            <strong>添加服务商</strong>
+                            <strong>添加商户</strong>
                         </li>
                     </ol>
                 </div>
@@ -43,22 +43,22 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>添加服务商</h5>
+                                <h5>添加商户</h5>
 
                             </div>
                             <div class="ibox-content">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
+                                    <div class="form-group"><label class="col-sm-2 control-label">归属服务商</label>
                                         <div class="col-sm-10">
                                             <select class="form-control m-b" name="zone_id">
-                                                @foreach($warzone_list as $key=>$value)
-                                                <option value="{{$value->id}}">{{$value->zone_name}}</option>
+                                                @foreach($list as $key=>$value)
+                                                <option value="{{$value->id}}">{{$value->organization_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
+                                    <div class="form-group"><label class="col-sm-2 control-label">商户名称</label>
                                         <div class="col-sm-10"><input type="text" name="organization_name" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
