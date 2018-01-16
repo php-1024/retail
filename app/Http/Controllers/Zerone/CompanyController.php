@@ -41,7 +41,7 @@ class CompanyController extends Controller{
         $list = Organization::getOne(['id'=>$id]);
 
         $parent_id = $request->input('organization_id');//零壹或者服务商organization_id
-        $parent_tree = $list['parent_tree'].','.$parent_id.',';//树是上级的树拼接上级的ID；
+        $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $list['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
 
@@ -109,18 +109,19 @@ class CompanyController extends Controller{
     }
     //商户审核数据提交
     public function company_examine_check(Request $request){
-//        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
+        $admin_this = $request->get('admin_data');//查找当前操作人员数据
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $companylist = CompanyApply::getOne([['id',$id]]);//查询申请服务商信息
+
         if($sta == -1 ){
             DB::beginTransaction();
             try{
                 CompanyApply::editCompanyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
                 //添加操作日志
-                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
+                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -128,40 +129,42 @@ class CompanyController extends Controller{
             }
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
         }elseif($sta == 1){
+
+            $list = Organization::getOne(['id'=>$id]);
+
+            $parent_id = $id;//零壹或者服务商organization_id
+            $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
+            $mobile = $companylist['company_owner_mobile'];//手机号码
+
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//申请通过
+                CompanyApply::editCompanyApply(['id'=>$id],['status'=>$sta]);//申请通过
                 //添加服务商
-                $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
+                $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>0,'type'=>3,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
-                $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
-                WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
+                $account  = 'C'.$companylist['company_owner_mobile'].'_'.$organization_id;//用户账号
+                $company_password =  $companylist['company_password'];//用户密码
 
-                $account  = 'P'.$proxylist['proxy_owner_mobile'].'_'.$organization_id;//用户账号
-                $parent_id = $admin_data['id'];//上级ID是当前用户ID
-                $parent_tree = $admin_data['parent_tree'].','.$parent_id;//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
-
-                $key = config("app.zerone_encrypt_key");//获取加密盐
-                $encrypted = md5($proxylist['proxy_password']);//加密密码第一重
-                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-
-                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
+                $Accparent_tree = $admin_data['parent_tree'].admin_data['id'].',';//管理员组织树
+                $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$company_password,'organization_id'=>$organization_id,'account'=>$account];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
-                $realname = $proxylist['proxy_owner'];//负责人姓名
-                $idcard = $proxylist['proxy_owner_idcard'];//负责人身份证号
+                $realname = $companylist['company_owner'];//负责人姓名
+                $idcard = $companylist['company_owner_idcard'];//负责人身份证号
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']];
-                OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
+                $companyinfo = ['organization_id'=>$organization_id, 'company_owner'=>$realname, 'company_owner_idcard'=>$idcard, 'company_owner_mobile'=>$companylist['company_owner_mobile']];
+
+                OrganizationCompanyinfo::addOrganizationCompanyinfo($companyinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$companylist['company_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }

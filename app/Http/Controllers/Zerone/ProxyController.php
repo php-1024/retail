@@ -41,7 +41,7 @@ class ProxyController extends Controller{
 
         $zone_id = $request->input('zone_id');//战区id
         $parent_id = $admin_data['id'];//上级ID是当前用户ID
-        $parent_tree = $admin_data['parent_tree'].','.$parent_id.',';//树是上级的树拼接上级的ID；
+        $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
         $password = $request->input('password');//用户密码
@@ -139,7 +139,7 @@ class ProxyController extends Controller{
 
                 $account  = 'P'.$proxylist['proxy_owner_mobile'].'_'.$organization_id;//用户账号
                 $parent_id = $admin_data['id'];//上级ID是当前用户ID
-                $parent_tree = $admin_data['parent_tree'].','.$parent_id.',';//树是上级的树拼接上级的ID；
+                $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
                 $key = config("app.zerone_encrypt_key");//获取加密盐
