@@ -137,7 +137,8 @@
         </div>
         @include('Zerone/Public/Footer')
         {{--添加战区弹出图层--}}
-        @include('Zerone/Warzone/warzone_add')
+        {{--@include('Zerone/Warzone/warzone_add')--}}
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
         {{--编辑战区弹出图层--}}
         {{--@include('Zerone/Warzone/warzone_edit')--}}
 
@@ -229,8 +230,8 @@
                     });
                     return;
                 }else{
-                    $('#myModal2').html(response);
-                    $('#myModal2').modal();
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
                 }
             });
         }
