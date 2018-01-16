@@ -94,8 +94,7 @@ class DashboardController extends Controller{
         }
         $new_province_name = array_diff($all_province_name,$province_name);
 
-//        $zone_id = $request->input('zone_id');
-        $zone_id = '1';
+        $zone_id = $request->input('id');
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
         return view('Zerone/Warzone/warzone_edit',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
     }
@@ -103,12 +102,11 @@ class DashboardController extends Controller{
     public function warzone_edit_check(Request $request){
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
-        $zone_id = $request->input('zone_id');//包含省份ID
+        $zone_id = $request->input('id');//战区ID
         if(empty($province_id)){
             return response()->json(['data' => $zone_id.'选择战区包含省份！', 'status' => '1']);
-        }else{
-
         }
+        dump($request);
     }
 
     //功能模块列表
