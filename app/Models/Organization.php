@@ -39,7 +39,7 @@ class Organization extends Model{
     }
     //获取单条信息-商户
     public static function getOneCompany($where){
-        return self::with('organizationproxyinfo')->where($where)->first();
+        return self::with('organizationCompanyinfo')->where($where)->first();
     }
     //获取单条信息和organizationproxyinfo的信息
     public static function getOneAndorganizationproxyinfo($where){
