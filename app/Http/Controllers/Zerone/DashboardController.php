@@ -78,9 +78,16 @@ class DashboardController extends Controller{
         $zone_name = $request->input('zone_name');
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],1,'id');
         dump($warzone);
-        $province = Province::getpluck([[ 'id','like','%'.'1'.'%' ]],'id');
+        $province = Province::getpluck('id');
         dump($province);
-        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone]);
+
+        foreach ($warzone as $key=>$val){
+            foreach ($val->province as $kk=>$vv){
+                $province_name[] = $vv->province_name;
+            }
+        }
+        dump($province_name);
+        return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province]);
     }
     //战区管理编辑弹出
     public function warzone_edit(){
