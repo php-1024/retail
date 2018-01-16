@@ -89,6 +89,7 @@ class DashboardController extends Controller{
             $all_province_name[$val->id] = $val->province_name;
         }
         $new_province_name = array_diff($all_province_name,$province_name);
+        dump($new_province_name);
         return view('Zerone/Warzone/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'warzone'=>$warzone,'province'=>$province,'new_province_name',$new_province_name]);
     }
     //战区管理编辑弹出
