@@ -92,7 +92,17 @@ class DashboardController extends Controller{
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
-        dump($request);
+        $zone_name = $request->input('zone_name');
+        if(empty($zone_name)){
+            return response()->json(['data' => '请输入战区名称！', 'status' => '1']);
+        }
+//        if ($account['password'] == $encryptPwd){
+//            Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
+//            return response()->json(['data' => '密码修改成功！', 'status' => '1']);
+//        }else{
+//            return response()->json(['data' => '原密码不正确！', 'status' => '1']);
+//        }
+//        dump($request);
     }
     //功能模块列表
     public function module_list(Request $request){
