@@ -106,7 +106,18 @@ class DashboardController extends Controller{
         if(empty($province_id)){
             return response()->json(['data' => $zone_id.'选择战区包含省份！', 'status' => '1']);
         }
-        dump($request);
+        DB::beginTransaction();
+        try {
+            Warzone::WarzoneEdit([['id', $zone_id]], ['zone_name' => $zone_name]);
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$account);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑下战区失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑战区成功', 'status' => '1']);
     }
 
     //功能模块列表
