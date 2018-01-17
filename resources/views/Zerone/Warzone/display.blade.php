@@ -52,7 +52,7 @@
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="warzone_add" value="{{ url('zerone/ajax/warzone_add') }}">
                 <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
-                <input type="hidden" id="warzone_delete_comfirm" value="{{ url('zerone/ajax/warzone_delete') }}">
+                <input type="hidden" id="warzone_delete" value="{{ url('zerone/ajax/warzone_delete') }}">
                 <div class="row">
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
@@ -140,6 +140,7 @@
         {{--添加战区弹出图层--}}
         {{--@include('Zerone/Warzone/warzone_add')--}}
         <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true"></div>
         <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
         {{--编辑战区弹出图层--}}
         {{--@include('Zerone/Warzone/warzone_edit')--}}
@@ -220,7 +221,7 @@
 
         //删除战区，安全密码框弹出
         function getDeleteComfirmForm(id,acconut){
-            var url = $('#subordinate_delete_confirm_url').val();
+            var url = $('#warzone_delete').val();
             var token = $('#_token').val();
 
 //            $('#deleteBtn').click(function(){
@@ -256,8 +257,8 @@
                     });
                     return;
                 }else{
-                    $('#myModal').html(response);
-                    $('#myModal').modal();
+                    $('#myModal1').html(response);
+                    $('#myModal1').modal();
                 }
             });
         }
