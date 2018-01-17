@@ -327,5 +327,15 @@ class ProxyController extends Controller{
         return $structure;
     }
 
+    //服务商程序管理
+    public function proxy_program(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        return view('Zerone/Proxy/proxy_program',compact('admin_data','route_name','menu_data','son_menu_data'));
+    }
+
 }
 ?>

@@ -17,7 +17,7 @@ class OrganizationProxyinfo extends Model{
 
     //和organization表一对一的关系
     public function Organization(){
-        return $this->hasOne('App\Models\Organization', 'organization_id');
+        return $this->belongsTo('App\Models\Organization', 'organization_id');
     }
 
     //添加数据
