@@ -306,6 +306,7 @@ class CompanyController extends Controller{
 
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneCompany([['id',$organization_id]]);
+        dd($listOrg);
         $list = Organization::getArrayCompany([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->Com_structure($list,$organization_id);
         return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
