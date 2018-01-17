@@ -52,7 +52,7 @@
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="warzone_add" value="{{ url('zerone/ajax/warzone_add') }}">
                 <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
-                <input type="hidden" id="warzone_delete_comfirm" value="{{ url('zerone/ajax/warzone_delete_comfirm') }}">
+                <input type="hidden" id="warzone_delete_comfirm" value="{{ url('zerone/ajax/warzone_delete') }}">
                 <div class="row">
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
@@ -114,7 +114,7 @@
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         {{--<button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
                                     </td>
                                 </tr>
@@ -182,13 +182,6 @@
                 calendarWeeks: true,
                 autoclose: true
             });
-            $('#deleteBtn').click(function(){
-                swal({
-                    title: "温馨提示",
-                    text: "删除成功",
-                    type: "success"
-                });
-            });
             $('#deleteBtn2').click(function(){
                 swal({
                     title: "温馨提示",
@@ -196,9 +189,6 @@
                     type: "error"
                 });
             });
-//            $('#addBtn').click(function(){
-//                $('#myModal').modal();
-//            });
 
         });
 
@@ -226,6 +216,52 @@
                 }
             });
         }
+
+
+        //删除战区，安全密码框弹出
+        function getDeleteComfirmForm(id,acconut){
+            var url = $('#subordinate_delete_confirm_url').val();
+            var token = $('#_token').val();
+
+//            $('#deleteBtn').click(function(){
+//                swal({
+//                    title: "温馨提示",
+//                    text: "删除成功",
+//                    type: "success"
+//                });
+//            });
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var data = {'id':id,'account':acconut,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
+
 
 
         //战区管理——编辑战区

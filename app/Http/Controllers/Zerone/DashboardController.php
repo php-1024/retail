@@ -138,7 +138,7 @@ class DashboardController extends Controller{
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
         return view('Zerone/Warzone/warzone_add',['zone_info'=>$zone_info,'all_province_name'=>$all_province_name]);
     }
-    //战区管理编辑数据提交
+    //战区管理添加数据提交
     public function warzone_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -157,6 +157,26 @@ class DashboardController extends Controller{
             return response()->json(['data' => '添加战区失败，请检查！', 'status' => '0']);
         }
         return response()->json(['data' => '添加战区成功！', 'status' => '1']);
+    }
+
+    //战区管理编辑弹出
+    public function warzone_delete(Request $request){
+        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
+        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
+        $province = Province::getpluck('id');
+        foreach ($warzone as $key=>$val){
+            foreach ($val->province as $kk=>$vv){
+                $province_name[$vv->id] = $vv->province_name;
+            }
+        }
+        foreach ($province as $key=>$val){
+            $all_province_name[$val->id] = $val->province_name;
+        }
+        $new_province_name = array_diff($all_province_name,$province_name);
+
+        $zone_id = $request->input('id');
+        $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
+        return view('Zerone/Warzone/warzone_delete',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
     }
 
     //功能模块列表
