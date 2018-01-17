@@ -59,12 +59,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label">操作账号</label>
-                                <input type="text" class="form-control" name="account" value="{{$search_data['account']}}" placeholder="请输入操作人账号">
-                            </div>
-                        </div>
+                        {{--<div class="col-sm-3">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label class="control-label">操作账号</label>--}}
+                                {{--<input type="text" class="form-control" name="account" value="{{$search_data['account']}}" placeholder="请输入操作人账号">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>

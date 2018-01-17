@@ -30,7 +30,6 @@ class OperationLog extends Model{
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
-
     //根据时间戳操作用户分页查询获取列表
     public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
         $model = self::with('accounts')->where($where);

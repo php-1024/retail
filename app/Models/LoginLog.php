@@ -31,6 +31,15 @@ class LoginLog extends Model{
         return self::with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
+    //根据时间戳分页查询获取列表
+    public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('accounts')->where($where);
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
     //添加登录日志
     public static function addLoginLog($account_id,$program_id,$organization_id,$ip,$addr){
         $loginlog = new LoginLog();//新建模型
