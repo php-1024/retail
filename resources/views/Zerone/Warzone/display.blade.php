@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>零壹新科技程序管理平台</title>
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
@@ -18,14 +15,9 @@
     <link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/footable')}}/css/footable.core.css" rel="stylesheet">
     <!-- Sweet Alert -->
-
-
 </head>
-
 <body class="">
-
 <div id="wrapper">
-
     @include('Zerone/Public/Nav')
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
@@ -41,12 +33,8 @@
                     </li>
                 </ol>
             </div>
-
         </div>
-
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
-
             <div class="ibox-content m-b-sm border-bottom">
             <form method="get" role="form" id="searchForm" action="">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
@@ -57,7 +45,7 @@
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
                             <label class="control-label" for="amount">&nbsp;</label>
-                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
+                            <button type="button" class="block btn-w-m btn btn-primary" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
@@ -74,7 +62,6 @@
                     </div>
                 </div>
             </form>
-
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -113,8 +100,8 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        <button type="button" id="editBtn" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->zone_name }}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->zone_name }}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         {{--<button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
                                     </td>
                                 </tr>
@@ -133,175 +120,119 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         @include('Zerone/Public/Footer')
         {{--添加战区弹出图层--}}
-        {{--@include('Zerone/Warzone/warzone_add')--}}
         <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        {{--删除战区弹出图层--}}
         <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true"></div>
-        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
         {{--编辑战区弹出图层--}}
-        {{--@include('Zerone/Warzone/warzone_edit')--}}
-
-
-
-    <!-- Mainly scripts -->
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <!-- Sweet alert -->
-    <script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
-    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
-    <script src="{{asset('public/Zerone/library/footable')}}/js/footable.all.min.js"></script>
-    <script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
-    <!-- Page-Level Scripts -->
-
-    <script>
-        $(document).ready(function() {
-
-            $('.chosen-select2').chosen({width:"100%"});
-            $('.chosen-select').chosen({width:"100%"});
-            $('#date_added').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
-
-            $('.gg').chosen();
-            $('#date_modified').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
-            $('#deleteBtn2').click(function(){
-                swal({
-                    title: "温馨提示",
-                    text: "删除失败,您没有操作权限",
-                    type: "error"
+        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        
+        <!-- Mainly scripts -->
+        <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+        <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+        <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+        <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+        <!-- Custom and plugin javascript -->
+        <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+        <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+        <!-- Sweet alert -->
+        <script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+        <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+        <script src="{{asset('public/Zerone/library/footable')}}/js/footable.all.min.js"></script>
+        <script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
+        <!-- Page-Level Scripts -->
+        <script>
+            //战区管理——添加战区
+            function getAddForm(){
+                var url = $('#warzone_add').val();
+                var token = $('#_token').val();
+                var data = {'_token':token};
+                $.post(url,data,function(response){
+                    if(response.status=='-1'){
+                        swal({
+                            title: "提示信息",
+                            text: response.data,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                        },function(){
+                            window.location.reload();
+                        });
+                        return;
+                    }else{
+                        $('#myModal').html(response);
+                        $('#myModal').modal();
+                    }
                 });
-            });
-
-        });
-
-
-
-        //战区管理——添加战区
-        function getAddForm(){
-            var url = $('#warzone_add').val();
-            var token = $('#_token').val();
-            var data = {'_token':token};
-            $.post(url,data,function(response){
-                if(response.status=='-1'){
-                    swal({
-                        title: "提示信息",
-                        text: response.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    },function(){
-                        window.location.reload();
-                    });
-                    return;
-                }else{
-                    $('#myModal').html(response);
-                    $('#myModal').modal();
-                }
-            });
-        }
-
-
-        //删除战区，安全密码框弹出
-        function getDeleteComfirmForm(id,zone_name){
-            var url = $('#warzone_delete_confirm').val();
-            var token = $('#_token').val();
-
-//            $('#deleteBtn').click(function(){
-//                swal({
-//                    title: "温馨提示",
-//                    text: "删除成功",
-//                    type: "success"
-//                });
-//            });
-
-            if(id==''){
-                swal({
-                    title: "提示信息",
-                    text: '数据传输错误',
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
             }
-
-            var data = {'id':id,'zone_name':zone_name,'_token':token};
-            $.post(url,data,function(response){
-                if(response.status=='-1'){
+            //删除战区，安全密码框弹出
+            function getDeleteComfirmForm(id,zone_name){
+                var url = $('#warzone_delete_confirm').val();
+                var token = $('#_token').val();
+                if(id==''){
                     swal({
                         title: "提示信息",
-                        text: response.data,
+                        text: '数据传输错误',
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "确定",
                     },function(){
                         window.location.reload();
                     });
                     return;
-                }else{
-                    $('#myModal1').html(response);
-                    $('#myModal1').modal();
                 }
-            });
-        }
-
-
-
-        //战区管理——编辑战区
-        function getEditForm(id){
-            var url = $('#warzone_edit').val();
-            var token = $('#_token').val();
-
-            if(id==''){
-                swal({
-                    title: "提示信息",
-                    text: '数据传输错误',
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
+                var data = {'id':id,'zone_name':zone_name,'_token':token};
+                $.post(url,data,function(response){
+                    if(response.status=='-1'){
+                        swal({
+                            title: "提示信息",
+                            text: response.data,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                        },function(){
+                            window.location.reload();
+                        });
+                        return;
+                    }else{
+                        $('#myModal1').html(response);
+                        $('#myModal1').modal();
+                    }
                 });
-                return;
             }
+            //战区管理——编辑战区
+            function getEditForm(id){
+                var url = $('#warzone_edit').val();
+                var token = $('#_token').val();
 
-            var data = {'id':id,'_token':token};
-            $.post(url,data,function(response){
-                if(response.status=='-1'){
+                if(id==''){
                     swal({
                         title: "提示信息",
-                        text: response.data,
+                        text: '数据传输错误',
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "确定",
                     },function(){
                         window.location.reload();
                     });
                     return;
-                }else{
-                    $('#myModal2').html(response);
-                    $('#myModal2').modal();
                 }
-            });
-        }
-    </script>
-
+                var data = {'id':id,'_token':token};
+                $.post(url,data,function(response){
+                    if(response.status=='-1'){
+                        swal({
+                            title: "提示信息",
+                            text: response.data,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                        },function(){
+                            window.location.reload();
+                        });
+                        return;
+                    }else{
+                        $('#myModal2').html(response);
+                        $('#myModal2').modal();
+                    }
+                });
+            }
+        </script>
 </body>
-
 </html>
