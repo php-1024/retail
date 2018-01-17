@@ -57,7 +57,7 @@
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
                             <label class="control-label" for="amount">&nbsp;</label>
-                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn" onclick="getAddForm({{ $val->id }})"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
+                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn" onclick="getAddForm(3)"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
