@@ -79,7 +79,8 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');//搜索时输入的战区名称
-        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
+        $search_data = ['zone_name'=>$zone_name];
+        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$search_data.'%' ]],10,'id');
         return view('Zerone/Warzone/display',['zone_name'=>$zone_name,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //战区管理编辑弹出
