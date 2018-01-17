@@ -89,6 +89,11 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/warzone_add_check"://检测战区名称 战区省份 安全密码是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndWarzoneAdd($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/warzone_edit_check"://检测战区名称 战区省份 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
                 return self::format_response($re,$next);
@@ -352,6 +357,20 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
+    public function checkLoginAndRuleAndSafeAndWarzoneAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkWarzoneAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -627,6 +646,19 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
         }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
             return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测战区添加表信息
+    public function checkWarzoneAdd($request){
+        if (empty($request->input('zone_name'))) {
+            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
+        }
+        if (empty($request->input('province_id'))) {
+            return self::res(0, response()->json(['data' => '请选择战区包含省份', 'status' => '0']));
+        }
+        if (empty($request->input('safe_password'))) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         return self::res(1, $request);
     }

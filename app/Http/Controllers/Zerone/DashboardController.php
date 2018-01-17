@@ -138,6 +138,10 @@ class DashboardController extends Controller{
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
         return view('Zerone/Warzone/warzone_add',['zone_info'=>$zone_info,'all_province_name'=>$all_province_name]);
     }
+    //战区管理编辑数据提交
+    public function warzone_add_check(Request $request){
+        dump($request);
+    }
 
     //功能模块列表
     public function module_list(Request $request){
