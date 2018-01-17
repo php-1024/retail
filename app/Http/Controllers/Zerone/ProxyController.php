@@ -189,7 +189,6 @@ class ProxyController extends Controller{
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
         $listorg = Organization::getPaginage($where,'5','id');
-        dd($listorg);
         return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
