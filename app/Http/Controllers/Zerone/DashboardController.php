@@ -98,7 +98,7 @@ class DashboardController extends Controller{
         }
         $new_province_name = array_diff($all_province_name,$province_name);
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
-        return view('Zerone/Warzone/warzone_edit',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
+        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
     }
     //战区管理编辑数据提交
     public function warzone_edit_check(Request $request){
@@ -135,7 +135,7 @@ class DashboardController extends Controller{
         }
         $zone_id = $request->input('id');
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
-        return view('Zerone/Warzone/warzone_add',['zone_info'=>$zone_info,'all_province_name'=>$all_province_name]);
+        return view('Zerone/Dashboard/warzone_add',['zone_info'=>$zone_info,'all_province_name'=>$all_province_name]);
     }
     //战区管理添加数据提交
     public function warzone_add_check(Request $request){
@@ -164,7 +164,7 @@ class DashboardController extends Controller{
         $account = $admin_data['account'];//要操作的管理员的账号,用于记录
         $id = $request->input('id');//要操作的战区ID
         $zone_name = $request->input('zone_name');//要操作的战区名称
-        return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
+        return view('Zerone/Dashboard/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
     }
 
     //战区管理确认删除
