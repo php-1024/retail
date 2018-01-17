@@ -52,7 +52,7 @@
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="warzone_add" value="{{ url('zerone/ajax/warzone_add') }}">
                 <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
-                <input type="hidden" id="warzone_delete" value="{{ url('zerone/ajax/warzone_delete') }}">
+                <input type="hidden" id="warzone_delete_confirm" value="{{ url('zerone/ajax/warzone_delete_confirm') }}">
                 <div class="row">
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
@@ -221,7 +221,7 @@
 
         //删除战区，安全密码框弹出
         function getDeleteComfirmForm(id,acconut){
-            var url = $('#warzone_delete').val();
+            var url = $('#warzone_delete_confirm').val();
             var token = $('#_token').val();
 
 //            $('#deleteBtn').click(function(){

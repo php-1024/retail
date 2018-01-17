@@ -111,7 +111,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登陆和权限
-            case "zerone/ajax/warzone_delete"://删除战区弹出框检测登陆和权限
+            case "zerone/ajax/warzone_delete_confirm"://删除战区弹出框检测登陆和权限
             case "zerone/ajax/warzone_edit"://修改战区弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
             case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登陆和权限

@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_delete') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/warzone_delete') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <input type="hidden" name="account" id="account" value="{{$account}}">
