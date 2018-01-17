@@ -305,7 +305,7 @@
             </div>
         </div>
     </div>
-    
+
 
 {{--<!-- Page-Level Scripts -->--}}
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
@@ -323,127 +323,7 @@
 <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
 <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
-<script>
 
-    $(function(){
-
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-
-    //编辑
-    function getEditForm(id){
-
-        var url = $('#proxy_list_edit').val();
-        var token = $('#_token').val();
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-    //冻结
-    function getFrozenForm(id){
-
-        var url = $('#proxy_list_frozen').val();
-        var token = $('#_token').val();
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-
-                $('#myModal3').html(response);
-                $('#myModal3').modal();
-            }
-        });
-    }
-    //删除
-    function getDeleteForm(id){
-
-        var url = $('#proxy_list_delete').val();
-        var token = $('#_token').val();
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-
-                $('#myModal2').html(response);
-                $('#myModal2').modal();
-            }
-        });
-    }
-</script>
 </div>
 </body>
 
