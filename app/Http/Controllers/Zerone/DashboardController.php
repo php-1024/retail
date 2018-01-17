@@ -211,6 +211,7 @@ class DashboardController extends Controller{
             ];
         }
         $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
+        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
 
 
 
@@ -222,10 +223,9 @@ class DashboardController extends Controller{
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
-        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
 
 
-        return view('Zerone/Dashboard/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
+        return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //所有登录记录
     public function login_log(Request $request)
