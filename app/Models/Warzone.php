@@ -24,7 +24,7 @@ class Warzone extends Model{
 
     //获取单行数据的其中一列
     public static function getOne($where){
-        return self::where($where)->get();
+        return self::with('province')->where($where)->get();
     }
 
     //和战区节点关联，多对多
