@@ -36,12 +36,12 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="ibox-content m-b-sm border-bottom">
-            <form method="get" role="form" id="searchForm" action="">
-                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="warzone_add" value="{{ url('zerone/ajax/warzone_add') }}">
-                <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
-                <input type="hidden" id="warzone_delete_confirm" value="{{ url('zerone/ajax/warzone_delete_confirm') }}">
                 <div class="row">
+                <form method="get" role="form" id="searchForm" action="">
+                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                    <input type="hidden" id="warzone_add" value="{{ url('zerone/ajax/warzone_add') }}">
+                    <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
+                    <input type="hidden" id="warzone_delete_confirm" value="{{ url('zerone/ajax/warzone_delete_confirm') }}">
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
                             <label class="control-label" for="amount">&nbsp;</label>
@@ -60,8 +60,8 @@
                             <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                         </div>
                     </div>
+                </form>
                 </div>
-            </form>
             </div>
             <div class="row">
                 <div class="col-lg-12">
