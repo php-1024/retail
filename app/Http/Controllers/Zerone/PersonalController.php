@@ -134,25 +134,44 @@ class PersonalController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']]
         ];
-        $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        return view('Zerone/Personal/operation_log',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'operation_log_list'=>$operation_log_list]);
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
+        return view('Zerone/Personal/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
     //个人中心——我的登录日志
     public function login_log(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']]
         ];
-        $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
-        return view('Zerone/Personal/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
+        return view('Zerone/Personal/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>
