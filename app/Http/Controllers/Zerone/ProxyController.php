@@ -188,9 +188,8 @@ class ProxyController extends Controller{
         if(!empty($proxy_owner_mobile)){
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
-        $listorg = Organization::getPaginage($where,'5','id');
-        $list = Organization::where([['type','2']])->join('warzone_proxy','organization.id','=','warzone_proxy.organization_id')->get();
-        dd($list);
+        $listorg = Organization::getPaginage($where,'5','id')->get();
+        dd($listorg);
 //        foreach ($listorg['data'] as $k=>$v){
 //            $warzone_id= $v['warzone_proxy']['id'];
 //            $listorg['data'][$k]['zhanquname'] = Warzone::getPluck(['id'=>$warzone_id],'zone_name')->toArray();
