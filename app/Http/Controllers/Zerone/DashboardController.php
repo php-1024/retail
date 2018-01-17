@@ -161,6 +161,7 @@ class DashboardController extends Controller{
 
     //战区管理编辑弹出
     public function warzone_delete_confirm(Request $request){
+        dump($request);
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
         return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'account'=>$account]);
