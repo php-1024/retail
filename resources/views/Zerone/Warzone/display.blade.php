@@ -50,13 +50,14 @@
             <div class="ibox-content m-b-sm border-bottom">
             <form method="get" role="form" id="searchForm" action="">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                <input type="hidden" id="warzone_add" value="{{ url('zerone/ajax/warzone_add') }}">
                 <input type="hidden" id="warzone_edit" value="{{ url('zerone/ajax/warzone_edit') }}">
                 <input type="hidden" id="warzone_delete_comfirm" value="{{ url('zerone/ajax/warzone_delete_comfirm') }}">
                 <div class="row">
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
                             <label class="control-label" for="amount">&nbsp;</label>
-                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn" onclick="getAddForm({{ $val->id }})"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
+                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn" onclick="getAddForm(3)"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
@@ -205,7 +206,7 @@
 
         //战区管理——添加战区
         function getAddForm(id){
-            var url = $('#warzone_edit').val();
+            var url = $('#warzone_add').val();
             var token = $('#_token').val();
 
             if(id==''){
