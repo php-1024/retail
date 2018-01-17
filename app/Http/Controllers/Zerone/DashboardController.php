@@ -145,7 +145,7 @@ class DashboardController extends Controller{
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
         $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
-        echo $zone_id;
+        echo $zone_id->id;
 //        DB::beginTransaction();
 //        try {
 //            Warzone::WarzoneAdd($zone_name);//添加战区名称
