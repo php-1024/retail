@@ -36,35 +36,30 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="ibox-content m-b-sm border-bottom">
-                <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
-                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="date_added">操作时间</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="date_modified">到</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label" for="date_added">操作时间</label>
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input id="date_added" type="text" class="form-control" value="2017-11-28">
                             </div>
                         </div>
                     </div>
-                </form>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label" for="date_modified">到</label>
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input id="date_modified" type="text" class="form-control" value="2017-11-28">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label" for="amount"> &nbsp;</label>
+                            <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
