@@ -56,7 +56,7 @@
                     <div class="pull-left padding_l_r_15">
                         <div class="form-group">
                             <label class="control-label" for="amount">&nbsp;</label>
-                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
+                            <button type="button" class="block btn-w-m btn btn-primary" id="addBtn" onclick="getAddForm({{ $val->id }})"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加战区</button>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
@@ -195,13 +195,52 @@
                     type: "error"
                 });
             });
-            $('#addBtn').click(function(){
-                $('#myModal').modal();
-            });
+//            $('#addBtn').click(function(){
+//                $('#myModal').modal();
+//            });
 
         });
 
-        //获取用户信息，编辑密码框
+
+
+        //战区管理——添加战区
+        function getAddForm(id){
+            var url = $('#warzone_edit').val();
+            var token = $('#_token').val();
+
+            if(id==''){
+                swal({
+                    title: "提示信息",
+                    text: '数据传输错误',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var data = {'id':id,'_token':token};
+            $.post(url,data,function(response){
+                if(response.status=='-1'){
+                    swal({
+                        title: "提示信息",
+                        text: response.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    return;
+                }else{
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
+                }
+            });
+        }
+
+
+        //战区管理——编辑战区
         function getEditForm(id){
             var url = $('#warzone_edit').val();
             var token = $('#_token').val();
