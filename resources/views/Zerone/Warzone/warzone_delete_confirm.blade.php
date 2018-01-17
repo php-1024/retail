@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                确认删除
+                确认删除{{$zone_name}}
             </div>
             <div class="modal-body">
                 <div class="form-group">

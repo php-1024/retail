@@ -163,8 +163,9 @@ class DashboardController extends Controller{
     public function warzone_delete_confirm(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $account = $admin_data->account;//要操作的管理员的账号,用于记录
-        $id = $request->input('id');//要操作的用户的ID
-        return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'account'=>$account]);
+        $id = $request->input('id');//要操作的战区ID
+        $zone_name = $request->input('zone_name');//要操作的战区名称
+        return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
     }
 
     //功能模块列表
