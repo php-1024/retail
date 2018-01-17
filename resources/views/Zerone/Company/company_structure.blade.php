@@ -72,7 +72,12 @@
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            {{ $oneOrg['account']. '-'.$oneOrg['account_info']['realname'] }}
+                                        </div>
+
                                         {!! $structure  !!}
+
                                     </li>
                                 </ol>
                             </div>
