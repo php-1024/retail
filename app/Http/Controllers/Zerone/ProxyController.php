@@ -290,7 +290,7 @@ class ProxyController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1'])->first();
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].','.$oneOrg['id'].'%']],0,'id','asc')->toArray();
-        dd($list);
+        dd(['parent_tree','like','%'.$oneOrg['parent_tree'].','.$oneOrg['id'].'%']);
         $structure = $this->proxy_str($list,$organization_id);
         return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
