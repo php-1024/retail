@@ -143,6 +143,114 @@
             @include('Zerone/Public/Footer')
     </div>
 </div>
+</div>
+
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <h3>“刘记新科技有限公司”程序划入</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>
+                    <div class="col-sm-2">主程序：188套</div>
+                    <div class="col-sm-2">分店数：1880套</div>
+
+                </div>
+
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划入</label>
+                    <div class="col-sm-4" ><input type="text" class="form-control"></div>
+                    <div class="col-sm-1" style="padding-top: 7px;">套</div>
+
+                </div>
+
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding-top: 7px;">分店划入</label>
+                    <div class="col-sm-4" ><input type="text" class="form-control"></div>
+                    <div class="col-sm-1" style="padding-top: 7px;">家</div>
+
+                </div>
+
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">安全密码</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary saveBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <h3>“刘记新科技有限公司”程序划出</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>
+                        <div class="col-sm-2">主程序：188套</div>
+                        <div class="col-sm-2">分店数：1880套</div>
+
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划出</label>
+                        <div class="col-sm-4" ><input type="text" class="form-control"></div>
+                        <div class="col-sm-1" style="padding-top: 7px;">套</div>
+
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="padding-top: 7px;">分店划出</label>
+                        <div class="col-sm-4" ><input type="text" class="form-control"></div>
+                        <div class="col-sm-1" style="padding-top: 7px;">家</div>
+
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">安全密码</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary saveBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
@@ -154,45 +262,29 @@
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
+
 <script>
-    $(function(){
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+    $(document).ready(function() {
+
+        // activate Nestable for list 2
+        $('#huabo_btn').click(function(){
+            $('#myModal').modal();
+        });
+        $('#koujian_btn').click(function(){
+            $('#myModal2').modal();
+        });
+        $('.saveBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            },function(){
+                window.location.reload();
+            });
         });
     });
-
-//提交表单
-function postForm() {
-    var target = $("#currentForm");
-    var url = target.attr("action");
-    var data = target.serialize();
-    $.post(url, data, function (json) {
-       if (json.status == -1) {
-           window.location.reload();
-       } else if(json.status == 1) {
-           swal({
-               title: "提示信息",
-               text: json.data,
-               confirmButtonColor: "#DD6B55",
-               confirmButtonText: "确定",
-           },function(){
-               window.location.reload();
-           });
-       }else{
-           swal({
-               title: "提示信息",
-               text: json.data,
-               confirmButtonColor: "#DD6B55",
-               confirmButtonText: "确定",
-               //type: "warning"
-           });
-       }
-    });
-}
 </script>
+
 </body>
 
 </html>
