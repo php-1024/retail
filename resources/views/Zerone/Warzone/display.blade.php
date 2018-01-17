@@ -51,7 +51,7 @@
                     <div class="col-sm-3 col-xs-6">
                         <div class="form-group">
                             <label class="control-label" for="amount">战区名称</label>
-                            <input type="text" id="amount" name="zone_name" value="" placeholder="战区名称" class="form-control">
+                            <input type="text" id="zone_name" name="zone_name" value="{{ $search_data['zone_name'] }}" placeholder="战区名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
