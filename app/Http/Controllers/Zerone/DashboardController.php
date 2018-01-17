@@ -86,6 +86,7 @@ class DashboardController extends Controller{
     public function warzone_edit(Request $request){
         $zone_name = $request->input('zone_name');//搜索时输入的战区名称
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
+        dd($warzone);
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
@@ -96,8 +97,6 @@ class DashboardController extends Controller{
             $all_province_name[$val->id] = $val->province_name;
         }
         $new_province_name = array_diff($all_province_name,$province_name);
-
-        dd($new_province_name);
 
 
         $zone_id = $request->input('id');
