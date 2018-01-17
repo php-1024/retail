@@ -49,6 +49,8 @@ class DashboardController extends Controller{
     }
     //参数设置编辑
     public function setup_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $serviceurl = $request->input('serviceurl');//[serviceurl]服务商通道链接
         $merchanturl = $request->input('merchanturl');//[merchant]商户通道链接
         $depth = $request->input('depth');//[depth]人员构深度设置
@@ -72,7 +74,7 @@ class DashboardController extends Controller{
             Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]); //修改保存服务商通道链接开启状态
             Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了系统管理参数设置：'.$zone_name);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了系统管理参数设置');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
             dump($e);
