@@ -20,7 +20,7 @@ class Node extends Model{
     }
 
     //和账号节点表多对多的关系
-    public function nodes(){
+    public function accounts(){
         return $this->belongsToMany('App\Models\Account','account_node','node_id','account_id');
     }
 
