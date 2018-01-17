@@ -15,7 +15,7 @@ class OrganizationRole extends Model{
 
     //和创建者account表多对一的关系
     public function create_account(){
-        return $this->belongsTo('App\Models\Account', 'created_by');
+        return $this->belongsto('App\Models\Account','created_by');
     }
 
     //和功能节点关系表，多对多

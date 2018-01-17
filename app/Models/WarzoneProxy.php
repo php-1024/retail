@@ -14,9 +14,9 @@ class WarzoneProxy extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和Organization表一对一的关系
-    public function organization(){
-        return $this->hasOne('App\Models\Organization', 'organization_id');
-    }
+//    public function organization(){
+//        return $this->hasOne('App\Models\Organization', 'id', 'organization_id');
+//    }
     //获取单条信息
     public static function getOne($where){
         return self::where($where)->first();

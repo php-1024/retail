@@ -19,7 +19,7 @@ class ToolingCheck{
                 if(!empty($sess_key)) {
                     return redirect('tooling');
                 }
-                break;
+            break;
 
             /****检测用户是否登陆 是否超级管理员****/
             case "tooling/dashboard/account_list"://账号列表
@@ -63,11 +63,11 @@ class ToolingCheck{
 
     //检测用户是否登陆 是否超级管理员 日期输入是否正确
     public function checkLoginAndSuperAndDate($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//是否超级管理员和登录
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkDate($re['response']);//判断是否超级管理员
+            $re2 = $this->checkDate($re['response']);//判断时间段是否正确
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -82,7 +82,7 @@ class ToolingCheck{
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkDate($re['response']);//判断是否超级管理员
+            $re2 = $this->checkDate($re['response']);
             if($re2['status']=='0'){
                 return $re2;
             }else{

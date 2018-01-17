@@ -16,7 +16,7 @@ class Organization extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和OrganizationProxyinfo表一对多的关系
-    public function organizationproxyinfo(){
+    public function organizationProxyinfo(){
         return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
     }
     //和OrganizationProxyinfo表一对多的关系
