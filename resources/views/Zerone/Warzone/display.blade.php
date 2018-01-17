@@ -195,9 +195,9 @@
                     type: "error"
                 });
             });
-            $('#addBtn').click(function(){
-                $('#myModal').modal();
-            });
+//            $('#addBtn').click(function(){
+//                $('#myModal').modal();
+//            });
 
         });
 
@@ -233,8 +233,8 @@
                     });
                     return;
                 }else{
-                    $('#myModal2').html(response);
-                    $('#myModal2').modal();
+                    $('#myModal').html(response);
+                    $('#myModal').modal();
                 }
             });
         }
