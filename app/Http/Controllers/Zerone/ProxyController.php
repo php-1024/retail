@@ -290,17 +290,21 @@ class ProxyController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1'])->first();
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
-        $structure = $this->proxy_str($list,$organization_id);
+        $structure = $this->create_structure($list,$organization_id);
         return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-
-    private function proxy_str($list,$id){
+    /*
+        * 递归生成人员结构的方法
+        * $list - 结构所有人员的无序列表
+        * $id - 上级ID
+        */
+    private function create_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->proxy_str($list, $val['id']);
+                $val['sonlist'] = $this->create_structure($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
@@ -311,7 +315,7 @@ class ProxyController extends Controller{
                     $structure.='【'.$val['account_roles'][0]['role_name'].'】';
                 }
                 $structure .= '</div>';
-                $son_menu = $this->proxy_str($list, $val['id']);
+                $son_menu = $this->create_structure($list, $val['id']);
                 if (!empty($son_menu)) {
                     $structure .=  $son_menu;
                 }
@@ -320,7 +324,6 @@ class ProxyController extends Controller{
         }
         return $structure;
     }
-
 
 }
 ?>
