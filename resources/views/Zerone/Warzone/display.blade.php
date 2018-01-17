@@ -128,7 +128,7 @@
         <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true"></div>
         {{--编辑战区弹出图层--}}
         <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
-        
+
         <!-- Mainly scripts -->
         <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
         <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
