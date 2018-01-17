@@ -46,6 +46,13 @@ class Warzone extends Model{
         return $model->id;
     }
 
+    //软删除战区
+    public static function WarzoneDelete($where)
+    {
+        $model = Self::where($where);
+        $model->delete();
+    }
+
     //修改战区
     public static function WarzoneEdit($where,$param)
     {

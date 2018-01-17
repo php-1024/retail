@@ -170,12 +170,22 @@ class DashboardController extends Controller{
 
     //战区管理确认删除
     public function warzone_delete(Request $request){
-        dd($request);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $account = $admin_data['account'];//要操作的管理员的账号,用于记录
-        $id = $request->input('id');//要操作的战区ID
-        $zone_name = $request->input('zone_name');//要操作的战区名称
-        return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
+        $route_name = $request->path();//获取当前的页面路由
+        $zone_id = $request->input('id');
+        $zone_name = $request->input('zone_name');//战区名称
+        DB::beginTransaction();
+        try {
+            Warzone::WarzoneDelete(['id'=>$zone_id]);//软删除战区
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了战区：'.$zone_name);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除战区失败，请检查！', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除战区成功！', 'status' => '1']);
     }
 
     //功能模块列表

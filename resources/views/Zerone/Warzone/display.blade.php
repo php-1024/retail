@@ -114,7 +114,7 @@
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->zone_name }}')" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->zone_name }}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         {{--<button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
                                     </td>
                                 </tr>
