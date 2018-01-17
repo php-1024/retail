@@ -42,6 +42,10 @@ class Organization extends Model{
     public static function getOneCompany($where){
         return self::with('organizationCompanyinfo')->where($where)->first();
     }
+    //获取单条信息-商户
+    public static function getArrayCompany($where){
+        return self::with('organizationCompanyinfo')->where($where)->toArray();
+    }
     //获取单条信息和organizationproxyinfo的信息
     public static function getOneAndorganizationproxyinfo($where){
         return self::with('organizationproxyinfo')->where($where)->first();
