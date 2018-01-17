@@ -189,7 +189,7 @@ class ProxyController extends Controller{
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
         $listorg = Organization::getPaginage($where,'5','id');
-        $list = Organization::all()->join('WarzoneProxy','WarzoneProxy.organization_id','=','Organization.id');
+        $list = Organization::where([['type','2']])->join('WarzoneProxy','WarzoneProxy.organization_id','=','Organization.id');
         dd($list);
 //        foreach ($listorg['data'] as $k=>$v){
 //            $warzone_id= $v['warzone_proxy']['id'];
