@@ -177,12 +177,12 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $proxy_name = $request->input('proxy_name');
+        $organization_name = $request->input('organization_name');
         $proxy_owner_mobile = $request->input('proxy_owner_mobile');
-        $search_data = ['proxy_name'=>$proxy_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
+        $search_data = ['organization_name'=>$organization_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
         $where = [['type','2']];
         if(!empty($proxy_name)){
-            $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
+            $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
 
         if(!empty($proxy_owner_mobile)){
