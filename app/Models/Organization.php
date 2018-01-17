@@ -37,6 +37,15 @@ class Organization extends Model{
     public static function getOne($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
     }
+
+    //查询获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::with('warzoneProxy')->with('organizationproxyinfo');
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
     //获取单条信息-商户
     public static function getOneCompany($where){
         return self::with('organizationCompanyinfo')->where($where)->first();
