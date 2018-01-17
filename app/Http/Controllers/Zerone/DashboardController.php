@@ -217,12 +217,13 @@ class DashboardController extends Controller{
 
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
         $time_st_format = $time_nd_format = 0;//实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
 
 
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
