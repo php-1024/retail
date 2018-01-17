@@ -43,7 +43,6 @@
 
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
-                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">服务商名称</label>
