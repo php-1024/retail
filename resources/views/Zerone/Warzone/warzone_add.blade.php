@@ -6,7 +6,6 @@
                 添加战区
             </div>
             <div class="modal-body">
-                    <input type="hidden" name="zone_id" id="zone_id" value="">
                     <div class="form-group">
                         <label>战区名称</label>
                         <input type="text" placeholder="请输入战区名称" name="zone_name" value="" class="form-control">
