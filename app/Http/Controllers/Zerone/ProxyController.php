@@ -92,11 +92,10 @@ class ProxyController extends Controller{
         if(!empty($proxy_name)){
             $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
         }
-
         if(!empty($proxy_owner_mobile)){
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
-        dump($where);
+
         $list = ProxyApply::getPaginage($where,'15','id');
         return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
@@ -177,12 +176,24 @@ class ProxyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $listorg = Organization::getPaginage([['type','2']],'5','id');
+
+        $proxy_name = $request->input('proxy_name');
+        $proxy_owner_mobile = $request->input('proxy_owner_mobile');
+        $search_data = ['proxy_name'=>$proxy_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
+        $where = [['type','2']];
+        if(!empty($proxy_name)){
+            $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
+        }
+
+        if(!empty($proxy_owner_mobile)){
+            $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
+        }
+        $listorg = Organization::getPaginage($where,'5','id');
 //        foreach ($listorg['data'] as $k=>$v){
 //            $warzone_id= $v['warzone_proxy']['id'];
 //            $listorg['data'][$k]['zhanquname'] = Warzone::getPluck(['id'=>$warzone_id],'zone_name')->toArray();
 //        }
-        return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit(Request $request){
