@@ -305,9 +305,9 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOne([['id',$organization_id]]);
-        dd($listOrg);
-        $list = Organization::getList([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
+        $listOrg = Organization::getOneCompany([['id',$organization_id]]);
+        $list = Organization::getOneCompany([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
+        dd($list);
         $structure = $this->account_structure($list,$organization_id);
         return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
