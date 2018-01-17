@@ -245,7 +245,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('company_store','Zerone\CompanyController@company_store')->middleware('ZeroneCheck');//商户划拨管理
     });
     //店铺管理
-    Route::group(['prefix'=>' store'],function(){
+    Route::group(['prefix'=>'store'],function(){
         Route::get('store_add','Zerone\StoreController@store_add')->middleware('ZeroneCheck');//添加店铺
         Route::get('store_list','Zerone\StoreController@store_list')->middleware('ZeroneCheck');//店铺列表
     });
