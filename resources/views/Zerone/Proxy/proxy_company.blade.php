@@ -49,12 +49,6 @@
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" onclick="location.href='proxy.html'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
                             <button type="button" id="addBtn" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
                         </div>
                     </div>
@@ -135,19 +129,9 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
-
-        <div class="footer" >
-            <div class="pull-right">
-                您登陆的时间是：2017-10-24 16:26:30
-            </div>
-            <div>
-                <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
-            </div>
-        </div>
+        @include('Zerone/Public/Footer')
 
     </div>
     <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
