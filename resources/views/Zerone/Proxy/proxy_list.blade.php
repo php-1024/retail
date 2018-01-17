@@ -131,7 +131,7 @@
                                     <tr>
                                         <td colspan="9" class="footable-visible">
                                             <ul class="pagination pull-right">
-                                           {{$listorg->links()}}
+                                           {{$listorg->appends($search_data)->links()}}
                                             </ul>
                                         </td>
                                     </tr>
