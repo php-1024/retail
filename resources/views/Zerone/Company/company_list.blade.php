@@ -43,7 +43,7 @@
                 <input type="hidden" id="company_list_delete" value="{{ url('zerone/ajax/company_list_delete') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
-
+                    <form method="get" role="form" id="searchForm" action="">
                     <div class="row">
 
                         <div class="col-sm-3">
@@ -73,11 +73,11 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                             </div>
                         </div>
                     </div>
-
+                    </form>
                 </div>
 
                 <div class="row">
