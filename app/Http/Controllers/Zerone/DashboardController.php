@@ -19,7 +19,7 @@ use Session;
 use App\Models\Statistics;
 
 class DashboardController extends Controller{
-    
+
     //系统管理首页
     public function display(Request $request)
     {
@@ -45,7 +45,6 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $setup_list = Setup::get_all();
-
         return view('Zerone/Dashboard/setup',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
@@ -65,11 +64,21 @@ class DashboardController extends Controller{
         }else{
             $merchanturl_status = 1;
         }
-        Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);        //修改保存服务商通道链接
-        Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);       //修改保存商户通道链接
-        Setup::editSetup([['id',3]],['cfg_value'=>$depth]);             //修改保存人员构深度设置
-        Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]); //修改保存服务商通道链接开启状态
-        Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
+        DB::beginTransaction();
+        try {
+            Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);        //修改保存服务商通道链接
+            Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);       //修改保存商户通道链接
+            Setup::editSetup([['id',3]],['cfg_value'=>$depth]);             //修改保存人员构深度设置
+            Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]); //修改保存服务商通道链接开启状态
+            Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了系统管理参数设置：'.$zone_name);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改系统管理参数设置失败，请检查！', 'status' => '0']);
+        }
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
     //战区管理首页
