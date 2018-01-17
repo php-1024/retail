@@ -181,12 +181,22 @@ class CompanyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $listorg = Organization::getCompany(['type'=>'3'],'5','id');
+
+        $organization_name = $request->input('organization_name');
+        $company_owner_mobile = $request->input('company_owner_mobile');
+
+        $search_data = ['organization_name'=>$organization_name,'company_owner_mobile'=>$company_owner_mobile];
+        $where = [['type','3']];
+        if(!empty($organization_name)){
+            $where[] = ['organization_name','like','%'.$organization_name.'%'];
+        }
+
+        $listorg = Organization::getCompany($where,'5','id');
         foreach ($listorg as $k=>$v){
             $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->toArray();
             $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->toArray();
         }
-        return view('Zerone/Company/company_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Company/company_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户编辑ajaxshow显示页面
     public function company_list_edit(Request $request){
