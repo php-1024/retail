@@ -306,7 +306,7 @@ class ProxyController extends Controller{
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
-                dump($val['sonlist']);exit;
+                dump($val['sonlist']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
