@@ -82,7 +82,7 @@ class Organization extends Model{
     }
     //获取分页数据-服务商
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organizationproxyinfo')->join('warzoneproxy','warzoneproxy.organization_id','=','organization.id')->join('warzone','warzone.id','=','warzoneproxy.zone_id')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('organizationproxyinfo')->join('warzoneproxy','warzoneproxy.organization_id','=','organization.id')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取分页数据-商户
     public static function getCompany($where,$paginate,$orderby,$sort='DESC'){
