@@ -291,7 +291,6 @@ class ProxyController extends Controller{
         $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1'])->first();
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->create_structure($list,$oneOrg['id']);
-        dd($structure);
         return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -303,7 +302,7 @@ class ProxyController extends Controller{
     private function create_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
-           
+
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
