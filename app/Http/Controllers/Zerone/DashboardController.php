@@ -86,8 +86,8 @@ class DashboardController extends Controller{
     public function warzone_edit(Request $request){
         $zone_id = $request->input('id');
         $warzone = Warzone::getOne(['id'=>$zone_id]);
-        dd($warzone);
         $province = Province::getpluck('id');
+        dd($province);
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
                 $province_name[$vv->id] = $vv->province_name;
