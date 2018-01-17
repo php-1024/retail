@@ -338,7 +338,6 @@
             </div>
         </div>
     </div>
-</div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
@@ -352,12 +351,18 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        var elem = document.querySelector('.js-switch2');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
         // activate Nestable for list 2
-        $('#huabo_btn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#koujian_btn').click(function(){
+        $('#addBtn').click(function(){
             $('#myModal2').modal();
+        });
+
+        $('#removeBtn').click(function(){
+            $('#myModal').modal();
         });
         $('.saveBtn').click(function(){
             swal({
