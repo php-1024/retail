@@ -43,15 +43,23 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/proxy_list_edit_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+            case "zerone/ajax/proxy_list_edit_check"://服务商 检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
                 return self::format_response($re,$next);
                 break;
+
+            case "zerone/ajax/company_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndComEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/proxy_examine_check"://服务商审核检测 登录 和 权限 和 安全密码
             case "zerone/ajax/company_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
+            case "zerone/ajax/company_list_frozen_check"://商户冻结  检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
+
             case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
@@ -81,11 +89,20 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/dashboard_warzone_edit"://检测战区名称 战区省份 安全密码是否为空
+            case "zerone/ajax/warzone_add_check"://检测战区名称 战区省份 安全密码是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndWarzoneAdd($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "zerone/ajax/warzone_edit_check"://检测战区名称 战区省份 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/warzone_delete"://确认删除战区检测登陆和权限和安全密码
+                $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+                return self::format_response($re,$next);
+                break;
             case "zerone/ajax/personal_edit_check"://检测是否登陆 权限 安全密码 及修改个人信息提交数据
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
@@ -97,6 +114,8 @@ class ZeroneCheckAjax
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登陆和权限
+            case "zerone/ajax/warzone_add"://添加战区弹出框检测登陆和权限
+            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登陆和权限
             case "zerone/ajax/warzone_edit"://修改战区弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
             case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登陆和权限
@@ -109,6 +128,8 @@ class ZeroneCheckAjax
 
             case "zerone/ajax/company_examine"://商户审核检测弹出登陆和权限
             case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
+            case "zerone/ajax/company_list_frozen"://商户冻结检测弹出登入和权限
+            case "zerone/ajax/company_list_delete"://商户删除检测弹出登入和权限
 
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -306,13 +327,27 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码
+    //服务商 检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndOrgEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
             $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //商户 检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndComEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkComEditData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -327,6 +362,20 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
+    public function checkLoginAndRuleAndSafeAndWarzoneAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkWarzoneAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -605,6 +654,19 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测战区添加表信息
+    public function checkWarzoneAdd($request){
+        if (empty($request->input('zone_name'))) {
+            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
+        }
+        if (empty($request->input('province_id'))) {
+            return self::res(0, response()->json(['data' => '请选择战区包含省份', 'status' => '0']));
+        }
+        if (empty($request->input('safe_password'))) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
     //检测战区编辑表信息
     public function checkWarzoneEdit($request){
         if (empty($request->input('zone_name'))) {
@@ -615,10 +677,26 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
-    //检测服务商申请表信息
+    //检测服务商编辑表信息
     public function checkOrgEditData($request){
         if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测商户编辑表信息
+    public function checkComEditData($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入商户名称', 'status' => '0']));
         }
         if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));

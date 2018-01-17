@@ -31,7 +31,7 @@ class OrganizationCompanyinfo extends Model{
         return $program->id;
     }
     //修改数据
-    public static function editOrganizationCmpanyinfo($where,$param){
+    public static function editOrganizationCompanyinfo($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;

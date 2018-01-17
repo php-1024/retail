@@ -104,7 +104,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->account['0']}}</td>
+                                        <td>{{$value->proxy_name['0']}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner}}</td>
                                         <td>{{$value->account['0']}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
@@ -221,7 +221,7 @@ function getEditForm(id){
 //冻结
 function getFrozenForm(id){
 
-    var url = $('#proxy_list_frozen').val();
+    var url = $('#company_list_frozen').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
@@ -257,7 +257,7 @@ function getFrozenForm(id){
 //删除
 function getDeleteForm(id){
 
-    var url = $('#proxy_list_delete').val();
+    var url = $('#company_list_delete').val();
     var token = $('#_token').val();
     if(id==''){
         swal({

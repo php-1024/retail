@@ -1,6 +1,5 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/dashboard_warzone_edit') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/warzone_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="zone_id" id="zone_id" value="">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -8,6 +7,7 @@
             </div>
             <div class="modal-body">
                 @foreach($zone_info as $key=>$val)
+                <input type="hidden" name="zone_id" id="zone_id" value="{{ $val->id }}">
                 <div class="form-group">
                     <label>战区名称</label>
                     <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
@@ -44,6 +44,45 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+
+        $('.chosen-select2').chosen({width:"100%"});
+        $('.chosen-select').chosen({width:"100%"});
+        $('#date_added').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $('.gg').chosen();
+        $('#date_modified').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+        $('#deleteBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "删除成功",
+                type: "success"
+            });
+        });
+        $('#deleteBtn2').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "删除失败,您没有操作权限",
+                type: "error"
+            });
+        });
+        $('#addBtn').click(function(){
+            $('#myModal').modal();
+        });
+
+    });
     //提交表单
     function postForm() {
         var target = $("#currentForm");

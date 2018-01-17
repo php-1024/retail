@@ -92,10 +92,10 @@ class ProxyController extends Controller{
         if(!empty($proxy_name)){
             $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
         }
-
         if(!empty($proxy_owner_mobile)){
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
+
         $list = ProxyApply::getPaginage($where,'15','id');
         return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
@@ -176,8 +176,15 @@ class ProxyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $listorg = Organization::getPaginage(['type'=>'2'],'5','id');
-        return view('Zerone/Proxy/proxy_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+        $organization_name = $request->input('organization_name');
+        $search_data = ['organization_name'=>$organization_name];
+        $where = [['type','2']];
+        if(!empty($organization_name)){
+            $where[] = ['organization_name','like','%'.$organization_name.'%'];
+        }
+        $listorg = Organization::getPaginage($where,'5','id');
+        return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit(Request $request){
@@ -280,8 +287,10 @@ class ProxyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Account::getList([['organization_id','7'],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'id','asc')->toArray();
-        $structure = $this->proxy_str($list,$admin_data['id']);
+        $organization_id = $request->input('organization_id');//服务商id
+        $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1'])->first();
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
+        $structure = $this->proxy_str($list,$organization_id);
         return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 

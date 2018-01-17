@@ -1,8 +1,7 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_examine_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/company_list_frozen_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{$info->id}}">
-    <input type="hidden" name="sta" id="sta" value="{{$sta}}">
+    <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -11,21 +10,23 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">服务商名称</label>
-                    <div class="col-sm-10">{{$info->proxy_name}}</div>
+                    <div class="col-sm-10">{{$list->organization_name}}</div>
                 </div>
                 <div style="clear:both"></div>
+
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" value="" name="safe_password"></div>
+                    <div class="col-sm-10"><input type="text" name="safe_password" class="form-control" value=""></div>
                 </div>
                 <div style="clear:both"></div>
+
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary saveBtn" onclick="postForm()" >保存</button>
+                <button type="button" class="btn btn-primary saveBtn" onclick="postForm()">确定</button>
             </div>
         </div>
     </div>
@@ -52,13 +53,13 @@
                 });
             }else{
                 console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                // swal({
+                //     title: "提示信息",
+                //     text: json.data,
+                //     confirmButtonColor: "#DD6B55",
+                //     confirmButtonText: "确定",
+                //     //type: "warning"
+                // });
             }
         });
     }

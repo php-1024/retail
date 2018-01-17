@@ -37,5 +37,31 @@ class Warzone extends Model{
         return self::with('province')->with('proxyapply')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
+    //添加战区
+    public static function WarzoneAdd($param)
+    {
+        $model = new Warzone();
+        $model->zone_name = $param;
+        $model->save();
+        return $model->id;
+    }
+
+    //软删除战区
+    public static function WarzoneDelete($where)
+    {
+        $model = Self::where($where);
+        $model->delete();
+    }
+
+    //修改战区
+    public static function WarzoneEdit($where,$param)
+    {
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
 }
 ?>
