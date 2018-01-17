@@ -38,66 +38,108 @@
                     </ol>
                 </div>
             </div>
-            <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>添加服务商</h5>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>“刘记新科技有限公司”程序管理</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                <thead>
+                                <tr>
+                                    <th>序</th>
+                                    <th>套餐名称</th>
+                                    <th>程序名称</th>
+                                    <th>程序数量</th>
+                                    <th class="col-sm-2 text-right" >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>零壹新科技微餐饮系统</td>
+                                    <td>微餐饮系统（先吃后付）通用版本</td>
 
-                            </div>
-                            <div class="ibox-content">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_add_check') }}">
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <div class="form-group"><label class="col-sm-2 control-label">所在战区</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control m-b" name="zone_id">
-                                                @foreach($warzone_list as $key=>$value)
-                                                <option value="{{$value->id}}">{{$value->zone_name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group"><label class="col-sm-2 control-label">服务商名称</label>
-                                        <div class="col-sm-10"><input type="text" name="organization_name" class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">负责人姓名</label>
-                                        <div class="col-sm-10"><input type="text" name="realname" class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">负责人身份证号</label>
-                                        <div class="col-sm-10"><input type="text" name="idcard" class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">手机号码</label>
-                                        <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">服务商登陆密码</label>
-                                        <div class="col-sm-10"><input type="text" name="proxy_password" class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">重复登陆密码</label>
-                                        <div class="col-sm-10"><input type="text" name="re_proxy_password" class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">安全密码</label>
-                                        <div class="col-sm-10"><input type="text" name="safe_password" class="form-control"></div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
+                                    <td>
+                                        <label class="label label-success" style="display:inline-block">188套</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>零壹新科技微餐饮系统</td>
+                                    <td>微餐饮系统（无人店模式）通用版本</td>
 
-                                    <div class="form-group ">
-                                        <div class="col-sm-4 col-sm-offset-5">
-                                            <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认申请</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    <td>
+                                        <label class="label label-success" style="display:inline-block">188套</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>零壹新科技微餐饮系统</td>
+                                    <td>微餐饮系统（自选店模式）通用版本</td>
+
+                                    <td>
+                                        <label class="label label-success" style="display:inline-block">188套</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>零壹新科技微餐饮系统</td>
+                                    <td>微餐饮系统（外卖系统）通用版本</td>
+
+                                    <td>
+                                        <label class="label label-success" style="display:inline-block">188套</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>零壹新科技微餐饮系统</td>
+                                    <td>微零售系统（单店）通用版本</td>
+
+                                    <td>
+                                        <label class="label label-success" style="display:inline-block">188套</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>零壹新科技微餐饮系统</td>
+                                    <td>微商城系统（总分店）通用版本</td>
+
+                                    <td>
+                                        <label class="label label-success" style="display:inline-block">188套</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>
-            </div>
             @include('Zerone/Public/Footer')
     </div>
 </div>

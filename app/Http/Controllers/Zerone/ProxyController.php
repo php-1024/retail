@@ -327,7 +327,7 @@ class ProxyController extends Controller{
         return $structure;
     }
 
-    //服务商下级人员架构
+    //服务商程序管理
     public function proxy_program(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
