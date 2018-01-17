@@ -122,7 +122,7 @@ class CompanyController extends Controller{
             try{
                 CompanyApply::editCompanyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
                 //添加操作日志
-                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -220,39 +220,39 @@ class CompanyController extends Controller{
 
         DB::beginTransaction();
         try{
-             $list = Organization::getOneCompany(['id'=>$id]); //获取商户组织信息
-             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
-             if($list['organization_name']!=$organization_name){
-                 Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
-             }
-             if($list['mobile']!=$mobile){
-                 OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id], ['company_owner_mobile'=>$mobile]);//修改商户表商户手机号码
-                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
-             }
+            $list = Organization::getOneCompany(['id'=>$id]); //获取商户组织信息
+            $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
+            if($list['organization_name']!=$organization_name){
+                Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
+            }
+            if($list['mobile']!=$mobile){
+                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id], ['company_owner_mobile'=>$mobile]);//修改商户表商户手机号码
+                Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
+            }
 
-             if($list['organizationcompanyinfo']['company_owner'] != $realname){
-                 $companydata = ['company_owner'=>$realname];
-                 OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],$companydata);//修改商户信息表 用户姓名
-                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
-             }
-             if(!empty($password)){
-                 $key = config("app.zerone_encrypt_key");//获取加密盐
-                 $encrypted = md5($password);//加密密码第一重
-                 $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-                 $accountdata = ['password'=>$encryptPwd];
-                 Account::editAccount(['organization_id'=>$id,'parent_id'=>'1'],$accountdata);//修改管理员表登入密码
-             }
-             if($acc['idcard'] != $idcard){
-                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                 OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],['company_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
-             }
+            if($list['organizationcompanyinfo']['company_owner'] != $realname){
+                $companydata = ['company_owner'=>$realname];
+                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],$companydata);//修改商户信息表 用户姓名
+                AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
+            }
+            if(!empty($password)){
+                $key = config("app.zerone_encrypt_key");//获取加密盐
+                $encrypted = md5($password);//加密密码第一重
+                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+                $accountdata = ['password'=>$encryptPwd];
+                Account::editAccount(['organization_id'=>$id,'parent_id'=>'1'],$accountdata);//修改管理员表登入密码
+            }
+            if($acc['idcard'] != $idcard){
+                AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
+                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],['company_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
+            }
 
-             if($list['parent_id'] != $parent_id){
-                 $porxy = Organization::getOne(['id'=>$parent_id]); //获取选择更换的上级服务商信息
-                 $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
-                 $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
-                 Organization::editOrganization(['id'=>$id],$data);//修改商户的上级服务商信息
-             }
+            if($list['parent_id'] != $parent_id){
+                $porxy = Organization::getOne(['id'=>$parent_id]); //获取选择更换的上级服务商信息
+                $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
+                $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
+                Organization::editOrganization(['id'=>$id],$data);//修改商户的上级服务商信息
+            }
 
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了商户：'.$list['organization_name']);//保存操作记录
