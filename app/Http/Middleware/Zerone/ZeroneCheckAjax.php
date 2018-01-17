@@ -99,6 +99,10 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/warzone_delete"://确认删除战区检测登陆和权限和安全密码
+                $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+                return self::format_response($re,$next);
+                break;
             case "zerone/ajax/personal_edit_check"://检测是否登陆 权限 安全密码 及修改个人信息提交数据
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
@@ -111,7 +115,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登陆和权限
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登陆和权限
-            case "zerone/ajax/warzone_delete_confirm"://删除战区弹出框检测登陆和权限
+            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登陆和权限
             case "zerone/ajax/warzone_edit"://修改战区弹出框检测登陆和权限
             case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
             case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登陆和权限
