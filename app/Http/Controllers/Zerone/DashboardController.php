@@ -224,9 +224,7 @@ class DashboardController extends Controller{
             ];
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
-        $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
-
+        $operation_log_list = OperationLog::getPaginage($where,$time_st_format,$time_nd_format,10,'id');//操作记录
         dump($search_data);
         dump($list);
 
