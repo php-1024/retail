@@ -148,7 +148,7 @@ class DashboardController extends Controller{
         echo $zone_id;
 //        DB::beginTransaction();
 //        try {
-//            Warzone::WarzoneAdd($zone_name);//添加战区名称
+//            $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
 //            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);//添加战区包含省份
 //            //添加操作日志
 //            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了战区：'.$zone_name);//保存操作记录

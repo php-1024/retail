@@ -43,7 +43,7 @@ class Warzone extends Model{
         $model = new Warzone();
         $model->zone_name = $param;
         $model->save();
-        return $model->id;
+        $model->id;
     }
 
     //修改战区
