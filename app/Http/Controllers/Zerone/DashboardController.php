@@ -206,8 +206,6 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $zerone_all = Statistics::all();//获取统计数据
-
         $where = [];
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
@@ -215,7 +213,7 @@ class DashboardController extends Controller{
             ];
         }
         $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        return view('Zerone/Log/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
+        return view('Zerone/Dashboard/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
     }
     /*
      * 所有登录记录
@@ -233,7 +231,7 @@ class DashboardController extends Controller{
             ];
         }
         $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
-        return view('Zerone/Log/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
+        return view('Zerone/Dashboard/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
     }
 
     /*
