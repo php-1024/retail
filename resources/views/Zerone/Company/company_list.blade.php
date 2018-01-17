@@ -116,7 +116,7 @@
                                             @endif
                                         </td>
                                         <td>2017-08-08 10:30:30</td>
-                                        <form method="get" role="form" id="searchForm" action="{{url('zerone/Company/company_structure')}}">
+                                        <form method="get" role="form" id="searchForm" action="{{url('zerone/company/company_structure')}}">
                                             <input type="hidden" name="organization_id" value="{{$value->id}}">
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
