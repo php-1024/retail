@@ -306,11 +306,13 @@ class CompanyController extends Controller{
 
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOne([['id',$organization_id]]);
-        $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
+
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
+        dd($list);
         $structure = $this->account_structure($list,$oneOrg['id']);
         return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
 
 
     private function account_structure($list,$id){
@@ -318,7 +320,7 @@ class CompanyController extends Controller{
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->proxy_str($list, $val['id']);
+                $val['sonlist'] = $this->account_structure($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
@@ -329,7 +331,7 @@ class CompanyController extends Controller{
                     $structure.='【'.$val['account_roles'][0]['role_name'].'】';
                 }
                 $structure .= '</div>';
-                $son_menu = $this->proxy_str($list, $val['id']);
+                $son_menu = $this->account_structure($list, $val['id']);
                 if (!empty($son_menu)) {
                     $structure .=  $son_menu;
                 }
