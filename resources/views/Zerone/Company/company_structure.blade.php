@@ -72,12 +72,7 @@
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            {{ $admin_data['account'] }}
-                                        </div>
-
                                         {!! $structure  !!}
-
                                     </li>
                                 </ol>
                             </div>
