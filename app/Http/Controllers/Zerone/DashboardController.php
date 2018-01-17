@@ -215,24 +215,18 @@ class DashboardController extends Controller{
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
-            if (empty($account)){
-                $where = [
-                    ['account_id',$admin_data['id']]
-                ];
-            }else{
-                $where = [
-                    ['account_id',$admin_data['id']],
-                    ['account',$account]
-                ];
-            }
+            $where = [
+                ['account_id',$admin_data['id']]
+            ];
         }else{
-            $where = [];
+            $where = [
+                ['account',$account]
+            ];
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
-        $operation_log_list = OperationLog::getPaginate([['account_id',$admin_data['id']],['account',$account]],$time_st_format,$time_nd_format,10,'id');//操作记录
-
+        $operation_log_list = OperationLog::getPaginage($where,$time_st_format,$time_nd_format,10,'id');//操作记录
         dump($search_data);
-        dump($operation_log_list);
+        dump($list);
 
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
