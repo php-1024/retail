@@ -180,7 +180,7 @@ class ProxyController extends Controller{
         $organization_name = $request->input('organization_name');
         $search_data = ['organization_name'=>$organization_name];
         $where = [['type','2']];
-        if(!empty($proxy_name)){
+        if(!empty($organization_name)){
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
         $listorg = Organization::getPaginage($where,'5','id');
