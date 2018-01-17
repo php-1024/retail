@@ -103,16 +103,16 @@
                                     @foreach($listorg as $key=>$value)
                                     <tr>
                                         <td>{{$value['id']}}</td>
-                                        <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->warzoneProxy->zone_id}}</td>
-                                        <td>{{$value->organizationproxyinfo->proxy_owner}}</td>
+                                        <td>{{$value['organization_name']}}</td>
+                                        <td>{{$value['warzoneProxy']['zone_id']}}</td>
+                                        <td>{{$value['organizationproxyinfo']['proxy_owner']}}</td>
 
 
-                                        <td>{{$value->organizationproxyinfo->proxy_owner_mobile}}</td>
+                                        <td>{{$value['organizationproxyinfo']['proxy_owner_mobile']}}</td>
                                         <td>
-                                            @if($value->status == 1)
+                                            @if($value['status'] == 1)
                                                 <label class="label label-primary">正常</label>
-                                            @elseif($value->status == 0)
+                                            @elseif($value['status'] == 0)
                                                 <label class="label label-danger">已冻结</label>
                                             @endif
                                         </td>
