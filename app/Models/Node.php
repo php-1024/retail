@@ -19,6 +19,11 @@ class Node extends Model{
         return $this->belongsToMany('App\Models\OrganizationRole','role_node','node_id','role_id');
     }
 
+    //和账号节点表多对多的关系
+    public function accounts(){
+        return $this->belongsToMany('App\Models\Account','account_node','node_id','account_id');
+    }
+
     //和功能模块关联，多对多
     public function modules()
     {
