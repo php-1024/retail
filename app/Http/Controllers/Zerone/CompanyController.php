@@ -7,12 +7,7 @@ use App\Models\CompanyApply;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationCompanyinfo;
-use App\Models\OrganizationProxyinfo;
-use App\Models\OrganizationRole;
-use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
-use App\Models\ProxyApply;
-use App\Models\Warzone;
 use Illuminate\Support\Facades\DB;
 use Session;
 class CompanyController extends Controller{
