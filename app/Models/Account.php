@@ -20,35 +20,14 @@ class Account extends Model{
         return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
 
-
-    //冻结账号
-    public static function editOrganizationBatch($where,$param){
-        $model =  self::where($where)->get();
-        foreach ($model as $k=>$v){
-            foreach($param as $key=>$val){
-                $v->$key=$val;
-            }
-            $v->save();
-        }
-    }
-
-    //修改账号
-    public static function editAccount($where,$param){
-        $model = self::where($where)->first();
-        foreach($param as $key=>$val){
-            $model->$key=$val;
-        }
-        $model->save();
-    }
-
     //和个人信息表一对一的关系
     public function account_info(){
         return $this->hasOne('App\Models\AccountInfo', 'account_id');
     }
 
-    //和账号节点表一对一的关系
-    public function account_node(){
-        return $this->hasOne('App\Models\AccountNode', 'account_id');
+    //和账号节点表多对多的关系
+    public function nodes(){
+        return $this->belongsToMany('App\Models\Node','account_node','account_id','node_id');
     }
 
     //和organization表多对一的关系
@@ -71,6 +50,26 @@ class Account extends Model{
             $model = $model->limit($limit);
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
+
+    //冻结账号
+    public static function editOrganizationBatch($where,$param){
+        $model =  self::where($where)->get();
+        foreach ($model as $k=>$v){
+            foreach($param as $key=>$val){
+                $v->$key=$val;
+            }
+            $v->save();
+        }
+    }
+
+    //修改账号
+    public static function editAccount($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
     }
 
     //查询获取账户的模块和节点列表
