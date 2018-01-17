@@ -116,7 +116,7 @@
                                             @endif
                                         </td>
                                         <td>2017-08-08 10:30:30</td>
-                                        <form method="post" role="form" id="searchForm" action="{{url('zerone/proxy/proxy_structure')}}">
+                                        <form method="get" role="form" id="searchForm" action="{{url('zerone/proxy/proxy_structure')}}">
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
