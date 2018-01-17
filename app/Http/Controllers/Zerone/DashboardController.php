@@ -144,21 +144,19 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');//战区名称
         $province_id = $request->input('province_id');//包含省份ID（array）
-        $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
-        echo $zone_id;
-//        DB::beginTransaction();
-//        try {
-//            $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
-//            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);//添加战区包含省份
-//            //添加操作日志
-//            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了战区：'.$zone_name);//保存操作记录
-//            DB::commit();
-//        } catch (\Exception $e) {
-//            dump($e);
-//            DB::rollBack();//事件回滚
-//            return response()->json(['data' => '添加战区失败，请检查！', 'status' => '0']);
-//        }
-//        return response()->json(['data' => '添加战区成功！', 'status' => '1']);
+        DB::beginTransaction();
+        try {
+            $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
+            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);//添加战区包含省份
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了战区：'.$zone_name);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加战区失败，请检查！', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加战区成功！', 'status' => '1']);
     }
 
     //功能模块列表
