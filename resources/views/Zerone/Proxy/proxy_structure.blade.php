@@ -22,7 +22,7 @@
     @include('Zerone/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-            @include('Zerone/Public/Header')
+        @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>“{{$listOrg->organization_name}}”人员结构</h2>
@@ -81,14 +81,14 @@
                                     </li>
                                 </ol>
                             </div>
-                            
+
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-            @include('Zerone/Public/Footer')
+        @include('Zerone/Public/Footer')
 
     </div>
 
