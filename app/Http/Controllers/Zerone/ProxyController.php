@@ -289,9 +289,8 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1'])->first();
-        dd($oneOrg);
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$listOrg['parent_tree'].','.$listOrg['id'].'%']],0,'id','asc')->toArray();
-
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].','.$oneOrg['id'].'%']],0,'id','asc')->toArray();
+        dd($list);
         $structure = $this->proxy_str($list,$organization_id);
         return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
