@@ -87,8 +87,9 @@
                     </div>
                 </div>
             </div>
+        </div>
             @include('Zerone/Public/Footer')
-            </div>
+
     </div>
 
     {{--<!-- Page-Level Scripts -->--}}
