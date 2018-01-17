@@ -161,21 +161,10 @@ class DashboardController extends Controller{
 
     //战区管理编辑弹出
     public function warzone_delete_confirm(Request $request){
-        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
-        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
-        $province = Province::getpluck('id');
-        foreach ($warzone as $key=>$val){
-            foreach ($val->province as $kk=>$vv){
-                $province_name[$vv->id] = $vv->province_name;
-            }
-        }
-        foreach ($province as $key=>$val){
-            $all_province_name[$val->id] = $val->province_name;
-        }
-        $new_province_name = array_diff($all_province_name,$province_name);
-        $zone_id = $request->input('id');
-        $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
-        return view('Zerone/Warzone/warzone_delete_confirm',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
+        dump($request);
+        $id = $request->input('id');//要操作的用户的ID
+        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'account'=>$account]);
     }
 
     //功能模块列表
