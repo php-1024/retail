@@ -234,9 +234,7 @@
 <!-- Page-Level Scripts -->
 
 
-<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
 
-{{--<script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>--}}
 <script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
 
 <script>
