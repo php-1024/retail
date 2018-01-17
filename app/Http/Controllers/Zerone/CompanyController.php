@@ -313,7 +313,7 @@ class CompanyController extends Controller{
     }
 
 
-    private function proxy_str($list,$id){
+    private function account_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
