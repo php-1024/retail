@@ -178,15 +178,10 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_name = $request->input('organization_name');
-        $proxy_owner_mobile = $request->input('proxy_owner_mobile');
-        $search_data = ['organization_name'=>$organization_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
+        $search_data = ['organization_name'=>$organization_name];
         $where = [['type','2']];
         if(!empty($proxy_name)){
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
-        }
-
-        if(!empty($proxy_owner_mobile)){
-            $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
         $listorg = Organization::getPaginage($where,'5','id');
         return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
