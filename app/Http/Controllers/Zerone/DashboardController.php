@@ -218,6 +218,7 @@ class DashboardController extends Controller{
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
         $account = $request->input('account');//查询操作账户
+        dump($request);
         $time_st_format = $time_nd_format = 0;//实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
