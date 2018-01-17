@@ -289,9 +289,9 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1'])->first();
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].'%']],0,'id','asc')->toArray();
-        dd($list);
-        $structure = $this->create_structure($list,$organization_id);
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
+        $structure = $this->create_structure($list,$oneOrg['id']);
+        dd($structure);
         return view('Zerone/Proxy/proxy_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -303,9 +303,11 @@ class ProxyController extends Controller{
     private function create_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
+
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
+                dump($val['sonlist']);exit;
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
