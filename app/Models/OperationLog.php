@@ -30,9 +30,14 @@ class OperationLog extends Model{
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
-    //分页查询获取列表
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('accountsInfo')->with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+
+    //根据时间戳操作用户分页查询获取列表
+    public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::where($where);
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //添加登录日志
