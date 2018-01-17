@@ -51,19 +51,22 @@ class ProxyController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$deepth,'type'=>2,'status'=>1];
+            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
-            $organization_id = Organization::addProgram(['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$deepth,'type'=>2,'status'=>1]); //返回值为商户的id
-
-            WarzoneProxy::addWarzoneProxy(['organization_id'=>$organization_id,'zone_id'=>$zone_id]);//战区关联服务商
+            $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
+            WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
 
             $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
-            $account_id = Account::addAccount(['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account]);//添加账号返回id
-
+            $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
+            $account_id = Account::addAccount($accdata);//添加账号返回id
             $realname = $request->input('realname');//负责人姓名
             $idcard = $request->input('idcard');//负责人身份证号
-            AccountInfo::addAccountInfo(['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard]);//添加到管理员信息表
+            $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
+            AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-            OrganizationProxyinfo::addOrganizationProxyinfo(['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile]);  //添加到服务商组织信息表
+            $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
+            OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
@@ -127,7 +130,7 @@ class ProxyController extends Controller{
         }elseif($sta == 1){
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply([['id'=>$id]],['status'=>$sta]);//申请通过
+                ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//申请通过
                 //添加服务商
                 $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
@@ -159,7 +162,6 @@ class ProxyController extends Controller{
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                echo $e;exit;
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
