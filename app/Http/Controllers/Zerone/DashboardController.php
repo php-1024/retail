@@ -220,7 +220,7 @@ class DashboardController extends Controller{
             ];
         }else{
             $where = [
-                ['account',$account]
+//                ['account',$account]
             ];
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
