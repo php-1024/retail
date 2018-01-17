@@ -1,7 +1,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/warzone_delete') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="">
-    <input type="hidden" name="account" id="account" value="">
+    <input type="hidden" name="id" id="id" value="{{$id}}">
+    <input type="hidden" name="account" id="account" value="{{$account}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">用户账号</label>
-                    <div class="col-sm-10"></div>
+                    <div class="col-sm-10">{{ $account }}</div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
