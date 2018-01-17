@@ -239,8 +239,9 @@ Route::group(['prefix'=>'zerone'],function(){
     Route::group(['prefix'=>'company'],function(){
         Route::get('company_add','Zerone\CompanyController@company_add')->middleware('ZeroneCheck');//添加商户
         Route::get('company_examinelist','Zerone\CompanyController@company_examinelist')->middleware('ZeroneCheck');//商户审核列表
-        Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//服务商列表
-        Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//服务商人员架构
+        Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//商户列表
+        Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//商户人员架构
+        Route::get('company_program','Zerone\CompanyController@company_program')->middleware('ZeroneCheck');//商户程序管理
     });
 
     //异步提交数据组
