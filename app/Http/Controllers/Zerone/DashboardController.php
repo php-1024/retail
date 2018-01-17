@@ -194,7 +194,6 @@ class DashboardController extends Controller{
         $module_name = $request->input('module_name');
         $search_data = ['module_name'=>$module_name];
         $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
-        dump($list);
         return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     /*
@@ -213,7 +212,6 @@ class DashboardController extends Controller{
             ];
         }
         $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        dump($operation_log_list);
         return view('Zerone/Dashboard/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
     }
     /*
