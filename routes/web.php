@@ -242,6 +242,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//商户列表
         Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//商户人员架构
         Route::get('company_program','Zerone\CompanyController@company_program')->middleware('ZeroneCheck');//商户程序管理
+        Route::get('company_store','Zerone\CompanyController@company_store')->middleware('ZeroneCheck');//商户划拨管理
     });
 
     //异步提交数据组
