@@ -247,7 +247,7 @@ Route::group(['prefix'=>'zerone'],function(){
     //店铺管理
     Route::group(['prefix'=>'store'],function(){
         Route::get('store_add','Zerone\StoreController@store_add')->middleware('ZeroneCheck');//添加店铺
-        Route::get('store_list','Zerone\StoreController@store_list')->middleware('ZeroneCheck');//店铺列表
+        Route::get('store_list','Zerone\StoreController@store_list');//店铺列表
     });
 
     //异步提交数据组
