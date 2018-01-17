@@ -1,9 +1,9 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/warzone_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/warzone_add_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                修改战区
+                添加战区
             </div>
             <div class="modal-body">
                 @foreach($zone_info as $key=>$val)
