@@ -324,7 +324,7 @@ class CompanyController extends Controller{
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure .= '【商户】'. $val['organization_nam']. '-'.$val['organization_companyinfo']['company_owner'].'-'.$val['organization_companyinfo']['company_owner_mobile'];
+                $structure .= '【商户】'. $val['organization_name']. '-'.$val['organization_companyinfo']['company_owner'].'-'.$val['organization_companyinfo']['company_owner_mobile'];
                 $structure .= '</div>';
                 $son_menu = $this->Com_structure($list, $val['id']);
                 if (!empty($son_menu)) {
