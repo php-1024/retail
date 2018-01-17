@@ -182,15 +182,16 @@ class CompanyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $company_name = $request->input('company_name');
+        $organization_name = $request->input('organization_name');
         $company_owner_mobile = $request->input('company_owner_mobile');
-        $search_data = ['company_name'=>$company_name,'company_owner_mobile'=>$company_owner_mobile];
-        $where = [];
-        if(!empty($company_name)){
-            $where[] = ['company_name','like','%'.$company_name.'%'];
+
+        $search_data = ['organization_name'=>$organization_name,'company_owner_mobile'=>$company_owner_mobile];
+        $where = [['type','3']];
+        if(!empty($organization_name)){
+            $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
 
-        $listorg = Organization::getCompany(['type'=>'3'],'5','id');
+        $listorg = Organization::getCompany($where,'5','id');
         foreach ($listorg as $k=>$v){
             $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->toArray();
             $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->toArray();
