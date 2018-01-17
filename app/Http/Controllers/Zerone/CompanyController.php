@@ -303,9 +303,13 @@ class CompanyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Account::getList([['organization_id','7'],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'id','asc')->toArray();
-        $structure = $this->proxy_str($list,$admin_data['id']);
-        return view('Zerone/Company/company_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+        $organization_id = $request->input('organization_id');//服务商id
+        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
+        $structure = $this->account_structure($list,$oneOrg['id']);
+        return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
