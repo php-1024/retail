@@ -307,30 +307,26 @@ class CompanyController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneCompany([['id',$organization_id]]);
         $list = Organization::getArrayCompany([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
-        dd($list);
-        $structure = $this->account_structure($list,$organization_id);
+        $structure = $this->Com_structure($list,$organization_id);
         return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
 
-    private function account_structure($list,$id){
+    private function Com_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->account_structure($list, $val['id']);
+                $val['sonlist'] = $this->Com_structure($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
-                if(!empty($val['account_roles'])){
-                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
-                }
+                $structure .= '【商户】'. $val['organization_nam']. '-'.$val['organization_companyinfo']['company_owner'].'-'.$val['organization_companyinfo']['company_owner_mobile'];
                 $structure .= '</div>';
-                $son_menu = $this->account_structure($list, $val['id']);
+                $son_menu = $this->Com_structure($list, $val['id']);
                 if (!empty($son_menu)) {
                     $structure .=  $son_menu;
                 }
