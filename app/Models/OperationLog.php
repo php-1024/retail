@@ -17,6 +17,10 @@ class OperationLog extends Model{
     public function accounts(){
         return $this->belongsTo('App\Models\Account', 'account_id');
     }
+    //关联程序管理工具账户信息表
+    public function accountsInfo(){
+        return $this->belongsTo('App\Models\AccountInfo', 'account_id');
+    }
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
@@ -28,7 +32,7 @@ class OperationLog extends Model{
     }
     //分页查询获取列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('accountsInfo')->with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //添加登录日志
