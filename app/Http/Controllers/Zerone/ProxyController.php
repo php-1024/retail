@@ -288,7 +288,7 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $oneOrg = Account::getOne([['organization_id',$organization_id,'parent_id','1']]);
+        $oneOrg = Account::where(['organization_id'=>$organization_id,'parent_id'=>'1']);
         dd($oneOrg);
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$listOrg['parent_tree'].','.$listOrg['id'].'%']],0,'id','asc')->toArray();
 
