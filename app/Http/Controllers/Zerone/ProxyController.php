@@ -289,7 +289,6 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOne([['id',$organization_id]]);
-        dd($listOrg);
         $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->account_structure($list,$oneOrg['id']);
