@@ -19,9 +19,8 @@ use Session;
 use App\Models\Statistics;
 
 class DashboardController extends Controller{
-    /*
-     * 登陆页面
-     */
+    
+    //系统管理首页
     public function display(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -187,18 +186,7 @@ class DashboardController extends Controller{
         return response()->json(['data' => '删除战区成功！', 'status' => '1']);
     }
 
-    //功能模块列表
-    public function module_list(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $module_name = $request->input('module_name');
-        $search_data = ['module_name'=>$module_name];
-        $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
-        return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
-    }
-    /*
-     * 所有操作记录
-     */
+    //所有操作记录
     public function operation_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -214,9 +202,7 @@ class DashboardController extends Controller{
         $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
         return view('Zerone/Dashboard/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
     }
-    /*
-     * 所有登录记录
-     */
+    //所有登录记录
     public function login_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -233,9 +219,7 @@ class DashboardController extends Controller{
         return view('Zerone/Dashboard/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
     }
 
-    /*
-     * 系统人员结构
-     */
+    //系统人员结构
     public function structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
