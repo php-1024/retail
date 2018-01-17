@@ -44,7 +44,7 @@ class ZeroneCheck{
             case "zerone/proxy/proxy_examinelist":      //服务商审核列表
             case "zerone/proxy/proxy_list":             //服务商列表
             case "zerone/proxy/proxy_structure":        //服务商人员架构
-                
+
             case "zerone/company/company_add":          //添加商户
             case "zerone/company/company_examinelist":  //商户审核列表
             case "zerone/company/company_list":         //商户列表
