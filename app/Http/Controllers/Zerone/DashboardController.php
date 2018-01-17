@@ -128,6 +128,25 @@ class DashboardController extends Controller{
         return response()->json(['data' => '编辑战区成功', 'status' => '1']);
     }
 
+    //战区管理添加战区弹出
+    public function warzone_add(Request $request){
+        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
+        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
+        $province = Province::getpluck('id');
+        foreach ($warzone as $key=>$val){
+            foreach ($val->province as $kk=>$vv){
+                $province_name[$vv->id] = $vv->province_name;
+            }
+        }
+        foreach ($province as $key=>$val){
+            $all_province_name[$val->id] = $val->province_name;
+        }
+        $new_province_name = array_diff($all_province_name,$province_name);
+        $zone_id = $request->input('id');
+        $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
+        return view('Zerone/Warzone/warzone_add',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
+    }
+
     //功能模块列表
     public function module_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
