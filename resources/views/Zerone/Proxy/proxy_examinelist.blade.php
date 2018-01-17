@@ -44,24 +44,24 @@
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount">服务商名称</label>
-                            <input type="text" id="proxy_name" name="proxy_name" value="{{ $search_data['proxy_name'] }}" placeholder="请输入服务商名称" class="form-control">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount">服务商名称</label>
+                                <input type="text" id="proxy_name" name="proxy_name" value="{{ $search_data['proxy_name'] }}" placeholder="请输入服务商名称" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount">手机号码</label>
-                            <input type="text" id="proxy_owner_mobile" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount">手机号码</label>
+                                <input type="text" id="proxy_owner_mobile" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount"> &nbsp;</label>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
@@ -88,29 +88,29 @@
                                 </thead>
                                 <tbody>
                                 @foreach($list as $key=>$value)
-                                <tr>
-                                    <td>{{$value->id}}</td>
-                                    <td>{{$value->proxy_name}}</td>
-                                    <td>{{$value->warzone->zone_name}}</td>
-                                    <td>{{$value->proxy_owner}}</td>
+                                    <tr>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->proxy_name}}</td>
+                                        <td>{{$value->warzone->zone_name}}</td>
+                                        <td>{{$value->proxy_owner}}</td>
 
-                                    <td>{{$value->proxy_owner_idcard}}</td>
-                                    <td>{{$value->proxy_owner_mobile}}</td>
-                                    <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
-                                        @elseif($value->status == 1)<label class="label label-primary">已通过</label>
-                                        @elseif($value->status == -1)<label class="label label-danger">未通过</label>
-                                        @endif
-                                    </td>
-                                    <td>{{$value->created_at}}</td>
-                                    <td class="text-right">
-                                        @if($value->status == 0)
-                                        <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
-                                        @else
-                                            <label class="label label-primary">已审核</label>
-                                        @endif
-                                    </td>
-                                </tr>
+                                        <td>{{$value->proxy_owner_idcard}}</td>
+                                        <td>{{$value->proxy_owner_mobile}}</td>
+                                        <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
+                                            @elseif($value->status == 1)<label class="label label-primary">已通过</label>
+                                            @elseif($value->status == -1)<label class="label label-danger">未通过</label>
+                                            @endif
+                                        </td>
+                                        <td>{{$value->created_at}}</td>
+                                        <td class="text-right">
+                                            @if($value->status == 0)
+                                                <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                            @else
+                                                <label class="label label-primary">已审核</label>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
@@ -154,52 +154,52 @@
 
 
 <script>
-$(function(){
+    $(function(){
 
-    //设置CSRF令牌
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-});
-
-//审核
-function getEditForm(id,sta){
-
-    var url = $('#proxy_examine').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-        return;
-    }
+    });
 
-    var data = {'id':id,'sta':sta,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
+    //审核
+    function getEditForm(id,sta){
+
+        var url = $('#proxy_examine').val();
+        var token = $('#_token').val();
+        if(id==''){
             swal({
                 title: "提示信息",
-                text: response.data,
+                text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
             },function(){
                 window.location.reload();
             });
             return;
-        }else{
-
-            $('#myModal').html(response);
-            $('#myModal').modal();
         }
-    });
-}
+
+        var data = {'id':id,'sta':sta,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 

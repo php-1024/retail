@@ -22,28 +22,28 @@
     @include('Zerone/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-            @include('Zerone/Public/Header')
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-sm-4">
-                    <h2>服务商列表</h2>
-                    <ol class="breadcrumb">
-                        <li class="active">
-                            <a href="JavaScript:;">服务商管理</a>
-                        </li>
-                        <li >
-                            <strong>服务商列表</strong>
-                        </li>
-                    </ol>
-                </div>
+        @include('Zerone/Public/Header')
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>服务商列表</h2>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <a href="JavaScript:;">服务商管理</a>
+                    </li>
+                    <li >
+                        <strong>服务商列表</strong>
+                    </li>
+                </ol>
             </div>
-            <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
-                <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
-                <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+            <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+            <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
+            <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
+            <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
 
-                <div class="ibox-content m-b-sm border-bottom">
-                    <form method="get" role="form" id="searchForm" action="">
+            <div class="ibox-content m-b-sm border-bottom">
+                <form method="get" role="form" id="searchForm" action="">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -52,22 +52,22 @@
                             </div>
                         </div>
                         {{--<div class="col-sm-3">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="control-label" for="amount">手机号码</label>--}}
-                                {{--<input type="text" id="amount" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">--}}
-                            {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                        {{--<label class="control-label" for="amount">手机号码</label>--}}
+                        {{--<input type="text" id="amount" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">--}}
+                        {{--</div>--}}
                         {{--</div>--}}
                         {{--<div class="col-sm-3">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="control-label" for="amount">所在战区</label>--}}
-                                {{--<select class="form-control m-b" name="account">--}}
-                                    {{--<option>东部战区</option>--}}
-                                    {{--<option>西部战区</option>--}}
-                                    {{--<option>南部战区</option>--}}
-                                    {{--<option>北部战区</option>--}}
-                                    {{--<option>中部战区</option>--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                        {{--<label class="control-label" for="amount">所在战区</label>--}}
+                        {{--<select class="form-control m-b" name="account">--}}
+                        {{--<option>东部战区</option>--}}
+                        {{--<option>西部战区</option>--}}
+                        {{--<option>南部战区</option>--}}
+                        {{--<option>北部战区</option>--}}
+                        {{--<option>中部战区</option>--}}
+                        {{--</select>--}}
+                        {{--</div>--}}
                         {{--</div>--}}
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -76,30 +76,30 @@
                             </div>
                         </div>
                     </div>
-                    </form>
-                </div>
+                </form>
+            </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox">
-                            <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-content">
 
-                                <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>服务商名称</th>
-                                        <th>所在战区</th>
-                                        <th>负责人姓名</th>
+                            <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>服务商名称</th>
+                                    <th>所在战区</th>
+                                    <th>负责人姓名</th>
 
-                                        <th>手机号码</th>
-                                        <th>服务商状态</th>
-                                        <th class="col-sm-1">注册时间</th>
-                                        <th class="col-sm-4 text-right" >操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($listorg as $key=>$value)
+                                    <th>手机号码</th>
+                                    <th>服务商状态</th>
+                                    <th class="col-sm-1">注册时间</th>
+                                    <th class="col-sm-4 text-right" >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($listorg as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
@@ -118,184 +118,184 @@
                                         <td>2017-08-08 10:30:30</td>
                                         <form method="get" role="form" id="searchForm" action="{{url('zerone/proxy/proxy_structure')}}">
                                             <input type="hidden" name="organization_id"  value="{{$value->id}}">
-                                        <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                            <td class="text-right">
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                                <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
 
-                                            <button type="submit" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
+                                                <button type="submit" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
 
-                                            <button type="button" id="programBtn" onclick="location.href='{{url('zerone/proxy/proxy_program')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                            <button type="button" id="companyBtn" onclick="location.href='proxycompany.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
-                                        </td>
+                                                <button type="button" id="programBtn" onclick="location.href='{{url('zerone/proxy/proxy_program')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
+                                                <button type="button" id="companyBtn" onclick="location.href='proxycompany.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
+                                            </td>
                                         </form>
                                     </tr>
-                                    @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="9" class="footable-visible">
-                                            <ul class="pagination pull-right">
-                                           {{$listorg->appends($search_data)->links()}}
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="9" class="footable-visible">
+                                        <ul class="pagination pull-right">
+                                            {{$listorg->appends($search_data)->links()}}
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
 
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('Zerone/Public/Footer')
-            </div>
-
-            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
-            <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
-            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        </div>
+        @include('Zerone/Public/Footer')
     </div>
 
-    {{--<!-- Page-Level Scripts -->--}}
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+    <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
-    <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
-    <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
-    <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
+    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
+</div>
 
-    <script>
+{{--<!-- Page-Level Scripts -->--}}
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
-$(function(){
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
-    //设置CSRF令牌
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-});
+<script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
+<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
-//编辑
-function getEditForm(id){
+<script>
 
-    var url = $('#proxy_list_edit').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
+    $(function(){
+
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-        return;
-    }
+    });
 
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
+    //编辑
+    function getEditForm(id){
+
+        var url = $('#proxy_list_edit').val();
+        var token = $('#_token').val();
+        if(id==''){
             swal({
                 title: "提示信息",
-                text: response.data,
+                text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
             },function(){
                 window.location.reload();
             });
             return;
-        }else{
-
-            $('#myModal').html(response);
-            $('#myModal').modal();
         }
-    });
-}
-//冻结
-function getFrozenForm(id){
 
-    var url = $('#proxy_list_frozen').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-        return;
     }
+    //冻结
+    function getFrozenForm(id){
 
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
+        var url = $('#proxy_list_frozen').val();
+        var token = $('#_token').val();
+        if(id==''){
             swal({
                 title: "提示信息",
-                text: response.data,
+                text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
             },function(){
                 window.location.reload();
             });
             return;
-        }else{
-
-            $('#myModal3').html(response);
-            $('#myModal3').modal();
         }
-    });
-}
-//删除
-function getDeleteForm(id){
 
-    var url = $('#proxy_list_delete').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal3').html(response);
+                $('#myModal3').modal();
+            }
         });
-        return;
     }
+    //删除
+    function getDeleteForm(id){
 
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
+        var url = $('#proxy_list_delete').val();
+        var token = $('#_token').val();
+        if(id==''){
             swal({
                 title: "提示信息",
-                text: response.data,
+                text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
             },function(){
                 window.location.reload();
             });
             return;
-        }else{
-
-            $('#myModal2').html(response);
-            $('#myModal2').modal();
         }
-    });
-}
-    </script>
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal2').html(response);
+                $('#myModal2').modal();
+            }
+        });
+    }
+</script>
 </div>
 </body>
 
