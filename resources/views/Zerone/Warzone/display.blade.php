@@ -114,7 +114,7 @@
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        <button type="button" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}')" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                        <button type="button" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->zone_name }}')" class="btn  btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         {{--<button type="button" id="deleteBtn2" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>--}}
                                     </td>
                                 </tr>
@@ -220,7 +220,7 @@
 
 
         //删除战区，安全密码框弹出
-        function getDeleteComfirmForm(id){
+        function getDeleteComfirmForm(id,zone_name){
             var url = $('#warzone_delete_confirm').val();
             var token = $('#_token').val();
 
@@ -244,7 +244,7 @@
                 return;
             }
 
-            var data = {'id':id,'_token':token};
+            var data = {'id':id,'zone_name':zone_name,'_token':token};
             $.post(url,data,function(response){
                 if(response.status=='-1'){
                     swal({
