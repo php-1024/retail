@@ -211,10 +211,10 @@ class DashboardController extends Controller{
             ];
         }
         $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
+//        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
 
 
-
+        
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
         $time_st_format = $time_nd_format = 0;//实例化时间格式
