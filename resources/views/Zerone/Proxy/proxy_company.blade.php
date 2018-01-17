@@ -237,6 +237,22 @@
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 
+
+<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
+
+
+{{--<script src="js/plugins/nestable/jquery.nestable.js"></script>--}}
+
+{{--<script src="js/plugins/chosen/chosen.jquery.js"></script>--}}
+
+
+
+
+
+
+
+
+
 <script>
     $(document).ready(function() {
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
