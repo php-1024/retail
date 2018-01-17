@@ -73,7 +73,7 @@
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            {{--{{ $oneOrg->account . '-'.$oneOrg->account_info->realname }}--}}
+                                            {{ $listOrg['organization_name']. '-'.$listOrg['organization_companyinfo']['company_owner'].'-'.$listOrg['organization_companyinfo']['company_owner_mobile'] }}
                                         </div>
 
                                         {!! $structure  !!}
@@ -87,8 +87,9 @@
                     </div>
                 </div>
             </div>
+        </div>
             @include('Zerone/Public/Footer')
-            </div>
+
     </div>
 
     {{--<!-- Page-Level Scripts -->--}}
