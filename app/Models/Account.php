@@ -117,7 +117,6 @@ class Account extends Model{
         return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
-    //获取分页数据
     public static function getalls($where,$orderby,$sort='DESC'){
         return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->get();
     }
