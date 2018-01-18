@@ -120,7 +120,11 @@
                                             <input type="hidden" name="organization_id" value="{{$value->id}}">
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @if($value->status == 1)
+                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @elseif($value->status == 0)
+                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            @endif
                                             <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="submit" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
                                             <button type="button" id="programBtn" onclick="location.href='{{url('zerone/company/company_program')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
