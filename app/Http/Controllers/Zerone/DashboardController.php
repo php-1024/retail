@@ -227,6 +227,7 @@ class DashboardController extends Controller{
 
         $lists = Account::getPaginage([['organization_id','1'],[ 'account','like','%'.'zeo'.'%' ]],15,'id');
         dump($lists);
+        dump($operation_log_list);
 
         foreach ($operation_log_list as $key=>$val){
 //            dump($val['account_id']);
