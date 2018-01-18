@@ -26,7 +26,6 @@ class CompanyController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//商户名称
-        $id = $request->input('organization_id');//零壹或者服务商organization_id
         $where = [['organization_name',$organization_name]];
 
         $name = Organization::checkRowExists($where);
@@ -34,9 +33,11 @@ class CompanyController extends Controller{
         if($name == 'true'){
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
+
+        $id = $request->input('organization_id');//零壹或者服务商organization_id
         $list = Organization::getOne([['id',$id]]);
 
-        $parent_id = $request->input('organization_id');//零壹或者服务商organization_id
+        $parent_id = $id;//上级组织 零壹或者服务商organization_id
         $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $list['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
@@ -47,7 +48,7 @@ class CompanyController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>0,'type'=>3,'status'=>1];
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
             $account  = 'C'.$mobile.'_'.$organization_id;//用户账号
@@ -115,7 +116,7 @@ class CompanyController extends Controller{
         if($sta == -1 ){
             DB::beginTransaction();
             try{
-                CompanyApply::editCompanyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
+                CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -126,7 +127,7 @@ class CompanyController extends Controller{
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
         }elseif($sta == 1){
 
-            $list = Organization::getOne(['id'=>$id]);
+            $list = Organization::getOne([['id',$id]]);
 
             $parent_id = $id;//零壹或者服务商organization_id
             $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
@@ -134,7 +135,7 @@ class CompanyController extends Controller{
 
             DB::beginTransaction();
             try{
-                CompanyApply::editCompanyApply(['id'=>$id],['status'=>$sta]);//申请通过
+                CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//申请通过
                 //添加服务商
                 $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>0,'type'=>3,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
@@ -188,8 +189,8 @@ class CompanyController extends Controller{
 
         $listorg = Organization::getCompany($where,'5','id');
         foreach ($listorg as $k=>$v){
-            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->toArray();
-            $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->toArray();
+            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
+            $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
         }
         return view('Zerone/Company/company_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
