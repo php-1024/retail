@@ -21,7 +21,7 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
         $admin_id = Account::where('id',1)->select('id')->first();//查找超级管理员的数据
-        echo $admin_id;
+        echo $admin_id->id;
         return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
