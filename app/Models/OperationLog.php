@@ -19,7 +19,7 @@ class OperationLog extends Model{
     }
     //关联程序管理工具账户信息表
     public function accountsInfo(){
-        return $this->belongsTo('App\Models\AccountInfo', 'account_id');
+        return $this->belongsToMany('App\Models\AccountInfo', 'accounts','account_id');
     }
 
     //查询获取列表
