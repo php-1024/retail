@@ -23,7 +23,7 @@ class OperationLog extends Model{
     }
     //和个人信息表一对一的关系
     public function account_info(){
-        return $this->hasOne('App\Models\AccountInfo', 'account_id');
+        return $this->belongsTo('App\Models\AccountInfo', 'account_id');
     }
 
     //查询获取列表
