@@ -93,7 +93,7 @@
                                     <tr>
                                         <td>{{ $val->accounts->id }}</td>
                                         <td>{{ $val->accounts->account }}</td>
-                                        <td>{{ $val->accounts->account_info->realname }}</td>
+                                        {{--<td>{{ $val->accounts->account_info->realname }}</td>--}}
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
