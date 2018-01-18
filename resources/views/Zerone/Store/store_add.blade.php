@@ -307,9 +307,10 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
+<!-- Sweet alert -->
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
 <script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
 
