@@ -224,12 +224,12 @@ class DashboardController extends Controller{
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
-        dump($operation_log_list);
 
-        $organization_id = 1;//零壹管理平台只有一个组织
+        $lists = Account::getPaginage([['organization_id','1'],['id','2']],15,'id');
+        dump($lists);
+
         foreach ($operation_log_list as $key=>$val){
-            $lists[] = Account::getPaginage([['organization_id',$organization_id],['id',$val['account_id']]],10,'id');
-            dump($lists);
+//            dump($val['account_id']);
         }
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
