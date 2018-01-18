@@ -16,7 +16,7 @@ class OperationLog extends Model{
     //和账号多对多的关系
     public function account_roles()
     {
-        return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
+        return $this->hasMany('App\Models\OrganizationRole','account_id','role_id');
     }
 
     //关联程序管理工具账户表
