@@ -229,7 +229,7 @@ class DashboardController extends Controller{
         $organization_id = 1;//零壹管理平台只有一个组织
         foreach ($operation_log_list as $key=>$val){
             $lists = Account::getPaginage([['organization_id',$organization_id],['id',$val['account_id']]],10,'id');
-            dump($lists);
+            dump($val['account_id']);
         }
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
