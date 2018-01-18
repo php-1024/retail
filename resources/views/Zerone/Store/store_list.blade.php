@@ -293,8 +293,7 @@
 
 <script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
 <script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
-
-
+<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
