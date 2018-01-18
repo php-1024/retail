@@ -20,8 +20,6 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
-        $admin_id = Account::where('id',1)->select('id')->first();//查找超级管理员的数据
-        echo $admin_id->id;
         return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
@@ -118,7 +116,7 @@ class ProxyController extends Controller{
         if($sta == -1 ){
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//拒绝通过
+                ProxyApply::editProxyApply([['id',$id]],['status'=>$sta]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -130,9 +128,11 @@ class ProxyController extends Controller{
         }elseif($sta == 1){
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply(['id'=>$id],['status'=>$sta]);//申请通过
+                ProxyApply::editProxyApply([['id',$id]],['status'=>$sta]);//申请通过
+
+                $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
-                $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>0,'program_id'=>0,'type'=>2,'status'=>1];
+                $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>$orgparent_tree,'program_id'=>2,'type'=>2,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
                 $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
@@ -143,11 +143,8 @@ class ProxyController extends Controller{
                 $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
-                $key = config("app.zerone_encrypt_key");//获取加密盐
-                $encrypted = md5($proxylist['proxy_password']);//加密密码第一重
-                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-
-                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
+                $password = $proxylist['proxy_password'];//用户密码
+                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$password,'organization_id'=>$organization_id,'account'=>$account];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
                 $realname = $proxylist['proxy_owner'];//负责人姓名
