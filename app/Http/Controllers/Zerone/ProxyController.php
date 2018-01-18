@@ -182,7 +182,10 @@ class ProxyController extends Controller{
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
         $listorg = Organization::getPaginage($where,'5','id');
-        dd($listorg);
+        foreach ($listorg as $K=>$v){
+            $zone_id = $v['warzoneProxy']['zone_id'];
+           echo  Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
+        }
         return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
