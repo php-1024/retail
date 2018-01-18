@@ -77,7 +77,7 @@
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>用户名</th>
                                     <th>操作详情</th>
                                     <th class="col-sm-1">操作时间</th>
                                 </tr>
@@ -85,7 +85,7 @@
                                 <tbody>
                                 @foreach($operation_log_list as $key=>$val)
                                     <tr>
-                                        <td>{{ $val->accounts->id }}</td>
+                                        <td>{{ $val->accounts->account }}</td>
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
