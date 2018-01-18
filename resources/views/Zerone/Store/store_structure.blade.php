@@ -227,6 +227,9 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+
+<!-- Data picker -->
+<script src="{{asset('public/Tooling/library/nestable')}}/js/jquery.nestable.js"></script>
 <script>
     $(document).ready(function() {
         // activate Nestable for list 2
