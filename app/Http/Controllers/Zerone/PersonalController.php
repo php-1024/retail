@@ -76,6 +76,7 @@ class PersonalController extends Controller{
     //个人中心——登录密码修改
     public function password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $account = Account::getOne([['id',$admin_data['id']]]);
         $password = $request->input('password');
         $new_password = $request->input('new_password');
