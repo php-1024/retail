@@ -13,6 +13,7 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Tooling/library/chosen')}}/css/chosen.css" rel="stylesheet">
 </head>
 
 <body class="">
