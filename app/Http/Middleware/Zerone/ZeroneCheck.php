@@ -58,6 +58,7 @@ class ZeroneCheck{
             case "zerone/store/store_list":             //店铺列表
             case "zerone/store/store_structure":        //店铺人员架构
             case "zerone/store/store_branchlist":       //分店管理
+            case "zerone/store/store_config":           //分店设置参数
 
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);

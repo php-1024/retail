@@ -107,7 +107,7 @@
                                         <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         <button type="button" id="peoplesBtn" onclick="location.href='{{url('zerone/store/store_structure')}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
                                         <button type="button" id="programBtn" onclick="location.href='{{url('zerone/store/store_branchlist')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;分店管理</button>
-                                        <button type="button" id="companyBtn" onclick="location.href='storeconfig.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;参数设置</button>
+                                        <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/store/store_config')}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;参数设置</button>
                                     </td>
                                 </tr>
 
