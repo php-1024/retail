@@ -110,17 +110,34 @@ class PersonalController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
         $new_encrypted = md5($new_safe_password);//加密新安全密码第一重
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新安全密码第二重
+
         if ($admin_data['safe_password'] == ''){
             if ($safe_password == ''){
                 return response()->json(['data' => '安全密码不能为空！', 'status' => '1']);
-            }else{
-                Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+            }else{//设置安全密码
+                DB::beginTransaction();
+                try {
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();//事件回滚
+                    return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
+                }
                 Session::put('zerone_account_id','');
                 return response()->json(['data' => '安全密码设置成功，请退出后重新登录！', 'status' => '1']);
             }
-        }else{
+        }else{//修改安全密码
             if ($admin_data['safe_password'] == $encryptPwd){
-                Account::editAccount([['id',$admin_data['id']]],['safe_password' => $new_encryptPwd]);
+                DB::beginTransaction();
+                try {
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $new_encryptPwd]);
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();//事件回滚
+                    return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
+                }
                 Session::put('zerone_account_id','');
                 return response()->json(['data' => '安全密码修改成功，请退出后重新登录！', 'status' => '1']);
             }else{
