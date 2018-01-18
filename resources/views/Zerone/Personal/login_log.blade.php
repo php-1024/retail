@@ -73,6 +73,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>用户名</th>
                                     <th>登陆IP</th>
                                     <th>登陆地址</th>
                                     <th>操作时间</th>
@@ -82,6 +83,7 @@
                                 @foreach($login_log_list as $key=>$val)
                                     <tr>
                                         <td>{{  $val->accounts->id }}</td>
+                                        <td>{{  $val->accounts->account }}</td>
                                         <td>{{  long2ip($val->ip) }}</td>
                                         <td>{{  $val->ip_position }}</td>
                                         <td>{{  $val->created_at }}</td>
