@@ -4,7 +4,6 @@ use App\Http\Controllers\Controller;
 class StoreController extends Controller{
     //店铺列表
     public function store_list(Request $request){
-        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
