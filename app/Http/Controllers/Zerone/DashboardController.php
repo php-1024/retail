@@ -224,9 +224,6 @@ class DashboardController extends Controller{
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
-        $organization_id = 1;//零壹管理平台只有一个组织
-        $account_role = Account::getPaginage([['organization_id',$organization_id]],10,'id');
-        dump($account_role);
         dump($admin_data);
         dump($operation_log_list);
         return view('Zerone/Dashboard/operation_log',['account_role'=>$account_role,'search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
