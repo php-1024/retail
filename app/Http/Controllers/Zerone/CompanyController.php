@@ -188,6 +188,7 @@ class CompanyController extends Controller{
         }
 
         $listorg = Organization::getCompany($where,'5','id');
+        dd($listorg);
         foreach ($listorg as $k=>$v){
             $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->toArray();
             $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->toArray();
