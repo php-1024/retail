@@ -19,6 +19,8 @@ class PersonalController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account_id = $admin_data['id'];//当前登陆账号ID
+        $user = Account::getOne([['id',$admin_data['id']]]);
+        dump($user);
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
@@ -76,6 +78,7 @@ class PersonalController extends Controller{
     //个人中心——登录密码修改
     public function password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $account = Account::getOne([['id',$admin_data['id']]]);
         $password = $request->input('password');
         $new_password = $request->input('new_password');
@@ -88,14 +91,14 @@ class PersonalController extends Controller{
             DB::beginTransaction();
             try {
                 Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了密码');//保存操作记录
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登陆密码');//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '修改密码失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '修改登陆密码失败，请检查', 'status' => '0']);
             }
             Session::put('zerone_account_id','');
-            return response()->json(['data' => '密码修改成功！', 'status' => '1']);
+            return response()->json(['data' => '登陆密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
         }
