@@ -219,33 +219,32 @@ class ProxyController extends Controller{
         try{
             $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
+            $account_id = $acc['id'];
             if($list['organization_name']!=$organization_name){
-                Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
+                Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
             if($list['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
 
             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
-                $orginfodata = ['proxy_owner'=>$realname];
-                OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],$orginfodata);//修改服务商用户信息表 用户姓名
-                AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             if(!empty($password)){
                 $key = config("app.zerone_encrypt_key");//获取加密盐
                 $encrypted = md5($password);//加密密码第一重
                 $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-                $accountdata = ['password'=>$encryptPwd];
-                Account::editAccount(['organization_id'=>$id,'parent_id'=>'1'],$accountdata);//修改管理员表登入密码
+                Account::editAccount([['organization_id',$id],['parent_id','1']],['password'=>$encryptPwd]);//修改管理员表登入密码
             }
             if($acc['idcard'] != $idcard){
-                AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                OrganizationProxyinfo::editOrganizationProxyinfo(['organization_id'=>$id],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+                AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
-            $waprlist = WarzoneProxy::getOne(['organization_id'=>$id]);
+            $waprlist = WarzoneProxy::getOne([['organization_id',$id]]);
             if($waprlist['zone_id'] != $zone_id){
-                WarzoneProxy::editWarzoneProxy(['organization_id'=>$id],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+                WarzoneProxy::editWarzoneProxy([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
             }
 
             //添加操作日志
@@ -262,8 +261,8 @@ class ProxyController extends Controller{
     public function proxy_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结状态
-        $list = Organization::getOne(['id'=>$id]);//服务商信息
-        return view('Zerone/Proxy/proxy_list_frozen',compact('id','list','status'));
+        $list = Organization::getOne([['id',$id]]);//服务商信息
+        return view('Zerone/Proxy/proxy_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //服务商冻结功能提交
     public function proxy_list_frozen_check(Request $request){
