@@ -224,6 +224,8 @@ class DashboardController extends Controller{
         }
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
+        $account_all = Account::getPaginage($where,10,'id');
+        dump($account_all);
         foreach ($operation_log_list as $key=>$val){
             dump($val['account_id']);
         }
