@@ -26,13 +26,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“刘记鸡煲王（总店）”人员结构</h2>
+                <h2>“刘记鸡煲王（总店）”分店管理</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">店铺管理</a>
+                        <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“刘记鸡煲王（总店）”人员结构</strong>
+                        <strong>“刘记鸡煲王（总店）”分店管理</strong>
                     </li>
                 </ol>
             </div>
@@ -54,17 +54,9 @@
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" id="expand-all" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;展开所有</button>
+                            <button type="button" id="addBtn" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加分店</button>
                         </div>
                     </div>
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" id="collapse-all" class="block btn btn-primary"><i class="fa fa-minus"></i>&nbsp;&nbsp;合并所有</button>
-                        </div>
-                    </div>
-
-
                 </div>
 
             </div>
@@ -73,151 +65,294 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“刘记鸡煲王（总店）”人员架构</h5>
+                            <h5>“刘记鸡煲王（总店）”分店管理</h5>
                         </div>
                         <div class="ibox-content">
-                            <div class="dd" id="nestable2">
-                                <ol class="dd-list">
-                                    <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            <span class="label label-primary"><i class="fa fa-shopping-cart"></i></span> 刘记鸡煲王（总店）
-                                        </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 张三-店铺负责人[zos_13123456789，店长，13123456789 ]
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                            <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店长[zos_13123456789，店长，13123456789 ]
-                                                        </div>
-                                                        <ol class="dd-list">
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                        </ol>
-                                                    </li>
+                            <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>分店名称</th>
+                                    <th>分店系统</th>
+                                    <th>归属店铺</th>
+                                    <th>负责人姓名</th>
+                                    <th>手机号码</th>
+                                    <th>负责人账号</th>
+                                    <th>商户状态</th>
+                                    <th class="col-sm-1">新增时间</th>
+                                    <th class="col-sm-3 text-right" >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>刘记鸡煲王（宝能店）</td>
+                                    <td>微餐饮系统（先吃后付）通用版本</td>
+                                    <td>刘记鸡煲王（总店）</td>
+                                    <td>刘兴文</td>
+                                    <td>13123456789</td>
+                                    <td>zob_13123456789</td>
+                                    <td>
+                                        <label class="label label-primary">正常</label>
+                                    </td>
+                                    <td>2017-08-08 10:30:30</td>
+                                    <td class="text-right">
+                                        <button type="button" id="editBtn" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                        <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                        <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
+                                    </td>
+                                </tr>
 
-                                                </ol>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="99" class="footable-visible">
+                                        <ul class="pagination pull-right">
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="first" href="#first">«</a>
                                             </li>
 
-                                        </ol>
-                                    </li>
-                                    <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            <span class="label label-primary"><i class="fa fa-shopping-cart"></i></span> 刘记鸡煲王（龙岗店）
-                                        </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 张三-店铺负责人[zos_13123456789，店长，13123456789 ]
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                            <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店长[zos_13123456789，店长，13123456789 ]
-                                                        </div>
-                                                        <ol class="dd-list">
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                        </ol>
-                                                    </li>
-
-                                                </ol>
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="prev" href="#prev">‹</a>
                                             </li>
-
-                                        </ol>
-                                    </li>
-                                    <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            <span class="label label-primary"><i class="fa fa-shopping-cart"></i></span> 刘记鸡煲王（宝能店）
-                                        </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 张三-店铺负责人[zos_13123456789，店长，13123456789 ]
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                            <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店长[zos_13123456789，店长，13123456789 ]
-                                                        </div>
-                                                        <ol class="dd-list">
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="fa fa-user"></i></span> 王五-店员[zos_13123456789，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                        </ol>
-                                                    </li>
-
-                                                </ol>
+                                            <li class="footable-page active">
+                                                <a data-page="0" href="#">1</a>
                                             </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">2</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">3</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">4</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">5</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="next" href="#next">›</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="last" href="#last">»</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                        </ol>
-                                    </li>
-                                </ol>
+
+        </div>
+
+
+        <div class="footer" >
+            <div class="pull-right">
+                您登陆的时间是：2017-10-24 16:26:30
+            </div>
+            <div>
+                <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <h3>添加分店</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">程序名称</label>
+                        <div class="col-sm-9"><input type="text" readonly class="form-control" value="微餐饮系统（先吃后付）通用版本"></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" style="padding-top: 7px;">商户名称</label>
+                        <div class="col-sm-9"><input type="text" readonly class="form-control" value="刘记鸡煲王"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" style="padding-top: 7px;">总店名称</label>
+                        <div class="col-sm-9"><input type="text" readonly class="form-control" value="刘记鸡煲王（总店）"></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分店名称</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">负责人姓名</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">负责人手机号</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分店登陆密码</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">重复登陆密码</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">安全密码</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="hr-line-dashed"></div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary saveBtn">保存</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content animated fadeIn">
+                    <div class="modal-header">
+                        <h3>修改分店</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">程序名称</label>
+                            <div class="col-sm-9"><input type="text" readonly class="form-control" value="微餐饮系统（先吃后付）通用版本"></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="padding-top: 7px;">商户名称</label>
+                            <div class="col-sm-9"><input type="text" readonly class="form-control" value="刘记鸡煲王"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="padding-top: 7px;">总店名称</label>
+                            <div class="col-sm-9"><input type="text" readonly class="form-control" value="刘记鸡煲王（总店）"></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">分店名称</label>
+                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">负责人姓名</label>
+                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">负责人手机号</label>
+                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">分店登陆密码</label>
+                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">安全密码</label>
+                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="hr-line-dashed"></div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary saveBtn">保存</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content animated fadeIn">
+                        <div class="modal-header">
+                            <h3>确认操作</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">安全密码</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
                             </div>
-
+                            <div style="clear:both"></div>
 
                         </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary saveBtn">保存</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        @include('Zerone/Public/Footer')
     </div>
 </div>
 {{--<!-- Page-Level Scripts -->--}}
@@ -241,35 +376,30 @@
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-        $('.footable').footable();
-
-        $('#date_added').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
-
-        $('#date_modified').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
-        $("#editBtn").click(function(){
+        var elem = document.querySelector('.js-switch2');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        // activate Nestable for list 2
+        $('#addBtn').click(function(){
             $('#myModal').modal();
+        });
+
+        $("#editBtn").click(function(){
+            $('#myModal2').modal();
         });
         $('#lockBtn').click(function(){
             $('#myModal3').modal();
         });
         $('#removeBtn').click(function(){
             $('#myModal3').modal();
+        });
+        $('.saveBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            },function(){
+                window.location.reload();
+            });
         });
         $('.saveBtn').click(function(){
             swal({
