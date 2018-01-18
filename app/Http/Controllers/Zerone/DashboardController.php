@@ -225,11 +225,11 @@ class DashboardController extends Controller{
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
 
+        $lists = Account::getPaginage([['organization_id','1']],15,'id');
+        dump($lists);
+
         foreach ($operation_log_list as $key=>$val){
 //            dump($val['account_id']);
-            $account_all = Account::getalls([['id',$val['account_id']]],'id');
-            $lists = Account::getPaginage([['organization_id','1']],15,'id');
-            dump($account_all);
         }
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }

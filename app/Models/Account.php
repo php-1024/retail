@@ -116,9 +116,5 @@ class Account extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-
-    public static function getalls($where,$orderby,$sort='DESC'){
-        return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->get();
-    }
 }
 ?>
