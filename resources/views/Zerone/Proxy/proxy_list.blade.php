@@ -123,7 +123,7 @@
                                                 @if($value->status == 1)
                                                 <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" value="1" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                                 @elseif($value->status == 0)
-                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" value="0" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-info" value="0" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                                 @endif
                                                 <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
 
