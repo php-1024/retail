@@ -183,7 +183,7 @@ class ProxyController extends Controller{
         }
         $listorg = Organization::getPaginage($where,'5','id');
         foreach ($listorg as $K=>$v){
-            dump($v['warzoneProxy']);
+            dump($v['warzoneProxy']['id']);
         }
         return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
