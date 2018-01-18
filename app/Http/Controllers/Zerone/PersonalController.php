@@ -129,6 +129,9 @@ class PersonalController extends Controller{
                 return response()->json(['data' => '安全密码设置成功，请退出后重新登录！', 'status' => '1']);
             }
         }else{//修改安全密码
+            if ($safe_password == ''){
+                return response()->json(['data' => '安全密码不能为空！', 'status' => '1']);
+            }
             if ($admin_data['safe_password'] == $encryptPwd){
                 DB::beginTransaction();
                 try {
