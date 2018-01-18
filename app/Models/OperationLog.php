@@ -13,6 +13,12 @@ class OperationLog extends Model{
     public $timestamps = true;//是否使用时间戳
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和账号多对多的关系
+    public function account_roles()
+    {
+        return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
+    }
+
     //关联程序管理工具账户表
     public function accounts(){
         return $this->belongsTo('App\Models\Account', 'account_id');
@@ -31,7 +37,7 @@ class OperationLog extends Model{
     }
     //根据时间戳操作用户分页查询获取列表
     public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('account_info')->where($where);
+        $model = self::with('account_info')->with('account_roles')->where($where);
         if(!empty($time_st_format) && !empty($time_nd_format)){
             $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
         }
