@@ -276,13 +276,22 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+
+<!-- Data picker -->
+<script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+
+<!-- Sweet alert -->
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
-<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
-<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
+<!-- FooTable -->
 <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
-<script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
+
+<!-- Page-Level Scripts -->
+<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
+
 <script>
     $(document).ready(function() {
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
