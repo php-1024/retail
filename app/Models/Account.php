@@ -119,7 +119,7 @@ class Account extends Model{
 
     //获取分页数据
     public static function gettest($where,$orderby,$sort='DESC'){
-        return self::with('account_roles')->where($where)->orderBy($orderby,$sort)->get();
+        return self::with('account_roles')->where($where)->orderBy($orderby,$sort)->all();
     }
 }
 ?>
