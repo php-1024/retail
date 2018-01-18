@@ -23,7 +23,8 @@ class CompanyController extends Controller{
     }
     //注册提交商户数据
     public function company_add_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
+        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//商户名称
         $where = [['organization_name',$organization_name]];
@@ -52,7 +53,9 @@ class CompanyController extends Controller{
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
             $account  = 'C'.$mobile.'_'.$organization_id;//用户账号
-            $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
+
+            $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
+            $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$admin_data['deepth']+1,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
 
             $realname = $request->input('realname');//负责人姓名
@@ -64,7 +67,7 @@ class CompanyController extends Controller{
 
             OrganizationCompanyinfo::addOrganizationCompanyinfo($comproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
 
