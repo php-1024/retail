@@ -207,6 +207,14 @@ class ProxyController extends Controller{
         $mobile = $request->input('mobile');//用户手机号
         $password = $request->input('password');//登入密码
 
+        $where = [['organization_name',$organization_name]];
+
+        $name = Organization::checkRowExists($where);
+
+        if($name == 'true'){
+            return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
+        }
+
         DB::beginTransaction();
         try{
             $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
