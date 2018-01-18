@@ -228,6 +228,7 @@ class DashboardController extends Controller{
         foreach ($operation_log_list as $key=>$val){
 //            dump($val['account_id']);
             $account_all = Account::getalls([['id',$val['account_id']]],'id');
+            $lists = Account::getPaginage([['organization_id','1']],15,'id');
             dump($account_all);
         }
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
