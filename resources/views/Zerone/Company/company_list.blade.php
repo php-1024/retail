@@ -230,7 +230,6 @@ function getFrozenForm(id,status){
 
     var url = $('#company_list_frozen').val();
     var token = $('#_token').val();
-    alert(status);
     if(id==''){
         swal({
             title: "提示信息",
