@@ -19,8 +19,8 @@ class PersonalController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account_id = $admin_data['id'];//当前登陆账号ID
-        $account = Account::getOne([['id',$admin_data['id']]]);
-        dump($account);
+        $user = Account::getOne([['id',$admin_data['id']]]);
+        dump($user);
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
