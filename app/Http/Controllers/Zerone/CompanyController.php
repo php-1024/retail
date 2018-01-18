@@ -140,7 +140,7 @@ class CompanyController extends Controller{
             try{
                 CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//申请通过
                 //添加服务商
-                $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>0,'type'=>3,'status'=>1];
+                $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
                 $account  = 'C'.$companylist['company_owner_mobile'].'_'.$organization_id;//用户账号
@@ -200,8 +200,8 @@ class CompanyController extends Controller{
     //商户编辑ajaxshow显示页面
     public function company_list_edit(Request $request){
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOneCompany(['id'=>$id]);
-        $proxy = Organization::where(['type'=>'1'])->orwhere(['type'=>'2'])->where(['status'=>'1'])->get();
+        $listorg = Organization::getOneCompany([['id',$id]]);
+        $proxy = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
         return view('Zerone/Company/company_list_edit',compact('listorg','proxy'));
     }
     //服务商编辑功能提交
