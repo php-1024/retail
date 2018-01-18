@@ -227,54 +227,29 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-
 <script>
     $(document).ready(function() {
-        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-        $('.footable').footable();
+        // activate Nestable for list 2
+        $('#nestable2').nestable();
 
-        $('#date_added').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
+        $('#nestable-menu').on('click', function (e) {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
         });
-
-        $('#date_modified').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
         });
-        $("#editBtn").click(function(){
-            $('#myModal').modal();
-        });
-        $('#lockBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#removeBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('.saveBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            },function(){
-                window.location.reload();
-            });
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
         });
     });
 </script>
-
 </body>
 
 </html>
