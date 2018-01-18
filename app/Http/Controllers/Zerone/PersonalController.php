@@ -89,14 +89,14 @@ class PersonalController extends Controller{
             DB::beginTransaction();
             try {
                 Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了密码');//保存操作记录
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登陆密码');//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '修改密码失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '修改登陆密码失败，请检查', 'status' => '0']);
             }
             Session::put('zerone_account_id','');
-            return response()->json(['data' => '密码修改成功！', 'status' => '1']);
+            return response()->json(['data' => '登陆密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
         }
