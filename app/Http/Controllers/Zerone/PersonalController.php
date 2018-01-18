@@ -44,7 +44,7 @@ class PersonalController extends Controller{
                 unset($module);
             }
         }
-        return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
+        return view('Zerone/Personal/display',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
     }
 
     //个人中心 - 修改个人资料

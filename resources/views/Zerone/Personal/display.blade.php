@@ -51,28 +51,28 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">用户账号</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" readonly value="1">
+                                            <input type="text" class="form-control" readonly value="{{$user['account']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">系统角色</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" readonly value="2">
+                                            <input type="text" class="form-control" readonly value="{{$user['role_name']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">真实姓名</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="realname" class="form-control" value="3">
+                                            <input type="text" name="realname" class="form-control" value="{{$user['account_info']['realname']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">手机号码</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="mobile" class="form-control" value="4">
+                                            <input type="text" name="mobile" class="form-control" value="{{$user['mobile']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
