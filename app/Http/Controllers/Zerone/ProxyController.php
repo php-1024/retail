@@ -21,12 +21,14 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
 
-        return view('Zerone/Proxy/proxy_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'warzone_list'=>$warzone_list]);
+        return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
 
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
+        $admin_id = Account::where('id',1)->pluck('id')->first();//查找超级管理员的数据
+        echo $admin_id;
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//服务商名称
