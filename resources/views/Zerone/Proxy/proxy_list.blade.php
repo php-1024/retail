@@ -103,7 +103,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->warzoneProxy->zone_id}}</td>
+                                        <td>{{$value['zone_name']}}</td>
                                         <td>{{$value->organizationproxyinfo->proxy_owner}}</td>
 
 
