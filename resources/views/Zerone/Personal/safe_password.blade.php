@@ -44,26 +44,26 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">设置安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="safe_password" class="form-control">
+                                            <input type="password" name="safe_password" class="form-control">
                                         </div>
                                     </div>
                                 @else
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="safe_password" class="form-control">
+                                        <input type="password" name="safe_password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">新安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="new_safe_password" class="form-control">
+                                        <input type="password" name="new_safe_password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="news_safe_password" class="form-control">
+                                        <input type="password" name="news_safe_password" class="form-control">
                                     </div>
                                 </div>
                                 @endif
