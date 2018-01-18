@@ -312,7 +312,7 @@
 <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
 <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
 <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
-
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
 
 
 <script>
