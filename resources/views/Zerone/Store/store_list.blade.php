@@ -106,7 +106,7 @@
                                         <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                         <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                         <button type="button" id="peoplesBtn" onclick="location.href='{{url('zerone/store/store_structure')}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
-                                        <button type="button" id="programBtn" onclick="location.href='storebranchlist.html'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;分店管理</button>
+                                        <button type="button" id="programBtn" onclick="location.href='{{url('zerone/store/store_storebranchlist')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;分店管理</button>
                                         <button type="button" id="companyBtn" onclick="location.href='storeconfig.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;参数设置</button>
                                     </td>
                                 </tr>
