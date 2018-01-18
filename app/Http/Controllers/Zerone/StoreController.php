@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Session;
 class StoreController extends Controller{
     //店铺列表
     public function store_list(Request $request){
