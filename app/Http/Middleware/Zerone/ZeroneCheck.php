@@ -56,6 +56,7 @@ class ZeroneCheck{
 
             case "zerone/store/store_add":              //店铺添加
             case "zerone/store/store_list":             //店铺列表
+            case "zerone/store/store_structure":        //店铺人员架构
 
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);
