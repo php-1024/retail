@@ -116,10 +116,5 @@ class Account extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('account_roles')->with('account_info')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-
-    //获取分页数据
-    public static function gettest($where,$orderby,$sort='DESC'){
-        return self::with('account_roles')->where($where)->orderBy($orderby,$sort)->get();
-    }
 }
 ?>
