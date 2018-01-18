@@ -13,6 +13,7 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Tooling/library/chosen')}}/css/chosen.css" rel="stylesheet">
 
 
 </head>
@@ -113,6 +114,7 @@
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
+<script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
