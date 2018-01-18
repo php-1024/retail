@@ -267,8 +267,8 @@ class CompanyController extends Controller{
     public function company_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOne(['id'=>$id]);//服务商信息
-        return view('Zerone/Company/company_list_frozen',compact('id','list','status'));
+        $list = Organization::getOne([['id',$id]]);//服务商信息
+        return view('Zerone/Company/company_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //商户冻结功能提交
     public function company_list_frozen_check(Request $request){
