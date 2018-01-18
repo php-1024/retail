@@ -270,19 +270,35 @@ class CompanyController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
+        $status = $request->input('status');//冻结操作状态
         $list = Organization::getOne(['id'=>$id]);
+        if($status == '1'){
         DB::beginTransaction();
         try{
             Organization::editOrganization(['id'=>$id],['status'=>'0']);
             Account::editOrganizationBatch(['organization_id'=>$id],['status'=>'0']);
 //            //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了了服务商：'.$list['organization_name']);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
             return response()->json(['data' => '冻结失败', 'status' => '0']);
         }
         return response()->json(['data' => '冻结成功', 'status' => '1']);
+        }elseif($status == '0'){
+            DB::beginTransaction();
+            try{
+                Organization::editOrganization(['id'=>$id],['status'=>'1']);
+                Account::editOrganizationBatch(['organization_id'=>$id],['status'=>'1']);
+//            //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：'.$list['organization_name']);//保存操作记录
+                DB::commit();//提交事务
+            }catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '解冻失败', 'status' => '0']);
+            }
+            return response()->json(['data' => '解冻成功', 'status' => '1']);
+        }
     }
     //商户删除ajaxshow显示页面
     public function company_list_delete(Request $request){
