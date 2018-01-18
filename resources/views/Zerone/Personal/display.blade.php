@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">系统角色</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" readonly value="{{$user['role_name']}}">
+                                            <input type="text" class="form-control" readonly value="{{$admin_data['role_name']}}">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
