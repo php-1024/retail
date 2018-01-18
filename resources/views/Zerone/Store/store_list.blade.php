@@ -296,8 +296,7 @@
             </div>
         </div>
     </div>
-
-
+</div>
 {{--<!-- Page-Level Scripts -->--}}
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -315,7 +314,23 @@
 <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
 
-</div>
+
+<script>
+    $(document).ready(function() {
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        $('#addbtn').click(function(){
+            $('#myModal').modal();
+        });
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+
+</script>
+
 </body>
 
 </html>
