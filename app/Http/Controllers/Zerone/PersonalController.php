@@ -85,7 +85,15 @@ class PersonalController extends Controller{
         $new_encrypted = md5($new_password);//加密新密码第一重
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
         if ($account['password'] == $encryptPwd){
-            Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
+            DB::beginTransaction();
+            try {
+                Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了密码');//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '修改密码失败，请检查', 'status' => '0']);
+            }
             Session::put('zerone_account_id','');
             return response()->json(['data' => '密码修改成功！', 'status' => '1']);
         }else{
