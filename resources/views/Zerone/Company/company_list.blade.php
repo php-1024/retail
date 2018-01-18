@@ -121,9 +121,9 @@
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             @if($value->status == 1)
-                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <button type="button" class="btn  btn-xs btn-warning" value="1" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             @elseif($value->status == 0)
-                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            <button type="button" class="btn  btn-xs btn-warning" value="0" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
                                             <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="submit" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
@@ -226,7 +226,7 @@ function getEditForm(id){
     });
 }
 //冻结
-function getFrozenForm(id){
+function getFrozenForm(id,status){
 
     var url = $('#company_list_frozen').val();
     var token = $('#_token').val();
@@ -242,7 +242,7 @@ function getFrozenForm(id){
         return;
     }
 
-    var data = {'id':id,'_token':token};
+    var data = {'id':id,'status':status,'_token':token};
     $.post(url,data,function(response){
         if(response.status=='-1'){
             swal({
