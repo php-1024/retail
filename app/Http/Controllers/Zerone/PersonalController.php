@@ -103,6 +103,7 @@ class PersonalController extends Controller{
     //个人中心——安全密码修改(设置)
     public function safe_password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $safe_password = $request->input('safe_password');           //安全密码
         $new_safe_password = $request->input('new_safe_password');   //新安全密码
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
