@@ -271,6 +271,7 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结操作状态
+        echo $status;exit;
         $list = Organization::getOne(['id'=>$id]);
         if($status == '1'){
         DB::beginTransaction();
