@@ -9,11 +9,9 @@
     <title>零壹新科技程序管理平台</title>
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Tooling/library/chosen')}}/css/chosen.css" rel="stylesheet">
+
 </head>
 
 <body class="">
@@ -48,7 +46,7 @@
                     <div class="col-sm-1">
                         <div class="form-group">
                             <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" onclick="location.href='storelist.html'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                            <button type="button" onclick="location.href='{{url('zerone/store/store_list')}}'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                         </div>
                     </div>
                     <div class="col-sm-1">
@@ -229,60 +227,32 @@
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
-<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
-<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
-<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
-<script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+<!-- Data picker -->
+<script src="{{asset('public/Tooling/library/nestable')}}/js/jquery.nestable.js"></script>
 <script>
     $(document).ready(function() {
-        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-        $('.footable').footable();
+        // activate Nestable for list 2
+        $('#nestable2').nestable();
 
-        $('#date_added').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
+        $('#nestable-menu').on('click', function (e) {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
         });
-
-        $('#date_modified').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
         });
-        $("#editBtn").click(function(){
-            $('#myModal').modal();
-        });
-        $('#lockBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#removeBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('.saveBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            },function(){
-                window.location.reload();
-            });
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
         });
     });
 </script>
-
 </body>
 
 </html>
