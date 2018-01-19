@@ -17,7 +17,6 @@ class WarzoneProvince extends Model{
     public static function  WarzoneProvinceAdd($param)
     {
         var_dump($param);
-        exit();
         $model = new WarzoneProvince();
         $model->zone_id = $param->zone_id;
         $model->province_id = $param->province_id;
