@@ -48,12 +48,12 @@ class CompanyController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
-            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+//            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
+//            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
             $user = Account::max('account');
             $account  = $user+1;//用户账号
-
+            echo $account;exit;
             $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
             $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$admin_data['deepth']+1,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
