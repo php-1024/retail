@@ -48,5 +48,18 @@ class OperationLog extends Model{
         $operation_log->operation_info = $info;
         $operation_log->save();
     }
+    //获取联表的分页数据
+    public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::join('account',function($join){
+            $join->on('operation_log.account_id','=','account.id');
+        })->select('account.account','operation_log.*');
+        if(!empty($account)){
+            $model =$model->where('account','like','%'.$account.'%');
+        }
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('operation_log.created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
