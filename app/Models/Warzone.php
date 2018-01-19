@@ -22,9 +22,9 @@ class Warzone extends Model{
         return $this->hasMany('App\Models\WarzoneProxy', 'zone_id');
     }
 
-    //获取单行数据的其中一列
+    //获取单行数据
     public static function getOne($where){
-        return self::with('province')->where($where)->get();
+        return self::with('province')->where($where)->first();
     }
 
     //和战区节点关联，多对多
