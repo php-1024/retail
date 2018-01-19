@@ -98,6 +98,7 @@ class DashboardController extends Controller{
         $zone_info = Warzone::getOne(['id'=>$zone_id]);
         $province = Province::getpluck('id');
         dump($zone_info);
+        exit();
         $selected_province = [];
         foreach ($zone_info->province as $key=>$val){
             $selected_province[] = $val->id;
