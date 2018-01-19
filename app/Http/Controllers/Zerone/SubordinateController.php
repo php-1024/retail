@@ -69,7 +69,6 @@ class SubordinateController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $account = $request->input('account');//用户账号
         $password = $request->input('password');//登陆密码
         $realname = $request->input('realname');//用户真实姓名
         $mobile = $request->input('mobile');//用户手机号码
