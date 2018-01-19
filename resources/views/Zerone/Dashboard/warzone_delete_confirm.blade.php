@@ -5,12 +5,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                确认删除{{$zone_name}}
+                确认删除
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">用户账号</label>
-                    <div class="col-sm-10">{{ $account }}</div>
+                    <label class="col-sm-2 control-label">战区名称</label>
+                    <div class="col-sm-10">{{$zone_name}}</div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>

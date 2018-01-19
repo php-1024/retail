@@ -185,7 +185,6 @@ class DashboardController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了战区：'.$zone_name);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '删除战区失败，请检查！', 'status' => '0']);
         }
