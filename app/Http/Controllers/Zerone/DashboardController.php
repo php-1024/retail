@@ -97,13 +97,12 @@ class DashboardController extends Controller{
         $zone_id = $request->input('id');
         $zone_info = Warzone::getOne(['id'=>$zone_id]);
         $province = Province::getpluck('id');
-        $selected_province=[];
+
         foreach ($zone_info->province as $key=>$val){
             $selected_province[] = $val->id;
         }
-        dump($selected_province);
-        exit();
-        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'province'=>$province]);
+
+        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'province'=>$province,'selected_province'=>$selected_province]);
     }
     //战区管理编辑数据提交
     public function warzone_edit_check(Request $request){
