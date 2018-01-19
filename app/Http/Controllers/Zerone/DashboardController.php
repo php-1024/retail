@@ -129,7 +129,6 @@ class DashboardController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '编辑战区失败，请检查！', 'status' => '0']);
         }
@@ -138,7 +137,7 @@ class DashboardController extends Controller{
 
     //战区管理添加战区弹出
     public function warzone_add(Request $request){
-        $province = Province::getpluck('id');//获取所有战区可选省份
+        $province = Province::getList([],0,'id','asc');//获取所有战区可选省份
         foreach ($province as $key=>$val){
             $all_province_name[$val->id] = $val->province_name;
         }
