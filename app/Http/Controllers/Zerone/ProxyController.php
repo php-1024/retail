@@ -15,7 +15,7 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        echo Account::max('account')->pluck('account')->first();
+        echo Account::max('account')->first();
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
