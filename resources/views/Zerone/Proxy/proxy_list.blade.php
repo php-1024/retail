@@ -116,8 +116,6 @@
                                             @endif
                                         </td>
                                         <td>2017-08-08 10:30:30</td>
-                                        <form method="get" role="form" id="searchForm" action="{{url('zerone/proxy/proxy_structure')}}">
-                                            <input type="hidden" name="organization_id"  value="{{$value->id}}">
                                             <td class="text-right">
                                                 <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                 @if($value->status == 1)
@@ -127,12 +125,11 @@
                                                 @endif
                                                 <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
 
-                                                <button type="submit" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
+                                                <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary" onclick="location.href='{{url('zerone/proxy/proxy_structure')}}?organization_id={{$value->id}}'"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
 
                                                 <button type="button" id="programBtn" onclick="location.href='{{url('zerone/proxy/proxy_program')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
                                                 <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/proxy/proxy_company')}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
                                             </td>
-                                        </form>
                                     </tr>
                                 @endforeach
                                 </tbody>
