@@ -16,7 +16,7 @@ class Province extends Model{
     //和战区节点关联，多对多
     public function warzone()
     {
-        return $this->belongsToMany('App\Models\Warzone','warzone_province','zone_id','province_id');
+        return $this->belongsToMany('App\Models\Warzone','warzone_province','province_id','zone_id');
     }
 
     //获取战区分页列表

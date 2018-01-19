@@ -110,7 +110,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {!! $warzone->links() !!}
+                                        {{ $warzone->appends($search_data)->links() }}
                                     </td>
                                 </tr>
                                 </tfoot>
