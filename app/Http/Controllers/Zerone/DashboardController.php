@@ -179,7 +179,8 @@ class DashboardController extends Controller{
         $zone_name = $request->input('zone_name');//战区名称
         DB::beginTransaction();
         try {
-            Warzone::WarzoneDelete(['id'=>$zone_id]);//软删除战区
+            Warzone::where('id',$zone_id)->delete();//软删除战区
+            WarzoneProvince::where('zone_id',$zone_id)->delete();//软删除战区省份关系
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了战区：'.$zone_name);//保存操作记录
             DB::commit();
