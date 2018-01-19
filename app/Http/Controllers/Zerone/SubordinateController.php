@@ -19,6 +19,8 @@ class SubordinateController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $account = Account::max('account');
+        dump($account);
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -83,6 +85,8 @@ class SubordinateController extends Controller{
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
+
+        $account = Account::max('account');
 
         if(Account::checkRowExists([[ 'account',$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
             return response()->json(['data' => '账号已存在', 'status' => '0']);
