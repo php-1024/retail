@@ -24,17 +24,12 @@ class ProxyController extends Controller{
     }
     //提交服务商数据
     public function proxy_add_check(Request $request){
-
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_name = $request->input('organization_name');//服务商名称
-
         $where = [['organization_name',$organization_name]];
-
-        $name = Organization::checkRowExists($where);
-
-        if($name == 'true'){
+        if(Organization::checkRowExists($where)){
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
 
