@@ -93,7 +93,11 @@
                                     <tr>
                                         <td>{{ $val->accounts->id }}</td>
                                         <td>{{ $val->accounts->account }}</td>
-                                        <td>{{$val->role_name}}</td>
+                                        @if($admin_data['id'] == '1')
+                                            <td>{{$admin_data['role_name']}}</td>
+                                        @else
+                                            <td>{{$val->role_name}}</td>
+                                        @endif
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
