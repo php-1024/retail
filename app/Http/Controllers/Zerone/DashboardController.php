@@ -138,6 +138,8 @@ class DashboardController extends Controller{
     //战区管理添加战区弹出
     public function warzone_add(Request $request){
         $province = Province::getList([],0,'id','asc');//获取所有战区可选省份
+        dump($province);
+        exit();
         return view('Zerone/Dashboard/warzone_add',['province'=>$province]);
     }
     //战区管理添加数据提交
