@@ -113,7 +113,7 @@ class SubordinateController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加了下级人员失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加下级人员成功', 'status' => '1']);
+            return response()->json(['data' => '添加下级人员成功，账号是：'.$account, 'status' => '1']);
         }
     }
 
