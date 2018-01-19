@@ -124,7 +124,7 @@ class DashboardController extends Controller{
                     continue;
                 }
             }
-            Warzone::where('zone_id', $zone_id)->whereNotIn('province_id', $province_id)->forceDelete();
+            WarzoneProvince::where('zone_id', $zone_id)->whereNotIn('province_id', $province_id)->forceDelete();
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
             DB::commit();
