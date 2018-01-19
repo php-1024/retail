@@ -50,11 +50,10 @@
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/setup_edit_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                @foreach($setup_list as $key=>$val)
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="serviceurl" value="{{$val['cfg_facilitator_url']}}"/>
+                                        <input type="text" class="form-control" name="serviceurl" value="{{$setup_list['cfg_facilitator_url']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -62,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" @if($val['cfg_facilitator_switch']==1) checked @endif value="1"/>
+                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" @if($setup_list['cfg_facilitator_switch']==1) checked @endif value="1"/>
                                     </div>
                                 </div>
 
@@ -71,7 +70,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >商户通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="merchanturl" value="{{$val['cfg_merchant_url']}}"/>
+                                        <input type="text" class="form-control" name="merchanturl" value="{{$setup_list['cfg_merchant_url']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -79,16 +78,16 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" @if($val['cfg_merchant_switch']==1)checked @endif value="1"/>
+                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" @if($setup_list['cfg_merchant_switch']==1)checked @endif value="1"/>
                                     </div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">人员构深度设置</label>
-                                    <div class="col-sm-1"><input type="text" name="depth" class="form-control" value="{{$val['cfg_depth']}}"/></div>
+                                    <div class="col-sm-1"><input type="text" name="depth" class="form-control" value="{{$setup_list['cfg_depth']}}"/></div>
                                 </div>
-                                @endforeach
+
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">安全密码</label>
