@@ -224,29 +224,18 @@ class DashboardController extends Controller{
     public function login_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $account = $request->input('account');//通过登录页账号查询
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
-        $account = $request->input('account');//查询操作账户
         $time_st_format = $time_nd_format = 0;//实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
-            $where = [
-                ['account_id',$admin_data['id']]
-            ];
-        }else{
-            $where = [
-//                ['account',$account]
-            ];
-        }
-        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
-        $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
-        return view('Zerone/Dashboard/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
+        $list = LoginLog::getUnionPaginate($account,$time_st_format,$time_nd_format,15,'id');
+        return view('Tooling/System/login_log_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'system']);
     }
 
     //系统人员结构
