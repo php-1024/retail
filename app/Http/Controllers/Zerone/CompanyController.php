@@ -40,7 +40,6 @@ class CompanyController extends Controller{
 
         $parent_id = $id;//上级组织 零壹或者服务商organization_id
         $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
-        $deepth = $list['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
 
         $password = $request->input('password');//用户密码
@@ -54,7 +53,7 @@ class CompanyController extends Controller{
 
             $user = Account::max('account');
             $account  = $user+1;//用户账号
-            
+
             $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
             $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$admin_data['deepth']+1,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
@@ -71,7 +70,7 @@ class CompanyController extends Controller{
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
