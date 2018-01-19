@@ -116,6 +116,14 @@ class DashboardController extends Controller{
         try {
             Warzone::WarzoneEdit([['id', $zone_id]], ['zone_name' => $zone_name]);//修改战区名称
             //此方法行不通，先删除原有战区ID的数据然后在添加新的数据
+            foreach($province_id as $key=>$val){
+                $vo = WarzoneProvince::getOne([['zone_id',$zone_id],['province_id',$val]]);//查询数据是否存在
+                if(is_null($vo)) {//不存在生成插入数据
+                    WarzoneProvince::addWor(['zone_id' => $zone_id, 'province_id' => $val]);
+                }else{//存在数据则跳过
+                    continue;
+                }
+            }
             WarzoneProvince::WarzoneProvinceDelete($zone_id);
             WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);
             //添加操作日志
