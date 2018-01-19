@@ -89,7 +89,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($operation_log_list as $key=>$val)
+                                @foreach($list as $key=>$val)
                                     <tr>
                                         <td>{{ $val->accounts->id }}</td>
                                         <td>{{ $val->accounts->account }}</td>
@@ -106,7 +106,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {!! $operation_log_list->links() !!}
+                                        {!! $list->appends($search_data)->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
