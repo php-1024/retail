@@ -30,7 +30,7 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zerone_all = Statistics::all();//获取统计数据
         $where = [];
-        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
+        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
             $where = [['account_id',$admin_data['id']]];
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
