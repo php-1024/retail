@@ -51,7 +51,7 @@ class OperationLog extends Model{
     //获取联表分页数据
     public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
         $model = self::join('account',function($join){
-            $join->on('login_log.id','=','account.id');
+            $join->on('login_log.account_id','=','id');
         })->select('account.account','login_log.*');
         if(!empty($account)){
             $model =$model->where('account','like','%'.$account.'%');
