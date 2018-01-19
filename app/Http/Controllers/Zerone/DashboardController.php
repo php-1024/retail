@@ -103,7 +103,8 @@ class DashboardController extends Controller{
             $selected_province[] = $val->id;
         }
         dump($selected_province);
-        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info]);
+        exit();
+        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'province'=>$province]);
     }
     //战区管理编辑数据提交
     public function warzone_edit_check(Request $request){
