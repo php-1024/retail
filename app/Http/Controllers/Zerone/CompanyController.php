@@ -181,12 +181,22 @@ class CompanyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $listorg = Organization::getCompany(['type'=>'3'],'5','id');
+
+        $organization_name = $request->input('organization_name');
+        $company_owner_mobile = $request->input('company_owner_mobile');
+
+        $search_data = ['organization_name'=>$organization_name,'company_owner_mobile'=>$company_owner_mobile];
+        $where = [['type','3']];
+        if(!empty($organization_name)){
+            $where[] = ['organization_name','like','%'.$organization_name.'%'];
+        }
+
+        $listorg = Organization::getCompany($where,'5','id');
         foreach ($listorg as $k=>$v){
             $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->toArray();
             $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->toArray();
         }
-        return view('Zerone/Company/company_list',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Company/company_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户编辑ajaxshow显示页面
     public function company_list_edit(Request $request){
@@ -286,35 +296,37 @@ class CompanyController extends Controller{
 //        $warzone = Warzone::all();
         return view('Zerone/Company/company_list_delete');
     }
-//商户下级人员架构
-    public function proxy_structure(Request $request){
+
+    //商户下级店铺架构
+    public function company_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Account::getList([['organization_id','7'],['parent_tree','like','%'.$admin_data['parent_tree'].','.$admin_data['id'].'%']],0,'id','asc')->toArray();
-        $structure = $this->proxy_str($list,$admin_data['id']);
-        return view('Zerone/Company/company_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+        $organization_id = $request->input('organization_id');//服务商id
+        $listOrg = Organization::getOneCompany([['id',$organization_id]]);
+        $list = Organization::getArrayCompany([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
+        $structure = $this->Com_structure($list,$organization_id);
+        return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
-    private function proxy_str($list,$id){
+
+    private function Com_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->proxy_str($list, $val['id']);
+                $val['sonlist'] = $this->Com_structure($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
-                if(!empty($val['account_roles'])){
-                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
-                }
+                $structure .= '【商户】'. $val['organization_name']. '-'.$val['organization_companyinfo']['company_owner'].'-'.$val['organization_companyinfo']['company_owner_mobile'];
                 $structure .= '</div>';
-                $son_menu = $this->proxy_str($list, $val['id']);
+                $son_menu = $this->Com_structure($list, $val['id']);
                 if (!empty($son_menu)) {
                     $structure .=  $son_menu;
                 }

@@ -19,9 +19,8 @@ use Session;
 use App\Models\Statistics;
 
 class DashboardController extends Controller{
-    /*
-     * 登陆页面
-     */
+
+    //系统管理首页
     public function display(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -46,10 +45,12 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $setup_list = Setup::get_all();
-        return view('Zerone/Setup/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
+        return view('Zerone/Dashboard/setup',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'setup_list'=>$setup_list]);
     }
     //参数设置编辑
     public function setup_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $serviceurl = $request->input('serviceurl');//[serviceurl]服务商通道链接
         $merchanturl = $request->input('merchanturl');//[merchant]商户通道链接
         $depth = $request->input('depth');//[depth]人员构深度设置
@@ -65,11 +66,21 @@ class DashboardController extends Controller{
         }else{
             $merchanturl_status = 1;
         }
-        Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);        //修改保存服务商通道链接
-        Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);       //修改保存商户通道链接
-        Setup::editSetup([['id',3]],['cfg_value'=>$depth]);             //修改保存人员构深度设置
-        Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]); //修改保存服务商通道链接开启状态
-        Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
+        DB::beginTransaction();
+        try {
+            Setup::editSetup([['id',1]],['cfg_value'=>$serviceurl]);        //修改保存服务商通道链接
+            Setup::editSetup([['id',2]],['cfg_value'=>$merchanturl]);       //修改保存商户通道链接
+            Setup::editSetup([['id',3]],['cfg_value'=>$depth]);             //修改保存人员构深度设置
+            Setup::editSetup([['id',4]],['cfg_value'=>$serviceurl_status]); //修改保存服务商通道链接开启状态
+            Setup::editSetup([['id',5]],['cfg_value'=>$merchanturl_status]);//修改保存服务商通道链接开启状态
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了系统管理参数设置');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改系统管理参数设置失败，请检查！', 'status' => '0']);
+        }
         return response()->json(['data' => '系统参数修改成功！', 'status' => '1']);
     }
     //战区管理首页
@@ -80,12 +91,12 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');//搜索时输入的战区名称
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
-        return view('Zerone/Warzone/display',['zone_name'=>$zone_name,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Zerone/Dashboard/warzone',['zone_name'=>$zone_name,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
-        $zone_name = $request->input('zone_name');//搜索时输入的战区名称
-        $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
+        $zone_id = $request->input('id');
+        $warzone = Warzone::getOne(['id'=>$zone_id]);
         $province = Province::getpluck('id');
         foreach ($warzone as $key=>$val){
             foreach ($val->province as $kk=>$vv){
@@ -96,13 +107,8 @@ class DashboardController extends Controller{
             $all_province_name[$val->id] = $val->province_name;
         }
         $new_province_name = array_diff($all_province_name,$province_name);
-
-        dd($new_province_name);
-
-
-        $zone_id = $request->input('id');
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
-        return view('Zerone/Warzone/warzone_edit',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
+        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
     }
     //战区管理编辑数据提交
     public function warzone_edit_check(Request $request){
@@ -139,7 +145,7 @@ class DashboardController extends Controller{
         }
         $zone_id = $request->input('id');
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
-        return view('Zerone/Warzone/warzone_add',['zone_info'=>$zone_info,'all_province_name'=>$all_province_name]);
+        return view('Zerone/Dashboard/warzone_add',['zone_info'=>$zone_info,'all_province_name'=>$all_province_name]);
     }
     //战区管理添加数据提交
     public function warzone_add_check(Request $request){
@@ -168,7 +174,7 @@ class DashboardController extends Controller{
         $account = $admin_data['account'];//要操作的管理员的账号,用于记录
         $id = $request->input('id');//要操作的战区ID
         $zone_name = $request->input('zone_name');//要操作的战区名称
-        return view('Zerone/Warzone/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
+        return view('Zerone/Dashboard/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
     }
 
     //战区管理确认删除
@@ -191,27 +197,13 @@ class DashboardController extends Controller{
         return response()->json(['data' => '删除战区成功！', 'status' => '1']);
     }
 
-    //功能模块列表
-    public function module_list(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $module_name = $request->input('module_name');
-        $search_data = ['module_name'=>$module_name];
-        $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
-        dump($list);
-        return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
-    }
-    /*
-     * 所有操作记录
-     */
+    //所有操作记录
     public function operation_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $zerone_all = Statistics::all();//获取统计数据
-
         $where = [];
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
@@ -219,11 +211,23 @@ class DashboardController extends Controller{
             ];
         }
         $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        return view('Zerone/Log/operation_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'operation_log_list'=>$operation_log_list]);
+//        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
+
+
+
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
+
+
+        return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    /*
-     * 所有登录记录
-     */
+    //所有登录记录
     public function login_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -237,12 +241,10 @@ class DashboardController extends Controller{
             ];
         }
         $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
-        return view('Zerone/Log/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
+        return view('Zerone/Dashboard/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
     }
 
-    /*
-     * 系统人员结构
-     */
+    //系统人员结构
     public function structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数

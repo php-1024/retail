@@ -25,13 +25,13 @@
             @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“刘记新科技有限公司”人员结构</h2>
+                <h2>“{{$listOrg->organization_name}}”店铺结构</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">服务商管理</a>
+                        <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“刘记新科技有限公司”人员结构</strong>
+                        <strong>“{{$listOrg->organization_name}}”店铺结构</strong>
                     </li>
                 </ol>
             </div>
@@ -66,14 +66,14 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“刘记新科技有限公司”人员架构</h5>
+                            <h5>“{{$listOrg->organization_name}}”店铺架构</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            {{ $admin_data['account'] }}
+                                            {{ $listOrg['organization_name']. '-'.$listOrg['organizationCompanyinfo']['company_owner'].'-'.$listOrg['organizationCompanyinfo']['company_owner_mobile'] }}
                                         </div>
 
                                         {!! $structure  !!}
@@ -87,8 +87,9 @@
                     </div>
                 </div>
             </div>
+        </div>
             @include('Zerone/Public/Footer')
-            </div>
+
     </div>
 
     {{--<!-- Page-Level Scripts -->--}}

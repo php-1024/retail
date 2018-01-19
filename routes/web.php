@@ -232,6 +232,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('proxy_examinelist','Zerone\ProxyController@proxy_examinelist')->middleware('ZeroneCheck');//服务商审核列表
         Route::get('proxy_list','Zerone\ProxyController@proxy_list')->middleware('ZeroneCheck');//服务商列表
         Route::get('proxy_structure','Zerone\ProxyController@proxy_structure')->middleware('ZeroneCheck');//服务商人员架构
+        Route::get('proxy_program','Zerone\ProxyController@proxy_program')->middleware('ZeroneCheck');//服务商程序管理
     });
     //商户管理
     Route::group(['prefix'=>'company'],function(){
