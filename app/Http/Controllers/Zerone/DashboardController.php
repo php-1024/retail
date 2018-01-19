@@ -76,7 +76,6 @@ class DashboardController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了系统管理参数设置');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改系统管理参数设置失败，请检查！', 'status' => '0']);
         }
@@ -89,8 +88,10 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $zone_name = $request->input('zone_name');//搜索时输入的战区名称
+        $search_data['zone_name'] = $zone_name;
+
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],10,'id');
-        return view('Zerone/Dashboard/warzone',['zone_name'=>$zone_name,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Zerone/Dashboard/warzone',['zone_name'=>$zone_name,'search_data'=>$search_data,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
