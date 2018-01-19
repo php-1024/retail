@@ -49,7 +49,7 @@ class CompanyController extends Controller{
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
-            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+            $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $user = Account::max('account');
             $account  = $user+1;//用户账号
@@ -141,7 +141,7 @@ class CompanyController extends Controller{
                 CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//申请通过
                 //添加服务商
                 $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
-                $organization_id = Organization::addorganization($listdata); //返回值为商户的id
+                $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
@@ -165,7 +165,6 @@ class CompanyController extends Controller{
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$companylist['company_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
