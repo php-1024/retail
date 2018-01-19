@@ -116,8 +116,15 @@ class DashboardController extends Controller{
         try {
             Warzone::WarzoneEdit([['id', $zone_id]], ['zone_name' => $zone_name]);//修改战区名称
             //此方法行不通，先删除原有战区ID的数据然后在添加新的数据
-            WarzoneProvince::WarzoneProvinceDelete($zone_id);
-            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);
+            foreach($province_id as $key=>$val){
+                $vo = WarzoneProvince::getOne([['zone_id',$zone_id],['province_id',$val]]);//查询数据是否存在
+                if(is_null($vo)) {//不存在生成插入数据
+                    WarzoneProvince::WarzoneProvinceAdd(['zone_id' => $zone_id, 'province_id' => $val]);
+                }else{//存在数据则跳过
+                    continue;
+                }
+            }
+            WarzoneProvince::where('zone_id', $zone_id)->whereNotIn('province_id', $province_id)->forceDelete();
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
             DB::commit();
@@ -148,12 +155,13 @@ class DashboardController extends Controller{
         DB::beginTransaction();
         try {
             $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
-            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);//添加战区包含省份
+            foreach($province_id as $key=>$val){
+                WarzoneProvince::WarzoneProvinceAdd(['zone_id' => $zone_id, 'province_id' => $val]);
+            }
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了战区：'.$zone_name);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加战区失败，请检查！', 'status' => '0']);
         }
