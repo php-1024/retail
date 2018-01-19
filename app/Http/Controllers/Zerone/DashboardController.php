@@ -207,7 +207,6 @@ class DashboardController extends Controller{
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
         $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,100,'id');
         dump($list);
-
         return view('Zerone/Dashboard/operation_log',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //所有登录记录
