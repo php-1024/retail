@@ -59,6 +59,7 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane" id="tab1">
+                                            <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户登陆密码</label>
                                                 <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
