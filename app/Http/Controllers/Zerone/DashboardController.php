@@ -105,7 +105,7 @@ class DashboardController extends Controller{
         dump($selected_province);
 
         $zone_info = Warzone::getPaginage([[ 'id','like','%'.$zone_id.'%' ]],10,'id');
-        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'new_province_name'=>$new_province_name]);
+        return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info]);
     }
     //战区管理编辑数据提交
     public function warzone_edit_check(Request $request){
