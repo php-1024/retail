@@ -20,7 +20,6 @@ class SubordinateController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account = Account::max('account');
-        dump($account);
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -87,9 +86,9 @@ class SubordinateController extends Controller{
         $organization_id = 1;//当前零壹管理平台就只有一个组织。
 
         $account = Account::max('account');
-
+        $account = $account+1;
         if(Account::checkRowExists([[ 'account',$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
-            return response()->json(['data' => '账号已存在', 'status' => '0']);
+            return response()->json(['data' => '账号生成错误，请重试', 'status' => '0']);
         }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
         }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
