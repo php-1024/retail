@@ -45,11 +45,20 @@ class ZeroneCheck{
             case "zerone/proxy/proxy_list":             //服务商列表
             case "zerone/proxy/proxy_structure":        //服务商人员架构
             case "zerone/proxy/proxy_program":          //服务商程序管理
+            case "zerone/proxy/proxy_company":          //服务商商户划拨
 
             case "zerone/company/company_add":          //添加商户
             case "zerone/company/company_examinelist":  //商户审核列表
             case "zerone/company/company_list":         //商户列表
             case "zerone/company/company_structure":    //商户店铺架构
+            case "zerone/company/company_program":      //商户程序管理
+            case "zerone/company/company_store":        //商户划拨管理
+
+            case "zerone/store/store_add":              //店铺添加
+            case "zerone/store/store_list":             //店铺列表
+            case "zerone/store/store_structure":        //店铺人员架构
+            case "zerone/store/store_branchlist":       //分店管理
+            case "zerone/store/store_config":           //分店设置参数
 
                 $re = $this->checkLoginAndRule($request);//判断是否登陆
                 return self::format_response($re,$next);

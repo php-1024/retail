@@ -104,9 +104,9 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->proxy_name['0']}}</td>
+                                        <td>{{$value->proxy_name}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner}}</td>
-                                        <td>{{$value->account['0']}}</td>
+                                        <td>{{$value->account}}</td>
                                         <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
@@ -120,11 +120,15 @@
                                             <input type="hidden" name="organization_id" value="{{$value->id}}">
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm({{ $value->id }})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @if($value->status == 1)
+                                            <button type="button" class="btn  btn-xs btn-warning" value="1" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @elseif($value->status == 0)
+                                            <button type="button" class="btn  btn-xs btn-info" value="0" onclick="getFrozenForm({{ $value->id }},this.value)"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            @endif
                                             <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             <button type="submit" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
-                                            <button type="button" id="programBtn" onclick="location.href='proxyprogram.html'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                            <button type="button" id="companyBtn" onclick="location.href='proxycompany.html'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
+                                            <button type="button" id="programBtn" onclick="location.href='{{url('zerone/company/company_program')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
+                                            <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/company/company_store')}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
                                         </td>
                                         </form>
                                     </tr>
@@ -222,7 +226,7 @@ function getEditForm(id){
     });
 }
 //冻结
-function getFrozenForm(id){
+function getFrozenForm(id,status){
 
     var url = $('#company_list_frozen').val();
     var token = $('#_token').val();
@@ -238,7 +242,7 @@ function getFrozenForm(id){
         return;
     }
 
-    var data = {'id':id,'_token':token};
+    var data = {'id':id,'status':status,'_token':token};
     $.post(url,data,function(response){
         if(response.status=='-1'){
             swal({

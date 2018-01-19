@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Province;
 use App\Models\Setup;
+use App\Models\ToolingOperationLog;
 use App\Models\Warzone;
 use App\Models\Module;
 use App\Models\LoginLog;
@@ -29,10 +30,8 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $zerone_all = Statistics::all();//获取统计数据
         $where = [];
-        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
-            $where = [
-                ['account_id',$admin_data['id']]
-            ];
+        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
+            $where = [['account_id',$admin_data['id']]];
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
@@ -204,27 +203,28 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $where = [];
-        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
-            $where = [
-                ['account_id',$admin_data['id']]
-            ];
-        }
-        $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-//        $list = ToolingOperationLog::getPaginate([['account_id',$admin_data['admin_id']]],$time_st_format,$time_nd_format,15,'id');
-
-
-
         $time_st = $request->input('time_st');//查询时间开始
         $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
         $time_st_format = $time_nd_format = 0;//实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd];
-
-
+        if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
+            $where = [
+                ['account_id',$admin_data['id']]
+            ];
+        }else{
+            $where = [
+//                ['account',$account]
+            ];
+        }
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
+        foreach ($operation_log_list as $key=>$val){
+//            dump($val['account_id']);
+        }
         return view('Zerone/Dashboard/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //所有登录记录
@@ -234,14 +234,26 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $where = [];
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据
             $where = [
                 ['account_id',$admin_data['id']]
             ];
+        }else{
+            $where = [
+//                ['account',$account]
+            ];
         }
-        $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
-        return view('Zerone/Dashboard/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
+        return view('Zerone/Dashboard/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //系统人员结构
@@ -252,7 +264,8 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = 1;//当前组织ID，零壹管理平台组织只能为1
         //获取重Admin开始的的所有人员
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','0,1,%']],0,'id','asc')->toArray();
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.'0,1,'.'%']],0,'id','asc')->toArray();
+        dump($list);
         //根据获取的人员组成结构树
         $structure = $this->create_structure($list,1);
         return view('Zerone/Dashboard/structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);

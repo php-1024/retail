@@ -19,6 +19,7 @@ class PersonalController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account_id = $admin_data['id'];//当前登陆账号ID
+        $user = Account::getOne([['id',$admin_data['id']]]);
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
@@ -42,7 +43,7 @@ class PersonalController extends Controller{
                 unset($module);
             }
         }
-        return view('Zerone/Personal/display',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
+        return view('Zerone/Personal/display',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
     }
 
     //个人中心 - 修改个人资料
@@ -76,6 +77,7 @@ class PersonalController extends Controller{
     //个人中心——登录密码修改
     public function password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $account = Account::getOne([['id',$admin_data['id']]]);
         $password = $request->input('password');
         $new_password = $request->input('new_password');
@@ -85,8 +87,17 @@ class PersonalController extends Controller{
         $new_encrypted = md5($new_password);//加密新密码第一重
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
         if ($account['password'] == $encryptPwd){
-            Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
-            return response()->json(['data' => '密码修改成功！', 'status' => '1']);
+            DB::beginTransaction();
+            try {
+                Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登陆密码');//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '修改登陆密码失败，请检查', 'status' => '0']);
+            }
+            Session::put('zerone_account_id','');
+            return response()->json(['data' => '登陆密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
         }
@@ -103,6 +114,7 @@ class PersonalController extends Controller{
     //个人中心——安全密码修改(设置)
     public function safe_password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $safe_password = $request->input('safe_password');           //安全密码
         $new_safe_password = $request->input('new_safe_password');   //新安全密码
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
@@ -110,17 +122,37 @@ class PersonalController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
         $new_encrypted = md5($new_safe_password);//加密新安全密码第一重
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新安全密码第二重
+
         if ($admin_data['safe_password'] == ''){
             if ($safe_password == ''){
                 return response()->json(['data' => '安全密码不能为空！', 'status' => '1']);
-            }else{
-                Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+            }else{//设置安全密码
+                DB::beginTransaction();
+                try {
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();//事件回滚
+                    return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
+                }
                 Session::put('zerone_account_id','');
                 return response()->json(['data' => '安全密码设置成功，请退出后重新登录！', 'status' => '1']);
             }
-        }else{
+        }else{//修改安全密码
+            if ($safe_password == ''){
+                return response()->json(['data' => '安全密码不能为空！', 'status' => '1']);
+            }
             if ($admin_data['safe_password'] == $encryptPwd){
-                Account::editAccount([['id',$admin_data['id']]],['safe_password' => $new_encryptPwd]);
+                DB::beginTransaction();
+                try {
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $new_encryptPwd]);
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();//事件回滚
+                    return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
+                }
                 Session::put('zerone_account_id','');
                 return response()->json(['data' => '安全密码修改成功，请退出后重新登录！', 'status' => '1']);
             }else{
@@ -134,25 +166,44 @@ class PersonalController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']]
         ];
-        $operation_log_list = OperationLog::getPaginage($where,10,'id');//操作记录
-        return view('Zerone/Personal/operation_log',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'operation_log_list'=>$operation_log_list]);
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
+        return view('Zerone/Personal/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
     //个人中心——我的登录日志
     public function login_log(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $account = $request->input('account');//查询操作账户
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']]
         ];
-        $login_log_list = LoginLog::getPaginage($where,10,'id');//登录记录
-        return view('Zerone/Personal/login_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list]);
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
+        return view('Zerone/Personal/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>

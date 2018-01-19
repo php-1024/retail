@@ -233,13 +233,24 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('proxy_list','Zerone\ProxyController@proxy_list')->middleware('ZeroneCheck');//服务商列表
         Route::get('proxy_structure','Zerone\ProxyController@proxy_structure')->middleware('ZeroneCheck');//服务商人员架构
         Route::get('proxy_program','Zerone\ProxyController@proxy_program')->middleware('ZeroneCheck');//服务商程序管理
+        Route::get('proxy_company','Zerone\ProxyController@proxy_company')->middleware('ZeroneCheck');//服务商商户划拨
     });
     //商户管理
     Route::group(['prefix'=>'company'],function(){
         Route::get('company_add','Zerone\CompanyController@company_add')->middleware('ZeroneCheck');//添加商户
         Route::get('company_examinelist','Zerone\CompanyController@company_examinelist')->middleware('ZeroneCheck');//商户审核列表
-        Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//服务商列表
-        Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//服务商人员架构
+        Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//商户列表
+        Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//商户人员架构
+        Route::get('company_program','Zerone\CompanyController@company_program')->middleware('ZeroneCheck');//商户程序管理
+        Route::get('company_store','Zerone\CompanyController@company_store')->middleware('ZeroneCheck');//商户划拨管理
+    });
+    //店铺管理
+    Route::group(['prefix'=>'store'],function(){
+        Route::get('store_add','Zerone\StoreController@store_add')->middleware('ZeroneCheck');//添加店铺
+        Route::get('store_list','Zerone\StoreController@store_list')->middleware('ZeroneCheck');//店铺列表
+        Route::get('store_structure','Zerone\StoreController@store_structure')->middleware('ZeroneCheck');//店铺人员架构
+        Route::get('store_branchlist','Zerone\StoreController@store_branchlist')->middleware('ZeroneCheck');//分店管理
+        Route::get('store_config','Zerone\StoreController@store_config')->middleware('ZeroneCheck');//分店设置参数
     });
 
     //异步提交数据组

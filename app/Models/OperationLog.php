@@ -17,11 +17,10 @@ class OperationLog extends Model{
     public function accounts(){
         return $this->belongsTo('App\Models\Account', 'account_id');
     }
-    //关联程序管理工具账户信息表
-    public function accountsInfo(){
+    //和个人信息表一对一的关系
+    public function account_info(){
         return $this->belongsTo('App\Models\AccountInfo', 'account_id');
     }
-
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = self::with('accounts');
@@ -30,9 +29,13 @@ class OperationLog extends Model{
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
-    //分页查询获取列表
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('accountsInfo')->with('accounts')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    //根据时间戳操作用户分页查询获取列表
+    public static function getPaginate($where,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('account_info')->where($where);
+        if(!empty($time_st_format) && !empty($time_nd_format)){
+            $model = $model->whereBetween('created_at',[$time_st_format,$time_nd_format]);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //添加登录日志

@@ -36,30 +36,39 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="ibox-content m-b-sm border-bottom">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="date_added">操作时间</label>
-                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input id="date_added" type="text" class="form-control" value="2017-11-28">
+                <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
+                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="date_added">操作时间</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="date_modified">到</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">
+                                </div>
+                            </div>
+                        </div>
+                        {{--<div class="col-sm-3">--}}
+                        {{--<div class="form-group">--}}
+                        {{--<label class="control-label">操作账号</label>--}}
+                        {{--<input type="text" class="form-control" name="account" value="{{$search_data['account']}}" placeholder="请输入操作人账号">--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount"> &nbsp;</label>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="date_modified">到</label>
-                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input id="date_modified" type="text" class="form-control" value="2017-11-28">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -68,7 +77,8 @@
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>id</th>
+                                    <th>用户名</th>
                                     <th>操作详情</th>
                                     <th class="col-sm-1">操作时间</th>
                                 </tr>
@@ -77,6 +87,7 @@
                                 @foreach($operation_log_list as $key=>$val)
                                     <tr>
                                         <td>{{ $val->accounts->id }}</td>
+                                        <td>{{ $val->accounts->account }}</td>
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
@@ -114,15 +125,14 @@
 <script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
 <!-- Custom and plugin javascript -->
 <script>
-    $(document).ready(function() {
-        $('#addbtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "修改成功",
-                type: "success"
-            });
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-        $('#date_added').datepicker({
+        $('.zerodate').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,
             forceParse: false,
@@ -130,23 +140,25 @@
             autoclose: true,
             format: 'yyyy-mm-dd'
         });
-
-        $('#date_modified').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true,
-            format: 'yyyy-mm-dd'
-        });
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-
     });
+    function searchFormCheck(){
+        var url = $('#searchForm').attr('action');
+        var data = $('#searchForm').serialize();
+        $.get(url+'?'+data,function(json){
+            if(json.status==0){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                });
+                return false;
+            }else{
+                location.href=url+'?'+data;
+            }
+        });
+        return false;
+    }
 </script>
 </body>
 
