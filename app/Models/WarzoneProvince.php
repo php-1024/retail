@@ -24,7 +24,7 @@ class WarzoneProvince extends Model{
     }
     //获取单行数据
     public static function getOne($where){
-        return self::with('province')->where($where)->first();
+        return self::where($where)->first();
     }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
