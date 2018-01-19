@@ -46,12 +46,12 @@ class ProxyController extends Controller{
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$deepth,'type'=>2,'status'=>1];
-            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+            $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
             WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
-
-            $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
+            $user = Account::max('account');
+            $account  = $user+1;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
             $realname = $request->input('realname');//负责人姓名
@@ -128,12 +128,13 @@ class ProxyController extends Controller{
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
                 $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>$orgparent_tree,'program_id'=>2,'type'=>2,'status'=>1];
-                $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+                $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
                 $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
                 WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
 
-                $account  = 'P'.$proxylist['proxy_owner_mobile'].'_'.$organization_id;//用户账号
+                $user = Account::max('account');
+                $account  = $user+1;//用户账号
                 $parent_id = $admin_data['id'];//上级ID是当前用户ID
                 $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度

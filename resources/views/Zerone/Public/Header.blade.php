@@ -7,11 +7,9 @@
             <span class="m-r-sm text-muted welcome-message">
                 欢迎登录！
                 <strong>
-                    @if ($admin_data['is_super']==1)
-                        超级管理员-{{ $admin_data['account'] }}
-                    @else
-                        管理员-{{ $admin_data['account'] }}
-                    @endif
+
+                        {{ $admin_data['role_name'] }}-{{ $admin_data['account'] }}
+
                 </strong>
             </span>
         </li>

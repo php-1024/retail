@@ -50,7 +50,7 @@ class Organization extends Model{
         return self::with('organizationproxyinfo')->where($where)->first();
     }
     //添加数据
-    public static function addProgram($param){
+    public static function addOrganization($param){
         $organization = new Organization();//实例化程序模型
 
         $organization->organization_name = $param['organization_name'];//组织名称
