@@ -106,7 +106,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="99" class="text-right">
-                                        {!! $list->appends($search_data)->links() !!}
+                                        {!! $list->links() !!}
                                     </td>
                                 </tr>
                                 </tfoot>
