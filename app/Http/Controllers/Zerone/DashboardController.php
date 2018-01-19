@@ -154,12 +154,13 @@ class DashboardController extends Controller{
         DB::beginTransaction();
         try {
             $zone_id = Warzone::WarzoneAdd($zone_name);//添加战区名称并且返回添加的id
-            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);//添加战区包含省份
+            foreach($province_id as $key=>$val){
+                WarzoneProvince::WarzoneProvinceAdd(['zone_id' => $zone_id, 'province_id' => $val]);
+            }
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了战区：'.$zone_name);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加战区失败，请检查！', 'status' => '0']);
         }
