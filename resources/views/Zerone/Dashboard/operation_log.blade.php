@@ -96,7 +96,7 @@
                                         @if($admin_data['id'] == '1')
                                             <td>{{$admin_data['role_name']}}</td>
                                         @else
-                                            <td>（0）{{$admin_data['role_name']}}</td>
+                                            <td>{{$val->role_name}}</td>
                                         @endif
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>

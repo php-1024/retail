@@ -61,8 +61,8 @@
                                         <div class="tab-pane" id="tab1">
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">用户账号</label>
-                                                <div class="col-sm-10"><input type="text" name="account" class="form-control"></div>
+                                                <label class="col-sm-2 control-label">手机号码</label>
+                                                <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
@@ -80,12 +80,6 @@
                                                 <div class="col-sm-10"><input type="text" name="realname" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">手机号码</label>
-                                                <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-
                                         </div>
                                         <div class="tab-pane" id="tab2">
                                             <div class="hr-line-dashed"></div>

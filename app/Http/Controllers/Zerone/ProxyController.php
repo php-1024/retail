@@ -47,7 +47,7 @@ class ProxyController extends Controller{
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$deepth,'type'=>2,'status'=>1];
-            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+            $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
             WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
@@ -128,7 +128,7 @@ class ProxyController extends Controller{
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
                 $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>$orgparent_tree,'program_id'=>2,'type'=>2,'status'=>1];
-                $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+                $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
                 $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
                 WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商

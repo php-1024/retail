@@ -485,9 +485,6 @@ class ZeroneCheckAjax
     }
     //检测添加下级人员数据
     public function checkSubordinateAdd($request){
-        if(empty($request->input('account'))){
-            return self::res(0,response()->json(['data' => '请输入用户账号', 'status' => '0']));
-        }
         if(empty($request->input('password'))){
             return self::res(0,response()->json(['data' => '请输入用户登陆密码', 'status' => '0']));
         }
