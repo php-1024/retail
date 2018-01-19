@@ -15,7 +15,6 @@ use Session;
 class ProxyController extends Controller{
     //添加服务商
     public function proxy_add(Request $request){
-        echo Account::max('account');
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -51,7 +50,8 @@ class ProxyController extends Controller{
 
             $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
             WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
-            $account  = 'P'.$mobile.'_'.$organization_id;//用户账号
+            $user = Account::max('account');
+            $account  = $user+1;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
             $realname = $request->input('realname');//负责人姓名
@@ -133,7 +133,8 @@ class ProxyController extends Controller{
                 $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
                 WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
 
-                $account  = 'P'.$proxylist['proxy_owner_mobile'].'_'.$organization_id;//用户账号
+                $user = Account::max('account');
+                $account  = $user+1;//用户账号
                 $parent_id = $admin_data['id'];//上级ID是当前用户ID
                 $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度

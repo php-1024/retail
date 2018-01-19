@@ -52,8 +52,9 @@ class CompanyController extends Controller{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
             $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
-            $account  = 'C'.$mobile.'_'.$organization_id;//用户账号
-
+            $user = Account::max('account');
+            $account  = $user+1;//用户账号
+            
             $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
             $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$admin_data['deepth']+1,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
             $account_id = Account::addAccount($accdata);//添加账号返回id
@@ -143,7 +144,8 @@ class CompanyController extends Controller{
                 $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
                 $organization_id = Organization::addProgram($listdata); //返回值为商户的id
 
-                $account  = 'C'.$companylist['company_owner_mobile'].'_'.$organization_id;//用户账号
+                $user = Account::max('account');
+                $account  = $user+1;//用户账号
                 $company_password =  $companylist['company_password'];//用户密码
 
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
