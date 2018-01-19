@@ -54,7 +54,9 @@ class OperationLog extends Model{
             $join->on('operation_log.account_id','account.id');
         })->join('role_account',function($join){
             $join->on('operation_log.account_id','role_account.account_id');
-        })->select('account.account','role_account.role_id','operation_log.*');
+        })->join('organization_role',function($join){
+            $join->on('organization_role.id','role_account.role_id');
+        })->select('account.account','role_account.role_id','organization_role.role_name','operation_log.*');
         if(!empty($account)){
             $model =$model->where('account','like','%'.$account.'%');
         }
