@@ -17,7 +17,7 @@
                     <select data-placeholder="请选择省份" name="province_id[]" class="chosen-select2" multiple style="width:350px;" tabindex="2">
                         {{--所有战区当前选中的战区--}}
                         @foreach($province as $kk=>$vv)
-                            <option value="{{ $vv->id }}">{{ $vv->province_name }}</option>
+                            <option @if(in_array($vv->id,$selected_province)) selected="selected" @endif value="{{ $vv->id }}">{{ $vv->province_name }}</option>
                         @endforeach
                     </select>
                     <div style="clear: both;"></div>
