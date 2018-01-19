@@ -49,7 +49,7 @@ class CompanyController extends Controller{
         DB::beginTransaction();
         try{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
-            $organization_id = Organization::addProgram($listdata); //返回值为商户的id
+            $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $user = Account::max('account');
             $account  = $user+1;//用户账号
@@ -141,7 +141,7 @@ class CompanyController extends Controller{
                 CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//申请通过
                 //添加服务商
                 $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
-                $organization_id = Organization::addorganization($listdata); //返回值为商户的id
+                $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
