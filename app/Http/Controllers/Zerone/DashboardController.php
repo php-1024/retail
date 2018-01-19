@@ -119,18 +119,16 @@ class DashboardController extends Controller{
             foreach($province_id as $key=>$val){
                 $vo = WarzoneProvince::getOne([['zone_id',$zone_id],['province_id',$val]]);//查询数据是否存在
                 if(is_null($vo)) {//不存在生成插入数据
-                    WarzoneProvince::addWor(['zone_id' => $zone_id, 'province_id' => $val]);
+                    WarzoneProvince::WarzoneProvinceAdd(['zone_id' => $zone_id, 'province_id' => $val]);
                 }else{//存在数据则跳过
                     continue;
                 }
             }
-            WarzoneProvince::WarzoneProvinceDelete($zone_id);
-            WarzoneProvince::WarzoneProvinceEdit($province_id,$zone_id);
+            Warzone::where('zone_id', $zone_id)->whereNotIn('province_id', $province_id)->forceDelete();
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '编辑战区失败，请检查！', 'status' => '0']);
         }
