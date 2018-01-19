@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >服务商通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="serviceurl" value="{{$setup_list['cfg_facilitator_url']}}"/>
+                                        <input type="text" class="form-control" name="serviceurl" value="{{$setup_list[0]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启服务商注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" @if($setup_list['cfg_facilitator_switch']==1) checked @endif value="1"/>
+                                        <input type="checkbox" name="serviceurl_deleted" class="js-switch" @if($setup_list[3]['cfg_value']==1) checked @endif value="1"/>
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >商户通道链接</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="merchanturl" value="{{$setup_list['cfg_merchant_url']}}"/>
+                                        <input type="text" class="form-control" name="merchanturl" value="{{$setup_list[1]['cfg_value']}}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -78,14 +78,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" >是否开启商户注册通道</label>
                                     <div class="col-sm-10">
-                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" @if($setup_list['cfg_merchant_switch']==1)checked @endif value="1"/>
+                                        <input type="checkbox" name="merchanturl_deleted" class="js-switch2" @if($setup_list[4]['cfg_value']==1)checked @endif value="1"/>
                                     </div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">人员构深度设置</label>
-                                    <div class="col-sm-1"><input type="text" name="depth" class="form-control" value="{{$setup_list['cfg_depth']}}"/></div>
+                                    <div class="col-sm-1"><input type="text" name="depth" class="form-control" value="{{$setup_list[2]['cfg_value']}}"/></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
