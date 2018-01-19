@@ -15,8 +15,8 @@
                         <div style="clear: both;"></div>
                         <select data-placeholder="请选择省份" name="province_id[]" class="chosen-select2" multiple style="width:350px;" tabindex="2">
                             {{--所有战区未选中的战区--}}
-                            @foreach($all_province_name as $k=>$v)
-                                <option value="{{$k}}">{{$v}}</option>
+                            @foreach($province as $k=>$v)
+                                <option value="{{$k->id}}">{{$v->province_name}}</option>
                             @endforeach
                             {{--所有战区未选中的战区--}}
                         </select>
