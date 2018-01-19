@@ -6,11 +6,10 @@
                 修改战区
             </div>
             <div class="modal-body">
-                @foreach($zone_info as $key=>$val)
-                <input type="hidden" name="zone_id" id="zone_id" value="{{ $val->id }}">
+                <input type="hidden" name="zone_id" id="zone_id" value="{{ $zone_info->id }}">
                 <div class="form-group">
                     <label>战区名称</label>
-                    <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $val->zone_name }}" class="form-control">
+                    <input type="text" placeholder="请输入战区名称" name="zone_name" value="{{ $zone_info->zone_name }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>包含省份</label>
@@ -18,18 +17,12 @@
                     <select data-placeholder="请选择省份" name="province_id[]" class="chosen-select2" multiple style="width:350px;" tabindex="2">
                         {{--所有战区当前选中的战区--}}
                         @foreach($val->province as $kk=>$vv)
-                            <option selected="selected" value="{{ $vv->id }}">{{ $vv->province_name }}</option>
+                            <option value="{{ $vv->id }}">{{ $vv->province_name }}</option>
                         @endforeach
-                        {{--所有战区当前选中的战区--}}
-                        {{--所有战区未选中的战区--}}
-                        @foreach($new_province_name as $k=>$v)
-                            <option value="{{$k}}">{{$v}}</option>
-                        @endforeach
-                        {{--所有战区未选中的战区--}}
+
                     </select>
                     <div style="clear: both;"></div>
                 </div>
-                @endforeach
                 <div class="form-group">
                     <label>安全密码</label>
                     <input type="password" placeholder="请输入安全密码" name="safe_password" value="" class="form-control">
