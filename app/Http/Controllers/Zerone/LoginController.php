@@ -118,8 +118,8 @@ class LoginController extends Controller{
                         //插入登录记录
                         if(LoginLog::addLoginLog($account_info['id'],1,0,$ip,$addr)) {//admin,唯一超级管理员，不属于任何组织
                             Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
-                            $admin_data['realname'] = '超级管理员';
-                            $admin_data['role_name'] = '超级管理员';
+                            $admin_data['realname'] = '系统管理员';
+                            $admin_data['role_name'] = '系统管理员';
                             //构造用户缓存数据
                             $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                             $this->create_menu_cache($account_info->id);//生成对应账号的系统菜单
