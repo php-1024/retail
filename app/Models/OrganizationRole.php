@@ -71,6 +71,13 @@ class OrganizationRole extends Model{
         return self::where($where)->pluck($pluck);
     }
 
+    //获取操作记录时根据account_id查询角色名
+    public static function getLogsRoleName($account_id){
+        $row = self::whereIn('id',function($query) use ($account_id){
+            $query->from('role_account')->where('account_id',$account_id)->select('role_id');
+        })->first();
+        dump($row);
+    }
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
