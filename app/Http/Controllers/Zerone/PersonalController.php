@@ -85,7 +85,7 @@ class PersonalController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $new_encrypted = md5($new_password);//加密新密码第一重
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
-        dump($admin_data);
+        dd($admin_data);
         if ($account['password'] == $encryptPwd){
             DB::beginTransaction();
             try {
