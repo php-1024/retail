@@ -9,7 +9,7 @@ class ZeroneRedis
      * key_id  - 目前以用户ID作为Redis的key的关键字
      * admin_data - 需要缓存的数据
      */
-    public function create_account_cache($key_id,$admin_data){
+    public static function create_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
         Redis::connection('zeo');//连接到我的redis服务器
         $data_key = 'zerone_system_admin_data_'.$key_id;
@@ -20,7 +20,7 @@ class ZeroneRedis
     /*
      * id - 用户的ID
      */
-    public function create_menu_cache($id){
+    public static function create_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'id','asc');//获取零壹管理系统的一级菜单
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
