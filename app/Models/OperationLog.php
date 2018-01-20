@@ -52,7 +52,7 @@ class OperationLog extends Model{
     public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
         $model = self::join('account',function($join){
             $join->on('operation_log.account_id','account.id');
-        })->select('account.account','role_account.role_id','organization_role.role_name','operation_log.*');
+        })->select('account.account','operation_log.*');
         if(!empty($account)){
             $model =$model->where('account','like','%'.$account.'%');
         }
