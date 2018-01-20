@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 @if($admin_data['safe_password'] == '')
-                                    <input type="hidden" name="is_editing" value="0">
+                                    <input type="hidden" name="is_editing" value="-1">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">设置安全密码</label>
                                         <div class="col-sm-10">

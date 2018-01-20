@@ -81,7 +81,7 @@ class ZeroneCheckAjax
                 break;
 
             case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 安全密码 和 修改登录密码权限数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSafepasswordEdit($request);
+                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
             case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
@@ -144,27 +144,16 @@ class ZeroneCheckAjax
     }
     /******************************复合检测*********************************/
     //检测安全密码
-    public function checkLoginAndRuleAndSafeAndSafepasswordEdit($request){
-        $admin_data = $request->get('admin_data');
-        if($admin_data['safe_password'] == ''){
-            $re = $this->checkLoginAndRule($request);//判断是否登陆
-            if($re['status']=='0'){//检测是否登陆
-                return $re;
-            }else{
-                return self::res(1,$request);
-            }
-
+    public function checkLoginAndRuleAndSafepasswordEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
         }else{
-            $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-            if($re['status']=='0'){//检测是否登陆
-                return $re;
+            $re2 = $this->checkSafePasswordEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
             }else{
-                $re2 = $this->checkSafepasswordEdit($re['response']);//检测修改或者设置的安全密码是否正常
-                if($re2['status']=='0'){
-                    return $re2;
-                }else{
-                    return self::res(1,$re2['response']);
-                }
+                return self::res(1,$re2['response']);
             }
         }
     }
@@ -469,18 +458,35 @@ class ZeroneCheckAjax
     }
     //检测修改设置安全密码
     public function checkSafepasswordEdit($request){
-        if(empty($request->input('safe_password'))){
-            return self::res(0,response()->json(['data' => '请输入原安全密码', 'status' => '0']));
+        if(empty($request->input('is_editing'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
-        if(empty($request->input('new_safe_password'))){
-            return self::res(0,response()->json(['data' => '新安全密码不能为空', 'status' => '0']));
+
+        if($request->input('is_editing')=='-1'){//设置安全密码时
+            if(empty($request->input('safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('re_safe_password'))){
+                return self::res(0,response()->json(['data' => '请重复安全密码', 'status' => '0']));
+            }
+            if($request->input('safe_password') <> $request->input('re_safe_password')){
+                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            }
+        }elseif($request->input('is_editing')=='1'){//修改安全密码时
+            if(empty($request->input('old_safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入新安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('re_safe_password'))){
+                return self::res(0,response()->json(['data' => '请重复新安全密码', 'status' => '0']));
+            }
+            if($request->input('safe_password') <> $request->input('re_safe_password')){
+                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            }
         }
-        if(empty($request->input('news_safe_password'))){
-            return self::res(0,response()->json(['data' => '请确认新安全密码是否一致', 'status' => '0']));
-        }
-        if($request->input('new_safe_password') != $request->input('news_safe_password')){
-            return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
-        }
+
         return self::res(1,$request);
     }
     //检测添加下级人员数据
