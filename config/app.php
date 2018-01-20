@@ -184,7 +184,7 @@ return [
 
         App\Providers\HttpCurlServiceProvider::class,
         App\Providers\IP2AttrServiceProvider::class,
-        App\Providers\ZeroneRedisServiceProvider::class,
+        //App\Providers\ZeroneRedisServiceProvider::class,
     ],
 
     /*
