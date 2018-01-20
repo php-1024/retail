@@ -181,10 +181,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\ZeroneRedisServiceProvider::class,
         App\Providers\HttpCurlServiceProvider::class,
         App\Providers\IP2AttrServiceProvider::class,
-        App\Providers\ZeroneRedisServiceProvider::class,
+
     ],
 
     /*
