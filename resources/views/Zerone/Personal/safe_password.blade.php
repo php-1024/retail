@@ -41,6 +41,7 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 @if($admin_data['safe_password'] == '')
+                                    <input type="hidden" name="is_editing" value="0">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">设置安全密码</label>
                                         <div class="col-sm-10">
@@ -54,24 +55,25 @@
                                         </div>
                                     </div>
                                 @else
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">原安全密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" name="safe_password" class="form-control">
+                                    <input type="hidden" name="is_editing" value="1">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">原安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" name="old_safe_password" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">新安全密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" name="new_safe_password" class="form-control">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">新安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" name="safe_password" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">重复新密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" name="news_safe_password" class="form-control">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">重复新密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" name="re_safe_password" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
                                 @endif
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group ">
