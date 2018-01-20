@@ -99,9 +99,8 @@ class PersonalController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '修改登陆密码失败，请检查', 'status' => '0']);
             }
-            //Session::put('zerone_account_id','');
-            $admin_data['password'] = $new_encryptPwd;
-            $this->create_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+//            $admin_data['password'] = $new_encryptPwd;
+//            $this->create_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '登陆密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
@@ -154,7 +153,6 @@ class PersonalController extends Controller{
                     DB::rollBack();//事件回滚
                     return response()->json(['data' => '安全密码修改失败，请检查', 'status' => '0']);
                 }
-//                Session::put('zerone_account_id','');
                 $admin_data['safe_password'] = $encryptPwd;
                 $this->create_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
                 return response()->json(['data' => '安全密码修改成功！', 'status' => '1']);
