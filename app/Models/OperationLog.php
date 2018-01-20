@@ -19,7 +19,7 @@ class OperationLog extends Model{
     }
     //和个人信息表一对一的关系
     public function account_info(){
-        return $this->belongsTo('App\Models\AccountInfo', 'account_id');
+        return $this->belongsTo('App\Models\AccountInfo', 'account_id','account_id');
     }
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
