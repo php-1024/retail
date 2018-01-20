@@ -20,7 +20,7 @@ class Program extends Model{
     }
 
     //和程序菜单表一对多的关系
-    public function program_menus(){
+    public function menus(){
         return $this->hasMany('App\Models\ProgramMenu', 'program_id');
     }
 
