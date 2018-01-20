@@ -47,6 +47,12 @@
                                             <input type="password" name="safe_password" class="form-control">
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">重复安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" name="re_safe_password" class="form-control">
+                                        </div>
+                                    </div>
                                 @else
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原安全密码</label>

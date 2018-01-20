@@ -115,7 +115,7 @@
                                                 <label class="label label-danger">已冻结</label>
                                             @endif
                                         </td>
-                                        <td>2017-08-08 10:30:30</td>
+                                        <td>{{$value->created_at}}</td>
                                             <td class="text-right">
                                                 <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                 @if($value->status == 1)
