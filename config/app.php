@@ -184,6 +184,7 @@ return [
 
         App\Providers\HttpCurlServiceProvider::class,
         App\Providers\IP2AttrServiceProvider::class,
+        App\Providers\ZeroneRedisServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'HttpCurl' => App\Facades\HttpCurlFacade::class,
         'IP2Attr' => App\Facades\IP2AttrFacade::class,
+        'ZeroneRedis' => App\Facades\ZeroneRedisFacade::class,
     ],
 
 ];
