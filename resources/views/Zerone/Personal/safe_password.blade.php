@@ -108,13 +108,6 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-        $('#addbtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "修改成功",
-                type: "success"
-            });
-        });
     });
     //提交表单
     function postForm() {
