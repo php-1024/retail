@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\AccountInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Session;
 
 class PersonalController extends Controller{
@@ -85,7 +86,8 @@ class PersonalController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $new_encrypted = md5($new_password);//加密新密码第一重
         $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
-        dd($admin_data);
+
+
         if ($account['password'] == $encryptPwd){
             DB::beginTransaction();
             try {
@@ -96,7 +98,9 @@ class PersonalController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '修改登陆密码失败，请检查', 'status' => '0']);
             }
-            Session::put('zerone_account_id','');
+            //Session::put('zerone_account_id','');
+            $admin_data['password'] = $new_encryptPwd;
+            $this->create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '登陆密码修改成功！', 'status' => '1']);
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
@@ -200,6 +204,18 @@ class PersonalController extends Controller{
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
         return view('Zerone/Personal/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    //内部方法，生成账号数据Redis缓存
+    /*
+     * key_id  - 目前以用户ID作为Redis的key的关键字
+     * admin_data - 需要缓存的数据
+     */
+    private function create_account_cache($key_id,$admin_data){
+        $admin_data = serialize($admin_data);//序列化数组数据
+        Redis::connection('zeo');//连接到我的redis服务器
+        $data_key = 'zerone_system_admin_data_'.$key_id;
+        Redis::set($data_key,$admin_data);
     }
 }
 ?>
