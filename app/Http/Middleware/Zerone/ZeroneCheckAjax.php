@@ -80,7 +80,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 安全密码 和 修改登录密码权限数据提交
+            case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 修改安全密码权限数据提交
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
@@ -143,13 +143,13 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    //检测安全密码
+    //检测登陆，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkSafePasswordEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -486,7 +486,6 @@ class ZeroneCheckAjax
                 return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
             }
         }
-
         return self::res(1,$request);
     }
     //检测添加下级人员数据
