@@ -73,6 +73,7 @@ class OrganizationRole extends Model{
 
     //获取操作记录时根据account_id查询角色名
     public static function getLogsRoleName($account_id){
+        dump($account_id);
         $row = self::whereIn('id',function($query) use ($account_id){
             $query->from('role_account')->where('account_id',$account_id)->select('role_id');
         })->first();
