@@ -7,6 +7,8 @@
 if (!function_exists('create_account_cache')) {
     function create_account_cache($key_id, $admin_data)
     {
+        dump(123);
+        exit();
         $admin_data = serialize($admin_data);//序列化数组数据
         Redis::connection('zeo');//连接到我的redis服务器
         $data_key = 'zerone_system_admin_data_' . $key_id;

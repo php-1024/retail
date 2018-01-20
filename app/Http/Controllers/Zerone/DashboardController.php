@@ -23,6 +23,7 @@ class DashboardController extends Controller{
     //系统管理首页
     public function display(Request $request)
     {
+        create_account_cache();
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
