@@ -26,8 +26,9 @@ class CompanyController extends Controller{
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('organization_id');//零壹或者服务商organization_id
         $organization_name = $request->input('organization_name');//商户名称
-        $where = [['organization_name',$organization_name]];
+        $where = [['organization_name',$organization_name],['id','<>',$id]];
 
         $name = Organization::checkRowExists($where);
 
@@ -35,7 +36,7 @@ class CompanyController extends Controller{
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
 
-        $id = $request->input('organization_id');//零壹或者服务商organization_id
+
         $list = Organization::getOne([['id',$id]]);
 
         $parent_id = $id;//上级组织 零壹或者服务商organization_id
