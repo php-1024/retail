@@ -303,7 +303,7 @@ class ProxyController extends Controller{
 
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],1,'id','asc')->toArray();
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].',%']],1,'id','asc')->toArray();
         dump($listOrg);
         dump($oneOrg);
         dump($list);
