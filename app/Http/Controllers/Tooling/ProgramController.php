@@ -87,6 +87,7 @@ class ProgramController extends Controller{
         $program_name = $request->input('program_name');
         $search_data['program_name'] = $program_name;
         $list = Program::getPaginage([[ 'program_name','like','%'.$program_name.'%' ]],15,'id');
+        dump($list);
         $module_list = [];//功能模块列表
         $pname = [];//上级程序名称列表
         foreach($list as $key=>$val){
