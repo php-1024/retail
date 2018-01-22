@@ -44,11 +44,11 @@
                 <div class="col-lg-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-info pull-right">{{$zerone_all['0']['item_name']}}</span>
+                            <span class="label label-info pull-right">零壹管理系统</span>
                             <h5>管理人员</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{$zerone_all['0']['item_value']}}人</h1>
+                            <h1 class="no-margins">{{$zerone['system_personnel']}}人</h1>
                             <div class="stat-percent font-bold text-info">20人 <i class="fa fa-level-up"></i></div>
                             <small>今日</small>
                         </div>
@@ -57,11 +57,11 @@
                 <div class="col-lg-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-primary pull-right">{{$zerone_all['1']['item_name']}}</span>
+                            <span class="label label-primary pull-right">服务商系统</span>
                             <h5>管理人员</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{$zerone_all['1']['item_value']}}人</h1>
+                            <h1 class="no-margins">{{$zerone['service_providers']}}人</h1>
                             <div class="stat-percent font-bold text-navy">88人 <i class="fa fa-level-up"></i></div>
                             <small>今日</small>
                         </div>

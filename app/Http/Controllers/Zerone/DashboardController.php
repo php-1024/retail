@@ -29,21 +29,21 @@ class DashboardController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         //ID为id=1(零壹管理系统); id=2(服务商系统); id=3(商户系统); id=4(所有业务系统); id=5(服务商数量); id=6(商户数量); id=7(店铺数量);
         $zerone_all = Statistics::all();//获取统计数据
-        $zerone_system = Statistics::getOne(1)->item_value; //零壹管理系统人员数量
-        $service_provider_system = Statistics::getOne(2)->item_value; //服务商系统人员数量
-        $merchant_system = Statistics::getOne(3)->item_value; //商户系统人员数量
-        $business_system = Statistics::getOne(4)->item_value; //所有业务系统人员数量
-        $service_providers = Statistics::getOne(5)->item_value; //服务商数量
-        $merchant = Statistics::getOne(6)->item_value; //商户数量
-        $shop = Statistics::getOne(7)->item_value; //店铺数量
+        $system_personnel       = Statistics::getOne(1)->item_value;    //零壹管理系统人员数量
+        $service_providers      = Statistics::getOne(2)->item_value;    //服务商系统人员数量
+        $merchant_system        = Statistics::getOne(3)->item_value;    //商户系统人员数量
+        $all_system_personnel   = Statistics::getOne(4)->item_value;    //所有业务系统人员数量
+        $service_provider       = Statistics::getOne(5)->item_value;    //服务商数量
+        $merchant               = Statistics::getOne(6)->item_value;    //商户数量
+        $shop                   = Statistics::getOne(7)->item_value;    //店铺数量
         $zerone = [
-            'system_personnel'        => $zerone_system,
-            'service_providers'       => $service_provider_system,
-            'merchant_system'         => $merchant_system,
-            'business_system'         => $business_system,
-            'service_provider'        => $service_providers,
-            'merchant'                => $merchant,
-            'shop'                    => $shop
+            'system_personnel'        => $system_personnel,         //零壹管理系统人员数量
+            'service_providers'       => $service_providers,        //服务商系统人员数量
+            'merchant_system'         => $merchant_system,          //商户系统人员数量
+            'all_system_personnel'    => $all_system_personnel,     //所有业务系统人员数量
+            'service_provider'        => $service_provider,         //服务商数量
+            'merchant'                => $merchant,                 //商户数量
+            'shop'                    => $shop                      //店铺数量
         ];
         dump($zerone);
         $where = [];
