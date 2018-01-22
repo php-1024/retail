@@ -58,7 +58,7 @@
 
             <div class="row">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg->id}}">
+                <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg['id']}}">
                 <input type="hidden" id="company_assets_add" value="{{ url('zerone/ajax/company_assets_add') }}">
                 <div class="col-lg-12">
                     <div class="ibox ">
