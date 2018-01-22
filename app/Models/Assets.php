@@ -18,7 +18,7 @@ class Assets extends Model{
         return self::where($where)->first();
     }
     //添加数据
-    public static function addZeroneAssets($param){
+    public static function addAssets($param){
         $program = new Assets();//实例化程序模型
         $program->package_id = $param['package_id'];//套餐id
         $program->organization_id = $param['organization_id'];//组织id
@@ -29,7 +29,7 @@ class Assets extends Model{
         return $program->id;
     }
     //修改数据
-    public static function editWarzoneProxy($where,$param){
+    public static function editAssets($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;

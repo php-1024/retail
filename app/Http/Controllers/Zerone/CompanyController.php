@@ -384,7 +384,14 @@ class CompanyController extends Controller{
         DB::beginTransaction();
         try{
             if($status == '1'){
-                Assets::addZeroneAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
+                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+               if(empty($re)){
+                Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
+               }else{
+                $id=$re['id'];
+                $num += $re['program_spare_num'];
+                Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
+               }
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：');//保存操作记录
             }
