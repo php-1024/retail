@@ -97,6 +97,31 @@
                                         <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
+
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>零壹科技商超系统</td>
+
+                                    <td>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超总店系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
+                                        </div>
+                                        <div style=" margin-top: 30px;"></div>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超店铺系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
+                                        </div>
+                                    </td>
+                                    <td>2017-08-08 10:30:30</td>
+                                    <td class="text-right">
+                                        <button class="btn btn-info btn-xs"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
                                 </tbody>
 
                             </table>
