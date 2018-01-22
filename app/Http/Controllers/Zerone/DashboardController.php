@@ -43,6 +43,7 @@ class DashboardController extends Controller{
             'merchant'                => $merchant,            //商户数量
             'shop'                    => $shop                 //店铺数量
         ];
+        dd($zerone);
         $where = [];
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
             $where = [['account_id',$admin_data['id']]];
