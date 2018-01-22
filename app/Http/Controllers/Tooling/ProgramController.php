@@ -317,7 +317,7 @@ class ProgramController extends Controller{
                     unset($vo);
                 }
                 //删除原本有这次没有的程序
-                PackageProgram::where('package_id',$id)->whereNotIn('program_id',$program_ids)->delete();
+                PackageProgram::where('package_id',$id)->whereNotIn('program_id',$program_ids)->forceDelete();
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序套餐'.$package_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
