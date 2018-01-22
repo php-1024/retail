@@ -27,15 +27,21 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Statistics::plucks('item_value');    //所有数据
+        $system_personnel       = Statistics::getPluck(['id'=>'1'],'item_value');    //零壹管理系统人员数量
+        $service_providers      = Statistics::getPluck(['id'=>'2'],'item_value');    //服务商系统人员数量
+        $merchant_system        = Statistics::getPluck(['id'=>'3'],'item_value');    //商户系统人员数量
+        $all_system_personnel   = Statistics::getPluck(['id'=>'4'],'item_value');    //所有业务系统人员数量
+        $service_provider       = Statistics::getPluck(['id'=>'5'],'item_value');    //服务商数量
+        $merchant               = Statistics::getPluck(['id'=>'6'],'item_value');    //商户数量
+        $shop                   = Statistics::getPluck(['id'=>'7'],'item_value');    //店铺数量
         $zerone = [
-            'system_personnel'        => $list['0'],     //零壹管理系统人员数量
-            'service_providers'       => $list['1'],     //服务商系统人员数量
-            'merchant_system'         => $list['2'],     //商户系统人员数量
-            'all_system_personnel'    => $list['3'],     //所有业务系统人员数量
-            'service_provider'        => $list['4'],     //服务商数量
-            'merchant'                => $list['5'],     //商户数量
-            'shop'                    => $list['6']      //店铺数量
+            'system_personnel'        => $system_personnel,    //零壹管理系统人员数量
+            'service_providers'       => $service_providers,   //服务商系统人员数量
+            'merchant_system'         => $merchant_system,     //商户系统人员数量
+            'all_system_personnel'    => $all_system_personnel,//所有业务系统人员数量
+            'service_provider'        => $service_provider,    //服务商数量
+            'merchant'                => $merchant,            //商户数量
+            'shop'                    => $shop                 //店铺数量
         ];
         $where = [];
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
