@@ -304,6 +304,8 @@ class ProxyController extends Controller{
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
+        dump($listOrg);
+        dump($oneOrg);
         dump($list);
         $structure = $this->account_structure($list,$oneOrg['id']);
         return view('Zerone/Proxy/proxy_structure',['listOrg'=>$listOrg,'oneOrg'=>$oneOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
