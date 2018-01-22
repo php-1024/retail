@@ -739,9 +739,10 @@ class ZeroneCheckAjax
     public function checkAssetsAdd($request){
         $num = $request->input('num');
         if (preg_match("/^-?[1-9]\\d*$/",$num)){
+            return self::res(1, $request);
+        }else{
             return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
         }
-        return self::res(1, $request);
     }
 
 
