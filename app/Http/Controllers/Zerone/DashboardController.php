@@ -43,7 +43,7 @@ class DashboardController extends Controller{
         $service_provider       = $list['4'];    //服务商数量
         $merchant               = $list['5'];    //商户数量
         $shop                   = $list['6'];    //店铺数量
-        dd($list);
+//        dd($list);
         $zerone = [
             'system_personnel'        => $system_personnel,         //零壹管理系统人员数量
             'service_providers'       => $service_providers,        //服务商系统人员数量
