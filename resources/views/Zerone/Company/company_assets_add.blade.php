@@ -3,6 +3,7 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
     <input type="hidden" name="package_id" value="{{$listPac->id}}">
+    <input type="hidden" name="status" value="{{$status}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -24,7 +25,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">套餐名称</label>
+                            <label class="col-sm-3 control-label">程序名称</label>
                             <div class="col-sm-9">
                                 <select class="form-control m-b" name="programs_id">
                                     @foreach($listPac->programs as $key=>$value)

@@ -94,7 +94,7 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$v->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$v->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                             <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
@@ -119,60 +119,6 @@
         @include('Zerone/Public/Footer')
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <form class="form-horizontal tasi-form" method="get">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">程序划出</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal tasi-form" method="get">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">商户名称</label>
-                                <div class="col-sm-9">
-                                    <input type="text" value="刘记鸡煲王" placeholder="商户名称" class="form-control" disabled="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">套餐名称</label>
-                                <div class="col-sm-9">
-                                    <input type="text" value="零壹科技餐饮系统" placeholder="套餐名称" class="form-control" disabled="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">零壹新科技餐饮总店系统</label>
-                                <div class="col-sm-2">
-                                    <input type="text" value="0" class="form-control" >
-                                </div>
-                                <label class="col-sm-2 control-label">套</label>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">零壹新科技餐饮店铺系统</label>
-                                <div class="col-sm-2">
-                                    <input type="text" value="0"  class="form-control">
-                                </div>
-                                <label class="col-sm-2 control-label">套</label>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">安全密码</label>
-                                <div class="col-sm-9">
-                                    <input type="password" value="" placeholder="安全密码" class="form-control" >
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                        <button class="btn btn-success" type="button" id="save_bt">确定</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -188,7 +134,7 @@
 <script>
 
     //程序划入
-    function getAssetsAdd(package_id) {
+    function getAssetsAdd(package_id,status) {
 
         var url = $('#company_assets_add').val();
         var token = $('#_token').val();
@@ -205,7 +151,7 @@
             return;
         }
 
-        var data = {'package_id': package_id, 'organization_id':organization_id, '_token': token};
+        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({

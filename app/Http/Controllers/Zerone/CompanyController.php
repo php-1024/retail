@@ -8,6 +8,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationCompanyinfo;
 use App\Models\Package;
+use App\Models\ZeroneAssets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -364,14 +365,41 @@ class CompanyController extends Controller{
     public function company_assets_add(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
+        $status = $request->input('status');//状态
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
 
-        return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
+        return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function company_assets_add_check(Request $request){
-        echo 11;
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $organization_id = $request->input('organization_id');//服务商id
+        $package_id = $request->input('package_id');//套餐id
+        $programs_id = $request->input('programs_id');//程序id
+        $num = $request->input('num');//数量
+        $status = $request->input('status');//判断划入或者划出
+
+        DB::beginTransaction();
+        try{
+            if($status == '1'){
+                ZeroneAssets::addZeroneAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'programs_id'=>$programs_id,'program_spare_num'=>$num]);
+                //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：');//保存操作记录
+            }
+            elseif($status == '0'){
+//                Organization::editOrganization([['id',$id]],['status'=>'1']);
+//                Account::editOrganizationBatch([['organization_id',$id]],['status'=>'1']);
+//                //添加操作日志
+//                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：'.$list['organization_name']);//保存操作记录
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
     }
     //商户程序管理
     public function company_store(Request $request){
