@@ -20,7 +20,7 @@ class Statistics extends Model
 
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->pluck($pluck)->toArray();
+        return self::where($where)->pluck($pluck);
     }
 
     public static function plucks($where)
