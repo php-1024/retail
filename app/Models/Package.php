@@ -25,6 +25,10 @@ class Package extends Model{
         $model->save();
         return $model->id;
     }
+    //查询一条数据
+    public static function getOnePackage($where){
+        return self::with('programs')->where($where)->first();
+    }
     //修改数据
     public static function editPackage($where,$param){
         $model = self::where($where)->first();

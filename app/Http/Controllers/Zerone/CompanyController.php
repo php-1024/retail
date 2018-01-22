@@ -358,13 +358,16 @@ class CompanyController extends Controller{
         $listOrg = Organization::getOne([['id',$organization_id]]);
 
         $list = Package::getPaginage([],15,'id');
-        dump($list);
         return view('Zerone/Company/company_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户资产页面划入js显示
     public function company_assets_add(Request $request){
+        $organization_id = $request->input('organization_id');//服务商id
+        $package_id = $request->input('package_id');//套餐id
+        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listPac = Package::getOnePackage([['package_id',$package_id]]);
 
-        return view('Zerone/Company/company_assets_add');
+        return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
     }
     //商户程序管理
     public function company_store(Request $request){
