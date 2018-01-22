@@ -363,6 +363,10 @@ class ProxyController extends Controller{
         $listPac = Package::getOnePackage([['id',$package_id]]);
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
     }
+    //服务商程序管理页面划入检测
+    public function proxy_assets_add_check(Request $request){
+        dd($request);
+    }
     //服务商程序管理
     public function proxy_company(Request $request){
 
