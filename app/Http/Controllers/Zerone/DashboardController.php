@@ -35,8 +35,15 @@ class DashboardController extends Controller{
 //        $service_provider       = Statistics::getOne(['id'=>'5'])->item_value;    //服务商数量
 //        $merchant               = Statistics::getOne(['id'=>'6'])->item_value;    //商户数量
 //        $shop                   = Statistics::getOne(['id'=>'7'])->item_value;    //店铺数量
-        $shop                   = Statistics::plucks('id');    //店铺数量
-        dd($shop);
+        $list                   = Statistics::plucks('item_value');    //所有数据
+        $system_personnel       = $list['0'];    //零壹管理系统人员数量
+        $service_providers      = $list['1'];    //服务商系统人员数量
+        $merchant_system        = $list['2'];    //商户系统人员数量
+        $all_system_personnel   = $list['3'];    //所有业务系统人员数量
+        $service_provider       = $list['4'];    //服务商数量
+        $merchant               = $list['5'];    //商户数量
+        $shop                   = $list['6'];    //店铺数量
+        dd($list);
         $zerone = [
             'system_personnel'        => $system_personnel,         //零壹管理系统人员数量
             'service_providers'       => $service_providers,        //服务商系统人员数量
