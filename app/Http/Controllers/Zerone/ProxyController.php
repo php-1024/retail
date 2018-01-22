@@ -6,6 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
+use App\Models\Package;
 use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
@@ -346,7 +347,11 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Zerone/Proxy/proxy_program',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $organization_id = $request->input('organization_id');//服务商id
+        $listOrg = Organization::getOne([['id',$organization_id]]);
+
+        $list = Package::getPaginage([],15,'id');
+        return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商程序管理
     public function proxy_company(Request $request){
