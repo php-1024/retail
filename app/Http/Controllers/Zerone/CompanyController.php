@@ -377,14 +377,14 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
-        $programs_id = $request->input('programs_id');//程序id
+        $program_id = $request->input('program_id');//程序id
         $num = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
 
         DB::beginTransaction();
         try{
             if($status == '1'){
-                Assets::addZeroneAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'programs_id'=>$programs_id,'program_spare_num'=>$num]);
+                Assets::addZeroneAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num]);
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：');//保存操作记录
             }
