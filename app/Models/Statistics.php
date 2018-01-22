@@ -23,4 +23,9 @@ class Statistics extends Model
         return Self::where($where)->first();
     }
 
+    public static function plucks($where)
+    {
+        return Self::pluck($where);
+    }
+
 }
