@@ -282,24 +282,20 @@
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
+
+    //owl carousel
+
     $(document).ready(function() {
-        // activate Nestable for list 2
-        $('#huabo_btn').click(function(){
+        $('#addBtn').click(function(){
             $('#myModal').modal();
         });
-        $('#koujian_btn').click(function(){
+
+        $('#minuBtn').click(function(){
             $('#myModal2').modal();
         });
-        $('.saveBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            },function(){
-                window.location.reload();
-            });
-        });
+
     });
+
 </script>
 
 </body>
