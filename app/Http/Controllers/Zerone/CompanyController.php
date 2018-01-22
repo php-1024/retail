@@ -7,6 +7,7 @@ use App\Models\CompanyApply;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationCompanyinfo;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -354,8 +355,10 @@ class CompanyController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        return view('Zerone/Company/company_program',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    
+        $list = Package::getPaginage([],15,'id');
+        dump($list);
+        return view('Zerone/Company/company_program',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户程序管理
     public function company_store(Request $request){

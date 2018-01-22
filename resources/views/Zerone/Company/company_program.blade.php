@@ -97,51 +97,43 @@
                                         <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
-
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>零壹科技商超系统</td>
-
-                                    <td>
-                                        <div>
-                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超总店系统</span> &nbsp;&nbsp;
-                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
-                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
-                                        </div>
-                                        <div style=" margin-top: 30px;"></div>
-                                        <div>
-                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超店铺系统</span> &nbsp;&nbsp;
-                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
-                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
-                                        </div>
-                                    </td>
-                                    <td>2017-08-08 10:30:30</td>
-                                    <td class="text-right">
-                                        <button class="btn btn-info btn-xs"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>零壹科技酒店系统</td>
-
-                                    <td>
-                                        <div>
-                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技酒店系统</span> &nbsp;&nbsp;
-                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
-                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
-                                        </div>
-
-                                    </td>
-                                    <td>2017-08-08 10:30:30</td>
-                                    <td class="text-right">
-                                        <button class="btn btn-info btn-xs"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
-                                </tr>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="99">
+                                        <ul class="pagination pull-right">
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="first" href="#first">«</a>
+                                            </li>
+
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="prev" href="#prev">‹</a>
+                                            </li>
+                                            <li class="footable-page active">
+                                                <a data-page="0" href="#">1</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">2</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">3</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">4</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">5</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="next" href="#next">›</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="last" href="#last">»</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
 
                             </table>
                         </div>
