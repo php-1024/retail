@@ -127,8 +127,8 @@
 
                                                 <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary" onclick="location.href='{{url('zerone/proxy/proxy_structure')}}?organization_id={{$value->id}}'"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
 
-                                                <button type="button" id="programBtn" onclick="location.href='{{url('zerone/proxy/proxy_program')}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                                <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/proxy/proxy_company')}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
+                                                <button type="button" id="programBtn" onclick="location.href='{{url('zerone/proxy/proxy_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
+                                                <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/proxy/proxy_company')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
                                             </td>
                                     </tr>
                                 @endforeach
