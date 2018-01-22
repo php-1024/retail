@@ -81,23 +81,22 @@
                                 <tr>
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->package_name}}</td>
-                                    @foreach($value->programs as $k=>$v)
+
                                     <td>
+                                        @foreach($value->programs as $k=>$v)
                                         <div>
                                             <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
                                             <span class="label label-primary">剩余：1 套</span>&nbsp;&nbsp;
                                             <span class="label label-warning">已用：1 套</span>&nbsp;&nbsp;
                                         </div>
                                         <div style=" margin-top: 20px;"></div>
+                                        @endforeach
                                     </td>
-                                    @endforeach
                                     <td>{{$value->created_at}}</td>
-                                    @foreach($value->programs as $k=>$v)
                                     <td class="text-right">
                                         <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                         <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
-                                    @endforeach
                                 </tr>
                                 @endforeach
                                 </tbody>
