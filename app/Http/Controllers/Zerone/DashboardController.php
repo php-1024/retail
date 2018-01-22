@@ -27,9 +27,26 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        //ID为id=1(零壹管理系统); id=2(服务商系统); id=3(商户系统); id=4(所有业务系统); id=5(服务商数量); id=6(商户数量); id=7(店铺数量);
         $zerone_all = Statistics::all();//获取统计数据
-        $id = Statistics::getOne(1);
-        dump($id);
+        $zerone_system = Statistics::getOne(1)->item_value; //零壹管理系统数量
+        $service_provider_system = Statistics::getOne(2)->item_value; //服务商系统数量
+        $merchant_system = Statistics::getOne(3)->item_value; //商户系统数量
+        $business_system = Statistics::getOne(4)->item_value; //所有业务系统数量
+        $service_providers = Statistics::getOne(5)->item_value; //服务商数量
+        $merchant = Statistics::getOne(6)->item_value; //商户数量
+        $shop = Statistics::getOne(7)->item_value; //店铺数量
+        $zerone[] = [
+            'zerone_system'           => $zerone_system,
+            'service_provider_system' => $service_provider_system,
+            'merchant_system'         => $merchant_system,
+            'business_system'         => $business_system,
+            'service_providers'       => $service_providers,
+            'merchant'                => $merchant,
+            'shop'                    => $shop,
+
+        ];
+        dump($zerone);
         $where = [];
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
             $where = [['account_id',$admin_data['id']]];
