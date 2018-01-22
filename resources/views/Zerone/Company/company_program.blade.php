@@ -91,7 +91,7 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-info btn-xs" id="addBtn" onclick="getEditForm()"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-info btn-xs" id="addBtn" onclick="getEditForm('{{$value->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                         <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
