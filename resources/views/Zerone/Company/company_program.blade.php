@@ -66,102 +66,79 @@
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
-                                    <th>序</th>
-                                    <th>程序名称</th>
-                                    <th>程序数量</th>
-                                    <th>分店数量</th>
-                                    <th class="col-sm-2 text-right" >操作</th>
+                                    <th>ID</th>
+                                    <th>套餐名称</th>
+                                    <th>包含程序</th>
+                                    <th>添加时间</th>
+                                    <th class="text-right">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>微餐饮系统（先吃后付）通用版本</td>
+                                    <td>零壹科技餐饮系统</td>
 
                                     <td>
-                                        <label class="label label-primary" style="display:inline-block">1套</label>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮总店系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：1 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：1 套</span>&nbsp;&nbsp;
+                                        </div>
+                                        <div style=" margin-top: 30px;"></div>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮店铺系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：8 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：7 套</span>&nbsp;&nbsp;
+                                        </div>
                                     </td>
-                                    <td>
-                                        <label class="label label-primary" style="display:inline-block">5家</label>
-                                    </td>
+                                    <td>2017-08-08 10:30:30</td>
                                     <td class="text-right">
-                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                        <button class="btn btn-info btn-xs" id="addBtn"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
+
+
                                 <tr>
                                     <td>2</td>
-                                    <td>微餐饮系统（无人店模式）通用版本</td>
+                                    <td>零壹科技商超系统</td>
 
                                     <td>
-                                        <label class="label label-success" style="display:inline-block">0套</label>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超总店系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
+                                        </div>
+                                        <div style=" margin-top: 30px;"></div>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超店铺系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
+                                        </div>
                                     </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0家</label>
-                                    </td>
+                                    <td>2017-08-08 10:30:30</td>
                                     <td class="text-right">
-                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                        <button class="btn btn-info btn-xs"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td>3</td>
-                                    <td>微餐饮系统（自选店模式）通用版本</td>
+                                    <td>零壹科技酒店系统</td>
 
                                     <td>
-                                        <label class="label label-primary" style="display:inline-block">1套</label>
-                                    </td>
-                                    <td>
-                                        <label class="label label-primary" style="display:inline-block">5家</label>
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>微餐饮系统（外卖系统）通用版本</td>
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技酒店系统</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：0 套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：0 套</span>&nbsp;&nbsp;
+                                        </div>
 
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0套</label>
                                     </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0家</label>
-                                    </td>
+                                    <td>2017-08-08 10:30:30</td>
                                     <td class="text-right">
-                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>微零售系统（单店）通用版本</td>
-
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0套</label>
-                                    </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0家</label>
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>微商城系统（总分店）通用版本</td>
-
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0套</label>
-                                    </td>
-                                    <td>
-                                        <label class="label label-success" style="display:inline-block">0家</label>
-                                    </td>
-                                    <td class="text-right">
-                                        <button type="button" id="huabo_btn"  class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button type="button" id="koujian_btn" class="btn  btn-xs btn-primary"><i class="fa fa-sort-amount-desc"></i>&nbsp;&nbsp;程序划出</button>
+                                        <button class="btn btn-info btn-xs"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
                                 </tbody>
