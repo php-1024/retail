@@ -733,7 +733,7 @@ class ZeroneCheckAjax
     //检测商户编辑表信息
     public function checkAssetsAdd($request){
         $num = $request->input('num');
-        if (!(preg_match("/^([+-]?)\\d*\\.?\\d+$/",$num))){
+        if (preg_match("/^([+-]?)\\d*\\.?\\d+$/",$num)){
             return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
         }
         return self::res(1, $request);
