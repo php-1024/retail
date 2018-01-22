@@ -54,7 +54,7 @@
                         <div class="col-sm-3">
                         <div class="form-group">
                         <label class="control-label" for="amount">手机号码</label>
-                        <input type="text" id="amount" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">
+                        <input type="text" id="amount" name="proxy_owner_mobile" value="123" placeholder="手机号码" class="form-control">
                         </div>
                         </div>
                         <div class="col-sm-3">
