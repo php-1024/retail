@@ -59,7 +59,7 @@
             <div class="row">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg['id']}}">
-                <input type="hidden" id="company_assets_add" value="{{ url('zerone/ajax/company_assets_add') }}">
+                <input type="hidden" id="proxy_assets_add" value="{{ url('zerone/ajax/proxy_assets_add') }}">
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
@@ -94,7 +94,7 @@
                                         </td>
                                         <td>{{$value->created_at}}</td>
                                         <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$v->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                             <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                         </td>
                                     </tr>
@@ -118,112 +118,115 @@
         </div>
         @include('Zerone/Public/Footer')
     </div>
-    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content animated fadeIn">
-                <div class="modal-header">
-                    <h3>“刘记新科技有限公司”程序划入</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>
-                        <div class="col-sm-2">主程序：188套</div>
-                        <div class="col-sm-2">分店数：1880套</div>
 
-                    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
+    {{--<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">--}}
+        {{--<div class="modal-dialog modal-lg">--}}
+            {{--<div class="modal-content animated fadeIn">--}}
+                {{--<div class="modal-header">--}}
+                    {{--<h3>“刘记新科技有限公司”程序划入</h3>--}}
+                {{--</div>--}}
+                {{--<div class="modal-body">--}}
+                    {{--<div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>--}}
+                        {{--<div class="col-sm-2">主程序：188套</div>--}}
+                        {{--<div class="col-sm-2">分店数：1880套</div>--}}
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划入</label>
-                        <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                        <div class="col-sm-1" style="padding-top: 7px;">套</div>
+                    {{--</div>--}}
 
-                    </div>
+                    {{--<div style="clear:both"></div>--}}
+                    {{--<div class="hr-line-dashed"></div>--}}
 
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划入</label>--}}
+                        {{--<div class="col-sm-4" ><input type="text" class="form-control"></div>--}}
+                        {{--<div class="col-sm-1" style="padding-top: 7px;">套</div>--}}
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" style="padding-top: 7px;">分店划入</label>
-                        <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                        <div class="col-sm-1" style="padding-top: 7px;">家</div>
+                    {{--</div>--}}
 
-                    </div>
+                    {{--<div style="clear:both"></div>--}}
+                    {{--<div class="hr-line-dashed"></div>--}}
 
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-sm-2 control-label" style="padding-top: 7px;">分店划入</label>--}}
+                        {{--<div class="col-sm-4" ><input type="text" class="form-control"></div>--}}
+                        {{--<div class="col-sm-1" style="padding-top: 7px;">家</div>--}}
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">安全密码</label>
-                        <div class="col-sm-10"><input type="password" class="form-control" value=""></div>
-                    </div>
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
+                    {{--</div>--}}
 
-                </div>
+                    {{--<div style="clear:both"></div>--}}
+                    {{--<div class="hr-line-dashed"></div>--}}
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveBtn">保存</button>
-                </div>
-            </div>
-        </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-sm-2 control-label">安全密码</label>--}}
+                        {{--<div class="col-sm-10"><input type="password" class="form-control" value=""></div>--}}
+                    {{--</div>--}}
+                    {{--<div style="clear:both"></div>--}}
+                    {{--<div class="hr-line-dashed"></div>--}}
 
-        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content animated fadeIn">
-                    <div class="modal-header">
-                        <h3>“刘记新科技有限公司”程序划出</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>
-                            <div class="col-sm-2">主程序：188套</div>
-                            <div class="col-sm-2">分店数：1880套</div>
+                {{--</div>--}}
 
-                        </div>
+                {{--<div class="modal-footer">--}}
+                    {{--<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>--}}
+                    {{--<button type="button" class="btn btn-primary saveBtn">保存</button>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
+        {{--<div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">--}}
+            {{--<div class="modal-dialog modal-lg">--}}
+                {{--<div class="modal-content animated fadeIn">--}}
+                    {{--<div class="modal-header">--}}
+                        {{--<h3>“刘记新科技有限公司”程序划出</h3>--}}
+                    {{--</div>--}}
+                    {{--<div class="modal-body">--}}
+                        {{--<div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>--}}
+                            {{--<div class="col-sm-2">主程序：188套</div>--}}
+                            {{--<div class="col-sm-2">分店数：1880套</div>--}}
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划出</label>
-                            <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                            <div class="col-sm-1" style="padding-top: 7px;">套</div>
+                        {{--</div>--}}
 
-                        </div>
+                        {{--<div style="clear:both"></div>--}}
+                        {{--<div class="hr-line-dashed"></div>--}}
 
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
+                        {{--<div class="form-group">--}}
+                            {{--<label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划出</label>--}}
+                            {{--<div class="col-sm-4" ><input type="text" class="form-control"></div>--}}
+                            {{--<div class="col-sm-1" style="padding-top: 7px;">套</div>--}}
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" style="padding-top: 7px;">分店划出</label>
-                            <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                            <div class="col-sm-1" style="padding-top: 7px;">家</div>
+                        {{--</div>--}}
 
-                        </div>
+                        {{--<div style="clear:both"></div>--}}
+                        {{--<div class="hr-line-dashed"></div>--}}
 
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
+                        {{--<div class="form-group">--}}
+                            {{--<label class="col-sm-2 control-label" style="padding-top: 7px;">分店划出</label>--}}
+                            {{--<div class="col-sm-4" ><input type="text" class="form-control"></div>--}}
+                            {{--<div class="col-sm-1" style="padding-top: 7px;">家</div>--}}
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安全密码</label>
-                            <div class="col-sm-10"><input type="password" class="form-control" value=""></div>
-                        </div>
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
+                        {{--</div>--}}
 
-                    </div>
+                        {{--<div style="clear:both"></div>--}}
+                        {{--<div class="hr-line-dashed"></div>--}}
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary saveBtn">保存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<label class="col-sm-2 control-label">安全密码</label>--}}
+                            {{--<div class="col-sm-10"><input type="password" class="form-control" value=""></div>--}}
+                        {{--</div>--}}
+                        {{--<div style="clear:both"></div>--}}
+                        {{--<div class="hr-line-dashed"></div>--}}
 
-    </div>
+                    {{--</div>--}}
+
+                    {{--<div class="modal-footer">--}}
+                        {{--<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>--}}
+                        {{--<button type="button" class="btn btn-primary saveBtn">保存</button>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+
+    {{--</div>--}}
 </div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -238,24 +241,43 @@
 <!-- Page-Level Scripts -->
 
 <script>
-    $(document).ready(function() {
-        // activate Nestable for list 2
-        $('#huabo_btn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#koujian_btn').click(function(){
-            $('#myModal2').modal();
-        });
-        $('.saveBtn').click(function(){
+    //程序划入
+    function getAssetsAdd(package_id) {
+
+        var url = $('#proxy_assets_add').val();
+        var token = $('#_token').val();
+        var organization_id = $('#organization_id').val();
+        if (package_id == '') {
             swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            },function(){
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            }, function () {
                 window.location.reload();
             });
+            return;
+        }
+
+        var data = {'package_id': package_id, 'organization_id':organization_id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-    });
+    }
 </script>
 
 </body>

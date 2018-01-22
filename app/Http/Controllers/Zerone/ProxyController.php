@@ -355,6 +355,15 @@ class ProxyController extends Controller{
         dump($list);
         return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //服务商程序管理页面划入js显示
+    public function proxy_assets_add(Request $request){
+        $organization_id = $request->input('organization_id');//服务商id
+        $package_id = $request->input('package_id');//套餐id
+        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listPac = Package::getOnePackage([['id',$package_id]]);
+
+        return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
+    }
     //服务商程序管理
     public function proxy_company(Request $request){
 
