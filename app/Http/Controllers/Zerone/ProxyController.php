@@ -348,7 +348,7 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listOrg = Organization::getOne([['id',1]]);
 
         $list = Package::getPaginage([],15,'id');
         dump($listOrg);
