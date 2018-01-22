@@ -35,7 +35,7 @@ class DashboardController extends Controller{
 //        $service_provider       = Statistics::getOne(['id'=>'5'])->item_value;    //服务商数量
 //        $merchant               = Statistics::getOne(['id'=>'6'])->item_value;    //商户数量
 //        $shop                   = Statistics::getOne(['id'=>'7'])->item_value;    //店铺数量
-        $shop                   = Statistics::plucks(['id'=>'7']);    //店铺数量
+        $shop                   = Statistics::plucks('item_value');    //店铺数量
         dd($shop);
         $zerone = [
             'system_personnel'        => $system_personnel,         //零壹管理系统人员数量
