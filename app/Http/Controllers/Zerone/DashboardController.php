@@ -27,16 +27,30 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $zerone_all = Statistics::all();//获取统计数据
-        $id = Statistics::getOne(1);
-        dump($id);
+        //ID为id=1(零壹管理系统); id=2(服务商系统); id=3(商户系统); id=4(所有业务系统); id=5(服务商数量); id=6(商户数量); id=7(店铺数量);
+        $system_personnel       = Statistics::getOne(1)->item_value;    //零壹管理系统人员数量
+        $service_providers      = Statistics::getOne(2)->item_value;    //服务商系统人员数量
+        $merchant_system        = Statistics::getOne(3)->item_value;    //商户系统人员数量
+        $all_system_personnel   = Statistics::getOne(4)->item_value;    //所有业务系统人员数量
+        $service_provider       = Statistics::getOne(5)->item_value;    //服务商数量
+        $merchant               = Statistics::getOne(6)->item_value;    //商户数量
+        $shop                   = Statistics::getOne(7)->item_value;    //店铺数量
+        $zerone = [
+            'system_personnel'        => $system_personnel,         //零壹管理系统人员数量
+            'service_providers'       => $service_providers,        //服务商系统人员数量
+            'merchant_system'         => $merchant_system,          //商户系统人员数量
+            'all_system_personnel'    => $all_system_personnel,     //所有业务系统人员数量
+            'service_provider'        => $service_provider,         //服务商数量
+            'merchant'                => $merchant,                 //商户数量
+            'shop'                    => $shop                      //店铺数量
+        ];
         $where = [];
         if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
             $where = [['account_id',$admin_data['id']]];
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
-        return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone_all'=>$zerone_all]);
+        return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone'=>$zerone]);
     }
     //参数设置展示
     public function setup(Request $request){
