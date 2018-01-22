@@ -351,6 +351,8 @@ class ProxyController extends Controller{
         $listOrg = Organization::getOne([['id',$organization_id]]);
 
         $list = Package::getPaginage([],15,'id');
+        dump($listOrg);
+        dump($list);
         return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商程序管理
