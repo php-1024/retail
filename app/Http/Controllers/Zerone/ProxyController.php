@@ -361,7 +361,7 @@ class ProxyController extends Controller{
         $package_id = $request->input('package_id');//套餐id
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
-
+        dd($listPac);
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
     }
     //服务商程序管理
