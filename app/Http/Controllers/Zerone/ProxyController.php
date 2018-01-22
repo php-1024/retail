@@ -357,7 +357,7 @@ class ProxyController extends Controller{
     }
     //服务商程序管理页面划入js显示
     public function proxy_assets_add(Request $request){
-        $organization_id = $request->input('organization_id');//服务商id
+        $organization_id = $request->input('organization_id'); //服务商id
         $package_id = $request->input('package_id');//套餐id
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
