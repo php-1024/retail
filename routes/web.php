@@ -306,7 +306,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('company_list_frozen_check','Zerone\CompanyController@company_list_frozen_check')->middleware('ZeroneCheckAjax');//商户冻结数据提交
         Route::post('company_list_delete','Zerone\CompanyController@company_list_delete')->middleware('ZeroneCheckAjax');//商户删除页面显示
         Route::post('company_assets_add','Zerone\CompanyController@company_assets_add')->middleware('ZeroneCheckAjax');//商户资产划入显示页面
-        Route::post('company_assets_add_check','Zerone\CompanyController@proxy_assets_add_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
+        Route::post('company_assets_add_check','Zerone\CompanyController@company_assets_add_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
 
     });
 });
