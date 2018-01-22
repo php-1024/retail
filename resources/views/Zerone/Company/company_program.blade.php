@@ -58,6 +58,7 @@
 
             <div class="row">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg->id}}">
                 <input type="hidden" id="company_assets_add" value="{{ url('zerone/ajax/company_assets_add') }}">
                 <div class="col-lg-12">
                     <div class="ibox ">
@@ -93,8 +94,8 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-info btn-xs" id="addBtn" onclick="getAssetsAdd('{{$value->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                        <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
+                                        <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -187,10 +188,11 @@
 <script>
 
     //程序划入
-    function getAssetsAdd(id) {
+    function getAssetsAdd(package_id) {
 
         var url = $('#company_assets_add').val();
         var token = $('#_token').val();
+        var organization_id = $('#organization_id').val();
         if (id == '') {
             swal({
                 title: "提示信息",
@@ -203,7 +205,7 @@
             return;
         }
 
-        var data = {'id': id, '_token': token};
+        var data = {'id': id, 'organization_id':organization_id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
