@@ -70,7 +70,7 @@
                                     <th>套餐名称</th>
                                     <th>添加时间</th>
                                     <th>包含程序</th>
-                                    <th class="text-right">操作</th>
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,14 +87,12 @@
                                             <span class="label label-warning">已用：1 套</span>&nbsp;&nbsp;
                                         </div>
                                         <div style=" margin-top: 20px;"></div>
-                                    <td class="text-right">
+
+
                                         <button class="btn btn-info btn-xs" id="addBtn"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                         <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
                                         @endforeach
                                     </td>
-
-
                                 </tr>
                                 @endforeach
                                 </tbody>
