@@ -18,4 +18,9 @@ class Statistics extends Model
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    public static function getOne($id)
+    {
+        return Self::where('id',$id)->first();
+    }
+
 }
