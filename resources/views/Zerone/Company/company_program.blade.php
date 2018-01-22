@@ -163,111 +163,112 @@
         </div>
 
     </div>
-    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content animated fadeIn">
-                <div class="modal-header">
-                    <h3>“刘记餐饮集团”程序划入</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>
-                        <div class="col-sm-2">主程序：1套</div>
-                        <div class="col-sm-2">分店数：5家</div>
-
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划入</label>
-                        <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                        <div class="col-sm-1" style="padding-top: 7px;">套</div>
-
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" style="padding-top: 7px;">分店划入</label>
-                        <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                        <div class="col-sm-1" style="padding-top: 7px;">家</div>
-
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">安全密码</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
-                    </div>
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveBtn">保存</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form class="form-horizontal tasi-form" method="get">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content animated fadeIn">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h3>“刘记餐饮集团”程序划出</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">程序划入</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group"><label class="col-sm-4 control-label">微餐饮系统（先吃后付）通用版本</label>
-                            <div class="col-sm-2">主程序：188套</div>
-                            <div class="col-sm-2">分店数：1880套</div>
+                        <form class="form-horizontal tasi-form" method="get">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">商户名称</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="刘记鸡煲王" placeholder="商户名称" class="form-control" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">套餐名称</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="零壹科技餐饮系统" placeholder="套餐名称" class="form-control" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">零壹新科技餐饮总店系统</label>
+                                <div class="col-sm-2">
+                                    <input type="text" value="0" class="form-control" >
+                                </div>
+                                <label class="col-sm-2 control-label">套</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">零壹新科技餐饮店铺系统</label>
+                                <div class="col-sm-2">
+                                    <input type="text" value="0"  class="form-control">
+                                </div>
+                                <label class="col-sm-2 control-label">套</label>
+                            </div>
 
-                        </div>
-
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" style="padding-top: 7px;">主程序划出</label>
-                            <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                            <div class="col-sm-1" style="padding-top: 7px;">套</div>
-
-                        </div>
-
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" style="padding-top: 7px;">分店划出</label>
-                            <div class="col-sm-4" ><input type="text" class="form-control"></div>
-                            <div class="col-sm-1" style="padding-top: 7px;">家</div>
-
-                        </div>
-
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安全密码</label>
-                            <div class="col-sm-10"><input type="password" class="form-control" value=""></div>
-                        </div>
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">安全密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary saveBtn">保存</button>
+                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                        <button class="btn btn-success" type="button" id="save_btn">确定</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form class="form-horizontal tasi-form" method="get">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">程序划出</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal tasi-form" method="get">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">商户名称</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="刘记鸡煲王" placeholder="商户名称" class="form-control" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">套餐名称</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="零壹科技餐饮系统" placeholder="套餐名称" class="form-control" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">零壹新科技餐饮总店系统</label>
+                                <div class="col-sm-2">
+                                    <input type="text" value="0" class="form-control" >
+                                </div>
+                                <label class="col-sm-2 control-label">套</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">零壹新科技餐饮店铺系统</label>
+                                <div class="col-sm-2">
+                                    <input type="text" value="0"  class="form-control">
+                                </div>
+                                <label class="col-sm-2 control-label">套</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">安全密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                        <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
