@@ -138,7 +138,7 @@ class DashboardController extends Controller{
                     continue;
                 }
             }
-            WarzoneProvince::where('zone_id', $zone_id)->whereNotIn('province_id', $province_id)->forceDelete();
+            WarzoneProvince::where('zone_id', $zone_id)->whereNotIn('province_id', $province_id)->forceDelete();//删除原本拥有但本次未选中的数据
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了战区：'.$zone_name);//保存操作记录
             DB::commit();
