@@ -27,13 +27,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“刘记餐饮集团”程序管理</h2>
+                <h2>“{{$listOrg->organization_name}}”程序管理</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“刘记餐饮集团”程序管理</strong>
+                        <strong>“{{$listOrg->organization_name}}”程序管理</strong>
                     </li>
                 </ol>
             </div>
@@ -60,7 +60,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“刘记餐饮集团”程序管理</h5>
+                            <h5>“{{$listOrg->organization_name}}”程序管理</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
@@ -82,7 +82,7 @@
                                     <td>
                                         @foreach($value->programs as $k=>$v)
                                         <div>
-                                            <span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span> &nbsp;&nbsp;
+                                            <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
                                             <span class="label label-primary">剩余：1 套</span>&nbsp;&nbsp;
                                             <span class="label label-warning">已用：1 套</span>&nbsp;&nbsp;
                                         </div>
@@ -101,34 +101,7 @@
                                 <tr>
                                     <td colspan="99">
                                         <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
+                                            {{$list->links()}}
                                         </ul>
                                     </td>
                                 </tr>
