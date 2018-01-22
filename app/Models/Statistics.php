@@ -17,15 +17,4 @@ class Statistics extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-
-    //获取单行数据的其中一列
-    public static function getPluck($where,$pluck){
-        return self::where($where)->pluck($pluck);
-    }
-
-    public static function plucks($where)
-    {
-        return Self::pluck($where)->toArray();
-    }
-
 }
