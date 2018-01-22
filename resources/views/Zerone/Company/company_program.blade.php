@@ -74,29 +74,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($list as $key=>$value)
                                 <tr>
-                                    <td>1</td>
-                                    <td>零壹科技餐饮系统</td>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->package_name}}</td>
 
                                     <td>
+                                        @foreach($value->programs as $k=>$v)
                                         <div>
-                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮总店系统</span> &nbsp;&nbsp;
+                                            <span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span> &nbsp;&nbsp;
                                             <span class="label label-primary">剩余：1 套</span>&nbsp;&nbsp;
                                             <span class="label label-warning">已用：1 套</span>&nbsp;&nbsp;
                                         </div>
-                                        <div style=" margin-top: 30px;"></div>
-                                        <div>
-                                            <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮店铺系统</span> &nbsp;&nbsp;
-                                            <span class="label label-primary">剩余：8 套</span>&nbsp;&nbsp;
-                                            <span class="label label-warning">已用：7 套</span>&nbsp;&nbsp;
-                                        </div>
+                                        <div style=" margin-top: 20px;"></div>
+                                        @endforeach
                                     </td>
-                                    <td>2017-08-08 10:30:30</td>
+                                    <td>{{$value->created_at}}</td>
                                     <td class="text-right">
                                         <button class="btn btn-info btn-xs" id="addBtn"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                         <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
