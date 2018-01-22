@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">程序名称</label>
                             <div class="col-sm-9">
-                                <select class="form-control m-b" name="programs_id">
+                                <select class="form-control m-b" name="program_id">
                                     @foreach($listPac->programs as $key=>$value)
                                         <option value="{{$value->id}}">{{$value->program_name}}</option>
                                     @endforeach
