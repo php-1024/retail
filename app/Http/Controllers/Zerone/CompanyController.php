@@ -365,7 +365,7 @@ class CompanyController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $listOrg = Organization::getOne([['id',$organization_id]]);
-        $listPac = Package::getOnePackage([['package_id',$package_id]]);
+        $listPac = Package::getOnePackage([['id',$package_id]]);
 
         return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
     }
