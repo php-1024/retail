@@ -189,7 +189,7 @@
     //程序划入
     function getAssetsAdd(id) {
 
-        var url = $('#company_Assets_add').val();
+        var url = $('#company_assets_add').val();
         var token = $('#_token').val();
         if (id == '') {
             swal({
