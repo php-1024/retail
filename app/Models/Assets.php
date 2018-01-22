@@ -6,7 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class ZeroneAssets extends Model{
+class Assets extends Model{
     use SoftDeletes;
     protected $table = 'zerone_assets';
     protected $primaryKey = 'id';
@@ -19,7 +19,7 @@ class ZeroneAssets extends Model{
     }
     //添加数据
     public static function addZeroneAssets($param){
-        $program = new ZeroneAssets();//实例化程序模型
+        $program = new Assets();//实例化程序模型
         $program->package_id = $param['package_id'];//套餐id
         $program->organization_id = $param['organization_id'];//组织id
         $program->program_id = $param['program_id'];//程序名称
