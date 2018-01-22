@@ -91,7 +91,7 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-info btn-xs" id="addBtn"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-info btn-xs" id="addBtn" onclick="getEditForm()"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                         <button class="btn btn-primary btn-xs" id="minuBtn"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
@@ -236,18 +236,42 @@
 <!-- Page-Level Scripts -->
 <script>
 
-    //owl carousel
+    //编辑
+    function getEditForm(id) {
 
-    $(document).ready(function() {
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
+        var url = $('#company_list_edit').val();
+        var token = $('#_token').val();
+        if (id == '') {
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            }, function () {
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id': id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-
-        $('#minuBtn').click(function(){
-            $('#myModal2').modal();
-        });
-
-    });
+    }
 
 </script>
 
