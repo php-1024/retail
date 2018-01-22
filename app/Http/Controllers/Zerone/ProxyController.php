@@ -357,12 +357,15 @@ class ProxyController extends Controller{
     }
     //服务商程序管理页面划入js显示
     public function proxy_assets_add(Request $request){
-        dd(1);
-        $organization_id = $request->input('organization_id');//服务商id
+        $organization_id = $request->input('organization_id'); //服务商id
         $package_id = $request->input('package_id');//套餐id
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
+    }
+    //服务商程序管理页面划入检测
+    public function proxy_assets_add_check(Request $request){
+        dd($request);
     }
     //服务商程序管理
     public function proxy_company(Request $request){
