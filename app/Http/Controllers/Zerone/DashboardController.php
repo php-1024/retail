@@ -27,7 +27,7 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list                   = Statistics::pluck('item_value')->toArray();    //所有数据
+        $list = Statistics::pluck('item_value')->toArray();    //所有数据
         $zerone = [
             'system_personnel'        => $list['0'],     //零壹管理系统人员数量
             'service_providers'       => $list['1'],     //服务商系统人员数量
