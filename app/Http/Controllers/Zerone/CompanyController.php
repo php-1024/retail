@@ -369,6 +369,10 @@ class CompanyController extends Controller{
 
         return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
     }
+    //商户资产页面划入js显示
+    public function company_assets_add_check(Request $request){
+        echo 11;
+    }
     //商户程序管理
     public function company_store(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
