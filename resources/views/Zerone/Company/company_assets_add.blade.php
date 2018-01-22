@@ -1,7 +1,8 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/company_list_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/company_assets_add_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="">
+    <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
+    <input type="hidden" name="package_id" value="{{$listPac->id}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,7 +26,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">套餐名称</label>
                             <div class="col-sm-9">
-                                <select class="form-control m-b" name="organization_id">
+                                <select class="form-control m-b" name="programs_id">
                                     @foreach($listPac->programs as $key=>$value)
                                         <option value="{{$value->id}}">{{$value->program_name}}</option>
                                     @endforeach
@@ -50,7 +51,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button class="btn btn-success" type="button" onclick="postForm()">确定</button>
                 </div>
             </div>
         </div>
