@@ -13,30 +13,32 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商户名称</label>
                             <div class="col-sm-9">
-                                <input type="text" value="刘记鸡煲王" placeholder="商户名称" class="form-control" disabled="">
+                                <input type="text" value="{{$listOrg->organization_name}}" placeholder="商户名称" class="form-control" disabled="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">套餐名称</label>
                             <div class="col-sm-9">
-                                <input type="text" value="零壹科技餐饮系统" placeholder="套餐名称" class="form-control" disabled="">
+                                <input type="text" value="{{$listPac->package_name}}" placeholder="套餐名称" class="form-control" disabled="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">零壹新科技餐饮总店系统</label>
+                            <label class="col-sm-3 control-label">套餐名称</label>
+                            <div class="col-sm-9">
+                                <select class="form-control m-b" name="organization_id">
+                                    @foreach($listPac->programs as $key=>$value)
+                                        <option value="{{$value->id}}">{{$value->program_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-2">
                                 <input type="text" value="0" class="form-control" >
                             </div>
                             <label class="col-sm-2 control-label">套</label>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">零壹新科技餐饮店铺系统</label>
-                            <div class="col-sm-2">
-                                <input type="text" value="0"  class="form-control">
-                            </div>
-                            <label class="col-sm-2 control-label">套</label>
-                        </div>
-
+                        
                         <div class="form-group">
                             <label class="col-sm-3 control-label">安全密码</label>
                             <div class="col-sm-9">
