@@ -361,6 +361,11 @@ class CompanyController extends Controller{
 
         return view('Zerone/Company/company_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //商户资产页面划入js显示
+    public function company_assets_add(Request $request){
+
+        return view('Zerone/Company/company_assets_add');
+    }
     //商户程序管理
     public function company_store(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -370,5 +375,6 @@ class CompanyController extends Controller{
 
         return view('Zerone/Company/company_store',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
 }
 ?>
