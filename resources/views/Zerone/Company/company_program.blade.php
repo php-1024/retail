@@ -27,13 +27,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“刘记餐饮集团”程序管理</h2>
+                <h2>“{{$listOrg->organization_name}}”程序管理</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“刘记餐饮集团”程序管理</strong>
+                        <strong>“{{$listOrg->organization_name}}”程序管理</strong>
                     </li>
                 </ol>
             </div>
@@ -60,7 +60,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“刘记餐饮集团”程序管理</h5>
+                            <h5>“{{$listOrg->organization_name}}”程序管理</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
