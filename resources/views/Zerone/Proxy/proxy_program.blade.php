@@ -63,7 +63,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“{{$listOrg->organization_name}}”程序管理</h5>
+                            <h5>“{{$listOrg['organization_name']}}”程序管理</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
