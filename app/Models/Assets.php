@@ -24,6 +24,7 @@ class Assets extends Model{
         $program->organization_id = $param['organization_id'];//组织id
         $program->program_id = $param['program_id'];//程序名称
         $program->program_spare_num = $param['program_spare_num'];//剩余数量
+        $program->program_use_num = $param['program_use_num'];//使用数量
         $program->save();
         return $program->id;
     }
