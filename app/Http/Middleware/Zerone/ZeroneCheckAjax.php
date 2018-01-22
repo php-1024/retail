@@ -111,6 +111,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssetsAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/proxy_assets_add_check"://检测是否登陆 权限 安全密码 数字不能为空
+                $re = $this->checkLoginAndRuleAndSafeAndAssetsAdd($request);
+                return self::format_response($re,$next);
+                break;
 
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
@@ -129,6 +133,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/proxy_list_edit"://服务商列表修改弹出检测登入和权限
             case "zerone/ajax/proxy_list_frozen"://服务商列表冻结弹出检测登入和权限
             case "zerone/ajax/proxy_list_delete"://服务商列表删除弹出检测登入和权限
+            case "zerone/ajax/proxy_assets_add"://服务商列表划入检测弹出登入和权限
 
             case "zerone/ajax/company_examine"://商户审核检测弹出登陆和权限
             case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
