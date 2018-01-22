@@ -361,7 +361,7 @@ class ProxyController extends Controller{
     }
     //服务商程序管理页面划入检测
     public function proxy_assets_add_check(Request $request){
-        echo '11';
+        dump($request);
     }
     //服务商程序管理
     public function proxy_company(Request $request){
