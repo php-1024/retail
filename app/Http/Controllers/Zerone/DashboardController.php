@@ -259,8 +259,8 @@ class DashboardController extends Controller{
         //获取重Admin开始的的所有人员
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.'0,1,'.'%']],0,'id','asc')->toArray();
         //根据获取的人员组成结构树
-        dump($list);
         $structure = $this->create_structure($list,1);
+        dump($structure);
         return view('Zerone/Dashboard/structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -275,7 +275,6 @@ class DashboardController extends Controller{
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
-                dump($val['sonlist']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
