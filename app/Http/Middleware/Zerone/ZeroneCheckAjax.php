@@ -107,6 +107,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/company_assets_add_check"://检测是否登陆 权限 安全密码 数字不能为空
+                $re = $this->checkLoginAndRuleAndSafeAndAssetsAdd($request);
+                return self::format_response($re,$next);
+                break;
 
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
@@ -396,6 +400,20 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkPersonalEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
+    public function checkLoginAndRuleAndSafeAndAssetsAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+        if($re['status']=='0'){//检测是否登陆
+            return $re;
+        }else{
+            $re2 = $this->checkAssetsAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -712,6 +730,15 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测商户编辑表信息
+    public function AssetsAdd($request){
+        $num = $request->input('num');
+        if (!preg_match("/^-?[1-9]\\d*$/",$num)){
+            return self::res(0, response()->json(['data' => '正确的参数', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
 
     //检测登陆提交数据
     public function checkID($request)
