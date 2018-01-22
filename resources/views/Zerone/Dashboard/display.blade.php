@@ -87,7 +87,7 @@
                             <h5>管理人员</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{$zerone_all['3']['item_value']}}人</h1>
+                            <h1 class="no-margins">{{$zerone['all_system_personnel']}}人</h1>
                             <div class="stat-percent font-bold text-success">1680人<i class="fa fa-level-up"></i></div>
                             <small>今日</small>
                         </div>
