@@ -356,7 +356,7 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $list = Package::getPaginage([],15,'id');
-     
+
         return view('Zerone/Company/company_program',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户程序管理
