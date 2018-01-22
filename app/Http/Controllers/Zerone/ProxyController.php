@@ -203,7 +203,7 @@ class ProxyController extends Controller{
         $mobile = $request->input('mobile');//用户手机号
         $password = $request->input('password');//登入密码
 
-        $where = [['organization_name',$organization_name]];
+        $where = [['organization_name',$organization_name],['id','<>',$id]];
 
         $name = Organization::checkRowExists($where);
 
