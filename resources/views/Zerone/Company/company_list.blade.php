@@ -152,7 +152,7 @@
             @include('Zerone/Public/Footer')
             </div>
 
-            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+            <div class="modal inmodal" id="my   Modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
             <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
