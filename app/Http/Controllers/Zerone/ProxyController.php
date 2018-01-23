@@ -350,6 +350,13 @@ class ProxyController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $list = Package::getPaginage([],15,'id');
+        foreach ($list as $key=>$value){
+            foreach ($value['programs'] as $k=>$v){
+                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
+                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+            }
+        }
         return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -374,23 +381,32 @@ class ProxyController extends Controller{
         $status = $request->input('status');//判断划入或者划出
         DB::beginTransaction();
         try{
-            if($status == '1'){
-                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+            $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+            $id=$re['id'];
+            $program_use_num = $re['program_use_num'];
+            if($status == '1'){//划入
                 if(empty($re)){
                     Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
                 }else{
-                    $id=$re['id'];
                     $num += $re['program_spare_num'];
-                    Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
+                    Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>$program_use_num]);
                 }
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：');//保存操作记录
             }
-            elseif($status == '0'){
-//                Organization::editOrganization([['id',$id]],['status'=>'1']);
-//                Account::editOrganizationBatch([['organization_id',$id]],['status'=>'1']);
-//                //添加操作日志
-//                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：'.$list['organization_name']);//保存操作记录
+            elseif($status == '0'){//划出
+                if(empty($re)){
+                    return response()->json(['data' => '数量不足', 'status' => '0']);
+                }else{
+                    if($re['program_spare_num'] >= $num){//划出数量小于或等于剩余数量
+                        $num = $re['program_spare_num'] - $num;
+                        Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>$program_use_num]);
+                    }else{
+                        return response()->json(['data' => '数量不足', 'status' => '0']);
+                    }
+                }
+                //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：');//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {

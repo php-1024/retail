@@ -78,26 +78,26 @@
                                 </thead>
                                 <tbody>
                                 @foreach($list as $key=>$value)
-                                    <tr>
-                                        <td>{{$value->id}}</td>
-                                        <td>{{$value->package_name}}</td>
+                                <tr>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->package_name}}</td>
 
-                                        <td>
-                                            @foreach($value->programs as $k=>$v)
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;
-                                                </div>
-                                                <div style=" margin-top: 20px;"></div>
-                                            @endforeach
-                                        </td>
-                                        <td>{{$value->created_at}}</td>
-                                        <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                            <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                        </td>
-                                    </tr>
+                                    <td>
+                                        @foreach($value->programs as $k=>$v)
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;
+                                        </div>
+                                        <div style=" margin-top: 20px;"></div>
+                                        @endforeach
+                                    </td>
+                                    <td>{{$value->created_at}}</td>
+                                    <td class="text-right">
+                                        <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
@@ -246,6 +246,43 @@
 
         var url = $('#proxy_assets_add').val();
         console.log(url);
+        var token = $('#_token').val();
+        var organization_id = $('#organization_id').val();
+        if (package_id == '') {
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            }, function () {
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //程序划出
+    function getAssetsReduce(package_id,status) {
+        var url = $('#proxy_assets_add').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
         if (package_id == '') {
