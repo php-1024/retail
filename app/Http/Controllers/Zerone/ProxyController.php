@@ -379,7 +379,6 @@ class ProxyController extends Controller{
         $program_id = $request->input('program_id');//程序id
         $number = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
-
         DB::beginTransaction();
         try{
             $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
@@ -417,8 +416,6 @@ class ProxyController extends Controller{
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-
-
     //服务商程序管理
     public function proxy_company(Request $request){
 
@@ -428,6 +425,5 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         return view('Zerone/Proxy/proxy_company',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-
 }
 ?>
