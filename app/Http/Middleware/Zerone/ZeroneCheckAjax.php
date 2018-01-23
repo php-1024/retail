@@ -107,8 +107,8 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/company_assets_add_check"://检测是否登陆 权限 安全密码 数字不能为空
-                $re = $this->checkLoginAndRuleAndSafeAndAssetsAdd($request);
+            case "zerone/ajax/company_assets_check"://检测是否登陆 权限 安全密码 数字不能为空
+                $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
             case "zerone/ajax/proxy_assets_check"://检测是否登陆 权限 安全密码 数字不能为空
