@@ -282,7 +282,7 @@
 
     //程序划出
     function getAssetsReduce(package_id,status) {
-        var url = $('#company_assets_add').val();
+        var url = $('#proxy_assets_add').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
         if (package_id == '') {
