@@ -94,7 +94,7 @@
                                         </td>
                                         <td>{{$value->created_at}}</td>
                                         <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                             <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                         </td>
                                     </tr>
@@ -242,7 +242,7 @@
 
 <script>
     //程序划入
-    function getAssetsAdd(package_id) {
+    function getAssetsAdd(package_id,status) {
 
         var url = $('#proxy_assets_add').val();
         console.log(url);
@@ -260,7 +260,7 @@
             return;
         }
 
-        var data = {'package_id': package_id, 'organization_id':organization_id, '_token': token};
+        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
