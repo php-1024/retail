@@ -360,7 +360,7 @@ class CompanyController extends Controller{
 
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value){
-            dump($value['id']);
+            dump($value);
         }
         return view('Zerone/Company/company_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
