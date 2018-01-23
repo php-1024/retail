@@ -357,7 +357,6 @@ class ProxyController extends Controller{
                 $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
             }
         }
-        dump($list);
         return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
