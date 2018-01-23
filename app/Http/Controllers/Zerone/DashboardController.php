@@ -266,8 +266,7 @@ class DashboardController extends Controller{
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->create_structure($list, $val['id']);
-                dump($val['sonlist']);
+                //$val['sonlist'] = $this->create_structure($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
