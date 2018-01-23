@@ -252,7 +252,6 @@ class DashboardController extends Controller{
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.'0,1,'.'%']],0,'id','asc')->toArray();
         //根据获取的人员组成结构树
         $structure = $this->create_structure($list,1);
-        dump($structure);
         return view('Zerone/Dashboard/structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -265,7 +264,7 @@ class DashboardController extends Controller{
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
-                unset($list[$key]);
+                //unset($list[$key]);
                 //$val['sonlist'] = $this->create_structure($list, $val['id']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
