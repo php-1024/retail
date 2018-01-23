@@ -25,13 +25,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>服务商注册审核</h2>
+                <h2>商户注册审核</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">服务商管理</a>
+                        <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>服务商注册审核</strong>
+                        <strong>商户注册审核</strong>
                     </li>
                 </ol>
             </div>
@@ -45,7 +45,7 @@
                     <form method="get" role="form" id="searchForm" action="">
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label class="control-label" for="amount">服务商名称</label>
+                            <label class="control-label" for="amount">商户名称</label>
                             <input type="text" id="proxy_name" name="company_name" value="{{ $search_data['company_name'] }}" placeholder="请输入服务商名称" class="form-control">
                         </div>
                     </div>
