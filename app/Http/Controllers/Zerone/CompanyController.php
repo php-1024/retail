@@ -382,7 +382,6 @@ class CompanyController extends Controller{
     //商户资产页面划入js显示
     public function company_assets_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $program_id = $request->input('program_id');//程序id
@@ -402,7 +401,7 @@ class CompanyController extends Controller{
                 Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>$program_use_num]);
                }
                 //添加操作日志
-                AssetsOperation::addAssetsOperation($program_id,$organization_id,$package_id,$status,$num);//保存操作记录
+                AssetsOperation::addAssetsOperation($admin_data['id'],$organization_id,$package_id,$package_id,$status,$num);//保存操作记录
             }
             elseif($status == '0'){//划出
                 if(empty($re)){
@@ -416,7 +415,7 @@ class CompanyController extends Controller{
                     }
                 }
                 //添加操作日志
-                AssetsOperation::addAssetsOperation($program_id,$organization_id,$package_id,$status,$num);//保存操作记录
+                AssetsOperation::addAssetsOperation($admin_data['id'],$organization_id,$package_id,$package_id,$status,$num);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
