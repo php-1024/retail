@@ -1,6 +1,6 @@
 <?php
 /**
- * 检测是否登陆的中间件
+ * 检测是否登录的中间件
  */
 namespace App\Http\Middleware\Zerone;
 use Closure;
@@ -11,9 +11,9 @@ class ZeroneCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
-            /*****登录页,如果已经登陆则不需要再次登陆*****/
-            case "zerone/login"://登录页,如果已经登陆则不需要再次登陆
-                //获取用户登陆存储的SessionId
+            /*****登录页,如果已经登录则不需要再次登录*****/
+            case "zerone/login"://登录页,如果已经登录则不需要再次登录
+                //获取用户登录存储的SessionId
                 $sess_key = Session::get('zerone_account_id');
                 //如果不为空跳转到首页
                 if(!empty($sess_key)) {
@@ -21,14 +21,14 @@ class ZeroneCheck{
                 }
                 break;
 
-            /****仅检测是否登陆及是否具有权限****/
+            /****仅检测是否登录及是否具有权限****/
             case "zerone/role/role_add"://添加权限角色
             case "zerone/role/role_list"://权限角色列表
             case "zerone/subordinate/subordinate_add"://添加下级人员
             case "zerone/subordinate/subordinate_list"://下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
             case "zerone/dashboard/operation_log"://战区管理所有操作记录
-            case "zerone/dashboard/login_log"://战区管理所有登陆记录
+            case "zerone/dashboard/login_log"://战区管理所有登录记录
             case "zerone/dashboard/warzone"://战区管理首页权限
             case "zerone/dashboard/setup/setup_edit"://参数设置权限
             case "zerone/dashboard/setup"://参数设置权限
@@ -37,7 +37,7 @@ class ZeroneCheck{
             case "zerone/personal/password_edit":       //个人中心——密码修改
             case "zerone/personal/safe_password":   //个人中心——安全密码设置
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
-            case "zerone/personal/login_log":           //个人中心——我的登陆日志
+            case "zerone/personal/login_log":           //个人中心——我的登录日志
             case "zerone"://后台首页
 
             case "zerone/proxy/proxy_add":              //添加服务商
@@ -60,7 +60,7 @@ class ZeroneCheck{
             case "zerone/store/store_branchlist":       //分店管理
             case "zerone/store/store_config":           //分店设置参数
 
-                $re = $this->checkLoginAndRule($request);//判断是否登陆
+                $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
         }
@@ -69,7 +69,7 @@ class ZeroneCheck{
 
     //检测是否admin或是否有权限
     public function checkLoginAndRule($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -94,11 +94,11 @@ class ZeroneCheck{
         }
     }
 
-    //普通页面检测用户是否登陆
+    //普通页面检测用户是否登录
     public function checkIsLogin($request){
-        //获取用户登陆存储的SessionId
+        //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_account_id');
-        //如果为空跳转到登陆页面
+        //如果为空跳转到登录页面
         if(empty($sess_key)) {
             return self::res(0,redirect('zerone/login'));
         }else{

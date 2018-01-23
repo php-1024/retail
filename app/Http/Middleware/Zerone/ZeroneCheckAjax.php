@@ -14,27 +14,27 @@ class ZeroneCheckAjax
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "zerone/ajax/login_check"://检测登陆数据提交
+            case "zerone/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/role_add_check"://检测登陆和权限和安全密码和添加角色
+            case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/role_edit_check"://检测登陆和权限和安全密码和编辑角色
+            case "zerone/ajax/role_edit_check"://检测登录和权限和安全密码和编辑角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit_check"://检测 登陆 和 权限 和 安全密码 和 编辑系统参数设置
+            case "zerone/ajax/setup_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑系统参数设置
                 $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
+            case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
                 return self::format_response($re,$next);
                 break;
@@ -84,7 +84,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登陆密码 安全密码是否为空
+            case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
                 return self::format_response($re,$next);
                 break;
@@ -99,34 +99,34 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/warzone_delete"://确认删除战区检测登陆和权限和安全密码
-                $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
+            case "zerone/ajax/warzone_delete"://确认删除战区检测登录和权限和安全密码
+                $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/personal_edit_check"://检测是否登陆 权限 安全密码 及修改个人信息提交数据
+            case "zerone/ajax/personal_edit_check"://检测是否登录 权限 安全密码 及修改个人信息提交数据
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/company_assets_check"://检测是否登陆 权限 安全密码 数字不能为空
+            case "zerone/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_assets_check"://检测是否登陆 权限 安全密码 数字不能为空
+            case "zerone/ajax/proxy_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
 
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
-            case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登陆和权限
-            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登陆和权限
-            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登陆和权限
-            case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登陆和权限
-            case "zerone/ajax/warzone_add"://添加战区弹出框检测登陆和权限
-            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登陆和权限
-            case "zerone/ajax/warzone_edit"://修改战区弹出框检测登陆和权限
-            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登陆和权限
-            case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登陆和权限
+            case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登录和权限
+            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登录和权限
+            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登录和权限
+            case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登录和权限
+            case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
+            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登录和权限
+            case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登录和权限
 
 
             case "zerone/ajax/proxy_examine"://服务商审核检测弹出登入和权限
@@ -135,7 +135,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/proxy_list_delete"://服务商列表删除弹出检测登入和权限
             case "zerone/ajax/proxy_assets"://服务商列表划入检测弹出登入和权限
 
-            case "zerone/ajax/company_examine"://商户审核检测弹出登陆和权限
+            case "zerone/ajax/company_examine"://商户审核检测弹出登录和权限
             case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
             case "zerone/ajax/company_list_frozen"://商户冻结检测弹出登入和权限
             case "zerone/ajax/company_list_delete"://商户删除检测弹出登入和权限
@@ -145,18 +145,18 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登陆 和 权限 和 安全密码 和 ID是否为空
-            case "zerone/ajax/role_delete"://删除权限角色 检测 登陆 和 权限 和 安全密码 和 ID是否为空
+            case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
+            case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
         }
     }
     /******************************复合检测*********************************/
-    //检测登陆，权限，及修改安全密码的数据
+    //检测登录，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
@@ -169,8 +169,8 @@ class ZeroneCheckAjax
     }
     //检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkPasswordEdit($re['response']);//检测是否具有权限
@@ -183,8 +183,8 @@ class ZeroneCheckAjax
     }
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkSubordinateAuthorize($re['response']);//检测是否具有权限
@@ -198,8 +198,8 @@ class ZeroneCheckAjax
 
     //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
@@ -213,8 +213,8 @@ class ZeroneCheckAjax
 
     //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
@@ -228,8 +228,8 @@ class ZeroneCheckAjax
 
     //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
     public function checkLoginAndRuleAndSafeAndProxyAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkProxyAdd($re['response']);//检测是否具有权限
@@ -240,10 +240,10 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登陆和权限和安全密码和ID是否为空
+    //检测登录和权限和安全密码和ID是否为空
     public function checkLoginAndRuleAndSafeAndID($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkID($re['response']);//检测是否具有权限
@@ -255,10 +255,10 @@ class ZeroneCheckAjax
         }
     }
 
-    //检测登陆和权限和安全密码和添加角色
+    //检测登录和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
@@ -269,10 +269,10 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登陆和权限和安全密码和添加角色
+    //检测登录和权限和安全密码和添加角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
@@ -283,10 +283,10 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登陆和权限和安全密码和编辑系统参数而设置
+    //检测登录和权限和安全密码和编辑系统参数而设置
     public function checkLoginAndRuleAndSafeAndSetupEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkSetupEdit($re['response']);//检测是否具有权限
@@ -300,8 +300,8 @@ class ZeroneCheckAjax
 
     //检测登录和权限
     public function checkLoginAndRule($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkHasRule($re['response']);//检测是否具有权限
@@ -314,8 +314,8 @@ class ZeroneCheckAjax
     }
     //检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafe($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
@@ -328,8 +328,8 @@ class ZeroneCheckAjax
     }
     //服务商 检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndOrgEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
@@ -342,8 +342,8 @@ class ZeroneCheckAjax
     }
     //商户 检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndComEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkComEditData($re['response']);//检测是否具有权限
@@ -356,8 +356,8 @@ class ZeroneCheckAjax
     }
     //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
     public function checkLoginAndRuleAndSafeAndCompanyAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
@@ -370,8 +370,8 @@ class ZeroneCheckAjax
     }
     //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
     public function checkLoginAndRuleAndSafeAndWarzoneAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkWarzoneAdd($re['response']);//检测是否具有权限
@@ -385,8 +385,8 @@ class ZeroneCheckAjax
 
     //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
     public function checkLoginAndRuleAndSafeAndWarzoneEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkWarzoneEdit($re['response']);//检测是否具有权限
@@ -400,8 +400,8 @@ class ZeroneCheckAjax
 
     //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
     public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkPersonalEdit($re['response']);//检测是否具有权限
@@ -412,10 +412,10 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测是否登陆 权限 安全密码 数字不能为空
+    //检测是否登录 权限 安全密码 数字不能为空
     public function checkLoginAndRuleAndSafeAndAssets($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
-        if($re['status']=='0'){//检测是否登陆
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkAssets($re['response']);//检测是否具有权限
@@ -464,16 +464,16 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测修改登陆密码
+    //检测修改登录密码
     public function checkPasswordEdit($request){
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入原登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入原登录密码', 'status' => '0']));
         }
         if(empty($request->input('new_password'))){
-            return self::res(0,response()->json(['data' => '新登陆密码不能为空', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '新登录密码不能为空', 'status' => '0']));
         }
         if(empty($request->input('news_password'))){
-            return self::res(0,response()->json(['data' => '请确认新登陆密码是否一致', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请确认新登录密码是否一致', 'status' => '0']));
         }
         if($request->input('new_password') != $request->input('news_password')){
             return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
@@ -515,13 +515,13 @@ class ZeroneCheckAjax
     //检测添加下级人员数据
     public function checkSubordinateAdd($request){
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入用户登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入用户登录密码', 'status' => '0']));
         }
         if(empty($request->input('repassword'))){
-            return self::res(0,response()->json(['data' => '请再次输入用户登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请再次输入用户登录密码', 'status' => '0']));
         }
         if($request->input('password')<>$request->input('repassword')){
-            return self::res(0,response()->json(['data' => '两次登陆密码输入不一致', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '两次登录密码输入不一致', 'status' => '0']));
         }
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
@@ -600,13 +600,13 @@ class ZeroneCheckAjax
             return self::res(1,$request);
         }
     }
-    //检测是否登陆
+    //检测是否登录
     public function checkIsLogin($request)
     {
         $sess_key = Session::get('zerone_account_id');
-        //如果为空返回登陆失效
+        //如果为空返回登录失效
         if (empty($sess_key)) {
-            return self::res(0, response()->json(['data' => '登陆状态失效', 'status' => '-1']));
+            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         } else {
             $sess_key = Session::get('zerone_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
@@ -618,7 +618,7 @@ class ZeroneCheckAjax
             return self::res(1, $request);
         }
     }
-    //检测登陆提交数据
+    //检测登录提交数据
     public function checkLoginPost($request)
     {
         if (empty($request->input('username'))) {
@@ -653,7 +653,7 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
         }
         if (empty($request->input('proxy_password'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
         }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
             return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
         }
@@ -674,7 +674,7 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
         }
         if (empty($request->input('proxy_password'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商登陆密码', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
         }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
             return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
         }
@@ -746,7 +746,7 @@ class ZeroneCheckAjax
     }
 
 
-    //检测登陆提交数据
+    //检测登录提交数据
     public function checkID($request)
     {
         if (empty($request->input('id'))) {

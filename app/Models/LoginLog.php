@@ -46,8 +46,8 @@ class LoginLog extends Model{
         $loginlog->account_id = $account_id;//用户账号ID
         $loginlog->ip = $ip;//登录IP
         $loginlog->ip_position = $addr;//登录地址
-        $loginlog->program_id = $program_id; //登陆哪套程序
-        $loginlog->organization_id = $organization_id;//哪个组织的账号登陆
+        $loginlog->program_id = $program_id; //登录哪套程序
+        $loginlog->organization_id = $organization_id;//哪个组织的账号登录
         $loginlog->save();//保存数据
         $id = $loginlog->id;//获取插入ID
         if(empty($id)){

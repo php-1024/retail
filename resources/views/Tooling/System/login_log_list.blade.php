@@ -28,13 +28,13 @@
         @include('Tooling/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>所有登陆日志</h2>
+                <h2>所有登录日志</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">系统管理</a>
                     </li>
                     <li >
-                        <strong>所有登陆日志</strong>
+                        <strong>所有登录日志</strong>
                     </li>
                 </ol>
             </div>
@@ -89,9 +89,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>用户账号</th>
-                                    <th>登陆IP</th>
-                                    <th>登陆区域</th>
-                                    <th class="col-sm-2">登陆时间</th>
+                                    <th>登录IP</th>
+                                    <th>登录区域</th>
+                                    <th class="col-sm-2">登录时间</th>
 
                                 </tr>
                                 </thead>

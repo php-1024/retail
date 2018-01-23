@@ -30,10 +30,10 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>登陆密码修改</h2>
+                <h2>登录密码修改</h2>
                 <ol class="breadcrumb">
                     <li class="active"> <a href="JavaScript:;">个人中心</a> </li>
-                    <li > <strong>登陆密码修改</strong> </li>
+                    <li > <strong>登录密码修改</strong> </li>
                 </ol>
             </div>
         </div>
@@ -42,24 +42,24 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>登陆密码修改</h5>
+                            <h5>登录密码修改</h5>
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/password_edit_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">登陆账号</label>
+                                    <label class="col-sm-2 control-label">登录账号</label>
                                     <div class="col-sm-10" style="padding-top:7px;">{{$admin_data['account']}}</div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">原登陆密码</label>
+                                    <label class="col-sm-2 control-label">原登录密码</label>
                                     <div class="col-sm-10">
                                         <input type="password" name="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">新登陆密码</label>
+                                    <label class="col-sm-2 control-label">新登录密码</label>
                                     <div class="col-sm-10">
                                         <input type="password" name="new_password" class="form-control">
                                     </div>

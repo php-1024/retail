@@ -85,14 +85,14 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::get('account_add', 'Tooling\SystemController@account_add')->middleware('ToolingCheck');//添加账号路由
         Route::get('account_list', 'Tooling\SystemController@account_list')->middleware('ToolingCheck');//账号列表路由
         Route::get('operation_log','Tooling\SystemController@operation_log_list')->middleware('ToolingCheck');//所有操作记录
-        Route::get('login_log','Tooling\SystemController@login_log_list')->middleware('ToolingCheck');//所有登陆记录
+        Route::get('login_log','Tooling\SystemController@login_log_list')->middleware('ToolingCheck');//所有登录记录
     });
 
     //个人中心组
     Route::group(['prefix'=>'personal'],function(){
         Route::get('password_edit', 'Tooling\PersonalController@password_edit')->middleware('ToolingCheck');//修改密码路由
         Route::get('operation_log','Tooling\PersonalController@operation_log_list')->middleware('ToolingCheck');//我的操作记录
-        Route::get('login_log','Tooling\PersonalController@login_log_list')->middleware('ToolingCheck');//所有登陆记录
+        Route::get('login_log','Tooling\PersonalController@login_log_list')->middleware('ToolingCheck');//所有登录记录
     });
 
     //功能模块组
@@ -116,14 +116,14 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::get('package_list','Tooling\ProgramController@package_list')->middleware('ToolingCheck');//配套列表路由
     });
 
-    //登陆页面组
+    //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Tooling\LoginController@display')->middleware('ToolingCheck');//登陆页面路由
+        Route::get('/', 'Tooling\LoginController@display')->middleware('ToolingCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Tooling\LoginController@captcha');//验证码路由
     });
 
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('checklogin','Tooling\LoginController@checkLogin')->middleware('ToolingCheckAjax');//提交登陆数据
+        Route::post('checklogin','Tooling\LoginController@checkLogin')->middleware('ToolingCheckAjax');//提交登录数据
 
 
         Route::post('account_add_check','Tooling\SystemController@account_add_check')->middleware('ToolingCheckAjax');//提交增加账号数据
@@ -195,7 +195,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('warzone','Zerone\DashboardController@warzone')->middleware('ZeroneCheck');//战区管理展示
         Route::get('structure','Zerone\DashboardController@structure')->middleware('ZeroneCheck');//人员结构
         Route::get('operation_log','Zerone\DashboardController@operation_log')->middleware('ZeroneCheck');//所有操作记录
-        Route::get('login_log','Zerone\DashboardController@login_log')->middleware('ZeroneCheck');//所有登陆记录
+        Route::get('login_log','Zerone\DashboardController@login_log')->middleware('ZeroneCheck');//所有登录记录
     });
 
 
@@ -208,9 +208,9 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('login_log','Zerone\PersonalController@login_log')->middleware('ZeroneCheck');//我的登录日志
     });
 
-    //登陆页面组
+    //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登陆页面路由
+        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
     });
 
@@ -255,7 +255,7 @@ Route::group(['prefix'=>'zerone'],function(){
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登陆数据
+        Route::post('login_check','Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登录数据
 
         Route::post('role_add_check','Zerone\RoleController@role_add_check')->middleware('ZeroneCheckAjax');//提交添加权限角色数据
         Route::post('role_edit','Zerone\RoleController@role_edit')->middleware('ZeroneCheckAjax');//编辑权限角色弹出框

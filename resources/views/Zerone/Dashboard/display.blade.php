@@ -173,16 +173,16 @@
                 <div class="col-lg-7">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>用户登陆日志</h5>
+                            <h5>用户登录日志</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-hover no-margins">
                                 <thead>
                                 <tr>
                                     <th>用户</th>
-                                    <th>登陆IP</th>
-                                    <th>登陆地址</th>
-                                    <th>登陆时间</th>
+                                    <th>登录IP</th>
+                                    <th>登录地址</th>
+                                    <th>登录时间</th>
                                 </tr>
                                 </thead>
                                 <tbody>

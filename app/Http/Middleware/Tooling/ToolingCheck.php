@@ -1,6 +1,6 @@
 <?php
 /**
- * 检测是否登陆的中间件
+ * 检测是否登录的中间件
  */
 namespace App\Http\Middleware\Tooling;
 use Closure;
@@ -11,9 +11,9 @@ class ToolingCheck{
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
-            /*****登录页,如果已经登陆则不需要再次登陆*****/
-            case "tooling/login"://登录页,如果已经登陆则不需要再次登陆
-                //获取用户登陆存储的SessionId
+            /*****登录页,如果已经登录则不需要再次登录*****/
+            case "tooling/login"://登录页,如果已经登录则不需要再次登录
+                //获取用户登录存储的SessionId
                 $sess_key = Session::get('tooling_account_id');
                 //如果不为空跳转到首页
                 if(!empty($sess_key)) {
@@ -21,47 +21,47 @@ class ToolingCheck{
                 }
             break;
 
-            /****检测用户是否登陆 是否超级管理员****/
+            /****检测用户是否登录 是否超级管理员****/
             case "tooling/dashboard/account_list"://账号列表
             case "tooling/dashboard/account_add"://添加账号
-                $re = $this->checkLoginAndSuper($request);//判断是否登陆和是否超级管理员
+                $re = $this->checkLoginAndSuper($request);//判断是否登录和是否超级管理员
                 return self::format_response($re,$next);
             break;
 
-            /****检测用户是否登陆 是否超级管理员 日期输入是否正确****/
+            /****检测用户是否登录 是否超级管理员 日期输入是否正确****/
             case "tooling/dashboard/operation_log"://操作日志
-            case "tooling/dashboard/login_log"://登陆日志
+            case "tooling/dashboard/login_log"://登录日志
                 $re = $this->checkLoginAndSuperAndDate($request);
                 return self::format_response($re,$next);
             break;
 
-            /****普通页面，检测是否登陆，日期输入是否正确****/
+            /****普通页面，检测是否登录，日期输入是否正确****/
             case "tooling/personal/operation_log"://我的操作日志
-            case "tooling/personal/login_log"://我的登陆日志
+            case "tooling/personal/login_log"://我的登录日志
                 $re = $this->checkLoginAndDate($request);
                 return self::format_response($re,$next);
             break;
 
-            /****仅检测是否登陆****/
+            /****仅检测是否登录****/
             case "tooling/module/module_add"://添加模块
             case "tooling/module/module_list"://模块列表
             case "tooling/node/node_add"://添加节点
             case "tooling/node/node_list"://节点列表
             case "tooling/program/program_add"://添加程序
             case "tooling/program/program_list"://程序列表
-            case "tooling/personal/password_edit"://修改登陆密码
+            case "tooling/personal/password_edit"://修改登录密码
             case "tooling/program/menu_list"://程序菜单列表
             case "tooling/program/package_add"://添加程序配套
             case "tooling/program/package_list"://程序配套列表
             case "tooling"://后台首页
-                $re = $this->checkIsLogin($request);//判断是否登陆
+                $re = $this->checkIsLogin($request);//判断是否登录
                 return self::format_response($re,$next);
             break;
         }
         return $next($request);
     }
 
-    //检测用户是否登陆 是否超级管理员 日期输入是否正确
+    //检测用户是否登录 是否超级管理员 日期输入是否正确
     public function checkLoginAndSuperAndDate($request){
         $re = $this->checkLoginAndSuper($request);//是否超级管理员和登录
         if($re['status']=='0'){
@@ -76,9 +76,9 @@ class ToolingCheck{
         }
     }
 
-    //检测用户是否登陆 日期输入是否正确
+    //检测用户是否登录 日期输入是否正确
     public function checkLoginAndDate($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -91,9 +91,9 @@ class ToolingCheck{
         }
     }
 
-    //检测是否登陆后检测是否超级管理员
+    //检测是否登录后检测是否超级管理员
     public function checkLoginAndSuper($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -132,11 +132,11 @@ class ToolingCheck{
         }
     }
 
-    //普通页面检测用户是否登陆
+    //普通页面检测用户是否登录
     public function checkIsLogin($request){
-        //获取用户登陆存储的SessionId
+        //获取用户登录存储的SessionId
         $sess_key = Session::get('tooling_account_id');
-        //如果为空跳转到登陆页面
+        //如果为空跳转到登录页面
         if(empty($sess_key)) {
             return self::res(0,redirect('tooling/login'));
         }else{

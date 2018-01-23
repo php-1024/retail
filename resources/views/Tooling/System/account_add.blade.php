@@ -51,16 +51,16 @@
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('tooling/ajax/account_add_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">登陆账号</label>
-                                    <div class="col-sm-10"><input type="text" name="account" class="form-control" placeholder="登陆账号"></div>
+                                    <label class="col-sm-2 control-label">登录账号</label>
+                                    <div class="col-sm-10"><input type="text" name="account" class="form-control" placeholder="登录账号"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">登陆密码</label>
-                                    <div class="col-sm-10"><input type="password" name="password" class="form-control" placeholder="登陆密码"></div>
+                                    <label class="col-sm-2 control-label">登录密码</label>
+                                    <div class="col-sm-10"><input type="password" name="password" class="form-control" placeholder="登录密码"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">重复登陆密码</label>
-                                    <div class="col-sm-10"><input type="password" name="repassword" class="form-control" placeholder="重复登陆密码"></div>
+                                    <label class="col-sm-2 control-label">重复登录密码</label>
+                                    <div class="col-sm-10"><input type="password" name="repassword" class="form-control" placeholder="重复登录密码"></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>

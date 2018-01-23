@@ -264,7 +264,7 @@
                             <div class="hr-line-dashed"></div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">店铺登陆密码</label>
+                                <label class="col-sm-3 control-label">店铺登录密码</label>
                                 <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
                             </div>
 
@@ -272,7 +272,7 @@
                             <div class="hr-line-dashed"></div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">重复登陆密码</label>
+                                <label class="col-sm-3 control-label">重复登录密码</label>
                                 <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
                             </div>
 

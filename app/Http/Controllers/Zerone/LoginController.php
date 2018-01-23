@@ -1,6 +1,6 @@
 <?php
 /**
- *新版本登陆界面
+ *新版本登录界面
  *
  **/
 namespace App\Http\Controllers\Zerone;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller{
     /*
-     * 登陆页面
+     * 登录页面
      */
     public function display()
     {
@@ -61,12 +61,12 @@ class LoginController extends Controller{
             if($account_info = Account::getOneForLogin($username)){
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip,1);
-                    return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
+                    return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif($account_info->status<>'1'){//查询账号状态
                     ErrorLog::addErrorTimes($ip,1);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
-                    //登陆成功要生成缓存的登陆信息
+                    //登录成功要生成缓存的登录信息
                     $admin_data = [
                         'id'=>$account_info->id,    //用户ID
                         'account'=>$account_info->account,//用户账号
@@ -78,18 +78,18 @@ class LoginController extends Controller{
                         'mobile'=>$account_info->mobile,//绑定手机号
                         'safe_password'=>$account_info->safe_password,//安全密码
                         'account_status'=>$account_info->status,//用户状态
-                        'ip'=>$ip,//登陆IP
-                        'login_position'=>$addr,//登陆地址
-                        'login_time'=>time()//登陆时间
+                        'ip'=>$ip,//登录IP
+                        'login_position'=>$addr,//登录地址
+                        'login_time'=>time()//登录时间
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        if($account_info->organization->program_id <> '1'){//如果账号不属于零壹平台管理系统，则报错，不能登陆。1是零壹凭条管理系统的ID
+                        if($account_info->organization->program_id <> '1'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
                             ErrorLog::addErrorTimes($ip,1);
-                            return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
+                            return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
-                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登陆日志
+                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登录日志
                                 Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if(!empty( $account_info->account_info->realname)) {
@@ -131,10 +131,10 @@ class LoginController extends Controller{
                 }
             }else{
                 ErrorLog::addErrorTimes($ip,1);
-                return response()->json(['data' => '登陆账号、手机号或密码输入错误', 'status' => '0']);
+                return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
             }
         }else{
-            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登陆 ','status' => '0']);
+            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登录 ','status' => '0']);
         }
     }
 }

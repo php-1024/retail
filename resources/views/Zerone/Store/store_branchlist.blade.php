@@ -152,7 +152,7 @@
 
         <div class="footer" >
             <div class="pull-right">
-                您登陆的时间是：2017-10-24 16:26:30
+                您登录的时间是：2017-10-24 16:26:30
             </div>
             <div>
                 <strong>Copyright</strong> 零壹新科技（深圳有限公司）&copy; 2017-2027
@@ -220,7 +220,7 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">分店登陆密码</label>
+                        <label class="col-sm-3 control-label">分店登录密码</label>
                         <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
                     </div>
 
@@ -228,7 +228,7 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">重复登陆密码</label>
+                        <label class="col-sm-3 control-label">重复登录密码</label>
                         <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
                     </div>
 
@@ -308,7 +308,7 @@
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">分店登陆密码</label>
+                            <label class="col-sm-3 control-label">分店登录密码</label>
                             <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
                         </div>
 

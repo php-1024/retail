@@ -11,12 +11,12 @@ class ToolingCheckAjax {
     public function handle($request,Closure $next){
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
-            case "tooling/ajax/checklogin"://检测登陆数据提交
+            case "tooling/ajax/checklogin"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re,$next);
                 break;
 
-            //检测是否登陆且是否登陆且是否超级管理员
+            //检测是否登录且是否登录且是否超级管理员
             case "tooling/ajax/account_edit":
                 $re = $this->checkLoginAndSuper($request);
                 return self::format_response($re,$next);
@@ -156,7 +156,7 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndSuperAndProgramRemove($request);
                 return self::format_response($re,$next);
                 break;
-            //仅检测是否登陆
+            //仅检测是否登录
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
             case "tooling/ajax/program_parents_node"://获取上级程序ID
@@ -172,9 +172,9 @@ class ToolingCheckAjax {
     }
 
     /**********************组合检测************************/
-    //添加账号检测是否登陆 是否超级管理员 输入数据是否正确
+    //添加账号检测是否登录 是否超级管理员 输入数据是否正确
     public function checkLoginAndSuperAndAccountEdit($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -187,9 +187,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //编辑账号检测是否登陆 是否超级管理员 输入数据是否正确
+    //编辑账号检测是否登录 是否超级管理员 输入数据是否正确
     public function checkLoginAndSuperAndAccountAdd($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -202,9 +202,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //冻结账号检测是否登陆 是否超级管理员 输入数据是否正确
+    //冻结账号检测是否登录 是否超级管理员 输入数据是否正确
     public function checkLoginAndSuperAndAccountLock($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -217,9 +217,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //检测是否登陆且是否超级管理员
+    //检测是否登录且是否超级管理员
     public function checkLoginAndSuper($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -231,9 +231,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //修改密码 检测是否登陆 输入数据是否正确
+    //修改密码 检测是否登录 输入数据是否正确
     public function checkLoginAndPasswordEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -246,9 +246,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //添加节点 检测是否登陆 输入数据是否正确
+    //添加节点 检测是否登录 输入数据是否正确
     public function checkLoginAndNodeAdd($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -261,9 +261,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //编辑节点 检测是否登陆 输入数据是否正确
+    //编辑节点 检测是否登录 输入数据是否正确
     public function checkLoginAndNodeEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -276,9 +276,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //添加模块 检测是否登陆 输入数据是否正确
+    //添加模块 检测是否登录 输入数据是否正确
     public function checkLoginAndModuleAdd($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -291,9 +291,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //编辑模块 检测是否登陆 输入数据是否正确
+    //编辑模块 检测是否登录 输入数据是否正确
     public function checkLoginAndModuleEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -306,9 +306,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //添加程序 检测是否登陆 输入数据是否正确
+    //添加程序 检测是否登录 输入数据是否正确
     public function checkLoginAndProgramAdd($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -321,9 +321,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //编辑程序 检测是否登陆 输入数据是否正确
+    //编辑程序 检测是否登录 输入数据是否正确
     public function checkLoginAndProgramEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -336,9 +336,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //添加程序菜单 检测是否登陆 输入数据是否正确
+    //添加程序菜单 检测是否登录 输入数据是否正确
     public function checkLoginAndMenuAdd($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -350,9 +350,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //编辑程序菜单 检测是否登陆 输入数据是否正确
+    //编辑程序菜单 检测是否登录 输入数据是否正确
     public function checkLoginAndMenuEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -365,9 +365,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //添加程序套餐 检测是否登陆 输入数据是否正确
+    //添加程序套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndPackageAdd($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -379,9 +379,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //编辑程序套餐 检测是否登陆 输入数据是否正确
+    //编辑程序套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndPackageEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -393,9 +393,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //软删除节点 检测是否登陆 输入数据是否正确
+    //软删除节点 检测是否登录 输入数据是否正确
     public function checkLoginAndNodeDelete($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -407,9 +407,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //硬删除节点 检测是否登陆 是否超级管理员 输入数据是否正确
+    //硬删除节点 检测是否登录 是否超级管理员 输入数据是否正确
     public function checkLoginAndSuperAndNodeRemove($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -421,9 +421,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //软删除模块 检测是否登陆 输入数据是否正确
+    //软删除模块 检测是否登录 输入数据是否正确
     public function checkLoginAndModuleDelete($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -435,9 +435,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //硬删除模块 检测是否登陆 输入数据是否正确
+    //硬删除模块 检测是否登录 输入数据是否正确
     public function checkLoginAndSuperAndModuleRemove($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -450,9 +450,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //软删除套餐 检测是否登陆 输入数据是否正确
+    //软删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndPackageDelete($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -464,9 +464,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //硬删除套餐 检测是否登陆 输入数据是否正确
+    //硬删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndSuperAndPackageRemove($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -479,9 +479,9 @@ class ToolingCheckAjax {
         }
     }
 
-    //软删除套餐 检测是否登陆 输入数据是否正确
+    //软删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndMenuDelete($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -493,9 +493,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //硬删除套餐 检测是否登陆 输入数据是否正确
+    //硬删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndSuperAndMenuRemove($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -507,9 +507,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //软删除套餐 检测是否登陆 输入数据是否正确
+    //软删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndProgramDelete($request){
-        $re = $this->checkIsLogin($request);//判断是否登陆
+        $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -521,9 +521,9 @@ class ToolingCheckAjax {
             }
         }
     }
-    //硬删除套餐 检测是否登陆 输入数据是否正确
+    //硬删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndSuperAndProgramRemove($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登陆
+        $re = $this->checkLoginAndSuper($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
@@ -757,13 +757,13 @@ class ToolingCheckAjax {
     //检测密码修改数据提交
     public function checkPasswordEdit($request){
         if(empty($request->input('oldpassword'))){
-            return  self::res(0,response()->json(['data' => '请输入原登陆密码', 'status' => '0']));
+            return  self::res(0,response()->json(['data' => '请输入原登录密码', 'status' => '0']));
         }
         if(empty($request->input('password'))){
-            return  self::res(0,response()->json(['data' => '请输入新登陆密码', 'status' => '0']));
+            return  self::res(0,response()->json(['data' => '请输入新登录密码', 'status' => '0']));
         }
         if(empty($request->input('repassword'))){
-            return  self::res(0,response()->json(['data' => '请再次输入新登陆密码', 'status' => '0']));
+            return  self::res(0,response()->json(['data' => '请再次输入新登录密码', 'status' => '0']));
         }
         if($request->input('password')==$request->input('oldpassword')){
             return  self::res(0,response()->json(['data' => '新旧密码不能相同', 'status' => '0']));
@@ -791,10 +791,10 @@ class ToolingCheckAjax {
             return self::res(0, response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入登录密码', 'status' => '0']));
         }
         if(empty($request->input('repassword'))){
-            return self::res(0,response()->json(['data' => '请再次输入登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请再次输入登录密码', 'status' => '0']));
         }
         if($request->input('password')!=$request->input('repassword')){
             return self::res(0,response()->json(['data' => '两次输入密码不一致', 'status' => '0']));
@@ -805,13 +805,13 @@ class ToolingCheckAjax {
     //检测账号添加数据提交
     public function checkAccountAdd($request){
         if(empty($request->input('account'))){
-            return self::res(0,response()->json(['data' => '请输入登陆账号', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入登录账号', 'status' => '0']));
         }
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入登录密码', 'status' => '0']));
         }
         if(empty($request->input('repassword'))){
-            return self::res(0,response()->json(['data' => '请再次输入登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请再次输入登录密码', 'status' => '0']));
         }
         if($request->input('password')!=$request->input('repassword')){
             return self::res(0,response()->json(['data' => '两次输入密码不一致', 'status' => '0']));
@@ -829,12 +829,12 @@ class ToolingCheckAjax {
         }
     }
 
-    //检测是否登陆
+    //检测是否登录
     public function checkIsLogin($request){
         $sess_key = Session::get('tooling_account_id');
-        //如果为空返回登陆失效
+        //如果为空返回登录失效
         if(empty($sess_key)) {
-            return self::res(0,response()->json(['data' => '登陆状态失效', 'status' => '-1']));
+            return self::res(0,response()->json(['data' => '登录状态失效', 'status' => '-1']));
         }else{
             $sess_key = Session::get('tooling_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
@@ -846,7 +846,7 @@ class ToolingCheckAjax {
             return self::res(1,$request);
         }
     }
-    //检测登陆提交数据
+    //检测登录提交数据
     public function checkLoginPost($request){
         if(empty($request->input('username'))){
             return self::res(0,response()->json(['data' => '请输入用户名', 'status' => '0']));

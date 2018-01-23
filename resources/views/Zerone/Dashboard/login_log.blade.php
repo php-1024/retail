@@ -30,10 +30,10 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>所有登陆记录</h2>
+                <h2>所有登录记录</h2>
                 <ol class="breadcrumb">
                     <li class="active"> <a href="JavaScript:;">系统管理</a> </li>
-                    <li > <strong>所有登陆记录</strong> </li>
+                    <li > <strong>所有登录记录</strong> </li>
                 </ol>
             </div>
         </div>
@@ -81,10 +81,10 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>登陆账号</th>
-                                    <th>登陆IP</th>
-                                    <th>登陆地址</th>
-                                    <th class="col-sm-1">登陆时间</th>
+                                    <th>登录账号</th>
+                                    <th>登录IP</th>
+                                    <th>登录地址</th>
+                                    <th class="col-sm-1">登录时间</th>
                                 </tr>
                                 </thead>
                                 <tbody>

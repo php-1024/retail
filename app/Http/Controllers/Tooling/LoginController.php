@@ -1,6 +1,6 @@
 <?php
 /**
- *新版本登陆界面
+ *新版本登录界面
  *
  **/
 namespace App\Http\Controllers\Tooling;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller{
     /*
-     * 登陆页面
+     * 登录页面
      */
     public function display()
     {
@@ -90,7 +90,7 @@ class LoginController extends Controller{
                 return response()->json(['data' => '登录账号或密码错误', 'status' => '0']);
             }
         }else{
-            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登陆 ','status' => '0']);
+            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登录 ','status' => '0']);
         }
     }
 }

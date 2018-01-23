@@ -50,17 +50,17 @@
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('tooling/ajax/password_edit_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <div class="form-group"><label class="col-sm-2 control-label">登陆账号</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">登录账号</label>
                                     <div class="col-sm-10" style="padding-top:7px;">{{ $admin_data['admin_account'] }}</div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">原登陆密码</label>
-                                    <div class="col-sm-10"><input type="password" name="oldpassword" class="form-control" placeholder="原登陆密码"></div>
+                                    <label class="col-sm-2 control-label">原登录密码</label>
+                                    <div class="col-sm-10"><input type="password" name="oldpassword" class="form-control" placeholder="原登录密码"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">新登陆密码</label>
-                                    <div class="col-sm-10"><input type="password" name="password" class="form-control" placeholder="新登陆密码"></div>
+                                    <label class="col-sm-2 control-label">新登录密码</label>
+                                    <div class="col-sm-10"><input type="password" name="password" class="form-control" placeholder="新登录密码"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>

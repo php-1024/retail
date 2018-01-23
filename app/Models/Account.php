@@ -81,7 +81,7 @@ class Account extends Model{
     }
 
 
-    //登陆时通过输入的用户名或手机号查询用户
+    //登录时通过输入的用户名或手机号查询用户
     public static function getOneForLogin($username){
         return self::with('account_info')->with('account_roles')->where('account',$username)->orWhere('mobile',$username)->first();
     }
@@ -92,8 +92,8 @@ class Account extends Model{
         $model->parent_id = $param['parent_id'];//上级用户ID
         $model->parent_tree = $param['parent_tree'];//组织树
         $model->deepth = $param['deepth'];//用户在该组织里的深度
-        $model->account = $param['account'];//登陆账号（零壹平台,自动生成）
-        $model->password = $param['password'];//登陆密码（MD5默认32位长度）
+        $model->account = $param['account'];//登录账号（零壹平台,自动生成）
+        $model->password = $param['password'];//登录密码（MD5默认32位长度）
         $model->mobile = $param['mobile'];//管理员绑定的手机号码
         $model->save();
         return $model->id;

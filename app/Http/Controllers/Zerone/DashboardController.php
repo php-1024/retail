@@ -1,6 +1,6 @@
 <?php
 /**
- *新版本登陆界面
+ *新版本登录界面
  *
  **/
 namespace App\Http\Controllers\Zerone;

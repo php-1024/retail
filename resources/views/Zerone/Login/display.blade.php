@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>零壹平台管理系统 | 登陆界面</title>
+    <title>零壹平台管理系统 | 登录界面</title>
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
@@ -33,7 +33,7 @@
                 <input type="text" name="username" id="currentForm" class="form-control" placeholder="用户名|手机号" >
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="登陆密码" >
+                <input type="password" name="password" class="form-control" placeholder="登录密码" >
             </div>
             <div class="form-group col-md-6" style="padding-left:0px;">
 

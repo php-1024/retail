@@ -12,7 +12,7 @@ class ToolingLog{
         $operation_log->operation_info = $info;
         $operation_log->save();
     }
-    //记录登陆日志
+    //记录登录日志
     public static function setLoginLog($account_id,$ip,$addr){
         $loginlog = new ToolingLoginLog();
         $loginlog->account_id = $account_id;

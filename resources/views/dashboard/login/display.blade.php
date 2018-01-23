@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
-    <title>零壹新科技后台管理系统| 登陆界面</title>
+    <title>零壹新科技后台管理系统| 登录界面</title>
     <link href="{{asset('public/dashboard/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{asset('public/dashboard/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/dashboard/library/font')}}/css/font-awesome.css" rel="stylesheet">
@@ -44,7 +44,7 @@
                     <img src="{{ URL('login/captcha/'.$random) }}" id="login_captcha" onClick="return changeCaptcha();">
                 	
                 </div>
-                <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登陆</button>
+                <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登录</button>
             </form>
 			
             <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027</small> </p>

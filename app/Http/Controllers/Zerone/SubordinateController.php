@@ -27,7 +27,7 @@ class SubordinateController extends Controller{
     //快速授权功能
     public function quick_rule(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $account_id = $admin_data['id'];//当前登陆账号ID
+        $account_id = $admin_data['id'];//当前登录账号ID
         $role_id = $request->input('role_id');
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
@@ -69,7 +69,7 @@ class SubordinateController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $password = $request->input('password');//登陆密码
+        $password = $request->input('password');//登录密码
         $realname = $request->input('realname');//用户真实姓名
         $mobile = $request->input('mobile');//用户手机号码
         $role_id = $request->input('role_id');//用户角色ID
@@ -144,7 +144,7 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//要编辑的人员的ID
         $account = $request->input('account');
-        $password = $request->input('password');//登陆密码
+        $password = $request->input('password');//登录密码
         $realname = $request->input('realname');//真实姓名
         $mobile = $request->input('mobile');//手机号码
         $organization_id = 1;

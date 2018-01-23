@@ -52,8 +52,8 @@
 
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label class="control-label" for="amount">登陆账号</label>
-                                <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="登陆账号" class="form-control">
+                                <label class="control-label" for="amount">登录账号</label>
+                                <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="登录账号" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -76,7 +76,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>登陆账号</th>
+                                    <th>登录账号</th>
                                     <th>账号类型</th>
                                     <th>账号状态</th>
                                     <th>添加时间</th>
