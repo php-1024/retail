@@ -45,7 +45,7 @@
                 <img src="{{ URL('tooling/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
 
             </div>
-            <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登陆</button>
+            <button type="button" class="btn btn-primary block full-width m-b" onClick="postForm();">登录</button>
         </form>
 
         <p class="m-t"> <small>零壹新科技（深圳）有限公司 &copy; 2017-2027</small> </p>
