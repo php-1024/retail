@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\AssetsOperation;
 use App\Models\CompanyApply;
 use App\Models\OperationLog;
 use App\Models\Organization;
@@ -401,7 +402,7 @@ class CompanyController extends Controller{
                 Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>$program_use_num]);
                }
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：');//保存操作记录
+                AssetsOperation::addAssetsOperation($program_id,$organization_id,$package_id,$status,$num);//保存操作记录
             }
             elseif($status == '0'){//划出
                 if(empty($re)){
@@ -415,7 +416,7 @@ class CompanyController extends Controller{
                     }
                 }
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：');//保存操作记录
+                AssetsOperation::addAssetsOperation($program_id,$organization_id,$package_id,$status,$num);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
