@@ -377,7 +377,7 @@ class CompanyController extends Controller{
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
 
-        return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        return view('Zerone/Company/company_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function company_assets_check(Request $request){
