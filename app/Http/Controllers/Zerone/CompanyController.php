@@ -360,7 +360,12 @@ class CompanyController extends Controller{
 
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value){
-            dump($value);
+            foreach ($value['programs'] as $k=>$v){
+                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
+                dump($re);
+                $list['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+                $list['programs'][$k]['program_use_num'] = $re['program_use_num'];
+            }
         }
         return view('Zerone/Company/company_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
