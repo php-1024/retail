@@ -357,10 +357,12 @@ class ProxyController extends Controller{
     public function proxy_assets_add(Request $request){
         $organization_id = $request->input('organization_id'); //服务商id
         $package_id = $request->input('package_id');//套餐id
+        $program_id = $request->input('program_id');//程序id
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         $status = $request->input('status');//状态
-        return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
+        dd($program_id);
+        return view('Zerone/Proxy/proxy_assets_add',['program_id'=>$program_id,'listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
     }
 
     //服务商程序管理页面划入检测
@@ -372,7 +374,6 @@ class ProxyController extends Controller{
         $program_id = $request->input('program_id');//程序id
         $num = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
-        dd($program_id);
         DB::beginTransaction();
         try{
             if($status == '1'){
