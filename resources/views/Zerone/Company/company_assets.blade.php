@@ -8,7 +8,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">程序划入</h4>
+                    <h4 class="modal-title">@if($status == 1)程序划入@else程序划出@endif</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal tasi-form" method="get">
