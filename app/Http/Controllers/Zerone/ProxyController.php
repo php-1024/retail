@@ -359,7 +359,6 @@ class ProxyController extends Controller{
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         $status = $request->input('status');//状态
-        dump($status);
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
     }
 
@@ -372,7 +371,6 @@ class ProxyController extends Controller{
         $program_id = $request->input('program_id');//程序id
         $num = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
-        dd($request);
         DB::beginTransaction();
         try{
             if($status == '1'){
