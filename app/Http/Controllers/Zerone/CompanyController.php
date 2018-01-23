@@ -401,8 +401,7 @@ class CompanyController extends Controller{
                }
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($admin_data['id'],$organization_id,$package_id,$package_id,$status,$number);//保存操作记录
-            }
-            elseif($status == '0'){//划出
+            } else{//划出
                 if(empty($re)){
                     return response()->json(['data' => '数量不足', 'status' => '0']);
                 }else{
