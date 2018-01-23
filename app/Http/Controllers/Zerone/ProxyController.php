@@ -351,6 +351,7 @@ class ProxyController extends Controller{
         $list = Package::getPaginage([],15,'id');
         return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+
     //服务商程序管理页面划入js显示
     public function proxy_assets_add(Request $request){
         $organization_id = $request->input('organization_id'); //服务商id
@@ -359,10 +360,47 @@ class ProxyController extends Controller{
         $listPac = Package::getOnePackage([['id',$package_id]]);
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac]);
     }
+
     //服务商程序管理页面划入检测
     public function proxy_assets_add_check(Request $request){
-        dump($request);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $organization_id = $request->input('organization_id');//服务商id
+        $package_id = $request->input('package_id');//套餐id
+        $program_id = $request->input('program_id');//程序id
+        $num = $request->input('num');//数量
+        $status = $request->input('status');//判断划入或者划出
+
+        DB::beginTransaction();
+        try{
+            if($status == '1'){
+                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+                if(empty($re)){
+                    Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
+                }else{
+                    $id=$re['id'];
+                    $num += $re['program_spare_num'];
+                    Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>'0']);
+                }
+                //添加操作日志
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：');//保存操作记录
+            }
+            elseif($status == '0'){
+//                Organization::editOrganization([['id',$id]],['status'=>'1']);
+//                Account::editOrganizationBatch([['organization_id',$id]],['status'=>'1']);
+//                //添加操作日志
+//                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：'.$list['organization_name']);//保存操作记录
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
     }
+
+
     //服务商程序管理
     public function proxy_company(Request $request){
 
