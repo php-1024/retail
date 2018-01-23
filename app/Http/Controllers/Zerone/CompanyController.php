@@ -392,13 +392,12 @@ class CompanyController extends Controller{
         try{
             $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
             $id=$re['id'];
-            $program_use_num = $re['program_use_num'];
             if($status == '1'){//划入
                if(empty($re)){
                 Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$number,'program_use_num'=>'0']);
                }else{
                 $num = $re['program_spare_num']+$number;
-                Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>$program_use_num]);
+                Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
                }
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($admin_data['id'],$organization_id,$package_id,$package_id,$status,$number);//保存操作记录
@@ -409,7 +408,7 @@ class CompanyController extends Controller{
                 }else{
                     if($re['program_spare_num'] >= $number){//划出数量小于或等于剩余数量
                         $num = $re['program_spare_num'] - $number;
-                        Assets::editAssets([['id',$id]],['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$num,'program_use_num'=>$program_use_num]);
+                        Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
                     }else{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
