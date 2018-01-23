@@ -283,8 +283,8 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('proxy_list_frozen','Zerone\ProxyController@proxy_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
         Route::post('proxy_list_frozen_check','Zerone\ProxyController@proxy_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
         Route::post('proxy_list_delete','Zerone\ProxyController@proxy_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
-        Route::post('proxy_assets_add','Zerone\ProxyController@proxy_assets_add')->middleware('ZeroneCheckAjax');//服务商程序管理划入显示页面
-        Route::post('proxy_assets_check','Zerone\ProxyController@proxy_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
+        Route::post('proxy_assets','Zerone\ProxyController@proxy_assets')->middleware('ZeroneCheckAjax');//服务商程序管理划入划出显示页面
+        Route::post('proxy_assets_check','Zerone\ProxyController@proxy_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交
 
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
@@ -306,7 +306,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('company_list_frozen','Zerone\CompanyController@company_list_frozen')->middleware('ZeroneCheckAjax');//商户冻结页面显示
         Route::post('company_list_frozen_check','Zerone\CompanyController@company_list_frozen_check')->middleware('ZeroneCheckAjax');//商户冻结数据提交
         Route::post('company_list_delete','Zerone\CompanyController@company_list_delete')->middleware('ZeroneCheckAjax');//商户删除页面显示
-        Route::post('company_assets','Zerone\CompanyController@company_assets')->middleware('ZeroneCheckAjax');//商户资产划入显示页面
+        Route::post('company_assets','Zerone\CompanyController@company_assets')->middleware('ZeroneCheckAjax');//商户程序管理划入划出显示页面
         Route::post('company_assets_check','Zerone\CompanyController@company_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
 
     });

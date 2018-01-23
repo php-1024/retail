@@ -133,7 +133,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/proxy_list_edit"://服务商列表修改弹出检测登入和权限
             case "zerone/ajax/proxy_list_frozen"://服务商列表冻结弹出检测登入和权限
             case "zerone/ajax/proxy_list_delete"://服务商列表删除弹出检测登入和权限
-            case "zerone/ajax/proxy_assets_add"://服务商列表划入检测弹出登入和权限
+            case "zerone/ajax/proxy_assets"://服务商列表划入检测弹出登入和权限
 
             case "zerone/ajax/company_examine"://商户审核检测弹出登陆和权限
             case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
