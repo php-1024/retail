@@ -368,7 +368,7 @@ class CompanyController extends Controller{
         $status = $request->input('status');//状态
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
-
+        dd($listPac);
         return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
@@ -406,7 +406,6 @@ class CompanyController extends Controller{
                     }else{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
-
                 }
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：');//保存操作记录
