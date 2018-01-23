@@ -370,7 +370,7 @@ class CompanyController extends Controller{
         return view('Zerone/Company/company_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户资产页面划入js显示
-    public function company_assets_add(Request $request){
+    public function company_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
@@ -380,7 +380,7 @@ class CompanyController extends Controller{
         return view('Zerone/Company/company_assets_add',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
-    public function company_assets_add_check(Request $request){
+    public function company_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id

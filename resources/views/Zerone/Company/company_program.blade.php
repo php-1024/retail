@@ -59,7 +59,7 @@
             <div class="row">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                 <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg->id}}">
-                <input type="hidden" id="company_assets_add" value="{{ url('zerone/ajax/company_assets_add') }}">
+                <input type="hidden" id="company_assets" value="{{ url('zerone/ajax/company_assets') }}">
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
@@ -135,7 +135,7 @@
 
     //程序划入
     function getAssetsAdd(package_id,status) {
-        var url = $('#company_assets_add').val();
+        var url = $('#company_assets').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
         if (package_id == '') {
@@ -172,7 +172,7 @@
     //程序划入
     function getAssetsReduce(package_id,status) {
 
-        var url = $('#company_assets_add').val();
+        var url = $('#company_assets').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
         if (package_id == '') {

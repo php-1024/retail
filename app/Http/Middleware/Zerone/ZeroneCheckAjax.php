@@ -111,8 +111,8 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssetsAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_assets_add_check"://检测是否登陆 权限 安全密码 数字不能为空
-                $re = $this->checkLoginAndRuleAndSafeAndAssetsAdd($request);
+            case "zerone/ajax/proxy_assets_check"://检测是否登陆 权限 安全密码 数字不能为空
+                $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -413,12 +413,12 @@ class ZeroneCheckAjax
         }
     }
     //检测是否登陆 权限 安全密码 数字不能为空
-    public function checkLoginAndRuleAndSafeAndAssetsAdd($request){
+    public function checkLoginAndRuleAndSafeAndAssets($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登陆
         if($re['status']=='0'){//检测是否登陆
             return $re;
         }else{
-            $re2 = $this->checkAssetsAdd($re['response']);//检测是否具有权限
+            $re2 = $this->checkAssets($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -736,7 +736,7 @@ class ZeroneCheckAjax
         return self::res(1, $request);
     }
     //检测商户编辑表信息
-    public function checkAssetsAdd($request){
+    public function checkAssets($request){
         $num = $request->input('num');
         if (preg_match("/^[1-9]{1}\d{0,9}$/",$num)){
             return self::res(1, $request);
