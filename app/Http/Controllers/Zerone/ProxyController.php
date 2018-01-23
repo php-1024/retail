@@ -371,7 +371,7 @@ class ProxyController extends Controller{
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
     }
 
-    //服务商程序管理页面划入检测
+    //服务商程序管理页面划入划出检测
     public function proxy_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//服务商id
