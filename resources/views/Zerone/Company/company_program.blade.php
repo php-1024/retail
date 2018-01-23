@@ -135,7 +135,6 @@
 
     //程序划入
     function getAssetsAdd(package_id,status) {
-        alert(package_id);
         var url = $('#company_assets_add').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
