@@ -245,7 +245,6 @@
     function getAssetsAdd(package_id,status) {
 
         var url = $('#proxy_assets_add').val();
-        console.log(url);
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
         if (package_id == '') {
