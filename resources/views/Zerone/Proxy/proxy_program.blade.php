@@ -78,26 +78,26 @@
                                 </thead>
                                 <tbody>
                                 @foreach($list as $key=>$value)
-                                    <tr>
-                                        <td>{{$value->id}}</td>
-                                        <td>{{$value->package_name}}</td>
+                                <tr>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->package_name}}</td>
 
-                                        <td>
-                                            @foreach($value->programs as $k=>$v)
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;
-                                                </div>
-                                                <div style=" margin-top: 20px;"></div>
-                                            @endforeach
-                                        </td>
-                                        <td>{{$value->created_at}}</td>
-                                        <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                            <button class="btn btn-primary btn-xs"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                        </td>
-                                    </tr>
+                                    <td>
+                                        @foreach($value->programs as $k=>$v)
+                                        <div>
+                                            <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
+                                            <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;
+                                            <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;
+                                        </div>
+                                        <div style=" margin-top: 20px;"></div>
+                                        @endforeach
+                                    </td>
+                                    <td>{{$value->created_at}}</td>
+                                    <td class="text-right">
+                                        <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                        <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
+                                    </td>
+                                </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
