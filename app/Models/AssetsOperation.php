@@ -18,9 +18,9 @@ class AssetsOperation extends Model{
         return self::where($where)->first();
     }
     //添加数据
-    public static function addAssetsOperation($program_id,$organization_id,$package_id,$program_id,$status,$number){
+    public static function addAssetsOperation($account_id,$organization_id,$package_id,$program_id,$status,$number){
         $program = new AssetsOperation();//实例化程序模型
-        $program->account_id = $program_id;//操作人id
+        $program->account_id = $account_id;//操作人id
         $program->organization_id = $organization_id;//程序名称
         $program->package_id = $package_id;//套餐id
         $program->program_id = $program_id;//程序id
