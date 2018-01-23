@@ -373,7 +373,6 @@ class ProxyController extends Controller{
 
     //服务商程序管理页面划入检测
     public function proxy_assets_check(Request $request){
-        dump($request);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
