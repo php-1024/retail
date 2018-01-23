@@ -359,6 +359,7 @@ class ProxyController extends Controller{
         $listOrg = Organization::getOne([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         $status = $request->input('status');//状态
+        dump($status);
         return view('Zerone/Proxy/proxy_assets_add',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
     }
 
