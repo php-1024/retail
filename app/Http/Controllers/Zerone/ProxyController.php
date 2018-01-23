@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\Assets;
+use App\Models\AssetsOperation;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
