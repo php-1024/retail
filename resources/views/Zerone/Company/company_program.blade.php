@@ -94,8 +94,8 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$v->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                            <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$v->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
+                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                     </td>
                                 </tr>
                                 @endforeach
