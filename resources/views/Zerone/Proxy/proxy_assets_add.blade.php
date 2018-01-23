@@ -3,7 +3,8 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
     <input type="hidden" name="package_id" value="{{$listPac->id}}">
-        <div class="modal-dialog modal-lg">
+    <input type="hidden" name="status" value="{{$status}}">
+    <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
