@@ -284,7 +284,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('proxy_list_frozen_check','Zerone\ProxyController@proxy_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
         Route::post('proxy_list_delete','Zerone\ProxyController@proxy_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
         Route::post('proxy_assets_add','Zerone\ProxyController@proxy_assets_add')->middleware('ZeroneCheckAjax');//服务商程序管理划入显示页面
-        Route::post('proxy_assets_add_check','Zerone\ProxyController@proxy_assets_add_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
+        Route::post('proxy_assets_check','Zerone\ProxyController@proxy_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
 
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
