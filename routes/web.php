@@ -344,3 +344,21 @@ Route::group(['prefix'=>'proxy'],function(){
     });
 });
 /********************服务商管理系统*************************/
+
+
+/**********************商户管理系统*********************/
+Route::group(['prefix'=>'company'],function(){
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
+        Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
+    });
+
+
+
+    //异步提交数据组
+    Route::group(['prefix'=>'ajax'],function(){
+        Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');//提交登录数据
+    });
+});
+/********************商户管理系统*************************/
