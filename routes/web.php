@@ -312,3 +312,27 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 });
 /********************零壹管理系统*************************/
+/**********************服务商管理系统*********************/
+Route::group(['prefix'=>'proxy'],function(){
+    Route::get('/', 'Proxy\SystemController@index')->middleware('ZeroneCheck');//系统首页
+    Route::get('quit','Proxy\SystemController@quit');//退出系统
+
+    //系统管理分组
+    Route::group(['prefix'=>'system'],function(){
+        Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ZeroneCheck');//服务商信息设置
+        Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ZeroneCheck');//服务商人员结构
+        Route::get('proxy_operation_log','Proxy\SystemController@proxy_operation_log')->middleware('ZeroneCheck');//操作日志
+        Route::get('proxy_login_log','Proxy\SystemController@proxy_login_log')->middleware('ZeroneCheck');//登录日志
+    });
+
+
+    
+
+
+    //异步提交数据组
+    Route::group(['prefix'=>'ajax'],function(){
+
+
+    });
+});
+/********************服务商管理系统*************************/
