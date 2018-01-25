@@ -14,7 +14,7 @@ class CompanyCheckAjax
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "zerone/ajax/login_check"://检测登录数据提交
+            case "company/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
@@ -638,6 +638,7 @@ class CompanyCheckAjax
             return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
         }
     }
+
     //检测服务商申请表信息
     public function checkProxyAdd($request){
         if (empty($request->input('organization_name'))) {
