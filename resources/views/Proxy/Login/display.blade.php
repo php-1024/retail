@@ -53,10 +53,10 @@
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
