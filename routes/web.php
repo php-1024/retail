@@ -312,8 +312,6 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 });
 /********************零壹管理系统*************************/
-
-
 /**********************服务商管理系统*********************/
 Route::group(['prefix'=>'proxy'],function(){
 
@@ -352,7 +350,7 @@ Route::group(['prefix'=>'proxy'],function(){
 Route::group(['prefix'=>'company'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Company\LoginController@display');//登录页面路由
+        Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
     });
 
