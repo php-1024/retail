@@ -45,12 +45,12 @@
             }
         });
     });
-    //更换验证码
-    function changeCaptcha(){
-        var url = $("#captcha_url").val();
-        url = url + "/" + Math.random();
-        $("#login_captcha").attr("src",url);
-    }
+//    //更换验证码
+//    function changeCaptcha(){
+//        var url = $("#captcha_url").val();
+//        url = url + "/" + Math.random();
+//        $("#login_captcha").attr("src",url);
+//    }
 
     //提交表单
     function postForm(){
