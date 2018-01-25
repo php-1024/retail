@@ -20,12 +20,13 @@
 
 <div class="container">
 
-    <form class="form-signin" action="select_proxy.html">
+    <form class="form-signin" id="currentForm" action="{{ url('zerone/ajax/login_check') }}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <h2 class="form-signin-heading">零壹新科技服务商管理平台</h2>
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus>
             <input type="password" class="form-control" placeholder="登陆密码">
-            <button class="btn btn-lg btn-login btn-block" type="submit">登陆</button>
+            <button class="btn btn-lg btn-login btn-block" type="submit" onClick="postForm();">登陆</button>
         </div>
 
     </form>
