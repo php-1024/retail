@@ -18,7 +18,7 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        return view('Zerone/Login/display');
+        return view('Company/Login/display');
     }
     /*
      * 生成验证码
