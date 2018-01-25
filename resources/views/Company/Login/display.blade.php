@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/app.css" type="text/css" />
     <!--[if lt IE 9]>
-
+    <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
+    <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
+    <script src="{{asset('public/Company/library/ie')}}/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="bg-success dker">
@@ -62,7 +64,7 @@
 <!-- App -->
 <script src="{{asset('public/Company')}}/js/app.js"></script>
 <script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+{{--<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>--}}
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script>
