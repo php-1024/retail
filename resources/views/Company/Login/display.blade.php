@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>Musik | Web Application</title>
+    <title>零壹云管理系统 - 商户管理平台登录</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
