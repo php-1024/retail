@@ -15,6 +15,7 @@ class ProxyCheckAjax
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
             case "proxy/ajax/login_check"://检测登录数据提交
+                dd(1);
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
