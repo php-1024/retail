@@ -30,7 +30,7 @@
             <form class="m-t" role="form" id="currentForm" action="{{ url('company/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
-                    <input type="text" name="username" id="currentForm" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
+                    <input type="text" name="username" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
