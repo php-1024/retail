@@ -339,7 +339,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-
+        Route::post('login_check','Proxy\LoginController@login_check')->middleware('ProxyCheckAjax');//提交登录数据
 
     });
 });
