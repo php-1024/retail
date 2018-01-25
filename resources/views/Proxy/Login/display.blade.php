@@ -120,7 +120,7 @@
                 });
                 changeCaptcha();
             }
-        }); 
+        });
     }
 </script>
 
