@@ -70,5 +70,5 @@ class Kernel extends HttpKernel
         'ProxyCheck'=>\App\Http\Middleware\Proxy\ProxyCheck::class,//检测普通页面跳转的中间件
         'ProxyCheckAjax'=>\App\Http\Middleware\Proxy\ProxyCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************服务商平台管理系统*******************************/
-
+    ];
 }
