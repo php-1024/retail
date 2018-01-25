@@ -52,7 +52,7 @@
 <footer id="footer">
     <div class="text-center padder">
         <p>
-            <small>Web app framework base on Bootstrap<br>&copy; 2014</small>
+            <small>零壹新科技（深圳）有限公司<br>&copy; 2018</small>
         </p>
     </div>
 </footer>
