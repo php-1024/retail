@@ -6,6 +6,8 @@ return [
     'tooling_encrypt_key'=>'1asdfnonlkj324jtsdfmio2o3immro43imio34om5om4om5',//程序管理系统加密盐
     'zerone_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdejwio',//零壹管理平台登录密码加密盐
     'zerone_safe_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdfd21a1',//零壹管理平台安全密码加密盐
+    'company_encrypt_key'=>'asdfghjklqwerasxczdfgrtijnjhbjhgysjughaysasaisdsyssd',//零壹管理平台登录密码加密盐
+    'company_safe_encrypt_key'=>'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
     'allowed_error_times'=>5,//允许登录错误次数
     /*
     |--------------------------------------------------------------------------

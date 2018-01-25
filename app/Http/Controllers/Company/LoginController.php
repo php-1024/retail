@@ -41,8 +41,6 @@ class LoginController extends Controller{
 
     //检测登录
     public function login_check(){
-        $re = Request::all();
-        dd($re);
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
@@ -50,7 +48,7 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $key = config("app.company_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
