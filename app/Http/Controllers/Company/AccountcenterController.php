@@ -3,22 +3,12 @@
  *新版本登录界面
  *
  **/
-namespace App\Http\Controllers\Zerone;
+namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
-use App\Models\Account;
-use App\Models\Province;
-use App\Models\Setup;
-use App\Models\Warzone;
-use App\Models\LoginLog;
-use App\Models\OperationLog;
-use App\Models\WarzoneProvince;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Session;
-use App\Models\Statistics;
-use App\Models\OrganizationRole;
 
-class DashboardController extends Controller{
+class AccountcenterController extends Controller{
 
     //系统管理首页
     public function display(Request $request)
