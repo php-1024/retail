@@ -58,7 +58,7 @@
     </div>
 </footer>
 <!-- / footer -->
-{{--<script src="{{asset('public/Company')}}/js/jquery.min.js"></script>--}}
+<script src="{{asset('public/Company')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Company/')}}/js/bootstrap.js"></script>
 <!-- App -->
@@ -68,43 +68,43 @@
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script>
-    $(function(){
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-    //更换验证码
-    function changeCaptcha(){
-        var url = $("#captcha_url").val();
-        url = url + "/" + Math.random();
-        $("#login_captcha").attr("src",url);
-    }
-
-    //提交表单
-    function postForm(){
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        console.log(url);
-        var data = target.serialize();
-        console.log(data);
-        $.post(url,data,function(json){
-            if(json.status==1){
-                window.location.reload();
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-                changeCaptcha();
-            }
-        });
-    }
+//    $(function(){
+//        //设置CSRF令牌
+//        $.ajaxSetup({
+//            headers: {
+//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//            }
+//        });
+//    });
+//    //更换验证码
+//    function changeCaptcha(){
+//        var url = $("#captcha_url").val();
+//        url = url + "/" + Math.random();
+//        $("#login_captcha").attr("src",url);
+//    }
+//
+//    //提交表单
+//    function postForm(){
+//        var target = $("#currentForm");
+//        var url = target.attr("action");
+//        console.log(url);
+//        var data = target.serialize();
+//        console.log(data);
+//        $.post(url,data,function(json){
+//            if(json.status==1){
+//                window.location.reload();
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//                changeCaptcha();
+//            }
+//        });
+//    }
 </script>
 </body>
 </html>
