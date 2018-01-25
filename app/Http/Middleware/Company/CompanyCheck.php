@@ -17,11 +17,14 @@ class CompanyCheck{
                 $sess_key = Session::get('zerone_account_id');
                 //如果不为空跳转到首页
                 if(!empty($sess_key)) {
-                    return redirect('zerone');
+                    return redirect('company');
                 }
                 break;
 
             /****仅检测是否登录及是否具有权限****/
+            case "company"://后台首页
+
+
             case "zerone/role/role_add"://添加权限角色
             case "zerone/role/role_list"://权限角色列表
             case "zerone/subordinate/subordinate_add"://添加下级人员
@@ -38,7 +41,7 @@ class CompanyCheck{
             case "zerone/personal/safe_password":   //个人中心——安全密码设置
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
             case "zerone/personal/login_log":           //个人中心——我的登录日志
-            case "zerone"://后台首页
+
 
             case "zerone/proxy/proxy_add":              //添加服务商
             case "zerone/proxy/proxy_examinelist":      //服务商审核列表
