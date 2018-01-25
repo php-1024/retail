@@ -352,7 +352,7 @@ Route::group(['prefix'=>'proxy'],function(){
 Route::group(['prefix'=>'company'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
+        Route::get('/', 'Company\LoginController@display');//登录页面路由
         Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
     });
 
