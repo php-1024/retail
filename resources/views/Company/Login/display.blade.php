@@ -64,9 +64,9 @@
     </div>
 </footer>
 <!-- / footer -->
-<script src="{{asset('public/Company/library/jquery')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Company')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Company/library/bootstrap')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Company/')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Company')}}/js/app.js"></script>
 <script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
