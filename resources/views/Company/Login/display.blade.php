@@ -73,7 +73,7 @@
 <script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Company/library/jPlayer')}}/demo.js"></script>
+{{--<script src="{{asset('public/Company/library/jPlayer')}}/demo.js"></script>--}}
 <script>
     $(function(){
         //设置CSRF令牌
