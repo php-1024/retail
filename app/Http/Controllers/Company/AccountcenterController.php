@@ -15,7 +15,6 @@ class AccountcenterController extends Controller{
     {
         dump($request);
         dd('登陆成功！');
-        return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone'=>$zerone]);
     }
 
     //退出登录
