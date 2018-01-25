@@ -69,7 +69,7 @@
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script>
     $(function(){
-        var o = null;
+        var o = 1;
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
