@@ -58,11 +58,6 @@
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-    <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
-    <script src="{{asset('public/Proxy')}}/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body class="login-body">
