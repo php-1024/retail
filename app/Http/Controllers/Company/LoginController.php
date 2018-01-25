@@ -80,8 +80,8 @@ class LoginController extends Controller{
                         'login_time'=>time()//登录时间
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        if($account_info->organization <> '3'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
-                            dd($account_info->organization);
+                        if($account_info->organization->id <> '3'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
+                            dd("bu==3")
                             ErrorLog::addErrorTimes($ip,1);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
