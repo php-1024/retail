@@ -84,7 +84,7 @@ class LoginController extends Controller{
                         'login_time'=>time()//登录时间
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        if($account_info->organization->program_id <> '3'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
+                        if($account_info->organization->program_id <> '3'){//如果账号不属于商户平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
                             ErrorLog::addErrorTimes($ip,1);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
@@ -107,7 +107,6 @@ class LoginController extends Controller{
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-
                                 \ZeroneRedis::create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 \ZeroneRedis::create_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
