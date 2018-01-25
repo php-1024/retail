@@ -34,8 +34,7 @@
 </div>
 
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
