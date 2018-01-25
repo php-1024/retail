@@ -9,6 +9,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
 </head>
 
 <body class="login-body">
