@@ -3,7 +3,7 @@
  *新版本登录界面
  *
  **/
-namespace App\Http\Controllers\Login;
+namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
