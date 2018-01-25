@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理系统 - 商户管理平台登录</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
@@ -21,12 +22,13 @@
 <body class="bg-success dker">
 <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
     <div class="container aside-xl">
-        <a class="navbar-brand block" href="index.html"><span class="h1 font-bold">ZERONE</span></a>
+        <a class="navbar-brand block" href="javascript:;"><span class="h1 font-bold">ZERONE</span></a>
         <section class="m-b-lg">
             <header class="wrapper text-center">
                 <strong>零壹云管理系统 - 商户管理平台登录</strong>
             </header>
-            <form action="index.html">
+            <form class="m-t" role="form" id="currentForm" action="{{ url('company/ajax/login_check') }}">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
                     <input type="email" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
                 </div>
@@ -34,9 +36,14 @@
                     <input type="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
+                    <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
                     <img src="http://o2o.01nnt.com/tooling/login/captcha/1516698884" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
+                </div>
+                <div class="form-group col-md-6" >
+                    <input type="hidden" id="captcha_url" value="{{ URL('zerone/login/captcha') }}">
+                    <img src="{{ URL('zerone/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
+
                 </div>
 
 
@@ -56,8 +63,6 @@
         </p>
     </div>
 </footer>
-
-
 <!-- / footer -->
 <script src="{{asset('public/Company/library/jquery')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
