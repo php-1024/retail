@@ -314,7 +314,15 @@ Route::group(['prefix'=>'zerone'],function(){
 /********************零壹管理系统*************************/
 /**********************服务商管理系统*********************/
 Route::group(['prefix'=>'proxy'],function(){
-    Route::get('/', 'Proxy\SystemController@index')->middleware('ZeroneCheck');//系统首页
+
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Proxy\LoginController@display');//登录页面路由
+        Route::get('captcha/{tmp}', 'Proxy\LoginController@captcha');//验证码路由
+    });
+
+
+    Route::get('/', 'Proxy\SystemController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Proxy\SystemController@quit');//退出系统
 
     //系统管理分组
@@ -326,7 +334,7 @@ Route::group(['prefix'=>'proxy'],function(){
     });
 
 
-    
+
 
 
     //异步提交数据组
