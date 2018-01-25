@@ -3,16 +3,14 @@
  *新版本登录界面
  *
  **/
-namespace App\Http\Controllers\Zerone;
+namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;
 use App\Models\ErrorLog;
 use App\Models\LoginLog;
-use App\Models\ProgramMenu;
 use Session;
-use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller{
     /*

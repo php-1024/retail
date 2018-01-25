@@ -2,7 +2,7 @@
 /**
  * 检测中间件囖
  */
-namespace App\Http\Middleware\Zerone;
+namespace App\Http\Middleware\Company;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
