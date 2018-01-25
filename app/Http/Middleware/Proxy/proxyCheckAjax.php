@@ -8,7 +8,7 @@ use Session;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
 
-class ZeroneCheckAjax
+class ProxyCheckAjax
 {
     public function handle($request, Closure $next)
     {
