@@ -59,20 +59,20 @@
         console.log(url);
         var data = target.serialize();
         console.log(data);
-        $.post(url,data,function(json){
-            if(json.status==1){
-                window.location.reload();
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-                changeCaptcha();
-            }
-        });
+//        $.post(url,data,function(json){
+//            if(json.status==1){
+//                window.location.reload();
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//                changeCaptcha();
+//            }
+//        });
     }
 </script>
 
