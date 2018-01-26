@@ -74,6 +74,7 @@ class LoginController extends Controller{
                     ErrorLog::addErrorTimes($ip,1);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
+                    dd($account_info);
                     //登录成功要生成缓存的登录信息
                     $admin_data = [
                         'id'=>$account_info->id,    //用户ID
