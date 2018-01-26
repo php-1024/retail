@@ -42,7 +42,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="{{ url('company/quit') }}" data-toggle="ajaxModal" >退出登录</a>
+                        <a href="{{ url('company/quit') }}" >退出登录</a>
                     </li>
                 </ul>
             </li>
