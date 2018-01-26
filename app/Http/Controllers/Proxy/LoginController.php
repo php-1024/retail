@@ -65,7 +65,7 @@ class LoginController extends Controller{
         //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip',$ip]]);//查询该IP下的错误记录
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
-//        if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
+        if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
             if(!empty($account_info)){
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip,1);
@@ -124,8 +124,8 @@ class LoginController extends Controller{
                         }
                     }else{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
+                            $admin_data['super_id'] = '1';//超级管理员判断字段
                         //插入登录记录
-                        if(LoginLog::addLoginLog($account_info['id'],1,0,$ip,$addr)) {//admin,唯一超级管理员，不属于任何组织
                             Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
                             $admin_data['role_name'] = '系统管理员';
@@ -133,18 +133,15 @@ class LoginController extends Controller{
                             \ZeroneRedis::create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                             \ZeroneRedis::create_proxy_menu_cache($account_info->id);//生成对应账号的系统菜单
                             return response()->json(['data' => '登录成功', 'status' => '1']);
-                        }else{
-                            return response()->json(['data' => '登录失败', 'status' => '0']);
-                        }
                     }
                 }
             }else{
                 ErrorLog::addErrorTimes($ip,1);
                 return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
             }
-//        }else{
-//            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登录 ','status' => '0']);
-//        }
+        }else{
+            return response()->json(['data' => '您短时间内错误的次数超过'.$allowed_error_times.'次，请稍候再尝试登录 ','status' => '0']);
+        }
     }
 }
 ?>
