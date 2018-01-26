@@ -136,7 +136,7 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => 1,
         ],
-        //定义一个自己的缓存的服务器，商户平台使用
+        //定义一个自己的缓存的服务器，服务商平台使用
         'proxy' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),

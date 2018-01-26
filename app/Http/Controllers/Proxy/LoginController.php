@@ -99,7 +99,7 @@ class LoginController extends Controller{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
                             if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization->id,$ip,$addr)) {//写入登录日志
-                                Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
 
                                 //构造用户缓存数据
                                 if(!empty( $account_info->account_info->realname)) {
@@ -126,7 +126,7 @@ class LoginController extends Controller{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             $admin_data['super_id'] = '1';//超级管理员判断字段
                         //插入登录记录
-                            Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                            Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
                             $admin_data['role_name'] = '系统管理员';
                             //构造用户缓存数据
