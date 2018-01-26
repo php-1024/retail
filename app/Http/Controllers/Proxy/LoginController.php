@@ -85,7 +85,6 @@ class LoginController extends Controller{
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time()//登录时间
                     ];
-                    dd($account_info);
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '2'){//如果账号不属于服务商管理系统，则报错，不能登录
                             ErrorLog::addErrorTimes($ip,1);
@@ -93,7 +92,7 @@ class LoginController extends Controller{
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
-                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登录日志
+                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization->id,$ip,$addr)) {//写入登录日志
                                 Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if(!empty( $account_info->account_info->realname)) {
