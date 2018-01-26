@@ -104,7 +104,7 @@ class LoginController extends Controller{
                                     foreach ($account_info->account_roles as $key => $val) {
                                         $account_info->role = $val;
                                     }
-                                    dd($account_info);
+                                    dd($account_info->account_roles->counts());
                                     $admin_data['role_name'] = $account_info->role->role_name;
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
