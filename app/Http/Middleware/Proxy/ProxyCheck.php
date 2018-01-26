@@ -13,6 +13,7 @@ class ProxyCheck{
         switch($route_name){
             /*****登录页,如果已经登录则不需要再次登录*****/
             case "proxy/login"://登录页,如果已经登录则不需要再次登录
+                dd(1);
                 //获取用户登录存储的SessionId
                 $sess_key = Session::get('zerone_account_id');
                 //如果不为空跳转到首页
