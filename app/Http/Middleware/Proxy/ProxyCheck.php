@@ -97,17 +97,17 @@ class ProxyCheck{
     //普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('zerone_account_id');
+        $sess_key = Session::get('proxy_account_id');
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
-            return self::res(0,redirect('zerone/login'));
+            return self::res(0,redirect('proxy/login'));
         }else{
-            $sess_key = Session::get('zerone_account_id');//获取管理员ID
+            $sess_key = Session::get('proxy_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('zerone_system_menu_'.$sess_key);
-            $son_menu_data = Redis::get('zerone_system_son_menu_'.$sess_key);
+            $admin_data = Redis::get('proxy_system_admin_data_'.$sess_key);//获取管理员信息
+            $menu_data = Redis::get('proxy_system_menu_'.$sess_key);
+            $son_menu_data = Redis::get('proxy_system_son_menu_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
