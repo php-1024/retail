@@ -93,6 +93,7 @@ class ZeroneRedis
         }
         $menu = serialize($menu);
         $son_menu = serialize($son_menu);
+        dd($menu);
         Redis::connection('company');//连接到我的redis服务器——商户平台使用
         $menu_key = 'zerone_company_menu_'.$id;  //一级菜单的Redis主键。
         $son_menu_key = 'zerone_company_son_menu_'.$id;//子菜单的Redis主键
