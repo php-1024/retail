@@ -101,14 +101,14 @@ class LoginController extends Controller{
                                 }else{
                                     $admin_data['realname'] = '未设置';
                                 }
-//                                if(!empty($account_info->account_roles)) {
-//                                    foreach ($account_info->account_roles as $key => $val) {
-//                                        $account_info->role = $val;
-//                                    }
-//                                    $admin_data['role_name'] = $account_info->role->role_name;
-//                                }else{
+                                if(!empty($account_info->account_roles)) {
+                                    foreach ($account_info->account_roles as $key => $val) {
+                                        $account_info->role = $val;
+                                    }
+                                    $admin_data['role_name'] = $account_info->role->role_name;
+                                }else{
                                     $admin_data['role_name'] = '角色未设置';
-//                                }
+                                }
                                 \ZeroneRedis::create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 \ZeroneRedis::create_proxy_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
