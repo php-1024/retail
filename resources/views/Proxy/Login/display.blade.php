@@ -26,7 +26,7 @@
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
             <input type="password" class="form-control" placeholder="登陆密码" name="password">
-            <button class="btn btn-lg btn-login btn-block" type="submit" onClick="postForm();">登陆</button>
+            <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登陆</button>
         </div>
 
     </form>
