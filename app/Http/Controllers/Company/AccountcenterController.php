@@ -21,6 +21,11 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+    public function company_organization()
+    {
+        return  view('Company/Accountcenter/company_organization');
+    }
+
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_account_id','');
