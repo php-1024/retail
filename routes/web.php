@@ -322,15 +322,15 @@ Route::group(['prefix'=>'proxy'],function(){
     });
 
 
-    Route::get('/', 'Proxy\SystemController@display')->middleware('ZeroneCheck');//系统首页
+    Route::get('/', 'Proxy\SystemController@display')->middleware('ProxyCheck');//系统首页
     Route::get('quit','Proxy\SystemController@quit');//退出系统
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
-        Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ZeroneCheck');//服务商信息设置
-        Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ZeroneCheck');//服务商人员结构
-        Route::get('proxy_operation_log','Proxy\SystemController@proxy_operation_log')->middleware('ZeroneCheck');//操作日志
-        Route::get('proxy_login_log','Proxy\SystemController@proxy_login_log')->middleware('ZeroneCheck');//登录日志
+        Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
+        Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
+        Route::get('proxy_operation_log','Proxy\SystemController@proxy_operation_log')->middleware('ProxyCheck');//操作日志
+        Route::get('proxy_login_log','Proxy\SystemController@proxy_login_log')->middleware('ProxyCheck');//登录日志
     });
 
 
@@ -339,7 +339,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Proxy\LoginController@login_check');//提交登录数据
+        Route::post('login_check','Proxy\LoginController@login_check')->middleware('ProxyCheck');//提交登录数据
 
     });
 });
