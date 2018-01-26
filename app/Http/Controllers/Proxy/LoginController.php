@@ -90,10 +90,9 @@ class LoginController extends Controller{
                             ErrorLog::addErrorTimes($ip,1);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
-                            echo 1;exit;
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
-                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization_id,$ip,$addr)) {//写入登录日志
+                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization->id,$ip,$addr)) {//写入登录日志
                                 Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if(!empty( $account_info->account_info->realname)) {
