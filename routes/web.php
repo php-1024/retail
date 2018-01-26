@@ -323,7 +323,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
 
     Route::get('/', 'Proxy\SystemController@display')->middleware('ProxyCheck');//系统首页
-    Route::get('quit','Proxy\SystemController@quit');//退出系统
+    Route::get('quit', 'Proxy\SystemController@quit');//退出系统
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
