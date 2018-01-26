@@ -350,6 +350,7 @@ Route::group(['prefix'=>'proxy'],function(){
 Route::group(['prefix'=>'company'],function(){
     Route::get('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');//首页面路由
     Route::get('quit', 'Company\AccountcenterController@quit');//退出系统
+    Route::get('company_organization', 'Company\AccountcenterController@company_organization');//选择商户组织
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
