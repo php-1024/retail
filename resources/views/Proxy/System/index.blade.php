@@ -61,10 +61,10 @@
     <!--sidebar start-->
     <aside>
         <div id="sidebar"  class="nav-collapse ">
-            @include('Tooling/Public/Nav')
+            @include('Proxy/Public/Nav')
 
             <div id="page-wrapper" class="gray-bg">
-                @include('Tooling/Public/Header')
+                @include('Proxy/Public/Header')
             </div>
         </div>
     </aside>
