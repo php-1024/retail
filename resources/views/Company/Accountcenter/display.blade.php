@@ -73,7 +73,7 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('Zerone/Public/Nav')
+            @include('Company/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
