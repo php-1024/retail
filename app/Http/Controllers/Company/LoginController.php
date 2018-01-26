@@ -83,8 +83,9 @@ class LoginController extends Controller{
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time()//登录时间
                     ];
+                    dd($account_info);
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        if($account_info->organization->program_id <> '3'){//如果账号不属于商户平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
+                        if($account_info->organization->program_id <> '1' || $account_info->organization->program_id <> '3'){//如果账号不属于零壹平台系统或者商户平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID 3、是商户管理系统
                             ErrorLog::addErrorTimes($ip,1);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
