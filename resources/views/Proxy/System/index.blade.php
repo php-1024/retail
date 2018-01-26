@@ -27,7 +27,7 @@
 
 <section id="container" class="">
     <header class="header white-bg">
-        @include('Zerone/Public/Header')
+        @include('Proxy/Public/Header')
     </header>
     <aside>
         <div id="sidebar"  class="nav-collapse ">
