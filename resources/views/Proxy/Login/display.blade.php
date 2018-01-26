@@ -26,6 +26,10 @@
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
             <input type="password" class="form-control" placeholder="登陆密码" name="password">
+            <input type="text" name="captcha" class="form-control" placeholder="验证码" >
+            <input type="hidden" id="captcha_url" value="{{ URL('zerone/login/captcha') }}">
+            <img src="{{ URL('zerone/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
+
             <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登陆</button>
         </div>
 
@@ -55,9 +59,7 @@
     function postForm(){
         var target = $("#currentForm");
         var url = target.attr("action");
-        console.log(url);
         var data = target.serialize();
-        console.log(data);
 //        $.post(url,data,function(json){
 //            if(json.status==1){
 //                window.location.reload();
