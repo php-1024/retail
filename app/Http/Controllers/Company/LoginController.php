@@ -48,7 +48,8 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        if ($username == '10000'){
+        $account_info = Account::getOneForLogin($username);//根据账号查询
+        if ($account_info->id == 1){
             $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
         }else{
             $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
@@ -103,7 +104,7 @@ class LoginController extends Controller{
                                     foreach ($account_info->account_roles as $key => $val) {
                                         $account_info->role = $val;
                                     }
-                                    dd($account_info);
+//                                    dd($account_info);
                                     $admin_data['role_name'] = $account_info->role->role_name;
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
