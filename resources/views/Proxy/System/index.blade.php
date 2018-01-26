@@ -317,6 +317,7 @@
                     </section>
                 </div>
             </div>
+            @include('Proxy/Public/Footer')
         </section>
     </section>
     <!--main content end-->
