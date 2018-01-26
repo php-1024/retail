@@ -1,3 +1,9 @@
+<div class="sidebar-toggle-box">
+    <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+</div>
+<!--logo start-->
+<a href="#" class="logo">ZER<span>O</span>NE</a>
+
 <div class="top-nav ">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
