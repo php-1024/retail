@@ -152,7 +152,6 @@
                                 </form>
                             </div>
                         </section>
-                        @include('Zerone/Public/Footer')
                     </section>
                 </section>
             </section>
