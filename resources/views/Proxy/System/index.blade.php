@@ -14,15 +14,7 @@
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
-    <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
-    <!-- Custom styles for this template -->
-    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+
 
 </head>
 
