@@ -19,7 +19,7 @@ class SystemController extends Controller{
 
     //退出登录
     public function quit(Request $request){
-        Session::put('tooling_account_id','');
+        Session::put('proxy_account_id','');
         return redirect('proxy/login');
     }
 }
