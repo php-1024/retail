@@ -40,6 +40,11 @@ class ZeroneRedis
         Redis::set($son_menu_key,$son_menu);
     }
 
+    //内部方法，生成对应程序及账号的菜单
+    /*
+     * id - 用户的ID
+     */
+    
     public static function create_proxy_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','2']],0,'id','asc');//获取零壹管理系统的一级菜单
         $son_menu = [];
