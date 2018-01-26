@@ -141,7 +141,7 @@ return [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
-            'database' => 1,
+            'database' => 5,
         ],
         //定义一个公司测试集群redis服务片区，测试使用
         'clusters' => [
