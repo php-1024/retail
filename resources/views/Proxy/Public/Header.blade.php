@@ -10,12 +10,12 @@
         <li class="dropdown">
             <a class="dropdown-toggle" href="#">
                 <i class="icon-user"></i>
-                <span class="username">admin-超级管理员</span>
+                <span class="username"> {{ $admin_data['role_name'] }}-{{ $admin_data['account'] }}</span>
             </a>
 
         </li>
         <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="{{ url('zerone/quit') }}">
 
                 <span class="username">退出登陆</span>
                 <i class="icon-arrow-right"></i>
