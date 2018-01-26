@@ -28,7 +28,7 @@ class AccountcenterController extends Controller{
 
     //退出登录
     public function quit(Request $request){
-        Session::put('zerone_account_id','');
+        Session::put('zerone_company_account_id','');
         return redirect('company/login');
     }
 }
