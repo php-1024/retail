@@ -19,7 +19,7 @@
 </head>
 <body class="">
 <section class="vbox">
-
+    @include('Company/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
