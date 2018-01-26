@@ -4,10 +4,22 @@ return [
 
     'encrypt_key'=>'1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',//加密盐
     'tooling_encrypt_key'=>'1asdfnonlkj324jtsdfmio2o3immro43imio34om5om4om5',//程序管理系统加密盐
+
+    /*******************零壹平台**************************/
     'zerone_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdejwio',//零壹管理平台登录密码加密盐
     'zerone_safe_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdfd21a1',//零壹管理平台安全密码加密盐
+    /*******************零壹平台**************************/
+
+    /*******************商户***************************/
     'company_encrypt_key'=>'asdfghjklqwerasxczdfgrtijnjhbjhgysjughaysasaisdsyssd',//零壹管理平台登录密码加密盐
     'company_safe_encrypt_key'=>'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
+    /*******************商户***************************/
+
+    /*******************服务商**************************/
+    'proxy_encrypt_key'=>'sdfdsf121s2dfdsfds121s2df45dsf12dsf45dsf12sd45sdf12ds',//零壹管理平台登录密码加密盐
+    'proxy_safe_encrypt_key'=>'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
+    /*******************服务商**************************/
+
     'allowed_error_times'=>5,//允许登录错误次数
     /*
     |--------------------------------------------------------------------------

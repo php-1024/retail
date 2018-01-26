@@ -5,6 +5,7 @@
  **/
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;
@@ -44,14 +45,13 @@ class LoginController extends Controller{
     //检测登录
     public function login_check(){
         $ip = Request::getClientIp();//获取访问者IP
-        echo $ip;exit;
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $key = config("app.proxy_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
@@ -84,7 +84,7 @@ class LoginController extends Controller{
                         'login_time'=>time()//登录时间
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        if($account_info->organization->program_id <> '1'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
+                        if($account_info->organization->program_id <> '1' ||$account_info->organization->program_id <> '2'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID 2是服务商管理系统
                             ErrorLog::addErrorTimes($ip,1);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
@@ -106,7 +106,6 @@ class LoginController extends Controller{
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-
                                 \ZeroneRedis::create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 \ZeroneRedis::create_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
