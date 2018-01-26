@@ -17,9 +17,9 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        if($admin_data['super_id'] == 1){
+        if(!empty($admin_data['super_id']) && $admin_data['super_id'] == 1){
             return  view('Company/Accountcenter/company_organization');
-        }elseif(empty($admin_data['super_id'])){
+        }else{
             return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
