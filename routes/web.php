@@ -317,7 +317,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Proxy\LoginController@display')->middleware('ProxyCheck');//登录页面路由
+        Route::get('/', 'Proxy\LoginController@display');//登录页面路由
         Route::get('captcha/{tmp}', 'Proxy\LoginController@captcha');//验证码路由
     });
 
