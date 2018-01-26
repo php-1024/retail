@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.html">
+
     <title>零壹新科技服务商管理平台</title>
 
     <!-- Bootstrap core CSS -->
@@ -26,7 +31,14 @@
 <body>
 
 <section id="container" class="">
+    <!--header start-->
     <header class="header white-bg">
+        <div class="sidebar-toggle-box">
+            <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+        </div>
+        <!--logo start-->
+        <a href="#" class="logo">ZER<span>O</span>NE</a>
+
         <div class="top-nav ">
             <!--search & user info start-->
             <ul class="nav pull-right top-menu">
@@ -50,6 +62,8 @@
             <!--search & user info end-->
         </div>
     </header>
+    <!--header end-->
+    <!--sidebar start-->
     <aside>
         <div id="sidebar"  class="nav-collapse ">
             <!-- sidebar menu start-->
@@ -139,7 +153,6 @@
             <!-- sidebar menu end-->
         </div>
     </aside>
-    
     <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
