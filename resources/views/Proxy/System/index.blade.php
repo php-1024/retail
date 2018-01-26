@@ -1,84 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>登陆页面 | 零壹新科技服务商管理平台</title>
+    <title>零壹新科技程序管理平台</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+
+    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+
 </head>
 
-<body class="login-body">
+<body class="">
 
-<div class="container">
+<div id="wrapper">
 
-    <form class="form-signin" id="currentForm" action="{{ url('proxy/ajax/login_check') }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <h2 class="form-signin-heading">零壹新科技服务商管理平台</h2>
-        <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
-            <input type="password" class="form-control" placeholder="登陆密码" name="password">
-            <input type="text" name="captcha" class="form-control" placeholder="验证码" >
-            <input type="hidden" id="captcha_url" value="{{ URL('proxy/login/captcha') }}">
-            <img src="{{ URL('proxy/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
+    @include('Zerone/Public/Nav')
 
-            <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登陆</button>
+    <div id="page-wrapper" class="gray-bg">
+        @include('Zerone/Public/Header')
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>管理首页</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="JavaScript:;">系统管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>管理首页</strong>
+                    </li>
+                </ol>
+            </div>
+
         </div>
 
-    </form>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-info pull-right">零壹管理系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{$zerone['system_personnel']}}人</h1>
+                            <div class="stat-percent font-bold text-info">20人 <i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-primary pull-right">服务商系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{$zerone['service_providers']}}人</h1>
+                            <div class="stat-percent font-bold text-navy">88人 <i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-danger pull-right">商户系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{$zerone['merchant_system']}}人</h1>
+                            <div class="stat-percent font-bold text-danger">18人 <i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-success pull-right">所有业务系统</span>
+                            <h5>管理人员</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{$zerone['all_system_personnel']}}人</h1>
+                            <div class="stat-percent font-bold text-success">1680人<i class="fa fa-level-up"></i></div>
+                            <small>今日</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="ibox-content forum-container">
 
+                        <div class="forum-title">
+
+                            <h3>服务商统计</h3>
+                        </div>
+
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <a href="javascript:;" class="forum-item-title">服务商数量</a>
+                                    <div class="forum-sub-title">进驻零壹平台的服务商的数量</div>
+                                </div>
+
+
+                                <div class="col-md-3 forum-info">
+                                            <span class="views-number">
+                                                {{$zerone['service_provider']}}家
+                                            </span>
+                                    <div>
+                                        <small>总计</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <a href="javascript:;" class="forum-item-title">商户数量</a>
+                                    <div class="forum-sub-title">注册零壹平台的商户的数量</div>
+                                </div>
+
+                                <div class="col-md-3 forum-info">
+                                            <span class="views-number">
+                                                {{$zerone['merchant']}}家
+                                            </span>
+                                    <div>
+                                        <small>总计</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-line-chart"></i>
+                                    </div>
+                                    <a href="javascript:;" class="forum-item-title">店铺数量</a>
+                                    <div class="forum-sub-title">商户在零壹平台开设的店铺数量</div>
+                                </div>
+                                <div class="col-md-3 forum-info">
+                                            <span class="views-number">
+                                                {{$zerone['shop']}}
+                                            </span>
+                                    <div>
+                                        <small>总计</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row wrapper wrapper-content animated fadeInRight">
+                <div class="col-lg-7">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户登录日志</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                <tr>
+                                    <th>用户</th>
+                                    <th>登录IP</th>
+                                    <th>登录地址</th>
+                                    <th>登录时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($login_log_list as $key=>$val)
+                                    <tr>
+                                        <td>{{  $val->accounts->account }}</td>
+                                        <td>{{  long2ip($val->ip) }}</td>
+                                        <td>{{  $val->ip_position }}</td>
+                                        <td>{{  $val->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户操作日志</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                <tr>
+                                    <th>用户</th>
+                                    <th>操作</th>
+                                    <th>时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($operation_log_list as $key=>$val)
+                                    <tr>
+                                        <td>{{ $val->accounts->account }}</td>
+                                        <td>{{ $val->operation_info }}</td>
+                                        <td>{{ $val->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @include('Zerone/Public/Footer')
+    </div>
 </div>
 
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script>
-    $(function(){
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-    //更换验证码
-    function changeCaptcha(){
-        var url = $("#captcha_url").val();
-        url = url + "/" + Math.random();
-        $("#login_captcha").attr("src",url);
-    }
+<!-- Mainly scripts -->
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
-    //提交表单
-    function postForm(){
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url,data,function(json){
-            if(json.status==1){
-                window.location.reload();
-            }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor:"#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
-                changeCaptcha();
-            }
-        });
-    }
-</script>
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
 
 </body>
+
 </html>
