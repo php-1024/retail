@@ -10,7 +10,7 @@
     <title>选择服务商 | 零壹服务商管理平台</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap-reset.css" type="text/css" />
     <!--external css-->
     <link rel="stylesheet" href="{{asset('public/Company/library/font-awesome')}}/css/font-awesome.css" type="text/css" />
