@@ -9,8 +9,11 @@
     <title>零壹新科技程序管理平台</title>
 
 
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
+    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
