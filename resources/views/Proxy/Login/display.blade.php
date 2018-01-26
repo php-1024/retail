@@ -53,12 +53,11 @@
 
     //提交表单
     function postForm(){
-        alert(1);
-//        var target = $("#currentForm");
-//        var url = target.attr("action");
-//        console.log(url);
-//        var data = target.serialize();
-//        console.log(data);
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        console.log(url);
+        var data = target.serialize();
+        console.log(data);
 //        $.post(url,data,function(json){
 //            if(json.status==1){
 //                window.location.reload();
