@@ -88,7 +88,8 @@ class LoginController extends Controller{
                         'account_status'=>$account_info->status,//用户状态
                         'ip'=>$ip,//登录IP
                         'login_position'=>$addr,//登录地址
-                        'login_time'=>time()//登录时间
+                        'login_time'=>time(),//登录时间
+                        'super_id' => '0' //超级管理员判断字段
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '2'){//如果账号不属于服务商管理系统，则报错，不能登录
