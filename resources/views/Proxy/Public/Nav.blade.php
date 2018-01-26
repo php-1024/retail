@@ -1,33 +1,97 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
-        <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">
-                <div class="dropdown profile-element">
-                    	<span>
-                            <img alt="image"  src="{{asset('public/Zerone')}}/images/zerone_logo.png" />
-                         </span>
+{{--<nav class="navbar-default navbar-static-side" role="navigation">--}}
+    {{--<div class="sidebar-collapse">--}}
+        {{--<ul class="nav metismenu" id="side-menu">--}}
+            {{--<li class="nav-header">--}}
+                {{--<div class="dropdown profile-element">--}}
+                    	{{--<span>--}}
+                            {{--<img alt="image"  src="{{asset('public/Zerone')}}/images/zerone_logo.png" />--}}
+                         {{--</span>--}}
 
-                </div>
-                <div class="logo-element">
-                    01
-                </div>
+                {{--</div>--}}
+                {{--<div class="logo-element">--}}
+                    {{--01--}}
+                {{--</div>--}}
+            {{--</li>--}}
+            {{--@foreach($menu_data as $key=>$val)--}}
+            {{--<li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>--}}
+                {{--<a href="index.html"><i class="{{ $val->icon_class }}"></i> <span class="nav-label">{{ $val->menu_name }}</span> <span class="fa arrow"></span></a>--}}
+                {{--<ul class="nav nav-second-level collapse">--}}
+                    {{--@foreach($son_menu_data[$val->id] as $k=>$v)--}}
+                    {{--<li @if($route_name == $v->menu_route)class="active"@endif><a href="{{ url($v->menu_route) }}">{{ $v->menu_name }}</a></li>--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
+            {{--</li>--}}
+            {{--@endforeach--}}
+            {{--<li>--}}
+                {{--<a href="{{ url('proxy/quit') }}"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>--}}
+            {{--</li>--}}
+
+
+        {{--</ul>--}}
+
+    {{--</div>--}}
+{{--</nav>--}}
+
+
+<!--header start-->
+<header class="header white-bg">
+    <div class="sidebar-toggle-box">
+        <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+    </div>
+    <!--logo start-->
+    <a href="#" class="logo">ZER<span>O</span>NE</a>
+
+    <div class="top-nav ">
+        <!--search & user info start-->
+        <ul class="nav pull-right top-menu">
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-user"></i>
+                    <span class="username">admin-超级管理员</span>
+                </a>
+
             </li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                    <span class="username">退出登陆</span>
+                    <i class="icon-arrow-right"></i>
+                </a>
+
+            </li>
+            <!-- user login dropdown end -->
+        </ul>
+        <!--search & user info end-->
+    </div>
+</header>
+<!--header end-->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar"  class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
             @foreach($menu_data as $key=>$val)
-            <li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>
-                <a href="index.html"><i class="{{ $val->icon_class }}"></i> <span class="nav-label">{{ $val->menu_name }}</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
+            <li class="active sub-menu">
+                <a href="javascript:;">
+                    <i class="{{ $val->icon_class }}"></i>
+                    <span>{{ $val->menu_name }}</span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub">
                     @foreach($son_menu_data[$val->id] as $k=>$v)
-                    <li @if($route_name == $v->menu_route)class="active"@endif><a href="{{ url($v->menu_route) }}">{{ $v->menu_name }}</a></li>
+                    <li @if($route_name == $v->menu_route) class="active" @endif><a href="{{ url($v->menu_route) }}">{{ $v->menu_name }}</a></li>
                     @endforeach
                 </ul>
             </li>
             @endforeach
             <li>
-                <a href="{{ url('proxy/quit') }}"><i class="fa fa-sign-out"></i> <span class="nav-label">退出登录</span></a>
+                <a href="login.html">
+                    <i class="icon-power-off"></i>
+                    <span>退出登陆</span>
+                </a>
             </li>
-
-
         </ul>
-
+        <!-- sidebar menu end-->
     </div>
-</nav>
+        {{--<li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>--}}
+</aside>
