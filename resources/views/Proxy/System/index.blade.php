@@ -317,12 +317,14 @@
                     </section>
                 </div>
             </div>
+
         </section>
+        @include('Proxy/Public/Footer')
+
     </section>
     <!--main content end-->
 
 </section>
-@include('Proxy/Public/Footer')
 
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
