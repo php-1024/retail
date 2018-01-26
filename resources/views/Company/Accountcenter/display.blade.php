@@ -158,7 +158,6 @@
         </section>
     </section>
 </section>
-@include('Zerone/Public/Footer')
 <script src="{{asset('public/Company')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Company/')}}/js/bootstrap.js"></script>
