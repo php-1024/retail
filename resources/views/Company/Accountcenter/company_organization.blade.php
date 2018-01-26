@@ -15,7 +15,7 @@
     <!--external css-->
     <link rel="stylesheet" href="{{asset('public/Company/library/font-awesome')}}/css/font-awesome.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/Company')}}css/owl.carousel.css" type="text/css">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/style.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/style-responsive.css" type="text/css" />
