@@ -30,7 +30,7 @@ class ZeroneRedis
      */
     public static function create_proxy_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
-        Redis::connection('zeo');//连接到我的redis服务器-商户平台使用
+        Redis::connection('proxy');//连接到我的redis服务器-商户平台使用
         $data_key = 'proxy_system_admin_data_'.$key_id;
         Redis::set($data_key,$admin_data);
     }
@@ -77,7 +77,7 @@ class ZeroneRedis
         }
         $menu = serialize($menu);
         $son_menu = serialize($son_menu);
-        Redis::connection('zeo');//连接到我的redis服务器
+        Redis::connection('proxy');//连接到我的redis服务器
         $menu_key = 'proxy_system_menu_'.$id;  //一级菜单的Redis主键。
         $son_menu_key = 'proxy_system_son_menu_'.$id;//子菜单的Redis主键
         Redis::set($menu_key,$menu);
