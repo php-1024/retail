@@ -19,7 +19,7 @@ class AccountcenterController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         if($admin_data['super_id'] == 1){
             return  view('Company/Accountcenter/company_organization');
-        }else{
+        }elseif(empty($admin_data['super_id'])){
             return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
