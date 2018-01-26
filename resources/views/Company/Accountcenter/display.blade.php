@@ -73,106 +73,7 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            <aside class="bg-black dk aside hidden-print" id="nav">
-                <section class="vbox">
-                    <section class="w-f-md scrollable">
-                        <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
-
-
-
-                            <!-- nav -->
-                            <nav class="nav-primary hidden-xs">
-                                <ul class="nav" data-ride="collapse">
-                                    <li  class="active">
-                                        <a href="jacascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="icon-screen-desktop icon text-success text-success">
-                                            </i>
-                                            <span>账户中心</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li class="active">
-                                                <a href="index.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>公司资料</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="profile.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>账号信息</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="password.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>登陆密码修改</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="safe_password.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>安全密码设置</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="operation_log.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>操作日志</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="login_log.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>登陆日志</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="fa-sitemap fa text-success">
-                                            </i>
-                                            <span>店铺管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="store_add.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>创建店铺</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="store_list.html" class="auto">
-                                                    <i class="fa fa-angle-right text-info"></i>
-                                                    <span>管理店铺</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="login.html" class="auto">
-                                            <i class="icon-logout icon text-danger"></i>
-                                            <span>退出系统</span>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </nav>
-                            <!-- / nav -->
-                        </div>
-                    </section>
-
-
-                </section>
-            </aside>
+            @include('Zerone/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -257,6 +158,7 @@
         </section>
     </section>
 </section>
+@include('Zerone/Public/Footer')
 <script src="{{asset('public/Company')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Company/')}}/js/bootstrap.js"></script>
