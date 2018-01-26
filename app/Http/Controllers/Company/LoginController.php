@@ -100,11 +100,10 @@ class LoginController extends Controller{
                                 }else{
                                     $admin_data['realname'] = '未设置';
                                 }
-                                if(!empty($account_info->account_roles)) {
+                                if(!empty($account_info->account_roles) && $account_info->account_roles->count() != 0) {
                                     foreach ($account_info->account_roles as $key => $val) {
                                         $account_info->role = $val;
                                     }
-                                    dd($account_info->account_roles->count());
                                     $admin_data['role_name'] = $account_info->role->role_name;
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
