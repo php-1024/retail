@@ -94,7 +94,7 @@ class LoginController extends Controller{
                             //插入登录记录
                             if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization->id,$ip,$addr)) {//写入登录日志
                                 Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
-                                echo 1;exit;
+
                                 //构造用户缓存数据
                                 if(!empty( $account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
@@ -109,6 +109,7 @@ class LoginController extends Controller{
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
                                 }
+                                echo 1;exit;
                                 \ZeroneRedis::create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 \ZeroneRedis::create_proxy_menu_cache($account_info->id);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
