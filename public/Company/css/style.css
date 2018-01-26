@@ -1568,7 +1568,7 @@ ul.ft-link li a i {
 
 .owl-buttons .owl-prev {
     text-indent: -9999px;
-    background: url("../img/left-arrow.png") no-repeat;
+    /*background: url("../img/left-arrow.png") no-repeat;*/
     width: 6px;
     height: 10px;
     display: inline-block;
@@ -1576,7 +1576,7 @@ ul.ft-link li a i {
 
 .owl-buttons .owl-next {
     text-indent: -9999px;
-    background: url("../img/right-arrow.png") no-repeat;
+    /*background: url("../img/right-arrow.png") no-repeat;*/
     width: 6px;
     height: 10px;
     display: inline-block;
@@ -2240,7 +2240,7 @@ ul.inbox-pagination li {
 }
 
 .error-wrapper .icon-404{
-    background: url("../img/404_icon.png") no-repeat;
+    /*background: url("../img/404_icon.png") no-repeat;*/
     width: 289px;
     height: 274px;
     display: inline-block;
@@ -2286,7 +2286,7 @@ ul.inbox-pagination li {
 }
 
 .error-wrapper .icon-500{
-    background: url("../img/500_icon.png") no-repeat;
+    /*background: url("../img/500_icon.png") no-repeat;*/
     width: 289px;
     height: 274px;
     display: inline-block;
@@ -3212,8 +3212,8 @@ table.sliders tr td {
     position: relative;
     text-align: left;
     width: 80px;
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    /*-webkit-mask: url('../img/mask.png') 0 0 no-repeat;*/
+    /*mask: url('../img/mask.png') 0 0 no-repeat;*/
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -3319,8 +3319,8 @@ table.sliders tr td {
 .switch-square {
     border-radius: 6px;
     -webkit-border-radius: 6px;
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    /*-webkit-mask: url('../img/mask.png') 0 0 no-repeat;*/
+    /*mask: url('../img/mask.png') 0 0 no-repeat;*/
 }
 .switch-square > div.switch-off label {
     border-color: #7f8c9a;
@@ -3482,19 +3482,19 @@ table.sliders tr td {
 }
 
 .has-js .label_radio {
-    background: url(../img/checkbox/radio-off.png) no-repeat;
+    /*background: url(../img/checkbox/radio-off.png) no-repeat;*/
 }
 
 .has-js .label_check {
-    background: url(../img/checkbox/check-off.png) no-repeat;
+    /*background: url(../img/checkbox/check-off.png) no-repeat;*/
 }
 
 .has-js label.c_on {
-    background: url(../img/checkbox/check-on.png) no-repeat;
+    /*background: url(../img/checkbox/check-on.png) no-repeat;*/
 }
 
 .has-js label.r_on {
-    background: url(../img/checkbox/radio-on.png) no-repeat;
+    /*background: url(../img/checkbox/radio-on.png) no-repeat;*/
 }
 
 .has-js .label_check input,
@@ -3560,9 +3560,9 @@ table.sliders tr td {
 
 .cke_top, .cke_bottom {
     background: #F5F5F5 !important;
-    background: -moz-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;
-    background: -webkit-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;
-    background: -o-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;
+    /*background: -moz-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;*/
+    /*background: -webkit-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;*/
+    /*background: -o-linear-gradient(center top , #F5F5F5, #F5F5F5) repeat scroll 0 0 #F5F5F5 !important;*/
     box-shadow: none;
     padding: 6px 8px 2px;
 }
