@@ -21,7 +21,7 @@ class ZeroneRedis
      */
     public static function create_company_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
-        Redis::connection('company');//连接到我的redis服务器
+        Redis::connection('zeo');//连接到我的redis服务器
         $data_key = 'zerone_company_admin_data_'.$key_id;
         Redis::set($data_key,$admin_data);
     }
