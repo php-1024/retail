@@ -603,12 +603,12 @@ class CompanyCheckAjax
     //检测是否登录
     public function checkIsLogin($request)
     {
-        $sess_key = Session::get('zerone_account_id');
+        $sess_key = Session::get('zerone_company_account_id');
         //如果为空返回登录失效
         if (empty($sess_key)) {
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         } else {
-            $sess_key = Session::get('zerone_account_id');//获取管理员ID
+            $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员信息

@@ -14,7 +14,7 @@ class CompanyCheck{
             /*****登录页,如果已经登录则不需要再次登录*****/
             case "company/login"://登录页,如果已经登录则不需要再次登录
                 //获取用户登录存储的SessionId
-                $sess_key = Session::get('zerone_account_id');
+                $sess_key = Session::get('zerone_company_account_id');
                 //如果不为空跳转到首页
                 if(!empty($sess_key)) {
                     return redirect('company');
@@ -63,12 +63,12 @@ class CompanyCheck{
     //普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('zerone_account_id');
+        $sess_key = Session::get('zerone_company_account_id');
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
             return self::res(0,redirect('company/login'));
         }else{
-            $sess_key = Session::get('zerone_account_id');//获取管理员ID
+            $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
