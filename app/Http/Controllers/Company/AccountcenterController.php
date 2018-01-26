@@ -14,13 +14,13 @@ class AccountcenterController extends Controller{
     public function display(Request $request)
     {
         dump($request);
-        return view('Accountcenter/display');
+        return view('Company/Accountcenter/display');
     }
 
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_account_id','');
-        return redirect('zerone/login');
+        return redirect('company/login');
     }
 }
 ?>
