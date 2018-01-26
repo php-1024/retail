@@ -20,6 +20,7 @@ class LoginController extends Controller{
      */
     public function display()
     {
+        Session::put('tooling_account_id','');
 
         return view('Proxy/Login/display');
     }
@@ -44,7 +45,7 @@ class LoginController extends Controller{
 
     //检测登录
     public function login_check(){
-        Session::put('tooling_account_id','');
+
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0].$addr_arr[1].$addr_arr[2].$addr_arr[3];//获取访问者地址
@@ -85,7 +86,6 @@ class LoginController extends Controller{
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time()//登录时间
                     ];
-                    dd($admin_data);
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '2'){//如果账号不属于服务商管理系统，则报错，不能登录
                             ErrorLog::addErrorTimes($ip,1);
