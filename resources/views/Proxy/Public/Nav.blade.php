@@ -55,7 +55,7 @@
             </li>
             @endforeach
             <li>
-                <a href="login.html">
+                <a href="{{url('proxy/quit')}}">
                     <i class="icon-power-off"></i>
                     <span>退出登陆</span>
                 </a>
