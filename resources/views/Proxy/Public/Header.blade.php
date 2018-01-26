@@ -1,22 +1,30 @@
-<div class="row border-bottom">
-    <div class="navbar-header">
-        <a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="javascript:;"><i class="fa fa-bars"></i> </a>
+<!--header start-->
+
+    <div class="sidebar-toggle-box">
+        <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
     </div>
-    <ul class="nav navbar-top-links navbar-right">
-        <li>
-            <span class="m-r-sm text-muted welcome-message">
-                欢迎登录！
-                <strong>
+    <!--logo start-->
+    <a href="#" class="logo">ZER<span>O</span>NE</a>
 
-                        {{ $admin_data['role_name'] }}-{{ $admin_data['account'] }}
+    <div class="top-nav ">
+        <!--search & user info start-->
+        <ul class="nav pull-right top-menu">
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-user"></i>
+                    <span class="username">admin-超级管理员</span>
+                </a>
 
-                </strong>
-            </span>
-        </li>
-        <li>
-            <a href="{{ url('zerone/quit') }}">
-                <i class="fa fa-sign-out"></i>退出系统
-            </a>
-        </li>
-    </ul>
-</div>
+            </li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                    <span class="username">退出登陆</span>
+                    <i class="icon-arrow-right"></i>
+                </a>
+
+            </li>
+            <!-- user login dropdown end -->
+        </ul>
+        <!--search & user info end-->
+    </div>

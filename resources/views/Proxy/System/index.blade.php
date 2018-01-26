@@ -26,7 +26,9 @@
 <body>
 
 <section id="container" class="">
-    @include('Zerone/Public/Nav')
+    <header class="header white-bg">
+        @include('Zerone/Public/Header')
+    </header>
     <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
