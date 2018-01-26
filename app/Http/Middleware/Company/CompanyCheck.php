@@ -15,14 +15,15 @@ class CompanyCheck{
             case "company/login"://登录页,如果已经登录则不需要再次登录
                 //获取用户登录存储的SessionId
                 $sess_key = Session::get('zerone_company_account_id');
-                //如果不为空跳转到首页
+                //如果不为空跳转到选择商户组织页面
                 if(!empty($sess_key)) {
-                    return redirect('company');
+                    return redirect('company/company_organization');
                 }
                 break;
 
             /****仅检测是否登录及是否具有权限****/
-            case "company"://后台首页
+            case "company":                             //后台首页
+            case "company/company_organization":        //商户组织选择页面
             case "zerone/personal":                     //个人中心——个人资料
             case "zerone/store/store_config":           //分店设置参数
 
