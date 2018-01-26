@@ -38,7 +38,7 @@ class ProxyCheck{
             case "zerone/personal/safe_password":   //个人中心——安全密码设置
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
             case "zerone/personal/login_log":           //个人中心——我的登录日志
-            case "zerone/proxy"://后台首页
+            case "proxy"://服务商后台首页
 
             case "zerone/proxy/proxy_add":              //添加服务商
             case "zerone/proxy/proxy_examinelist":      //服务商审核列表
