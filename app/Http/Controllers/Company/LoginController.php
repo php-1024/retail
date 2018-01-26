@@ -83,7 +83,7 @@ class LoginController extends Controller{
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time()//登录时间
                     ];
-                    dd($account_info);
+//                    dd($account_info);
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '1' || $account_info->organization->program_id <> '3'){//如果账号不属于零壹平台系统或者商户平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID 3、是商户管理系统
                             ErrorLog::addErrorTimes($ip,1);
@@ -119,7 +119,7 @@ class LoginController extends Controller{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                         //插入登录记录
                         if(LoginLog::addLoginLog($account_info['id'],1,0,$ip,$addr)) {//admin,唯一超级管理员，不属于任何组织
-                            Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                            Session::put('zerone_company_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
                             $admin_data['role_name'] = '系统管理员';
                             //构造用户缓存数据
