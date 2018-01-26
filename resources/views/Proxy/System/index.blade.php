@@ -352,7 +352,7 @@
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 <!--common script for all pages-->
-<script src="js/common-scripts.js"></script>
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 
 
 <script>
