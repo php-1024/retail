@@ -317,8 +317,8 @@
                     </section>
                 </div>
             </div>
-            @include('Proxy/Public/Footer')
         </section>
+        @include('Proxy/Public/Footer')
     </section>
     <!--main content end-->
 </section>
