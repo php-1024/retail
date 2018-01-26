@@ -37,7 +37,6 @@
 
 </div>
 
-<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script>
     $(function(){
