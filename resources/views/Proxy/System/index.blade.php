@@ -12,8 +12,8 @@
     <link href="{{asset('public/Proxy/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
 
 
 </head>
