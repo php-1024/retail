@@ -48,7 +48,7 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        if ($username == '10001'){
+        if ($username == '10000'){
             $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
         }else{
             $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
@@ -83,7 +83,7 @@ class LoginController extends Controller{
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time()//登录时间
                     ];
-                    dd($account_info);
+//                    dd($account_info);
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '1' || $account_info->organization->program_id <> '3'){//如果账号不属于零壹平台系统或者商户平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID 3、是商户管理系统
                             ErrorLog::addErrorTimes($ip,1);
