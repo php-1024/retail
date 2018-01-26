@@ -14,7 +14,7 @@ class AccountcenterController extends Controller{
     public function display(Request $request)
     {
         dump($request);
-        dd('登陆成功123456！');
+        return view('Accountcenter/display');
     }
 
     //退出登录
