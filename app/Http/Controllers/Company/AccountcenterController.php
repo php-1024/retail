@@ -21,7 +21,7 @@ class AccountcenterController extends Controller{
         $organization = Organization::getlist(['type'=>'3']);
         dump($organization);
         if(!empty($admin_data['super_id']) && $admin_data['super_id'] == 1){
-            return  view('Company/Accountcenter/company_organization');
+            return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }else{
             return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
