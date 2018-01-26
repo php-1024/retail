@@ -48,7 +48,7 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        if ($username == '10000'){
+        if ($username == '10001'){
             $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
         }else{
             $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
@@ -119,7 +119,7 @@ class LoginController extends Controller{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                         //插入登录记录
                         if(LoginLog::addLoginLog($account_info['id'],1,0,$ip,$addr)) {//admin,唯一超级管理员，不属于任何组织
-                            Session::put('zerone_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                            Session::put('zerone_company_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
                             $admin_data['role_name'] = '系统管理员';
                             //构造用户缓存数据
