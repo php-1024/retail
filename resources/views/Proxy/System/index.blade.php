@@ -318,9 +318,10 @@
                 </div>
             </div>
         </section>
-        @include('Proxy/Public/Footer')
     </section>
     <!--main content end-->
+    @include('Proxy/Public/Footer')
+
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
