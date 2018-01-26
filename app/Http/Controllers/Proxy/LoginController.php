@@ -51,7 +51,7 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        $key = config("app.proxy_encrypt_key");//获取加密盐
+        $key = config("app.zerone_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
