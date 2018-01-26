@@ -26,7 +26,7 @@ class ZeroneRedis
         Redis::set($data_key,$admin_data);
     }
     /*
-     * 商户平台
+     * 服务商平台
      */
     public static function create_proxy_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
