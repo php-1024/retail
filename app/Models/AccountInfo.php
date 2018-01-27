@@ -53,5 +53,9 @@ class AccountInfo extends Model
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
+    //获取单条数据
+    public static function getOne($where){
+        return self::where($where)->get();
+    }
 }
 ?>
