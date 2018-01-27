@@ -64,7 +64,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人手机号码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="13123456789">
+                                            <input type="text" class="form-control" id="input-id-1" value="{{$admin_data['mobile']}}">
                                         </div>
                                     </div>
 
@@ -72,14 +72,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="韦江">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{ $account_info->idcard }}">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人身份证号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="111122223333444455">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{ $account_info->idcard }}">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>

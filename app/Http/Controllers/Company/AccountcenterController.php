@@ -32,7 +32,7 @@ class AccountcenterController extends Controller{
             $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
             dump($accountInfo);
             dump($admin_data['organization_id']);
-            return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Company/Accountcenter/display',['account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
 
