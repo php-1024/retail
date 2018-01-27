@@ -32,7 +32,7 @@ class SystemController extends Controller{
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
             $data = ['organization_id'=>$admin_data['organization_id']];
-            $aa=Account::where($data)->table('test')->count();
+            $aa=Account::where($data)->count();
             dump($aa);
             return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
