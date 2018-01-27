@@ -61,7 +61,7 @@
         @foreach($organization as $key=>$val)
     <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="_token" value="{{ $val->organizationCompanyinfo }}">
+        <input type="hidden" name="companyinfo" value="{{ $val->organizationCompanyinfo }}">
         <div class="col-lg-3 col-sm-6">
             <a href="{{url('company')}}?organization_id={{ $val->id }}" onclick="return postForm();">
                 <section class="panel">
