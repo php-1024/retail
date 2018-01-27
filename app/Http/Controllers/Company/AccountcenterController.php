@@ -22,9 +22,10 @@ class AccountcenterController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $companyinfo = $request->companyinfo;
         if (!empty($companyinfo)){
-//            $arr = json_decode();
-            echo $companyinfo;
-//            dd($companyinfo);
+            $jsons = "[".$companyinfo."]";
+            $arr = json_decode($jsons);
+            echo $arr['id'];
+            dd($companyinfo);
         }
         if (!empty($request->organization_id)){
             $admin_data['organization_id'] = $request->organization_id;
