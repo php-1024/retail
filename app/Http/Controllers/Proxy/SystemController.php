@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
