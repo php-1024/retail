@@ -62,7 +62,6 @@
     <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="companyinfo" value="{{ $val->organizationCompanyinfo }}">
-        <input type="hidden" name="organization_id" value="{{ $val->id }}">
         <div class="col-lg-3 col-sm-6">
             <a href="javascript:;" onclick="return postForm();">
                 <section class="panel">
