@@ -20,7 +20,9 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dd($request->companyinfo);
+        if (!empty($request->companyinfo)){
+            dd($request->companyinfo);
+        }
         if (!empty($request->organization_id)){
             $admin_data['organization_id'] = $request->organization_id;
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
