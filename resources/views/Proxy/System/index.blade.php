@@ -180,8 +180,6 @@
             </div>
 
         </section>
-        @include('Proxy/Public/Footer')
-
     </section>
     <!--main content end-->
 
