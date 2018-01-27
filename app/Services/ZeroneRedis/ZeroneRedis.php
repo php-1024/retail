@@ -17,7 +17,17 @@ class ZeroneRedis
     }
 
     /*
-     * 商户平台
+     * 商户平台超级管理员专用
+     */
+    public static function create_super_company_account_cache($key_id,$admin_data){
+        $admin_data = serialize($admin_data);//序列化数组数据
+        Redis::connection('super_company');//连接到我的redis服务器-商户平台使用
+        $data_key = 'super_company_system_admin_data_'.$key_id;
+        Redis::set($data_key,$admin_data);
+    }
+
+    /*
+     * 商户平台普通用户使用
      */
     public static function create_company_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
@@ -25,6 +35,7 @@ class ZeroneRedis
         $data_key = 'company_system_admin_data_'.$key_id;
         Redis::set($data_key,$admin_data);
     }
+
     /*
      * 服务商平台
      */
