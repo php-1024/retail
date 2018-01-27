@@ -20,8 +20,10 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        if (!empty($request->companyinfo)){
-            dd($request->companyinfo);
+        $companyinfo = $request->companyinfo;
+        if (!empty($companyinfo)){
+            echo $companyinfo['company_owner'];
+            dd($companyinfo);
         }
         if (!empty($request->organization_id)){
             $admin_data['organization_id'] = $request->organization_id;
