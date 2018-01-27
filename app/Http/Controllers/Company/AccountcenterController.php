@@ -40,5 +40,16 @@ class AccountcenterController extends Controller{
         Session::put('zerone_company_account_id','');
         return redirect('company/login');
     }
+
+    //退出重新选择商户
+    public function company_switch(Request $request){
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $admin_data['organization_id'] = 0;
+        \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+        return redirect('company');
+
+    }
+
+
 }
 ?>
