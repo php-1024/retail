@@ -38,6 +38,7 @@ class SystemController extends Controller{
     public function select_proxy(Request $request){
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneForLogin([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        dd($account_info);
         if(!empty($list)){
             //登录成功要生成缓存的登录信息
             $admin_data = [
@@ -59,7 +60,6 @@ class SystemController extends Controller{
             }else{
                 $admin_data['realname'] = '未设置';
             }
-            echo 1;exit;
             if(!empty($account_info->account_roles)) {
                 foreach ($account_info->account_roles as $key => $val) {
                     $account_info->role = $val;
