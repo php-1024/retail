@@ -31,9 +31,6 @@ class AccountcenterController extends Controller{
                 'company_owner_idcard'  => $companyinfo_arr['company_owner_idcard'],    //商户身份证号码
                 'organization_id'       => $companyinfo_arr['organization_id'],         //组织ID
             ];
-        }
-        if (!empty($request->organization_id)){
-            $admin_data['organization_id'] = $request->organization_id;
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         }
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
