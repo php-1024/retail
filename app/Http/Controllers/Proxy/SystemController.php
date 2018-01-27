@@ -70,10 +70,10 @@ class SystemController extends Controller{
             }
             \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
             \ZeroneRedis::create_proxy_menu_cache(1);//生成对应账号的系统菜单
+            return response()->json(['data' => '操作成功', 'status' => '0']);
+        }else{
+            return response()->json(['data' => '操作失败', 'status' => '1']);
         }
-        $admin_data1 = $request->get('admin_data');//中间件产生的管理员数据参数
-        return redirect('proxy');
-
     }
     //退出登录
     public function quit(Request $request){
