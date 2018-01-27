@@ -53,6 +53,8 @@ class SystemController extends Controller{
                 'account_status'=>$account_info->status,//用户状态
                 'super_id' => '2' //超级管理员进入后切换身份用
             ];
+            dd($admin_data);
+
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
                 $admin_data['realname'] = $account_info->account_info->realname;
@@ -71,7 +73,6 @@ class SystemController extends Controller{
             \ZeroneRedis::create_proxy_menu_cache($account_info->id);//生成对应账号的系统菜单
         }
         $admin_data1 = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data1);
         return redirect('proxy');
 
     }
