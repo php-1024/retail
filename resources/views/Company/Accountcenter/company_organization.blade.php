@@ -59,8 +59,10 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         @foreach($organization as $key=>$val)
+    <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company') }}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="col-lg-3 col-sm-6">
-            <a href="{{url('company')}}?organization_id={{ $val->id }}">
+            <a href="{{url('company')}}?organization_id={{ $val->id }}" onclick="return postForm();">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
@@ -69,6 +71,7 @@
                 </section>
             </a>
         </div>
+    </form>
         @endforeach
 
     </div>
@@ -93,9 +96,6 @@
 <script src="{{asset('public/Company')}}/js/sparkline-chart.js"></script>
 <script src="{{asset('public/Company')}}/js/easy-pie-chart.js"></script>
 <script>
-
-    //owl carousel
-
     $(document).ready(function () {
         $("#owl-demo").owlCarousel({
             navigation: true,
@@ -105,13 +105,39 @@
 
         });
     });
-
-    //custom select box
-
     $(function () {
         $('select.styled').customSelect();
     });
 
+
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>

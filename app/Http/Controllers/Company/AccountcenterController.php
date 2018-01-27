@@ -24,8 +24,8 @@ class AccountcenterController extends Controller{
             $admin_data['organization_id'] = $request->organization_id;
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         }
-        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){//如果是超级管理员并且组织ID等于零则进入选择组织页面
-            $organization = Organization::getlist(['type'=>'3']); //如何是admin则获取所有组织信息
+        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
+            $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
             dump($organization);
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }

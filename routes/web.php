@@ -349,7 +349,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
 /**********************商户管理系统*********************/
 Route::group(['prefix'=>'company'],function(){
-    Route::get('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');//首页面路由
+    Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');//首页面路由
     Route::get('quit', 'Company\AccountcenterController@quit');//退出系统
     Route::get('company_switch', 'Company\AccountcenterController@company_switch')->middleware('CompanyCheck');//退出重新选择商户
     //登录页面组
