@@ -23,7 +23,7 @@ class AccountcenterController extends Controller{
         $companyinfo = $request->companyinfo;
         if (!empty($companyinfo)){
             $jsons = "[".$companyinfo."]";
-            $arr = $jsons->toArray();
+            $arr = json_decode($companyinfo);
             print_r($arr);
             dd($companyinfo);
         }
