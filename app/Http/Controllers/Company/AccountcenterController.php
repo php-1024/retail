@@ -5,6 +5,7 @@
  **/
 namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
+use App\Models\AccountInfo;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Session;
@@ -18,7 +19,7 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dump($request);
+        dump($admin_data);
         if(!empty($admin_data['super_id']) && $admin_data['super_id'] == 1){
             $organization = Organization::getlist(['type'=>'3']); //如何是admin则获取所有组织信息
             if (!empty($request->organization_id)){
@@ -27,7 +28,9 @@ class AccountcenterController extends Controller{
             }else{
                 return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
             }
-        }else{
+        }else{//不是超级管理员
+            $accountInfo = AccountInfo::getOne(['id'=>$admin_data['account']]);
+            dump($accountInfo);
             dump($admin_data['organization_id']);
             return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
