@@ -25,14 +25,16 @@ class AccountcenterController extends Controller{
             $companyinfo_arr = json_decode($companyinfo,true);
             //Admin登陆商户平台要生成的信息
             //以商户的身份登陆
-            $admin_data = [
-                'id'                    => $companyinfo_arr['id'],                      //admin当前浏览用户的ID
-                'mobile'                => $companyinfo_arr['company_owner_mobile'],    //商户绑定手机号
-                'company_owner_idcard'  => $companyinfo_arr['company_owner_idcard'],    //商户身份证号码
-                'organization_id'       => $companyinfo_arr['organization_id'],         //组织ID
-            ];
-        }
-        if (!empty($request->organization_id)){
+            $admin_data['mobile'] = $companyinfo_arr['company_owner_mobile'];
+            $admin_data['company_owner_idcard'] = $companyinfo_arr['company_owner_idcard'];
+            $admin_data['company_owner_idcard'] = $companyinfo_arr['company_owner_idcard'];
+            $admin_data['organization_id'] = $companyinfo_arr['organization_id'];
+//            $admin_data = [
+//                'id'                    => $companyinfo_arr['id'],                      //admin当前浏览用户的ID
+//                'mobile'                => $companyinfo_arr['company_owner_mobile'],    //商户绑定手机号
+//                'company_owner_idcard'  => $companyinfo_arr['company_owner_idcard'],    //商户身份证号码
+//                'organization_id'       => $companyinfo_arr['organization_id'],         //组织ID
+//            ];
             $admin_data['organization_id'] = $request->organization_id;
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         }
