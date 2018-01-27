@@ -39,7 +39,7 @@ class Organization extends Model{
 
     //获取-服务商列表
     public static function getlist($where){
-        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->get();
+        return self::with('warzoneProxy','organizationCompanyinfo')->where($where)->get();
     }
 
     //获取单条信息-商户
