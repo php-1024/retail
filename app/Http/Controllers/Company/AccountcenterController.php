@@ -29,13 +29,8 @@ class AccountcenterController extends Controller{
                 return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
             }
         }else{//不是超级管理员
-            $accountInfo = AccountInfo::getOne(['id' => 4]);
-            foreach ($accountInfo as $key=>$val){
-                $accountInfo[] = $val[$key];
-            }
-            $organization = Organization::getOne(['id'=>$admin_data['organization_id']]);
-            dump($accountInfo);
-            dump($admin_data['organization_id']);
+            $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
+            $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
             return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }

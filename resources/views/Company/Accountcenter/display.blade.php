@@ -56,7 +56,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">商户名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="韦小堡（深圳）有限公司">
+                                            <input type="text" class="form-control" id="input-id-1" value="{{$organization->organization_name}}">
                                         </div>
                                     </div>
 
@@ -72,14 +72,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{ $account_info[0]->realname }}">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{ $account_info->realname }}">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人身份证号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{ $account_info[0]->idcard }}">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{ $account_info->idcard }}">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
