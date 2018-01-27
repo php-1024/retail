@@ -21,11 +21,11 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        $companyinfo = $request->companyinfo;
+        $organization_id = $request->organization_id;
 
         //是否存在商户选择数据
-        if (!empty($companyinfo)){
-            $this->superadmin_login($companyinfo);
+        if (!empty($organization_id)){
+            $this->superadmin_login($organization_id);
         }
 
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
@@ -59,10 +59,8 @@ class AccountcenterController extends Controller{
 
 
     //超级管理员登陆商户平台处理
-    public function superadmin_login($companyinfo)
+    public function superadmin_login($organization_id)
     {
-        $companyinfo_arr = json_decode($companyinfo,true);
-        $organization_id = $companyinfo_arr['organization_id'];
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         //Admin登陆商户平台要生成的信息
         //重新生成缓存的登录信息
