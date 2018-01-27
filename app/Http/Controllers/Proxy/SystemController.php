@@ -36,8 +36,6 @@ class SystemController extends Controller{
     }
     //退出登录
     public function select_proxy(Request $request){
-        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_this);exit;
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         if(!empty($account_info)){
@@ -70,8 +68,8 @@ class SystemController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            \ZeroneRedis::create_proxy_account_cache($admin_this->id,$admin_data);//生成账号数据的Redis缓存
-            \ZeroneRedis::create_proxy_menu_cache($admin_this->id);//生成对应账号的系统菜单
+            \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+            \ZeroneRedis::create_proxy_menu_cache(1);//生成对应账号的系统菜单
         }
         $admin_data1 = $request->get('admin_data');//中间件产生的管理员数据参数
         return redirect('proxy');
