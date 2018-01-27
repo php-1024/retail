@@ -19,7 +19,7 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $organization = Organization::getlist(['type'=>'3']);
-        dump($request);
+        dump($organization);
         if(!empty($admin_data['super_id']) && $admin_data['super_id'] == 1){
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }else{
