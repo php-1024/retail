@@ -62,7 +62,7 @@
                             <i class="icon-user"></i>
                         </div>
                         <div class="value">
-                            <h1>22</h1>
+                            <h1>{{$acc_num}}</h1>
                             <p>公司人员</p>
                         </div>
                     </section>
