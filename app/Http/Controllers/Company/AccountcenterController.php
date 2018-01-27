@@ -30,14 +30,15 @@ class AccountcenterController extends Controller{
             }
         }else{//不是超级管理员
             $accountInfos = AccountInfo::getOne(['id' => $admin_data['id']]);
-            $organization = Organization::getOne(['id'=>$admin_data['organization_id']]);
+            $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
             foreach ($accountInfos as $key=>$val){
                 $accountInfo['realname'] = $val->realname;
                 $accountInfo['idcard'] = $val->idcard;
             }
-            foreach ($organization as $key=>$val){
-                $accountInfo['organization'] = $val->organization_name;
-            }
+//            foreach ($organization as $key=>$val){
+//                $accountInfo['organization'] = $val->organization_name;
+//            }
+            dump($organization);
             dump($accountInfo);
 
             dump($admin_data['organization_id']);
