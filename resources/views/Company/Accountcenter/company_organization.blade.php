@@ -60,7 +60,7 @@
     <div class="row state-overview" style="margin: 10px;">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
-            <a href="index.html">
+            <a href="{{url('company')}}?{{ $val->organization }}">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
