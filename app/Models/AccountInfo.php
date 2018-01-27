@@ -55,7 +55,7 @@ class AccountInfo extends Model
     }
     //获取单条数据
     public static function getOne($where){
-        return self::where($where)->get();
+        return self::where($where)->first();
     }
 }
 ?>
