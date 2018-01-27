@@ -121,7 +121,7 @@
             console.log(json);
         });
     }
-    @@endforeach
+    @endforeach
 </script>
 </body>
 </html>
