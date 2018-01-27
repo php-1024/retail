@@ -110,7 +110,7 @@
         $('select.styled').customSelect();
     });
 
-
+    @foreach($organization as $key=>$val)
     //提交表单
     function postForm{{$val->id}}() {
         var target = $("#currentForm{{$val->id}}");
@@ -121,6 +121,7 @@
             console.log(json);
         });
     }
+    @@endforeach
 </script>
 </body>
 </html>
