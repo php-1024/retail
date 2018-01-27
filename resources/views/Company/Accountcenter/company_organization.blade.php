@@ -117,8 +117,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
-//            window.location.reload();
-            console.log(json);
+            window.location.reload();
         });
     }
     @endforeach
