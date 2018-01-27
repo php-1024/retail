@@ -82,11 +82,11 @@ class SystemController extends Controller{
 
     //公司信息设置
     public function proxy_info(Request $request){
-        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        return view('Proxy/System/proxy_info',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //退出登录
     public function quit(Request $request){
