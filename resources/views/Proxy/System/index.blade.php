@@ -74,7 +74,7 @@
                             <i class="icon-sitemap"></i>
                         </div>
                         <div class="value">
-                            <h1>300</h1>
+                            <h1>{{$org_num}}</h1>
                             <p>商户</p>
                         </div>
                     </section>
