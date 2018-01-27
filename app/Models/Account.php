@@ -87,7 +87,7 @@ class Account extends Model{
     }
     //根据条件查询一条数据
     public static function getOneAccount($where){
-        return self::with('account_info')->with('account_roles')->with('organization')->where($where)->orWhere('mobile',$username)->first();
+        return self::with('account_info')->with('account_roles')->with('organization')->where($where)->first();
     }
     //添加用户
     public static function addAccount($param){
