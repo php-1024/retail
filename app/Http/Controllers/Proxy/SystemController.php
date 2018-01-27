@@ -67,10 +67,11 @@ class SystemController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            echo 1;exit;
             \ZeroneRedis::create_proxy_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
             \ZeroneRedis::create_proxy_menu_cache($account_info->id);//生成对应账号的系统菜单
         }
+        $admin_data1 = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data1);
         return redirect('proxy');
 
     }
