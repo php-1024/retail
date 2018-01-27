@@ -15,6 +15,7 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -54,9 +55,11 @@
     </div>
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
-        @foreach($listOrg as $key=>$value)
+        <input type="hidden" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" id="url" value="{{url('proxy/system/select_proxy')}}">
+    @foreach($listOrg as $key=>$value)
         <div class="col-lg-3 col-sm-6">
-            <a href="{{url('proxy/system/select_proxy')}}?organization_id={{ $value->id }}">
+            <a href="javascript;" onclick="postForm('{{$value->id}}')">
                 <section class="panel">
                     <div class="symbol terques">
                         <i class="icon-arrow-right"></i>
@@ -72,6 +75,31 @@
     </div>
     <!--state overview end-->
 </section>
-
+<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script>
+    //提交表单
+    function postForm(organization_id){
+        var _token = $("#_token").val();
+        var url = $("#url").val();
+        var data = {'_token':_token,'organization_id':organization_id};
+        $.post(url,data,function(json){
+            if(json.status==1){
+                window.location.reload();
+            }else{
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//                changeCaptcha();
+            }
+        });
+    }
+</script>
 </body>
 </html>
