@@ -97,13 +97,14 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                            @foreach
                             <tr>
-                                <td>admin</td>
-                                <td>14.127.254.249</td>
-                                <td>中国广东深圳</td>
-                                <td>2018-01-16 09:37:37</td>
+                                <td>{{  $val->accounts->account }}</td>
+                                <td>{{  long2ip($val->ip) }}</td>
+                                <td>{{  $val->ip_position }}</td>
+                                <td>{{  $val->created_at }}</td>
                             </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </section>
