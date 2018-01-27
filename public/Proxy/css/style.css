@@ -437,7 +437,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     /* Safari and Chrome */
     .dropdown-menu.extended  {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176) !important;
-    };
+    }
 }
 
 .dropdown-menu.extended li p {
@@ -1426,7 +1426,7 @@ h3.timeline-title {
     /* Safari and Chrome */
     .panel-footer.revenue-foot {
         margin-bottom: -4px;
-    };
+    }
 }
 
 
@@ -3481,21 +3481,21 @@ table.sliders tr td {
     padding-left: 34px;
 }
 
-.has-js .label_radio {
-    background: url(../img/checkbox/radio-off.png) no-repeat;
-}
+/*.has-js .label_radio {*/
+    /*background: url(../img/checkbox/radio-off.png) no-repeat;*/
+/*}*/
 
-.has-js .label_check {
-    background: url(../img/checkbox/check-off.png) no-repeat;
-}
+/*.has-js .label_check {*/
+    /*background: url(../img/checkbox/check-off.png) no-repeat;*/
+/*}*/
 
-.has-js label.c_on {
-    background: url(../img/checkbox/check-on.png) no-repeat;
-}
+/*.has-js label.c_on {*/
+    /*background: url(../img/checkbox/check-on.png) no-repeat;*/
+/*}*/
 
-.has-js label.r_on {
-    background: url(../img/checkbox/radio-on.png) no-repeat;
-}
+/*.has-js label.r_on {*/
+    /*background: url(../img/checkbox/radio-on.png) no-repeat;*/
+/*}*/
 
 .has-js .label_check input,
 .has-js .label_radio input {
@@ -3938,6 +3938,6 @@ span.customSelect {
 span.customSelect.changed {
     background-color: #fff;
 }
-.customSelectInner {
-    background:url(../img/customSelect-arrow.gif) no-repeat center right;
-}
+/*.customSelectInner {*/
+    /*background:url(../img/customSelect-arrow.gif) no-repeat center right;*/
+/*}*/
