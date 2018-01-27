@@ -32,7 +32,7 @@ class AccountcenterController extends Controller{
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
-
+        dump($request);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -42,11 +42,10 @@ class AccountcenterController extends Controller{
 
 
     //退出登录
-    public function quit(Request $request){
+    public function quit(){
         Session::put('zerone_company_account_id','');
         return redirect('company/login');
     }
-
 
 
     //退出重新选择商户
@@ -56,9 +55,7 @@ class AccountcenterController extends Controller{
         \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         return redirect('company');
     }
-
-
-    //超级管理员登陆商户平台处理
+    //超级管理员以商户平台登录处理
     public function superadmin_login($organization_id)
     {
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
