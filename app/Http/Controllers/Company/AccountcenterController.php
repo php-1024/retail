@@ -29,7 +29,7 @@ class AccountcenterController extends Controller{
             dump($organization);
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
-
+        dump($request);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
