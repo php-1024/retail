@@ -67,14 +67,15 @@
             if(json.status==1){
                 window.location.reload();
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-                changeCaptcha();
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//                changeCaptcha();
             }
         });
     }

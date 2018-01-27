@@ -53,6 +53,7 @@ class SystemController extends Controller{
                 'account_status'=>$account_info->status,//用户状态
                 'super_id' => '2' //超级管理员进入后切换身份用
             ];
+            dd($admin_data);
             Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
