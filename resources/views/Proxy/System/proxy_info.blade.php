@@ -65,13 +65,7 @@
                             <form class="form-horizontal tasi-form" method="get">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">所属战区</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control m-bot15">
-                                            <option>东部战区</option>
-                                            <option>西部战区</option>
-                                            <option>南部战区</option>
-                                        </select>
-                                    </div>
+                                    <div class="col-sm-10">东部战区</div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">公司名称</label>
