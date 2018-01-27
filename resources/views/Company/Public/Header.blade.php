@@ -41,6 +41,11 @@
                         <a href="{{ url('company/password') }}">修改密码</a>
                     </li>
                     <li class="divider"></li>
+                    @if($admin_data['is_super'] == 1)
+                        <li>
+                            <a href="{{ url('company/switch') }}" >切换商户</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ url('company/quit') }}" >退出登录</a>
                     </li>
