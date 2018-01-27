@@ -35,9 +35,40 @@ class SystemController extends Controller{
     //退出登录
     public function select_proxy(Request $request){
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
-
-        $list =  Organization::getOne([['id',$organization_id]]);
-        dd($list);
+        $account_info = Account::getOneForLogin([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        if(!empty($list)){
+            //登录成功要生成缓存的登录信息
+            $admin_data = [
+                'id'=>$account_info->id,    //用户ID
+                'account'=>$account_info->account,//用户账号
+                'organization_id'=>$account_info->organization_id,//组织ID
+                'is_super'=>$account_info->is_super,//是否超级管理员
+                'parent_id'=>$account_info->parent_id,//上级ID
+                'parent_tree'=>$account_info->parent_tree,//上级树
+                'deepth'=>$account_info->deepth,//账号在组织中的深度
+                'mobile'=>$account_info->mobile,//绑定手机号
+                'safe_password'=>$account_info->safe_password,//安全密码
+                'account_status'=>$account_info->status,//用户状态
+                'super_id' => '2' //超级管理员进入后切换身份用
+            ];
+            //构造用户缓存数据
+            if(!empty( $account_info->account_info->realname)) {
+                $admin_data['realname'] = $account_info->account_info->realname;
+            }else{
+                $admin_data['realname'] = '未设置';
+            }
+            if(!empty($account_info->account_roles)) {
+                foreach ($account_info->account_roles as $key => $val) {
+                    $account_info->role = $val;
+                }
+                $admin_data['role_name'] = $account_info->role->role_name;
+            }else{
+                $admin_data['role_name'] = '角色未设置';
+            }
+            \ZeroneRedis::create_proxy_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
+            \ZeroneRedis::create_proxy_menu_cache($account_info->id);//生成对应账号的系统菜单
+            return redirect('proxy');
+        }
     }
     //退出登录
     public function quit(Request $request){
