@@ -22,8 +22,8 @@ class AccountcenterController extends Controller{
         dump($request->organization);
         if(!empty($admin_data['super_id']) && $admin_data['super_id'] == 1){
             $organization = Organization::getlist(['type'=>'3']); //如何是admin则获取所有组织信息
-            if (!empty($request->organization)){
-                return view('Company/Accountcenter/display',['organization_id'=>$request->organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            if (!empty($request->organization_id)){
+                return view('Company/Accountcenter/display',['organization_id'=>$request->organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
             }else{
                 return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
             }
