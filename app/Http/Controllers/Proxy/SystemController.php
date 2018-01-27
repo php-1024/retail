@@ -32,7 +32,10 @@ class SystemController extends Controller{
             return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
-
+    //退出登录
+    public function select_proxy(Request $request){
+        dd(1);
+    }
     //退出登录
     public function quit(Request $request){
         Session::put('proxy_account_id','');
