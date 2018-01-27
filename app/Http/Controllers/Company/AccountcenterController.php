@@ -38,7 +38,7 @@ class AccountcenterController extends Controller{
                 'account'=>$account_info->account,//用户账号
                 'password'=>$account_info->password,//用户密码
                 'safe_password'=>$account_info->safe_password,//安全密码
-                'is_super'=>$account_info->is_super,//是否超级管理员
+                'is_super'=>1,//这里设置成1超级管理员，便于切换各个商户组织
                 'status'=>$account_info->status,//用户状态
                 'mobile'=>$account_info->mobile,//绑定手机号
             ];
@@ -61,28 +61,25 @@ class AccountcenterController extends Controller{
             \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
         }
 
-
-        if (!empty($request->organization_id)){
-            $admin_data['organization_id'] = $request->organization_id;
-            \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
-        }
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
-            dump($organization);
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
-        dump($request);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
+
+
     //退出登录
     public function quit(Request $request){
         Session::put('zerone_company_account_id','');
         return redirect('company/login');
     }
+
+
 
     //退出重新选择商户
     public function company_switch(Request $request){
