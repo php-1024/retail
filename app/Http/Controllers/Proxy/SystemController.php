@@ -6,6 +6,7 @@ use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\Warzone;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Session;
 class SystemController extends Controller{
