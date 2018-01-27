@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
+use App\Models\LoginLog;
 use Illuminate\Http\Request;
 use Session;
 class SystemController extends Controller{
