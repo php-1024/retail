@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\Warzone;
 use Illuminate\Http\Request;
 use Session;
 class SystemController extends Controller{
@@ -15,8 +16,11 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         if($admin_data['super_id'] == 1){
             $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
-            dd($listOrg);
-            return view('Proxy/System/select_proxy');
+            foreach ($listOrg as $k=>$v){
+                $zone_id = $v['warzoneProxy']['zone_id'];
+                $listOrg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
+            }
+            return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
         }else{
 
             $where = [];
