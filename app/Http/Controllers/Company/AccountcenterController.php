@@ -22,7 +22,8 @@ class AccountcenterController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $companyinfo = $request->companyinfo;
         if (!empty($companyinfo)){
-            echo $companyinfo['company_owner'];
+            $arr = $companyinfo->toArray();
+            echo $arr['company_owner'];
             dd($companyinfo);
         }
         if (!empty($request->organization_id)){
