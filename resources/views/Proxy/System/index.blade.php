@@ -124,56 +124,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>编辑了菜单系统管理</td>
-                                <td>2018-01-15 22:14:16</td>
-                            </tr>
+                            @foreach($operation_log_list as $key=>$val)
+                                <tr>
+                                    <td>{{ $val->accounts->account }}</td>
+                                    <td>{{ $val->operation_info }}</td>
+                                    <td>{{ $val->created_at }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </section>
