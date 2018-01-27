@@ -34,7 +34,10 @@ class SystemController extends Controller{
     }
     //退出登录
     public function select_proxy(Request $request){
-        dd(1);
+        $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
+
+        $list =  Organization::getOne([['id',$organization_id]]);
+        dd($list);
     }
     //退出登录
     public function quit(Request $request){
