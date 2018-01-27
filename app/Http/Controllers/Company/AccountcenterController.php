@@ -43,12 +43,12 @@ class AccountcenterController extends Controller{
 
     //退出重新选择商户
     public function company_switch(Request $request){
-        dd(222);
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $admin_data['organization_id'] = 0;
-        \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
-        dump($request);
-        return redirect('company');
+        dd('222');
+//        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+//        $admin_data['organization_id'] = 0;
+//        \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+//        dump($request);
+//        return redirect('company');
 
     }
 
