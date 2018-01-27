@@ -34,6 +34,7 @@ class SystemController extends Controller{
             $organization_id = $admin_data['organization_id'];//服务商id
             $acc_num = Account::where([['organization_id',$organization_id]])->count();//查询服务商人数
             $parent_id = Organization::getPluck([['id',$organization_id]],'parent_id');
+            echo $parent_id;
             $org_num = Organization::where([['parent_id',$parent_id]])->count();//查询服务商附属商务个数
             return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
