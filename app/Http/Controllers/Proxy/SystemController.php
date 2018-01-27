@@ -37,7 +37,7 @@ class SystemController extends Controller{
     //退出登录
     public function select_proxy(Request $request){
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
-        echo $admin_this->id;exit;
+        echo $admin_this;exit;
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         if(!empty($account_info)){
