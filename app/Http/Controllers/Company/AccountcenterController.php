@@ -22,6 +22,8 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $companyinfo = $request->companyinfo;
+
+        //是否存在商户选择数据
         if (!empty($companyinfo)){
             $this->superadmin_login($companyinfo);
         }
@@ -30,6 +32,7 @@ class AccountcenterController extends Controller{
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
+
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -94,7 +97,6 @@ class AccountcenterController extends Controller{
         \ZeroneRedis::create_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
         \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
     }
-
 
 }
 ?>
