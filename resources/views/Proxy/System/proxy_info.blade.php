@@ -67,36 +67,26 @@
                                     <label class="col-sm-2 control-label">所属战区</label>
                                     <div class="col-sm-10">东部战区</div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">公司名称</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">公司名称</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
+                                </div>
+
+                                <div class="form-group"><label class="col-sm-2 control-label">公司负责人</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationproxyinfo->proxy_owner}}"></div>
+                                </div>
+
+                                <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationproxyinfo->proxy_owner_idcard}}"></div>
+                                </div>
+
+
+                                <div class="form-group"><label class="col-sm-2 control-label">联系方式</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationproxyinfo->proxy_owner_mobile}}"></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">公司负责人</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">负责人身份证号</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">联系方式</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">安全密码 </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
+                                    <label class="col-sm-2 control-label">安全密码</label>
+                                    <div class="col-sm-10"><input type="password" class="form-control" name="safe_password" value=""></div>
                                 </div>
 
                                 <div class="form-group" style="text-align: center;">
