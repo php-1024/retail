@@ -58,6 +58,7 @@ class SystemController extends Controller{
             }else{
                 $admin_data['realname'] = '未设置';
             }
+            echo 1;exit;
             if(!empty($account_info->account_roles)) {
                 foreach ($account_info->account_roles as $key => $val) {
                     $account_info->role = $val;
