@@ -22,9 +22,15 @@ class AccountcenterController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $companyinfo = $request->companyinfo;
         if (!empty($companyinfo)){
-            $arr = json_decode($companyinfo,true);
-            print_r($arr);
-            dd($companyinfo);
+            $companyinfo_arr = json_decode($companyinfo,true);
+            //Admin登陆商户平台要生成的信息
+            //以商户的身份登陆
+            $admin_data = [
+                'id'                    => $companyinfo_arr['id'],                      //admin当前浏览用户的ID
+                'mobile'                => $companyinfo_arr['company_owner_mobile'],    //商户绑定手机号
+                'company_owner_idcard'  => $companyinfo_arr['company_owner_idcard'],    //商户身份证号码
+                'organization_id'       => $companyinfo_arr['organization_id'],         //组织ID
+            ];
         }
         if (!empty($request->organization_id)){
             $admin_data['organization_id'] = $request->organization_id;
