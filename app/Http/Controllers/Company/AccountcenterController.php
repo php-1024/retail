@@ -29,7 +29,7 @@ class AccountcenterController extends Controller{
                 return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
             }
         }else{//不是超级管理员
-            $accountInfo = AccountInfo::getOne(['account_id'=>$admin_data['account']]);
+            $accountInfo = AccountInfo::getOne([]);
             dump($accountInfo);
             dump($admin_data['organization_id']);
             return view('Company/Accountcenter/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
