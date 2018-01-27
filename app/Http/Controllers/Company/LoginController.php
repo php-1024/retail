@@ -122,7 +122,6 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        $admin_data['super_id'] = '1';//超级管理员判断字段
                         //插入登录记录
                         if (LoginLog::addLoginLog($account_info['id'], 1, 0, $ip, $addr)) {//admin,唯一超级管理员，不属于任何组织
                             Session::put('zerone_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID

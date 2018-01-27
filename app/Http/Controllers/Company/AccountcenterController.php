@@ -23,7 +23,7 @@ class AccountcenterController extends Controller{
         $organization_id = $request->organization_id;       //获取组织id
         dump($organization_id);
         dump($request);
-        if(!empty($admin_data['super_id']) && $admin_data['super_id'] == 1){
+        if(!empty($admin_data['is_super']) && $admin_data['is_super'] == 1){
             $admin_data['organization_id'] = $organization_id;
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             $organization = Organization::getlist(['type'=>'3']); //如何是admin则获取所有组织信息
