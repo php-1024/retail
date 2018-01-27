@@ -23,8 +23,8 @@ class AccountcenterController extends Controller{
         $companyinfo = $request->companyinfo;
         if (!empty($companyinfo)){
             $jsons = "[".$companyinfo."]";
-            $arr = json_decode($jsons);
-            echo $arr['id'];
+            $arr = json_decode($companyinfo);
+            print_r($arr);
             dd($companyinfo);
         }
         if (!empty($request->organization_id)){
