@@ -95,7 +95,8 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-                window.location.reload();
+                changeCaptcha();
+
             }
         });
     }
