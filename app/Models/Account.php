@@ -85,6 +85,10 @@ class Account extends Model{
     public static function getOneForLogin($username){
         return self::with('account_info')->with('account_roles')->with('organization')->where('account',$username)->orWhere('mobile',$username)->first();
     }
+    //根据条件查询一条数据
+    public static function getOneAccount($where){
+        return self::with('account_info')->with('account_roles')->with('organization')->where($where)->orWhere('mobile',$username)->first();
+    }
     //添加用户
     public static function addAccount($param){
         $model = new Account();
