@@ -56,7 +56,7 @@
     <div class="row state-overview" style="margin: 10px;">
         @foreach($listOrg as $key=>$value)
         <div class="col-lg-3 col-sm-6">
-            <a href="{{url('prxoy/system/select_proxy')}}?organization_id={{ $value->id }}">
+            <a href="{{url('prxoy/system/select_proxy')}}">
                 <section class="panel">
                     <div class="symbol terques">
                         <i class="icon-arrow-right"></i>
