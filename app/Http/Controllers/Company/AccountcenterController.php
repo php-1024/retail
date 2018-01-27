@@ -5,6 +5,7 @@
  **/
 namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
@@ -23,18 +24,26 @@ class AccountcenterController extends Controller{
         $companyinfo = $request->companyinfo;
         if (!empty($companyinfo)){
             $companyinfo_arr = json_decode($companyinfo,true);
+            $organization_id = $companyinfo_arr['organization_id'];
+            $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+            dd($account_info);
             //Admin登陆商户平台要生成的信息
-            //以商户的身份登陆
-            $admin_data['mobile'] = $companyinfo_arr['company_owner_mobile'];
-            $admin_data['company_owner_idcard'] = $companyinfo_arr['company_owner_idcard'];
-            $admin_data['company_owner_idcard'] = $companyinfo_arr['company_owner_idcard'];
-            $admin_data['organization_id'] = $companyinfo_arr['organization_id'];
-//            $admin_data = [
-//                'id'                    => $companyinfo_arr['id'],                      //admin当前浏览用户的ID
-//                'mobile'                => $companyinfo_arr['company_owner_mobile'],    //商户绑定手机号
-//                'company_owner_idcard'  => $companyinfo_arr['company_owner_idcard'],    //商户身份证号码
-//                'organization_id'       => $companyinfo_arr['organization_id'],         //组织ID
-//            ];
+            //重新生成缓存的登录信息
+            $admin_data = [
+                'id'=>$account_info->id,    //用户ID
+                'account'=>$account_info->account,//用户账号
+                'organization_id'=>$account_info->organization_id,//组织ID
+                'is_super'=>$account_info->is_super,//是否超级管理员
+                'parent_id'=>$account_info->parent_id,//上级ID
+                'parent_tree'=>$account_info->parent_tree,//上级树
+                'deepth'=>$account_info->deepth,//账号在组织中的深度
+                'mobile'=>$account_info->mobile,//绑定手机号
+                'safe_password'=>$account_info->safe_password,//安全密码
+                'account_status'=>$account_info->status,//用户状态
+                'super_id' => '2' //超级管理员进入后切换身份用
+            ];
+        }
+        if (!empty($request->organization_id)){
             $admin_data['organization_id'] = $request->organization_id;
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         }
