@@ -76,7 +76,6 @@ class ProxyCheck{
             $menu_data = Redis::get('proxy_system_menu_'.$sess_key);
             $son_menu_data = Redis::get('proxy_system_son_menu_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
-            dd($admin_data);
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
