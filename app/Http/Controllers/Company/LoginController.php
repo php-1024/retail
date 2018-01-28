@@ -120,7 +120,11 @@ class LoginController extends Controller
                                 return response()->json(['data' => '登录失败', 'status' => '0']);
                             }
                         }
-                    } else {
+                    } else {//如果是超级管理员用super_company生成Redis缓存
+                        /*
+                         * 需要修改
+                         * 用super_company生成Redis缓存
+                         */
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                         //插入登录记录
                         if (LoginLog::addLoginLog($account_info['id'], 1, 0, $ip, $addr)) {//admin,唯一超级管理员，不属于任何组织

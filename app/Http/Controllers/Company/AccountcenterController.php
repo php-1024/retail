@@ -31,14 +31,6 @@ class AccountcenterController extends Controller{
 
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
-
-
-            $sess_key = Session::get('zerone_company_account_id');
-            $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('company');//连接到我的缓存服务器
-            $admin_datas = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
-            dump($admin_datas);
-
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
