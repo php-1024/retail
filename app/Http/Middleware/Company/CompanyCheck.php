@@ -14,9 +14,10 @@ class CompanyCheck{
             /*****登录页,如果已经登录则不需要再次登录*****/
             case "company/login"://登录页,如果已经登录则不需要再次登录
                 //获取用户登录存储的SessionId
-                $sess_key = Session::get('zerone_company_account_id');
+                $sess_key = Session::get('zerone_company_account_id');//普通商户登录
+                $super_sess_key = Session::get('zerone_super_company_account_id');//超级管理员登陆
                 //如果不为空跳转到选择商户组织页面
-                if(!empty($sess_key)) {
+                if(!empty($sess_key) || !empty($super_sess_key)) {
                     return redirect('company');
                 }
                 break;
