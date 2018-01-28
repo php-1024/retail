@@ -39,7 +39,7 @@ class SystemController extends Controller{
     }
     //超级管理员选择服务商
     public function select_proxy(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         if(!empty($account_info)){
@@ -53,7 +53,7 @@ class SystemController extends Controller{
                 'parent_tree'=>$account_info->parent_tree,//上级树
                 'deepth'=>$account_info->deepth,//账号在组织中的深度
                 'mobile'=>$account_info->mobile,//绑定手机号
-                'safe_password'=>$admin_data['safe_password'],//安全密码-超级管理员
+                'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
                 'super_id' => '2' //超级管理员进入后切换身份用
             ];
