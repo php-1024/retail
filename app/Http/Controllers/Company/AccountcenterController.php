@@ -73,7 +73,7 @@ class AccountcenterController extends Controller{
             'status'=>$account_info->status,//用户状态
             'mobile'=>$account_info->mobile,//绑定手机号
         ];
-        Session::put('zerone_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+        Session::put('zerone_super_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
@@ -88,8 +88,8 @@ class AccountcenterController extends Controller{
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        \ZeroneRedis::create_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-        \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+        \ZeroneRedis::create_super_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+        \ZeroneRedis::create_super_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
     }
 
 }

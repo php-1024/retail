@@ -66,8 +66,25 @@ class CompanyCheck{
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_company_account_id');
+        $super_sess_key = Session::get('zerone_super_company_account_id');//超级管理员登陆
         //如果为空跳转到登录页面
-        if(empty($sess_key)) {
+        if(empty($sess_key)) {//普通用户
+            if (empty($super_sess_key)){//超级管理员用户
+                return self::res(0,redirect('company/login'));
+            }else{
+                $super_sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
+                $super_sess_key = decrypt($super_sess_key);//解密管理员ID
+                Redis::connect('super_company');//连接到我的缓存服务器
+                $admin_data = Redis::get('super_company_system_admin_data_'.$super_sess_key);//获取管理员信息
+                $menu_data = Redis::get('super_company_system_menu_'.$super_sess_key);
+                $son_menu_data = Redis::get('super_company_system_son_menu_'.$super_sess_key);
+                $admin_data = unserialize($admin_data);//解序列我的信息
+                $menu_data =  unserialize($menu_data);//解序列一级菜单
+                $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
+                $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
+                //把参数传递到下一个中间件
+                return self::res(1,$request);
+            }
             return self::res(0,redirect('company/login'));
         }else{
             $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
