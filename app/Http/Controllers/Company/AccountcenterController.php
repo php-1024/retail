@@ -51,7 +51,7 @@ class AccountcenterController extends Controller{
     public function company_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
-        \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+        \ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         return redirect('company');
     }
     //超级管理员以商户平台登录处理
