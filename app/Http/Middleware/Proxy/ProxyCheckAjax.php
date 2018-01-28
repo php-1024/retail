@@ -167,12 +167,17 @@ class ProxyCheckAjax
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
-
         $safe_password = $request->input('safe_password');
-        $key = config("app.proxy_safe_encrypt_key");//获取加密盐
-        $encrypted = md5($safe_password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-
+        if($admin_data['super_id'] == '2'){
+            $key = config("app.zernoe_safe_encrypt_key");//获取加密盐
+            $encrypted = md5($safe_password);//加密密码第一重
+            $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        }else{
+            $key = config("app.proxy_safe_encrypt_key");//获取加密盐
+            $encrypted = md5($safe_password);//加密密码第一重
+            $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        }
+        
         if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }

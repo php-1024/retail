@@ -53,7 +53,7 @@ class SystemController extends Controller{
                 'parent_tree'=>$account_info->parent_tree,//上级树
                 'deepth'=>$account_info->deepth,//账号在组织中的深度
                 'mobile'=>$account_info->mobile,//绑定手机号
-                'safe_password'=>$account_info->safe_password,//安全密码
+                'safe_password'=>$admin_data['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
                 'super_id' => '2' //超级管理员进入后切换身份用
             ];
@@ -84,7 +84,6 @@ class SystemController extends Controller{
     //公司信息设置
     public function proxy_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
