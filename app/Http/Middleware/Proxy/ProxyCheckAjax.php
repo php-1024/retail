@@ -168,6 +168,7 @@ class ProxyCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
+
         if($admin_data['super_id'] == '2'){
             $key = config("app.zernoe_safe_encrypt_key");//获取加密盐
             $encrypted = md5($safe_password);//加密密码第一重
