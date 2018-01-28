@@ -59,11 +59,8 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         @foreach($organization as $key=>$val)
-    <form method="post" class="form-horizontal" role="form" id="currentForm{{$val->id}}" action="{{ url('company') }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="organization_id" value="{{ $val->id }}">
         <div class="col-lg-3 col-sm-6">
-            <a href="javascript:;" onclick="return postForm{{$val->id}}();">
+            <a href="{{ url('company') }}?organization_id={{ $val->id }}" >
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
@@ -72,7 +69,6 @@
                 </section>
             </a>
         </div>
-    </form>
         @endforeach
 
     </div>
@@ -110,17 +106,17 @@
         $('select.styled').customSelect();
     });
 
-    @foreach($organization as $key=>$val)
-    //提交表单
-    function postForm{{$val->id}}() {
-        var target = $("#currentForm{{$val->id}}");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            window.location.reload();
-        });
-    }
-    @endforeach
+    {{--@foreach($organization as $key=>$val)--}}
+    {{--//提交表单--}}
+    {{--function postForm{{$val->id}}() {--}}
+        {{--var target = $("#currentForm{{$val->id}}");--}}
+        {{--var url = target.attr("action");--}}
+        {{--var data = target.serialize();--}}
+        {{--$.post(url, data, function (json) {--}}
+            {{--window.location.reload();--}}
+        {{--});--}}
+    {{--}--}}
+    {{--@endforeach--}}
 </script>
 </body>
 </html>
