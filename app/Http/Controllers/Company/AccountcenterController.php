@@ -32,7 +32,8 @@ class AccountcenterController extends Controller{
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
-
+        $sess_key = Session::get('zerone_company_account_id');
+        dump($sess_key);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
