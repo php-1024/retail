@@ -72,12 +72,12 @@ class CompanyCheck{
             if (empty($super_sess_key)){//超级管理员用户
                 return self::res(0,redirect('company/login'));
             }else{
-                $super_sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
-                $super_sess_key = decrypt($super_sess_key);//解密管理员ID
+                $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
+                $sess_key = decrypt($sess_key);//解密管理员ID
                 Redis::connect('super_company');//连接到我的缓存服务器
-                $admin_data = Redis::get('super_company_system_admin_data_'.$super_sess_key);//获取管理员信息
-                $menu_data = Redis::get('super_company_system_menu_'.$super_sess_key);
-                $son_menu_data = Redis::get('super_company_system_son_menu_'.$super_sess_key);
+                $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
+                $menu_data = Redis::get('super_company_system_menu_'.$sess_key);
+                $son_menu_data = Redis::get('super_company_system_son_menu_'.$sess_key);
                 $admin_data = unserialize($admin_data);//解序列我的信息
                 $menu_data =  unserialize($menu_data);//解序列一级菜单
                 $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
