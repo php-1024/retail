@@ -10,6 +10,7 @@ use App\Models\AccountInfo;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Session;
 
 class AccountcenterController extends Controller{
@@ -35,8 +36,8 @@ class AccountcenterController extends Controller{
         $sess_key = Session::get('zerone_company_account_id');
         $sess_key = decrypt($sess_key);//解密管理员ID
         Redis::connect('company');//连接到我的缓存服务器
-        $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
-        dump($admin_data);
+        $admin_datas = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
+        dump($admin_datas);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
