@@ -104,8 +104,15 @@
     </section>
     <!--main content end-->
 </section>
-
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+
+<script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
+<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
 
 <script>
