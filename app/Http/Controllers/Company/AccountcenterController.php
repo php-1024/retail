@@ -22,6 +22,7 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $request->organization_id;
+
         //是否存在商户选择数据
         if (!empty($organization_id)){
             $this->superadmin_login($organization_id);
@@ -29,11 +30,9 @@ class AccountcenterController extends Controller{
 
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
-            dump($admin_data);
-            dump($organization_id);
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
         }
-        dump($request);
+
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOne(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -53,7 +52,7 @@ class AccountcenterController extends Controller{
     public function company_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
-        \ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+        \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
         return redirect('company');
     }
     //超级管理员以商户平台登录处理
@@ -75,7 +74,7 @@ class AccountcenterController extends Controller{
             'status'=>$account_info->status,//用户状态
             'mobile'=>$account_info->mobile,//绑定手机号
         ];
-        Session::put('zerone_super_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+        Session::put('zerone_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
@@ -90,8 +89,8 @@ class AccountcenterController extends Controller{
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        \ZeroneRedis::create_super_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-        \ZeroneRedis::create_super_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+        \ZeroneRedis::create_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+        \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
     }
 
 }
