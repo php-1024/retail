@@ -20,7 +20,6 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -105,14 +104,10 @@
     <!--main content end-->
 </section>
 <!-- Custom and plugin javascript -->
-<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
-
-<script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
-<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
-<script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
 
 <script>
