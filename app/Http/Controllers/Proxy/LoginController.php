@@ -20,8 +20,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        Session::put('tooling_account_id','');
-
         return view('Proxy/Login/display');
     }
     /*
