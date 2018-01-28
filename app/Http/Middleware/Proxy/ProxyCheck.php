@@ -71,8 +71,9 @@ class ProxyCheck{
         }else{
             $sess_key = Session::get('proxy_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('zeo');//连接到我的缓存服务器
+            Redis::connect('proxy');//连接到我的缓存服务器
             $admin_data = Redis::get('proxy_system_admin_data_'.$sess_key);//获取管理员信息
+            dd($admin_data);
             $menu_data = Redis::get('proxy_system_menu_'.$sess_key);
             $son_menu_data = Redis::get('proxy_system_son_menu_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
