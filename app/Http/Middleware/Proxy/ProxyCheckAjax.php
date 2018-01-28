@@ -48,12 +48,12 @@ class ProxyCheckAjax
         }
     }
     //检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
+    public function checkLoginAndRuleAndSafeAndProxyInfo($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkPasswordEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkProxyInfo($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -167,10 +167,12 @@ class ProxyCheckAjax
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
+
         $safe_password = $request->input('safe_password');
         $key = config("app.proxy_safe_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+
         if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
@@ -235,8 +237,8 @@ class ProxyCheckAjax
 
 
 
-    //检测服务商编辑表信息
-    public function checkOrgEditData($request){
+    //检测公司信息设置
+    public function checkProxyInfo($request){
         if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
         }

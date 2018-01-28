@@ -39,6 +39,7 @@ class SystemController extends Controller{
     }
     //超级管理员选择服务商
     public function select_proxy(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         if(!empty($account_info)){
@@ -83,6 +84,7 @@ class SystemController extends Controller{
     //公司信息设置
     public function proxy_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -90,6 +92,10 @@ class SystemController extends Controller{
         $listorg = Organization::getOne([['id',$organization_id]]);
 
         return view('Proxy/System/proxy_info',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+    //公司信息设置
+    public function proxy_info_check(Request $request){
+        echo 1;exit;
     }
     //退出登录
     public function quit(Request $request){
