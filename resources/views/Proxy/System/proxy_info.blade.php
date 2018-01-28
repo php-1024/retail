@@ -92,7 +92,7 @@
                                     </div>
 
                                     <div class="form-group" style="text-align: center;">
-                                        <button type="button" id="addbtn" class="btn btn-shadow btn-info">保存信息</button>
+                                        <button type="button" onclick="postForm()" class="btn btn-shadow btn-info">保存信息</button>
                                     </div>
                                 </form>
                             </div>
