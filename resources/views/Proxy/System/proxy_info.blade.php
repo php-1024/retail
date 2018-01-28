@@ -54,91 +54,86 @@
                     <!--breadcrumbs end -->
                 </div>
             </div>
-            <form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/proxy_info_check') }}">
-                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                公司信息设置
-                            </header>
-                            <div class="panel-body">
-                                <form class="form-horizontal tasi-form" method="get">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">所属战区</label>
-                                        <div class="col-sm-10">东部战区</div>
-                                    </div>
-                                    <div class="form-group"><label class="col-sm-2 control-label">公司名称</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
-                                    </div>
 
-                                    <div class="form-group"><label class="col-sm-2 control-label">公司负责人</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationproxyinfo->proxy_owner}}"></div>
-                                    </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            公司信息设置
+                        </header>
+                        <div class="panel-body">
+                            <form class="form-horizontal tasi-form" method="get">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">所属战区</label>
+                                    <div class="col-sm-10">东部战区</div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">公司名称</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
+                                </div>
 
-                                    <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationproxyinfo->proxy_owner_idcard}}"></div>
-                                    </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">公司负责人</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationproxyinfo->proxy_owner}}"></div>
+                                </div>
+
+                                <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationproxyinfo->proxy_owner_idcard}}"></div>
+                                </div>
 
 
-                                    <div class="form-group"><label class="col-sm-2 control-label">联系方式</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationproxyinfo->proxy_owner_mobile}}"></div>
-                                    </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">联系方式</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationproxyinfo->proxy_owner_mobile}}"></div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">安全密码</label>
-                                        <div class="col-sm-10"><input type="password" class="form-control" name="safe_password" value=""></div>
-                                    </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">安全密码</label>
+                                    <div class="col-sm-10"><input type="password" class="form-control" name="safe_password" value=""></div>
+                                </div>
 
-                                    <div class="form-group" style="text-align: center;">
-                                        <button type="button" id="addbtn" class="btn btn-shadow btn-info">保存信息</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </section>
-                    </div>
+                                <div class="form-group" style="text-align: center;">
+                                    <button type="button" id="addbtn" class="btn btn-shadow btn-info">保存信息</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
                 </div>
-            </form>
+            </div>
+
         </section>
     </section>
     <!--main content end-->
 </section>
 
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 
 
 <script>
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
 
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
-            }
+    //owl carousel
+
+    $(document).ready(function() {
+        $("#owl-demo").owlCarousel({
+            navigation : true,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem : true
+
         });
-    }
+    });
+
+    //custom select box
+
+    $(function(){
+        $('select.styled').customSelect();
+    });
+
 </script>
 
 </body>
