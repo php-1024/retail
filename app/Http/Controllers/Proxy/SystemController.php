@@ -116,6 +116,8 @@ class SystemController extends Controller{
             if($list['mobile']!=$mobile){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
+                $admin_data['realname'] = $realname;
+
             }
 
             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
@@ -126,6 +128,7 @@ class SystemController extends Controller{
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+                $admin_data['mobile'] = $mobile;
             }
 
             if($admin_data['super_id'] != 2) {
@@ -137,12 +140,12 @@ class SystemController extends Controller{
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
-        $admin_data['realname'] = $realname;
-        $admin_data['mobile'] = $mobile;
-        if($admin_data['super_id'] == 2) {
-            \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-        }else{
-            \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+        if($acc['idcard'] != $idcard || $list['mobile']!=$mobile){
+            if($admin_data['super_id'] == 2) {
+                \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+            }else{
+                \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+            }
         }
         return response()->json(['data' => '修改成功', 'status' => '1']);
 
