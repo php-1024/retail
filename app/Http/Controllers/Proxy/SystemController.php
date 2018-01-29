@@ -195,21 +195,14 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $account = $request->input('account');//通过登录页账号查询
-        $time_st = $request->input('time_st');//查询时间开始
-        $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = $time_nd_format = 0;//实例化时间格式
-        if(!empty($time_st) && !empty($time_nd)) {
-            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
-            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
-        }
-        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd,'Organization_id'=>$admin_data['Organization_id']];
-        $list = OperationLog::getPaginate($account,$time_st_format,$time_nd_format,10,'id');
-        dd($list);
+        
+        $search_data = ['organization_id'=>$admin_data['organization_id']];
+        $list = OperationLog::getProxyPaginate($account,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
         }
-        return view('Proxy/System/operationlog',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Proxy/System/operationlog',['list'=>$list,'roles'=>$roles,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //登录日记
     public function loginlog(Request $request){

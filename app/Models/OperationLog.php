@@ -61,5 +61,15 @@ class OperationLog extends Model{
         }
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
+    //获取联表的分页数据
+    public static function getProxyPaginate($where,$paginate,$orderby,$sort='DESC'){
+        $model = self::join('account',function($join){
+            $join->on('operation_log.account_id','account.id');
+        })->select('account.account','operation_log.*');
+        if(!empty($account)){
+            $model =$model->where($where);
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
