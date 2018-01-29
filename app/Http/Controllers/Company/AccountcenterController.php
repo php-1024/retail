@@ -24,11 +24,9 @@ class AccountcenterController extends Controller{
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('company/company_list');
         }
-        dump($admin_data);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $account = Account::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneProxy(['id' => $admin_data['organization_id']]);
-        dump($account);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -70,9 +68,23 @@ class AccountcenterController extends Controller{
     }
 
     //登录密码
-    public function password()
+    public function password(Request $request)
     {
-        return view('Company/Accountcenter/password');
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        return view('Company/Accountcenter/password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    //安全密码
+    public function safe_password(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
