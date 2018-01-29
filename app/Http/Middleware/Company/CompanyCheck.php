@@ -24,7 +24,7 @@ class CompanyCheck{
 
             /****仅检测是否登录及是否具有权限****/
             case "company":                             //后台首页
-            case "company/company_switch":              //清除当前组织重新选择商户组织
+            case "company/company_select":              //清除当前组织重新选择商户组织
             case "zerone/personal":                     //个人中心——个人资料
             case "zerone/store/store_config":           //分店设置参数
 

@@ -36,12 +36,13 @@ class AccountcenterController extends Controller{
     //商户列表
     public function company_select(Request $request)
     {
+        dump($request);
         $organization = Organization::getArrayCompany(['type'=>'3']);
         return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
     }
-    //超级管理员退出后重新选择商户
-    public function company_select_check(Request $request){
-        dump($request);
+
+    //超级管理员退出当前商户
+    public function company_quit(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
         ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//清空所选组织
