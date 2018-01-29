@@ -195,9 +195,12 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $account = $request->input('account');//通过登录页账号查询
-
-        $search_data = ['organization_id'=>$admin_data['organization_id']];
-        $list = OperationLog::getProxyPaginate($search_data,10,'id');
+        $where = [['operation_log.organization_id',$admin_data['organization_id']]];
+        if(!empty($account)){
+            $where[] = ['$account',$account];
+        }
+        $search_data = ['account'=>$account,'operation_log.organization_id'=>$admin_data['organization_id']];
+        $list = OperationLog::getProxyPaginate($where,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
