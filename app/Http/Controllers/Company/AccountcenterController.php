@@ -27,6 +27,7 @@ class AccountcenterController extends Controller{
         dump($admin_data);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneProxy(['id' => $admin_data['organization_id']]);
+        dump($accountInfo);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -61,8 +62,8 @@ class AccountcenterController extends Controller{
         return redirect('company');
     }
 
-
-    public function company_info()
+    //公司资料编辑（商户资料）
+    public function company_edit()
     {
         dump("test");
     }
