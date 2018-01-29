@@ -204,11 +204,11 @@ class SystemController extends Controller{
         }
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
         $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
+        dd($list);
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
         }
-        dd($list);
         return view('Proxy/System/operationlog',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //登录日记
