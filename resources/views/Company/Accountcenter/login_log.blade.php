@@ -36,8 +36,9 @@
                             <header class="panel-heading">
                                 登陆日志列表
                             </header>
+                        <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
+                            <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                             <div class="row wrapper">
-                                <form class="form-horizontal" method="get">
                                     <label class="col-sm-1 control-label">时间范围</label>
 
                                     <div class="col-sm-2">
@@ -51,10 +52,10 @@
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
-                                </form>
                             </div>
+                        </form>
                             <div class="table-responsive">
                                 <table class="table table-striped b-t b-light">
                                     <thead>
@@ -104,33 +105,23 @@
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('public/Company/library/datepicker')}}/bootstrap-datepicker.js"></script>
 <script>
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
+    function searchFormCheck(){
+        var url = $('#searchForm').attr('action');
+        var data = $('#searchForm').serialize();
+        $.get(url+'?'+data,function(json){
+            if(json.status==0){
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
                 });
+                return false;
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                location.href=url+'?'+data;
             }
         });
+        return false;
     }
 </script>
 </body>
