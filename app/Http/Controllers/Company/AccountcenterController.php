@@ -43,24 +43,18 @@ class AccountcenterController extends Controller{
             $this->superadmin_login($organization_id);
         }
         $organization = Organization::getArrayCompany(['type'=>'3']);
-        return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
+        return  view('Company/Accountcenter/company_list',['organization'=>$organization]);
     }
 
     //选择商户
     public function company_select(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $organization_id = $request->organization_id;
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员已经切换身份成功则跳转
-            return redirect('company');
-        }
         //如果存在商户组织ID并且当前管理员的组织ID为空
         if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
         }
-        $organization = Organization::getArrayCompany(['type'=>'3']);
-        return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
     }
     //超级管理员退出当前商户
     public function company_quit(Request $request){
@@ -76,6 +70,11 @@ class AccountcenterController extends Controller{
         Session::put('zerone_super_company_account_id','');
         return redirect('company/login');
     }
+
+
+
+
+
 
     //超级管理员以商户平台普通管理员登录处理
     public function superadmin_login($organization_id)
@@ -114,7 +113,6 @@ class AccountcenterController extends Controller{
         }
         ZeroneRedis::create_super_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
         ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
-        return redirect("company");
     }
 
 }
