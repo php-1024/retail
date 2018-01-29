@@ -24,8 +24,9 @@ class AccountcenterController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $request->organization_id;
         dump($organization_id);
+        dump($admin_data);
         //是否存在商户选择数据
-        if (!empty($organization_id)){
+        if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
         }
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
@@ -51,7 +52,7 @@ class AccountcenterController extends Controller{
     public function company_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
-        \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+        ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//清空所选组织
         return redirect('company');
     }
     //超级管理员以商户平台登录处理
@@ -73,7 +74,8 @@ class AccountcenterController extends Controller{
             'status'=>$account_info->status,//用户状态
             'mobile'=>$account_info->mobile,//绑定手机号
         ];
-        Session::put('zerone_company_account_id', encrypt($admin_data['id']));//存储登录session_id为当前用户ID
+        Session::put('zerone_company_account_id','');//清空普通用户
+        Session::put('zerone_super_company_account_id', encrypt($admin_data['id']));//存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
@@ -88,8 +90,8 @@ class AccountcenterController extends Controller{
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        \ZeroneRedis::create_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-        \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+        ZeroneRedis::create_super_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+        ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
     }
 
 }
