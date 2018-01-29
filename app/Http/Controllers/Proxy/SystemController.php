@@ -107,6 +107,7 @@ class SystemController extends Controller{
         DB::beginTransaction();
         try{
             $list = Organization::getOneProxy(['id'=>$id]);
+            dd($list);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
             $account_id = $acc['id'];
             if($list['organization_name']!=$organization_name){
