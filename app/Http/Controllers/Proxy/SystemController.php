@@ -196,7 +196,7 @@ class SystemController extends Controller{
 
         $account = $request->input('account');//通过登录页账号查询
 
-        $search_data = ['organization_id'=>$admin_data['organization_id']];
+        $search_data = ['operation_log.organization_id'=>$admin_data['organization_id']];
         $list = OperationLog::getProxyPaginate($search_data,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
