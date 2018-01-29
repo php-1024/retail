@@ -51,7 +51,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">真实姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="realname" class="form-control" value="{{$user['realname']}}">
+                                            <input type="text" name="realname" class="form-control" value="{{$user->account_info['realname']}}">
                                         </div>
                                     </div>
 
