@@ -581,19 +581,30 @@ class CompanyCheckAjax
     //检测是否登录
     public function checkIsLogin($request)
     {
+        //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_company_account_id');
-        //如果为空返回登录失效
-        if (empty($sess_key)) {
-            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
-        } else {
+        $super_sess_key = Session::get('zerone_super_company_account_id');
+        //如果为空跳转到登录页面
+        if(!empty($sess_key)) {
             $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员信息
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
-            $request->attributes->add(['admin_data' => $admin_data]);//添加参数
+            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
             //把参数传递到下一个中间件
-            return self::res(1, $request);
+            return self::res(1,$request);
+        }elseif (!empty($super_sess_key)){
+            $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
+            $sess_key = decrypt($sess_key);//解密管理员ID
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = unserialize($admin_data);//解序列我的信息
+            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
+            //把参数传递到下一个中间件
+            return self::res(1,$request);
+        }else{
+            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         }
     }
     //检测登录提交数据
