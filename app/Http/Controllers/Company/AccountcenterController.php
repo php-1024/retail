@@ -27,16 +27,24 @@ class AccountcenterController extends Controller{
             $this->superadmin_login($organization_id);
         }
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
-            return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
+            return redirect('company/company_select');
         }
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneProxy(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-
     }
 
+    public function company_list(Request $request)
+    {
+        $organization = Organization::getlist(['type'=>'3']);
+        return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
+    }
 
+    public function company_select(Request $request)
+    {
+        //选择商户
+        dd("选择商户！");
+    }
 
     //退出登录
     public function quit(){

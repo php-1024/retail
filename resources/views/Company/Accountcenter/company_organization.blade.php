@@ -58,9 +58,11 @@
     </div>
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
+        <input type="hidden" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" id="url" value="{{url('company/company_select')}}">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
-            <a href="{{ url('company') }}?organization_id={{ $val->id }}">
+            <a onclick="postForm('{{$val->id}}')">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
@@ -93,18 +95,38 @@
 <script src="{{asset('public/Company')}}/js/sparkline-chart.js"></script>
 <script src="{{asset('public/Company')}}/js/easy-pie-chart.js"></script>
 <script>
-    $(document).ready(function () {
-        $("#owl-demo").owlCarousel({
-            navigation: true,
-            slideSpeed: 300,
-            paginationSpeed: 400,
-            singleItem: true
+//    $(document).ready(function () {
+//        $("#owl-demo").owlCarousel({
+//            navigation: true,
+//            slideSpeed: 300,
+//            paginationSpeed: 400,
+//            singleItem: true
+//
+//        });
+//    });
+//    $(function () {
+//        $('select.styled').customSelect();
+//    });
 
+    //提交表单
+    function postForm(organization_id){
+        var _token = $("#_token").val();
+        var url = $("#url").val();
+        var data = {'_token':_token,'organization_id':organization_id};
+        $.post(url,data,function(json){
+            if(json.status==1){
+                window.location.reload();
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
         });
-    });
-    $(function () {
-        $('select.styled').customSelect();
-    });
+    }
 </script>
 </body>
 </html>
