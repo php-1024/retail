@@ -22,8 +22,8 @@ class CompanyCheckAjax
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re, $next);
                 break;
-            case "company/ajax/password_edit_check"://超级管理员选择商户提交数据
-                $re = $this->checkIsLogin($request);
+            case "company/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
+                $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
             //下面是冗余代码，待参考
