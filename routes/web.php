@@ -373,9 +373,11 @@ Route::group(['prefix'=>'company'],function(){
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');         //登陆密码页面
-        Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');//安全密码
-        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');//安全密码
+        Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');            //登陆密码页面
+        Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');  //安全密码
+        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');              //安全密码
+        Route::get('operation_log', 'Company\AccountcenterController@operation_log')->middleware('CompanyCheck'); //账户中心个人操作日志
+        Route::get('login_log', 'Company\AccountcenterController@login_log')->middleware('CompanyCheck');         //账户中心个人登陆日志
     });
 
     //异步提交数据组
