@@ -38,7 +38,7 @@ class Organization extends Model{
     }
 
     //获取-服务商列表
-    public static function getlist($where){
+    public static function getListProxy($where){
         return self::with('organizationCompanyinfo')->where($where)->get();
     }
 
