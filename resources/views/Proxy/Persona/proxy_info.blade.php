@@ -100,7 +100,10 @@
                             安全密码修改
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="get">
+                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/proxy_info_check') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="id"  value="{{$oneAcc->id}}">
+                                <input type="hidden" name="is_editing"  value="1">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
@@ -110,26 +113,26 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="password" class="form-control" name="old_safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">新安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="password" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="password" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group" style="text-align: center;">
-                                    <button type="button" id="addbtn" class="btn btn-shadow btn-info">确认修改</button>
+                                    <button type="button" onclick="postForm()" class="btn btn-shadow btn-info">确认修改</button>
                                 </div>
                             </form>
                         </div>
@@ -153,7 +156,6 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
-
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
