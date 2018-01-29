@@ -333,7 +333,10 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('proxy_operation_log','Proxy\SystemController@proxy_operation_log')->middleware('ProxyCheck');//操作日志
         Route::get('proxy_login_log','Proxy\SystemController@proxy_login_log')->middleware('ProxyCheck');//登录日志
     });
-
+    //个人信息分组
+    Route::group(['prefix'=>'persona'],function(){
+        Route::post('safe_password','Proxy\PersonaController@safe_password')->middleware('ProxyCheck');//安全密码修改
+    });
 
 
 
