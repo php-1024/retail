@@ -121,12 +121,13 @@ class SystemController extends Controller{
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
-            echo 1;exit;
 
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
+            echo 1;exit;
+
             if($admin_data['super_id'] != 2) {
                 //添加操作日志
                 OperationLog::addOperationLog('2', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了服务商：' . $list['organization_name']);//保存操作记录
