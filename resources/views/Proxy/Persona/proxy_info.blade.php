@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="admin" disabled="true">
+                                        <input type="text" class="form-control" value="{{$oneAcc->account}}" disabled="true">
                                     </div>
                                 </div>
 
@@ -104,7 +104,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="admin" disabled="true">
+                                        <input type="text" class="form-control" value="{{$oneAcc->account}}" disabled="true">
                                     </div>
                                 </div>
                                 <div class="form-group">
