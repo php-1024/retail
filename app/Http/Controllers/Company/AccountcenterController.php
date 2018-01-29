@@ -70,13 +70,21 @@ class AccountcenterController extends Controller{
     //登录密码
     public function password()
     {
-        return view('Company/Accountcenter/password');
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        return view('Company/Accountcenter/password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //安全密码
     public function safe_password()
     {
-        return view('Company/Accountcenter/safe_password');
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
