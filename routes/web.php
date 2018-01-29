@@ -331,8 +331,8 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
         Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
         Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
-        Route::get('proxy_operation_log','Proxy\SystemController@proxy_operation_log')->middleware('ProxyCheck');//操作日志
-        Route::get('proxy_login_log','Proxy\SystemController@proxy_login_log')->middleware('ProxyCheck');//登录日志
+        Route::get('operationlog','Proxy\SystemController@operationlog')->middleware('ProxyCheck');//操作日志
+        Route::get('loginlog','Proxy\SystemController@loginlog')->middleware('ProxyCheck');//登录日志
     });
     //个人信息分组
     Route::group(['prefix'=>'persona'],function(){

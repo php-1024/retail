@@ -67,61 +67,26 @@
                     </section>
                     <section class="panel">
                         <header class="panel-heading">
-                            店铺人员结构
+                            公司人员结构
                         </header>
                         <div class="panel-body">
                             <div class="dd" id="nestable2">
+
                                 <ol class="dd-list">
-                                    <li class="dd-item" data-id="1">
+                                    <li class="dd-item" data-id="2">
                                         <div class="dd-handle">
-                                            <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（总店）
+                                            <span class="label label-primary"><i class="icon-user"></i></span> {{$oneAcc->account_info->realname}}-公司负责人
                                         </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                    <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                            <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
-                                                        </div>
-                                                        <ol class="dd-list">
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                        </ol>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                        </ol>
+                                        {!! $structure  !!}
                                     </li>
+
                                 </ol>
+
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
-
-
-
         </section>
     </section>
     <!--main content end-->
