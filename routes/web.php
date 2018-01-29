@@ -371,7 +371,6 @@ Route::group(['prefix'=>'company'],function(){
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');//提交登录数据
-        Route::post('company_select_check', 'Company\AccountcenterController@company_select_check')->middleware('CompanyCheck');//退出重新选择商户
     });
 });
 /********************商户管理系统*************************/

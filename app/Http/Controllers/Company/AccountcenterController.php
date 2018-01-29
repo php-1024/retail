@@ -39,11 +39,6 @@ class AccountcenterController extends Controller{
         $organization = Organization::getArrayCompany(['type'=>'3']);
         return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
     }
-    //超级管理员退出后重新选择商户
-    public function company_select_check(Request $request){
-        $organization_id = $request->organization_id;
-        dd($request);
-    }
 
     //超级管理员退出当前商户
     public function company_quit(Request $request){
