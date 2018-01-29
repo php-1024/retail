@@ -26,6 +26,7 @@ class CompanyCheck{
             case "company":                             //后台首页
             case "company/company_quit":                //退出切换商户
             case "company/company_list":                //所有商户列表
+            case "company/account/profile":            //密码设置
             case "company/account/password":            //密码设置
             case "company/account/safe_password":       //安全密码设置
                 $re = $this->checkLoginAndRule($request);//判断是否登录
