@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
