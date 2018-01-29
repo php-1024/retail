@@ -335,7 +335,7 @@ Route::group(['prefix'=>'proxy'],function(){
     });
     //个人信息分组
     Route::group(['prefix'=>'persona'],function(){
-        Route::post('safe_password','Proxy\PersonaController@safe_password')->middleware('ProxyCheck');//安全密码修改
+        Route::post('safe_password','Proxy\PersonaController@safe_password');//安全密码修改
     });
 
 
