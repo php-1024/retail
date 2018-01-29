@@ -57,7 +57,6 @@
                         </div>
                         @if(empty($admin_data['safe_password']))
                         <section class="panel panel-default">
-
                             <header class="panel-heading font-bold">
                                 安全密码设置-<b style="color:#f00">您还没有设置安全密码，设置安全密码后才能操作！</b>
                             </header>
@@ -100,7 +99,6 @@
                         </section>
                         @else
                         <section class="panel panel-default">
-
                             <header class="panel-heading font-bold">
                                 安全密码修改
                             </header>
