@@ -44,8 +44,13 @@ class PersonaController extends Controller{
         if ($is_editing == '-1'){
             DB::beginTransaction();
             try {
-                Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                if($admin_data['super_id'] == 2){
+                    Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统设置了安全密码');//保存操作记录
+                }else{
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
