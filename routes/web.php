@@ -355,7 +355,7 @@ Route::group(['prefix'=>'proxy'],function(){
 Route::group(['prefix'=>'company'],function(){
     Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');//首页面路由
     Route::get('quit', 'Company\AccountcenterController@quit');//退出系统
-    Route::get('company_quit', 'Company\AccountcenterController@company_quit');//超级管理员退出当前商户
+    Route::get('company_quit', 'Company\AccountcenterController@company_quit')->middleware('CompanyCheck');//超级管理员退出当前商户
     Route::get('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheck');//商户列表
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
