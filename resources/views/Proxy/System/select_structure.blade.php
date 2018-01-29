@@ -21,7 +21,7 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/nestable/nestable.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/css/nestable.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
