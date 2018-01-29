@@ -18,111 +18,11 @@ class CompanyCheckAjax
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-
-            case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加角色
-                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
+            case "company/ajax/company_select"://超级管理员选择商户提交数据
+                $re = $this->checkIsLogin($request);
                 return self::format_response($re, $next);
                 break;
-
-            case "zerone/ajax/role_edit_check"://检测登录和权限和安全密码和编辑角色
-                $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
-                return self::format_response($re, $next);
-                break;
-
-            case "zerone/ajax/setup_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑系统参数设置
-                $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
-                return self::format_response($re, $next);
-                break;
-
-            case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/proxy_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/proxy_list_edit_check"://服务商 检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/company_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndComEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/proxy_examine_check"://服务商审核检测 登录 和 权限 和 安全密码
-            case "zerone/ajax/company_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
-            case "zerone/ajax/company_list_frozen_check"://商户冻结  检测 登录 和 权限 和 安全密码
-                $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/password_edit_check"://检测 登录 和 权限 和 安全密码 和 修改登录密码权限数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndPasswordEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 修改安全密码权限数据提交
-                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/warzone_add_check"://检测战区名称 战区省份 安全密码是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndWarzoneAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/warzone_edit_check"://检测战区名称 战区省份 安全密码是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "zerone/ajax/warzone_delete"://确认删除战区检测登录和权限和安全密码
-                $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/personal_edit_check"://检测是否登录 权限 安全密码 及修改个人信息提交数据
-                $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
-                $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/proxy_assets_check"://检测是否登录 权限 安全密码 数字不能为空
-                $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "company/ajax/company_select_check"://超级管理员选择商户提交数据
-            case "zerone/ajax/company_assets"://商户资产划入检测弹出登入和权限
-
-                $re = $this->checkLoginAndRule($request);
-                return self::format_response($re, $next);
-                break;
-
+            //下面是冗余代码，待参考
             case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
@@ -581,19 +481,30 @@ class CompanyCheckAjax
     //检测是否登录
     public function checkIsLogin($request)
     {
+        //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_company_account_id');
-        //如果为空返回登录失效
-        if (empty($sess_key)) {
-            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
-        } else {
+        $super_sess_key = Session::get('zerone_super_company_account_id');
+        //如果为空跳转到登录页面
+        if(!empty($sess_key)) {
             $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员信息
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
-            $request->attributes->add(['admin_data' => $admin_data]);//添加参数
+            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
             //把参数传递到下一个中间件
-            return self::res(1, $request);
+            return self::res(1,$request);
+        }elseif (!empty($super_sess_key)){
+            $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
+            $sess_key = decrypt($sess_key);//解密管理员ID
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = unserialize($admin_data);//解序列我的信息
+            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
+            //把参数传递到下一个中间件
+            return self::res(1,$request);
+        }else{
+            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         }
     }
     //检测登录提交数据
