@@ -75,73 +75,9 @@
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="2">
                                         <div class="dd-handle">
-
-                                            <span class="label label-primary"><i class="icon-user"></i></span> 张三-公司负责人
+                                            <span class="label label-primary"><i class="icon-user"></i></span> {{$oneAcc->account_info->realname}}-公司负责人
                                         </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="3">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> <button type="button" class="btn btn-info btn-xs" id="edit_btn"><i class="icon-edit"></i> 调整关系</button></span>
-                                                    <span class="label label-primary"><i class="icon-user"></i></span> 张三-运营总监
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle">
-                                                            <span class="pull-right"> <button type="button" class="btn btn-info btn-xs"><i class="icon-edit"></i> 调整关系</button></span>
-                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                        </ol>
+                                        {!! $structure  !!}
                                     </li>
 
                                 </ol>
