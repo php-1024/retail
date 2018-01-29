@@ -47,7 +47,7 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        {{--@include('Company/Public/Nav')--}}
+        @include('Company/Public/Nav')
         <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
