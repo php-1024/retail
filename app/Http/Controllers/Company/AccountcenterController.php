@@ -73,6 +73,12 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/password');
     }
 
+    //安全密码
+    public function safe_password()
+    {
+        return view('Company/Accountcenter/safe_password');
+    }
+
 
 
 
