@@ -41,7 +41,8 @@ class AccountcenterController extends Controller{
     }
     //超级管理员退出后重新选择商户
     public function company_select_check(Request $request){
-        dump($request);
+        $organization_id = $request->organization_id;
+        dd($request);
     }
 
     //超级管理员退出当前商户
