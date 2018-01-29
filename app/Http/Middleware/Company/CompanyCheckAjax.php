@@ -116,29 +116,7 @@ class CompanyCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
-            case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
-            case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登录和权限
-            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登录和权限
-            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登录和权限
-            case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登录和权限
-            case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
-            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
-            case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
-            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登录和权限
-            case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登录和权限
-
-
-            case "zerone/ajax/proxy_examine"://服务商审核检测弹出登入和权限
-            case "zerone/ajax/proxy_list_edit"://服务商列表修改弹出检测登入和权限
-            case "zerone/ajax/proxy_list_frozen"://服务商列表冻结弹出检测登入和权限
-            case "zerone/ajax/proxy_list_delete"://服务商列表删除弹出检测登入和权限
-            case "zerone/ajax/proxy_assets"://服务商列表划入检测弹出登入和权限
-
-            case "zerone/ajax/company_examine"://商户审核检测弹出登录和权限
-            case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
-            case "zerone/ajax/company_list_frozen"://商户冻结检测弹出登入和权限
-            case "zerone/ajax/company_list_delete"://商户删除检测弹出登入和权限
+            case "company/ajax/company_select_check"://超级管理员选择商户提交数据
             case "zerone/ajax/company_assets"://商户资产划入检测弹出登入和权限
 
                 $re = $this->checkLoginAndRule($request);

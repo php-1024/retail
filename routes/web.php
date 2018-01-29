@@ -354,17 +354,22 @@ Route::group(['prefix'=>'proxy'],function(){
 
 /**********************商户管理系统*********************/
 Route::group(['prefix'=>'company'],function(){
+
+    //登陆处理
     Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');//首页面路由
     Route::get('quit', 'Company\AccountcenterController@quit');//退出系统
-    Route::get('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheck');//商户列表
+    Route::get('company_list', 'Company\AccountcenterController@company_list')->middleware('CompanyCheck');//商户列表
     Route::get('company_quit', 'Company\AccountcenterController@company_quit')->middleware('CompanyCheck');//超级管理员退出当前商户
+
+
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
     });
 
-    //登录页面组
+
+    //账户中心
     Route::group(['prefix'=>'accountcenter'],function(){
         Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
@@ -375,6 +380,7 @@ Route::group(['prefix'=>'company'],function(){
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');//提交登录数据
+        Route::post('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheckAjax');//选择商户
     });
 });
 /********************商户管理系统*************************/
