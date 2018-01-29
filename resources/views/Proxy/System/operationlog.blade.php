@@ -52,21 +52,19 @@
                     <!--breadcrumbs end -->
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="get">
+                            <form class="form-horizontal tasi-form" method="get" action="">
 
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">用户账号</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="用户账号">
+                                        <input type="text" class="form-control" name="account" value="{{ $search_data['account'] }}" placeholder="用户账号">
                                     </div>
                                     <div class="col-lg-2">
-                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                        <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                                     </div>
 
                                 </div>
