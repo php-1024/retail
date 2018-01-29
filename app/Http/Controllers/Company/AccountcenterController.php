@@ -76,6 +76,12 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //登录密码修改
+    public function password_edit_check(Request $request)
+    {
+        dd($request);
+    }
+
     //安全密码
     public function safe_password(Request $request)
     {
