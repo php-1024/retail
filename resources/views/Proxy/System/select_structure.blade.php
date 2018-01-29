@@ -80,7 +80,7 @@
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                    <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
+                                                    <span class="label label-info"><i class="icon-user"></i></span> {{$oneAcc->realname}}-店铺负责人[b13123456789_1，店长，13123456789 ]
                                                 </div>
                                                 <ol class="dd-list">
                                                     <li class="dd-item" data-id="3">
@@ -89,18 +89,6 @@
                                                             <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
                                                         </div>
                                                         <ol class="dd-list">
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="4">
-                                                                <div class="dd-handle">
-                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                </div>
-                                                            </li>
                                                             <li class="dd-item" data-id="4">
                                                                 <div class="dd-handle">
                                                                     <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
