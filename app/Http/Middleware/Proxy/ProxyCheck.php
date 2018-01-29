@@ -58,13 +58,12 @@ class ProxyCheck{
             }else{
                 $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
                 if($admin_data['super_id'] != 2){ //防止直接输入地址访问
-                    return self::res(1,$re2['response']);
-
+                    return self::res(0,$request);
                 }
                 $admin_data['super_id'] = 1; //切换权限
                 \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
 
-                return self::res(1,$re2['response']);
+                return self::res(1,$request);
             }
         }
     }
