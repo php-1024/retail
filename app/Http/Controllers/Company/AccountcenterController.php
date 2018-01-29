@@ -32,8 +32,8 @@ class AccountcenterController extends Controller{
     //商户列表（超级管理员使用）
     public function company_list(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员并且已经切换身份成功则跳转
+        $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
+        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('company');
         }
         $organization = Organization::getArrayCompany(['type'=>'3']);
@@ -52,7 +52,7 @@ class AccountcenterController extends Controller{
         return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
     }
 
-    //超级管理员退出当前商户
+    //超级管理员退出当前商户（切换商户）
     public function company_quit(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
