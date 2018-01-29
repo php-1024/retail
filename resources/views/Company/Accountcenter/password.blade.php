@@ -107,7 +107,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
 
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -130,16 +130,35 @@
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
+<script>
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
         });
-    });
-</script>>
+    }
+</script>
 </body>
 </html>
