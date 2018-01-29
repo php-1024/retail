@@ -140,8 +140,7 @@ class SystemController extends Controller{
     }
     //退出登录
     public function switch_status(Request $request){
-        dd($request);
-
+        return self::display($request);
     }
     //退出登录
     public function quit(Request $request){
