@@ -37,7 +37,7 @@ class AccountcenterController extends Controller{
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员已经切换身份成功则跳转
             return redirect('company');
         }
-        //是否存在商户选择数据
+        //如果存在商户组织ID并且当前管理员的组织ID为空
         if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
         }
@@ -60,7 +60,7 @@ class AccountcenterController extends Controller{
         return redirect('company/login');
     }
 
-    //超级管理员以商户平台登录处理
+    //超级管理员以商户平台普通管理员登录处理
     public function superadmin_login($organization_id)
     {
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
