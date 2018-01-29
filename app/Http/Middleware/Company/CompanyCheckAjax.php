@@ -22,6 +22,10 @@ class CompanyCheckAjax
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re, $next);
                 break;
+            case "company/ajax/password_edit_check"://超级管理员选择商户提交数据
+                $re = $this->checkIsLogin($request);
+                return self::format_response($re, $next);
+                break;
             //下面是冗余代码，待参考
             case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
@@ -31,13 +35,13 @@ class CompanyCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    //检测登录，权限，及修改安全密码的数据
-    public function checkLoginAndRuleAndSafepasswordEdit($request){
+    //检测登录，权限，及修改密码的数据
+    public function checkLoginAndRuleAndPasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkPasswordEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -45,13 +49,24 @@ class CompanyCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+
+
+
+
+
+
+    /**
+     * @param $request
+     * @return array
+     */
+
+    //检测登录，权限，及修改安全密码的数据
+    public function checkLoginAndRuleAndSafepasswordEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkPasswordEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
