@@ -60,7 +60,7 @@
     <div class="row state-overview" style="margin: 10px;">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
-            <a href="{{ url('company') }}?organization_id={{ $val->id }}" onclick="return postForm{{$val->id}}();">
+            <a href="{{ url('company') }}?organization_id={{ $val->id }}">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
@@ -105,12 +105,6 @@
     $(function () {
         $('select.styled').customSelect();
     });
-
-    @foreach($organization as $key=>$val)
-    //提交表单
-    function postForm{{$val->id}}() {
-        window.location.reload();
-    @endforeach
 </script>
 </body>
 </html>
