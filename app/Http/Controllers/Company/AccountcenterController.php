@@ -33,13 +33,8 @@ class AccountcenterController extends Controller{
     public function company_list(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $organization_id = $request->organization_id;
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('company');
-        }
-        //如果存在商户组织ID并且当前管理员的组织ID为空
-        if (!empty($organization_id) && $admin_data['organization_id'] == 0){
-            $this->superadmin_login($organization_id);
         }
         $organization = Organization::getArrayCompany(['type'=>'3']);
         return  view('Company/Accountcenter/company_list',['organization'=>$organization]);
