@@ -23,12 +23,11 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $request->organization_id;
-
+        dump($organization_id);
         //是否存在商户选择数据
         if (!empty($organization_id)){
             $this->superadmin_login($organization_id);
         }
-        dump($organization_id);
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             $organization = Organization::getlist(['type'=>'3']);                   //如何是admin则获取所有组织信息
             return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
@@ -74,7 +73,7 @@ class AccountcenterController extends Controller{
             'status'=>$account_info->status,//用户状态
             'mobile'=>$account_info->mobile,//绑定手机号
         ];
-        Session::put('zerone_company_account_id', encrypt(1));//存储登录session_id为当前用户ID
+        Session::put('zerone_company_account_id', encrypt($admin_data['id']));//存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
