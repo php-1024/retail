@@ -26,7 +26,7 @@ class AccountcenterController extends Controller{
         dump($organization_id);
         dump($admin_data);
         //是否存在商户选择数据
-        if (!empty($organization_id)){
+        if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
         }
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
