@@ -71,9 +71,9 @@ class PersonaController extends Controller{
                 }
                 $admin_data['safe_password'] = $encryptPwd;
                 if($admin_data['super_id'] == 2) {
-                    \ZeroneRedis::create_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                    \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
                 }else{
-                    \ZeroneRedis::create_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+                    \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 return response()->json(['data' => '安全密码修改成功！', 'status' => '1']);
             }else{
