@@ -140,7 +140,7 @@ class SystemController extends Controller{
     }
     //退出登录
     public function switch_status(Request $request){
-        redirect('proxy');
+        return self::display($request);
     }
     //退出登录
     public function quit(Request $request){
