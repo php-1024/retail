@@ -190,7 +190,6 @@ class SystemController extends Controller{
     //操作日记
     public function operationlog(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -204,7 +203,7 @@ class SystemController extends Controller{
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd,'organization_id'=>$admin_data['organization_id']];
-        $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
+        $list = OperationLog::getPaginate($account,$time_st_format,$time_nd_format,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
