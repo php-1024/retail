@@ -369,10 +369,9 @@ Route::group(['prefix'=>'company'],function(){
     });
 
 
-    //账户中心
-    Route::group(['prefix'=>'accountcenter'],function(){
-        Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
-        Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
+    //公司资料
+    Route::group(['prefix'=>'/'],function(){
+        Route::get('test', 'Company\AccountcenterController@company_info')->middleware('CompanyCheck');//登录页面路由
     });
 
 
