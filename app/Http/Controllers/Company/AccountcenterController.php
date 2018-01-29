@@ -61,16 +61,24 @@ class AccountcenterController extends Controller{
         return redirect('company');
     }
 
+
+    public function company_info()
+    {
+        dump("test");
+    }
+
+
+
+
+
+
+
     //退出登录
     public function quit(){
         Session::put('zerone_company_account_id','');       //清除普通商户身份
         Session::put('zerone_super_company_account_id',''); //清除超级管理员身份
         return redirect('company/login');
     }
-
-
-
-
 
 
     //超级管理员以商户平台普通管理员登录处理
