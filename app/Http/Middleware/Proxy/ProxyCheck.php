@@ -62,18 +62,6 @@ class ProxyCheck{
                 }
                 $admin_data['super_id'] = 1; //切换权限
                 \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-
-                $sess_key = Session::get('proxy_account_id');//获取管理员ID
-                $sess_key = decrypt($sess_key);//解密管理员ID
-                Redis::connect('proxy');//连接到我的缓存服务器
-                $admin_data = Redis::get('proxy_system_admin_data_'.$sess_key);//获取管理员信息
-                $menu_data = Redis::get('proxy_system_menu_'.$sess_key);
-                $son_menu_data = Redis::get('proxy_system_son_menu_'.$sess_key);
-                $admin_data = unserialize($admin_data);//解序列我的信息
-                $menu_data =  unserialize($menu_data);//解序列一级菜单
-                $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
-                $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
-                //把参数传递到下一个中间件
                 return self::res(1,$request);
 
             }
