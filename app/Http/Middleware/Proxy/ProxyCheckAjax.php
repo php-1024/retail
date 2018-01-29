@@ -25,6 +25,7 @@ class ProxyCheckAjax
                 break;
 
             case "proxy/ajax/safe_password_check"://设置安全密码
+                dd(1);
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
