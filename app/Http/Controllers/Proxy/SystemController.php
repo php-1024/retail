@@ -195,15 +195,9 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $account = $request->input('account');//通过登录页账号查询
-        $time_st = $request->input('time_st');//查询时间开始
-        $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = $time_nd_format = 0;//实例化时间格式
-        if(!empty($time_st) && !empty($time_nd)) {
-            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
-            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
-        }
-        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd,'organization_id'=>$admin_data['organization_id']];
-        $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
+        
+        $search_data = ['organization_id'=>$admin_data['organization_id']];
+        $list = OperationLog::getProxyPaginate($account,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
