@@ -56,7 +56,7 @@ class ProxyCheck{
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                $admin_data = $re->get('admin_data');//中间件产生的管理员数据参数
+                $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
                 dd($admin_data);
                 if($admin_data['super_id'] != 2){ //防止直接输入地址访问
                     return redirect('proxy');
