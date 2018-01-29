@@ -68,7 +68,7 @@ class AccountcenterController extends Controller{
     }
 
     //登录密码
-    public function password()
+    public function password(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
@@ -78,7 +78,7 @@ class AccountcenterController extends Controller{
     }
 
     //安全密码
-    public function safe_password()
+    public function safe_password(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
