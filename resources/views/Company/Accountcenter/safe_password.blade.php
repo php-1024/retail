@@ -55,7 +55,10 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-                        @if(empty($admin_data['safe_password']))
+                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/safe_password_edit_check') }}">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    @if(empty($admin_data['safe_password']))
+                        <input type="hidden" name="is_editing" value="-1">
                         <section class="panel panel-default">
                             <header class="panel-heading font-bold">
                                 安全密码设置-<b style="color:#f00">您还没有设置安全密码，设置安全密码后才能操作！</b>
@@ -148,6 +151,7 @@
                             </div>
                         </section>
                         @endif
+                    </form>
                     </section>
                 </section>
             </section>
@@ -164,16 +168,35 @@
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
+<script>
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload('zerone/login');
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
         });
-    });
-</script>>
+    }
+</script>
 </body>
 </html>
