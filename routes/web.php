@@ -370,7 +370,11 @@ Route::group(['prefix'=>'company'],function(){
         Route::get('company_edit', 'Company\AccountcenterController@company_edit')->middleware('CompanyCheck');     //公司资料编辑（商户资料）
     });
 
-
+    //账户中心
+    Route::group(['prefix'=>'account'],function(){
+        Route::get('password', 'Company\LoginController@password')->middleware('CompanyCheck');         //登陆密码页面
+        Route::get('safe_password', 'Company\LoginController@safe_password')->middleware('CompanyCheck');//安全密码
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
