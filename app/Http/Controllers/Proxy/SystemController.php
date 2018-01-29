@@ -107,12 +107,12 @@ class SystemController extends Controller{
         DB::beginTransaction();
         try{
             $list = Organization::getOneProxy(['id'=>$id]);
-            dd($list);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
             $account_id = $acc['id'];
             if($list['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
+            echo 1;exit;
             if($list['mobile']!=$mobile){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
