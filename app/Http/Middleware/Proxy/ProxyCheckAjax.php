@@ -170,7 +170,7 @@ class ProxyCheckAjax
         $safe_password = $request->input('safe_password');
 
         if($admin_data['super_id'] == '2'){
-            $key = config("app.zernoe_safe_encrypt_key");//获取加密盐
+            $key = config("app.zerone_safe_encrypt_key");//获取加密盐
             $encrypted = md5($safe_password);//加密密码第一重
             $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         }else{
@@ -178,7 +178,7 @@ class ProxyCheckAjax
             $encrypted = md5($safe_password);//加密密码第一重
             $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         }
-
+        echo $encryptPwd;exit;
         if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
