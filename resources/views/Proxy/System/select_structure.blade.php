@@ -79,8 +79,7 @@
                                         <ol class="dd-list">
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间 {{$oneAcc->created_at}}</span>
-                                                    <span class="label label-info"><i class="icon-user"></i></span> {{$oneAcc->account_info->realname}}-店铺负责人[{{$oneAcc->account}}，店长，{{$oneAcc->mobile}} ]
+                                                    {{ $oneOrg['account']. '-'.$oneOrg['account_info']['realname'] }}
                                                 </div>
                                                 {!! $structure  !!}
                                             </li>
