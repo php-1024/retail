@@ -202,13 +202,13 @@ class SystemController extends Controller{
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        $where = ['organization_id'=>$admin_data['organization_id']];
-        $list = OperationLog::getList($where,10,'id');
+        $search_data = ['organization_id'=>$admin_data['organization_id']];
+        $list = OperationLog::getList($search_data,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
         }
-        return view('Proxy/System/operationlog',['list'=>$list,'roles'=>$roles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Proxy/System/operationlog',['list'=>$list,'roles'=>$roles,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //登录日记
     public function loginlog(Request $request){
