@@ -159,7 +159,7 @@ class SystemController extends Controller{
         $oneAcc = Account::getOne([['organization_id',$organization_id],['parent_id',1]]);//查找服务商对应的负责人信息
         $parent_tree = $oneAcc['parent_tree'];//组织树
         //获取重Admin开始的的所有人员
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%']],0,'id','asc')->toArray();
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].'%']],0,'id','asc')->toArray();
         //根据获取的人员组成结构树
         $structure = $this->create_structure($list,$oneAcc['parent_id']);
         return view('Proxy/System/select_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -174,7 +174,7 @@ class SystemController extends Controller{
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
-                $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
+                $structure .= '<span class="label label-info"><i class="icon-user"></i></span>';
                 $structure .=  $val['account']. '-'.$val['account_info']['realname'];
                 if(!empty($val['account_roles'])){
                     $structure.='【'.$val['account_roles'][0]['role_name'].'】';

@@ -264,9 +264,6 @@ class DashboardController extends Controller{
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
-                //unset($list[$key]);
-                //$val['sonlist'] = $this->create_structure($list, $val['id']);
-                //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
