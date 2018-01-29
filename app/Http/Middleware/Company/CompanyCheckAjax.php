@@ -19,7 +19,6 @@ class CompanyCheckAjax
                 return self::format_response($re, $next);
                 break;
             case "company/ajax/company_select"://超级管理员选择商户提交数据
-                dd($request);
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re, $next);
                 break;
