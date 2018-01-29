@@ -68,6 +68,34 @@ class AccountcenterController extends Controller{
         dump("test");
     }
 
+    public function profile(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        return view('Company/Accountcenter/profile',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    public function profile_edit_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $realname = $request->input('realname');
+        $mobile = $request->input('mobile');
+        DB::beginTransaction();
+        try {
+            Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
+            AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了个人账号信息');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改个人账号信息失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改个人账号信息成功', 'status' => '1']);
+    }
+
     //登录密码
     public function password(Request $request)
     {

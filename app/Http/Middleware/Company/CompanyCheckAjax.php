@@ -22,6 +22,10 @@ class CompanyCheckAjax
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re, $next);
                 break;
+            case "company/ajax/profile_edit_check"://检测登录，权限，及修改密码的数据
+                $re = $this->checkLoginAndRuleAndProfileEdit($request);
+                return self::format_response($re, $next);
+                break;
             case "company/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
@@ -32,8 +36,10 @@ class CompanyCheckAjax
                 break;
         }
     }
+
+
+
     /******************************复合检测开始*********************************/
-    /***/
     //检测登录，权限，及修改密码的数据
     public function checkLoginAndRuleAndPasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -68,6 +74,21 @@ class CompanyCheckAjax
             }
         }
     }
+
+    //检测登录，权限，及修改个人账号信息的数据
+    public function checkLoginAndRuleAndProfileEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录是否有权限以及安全密码
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkProfileEdit($re['response']);//检测修改的数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     /***/
     /******************************复合检测结束*********************************/
 
@@ -80,65 +101,6 @@ class CompanyCheckAjax
      * @param $request
      * @return array
      */
-    //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAuthorize($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
-    public function checkLoginAndRuleAndSafeAndProxyAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkProxyAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
     //检测登录和权限和安全密码和ID是否为空
     public function checkLoginAndRuleAndSafeAndID($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -154,49 +116,8 @@ class CompanyCheckAjax
         }
     }
 
-    //检测登录和权限和安全密码和添加角色
-    public function checkLoginAndRuleAndSafeAndRoleEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登录和权限和安全密码和添加角色
-    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登录和权限和安全密码和编辑系统参数而设置
-    public function checkLoginAndRuleAndSafeAndSetupEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSetupEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
+    /*********************************通用单项检测开始*******************************************/
     //检测登录和权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
@@ -225,92 +146,12 @@ class CompanyCheckAjax
             }
         }
     }
-    //服务商 检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndOrgEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //商户 检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndComEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkComEditData($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
-    public function checkLoginAndRuleAndSafeAndCompanyAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
-    public function checkLoginAndRuleAndSafeAndWarzoneAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkWarzoneAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+    /*********************************通用单项检测结束*******************************************/
 
-    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
-    public function checkLoginAndRuleAndSafeAndWarzoneEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkWarzoneEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
-    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
-    public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkPersonalEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
+
+
     //检测是否登录 权限 安全密码 数字不能为空
     public function checkLoginAndRuleAndSafeAndAssets($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -326,9 +167,9 @@ class CompanyCheckAjax
         }
     }
 
-    /******************************单项检测*********************************/
+    /*****************************数据检测开始****************************/
     //检测编辑个人信息数据
-    public function checkPersonalEdit(Request $request){
+    public function checkProfileEdit(Request $request){
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
@@ -337,48 +178,7 @@ class CompanyCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测编辑下级人员权限数据
-    public function checkSubordinateAuthorize($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测编辑下级人员数据
-    public function checkSubordinateEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测修改登录密码
-    public function checkPasswordEdit($request){
-        if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入原登录密码', 'status' => '0']));
-        }
-        if(empty($request->input('new_password'))){
-            return self::res(0,response()->json(['data' => '新登录密码不能为空', 'status' => '0']));
-        }
-        if(empty($request->input('news_password'))){
-            return self::res(0,response()->json(['data' => '请确认新登录密码是否一致', 'status' => '0']));
-        }
-        if($request->input('new_password') != $request->input('news_password')){
-            return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
@@ -430,64 +230,49 @@ class CompanyCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测添加下级人员数据
-    public function checkSubordinateAdd($request){
+
+    //检测修改登录密码
+    public function checkPasswordEdit($request){
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入用户登录密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入原登录密码', 'status' => '0']));
         }
-        if(empty($request->input('repassword'))){
-            return self::res(0,response()->json(['data' => '请再次输入用户登录密码', 'status' => '0']));
+        if(empty($request->input('new_password'))){
+            return self::res(0,response()->json(['data' => '新登录密码不能为空', 'status' => '0']));
         }
-        if($request->input('password')<>$request->input('repassword')){
-            return self::res(0,response()->json(['data' => '两次登录密码输入不一致', 'status' => '0']));
+        if(empty($request->input('news_password'))){
+            return self::res(0,response()->json(['data' => '请确认新登录密码是否一致', 'status' => '0']));
         }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
+        if($request->input('new_password') != $request->input('news_password')){
+            return self::res(0,response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
         }
         return self::res(1,$request);
     }
-    //检测编辑系统参数设置数据
-    public function checkSetupEdit($request){
-        if(empty($request->input('serviceurl'))){
-            return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
+
+    //检测登录提交数据
+    public function checkLoginPost($request)
+    {
+        if (empty($request->input('username'))) {
+            return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
         }
-        if(empty($request->input('merchanturl'))){
-            return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
+        if (empty($request->input('password'))) {
+            return self::res(0, response()->json(['data' => '请输入登录密码', 'status' => '0']));
         }
-        return self::res(1,$request);
+        if (empty($request->input('captcha'))) {
+            return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
+        }
+        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
+            //把参数传递到下一个程序
+            return self::res(1, $request);
+        } else {
+            //用户输入验证码错误
+            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
+        }
     }
-    //检测编辑权限角色数据
-    public function checkRoleEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('role_name'))){
-            return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测添加权限角色数据
-    public function checkRoleAdd($request){
-        if(empty($request->input('role_name'))){
-            return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
+    /*****************************数据检测结束****************************/
+
+
+
 
 
     //部分页面检测用户是否admin，否则检测是否有权限
@@ -530,124 +315,8 @@ class CompanyCheckAjax
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         }
     }
-    //检测登录提交数据
-    public function checkLoginPost($request)
-    {
-        if (empty($request->input('username'))) {
-            return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
-        }
-        if (empty($request->input('password'))) {
-            return self::res(0, response()->json(['data' => '请输入登录密码', 'status' => '0']));
-        }
-        if (empty($request->input('captcha'))) {
-            return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
-        }
-        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
-            //把参数传递到下一个程序
-            return self::res(1, $request);
-        } else {
-            //用户输入验证码错误
-            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
-        }
-    }
 
-    //检测服务商申请表信息
-    public function checkProxyAdd($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        if (empty($request->input('proxy_password'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
-        }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
-            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测商户申请表信息
-    public function checkCompanyAdd($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        if (empty($request->input('proxy_password'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
-        }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
-            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测战区添加表信息
-    public function checkWarzoneAdd($request){
-        if (empty($request->input('zone_name'))) {
-            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
-        }
-        if (empty($request->input('province_id'))) {
-            return self::res(0, response()->json(['data' => '请选择战区包含省份', 'status' => '0']));
-        }
-        if (empty($request->input('safe_password'))) {
-            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测战区编辑表信息
-    public function checkWarzoneEdit($request){
-        if (empty($request->input('zone_name'))) {
-            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
-        }
-        if (empty($request->input('safe_password'))) {
-            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测服务商编辑表信息
-    public function checkOrgEditData($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测商户编辑表信息
-    public function checkComEditData($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入商户名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
+
     //检测商户编辑表信息
     public function checkAssets($request){
         $num = $request->input('num');

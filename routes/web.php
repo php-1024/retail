@@ -375,14 +375,16 @@ Route::group(['prefix'=>'company'],function(){
     Route::group(['prefix'=>'account'],function(){
         Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');         //登陆密码页面
         Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');//安全密码
+        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');//安全密码
     });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');//提交登录数据
-        Route::post('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheckAjax');//选择商户
-        Route::post('password_edit_check', 'Company\AccountcenterController@password_edit_check')->middleware('CompanyCheckAjax');//选择商户
-        Route::post('safe_password_edit_check', 'Company\AccountcenterController@safe_password_edit_check')->middleware('CompanyCheckAjax');//选择商户
+        Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');                                   //提交登录数据
+        Route::post('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheckAjax');                    //选择商户
+        Route::post('profile_edit_check', 'Company\AccountcenterController@profile_edit_check')->middleware('CompanyCheckAjax');            //个人账号信息修改
+        Route::post('password_edit_check', 'Company\AccountcenterController@password_edit_check')->middleware('CompanyCheckAjax');          //密码检测
+        Route::post('safe_password_edit_check', 'Company\AccountcenterController@safe_password_edit_check')->middleware('CompanyCheckAjax');//安全密码检测
     });
 });
 /********************商户管理系统*************************/
