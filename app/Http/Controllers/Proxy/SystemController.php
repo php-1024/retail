@@ -19,6 +19,7 @@ class SystemController extends Controller{
         if($admin_data['super_id'] == 1){
             $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
             foreach ($listOrg as $k=>$v){
+                dump($admin_data);
                 $zone_id = $v['warzoneProxy']['zone_id'];
                 $listOrg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
             }
