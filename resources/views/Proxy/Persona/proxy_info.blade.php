@@ -54,7 +54,7 @@
                     <!--breadcrumbs end -->
                 </div>
             </div>
-
+            @if(empty($oneAcc->safe_password))
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="admin" disabled="true">
+                                        <input type="text" class="form-control" value="{{$oneAcc->account}}" disabled="true">
                                     </div>
                                 </div>
 
@@ -92,7 +92,7 @@
                     </section>
                 </div>
             </div>
-
+            @else
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
@@ -104,7 +104,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="admin" disabled="true">
+                                        <input type="text" class="form-control" value="{{$oneAcc->account}}" disabled="true">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -136,7 +136,7 @@
                     </section>
                 </div>
             </div>
-
+            @endif
 
         </section>
     </section>
