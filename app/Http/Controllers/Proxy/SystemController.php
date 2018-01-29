@@ -139,9 +139,9 @@ class SystemController extends Controller{
 
     }
     //退出登录
-    public function quit(Request $request){
+    public function switch_status(Request $request){
         dd($request);
-    
+
     }
     //退出登录
     public function quit(Request $request){
