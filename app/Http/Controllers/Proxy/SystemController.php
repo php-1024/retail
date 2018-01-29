@@ -124,7 +124,6 @@ class SystemController extends Controller{
 
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
 
