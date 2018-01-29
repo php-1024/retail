@@ -36,6 +36,7 @@ class AccountcenterController extends Controller{
     //商户列表
     public function company_select(Request $request)
     {
+        dump($request);
         $organization = Organization::getArrayCompany(['type'=>'3']);
         return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
     }
