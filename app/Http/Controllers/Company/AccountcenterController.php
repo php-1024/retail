@@ -55,6 +55,8 @@ class AccountcenterController extends Controller{
         if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
         }
+        return response()->json(['data' => '成功选择商户！', 'status' => '1']);
+
     }
     //超级管理员退出当前商户
     public function company_quit(Request $request){
@@ -66,8 +68,8 @@ class AccountcenterController extends Controller{
 
     //退出登录
     public function quit(){
-        Session::put('zerone_company_account_id','');
-        Session::put('zerone_super_company_account_id','');
+        Session::put('zerone_company_account_id','');       //清除普通商户身份
+        Session::put('zerone_super_company_account_id',''); //清除超级管理员身份
         return redirect('company/login');
     }
 
