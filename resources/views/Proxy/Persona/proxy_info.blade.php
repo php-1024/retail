@@ -62,7 +62,10 @@
                             安全密码设置
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="get">
+                            <form class="form-horizontal tasi-form" method="post" id="SetForm" action="{{ url('proxy/ajax/safe_password_check') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="id"  value="{{$oneAcc->id}}">
+                                <input type="hidden" name="is_editing"  value="-1">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
@@ -73,19 +76,19 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">新安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="password" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
+                                        <input type="password" class="form-control" name="re_safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group" style="text-align: center;">
-                                    <button type="button" id="addbtn" class="btn btn-shadow btn-info">确认修改</button>
+                                    <button type="button" onclick="postSetForm()" class="btn btn-shadow btn-info">确认修改</button>
                                 </div>
                             </form>
                         </div>
@@ -154,6 +157,35 @@
     //提交表单
     function postForm() {
         var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+            }
+        });
+    }
+    //提交表单
+    function postSetForm() {
+        var target = $("#SetForm");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
