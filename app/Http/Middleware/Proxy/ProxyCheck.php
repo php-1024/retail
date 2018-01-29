@@ -22,8 +22,8 @@ class ProxyCheck{
                 break;
 
             case "proxy/switch_status"://超级管理员切换服务商
-                dd(1);
                 $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+                dd($admin_data);
                 if($admin_data['super_id'] != 2){ //防止直接输入地址访问
                     return redirect('proxy');
                 }
