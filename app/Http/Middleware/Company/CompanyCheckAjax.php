@@ -22,7 +22,7 @@ class CompanyCheckAjax
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re, $next);
                 break;
-
+            //下面是冗余代码，待参考
             case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
