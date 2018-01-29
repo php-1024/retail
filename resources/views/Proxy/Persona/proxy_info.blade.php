@@ -127,7 +127,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="safe_password">
+                                        <input type="password" class="form-control" name="re_safe_password">
                                     </div>
                                 </div>
 
