@@ -7,6 +7,7 @@ use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
+use App\Models\OrganizationRole;
 use App\Models\Warzone;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -168,9 +169,6 @@ class SystemController extends Controller{
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
-                //unset($list[$key]);
-                //$val['sonlist'] = $this->create_structure($list, $val['id']);
-                //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
@@ -195,6 +193,22 @@ class SystemController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+
+        $account = $request->input('account');//通过登录页账号查询
+        $time_st = $request->input('time_st');//查询时间开始
+        $time_nd = $request->input('time_nd');//查询时间结束
+        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        if(!empty($time_st) && !empty($time_nd)) {
+            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+        }
+        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
+        $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
+        $roles = [];
+        foreach($list as $key=>$val){
+            $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
+        }
+        dd($list);
         return view('Proxy/System/operationlog',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //登录日记
