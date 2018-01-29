@@ -45,177 +45,176 @@
         @include('Proxy/Public/Nav')
     </aside>
 
-        <!--sidebar end-->
-        <!--main content start-->
-        <section id="main-content">
-            <section class="wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!--breadcrumbs start -->
-                        <ul class="breadcrumb">
-                            <li><a href="#"><i class="icon-cloud"></i> 商户店铺管理</a></li>
-                            <li class="active">店铺列表</li>
-                        </ul>
-                        <!--breadcrumbs end -->
-                    </div>
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-cloud"></i> 商户店铺管理</a></li>
+                        <li class="active">店铺列表</li>
+                    </ul>
+                    <!--breadcrumbs end -->
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <div class="panel-body">
-                                <button type="button" class="btn btn-info" onclick="location.href='store_list.html'"><i class="icon-reply"></i> 返回列表</button>
-                                <button type="button" class="btn btn-primary" id="expand-all"><i class="icon-plus"></i> 展开所有</button>
-                                <button type="button" class="btn btn-primary" id="collapse-all"><i class="icon-minus"></i> 合并所有</button>
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-info" onclick="location.href='store_list.html'"><i class="icon-reply"></i> 返回列表</button>
+                            <button type="button" class="btn btn-primary" id="expand-all"><i class="icon-plus"></i> 展开所有</button>
+                            <button type="button" class="btn btn-primary" id="collapse-all"><i class="icon-minus"></i> 合并所有</button>
+                        </div>
+                    </section>
+                    <section class="panel">
+                        <header class="panel-heading">
+                            店铺人员结构
+                        </header>
+                        <div class="panel-body">
+                            <div class="dd" id="nestable2">
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（总店）
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                    <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item" data-id="3">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                        <ol class="dd-list">
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（宝能店）
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                    <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item" data-id="3">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                        <ol class="dd-list">
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（龙岗店）
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                    <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item" data-id="3">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                        <ol class="dd-list">
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                            <li class="dd-item" data-id="4">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
+                                                                    <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+
+                                </ol>
                             </div>
-                        </section>
-                        <section class="panel">
-                            <header class="panel-heading">
-                                店铺人员结构
-                            </header>
-                            <div class="panel-body">
-                                <div class="dd" id="nestable2">
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="1">
-                                            <div class="dd-handle">
-                                                <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（总店）
-                                            </div>
-                                            <ol class="dd-list">
-                                                <li class="dd-item" data-id="2">
-                                                    <div class="dd-handle">
-                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                        <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
-                                                    </div>
-                                                    <ol class="dd-list">
-                                                        <li class="dd-item" data-id="3">
-                                                            <div class="dd-handle">
-                                                                <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
-                                                            </div>
-                                                            <ol class="dd-list">
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                            </ol>
-                                                        </li>
-
-                                                    </ol>
-                                                </li>
-                                            </ol>
-                                        </li>
-                                        <li class="dd-item" data-id="1">
-                                            <div class="dd-handle">
-                                                <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（宝能店）
-                                            </div>
-                                            <ol class="dd-list">
-                                                <li class="dd-item" data-id="2">
-                                                    <div class="dd-handle">
-                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                        <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
-                                                    </div>
-                                                    <ol class="dd-list">
-                                                        <li class="dd-item" data-id="3">
-                                                            <div class="dd-handle">
-                                                                <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
-                                                            </div>
-                                                            <ol class="dd-list">
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                            </ol>
-                                                        </li>
-
-                                                    </ol>
-                                                </li>
-                                            </ol>
-                                        </li>
-
-                                        <li class="dd-item" data-id="1">
-                                            <div class="dd-handle">
-                                                <span class="label label-primary"><i class="icon-sitemap"></i></span> 刘记鸡煲王（龙岗店）
-                                            </div>
-                                            <ol class="dd-list">
-                                                <li class="dd-item" data-id="2">
-                                                    <div class="dd-handle">
-                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
-                                                        <span class="label label-info"><i class="icon-user"></i></span> 张三-店铺负责人[b13123456789_1，店长，13123456789 ]
-                                                    </div>
-                                                    <ol class="dd-list">
-                                                        <li class="dd-item" data-id="3">
-                                                            <div class="dd-handle">
-                                                                <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                <span class="label label-info"><i class="icon-user"></i></span> 王五-店长[b13123456789_1，店长，13123456789 ]
-                                                            </div>
-                                                            <ol class="dd-list">
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="4">
-                                                                    <div class="dd-handle">
-                                                                        <span class="pull-right"> 添加时间 2017-12-08 12:00:00 </span>
-                                                                        <span class="label label-info"><i class="icon-user"></i></span> 王五-店员[b13123456789_1，店长，13123456789 ]
-                                                                    </div>
-                                                                </li>
-                                                            </ol>
-                                                        </li>
-
-                                                    </ol>
-                                                </li>
-                                            </ol>
-                                        </li>
-
-                                    </ol>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                        </div>
+                    </section>
                 </div>
+            </div>
 
-            </section>
 
-            </section>
+
         </section>
-        <!--main content end-->
+    </section>
+    <!--main content end-->
+</section>
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
