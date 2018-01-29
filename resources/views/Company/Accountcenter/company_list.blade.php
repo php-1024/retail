@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap-reset.css" type="text/css"/>
     <!--external css-->
-    <link rel="stylesheet" href="{{asset('public/Company/library/font-awesome')}}/css/font-awesome.css"
-          type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Company/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.css"
-          type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Company/library/font-awesome')}}/css/font-awesome.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Company/library/sweetalert')}}/sweetalert.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Company/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/owl.carousel.css" type="text/css">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/style.css" type="text/css"/>
@@ -85,6 +84,7 @@
 <script src="{{asset('public/Company')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <script src="{{asset('public/Company')}}/js/jquery.sparkline.js" type="text/javascript"></script>
 <script src="{{asset('public/Company/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.js"></script>
+<script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('public/Company')}}/js/owl.carousel.js"></script>
 <script src="{{asset('public/Company')}}/js/jquery.customSelect.min.js"></script>
 
