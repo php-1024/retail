@@ -10,7 +10,6 @@ use App\Models\AccountInfo;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use Session;
 
 class AccountcenterController extends Controller{
@@ -23,8 +22,6 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $request->organization_id;
-        dump($organization_id);
-        dump($admin_data);
         //是否存在商户选择数据
         if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
