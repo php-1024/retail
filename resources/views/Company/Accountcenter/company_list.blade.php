@@ -101,7 +101,8 @@
         var url = $("#url").val();
         var data = {'_token':_token,'organization_id':organization_id};
         $.post(url,data,function(json){
-            if(json.status==1){
+            console.log(json.status);
+            if (json.status == 1){
                 swal({
                     title: "提示信息",
                     text: json.data,
