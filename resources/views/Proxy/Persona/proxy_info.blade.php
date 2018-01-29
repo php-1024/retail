@@ -100,7 +100,7 @@
                             安全密码修改
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/proxy_info_check') }}">
+                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/safe_password_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                 <input type="hidden" name="is_editing"  value="1">
