@@ -224,7 +224,7 @@
 
     <!--common script for all pages-->
     <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-    <script src="{{asset('public/Proxy')}}/nestable/jquery.nestable.js"></script>
+    <script src="{{asset('public/Proxy')}}/js/jquery.nestable.js"></script>
 
     <script>
 
