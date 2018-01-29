@@ -27,16 +27,26 @@ class AccountcenterController extends Controller{
             $this->superadmin_login($organization_id);
         }
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            $organization = Organization::getListProxy(['type'=>'3']);                   //如何是admin则获取所有组织信息
-            return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
+            return redirect('company/company_select');
         }
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneProxy(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-
     }
-
-
+    //商户列表
+    public function company_select(Request $request)
+    {
+        $organization = Organization::getArrayCompany(['type'=>'3']);
+        return  view('Company/Accountcenter/company_organization',['organization'=>$organization]);
+    }
+    //超级管理员退出后重新选择商户
+    public function company_select_check(Request $request){
+        dump($request);
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $admin_data['organization_id'] = 0;
+        ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//清空所选组织
+        return redirect('company');
+    }
 
     //退出登录
     public function quit(){
@@ -44,14 +54,6 @@ class AccountcenterController extends Controller{
         return redirect('company/login');
     }
 
-
-    //退出重新选择商户
-    public function company_switch(Request $request){
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $admin_data['organization_id'] = 0;
-        ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//清空所选组织
-        return redirect('company');
-    }
     //超级管理员以商户平台登录处理
     public function superadmin_login($organization_id)
     {
