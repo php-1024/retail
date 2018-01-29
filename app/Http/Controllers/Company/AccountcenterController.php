@@ -94,6 +94,7 @@ class AccountcenterController extends Controller{
         }
         ZeroneRedis::create_super_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
         ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+        return redirect("company");
     }
 
 }
