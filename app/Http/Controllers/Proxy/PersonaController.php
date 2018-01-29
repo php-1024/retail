@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 class PersonaController extends Controller{
-    //添加服务商
+    //修改安全密码
     public function safe_password(Request $request){
         dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
