@@ -55,46 +55,43 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-                        @if(empty($admin_data['safe_password']))
+                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/safe_password_edit_check') }}">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    @if(empty($admin_data['safe_password']))
+                        <input type="hidden" name="is_editing" value="-1">
                         <section class="panel panel-default">
                             <header class="panel-heading font-bold">
                                 安全密码设置-<b style="color:#f00">您还没有设置安全密码，设置安全密码后才能操作！</b>
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get">
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="200307">
-                                        </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" disabled="" value="{{$admin_data['account']}}">
                                     </div>
-
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
-                                        </div>
+                                </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="safe_password" class="form-control" value="">
                                     </div>
-
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
-                                        </div>
+                                </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="safes_password" class="form-control" value="">
                                     </div>
-
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12 col-sm-offset-6">
-
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
-                                        </div>
+                                </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 col-sm-offset-6">
+                                        <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                     </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                </form>
+                                </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
                             </div>
                         </section>
                         @else
@@ -103,51 +100,45 @@
                                 安全密码修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="200307">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{$admin_data['account']}}">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">原安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">新安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" name="new_safe_password" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" name="news_safe_password" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
-
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                </form>
                             </div>
                         </section>
                         @endif
+                    </form>
                     </section>
                 </section>
             </section>
@@ -164,16 +155,35 @@
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
+<script>
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload('zerone/login');
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
         });
-    });
-</script>>
+    }
+</script>
 </body>
 </html>
