@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">用户账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="200307">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{$admin_data['account']}}">
                                         </div>
                                     </div>
 
@@ -51,7 +51,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">真实姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="realname" class="form-control" value="薛志豪">
+                                            <input type="text" name="realname" class="form-control" value="{{$admin_data['realname']}}">
                                         </div>
                                     </div>
 
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">手机号码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="mobile" class="form-control" value="13454058991">
+                                            <input type="text" name="mobile" class="form-control" value="{{$admin_data['mobile']}}">
                                             <span class="help-block m-b-none">该手机号码可用作登陆，与负责人手机号码可分别设置</span>
                                         </div>
 
