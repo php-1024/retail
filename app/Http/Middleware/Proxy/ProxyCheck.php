@@ -62,8 +62,6 @@ class ProxyCheck{
                 }
                 $admin_data['super_id'] = 1; //切换权限
                 \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-                dd($request);
-                return self::res(1,$request);
             }
         }
     }
