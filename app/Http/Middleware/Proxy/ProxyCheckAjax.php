@@ -209,7 +209,6 @@ class ProxyCheckAjax
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         } else {
             $sess_key = Session::get('proxy_account_id');//获取管理员ID
-            dump($sess_key);
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('proxy');//连接到我的缓存服务器
             $admin_data = Redis::get('proxy_system_admin_data_' . $sess_key);//获取管理员信息
