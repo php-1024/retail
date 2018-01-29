@@ -202,7 +202,7 @@ class SystemController extends Controller{
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd,'Organization_id'=>$admin_data['Organization_id']];
+        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd,'organization_id'=>$admin_data['Organization_id']];
         $list = OperationLog::getPaginate($account,$time_st_format,$time_nd_format,10,'id');
         dd($list);
         $roles = [];
