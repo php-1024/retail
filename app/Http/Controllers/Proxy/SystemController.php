@@ -189,7 +189,14 @@ class SystemController extends Controller{
         }
         return $structure;
     }
-
+    //退出登录
+    public function operationlog(Request $request){
+        dd(1);
+    }
+    //退出登录
+    public function loginlog(Request $request){
+        dd(1);
+    }
     //退出登录
     public function quit(Request $request){
         Session::put('proxy_account_id','');
