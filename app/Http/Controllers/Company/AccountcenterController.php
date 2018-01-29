@@ -7,9 +7,11 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class AccountcenterController extends Controller{
@@ -79,7 +81,30 @@ class AccountcenterController extends Controller{
     //登录密码修改
     public function password_edit_check(Request $request)
     {
-        dd($request);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $account = Account::getOne([['id',$admin_data['id']]]);
+        $password = $request->input('password');
+        $new_password = $request->input('new_password');
+        $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $new_encrypted = md5($new_password);//加密新密码第一重
+        $new_encryptPwd = md5("lingyikeji".$new_encrypted.$key);//加密新码第二重
+        if ($account['password'] == $encryptPwd){
+            DB::beginTransaction();
+            try {
+                Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '登录密码修改成功！', 'status' => '1']);
+        }else{
+            return response()->json(['data' => '原密码不正确！', 'status' => '1']);
+        }
     }
 
     //安全密码
