@@ -58,9 +58,11 @@
     </div>
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
+        <input type="hidden" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" id="url" value="{{url('company/ajax/company_select')}}">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
-            <a href="{{url('company/company_list')}}?organization_id={{$val->id}}">
+            <a href="javascript:;" onclick="postForm({{$val->id}})">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
