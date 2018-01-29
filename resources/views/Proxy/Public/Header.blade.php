@@ -7,6 +7,16 @@
 <div class="top-nav ">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
+        @if($admin_data['super_id'] == 2)
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="{{url('proxy/system/select_proxy')}}">
+                <i class="icon-user"></i>
+                <span class="username"> 切换服务商</span>
+            </a>
+
+        </li>
+        @endif
+
         <li class="dropdown">
             <a class="dropdown-toggle" href="#">
                 <i class="icon-user"></i>
