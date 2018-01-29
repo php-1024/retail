@@ -60,7 +60,7 @@
     <div class="row state-overview" style="margin: 10px;">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
-            <a href="{{url('company/company_select')}}?organization_id={{$val->id}}">
+            <a href="{{url('company/company_list')}}?organization_id={{$val->id}}">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
@@ -93,19 +93,6 @@
 <script src="{{asset('public/Company')}}/js/sparkline-chart.js"></script>
 <script src="{{asset('public/Company')}}/js/easy-pie-chart.js"></script>
 <script>
-//    $(document).ready(function () {
-//        $("#owl-demo").owlCarousel({
-//            navigation: true,
-//            slideSpeed: 300,
-//            paginationSpeed: 400,
-//            singleItem: true
-//
-//        });
-//    });
-//    $(function () {
-//        $('select.styled').customSelect();
-//    });
-
     //提交表单
     function postForm(organization_id){
         var _token = $("#_token").val();
