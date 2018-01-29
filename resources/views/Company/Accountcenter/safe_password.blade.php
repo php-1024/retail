@@ -59,7 +59,7 @@
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
-                                安全密码设置-<font style="color: #ff0000;">您还没有设置安全密码，设置安全密码后才能操作！</font>
+                                安全密码设置-<font style="color:#f00">您还没有设置安全密码，设置安全密码后才能操作！</font>
                             </header>
                             <div class="panel-body">
                                 <form class="form-horizontal" method="get">
@@ -161,7 +161,7 @@
 <script src="{{asset('public/Company')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Company')}}/js/app.js"></script>
-<script src="{{asset('public/Company/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
