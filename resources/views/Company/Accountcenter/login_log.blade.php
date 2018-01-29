@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/app.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css">
-    <link rel="stylesheet" href="{{asset('public/Company/library/datepicker')}}/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="{{asset('public/Company/library/datepicker')}}/datepicker.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
