@@ -42,13 +42,13 @@
                                     <label class="col-sm-1 control-label">时间范围</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm datepicker-input form-control" size="16" type="text" value="" data-date-format="yyyy-mm-dd">
+                                        <input class="input-sm datepicker-input form-control zerodate" size="16" type="text" name="time_st" value="{{$search_data['time_st']}}" data-date-format="yyyy-mm-dd">
                                     </div>
 
                                     <label class="col-sm-1 control-label">到</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm datepicker-input form-control" size="16" type="text" value="" data-date-format="yyyy-mm-dd">
+                                        <input class="input-sm datepicker-input form-control zerodate" size="16" type="text" name="time_nd" value="{{$search_data['time_nd']}}" data-date-format="yyyy-mm-dd">
                                     </div>
 
                                     <div class="col-sm-3">
@@ -105,6 +105,18 @@
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('public/Company/library/datepicker')}}/bootstrap-datepicker.js"></script>
 <script>
+
+    $(function(){
+        $('.zerodate').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+    });
+
     function searchFormCheck(){
         var url = $('#searchForm').attr('action');
         var data = $('#searchForm').serialize();
