@@ -372,8 +372,8 @@ Route::group(['prefix'=>'company'],function(){
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('password', 'Company\LoginController@password')->middleware('CompanyCheck');         //登陆密码页面
-        Route::get('safe_password', 'Company\LoginController@safe_password')->middleware('CompanyCheck');//安全密码
+        Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');         //登陆密码页面
+        Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');//安全密码
     });
 
     //异步提交数据组

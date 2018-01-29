@@ -69,6 +69,12 @@ class AccountcenterController extends Controller{
         dump("test");
     }
 
+    //登录密码
+    public function password()
+    {
+        dd("登录密码！");
+    }
+
 
 
 
