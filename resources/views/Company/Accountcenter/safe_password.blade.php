@@ -82,7 +82,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="safes_password" class="form-control" value="">
+                                        <input type="text" name="re_safe_password" class="form-control" value="">
                                     </div>
                                 </div>
                                 <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -95,6 +95,7 @@
                             </div>
                         </section>
                         @else
+                        <input type="hidden" name="is_editing" value="1">
                         <section class="panel panel-default">
                             <header class="panel-heading font-bold">
                                 安全密码修改
@@ -111,21 +112,21 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">原安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" value="">
+                                            <input type="text" name="old_safe_password" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">新安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="new_safe_password" class="form-control" value="">
+                                            <input type="text" name="safe_password" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="news_safe_password" class="form-control" value="">
+                                            <input type="text" name="re_safe_password" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
