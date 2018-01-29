@@ -142,12 +142,13 @@ class AccountcenterController extends Controller{
                 Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                 DB::commit();
+                dd("1");
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
             }
             $admin_data['safe_password'] = $encryptPwd;
-            \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+            ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
         }else{//修改安全密码
             if ($admin_data['safe_password'] == $old_encryptPwd){
@@ -160,7 +161,7 @@ class AccountcenterController extends Controller{
                     return response()->json(['data' => '安全密码修改失败，请检查', 'status' => '0']);
                 }
                 $admin_data['safe_password'] = $encryptPwd;
-                \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+                ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
                 return response()->json(['data' => '安全密码修改成功！', 'status' => '1']);
             }else{
                 return response()->json(['data' => '原安全密码不正确！', 'status' => '0']);
