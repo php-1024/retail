@@ -155,6 +155,7 @@
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
+
 <script>
     //提交表单
     function postForm() {
