@@ -88,6 +88,7 @@
             if(json.status==1){
                 window.location.reload();
             }else{
+
                 console.log(json);
 //                swal({
 //                    title: "提示信息",
