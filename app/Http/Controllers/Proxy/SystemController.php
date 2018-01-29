@@ -215,7 +215,7 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $account = $request->input('account');//通过登录页账号查询
 
-        $where = [['LoginLog.organization_id',$admin_data['organization_id']]];
+        $where = [['login_log.organization_id',$admin_data['organization_id']]];
 
         $list = LoginLog::getProxyPaginate($where,15,'id');
         dd($list);
