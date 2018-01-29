@@ -121,7 +121,7 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-    //安全密码
+    //安全密码修改设置
     public function safe_password_edit_check(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -129,7 +129,7 @@ class AccountcenterController extends Controller{
         $is_editing = $request->input('is_editing');    //是否修改安全密码
         $old_safe_password = $request->input('old_safe_password');    //原安全密码
         $safe_password = $request->input('safe_password');  //新安全密码
-        $key = config("app.zerone_safe_encrypt_key");//获取加密盐
+        $key = config("app.company_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
         $old_encrypted = md5($old_safe_password);//加密新安全密码第一重
