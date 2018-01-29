@@ -2,9 +2,11 @@
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationProxyinfo;
 use App\Models\Warzone;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -94,9 +96,12 @@ class SystemController extends Controller{
     }
     //公司信息设置
     public function proxy_info_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOneProxy([['id',$id]]);
-
+        $realname = $request->input('realname');//负责人
+        $organization_name = $request->input('organization_name');//服务商名称
+        $idcard = $request->input('idcard');//负责人身份证
+        $mobile = $request->input('mobile');//负责人手机号
         DB::beginTransaction();
         try{
             $list = Organization::getOneProxy(['id'=>$id]);
@@ -109,28 +114,19 @@ class SystemController extends Controller{
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
-
             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
-            if(!empty($password)){
-                $key = config("app.zerone_encrypt_key");//获取加密盐
-                $encrypted = md5($password);//加密密码第一重
-                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-                Account::editAccount([['organization_id',$id],['parent_id','1']],['password'=>$encryptPwd]);//修改管理员表登入密码
-            }
+
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
-            $waprlist = WarzoneProxy::getOne([['organization_id',$id]]);
-            if($waprlist['zone_id'] != $zone_id){
-                WarzoneProxy::editWarzoneProxy([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+            if($admin_data['super_id'] != 2) {
+                //添加操作日志
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了服务商：' . $list['organization_name']);//保存操作记录
             }
-
-            //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了服务商：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
