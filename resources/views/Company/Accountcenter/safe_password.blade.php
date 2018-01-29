@@ -55,10 +55,11 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
+                        @if(empty($admin_data['safe_password']))
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
-                                安全密码设置
+                                安全密码设置-<font style="color: #ff0000;">您还没有设置安全密码，设置安全密码后才能操作！</font>
                             </header>
                             <div class="panel-body">
                                 <form class="form-horizontal" method="get">
@@ -97,7 +98,7 @@
                                 </form>
                             </div>
                         </section>
-
+                        @else
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
@@ -148,6 +149,7 @@
                                 </form>
                             </div>
                         </section>
+                        @endif
                     </section>
                 </section>
             </section>
