@@ -140,6 +140,11 @@ class SystemController extends Controller{
     }
     //退出登录
     public function quit(Request $request){
+        dd($request);
+    
+    }
+    //退出登录
+    public function quit(Request $request){
         Session::put('proxy_account_id','');
         return redirect('proxy/login');
     }
