@@ -142,7 +142,6 @@ class AccountcenterController extends Controller{
                 Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                 DB::commit();
-                dd("1");
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
@@ -155,6 +154,7 @@ class AccountcenterController extends Controller{
                 DB::beginTransaction();
                 try {
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                     DB::commit();
                 } catch (\Exception $e) {
                     DB::rollBack();//事件回滚
