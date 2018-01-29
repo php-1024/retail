@@ -25,7 +25,6 @@ class ProxyCheckAjax
                 break;
 
             case "proxy/ajax/safe_password_check"://设置安全密码
-                dd(1);
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
@@ -133,7 +132,6 @@ class ProxyCheckAjax
     //检测是否登录 权限 修改安全密码
     public function checkLoginAndRuleAndSafeEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录和权限
-        dd($re);
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
