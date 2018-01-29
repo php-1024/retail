@@ -100,6 +100,7 @@ class SystemController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
+        dd($id);
         $realname = $request->input('realname');//负责人
         $organization_name = $request->input('organization_name');//服务商名称
         $idcard = $request->input('idcard');//负责人身份证
@@ -108,7 +109,6 @@ class SystemController extends Controller{
         try{
             $list = Organization::getOneProxy(['id'=>$id]);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
-            dd($acc);
             $account_id = $acc['id'];
             if($list['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
