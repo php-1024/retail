@@ -9,7 +9,7 @@
     <ul class="nav pull-right top-menu">
         @if($admin_data['super_id'] == 2)
         <li class="dropdown">
-            <a class="dropdown-toggle" href="{{url('proxy/system/select_proxy')}}">
+            <a class="dropdown-toggle" href="{{url('proxy/switch_status')}}">
                 <i class="icon-user"></i>
                 <span class="username"> 切换服务商</span>
             </a>

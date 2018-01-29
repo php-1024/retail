@@ -323,11 +323,12 @@ Route::group(['prefix'=>'proxy'],function(){
 
 
     Route::get('/', 'Proxy\SystemController@display')->middleware('ProxyCheck');//系统首页
+    Route::get('switch_status', 'Proxy\SystemController@switch_status')->middleware('ProxyCheck');//超级管理员切换服务商
     Route::get('quit', 'Proxy\SystemController@quit');//退出系统
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
-        Route::any('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
+        Route::post('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
         Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
         Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
         Route::get('proxy_operation_log','Proxy\SystemController@proxy_operation_log')->middleware('ProxyCheck');//操作日志
