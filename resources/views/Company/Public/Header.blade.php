@@ -34,11 +34,11 @@
                         <a href="#"></a>
                     </li>
                     <li>
-                        <a href="{{ url('company/profile') }}">个人信息</a>
+                        <a href="{{ url('/company/account/profile') }}">个人信息</a>
                     </li>
 
                     <li>
-                        <a href="{{ url('company/password') }}">修改密码</a>
+                        <a href="{{ url('/company/account/password') }}">修改密码</a>
                     </li>
                     <li class="divider"></li>
                     @if($admin_data['is_super'] == 1)
