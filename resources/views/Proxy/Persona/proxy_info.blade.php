@@ -102,8 +102,8 @@
                         <div class="panel-body">
                             <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/proxy_info_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <input type="hidden" name="id" id="id" value="{{$oneAcc->id}}">
-                                <input type="hidden" name="id" id="is_editing" value="1">
+                                <input type="hidden" name="id"  value="{{$oneAcc->id}}">
+                                <input type="hidden" name="is_editing"  value="1">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">用户账号</label>
                                     <div class="col-sm-10">
