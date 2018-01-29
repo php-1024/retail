@@ -60,7 +60,7 @@ class ProxyCheck{
                 if($admin_data['super_id'] != 2){ //防止直接输入地址访问
                     return self::res(0,$request);
                 }
-                dd($request->attributes->admin_data['super_id']);
+                dd($request->attributes->get['admin_data']);
                 $admin_data['super_id'] = 1; //切换权限
                 \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
             }
