@@ -112,11 +112,12 @@ class SystemController extends Controller{
             if($list['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
-            echo 1;exit;
             if($list['mobile']!=$mobile){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
+            echo 1;exit;
+
             if($list['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
