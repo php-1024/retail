@@ -55,7 +55,7 @@ class AccountcenterController extends Controller{
         if (!empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);
         }
-        return response()->json(['data' => '成功选择商户！', 'status' => '1']);
+        return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
 
     }
     //超级管理员退出当前商户
