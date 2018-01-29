@@ -40,6 +40,146 @@
     <aside>
         @include('Proxy/Public/Nav')
     </aside>
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-desktop"></i> 系统管理</a></li>
+                        <li class="active">登陆日志查询</li>
+                    </ul>
+                    <!--breadcrumbs end -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <form class="form-horizontal tasi-form" method="get">
+
+                                <div class="form-group">
+                                    <label class="control-label col-lg-1" for="inputSuccess">用户账号</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" placeholder="用户账号">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        登陆日志记录
+                                    </header>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>用户</th>
+                                            <th>登陆IP</th>
+                                            <th>登陆地址</th>
+                                            <th>时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>192.168.1.1</td>
+                                            <td>中国广东深圳</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Mark</td>
+                                            <td>192.168.1.1</td>
+                                            <td>中国广东深圳</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Mark</td>
+                                            <td>192.168.1.1</td>
+                                            <td>中国广东深圳</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Mark</td>
+                                            <td>192.168.1.1</td>
+                                            <td>中国广东深圳</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Mark</td>
+                                            <td>192.168.1.1</td>
+                                            <td>中国广东深圳</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="99">
+                                                <ul class="pagination pull-right">
+                                                    <li class="footable-page-arrow disabled">
+                                                        <a data-page="first" href="#first">«</a>
+                                                    </li>
+
+                                                    <li class="footable-page-arrow disabled">
+                                                        <a data-page="prev" href="#prev">‹</a>
+                                                    </li>
+                                                    <li class="footable-page active">
+                                                        <a data-page="0" href="#">1</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">2</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">3</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">4</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">5</a>
+                                                    </li>
+                                                    <li class="footable-page-arrow">
+                                                        <a data-page="next" href="#next">›</a>
+                                                    </li>
+                                                    <li class="footable-page-arrow">
+                                                        <a data-page="last" href="#last">»</a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
 
 </section>
 
