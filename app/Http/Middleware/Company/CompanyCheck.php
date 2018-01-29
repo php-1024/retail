@@ -61,7 +61,13 @@ class CompanyCheck{
         }
     }
 
-    //普通页面检测用户是否登录
+
+    /**
+     * 1、普通页面检测用户是否登录
+     * 2、工厂方法返回结果
+     * 3、格式化返回值
+     */
+    //1、普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_company_account_id');
@@ -98,11 +104,11 @@ class CompanyCheck{
         }
     }
 
-    //工厂方法返回结果
+    //2、工厂方法返回结果
     public static function res($status,$response){
         return ['status'=>$status,'response'=>$response];
     }
-    //格式化返回值
+    //3、格式化返回值
     public static function format_response($re,Closure $next){
         if($re['status']=='0'){
             return $re['response'];
