@@ -33,7 +33,7 @@ class Organization extends Model{
     }
 
     //获取单条信息-服务商
-    public static function getOne($where){
+    public static function getOneProxy($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
     }
 
@@ -46,7 +46,7 @@ class Organization extends Model{
     public static function getOneCompany($where){
         return self::with('organizationCompanyinfo')->where($where)->first();
     }
-    //获取单条信息-商户
+    //获取-商户列表
     public static function getArrayCompany($where){
         return self::with('organizationCompanyinfo')->where($where)->get();
     }

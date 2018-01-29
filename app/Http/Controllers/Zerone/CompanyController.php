@@ -40,7 +40,7 @@ class CompanyController extends Controller{
         }
 
 
-        $list = Organization::getOne([['id',$id]]);
+        $list = Organization::getOneProxy([['id',$id]]);
 
         $parent_id = $id;//上级组织 零壹或者服务商organization_id
         $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
@@ -134,7 +134,7 @@ class CompanyController extends Controller{
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
         }elseif($sta == 1){
 
-            $list = Organization::getOne([['id',$id]]);
+            $list = Organization::getOneProxy([['id',$id]]);
 
             $parent_id = $id;//零壹或者服务商organization_id
             $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
@@ -251,7 +251,7 @@ class CompanyController extends Controller{
             }
 
             if($list['parent_id'] != $parent_id){
-                $porxy = Organization::getOne(['id'=>$parent_id]); //获取选择更换的上级服务商信息
+                $porxy = Organization::getOneProxy(['id'=>$parent_id]); //获取选择更换的上级服务商信息
                 $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
                 $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
                 Organization::editOrganization(['id'=>$id],$data);//修改商户的上级服务商信息
@@ -271,7 +271,7 @@ class CompanyController extends Controller{
     public function company_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOne([['id',$id]]);//服务商信息
+        $list = Organization::getOneProxy([['id',$id]]);//服务商信息
         return view('Zerone/Company/company_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //商户冻结功能提交
@@ -280,7 +280,7 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOne([['id',$id]]);
+        $list = Organization::getOneProxy([['id',$id]]);
         DB::beginTransaction();
         try{
             if($status == '1'){
@@ -306,7 +306,7 @@ class CompanyController extends Controller{
     //商户删除ajaxshow显示页面
     public function company_list_delete(Request $request){
 //        $id = $request->input('id');//服务商id
-//        $listorg = Organization::getOne(['id'=>$id]);
+//        $listorg = Organization::getOneProxy(['id'=>$id]);
 //        $warzone = Warzone::all();
         return view('Zerone/Company/company_list_delete');
     }
@@ -357,7 +357,7 @@ class CompanyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
 
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value){
@@ -374,7 +374,7 @@ class CompanyController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
-        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
 
         return view('Zerone/Company/company_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
