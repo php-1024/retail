@@ -88,13 +88,56 @@ class SystemController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
-        $listorg = Organization::getOne([['id',$organization_id]]);
+        $listorg = Organization::getOneProxy([['id',$organization_id]]);
 
         return view('Proxy/System/proxy_info',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //公司信息设置
     public function proxy_info_check(Request $request){
-        echo 1;exit;
+        $id = $request->input('id');//服务商id
+        $listorg = Organization::getOneProxy([['id',$id]]);
+
+        DB::beginTransaction();
+        try{
+            $list = Organization::getOneAndorganizationproxyinfo(['id'=>$id]);
+            $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
+            $account_id = $acc['id'];
+            if($list['organization_name']!=$organization_name){
+                Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
+            }
+            if($list['mobile']!=$mobile){
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
+            }
+
+            if($list['organizationproxyinfo']['proxy_owner'] != $realname){
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
+            }
+            if(!empty($password)){
+                $key = config("app.zerone_encrypt_key");//获取加密盐
+                $encrypted = md5($password);//加密密码第一重
+                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+                Account::editAccount([['organization_id',$id],['parent_id','1']],['password'=>$encryptPwd]);//修改管理员表登入密码
+            }
+            if($acc['idcard'] != $idcard){
+                AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+            }
+            $waprlist = WarzoneProxy::getOne([['organization_id',$id]]);
+            if($waprlist['zone_id'] != $zone_id){
+                WarzoneProxy::editWarzoneProxy([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+            }
+
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了服务商：'.$list['organization_name']);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改成功', 'status' => '1']);
+
     }
     //退出登录
     public function quit(Request $request){

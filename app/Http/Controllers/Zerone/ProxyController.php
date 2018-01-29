@@ -190,7 +190,7 @@ class ProxyController extends Controller{
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit(Request $request){
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOne([['id',$id]]);
+        $listorg = Organization::getOneProxy([['id',$id]]);
         $warzone = Warzone::all();
         return view('Zerone/Proxy/proxy_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
     }
@@ -260,7 +260,7 @@ class ProxyController extends Controller{
     public function proxy_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结状态
-        $list = Organization::getOne([['id',$id]]);//服务商信息
+        $list = Organization::getOneProxy([['id',$id]]);//服务商信息
         return view('Zerone/Proxy/proxy_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //服务商冻结功能提交
@@ -269,7 +269,7 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//服务商id
-        $list = Organization::getOne([['id',$id]]);
+        $list = Organization::getOneProxy([['id',$id]]);
             DB::beginTransaction();
             try{
                 if($status == '1'){
@@ -304,7 +304,7 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
 
-        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->account_structure($list,$oneOrg['id']);
@@ -349,7 +349,7 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value){
             foreach ($value['programs'] as $k=>$v){
@@ -365,7 +365,7 @@ class ProxyController extends Controller{
     public function proxy_assets(Request $request){
         $organization_id = $request->input('organization_id'); //服务商id
         $package_id = $request->input('package_id');//套餐id
-        $listOrg = Organization::getOne([['id',$organization_id]]);
+        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         $status = $request->input('status');//状态
         return view('Zerone/Proxy/proxy_assets',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
