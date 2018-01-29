@@ -389,7 +389,7 @@ class CompanyCheckAjax
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         if(empty($admin_data['safe_password'])){
-            return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '-1']));
         }
         if($encryptPwd != $admin_data['safe_password']){
             return self::res(0,response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
