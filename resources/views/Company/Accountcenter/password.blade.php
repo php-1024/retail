@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{$admin_data['account']}}">
+                                            <input type="text" class="form-control" disabled="" value="{{$admin_data['account']}}">
                                         </div>
                                     </div>
 
@@ -75,7 +75,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">原登陆密码</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="password" class="form-control" id="input-id-1" value="">
+                                            <input type="password" name="password" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -83,7 +83,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">新登陆密码</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="new_password" class="form-control" id="input-id-1" value="">
+                                            <input type="password" name="new_password" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -91,7 +91,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复新密码</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="news_password" class="form-control" id="input-id-1" value="">
+                                            <input type="password" name="news_password" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -99,7 +99,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="safe_password" class="form-control" id="input-id-1" value="">
+                                            <input type="password" name="safe_password" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -125,7 +125,7 @@
 <script src="{{asset('public/Company')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Company')}}/js/app.js"></script>
-<script src="{{asset('public/Company/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
