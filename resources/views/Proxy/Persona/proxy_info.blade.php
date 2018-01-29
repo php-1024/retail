@@ -54,7 +54,7 @@
                     <!--breadcrumbs end -->
                 </div>
             </div>
-
+            @if(!empty($oneAcc->safe_password))
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
@@ -92,7 +92,7 @@
                     </section>
                 </div>
             </div>
-
+            @else
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
@@ -136,7 +136,7 @@
                     </section>
                 </div>
             </div>
-
+            @endif
 
         </section>
     </section>
