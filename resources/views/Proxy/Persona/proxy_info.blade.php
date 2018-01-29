@@ -113,21 +113,21 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">原安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="old_safe_password">
+                                        <input type="password" class="form-control" name="old_safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">新安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="safe_password">
+                                        <input type="password" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="safe_password">
+                                        <input type="password" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 

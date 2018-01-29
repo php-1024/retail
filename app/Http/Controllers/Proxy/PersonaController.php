@@ -20,5 +20,9 @@ class PersonaController extends Controller{
         return view('Proxy/Persona/proxy_info',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
+    public function safe_password_check(Request $request){
+        dd(1);
+
+    }
 }
 ?>
