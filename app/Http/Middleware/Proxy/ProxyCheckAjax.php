@@ -129,9 +129,10 @@ class ProxyCheckAjax
             }
         }
     }
-    //检测是否登录 权限 安全密码 数字不能为空
+    //检测是否登录 权限 修改安全密码
     public function checkLoginAndRuleAndSafeEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录和权限
+        dd($re);
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
