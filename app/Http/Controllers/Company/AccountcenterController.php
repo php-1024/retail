@@ -66,6 +66,7 @@ class AccountcenterController extends Controller{
     public function company_edit()
     {
         dump("test");
+
     }
 
     public function profile(Request $request)
