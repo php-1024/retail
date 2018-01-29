@@ -17,7 +17,6 @@ class SystemController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         if($admin_data['super_id'] == 1){
-            dump($admin_data);
             $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
             foreach ($listOrg as $k=>$v){
                 $zone_id = $v['warzoneProxy']['zone_id'];
