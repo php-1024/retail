@@ -134,9 +134,15 @@ class SystemController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
+        }
+        $admin_data['realname'] = $realname;
+        $admin_data['mobile'] = $mobile;
+        if($admin_data['super_id'] == 2) {
+            \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+        }else{
+            \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
         }
         return response()->json(['data' => '修改成功', 'status' => '1']);
 
