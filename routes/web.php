@@ -352,8 +352,7 @@ Route::group(['prefix'=>'proxy'],function(){
 Route::group(['prefix'=>'company'],function(){
     Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');//首页面路由
     Route::get('quit', 'Company\AccountcenterController@quit');//退出系统
-    Route::get('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheck');//退出重新选择商户
-    Route::get('company_list', 'Company\AccountcenterController@company_list')->middleware('CompanyCheck');//商户列表
+    Route::get('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheck');//商户列表
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Company\LoginController@display')->middleware('CompanyCheck');//登录页面路由
@@ -371,6 +370,7 @@ Route::group(['prefix'=>'company'],function(){
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');//提交登录数据
+        Route::post('company_select_check', 'Company\AccountcenterController@company_select_check')->middleware('CompanyCheck');//退出重新选择商户
     });
 });
 /********************商户管理系统*************************/
