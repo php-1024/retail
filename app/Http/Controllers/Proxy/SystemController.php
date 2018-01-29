@@ -103,7 +103,6 @@ class SystemController extends Controller{
         $realname = $request->input('realname');//负责人
         $organization_name = $request->input('organization_name');//服务商名称
         $idcard = $request->input('idcard');//负责人身份证
-        dd($idcard);
         $mobile = $request->input('mobile');//负责人手机号
         DB::beginTransaction();
         try{
@@ -125,8 +124,6 @@ class SystemController extends Controller{
 
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                echo 1;exit;
-
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
 
