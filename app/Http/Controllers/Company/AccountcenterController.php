@@ -72,7 +72,7 @@ class AccountcenterController extends Controller{
     //登录密码
     public function password()
     {
-        dd("登录密码！");
+        return view('Company/Accountcenter/password');
     }
 
 
