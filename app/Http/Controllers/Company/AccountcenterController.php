@@ -29,18 +29,9 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //商户列表
-    public function company_list(Request $request)
+    //商户列表（超级管理员使用）
+    public function company_list()
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $organization_id = $request->organization_id;
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员已经切换身份成功则跳转
-            return redirect('company');
-        }
-        //如果存在商户组织ID并且当前管理员的组织ID为空
-        if (!empty($organization_id) && $admin_data['organization_id'] == 0){
-            $this->superadmin_login($organization_id);
-        }
         $organization = Organization::getArrayCompany(['type'=>'3']);
         return  view('Company/Accountcenter/company_list',['organization'=>$organization]);
     }
@@ -55,8 +46,8 @@ class AccountcenterController extends Controller{
             $this->superadmin_login($organization_id);
         }
         return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
-
     }
+
     //超级管理员退出当前商户
     public function company_quit(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
