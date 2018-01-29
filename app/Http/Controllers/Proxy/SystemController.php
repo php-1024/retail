@@ -103,6 +103,7 @@ class SystemController extends Controller{
         $realname = $request->input('realname');//负责人
         $organization_name = $request->input('organization_name');//服务商名称
         $idcard = $request->input('idcard');//负责人身份证
+        dd($idcard);
         $mobile = $request->input('mobile');//负责人手机号
         DB::beginTransaction();
         try{
