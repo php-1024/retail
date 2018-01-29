@@ -24,11 +24,9 @@ class AccountcenterController extends Controller{
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('company/company_list');
         }
-        dump($admin_data);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $account = Account::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneProxy(['id' => $admin_data['organization_id']]);
-        dump($account);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
