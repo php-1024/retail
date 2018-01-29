@@ -31,6 +31,7 @@ class ProxyCheck{
             case "proxy/system/proxy_info":             //公司信息设置
             case "proxy":                               //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
+            case "proxy/system/proxy_structure":        //人员结构
             /****系统管理****/
 
             /****个人信息****/
