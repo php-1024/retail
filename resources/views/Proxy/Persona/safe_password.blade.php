@@ -199,7 +199,7 @@
                 },function(){
                     window.location.reload();
                 });
-            }else{
+            }else{ 
                 swal({
                     title: "提示信息",
                     text: json.data,
