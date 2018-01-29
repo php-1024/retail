@@ -59,7 +59,7 @@
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
-                                安全密码设置-<font style="color:#f00">您还没有设置安全密码，设置安全密码后才能操作！</font>
+                                安全密码设置-<b style="color:#f00">您还没有设置安全密码，设置安全密码后才能操作！</b>
                             </header>
                             <div class="panel-body">
                                 <form class="form-horizontal" method="get">
