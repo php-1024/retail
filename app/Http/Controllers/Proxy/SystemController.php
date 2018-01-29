@@ -216,7 +216,6 @@ class SystemController extends Controller{
         $account = $request->input('account');//通过登录页账号查询
 
         $where = [['login_log.organization_id',$admin_data['organization_id']]];
-
         $list = LoginLog::getProxyPaginate($where,15,'id');
         return view('Proxy/System/loginlog',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
