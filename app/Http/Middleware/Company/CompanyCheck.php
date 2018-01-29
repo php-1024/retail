@@ -24,10 +24,9 @@ class CompanyCheck{
 
             /****仅检测是否登录及是否具有权限****/
             case "company":                             //后台首页
+            case "company/company_quit":                //退出切换商户
             case "company/company_select":              //清除当前组织重新选择商户组织
             case "zerone/personal":                     //个人中心——个人资料
-            case "company_quit":                        //退出切换商户
-                dd($request);
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
