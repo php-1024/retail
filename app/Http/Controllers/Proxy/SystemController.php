@@ -155,8 +155,38 @@ class SystemController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
+        $organization_id = $admin_data['organization_id'];//当前组织ID，零壹管理平台组织只能为1
+        //获取重Admin开始的的所有人员
+        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.'0,1,'.'%']],0,'id','asc')->toArray();
+        //根据获取的人员组成结构树
+        $structure = $this->create_structure($list,$organization_id);
+        dd($structure);
         return view('Proxy/System/select_structure',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+    private function create_structure($list,$id){
+        $structure = '';
+        foreach($list as $key=>$val){
+            if($val['parent_id'] == $id) {
+                //unset($list[$key]);
+                //$val['sonlist'] = $this->create_structure($list, $val['id']);
+                //$arr[] = $val;
+                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
+                $structure .= '<div class="dd-handle">';
+                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
+                $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
+                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
+                if(!empty($val['account_roles'])){
+                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
+                }
+                $structure .= '</div>';
+                $son_menu = $this->create_structure($list, $val['id']);
+                if (!empty($son_menu)) {
+                    $structure .=  $son_menu;
+                }
+                $structure .= '</li></ol>';
+            }
+        }
+        return $structure;
     }
 
     //退出登录
