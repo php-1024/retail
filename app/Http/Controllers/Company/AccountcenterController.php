@@ -25,7 +25,6 @@ class AccountcenterController extends Controller{
             return redirect('company/company_list');
         }
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
-        $account = Account::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneProxy(['id' => $admin_data['organization_id']]);
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
@@ -80,6 +79,7 @@ class AccountcenterController extends Controller{
     //安全密码
     public function safe_password(Request $request)
     {
+        dump($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
