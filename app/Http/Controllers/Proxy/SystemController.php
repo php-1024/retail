@@ -99,7 +99,6 @@ class SystemController extends Controller{
     public function proxy_info_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
         $id = $request->input('id');//服务商id
         $realname = $request->input('realname');//负责人
         $organization_name = $request->input('organization_name');//服务商名称
@@ -132,6 +131,7 @@ class SystemController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
