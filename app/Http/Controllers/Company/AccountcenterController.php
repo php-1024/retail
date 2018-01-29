@@ -75,7 +75,7 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dump($admin_data);
+        dump($admin_data['safe_password']);
         if (empty($admin_data['safe_password'])){
             redirect('company/account/safe_password');
         }else{
