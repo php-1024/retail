@@ -34,7 +34,7 @@ class AccountcenterController extends Controller{
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $organization_id = $request->organization_id;
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员已经选择商户组织ID,切换身份成功则跳转
+        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){ //如果是超级管理员已经切换身份成功则跳转
             return redirect('company');
         }
         //是否存在商户选择数据
