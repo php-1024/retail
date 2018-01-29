@@ -65,8 +65,10 @@ class OperationLog extends Model{
     public static function getProxyPaginate($where,$paginate,$orderby,$sort='DESC'){
         $model = self::leftjoin('account',function($join){
             $join->on('operation_log.account_id','account.id');
-        })->where($where)->select('account.account','operation_log.*');
-
+        })->select('account.account','operation_log.*');
+        if(!empty($where)){
+            $model =$model->where($where);
+        }
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
