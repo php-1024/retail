@@ -10,6 +10,7 @@ use App\Models\OrganizationProxyinfo;
 use App\Models\Warzone;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 class SystemController extends Controller{
     //添加服务商
