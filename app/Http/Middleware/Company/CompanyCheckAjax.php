@@ -26,15 +26,14 @@ class CompanyCheckAjax
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            //下面是冗余代码，待参考
-            case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
-            case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndID($request);
+            case "company/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
+                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
         }
     }
-    /******************************复合检测*********************************/
+    /******************************复合检测开始*********************************/
+    /***/
     //检测登录，权限，及修改密码的数据
     public function checkLoginAndRuleAndPasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -55,16 +54,6 @@ class CompanyCheckAjax
         }
     }
 
-
-
-
-
-
-    /**
-     * @param $request
-     * @return array
-     */
-
     //检测登录，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -79,6 +68,18 @@ class CompanyCheckAjax
             }
         }
     }
+    /***/
+    /******************************复合检测结束*********************************/
+
+
+
+
+
+
+    /**
+     * @param $request
+     * @return array
+     */
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录

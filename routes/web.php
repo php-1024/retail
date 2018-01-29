@@ -382,6 +382,7 @@ Route::group(['prefix'=>'company'],function(){
         Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');//提交登录数据
         Route::post('company_select', 'Company\AccountcenterController@company_select')->middleware('CompanyCheckAjax');//选择商户
         Route::post('password_edit_check', 'Company\AccountcenterController@password_edit_check')->middleware('CompanyCheckAjax');//选择商户
+        Route::post('safe_password_edit_check', 'Company\AccountcenterController@safe_password_edit_check')->middleware('CompanyCheckAjax');//选择商户
     });
 });
 /********************商户管理系统*************************/
