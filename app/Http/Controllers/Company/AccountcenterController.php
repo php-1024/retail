@@ -61,8 +61,8 @@ class AccountcenterController extends Controller{
         return redirect('company');
     }
 
-
-    public function company_info()
+    //公司资料编辑（商户资料）
+    public function company_edit()
     {
         dump("test");
     }
