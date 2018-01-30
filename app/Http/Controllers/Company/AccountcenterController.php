@@ -33,6 +33,11 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+    public function compant_info_edit_check(Request $request)
+    {
+        dd($request);
+    }
+
     //商户列表（超级管理员使用）
     public function company_list(Request $request)
     {
