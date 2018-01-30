@@ -90,7 +90,9 @@ class AccountcenterController extends Controller{
         try {
             Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
             AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了个人账号信息');//保存操作记录
+            if ($admin_data['is_super'] != 1) {
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了个人账号信息');//保存操作记录
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
@@ -136,7 +138,9 @@ class AccountcenterController extends Controller{
             DB::beginTransaction();
             try {
                 Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
+                if ($admin_data['is_super'] != 1){
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
+                }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -181,8 +185,9 @@ class AccountcenterController extends Controller{
             DB::beginTransaction();
             try {
                 Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                if ($admin_data['is_super'] != 1){
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -196,7 +201,9 @@ class AccountcenterController extends Controller{
                 DB::beginTransaction();
                 try {
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                    if ($admin_data['is_super'] != 1){
+                        OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                    }
                     DB::commit();
                 } catch (\Exception $e) {
                     DB::rollBack();//事件回滚
