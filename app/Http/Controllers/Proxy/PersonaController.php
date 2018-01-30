@@ -47,6 +47,7 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
+        dump($user);
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
@@ -58,7 +59,6 @@ class PersonaController extends Controller{
         $realname = $request->input('realname');//真实姓名
         $id = $request->input('id');//用户id
         $organization_id = $request->input('organization_id');//用户id
-        echo $organization_id;exit;
         if($admin_data['super_id'] == 2){
             $oneAcc = Account::getOne([['id',1]]);
         }else{
