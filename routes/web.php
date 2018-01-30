@@ -380,6 +380,11 @@ Route::group(['prefix'=>'company'],function(){
         Route::get('login_log', 'Company\AccountcenterController@login_log')->middleware('CompanyCheck');         //账户中心个人登陆日志
     });
 
+    //店铺管理
+    Route::group(['prefix'=>'store'],function(){
+        Route::get('store_add', 'Company\StoreController@store_add')->middleware('CompanyCheck');            //登陆密码页面
+    });
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');                                   //提交登录数据
