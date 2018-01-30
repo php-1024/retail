@@ -19,7 +19,7 @@ class StoreController extends Controller{
         $route_name = $request->path();                 //获取当前的页面路由
         $program = Program::getList(['id'=>3],0,'id','DESC');
         dump($program);
-        return view('Company/Store/store_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Company/Store/store_add',['program'=>$program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //店铺管理立即开店
