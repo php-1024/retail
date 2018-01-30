@@ -33,7 +33,7 @@
                             <h3 class="m-b-none">创建店铺</h3>
                         </div>
                         @foreach($program as $key=>$val)
-                            @foreach($val->package as $k=>$v)
+                            @foreach($val->packages as $k=>$v)
                         <div class="col-sm-2">
                             <section class="panel panel-default"   style="height: 230px;">
                                 <header class="panel-heading bg-light no-border">
