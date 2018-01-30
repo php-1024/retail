@@ -57,9 +57,12 @@
                     <section class="panel">
                         <div class="panel-body">
                             <div class="col-sm-12">
+                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg->id}}">
+                                <input type="hidden" id="company_assets" value="{{ url('proxy/ajax/company_assets') }}">
                                 <section class="panel">
                                     <header class="panel-heading">
-                                        商户："刘记鸡煲王"程序划拨
+                                        商户："{{$listOrg->organization_name}}"程序划拨
                                     </header>
                                     <table class="table table-hover">
                                         <thead>
@@ -111,11 +114,6 @@
                     </section>
                 </div>
             </div>
-
-
-
-
-
         </section>
     </section>
     <!--main content end-->
@@ -237,27 +235,95 @@
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 
+script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<!-- Page-Level Scripts -->
 <script>
-
-    //owl carousel
-
-    $(document).ready(function() {
-        $("#owl-demo").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            singleItem : true
-
-        });
-    });
-
-    //custom select box
-
     $(function(){
         $('select.styled').customSelect();
     });
 
+    //程序划入
+    function getAssetsAdd(package_id,status) {
+        var url = $('#company_assets').val();
+        var token = $('#_token').val();
+        var organization_id = $('#organization_id').val();
+        if (package_id == '') {
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            }, function () {
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //程序划出
+    function getAssetsReduce(package_id,status) {
+
+        var url = $('#company_assets').val();
+        var token = $('#_token').val();
+        var organization_id = $('#organization_id').val();
+        if (package_id == '') {
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            }, function () {
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>

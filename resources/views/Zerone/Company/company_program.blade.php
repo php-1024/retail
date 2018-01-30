@@ -169,7 +169,7 @@
             }
         });
     }
-    //程序划入
+    //程序划出
     function getAssetsReduce(package_id,status) {
 
         var url = $('#company_assets').val();
