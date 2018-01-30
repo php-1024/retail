@@ -113,69 +113,12 @@
                                                 <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>李记猪肚鸡</td>
-                                            <td>李健瑚</td>
-                                            <td>c_13123456789_18</td>
-                                            <td>13123456789</td>
-                                            <td>
-                                                <label class="label label-primary">正常</label>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-                                            <td class="text-right">
-                                                <button type="button" id="peoplesBtn" onclick="location.href='company_structure.html'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
-                                                <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>韦小堡</td>
-                                            <td>韦江</td>
-                                            <td>c_13123456789_19</td>
-                                            <td>13123456789</td>
-                                            <td>
-                                                <label class="label label-danger">已冻结</label>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-                                            <td class="text-right">
-                                                <button type="button" id="peoplesBtn" onclick="location.href='company_structure.html'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
-                                                <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                         <tfoot>
                                         <tr>
                                             <td colspan="99">
                                                 <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
 
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
                                                 </ul>
                                             </td>
                                         </tr>

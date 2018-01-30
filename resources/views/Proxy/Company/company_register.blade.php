@@ -59,10 +59,7 @@
                                     <div class="col-lg-11">
                                         <input type="text" class="form-control" value="https://www.baidu.com?id=asd&&token=456" readonly="">
                                     </div>
-
-
                                 </div>
-
                             </form>
                         </div>
                     </section>
