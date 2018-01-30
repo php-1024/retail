@@ -17,7 +17,7 @@ class Package extends Model{
     {
         return $this->belongsToMany('App\Models\Program','package_program','package_id','program_id');
     }
-    //和AssetsOperation表多对一的关系
+    //和AssetsOperation表一对多的关系
     public function assets_operation(){
         return $this->belongsto('App\Models\AssetsOperation','package_id');
     }
