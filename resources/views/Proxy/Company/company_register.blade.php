@@ -73,23 +73,21 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="get">
-
+                            <form class="form-horizontal tasi-form" method="get" action="">
+                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">商户名称</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="商户名称">
+                                        <input type="text" class="form-control" name="proxy_name" value="{{ $search_data['proxy_name'] }}" placeholder="商户名称">
                                     </div>
                                     <label class="control-label col-lg-1" for="inputSuccess">手机号码</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="手机号码">
+                                        <input type="text" class="form-control" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码">
                                     </div>
                                     <div class="col-lg-2">
-                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                        <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                                     </div>
-
                                 </div>
-
                             </form>
                         </div>
                     </section>
@@ -129,7 +127,7 @@
                                                 <td>{{$value->proxy_owner_mobile}}</td>
                                                 <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
                                                     @elseif($value->status == 1)<label class="label label-primary">已通过</label>
-                                                    @elseif($value->status == -1)<label class="label label-danger">未通过</label>
+                                                    @elseif($value->status == -1)<label class="label label-danger">已拒绝</label>
                                                     @endif
                                                 </td>
                                                 <td>{{$value->created_at}}</td>
