@@ -33,6 +33,8 @@
         <!-- sidebar menu end-->
     </div>
 
+    <!--common script for all pages-->
+    <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 
 
 
