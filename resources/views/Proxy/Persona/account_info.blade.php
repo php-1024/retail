@@ -61,48 +61,42 @@
                                 个人信息修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal tasi-form" method="get">
-
+                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('zerone/persona/account_info_check') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">用户账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" value="admin" disabled="true" class="form-control">
+                                            <input type="text" value="{{$user['account']}}" disabled="true" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">用户角色</label>
                                         <div class="col-sm-10">
-                                            <input type="text" value="超级管理员" disabled="true" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">用户角色</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" value="超级管理员" disabled="true" class="form-control">
+                                            <input type="text" value="{{$admin_data['role_name']}}" disabled="true" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">真实姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" value="薛志豪">
+                                            <input type="text" class="form-control" value="{{$user['account_info']['realname']}}" name="realname">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">联系方式</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" value="13123456789">
+                                            <input type="text" class="form-control" value="{{$user['mobile']}}" name="mobile">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">安全密码 </label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="password" class="form-control" name="safe_password" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group" style="text-align: center;">
-                                        <button type="button" id="addbtn" class="btn btn-shadow btn-info">保存信息</button>
+                                        <button type="button" onclick="postForm()" class="btn btn-shadow btn-info">保存信息</button>
                                     </div>
                                 </form>
                             </div>
@@ -115,125 +109,22 @@
                                 我的权限
                             </header>
                             <div class="panel-body">
+                                @foreach($module_node_list as $key=>$val)
                                 <div>
                                     <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单模块
+                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> {{ $val['module_name'] }}
                                     </label>
                                 </div>
                                 <div>
+                                    @foreach($val['program_nodes'] as $kk=>$vv)
                                     <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单编辑
+                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> {{ $vv['node_name'] }}
                                     </label>
                                     &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled=""> 订单查询
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单添加
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单删除
-                                    </label>
+                                    @endforeach
                                 </div>
                                 <div style="margin-top: 10px;"></div>
-
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单模块
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单编辑
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled=""> 订单查询
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单添加
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单删除
-                                    </label>
-                                </div>
-                                <div style="margin-top: 10px;"></div>
-
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单模块
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单编辑
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled=""> 订单查询
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单添加
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单删除
-                                    </label>
-                                </div>
-                                <div style="margin-top: 10px;"></div>
-
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单模块
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单编辑
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled=""> 订单查询
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单添加
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单删除
-                                    </label>
-                                </div>
-                                <div style="margin-top: 10px;"></div>
-
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单模块
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单编辑
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled=""> 订单查询
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单添加
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label class="i-checks">
-                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单删除
-                                    </label>
-                                </div>
-                                <div style="margin-top: 10px;"></div>
+                                @endforeach
                             </div>
                         </section>
                     </div>

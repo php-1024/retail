@@ -17,11 +17,11 @@ class PersonaController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $account_id = $admin_data['id'];//当前登录账号ID
-        $user = Account::getOne([['id',$admin_data['id']]]);
         if($admin_data['super_id'] == 2) {//如果是超级管理员
+            $user = Account::getOne([['id',1]]);
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
+            $user = Account::getOne([['id',$admin_data['id']]]);
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
@@ -41,8 +41,7 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
-        dump($module_node_list);
-        return view('Proxy/Persona/account_info',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
