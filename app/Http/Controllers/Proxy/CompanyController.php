@@ -24,7 +24,6 @@ class CompanyController extends Controller{
             $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
         }
         $list = ProxyApply::getPaginage($where,'15','id');
-        dump($list);
         return view('Proxy/Company/company_register',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户列表
