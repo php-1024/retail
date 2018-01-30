@@ -50,7 +50,12 @@ class CompanyCheck{
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                return self::res(1,$re2['response']);
+                $re3 = $this->checkSafePassword($re2['response']);//检测安全密码是否为空
+                if($re3['status']=='0'){
+                    return $re3;
+                }else{
+                    return self::res(1,$re3['response']);
+                }
             }
         }
     }
@@ -58,8 +63,20 @@ class CompanyCheck{
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            return redirect('company/company_list');
+        if($admin_data['id']!=1){
+            //暂定所有用户都有权限
+            //return self::res(1,redirect('zerone'));
+            return self::res(1,$request);
+        }else{
+            return self::res(1,$request);
+        }
+    }
+
+    //部分页面检测用户是否admin，否则检测是否有权限
+    public function checkSafePassword($request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        if (empty($admin_data['safe_password'])){    //前往设置安全密码
+            return redirect('company/account/password');
         }else{
             return self::res(1,$request);
         }
