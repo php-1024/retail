@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
+use App\Models\Assets;
+use App\Models\Organization;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Session;
 class ProgramController extends Controller{
@@ -12,7 +15,6 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         $listOrg = Organization::getOneProxy([['id',$organization_id]]);
-
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value) {
             foreach ($value['programs'] as $k => $v) {
