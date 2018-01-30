@@ -106,6 +106,7 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
+        dump($admin_data);
         if (empty($admin_data['safe_password'])){
             return redirect('company/account/safe_password');
         }else{
@@ -149,6 +150,7 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
+        dump($admin_data);
         return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -169,6 +171,7 @@ class AccountcenterController extends Controller{
             DB::beginTransaction();
             try {
                 Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
+
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
