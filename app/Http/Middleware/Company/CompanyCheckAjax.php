@@ -212,7 +212,7 @@ class CompanyCheckAjax
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
         if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹加密盐
-            dd($safe_password);
+            dd($request);
             $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
         }else{
             $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
