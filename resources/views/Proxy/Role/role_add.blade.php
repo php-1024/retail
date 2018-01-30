@@ -220,7 +220,7 @@
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <!--common script for all pages-->
-<script src="{{asset('public/Proxy')}}/iCheck/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/icheck.min.js"></script>
 
 <script>
     $(function(){
