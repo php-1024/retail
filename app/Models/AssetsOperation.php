@@ -28,5 +28,9 @@ class AssetsOperation extends Model{
         $program->number = $number;//操作数量
         $program->save();
     }
+    //获取分页数据
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
+        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
