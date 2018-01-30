@@ -52,7 +52,9 @@ class AccountcenterController extends Controller{
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
             //添加操作日志
-            if ($admin_data['is_super'] != 1){//超级管理员跳过操作商户的记录
+            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的公司资料！');//保存操作记录
+            }else{//商户本人操作记录
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了公司资料：'.$list['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
