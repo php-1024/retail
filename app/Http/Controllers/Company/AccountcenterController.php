@@ -143,11 +143,9 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dump($admin_data['is_super']);
-        if ($admin_data['is_super'] != 1){
-            dump("is_super不等于1");
-        }else{
-            dump("is_super等于1");
+        $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
+        if ($admin_data['is_super'] == 1){
+            $admin_data['account'] = $account['account'];
         }
         if (empty($admin_data['safe_password'])){
             return redirect('company/account/safe_password');
