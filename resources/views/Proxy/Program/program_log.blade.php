@@ -72,11 +72,11 @@
                                          @foreach($list as $key=>$val)
                                         <tr>
                                             <td>{{$val->id}}</td>
-                                            <td>零壹新科技（四平）有限公司</td>
+                                            <td>{{$val->organization->organization_name}}</td>
                                             <td><span class="label label-success">@if($val->status == 1)划入@else划出@endif</span></td>
                                             <td>
                                                 <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> {{$val}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}} 套</span>
+                                                    <span class="label label-danger"><i class="icon-code"></i> {{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}} 套</span>
                                                 </div>
 
                                             </td>
@@ -89,34 +89,7 @@
                                         <tr>
                                             <td colspan="99">
                                                 <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
-
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
+                                                    {{$list->links()}}
                                                 </ul>
                                             </td>
                                         </tr>
