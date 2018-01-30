@@ -52,7 +52,7 @@
 
                                     <div>
                                         <i class="fa fa-info text-info text-xm "></i>
-                                        面向餐饮实体，实现了餐饮实体线上线下一体化。
+                                        面向餐饮实体，实现了餐饮实体线上线下一体化。（待修改）
                                     </div>
 
                                 </div>
