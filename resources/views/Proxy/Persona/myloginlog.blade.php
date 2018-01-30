@@ -85,7 +85,7 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td colspan="99">
+                                            <td colspan="99" class="text-right">
                                                 {!! $list->links() !!}
                                             </td>
                                         </tr>
