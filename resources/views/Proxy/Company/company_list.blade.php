@@ -41,12 +41,40 @@
                 <div class="col-lg-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><a href="#"><i class="icon-code"></i> 系统资产管理</a></li>
-                        <li class="active">系统资产列表</li>
+                        <li><a href="#"><i class="icon-sitemap"></i> 下辖商户管理</a></li>
+                        <li class="active">商户列表</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <form class="form-horizontal tasi-form" method="get">
+
+                                <div class="form-group">
+                                    <label class="control-label col-lg-1" for="inputSuccess">商户名称</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" placeholder="商户名称">
+                                    </div>
+                                    <label class="control-label col-lg-1" for="inputSuccess">手机号码</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" placeholder="手机号码">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
@@ -54,40 +82,67 @@
                             <div class="col-sm-12">
                                 <section class="panel">
                                     <header class="panel-heading">
-                                        系统资产列表
+                                        商户列表
                                     </header>
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>套餐名称</th>
-                                            <th>包含程序</th>
-                                            <th>添加时间</th>
+                                            <th>商户名称</th>
+                                            <th>负责人姓名</th>
+                                            <th>商户账号</th>
+                                            <th>手机号码</th>
+                                            <th>商户状态</th>
+                                            <th>注册时间</th>
+                                            <th class="text-right" >操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-
                                         <tr>
                                             <td>1</td>
-                                            <td>零壹科技餐饮系统</td>
-
+                                            <td>刘记餐饮集团</td>
+                                            <td>刘兴文</td>
+                                            <td>c_13123456789_17</td>
+                                            <td>13123456789</td>
                                             <td>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮总店系统</span> &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:30 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:10 套</span>&nbsp;&nbsp;
-                                                </div>
-                                                <div style=" margin-top: 30px;"></div>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮店铺系统</span>  &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:150 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:15 套</span>&nbsp;&nbsp;
-                                                </div>
+                                                <label class="label label-primary">正常</label>
                                             </td>
                                             <td>2017-08-08 10:30:30</td>
-
+                                            <td class="text-right">
+                                                <button type="button" id="peoplesBtn" onclick="location.href='company_structure.html'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
+                                                <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
+                                            </td>
                                         </tr>
-
+                                        <tr>
+                                            <td>2</td>
+                                            <td>李记猪肚鸡</td>
+                                            <td>李健瑚</td>
+                                            <td>c_13123456789_18</td>
+                                            <td>13123456789</td>
+                                            <td>
+                                                <label class="label label-primary">正常</label>
+                                            </td>
+                                            <td>2017-08-08 10:30:30</td>
+                                            <td class="text-right">
+                                                <button type="button" id="peoplesBtn" onclick="location.href='company_structure.html'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
+                                                <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>韦小堡</td>
+                                            <td>韦江</td>
+                                            <td>c_13123456789_19</td>
+                                            <td>13123456789</td>
+                                            <td>
+                                                <label class="label label-danger">已冻结</label>
+                                            </td>
+                                            <td>2017-08-08 10:30:30</td>
+                                            <td class="text-right">
+                                                <button type="button" id="peoplesBtn" onclick="location.href='company_structure.html'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
+                                                <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                         <tfoot>
                                         <tr>
