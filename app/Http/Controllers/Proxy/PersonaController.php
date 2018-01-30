@@ -73,6 +73,7 @@ class PersonaController extends Controller{
                 $admin_data['realname'] = $realname;
 
             }
+            echo 1;exit;
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
