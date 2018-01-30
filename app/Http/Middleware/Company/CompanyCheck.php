@@ -16,18 +16,15 @@ class CompanyCheck{
                 //获取用户登录存储的SessionId
                 $sess_key = Session::get('zerone_company_account_id');
                 //如果不为空跳转到选择商户组织页面
-                if(!empty($sess_key)) {
+                if(!empty($sess_key))) {
                     return redirect('company');
                 }
                 break;
 
             /****仅检测是否登录及是否具有权限****/
-            case "company/store/store_list":            //店铺管理
-                $re = $this->checkLoginAndRule($request);//判断是否登录
-                return self::format_response($re,$next);
-                break;
             case "company":                             //后台首页
             case "company/company_quit":                //退出切换商户
+            case "company/company_list":                //所有商户列表
             case "company/account/profile":             //密码设置
             case "company/account/password":            //密码设置
             case "company/account/safe_password":       //安全密码设置
@@ -35,8 +32,8 @@ class CompanyCheck{
             case "company/account/login_log":           //账户中心个人登陆日志
             case "company/store/store_add":             //店铺管理创建店铺
             case "company/store/store_add_second":      //店铺管理立即开店
-            case "company/company_list":                //所有商户列表
-                $re = $this->checkIsLogin($request);//判断是否登录
+            case "company/store/store_list":            //店铺管理
+                $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
         }
@@ -53,12 +50,7 @@ class CompanyCheck{
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                $re3 = $this->checkSafePassword($re2['response']);//检测安全密码是否为空
-                if($re3['status']=='0'){
-                    return $re3;
-                }else{
-                    return self::res(1,$re3['response']);
-                }
+                return self::res(1,$re2['response']);
             }
         }
     }
@@ -75,16 +67,6 @@ class CompanyCheck{
         }
     }
 
-    //部分页面检测用户是否admin，否则检测是否有权限
-    public function checkSafePassword($request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if (empty($admin_data['safe_password'])){    //前往设置安全密码
-            return redirect('company/account/password');
-        }else{
-            return self::res(1,$request);
-        }
-    }
-
 
     /**
      * 1、普通页面检测用户是否登录
@@ -95,12 +77,26 @@ class CompanyCheck{
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_company_account_id');
+        $super_sess_key = Session::get('zerone_super_company_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
             $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('company');//连接到我的缓存服务器
             $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
+            $menu_data = Redis::get('company_system_menu_'.$sess_key);
+            $son_menu_data = Redis::get('company_system_son_menu_'.$sess_key);
+            $admin_data = unserialize($admin_data);//解序列我的信息
+            $menu_data =  unserialize($menu_data);//解序列一级菜单
+            $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
+            $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
+            //把参数传递到下一个中间件
+            return self::res(1,$request);
+        }elseif (!empty($super_sess_key)){
+            $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
+            $sess_key = decrypt($sess_key);//解密管理员ID
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('company_system_menu_'.$sess_key);
             $son_menu_data = Redis::get('company_system_son_menu_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
