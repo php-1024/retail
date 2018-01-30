@@ -178,7 +178,7 @@ class AccountcenterController extends Controller{
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                     Account::editAccount([['id','1']],['password' => $new_encryptPwd]);                    //修改超级管理员登陆密码
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了自己的登陆密码！');  //保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的登陆密码！');  //保存操作记录
                 }else{//商户本人操作记录
                     Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改商户登陆密码
                     OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
@@ -222,7 +222,15 @@ class AccountcenterController extends Controller{
         $is_editing = $request->input('is_editing');    //是否修改安全密码
         $old_safe_password = $request->input('old_safe_password');    //原安全密码
         $safe_password = $request->input('safe_password');  //新安全密码
-        $key = config("app.company_encrypt_key");//获取加密盐
+
+        if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹安全密码加密盐
+            $safe_password_check = $account['safe_password'];
+            $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
+        }else{
+            $safe_password_check = $admin_data['safe_password'];
+            $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
+        }
+
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
         $old_encrypted = md5($old_safe_password);//加密新安全密码第一重
@@ -230,8 +238,12 @@ class AccountcenterController extends Controller{
         if ($is_editing == '-1'){
             DB::beginTransaction();
             try {
-                Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                if ($admin_data['is_super'] != 1){
+                //添加操作日志
+                if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                    Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //设置超级管理员安全密码
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统设置了自己的安全密码！');    //保存操作记录
+                }else{//商户本人操作记录
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
                     OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                 }
                 DB::commit();
@@ -243,11 +255,15 @@ class AccountcenterController extends Controller{
             \ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
         }else{//修改安全密码
-            if ($admin_data['safe_password'] == $old_encryptPwd){
+            if ($safe_password_check == $old_encryptPwd){
                 DB::beginTransaction();
                 try {
-                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                    if ($admin_data['is_super'] != 1){
+                    //添加操作日志
+                    if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                        Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //修改超级管理员安全密码
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统设置了自己的安全密码！');    //保存操作记录
+                    }else{//商户本人操作记录
+                        Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
                         OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                     }
                     DB::commit();
