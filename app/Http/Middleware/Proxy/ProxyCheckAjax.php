@@ -327,11 +327,17 @@ class ProxyCheckAjax
     //检测登入密码修改
     public function checkPassword($request){
 
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        if(empty($request->input('old_password'))){
+            return self::res(0,response()->json(['data' => '请输入原密码', 'status' => '0']));
         }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入新密码', 'status' => '0']));
+        }
+        if(empty($request->input('re_password'))){
+            return self::res(0,response()->json(['data' => '请重复新密码', 'status' => '0']));
+        }
+        if($request->input('password') <> $request->input('re_password')){
+            return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
         }
         return self::res(1, $request);
     }
