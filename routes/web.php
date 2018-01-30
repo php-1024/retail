@@ -340,7 +340,7 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('safe_password','Proxy\PersonaController@safe_password')->middleware('ProxyCheck');//安全密码修改
         Route::get('password','Proxy\PersonaController@password')->middleware('ProxyCheck');//登入密码修改
         Route::get('myoperationlog','Proxy\PersonaController@myoperationlog')->middleware('ProxyCheck');//我的操作记录
-        Route::get('myloginlog','Proxy\PersonaController@myoperationlog')->middleware('ProxyCheck');//我的登入记录
+        Route::get('myloginlog','Proxy\PersonaController@myloginlog')->middleware('ProxyCheck');//我的登入记录
     });
 
 
