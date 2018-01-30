@@ -37,6 +37,7 @@ class ProxyCheck{
             /****系统管理****/
 
             /****个人信息****/
+            case "proxy/persona/account_info":         //安全密码修改
             case "proxy/persona/safe_password":         //安全密码修改
             /****个人信息****/
 
