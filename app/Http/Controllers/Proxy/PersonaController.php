@@ -9,7 +9,7 @@ use Session;
 class PersonaController extends Controller{
 
 
-//修改安全密码
+    //个人信息
     public function account_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
