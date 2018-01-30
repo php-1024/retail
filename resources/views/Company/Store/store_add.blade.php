@@ -41,7 +41,7 @@
 
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
-                                                {{$v['package_name']}}
+                                                {{$v['package_name']}}--价值{{$v['package_price']}}
                                                 <i class="fa fa-cutlery text-success text-lg pull-right"></i>
                                             </div>
 
@@ -58,7 +58,7 @@
                                 </div>
 
                                 <div class="panel-body" style="text-align:center;">
-                                    <button class="btn btn-s-md btn-danger" onclick="location.href='store_add_second.html'">立即开店</button>
+                                    <button class="btn btn-s-md btn-danger" onclick="location.href='{{url('company/store/store_add_second')}}?package_id={{$v['id']}}'">立即开店</button>
                                 </div>
                             </section>
                         </div>
