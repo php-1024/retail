@@ -72,7 +72,7 @@
                                         @foreach($list as $key=>$val)
                                         <tr>
                                             <td>{{$val->id}}</td>
-                                            <td>零壹新科技（四平）有限公司</td>
+                                            <td>{{$val->organization->organization_name}}</td>
                                             <td><span class="label label-success">@if($val->status ==1)划入@else划出@endif</span></td>
                                             <td>
                                                 <div>
