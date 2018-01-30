@@ -16,8 +16,6 @@
     <!--external css-->
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
-    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
@@ -87,7 +85,7 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td colspan="99">
+                                            <td colspan="99" class="text-right">
                                                 {!! $list->links() !!}
                                             </td>
                                         </tr>
@@ -102,70 +100,5 @@
         </section>
     </section>
 </section>
-<!-- Custom and plugin javascript -->
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
-
-
-<script>
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
-    //提交表单
-    function postSetForm() {
-        var target = $("#SetForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
-</script>
-
 </body>
 </html>
