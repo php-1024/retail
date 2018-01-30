@@ -99,13 +99,18 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>刘记餐饮集团</td>
-                                            <td>刘兴文</td>
+                                        @foreach($list as $key=>$val)
+                                            <td>{{$val->id}}</td>
+                                            <td>{{$val->organization_name}}</td>
+                                            <td>{{$val->organization_companyinfo->company_owner}}</td>
                                             <td>c_13123456789_17</td>
-                                            <td>13123456789</td>
+                                            <td>{{$val->organization_companyinfo->company_owner_mobile}}</td>
                                             <td>
+                                                @if($val->status ==1)
                                                 <label class="label label-primary">正常</label>
+                                                @else
+                                                    <label class="label label-danger">冻结</label>
+                                                @endif
                                             </td>
                                             <td>2017-08-08 10:30:30</td>
                                             <td class="text-right">
@@ -113,6 +118,7 @@
                                                 <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
