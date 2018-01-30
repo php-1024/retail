@@ -68,13 +68,16 @@ class PersonaController extends Controller{
         try {
 
             if($oneAcc['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                if($admin_data['super_id'] != 2) {
+                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
+                }
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
-                $admin_data['realname'] = $realname;
 
             }
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                if($admin_data['super_id'] != 2) {
+                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改服务商用户信息表 用户姓名
+                }
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             $admin_data['realname'] = $realname;
