@@ -205,11 +205,9 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dump($admin_data['is_super']);
-        if ($admin_data['is_super'] != 1){
-            dump("is_super不等于1");
-        }else{
-            dump("is_super等于1");
+        $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
+        if ($admin_data['is_super'] == 1){
+            $admin_data['account'] = $account['account'];
         }
         return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
@@ -222,7 +220,7 @@ class AccountcenterController extends Controller{
         $is_editing = $request->input('is_editing');    //是否修改安全密码
         $old_safe_password = $request->input('old_safe_password');    //原安全密码
         $safe_password = $request->input('safe_password');  //新安全密码
-
+        $account = Account::getOne(['id'=>'1']);//查询超级管理员的安全密码
         if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹安全密码加密盐
             $safe_password_check = $account['safe_password'];
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
@@ -261,7 +259,7 @@ class AccountcenterController extends Controller{
                     //添加操作日志
                     if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                         Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //修改超级管理员安全密码
-                        OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统设置了自己的安全密码！');    //保存操作记录
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的安全密码！');    //保存操作记录
                     }else{//商户本人操作记录
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
                         OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
