@@ -16,7 +16,7 @@ class CompanyController extends Controller{
         $proxy_owner_mobile = $request->input('proxy_owner_mobile');
         $search_data = ['proxy_name'=>$proxy_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
 
-        $where = [['parent_id',$admin_data['organization']]];
+        $where = [['parent_id',$admin_data['organization_id']]];
         if(!empty($proxy_name)){
             $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
         }
