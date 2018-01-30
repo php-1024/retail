@@ -23,7 +23,10 @@ class ProxyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndProxyInfo($request);
                 return self::format_response($re, $next);
                 break;
-
+            case "proxy/ajax/account_info_check"://检测登录和权限和安全密码和公司信息是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndAccountInfo($request);
+                return self::format_response($re, $next);
+                break;
             case "proxy/ajax/safe_password_check"://设置安全密码
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
@@ -58,6 +61,20 @@ class ProxyCheckAjax
             return $re;
         }else{
             $re2 = $this->checkProxyInfo($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndAccountInfo($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAccountInfo($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -279,6 +296,18 @@ class ProxyCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测个人信息修改
+    public function checkAccountInfo($request){
+
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
 
     //检测商户编辑表信息
     public function checkAssets($request){

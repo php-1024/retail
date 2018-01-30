@@ -46,6 +46,16 @@ class PersonaController extends Controller{
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
+    //修改个人信息提交
+    public function account_info_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        if($admin_data['super_id'] == 2){
+            $oneAcc = Account::getOne([['id',1]]);
+        }else{
+            $oneAcc = Account::getOne([['id',$admin_data['id']]]);
+        }
+        dd($oneAcc);
+    }
 
     //修改安全密码
     public function safe_password(Request $request){
@@ -62,6 +72,8 @@ class PersonaController extends Controller{
         return view('Proxy/Persona/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
+
+    //修改安全密码提交
     public function safe_password_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -126,5 +138,12 @@ class PersonaController extends Controller{
             }
         }
     }
+
+
+
+
+
+
+
 }
 ?>
