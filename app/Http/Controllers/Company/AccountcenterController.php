@@ -106,7 +106,12 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dump($admin_data);
+        dump($admin_data['is_super']);
+        if ($admin_data['is_super'] != 1){
+            dump("is_super不等于1");
+        }else{
+            dump("is_super等于1");
+        }
         if (empty($admin_data['safe_password'])){
             return redirect('company/account/safe_password');
         }else{
@@ -150,7 +155,12 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        dump($admin_data);
+        dump($admin_data['is_super']);
+        if ($admin_data['is_super'] != 1){
+            dump("is_super不等于1");
+        }else{
+            dump("is_super等于1");
+        }
         return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
