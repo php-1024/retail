@@ -84,7 +84,33 @@
     </section>
     <!--main content end-->
 </section>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 
+<script src="{{asset('public/Proxy')}}/js/jquery.nestable.js"></script>
+
+<script>
+
+    //owl carousel
+
+    $(document).ready(function() {
+        $('#nestable2').nestable();
+
+
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
+        });
+
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
+
+
+    });
+
+
+
+</script>
 </body>
 </html>
 
