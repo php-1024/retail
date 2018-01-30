@@ -53,6 +53,11 @@ class ProxyCheck{
             case "proxy/program/program_list":           //权限角色添加
             case "proxy/program/program_log":            //权限角色列表
             /****系统资产管理****/
+            
+            /****下辖商户管理****/
+            case "proxy/company/company_register":        //商户注册列表
+            case "proxy/company/company_list":            //商户列表
+            /****下辖商户管理****/
 
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);

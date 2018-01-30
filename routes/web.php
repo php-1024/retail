@@ -354,6 +354,11 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('program_log','Proxy\ProgramController@program_log')->middleware('ProxyCheck');//权限角色列表
     });
 
+    //下辖商户管理
+    Route::group(['prefix'=>'company'],function(){
+        Route::get('company_register','Proxy\ProgramController@company_register')->middleware('ProxyCheck');//添加权限角色
+        Route::get('company_list','Proxy\ProgramController@company_list')->middleware('ProxyCheck');//权限角色列表
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
