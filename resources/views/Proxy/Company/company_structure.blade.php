@@ -61,14 +61,14 @@
                     </section>
                     <section class="panel">
                         <header class="panel-heading">
-                            "刘记餐饮集团"店铺结构
+                            "{{$oneAcc->organization->organization_name}}"店铺结构
                         </header>
                         <div class="panel-body">
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】刘记餐饮集团[ 刘新文，c13123456789_1]
+                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】{{$oneAcc->organization->organization_name}}[ {{$oneAcc->account_info->realname}}，{{$oneAcc->account}}]
                                         </div>
                                         <ol class="dd-list">
                                             {!! $structure  !!}
