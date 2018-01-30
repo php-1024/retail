@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\DB;
 use Session;
 
 class AccountcenterController extends Controller{
-
     //系统管理首页
     public function display(Request $request)
     {
@@ -25,7 +24,7 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        if (empty($admin_data['safe_password'])){//先设置安全密码
+        if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('company/account/password');
         }else{
             if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
@@ -37,6 +36,30 @@ class AccountcenterController extends Controller{
         }
     }
 
+    //商户列表（超级管理员使用）
+    public function company_list(Request $request)
+    {
+        $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
+        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
+            return redirect('company');
+        }
+        $organization = Organization::getArrayCompany(['type'=>'3']);
+        return  view('Company/Accountcenter/company_list',['organization'=>$organization]);
+    }
+
+    //选择商户
+    public function company_select(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $organization_id = $request->organization_id;
+        //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
+        if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
+            $this->superadmin_login($organization_id);//选择身份登陆
+        }
+        return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
+    }
+
+    //商户信息编辑
     public function compant_info_edit_check(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -68,29 +91,6 @@ class AccountcenterController extends Controller{
         return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
-    //商户列表（超级管理员使用）
-    public function company_list(Request $request)
-    {
-        $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
-            return redirect('company');
-        }
-        $organization = Organization::getArrayCompany(['type'=>'3']);
-        return  view('Company/Accountcenter/company_list',['organization'=>$organization]);
-    }
-
-    //选择商户
-    public function company_select(Request $request)
-    {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $organization_id = $request->organization_id;
-        //如果存在商户组织ID并且当前管理员的组织ID为空
-        if (!empty($organization_id) && $admin_data['organization_id'] == 0){
-            $this->superadmin_login($organization_id);
-        }
-        return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
-    }
-
     //超级管理员退出当前商户（切换商户）
     public function company_quit(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -99,13 +99,7 @@ class AccountcenterController extends Controller{
         return redirect('company');
     }
 
-    //公司资料编辑（商户资料）
-    public function company_edit()
-    {
-        dump("test");
-
-    }
-
+    //账号信息修改页面
     public function profile(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -116,6 +110,7 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/profile',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //账号信息修改处理
     public function profile_edit_check(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -140,7 +135,7 @@ class AccountcenterController extends Controller{
         return response()->json(['data' => '修改个人账号信息成功', 'status' => '1']);
     }
 
-    //登录密码
+    //登录密码页面
     public function password(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -158,7 +153,7 @@ class AccountcenterController extends Controller{
         }
     }
 
-    //登录密码修改
+    //登录密码修改处理
     public function password_edit_check(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -202,7 +197,7 @@ class AccountcenterController extends Controller{
         }
     }
 
-    //安全密码
+    //安全密码设置页面
     public function safe_password(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -216,7 +211,7 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-    //安全密码修改设置
+    //安全密码修改设置处理
     public function safe_password_edit_check(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -232,7 +227,6 @@ class AccountcenterController extends Controller{
             $safe_password_check = $admin_data['safe_password'];
             $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
         }
-
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
         $old_encrypted = md5($old_safe_password);//加密新安全密码第一重
@@ -282,7 +276,7 @@ class AccountcenterController extends Controller{
         }
     }
 
-    //个人操作日志
+    //个人操作日志页面
     public function operation_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -306,7 +300,7 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //个人登陆日志
+    //个人登陆日志页面
     public function login_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -331,16 +325,11 @@ class AccountcenterController extends Controller{
     }
 
 
-
-
-
-
     //退出登录
     public function quit(){
         Session::put('zerone_company_account_id','');
         return redirect('company/login');
     }
-
 
     //超级管理员以商户平台普通管理员登录处理
     public function superadmin_login($organization_id)
