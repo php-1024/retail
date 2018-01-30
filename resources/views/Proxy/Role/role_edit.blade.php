@@ -80,6 +80,25 @@
                 $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
             }
         });
+
+
+        //owl carousel
+
+        $(document).ready(function() {
+            $("#owl-demo").owlCarousel({
+                navigation : true,
+                slideSpeed : 300,
+                paginationSpeed : 400,
+                singleItem : true
+
+            });
+        });
+
+        //custom select box
+
+        $(function(){
+            $('select.styled').customSelect();
+        });
     });
 
     //提交表单
