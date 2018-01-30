@@ -249,8 +249,7 @@ class PersonaController extends Controller{
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
         }
-        dump($list);
-        return view('Proxy/Persona/myoperationlog',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Proxy/Persona/myoperationlog',['list'=>$list,'roles'=>$roles,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
     public function myloginlog(Request $request){
