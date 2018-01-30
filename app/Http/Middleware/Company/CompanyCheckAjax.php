@@ -215,10 +215,10 @@ class CompanyCheckAjax
         $account = Account::getOne(['id'=>'1']);//查询超级管理员的安全密码
         if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹加密盐
             $safe_password_check = $account['safe_password'];
-            $key = config("app.zerone_safe_encrypt_key");//获取加密盐（零壹平台专用）
+            $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         }else{
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.company_safe_encrypt_key");//获取加密盐（商户专用）
+            $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
