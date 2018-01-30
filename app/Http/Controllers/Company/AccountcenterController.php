@@ -220,7 +220,7 @@ class AccountcenterController extends Controller{
         $is_editing = $request->input('is_editing');    //是否修改安全密码
         $old_safe_password = $request->input('old_safe_password');    //原安全密码
         $safe_password = $request->input('safe_password');  //新安全密码
-
+        $account = Account::getOne(['id'=>'1']);//查询超级管理员的安全密码
         if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹安全密码加密盐
             $safe_password_check = $account['safe_password'];
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
