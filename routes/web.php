@@ -342,6 +342,12 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('myoperationlog','Proxy\PersonaController@myoperationlog')->middleware('ProxyCheck');//我的操作记录
         Route::get('myloginlog','Proxy\PersonaController@myloginlog')->middleware('ProxyCheck');//我的登入记录
     });
+    //下级人员管理--权限角色组
+    //权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add','Proxy\RoleController@role_add')->middleware('ZeroneCheck');//添加权限角色
+        Route::get('role_list','Proxy\RoleController@role_list')->middleware('ZeroneCheck');//权限角色列表
+    });
 
 
 
