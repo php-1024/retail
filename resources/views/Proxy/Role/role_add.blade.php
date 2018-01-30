@@ -21,7 +21,7 @@
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
-    <link href="{{asset('public/Proxy')}}/css/custom.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/iCheck/css/custom.css" rel="stylesheet" />
     <!--external css-->
 
 
@@ -216,6 +216,8 @@
     </section>
     <!--main content end-->
 </section>
+<script src="{{asset('public/Proxy')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 
 </body>
 </html>
