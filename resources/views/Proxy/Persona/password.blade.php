@@ -51,7 +51,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="icon-user"></i> 个人信息</a></li>
-                        <li class="active">安全密码修改</li>
+                        <li class="active">登入密码修改</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -60,10 +60,10 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            安全密码修改
+                            登入密码修改
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/safe_password_check') }}">
+                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/password_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                 <div class="form-group">
@@ -73,23 +73,29 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">原安全密码</label>
+                                    <label class="col-sm-2 control-label">原登入密码</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="old_safe_password">
+                                        <input type="password" class="form-control" name="old_password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">新安全密码</label>
+                                    <label class="col-sm-2 control-label">新登入密码</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="safe_password">
+                                        <input type="password" class="form-control" name="password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复新密码</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="re_safe_password">
+                                        <input type="password" class="form-control" name="re_password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">安全密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 
@@ -130,44 +136,18 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
-    //提交表单
-    function postSetForm() {
-        var target = $("#SetForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
+
 </script>
 
 </body>
