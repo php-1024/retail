@@ -24,7 +24,6 @@ class CompanyCheck{
             /****仅检测是否登录及是否具有权限****/
             case "company":                             //后台首页
             case "company/company_quit":                //退出切换商户
-            case "company/company_list":                //所有商户列表
             case "company/account/profile":             //密码设置
             case "company/account/password":            //密码设置
             case "company/account/safe_password":       //安全密码设置
@@ -34,6 +33,10 @@ class CompanyCheck{
             case "company/store/store_add_second":      //店铺管理立即开店
             case "company/store/store_list":            //店铺管理
                 $re = $this->checkLoginAndRule($request);//判断是否登录
+                return self::format_response($re,$next);
+                break;
+            case "company/company_list":                //所有商户列表
+                $re = $this->checkIsLogin($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
         }
