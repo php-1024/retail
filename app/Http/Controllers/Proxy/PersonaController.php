@@ -2,9 +2,13 @@
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\AccountInfo;
 use App\Models\Module;
 use App\Models\OperationLog;
+use App\Models\OrganizationProxyinfo;
+use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -69,7 +73,6 @@ class PersonaController extends Controller{
                 $admin_data['realname'] = $realname;
 
             }
-
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
