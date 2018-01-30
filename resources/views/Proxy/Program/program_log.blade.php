@@ -76,11 +76,11 @@
                                             <td><span class="label label-success">@if($val->status ==1)划入@else划出@endif</span></td>
                                             <td>
                                                 <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮总店系统</span> &nbsp;&nbsp; <span class="label label-primary">X1 套</span>
+                                                    <span class="label label-danger"><i class="icon-code"></i> {{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X1 套</span>
                                                 </div>
 
                                             </td>
-                                            <th>零壹新科技（深圳）有限公司</th>
+                                            <th></th>
                                             <td>{{$val->created_at}}</td>
                                         </tr>
                                          @endforeach
