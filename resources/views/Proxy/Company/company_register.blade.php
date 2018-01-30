@@ -118,77 +118,36 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>刘记鸡煲王</td>
-                                            <td>刘兴文</td>
+                                        @foreach($list as $key=>$value)
+                                            <tr>
+                                                <td>{{$value->id}}</td>
+                                                <td>{{$value->proxy_name}}</td>
+                                                <td>{{$value->warzone->zone_name}}</td>
+                                                <td>{{$value->proxy_owner}}</td>
 
-                                            <td>440*** **** **** 2345</td>
-                                            <td>13123456789</td>
-                                            <td>
-                                                <label class="label label-primary">已通过</label>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>李记猪肚鸡</td>
-                                            <td>李健瑚</td>
-                                            <td>440*** **** **** 3456</td>
-                                            <td>13123456789</td>
-                                            <td>
-                                                <label class="label label-warning">待审核</label>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>韦小堡</td>
-                                            <td>韦江</td>
-                                            <td>440*** **** **** 3579</td>
-                                            <td>13123456789</td>
-                                            <td>
-                                                <label class="label label-danger">已拒绝</label>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-
-                                        </tr>
+                                                <td>{{$value->proxy_owner_idcard}}</td>
+                                                <td>{{$value->proxy_owner_mobile}}</td>
+                                                <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
+                                                    @elseif($value->status == 1)<label class="label label-primary">已通过</label>
+                                                    @elseif($value->status == -1)<label class="label label-danger">未通过</label>
+                                                    @endif
+                                                </td>
+                                                <td>{{$value->created_at}}</td>
+                                                <td class="text-right">
+                                                    @if($value->status == 0)
+                                                        <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
+                                                        <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                                    @else
+                                                        <label class="label label-primary">已审核</label>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td colspan="99">
-                                                <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
-
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
-                                                </ul>
+                                            <td colspan="9" class="footable-visible">
+                                                {{ $list->appends($search_data)->links() }}
                                             </td>
                                         </tr>
                                         </tfoot>
