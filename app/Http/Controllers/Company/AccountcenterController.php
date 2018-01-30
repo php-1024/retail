@@ -10,6 +10,7 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationCompanyinfo;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,31 @@ class AccountcenterController extends Controller{
 
     public function compant_info_edit_check(Request $request)
     {
-        dd($request);
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        $id = $request->organization_id;                    //接收组织id
+        $organization_name = $request->organization_name;   //接收组织商户名称
+        $mobile = $request->company_owner_mobile;           //接收负责人手机号码
+        $list = Organization::getOneCompany(['id'=>$id]);   //获取商户组织信息
+        DB::beginTransaction();
+        try{
+            if($list['organization_name']!=$organization_name){
+                Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
+            }
+            if($list['mobile']!=$mobile){
+                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id], ['company_owner_mobile'=>$mobile]);//修改商户表商户手机号码
+                Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
+            }
+            //添加操作日志
+            if ($admin_data['is_super'] != 1){//超级管理员跳过操作商户的记录
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了公司资料：'.$list['organization_name']);//保存操作记录
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
     //商户列表（超级管理员使用）
