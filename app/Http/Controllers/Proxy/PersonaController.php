@@ -47,7 +47,6 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
-        dump($user);
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
@@ -73,7 +72,6 @@ class PersonaController extends Controller{
                 $admin_data['realname'] = $realname;
 
             }
-            echo 1;exit;
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
