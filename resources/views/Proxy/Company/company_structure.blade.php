@@ -35,7 +35,90 @@
     <aside>
         @include('Proxy/Public/Nav')
     </aside>
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-sitemap"></i> 下辖商户管理</a></li>
+                        <li class="active">商户店铺结构</li>
+                    </ul>
+                    <!--breadcrumbs end -->
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-info" onclick="location.href='company_list.html'"><i class="icon-reply"></i> 返回列表</button>
+                            <button type="button" class="btn btn-primary" id="expand-all"><i class="icon-plus"></i> 展开所有</button>
+                            <button type="button" class="btn btn-primary" id="collapse-all"><i class="icon-minus"></i> 合并所有</button>
+                        </div>
+                    </section>
+                    <section class="panel">
+                        <header class="panel-heading">
+                            "刘记餐饮集团"店铺结构
+                        </header>
+                        <div class="panel-body">
+                            <div class="dd" id="nestable2">
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】刘记餐饮集团[ 刘新文，c13123456789_1]
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                    <span class="label label-info"><i class="icon-user"></i></span> 【总店】刘记鸡煲王总店[ 刘新文，s13123456789_1]
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item" data-id="3">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 【分店】刘记鸡煲王宝能店[ 刘新文，b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 【分店】刘记鸡煲王宝能店[ 刘新文，b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                    <span class="label label-info"><i class="icon-user"></i></span> 【总店】刘记猪肚鸡总店[ 刘新文，s13123456789_1]
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item" data-id="3">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 【分店】刘记鸡煲王宝能店[ 刘新文，b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间 2017-12-08 12:00:00</span>
+                                                            <span class="label label-info"><i class="icon-user"></i></span> 【分店】刘记鸡煲王宝能店[ 刘新文，b13123456789_1，店长，13123456789 ]
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
     <!--main content end-->
 </section>
 
