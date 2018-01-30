@@ -103,7 +103,7 @@
                                             <td>{{$val->id}}</td>
                                             <td>{{$val->organization_name}}</td>
                                             <td>{{$val->organizationCompanyinfo->company_owner}}</td>
-                                            <td>c_13123456789_17</td>
+                                            <td>{{$val->account}}</td>
                                             <td>{{$val->organizationCompanyinfo->company_owner_mobile}}</td>
                                             <td>
                                                 @if($val->status ==1)
