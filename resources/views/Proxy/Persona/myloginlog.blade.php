@@ -75,42 +75,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>您</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-01-16 12:22:33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>您</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-01-16 12:22:33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>您</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-01-16 12:22:33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>您</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-01-16 12:22:33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>您</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-01-16 12:22:33</td>
-                                        </tr>
-
+                                        @foreach($list as $key=>$val)
+                                            <tr>
+                                                <td>{{  $val->accounts->id }}</td>
+                                                <td>{{  $val->accounts->account }}</td>
+                                                <td>{{  long2ip($val->ip) }}</td>
+                                                <td>{{  $val->ip_position }}</td>
+                                                <td>{{  $val->created_at }}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
