@@ -36,7 +36,7 @@ class CompanyController extends Controller{
         $organization = $admin_data['organization_id'];
         $list = Organization::getCompany([['parent_id',$organization],['program_id',3]],10,'id');
         foreach ($list as $key=>$val){
-           $account = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account');
+           $account = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account')->first();
            dump($account);
         }
         return view('Proxy/Company/company_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
