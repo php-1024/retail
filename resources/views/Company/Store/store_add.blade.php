@@ -32,6 +32,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">创建店铺</h3>
                         </div>
+                        @foreach($program as $key=>$val)
                         <div class="col-sm-2">
                             <section class="panel panel-default"   style="height: 230px;">
                                 <header class="panel-heading bg-light no-border">
@@ -39,7 +40,7 @@
 
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
-                                                零壹餐饮系统
+                                                {{$val->package->package_name}}
                                                 <i class="fa fa-cutlery text-success text-lg pull-right"></i>
                                             </div>
 
@@ -60,61 +61,7 @@
                                 </div>
                             </section>
                         </div>
-                        <div class="col-sm-2">
-                            <section class="panel panel-default"   style="height: 230px;">
-                                <header class="panel-heading bg-light no-border">
-                                    <div class="clearfix">
-                                        <a href="#" class="pull-left thumb-md avatar b-3x m-r">
-
-                                        </a>
-                                        <div class="clear">
-                                            <div class=" m-t-xs m-b-xs">
-                                                零壹商城系统
-                                                <i class="icon icon-basket-loaded text-success text-lg pull-right"></i>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </header>
-                                <div class="panel-body text-sm">
-                                    <div>
-                                        <i class="fa fa-info text-info text-xm "></i>
-                                        面向便利店，商场等实体，实现了商城实体线上线下一体化。
-                                    </div>
-                                </div>
-                                <div class="panel-body" style="text-align:center;">
-                                    <button class="btn btn-s-md btn-danger"  onclick="location.href='store_add_second.html'">立即开店</button>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-sm-2">
-                            <section class="panel panel-default"   style="height: 230px;">
-                                <header class="panel-heading bg-light no-border">
-                                    <div class="clearfix">
-                                        <a href="#" class="pull-left thumb-md avatar b-3x m-r">
-
-                                        </a>
-                                        <div class="clear">
-                                            <div class=" m-t-xs m-b-xs">
-                                                零壹酒店系统
-                                                <i class="fa fa-building-o text-success text-lg pull-right"></i>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </header>
-                                <div class="panel-body text-sm">
-                                    <div>
-                                        <i class="fa fa-info text-info text-xm "></i>
-                                        面向酒店，宾馆等实体，实现了酒店，宾馆等实体的线上线下一体化。
-                                    </div>
-                                </div>
-                                <div class="panel-body" style="text-align:center;">
-                                    <button class="btn btn-s-md btn-danger"  onclick="location.href='store_add_second.html'">立即开店</button>
-                                </div>
-                            </section>
-                        </div>
-
+                        @endforeach
 
                     </section>
                 </section>
