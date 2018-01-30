@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Session;
 
 class AccountcenterController extends Controller{
+
     //系统管理首页
     public function display(Request $request)
     {
@@ -24,12 +25,16 @@ class AccountcenterController extends Controller{
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            return redirect('company/company_list');
+        if (empty($admin_data['safe_password'])){           //先设置安全密码
+            return redirect('company/account/password');
+        }else{
+            if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
+                return redirect('company/company_list');
+            }
+            $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
+            $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
+            return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
-        $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
-        $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
-        return view('Company/Accountcenter/display',['organization'=>$organization,'account_info'=>$accountInfo,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //商户列表（超级管理员使用）
@@ -50,7 +55,7 @@ class AccountcenterController extends Controller{
         $organization_id = $request->organization_id;
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
         if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
-            $this->superadmin_login($organization_id);//选择身份登陆
+            $this->superadmin_login($organization_id);      //超级管理员选择身份登录
         }
         return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
     }
