@@ -135,22 +135,12 @@ class CompanyCheckAjax
     {
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_company_account_id');
-        $super_sess_key = Session::get('zerone_super_company_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
             $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('company');//连接到我的缓存服务器
             $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
-            $admin_data = unserialize($admin_data);//解序列我的信息
-            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
-            //把参数传递到下一个中间件
-            return self::res(1,$request);
-        }elseif (!empty($super_sess_key)){
-            $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
-            $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('company');//连接到我的缓存服务器
-            $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
             //把参数传递到下一个中间件
@@ -221,7 +211,11 @@ class CompanyCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
-        $key = config("app.company_encrypt_key");//获取加密盐
+        if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹加密盐
+            $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
+        }else{
+            $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
+        }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         if(empty($safe_password)){
@@ -241,7 +235,6 @@ class CompanyCheckAjax
         if(empty($request->input('is_editing'))){
             return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
-
         if($request->input('is_editing')=='-1'){//设置安全密码时
             if(empty($request->input('safe_password'))){
                 return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
