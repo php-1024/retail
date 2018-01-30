@@ -16,15 +16,12 @@
     <!--external css-->
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
     <link href="{{asset('public/Proxy')}}/css/custom.css" rel="stylesheet" />
-    <!--external css-->
-
-
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -216,6 +213,28 @@
     </section>
     <!--main content end-->
 </section>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<!-- js placed at the end of the document so the pages load faster -->
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/icheck.min.js"></script>
+
+<script>
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
 
 </body>
 </html>
+
