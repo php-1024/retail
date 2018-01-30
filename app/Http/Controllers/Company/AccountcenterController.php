@@ -172,8 +172,12 @@ class AccountcenterController extends Controller{
         if ($account['password'] == $encryptPwd){
             DB::beginTransaction();
             try {
-                Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);
-                if ($admin_data['is_super'] != 1){
+                //添加操作日志
+                if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                    Account::editAccount([['id','1']],['password' => $new_encryptPwd]);                    //修改超级管理员登陆密码
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了自己的登陆密码！');  //保存操作记录
+                }else{//商户本人操作记录
+                    Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改商户登陆密码
                     OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
@@ -181,7 +185,11 @@ class AccountcenterController extends Controller{
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '登录密码修改成功！', 'status' => '1']);
+            if ($admin_data['is_super'] == 1){
+                return response()->json(['data' => '这里修改的是您自己的登录密码！你已经修改了你自己的登录密码！请牢记！', 'status' => '1']);
+            }else{
+                return response()->json(['data' => '登录密码修改成功！', 'status' => '1']);
+            }
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
         }
