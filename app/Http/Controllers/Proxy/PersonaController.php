@@ -2,9 +2,13 @@
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\AccountInfo;
 use App\Models\Module;
 use App\Models\OperationLog;
+use App\Models\OrganizationProxyinfo;
+use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -49,12 +53,11 @@ class PersonaController extends Controller{
     //修改个人信息提交
     public function account_info_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
+        $route_name = $request->path();//获取当前的页面路由
         $mobile = $request->input('mobile');//手机号码
         $realname = $request->input('realname');//真实姓名
         $id = $request->input('id');//用户id
-        $organization = $request->input('organization');//用户id
-
+        $organization_id = $request->input('organization_id');//用户id
         if($admin_data['super_id'] == 2){
             $oneAcc = Account::getOne([['id',1]]);
         }else{
@@ -64,23 +67,30 @@ class PersonaController extends Controller{
         try {
 
             if($oneAcc['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
-                Account::editAccount(['organization_id'=>$organization],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
                 $admin_data['realname'] = $realname;
 
             }
-
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
+            }
+            $admin_data['realname'] = $realname;
+            $admin_data['mobile'] = $mobile;
+            if($admin_data['super_id'] == 2){
+                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
+            }else{
+                \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
+                OperationLog::addOperationLog('2',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
-        $admin_data['safe_password'] = $encryptPwd;
-        \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+
         return response()->json(['data' => '个人信息修改成功', 'status' => '1']);
 
     }
