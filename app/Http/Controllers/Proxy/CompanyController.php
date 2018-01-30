@@ -34,7 +34,9 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
         $list = Organization::getCompany([['parent_id',$organization],['program_id',3]],10,'id');
-        dump($list);
+        foreach ($list as $key=>$val){
+            dump($val);
+        }
         return view('Proxy/Company/company_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
