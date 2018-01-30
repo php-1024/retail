@@ -47,7 +47,7 @@ class CompanyCheck{
             return $re;
         }else{
             $re2 = $this->checkHasRule($re['response']);//判断用户是否admin或是否有权限
-            dd($re2);
+            dump($re2);
             if($re2['status']=='0'){
                 return $re2;
             }else{
