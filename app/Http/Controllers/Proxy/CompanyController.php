@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Assets;
 use App\Models\Organization;
 use App\Models\Package;
 use App\Models\ProxyApply;
