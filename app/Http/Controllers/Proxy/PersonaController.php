@@ -242,15 +242,7 @@ class PersonaController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $admin_data['organization_id'];
-        $re = Account::checkRowExists([['organization_id',$organization_id],['parent_id',1]]);
-        if(!empty($re)){
-            $where = [['login_log.organization_id',$organization_id]];
-        }else{
-            $where = [['login_log.organization_id',$organization_id],['account_id',$admin_data['id']]];
-        }
-        $list = LoginLog::getProxyPaginate($where,15,'id');
-        dump($list);
+
         return view('Proxy/Persona/myoperationlog',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
@@ -259,7 +251,9 @@ class PersonaController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Proxy/Persona/myloginlog',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
+        $list = LoginLog::getProxyPaginate($where,15,'id');
+        return view('Proxy/Persona/myloginlog',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
