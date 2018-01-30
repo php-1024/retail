@@ -39,7 +39,9 @@ class ProxyCheck{
             /****个人信息****/
             case "proxy/persona/account_info":          //个人信息修改
             case "proxy/persona/safe_password":         //安全密码修改
-            case "proxy/persona/password":         //登入密码修改
+            case "proxy/persona/password":              //登入密码修改
+            case "proxy/persona/myoperationlog":        //我的操作记录
+            case "proxy/persona/myloginlog":            //登入密码修改
             /****个人信息****/
 
                 $re = $this->checkLoginAndRule($request);//判断是否登录
