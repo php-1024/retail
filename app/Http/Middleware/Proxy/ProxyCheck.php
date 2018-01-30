@@ -32,13 +32,14 @@ class ProxyCheck{
             case "proxy":                               //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
             case "proxy/system/proxy_structure":        //人员结构
-            case "proxy/system/operationlog":     //操作日记
-            case "proxy/system/loginlog":         //登入日记
+            case "proxy/system/operationlog":           //操作日记
+            case "proxy/system/loginlog":               //登入日记
             /****系统管理****/
 
             /****个人信息****/
-            case "proxy/persona/account_info":         //安全密码修改
+            case "proxy/persona/account_info":          //个人信息修改
             case "proxy/persona/safe_password":         //安全密码修改
+            case "proxy/persona/password":         //登入密码修改
             /****个人信息****/
 
                 $re = $this->checkLoginAndRule($request);//判断是否登录
