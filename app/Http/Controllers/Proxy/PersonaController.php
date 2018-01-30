@@ -232,7 +232,7 @@ class PersonaController extends Controller{
             }
             return response()->json(['data' => '登录密码修改成功！', 'status' => '1']);
         }else{
-            return response()->json(['data' => '原密码不正确！', 'status' => '1']);
+            return response()->json(['data' => '原密码不正确！', 'status' => '0']);
         }
 
     }
