@@ -66,65 +66,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($list as $key=>$value)
+                                            <tr>
+                                                <td>{{$value->id}}</td>
+                                                <td>{{$value->package_name}}</td>
 
-                                        <tr>
-                                            <td>1</td>
-                                            <td>零壹科技餐饮系统</td>
+                                                <td>
+                                                    @foreach($value->programs as $k=>$v)
+                                                        <div>
+                                                            <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
+                                                            <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;
+                                                            <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;
+                                                        </div>
+                                                        <div style=" margin-top: 20px;"></div>
+                                                    @endforeach
+                                                </td>
+                                                <td>{{$value->created_at}}</td>
 
-                                            <td>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮总店系统</span> &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:30 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:10 套</span>&nbsp;&nbsp;
-                                                </div>
-                                                <div style=" margin-top: 30px;"></div>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮店铺系统</span>  &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:150 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:15 套</span>&nbsp;&nbsp;
-                                                </div>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-
-                                        </tr>
-
-
-                                        <tr>
-                                            <td>2</td>
-                                            <td>零壹科技商超系统</td>
-
-                                            <td>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超总店系统</span> &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:30 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:10 套</span>&nbsp;&nbsp;
-                                                </div>
-                                                <div style=" margin-top: 30px;"></div>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮店铺系统</span>  &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:150 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:15 套</span>&nbsp;&nbsp;
-                                                </div>
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>3</td>
-                                            <td>零壹科技酒店系统</td>
-
-                                            <td>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> 零壹新科技商超总店系统</span> &nbsp;&nbsp;
-                                                    <span class="label label-primary">剩余:30 套</span>&nbsp;&nbsp;
-                                                    <span class="label label-warning">已用:10 套</span>&nbsp;&nbsp;
-                                                </div>
-
-                                            </td>
-                                            <td>2017-08-08 10:30:30</td>
-                                        </tr>
-
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
