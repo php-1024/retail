@@ -351,7 +351,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
         Route::post('account_info_check','Proxy\PersonaController@account_info_check')->middleware('ProxyCheckAjax');//个人信息修改
         Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置
-        Route::get('password_check','Proxy\PersonaController@password_check')->middleware('ProxyCheckAjax');//登入密码修改
+        Route::post('password_check','Proxy\PersonaController@password_check')->middleware('ProxyCheckAjax');//登入密码修改
 
     });
 });
