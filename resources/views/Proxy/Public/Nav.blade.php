@@ -3,8 +3,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
             @foreach($menu_data as $key=>$val)
-            <li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active sub-menu" @endif>
-
+            <li class="active sub-menu">
                 <a href="javascript:;">
                     <i class="{{ $val->icon_class }}"></i>
                     <span>{{ $val->menu_name }}</span>
