@@ -243,6 +243,13 @@ class PersonaController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+        $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']];
+        $list = OperationLog::getProxyPaginate($where,10,'id');
+        $roles = [];
+        foreach($list as $key=>$val){
+            $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
+        }
+        dump($list);
         return view('Proxy/Persona/myoperationlog',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
