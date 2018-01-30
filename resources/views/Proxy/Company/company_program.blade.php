@@ -317,17 +317,21 @@
     //owl carousel
 
     $(document).ready(function() {
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
-        });
+        $("#owl-demo").owlCarousel({
+            navigation : true,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem : true
 
-        $('#minuBtn').click(function(){
-            $('#myModal2').modal();
         });
+    });
 
+    //custom select box
+
+    $(function(){
+        $('select.styled').customSelect();
     });
 
 </script>
-
 </body>
 </html>
