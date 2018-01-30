@@ -35,76 +35,10 @@
     <aside>
         @include('Proxy/Public/Nav')
     </aside>
-    <section id="main-content">
-        <section class="wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--breadcrumbs start -->
-                    <ul class="breadcrumb">
-                        <li><a href="#"><i class="icon-code"></i> 系统资产管理</a></li>
-                        <li class="active">系统资产列表</li>
-                    </ul>
-                    <!--breadcrumbs end -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-                                <section class="panel">
-                                    <header class="panel-heading">
-                                        系统资产列表
-                                    </header>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>套餐名称</th>
-                                            <th>包含程序</th>
-                                            <th>添加时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($list as $key=>$value)
-                                            <tr>
-                                                <td>{{$value->id}}</td>
-                                                <td>{{$value->package_name}}</td>
 
-                                                <td>
-                                                    @foreach($value->programs as $k=>$v)
-                                                        <div>
-                                                            <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
-                                                            <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;
-                                                            <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;
-                                                        </div>
-                                                        <div style=" margin-top: 20px;"></div>
-                                                    @endforeach
-                                                </td>
-                                                <td>{{$value->created_at}}</td>
-
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="99">
-                                                <ul class="pagination pull-right">
-                                                    {{$list->links()}}
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </section>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </section>
-    </section>
     <!--main content end-->
 </section>
+
 </body>
 </html>
+

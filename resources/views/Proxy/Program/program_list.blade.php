@@ -35,75 +35,7 @@
     <aside>
         @include('Proxy/Public/Nav')
     </aside>
-    <section id="main-content">
-        <section class="wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--breadcrumbs start -->
-                    <ul class="breadcrumb">
-                        <li><a href="#"><i class="icon-desktop"></i> 系统管理</a></li>
-                        <li class="active">系统首页</li>
-                    </ul>
-                    <!--breadcrumbs end -->
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-                                <section class="panel">
-                                    <header class="panel-heading">
-                                        资产划拨记录
-                                    </header>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>划入公司</th>
-                                            <th>操作类型</th>
-                                            <th>系统</th>
-                                            <th>划出公司</th>
-                                            <th>操作时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($list as $key=>$val)
-                                        <tr>
-                                            <td>{{$val->id}}</td>
-                                            <td>{{$val->organization->organization_name}}</td>
-                                            <td><span class="label label-success">@if($val->status ==1)划入@else划出@endif</span></td>
-                                            <td>
-                                                <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> {{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}} 套</span>
-                                                </div>
-
-                                            </td>
-                                            <th></th>
-                                            <td>{{$val->created_at}}</td>
-                                        </tr>
-                                         @endforeach
-
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="99">
-                                                <ul class="pagination pull-right">
-                                                        {{$list->links()}}
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </section>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </section>
-    </section>
     <!--main content end-->
 </section>
 
