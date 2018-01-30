@@ -84,6 +84,7 @@
     </section>
     <!--main content end-->
 </section>
+<!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
@@ -92,22 +93,28 @@
 
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-
+<script src="{{asset('public/Proxy')}}/js/jquery.nestable.js"></script>
 
 <script>
 
     //owl carousel
 
     $(document).ready(function() {
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
+        $('#nestable2').nestable();
+
+
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
         });
 
-        $('#minuBtn').click(function(){
-            $('#myModal2').modal();
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
         });
+
 
     });
+
+
 
 </script>
 </body>
