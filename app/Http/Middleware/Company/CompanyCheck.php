@@ -16,7 +16,7 @@ class CompanyCheck{
                 //获取用户登录存储的SessionId
                 $sess_key = Session::get('zerone_company_account_id');
                 //如果不为空跳转到选择商户组织页面
-                if(!empty($sess_key))) {
+                if(!empty($sess_key)) {
                     return redirect('company');
                 }
                 break;
