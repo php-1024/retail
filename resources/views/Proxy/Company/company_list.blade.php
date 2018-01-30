@@ -33,7 +33,7 @@
     <!--header end-->
     <!--sidebar start-->
     <aside>
-        @include('Proxy/Public/Nav')
+        @include('Proxy/Public/Nav') 
     </aside>
     <section id="main-content">
         <section class="wrapper">
