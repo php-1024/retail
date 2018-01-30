@@ -113,7 +113,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
@@ -122,8 +122,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
