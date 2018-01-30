@@ -59,7 +59,7 @@ class AccountcenterController extends Controller{
     public function company_quit(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
-        ZeroneRedis::create_super_company_account_cache($admin_data['id'],$admin_data);//清空所选组织
+        ZeroneRedis::create_company_account_cache(1,$admin_data);//清空所选组织
         return redirect('company');
     }
 
@@ -253,8 +253,7 @@ class AccountcenterController extends Controller{
 
     //退出登录
     public function quit(){
-        Session::put('zerone_company_account_id','');       //清除普通商户身份
-        Session::put('zerone_super_company_account_id',''); //清除超级管理员身份
+        Session::put('zerone_company_account_id','');
         return redirect('company/login');
     }
 
@@ -279,7 +278,7 @@ class AccountcenterController extends Controller{
             'mobile'=>$account_info->mobile,//绑定手机号
         ];
         Session::put('zerone_company_account_id','');//清空普通用户
-        Session::put('zerone_super_company_account_id', encrypt($admin_data['id']));//存储登录session_id为当前用户ID
+        Session::put('zerone_company_account_id', encrypt(1));//存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
@@ -294,8 +293,8 @@ class AccountcenterController extends Controller{
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        ZeroneRedis::create_super_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-        ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+        ZeroneRedis::create_company_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+        ZeroneRedis::create_company_menu_cache(1);//生成对应账号的商户系统菜单
     }
 
 }
