@@ -89,7 +89,6 @@ class LoginController extends Controller
                         'login_position' => $addr,//登录地址
                         'login_time' => time()//登录时间
                     ];
-//                    dd($account_info);
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if ($account_info->organization->program_id <> '3') {//如果账号不属于商户平台管理系统，则报错，不能登录。3、是商户管理系统的ID
                             ErrorLog::addErrorTimes($ip, 1);
@@ -120,11 +119,7 @@ class LoginController extends Controller
                                 return response()->json(['data' => '登录失败', 'status' => '0']);
                             }
                         }
-                    } else {//如果是超级管理员用super_company生成Redis缓存
-                        /*
-                         * 需要修改
-                         * 用super_company生成Redis缓存
-                         */
+                    } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                         //插入登录记录
                         if (LoginLog::addLoginLog($account_info['id'], 1, 0, $ip, $addr)) {//admin,唯一超级管理员，不属于任何组织
