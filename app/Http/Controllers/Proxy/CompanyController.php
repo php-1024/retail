@@ -52,7 +52,6 @@ class CompanyController extends Controller{
         $parent_tree = $oneAcc['parent_tree'];//组织树
         //获取重Admin开始的的所有人员
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
-        dd($list);
         //根据获取的人员组成结构树
         $structure = $this->create_structure($list,$oneAcc['id']);
         return view('Proxy/Company/company_structure',['structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
