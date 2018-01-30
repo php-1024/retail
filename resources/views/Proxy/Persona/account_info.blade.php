@@ -61,7 +61,7 @@
                                 个人信息修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('zerone/persona/account_info_check') }}">
+                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/account_info_check') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">用户账号</label>
@@ -159,44 +159,18 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
-    //提交表单
-    function postSetForm() {
-        var target = $("#SetForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
+
 </script>
 
 </body>

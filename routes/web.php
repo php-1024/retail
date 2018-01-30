@@ -349,6 +349,7 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('proxy_info_check','Proxy\SystemController@proxy_info_check')->middleware('ProxyCheckAjax');//提交公司信息修改
 
         Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置
+        Route::post('account_info_check','Proxy\PersonaController@account_info_check')->middleware('ProxyCheckAjax');//个人信息修改
     });
 });
 /********************服务商管理系统*************************/
