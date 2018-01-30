@@ -212,10 +212,13 @@ class CompanyCheckAjax
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
         if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹加密盐
+            $iszmxw = 'iszmxw';
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐（零壹平台专用）
         }else{
+            $iszmxw = 01;
             $key = config("app.company_safe_encrypt_key");//获取加密盐（商户专用）
         }
+        dd($iszmxw);
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         if(empty($safe_password)){
