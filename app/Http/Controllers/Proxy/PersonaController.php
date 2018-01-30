@@ -72,7 +72,6 @@ class PersonaController extends Controller{
                 $admin_data['realname'] = $realname;
 
             }
-            echo 1;exit;
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
@@ -80,7 +79,6 @@ class PersonaController extends Controller{
             $admin_data['realname'] = $realname;
             $admin_data['mobile'] = $mobile;
             if($admin_data['super_id'] == 2){
-                \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存-超级管理员
                 OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
             }else{
                 \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
