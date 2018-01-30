@@ -343,13 +343,16 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('myloginlog','Proxy\PersonaController@myloginlog')->middleware('ProxyCheck');//我的登入记录
     });
     //下级人员管理--权限角色组
-    //权限角色组
     Route::group(['prefix'=>'role'],function(){
         Route::get('role_add','Proxy\RoleController@role_add')->middleware('ProxyCheck');//添加权限角色
         Route::get('role_list','Proxy\RoleController@role_list')->middleware('ProxyCheck');//权限角色列表
     });
 
-
+    //系统资产管理
+    Route::group(['prefix'=>'program'],function(){
+        Route::get('program_list','Proxy\ProgramController@program_list')->middleware('ProxyCheck');//添加权限角色
+        Route::get('program_log','Proxy\ProgramController@program_log')->middleware('ProxyCheck');//权限角色列表
+    });
 
 
     //异步提交数据组
