@@ -83,8 +83,9 @@
                                                         <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif 套</span>&nbsp;&nbsp;
                                                         <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif 套</span>&nbsp;&nbsp;
                                                     </div>
+                                                    <div style=" margin-top: 30px;"></div>
                                                 @endforeach
-                                                <div style=" margin-top: 30px;"></div>
+
                                             </td>
                                             <td>{{$value->created_at}}</td>
                                             <td class="text-right">
