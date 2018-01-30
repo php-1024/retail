@@ -34,6 +34,10 @@ class CompanyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
+            case "company/ajax/compant_info_edit_check"://检测登录，权限，安全密码，及修改商户信息的数据
+                $re = $this->checkLoginAndRuleAndSafeCompanyEdit($request);
+                return self::format_response($re, $next);
+                break;
         }
     }
 
@@ -56,6 +60,22 @@ class CompanyCheckAjax
                 }else{
                     return self::res(1,$re3['response']);
                 }
+            }
+        }
+    }
+
+
+    //检测登录，权限，安全密码，及修改商户信息的数据
+    public function checkLoginAndRuleAndSafeCompanyEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkCompanyEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
             }
         }
     }
@@ -175,6 +195,17 @@ class CompanyCheckAjax
 
 
     /*****************************数据检测开始****************************/
+    //检测商户编辑信息
+    public function checkCompanyEdit(Request $request)
+    {
+        if(empty($request->input('organization_name'))){
+            return self::res(0,response()->json(['data' => '请输入商户名称', 'status' => '0']));
+        }
+        if(empty($request->input('company_owner_mobile'))){
+            return self::res(0,response()->json(['data' => '请输入负责人手机号码', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测编辑个人信息数据
     public function checkProfileEdit(Request $request){
         if(empty($request->input('realname'))){
