@@ -216,8 +216,22 @@
     </section>
     <!--main content end-->
 </section>
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery.js"></script>
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/iCheck/js/icheck.min.js"></script>
+
+<script>
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('select.styled').customSelect();
+    });
+</script>
 
 </body>
 </html>
+
