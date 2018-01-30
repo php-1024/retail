@@ -21,10 +21,12 @@ class PersonaController extends Controller{
 
         if($admin_data['super_id'] == 2) {//如果是超级管理员
             $user = Account::getOne([['id',1]]);
-            $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
             $user = Account::getOne([['id',$admin_data['id']]]);
             $account_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前用户具有权限的节点
+            dump($account_node_list);
+
             $modules = [];
             $nodes = [];
             $module_node_list = [];
