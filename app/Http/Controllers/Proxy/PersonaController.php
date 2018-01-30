@@ -226,7 +226,6 @@ class PersonaController extends Controller{
                 }
                 DB::commit();
             } catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
             }
@@ -235,6 +234,22 @@ class PersonaController extends Controller{
             return response()->json(['data' => '原密码不正确！', 'status' => '0']);
         }
 
+    }
+    //我的操作记录
+    public function myoperationlog(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Zerone/Personal/myoperationlog',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+    //我的登入记录
+    public function myloginlog(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Zerone/Personal/myloginlog',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
