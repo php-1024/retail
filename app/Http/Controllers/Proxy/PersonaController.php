@@ -72,6 +72,7 @@ class PersonaController extends Controller{
                 $admin_data['realname'] = $realname;
 
             }
+            echo 1;exit;
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
@@ -87,7 +88,6 @@ class PersonaController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
