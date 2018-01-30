@@ -33,7 +33,7 @@ class ProgramController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         $list = AssetsOperation::getPaginage([['organization_id',$organization_id]],'10','id');//保存操作记录
         dump($list);
-        return view('Proxy/Program/program_log',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Proxy/Program/program_log',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
