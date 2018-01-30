@@ -216,7 +216,7 @@
     </section>
     <!--main content end-->
 </section>
-<script src="{{asset('public/Proxy')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 
 </body>
