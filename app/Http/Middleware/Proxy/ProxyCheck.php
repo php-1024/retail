@@ -57,6 +57,8 @@ class ProxyCheck{
             /****下辖商户管理****/
             case "proxy/company/company_register":        //商户注册列表
             case "proxy/company/company_list":            //商户列表
+            case "proxy/company/company_structure":       //店铺结构
+            case "proxy/company/company_program":         //程序划拨
             /****下辖商户管理****/
 
                 $re = $this->checkLoginAndRule($request);//判断是否登录

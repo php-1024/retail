@@ -114,8 +114,8 @@
                                             </td>
                                             <td>2017-08-08 10:30:30</td>
                                             <td class="text-right">
-                                                <button type="button" id="peoplesBtn" onclick="location.href='company_structure.html'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
-                                                <button type="button" id="programBtn" onclick="location.href='company_program.html'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
+                                                <button type="button" id="peoplesBtn" onclick="location.href='{{url('proxy/company/company_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
+                                                <button type="button" id="programBtn" onclick="location.href='{{url('proxy/company/company_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
                                             </td>
                                         </tr>
                                         @endforeach
