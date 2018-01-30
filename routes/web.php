@@ -383,7 +383,9 @@ Route::group(['prefix'=>'company'],function(){
 
     //店铺管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('store_add', 'Company\StoreController@store_add')->middleware('CompanyCheck');            //登陆密码页面
+        Route::get('store_add', 'Company\StoreController@store_add')->middleware('CompanyCheck');               //店铺管理创建店铺
+        Route::get('store_add_second', 'Company\StoreController@store_add_second')->middleware('CompanyCheck'); //店铺管理立即开店
+        Route::get('store_list', 'Company\StoreController@store_list')->middleware('CompanyCheck');             //店铺管理
     });
 
     //异步提交数据组
