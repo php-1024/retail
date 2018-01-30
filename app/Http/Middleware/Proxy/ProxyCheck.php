@@ -49,6 +49,11 @@ class ProxyCheck{
             case "proxy/role/role_list":                //权限角色列表
             /****下级人员管理--权限角色****/
 
+            /****系统资产管理****/
+            case "proxy/program/program_list":           //权限角色添加
+            case "proxy/program/program_log":            //权限角色列表
+            /****系统资产管理****/
+
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
