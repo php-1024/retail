@@ -39,6 +39,7 @@
                             <div class="panel-body">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/compant_info_edit_check') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" name="organization_id" value="{{$organization->id}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">服务商</label>
