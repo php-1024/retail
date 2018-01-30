@@ -97,27 +97,49 @@ class CompanyCheckAjax
 
 
 
-    /**
-     * @param $request
-     * @return array
-     */
-    //检测登录和权限和安全密码和ID是否为空
-    public function checkLoginAndRuleAndSafeAndID($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
+    /*********************************通用单项检测开始*******************************************/
+    //部分页面检测用户是否admin，否则检测是否有权限
+    public function checkHasRule($request){
+        $admin_data = $request->get('admin_data');
+        if($admin_data['id']!=1){
+            //暂定除admin外所有用户都没有权限
+            //return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
+            return self::res(1,$request);
         }else{
-            $re2 = $this->checkID($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
+            return self::res(1,$request);
         }
     }
 
+    //检测是否登录
+    public function checkIsLogin($request)
+    {
+        //获取用户登录存储的SessionId
+        $sess_key = Session::get('zerone_company_account_id');
+        $super_sess_key = Session::get('zerone_super_company_account_id');
+        //如果为空跳转到登录页面
+        if(!empty($sess_key)) {
+            $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
+            $sess_key = decrypt($sess_key);//解密管理员ID
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = unserialize($admin_data);//解序列我的信息
+            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
+            //把参数传递到下一个中间件
+            return self::res(1,$request);
+        }elseif (!empty($super_sess_key)){
+            $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
+            $sess_key = decrypt($sess_key);//解密管理员ID
+            Redis::connect('company');//连接到我的缓存服务器
+            $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = unserialize($admin_data);//解序列我的信息
+            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
+            //把参数传递到下一个中间件
+            return self::res(1,$request);
+        }else{
+            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
+        }
+    }
 
-    /*********************************通用单项检测开始*******************************************/
     //检测登录和权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
@@ -151,21 +173,6 @@ class CompanyCheckAjax
 
 
 
-
-    //检测是否登录 权限 安全密码 数字不能为空
-    public function checkLoginAndRuleAndSafeAndAssets($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAssets($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
     /*****************************数据检测开始****************************/
     //检测编辑个人信息数据
@@ -275,67 +282,6 @@ class CompanyCheckAjax
 
 
 
-    //部分页面检测用户是否admin，否则检测是否有权限
-    public function checkHasRule($request){
-        $admin_data = $request->get('admin_data');
-        if($admin_data['id']!=1){
-            //暂定除admin外所有用户都没有权限
-            //return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
-            return self::res(1,$request);
-        }else{
-            return self::res(1,$request);
-        }
-    }
-    //检测是否登录
-    public function checkIsLogin($request)
-    {
-        //获取用户登录存储的SessionId
-        $sess_key = Session::get('zerone_company_account_id');
-        $super_sess_key = Session::get('zerone_super_company_account_id');
-        //如果为空跳转到登录页面
-        if(!empty($sess_key)) {
-            $sess_key = Session::get('zerone_company_account_id');//获取管理员ID
-            $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('company');//连接到我的缓存服务器
-            $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
-            $admin_data = unserialize($admin_data);//解序列我的信息
-            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
-            //把参数传递到下一个中间件
-            return self::res(1,$request);
-        }elseif (!empty($super_sess_key)){
-            $sess_key = Session::get('zerone_super_company_account_id');//获取管理员ID
-            $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('company');//连接到我的缓存服务器
-            $admin_data = Redis::get('super_company_system_admin_data_'.$sess_key);//获取管理员信息
-            $admin_data = unserialize($admin_data);//解序列我的信息
-            $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
-            //把参数传递到下一个中间件
-            return self::res(1,$request);
-        }else{
-            return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
-        }
-    }
-
-
-    //检测商户编辑表信息
-    public function checkAssets($request){
-        $num = $request->input('num');
-        if (preg_match("/^[1-9]{1}\d{0,9}$/",$num)){
-            return self::res(1, $request);
-        }else{
-            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
-        }
-    }
-
-
-    //检测登录提交数据
-    public function checkID($request)
-    {
-        if (empty($request->input('id'))) {
-            return self::res(0, response()->json(['data' => '无效的数据传输', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
     //工厂方法返回结果
     public static function res($status, $response)
     {
