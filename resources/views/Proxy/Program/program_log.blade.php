@@ -76,7 +76,7 @@
                                             <td><span class="label label-success">@if($val->status == 1)划入@else划出@endif</span></td>
                                             <td>
                                                 <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i> {{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X @if(!empty($val->number)){{$val->number}}@endif 套</span>
+                                                    <span class="label label-danger"><i class="icon-code"></i> {{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X  套</span>
                                                 </div>
 
                                             </td>
