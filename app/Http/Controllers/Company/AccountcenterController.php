@@ -168,6 +168,7 @@ class AccountcenterController extends Controller{
             $account = Account::getOne([['id',$admin_data['id']]]);
             $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
         }
+        dd($account['password']);
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $new_encrypted = md5($new_password);//加密新密码第一重
