@@ -44,7 +44,7 @@
                                                 {{$v['package_name']}}
                                                 <i class="fa fa-cutlery text-success text-lg pull-right"></i>
                                             </div>
-
+                                            <i class="fa fa-rmb text-danger text-lg pull-left">{{$v['package_price']}}</i>
                                         </div>
                                     </div>
                                 </header>
@@ -58,7 +58,7 @@
                                 </div>
 
                                 <div class="panel-body" style="text-align:center;">
-                                    <button class="btn btn-s-md btn-danger" onclick="location.href='store_add_second.html'">立即开店</button>
+                                    <button class="btn btn-s-md btn-danger" onclick="location.href='{{url('company/store/store_add_second')}}?package_id={{$v['id']}}'">立即开店</button>
                                 </div>
                             </section>
                         </div>
