@@ -389,18 +389,18 @@ Route::group(['prefix'=>'company'],function(){
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');            //登陆密码页面
-        Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');  //安全密码
-        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');              //安全密码
-        Route::get('operation_log', 'Company\AccountcenterController@operation_log')->middleware('CompanyCheck'); //账户中心个人操作日志
-        Route::get('login_log', 'Company\AccountcenterController@login_log')->middleware('CompanyCheck');         //账户中心个人登陆日志
+        Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');             //登陆密码页面
+        Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');   //安全密码
+        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');               //安全密码
+        Route::get('operation_log', 'Company\AccountcenterController@operation_log')->middleware('CompanyCheck');   //账户中心个人操作日志
+        Route::get('login_log', 'Company\AccountcenterController@login_log')->middleware('CompanyCheck');           //账户中心个人登陆日志
     });
 
     //店铺管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('store_add', 'Company\StoreController@store_add')->middleware('CompanyCheck');               //店铺管理创建店铺
-        Route::get('store_add_second', 'Company\StoreController@store_add_second')->middleware('CompanyCheck'); //店铺管理立即开店
-        Route::get('store_list', 'Company\StoreController@store_list')->middleware('CompanyCheck');             //店铺管理
+        Route::get('store_add', 'Company\StoreController@store_add')->middleware('CompanyCheck');                   //店铺管理创建店铺
+        Route::get('store_add_second', 'Company\StoreController@store_add_second')->middleware('CompanyCheck');     //店铺管理立即开店
+        Route::get('store_list', 'Company\StoreController@store_list')->middleware('CompanyCheck');                 //店铺管理
     });
 
     //异步提交数据组
