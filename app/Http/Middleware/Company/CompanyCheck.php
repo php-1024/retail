@@ -31,7 +31,7 @@ class CompanyCheck{
             case "company/account/safe_password":       //安全密码设置
             case "company/account/operation_log":       //账户中心个人操作日志
             case "company/account/login_log":           //账户中心个人登陆日志
-            case "store/store_add":                     //店铺管理创建店铺
+            case "company/store/store_add":             //店铺管理创建店铺
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
