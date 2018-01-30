@@ -336,8 +336,9 @@ Route::group(['prefix'=>'proxy'],function(){
     });
     //个人信息分组
     Route::group(['prefix'=>'persona'],function(){
-        Route::get('account_info','Proxy\PersonaController@account_info')->middleware('ProxyCheck');//安全密码修改
+        Route::get('account_info','Proxy\PersonaController@account_info')->middleware('ProxyCheck');//个人信息修改
         Route::get('safe_password','Proxy\PersonaController@safe_password')->middleware('ProxyCheck');//安全密码修改
+        Route::get('password','Proxy\PersonaController@password')->middleware('ProxyCheck');//登入密码修改
     });
 
 
@@ -348,8 +349,10 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('login_check','Proxy\LoginController@login_check')->middleware('ProxyCheckAjax');//提交登录数据
         Route::post('proxy_info_check','Proxy\SystemController@proxy_info_check')->middleware('ProxyCheckAjax');//提交公司信息修改
 
-        Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置
         Route::post('account_info_check','Proxy\PersonaController@account_info_check')->middleware('ProxyCheckAjax');//个人信息修改
+        Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置
+        Route::get('password_check','Proxy\PersonaController@password_check')->middleware('ProxyCheckAjax');//登入密码修改
+
     });
 });
 /********************服务商管理系统*************************/
