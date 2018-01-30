@@ -22,7 +22,6 @@ class PersonaController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-
         if($admin_data['super_id'] == 2) {//如果是超级管理员
             $user = Account::getOne([['id',1]]);
             $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
@@ -47,6 +46,7 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
+        dump($admin_data);
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
@@ -67,13 +67,16 @@ class PersonaController extends Controller{
         try {
 
             if($oneAcc['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                if($admin_data['super_id'] != 2) {
+                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
+                }
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
-                $admin_data['realname'] = $realname;
 
             }
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                if($admin_data['super_id'] != 2) {
+                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改服务商用户信息表 用户姓名
+                }
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             $admin_data['realname'] = $realname;
@@ -86,7 +89,6 @@ class PersonaController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
