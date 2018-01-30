@@ -161,12 +161,13 @@ class AccountcenterController extends Controller{
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $account = Account::getOne([['id',$admin_data['id']]]);
         $password = $request->input('password');
         $new_password = $request->input('new_password');
         if ($admin_data['is_super'] == 1){//如果是超级管理员获取零壹加密盐
+            $account = Account::getOne([['id','1']]);
             $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
         }else{
+            $account = Account::getOne([['id',$admin_data['id']]]);
             $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
         }
         $encrypted = md5($password);//加密密码第一重
