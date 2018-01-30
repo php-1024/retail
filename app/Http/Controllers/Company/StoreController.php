@@ -5,7 +5,7 @@
  **/
 namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
-use App\Models\Package;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Session;
 
@@ -17,8 +17,8 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
-        $package = Package::getOnePackage(['id'=>1]);
-        dump($package);
+        $program = Program::getOnePackage(['id'=>1]);
+        dump($program);
         return view('Company/Store/store_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
