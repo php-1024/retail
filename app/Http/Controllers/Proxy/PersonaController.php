@@ -184,8 +184,13 @@ class PersonaController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        return view('Proxy/Persona/safe_password',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $id = $admin_data['id'];
+        if($admin_data['super_id'] == 2){
+            $oneAcc = Account::getOne([['id',1]]);
+        }else{
+            $oneAcc = Account::getOne([['id',$id]]);
+        }
+        return view('Proxy/Persona/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
