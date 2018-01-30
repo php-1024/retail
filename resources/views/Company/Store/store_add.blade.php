@@ -42,7 +42,7 @@
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
                                                 {{$v['package_name']}}
-                                                <i class="fa fa-rmb text-success text-lg pull-right">价值{{$v['package_price']}}</i>
+                                                <i class="fa fa-rmb text-success text-lg pull-left">{{$v['package_price']}}</i>
                                                 <i class="fa fa-cutlery text-success text-lg pull-right"></i>
                                             </div>
 
