@@ -49,7 +49,7 @@ class PersonaController extends Controller{
     //修改个人信息提交
     public function account_info_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
+        $route_name = $request->path();//获取当前的页面路由
         $mobile = $request->input('mobile');//手机号码
         $realname = $request->input('realname');//真实姓名
         $id = $request->input('id');//用户id
@@ -74,13 +74,21 @@ class PersonaController extends Controller{
                 OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
+            $admin_data['realname'] = $realname;
+            $admin_data['mobile'] = $mobile;
+            if($admin_data['super_id'] == 2){
+                \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存-超级管理员
+                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
+            }else{
+                \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
+                OperationLog::addOperationLog('2',$organization,$id,$route_name,'修改了个人信息');//保存操作记录
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
-        $admin_data['safe_password'] = $encryptPwd;
-        \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+
         return response()->json(['data' => '个人信息修改成功', 'status' => '1']);
 
     }
