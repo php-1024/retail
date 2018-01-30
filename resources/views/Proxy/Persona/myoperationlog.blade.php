@@ -42,8 +42,6 @@
     <aside>
         @include('Proxy/Public/Nav')
     </aside>
-    <!--sidebar end-->
-    <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
             <div class="row">
@@ -51,169 +49,127 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="icon-user"></i> 个人信息</a></li>
-                        <li class="active">安全密码修改</li>
+                        <li class="active">我的操作日志</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
             </div>
-            @if(empty($oneAcc->safe_password))
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            安全密码设置
-                        </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="post" id="SetForm" action="{{ url('proxy/ajax/safe_password_check') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <input type="hidden" name="id"  value="{{$oneAcc->id}}">
-                                <input type="hidden" name="is_editing"  value="-1">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">用户账号</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="{{$oneAcc->account}}" disabled="true">
-                                    </div>
-                                </div>
+                            <div class="col-sm-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        我的操作日志
+                                    </header>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>用户</th>
+                                            <th>操作</th>
+                                            <th>时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>您</td>
+                                            <td>修改了参数设置</td>
+                                            <td>2018-01-16 12:22:33</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="99">
+                                                <ul class="pagination pull-right">
+                                                    <li class="footable-page-arrow disabled">
+                                                        <a data-page="first" href="#first">«</a>
+                                                    </li>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">新安全密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="safe_password">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">重复新密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="re_safe_password">
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="text-align: center;">
-                                    <button type="button" onclick="postSetForm()" class="btn btn-shadow btn-info">确认修改</button>
-                                </div>
-                            </form>
+                                                    <li class="footable-page-arrow disabled">
+                                                        <a data-page="prev" href="#prev">‹</a>
+                                                    </li>
+                                                    <li class="footable-page active">
+                                                        <a data-page="0" href="#">1</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">2</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">3</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">4</a>
+                                                    </li>
+                                                    <li class="footable-page">
+                                                        <a data-page="1" href="#">5</a>
+                                                    </li>
+                                                    <li class="footable-page-arrow">
+                                                        <a data-page="next" href="#next">›</a>
+                                                    </li>
+                                                    <li class="footable-page-arrow">
+                                                        <a data-page="last" href="#last">»</a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </section>
+                            </div>
                         </div>
                     </section>
                 </div>
             </div>
-            @else
-            <div class="row">
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            安全密码修改
-                        </header>
-                        <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/safe_password_check') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <input type="hidden" name="id"  value="{{$oneAcc->id}}">
-                                <input type="hidden" name="is_editing"  value="1">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">用户账号</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="{{$oneAcc->account}}" disabled="true">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">原安全密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="old_safe_password">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">新安全密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="safe_password">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">重复新密码</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="re_safe_password">
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="text-align: center;">
-                                    <button type="button" onclick="postForm()" class="btn btn-shadow btn-info">确认修改</button>
-                                </div>
-                            </form>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            @endif
-
         </section>
     </section>
     <!--main content end-->
 </section>
-<!-- Custom and plugin javascript -->
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
-
-<script>
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
-    //提交表单
-    function postSetForm() {
-        var target = $("#SetForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
-            }
-        });
-    }
-</script>
 
 </body>
 </html>
