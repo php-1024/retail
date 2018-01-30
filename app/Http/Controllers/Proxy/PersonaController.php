@@ -57,7 +57,7 @@ class PersonaController extends Controller{
         $mobile = $request->input('mobile');//手机号码
         $realname = $request->input('realname');//真实姓名
         $id = $request->input('id');//用户id
-        $organization = $request->input('organization');//用户id
+        $organization_id = $request->input('organization_id');//用户id
 
         if($admin_data['super_id'] == 2){
             $oneAcc = Account::getOne([['id',1]]);
@@ -68,13 +68,13 @@ class PersonaController extends Controller{
         try {
 
             if($oneAcc['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
-                Account::editAccount(['organization_id'=>$organization],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
                 $admin_data['realname'] = $realname;
 
             }
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             $admin_data['realname'] = $realname;
@@ -84,7 +84,7 @@ class PersonaController extends Controller{
                 OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
             }else{
                 \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
-                OperationLog::addOperationLog('2',$organization,$id,$route_name,'修改了个人信息');//保存操作记录
+                OperationLog::addOperationLog('2',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
