@@ -62,7 +62,9 @@
                             </header>
                             <div class="panel-body">
                                 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/account_info_check') }}">
-                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" name="_token"  value="{{csrf_token()}}">
+                                    <input type="hidden" name="id" value="{{$user['id']}}">
+                                    <input type="hidden" name="organization_id" value="{{$user['organization']['id']}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">用户账号</label>
                                         <div class="col-sm-10">
