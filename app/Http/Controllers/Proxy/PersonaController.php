@@ -20,6 +20,8 @@ class PersonaController extends Controller{
         if($admin_data['super_id'] == 2) {//如果是超级管理员
             $user = Account::getOne([['id',1]]);
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+            dump($module_node_list);
+
         }else{
             $user = Account::getOne([['id',$admin_data['id']]]);
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
@@ -41,7 +43,6 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
-        dump($module_node_list);
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
