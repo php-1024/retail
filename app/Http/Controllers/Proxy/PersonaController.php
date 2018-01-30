@@ -58,7 +58,7 @@ class PersonaController extends Controller{
         $realname = $request->input('realname');//真实姓名
         $id = $request->input('id');//用户id
         $organization_id = $request->input('organization_id');//用户id
-
+        echo $organization_id;exit;
         if($admin_data['super_id'] == 2){
             $oneAcc = Account::getOne([['id',1]]);
         }else{
