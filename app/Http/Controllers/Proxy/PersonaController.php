@@ -46,8 +46,6 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
-        dump($user);
-
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
@@ -90,7 +88,6 @@ class PersonaController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
