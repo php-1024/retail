@@ -13,9 +13,14 @@ class AssetsOperation extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和个人信息表一对一的关系
+    //和组织表一对一的关系
     public function organization(){
         return $this->hasOne('App\Models\Organization', 'id');
+    }
+
+    //和套餐表一对一的关系
+    public function package(){
+        return $this->hasOne('App\Models\Package', 'id');
     }
 
     //获取单条信息
@@ -35,7 +40,7 @@ class AssetsOperation extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('organization','package')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
