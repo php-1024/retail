@@ -356,8 +356,8 @@ Route::group(['prefix'=>'proxy'],function(){
 
     //下辖商户管理
     Route::group(['prefix'=>'company'],function(){
-        Route::get('company_register','Proxy\ProgramController@company_register')->middleware('ProxyCheck');//添加权限角色
-        Route::get('company_list','Proxy\ProgramController@company_list')->middleware('ProxyCheck');//权限角色列表
+        Route::get('company_register','Proxy\CompanyController@company_register')->middleware('ProxyCheck');//添加权限角色
+        Route::get('company_list','Proxy\CompanyController@company_list')->middleware('ProxyCheck');//权限角色列表
     });
 
     //异步提交数据组
