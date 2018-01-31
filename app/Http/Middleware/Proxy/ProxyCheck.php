@@ -28,6 +28,7 @@ class ProxyCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****系统管理****/
+            case "proxy/system/setup":                  //参数设置
             case "proxy/system/proxy_info":             //公司信息设置
             case "proxy":                               //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
