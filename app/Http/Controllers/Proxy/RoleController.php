@@ -13,8 +13,7 @@ class RoleController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dump($admin_data);
-        $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
+        $account_node_list = ProgramModuleNode::getAccountModuleNodes(3,$admin_data['id']);//获取当前用户在服务商系统具有权限的节点
         $modules = [];
         $nodes = [];
         $module_node_list = [];
@@ -32,7 +31,6 @@ class RoleController extends Controller{
             $module_node_list[] = $module;
             unset($module);
         }
-        dump($module_node_list);
         return view('Proxy/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
