@@ -2,31 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>密码设置 | 零壹云管理平台 | 商户管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/app.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css">
-    <!--[if lt IE 9]>
-    <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
-    <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
-    <script src="{{asset('public/Company/library/ie')}}/excanvas.js"></script>
-    <![endif]-->
-</head>
-
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en" class="app">
-<head>
-    <meta charset="utf-8" />
-    <title>零壹云管理平台 | 商户管理系统</title>
-
+    <title>登陆密码修改 | 零壹云管理平台 | 商户管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
@@ -56,7 +32,6 @@
                             <h3 class="m-b-none">登陆密码</h3>
                         </div>
                         <section class="panel panel-default">
-
                             <header class="panel-heading font-bold">
                                 登陆密码修改
                             </header>
@@ -70,7 +45,6 @@
                                             <input type="text" class="form-control" disabled="" value="{{$admin_data['account']}}">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">原登陆密码</label>
@@ -78,7 +52,6 @@
                                             <input type="password" name="password" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">新登陆密码</label>
@@ -86,7 +59,6 @@
                                             <input type="password" name="new_password" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复新密码</label>
@@ -94,7 +66,6 @@
                                             <input type="password" name="news_password" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
@@ -103,10 +74,8 @@
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
-
                                             <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
