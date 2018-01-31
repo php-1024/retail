@@ -187,7 +187,7 @@ class RoleController extends Controller{
     //直接输入安全密码操作的页面
     public function role_delete_comfirm(Request $request){
         $id = $request->input('id');
-        return view('Zerone/Role/role_delete_comfirm',['id'=>$id]);
+        return view('Proxy/Role/role_delete_comfirm',['id'=>$id]);
     }
     //下级人员添加
     public function subordinate_add(Request $request){
