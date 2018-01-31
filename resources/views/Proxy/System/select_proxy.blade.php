@@ -75,6 +75,11 @@
     </div>
     <!--state overview end-->
 </section>
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+
 <script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>

@@ -124,9 +124,14 @@
     </section>
     <!--main content end-->
 </section>
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 
-</section>
-
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script>
     //owl carousel
 
