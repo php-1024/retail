@@ -18,6 +18,10 @@ class Organization extends Model{
     public function organizationProxyinfo(){
         return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
     }
+    //和assetsOperation表一对多的关系
+    public function assetsOperation(){
+        return $this->hasMany('App\Models\AssetsOperation', 'organization_id','id');
+    }
     //和OrganizationProxyinfo表一对多的关系
     public function organizationCompanyinfo(){
         return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id');
