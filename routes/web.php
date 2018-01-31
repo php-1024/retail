@@ -384,7 +384,8 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
         Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
 
-        Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;//权限
+        Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;////提交添加权限角色数据
+        Route::post('role_edit','Proxy\RoleController@role_edit')->middleware('ZeroneCheckAjax');//编辑权限角色弹出框
 
     });
 });
