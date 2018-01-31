@@ -20,6 +20,7 @@ class CompanyCheck{
                     return redirect('company');
                 }
                 break;
+                break;
 
             /****仅检测是否登录及是否具有权限****/
             case "company":                             //后台首页
@@ -47,7 +48,6 @@ class CompanyCheck{
             return $re;
         }else{
             $re2 = $this->checkHasRule($re['response']);//判断用户是否admin或是否有权限
-            dump($re2);
             if($re2['status']=='0'){
                 return $re2;
             }else{
