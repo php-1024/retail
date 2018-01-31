@@ -12,6 +12,7 @@
     <!--external css-->
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
@@ -58,11 +59,12 @@
                         </header>
                         <div class="panel-body">
                             <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{url('proxy/ajax/role_add_check')}}">
-
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="organization_id" value="">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">角色名称</label>
                                     <div class="col-sm-10">
-                                        <input type="text" value="admin" placeholder="角色名称" class="form-control" name="rolename">
+                                        <input type="text"  placeholder="角色名称" class="form-control" name="role_name">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,7 +94,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" value="" placeholder="安全密码" class="form-control" name="sale_password">
+                                        <input type="password" value="" placeholder="安全密码" class="form-control" name="safe_password">
                                     </div>
                                 </div>
 
@@ -114,8 +116,10 @@
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script>
     $(document).ready(function() {
@@ -162,13 +166,12 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }

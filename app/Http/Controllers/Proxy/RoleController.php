@@ -3,8 +3,13 @@ namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Module;
+use App\Models\OperationLog;
+use App\Models\Organization;
+use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
+use App\Models\RoleNode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 class RoleController extends Controller{
 
@@ -43,7 +48,32 @@ class RoleController extends Controller{
     }
     //下级人员管理权限角色添加--功能提交
     public function role_add_check(Request $request){
-        dd(1);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $role_name = $request->input('role_name');//权限角色名称
+        $node_ids = $request->input('module_node_ids');//角色权限节点
+
+        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
+            return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+                $role_id = OrganizationRole::addRole(['program_id'=>2,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                foreach ($node_ids as $key => $val) {
+                    RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
+                }
+                if($admin_data['super_id'] == 2){
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了权限角色'.$role_name);//保存操作记录
+                }else{
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加权限角色成功', 'status' => '1']);
+        }
     }
 
 

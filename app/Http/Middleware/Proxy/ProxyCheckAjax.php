@@ -319,7 +319,7 @@ class ProxyCheckAjax
   //检测是否登录 权限 安全密码--权限角色添加
     public function checkRoleAdd($request)
     {
-        if (empty($request->input('rolename'))) {
+        if (empty($request->input('role_name'))) {
             return self::res(0, response()->json(['data' => '角色名称', 'status' => '0']));
         }
         return self::res(1, $request);
