@@ -32,9 +32,8 @@ class RoleController extends Controller{
             $module_node_list[] = $module;
             unset($module);
         }
-
         dump($module_node_list);
-        return view('Proxy/Role/role_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Proxy/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
