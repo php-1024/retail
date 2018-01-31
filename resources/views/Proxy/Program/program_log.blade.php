@@ -73,7 +73,13 @@
                                         <tr>
                                             <td>{{$val->id}}</td>
                                             <td>{{$val->organization->organization_name}}</td>
-                                            <td><span class="label label-success">@if($val->status == 1)划入@else划出@endif</span></td>
+                                            <td>
+                                                @if($val->status == 1)
+                                                    <span class="label label-success">划入</span>
+                                                @else
+                                                    <span class="label label-danger">划出</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div>
                                                     <span class="label label-danger"><i class="icon-code"></i>{{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}}套</span>
