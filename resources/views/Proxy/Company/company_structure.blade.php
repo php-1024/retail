@@ -49,12 +49,11 @@
                     <!--breadcrumbs end -->
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <button type="button" class="btn btn-info" onclick="location.href='company_list.html'"><i class="icon-reply"></i> 返回列表</button>
+                            <button type="button" class="btn btn-info" onclick="javascript:history();"><i class="icon-reply"></i> 返回列表</button>
                             <button type="button" class="btn btn-primary" id="expand-all"><i class="icon-plus"></i> 展开所有</button>
                             <button type="button" class="btn btn-primary" id="collapse-all"><i class="icon-minus"></i> 合并所有</button>
                         </div>
@@ -98,22 +97,11 @@
 <script>
     $(document).ready(function() {
         $('#nestable2').nestable();
-
-
         $('#expand-all').click(function(){
             $('.dd').nestable('expandAll');
         });
-
         $('#collapse-all').click(function(){
             $('.dd').nestable('collapseAll');
-        });
-
-        $("#owl-demo").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            singleItem : true
-
         });
     });
     $(function(){
