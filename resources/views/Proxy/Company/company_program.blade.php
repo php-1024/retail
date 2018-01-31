@@ -118,6 +118,7 @@
     </section>
     <!--main content end-->
 </section>
+<<<<<<< HEAD
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
         <div class="modal-dialog modal-lg">
@@ -235,17 +236,16 @@
 
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+=======
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+>>>>>>> 7b2680f8f34fecc171135fa302d7e282835529e7
 
-script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Proxy/library/bootstrap')}}/js/bootstrap.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
     $(function(){
