@@ -106,7 +106,7 @@
     <!--main content end-->
 </section>
 
-{{--<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>--}}
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js"></script>
 <!--common script for all pages-->
 {{--<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>--}}
