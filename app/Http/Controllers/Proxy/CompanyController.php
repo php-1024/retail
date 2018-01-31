@@ -100,6 +100,10 @@ class CompanyController extends Controller{
         }
         return view('Proxy/Company/company_program',['listOrg'=>$listOrg,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //程序划拨
+    public function company_assets(Request $request){
+     echo 1;exit;
+    }
 
 
 }

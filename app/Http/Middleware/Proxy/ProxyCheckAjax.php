@@ -36,7 +36,7 @@ class ProxyCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/company_assets"://商户资产划入检测弹出登入和权限
+            case "proxy/ajax/company_assets"://商户资产划入检测弹出登入和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
