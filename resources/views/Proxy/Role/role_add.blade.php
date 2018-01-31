@@ -57,12 +57,12 @@
                             权限角色添加
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="post" action="{{url('proxy/ajax/role_add_check')}}">
+                            <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{url('proxy/ajax/role_add_check')}}">
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">角色名称</label>
                                     <div class="col-sm-10">
-                                        <input type="text" value="admin" placeholder="角色名称" class="form-control">
+                                        <input type="text" value="admin" placeholder="角色名称" class="form-control" name="rolename">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">安全密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" value="" placeholder="安全密码" class="form-control">
+                                        <input type="text" value="" placeholder="安全密码" class="form-control" name="sale_password">
                                     </div>
                                 </div>
 
