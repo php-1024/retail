@@ -6,6 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\Module;
 use App\Models\OperationLog;
+use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
 use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
@@ -23,6 +24,8 @@ class PersonaController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+        $oneAcc = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
+        dump($oneAcc);
         if($admin_data['super_id'] == 2) {//如果是超级管理员
             $user = Account::getOne([['id',1]]);
             $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
