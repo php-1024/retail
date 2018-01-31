@@ -104,9 +104,6 @@
             $('.dd').nestable('collapseAll');
         });
     });
-    $(function(){
-        $('select.styled').customSelect();
-    });
 </script>
 
 </body>
