@@ -22,13 +22,13 @@
                                 <group class="checked_box_group_{{ $val['id'] }}">
                                     <div>
                                         <label class="i-checks">
-                                            <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
+                                            <input type="checkbox" @if(in_array($val['id'],$selected_modules)) checked="checked" @endif class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
                                         </label>
                                     </div>
                                     <div>
                                         @foreach($val['program_nodes'] as $kk=>$vv)
                                             <label class="i-checks">
-                                                <input type="checkbox"  data-group_id="{{  $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
+                                                <input type="checkbox" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif  data-group_id="{{  $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
                                             </label>
                                             &nbsp;&nbsp;
                                         @endforeach
@@ -110,13 +110,12 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }
