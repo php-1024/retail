@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">角色名称</label>
                                     <div class="col-sm-10">
-                                        <input type="text"  placeholder="角色名称" class="form-control" name="rolename">
+                                        <input type="text"  placeholder="角色名称" class="form-control" name="role_name">
                                     </div>
                                 </div>
                                 <div class="form-group">
