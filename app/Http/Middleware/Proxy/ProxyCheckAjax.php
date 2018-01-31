@@ -49,6 +49,7 @@ class ProxyCheckAjax
                 break;
             case "proxy/ajax/company_assets":   //商户资产划入检测弹出登入和权限
             case "proxy/ajax/role_edit":        //编辑权限角色弹出框检测登入和权限
+            case "proxy/ajax/role_delete_comfirm"://编辑权限角色弹出框检测登入和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

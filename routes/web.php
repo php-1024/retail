@@ -387,6 +387,8 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;////提交添加权限角色数据
         Route::post('role_edit','Proxy\RoleController@role_edit')->middleware('ProxyCheckAjax');//编辑权限角色弹出框
         Route::post('role_edit_check','Proxy\RoleController@role_edit_check')->middleware('ProxyCheckAjax');//编辑权限角色弹出框
+        Route::post('role_delete_comfirm','Proxy\RoleController@role_delete_comfirm')->middleware('ProxyCheckAjax');;//删除权限角色弹出安全密码框
+        Route::post('role_delete','Proxy\RoleController@role_delete')->middleware('ProxyCheckAjax');//删除权限角色弹出安全密码框
 
     });
 });
