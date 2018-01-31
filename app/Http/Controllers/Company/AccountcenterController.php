@@ -28,7 +28,6 @@ class AccountcenterController extends Controller{
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('company/company_list');
         }
-        dump($admin_data);
         $accountInfo = AccountInfo::getOne(['id' => $admin_data['id']]);
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
         if (empty($admin_data['safe_password'])){           //先设置安全密码
@@ -145,13 +144,10 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
-        if ($admin_data['is_super'] == 1){
-            $admin_data['account'] = $account['account'];
-        }
         if (empty($admin_data['safe_password'])){
             return redirect('company/account/safe_password');
         }else{
-            return view('Company/Accountcenter/password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+            return view('Company/Accountcenter/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
         }
     }
 
