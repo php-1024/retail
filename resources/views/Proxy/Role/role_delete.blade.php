@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/role_delete') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/role_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">
@@ -50,13 +50,12 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }
