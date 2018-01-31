@@ -24,7 +24,7 @@ class CompanyCheck{
 
             /****仅检测是否登录及是否具有权限****/
             case "company":                             //后台首页
-            case "company/company_quit":                //退出切换商户
+            case "company/company_switch":              //退出切换商户
             case "company/company_list":                //所有商户列表
             case "company/account/profile":             //密码设置
             case "company/account/password":            //密码设置
