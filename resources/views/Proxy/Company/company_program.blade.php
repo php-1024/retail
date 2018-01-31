@@ -124,7 +124,6 @@
 <script src="{{asset('public/Proxy/library/bootstrap')}}/js/bootstrap.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="{{asset('public/Proxy')}}/js/inspinia.js"></script>
 <script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
