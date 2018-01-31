@@ -391,7 +391,6 @@ class CompanyController extends Controller{
         $program_id = $request->input('program_id');//程序id
         $number = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
-
         DB::beginTransaction();
         try{
             $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
