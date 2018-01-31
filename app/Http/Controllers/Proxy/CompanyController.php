@@ -131,15 +131,20 @@ class CompanyController extends Controller{
             $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);//查询商户套餐系统数量
 
             $oneProxy = Assets::getOne([['organization_id',$admin_data['organization_id']],['package_id',$package_id],['program_id',$program_id]]);//查询服务商套餐系统数量
-            dd($oneProxy);
             $id=$re['id'];
             if($status == '1'){//划入
+                if($oneProxy['program_spare_num'] < $number){//数量不足
+                    return response()->json(['data' => '数量不足', 'status' => '0']);
+                }
                 if(empty($re)){
-                    Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$number,'program_use_num'=>'0']);
+                    Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$number,'program_use_num'=>'0']);//新添加商户系统数量
                 }else{
                     $num = $re['program_spare_num']+$number;
-                    Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
+                    Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);//商户原来的基础上加上系统数量
                 }
+                    $proxyNum = $oneProxy['program_spare_num'] - $number;//剩余数量
+                    $proxyUseNum = $oneProxy['program_use_num'] + $number;//使用数量
+                    Assets::editAssets([['id',$oneProxy['id']]],['program_spare_num'=>$proxyNum,'program_use_num'=>$proxyUseNum]);
                 $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
