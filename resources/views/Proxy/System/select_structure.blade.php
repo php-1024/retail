@@ -100,45 +100,6 @@
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nestable.js"></script>
-<script>
-
-//owl carousel
-
-$(document).ready(function() {
-    $('#nestable2').nestable();
-
-
-    $('#expand-all').click(function(){
-        $('.dd').nestable('expandAll');
-    });
-
-    $('#collapse-all').click(function(){
-        $('.dd').nestable('collapseAll');
-    });
-
-
-    //owl carousel
-
-    $("#owl-demo").owlCarousel({
-        navigation : true,
-        slideSpeed : 300,
-        paginationSpeed : 400,
-        singleItem : true
-
-    });
-
-    //custom select box
-
-    $(function(){
-        $('select.styled').customSelect();
-    });
-
-
-});
-
-
-
-</script>
 
 </body>
 </html>
