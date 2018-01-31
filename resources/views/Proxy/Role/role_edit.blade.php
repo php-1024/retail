@@ -1,5 +1,3 @@
-<link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<link href="{{asset('public/Proxy/')}}/css/style.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/role_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
@@ -55,16 +53,6 @@
         </div>
     </div>
 </form>
-{{--<!-- js placed at the end of the document so the pages load faster -->--}}
-{{--<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>--}}
-{{--<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>--}}
-{{--<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>--}}
-{{--<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>--}}
-{{--<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>--}}
-
-{{--<!--common script for all pages-->--}}
-{{--<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>--}}
-{{--<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>--}}
 <script>
     $(function(){
         $('.i-checks').iCheck({
