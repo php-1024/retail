@@ -136,17 +136,26 @@
     </aside>
 </section>
 
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
-<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-<!-- Custom and plugin javascript -->
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<!--script for this page-->
 <script>
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('select.styled').customSelect();
+    });
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
