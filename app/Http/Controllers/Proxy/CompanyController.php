@@ -144,7 +144,7 @@ class CompanyController extends Controller{
                 }
                     $proxyNum = $oneProxy['program_spare_num'] - $number;//剩余数量
                     $proxyUseNum = $oneProxy['program_use_num'] + $number;//使用数量
-                    Assets::editAssets([['id',$oneProxy['id']]],['program_spare_num'=>$proxyNum,'program_use_num'=>$proxyUseNum]);
+                    Assets::editAssets([['id',$oneProxy['id']]],['program_spare_num'=>$proxyNum,'program_use_num'=>$proxyUseNum]);//修改服务商系统数量
                 $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
@@ -159,6 +159,9 @@ class CompanyController extends Controller{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
+                $proxyNum = $oneProxy['program_spare_num'] + $number;//剩余数量
+                $proxyUseNum = $oneProxy['program_use_num'] - $number;//使用数量
+                Assets::editAssets([['id',$oneProxy['id']]],['program_spare_num'=>$proxyNum,'program_use_num'=>$proxyUseNum]);//修改服务商系统数量
                 $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
