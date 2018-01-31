@@ -88,64 +88,37 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>角色名称</th>
+                                            <th>角色创建人</th>
                                             <th>角色权限</th>
                                             <th>添加时间</th>
                                             <th class="text-right">操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-
+                                        @foreach($list as $key=>$val)
                                         <tr>
-                                            <td>1</td>
-                                            <td>订单管理员</td>
+                                            <td>{{ $val->id }}</td>
+                                            <td>{{ $val->role_name }}</td>
+                                            <td>{{ $val->create_account->account }}</td>
 
                                             <td>
-                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
-                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
-                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
-                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
-
+                                                @foreach($role_module_nodes[$val->id] as $k=>$v)
+                                                <button data-original-title="订单模块" data-content="@foreach($v as $kk=>$vv){{$vv}}  @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;
+                                                @endforeach
                                             </td>
-                                            <td>2017-08-08 10:30:30</td>
+                                            <td>{{ $val->created_at }}</td>
                                             <td class="text-right">
-                                                <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="icon-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                <button type="button" id="deleteBtn" class="btn  btn-xs btn-danger"><i class="icon-remove"></i>&nbsp;&nbsp;删除</button>
+                                                <button type="button" class="btn  btn-xs btn-primary"  onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                <button type="button" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm({{ $val->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             </td>
                                         </tr>
-
+                                        @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
                                             <td colspan="99">
                                                 <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
-
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
+                                                    {{ $list->appends($search_data)->links() }}
                                                 </ul>
                                             </td>
                                         </tr>
@@ -170,6 +143,78 @@
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script>
+    //获取删除权限角色删除密码确认框
+    function getDeleteComfirmForm(id){
+        var url = $('#role_delete_comfirm_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //获取用户信息，编辑密码框
+    function getEditForm(id){
+        var url = $('#role_edit_url').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+</script>
 </body>
 </html>
 
