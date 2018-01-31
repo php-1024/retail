@@ -70,120 +70,120 @@
                                     <div class="col-sm-10">
                                         <div>
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                <input type="checkbox" value="option1" checked="checked" > 订单模块
                                             </label>
                                         </div>
                                         <div>
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                <input type="checkbox" value="option1" checked="checked" > 订单编辑
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                <input type="checkbox" value="option2" checked="checked" > 订单查询
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                <input type="checkbox" value="option3" checked="checked" > 订单添加
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                            </label>
-                                        </div>
-                                        <div style="margin-top: 20px;"></div>
-
-                                        <div>
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                <input type="checkbox" value="option3" checked="checked" > 订单删除
                                             </label>
                                         </div>
                                         <div style="margin-top: 20px;"></div>
 
                                         <div>
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                <input type="checkbox" value="option1" checked="checked" > 订单模块
                                             </label>
                                         </div>
                                         <div>
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                <input type="checkbox" value="option1" checked="checked" > 订单编辑
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                <input type="checkbox" value="option2" checked="checked" > 订单查询
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                <input type="checkbox" value="option3" checked="checked" > 订单添加
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                            </label>
-                                        </div>
-                                        <div style="margin-top: 20px;"></div>
-
-                                        <div>
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                <input type="checkbox" value="option3" checked="checked" > 订单删除
                                             </label>
                                         </div>
                                         <div style="margin-top: 20px;"></div>
 
                                         <div>
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                <input type="checkbox" value="option1" checked="checked" > 订单模块
                                             </label>
                                         </div>
                                         <div>
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                <input type="checkbox" value="option1" checked="checked" > 订单编辑
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                <input type="checkbox" value="option2" checked="checked" > 订单查询
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                <input type="checkbox" value="option3" checked="checked" > 订单添加
                                             </label>
                                             &nbsp;&nbsp;
                                             <label class="i-checks">
-                                                <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                <input type="checkbox" value="option3" checked="checked" > 订单删除
+                                            </label>
+                                        </div>
+                                        <div style="margin-top: 20px;"></div>
+
+                                        <div>
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option1" checked="checked" > 订单模块
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option1" checked="checked" > 订单编辑
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option2" checked="checked" > 订单查询
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option3" checked="checked" > 订单添加
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option3" checked="checked" > 订单删除
+                                            </label>
+                                        </div>
+                                        <div style="margin-top: 20px;"></div>
+
+                                        <div>
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option1" checked="checked" > 订单模块
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option1" checked="checked" > 订单编辑
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option2" checked="checked" > 订单查询
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option3" checked="checked" > 订单添加
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="i-checks">
+                                                <input type="checkbox" value="option3" checked="checked" > 订单删除
                                             </label>
                                         </div>
                                         <div style="margin-top: 20px;"></div>
