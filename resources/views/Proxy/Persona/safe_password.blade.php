@@ -150,20 +150,15 @@
     </section>
     <!--main content end-->
 </section>
-
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
-
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
-
-
 <script>
     //提交表单
     function postForm() {
@@ -178,7 +173,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
@@ -187,8 +182,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
@@ -221,24 +215,6 @@
             }
         });
     }
-
-    //owl carousel
-
-    $(document).ready(function() {
-        $("#owl-demo").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            singleItem : true
-
-        });
-    });
-
-    //custom select box
-
-    $(function(){
-        $('select.styled').customSelect();
-    });
 </script>
 
 </body>
