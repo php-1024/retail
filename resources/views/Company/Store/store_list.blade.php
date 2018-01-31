@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>零壹云管理平台 | 商户管理系统</title>
+    <title>店铺列表 | 零壹云管理平台 | 商户管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
@@ -37,7 +37,6 @@
                                 <header class="panel-heading bg-light no-border">
                                     <div class="clearfix">
                                         <a href="#" class="pull-left thumb-md avatar b-3x m-r">
-
                                         </a>
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
@@ -49,7 +48,6 @@
                                     </div>
                                 </header>
                                 <div class="panel-body ">
-
                                     <div>
                                         店铺状态：<label class="label label-success pull-right">正常</label>
                                     </div>
@@ -57,7 +55,6 @@
                                     <div>
                                         主账号：<label class="label label-info pull-right">503020</label>
                                     </div>
-
                                 </div>
                                 <div class="panel-body" style="text-align:center;">
                                     <button class="btn btn-s-md btn-danger">进入店铺</button>
@@ -69,19 +66,16 @@
                                 <header class="panel-heading bg-light no-border">
                                     <div class="clearfix">
                                         <a href="#" class="pull-left thumb-md avatar b-3x m-r">
-
                                         </a>
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
                                                 楼兰美妆
                                                 <i class="fa icon-basket-loaded text-success text-lg pull-right"></i>
                                             </div>
-
                                         </div>
                                     </div>
                                 </header>
                                 <div class="panel-body ">
-
                                     <div>
                                         店铺状态：<label class="label label-success pull-right">正常</label>
                                     </div>
@@ -89,7 +83,6 @@
                                     <div>
                                         主账号：<label class="label label-info pull-right">203020</label>
                                     </div>
-
                                 </div>
                                 <div class="panel-body" style="text-align:center;">
                                     <button class="btn btn-s-md btn-danger">进入店铺</button>
@@ -101,19 +94,16 @@
                                 <header class="panel-heading bg-light no-border">
                                     <div class="clearfix">
                                         <a href="#" class="pull-left thumb-md avatar b-3x m-r">
-
                                         </a>
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
                                                 维也纳酒店
                                                 <i class="fa fa-building-o text-success text-lg pull-right"></i>
                                             </div>
-
                                         </div>
                                     </div>
                                 </header>
                                 <div class="panel-body ">
-
                                     <div>
                                         店铺状态：<label class="label label-success pull-right">正常</label>
                                     </div>
@@ -121,7 +111,6 @@
                                     <div>
                                         主账号：<label class="label label-info pull-right">303020</label>
                                     </div>
-
                                 </div>
                                 <div class="panel-body" style="text-align:center;">
                                     <button class="btn btn-s-md btn-danger">进入店铺</button>
