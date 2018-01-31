@@ -40,8 +40,8 @@ class AssetsOperation extends Model{
         $program->save();
     }
     //获取分页数据
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organization','package')->orWhere($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getPaginage($where,$orWhere,$paginate,$orderby,$sort='DESC'){
+        return self::with('organization','package')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
