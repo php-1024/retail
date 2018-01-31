@@ -83,6 +83,7 @@
                                                     @endforeach
                                                 </div>
                                             </group>
+                                            <div style="margin-top: 20px;"></div>
                                             <div class="hr-line-dashed" style="clear: both;"></div>
                                         @endforeach
                                         {{--<group class="checked_box_group_{{ $val['id'] }}">--}}
