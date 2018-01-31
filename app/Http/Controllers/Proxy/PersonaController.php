@@ -49,6 +49,7 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
+        
         return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
