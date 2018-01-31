@@ -32,7 +32,7 @@ class AssetsOperation extends Model{
         $program = new AssetsOperation();//实例化程序模型
         $program->account_id = $param['account_id'];//操作人id
         $program->organization_id = $param['organization_id'];//程序名称
-        $program->wrawo_rganization_id = $param['draw_organization_id'];//程序名称
+        $program->draw_organization_id = $param['draw_organization_id'];//程序名称
         $program->package_id = $param['package_id'];//套餐id
         $program->program_id = $param['program_id'];//程序id
         $program->status = $param['status'];//操作状态

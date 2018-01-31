@@ -382,7 +382,10 @@ class CompanyController extends Controller{
     //商户资产页面划入js显示
     public function company_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
+
+        if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
+            $draw_organization_id = 1;
+        }
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $program_id = $request->input('program_id');//程序id
@@ -400,7 +403,7 @@ class CompanyController extends Controller{
                 $num = $re['program_spare_num']+$number;
                 Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
                }
-               $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'wrawo_rganization_id'=>$admin_data['organization_id'],'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
+               $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
             } else{//划出
@@ -414,13 +417,12 @@ class CompanyController extends Controller{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
-                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'wraw_organization_id'=>$admin_data['organization_id'],'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
+                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
