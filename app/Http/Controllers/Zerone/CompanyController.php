@@ -399,8 +399,9 @@ class CompanyController extends Controller{
                 $num = $re['program_spare_num']+$number;
                 Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
                }
+               $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'wrawo_rganization_id'=>$admin_data['organization_id'],'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
-                AssetsOperation::addAssetsOperation($admin_data['id'],$organization_id,$package_id,$package_id,$status,$number);//保存操作记录
+                AssetsOperation::addAssetsOperation($data);//保存操作记录
             } else{//划出
                 if(empty($re)){
                     return response()->json(['data' => '数量不足', 'status' => '0']);
@@ -412,8 +413,9 @@ class CompanyController extends Controller{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
+                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'wrawo_rganization_id'=>$admin_data['organization_id'],'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
-                AssetsOperation::addAssetsOperation($admin_data['id'],$organization_id,$package_id,$package_id,$status,$number);//保存操作记录
+                AssetsOperation::addAssetsOperation($data);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {

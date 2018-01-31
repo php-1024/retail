@@ -28,14 +28,15 @@ class AssetsOperation extends Model{
         return self::where($where)->first();
     }
     //添加数据
-    public static function addAssetsOperation($account_id,$organization_id,$package_id,$program_id,$status,$number){
+    public static function addAssetsOperation($param){
         $program = new AssetsOperation();//实例化程序模型
-        $program->account_id = $account_id;//操作人id
-        $program->organization_id = $organization_id;//程序名称
-        $program->package_id = $package_id;//套餐id
-        $program->program_id = $program_id;//程序id
-        $program->status = $status;//操作状态
-        $program->number = $number;//操作数量
+        $program->account_id = $param['account_id'];//操作人id
+        $program->organization_id = $param['organization_id'];//程序名称
+        $program->wrawo_rganization_id = $param['wrawo_rganization_id'];//程序名称
+        $program->package_id = $param['package_id'];//套餐id
+        $program->program_id = $param['program_id'];//程序id
+        $program->status = $param['status'];//操作状态
+        $program->number = $param['number'];//操作数量
         $program->save();
     }
     //获取分页数据
