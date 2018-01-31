@@ -109,7 +109,11 @@ class RoleController extends Controller{
         }
         return $module_nodes;
     }
-
+    //下级人员添加
+    public function role_edit(Request $request){
+  
+        return view('Proxy/Role/role_edit');
+    }
     //下级人员添加
     public function subordinate_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
