@@ -36,6 +36,11 @@ class ProxyCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+            case "proxy/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
+                $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
+                return self::format_response($re,$next);
+                break;
+
             case "proxy/ajax/company_assets"://商户资产划入检测弹出登入和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);

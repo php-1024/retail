@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Proxy;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Assets;
+use App\Models\AssetsOperation;
 use App\Models\Organization;
 use App\Models\Package;
 use App\Models\ProxyApply;
@@ -108,6 +109,60 @@ class CompanyController extends Controller{
         $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         return view('Proxy/Company/company_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+    }
+    //商户资产页面划入js显示
+    public function company_assets_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $organization_id = $request->input('organization_id');//服务商id
+        $package_id = $request->input('package_id');//套餐id
+        $program_id = $request->input('program_id');//程序id
+        $number = $request->input('num');//数量
+        $status = $request->input('status');//判断划入或者划出
+
+        DB::beginTransaction();
+        try{
+            $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+            $id=$re['id'];
+            if($status == '1'){//划入
+                if(empty($re)){
+                    Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$number,'program_use_num'=>'0']);
+                }else{
+                    $num = $re['program_spare_num']+$number;
+                    Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
+                }
+                if($admin_data['super_id'] == 2) {//如果是超级管理员
+                    //添加操作日志
+                    AssetsOperation::addAssetsOperation(1, $organization_id, $package_id, $package_id, $status, $number);//保存操作记录
+                }else{
+                    //添加操作日志
+                    AssetsOperation::addAssetsOperation($admin_data['id'], $organization_id, $package_id, $package_id, $status, $number);//保存操作记录
+                }
+            } else{//划出
+                if(empty($re)){
+                    return response()->json(['data' => '数量不足', 'status' => '0']);
+                }else{
+                    if($re['program_spare_num'] >= $number){//划出数量小于或等于剩余数量
+                        $num = $re['program_spare_num'] - $number;
+                        Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
+                    }else{
+                        return response()->json(['data' => '数量不足', 'status' => '0']);
+                    }
+                }
+                if($admin_data['super_id'] == 2) {//如果是超级管理员
+                    //添加操作日志
+                    AssetsOperation::addAssetsOperation(1, $organization_id, $package_id, $package_id, $status, $number);//保存操作记录
+                }else{
+                    //添加操作日志
+                    AssetsOperation::addAssetsOperation($admin_data['id'], $organization_id, $package_id, $package_id, $status, $number);//保存操作记录
+                }
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
 
