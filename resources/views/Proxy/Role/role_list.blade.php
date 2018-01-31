@@ -136,15 +136,14 @@
     </section>
     <!--main content end-->
 </section>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-<script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     //获取删除权限角色删除密码确认框
