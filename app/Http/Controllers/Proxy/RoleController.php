@@ -14,7 +14,7 @@ class RoleController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,1);//获取当前用户具有权限的节点
+        $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,'1');//获取当前用户具有权限的节点
         $modules = [];
         $nodes = [];
         $module_node_list = [];
