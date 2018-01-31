@@ -111,7 +111,6 @@ class RoleController extends Controller{
     }
     //下级人员添加
     public function role_edit(Request $request){
-        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');//权限角色ID
         $info = OrganizationRole::getOne([['id',$id]]);//获取该ID的信息
@@ -125,7 +124,6 @@ class RoleController extends Controller{
         }
 
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
-        dd($account_id);
         if($account_id == $admin_data['id']) {
             $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
