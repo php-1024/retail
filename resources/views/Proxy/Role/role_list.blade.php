@@ -136,7 +136,7 @@
     </section>
     <!--main content end-->
 </section>
-<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
