@@ -8,6 +8,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet" />
     <!--external css-->
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -215,7 +216,16 @@
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
+<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script>
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    });
+</script>
 </body>
 </html>
 
