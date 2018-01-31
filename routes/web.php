@@ -410,7 +410,6 @@ Route::group(['prefix'=>'company'],function(){
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('company_edit', 'Company\AccountcenterController@company_edit')->middleware('CompanyCheck');     //公司资料编辑（商户资料）
         Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');             //登陆密码页面
         Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');   //安全密码
         Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');               //安全密码
