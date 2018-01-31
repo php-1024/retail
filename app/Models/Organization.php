@@ -22,6 +22,9 @@ class Organization extends Model{
     public function assetsOperation(){
         return $this->hasMany('App\Models\AssetsOperation', 'organization_id','id');
     }
+    public static function getli($where){
+        return self::with('assetsOperation')->where($where)->get();
+    }
     //和OrganizationProxyinfo表一对多的关系
     public function organizationCompanyinfo(){
         return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id');
