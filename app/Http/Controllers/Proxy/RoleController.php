@@ -62,10 +62,13 @@ class RoleController extends Controller{
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
-                OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                if($admin_data['super_id'] == 2){
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了权限角色'.$role_name);//保存操作记录
+                }else{
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                }
                 DB::commit();
             } catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
             }
