@@ -55,19 +55,19 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="get">
-
+                            <form class="form-horizontal tasi-form" method="get" id="searchForm" action="">
+                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                <input type="hidden" id="role_edit_url" value="{{ url('proxy/ajax/role_edit') }}">
+                                <input type="hidden" id="role_delete_comfirm_url" value="{{ url('proxy/ajax/role_delete_comfirm') }}">
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">角色名称</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="角色名称">
+                                        <input type="text" class="form-control" placeholder="角色名称" id="role_name" name="role_name" value="{{ $search_data['role_name'] }}">
                                     </div>
                                     <div class="col-lg-2">
-                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                        <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                                     </div>
-
                                 </div>
-
                             </form>
                         </div>
                     </section>
