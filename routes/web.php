@@ -349,6 +349,7 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('role_list','Proxy\RoleController@role_list')->middleware('ProxyCheck');//权限角色列表
         Route::get('subordinate_add','Proxy\RoleController@subordinate_add')->middleware('ProxyCheck');//下级人员添加
         Route::get('subordinate_list','Proxy\RoleController@subordinate_list')->middleware('ProxyCheck');//下级人员列表
+        Route::get('subordinate_structure','Proxy\RoleController@subordinate_structure')->middleware('ProxyCheck');//下级人员结构
     });
 
     //系统资产管理
