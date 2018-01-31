@@ -351,6 +351,12 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::get('subordinate_list','Proxy\RoleController@subordinate_list')->middleware('ProxyCheck');//下级人员列表
         Route::get('subordinate_structure','Proxy\RoleController@subordinate_structure')->middleware('ProxyCheck');//下级人员结构
     });
+    //下级人员管理--添加组
+    Route::group(['prefix'=>'subordinate'],function(){
+        Route::get('subordinate_add','Zerone\SubordinateController@subordinate_add')->middleware('ZeroneCheck');//添加下级人员
+        Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list')->middleware('ZeroneCheck');//下级人员列表
+        Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure')->middleware('ZeroneCheck');//下级人员结构
+    });
 
     //系统资产管理
     Route::group(['prefix'=>'program'],function(){
