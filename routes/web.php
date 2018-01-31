@@ -360,7 +360,7 @@ Route::group(['prefix'=>'proxy'],function(){
 
     //系统资产管理
     Route::group(['prefix'=>'program'],function(){
-        Route::get('program_list','Proxy\ProgramController@program_list')->middleware('ProxyCheck');//添加权限角色
+        Route::get('program_list','Proxy\ProgramController@program_list')->middleware('ProxyCheck');//资产
         Route::get('program_log','Proxy\ProgramController@program_log')->middleware('ProxyCheck');//权限角色列表
     });
 
@@ -383,6 +383,8 @@ Route::group(['prefix'=>'proxy'],function(){
 
         Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
         Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
+
+        Route::post('role_add_check','Proxy\Role@role_add_check')->middleware('ProxyCheckAjax');//权限
 
     });
 });

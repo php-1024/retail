@@ -35,9 +35,12 @@ class ProxyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
-
             case "proxy/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
+                return self::format_response($re,$next);
+                break;
+            case "proxy/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
+                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -168,6 +171,21 @@ class ProxyCheckAjax
             }
         }
     }
+    //检测是否登录 权限 安全密码--权限角色添加
+    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测是否登录 权限 修改安全密码
     public function checkLoginAndRuleAndSafeEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录和权限
@@ -298,8 +316,14 @@ class ProxyCheckAjax
 //            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
 //        }
     }
-
-
+  //检测是否登录 权限 安全密码--权限角色添加
+    public function checkRoleAdd($request)
+    {
+        if (empty($request->input('rolename'))) {
+            return self::res(0, response()->json(['data' => '角色名称', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
 
 
     //检测公司信息设置
