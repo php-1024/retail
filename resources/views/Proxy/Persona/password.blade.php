@@ -143,31 +143,16 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
-
-
-    //owl carousel
-
-    $(document).ready(function() {
-        $("#owl-demo").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            singleItem : true
-
-        });
-    });
-
     //custom select box
 
     $(function(){
