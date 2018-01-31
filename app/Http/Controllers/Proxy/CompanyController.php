@@ -8,6 +8,7 @@ use App\Models\Organization;
 use App\Models\Package;
 use App\Models\ProxyApply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 class CompanyController extends Controller{
     //商户注册列表
