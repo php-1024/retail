@@ -22,9 +22,7 @@
     <script src="{{asset('public/Proxy')}}/js/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
-
 <section id="container" class="">
     <!--header start-->
     <header class="header white-bg">
@@ -64,7 +62,6 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane" id="tab1">
-
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">手机号码</label>
                                                 <div class="col-sm-10"><input type="text" class="form-control"></div>
@@ -73,20 +70,16 @@
                                                 <label class="col-sm-2 control-label">用户密码</label>
                                                 <div class="col-sm-10"><input type="text" class="form-control"></div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">重复密码</label>
                                                 <div class="col-sm-10"><input type="text" class="form-control"></div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">真实姓名</label>
                                                 <div class="col-sm-10"><input type="text" class="form-control"></div>
                                             </div>
-
                                         </div>
                                         <div class="tab-pane" id="tab2">
-
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">权限角色</label>
                                                 <div class="col-sm-3">
@@ -173,7 +166,6 @@
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 20px;"></div>
-
                                                     <div>
                                                         <label class="i-checks">
                                                             <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
@@ -197,7 +189,6 @@
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 20px;"></div>
-
                                                     <div>
                                                         <label class="i-checks">
                                                             <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块

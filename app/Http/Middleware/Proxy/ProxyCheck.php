@@ -49,6 +49,8 @@ class ProxyCheck{
             case "proxy/role/role_add":                 //权限角色添加
             case "proxy/role/role_list":                //权限角色列表
             case "proxy/role/subordinate_add":          //下级人员添加
+            case "proxy/role/subordinate_list":         //下级人员列表
+            case "proxy/role/subordinate_structure":    //下级人员结构
             /****下级人员管理--权限角色****/
 
             /****系统资产管理****/
