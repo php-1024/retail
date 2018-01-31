@@ -102,7 +102,7 @@ class CompanyController extends Controller{
     }
     //程序划拨
     public function company_assets(Request $request){
-     echo 1;exit;
+        return view('Proxy/Company/company_assets');
     }
 
 
