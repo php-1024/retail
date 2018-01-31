@@ -149,6 +149,10 @@ class RoleController extends Controller{
         return view('Proxy/Role/role_edit',['info'=>$info,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
     }
     //下级人员添加
+    public function role_edit_check(Request $request){
+
+    }
+    //下级人员添加
     public function subordinate_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
