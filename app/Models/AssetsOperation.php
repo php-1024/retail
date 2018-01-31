@@ -18,6 +18,11 @@ class AssetsOperation extends Model{
         return $this->belongsTo('App\Models\Organization', 'organization_id','id');
     }
 
+    //和组织表一对一的关系
+    public function draw_organization(){
+        return $this->belongsTo('App\Models\Organization', 'draw_organization_id','id');
+    }
+
     //和套餐表一对一的关系
     public function package(){
         return $this->belongsTo('App\Models\Package','package_id','id');

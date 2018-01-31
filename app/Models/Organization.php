@@ -22,6 +22,10 @@ class Organization extends Model{
     public function assetsOperation(){
         return $this->hasMany('App\Models\AssetsOperation', 'organization_id','id');
     }
+    //和assetsOperation表一对多的关系
+    public function assetsOperation_draw(){
+        return $this->hasMany('App\Models\AssetsOperation', 'draw_organization_id','id');
+    }
 
     //和OrganizationProxyinfo表一对一的关系
     public function organizationCompanyinfo(){
