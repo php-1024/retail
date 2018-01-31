@@ -116,7 +116,6 @@
                 </div>
             </div>
         </div>
-        @include('Zerone/Public/Footer')
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 </div>
