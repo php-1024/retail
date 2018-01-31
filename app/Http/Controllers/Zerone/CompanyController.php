@@ -385,6 +385,8 @@ class CompanyController extends Controller{
 
         if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
             $draw_organization_id = 1;
+        }else{
+            $draw_organization_id = $admin_data['organization_id'];
         }
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
