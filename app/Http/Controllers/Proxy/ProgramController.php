@@ -33,8 +33,7 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         $list = AssetsOperation::getPaginage([['organization_id',$organization_id]],'10','id');//查询操作记录
-        $aa = Organization::getli([['id',2]]);
-        dd($aa);
+       dd($list);
         return view('Proxy/Program/program_log',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 

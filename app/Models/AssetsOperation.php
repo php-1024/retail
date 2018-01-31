@@ -20,7 +20,7 @@ class AssetsOperation extends Model{
 
     //和套餐表一对一的关系
     public function package(){
-        return $this->hasOne('App\Models\Package', 'id');
+        return $this->belongsTo('App\Models\Package','package_id','id');
     }
 
     //获取单条信息

@@ -19,7 +19,7 @@ class Package extends Model{
     }
     //和AssetsOperation表一对多的关系
     public function assets_operation(){
-        return $this->belongsto('App\Models\AssetsOperation','package_id');
+        return $this->hasMany('App\Models\AssetsOperation','package_id','id');
     }
 
     //添加配套
