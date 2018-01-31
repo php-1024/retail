@@ -80,7 +80,7 @@
                                                 </div>
 
                                             </td>
-                                            <th></th>
+                                            <th>{{$val->draw_organization->organization_name}}</th>
                                             <td>{{$val->created_at}}</td>
                                         </tr>
                                         @endforeach

@@ -46,7 +46,7 @@ class AssetsOperation extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$orWhere,$paginate,$orderby,$sort='DESC'){
-        return self::with('organization','package')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('organization')->with('draw_organization')->with('package')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
