@@ -384,8 +384,7 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
         Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
 
-        Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;//提交添加权限角色数据
-        Route::post('role_edit','Proxy\RoleController@role_edit')->middleware('ProxyCheck');;//编辑权限角色弹出框
+        Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;//权限
 
     });
 });
@@ -401,13 +400,17 @@ Route::group(['prefix'=>'company'],function(){
         Route::get('captcha/{tmp}', 'Company\LoginController@captcha');//验证码路由
     });
 
-    Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');                     //首页面路由
-    Route::get('quit', 'Company\AccountcenterController@quit');                                                 //退出系统
-    Route::get('company_list', 'Company\AccountcenterController@company_list')->middleware('CompanyCheck');     //商户列表
-    Route::get('company_quit', 'Company\AccountcenterController@company_quit')->middleware('CompanyCheck');     //超级管理员退出当前商户
+    //系统首页&&公司资料
+    Route::group(['prefix'=>'/'],function(){
+        Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');                     //首页面路由
+        Route::get('quit', 'Company\AccountcenterController@quit');                                                 //退出系统
+        Route::get('company_list', 'Company\AccountcenterController@company_list')->middleware('CompanyCheck');     //商户列表
+        Route::get('company_quit', 'Company\AccountcenterController@company_quit')->middleware('CompanyCheck');     //超级管理员退出当前商户
+    });
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
+        Route::get('company_edit', 'Company\AccountcenterController@company_edit')->middleware('CompanyCheck');     //公司资料编辑（商户资料）
         Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');             //登陆密码页面
         Route::get('safe_password', 'Company\AccountcenterController@safe_password')->middleware('CompanyCheck');   //安全密码
         Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');               //安全密码
@@ -417,7 +420,6 @@ Route::group(['prefix'=>'company'],function(){
 
     //店铺管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('company_edit', 'Company\AccountcenterController@company_edit')->middleware('CompanyCheck');     //公司资料编辑（商户资料）
         Route::get('store_add', 'Company\StoreController@store_add')->middleware('CompanyCheck');                   //店铺管理创建店铺
         Route::get('store_add_second', 'Company\StoreController@store_add_second')->middleware('CompanyCheck');     //店铺管理立即开店
         Route::get('store_list', 'Company\StoreController@store_list')->middleware('CompanyCheck');                 //店铺管理
