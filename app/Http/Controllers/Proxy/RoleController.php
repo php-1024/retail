@@ -111,7 +111,7 @@ class RoleController extends Controller{
     }
     //下级人员添加
     public function role_edit(Request $request){
-  
+        dd(1);
         return view('Proxy/Role/role_edit');
     }
     //下级人员添加
