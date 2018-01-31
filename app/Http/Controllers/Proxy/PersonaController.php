@@ -23,13 +23,15 @@ class PersonaController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
-        if($account_id == $admin_data['id']) {//如果是超级管理员
+        if($admin_data['super_id'] == 2){//如果是超级管理员
             $user = Account::getOne([['id',1]]);
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
             $user = Account::getOne([['id',$admin_data['id']]]);
+        }
+        $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
+        if($account_id == $admin_data['id']) {
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
+        }else{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
