@@ -31,6 +31,7 @@
                                                 <input type="checkbox" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif  data-group_id="{{  $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
                                             </label>
                                             &nbsp;&nbsp;
+
                                         @endforeach
                                     </div>
                                 </group>
