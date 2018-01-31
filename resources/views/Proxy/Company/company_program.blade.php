@@ -235,7 +235,7 @@
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 
-script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
 <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
