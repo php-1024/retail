@@ -122,8 +122,6 @@
 
 <script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy/library/bootstrap')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Proxy/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Proxy')}}/js/inspinia.js"></script>
