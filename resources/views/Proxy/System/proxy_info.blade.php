@@ -105,16 +105,6 @@
     </section>
     <!--main content end-->
 </section>
-
-{{--<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>--}}
-{{--<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js"></script>--}}
-{{--<!--common script for all pages-->--}}
-{{--<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>--}}
-{{--<!-- Custom and plugin javascript -->--}}
-{{--<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>--}}
-{{--<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>--}}
-
-
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
@@ -144,14 +134,13 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
