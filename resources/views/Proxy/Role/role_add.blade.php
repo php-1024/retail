@@ -85,35 +85,7 @@
                                                 </div>
                                             </group>
                                             <div style="margin-top: 20px;"></div>
-                                            {{--<div class="hr-line-dashed" style="clear: both;"></div>--}}
                                         @endforeach
-                                        {{--<group class="checked_box_group_{{ $val['id'] }}">--}}
-                                            {{--<div>--}}
-                                                {{--<label class="i-checks">--}}
-                                                    {{--<input type="checkbox" value="option1" checked="checked" > 订单模块--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                            {{--<div>--}}
-                                                {{--<label class="i-checks">--}}
-                                                    {{--<input type="checkbox" value="option1" checked="checked" > 订单编辑--}}
-                                                {{--</label>--}}
-                                                {{--&nbsp;&nbsp;--}}
-                                                {{--<label class="i-checks">--}}
-                                                    {{--<input type="checkbox" value="option2" checked="checked" > 订单查询--}}
-                                                {{--</label>--}}
-                                                {{--&nbsp;&nbsp;--}}
-                                                {{--<label class="i-checks">--}}
-                                                    {{--<input type="checkbox" value="option3" checked="checked" > 订单添加--}}
-                                                {{--</label>--}}
-                                                {{--&nbsp;&nbsp;--}}
-                                                {{--<label class="i-checks">--}}
-                                                    {{--<input type="checkbox" value="option3" checked="checked" > 订单删除--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                        {{--</group>--}}
-                                        {{--<div style="margin-top: 20px;"></div>--}}
-
-
                                     </div>
                                 </div>
 
