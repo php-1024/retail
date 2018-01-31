@@ -15,7 +15,7 @@ class AssetsOperation extends Model{
 
     //和组织表一对一的关系
     public function organization(){
-        return $this->hasOne('App\Models\Organization', 'id','organization_id');
+        return $this->belongsTo('App\Models\Organization', 'id','organization_id');
     }
 
     //和套餐表一对一的关系
