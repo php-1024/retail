@@ -330,6 +330,7 @@ Route::group(['prefix'=>'proxy'],function(){
     Route::group(['prefix'=>'system'],function(){
         Route::post('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
         Route::get('setup','Proxy\SystemController@setup')->middleware('ProxyCheck');//服务商参数设置
+        Route::get('subordinate_add','Proxy\SystemController@subordinate_add')->middleware('ProxyCheck');//下级人员添加
         Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
         Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
         Route::get('operationlog','Proxy\SystemController@operationlog')->middleware('ProxyCheck');//操作日志

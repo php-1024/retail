@@ -29,6 +29,7 @@ class ProxyCheck{
 
             /****系统管理****/
             case "proxy/system/setup":                  //参数设置
+            case "proxy/system/subordinate_add":        //下级人员添加
             case "proxy/system/proxy_info":             //公司信息设置
             case "proxy":                               //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
