@@ -1,4 +1,5 @@
 <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
+<link href="{{asset('public/Proxy/')}}/css/style.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/role_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
