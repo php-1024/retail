@@ -124,7 +124,7 @@
                                 </div>
 
                                 <div class="form-group" style="text-align: center;">
-                                    <button type="button" id="addbtn" class="btn btn-shadow btn-info">提交</button>
+                                    <button type="button" onclick="return postForm();" class="btn btn-shadow btn-info">提交</button>
                                 </div>
                             </form>
                         </div>
@@ -145,12 +145,59 @@
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script>
-    $(function(){
+    $(document).ready(function() {
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green'
         });
+
+        $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('check') ;
+        }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('uncheck') ;
+        });
+        $('.checkbox_node_name').on('ifUnchecked',function(event){
+            var group_id = $(this).attr('data-group_id');
+            var tag=false;
+            $('.checkbox_node_name_'+group_id).each(function(i,v){
+                if($('.checkbox_node_name_'+group_id+':eq('+i+')').is(":checked")){
+                    tag=true;
+                }
+            });
+            if(tag==false){
+                $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
+            }
+        });
     });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>
