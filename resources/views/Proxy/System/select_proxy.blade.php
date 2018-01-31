@@ -88,6 +88,7 @@
 <!--script for this page-->
 <script src="{{asset('public/Proxy')}}/js/sparkline-chart.js"></script>
 <script src="{{asset('public/Proxy')}}/js/easy-pie-chart.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     //提交表单
     function postForm(organization_id){
@@ -102,8 +103,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
