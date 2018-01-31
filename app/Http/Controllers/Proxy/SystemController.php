@@ -81,7 +81,7 @@ class SystemController extends Controller{
             return response()->json(['data' => '操作成功', 'status' => '1']);
 
         }else{
-            dd($request);
+            dd($account_info);
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
     }
