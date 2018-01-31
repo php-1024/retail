@@ -43,7 +43,10 @@ class ProxyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re,$next);
                 break;
-
+            case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
             case "proxy/ajax/company_assets":   //商户资产划入检测弹出登入和权限
             case "proxy/ajax/role_edit":        //编辑权限角色弹出框检测登入和权限
                 $re = $this->checkLoginAndRule($request);

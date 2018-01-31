@@ -149,6 +149,42 @@ class RoleController extends Controller{
         return view('Proxy/Role/role_edit',['info'=>$info,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
     }
     //下级人员添加
+    public function role_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要编辑的角色ID
+        $role_name = $request->input('role_name');//权限角色名称
+        $node_ids = $request->input('module_node_ids');//角色权限节点
+
+        if(OrganizationRole::checkRowExists([['id','<>',$id],['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断非本条数据是否有相同的的角色
+            return response()->json(['data' => '存在另一个相同的权限角色名称', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+                OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
+                foreach ($node_ids as $key => $val) {
+                    $vo = RoleNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
+                    if(is_null($vo)) {//不存在生成插入数据
+                        RoleNode::addRoleNode(['role_id' => $id, 'node_id' => $val]);
+                    }else{//存在数据则跳过
+                        continue;
+                    }
+                }
+                RoleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
+                if($admin_data['super_id'] == 2){
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了权限角色'.$role_name);//保存操作记录
+                }else{
+                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '编辑权限角色失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '编辑权限角色成功', 'status' => '1']);
+        }
+    }
+    //下级人员添加
     public function subordinate_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
