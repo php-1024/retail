@@ -128,7 +128,10 @@ class CompanyController extends Controller{
         $status = $request->input('status');//判断划入或者划出
         DB::beginTransaction();
         try{
-            $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+            $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);//查询商户套餐系统数量
+
+            $oneProxy = Assets::getOne([['organization_id',$admin_data['organization_id']],['package_id',$package_id],['program_id',$program_id]]);//查询服务商套餐系统数量
+            dd($oneProxy);
             $id=$re['id'];
             if($status == '1'){//划入
                 if(empty($re)){
