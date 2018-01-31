@@ -89,25 +89,6 @@
                 $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
             }
         });
-
-
-        //owl carousel
-
-        $(document).ready(function() {
-            $("#owl-demo").owlCarousel({
-                navigation : true,
-                slideSpeed : 300,
-                paginationSpeed : 400,
-                singleItem : true
-
-            });
-        });
-
-        //custom select box
-
-        $(function(){
-            $('select.styled').customSelect();
-        });
     });
 
     //提交表单
@@ -123,7 +104,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
@@ -132,8 +113,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
