@@ -58,14 +58,12 @@
     </div>
 </form>
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
-
 <script>
     //提交表单
     function postForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
-
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
