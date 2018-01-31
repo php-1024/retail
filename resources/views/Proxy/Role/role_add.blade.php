@@ -57,7 +57,7 @@
                             权限角色添加
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="get">
+                            <form class="form-horizontal tasi-form" method="post" action="{{url('proxy/ajax/role_add_check')}}">
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">角色名称</label>
@@ -162,12 +162,13 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
             }
         });
     }
