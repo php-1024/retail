@@ -11,6 +11,7 @@
     <!--external css-->
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
@@ -135,15 +136,15 @@
     </section>
     <!--main content end-->
 </section>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     //获取删除权限角色删除密码确认框
     function getDeleteComfirmForm(id){
@@ -209,9 +210,8 @@
                 });
                 return;
             }else{
-                console.log(response);
-//                $('#myModal').html(response);
-//                $('#myModal').modal();
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
