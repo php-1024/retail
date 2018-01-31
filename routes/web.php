@@ -406,7 +406,7 @@ Route::group(['prefix'=>'company'],function(){
         Route::any('/', 'Company\AccountcenterController@display')->middleware('CompanyCheck');                     //首页面路由
         Route::get('quit', 'Company\AccountcenterController@quit');                                                 //退出系统
         Route::get('company_list', 'Company\AccountcenterController@company_list')->middleware('CompanyCheck');     //商户列表
-        Route::get('company_quit', 'Company\AccountcenterController@company_quit')->middleware('CompanyCheck');     //超级管理员退出当前商户
+        Route::get('company_switch', 'Company\AccountcenterController@company_switch')->middleware('CompanyCheck'); //超级管理员退出当前商户
     });
 
     //账户中心

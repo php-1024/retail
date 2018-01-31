@@ -93,7 +93,7 @@ class AccountcenterController extends Controller{
     }
 
     //超级管理员退出当前商户（切换商户）
-    public function company_quit(Request $request){
+    public function company_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
         ZeroneRedis::create_company_account_cache(1,$admin_data);//清空所选组织
