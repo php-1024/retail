@@ -174,7 +174,7 @@ class RoleController extends Controller{
                 if($admin_data['super_id'] == 2){
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了权限角色'.$role_name);//保存操作记录
                 }else{
-                    OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -188,6 +188,29 @@ class RoleController extends Controller{
     public function role_delete(Request $request){
         $id = $request->input('id');
         return view('Proxy/Role/role_delete',['id'=>$id]);
+    }
+    //直接输入安全密码操作的页面
+    public function role_delete_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        DB::beginTransaction();
+        try{
+            OrganizationRole::where('id',$id)->delete();//删除权限角色
+            RoleNode::where('role_id',$id)->delete();//删除角色节点关系
+            RoleAccount::where('role_id',$id)->delete();//删除角色账号关系
+            if($admin_data['super_id'] == 2){
+                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统删除了权限角色，ID为：'.$id);//保存操作记录
+
+            }else{
+                OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除权限角色失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除权限角色成功', 'status' => '1']);
     }
     //下级人员添加
     public function subordinate_add(Request $request){
