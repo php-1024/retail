@@ -43,7 +43,7 @@
                     <li class="divider"></li>
                     @if($admin_data['is_super'] == 1)
                         <li>
-                            <a href="{{ url('company/company_quit') }}" >切换商户</a>
+                            <a href="{{ url('company/company_switch') }}" >切换商户</a>
                         </li>
                     @endif
                     <li>
