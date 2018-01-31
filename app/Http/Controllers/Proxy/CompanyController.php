@@ -114,7 +114,7 @@ class CompanyController extends Controller{
     //商户资产页面划入js显示
     public function company_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-
+        dd($admin_data);
         if($admin_data['super_id'] == 2){//超级管理员没有组织id，操作默认为零壹公司操作
             $draw_organization_id = 1;
             $account_id = 1;
