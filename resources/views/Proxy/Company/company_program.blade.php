@@ -134,7 +134,6 @@
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
-
     $(function(){
         $('select.styled').customSelect();
     });
