@@ -8,7 +8,6 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.html">
     <title>选择服务商 | 零壹服务商管理平台</title>
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap-reset.css" type="text/css"/>
@@ -71,7 +70,6 @@
             </a>
         </div>
         @endforeach
-
     </div>
     <!--state overview end-->
 </section>
@@ -87,10 +85,8 @@
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('public/Company')}}/js/owl.carousel.js"></script>
 <script src="{{asset('public/Company')}}/js/jquery.customSelect.min.js"></script>
-
 <!--common script for all pages-->
 <script src="{{asset('public/Company')}}/js/common-scripts.js"></script>
-
 <!--script for this page-->
 <script src="{{asset('public/Company')}}/js/sparkline-chart.js"></script>
 <script src="{{asset('public/Company')}}/js/easy-pie-chart.js"></script>
