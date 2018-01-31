@@ -15,14 +15,11 @@
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
-    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
-
+    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
     <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
@@ -135,16 +132,6 @@
         </section>
     </aside>
 </section>
-
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
-<!--common script for all pages-->
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-<!-- Custom and plugin javascript -->
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
