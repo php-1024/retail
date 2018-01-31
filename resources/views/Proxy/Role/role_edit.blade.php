@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">角色权限</label>
                         <div class="col-sm-10">
-                            <@foreach($module_node_list as $key=>$val)
+                            @foreach($module_node_list as $key=>$val)
                                 <group class="checked_box_group_{{ $val['id'] }}">
                                     <div>
                                         <label class="i-checks">
