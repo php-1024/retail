@@ -3,21 +3,23 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content animated fadeIn">
+        <div class="modal-content">
             <div class="modal-header">
-                修改权限角色
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">权限角色编辑</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">角色名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="role_name" value="{{ $info->role_name }}" placeholder="{{ $info->role_name }}" class="form-control">
+                <form class="form-horizontal tasi-form" method="get">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">角色名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="role_name" placeholder="角色名称" value="{{ $info->role_name }}" placeholder="{{ $info->role_name }}" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">角色权限</label>
-                    <div class="col-sm-10">
-                            @foreach($module_node_list as $key=>$val)
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">角色权限</label>
+                        <div class="col-sm-10">
+                            <@foreach($module_node_list as $key=>$val)
                                 <group class="checked_box_group_{{ $val['id'] }}">
                                     <div>
                                         <label class="i-checks">
@@ -35,24 +37,19 @@
                                 </group>
                                 <div style="margin-top: 20px;"></div>
                             @endforeach
+                        </div>
                     </div>
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">安全密码</label>
-                    <div class="col-sm-10"><input type="password" class="form-control" id="safe_password" name="safe_password"></div>
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-
-
-
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">安全密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="安全密码" id="safe_password" name="safe_password">
+                        </div>
+                    </div>
+                </form>
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="return postForm();">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="save_btn" onclick="return postForm();">确定</button>
             </div>
         </div>
     </div>
