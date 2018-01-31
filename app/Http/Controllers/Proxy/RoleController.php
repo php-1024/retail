@@ -4,7 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 class RoleController extends Controller{
-    //添加服务商
+
+    //下级人员管理权限角色添加
     public function role_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -13,7 +14,9 @@ class RoleController extends Controller{
 
         return view('Proxy/Role/role_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //添加服务商
+
+
+    //下级人员管理权限角色列表
     public function role_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
