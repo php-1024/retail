@@ -97,6 +97,12 @@
         var data = {'_token':_token,'organization_id':organization_id};
         $.post(url,data,function(json){
             if(json.status==1){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText: "确定"
+                });
                 window.location.reload();
             }else{
                 swal({
