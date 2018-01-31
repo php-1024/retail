@@ -60,7 +60,7 @@
                             <form class="form-horizontal tasi-form" method="get" id="searchForm" action="">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <input type="hidden" id="role_edit_url" value="{{ url('proxy/ajax/role_edit') }}">
-                                <input type="hidden" id="role_delete_comfirm_url" value="{{ url('proxy/ajax/role_delete_comfirm') }}">
+                                <input type="hidden" id="role_delete_comfirm_url" value="{{ url('proxy/ajax/role_delete') }}">
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">角色名称</label>
                                     <div class="col-lg-2">
