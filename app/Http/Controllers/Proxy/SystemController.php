@@ -20,7 +20,6 @@ class SystemController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dump($admin_data);
         if($admin_data['super_id'] == 1){
             $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
             foreach ($listOrg as $k=>$v){
@@ -84,6 +83,16 @@ class SystemController extends Controller{
         }else{
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
+    }
+
+    //服务商参数设置
+    public function setup(Request $request)
+    {
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Proxy/System/setup',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //公司信息设置
