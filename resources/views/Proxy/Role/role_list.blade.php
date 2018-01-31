@@ -209,8 +209,9 @@
                 });
                 return;
             }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
+                console.log(response);
+//                $('#myModal').html(response);
+//                $('#myModal').modal();
             }
         });
     }
