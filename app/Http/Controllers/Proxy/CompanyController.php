@@ -102,7 +102,12 @@ class CompanyController extends Controller{
     }
     //程序划拨
     public function company_assets(Request $request){
-        return view('Proxy/Company/company_assets');
+        $organization_id = $request->input('organization_id');//服务商id
+        $package_id = $request->input('package_id');//套餐id
+        $status = $request->input('status');//状态
+        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
+        $listPac = Package::getOnePackage([['id',$package_id]]);
+        return view('Proxy/Company/company_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
 
 
