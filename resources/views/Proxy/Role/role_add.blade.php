@@ -58,7 +58,8 @@
                         </header>
                         <div class="panel-body">
                             <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{url('proxy/ajax/role_add_check')}}">
-
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="organization_id" value="">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">角色名称</label>
                                     <div class="col-sm-10">
@@ -149,29 +150,28 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
-        console.log(data);
-//        $.post(url, data, function (json) {
-//            if (json.status == -1) {
-//                window.location.reload();
-//            } else if(json.status == 1) {
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                console.log(json);
 //                swal({
 //                    title: "提示信息",
 //                    text: json.data,
 //                    confirmButtonColor: "#DD6B55",
 //                    confirmButtonText: "确定"
-//                },function(){
-//                    window.location.reload();
 //                });
-//            }else{
-//                console.log(json);
-////                swal({
-////                    title: "提示信息",
-////                    text: json.data,
-////                    confirmButtonColor: "#DD6B55",
-////                    confirmButtonText: "确定"
-////                });
-//            }
-//        });
+            }
+        });
     }
 </script>
 </body>
