@@ -44,6 +44,7 @@ class ProxyCheckAjax
                 return self::format_response($re,$next);
                 break;
             case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
+            case "proxy/ajax/role_delete_comfirm"://检测是否登录 权限 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;

@@ -184,6 +184,11 @@ class RoleController extends Controller{
             return response()->json(['data' => '编辑权限角色成功', 'status' => '1']);
         }
     }
+    //直接输入安全密码操作的页面
+    public function role_delete_comfirm(Request $request){
+        $id = $request->input('id');
+        return view('Zerone/Role/role_delete_comfirm',['id'=>$id]);
+    }
     //下级人员添加
     public function subordinate_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
