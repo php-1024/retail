@@ -53,7 +53,7 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <button type="button" class="btn btn-info" onclick="javascript:history();"><i class="icon-reply"></i> 返回列表</button>
+                            <button type="button" class="btn btn-info" onclick="history.back();"><i class="icon-reply"></i> 返回列表</button>
                             <button type="button" class="btn btn-primary" id="expand-all"><i class="icon-plus"></i> 展开所有</button>
                             <button type="button" class="btn btn-primary" id="collapse-all"><i class="icon-minus"></i> 合并所有</button>
                         </div>
@@ -103,9 +103,6 @@
         $('#collapse-all').click(function(){
             $('.dd').nestable('collapseAll');
         });
-    });
-    $(function(){
-        $('select.styled').customSelect();
     });
 </script>
 

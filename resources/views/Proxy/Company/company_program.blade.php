@@ -52,7 +52,7 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <button type="button" class="btn btn-info" onclick="location.href='company_list.html'"><i class="icon-reply"></i> 返回列表</button>
+                            <button type="button" class="btn btn-info" onclick="history.back()"><i class="icon-reply"></i> 返回列表</button>
                         </div>
                     </section>
                     <section class="panel">
