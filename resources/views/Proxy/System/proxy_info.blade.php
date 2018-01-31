@@ -109,7 +109,7 @@
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js"></script>
 <!--common script for all pages-->
-{{--<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>--}}
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <!-- Custom and plugin javascript -->
 <script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
