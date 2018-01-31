@@ -58,6 +58,8 @@
     </div>
 </form>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+
 <script>
     //提交表单
     function postForm() {
