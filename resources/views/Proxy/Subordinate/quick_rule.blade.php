@@ -16,7 +16,7 @@
                 @endforeach
             </div>
         </group>
-        <div class="hr-line-dashed" style="clear: both;"></div>
+        <div style="margin-top: 20px;"></div>
     @endforeach
 </div>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
