@@ -62,7 +62,7 @@
                                     <div>
                                         主账号：<label class="label label-info pull-right">
                                             @foreach($val->account as $kk=>$vv)
-                                                @php(echo $vv)
+                                                @php(echo $vv;)
                                             @endforeach
                                         </label>
                                     </div>
