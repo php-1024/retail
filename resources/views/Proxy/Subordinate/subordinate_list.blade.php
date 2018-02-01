@@ -61,7 +61,7 @@
                             <form class="form-horizontal tasi-form" method="get" action="">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <input type="hidden" id="subordinate_edit_url" value="{{ url('proxy/ajax/subordinate_edit') }}">
-                                <input type="hidden" id="subordinate_lock_confirm_url" value="{{ url('proxy/ajax/subordinate_lock_confirm') }}">
+                                <input type="hidden" id="subordinate_lock" value="{{ url('proxy/ajax/subordinate_lock') }}">
                                 <input type="hidden" id="subordinate_delete_confirm_url" value="{{ url('proxy/ajax/subordinate_delete_confirm') }}">
                                 <input type="hidden" id="subordinate_authorize_url" value="{{ url('proxy/ajax/subordinate_authorize') }}">
                                 <div class="form-group">
@@ -185,7 +185,7 @@
 
     //获取删除权限角色删除密码确认框
     function getLockComfirmForm(id,account,status){
-        var url = $('#subordinate_lock_confirm_url').val();
+        var url = $('#subordinate_lock').val();
         var token = $('#_token').val();
 
         if(id==''){
