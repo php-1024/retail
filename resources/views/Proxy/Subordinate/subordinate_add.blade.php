@@ -132,6 +132,7 @@
                                                     @endforeach
                                                 </div>
                                             </div>
+                                            <div class="form-group" id="module_node_box"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">安全密码</label>
                                                 <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
@@ -166,16 +167,6 @@
     </section>
     <!--main content end-->
 </section>
-<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Zerone/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
