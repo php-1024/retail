@@ -8,12 +8,12 @@
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet"/>
     <link href="{{asset('public/Proxy')}}/css/owl.carousel.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet"/>
     <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
@@ -186,7 +186,10 @@
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.js"></script>
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
 
