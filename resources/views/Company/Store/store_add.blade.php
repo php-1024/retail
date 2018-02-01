@@ -57,7 +57,7 @@
                                 </div>
 
                                 <div class="panel-body" style="text-align:center;">
-                                    <button class="btn btn-s-md btn-danger" onclick="location.href='{{url('company/store/store_add_second')}}?package_id={{$v['id']}}'">立即开店</button>
+                                    <button class="btn btn-s-md btn-danger" onclick="location.href='{{url('company/store/store_add_second')}}?package_id={{$val['id']}}'">立即开店</button>
                                 </div>
                             </section>
                         </div>
