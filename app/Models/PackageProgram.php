@@ -18,6 +18,11 @@ class PackageProgram extends Model{
         return self::where($where)->first();
     }
 
+    //获取多条数据
+    public static function getlist($where){
+        return self::where($where)->get();
+    }
+
     //添加配套
     public static function addPackageProgram($params){
         $model = new PackageProgram();
