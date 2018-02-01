@@ -15,8 +15,8 @@
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
