@@ -65,6 +65,7 @@ class ProxyCheckAjax
             case "proxy/ajax/selected_rule"://快速授权检测登入和权限
             case "proxy/ajax/subordinate_edit"://下级人员列表编辑用户弹出框
             case "proxy/ajax/subordinate_lock":  //添加下级人员快速授权
+            case "proxy/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

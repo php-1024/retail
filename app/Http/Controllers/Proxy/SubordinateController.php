@@ -205,7 +205,7 @@ class SubordinateController extends Controller{
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+        $role_list = OrganizationRole::getList([['program_id',2],['created_by',$admin_data['id']]],0,'id');
         return view('Proxy/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
@@ -213,8 +213,9 @@ class SubordinateController extends Controller{
     public function selected_rule(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
-        if($admin_data['id'] == 1) {//如果是超级管理员
-            $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+        $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
+        if($account_id == $admin_data['id']) {
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
 
@@ -238,7 +239,7 @@ class SubordinateController extends Controller{
         }
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
-        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(1,$id);//获取要操作的用户有的节点
+        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(2,$id);//获取要操作的用户有的节点
         foreach($selected_node_list as $key=>$val){
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
