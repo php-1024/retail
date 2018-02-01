@@ -5,7 +5,7 @@
  **/
 namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
-use App\Models\PackageProgram;
+use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Session;
@@ -32,7 +32,7 @@ class StoreController extends Controller{
         $route_name = $request->path();                 //获取当前的页面路由
         $package_id = $request->package_id;             //套餐id
         $program = Program::getList(['complete_id'=>'3'],0,'id','DESC');
-        $package_program = PackageProgram::getlist(['package_id'=>$package_id]);
+        $package_program = Package::getOnePackage(['package_id'=>$package_id]);
         dump($package_program);
         return view('Company/Store/store_add_second',['program'=>$program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
