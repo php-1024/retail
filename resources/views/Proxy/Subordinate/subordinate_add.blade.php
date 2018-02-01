@@ -16,6 +16,8 @@
     <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet"/>
     <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
     <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
@@ -244,14 +246,13 @@
                     window.location.reload();
                 });
             } else {
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
