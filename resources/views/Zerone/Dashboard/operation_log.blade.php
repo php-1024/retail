@@ -94,7 +94,7 @@
                                         <td>{{ $val->accounts->id }}</td>
                                         <td>{{ $val->accounts->account }}</td>
 
-                                        <td>@if(empty($roles[$val->id])){{ $roles[$val->id] }}@else角色未设置@endif</td>
+                                        <td>@if(empty($roles[$val->id]))角色未设置@else{{ $roles[$val->id] }}@endif</td>
 
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
