@@ -76,7 +76,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺负责人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="relname" class="form-control" value="">
+                                            <input type="text" name="realname" class="form-control" value="">
                                         </div>
                                     </div>
 
