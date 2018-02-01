@@ -29,18 +29,16 @@
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
-                        <div class="m-b-md">
-                            <h3 class="m-b-none">创建餐饮店铺</h3>
-                        </div>
-                        <section class="panel panel-default">
-
-                            <header class="panel-heading font-bold">
-                                创建餐饮店铺
-                            </header>
-                            <div class="panel-body">
-                                <form class="form-horizontal" method="get">
-
-
+                    <div class="m-b-md">
+                        <h3 class="m-b-none">创建餐饮店铺</h3>
+                    </div>
+                    <section class="panel panel-default">
+                        <header class="panel-heading font-bold">
+                            创建餐饮店铺
+                        </header>
+                        <div class="panel-body">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/password_edit_check') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">选择模式</label>
@@ -63,7 +61,6 @@
                                             <input type="text" name="organization_name" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺负责人手机号码</label>
@@ -71,7 +68,6 @@
                                             <input type="text" name="tell" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺负责人姓名</label>
@@ -112,9 +108,9 @@
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                </form>
-                            </div>
-                        </section>
+                            </form>
+                        </div>
+                    </section>
 
 
                     </section>
