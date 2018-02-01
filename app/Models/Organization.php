@@ -16,7 +16,7 @@ class Organization extends Model{
 
     //和Account表多对一的关系
     public function account(){
-        return $this->belongsTo('App\Models\Account', 'parent_id');
+        return $this->hasOne('App\Models\Account', 'parent_id');
     }
 
     //和OrganizationProxyinfo表一对一的关系
