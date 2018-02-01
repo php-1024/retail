@@ -106,7 +106,6 @@ class StoreController extends Controller{
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];
         $organization = Organization::getArrayCompany(['parent_id'=>$parent_id]);
-        dump($organization);
         return view('Company/Store/store_list',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
