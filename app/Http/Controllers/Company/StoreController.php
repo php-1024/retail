@@ -33,8 +33,7 @@ class StoreController extends Controller{
         $route_name = $request->path();                 //获取当前的页面路由
         $package_id = $request->package_id;             //套餐id
         $package_program = Package::getList(['id'=>$package_id],0,'id','DESC');   //查询当前所选餐包含的程序
-        dump($package_program);
-        return view('Company/Store/store_add_second',['program'=>$program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Company/Store/store_add_second',['package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //店铺管理
