@@ -208,7 +208,6 @@ class RoleController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '删除权限角色失败，请检查', 'status' => '0']);
         }
