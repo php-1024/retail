@@ -4,6 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>零壹新科技服务商管理平台</title>
+    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+
+    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/wizard')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
