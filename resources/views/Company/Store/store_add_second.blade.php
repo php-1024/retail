@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="刘记鸡煲王">
+                                            <input type="text" name="organization_name" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -66,7 +66,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺负责人手机号码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="13123456789">
+                                            <input type="text" name="tell" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -74,7 +74,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺负责人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="刘兴文">
+                                            <input type="text" name="relname" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -82,7 +82,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺登陆密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" name="password" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -90,23 +90,22 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复登陆密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" name="re_password" class="form-control" value="">
                                         </div>
                                     </div>
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" name="safe_password" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-5">
-                                            <button type="button" class="btn btn-default" onclick="location.href='store_add.html'">返回</button>
+                                            <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
                                             <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
                                         </div>
                                     </div>
