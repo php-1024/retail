@@ -71,12 +71,12 @@
                                             <span class="label label-primary"><i class="icon-user"></i></span> {{ $admin_data['account'] }}-公司负责人
                                         </div>
                                         <ol class="dd-list">
-                                            <li class="dd-item" data-id="3">
-                                                <div class="dd-handle">
-                                                    <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
-                                                    <span class="label label-primary"><i class="icon-user"></i></span> 张三-运营总监
-                                                </div>
-                                                <ol class="dd-list">
+                                            {{--<li class="dd-item" data-id="3">--}}
+                                                {{--<div class="dd-handle">--}}
+                                                    {{--<span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>--}}
+                                                    {{--<span class="label label-primary"><i class="icon-user"></i></span> 张三-运营总监--}}
+                                                {{--</div>--}}
+                                                {{--<ol class="dd-list">--}}
                                                     {{--<li class="dd-item" data-id="4">--}}
                                                         {{--<div class="dd-handle">--}}
                                                             {{--<span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>--}}
@@ -85,8 +85,8 @@
                                                     {{--</li>--}}
                                                     {!! $structure  !!}
 
-                                                </ol>
-                                            </li>
+                                                {{--</ol>--}}
+                                            {{--</li>--}}
                                         </ol>
                                     </li>
 
