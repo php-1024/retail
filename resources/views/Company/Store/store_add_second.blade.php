@@ -37,7 +37,7 @@
                             创建餐饮店铺
                         </header>
                         <div class="panel-body">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/password_edit_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/store_add_second_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
@@ -104,7 +104,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-5">
                                             <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" class="btn btn-success" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -131,33 +131,33 @@
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('public/Company/library/datepicker')}}/bootstrap-datepicker.js"></script>
 <script>
-    $(function(){
-        $('.zerodate').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true,
-            format: 'yyyy-mm-dd'
-        });
-    });
-    function searchFormCheck(){
-        var url = $('#searchForm').attr('action');
-        var data = $('#searchForm').serialize();
-        $.get(url+'?'+data,function(json){
-            if(json.status==0){
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
                 });
-                return false;
             }else{
-                location.href=url+'?'+data;
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
-        return false;
     }
 </script>
 </body>

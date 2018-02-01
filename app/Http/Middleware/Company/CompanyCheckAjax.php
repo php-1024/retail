@@ -19,8 +19,8 @@ class CompanyCheckAjax
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "company/ajax/company_select"://超级管理员选择商户提交数据
-                $re = $this->checkIsLogin($request);
+            case "company/ajax/company_select":         //超级管理员选择商户提交数据
+                $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
             case "company/ajax/profile_edit_check"://检测登录，权限，及修改密码的数据
@@ -37,6 +37,10 @@ class CompanyCheckAjax
                 break;
             case "company/ajax/compant_info_edit_check"://检测登录，权限，安全密码，及修改商户信息的数据
                 $re = $this->checkLoginAndRuleAndSafeCompanyEdit($request);
+                return self::format_response($re, $next);
+                break;
+            case "company/ajax/store_add_second_check": //商户创建店铺数据检测
+                $re = $this->checkLoginAndRuleAndStoreAdd($request);
                 return self::format_response($re, $next);
                 break;
         }
@@ -103,6 +107,22 @@ class CompanyCheckAjax
             return $re;
         }else{
             $re2 = $this->checkProfileEdit($re['response']);//检测修改的数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
+    //检测登录，权限，及商户创建店铺数据检测
+    public function checkLoginAndRuleAndStoreAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录是否有权限以及安全密码
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkStoreAdd($re['response']);//检测修改的数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -204,6 +224,30 @@ class CompanyCheckAjax
         }
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测添加店铺的数据
+    public function checkStoreAdd(Request $request)
+    {
+        if(empty($request->input('organization_name'))){
+            return self::res(0,response()->json(['data' => '请填写店铺名称', 'status' => '0']));
+        }
+        if(empty($request->input('tell'))){
+            return self::res(0,response()->json(['data' => '请填写店铺负责人手机号码', 'status' => '0']));
+        }
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请填写店铺负责人姓名', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请填写店铺登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('re_password'))){
+            return self::res(0,response()->json(['data' => '请输入重复登陆密码', 'status' => '0']));
+        }
+        if(empty($request->input('safe_password'))){
+            return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
         return self::res(1,$request);
     }

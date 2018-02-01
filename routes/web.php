@@ -440,6 +440,7 @@ Route::group(['prefix'=>'company'],function(){
         Route::post('profile_edit_check', 'Company\AccountcenterController@profile_edit_check')->middleware('CompanyCheckAjax');            //个人账号信息修改
         Route::post('password_edit_check', 'Company\AccountcenterController@password_edit_check')->middleware('CompanyCheckAjax');          //密码检测
         Route::post('safe_password_edit_check', 'Company\AccountcenterController@safe_password_edit_check')->middleware('CompanyCheckAjax');//安全密码检测
+        Route::post('store_add_second_check', 'Company\StoreController@store_add_second_check')->middleware('CompanyCheckAjax');//安全密码检测
     });
 });
 /********************商户管理系统*************************/
