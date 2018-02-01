@@ -182,7 +182,7 @@
 <script>
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        get_quick_rule('#role_id');
+//        get_quick_rule('#role_id');
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
