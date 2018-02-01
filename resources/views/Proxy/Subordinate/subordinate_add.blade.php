@@ -8,12 +8,12 @@
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet"/>
     <link href="{{asset('public/Proxy')}}/css/owl.carousel.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet"/>
     <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
@@ -54,32 +54,40 @@
                             添加下级人员
                         </header>
                         <div class="panel-body">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('proxy/ajax/subordinate_add_check') }}">
+                            <form method="post" class="form-horizontal" role="form" id="currentForm"
+                                  action="{{ url('proxy/ajax/subordinate_add_check') }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <input type="hidden" id="quick_rule_url" value="{{ url('proxy/ajax/quick_rule') }}">
                                 <div id="rootwizard">
                                     <ul>
-                                        <li><a href="#tab1" data-toggle="tab"><span style="color:#999;" class="label">1</span> 填写基础资料</a></li>
-                                        <li><a href="#tab2" data-toggle="tab"><span style="color:#999;" class="label">2</span> 指派权限</a></li>
+                                        <li><a href="#tab1" data-toggle="tab"><span style="color:#999;"
+                                                                                    class="label">1</span> 填写基础资料</a>
+                                        </li>
+                                        <li><a href="#tab2" data-toggle="tab"><span style="color:#999;"
+                                                                                    class="label">2</span> 指派权限</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane" id="tab1">
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">手机号码</label>
-                                                <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="text" name="mobile"
+                                                                              class="form-control"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户登录密码</label>
-                                                <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="password" name="password"
+                                                                              class="form-control"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">重复登录密码</label>
-                                                <div class="col-sm-10"><input type="password" name="repassword" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="password" name="repassword"
+                                                                              class="form-control"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">真实姓名</label>
-                                                <div class="col-sm-10"><input type="text" name="realname" class="form-control"></div>
+                                                <div class="col-sm-10"><input type="text" name="realname"
+                                                                              class="form-control"></div>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab2">
@@ -93,22 +101,69 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button></div>
+                                                <div class="col-sm-2">
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="get_quick_rule('#role_id');"><i
+                                                                class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="form-group" id="module_node_box"></div>
-                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">用户权限</label>
+                                                <div class="col-sm-10">
+                                                    <div>
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
+                                                                   checked="checked"> 订单模块
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
+                                                                   checked="checked"> 订单编辑
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
+                                                                   checked="checked"> 订单查询
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
+                                                                   checked="checked"> 订单添加
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
+                                                                   checked="checked"> 订单删除
+                                                        </label>
+                                                    </div>
+                                                    <div style="margin-top: 20px;"></div>
+
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">安全密码</label>
                                                 <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
                                             </div>
-                                            <div class="hr-line-dashed"></div>
                                         </div>
                                         <ul class="pager wizard">
 
-                                            <li class="previous"><button type="button" class="btn btn-primary"><i class="icon-arrow-left"></i>&nbsp;&nbsp;上一步</button></li>
+                                            <li class="previous">
+                                                <button type="button" class="btn btn-primary"><i
+                                                            class="icon-arrow-left"></i>&nbsp;&nbsp;上一步
+                                                </button>
+                                            </li>
 
-                                            <li class="next"><button type="button" class="btn btn-primary">下一步&nbsp;&nbsp;<i class="icon-arrow-right"></i></button></li>
-                                            <li class="finish"><button type="button" id="addbtn" class="btn btn-primary" onclick="return postForm();">完成&nbsp;&nbsp;<i class="icon-arrow-right"></i></button></li>
+                                            <li class="next">
+                                                <button type="button" class="btn btn-primary">下一步&nbsp;&nbsp;<i
+                                                            class="icon-arrow-right"></i></button>
+                                            </li>
+                                            <li class="finish">
+                                                <button type="button" id="addbtn" class="btn btn-primary"
+                                                        onclick="return postForm();">完成&nbsp;&nbsp;<i
+                                                            class="icon-arrow-right"></i></button>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -137,7 +192,7 @@
 
     //owl carousel
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
@@ -146,20 +201,22 @@
     });
 
     //custom select box
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
         get_quick_rule('#role_id');
     });
+
     //获取上级程序节点
-    function get_quick_rule(obj){
-        var url =  $('#quick_rule_url').val();
+    function get_quick_rule(obj) {
+        var url = $('#quick_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
-        var data = {'_token':token,'role_id':role_id}
-        $.post(url,data,function(response){
+        var data = {'_token': token, 'role_id': role_id}
+        $.post(url, data, function (response) {
             $('#module_node_box').html(response);
         });
     }
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
@@ -168,16 +225,16 @@
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if (json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
+            } else {
                 swal({
                     title: "提示信息",
                     text: json.data,
