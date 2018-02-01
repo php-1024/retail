@@ -13,7 +13,6 @@
                     <label class="col-sm-2 control-label">用户账号</label>
                     <div class="col-sm-10"><input type="text" value="{{ $info->account }}" disabled="" class="form-control"></div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">用户密码</label>
                     <div class="col-sm-10"><input type="password" class="form-control" name="password"  value=""></div>
@@ -22,6 +21,7 @@
                     <label class="col-sm-2 control-label">真实姓名</label>
                     <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="@if(!empty($info->account_info)){{ $info->account_info->realname }}@endif"></div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
                     <div class="col-sm-10"><input type="password" class="form-control"  name="safe_password"></div>
