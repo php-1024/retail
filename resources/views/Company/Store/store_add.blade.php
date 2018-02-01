@@ -33,7 +33,6 @@
                             <h3 class="m-b-none">创建店铺</h3>
                         </div>
                         @foreach($program as $key=>$val)
-                            @foreach($val->packages as $k=>$v)
                         <div class="col-sm-2">
                             <section class="panel panel-default"   style="height: 230px;">
                                 <header class="panel-heading bg-light no-border">
@@ -41,10 +40,10 @@
 
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
-                                                {{$v['package_name']}}
+                                                {{$val['package_name']}}
                                                 <i class="fa fa-cutlery text-success text-lg pull-right"></i>
                                             </div>
-                                            <i class="fa fa-rmb text-danger text-lg pull-left">{{$v['package_price']}}</i>
+                                            <i class="fa fa-rmb text-danger text-lg pull-left">{{$val['package_price']}}</i>
                                         </div>
                                     </div>
                                 </header>
@@ -62,7 +61,6 @@
                                 </div>
                             </section>
                         </div>
-                            @endforeach
                         @endforeach
 
                     </section>
