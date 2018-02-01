@@ -70,6 +70,7 @@ class ProxyCheckAjax
             case "proxy/ajax/subordinate_edit"://下级人员列表编辑用户弹出框
             case "proxy/ajax/subordinate_lock":  //添加下级人员快速授权
             case "proxy/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
+            case "proxy/ajax/subordinate_delete":  //添加下级人员用户授权显示页面
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
