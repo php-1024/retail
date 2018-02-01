@@ -299,13 +299,26 @@ class SubordinateController extends Controller{
         try{
             if($status==1) {
                 Account::editAccount([['id',$id]],['status'=>'0']);
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+                if($admin_data['super_id'] == 2){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统冻结了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+                }
             }else{
                 Account::editAccount([['id',$id]],['status'=>'1']);
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+                if($admin_data['super_id'] == 2){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统解冻了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+                }
             }
             DB::commit();
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败，请检查', 'status' => '0']);
         }

@@ -183,7 +183,7 @@
         });
     });
 
-    //获取删除权限角色删除密码确认框
+    //冻结用户-解冻
     function getLockComfirmForm(id,account,status){
         var url = $('#subordinate_lock').val();
         var token = $('#_token').val();
