@@ -69,6 +69,7 @@ class SubordinateController extends Controller{
 
     //添加下级人员数据提交
     public function subordinate_add_check(Request $request){
+        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
