@@ -93,6 +93,7 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab2">
+                                            <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">权限角色</label>
                                                 <div class="col-sm-3">
@@ -216,7 +217,9 @@
         var url = $('#quick_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
+        console.log(role_id);
         var data = {'_token': token, 'role_id': role_id}
+        console.log(data);
         $.post(url, data, function (response) {
             $('#module_node_box').html(response);
         });
