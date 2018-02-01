@@ -111,6 +111,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户权限</label>
                                                 <div class="col-sm-10">
+                                                    <group class="checked_box_group_88888888">
                                                     <div>
                                                         <label class="i-checks">
                                                             <input type="checkbox" value="option1" id="inlineCheckbox1"
@@ -139,7 +140,7 @@
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 20px;"></div>
-
+                                                    </group>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -193,6 +194,33 @@
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
 
+
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('check') ;
+        }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('uncheck') ;
+        });
+        $('.checkbox_node_name').on('ifUnchecked',function(event){
+            var group_id = $(this).attr('data-group_id');
+            var tag=false;
+            $('.checkbox_node_name_'+group_id).each(function(i,v){
+                if($('.checkbox_node_name_'+group_id+':eq('+i+')').is(":checked")){
+                    tag=true;
+                }
+            });
+            if(tag==false){
+                $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
+            }
+        });
+    });
+
     //owl carousel
 
     $(document).ready(function () {
@@ -201,12 +229,8 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-    });
-
-    //custom select box
-    $(document).ready(function () {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        get_quick_rule('#role_id');
+//        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+//        get_quick_rule('#role_id');
     });
 
     //获取上级程序节点
