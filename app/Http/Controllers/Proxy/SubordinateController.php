@@ -21,19 +21,18 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',2],['created_by',$admin_data['id']]],0,'id');
-        dd($role_list);
         return view('Proxy/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //快速授权功能
     public function quick_rule(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $account_id = $admin_data['id'];//当前登录账号ID
         $role_id = $request->input('role_id');
-        if($account_id == 1) {//如果是超级管理员
-            $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+        $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
+        if($account_id == $admin_data['id']) {
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
 
             $modules = [];
             $nodes = [];
@@ -56,7 +55,7 @@ class SubordinateController extends Controller{
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
         if($role_id <> '0'){
-            $node_list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);//获取当前角色拥有权限的模块和节点
+            $node_list = ProgramModuleNode::getRoleModuleNodes(2,$role_id);//获取当前角色拥有权限的模块和节点
             foreach($node_list as $key=>$val){
                 $selected_modules[] = $val->module_id;
                 $selected_nodes[] = $val->node_id;
