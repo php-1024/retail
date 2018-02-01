@@ -56,6 +56,7 @@ class ProxyCheckAjax
             case "proxy/ajax/role_edit":        //编辑权限角色弹出框检测登入和权限
             case "proxy/ajax/role_delete"://编辑权限角色弹出框检测登入和权限
             case "proxy/ajax/quick_rule"://快速授权检测登入和权限
+            case "proxy/ajax/selected_rule"://快速授权检测登入和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
