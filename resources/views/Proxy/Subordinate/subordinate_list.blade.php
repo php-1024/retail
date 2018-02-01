@@ -124,7 +124,7 @@
 
                                             <td>{{ $val->created_at }}</td>
                                             <td class="text-right">
-                                                <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="getEditForm({{ $val->id }})><i class="icon-edit"></i>&nbsp;&nbsp;编辑用户</button>
+                                                <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="getEditForm({{ $val->id }})"><i class="icon-edit"></i>&nbsp;&nbsp;编辑用户</button>
                                                 <button type="button" id="ruleBtn" class="btn  btn-xs btn-info" onclick="getAuthorizeForm({{ $val->id }})"><i class="icon-certificate"></i>&nbsp;&nbsp;用户授权</button>
                                                 @if($val->status=='1')
                                                     <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon-lock"></i>&nbsp;&nbsp;冻结用户</button>
