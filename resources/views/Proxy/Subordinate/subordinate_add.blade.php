@@ -133,6 +133,7 @@
                                                 {{--</div>--}}
                                             {{--</div>--}}
                                             <div class="form-group" id="module_node_box"></div>
+                                            <div class="hr-line-dashed"></div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">安全密码</label>
                                                 <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
