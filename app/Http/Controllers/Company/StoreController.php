@@ -109,6 +109,7 @@ class StoreController extends Controller{
         $parent_tree = $admin_data['parent_tree'].','.$admin_data['id'];
         $organization = Organization::getOneCompany([['parent_tree','like','%'.$parent_tree.'%']]);
         dump($admin_data);
+        dump($parent_tree);
         dump($organization);
         return view('Company/Store/store_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
