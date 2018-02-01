@@ -114,33 +114,33 @@
                                                     <group class="checked_box_group_88888888">
                                                     <div>
                                                         <label class="i-checks">
-                                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
+                                                            <input type="checkbox" value="option1" class="checkbox_module_name checkbox_module_name_1" id="inlineCheckbox1"
                                                                    checked="checked"> 订单模块
                                                         </label>
                                                     </div>
                                                     <div>
                                                         <label class="i-checks">
-                                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
+                                                            <input type="checkbox" value="option1" id="inlineCheckbox1" data-group_id="11" class="checkbox_node_name checkbox_node_name_11" name="module_node_ids[]"
                                                                    checked="checked"> 订单编辑
                                                         </label>
                                                         &nbsp;&nbsp;
                                                         <label class="i-checks">
-                                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
+                                                            <input type="checkbox" value="option2" id="inlineCheckbox2" data-group_id="12" class="checkbox_node_name checkbox_node_name_12" name="module_node_ids[]"
                                                                    checked="checked"> 订单查询
                                                         </label>
                                                         &nbsp;&nbsp;
                                                         <label class="i-checks">
-                                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
+                                                            <input type="checkbox" value="option3" id="inlineCheckbox3" data-group_id="13" class="checkbox_node_name checkbox_node_name_13" name="module_node_ids[]"
                                                                    checked="checked"> 订单添加
                                                         </label>
                                                         &nbsp;&nbsp;
                                                         <label class="i-checks">
-                                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
+                                                            <input type="checkbox" value="option3" id="inlineCheckbox3" data-group_id="14" class="checkbox_node_name checkbox_node_name_14" name="module_node_ids[]"
                                                                    checked="checked"> 订单删除
                                                         </label>
                                                     </div>
-                                                    <div style="margin-top: 20px;"></div>
                                                     </group>
+                                                    <div style="margin-top: 20px;"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
