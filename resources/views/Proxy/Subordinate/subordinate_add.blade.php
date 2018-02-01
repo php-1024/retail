@@ -4,23 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>零壹新科技服务商管理平台</title>
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/wizard')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-
-
-
-
-
-
-
-
-
-
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
@@ -204,7 +187,7 @@
         get_quick_rule('#role_id');
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
+            radioClass: 'iradio_square-green'
         });
     });
     $(function(){
@@ -234,10 +217,9 @@
         var url = $('#quick_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
-        console.log(role_id);
         var data = {'_token': token, 'role_id': role_id}
-        console.log(data);
         $.post(url, data, function (response) {
+            console.log(response);
             $('#module_node_box').html(response);
         });
     }
