@@ -1,116 +1,173 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>零壹新科技管理平台</title>
-
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
-
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-
+    <title>零壹新科技服务商管理平台</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/css/owl.carousel.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/css/nestable.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
+    <script src="{{asset('public/Proxy')}}/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body class="">
+<body>
 
-<div id="wrapper">
-
-    @include('Zerone/Public/Nav')
-
-    <div id="page-wrapper" class="gray-bg">
-        @include('Zerone/Public/Header')
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-sm-4">
-                <h2>下级人员结构</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="JavaScript:;">下级人员</a>
-                    </li>
-                    <li class="active">
-                        <strong>下级人员结构</strong>
-                    </li>
-                </ol>
-            </div>
-
-        </div>
-
-        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
-
-            <div class="ibox-content m-b-sm border-bottom">
-
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" id="expand-all" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;展开所有</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label class="control-label" for="amount"> &nbsp;</label>
-                            <button type="button" id="collapse-all" class="block btn btn-primary"><i class="fa fa-minus"></i>&nbsp;&nbsp;合并所有</button>
-                        </div>
-                    </div>
+<section id="container" class="">
+    <!--header start-->
+    <header class="header white-bg">
+        @include('Proxy/Public/Header')
+    </header>
+    <!--header end-->
+    <!--sidebar start-->
+    <aside>
+        @include('Proxy/Public/Nav')
+    </aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-desktop"></i> 系统管理</a></li>
+                        <li class="active">公司人员结构</li>
+                    </ul>
+                    <!--breadcrumbs end -->
                 </div>
-
             </div>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <h5>下级人员结构</h5>
+                    <section class="panel">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-primary" id="expand-all"><i class="icon-plus"></i> 展开所有</button>
+                            <button type="button" class="btn btn-primary" id="collapse-all"><i class="icon-minus"></i> 合并所有</button>
                         </div>
-                        <div class="ibox-content">
+                    </section>
+                    <section class="panel">
+                        <header class="panel-heading">
+                            公司人员结构
+                        </header>
+                        <div class="panel-body">
                             <div class="dd" id="nestable2">
+
                                 <ol class="dd-list">
-                                    <li class="dd-item" data-id="1">
+                                    <li class="dd-item" data-id="2">
                                         <div class="dd-handle">
-                                            <span class="label label-info"><i class="fa fa-user"></i></span>{{ $admin_data['account'] }}
+
+                                            <span class="label label-primary"><i class="icon-user"></i></span> 张三-公司负责人
                                         </div>
-                                       {!! $structure  !!}
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="3">
+                                                <div class="dd-handle">
+                                                    <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                    <span class="label label-primary"><i class="icon-user"></i></span> 张三-运营总监
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item" data-id="4">
+                                                        <div class="dd-handle">
+                                                            <span class="pull-right"> 添加时间：2018-01-17 02:22:23</span>
+                                                            <span class="label label-primary"><i class="icon-user"></i></span> 王王张三-客户经理
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
                                     </li>
+
                                 </ol>
+
                             </div>
-
-
                         </div>
-
-                    </div>
+                    </section>
                 </div>
             </div>
-        </div>
-
-        @include('Zerone/Public/Footer')
-    </div>
-</div>
-    <!-- Mainly scripts -->
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-    <script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script>
-        $(function(){
-            $('#nestable2').nestable();
-            $('#expand-all').click(function(){
-                $('.dd').nestable('expandAll');
-            });
-            $('#collapse-all').click(function(){
-                $('.dd').nestable('collapseAll');
-            });
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Proxy/library/nestable')}}/js/jquery.nestable.js"></script>
+<script>
+    //owl carousel
+    $(document).ready(function() {
+        $('#nestable2').nestable();
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
         });
-    </script>
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
+    });
+</script>
 </body>
-
 </html>
+
