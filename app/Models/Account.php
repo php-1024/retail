@@ -31,7 +31,7 @@ class Account extends Model{
 
     //和organization表多对一的关系
     public function organization(){
-        return $this->belongsTo('App\Models\Organization', 'organization_id');
+        return $this->belongsToMany('App\Models\Organization', 'organization_id','parent_id');
     }
     //和权限角色表创建者一对多的关系
     public function roles(){
