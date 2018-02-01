@@ -1,4 +1,4 @@
-<link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
+<link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
 <label class="col-sm-2 control-label">用户权限</label>
 <div class="col-sm-10">
     @foreach($module_node_list as $key=>$val)
@@ -16,7 +16,7 @@
                 @endforeach
             </div>
         </group>
-        <div class="hr-line-dashed" style="clear: both;"></div>
+        <div style="margin-top: 20px;"></div>
     @endforeach
 </div>
 <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
