@@ -102,61 +102,45 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($list as $key=>$val)
                                         <tr>
-                                            <td>1</td>
-                                            <td>p_13123456789_2</td>
-                                            <td>订单管理员</td>
-                                            <td>薛志豪</td>
-                                            <td>13824322924</td>
-                                            <td><label class="label label-success">正常</label></td>
-                                            <td>第1层</td>
+                                            <td>{{ $val->id }}</td>
+                                            <td>{{ $val->account }}</td>
+                                            <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
+                                            <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@endif</td>
+                                            <td>{{ $val->mobile }}</td>
+                                            <td>
+                                                @if($val->status == '1')
+                                                    <label class="label label-success">正常</label>
+                                                @else
+                                                    <label class="label label-warning">已冻结</label>
+                                                @endif
+                                                </td>
+                                            <td>第{{ $val->deepth }}层</td>
 
-                                            <td>2017-08-08 10:30:30</td>
+                                            <td>{{ $val->created_at }}</td>
                                             <td class="text-right">
-                                                <button type="button" id="editBtn"  class="btn  btn-xs btn-primary"><i class="icon-edit"></i>&nbsp;&nbsp;编辑用户</button>
-                                                <button type="button" id="ruleBtn" class="btn  btn-xs btn-info"><i class="icon-certificate"></i>&nbsp;&nbsp;用户授权</button>
-                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-success"><i class="icon-lock"></i>&nbsp;&nbsp;冻结用户</button>
-                                                <button type="button" id="deleteBtn" class="btn  btn-xs btn-danger"><i class="icon-remove"></i>&nbsp;&nbsp;删除用户</button>
+                                                <button type="button" id="editBtn"  class="btn  btn-xs btn-primary" onclick="getEditForm({{ $val->id }})><i class="icon-edit"></i>&nbsp;&nbsp;编辑用户</button>
+                                                <button type="button" id="ruleBtn" class="btn  btn-xs btn-info" onclick="getAuthorizeForm({{ $val->id }})"><i class="icon-certificate"></i>&nbsp;&nbsp;用户授权</button>
+                                                @if($val->status=='1')
+                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon-lock"></i>&nbsp;&nbsp;冻结用户</button>
+
+                                                @else
+                                                    <button type="button" class="btn  btn-xs btn-warning"  onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;解冻用户</button>
+                                                @endif
+
+                                                <button type="button" id="deleteBtn" class="btn  btn-xs btn-danger" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="icon-remove"></i>&nbsp;&nbsp;删除用户</button>
 
                                             </td>
                                         </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="99">
-                                                <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
-
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
+                                        @endforeach
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="99" class="text-right">
+                                                    {{ $list->appends($search_data)->links() }}
+                                                </td>
+                                            </tr>
+                                            </tfoot>
                                     </table>
                                 </section>
                             </div>
