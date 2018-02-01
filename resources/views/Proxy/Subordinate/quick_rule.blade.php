@@ -13,6 +13,7 @@
                     <label class="checkbox-inline i-checks">
                         <input type="checkbox"  data-group_id="{{ $val['id'] }}" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
                     </label>
+                    &nbsp;&nbsp;
                 @endforeach
             </div>
         </group>
