@@ -231,6 +231,9 @@ class CompanyCheckAjax
     //检测添加店铺的数据
     public function checkStoreAdd(Request $request)
     {
+        if(empty($request->input('program_id'))){
+            return self::res(0,response()->json(['data' => '请选择店铺模式！', 'status' => '0']));
+        }
         if(empty($request->input('organization_name'))){
             return self::res(0,response()->json(['data' => '请填写店铺名称', 'status' => '0']));
         }
