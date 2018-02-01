@@ -326,14 +326,14 @@ class SubordinateController extends Controller{
     }
 
     //删除下级人员确定
-    public function subordinate_delete_confirm(Request $request){
+    public function subordinate_delete(Request $request){
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
-        return view('Proxy/Subordinate/subordinate_delete_confirm',['id'=>$id,'account'=>$account]);
+        return view('Proxy/Subordinate/subordinate_delete',['id'=>$id,'account'=>$account]);
     }
 
     //删除下级人员
-    public function subordinate_delete(Request $request){
+    public function subordinate_delete_check(Request $request){
         echo "这里是删除下级人员";
     }
 

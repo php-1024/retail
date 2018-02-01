@@ -392,6 +392,7 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('subordinate_edit_check','Proxy\SubordinateController@subordinate_edit_check')->middleware('ProxyCheckAjax');//下级人员列表编辑功能提交
         Route::post('subordinate_authorize','Proxy\SubordinateController@subordinate_authorize')->middleware('ProxyCheckAjax');//下级人员列表用户授权显示页面
         Route::post('subordinate_authorize_check','Proxy\SubordinateController@subordinate_authorize_check')->middleware('ProxyCheckAjax');//下级人员列表用户授权功能提交页面
+        Route::post('subordinate_delete','Proxy\SubordinateController@subordinate_delete')->middleware('ProxyCheckAjax');//下级人员列表删除用户显示页面
         Route::post('subordinate_lock','Proxy\SubordinateController@subordinate_lock')->middleware('ProxyCheckAjax');//冻结下级人员显示页面
         Route::post('subordinate_lock_check','Proxy\SubordinateController@subordinate_lock_check')->middleware('ProxyCheckAjax');//冻结下级人员功能提交
 

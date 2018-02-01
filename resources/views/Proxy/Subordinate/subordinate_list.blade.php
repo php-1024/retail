@@ -62,7 +62,7 @@
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <input type="hidden" id="subordinate_edit_url" value="{{ url('proxy/ajax/subordinate_edit') }}">
                                 <input type="hidden" id="subordinate_lock" value="{{ url('proxy/ajax/subordinate_lock') }}">
-                                <input type="hidden" id="subordinate_delete_confirm_url" value="{{ url('proxy/ajax/subordinate_delete_confirm') }}">
+                                <input type="hidden" id="subordinate_delete" value="{{ url('proxy/ajax/subordinate_delete') }}">
                                 <input type="hidden" id="subordinate_authorize_url" value="{{ url('proxy/ajax/subordinate_authorize') }}">
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">用户账号</label>
@@ -221,7 +221,7 @@
 
     //获取用户信息，编辑密码框
     function getDeleteComfirmForm(id,acconut){
-        var url = $('#subordinate_delete_confirm_url').val();
+        var url = $('#subordinate_delete').val();
         var token = $('#_token').val();
 
         if(id==''){
