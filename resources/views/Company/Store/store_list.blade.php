@@ -30,7 +30,7 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">创建店铺</h3>
+                            <h3 class="m-b-none">管理店铺</h3>
                         </div>
                         <div class="col-sm-2">
                             <section class="panel panel-default"   style="height: 230px;">
