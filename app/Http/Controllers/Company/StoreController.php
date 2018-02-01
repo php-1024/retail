@@ -29,8 +29,9 @@ class StoreController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $package_id = $request->package_id;             //套餐id
+        $program = Program::getList(['complete_id'=>'3'],0,'id','DESC');
         dump($package_id);
-        return view('Company/Store/store_add_second',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Company/Store/store_add_second',['program'=>$program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //店铺管理
