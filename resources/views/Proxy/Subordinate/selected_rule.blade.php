@@ -19,7 +19,7 @@
         <div style="margin-top: 20px;"></div>
     @endforeach
 </div>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     $(function(){
         $('.i-checks').iCheck({

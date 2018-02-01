@@ -59,6 +59,7 @@ class ProxyCheck{
             /****系统资产管理****/
             case "proxy/program/program_list":           //权限角色添加
             case "proxy/program/program_log":            //权限角色列表
+            case "proxy/program/quick_rule":             //权限角色列表
             /****系统资产管理****/
             
             /****下辖商户管理****/
