@@ -219,6 +219,7 @@
         var role_id = $(obj).val();
         console.log(role_id);
         var data = {'_token': token, 'role_id': role_id}
+        console.log(data);
         $.post(url, data, function (response) {
             $('#module_node_box').html(response);
         });
