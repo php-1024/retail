@@ -8,13 +8,13 @@
 
     <title>零壹新科技管理平台</title>
 
-    <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
-    <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/wizard')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/animate.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -22,10 +22,10 @@
 
 <div id="wrapper">
 
-    @include('Zerone/Public/Nav')
+    @include('Proxy/Public/Nav')
 
     <div id="page-wrapper" class="gray-bg">
-        @include('Zerone/Public/Header')
+        @include('Proxy/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>添加下级人员</h2>
@@ -49,9 +49,9 @@
 
                         </div>
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/subordinate_add_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('proxy/ajax/subordinate_add_check') }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <input type="hidden" id="quick_rule_url" value="{{ url('zerone/ajax/quick_rule') }}">
+                                <input type="hidden" id="quick_rule_url" value="{{ url('proxy/ajax/quick_rule') }}">
                                 <div id="rootwizard">
                                     <ul>
                                         <li><a href="#tab1" data-toggle="tab"><span class="label">1</span> 填写用户基础资料</a></li>
@@ -122,16 +122,16 @@
     </div>
 </div>
     <!-- Mainly scripts -->
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+    <script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
+    <script src="{{asset('public/Proxy/library/bootstrap')}}/js/bootstrap.min.js"></script>
+    <script src="{{asset('public/Proxy/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+    <script src="{{asset('public/Proxy/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script src="{{asset('public/Zerone/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
-    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+    <script src="{{asset('public/Proxy')}}/js/inspinia.js"></script>
+    <script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
+    <script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
+    <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
