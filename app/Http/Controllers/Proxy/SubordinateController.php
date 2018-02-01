@@ -155,9 +155,9 @@ class SubordinateController extends Controller{
         $password = $request->input('password');//登录密码
         $realname = $request->input('realname');//真实姓名
         $mobile = $request->input('mobile');//手机号码
-        $organization_id = 1;
+        $organization_id = $admin_data['organization_id'];
         if (!empty($password)) {
-            $key = config("app.zerone_encrypt_key");//获取加密盐
+            $key = config("app.proxy_encrypt_key");//获取加密盐
             $encrypted = md5($password);//加密密码第一重
             $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
         }
