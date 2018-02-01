@@ -50,7 +50,11 @@
                                                 <label class="btn btn-sm btn-success active">
                                                     <input type="radio" name="options" value="{{$val->id}}"><i class="fa fa-check text-active"></i> {{$val->program_name}}
                                                 </label>
+
+
                                                 @endforeach
+
+
                                             </div>
                                         </div>
                                     </div>
