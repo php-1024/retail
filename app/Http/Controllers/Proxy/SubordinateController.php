@@ -21,6 +21,7 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',2],['created_by',$admin_data['id']]],0,'id');
+        dd($role_list);
         return view('Proxy/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
