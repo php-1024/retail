@@ -31,6 +31,7 @@ class StoreController extends Controller{
         $package_id = $request->package_id;             //套餐id
         $program = Program::getList(['complete_id'=>'3'],0,'id','DESC');
         dump($package_id);
+        dump($program);
         return view('Company/Store/store_add_second',['program'=>$program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
