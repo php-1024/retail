@@ -43,6 +43,10 @@ class ProxyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "proxy/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
+                return self::format_response($re,$next);
+                break;
             case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "proxy/ajax/role_delete_check"://检测是否登录 权限 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
@@ -206,10 +210,45 @@ class ProxyCheckAjax
             }
         }
     }
-
-
-
-
+    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测添加下级人员数据
+    public function checkSubordinateAdd($request){
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入用户登录密码', 'status' => '0']));
+        }
+        if(empty($request->input('repassword'))){
+            return self::res(0,response()->json(['data' => '请再次输入用户登录密码', 'status' => '0']));
+        }
+        if($request->input('password')<>$request->input('repassword')){
+            return self::res(0,response()->json(['data' => '两次登录密码输入不一致', 'status' => '0']));
+        }
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
+        }
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        }
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     /******************************单项检测*********************************/
 
 
