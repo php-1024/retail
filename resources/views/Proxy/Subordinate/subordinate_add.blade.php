@@ -143,18 +143,17 @@
     </section>
     <!--main content end-->
 </section>
-<!-- js placed at the end of the document so the pages load faster -->
+<!-- Mainly scripts -->
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
-<!--common script for all pages-->
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.js"></script>
-<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
@@ -168,7 +167,7 @@
         var data = {'_token': token, 'role_id': role_id}
         $.post(url, data, function (response) {
             console.log(response);
-//            $('#module_node_box').html(response);
+            $('#module_node_box').html(response);
         });
     }
     //提交表单
