@@ -54,12 +54,13 @@ class ProxyCheck{
             case "proxy/subordinate/subordinate_add":   //下级人员添加
             case "proxy/subordinate/subordinate_list":  //下级人员列表
             case "proxy/subordinate/subordinate_structure"://下级人员结构
-            /****下级人员管理--添加组****/
+            case "proxy/subordinate/quick_rule":        //添加下级人员快速授权
+
+                /****下级人员管理--添加组****/
 
             /****系统资产管理****/
             case "proxy/program/program_list":           //权限角色添加
             case "proxy/program/program_log":            //权限角色列表
-            case "proxy/program/quick_rule":             //权限角色列表
             /****系统资产管理****/
             
             /****下辖商户管理****/
