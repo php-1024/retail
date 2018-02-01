@@ -107,7 +107,7 @@ class StoreController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_tree = $admin_data['parent_tree'].','.$admin_data['id'];
-        $organization = Organization::getOneCompany([ 'parent_tree','like','%'.$parent_tree.'%' ]);
+        $organization = Organization::getOneCompany([['parent_tree','like','%'.$parent_tree.'%']]);
         dump($admin_data);
         dump($organization);
         return view('Company/Store/store_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
