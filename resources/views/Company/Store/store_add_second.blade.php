@@ -46,10 +46,12 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">选择模式</label>
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
-                                                @foreach($program as $key=>$val)
+                                                @foreach($package_program as $key=>$val)
+                                                    @foreach($val->programs as $kk=>$vv)
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="radio" name="options" value="{{$val->id}}"><i class="fa fa-check text-active"></i>{{$val->program_name}}
+                                                    <input type="radio" name="options" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
                                                 </label>
+                                                    @endforeach
                                                 @endforeach
                                             </div>
                                         </div>
