@@ -107,7 +107,6 @@ class StoreController extends Controller{
         $parent_id = $admin_data['id'];
         $organization = Organization::getArrayCompany(['parent_id'=>$parent_id]);
         dump($admin_data);
-        dump($parent_tree);
         dump($organization);
         return view('Company/Store/store_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
