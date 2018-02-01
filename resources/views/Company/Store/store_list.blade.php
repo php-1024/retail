@@ -61,9 +61,7 @@
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div>
                                         主账号：<label class="label label-info pull-right">
-                                            @foreach($val as $kk=>$vv)
-                                                @php(var_dump($vv))
-                                            @endforeach
+                                            {{$val->account->account}}
                                         </label>
                                     </div>
                                 </div>
