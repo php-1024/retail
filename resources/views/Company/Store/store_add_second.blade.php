@@ -47,13 +47,10 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 @foreach($program as $key=>$val)
-                                                <label class="btn btn-sm btn-success active">
-                                                    <input type="radio" name="options" value="{{$val->id}}"><i class="fa fa-check text-active"></i> {{$val->program_name}}
+                                                <label class="btn btn-sm btn-success active" style="margin-right: 10px;">
+                                                    <input type="radio" name="options" value="{{$val->id}}"><i class="fa fa-check text-active"></i>{{$val->program_name}}
                                                 </label>
-                                                    &nbsp;&nbsp;
                                                 @endforeach
-
-
                                             </div>
                                         </div>
                                     </div>
