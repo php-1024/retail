@@ -182,8 +182,13 @@
 <script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
-
-
+    $(document).ready(function () {
+        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
     $(function(){
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
