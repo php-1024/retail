@@ -283,7 +283,6 @@ class SubordinateController extends Controller{
 
     //输入安全密码判断是否能冻结的页面
     public function subordinate_lock(Request $request){
-        dd(1);
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
         $status = $request->input('status');//当前用户的状态
