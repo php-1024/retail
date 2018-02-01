@@ -132,7 +132,7 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $account = $request->input('account');
         $search_data = ['account'=>$account];
-        $organization_id = $admin_data['$organization_id'];//零壹管理平台只有一个组织
+        $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
         $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
         dd($list);
