@@ -34,6 +34,15 @@ class Package extends Model{
     public static function getOnePackage($where){
         return self::with('programs')->where($where)->first();
     }
+
+    //获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = new Package();
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->with('programs')->where($where)->orderBy($orderby,$sort)->get();
+    }
     //修改数据
     public static function editPackage($where,$param){
         $model = self::where($where)->first();
