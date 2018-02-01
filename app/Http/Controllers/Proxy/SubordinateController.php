@@ -179,10 +179,17 @@ class SubordinateController extends Controller{
                 }else{
                     AccountInfo::addAccountInfo(['account_id'=>$id,'realname'=>$realname]);
                 }
+                if($admin_data['super_id'] == 2){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
+                }
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑下级人员失败，请检查', 'status' => '0']);
             }
