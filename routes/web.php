@@ -388,7 +388,7 @@ Route::group(['prefix'=>'proxy'],function(){
         Route::post('role_delete_check','Proxy\RoleController@role_delete_check')->middleware('ProxyCheckAjax');//删除权限角色弹出安全密码框
 
         Route::post('subordinate_add_check','Proxy\SubordinateController@subordinate_add_check')->middleware('ProxyCheckAjax');//添加下级人员数据提交
-        Route::post('subordinate_edit','Proxy\SubordinateController@subordinate_edit')->middleware('ProxyCheckAjax');//下级人员列表编辑用户弹出框
+        Route::post('subordinate_edit','Proxy\SubordinateController@subordinate_edit');//下级人员列表编辑用户弹出框
 
         Route::post('quick_rule','Proxy\SubordinateController@quick_rule')->middleware('ProxyCheckAjax');//添加下级人员快速授权
         Route::post('selected_rule','Proxy\SubordinateController@selected_rule')->middleware('ProxyCheckAjax');//下级人员已经选中的权限出框

@@ -142,7 +142,7 @@ class SubordinateController extends Controller{
     public function subordinate_edit(Request $request){
         $id = $request->input('id');
         $info = Account::getOne([['id',$id]]);
-        dd($info); 
+        dd($info);
         return view('Proxy/Subordinate/subordinate_edit',['info'=>$info]);
     }
 
