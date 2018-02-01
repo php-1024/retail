@@ -5,6 +5,9 @@
  **/
 namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\Organization;
+use App\Models\OrganizationCompanyinfo;
 use App\Models\Package;
 use App\Models\PackageProgram;
 use App\Models\Program;
@@ -39,11 +42,59 @@ class StoreController extends Controller{
     public function store_add_second_check(Request $request)
     {
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];                 //上级id
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
         $program_id = $request->program_id;
+        $organization_name = $request->organization_name;
         $type = '4';                                    //店铺组织为4
-        dd($request);
+        $company_owner = $request->realname;            //负责人姓名
+        $company_owner_mobile = $request->tell;         //负责人电话
+        $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
+        $user = Account::max('account');
+        $account  = $user+1;//用户账号
+        $password = $request->password;
+        $key = config("app.company_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        DB::beginTransaction();
+        try{
+            $organization = [
+                'organization_name'=>$organization_name,
+                'parent_id'        =>$parent_id,
+                'parent_tree'      =>$parent_tree,
+                'program_id'       =>$program_id,
+                'type'             =>$type,
+                'status'           =>'1',
+            ];
+            //在组织表创建保存店铺信息
+            $id = Organization::addOrganization($organization);
+            $companyinfo = [
+                'organization_id'       =>$id,
+                'company_owner'         =>$company_owner,
+                'company_owner_idcard'  =>'',
+                'company_owner_mobile'  =>$company_owner_mobile,
+            ];
+            //在商户组织信息表创建店铺组织信息
+            OrganizationCompanyinfo::addOrganizationCompanyinfo($companyinfo);
+            $accdata = [
+                'organization_id'  =>$id,
+                'parent_id'        =>$parent_id,
+                'parent_tree'      =>$parent_tree,
+                'deepth'           =>$deepth,
+                'account'          =>$account,
+                'password'         =>$encryptPwd,
+                'mobile'           =>$company_owner_mobile,
+            ];
+            Account::addAccount($accdata);
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建了店铺：'.$organization_name);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '创建店铺失败，请稍后再试！', 'status' => '0']);
+        }
+        return response()->json(['data' => '创建店铺成功！', 'status' => '1']);
     }
 
     //店铺管理
