@@ -104,9 +104,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <button type="button" class="btn btn-primary"
-                                                            onclick="get_quick_rule('#role_id');"><i
-                                                                class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权
+                                                    <button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权
                                                     </button>
                                                 </div>
                                             </div>
@@ -186,6 +184,7 @@
 <script>
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        get_quick_rule('#role_id');
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
