@@ -104,9 +104,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <button type="button" class="btn btn-primary"
-                                                            onclick="get_quick_rule('#role_id');"><i
-                                                                class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权
+                                                    <button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权
                                                     </button>
                                                 </div>
                                             </div>
@@ -168,11 +166,10 @@
     </section>
     <!--main content end-->
 </section>
-
-
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -186,6 +183,7 @@
 <script>
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        get_quick_rule('#role_id');
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
