@@ -8,12 +8,12 @@
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet"/>
+    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/css/owl.carousel.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet"/>
+    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
@@ -177,14 +177,17 @@
     <!--main content end-->
 </section>
 
-<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
-<script src="{{asset('public/Proxy/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Proxy/library/bootstrap')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-<script src="{{asset('public/Proxy/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 
-<!-- Custom and plugin javascript -->
-<script src="{{asset('public/Proxy')}}/js/inspinia.js"></script>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.js"></script>
+<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
 <script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
