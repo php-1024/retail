@@ -21,7 +21,6 @@ class SubordinateController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
-        dd($role_list);
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -31,7 +30,7 @@ class SubordinateController extends Controller{
         $account_id = $admin_data['id'];//当前登录账号ID
         $role_id = $request->input('role_id');
         if($account_id == 1) {//如果是超级管理员
-            $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
 
