@@ -118,7 +118,7 @@ class CompanyCheckAjax
 
     //检测登录，权限，及商户创建店铺数据检测
     public function checkLoginAndRuleAndStoreAdd($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录是否有权限以及安全密码
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录是否有权限以及安全密码
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{

@@ -47,7 +47,7 @@
                                                 @foreach($package_program as $key=>$val)
                                                     @foreach($val->programs as $kk=>$vv)
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="radio" name="options" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
+                                                    <input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
                                                 </label>
                                                     @endforeach
                                                 @endforeach

@@ -20,7 +20,6 @@ class StoreController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $program = Package::getList([],0,'id','ASC');//查询所有商户系统套餐程序
-        dump($program);
         return view('Company/Store/store_add',['program'=>$program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -39,6 +38,11 @@ class StoreController extends Controller{
     //店铺管理
     public function store_add_second_check(Request $request)
     {
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $parent_id = $admin_data['id'];                 //上级id
+        $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
+        $program_id = $request->program_id;
+        $type = '4';                                    //店铺组织为4
         dd($request);
     }
 
