@@ -55,7 +55,6 @@ class ProxyCheck{
             case "proxy/subordinate/subordinate_list":  //下级人员列表
             case "proxy/subordinate/subordinate_structure"://下级人员结构
             case "proxy/subordinate/quick_rule":        //添加下级人员快速授权
-            case "proxy/subordinate/subordinate_lock":  //添加下级人员快速授权
 
                 /****下级人员管理--添加组****/
 
