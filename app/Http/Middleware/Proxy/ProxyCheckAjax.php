@@ -47,6 +47,11 @@ class ProxyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "proxy/ajax/role_delete_check"://检测是否登录 权限 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
@@ -220,6 +225,20 @@ class ProxyCheckAjax
             return $re;
         }else{
             $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -417,6 +436,19 @@ class ProxyCheckAjax
             return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
         }
         return self::res(1, $request);
+    }
+    //检测编辑下级人员数据
+    public function checkSubordinateEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
+        }
+//        if(empty($request->input('mobile'))){
+//            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+//        }
+        return self::res(1,$request);
     }
 
 
