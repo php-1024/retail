@@ -51,9 +51,14 @@ class ProxyCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
                 return self::format_response($re,$next);
                 break;
+            case "proxy/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
+                return self::format_response($re,$next);
+                break;
 
             case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "proxy/ajax/role_delete_check"://检测是否登录 权限 安全密码
+            case "proxy/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -63,7 +68,9 @@ class ProxyCheckAjax
             case "proxy/ajax/quick_rule"://快速授权检测登入和权限
             case "proxy/ajax/selected_rule"://快速授权检测登入和权限
             case "proxy/ajax/subordinate_edit"://下级人员列表编辑用户弹出框
-                $re = $this->checkLoginAndRule($request);
+            case "proxy/ajax/subordinate_lock":  //添加下级人员快速授权
+            case "proxy/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
@@ -239,6 +246,20 @@ class ProxyCheckAjax
             return $re;
         }else{
             $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateAuthorize($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -445,9 +466,22 @@ class ProxyCheckAjax
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
         }
-//        if(empty($request->input('mobile'))){
-//            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
-//        }
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测编辑下级人员权限数据
+    public function checkSubordinateAuthorize($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
+        }
         return self::res(1,$request);
     }
 
