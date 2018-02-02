@@ -21,21 +21,13 @@ class SystemController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         if($admin_data['is_super'] == 1){
-            $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
-            foreach ($listOrg as $k=>$v){
-                $zone_id = $v['warzoneProxy']['zone_id'];
-                $listOrg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
-            }
+            $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','2']],20,'id');
             return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
         }else{
 
             $where = [['organization_id',$admin_data['organization_id']]];
             if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
                 $where[] = ['account_id',$admin_data['id']];
-            }
-            $listOrg = Organization::getL([['program_id','2']],20,'id');
-            foreach ($listOrg as $key=>$val){
-                dump($val->warzone['0']['zone_name']);
             }
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
