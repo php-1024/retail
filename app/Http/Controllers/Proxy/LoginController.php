@@ -66,10 +66,10 @@ class LoginController extends Controller{
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
             if(!empty($account_info)){
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
-                    ErrorLog::addErrorTimes($ip,1);
+                    ErrorLog::addErrorTimes($ip,2);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif($account_info->status<>'1'){//查询账号状态
-                    ErrorLog::addErrorTimes($ip,1);
+                    ErrorLog::addErrorTimes($ip,2);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
                     //登录成功要生成缓存的登录信息
@@ -87,16 +87,15 @@ class LoginController extends Controller{
                         'ip'=>$ip,//登录IP
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time(),//登录时间
-                        'super_id' => '0' //超级管理员判断字段
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '2'){//如果账号不属于服务商管理系统，则报错，不能登录
-                            ErrorLog::addErrorTimes($ip,1);
+                            ErrorLog::addErrorTimes($ip,2);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
-                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization->id,$ip,$addr)) {//写入登录日志
+                            if(LoginLog::addLoginLog($account_info['id'],2,$account_info->organization->id,$ip,$addr)) {//写入登录日志
                                 Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
 
                                 //构造用户缓存数据
@@ -122,7 +121,6 @@ class LoginController extends Controller{
                         }
                     }else{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                            $admin_data['super_id'] = '1';//超级管理员判断字段
                         //插入登录记录
                             Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
@@ -134,7 +132,7 @@ class LoginController extends Controller{
                     }
                 }
             }else{
-                ErrorLog::addErrorTimes($ip,1);
+                ErrorLog::addErrorTimes($ip,2);
                 return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
             }
         }else{

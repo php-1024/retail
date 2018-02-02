@@ -7,7 +7,7 @@
 <div class="top-nav ">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
-        @if($admin_data['super_id'] == 2)
+        @if($admin_data['is_super'] == 2)
         <li class="dropdown">
             <a class="dropdown-toggle" href="{{url('proxy/switch_status')}}">
                 <i class="icon-user"></i>
