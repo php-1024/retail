@@ -278,14 +278,14 @@ class AccountcenterController extends Controller{
     //个人操作日志页面
     public function operation_log(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $time_st = $request->input('time_st');//查询时间开始
-        $time_nd = $request->input('time_nd');//查询时间结束
-        $account = $request->input('account');//查询操作账户
-        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        $route_name = $request->path();                 //获取当前的页面路由
+        $time_st = $request->input('time_st');          //查询时间开始
+        $time_nd = $request->input('time_nd');          //查询时间结束
+        $account = $request->input('account');          //查询操作账户
+        $time_st_format = $time_nd_format = 0;          //实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
@@ -304,14 +304,14 @@ class AccountcenterController extends Controller{
     //个人登陆日志页面
     public function login_log(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $time_st = $request->input('time_st');//查询时间开始
-        $time_nd = $request->input('time_nd');//查询时间结束
-        $account = $request->input('account');//查询操作账户
-        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        $time_st = $request->input('time_st');              //查询时间开始
+        $time_nd = $request->input('time_nd');              //查询时间结束
+        $account = $request->input('account');              //查询操作账户
+        $time_st_format = $time_nd_format = 0;              //实例化时间格式
         if(!empty($time_st) && !empty($time_nd)) {
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
