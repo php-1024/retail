@@ -62,7 +62,7 @@ class ProgramModuleNode extends Model{
     public static function getModuleNodes($id){
         return self::join('module',function($query){
             $query->on('program_module_node.module_id','module.id');
-        })->where('id',$id)->get();
+        })->where('program_id',$id)->get();
     }
 
     //修改数据
