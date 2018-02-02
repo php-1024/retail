@@ -33,6 +33,8 @@ class SystemController extends Controller{
             if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
                 $where[] = ['account_id',$admin_data['id']];
             }
+            $listOrg = Organization::getL([['program_id','2']],20,'id');
+            dd($listOrg);
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
             $organization_id = $admin_data['organization_id'];//服务商id

@@ -46,6 +46,10 @@ class Organization extends Model{
         return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id')->select('zone_name');
     }
 
+    //获取分页数据-服务商
+    public static function getL($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
     //获取单条信息-服务商
     public static function getOneProxy($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
