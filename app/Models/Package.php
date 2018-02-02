@@ -71,7 +71,7 @@ class Package extends Model{
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('programs')->with(['assets'=>function($query){
-            $query->where('package_id','package.id')->where('program_id','programs.id');
+            $query->where([['assets.package_id','package.id'],['assets.program_id','programs.id']]);
         }])->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
