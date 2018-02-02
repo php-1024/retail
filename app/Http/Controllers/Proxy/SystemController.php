@@ -24,7 +24,6 @@ class SystemController extends Controller{
             $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','2']],20,'id');
             return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
         }else{
-
             $where = [['organization_id',$admin_data['organization_id']]];
             if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
                 $where[] = ['account_id',$admin_data['id']];
