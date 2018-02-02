@@ -273,7 +273,5 @@ class PersonaController extends Controller{
         return view('Proxy/Persona/myloginlog',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-
-
 }
 ?>
