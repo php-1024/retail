@@ -53,6 +53,7 @@ class LoginController extends Controller{
         $password = Request::input('password');//接收用户密码
 
         $account_info = Account::getOneForLogin($username);//根据账号查询
+        dd($account_info);
         if($account_info->id == 1){//如果是超级管理员获取零壹加密盐
             $key = config("app.zerone_encrypt_key");//获取加密盐
         }else{
@@ -66,10 +67,10 @@ class LoginController extends Controller{
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
             if(!empty($account_info)){
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
-                    ErrorLog::addErrorTimes($ip,1);
+                    ErrorLog::addErrorTimes($ip,2);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif($account_info->status<>'1'){//查询账号状态
-                    ErrorLog::addErrorTimes($ip,1);
+                    ErrorLog::addErrorTimes($ip,2);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
                     //登录成功要生成缓存的登录信息
@@ -91,7 +92,7 @@ class LoginController extends Controller{
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '2'){//如果账号不属于服务商管理系统，则报错，不能登录
-                            ErrorLog::addErrorTimes($ip,1);
+                            ErrorLog::addErrorTimes($ip,2);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
@@ -134,7 +135,7 @@ class LoginController extends Controller{
                     }
                 }
             }else{
-                ErrorLog::addErrorTimes($ip,1);
+                ErrorLog::addErrorTimes($ip,2);
                 return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
             }
         }else{
