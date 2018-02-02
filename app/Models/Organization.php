@@ -43,9 +43,13 @@ class Organization extends Model{
     }
     //和WarzoneProxy表 warzone表 一对一的关系
     public function warzone(){
-        return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id')->select('zone_name');
+        return $this->hasManyThrough('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'id');
     }
 
+    //获取分页数据-服务商
+    public static function getL($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
     //获取单条信息-服务商
     public static function getOneProxy($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
