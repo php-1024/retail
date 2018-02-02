@@ -290,6 +290,8 @@ class AccountcenterController extends Controller{
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
+        $re = OperationLog::getUnionPaginate('10003','','','10','id','ASC');
+        dump($re);
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
