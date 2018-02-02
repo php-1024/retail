@@ -41,13 +41,13 @@ class Organization extends Model{
     public function warzoneProxy(){
         return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
     }
-    //和WarzoneProxy表 warzone表 一对一的关系
+    //和WarzoneProxy表 warzone表 多对多的关系
     public function warzone(){
         return $this->belongsToMany('App\Models\Warzone','warzone_proxy','organization_id','zone_id')->select('zone_name');
     }
 
     //获取分页数据-服务商
-    public static function getL($where,$paginate,$orderby,$sort='DESC'){
+    public static function getWarzoneProxyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取单条信息-服务商

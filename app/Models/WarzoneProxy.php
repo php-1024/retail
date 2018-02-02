@@ -17,9 +17,7 @@ class WarzoneProxy extends Model{
 //    public function organization(){
 //        return $this->hasOne('App\Models\Organization', 'id', 'organization_id');
 //    }
-    public function warzone(){
-        return $this->belongsToMany('App\Models\Organization');
-    }
+
     //获取单条信息
     public static function getOne($where){
         return self::where($where)->first();

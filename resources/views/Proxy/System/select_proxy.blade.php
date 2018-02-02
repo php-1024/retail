@@ -66,7 +66,7 @@
                     </div>
                     <div class="value">
                         <b>{{$value->organization_name}}</b>
-                        <p>{{$value->zone_name}}</p>
+                        <p>{{$value->warzone['0']['zone_name']}}</p>
                     </div>
                 </section>
             </a>
