@@ -104,7 +104,7 @@ class LoginController extends Controller
                                 } else {
                                     $admin_data['realname'] = '未设置';
                                 }
-                                if (!empty($account_info->account_roles) && $account_info->account_roles->count() != 0) {
+                                if (!empty($account_info->account_roles)) {
                                     foreach ($account_info->account_roles as $key => $val) {
                                         $account_info->role = $val;
                                     }
@@ -121,18 +121,13 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        //插入登录记录
-                        if (LoginLog::addLoginLog($account_info['id'], 1, 0, $ip, $addr)) {//admin,唯一超级管理员，不属于任何组织
-                            Session::put('zerone_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
-                            $admin_data['realname'] = '系统管理员';
-                            $admin_data['role_name'] = '系统管理员';
-                            //构造用户缓存数据
-                            \ZeroneRedis::create_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                            \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
-                            return response()->json(['data' => '登录成功', 'status' => '1']);
-                        } else {
-                            return response()->json(['data' => '登录失败', 'status' => '0']);
-                        }
+                        Session::put('zerone_company_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                        $admin_data['realname'] = '系统管理员';
+                        $admin_data['role_name'] = '系统管理员';
+                        //构造用户缓存数据
+                        \ZeroneRedis::create_company_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        \ZeroneRedis::create_company_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+                        return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
                 }
             } else {
