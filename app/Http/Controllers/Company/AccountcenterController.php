@@ -71,6 +71,7 @@ class AccountcenterController extends Controller{
         $organization_name = $request->organization_name;   //接收组织商户名称
         $mobile = $request->company_owner_mobile;           //接收负责人手机号码
         $list = Organization::getOneCompany(['id'=>$id]);   //获取商户组织信息
+        dd($request);
         DB::beginTransaction();
         try{
             if($list['organization_name']!=$organization_name){
