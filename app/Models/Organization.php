@@ -52,7 +52,7 @@ class Organization extends Model{
     }
     //获取单条信息-服务商
     public static function getOneProxy($where){
-        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
+        return self::with('warzoneProxy')->with('organizationproxyinfo')->with('warzone')->where($where)->first();
     }
 
     //获取-服务商列表
