@@ -64,7 +64,7 @@
                                         <input type="text" class="form-control" name="account" value="{{ $search_data['operation_log.account'] }}" placeholder="用户账号">
                                     </div>
                                     <div class="col-lg-2">
-                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                        <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                                     </div>
 
                                 </div>
