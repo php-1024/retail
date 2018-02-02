@@ -201,7 +201,7 @@ class SystemController extends Controller{
         $account = $request->input('account');//通过登录页账号查询
         $where = [['operation_log.organization_id',$admin_data['organization_id']]];
         if(!empty($account)){
-            $where[] = ['account.account',$account];
+            $where[] = ['account.account','like','%'.$account.'%'];
         }
         $search_data = ['operation_log.account'=>$account,'operation_log.organization_id'=>$admin_data['organization_id']];
         $list = OperationLog::getProxyPaginate($where,10,'id');
