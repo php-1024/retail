@@ -142,10 +142,10 @@ class PersonaController extends Controller{
 
         $old_encrypted = md5($old_safe_password);//加密原安全密码第一重
         $old_encryptPwd = md5("lingyikeji".$old_encrypted.$key);//加密原安全密码第二重
-        $admin_data['safe_password'] = $encryptPwd;
         if ($is_editing == '-1'){
             DB::beginTransaction();
             try {
+                $admin_data['safe_password'] = $encryptPwd;
                 if($admin_data['is_super'] == 2){
                     Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统设置了安全密码');//在零壹保存操作记录
@@ -166,6 +166,7 @@ class PersonaController extends Controller{
             if ($admin_data['safe_password'] == $old_encryptPwd){
                 DB::beginTransaction();
                 try {
+                    $admin_data['safe_password'] = $encryptPwd;
                     if($admin_data['is_super'] == 2){
                         Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了安全密码');//在零壹保存操作记录
