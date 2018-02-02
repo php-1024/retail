@@ -41,8 +41,18 @@ class SystemController extends Controller{
             return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
-    //超级管理员选择服务商
+    //添加服务商
     public function select_proxy(Request $request){
+            $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
+            foreach ($listOrg as $k=>$v){
+                $zone_id = $v['warzoneProxy']['zone_id'];
+                $listOrg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
+            }
+            return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
+
+    }
+    //超级管理员选择服务商
+    public function select_proxy_check(Request $request){
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
