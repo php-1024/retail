@@ -34,7 +34,9 @@ class SystemController extends Controller{
                 $where[] = ['account_id',$admin_data['id']];
             }
             $listOrg = Organization::getL([['program_id','2']],20,'id');
-            dd($listOrg);
+            foreach ($listOrg as $key=>$val){
+                dump($val);
+            }
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
             $organization_id = $admin_data['organization_id'];//服务商id
