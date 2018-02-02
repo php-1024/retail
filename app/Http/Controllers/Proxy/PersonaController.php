@@ -142,23 +142,25 @@ class PersonaController extends Controller{
 
         $old_encrypted = md5($old_safe_password);//加密原安全密码第一重
         $old_encryptPwd = md5("lingyikeji".$old_encrypted.$key);//加密原安全密码第二重
+        $admin_data['safe_password'] = $encryptPwd;
         if ($is_editing == '-1'){
             DB::beginTransaction();
             try {
                 if($admin_data['is_super'] == 2){
                     Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统设置了安全密码');//在零壹保存操作记录
+                    \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+
                 }else{
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                     OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
             }
-            $admin_data['safe_password'] = $encryptPwd;
-            \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
         }else{//修改安全密码
             if ($admin_data['safe_password'] == $old_encryptPwd){
@@ -167,20 +169,18 @@ class PersonaController extends Controller{
                     if($admin_data['is_super'] == 2){
                         Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了安全密码');//在零壹保存操作记录
+                        \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+
                     }else{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                        \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+
                     }
                     DB::commit();
                 } catch (\Exception $e) {
                     DB::rollBack();//事件回滚
                     return response()->json(['data' => '安全密码修改失败，请检查', 'status' => '0']);
-                }
-                $admin_data['safe_password'] = $encryptPwd;
-                if($admin_data['is_super'] == 2) {
-                    \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-                }else{
-                    \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 return response()->json(['data' => '安全密码修改成功！', 'status' => '1']);
             }else{
