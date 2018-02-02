@@ -35,7 +35,7 @@ class SystemController extends Controller{
             }
             $listOrg = Organization::getL([['program_id','2']],20,'id');
             foreach ($listOrg as $key=>$val){
-                dump($val);
+                dump($val->warzone);
             }
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
