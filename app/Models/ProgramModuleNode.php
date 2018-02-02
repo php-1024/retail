@@ -62,6 +62,8 @@ class ProgramModuleNode extends Model{
     public static function getModuleNodes($where){
         return self::join('module',function($query){
             $query->on('program_module_node.module_id','module.id');
+        })->join('node',function($query){
+            $query->on('program_module_node.node_id','node.id');
         })->where($where)->get();
     }
 
