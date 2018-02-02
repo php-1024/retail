@@ -1,6 +1,6 @@
 <?php
 /**
- *新版本登录界面
+ *账户中心
  *
  **/
 namespace App\Http\Controllers\Company;

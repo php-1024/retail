@@ -1,6 +1,6 @@
 <?php
 /**
- *新版本登录界面
+ *店铺管理界面
  *
  **/
 namespace App\Http\Controllers\Company;
