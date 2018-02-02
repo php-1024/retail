@@ -43,7 +43,7 @@ class Organization extends Model{
     }
     //和WarzoneProxy表 warzone表 一对一的关系
     public function warzone(){
-        return $this->hasManyThrough('App\Models\WarzoneProxy', 'App\Models\Warzon', 'organization_id', 'zone_id')->select('zone_name');
+        return $this->belongsToMany('App\Models\Warzone', 'App\Models\WarzoneProxy', 'organization_id', 'zone_id')->select('zone_name');
     }
 
     //获取分页数据-服务商
