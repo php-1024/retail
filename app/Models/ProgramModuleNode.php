@@ -59,10 +59,10 @@ class ProgramModuleNode extends Model{
 
 
     //获取用户拥有的模块和节点
-    public static function getModuleNodes($id){
+    public static function getModuleNodes($where){
         return self::join('module',function($query){
             $query->on('program_module_node.module_id','module.id');
-        })->where('id',$id)->get();
+        })->where($where)->get();
     }
 
     //修改数据
