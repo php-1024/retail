@@ -41,18 +41,18 @@ class Organization extends Model{
     public function warzoneProxy(){
         return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
     }
-    //和WarzoneProxy表 warzone表 多对多的关系
+    //和WarzoneProxy表 warzone表 一对一的关系
     public function warzone(){
-        return $this->belongsToMany('App\Models\Warzone','warzone_proxy','organization_id','zone_id')->select('zone_name');
+        return $this->belongsToMany('App\Models\Warzone','warzone_proxy','organization_id','zone_id')->select('');
     }
 
     //获取分页数据-服务商
-    public static function getWarzoneProxyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
+    public static function getL($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取单条信息-服务商
     public static function getOneProxy($where){
-        return self::with('warzoneProxy')->with('organizationproxyinfo')->with('warzone')->where($where)->first();
+        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
     }
 
     //获取-服务商列表
@@ -112,10 +112,8 @@ class Organization extends Model{
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取分页数据-商户
-    public static function getCompany($where,$paginate,$orderby,$sort='DESC',$organization_id){
-        return self::with('organizationCompanyinfo')->with(['account'=>function($query)use ($organization_id){
-            $query->where('organization_id',$organization_id)->where('parent_id','1');
-        }])->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getCompany($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('organizationCompanyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
