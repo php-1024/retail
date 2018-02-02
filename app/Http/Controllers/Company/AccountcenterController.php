@@ -53,6 +53,7 @@ class AccountcenterController extends Controller{
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $organization_id = $request->organization_id;
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
+        dd($organization_id);
         if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);      //超级管理员选择身份登录
         }
