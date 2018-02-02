@@ -82,7 +82,7 @@ class AccountcenterController extends Controller{
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('3','1','1',$route_name,'在商户系统修改了商户（'.$admin_data['account'].'）的公司资料！');//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户（'.$admin_data['account'].'）的公司资料！');//保存操作记录
             }else{//商户本人操作记录
                 OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了公司资料');//保存操作记录
             }
@@ -126,7 +126,7 @@ class AccountcenterController extends Controller{
             AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('3','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
             }else{//商户本人操作记录
                 OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
             }
@@ -177,7 +177,7 @@ class AccountcenterController extends Controller{
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                     Account::editAccount([['id','1']],['password' => $new_encryptPwd]);                    //修改超级管理员登陆密码
-                    OperationLog::addOperationLog('3','1','1',$route_name,'在商户管理系统修改了自己的登陆密码！');  //保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的登陆密码！');  //保存操作记录
                 }else{//商户本人操作记录
                     Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改商户登陆密码
                     OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
