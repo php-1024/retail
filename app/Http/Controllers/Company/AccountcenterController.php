@@ -293,6 +293,7 @@ class AccountcenterController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
+            ['program_id','3'],
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
@@ -318,6 +319,7 @@ class AccountcenterController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
+            ['program_id','3'],
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
