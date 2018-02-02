@@ -95,7 +95,7 @@ class LoginController extends Controller{
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
-                            if(LoginLog::addLoginLog($account_info['id'],1,$account_info->organization->id,$ip,$addr)) {//写入登录日志
+                            if(LoginLog::addLoginLog($account_info['id'],2,$account_info->organization->id,$ip,$addr)) {//写入登录日志
                                 Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
 
                                 //构造用户缓存数据
