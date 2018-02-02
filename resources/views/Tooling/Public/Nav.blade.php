@@ -13,7 +13,7 @@
                 </div>
             </li>
             <li @if ($action_name=='system')class="active"@endif>
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
+                <a href="javascript:;"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='tooling')class="active"@endif><a href="{{ url('tooling') }}">管理首页</a></li>
                     @if($admin_data['admin_is_super']==1)
