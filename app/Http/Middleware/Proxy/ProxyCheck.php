@@ -28,9 +28,12 @@ class ProxyCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****系统管理****/
+            case "proxy":                               //服务商后台首页
+                $re = $this->checkLoginAndRuleAndSelectProxy($request);//判断是否登录
+                return self::format_response($re,$next);
+                break;
             case "proxy/system/setup":                  //参数设置
             case "proxy/system/proxy_info":             //公司信息设置
-            case "proxy":                               //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
             case "proxy/system/proxy_structure":        //人员结构
             case "proxy/system/operationlog":           //操作日记
@@ -77,6 +80,15 @@ class ProxyCheck{
         return $next($request);
     }
 
+    //检测是否admin或是否有权限
+    public function checkLoginAndRuleAndSelectProxy($request){
+        $re = $this->checkLoginAndRule($request);////检测是否admin或是否有权限
+        if($re['status']=='0'){
+            return $re;
+        }else{
+           dd($re);
+        }
+    }
 
 
     //检测是否admin或是否有权限

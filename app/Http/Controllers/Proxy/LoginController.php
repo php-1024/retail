@@ -54,9 +54,9 @@ class LoginController extends Controller{
 
         $account_info = Account::getOneForLogin($username);//根据账号查询
         if($account_info->id == 1){//如果是超级管理员获取零壹加密盐
-            $key = config("app.zerone_encrypt_key");//获取加密盐
+            $key = config("app.zerone_encrypt_key");//获取加密盐--零壹加密盐
         }else{
-            $key = config("app.proxy_encrypt_key");//获取加密盐
+            $key = config("app.proxy_encrypt_key");//获取加密盐--服务商加密盐
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
