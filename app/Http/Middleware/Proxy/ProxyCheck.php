@@ -86,7 +86,11 @@ class ProxyCheck{
         if($re['status']=='0'){
             return $re;
         }else{
-           dd($re);
+            $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+            if($admin_data['is_super'] == 1){ //防止直接输入地址访问
+                return redirect('proxy');
+            }
+
         }
     }
 

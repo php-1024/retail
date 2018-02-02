@@ -328,7 +328,8 @@ Route::group(['prefix'=>'proxy'],function(){
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
-        Route::post('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
+        Route::get('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
+        Route::post('select_proxy_check','Proxy\SystemController@select_proxy_check')->middleware('ProxyCheck');//超级管理员选择登入的服务商
         Route::get('setup','Proxy\SystemController@setup')->middleware('ProxyCheck');//服务商参数设置
         Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
         Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
