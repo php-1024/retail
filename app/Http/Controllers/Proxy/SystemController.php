@@ -203,7 +203,7 @@ class SystemController extends Controller{
         if(!empty($account)){
             $where[] = ['account.account','like','%'.$account.'%'];
         }
-        $search_data = ['operation_log.account'=>$account,'operation_log.organization_id'=>$admin_data['organization_id']];
+        $search_data = ['account.account'=>$account,'operation_log.organization_id'=>$admin_data['organization_id']];
         $list = OperationLog::getProxyPaginate($where,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
@@ -218,10 +218,13 @@ class SystemController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account = $request->input('account');//通过登录页账号查询
-
         $where = [['login_log.organization_id',$admin_data['organization_id']]];
+        if(!empty($account)){
+            $where[] = ['account.account','like','%'.$account.'%'];
+        }
+        $search_data = ['account.account'=>$account,'login_log.organization_id'=>$admin_data['organization_id']];
         $list = LoginLog::getProxyPaginate($where,15,'id');
-        return view('Proxy/System/loginlog',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Proxy/System/loginlog',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //退出登录
     public function quit(Request $request){
