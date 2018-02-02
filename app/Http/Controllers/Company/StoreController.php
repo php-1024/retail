@@ -88,7 +88,11 @@ class StoreController extends Controller{
             ];
             Account::addAccount($accdata);
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建了店铺：'.$organization_name);//保存操作记录
+            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统创建了店铺：'.$organization_name);    //保存操作记录
+            }else{//商户本人操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建了店铺：'.$organization_name);//保存操作记录
+            }
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
