@@ -38,7 +38,7 @@ class CompanyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
-        $list = Organization::getCompany([['parent_id',$organization],['program_id',3]],10,'id');
+        $list = Organization::getCompany([['parent_id',$organization],['program_id',3]],10,'id',$organization);
         dd($list);
         foreach ($list as $key=>$val){
             $list[$key]['account'] = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account')->first();
