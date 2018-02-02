@@ -18,6 +18,10 @@ class RoleController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+
+        $re = ProgramModuleNode::getModuleNodes();
+        dump($re);
+
         if($admin_data['id'] == 1) {
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
