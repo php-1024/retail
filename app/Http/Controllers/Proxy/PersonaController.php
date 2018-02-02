@@ -68,11 +68,12 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        dd($oneAcc);
         DB::beginTransaction();
         try {
-
             if($oneAcc['mobile']!=$mobile){
+                if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){
+                    return response()->json(['data' => '手机号已存在', 'status' => '0']);
+                }
                 if($admin_data['is_super'] != 2) {
                     OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
                 }
