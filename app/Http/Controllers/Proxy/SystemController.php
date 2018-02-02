@@ -20,7 +20,7 @@ class SystemController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        if($admin_data['is_super'] == 1){
+        if($admin_data['super_id'] == 1){
             $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
             foreach ($listOrg as $k=>$v){
                 $zone_id = $v['warzoneProxy']['zone_id'];
@@ -41,18 +41,8 @@ class SystemController extends Controller{
             return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
-    //添加服务商
-    public function select_proxy(Request $request){
-            $listOrg = Organization::getPaginage([['program_id','2']],20,'id');
-            foreach ($listOrg as $k=>$v){
-                $zone_id = $v['warzoneProxy']['zone_id'];
-                $listOrg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
-            }
-            return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
-
-    }
     //超级管理员选择服务商
-    public function select_proxy_check(Request $request){
+    public function select_proxy(Request $request){
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
@@ -62,13 +52,14 @@ class SystemController extends Controller{
                 'id'=>$account_info->id,    //用户ID
                 'account'=>$account_info->account,//用户账号
                 'organization_id'=>$account_info->organization_id,//组织ID
-                'is_super'=>'2',//超级管理员进入后切换身份用
+                'is_super'=>$account_info->is_super,//是否超级管理员
                 'parent_id'=>$account_info->parent_id,//上级ID
                 'parent_tree'=>$account_info->parent_tree,//上级树
                 'deepth'=>$account_info->deepth,//账号在组织中的深度
                 'mobile'=>$account_info->mobile,//绑定手机号
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
+                'super_id' => '2' //超级管理员进入后切换身份用
             ];
             Session::put('proxy_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
@@ -150,7 +141,7 @@ class SystemController extends Controller{
                 $admin_data['mobile'] = $mobile;
             }
 
-            if($admin_data['is_super'] != 2) {
+            if($admin_data['super_id'] != 2) {
                 //添加操作日志
                 OperationLog::addOperationLog('2', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了服务商：' . $list['organization_name']);//保存操作记录
             }
@@ -160,7 +151,7 @@ class SystemController extends Controller{
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
         if($acc['idcard'] != $idcard || $list['mobile']!=$mobile){
-            if($admin_data['is_super'] == 2) {
+            if($admin_data['super_id'] == 2) {
                 \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
             }else{
                 \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存

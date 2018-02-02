@@ -28,12 +28,9 @@ class ProxyCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****系统管理****/
-            case "proxy":                               //服务商后台首页
-                $re = $this->checkLoginAndRuleAndSelectProxy($request);//判断是否登录
-                return self::format_response($re,$next);
-                break;
             case "proxy/system/setup":                  //参数设置
             case "proxy/system/proxy_info":             //公司信息设置
+            case "proxy":                               //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
             case "proxy/system/proxy_structure":        //人员结构
             case "proxy/system/operationlog":           //操作日记
@@ -80,19 +77,6 @@ class ProxyCheck{
         return $next($request);
     }
 
-    //检测是否admin或是否有权限
-    public function checkLoginAndRuleAndSelectProxy($request){
-        $re = $this->checkLoginAndRule($request);////检测是否admin或是否有权限
-        if($re['status']=='0'){
-            return $re;
-        }else{
-            $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-            if($admin_data['is_super'] == 1){ //防止直接输入地址访问
-                return redirect('proxy');
-            }
-
-        }
-    }
 
 
     //检测是否admin或是否有权限
@@ -106,10 +90,10 @@ class ProxyCheck{
                 return $re2;
             }else{
                 $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-                if($admin_data['is_super'] != 2){ //防止直接输入地址访问
+                if($admin_data['super_id'] != 2){ //防止直接输入地址访问
                     return self::res(0,$request);
                 }
-                $admin_data['is_super'] = 1; //切换权限
+                $admin_data['super_id'] = 1; //切换权限
                 \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
 
