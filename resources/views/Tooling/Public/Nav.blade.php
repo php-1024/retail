@@ -25,7 +25,7 @@
                 </ul>
             </li>
             <li @if ($action_name=='personal')class="active"@endif>
-                <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
+                <a href="javascript:;"><i class="fa fa-user"></i> <span class="nav-label">个人中心</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='tooling/personal/password_edit')class="active"@endif><a href="{{ url('tooling/personal/password_edit') }}">登录密码修改</a></li>
                     <li @if ($route_name=='tooling/personal/operation_log')class="active"@endif><a href="{{ url('tooling/personal/operation_log') }}">我的操作日志</a></li>
@@ -34,7 +34,7 @@
             </li>
 
             <li @if ($action_name=='program')class="active"@endif>
-                <a href="index.html"><i class="fa fa-language"></i> <span class="nav-label">程序管理</span> <span class="fa arrow"></span></a>
+                <a href="javascript:;"><i class="fa fa-language"></i> <span class="nav-label">程序管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='tooling/program/program_add')class="active"@endif><a href="{{ url('tooling/program/program_add') }}">添加程序</a></li>
                     <li @if ($route_name=='tooling/program/program_list' || $route_name == 'tooling/program/menu_list')class="active"@endif><a href="{{ url('tooling/program/program_list') }}">程序列表</a></li>
@@ -43,14 +43,14 @@
                 </ul>
             </li>
             <li @if ($action_name=='module')class="active"@endif>
-                <a href="index.html"><i class="fa fa-slack"></i> <span class="nav-label">功能模块管理</span> <span class="fa arrow"></span></a>
+                <a href="javascript:;"><i class="fa fa-slack"></i> <span class="nav-label">功能模块管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='tooling/module/module_add')class="active"@endif><a href="{{ url('tooling/module/module_add') }}">添加模块</a></li>
                     <li @if ($route_name=='tooling/module/module_list')class="active"@endif><a href="{{ url('tooling/module/module_list') }}">模块列表</a></li>
                 </ul>
             </li>
             <li  @if ($action_name=='node')class="active"@endif>
-                <a href="index.html"><i class="fa fa-steam"></i> <span class="nav-label">功能节点管理</span> <span class="fa arrow"></span></a>
+                <a href="javascript:;"><i class="fa fa-steam"></i> <span class="nav-label">功能节点管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='tooling/node/node_add')class="active"@endif><a href="{{ url('tooling/node/node_add') }}">添加节点</a></li>
                     <li @if ($route_name=='tooling/node/node_list')class="active"@endif><a href="{{ url('tooling/node/node_list') }}">节点列表</a></li>
