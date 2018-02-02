@@ -57,6 +57,14 @@ class ProgramModuleNode extends Model{
         })->where('program_id',$program_id)->select('program_module_node.*','module.module_name','module.id','node.node_name','node.id')->get();
     }
 
+
+    //获取用户拥有的模块和节点
+    public static function getModuleNodes(){
+        return self::join('module',function($query){
+            $query->on('program_module_node.module_id','module.id');
+        })->get();
+    }
+
     //修改数据
     public static function editProgramModuleNode($where,$param){
         $model = self::where($where)->first();
