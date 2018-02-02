@@ -66,7 +66,7 @@
                             <div class="panel-body">
                                 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('proxy/ajax/proxy_info_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
+                                    <input type="hidden" name="organization_id" value="{{$listorg->id}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">所属战区</label>
                                         <div class="col-sm-10">东部战区</div>
@@ -134,14 +134,13 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
