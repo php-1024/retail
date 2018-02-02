@@ -25,7 +25,8 @@ class SystemController extends Controller{
             return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$admin_data['organization_id']]];
-            if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
+            $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();//获取负责人id
+            if($account_id != $admin_data['id']) {//如果不是服务商负责人 只允许看自己的登入记录
                 $where[] = ['account_id',$admin_data['id']];
             }
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
