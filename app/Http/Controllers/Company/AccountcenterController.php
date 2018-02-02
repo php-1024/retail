@@ -292,7 +292,8 @@ class AccountcenterController extends Controller{
         }
         //只查询自己相关的数据
         $where = [
-            ['account_id',$admin_data['id']]
+            ['account_id',$admin_data['id']],
+            ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
