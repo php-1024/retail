@@ -93,7 +93,6 @@ class PersonaController extends Controller{
             $admin_data['mobile'] = $mobile;
             if($admin_data['is_super'] == 2){
                 OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
-                \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存-服务商
             }else{
                 \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
                 OperationLog::addOperationLog('2',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
