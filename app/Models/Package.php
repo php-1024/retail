@@ -21,11 +21,6 @@ class Package extends Model{
     public function assets_operation(){
         return $this->hasMany('App\Models\AssetsOperation','package_id','id');
     }
-    //和assets表一对多的关系
-    public function assets(){
-        return $this->hasMany('App\Models\Assets','package_id','id');
-    }
-
     //添加配套
     public static function addPackage($params){
         $model = new Package();
@@ -70,9 +65,7 @@ class Package extends Model{
     }
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('programs')->with(['assets'=>function($query){
-            $query->where([['assets.package_id','package.id'],['assets.program_id','programs.id']]);
-        }])->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('programs')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
