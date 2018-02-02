@@ -55,8 +55,11 @@ class AccountcenterController extends Controller{
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
         if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);      //超级管理员选择身份登录
+            return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
+        }else{
+            return response()->json(['data' => '操作失败，请稍后再试！', 'status' => '1']);
         }
-        return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
+
     }
 
     //商户信息编辑
@@ -329,7 +332,6 @@ class AccountcenterController extends Controller{
     public function superadmin_login($organization_id)
     {
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
-        dd($account_info);
         //Admin登陆商户平台要生成的信息
         //重新生成缓存的登录信息
         $admin_data = [
@@ -345,7 +347,6 @@ class AccountcenterController extends Controller{
             'status'=>$account_info->status,//用户状态
             'mobile'=>$account_info->mobile,//绑定手机号
         ];
-        Session::put('company_account_id','');//清空普通用户
         Session::put('company_account_id', encrypt(1));//存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
