@@ -98,7 +98,7 @@ class StoreController extends Controller{
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建店铺失败，请稍后再试！', 'status' => '0']);
         }
-        return response()->json(['data' => '创建店铺成功！', 'status' => '1']);
+        return response()->json(['data' => '创建店铺成功,请前往管理店铺进行管理！', 'status' => '1']);
     }
 
     //店铺管理
