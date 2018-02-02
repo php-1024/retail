@@ -33,8 +33,7 @@ class SystemController extends Controller{
             if($admin_data['id']<>1){   //不是超级管理员的时候，只查询自己相关的数据【后期考虑转为查询自己及自己管理的下级人员的所有操作记录】
                 $where[] = ['account_id',$admin_data['id']];
             }
-            $listOrg = Organization::getL([['program_id','2']],20,'id');
-            dd($listOrg);
+
             $login_log_list = LoginLog::getList($where,10,'id');//登录记录
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
             $organization_id = $admin_data['organization_id'];//服务商id
@@ -54,14 +53,13 @@ class SystemController extends Controller{
                 'id'=>$account_info->id,    //用户ID
                 'account'=>$account_info->account,//用户账号
                 'organization_id'=>$account_info->organization_id,//组织ID
-                'is_super'=>$account_info->is_super,//是否超级管理员
+                'is_super'=>'2',//是否超级管理员
                 'parent_id'=>$account_info->parent_id,//上级ID
                 'parent_tree'=>$account_info->parent_tree,//上级树
                 'deepth'=>$account_info->deepth,//账号在组织中的深度
                 'mobile'=>$account_info->mobile,//绑定手机号
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
-                'super_id' => '2' //超级管理员进入后切换身份用
             ];
             Session::put('proxy_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
