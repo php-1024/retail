@@ -108,7 +108,7 @@ class SubordinateController extends Controller{
                 foreach($module_node_ids as $key=>$val){
                     AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val]);
                 }
-                if($admin_data['super_id'] == 2){
+                if($admin_data['is_super'] == 2){
                     //添加操作日志
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了下级人员：'.$account);//保存操作记录
                 }else{
@@ -179,7 +179,7 @@ class SubordinateController extends Controller{
                 }else{
                     AccountInfo::addAccountInfo(['account_id'=>$id,'realname'=>$realname]);
                 }
-                if($admin_data['super_id'] == 2){
+                if($admin_data['is_super'] == 2){
                     //添加操作日志
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了下级人员：'.$account);//保存操作记录
                 }else{
@@ -300,7 +300,7 @@ class SubordinateController extends Controller{
         try{
             if($status==1) {
                 Account::editAccount([['id',$id]],['status'=>'0']);
-                if($admin_data['super_id'] == 2){
+                if($admin_data['is_super'] == 2){
                     //添加操作日志
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统冻结了下级人员：'.$account);//保存操作记录
                 }else{
@@ -309,7 +309,7 @@ class SubordinateController extends Controller{
                 }
             }else{
                 Account::editAccount([['id',$id]],['status'=>'1']);
-                if($admin_data['super_id'] == 2){
+                if($admin_data['is_super'] == 2){
                     //添加操作日志
                     OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统解冻了下级人员：'.$account);//保存操作记录
                 }else{

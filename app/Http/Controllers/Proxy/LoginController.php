@@ -53,7 +53,6 @@ class LoginController extends Controller{
         $password = Request::input('password');//接收用户密码
 
         $account_info = Account::getOneForLogin($username);//根据账号查询
-        dd($account_info);
         if($account_info->id == 1){//如果是超级管理员获取零壹加密盐
             $key = config("app.zerone_encrypt_key");//获取加密盐
         }else{
@@ -88,7 +87,6 @@ class LoginController extends Controller{
                         'ip'=>$ip,//登录IP
                         'login_position'=>$addr,//登录地址
                         'login_time'=>time(),//登录时间
-                        'super_id' => '0' //超级管理员判断字段
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '2'){//如果账号不属于服务商管理系统，则报错，不能登录
@@ -123,7 +121,6 @@ class LoginController extends Controller{
                         }
                     }else{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                            $admin_data['super_id'] = '1';//超级管理员判断字段
                         //插入登录记录
                             Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
