@@ -94,6 +94,7 @@ class CompanyController extends Controller{
         $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $list = Package::getPaginage([],15,'id');
         dd($list);
+        
         foreach ($list as $key=>$value){
             foreach ($value['programs'] as $k=>$v){
                 $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
