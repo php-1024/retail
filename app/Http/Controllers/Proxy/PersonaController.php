@@ -190,7 +190,7 @@ class PersonaController extends Controller{
         }
     }
 
-    //修改登入密码
+    //修改登入密码显示页面
     public function password(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -205,7 +205,7 @@ class PersonaController extends Controller{
         return view('Proxy/Persona/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
-    //修改登入密码
+    //修改登入密码功能提交
     public function password_check(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -234,7 +234,7 @@ class PersonaController extends Controller{
                 if($admin_data['is_super'] == 2){
                     OperationLog::addOperationLog('1','1',$id,$route_name,'在服务商系统修改了登录密码');//保存操作记录-保存到零壹系统
                 }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
