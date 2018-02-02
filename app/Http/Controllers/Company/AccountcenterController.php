@@ -290,7 +290,6 @@ class AccountcenterController extends Controller{
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        dump($request);
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
@@ -318,7 +317,8 @@ class AccountcenterController extends Controller{
         }
         //只查询自己相关的数据
         $where = [
-            ['account_id',$admin_data['id']]
+            ['account_id',$admin_data['id']],
+            ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
