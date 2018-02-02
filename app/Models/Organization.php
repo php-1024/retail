@@ -14,6 +14,11 @@ class Organization extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和Account表多对一的关系
+    public function account(){
+        return $this->hasOne('App\Models\Account', 'organization_id');
+    }
+
     //和OrganizationProxyinfo表一对一的关系
     public function organizationProxyinfo(){
         return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
@@ -57,7 +62,7 @@ class Organization extends Model{
     }
     //获取-商户列表
     public static function getArrayCompany($where){
-        return self::with('organizationCompanyinfo')->where($where)->get();
+        return self::with('organizationCompanyinfo')->with('account')->where($where)->get();
     }
     //获取单条信息和organizationproxyinfo的信息
     public static function getOneAndorganizationproxyinfo($where){

@@ -10,8 +10,6 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationCompanyinfo;
 use App\Models\Package;
-use App\Models\PackageProgram;
-use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -106,7 +104,9 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
-        return view('Company/Store/store_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $parent_id = $admin_data['id'];
+        $organization = Organization::getArrayCompany(['parent_id'=>$parent_id]);
+        return view('Company/Store/store_list',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>
