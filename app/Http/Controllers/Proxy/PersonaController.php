@@ -71,8 +71,10 @@ class PersonaController extends Controller{
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
-                if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){
+                if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){//判断手机号在服务商存不存在
                     return response()->json(['data' => '手机号已存在', 'status' => '0']);
+                }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
+                    return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                 }
                 if($admin_data['is_super'] != 2) {
                     OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
