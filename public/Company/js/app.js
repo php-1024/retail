@@ -369,7 +369,7 @@
       $this.next().is('ul') && e.preventDefault();
 
       setTimeout(function(){ $(document).trigger('updateNav'); }, 300);
-    });
+    })
 //
 //     // dropdown still
 //     $(document).on('click.bs.dropdown.data-api', '.dropdown .on, .dropup .on, .open .on', function (e) { e.stopPropagation() });
