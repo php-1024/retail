@@ -47,12 +47,12 @@ class AccountcenterController extends Controller{
         $where = ['type'=>'3'];
         $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
         $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','3']],20,'id');
-        dump($listOrg);
+//        dump($listOrg);
         foreach ($organization as $key=>$val){
             $res[] = Organization::getArrayCompany(['id'=>$val->id]);
         }
-        dump($res);
-        dump($organization);
+//        dump($res);
+//        dump($organization);
         return  view('Company/Accountcenter/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
