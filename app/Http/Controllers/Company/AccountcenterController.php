@@ -341,19 +341,19 @@ class AccountcenterController extends Controller{
         //Admin登陆商户平台要生成的信息
         //重新生成缓存的登录信息
         $admin_data = [
-            'id'=>$account_info->id,    //用户ID
-            'organization_id'=>$account_info->organization_id,//组织ID
-            'parent_id'=>$account_info->parent_id,//上级ID
-            'parent_tree'=>$account_info->parent_tree,//上级树
-            'deepth'=>$account_info->deepth,//账号在组织中的深度
-            'account'=>$account_info->account,//用户账号
-            'password'=>$account_info->password,//用户密码
-            'safe_password'=>$account_info->safe_password,//安全密码
-            'is_super'=>1,//这里设置成1超级管理员，便于切换各个商户组织
-            'status'=>$account_info->status,//用户状态
-            'mobile'=>$account_info->mobile,//绑定手机号
+            'id'=>$account_info->id,                            //用户ID
+            'organization_id'=>$account_info->organization_id,  //组织ID
+            'parent_id'=>$account_info->parent_id,              //上级ID
+            'parent_tree'=>$account_info->parent_tree,          //上级树
+            'deepth'=>$account_info->deepth,                    //账号在组织中的深度
+            'account'=>$account_info->account,                  //用户账号
+            'password'=>$account_info->password,                //用户密码
+            'safe_password'=>$account_info->safe_password,      //安全密码
+            'is_super'=>1,                                      //这里设置成1超级管理员，便于切换各个商户组织
+            'status'=>$account_info->status,                    //用户状态
+            'mobile'=>$account_info->mobile,                    //绑定手机号
         ];
-        Session::put('company_account_id', encrypt(1));//存储登录session_id为当前用户ID
+        Session::put('company_account_id', encrypt(1));         //存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
