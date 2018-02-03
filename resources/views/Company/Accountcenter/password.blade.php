@@ -107,7 +107,7 @@
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
-                window.location.reload();
+//                window.location.reload();
             } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
