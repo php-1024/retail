@@ -71,62 +71,6 @@
                             </section>
                         </div>
                         @endforeach
-                        {{--<div class="col-sm-2">--}}
-                            {{--<section class="panel panel-default"   style="height: 230px;">--}}
-                                {{--<header class="panel-heading bg-light no-border">--}}
-                                    {{--<div class="clearfix">--}}
-                                        {{--<a href="#" class="pull-left thumb-md avatar b-3x m-r">--}}
-                                        {{--</a>--}}
-                                        {{--<div class="clear">--}}
-                                            {{--<div class=" m-t-xs m-b-xs">--}}
-                                                {{--楼兰美妆--}}
-                                                {{--<i class="fa icon-basket-loaded text-success text-lg pull-right"></i>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</header>--}}
-                                {{--<div class="panel-body ">--}}
-                                    {{--<div>--}}
-                                        {{--店铺状态：<label class="label label-success pull-right">正常</label>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
-                                    {{--<div>--}}
-                                        {{--主账号：<label class="label label-info pull-right">203020</label>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-body" style="text-align:center;">--}}
-                                    {{--<button class="btn btn-s-md btn-danger">进入店铺</button>--}}
-                                {{--</div>--}}
-                            {{--</section>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-sm-2">--}}
-                            {{--<section class="panel panel-default"   style="height: 230px;">--}}
-                                {{--<header class="panel-heading bg-light no-border">--}}
-                                    {{--<div class="clearfix">--}}
-                                        {{--<a href="#" class="pull-left thumb-md avatar b-3x m-r">--}}
-                                        {{--</a>--}}
-                                        {{--<div class="clear">--}}
-                                            {{--<div class=" m-t-xs m-b-xs">--}}
-                                                {{--维也纳酒店--}}
-                                                {{--<i class="fa fa-building-o text-success text-lg pull-right"></i>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</header>--}}
-                                {{--<div class="panel-body ">--}}
-                                    {{--<div>--}}
-                                        {{--店铺状态：<label class="label label-success pull-right">正常</label>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
-                                    {{--<div>--}}
-                                        {{--主账号：<label class="label label-info pull-right">303020</label>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-body" style="text-align:center;">--}}
-                                    {{--<button class="btn btn-s-md btn-danger">进入店铺</button>--}}
-                                {{--</div>--}}
-                            {{--</section>--}}
-                        {{--</div>--}}
                     </section>
                 </section>
             </section>
@@ -137,7 +81,7 @@
 <!-- Bootstrap -->
 <script src="{{asset('public/Company')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Company')}}/js/app.js"></script>
+{{--<script src="{{asset('public/Company')}}/js/app.js"></script>--}}
 <script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
