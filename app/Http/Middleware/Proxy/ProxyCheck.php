@@ -94,7 +94,6 @@ class ProxyCheck{
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限
-                $admin_data['organization_id'] = 0; //切换权限
                 \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
 
