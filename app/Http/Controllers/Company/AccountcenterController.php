@@ -49,9 +49,9 @@ class AccountcenterController extends Controller{
         $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','3']],20,'id');
         dump($listOrg);
         foreach ($organization as $key=>$val){
-            $re[] = Organization::getArrayCompany(['id',$val->id]);
+            $res[] = Organization::getArrayCompany(['id',$val->id])->toArray();
         }
-        dump($re);
+        dump($res);
         dump($organization);
         return  view('Company/Accountcenter/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
