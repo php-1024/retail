@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>个人账号信息修改 | 零壹云管理平台 | 商户管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    {{--<link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />--}}
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/font-awesome.min.css" type="text/css" />
@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/app.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css">
     <!--[if lt IE 9]>
-    <!--<script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>-->
-    <!--<script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>-->
-    <!--<script src="{{asset('public/Company/library/ie')}}/excanvas.js"></script>-->
+    <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
+    <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
+    <script src="{{asset('public/Company/library/ie')}}/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
