@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>个人账号信息修改 | 零壹云管理平台 | 商户管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    {{--<link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />--}}
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/font-awesome.min.css" type="text/css" />
@@ -95,7 +95,7 @@
 <!-- App -->
 <script src="{{asset('public/Company')}}/js/app.js"></script>
 <script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
+{{--<script src="{{asset('public/Company')}}/js/app.plugin.js"></script>--}}
 <script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
