@@ -83,7 +83,7 @@
                                             <td>
                                                 @foreach($value->programs as $k=>$v)
                                                     <div>
-                                                        <span class="label label-danger"><i class="icon-code"></i> 零壹新科技餐饮店铺系统</span> &nbsp;&nbsp;
+                                                        <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
                                                         <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif 套</span>&nbsp;&nbsp;
                                                         <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif 套</span>&nbsp;&nbsp;
                                                     </div>
