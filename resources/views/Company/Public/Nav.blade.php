@@ -1,8 +1,7 @@
 <aside class="bg-black dk aside hidden-print" id="nav">
     <section class="vbox">
         <section class="w-f-md scrollable">
-            <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px"
-                 data-railOpacity="0.2">
+            <div class="slim-scroll">
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav" data-ride="collapse">
@@ -19,7 +18,7 @@
                             </a>
                             <ul class="nav dk text-sm">
                                 @foreach($son_menu_data[$val->id] as $k=>$v)
-                                    <li @if($route_name == $v->menu_route)class="active"@endif>
+                                    <li @if($route_name == $v->menu_route) class="active" @endif>
                                         <a href="{{ url($v->menu_route) }}" class="auto">
                                             <i class="fa fa-angle-right text-info"></i>
                                             <span>{{ $v->menu_name }}</span>
