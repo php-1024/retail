@@ -46,7 +46,7 @@ class AccountcenterController extends Controller{
         $organization_name  = $request->organization_name;
         dump($organization_name);
         $search_data = ['organization_name'=>$organization_name];
-        $organization = Organization::getArrayCompany(['type'=>'3']);
+        $organization = Organization::getArrayCompany(['organization_name','like','%'.$organization_name.'%','organization_name'=>,'type'=>'3']);
         return  view('Company/Accountcenter/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
