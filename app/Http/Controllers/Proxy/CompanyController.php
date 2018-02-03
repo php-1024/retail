@@ -151,13 +151,13 @@ class CompanyController extends Controller{
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
             } else{//划出
                 if(empty($re)){
-                    return response()->json(['data' => '数量不足', 'status' => '0']);
+                    return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
                 }else{
                     if($re['program_spare_num'] >= $number){//划出数量小于或等于剩余数量
                         $num = $re['program_spare_num'] - $number;
                         Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
                     }else{
-                        return response()->json(['data' => '数量不足', 'status' => '0']);
+                        return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
                     }
                 }
                     $proxyNum = $oneProxy['program_spare_num'] + $number;//剩余数量
