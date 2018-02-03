@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
     <title>个人账号信息修改 | 零壹云管理平台 | 商户管理系统</title>
@@ -122,7 +122,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 });
             }
         });
