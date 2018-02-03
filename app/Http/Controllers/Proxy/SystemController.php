@@ -79,6 +79,10 @@ class SystemController extends Controller{
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
     }
+    //超级管理员选择服务商
+    public function switch_status(Request $request){
+        return redirect('proxy');
+    }
 
     //服务商参数设置
     public function setup(Request $request)
