@@ -148,6 +148,6 @@
             }
         });
     }
-</script>>
+</script>
 </body>
 </html>
