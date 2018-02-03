@@ -147,7 +147,7 @@ class AccountcenterController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
         if (empty($admin_data['safe_password'])){
-//            return redirect('company/account/safe_password');
+            return redirect('company/account/safe_password');
         }else{
             return view('Company/Accountcenter/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
         }
