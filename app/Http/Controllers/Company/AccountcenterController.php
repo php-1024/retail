@@ -49,7 +49,7 @@ class AccountcenterController extends Controller{
         $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','3']],20,'id');
         dump($listOrg);
         foreach ($organization as $key=>$val){
-            $res[] = Organization::getArrayCompany(['id',$val->id])->toArray();
+            $res[] = Organization::getArrayCompany(['id'=>$val->id])->toArray();
         }
         dump($res);
         dump($organization);
