@@ -135,8 +135,10 @@ class SystemController extends Controller{
                 $admin_data['mobile'] = $mobile;
             }
 
-            if($admin_data['is_super'] != 2) {
+            if($admin_data['is_super'] == 2) {
                 //添加操作日志
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在服务商系统修改了服务商：' . $list['organization_name']);//保存操作记录
+            }else{
                 OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商：' . $list['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
