@@ -30,11 +30,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                     <div class="m-b-md">
-                        <h3 class="m-b-none">创建餐饮店铺</h3>
+                        <h3 class="m-b-none">创建{{$package_name}}</h3>
                     </div>
                     <section class="panel panel-default">
                         <header class="panel-heading font-bold">
-                            创建餐饮店铺
+                            请选择{{$package_name}}版本
                         </header>
                         <div class="panel-body">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/store_add_second_check') }}">
