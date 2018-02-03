@@ -44,9 +44,12 @@ class AccountcenterController extends Controller{
             return redirect('company');
         }
         $organization_name  = $request->organization_name;
+        $where = [
+            ['type'=>'3'],
+//            ['organization_name'=>$organization_name],
+        ];
+        $organization = Organization::getCompanyAndWarzone($where,20,'id','ASC');
         dump($organization_name);
-        $search_data = ['organization_name'=>$organization_name];
-        $organization = Organization::getArrayCompany(['type'=>'3']);
         return  view('Company/Accountcenter/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 

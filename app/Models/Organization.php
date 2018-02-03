@@ -68,6 +68,12 @@ class Organization extends Model{
     public static function getArrayCompany($where){
         return self::with('organizationCompanyinfo')->with('account')->where($where)->get();
     }
+
+    //获取分页数据-商户
+    public static function getCompanyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
     //获取单条信息和organizationproxyinfo的信息
     public static function getOneAndorganizationproxyinfo($where){
         return self::with('organizationproxyinfo')->where($where)->first();
