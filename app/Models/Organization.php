@@ -70,8 +70,12 @@ class Organization extends Model{
     }
 
     //获取分页数据-商户
-    public static function getCompanyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getCompanyAndWarzone($organization_name,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('warzone');
+        if(!empty($organization_name)){
+            $model =$model->where('organization_name','like','%'.$organization_name.'%');
+        }
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单条信息和organizationproxyinfo的信息
