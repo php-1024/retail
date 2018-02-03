@@ -43,7 +43,7 @@ class AccountcenterController extends Controller{
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('company');
         }
-        $organization_name  => $request->organization_name;
+        $organization_name  = $request->organization_name;
         dump($organization_name);
         $search_data = ['organization_name'=>$organization_name];
         $organization = Organization::getArrayCompany(['type'=>'3']);
