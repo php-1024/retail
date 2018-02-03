@@ -94,10 +94,10 @@
 <script src="{{asset('public/Company')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Company')}}/js/app.js"></script>
-<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+{{--<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>--}}
 {{--<script src="{{asset('public/Company')}}/js/app.plugin.js"></script>--}}
-<script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
-<script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
+{{--<script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>--}}
+{{--<script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>--}}
 <script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
 <script>
     //提交表单
