@@ -77,7 +77,7 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
   }
 
   Bjax.DEFAULTS = {
-      backdrop: true
+      backdrop: false
     , url: ''
   }
 
