@@ -82,8 +82,8 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
   }
 
   Bjax.prototype.start = function () {
-    var that = this;
-    this.backdrop();
+    // var that = this;
+    // this.backdrop();
     $.ajax(this.options.url).done(function(r){
       that.$content = r;
       that.complete();
