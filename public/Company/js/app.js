@@ -103,18 +103,19 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
     this.updateBar(100);
   }
 
-  Bjax.prototype.backdrop = function(){
-    this.$element.css('position','relative')
-    this.$backdrop = $('<div class="backdrop fade bg-white"></div>')
-      .appendTo(this.$element);
-    if(!this.options.backdrop) this.$backdrop.css('height', '2');
-    this.$backdrop[0].offsetWidth; // force reflow
-    this.$backdrop.addClass('in');
-
-    this.$bar = $('<div class="bar b-t b-2x b-info"></div>')
-      .width(0)
-      .appendTo(this.$backdrop);
-  }
+  //网页头部加载进度条（暂时屏蔽掉，没什么用）
+  // Bjax.prototype.backdrop = function(){
+  //   this.$element.css('position','relative')
+  //   this.$backdrop = $('<div class="backdrop fade bg-white"></div>')
+  //     .appendTo(this.$element);
+  //   if(!this.options.backdrop) this.$backdrop.css('height', '2');
+  //   this.$backdrop[0].offsetWidth; // force reflow
+  //   this.$backdrop.addClass('in');
+  //
+  //   this.$bar = $('<div class="bar b-t b-2x b-info"></div>')
+  //     .width(0)
+  //     .appendTo(this.$backdrop);
+  // }
 
   Bjax.prototype.update = function (){
     this.$element.css('position','');
