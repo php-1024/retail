@@ -1,6 +1,6 @@
 <aside class="bg-black dk aside hidden-print" id="nav">
     <section class="vbox">
-        <section class="w-f-md scrollable">
+        <section class="w-f-md">
             <div class="slim-scroll">
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
