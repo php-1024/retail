@@ -77,7 +77,7 @@
         <div class="row">
 
             <div class="col-sm-12 text-right text-center-xs">
-                {!! $operation_log_list->links() !!}
+                {!! $organization->links() !!}
             </div>
         </div>
     </footer>
