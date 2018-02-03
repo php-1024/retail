@@ -21,7 +21,7 @@ class SystemController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
-        if($admin_data['is_super'] == 1){
+        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] = 0){
             $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','2']],20,'id');
             return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
         }else{
