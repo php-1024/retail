@@ -27,352 +27,349 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
 // data-shift api
 +function ($) { "use strict";
 
- /* SHIFT CLASS DEFINITION
-  * ====================== */
+    /* SHIFT CLASS DEFINITION
+     * ====================== */
 
-  var Shift = function (element) {
-    this.$element = $(element)
-    this.$prev = this.$element.prev()
-    !this.$prev.length && (this.$parent = this.$element.parent())
-  }
-
-  Shift.prototype = {
-  	constructor: Shift
-
-    , init:function(){
-    	var $el = this.$element
-    	, method = $el.data()['toggle'].split(':')[1]
-    	, $target = $el.data('target')
-    	$el.hasClass('in') || $el[method]($target).addClass('in')
+    var Shift = function (element) {
+        this.$element = $(element)
+        this.$prev = this.$element.prev()
+        !this.$prev.length && (this.$parent = this.$element.parent())
     }
-    , reset :function(){
-    	this.$parent && this.$parent['prepend'](this.$element)
-    	!this.$parent && this.$element['insertAfter'](this.$prev)
-    	this.$element.removeClass('in')
+
+    Shift.prototype = {
+        constructor: Shift
+
+        , init:function(){
+            var $el = this.$element
+                , method = $el.data()['toggle'].split(':')[1]
+                , $target = $el.data('target')
+            $el.hasClass('in') || $el[method]($target).addClass('in')
+        }
+        , reset :function(){
+            this.$parent && this.$parent['prepend'](this.$element)
+            !this.$parent && this.$element['insertAfter'](this.$prev)
+            this.$element.removeClass('in')
+        }
     }
-  }
 
- /* SHIFT PLUGIN DEFINITION
-  * ======================= */
+    /* SHIFT PLUGIN DEFINITION
+     * ======================= */
 
-  $.fn.shift = function (option) {
-    return this.each(function () {
-      var $this = $(this)
-        , data = $this.data('shift')
-      if (!data) $this.data('shift', (data = new Shift(this)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
+    $.fn.shift = function (option) {
+        return this.each(function () {
+            var $this = $(this)
+                , data = $this.data('shift')
+            if (!data) $this.data('shift', (data = new Shift(this)))
+            if (typeof option == 'string') data[option]()
+        })
+    }
 
-  $.fn.shift.Constructor = Shift
+    $.fn.shift.Constructor = Shift
 }(jQuery);
 
 
 // data-bjax api
 +function ($) { "use strict";
-  var Bjax = function (element, options) {
-    this.options   = options
-    this.$element  = $( this.options.target || 'html' );
-    this.start()
-  }
+    var Bjax = function (element, options) {
+        this.options   = options
+        this.$element  = $( this.options.target || 'html' );
+        this.start()
+    }
 
-  Bjax.DEFAULTS = {
-      backdrop: false
-    , url: ''
-  }
+    Bjax.DEFAULTS = {
+        backdrop: false
+        , url: ''
+    }
 
-  Bjax.prototype.start = function () {
-    var that = this;
-    this.backdrop();
-    $.ajax(this.options.url).done(function(r){
-      that.$content = r;
-      that.complete();
+    Bjax.prototype.start = function () {
+        var that = this;
+        this.backdrop();
+        $.ajax(this.options.url).done(function(r){
+            that.$content = r;
+            that.complete();
+        });
+    }
+
+    Bjax.prototype.complete = function (){
+        var that = this;
+        if( this.$element.is('html') || (this.options.replace) ){
+            try{
+                window.history.pushState({}, '', this.options.url);
+            }catch(e){
+                window.location.replace(this.options.url)
+            }
+        }
+
+        this.updateBar(100);
+    }
+
+    Bjax.prototype.backdrop = function(){
+        this.$element.css('position','relative')
+        this.$backdrop = $('<div class="backdrop fade bg-white"></div>')
+            .appendTo(this.$element);
+        if(!this.options.backdrop) this.$backdrop.css('height', '2');
+        this.$backdrop[0].offsetWidth; // force reflow
+        this.$backdrop.addClass('in');
+
+        this.$bar = $('<div class="bar b-t b-2x b-info"></div>')
+            .width(0)
+            .appendTo(this.$backdrop);
+    }
+
+    Bjax.prototype.update = function (){
+        this.$element.css('position','');
+        if( !this.$element.is('html') ){
+            if(this.options.el){
+                this.$content = $(this.$content).find(this.options.el);
+            }
+            this.$element.html(this.$content);
+        }
+        if( this.$element.is('html') ) {
+            if( $('.ie').length ){
+                location.reload();
+                return;
+            }
+            document.open();
+            document.write(this.$content);
+            document.close();
+        }
+    }
+
+    Bjax.prototype.updateBar = function (per){
+        var that = this;
+        this.$bar.stop().animate({
+            width: per + '%'
+        }, 500, 'linear', function(){
+            if(per == 100) that.update();
+        });
+    }
+
+    Bjax.prototype.enable = function (e){
+        var link = e.currentTarget;
+        if ( location.protocol !== link.protocol || location.hostname !== link.hostname )
+            return false
+        if (link.hash && link.href.replace(link.hash, '') ===
+            location.href.replace(location.hash, ''))
+            return false
+        if (link.href === location.href + '#' || link.href === location.href)
+            return false
+        if(link.protocol.indexOf('http') ==-1)
+            return false
+        return true;
+    }
+
+    $.fn.bjax = function (option) {
+        return this.each(function () {
+            var $this   = $(this);
+            var data    = $this.data('app.bjax');
+            var options = $.extend({}, Bjax.DEFAULTS, $this.data(), typeof option == 'object' && option)
+            if (!data) $this.data('app.bjax', (data = new Bjax(this, options)))
+            if (data) data['start']()
+            if (typeof option == 'string') data[option]()
+        })
+    }
+
+    $.fn.bjax.Constructor = Bjax
+
+    $(window).on("popstate", function(e) {
+        if (e.originalEvent.state !== null) {
+            window.location.reload(true);
+        }
+        e.preventDefault();
     });
-  }
 
-  Bjax.prototype.complete = function (){
-    var that = this;
-    if( this.$element.is('html') || (this.options.replace) ){
-      try{
-        window.history.pushState({}, '', this.options.url);
-      }catch(e){
-        window.location.replace(this.options.url)
-      }
-    }
-
-    this.updateBar(100);
-  }
-
-  //网页头部加载进度条（暂时屏蔽掉，没什么用）
-  Bjax.prototype.backdrop = function(){
-    this.$element.css('position','relative')
-    this.$backdrop = $('<div class="backdrop fade bg-white"></div>')
-      .appendTo(this.$element);
-    if(!this.options.backdrop) this.$backdrop.css('height', '2');
-    this.$backdrop[0].offsetWidth; // force reflow
-    this.$backdrop.addClass('in');
-
-    this.$bar = $('<div class="bar b-t b-2x b-info"></div>')
-      .width(0)
-      .appendTo(this.$backdrop);
-  }
-
-  Bjax.prototype.update = function (){
-    this.$element.css('position','');
-    if( !this.$element.is('html') ){
-      if(this.options.el){
-        this.$content = $(this.$content).find(this.options.el);
-      }
-      this.$element.html(this.$content);
-    }
-    if( this.$element.is('html') ) {
-      if( $('.ie').length ){
-        location.reload();
-        return;
-      }
-      document.open();
-      document.write(this.$content);
-      document.close();
-    }
-  }
-
-  Bjax.prototype.updateBar = function (per){
-    var that = this;
-    this.$bar.stop().animate({
-        width: per + '%'
-    }, 500, 'linear', function(){
-      if(per == 100) that.update();
-    });
-  }
-
-  Bjax.prototype.enable = function (e){
-    var link = e.currentTarget;
-    if ( location.protocol !== link.protocol || location.hostname !== link.hostname )
-      return false
-    if (link.hash && link.href.replace(link.hash, '') ===
-         location.href.replace(location.hash, ''))
-      return false
-    if (link.href === location.href + '#' || link.href === location.href)
-      return false
-    if(link.protocol.indexOf('http') ==-1)
-      return false
-    return true;
-  }
-
-  $.fn.bjax = function (option) {
-    return this.each(function () {
-      var $this   = $(this);
-      var data    = $this.data('app.bjax');
-      var options = $.extend({}, Bjax.DEFAULTS, $this.data(), typeof option == 'object' && option)
-      if (!data) $this.data('app.bjax', (data = new Bjax(this, options)))
-      if (data) data['start']()
-      if (typeof option == 'string') data[option]()
+    $(document).on('click.app.bjax.data-api', '[data-bjax], .nav-primary a', function (e) {
+        if(!Bjax.prototype.enable(e)) return;
+        $(this).bjax({url: $(this).attr('href') || $(this).attr('data-url') });
+        e.preventDefault();
     })
-  }
-
-  $.fn.bjax.Constructor = Bjax
-
-  $(window).on("popstate", function(e) {
-    if (e.originalEvent.state !== null) {
-      window.location.reload(true);
-    }
-    e.preventDefault();
-  });
-
-  $(document).on('click.app.bjax.data-api', '[data-bjax], .nav-primary a', function (e) {
-    if(!Bjax.prototype.enable(e)) return;
-    $(this).bjax({url: $(this).attr('href') || $(this).attr('data-url') });
-    e.preventDefault();
-  })
 }(jQuery);
 
 Date.now = Date.now || function() { return +new Date; };
 
 +function ($) {
 
-  $(function(){
+    $(function(){
 
-    // toogle fullscreen
-    $(document).on('click', "[data-toggle=fullscreen]", function(e){
-      e.preventDefault();
-      if (screenfull.enabled) {
-        screenfull.request();
-      }
-    });
-
-  	// placeholder
-  	$('input[placeholder], textarea[placeholder]').placeholder();
-
-    // popover
-    $("[data-toggle=popover]").popover();
-    $(document).on('click', '.popover-title .close', function(e){
-    	var $target = $(e.target), $popover = $target.closest('.popover').prev();
-    	$popover && $popover.popover('hide');
-    });
-
-    // ajax modal
-    $(document).on('click', '[data-toggle="ajaxModal"]',
-      function(e) {
-        $('#ajaxModal').remove();
-        e.preventDefault();
-        var $this = $(this)
-          , $remote = $this.data('remote') || $this.attr('href')
-          , $modal = $('<div class="modal fade" id="ajaxModal"><div class="modal-body"></div></div>');
-        $('body').append($modal);
-        $modal.modal();
-        $modal.load($remote);
-      }
-    );
-
-    // dropdown menu
-    $.fn.dropdown.Constructor.prototype.change = function(e){
-      e.preventDefault();
-      var $item = $(e.target), $select, $checked = false, $menu, $label;
-      !$item.is('a') && ($item = $item.closest('a'));
-      $menu = $item.closest('.dropdown-menu');
-      $label = $menu.parent().find('.dropdown-label');
-      $labelHolder = $label.text();
-      $select = $item.parent().find('input');
-      $checked = $select.is(':checked');
-      if($select.is(':disabled')) return;
-      if($select.attr('type') == 'radio' && $checked) return;
-      if($select.attr('type') == 'radio') $menu.find('li').removeClass('active');
-      $item.parent().removeClass('active');
-      !$checked && $item.parent().addClass('active');
-      $select.prop("checked", !$select.prop("checked"));
-
-      $items = $menu.find('li > input:checked');
-      if ($items.length) {
-          $text = [];
-          $items.each(function () {
-              var $str = $(this).parent().text();
-              $str && $text.push($.trim($str));
-          });
-
-          $text = $text.length < 4 ? $text.join(', ') : $text.length + ' selected';
-          $label.html($text);
-      }else{
-        $label.html($label.data('placeholder'));
-      }
-    }
-    $(document).on('click.dropdown-menu', '.dropdown-select > li > a', $.fn.dropdown.Constructor.prototype.change);
-
-  	// tooltip
-    $("[data-toggle=tooltip]").tooltip();
-
-    // class
-  	$(document).on('click', '[data-toggle^="class"]', function(e){
-  		e && e.preventDefault();
-  		var $this = $(e.target), $class , $target, $tmp, $classes, $targets;
-  		!$this.data('toggle') && ($this = $this.closest('[data-toggle^="class"]'));
-    	$class = $this.data()['toggle'];
-    	$target = $this.data('target') || $this.attr('href');
-      $class && ($tmp = $class.split(':')[1]) && ($classes = $tmp.split(','));
-      $target && ($targets = $target.split(','));
-      $classes && $classes.length && $.each($targets, function( index, value ) {
-        if ( $classes[index].indexOf( '*' ) !== -1 ) {
-          var patt = new RegExp( '\\s' +
-              $classes[index].
-                replace( /\*/g, '[A-Za-z0-9-_]+' ).
-                split( ' ' ).
-                join( '\\s|\\s' ) +
-              '\\s', 'g' );
-          $($this).each( function ( i, it ) {
-            var cn = ' ' + it.className + ' ';
-            while ( patt.test( cn ) ) {
-              cn = cn.replace( patt, ' ' );
+        // toogle fullscreen
+        $(document).on('click', "[data-toggle=fullscreen]", function(e){
+            e.preventDefault();
+            if (screenfull.enabled) {
+                screenfull.request();
             }
-            it.className = $.trim( cn );
-          });
+        });
+
+        // placeholder
+        $('input[placeholder], textarea[placeholder]').placeholder();
+
+        // popover
+        $("[data-toggle=popover]").popover();
+        $(document).on('click', '.popover-title .close', function(e){
+            var $target = $(e.target), $popover = $target.closest('.popover').prev();
+            $popover && $popover.popover('hide');
+        });
+
+        // ajax modal
+        $(document).on('click', '[data-toggle="ajaxModal"]',
+            function(e) {
+                $('#ajaxModal').remove();
+                e.preventDefault();
+                var $this = $(this)
+                    , $remote = $this.data('remote') || $this.attr('href')
+                    , $modal = $('<div class="modal fade" id="ajaxModal"><div class="modal-body"></div></div>');
+                $('body').append($modal);
+                $modal.modal();
+                $modal.load($remote);
+            }
+        );
+
+        // dropdown menu
+        $.fn.dropdown.Constructor.prototype.change = function(e){
+            e.preventDefault();
+            var $item = $(e.target), $select, $checked = false, $menu, $label;
+            !$item.is('a') && ($item = $item.closest('a'));
+            $menu = $item.closest('.dropdown-menu');
+            $label = $menu.parent().find('.dropdown-label');
+            $labelHolder = $label.text();
+            $select = $item.parent().find('input');
+            $checked = $select.is(':checked');
+            if($select.is(':disabled')) return;
+            if($select.attr('type') == 'radio' && $checked) return;
+            if($select.attr('type') == 'radio') $menu.find('li').removeClass('active');
+            $item.parent().removeClass('active');
+            !$checked && $item.parent().addClass('active');
+            $select.prop("checked", !$select.prop("checked"));
+
+            $items = $menu.find('li > input:checked');
+            if ($items.length) {
+                $text = [];
+                $items.each(function () {
+                    var $str = $(this).parent().text();
+                    $str && $text.push($.trim($str));
+                });
+
+                $text = $text.length < 4 ? $text.join(', ') : $text.length + ' selected';
+                $label.html($text);
+            }else{
+                $label.html($label.data('placeholder'));
+            }
         }
-        ($targets[index] !='#') && $($targets[index]).toggleClass($classes[index]) || $this.toggleClass($classes[index]);
-      });
-    	$this.toggleClass('active');
-  	});
+        $(document).on('click.dropdown-menu', '.dropdown-select > li > a', $.fn.dropdown.Constructor.prototype.change);
 
-    // panel toggle
-    $(document).on('click', '.panel-toggle', function(e){
-      e && e.preventDefault();
-      var $this = $(e.target), $class = 'collapse' , $target;
-      if (!$this.is('a')) $this = $this.closest('a');
-      $target = $this.closest('.panel');
-        $target.find('.panel-body').toggleClass($class);
-        $this.toggleClass('active');
+        // tooltip
+        $("[data-toggle=tooltip]").tooltip();
+
+        // class
+        $(document).on('click', '[data-toggle^="class"]', function(e){
+            e && e.preventDefault();
+            var $this = $(e.target), $class , $target, $tmp, $classes, $targets;
+            !$this.data('toggle') && ($this = $this.closest('[data-toggle^="class"]'));
+            $class = $this.data()['toggle'];
+            $target = $this.data('target') || $this.attr('href');
+            $class && ($tmp = $class.split(':')[1]) && ($classes = $tmp.split(','));
+            $target && ($targets = $target.split(','));
+            $classes && $classes.length && $.each($targets, function( index, value ) {
+                if ( $classes[index].indexOf( '*' ) !== -1 ) {
+                    var patt = new RegExp( '\\s' +
+                        $classes[index].
+                        replace( /\*/g, '[A-Za-z0-9-_]+' ).
+                        split( ' ' ).
+                        join( '\\s|\\s' ) +
+                        '\\s', 'g' );
+                    $($this).each( function ( i, it ) {
+                        var cn = ' ' + it.className + ' ';
+                        while ( patt.test( cn ) ) {
+                            cn = cn.replace( patt, ' ' );
+                        }
+                        it.className = $.trim( cn );
+                    });
+                }
+                ($targets[index] !='#') && $($targets[index]).toggleClass($classes[index]) || $this.toggleClass($classes[index]);
+            });
+            $this.toggleClass('active');
+        });
+
+        // panel toggle
+        $(document).on('click', '.panel-toggle', function(e){
+            e && e.preventDefault();
+            var $this = $(e.target), $class = 'collapse' , $target;
+            if (!$this.is('a')) $this = $this.closest('a');
+            $target = $this.closest('.panel');
+            $target.find('.panel-body').toggleClass($class);
+            $this.toggleClass('active');
+        });
+
+        // carousel
+        $('.carousel.auto').carousel();
+
+        // button loading
+        $(document).on('click.button.data-api', '[data-loading-text]', function (e) {
+            var $this = $(e.target);
+            $this.is('i') && ($this = $this.parent());
+            $this.button('loading');
+        });
+
+        var $window = $(window);
+        // mobile
+        var mobile = function(option){
+            if(option == 'reset'){
+                $('[data-toggle^="shift"]').shift('reset');
+                return true;
+            }
+            $('[data-toggle^="shift"]').shift('init');
+            return true;
+        };
+        // unmobile
+        $window.width() < 768 && mobile();
+        // resize
+        var $resize, $width = $window.width();
+        $window.resize(function() {
+            if($width !== $window.width()){
+                clearTimeout($resize);
+                $resize = setTimeout(function(){
+                    setHeight();
+                    $window.width() < 768 && mobile();
+                    $window.width() >= 768 && mobile('reset') && fixVbox();
+                    $width = $window.width();
+                }, 500);
+            }
+        });
+
+        // fluid layout
+        var setHeight = function(){
+            $('.app-fluid #nav > *').css('min-height', $(window).height()-60);
+            return true;
+        }
+        setHeight();
+
+
+        // fix vbox
+        var fixVbox = function(){
+            $('.ie11 .vbox').each(function(){
+                $(this).height($(this).parent().height());
+            });
+            return true;
+        }
+        fixVbox();
+
+        // collapse nav
+        $(document).on('click', '[data-ride="collapse"] a', function (e) {
+            var $this = $(e.target), $active;
+            $this.is('a') || ($this = $this.closest('a'));
+
+            $active = $this.parent().siblings( ".active" );
+            $active && $active.toggleClass('active').find('> ul:visible').slideUp(200);
+
+            ($this.parent().hasClass('active') && $this.next().slideUp(200)) || $this.next().slideDown(200);
+            $this.parent().toggleClass('active');
+
+            $this.next().is('ul') && e.preventDefault();
+
+            setTimeout(function(){ $(document).trigger('updateNav'); }, 300);
+        });
+
+        // dropdown still
+        $(document).on('click.bs.dropdown.data-api', '.dropdown .on, .dropup .on, .open .on', function (e) { e.stopPropagation() });
+
     });
-
-
-
-  	// button loading
-  	$(document).on('click.button.data-api', '[data-loading-text]', function (e) {
-  	    var $this = $(e.target);
-  	    $this.is('i') && ($this = $this.parent());
-  	    $this.button('loading');
-  	});
-
-    var $window = $(window);
-    // mobile
-  	var mobile = function(option){
-  		if(option == 'reset'){
-  			$('[data-toggle^="shift"]').shift('reset');
-  			return true;
-  		}
-  		$('[data-toggle^="shift"]').shift('init');
-      return true;
-  	};
-  	// unmobile
-  	$window.width() < 768 && mobile();
-    // resize
-    var $resize, $width = $window.width();
-  	$window.resize(function() {
-      if($width !== $window.width()){
-        clearTimeout($resize);
-        $resize = setTimeout(function(){
-          setHeight();
-          $window.width() < 768 && mobile();
-          $window.width() >= 768 && mobile('reset') && fixVbox();
-          $width = $window.width();
-        }, 500);
-      }
-  	});
-
-    // fluid layout
-    var setHeight = function(){
-      $('.app-fluid #nav > *').css('min-height', $(window).height()-60);
-      return true;
-    }
-    setHeight();
-
-
-    // fix vbox
-    var fixVbox = function(){
-      $('.ie11 .vbox').each(function(){
-        $(this).height($(this).parent().height());
-      });
-      return true;
-    }
-    fixVbox();
-
-
-    // carousel菜单展开闭合
-    $('.carousel.auto').carousel();
-    // collapse nav
-    $(document).on('click', '[data-ride="collapse"] a', function (e) {
-      var $this = $(e.target), $active;
-      $this.is('a') || ($this = $this.closest('a'));
-
-      $active = $this.parent().siblings( ".active" );
-      $active && $active.toggleClass('active').find('> ul:visible').slideUp(200);
-
-      ($this.parent().hasClass('active') && $this.next().slideUp(200)) || $this.next().slideDown(200);
-      $this.parent().toggleClass('active');
-
-      $this.next().is('ul') && e.preventDefault();
-
-      setTimeout(function(){ $(document).trigger('updateNav'); }, 300);
-    });
-
-    // dropdown still
-    $(document).on('click.bs.dropdown.data-api', '.dropdown .on, .dropup .on, .open .on', function (e) { e.stopPropagation() });
-
-  });
 }(jQuery);
