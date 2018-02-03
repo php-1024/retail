@@ -43,6 +43,7 @@
     <div class="row state-overview" style="margin: 10px;">
         <div class="form-group">
             <div class="col-lg-12">
+                <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
                 <div class="input-group m-bot15 col-lg-3 "><span class="input-group-addon"><i
                                 class="icon-search"></i></span>
                     <input type="text"  name="organization_name" class="form-control " placeholder="服务商名称">
@@ -50,6 +51,7 @@
                 <div class="input-group m-bot15 col-lg-2 ">
                     <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                 </div>
+                </form>
             </div>
         </div>
         <div style="clear:both;"></div>
@@ -116,6 +118,25 @@
                 });
             }
         });
+    }
+    //搜索商户组织
+    function searchFormCheck(){
+        var url = $('#searchForm').attr('action');
+        var data = $('#searchForm').serialize();
+        $.get(url+'?'+data,function(json){
+            if(json.status==0){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                });
+                return false;
+            }else{
+                location.href=url+'?'+data;
+            }
+        });
+        return false;
     }
 </script>
 </body>
