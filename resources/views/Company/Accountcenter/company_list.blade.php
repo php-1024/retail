@@ -45,10 +45,10 @@
             <div class="col-lg-12">
                 <div class="input-group m-bot15 col-lg-3 "><span class="input-group-addon"><i
                                 class="icon-search"></i></span>
-                    <input type="text" class="form-control " placeholder="服务商名称">
+                    <input type="text"  name="organization_name" class="form-control " placeholder="服务商名称">
                 </div>
                 <div class="input-group m-bot15 col-lg-2 ">
-                    <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                    <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                 </div>
             </div>
         </div>
