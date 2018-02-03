@@ -76,18 +76,18 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
     this.start()
   }
 
-  // Bjax.DEFAULTS = {
-  //     backdrop: false
-  //   , url: ''
-  // }
+  Bjax.DEFAULTS = {
+      backdrop: false
+    , url: ''
+  }
 
   Bjax.prototype.start = function () {
     var that = this;
-    // this.backdrop();
-    // $.ajax(this.options.url).done(function(r){
-    //   that.$content = r;
-    //   that.complete();
-    // });
+    this.backdrop();
+    $.ajax(this.options.url).done(function(r){
+      that.$content = r;
+      that.complete();
+    });
   }
 
   Bjax.prototype.complete = function (){
