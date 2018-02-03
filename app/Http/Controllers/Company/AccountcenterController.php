@@ -45,7 +45,7 @@ class AccountcenterController extends Controller{
         }
         $organization_name  = $request->organization_name;
         $where = [
-            ['type'=>'3'],
+            'type'=>'3'
 //            ['organization_name'=>$organization_name],
         ];
         $organization = Organization::getCompanyAndWarzone($where,20,'id','ASC');
