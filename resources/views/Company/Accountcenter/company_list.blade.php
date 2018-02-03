@@ -73,14 +73,11 @@
         </div>
         @endforeach
     </div>
-    <footer class="panel-footer">
-        <div class="row">
-
-            <div class="col-sm-12 text-right text-center-xs">
-                {!! $organization->links() !!}
-            </div>
+    <div class="row">
+        <div class="col-sm-12 text-right text-center-xs">
+            {!! $organization->links() !!}
         </div>
-    </footer>
+    </div>
     <!--state overview end-->
 </section>
 
