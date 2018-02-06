@@ -133,7 +133,7 @@ class Organization extends Model{
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
         $model = $model->where($where);
-        $model = $model->join('zerone_organization',function($join){
+        $model = $model->join('organization',function($join){
             $join->on('zerone_organization.parent_id','zerone_organization.id');
         })->where(['id','2'])->select('zerone_organization.organization_name','zerone_organization.*');
         return $model->orderBy($orderby,$sort)->paginate($paginate);
