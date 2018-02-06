@@ -126,13 +126,5 @@ class Organization extends Model{
         return self::with('organizationCompanyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
-    public static function getCompanyAndProxy($where,$paginate,$orderby,$sort='DESC')
-    {
-        $model = self::join('organization as iszmxw',function($join){
-            $join->on('iszmxw.parent_id','iszmxw.id');
-        })->where($where)->select('iszmxw.organization_name','iszmxw.*');
-        return $model->orderBy($orderby,$sort)->paginate($paginate);
-    }
-
 }
 ?>
