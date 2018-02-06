@@ -46,10 +46,12 @@ class AccountcenterController extends Controller{
         $organization_name  = $request->organization_name;
         $where = ['type'=>'3'];
         $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
+        $organization_all = Organization::getCompany('','20','id','ASC');
         foreach ($organization as $key=>$val){
+            $parent_id[] = $val->id;
             dump($val->parent_id);
         }
-        return  view('Company/Accountcenter/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
+        return  view('Company/Accountcenter/company_list',['organization_all'=>$organization_all,'organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
     //选择商户
