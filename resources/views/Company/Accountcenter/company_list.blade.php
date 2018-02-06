@@ -68,11 +68,7 @@
                     <div class="value"><b>{{ $val->organization_name }}</b>
                         <p>
                             东北战区
-                            @foreach($organization_all as $kk=>$vv)
-
-                                @if(in_array($vv['id'],$organization->toArray())) {{$vv['organization_name']}} @endif
-
-                            @endforeach
+                            @if(in_array($val->parent_id,$organization_all->toArray())) {{$vv['organization_name']}} @endif
                         </p>
                     </div>
                 </section>
