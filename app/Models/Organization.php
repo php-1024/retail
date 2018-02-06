@@ -136,7 +136,7 @@ class Organization extends Model{
         $model = $model->join('zerone_organization',function($join){
             $join->on('zerone_organization.parent_id','zerone_organization.id');
         })->where(['id'=>$model->parent_id])->select('zerone_organization.organization_name','zerone_organization.*');
-        return $model->->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
