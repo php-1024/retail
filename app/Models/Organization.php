@@ -126,7 +126,7 @@ class Organization extends Model{
         return self::with('organizationCompanyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
-    public function getCompanyAndProxy($organization_name,$where,$paginate,$orderby,$sort='DESC')
+    public static function getCompanyAndProxy($organization_name,$where,$paginate,$orderby,$sort='DESC')
     {
         $model = self::with('warzone');
         if(!empty($organization_name)){
