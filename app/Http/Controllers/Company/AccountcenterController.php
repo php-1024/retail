@@ -51,6 +51,7 @@ class AccountcenterController extends Controller{
             $parent_id[] = $val->id;
             dump($val->parent_id);
         }
+        dump($parent_id);
         return  view('Company/Accountcenter/company_list',['organization_all'=>$organization_all,'organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
