@@ -52,7 +52,7 @@ class ProgramModuleNode extends Model{
             $query->on('program_module_node.module_id','module.id');
         })->whereIn('node_id',function($query) use($account_id){
             $query->from('account_node')->select('node_id')->where('account_id',$account_id);
-        })->where('program_id',$program_id)->select('program_module_node.*','module.module_name','module.id','node.node_name','node.id')->get();
+        })->where('program_id',$program_id)->select('program_module_node.*','module.id','node.node_name','node.id')->get();
     }
 
     //修改数据
