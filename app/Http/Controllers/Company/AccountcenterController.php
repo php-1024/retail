@@ -49,9 +49,9 @@ class AccountcenterController extends Controller{
         $organization_all = Organization::getCompany(['status'=>'1'],'20','id','ASC');
         foreach ($organization as $key=>$val){
             $parent_id[] = $val->parent_id;
-            dump($val->parent_id);
         }
         dump($parent_id);
+        dump($organization_all);
         return  view('Company/Accountcenter/company_list',['organization_all'=>$organization_all,'organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
