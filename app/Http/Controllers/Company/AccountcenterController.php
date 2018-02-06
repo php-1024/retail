@@ -50,7 +50,7 @@ class AccountcenterController extends Controller{
         $organization_all = Organization::get()->toArray();
         foreach ($organization as $key=>$val){
             $parent_id[] = $val->parent_id;
-            $proxy = Organization::getCompanyAndWarzone($organization_name,['id'=>$val->parent_id],20,'id','ASC')->firstItem();
+            $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
             dump($proxy);
         }
 //        dump($parent_id);
