@@ -51,11 +51,11 @@ class AccountcenterController extends Controller{
         foreach ($organization as $key=>$val){
             $parent_id[] = $val->parent_id;
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
-            dump($proxy);
+            $organization->proxyname = $proxy->organization_name;
         }
 //        dump($parent_id);
 //        dump($organization_all);
-//        dump($organization_all);
+        dump($organization);
         return  view('Company/Accountcenter/company_list',['organization_all'=>$organization_all,'organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
