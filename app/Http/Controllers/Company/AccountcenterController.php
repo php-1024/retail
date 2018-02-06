@@ -47,7 +47,7 @@ class AccountcenterController extends Controller{
         $where = ['type'=>'3'];
         $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
         $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','3']],20,'id');
-        $listOrgs = Organization::getCompanyAndProxy('10','id','DESC');
+        $listOrgs = Organization::getCompanyAndProxy();
         dump($listOrg);
         dump($listOrgs);
         dump($organization);

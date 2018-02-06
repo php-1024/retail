@@ -84,17 +84,17 @@ class Organization extends Model{
     }
 
     //获取分页数据-商户以及归属的服务商
-    public static function getCompanyAndProxy($paginate,$orderby,$sort='DESC'){
+    public static function getCompanyAndProxy(){
         $model = self::join('organization',function($join){
             $join->on('organization.parent_id','organization.id');
-        })->select('organization.organization_name','organization.*');
+        })->get();
 //        if(!empty($account)){
 //            $model =$model->where('account','like','%'.$account.'%');
 //        }
 //        if(!empty($time_st_format) && !empty($time_nd_format)){
 //            $model = $model->whereBetween('operation_log.created_at',[$time_st_format,$time_nd_format]);
 //        }
-        return $model->orderBy($orderby,$sort)->paginate($paginate);
+        return $model;
     }
 
     //获取单条信息和organizationproxyinfo的信息
