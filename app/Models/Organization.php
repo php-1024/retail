@@ -133,9 +133,9 @@ class Organization extends Model{
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
         $model = $model->where($where);
-        $model = $model->join('organization as xinxi',function($join){
-            $join->on('organization.parent_id',$model->id);
-        })->where(['id','2'])->select('organization.organization_name','organization.*');
+//        $model = $model->join('organization as xinxi',function($join){
+//            $join->on('organization.parent_id','organization.id');
+//        })->where(['id','2'])->select('organization.organization_name','organization.*');
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
