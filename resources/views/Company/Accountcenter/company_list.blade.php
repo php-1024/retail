@@ -69,7 +69,7 @@
                         <p>
                             东北战区
                             @foreach($organization_all as $kk=>$vv)
-                                @if(in_array($vv->id,$organization->id)) {{$vv->organization_name}} @endif
+                                @if(in_array($vv['id'],$organization->id)) {{$vv['organization_name']}} @endif
                             @endforeach
                         </p>
                     </div>
