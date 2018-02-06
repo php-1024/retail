@@ -15,6 +15,8 @@ class ProgramController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
+        $aa = Organization::getListProxy([['id',$organization_id]],'15','id');
+        dd($aa);
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value) {
             foreach ($value['programs'] as $k => $v) {
