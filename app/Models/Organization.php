@@ -87,7 +87,7 @@ class Organization extends Model{
     public static function getCompanyAndProxy(){
         $model = self::join('organization',function($join){
             $join->on('organization.parent_id','organization.id');
-        })->get();
+        })->first();
 //        if(!empty($account)){
 //            $model =$model->where('account','like','%'.$account.'%');
 //        }
