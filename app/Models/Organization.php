@@ -21,7 +21,7 @@ class Organization extends Model{
 
     //和Organization表多对一的关系
     public function organization(){
-        return $this->hasOne('App\Models\Organization', 'parent_id');
+        return $this->hasMany('App\Models\Organization', 'parent_id','organization_id');
     }
 
     //和OrganizationProxyinfo表一对一的关系
