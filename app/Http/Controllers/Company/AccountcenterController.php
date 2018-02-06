@@ -50,8 +50,8 @@ class AccountcenterController extends Controller{
         foreach ($organization as $key=>$val){
             $parent_id[] = $val->parent_id;
         }
-        dump($parent_id);
-        dump($organization_all);
+//        dump($parent_id);
+//        dump($organization_all);
         return  view('Company/Accountcenter/company_list',['organization_all'=>$organization_all,'organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
