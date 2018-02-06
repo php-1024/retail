@@ -48,9 +48,7 @@ class ProgramModuleNode extends Model{
 
     //获取用户拥有的模块和节点
     public static function getAccountModuleNodes($program_id,$account_id){
-        return self::join('module',function($query){
-            $query->on('program_module_node.module_id','module.id');
-        })->join('node',function($query){
+        return self::join('node',function($query){
             $query->on('program_module_node.node_id','node.id');
         })->whereIn('node_id',function($query) use($account_id){
             $query->from('account_node')->select('node_id')->where('account_id',$account_id);
