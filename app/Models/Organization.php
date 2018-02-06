@@ -126,16 +126,11 @@ class Organization extends Model{
         return self::with('organizationCompanyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
-    public static function getCompanyAndProxy($organization_name,$where,$paginate,$orderby,$sort='DESC')
+    public static function getCompanyAndProxy($where,$paginate,$orderby,$sort='DESC')
     {
-        $model = self::with('warzone');
-        if(!empty($organization_name)){
-            $model =$model->where('organization_name','like','%'.$organization_name.'%');
-        }
-        $model =$model->where($where);
-//        $model = $model->join('organization as iszmxw',function($join){
-//            $join->on('organization.organization_id','iszmxw.id');
-//        })->where(['id'=>'2'])->select('organization.organization_name as iszmxw','organization.organization_name');
+        $model = self::join('organization',function($join){
+            $join->on('organization.parent_id','organization.id');
+        })->where($where)->select('organization.organization_name','organization.*');
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
