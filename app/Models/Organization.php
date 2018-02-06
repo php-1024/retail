@@ -58,7 +58,7 @@ class Organization extends Model{
     //获取-服务商列表
     public static function getListProxy($where){
         return self::join('organization',function($query){
-            $query->on('parent_id','id');
+            $query->on('organization.parent_id','organization.id');
         })->with('organizationCompanyinfo')->where($where)->get();
     }
 
