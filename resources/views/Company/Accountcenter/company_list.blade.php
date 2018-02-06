@@ -67,7 +67,7 @@
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
                         <p>
-                            @if(in_array($val->parent_id,$organization_all)) {{$organization_all[0]['organization_name']}} @endif
+                            @if(in_array($val->parent_id,$organization_all)) {{$organization_all['organization_name']}} @endif
                         </p>
                     </div>
                 </section>
