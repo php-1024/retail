@@ -128,8 +128,8 @@ class Organization extends Model{
 
     public static function getCompanyAndProxy($where,$paginate,$orderby,$sort='DESC')
     {
-        $model = self::join('organization',function($join){
-            $join->on('organization.parent_id','organization.id');
+        $model = self::join('organization as iszmxw',function($join){
+            $join->on('iszmxw.parent_id','organization.id');
         })->where($where)->select('organization.organization_name','organization.*');
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
