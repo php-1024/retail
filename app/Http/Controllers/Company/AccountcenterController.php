@@ -48,7 +48,7 @@ class AccountcenterController extends Controller{
         $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
         $organization_all = Organization::getCompany(['status'=>'1'],'20','id','ASC');
         foreach ($organization as $key=>$val){
-            $parent_id[] = $val->id;
+            $parent_id[] = $val->parent_id;
             dump($val->parent_id);
         }
         dump($parent_id);
