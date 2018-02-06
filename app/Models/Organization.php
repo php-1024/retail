@@ -19,6 +19,11 @@ class Organization extends Model{
         return $this->hasOne('App\Models\Account', 'organization_id');
     }
 
+    //和Organization表多对一的关系(用于商户查询归属服务上使用)
+    public function organization(){
+        return $this->hasOne('App\Models\Organization', 'parent_id');
+    }
+
     //和OrganizationProxyinfo表一对一的关系
     public function organizationProxyinfo(){
         return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
@@ -76,6 +81,21 @@ class Organization extends Model{
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
         return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
+    //获取分页数据-商户以及归属的服务商
+    public static function getCompanyAndProxy(){
+        $model = self::join('organization',function($join){
+            $join->on('organization.parent_id','organization.id');
+        })->select('organization.organization_name','organization.*');
+//        if(!empty($account)){
+//            $model =$model->where('account','like','%'.$account.'%');
+//        }
+//        if(!empty($time_st_format) && !empty($time_nd_format)){
+//            $model = $model->whereBetween('operation_log.created_at',[$time_st_format,$time_nd_format]);
+//        }
+//        return $model->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->get();
     }
 
     //获取单条信息和organizationproxyinfo的信息
