@@ -53,7 +53,7 @@ class AccountcenterController extends Controller{
         }
 //        dump($parent_id);
 //        dump($organization_all);
-        dump($test);
+        dump($organization_all);
         return  view('Company/Accountcenter/company_list',['organization_all'=>$organization_all,'organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
