@@ -67,7 +67,6 @@
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
                         <p>
-                            {{--所属服务商--}}
                             所属服务商：【{{$val->proxyname}}】
                         </p>
                     </div>
