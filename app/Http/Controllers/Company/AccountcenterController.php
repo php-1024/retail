@@ -51,7 +51,7 @@ class AccountcenterController extends Controller{
         foreach ($organization as $key=>$val){
             $parent_id[] = $val->parent_id;
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
-            $organization->proxyname = $proxy->organization_name;
+            $val->proxyname = $proxy->organization_name;
         }
 //        dump($parent_id);
 //        dump($organization_all);
