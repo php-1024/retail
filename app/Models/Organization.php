@@ -86,7 +86,7 @@ class Organization extends Model{
     //获取分页数据-商户以及归属的服务商
     public static function getCompanyAndProxy($paginate,$orderby,$sort='DESC'){
         $model = self::join('organization',function($join){
-            $join->on('organization.parent_id','organization.id');
+            $join->on('organization.id','organization.parent_id');
         })->select('organization.organization_name','organization.*');
 //        if(!empty($account)){
 //            $model =$model->where('account','like','%'.$account.'%');
