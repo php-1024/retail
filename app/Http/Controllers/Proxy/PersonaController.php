@@ -33,7 +33,6 @@ class PersonaController extends Controller{
             $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
-            dd($account_node_list);
             $modules = [];
             $nodes = [];
             $module_node_list = [];
