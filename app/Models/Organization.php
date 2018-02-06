@@ -130,7 +130,7 @@ class Organization extends Model{
     {
         $model = self::join('organization as iszmxw',function($join){
             $join->on('iszmxw.parent_id','organization.id');
-        })->where($where)->select('organization.organization_name','organization.*');
+        })->where($where)->select('organization.organization_name','organization.organization_name');
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
 
