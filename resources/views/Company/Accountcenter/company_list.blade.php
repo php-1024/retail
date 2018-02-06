@@ -68,7 +68,7 @@
                     <div class="value"><b>{{ $val->organization_name }}</b>
                         <p>
                             东北战区
-                            @if(in_array($val->parent_id,$organization_all->toArray())) {{$vv['organization_name']}} @endif
+                            @if(in_array($val->parent_id,$organization_all->toArray())) {{$organization_all->organization_name}} @endif
                         </p>
                     </div>
                 </section>
