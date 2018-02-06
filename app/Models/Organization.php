@@ -132,11 +132,11 @@ class Organization extends Model{
         if(!empty($organization_name)){
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
-        $model = $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        $model = $model->where($where)->orderBy($orderby,$sort);
         $model = $model->join('organization as iszmxw',function($join){
             $join->on('iszmxw.parent_id','organization.id');
         })->where(['id'=>'2'])->select('organization.organization_name as iszmxw','organization.organization_name');
-        return $model;
+        return $model->paginate($paginate);
     }
 
 }
