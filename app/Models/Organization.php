@@ -19,6 +19,11 @@ class Organization extends Model{
         return $this->hasOne('App\Models\Account', 'organization_id');
     }
 
+    //和Organization表多对一的关系
+    public function organization(){
+        return $this->hasOne('App\Models\Organization', 'parent_id');
+    }
+
     //和OrganizationProxyinfo表一对一的关系
     public function organizationProxyinfo(){
         return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
@@ -71,7 +76,7 @@ class Organization extends Model{
 
     //获取分页数据-商户
     public static function getCompanyAndWarzone($organization_name,$where,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('warzone');
+        $model = self::with('warzone')->with('organization');
         if(!empty($organization_name)){
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
