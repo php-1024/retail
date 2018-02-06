@@ -47,7 +47,6 @@ class AccountcenterController extends Controller{
         $where = ['type'=>'3'];
         $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
         foreach ($organization as $key=>$val){
-            $parent_id[] = $val->parent_id;
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
             $val->proxyname = $proxy->organization_name;
         }
