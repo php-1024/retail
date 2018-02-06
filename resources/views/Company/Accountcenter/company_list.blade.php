@@ -66,7 +66,12 @@
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
-                        <p>东北战区</p>
+                        <p>
+                            东北战区
+                            @foreach($organization_all as $kk=>$vv)
+                                @if(in_array($vv->id,$organization->id)) {{$vv->organization_name}} @endif
+                            @endforeach
+                        </p>
                     </div>
                 </section>
             </a>
