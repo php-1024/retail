@@ -448,4 +448,12 @@ Route::group(['prefix'=>'company'],function(){
         Route::post('store_add_second_check', 'Company\StoreController@store_add_second_check')->middleware('CompanyCheckAjax');//安全密码检测
     });
 });
+
+Route::group(['prefix'=>'api'],function() {
+
+    //登录页面组
+    Route::group(['prefix' => 'wechat'], function () {
+        Route::get('/', 'Api\WechatController@response');//登录页面路由
+    });
+});
 /********************商户管理系统*************************/
