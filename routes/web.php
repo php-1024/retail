@@ -453,7 +453,8 @@ Route::group(['prefix'=>'api'],function() {
 
     //登录页面组
     Route::group(['prefix' => 'wechat'], function () {
-        Route::get('response', 'Api\WechatController@response');//登录页面路由
+        Route::get('response/{appid}', 'Api\WechatController@response');//登录页面路由
+        Route::get('open', 'Api\WechatController@open');//登录页面路由
     });
 });
 /********************商户管理系统*************************/
