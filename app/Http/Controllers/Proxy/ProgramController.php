@@ -18,7 +18,7 @@ class ProgramController extends Controller{
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $list) {
             echo $list->package_name;
-        }
+        }exit;
 
 //        foreach ($list as $key=>$value) {
 //            foreach ($value['programs'] as $k => $v) {
