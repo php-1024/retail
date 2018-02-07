@@ -209,7 +209,7 @@ class SystemController extends Controller{
         if(!empty($account)){
             $where[] = ['account.account','like','%'.$account.'%'];
         }
-        $search_data = ['account.account'=>$account,'operation_log.organization_id'=>$admin_data['organization_id']];
+        $search_data = ['account'=>$account];
         $list = OperationLog::getProxyPaginate($where,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
