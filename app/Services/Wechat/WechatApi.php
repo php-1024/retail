@@ -5,7 +5,7 @@ namespace App\Services\Wechat;
 */
 
 class WechatApi{
-    public function test(){
+    public static function test(){
         echo "你好世界";
     }
 }
