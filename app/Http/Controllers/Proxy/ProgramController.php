@@ -16,7 +16,6 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         $list = Package::getPaginage([],15,'id');
-        dd($list);
         foreach ($list as $list) {
             echo $list->package_name;
         }
