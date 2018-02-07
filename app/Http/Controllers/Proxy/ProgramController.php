@@ -20,13 +20,13 @@ class ProgramController extends Controller{
             echo $list->package_name;
         }
 
-        foreach ($list as $key=>$value) {
-            foreach ($value['programs'] as $k => $v) {
-                $re = Assets::getOne([['organization_id', $organization_id], ['package_id', $value['id']], ['program_id', $v['id']]]);
-                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-            }
-        }
+//        foreach ($list as $key=>$value) {
+//            foreach ($value['programs'] as $k => $v) {
+//                $re = Assets::getOne([['organization_id', $organization_id], ['package_id', $value['id']], ['program_id', $v['id']]]);
+//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+//            }
+//        }
         return view('Proxy/Program/program_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //资产划拨记录
