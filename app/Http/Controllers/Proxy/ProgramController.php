@@ -18,7 +18,7 @@ class ProgramController extends Controller{
         $list = Package::getPaginage([],15,'id');
         dd($list);
         foreach ($list as $list) {
-           // echo $flight->name;
+            echo $list->package_name;
         }
 
         foreach ($list as $key=>$value) {
