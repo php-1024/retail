@@ -228,7 +228,7 @@ class SystemController extends Controller{
         if(!empty($account)){
             $where[] = ['account.account','like','%'.$account.'%'];
         }
-        $search_data = ['account.account'=>$account,'login_log.organization_id'=>$admin_data['organization_id']];
+        $search_data = ['account'=>$account];
         $list = LoginLog::getProxyPaginate($where,15,'id');
         return view('Proxy/System/loginlog',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
