@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">用户账号</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="用户账号"  name="account" value="{{ $search_data['account.account'] }}">
+                                        <input type="text" class="form-control" placeholder="用户账号"  name="account" value="{{ $search_data['account'] }}">
                                     </div>
                                     <div class="col-lg-2">
                                         <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
