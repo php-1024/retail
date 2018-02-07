@@ -4,7 +4,8 @@ use App\Http\Controllers\Controller;
 
 class WechatController extends Controller{
     public function response(){
-        echo "这里是微信接口测试环境";
+        $wechat = new \WechatApi();
+        $wechat->test();
     }
 }
 ?>

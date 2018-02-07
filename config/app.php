@@ -198,7 +198,7 @@ return [
         App\Providers\ZeroneRedisServiceProvider::class,
         App\Providers\HttpCurlServiceProvider::class,
         App\Providers\IP2AttrServiceProvider::class,
-
+        App\Providers\WechatServiceProvider::class,
     ],
 
     /*
@@ -249,7 +249,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'HttpCurl' => App\Facades\HttpCurlFacade::class,
         'IP2Attr' => App\Facades\IP2AttrFacade::class,
-        'ZeroneRedis' => App\Facades\ZeroneRedisFacade::class
+        'ZeroneRedis' => App\Facades\ZeroneRedisFacade::class,
+        'Wechat' => App\Facades\WechatFacade::class
     ],
 
 ];
