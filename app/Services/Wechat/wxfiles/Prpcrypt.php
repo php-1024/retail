@@ -72,7 +72,7 @@ class Prpcrypt
 
             $ciphertext_dec = base64_decode($encrypted);
             $iv = substr($this->key, 0, 16);
-            $decrypted = openssl_decrypt(base64_decode($ciphertext_dec), 'aes-128-cbc', $this->key, OPENSSL_RAW_DATA, $iv);
+            $decrypted = openssl_decrypt($ciphertext_dec, 'aes-128-cbc', $this->key, OPENSSL_RAW_DATA, $iv);
             dump($decrypted);
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
