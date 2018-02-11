@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Wechat;
 use App\Models\WechatOpenSetting;
-use  App\Services\Wechat\wxfiles\WXBizMsgCrypt;
+require_once ("wxfiles/wxBizMsgCrypt.php");
 /*
     微信开放平台操作相关接口
 */
@@ -17,7 +17,7 @@ class WechatApi{
     */
     public function getVerify_Ticket($timeStamp,$nonce,$encrypt_type,$msg_sign,$encryptMsg){
         $wxparam = config('app.wechat_open_setting');
-        $jm = new WXBizMsgCrypt( $wxparam['open_token'],  $wxparam['open_key'], $wxparam['open_appid']);
+        $jm = new WXBizMsgCrypt($wxparam['open_token'],  $wxparam['open_key'], $wxparam['open_appid']);
         $xml_tree = new DOMDocument();
         $xml_tree->loadXML($encryptMsg);
         $array_e = $xml_tree->getElementsByTagName('Encrypt');

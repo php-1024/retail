@@ -1,12 +1,16 @@
 <?php
-namespace App\Services\Wechat\wxfiles;
+
 /**
- * 对公众平台发送给公众账号的消息加解密
+ * 对公众平台发送给公众账号的消息加解密示例代码.
+ *
+ * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
-use  App\Services\Wechat\wxfiles\sha1;
-use  App\Services\Wechat\wxfiles\xmlparse;
-use  App\Services\Wechat\wxfiles\pkcs7Encoder;
-use  App\Services\Wechat\wxfiles\ErrorCode;
+
+
+include_once "sha1.php";
+include_once "xmlparse.php";
+include_once "pkcs7Encoder.php";
+include_once "errorCode.php";
 
 /**
  * 1.第三方回复加密消息给公众平台；
@@ -24,7 +28,7 @@ class WXBizMsgCrypt
 	 * @param $encodingAesKey string 公众平台上，开发者设置的EncodingAESKey
 	 * @param $appId string 公众平台的appId
 	 */
-	public function __construct($token, $encodingAesKey, $appId)
+	public function WXBizMsgCrypt($token, $encodingAesKey, $appId)
 	{
 		$this->token = $token;
 		$this->encodingAesKey = $encodingAesKey;

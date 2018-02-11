@@ -1,7 +1,6 @@
 <?php
-namespace App\Services\Wechat\wxfiles;
-use  App\Services\Wechat\wxfiles\ErrorCode;
 
+include_once "errorCode.php";
 
 /**
  * PKCS7Encoder class
@@ -61,7 +60,7 @@ class Prpcrypt
 {
 	public $key;
 
-	function __construct($k)
+	function Prpcrypt($k)
 	{
 		$this->key = base64_decode($k . "=");
 	}
