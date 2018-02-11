@@ -17,6 +17,7 @@ class WechatApi{
     */
     public function getVerify_Ticket($timeStamp,$nonce,$encrypt_type,$msg_sign,$encryptMsg){
         $wxparam = config('app.wechat_open_setting');
+        dump($wxparam);
         $jm = new WXBizMsgCrypt($wxparam['open_token'],  $wxparam['open_key'], $wxparam['open_appid']);
         $xml_tree = new \DOMDocument();
         $xml_tree->loadXML($encryptMsg);
