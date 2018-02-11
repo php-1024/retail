@@ -56,7 +56,7 @@ class Prpcrypt
      */
     public function decrypt($encrypted, $appid)
     {
-
+        dump($appid);
         try {
             //使用BASE64对需要解密的字符串进行解码
             /*
