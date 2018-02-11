@@ -56,7 +56,6 @@ class Prpcrypt
      */
     public function decrypt($encrypted, $appid)
     {
-        dump($appid);
         try {
             //使用BASE64对需要解密的字符串进行解码
             /*
@@ -93,6 +92,7 @@ class Prpcrypt
             //print $e;
             return array(ErrorCode::$IllegalBuffer, null);
         }
+        dump($from_appid);
         if ($from_appid != $appid)
             return array(ErrorCode::$ValidateAppidError, null);
         return array(0, $xml_content);
