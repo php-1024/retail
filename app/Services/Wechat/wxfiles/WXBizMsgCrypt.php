@@ -10,7 +10,7 @@ namespace App\Services\Wechat\wxfiles;
 include_once "sha1.php";
 include_once "xmlparse.php";
 include_once "pkcs7Encoder.php";
-include_once "Prpcrypt.php";
+include_once "Prpcrypt1.php";
 include_once "errorCode.php";
 
 /**
