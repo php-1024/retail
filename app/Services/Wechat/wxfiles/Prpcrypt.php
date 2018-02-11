@@ -69,10 +69,10 @@ class Prpcrypt
             $decrypted = mdecrypt_generic($module, $ciphertext_dec);
             mcrypt_generic_deinit($module);
             mcrypt_module_close($module);*/
-            $ciphertext_dec = base64_decode($encrypted);
+            //$ciphertext_dec = base64_decode($encrypted);
             $iv = substr($this->key, 0, 16);
             dump($iv);
-            $decrypted = openssl_decrypt($ciphertext_dec,'AES-128-CBC',$this->key,OPENSSL_ZERO_PADDING,$iv);
+            $decrypted = openssl_decrypt($encrypted,'AES-128-CBC',$this->key,OPENSSL_ZERO_PADDING,$iv);
             dump($decrypted);
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
