@@ -70,7 +70,7 @@ class Prpcrypt
             mcrypt_module_close($module);*/
             //$ciphertext_dec = base64_decode($encrypted);
             $iv = substr($this->key, 0, 16);
-            $decrypted = openssl_decrypt($encrypted,'AES-128-CBC',$this->key,OPENSSL_ZERO_PADDING,$iv);
+            $decrypted = openssl_decrypt($encrypted,'AES-128-CBC',$this->key,OPENSSL_ZERO_PADDING);
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
@@ -92,7 +92,6 @@ class Prpcrypt
             //print $e;
             return array(ErrorCode::$IllegalBuffer, null);
         }
-        dump($from_appid);
         if ($from_appid != $appid)
             return array(ErrorCode::$ValidateAppidError, null);
         return array(0, $xml_content);
