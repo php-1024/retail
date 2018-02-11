@@ -26,6 +26,7 @@ class WechatApi{
         $from_xml = sprintf($format, $encrypt);
         $msg = '';
         $errCode = $jm->decryptMsg($msg_sign, $timeStamp, $nonce, $from_xml, $msg);
+        dump($errCode);
         if ($errCode == 0) {
             $xml = new \DOMDocument();
             $xml->loadXML($msg);
