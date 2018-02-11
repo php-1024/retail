@@ -1,5 +1,5 @@
 <?php
-include_once "errorCode.php";
+namespace App\Services\Wechat\wxfiles;
 
 /**
  * XMLParse class
@@ -17,14 +17,14 @@ class XMLParse
 	public function extract($xmltext)
 	{
 		try {
-			$xml = new DOMDocument();
+			$xml = new \DOMDocument();
 			$xml->loadXML($xmltext);
 			$array_e = $xml->getElementsByTagName('Encrypt');
 			$array_a = $xml->getElementsByTagName('ToUserName');
 			$encrypt = $array_e->item(0)->nodeValue;
 			$tousername = $array_a->item(0)->nodeValue;
 			return array(0, $encrypt, $tousername);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			//print $e . "\n";
 			return array(ErrorCode::$ParseXmlError, null, null);
 		}

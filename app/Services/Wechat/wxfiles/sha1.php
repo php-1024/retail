@@ -1,6 +1,5 @@
 <?php
-
-include_once "errorCode.php";
+namespace App\Services\Wechat\wxfiles;
 
 /**
  * SHA1 class
