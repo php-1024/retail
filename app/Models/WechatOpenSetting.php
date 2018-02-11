@@ -18,6 +18,7 @@ class WechatOpenSetting extends Model{
             'value'=>$value,
             'expire_time'=>$expire_time,
         ];
+        dump($param);
         self::editSetting([['id','1']],$param);
     }
 
