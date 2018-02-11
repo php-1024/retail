@@ -26,5 +26,9 @@ class WechatController extends Controller{
             echo "success";
         }
     }
+
+    public function auth(){
+        header('location: http://www.baidu.com');
+    }
 }
 ?>
