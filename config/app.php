@@ -22,7 +22,10 @@ return [
 
     /******************微信开放平台相关参数********************/
     'wechat_open_setting'=>[
-        ''
+        'open_appid'=>'wxd22806e3df9e9d35', //开放平台APPID
+        'open_token'=>'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
+        'open_key'=>'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
+        'open_appsecret'=>'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
     ],
     /******************微信开放平台相关参数********************/
 
