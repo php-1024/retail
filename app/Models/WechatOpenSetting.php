@@ -24,6 +24,8 @@ class WechatOpenSetting extends Model{
 
 
     public static function editSetting($where,$param){
+        $model = self::where($where)->first();
+        dump($model);
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
