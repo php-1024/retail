@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Wechat;
 use App\Models\WechatOpenSetting;
-require_once("wxfiles/WXBizMsgCrypt.php");
+require_once("./wxfiles/WXBizMsgCrypt.php");
 /*
     微信开放平台操作相关接口
 */
