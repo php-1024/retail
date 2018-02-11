@@ -58,7 +58,6 @@ class Prpcrypt
     {
         try {
             //使用BASE64对需要解密的字符串进行解码
-            /*
             $ciphertext_dec = base64_decode($encrypted);
             $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
             $iv = substr($this->key, 0, 16);
@@ -67,11 +66,9 @@ class Prpcrypt
             //解密
             $decrypted = mdecrypt_generic($module, $ciphertext_dec);
             mcrypt_generic_deinit($module);
-            mcrypt_module_close($module);*/
-            //$ciphertext_dec = base64_decode($encrypted);
-            $iv = substr($this->key, 0, 16);
-            $decrypted = openssl_decrypt($encrypted,'AES-128-CBC',$this->key,OPENSSL_CIPHER_AES_128_CBC,$iv);
-            dump($decrypted);
+            mcrypt_module_close($module);
+
+
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
