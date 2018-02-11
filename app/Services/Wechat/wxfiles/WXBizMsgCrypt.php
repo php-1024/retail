@@ -10,7 +10,6 @@ namespace App\Services\Wechat\wxfiles;
 include_once "sha1.php";
 include_once "xmlparse.php";
 include_once "pkcs7Encoder.php";
-include_once "Prpcrypt1.php";
 include_once "errorCode.php";
 
 /**
@@ -54,7 +53,7 @@ class WXBizMsgCrypt
 	 */
 	public function encryptMsg($replyMsg, $timeStamp, $nonce, &$encryptMsg)
 	{
-		$pc = new Prpcrypt1($this->encodingAesKey);
+		$pc = new Prpcrypt($this->encodingAesKey);
 
 		//加密
 		$array = $pc->encrypt($replyMsg, $this->appId);
@@ -106,7 +105,7 @@ class WXBizMsgCrypt
 			return ErrorCode::$IllegalAesKey;
 		}
 
-		$pc = new Prpcrypt1($this->encodingAesKey);
+		$pc = new Prpcrypt($this->encodingAesKey);
 
 		//提取密文
 		$xmlparse = new XMLParse;
