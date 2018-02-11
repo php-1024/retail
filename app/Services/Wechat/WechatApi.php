@@ -6,7 +6,8 @@ namespace App\Services\Wechat;
 
 class WechatApi{
     public function test(){
-        echo "你好世界啊";
+        $info = \HttpCurl::doget('http://www.baidu.com');
+        dump($info);
     }
 }
 ?>
