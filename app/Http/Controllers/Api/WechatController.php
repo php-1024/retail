@@ -29,7 +29,7 @@ class WechatController extends Controller{
 
     public function auth(){
        // header('location: http://www.baidu.com');
-
+        echo 123;
     }
 }
 ?>
