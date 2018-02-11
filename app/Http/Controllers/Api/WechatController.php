@@ -13,8 +13,18 @@ class WechatController extends Controller{
         echo "这里是消息与事件接收URL";
     }
 
-    public function open(){
-        echo "授权事件接收URL";
+    public function open(Request $request){
+        $timeStamp    =$request->input('timestamp');
+        $nonce        =$request->input('nonce');
+        $encrypt_type =$request->input('encrypt_type');
+        $msg_sign     =$request->input('msg_signature');
+        $encryptMsg   =file_get_contents('php://input');
+
+        $result = \Wechat::getVerify_Ticket($timeStamp,$nonce,$encrypt_type,$msg_sign,$encryptMsg);
+        if($result){
+            ob_clean();
+            echo "success";
+        }
     }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Services\Wechat\wxfiles;
 /**
  * error code 说明.
  * <ul>

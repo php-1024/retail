@@ -1,6 +1,7 @@
 <?php
+namespace App\Services\Wechat\wxfiles;
+use  App\Services\Wechat\wxfiles\ErrorCode;
 
-include_once "errorCode.php";
 
 /**
  * PKCS7Encoder class

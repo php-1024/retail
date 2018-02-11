@@ -1,5 +1,6 @@
 <?php
-include_once "errorCode.php";
+namespace App\Services\Wechat\wxfiles;
+use  App\Services\Wechat\wxfiles\ErrorCode;
 
 /**
  * XMLParse class

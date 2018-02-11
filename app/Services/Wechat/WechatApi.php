@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Wechat;
-require_once ("wxfiles/wxBizMsgCrypt.php");
+use App\Models\WechatOpenSetting;
+use  App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 /*
     微信开放平台操作相关接口
 */
@@ -30,7 +31,7 @@ class WechatApi{
             $xml->loadXML($msg);
             $array_e = $xml->getElementsByTagName('ComponentVerifyTicket');
             $component_verify_ticket = $array_e->item(0)->nodeValue;
-            file_put_contents('component_verify_ticket.txt',$component_verify_ticket.'||'.time());
+            WechatOpenSetting::editComponentVerifyTicket($component_verify_ticket,time()+550);
             return true;
         }else{
             return false;
