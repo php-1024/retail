@@ -56,29 +56,14 @@ class Prpcrypt
      */
     public function decrypt($encrypted, $appid)
     {
+
         try {
-            //使用BASE64对需要解密的字符串进行解码
-            /*
-            $ciphertext_dec = base64_decode($encrypted);
-            $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
             $iv = substr($this->key, 0, 16);
-            mcrypt_generic_init($module, $this->key, $iv);
+            $decrypted = openssl_decrypt(base64_decode($encrypted),'AES-256-CBC',$this->key,OPENSSL_RAW_DATA,$iv);
 
-            //解密
-            $decrypted = mdecrypt_generic($module, $ciphertext_dec);
-            mcrypt_generic_deinit($module);
-            mcrypt_module_close($module);
-            */
-
-            $ciphertext_dec = base64_decode($encrypted);
-            $iv = substr($this->key, 0, 16);
-            $decrypted = openssl_decrypt($ciphertext_dec, 'aes-128-cbc', $this->key, OPENSSL_RAW_DATA, $iv);
-            dump($decrypted);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
-
-
         try {
             //去除补位字符
             $pkc_encoder = new PKCS7Encoder;
@@ -91,7 +76,8 @@ class Prpcrypt
             $xml_len = $len_list[1];
             $xml_content = substr($content, 4, $xml_len);
             $from_appid = substr($content, $xml_len + 4);
-        } catch (Exception $e) {
+
+        } catch (\Exception $e) {
             //print $e;
             return array(ErrorCode::$IllegalBuffer, null);
         }
