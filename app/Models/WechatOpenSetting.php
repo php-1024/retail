@@ -19,13 +19,13 @@ class WechatOpenSetting extends Model{
             'expire_time'=>$expire_time,
         ];
         dump($param);
-        self::editSetting([['id','1']],$param);
+        self::editSetting([['id',1]],$param);
     }
 
 
     public static function editSetting($where,$param){
         dump($where);
-        $model = self::where(['id',1])->first();
+        $model = self::where([['id',1]])->first();
         dump($model);
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
