@@ -16,6 +16,10 @@ class WechatApi{
      *
      */
     public function get_component_access_token(){
+        $token_info = WechatOpenSetting::getComponentAccessToken();
+        if(!empty($token_info->param_value) && $token_info->expire_time - time() > 300){//过时前5分钟也需要重置了
+
+        }
         $wxparam = config('app.wechat_open_setting');
         $ticket_info = WechatOpenSetting::getComponentVerifyTicket();
         if(empty($ticket_info->param_value)){

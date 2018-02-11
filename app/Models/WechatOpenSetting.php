@@ -13,6 +13,17 @@ class WechatOpenSetting extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    public static function getComponentAccessToken(){
+        $info = self::where([['id',2]])->first();
+        return $info;
+    }
+    public static function editComponentAccessToken($value,$expire_time){
+        $param = [
+            'param_value'=>$value,
+            'expire_time'=>$expire_time,
+        ];
+        self::editSetting([['id',2]],$param);
+    }
 
     public static function getComponentVerifyTicket(){
         $info = self::where([['id',1]])->first();
