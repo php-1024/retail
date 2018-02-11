@@ -71,9 +71,7 @@ class Prpcrypt
             mcrypt_module_close($module);*/
             //$ciphertext_dec = base64_decode($encrypted);
             $iv = substr($this->key, 0, 16);
-            dump($iv);
             $decrypted = openssl_decrypt($encrypted,'AES-128-CBC',$this->key,OPENSSL_ZERO_PADDING,$iv);
-            dump($decrypted);
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
