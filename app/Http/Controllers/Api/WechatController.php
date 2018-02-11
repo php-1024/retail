@@ -14,6 +14,7 @@ class WechatController extends Controller{
     }
 
     public function open(Request $request){
+        file_put_contents('testopen.txt','123456');
         $timeStamp    =$request->input('get.timestamp');
         $nonce        =$request->input('get.nonce');
         $encrypt_type =$request->input('get.encrypt_type');
