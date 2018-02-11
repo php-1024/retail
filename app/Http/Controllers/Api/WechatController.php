@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\DB;
 class WechatController extends Controller{
     public function response($appid,Request $request){
         dump($appid);
+        echo "这里是消息与事件接收URL";
     }
 
     public function open(){
-
+        echo "授权事件接收URL";
     }
 }
 ?>
