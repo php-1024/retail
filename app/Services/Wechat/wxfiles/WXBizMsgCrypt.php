@@ -106,7 +106,7 @@ class WXBizMsgCrypt
 			return ErrorCode::$IllegalAesKey;
 		}
 
-		$pc = new Prpcrypt($this->encodingAesKey);
+		$pc = new Prpcrypt1($this->encodingAesKey);
 
 		//提取密文
 		$xmlparse = new XMLParse;
