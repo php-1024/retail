@@ -20,35 +20,27 @@ class Prpcrypt
      * @param string $text 需要加密的明文
      * @return string 加密后的密文
      */
+    /**
+     * 对明文进行加密
+     * @param string $text 需要加密的明文
+     * @return string 加密后的密文
+     */
     public function encrypt($text, $appid)
     {
-
         try {
             //获得16位随机字符串，填充到明文之前
-            $random = $this->getRandomStr();
+            $random = $this->getRandomStr();//"aaaabbbbccccdddd";
             $text = $random . pack("N", strlen($text)) . $text . $appid;
-            // 网络字节序
-            $size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-            $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
             $iv = substr($this->key, 0, 16);
-            //使用自定义的填充方式对明文进行补位填充
             $pkc_encoder = new PKCS7Encoder;
             $text = $pkc_encoder->encode($text);
-            mcrypt_generic_init($module, $this->key, $iv);
-            //加密
-            $encrypted = mcrypt_generic($module, $text);
-            mcrypt_generic_deinit($module);
-            mcrypt_module_close($module);
-
-            //print(base64_encode($encrypted));
-            //使用BASE64对加密后的字符串进行编码
-            return array(ErrorCode::$OK, base64_encode($encrypted));
+            $encrypted = openssl_encrypt($text,'AES-256-CBC',substr($this->key, 0, 32),OPENSSL_ZERO_PADDING,$iv);
+            return array(ErrorCode::$OK, $encrypted);
         } catch (Exception $e) {
             //print $e;
             return array(ErrorCode::$EncryptAESError, null);
         }
     }
-
     /**
      * 对密文进行解密
      * @param string $encrypted 需要解密的密文
@@ -56,12 +48,10 @@ class Prpcrypt
      */
     public function decrypt($encrypted, $appid)
     {
-
         try {
             $iv = substr($this->key, 0, 16);
-            $decrypted = openssl_decrypt(base64_decode($encrypted),'AES-256-CBC',$this->key,OPENSSL_RAW_DATA,$iv);
-            dump($decrypted);
-        } catch (\Exception $e) {
+            $decrypted = openssl_decrypt($encrypted,'AES-256-CBC',substr($this->key, 0, 32),OPENSSL_ZERO_PADDING,$iv);
+        } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
         try {
@@ -76,15 +66,18 @@ class Prpcrypt
             $xml_len = $len_list[1];
             $xml_content = substr($content, 4, $xml_len);
             $from_appid = substr($content, $xml_len + 4);
-
-        } catch (\Exception $e) {
+            if (!$appid)
+                $appid = $from_appid;
+            //如果传入的appid是空的，则认为是订阅号，使用数据中提取出来的appid
+        } catch (Exception $e) {
             //print $e;
             return array(ErrorCode::$IllegalBuffer, null);
         }
         if ($from_appid != $appid)
             return array(ErrorCode::$ValidateAppidError, null);
-        return array(0, $xml_content);
-
+        //不注释上边两行，避免传入appid是错误的情况
+        return array(0, $xml_content, $from_appid);
+        //增加appid，为了解决后面加密回复消息的时候没有appid的订阅号会无法回复
     }
 
 
