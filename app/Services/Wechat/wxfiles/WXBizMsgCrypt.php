@@ -54,7 +54,7 @@ class WXBizMsgCrypt
 	 */
 	public function encryptMsg($replyMsg, $timeStamp, $nonce, &$encryptMsg)
 	{
-		$pc = new Prpcrypt($this->encodingAesKey);
+		$pc = new Prpcrypt1($this->encodingAesKey);
 
 		//加密
 		$array = $pc->encrypt($replyMsg, $this->appId);
