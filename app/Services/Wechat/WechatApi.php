@@ -27,7 +27,7 @@ class WechatApi{
         $msg = '';
         $errCode = $jm->decryptMsg($msg_sign, $timeStamp, $nonce, $from_xml, $msg);
         if ($errCode == 0) {
-            $xml = new DOMDocument();
+            $xml = new \DOMDocument();
             $xml->loadXML($msg);
             $array_e = $xml->getElementsByTagName('ComponentVerifyTicket');
             $component_verify_ticket = $array_e->item(0)->nodeValue;
