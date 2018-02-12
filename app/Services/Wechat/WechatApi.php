@@ -44,7 +44,7 @@ class WechatApi{
                 'authorizer_access_token'=>$authorizer_access_token,
                 'authorizer_refresh_token'=>$authorizer_refresh_token,
                 'origin_data'=>$origin_re,
-                'status'=>1,
+                'status'=>'1',
                 'expire_time'=>time()+7200,
             );
 
