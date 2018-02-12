@@ -34,7 +34,11 @@ class WechatController extends Controller{
 
     //授权回调链接
     public function redirect(){
-        echo "授权成功";
+        $auth_code = $_GET['auth_code'];//授权码
+        $expires_in = $_GET['expires_in'];//过期时间
+        $auth_info = \Wechat::get_authorization_info($auth_code,1);//获取授权
+        //添加所有的已有粉丝进入零壹账号体系,明天再做。
+
     }
 }
 ?>

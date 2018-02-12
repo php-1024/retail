@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Wechat;
 use App\Models\WechatOpenSetting;
+use App\Models\WechatAuthorizationInfo;
 use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 /*
     微信开放平台操作相关接口
@@ -14,9 +15,54 @@ class WechatApi{
     }
 
     /*
+     * 获取授权信息
+     * $auth_code  公众号授权后回调时返回的授权码
+     * $organization_id 该公众号关联组织ID
+     */
+    public function get_authorization_info($auth_code,$organization_id){
+        $wxparam = config('app.wechat_open_setting');
+        $component_access_token = $this->get_component_access_token();
+        $url = 'https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token='.$component_access_token;
+        $data = array(
+            'component_appid'=>$wxparam['open_id'],
+            'authorization_code'=>$auth_code
+        );
+        $data = json_encode($data);
+        $origin_re =  \HttpCurl::doPost($url,$data);
+        $re = json_decode($origin_re,true);
+        if(!empty($re['authorization_info'])){
+            //授权方APPID
+            $authorizer_appid = $re['authorization_info']['authorizer_appid'];
+            //第三方调用接口令牌
+            $authorizer_access_token = $re['authorization_info']['authorizer_access_token'];
+            //第三方刷新调用接口令牌
+            $authorizer_refresh_token = $re['authorization_info']['authorizer_refresh_token'];
+
+            $auth_data = array(
+                'organization_id'=>$organization_id,
+                'authorizer_appid'=>$authorizer_appid,
+                'authorizer_access_token'=>$authorizer_access_token,
+                'authorizer_refresh_token'=>$authorizer_refresh_token,
+                'origin_data'=>$origin_re,
+                'status'=>1,
+                'expire_time'=>time()+7200,
+            );
+
+            WechatAuthorizationInfo::addInfo($auth_data);
+
+            return array(
+                'authorizer_appid'=> $re['authorization_info']['authorizer_appid'],
+                'authorizer_access_token'=>$re['authorization_info']['authorizer_access_token'],
+                'authorizer_refresh_token'=>$re['authorization_info']['authorizer_refresh_token']
+            );
+        }else{
+            exit('授权失败，请重新授权');
+        }
+    }
+
+    /*
      * 获取授权链接
      */
-
     public function get_auth_url(){
         $wxparam = config('app.wechat_open_setting');
         $open_appid = $wxparam['open_appid'];//第三方平台方appid
@@ -26,7 +72,6 @@ class WechatApi{
         $url = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=" . $open_appid . "&pre_auth_code=" . $pre_auth_code . "&redirect_uri=".$redirect_url."&auth_type=".$auth_type;
         return $url;
     }
-
     /*
    *获取开放平台的预授权码
    */
