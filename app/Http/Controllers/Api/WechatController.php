@@ -28,7 +28,7 @@ class WechatController extends Controller{
     //授权链接
     public function auth(){
         $url = \Wechat::get_auth_url();
-        dump($url);
+        echo "<a href='".$url."'>授权入口</a>";
         //header('location:'.$url);
     }
 
