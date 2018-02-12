@@ -27,9 +27,8 @@ class WechatController extends Controller{
 
     //授权链接
     public function auth(){
-       // header('location: http://www.baidu.com');
-        $token = \Wechat::get_pre_auth_code();
-        dump($token);
+        $url = \Wechat::get_auth_url();
+        dump($url);
     }
 
     //授权回调链接
