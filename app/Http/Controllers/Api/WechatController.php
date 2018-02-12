@@ -8,8 +8,6 @@ use App\Models\WechatOpenSetting;
 class WechatController extends Controller{
     public function response($appid,Request $request){
         dump($appid);
-        //\Wechat::getVerify_Ticket();
-        WechatOpenSetting::editComponentVerifyTicket(123,time());
         echo "这里是消息与事件接收URL";
     }
 
@@ -29,7 +27,8 @@ class WechatController extends Controller{
 
     public function auth(){
        // header('location: http://www.baidu.com');
-        echo 123;
+        $token = \Wechat::get_component_access_token();
+        dump($token);
     }
 }
 ?>
