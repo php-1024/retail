@@ -38,7 +38,7 @@ class WechatController extends Controller{
         $expires_in = $_GET['expires_in'];//过期时间
         $auth_info = \Wechat::get_authorization_info($auth_code,1);//获取授权
         //添加所有的已有粉丝进入零壹账号体系,明天再做。
-
+        echo "授权完成";
     }
 }
 ?>
