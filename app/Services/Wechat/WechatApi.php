@@ -24,7 +24,7 @@ class WechatApi{
         $component_access_token = $this->get_component_access_token();
         $url = 'https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token='.$component_access_token;
         $data = array(
-            'component_appid'=>$wxparam['open_id'],
+            'component_appid'=>$wxparam['open_appid'],
             'authorization_code'=>$auth_code
         );
         $data = json_encode($data);
