@@ -35,6 +35,7 @@ class WechatApi{
             $data = json_encode($data);
             $re = \HttpCurl::doPost($url, $data);
             $re = json_decode($re,true);
+            dump($re);
             if (!empty($re['component_access_token'])) {
                 WechatOpenSetting::editComponentAccessToken($re['component_access_token'],time()+7000);
                 return $re['component_access_token'];
@@ -57,7 +58,6 @@ class WechatApi{
         $from_xml = sprintf($format, $encrypt);
         $msg = '';
         $errCode = $jm->decryptMsg($msg_sign, $timeStamp, $nonce, $from_xml, $msg);
-        dump($errCode);
         if ($errCode == 0) {
             $xml = new \DOMDocument();
             $xml->loadXML($msg);
