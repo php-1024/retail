@@ -27,7 +27,7 @@ class WechatController extends Controller{
 
     public function auth(){
        // header('location: http://www.baidu.com');
-        $token = \Wechat::get_component_access_token();
+        $token = \Wechat::get_pre_auth_code();
         dump($token);
     }
 }

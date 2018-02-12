@@ -14,7 +14,32 @@ class WechatApi{
     }
 
     /*
-     *
+   *获取开放平台的预授权码
+   */
+    public function get_pre_auth_code(){
+        $auth_info = WechatOpenSetting::getPreAuthCode();
+        if(!empty($auth_info->param_value) && $auth_info->expire_time - time() > 00){//过时前60秒也需要重置了
+            return $auth_info->param_value;
+        }
+        $wxparam = config('app.wechat_open_setting');
+        $component_access_token = $this->get_component_access_token();
+        $url = 'https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token='.$component_access_token;
+        $data = array(
+            'component_appid'=>$wxparam['open_appid']
+        );
+        $data = json_encode($data);
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        if (!empty($re['pre_auth_code'])) {
+            WechatOpenSetting::editPreAuthCode($re['pre_auth_code'],time()+600);
+            return $re['pre_auth_code'];
+        }else{
+            return false;
+        }
+    }
+
+    /*
+     *获取开放平台的接口调用凭据
      */
     public function get_component_access_token(){
         $token_info = WechatOpenSetting::getComponentAccessToken();
@@ -35,9 +60,8 @@ class WechatApi{
             $data = json_encode($data);
             $re = \HttpCurl::doPost($url, $data);
             $re = json_decode($re,true);
-            dump($re);
             if (!empty($re['component_access_token'])) {
-                WechatOpenSetting::editComponentAccessToken($re['component_access_token'],time()+7000);
+                WechatOpenSetting::editComponentAccessToken($re['component_access_token'],time()+7200);
                 return $re['component_access_token'];
             }else{
                 exit('获取微信开放平台ComponentAccessToken失败');
