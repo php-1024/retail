@@ -14,6 +14,17 @@ class WechatApi{
     }
 
     /*
+     * 获取授权链接
+     */
+
+    public function get_auth_url(){
+        $wxparam = config('app.wechat_open_setting');
+        $open_appid = $wxparam['open_appid'];
+        $pre_auth_code = $this->get_pre_auth_code();
+        $url = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=" . $open_appid . "&pre_auth_code=" . $pre_auth_code . "&redirect_uri=http://wx.54zm.com/redirect.php&auth_type=1";
+    }
+
+    /*
    *获取开放平台的预授权码
    */
     public function get_pre_auth_code(){

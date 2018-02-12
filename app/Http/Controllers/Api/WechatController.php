@@ -10,7 +10,7 @@ class WechatController extends Controller{
         dump($appid);
         echo "这里是消息与事件接收URL";
     }
-
+    //接受收授权推送消息。
     public function open(Request $request){
         $timeStamp    =$_GET['timestamp'];
         $nonce        =$_GET['nonce'];
@@ -25,10 +25,16 @@ class WechatController extends Controller{
         }
     }
 
+    //授权链接
     public function auth(){
        // header('location: http://www.baidu.com');
         $token = \Wechat::get_pre_auth_code();
         dump($token);
+    }
+
+    //授权回调链接
+    public function redirect(){
+        echo "授权成功";
     }
 }
 ?>
