@@ -29,7 +29,7 @@ class WechatApi{
         $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$authorizer_access_token;
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re,true);
-        dump($re);
+        return $re;
     }
 
     /*
