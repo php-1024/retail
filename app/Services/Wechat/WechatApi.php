@@ -228,5 +228,14 @@ class WechatApi{
             return false;
         }
     }
+
+    /*
+     * 返回加密解密类
+     */
+    public function WXBizMsgCrypt(){
+        $wxparam = config('app.wechat_open_setting');
+        $jm = new WXBizMsgCrypt($wxparam['open_token'],  $wxparam['open_key'], $wxparam['open_appid']);
+        return $jm;
+    }
 }
 ?>

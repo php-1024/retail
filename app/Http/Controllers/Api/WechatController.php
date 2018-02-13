@@ -8,9 +8,6 @@ use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
     public function test(){
-        $xml = '<xml><ToUserName><![CDATA[gh_3c884a361561]]></ToUserName> <FromUserName><![CDATA[ozy4qt1eDxSxzCr0aNT0mXCWfrDE]]></FromUserName> <CreateTime>1426561271</CreateTime> <MsgType><![CDATA[event]]></MsgType> <Event><![CDATA[LOCATION]]></Event> <Latitude>111.000000</Latitude> <Longitude>222.000000</Longitude> <Precision>333.000000</Precision> </xml>';
-        dump($this->xml2array($xml));
-        /*
         $auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
         //$info = WechatAuthorization::getOne([['organization_id',1]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
@@ -20,10 +17,52 @@ class WechatController extends Controller{
             \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
             exit();
         };
-        */
     }
     public function response($appid,Request $request){
-        echo $appid.'123';
+        $timestamp = empty($_GET['timestamp']) ? '' : trim($_GET['timestamp']);
+        $nonce = empty($_GET['nonce']) ? '' : trim($_GET ['nonce']);
+        $msgSign = empty($_GET['msg_signature']) ? '' : trim($_GET['msg_signature']);
+        $signature = empty($_GET['signature']) ? '' : trim($_GET['signature']);
+        $encryptType = empty($_GET['encrypt_type']) ? '' : trim($_GET['encrypt_type']);
+        $openid = $appid;
+        $input = file_get_contents('php://input');
+        $paramArr = $this->xml2array($input);
+
+        $jm = \Wechat::WXBizMsgCrypt();
+        $format = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[%s]]></Encrypt></xml>";
+        $fromXml = sprintf($format, $paramArr['Encrypt']);
+        $toXml='';
+        $errCode = $jm->decryptMsg($msgSign, $timestamp, $nonce, $fromXml, $toXml); // 解密
+        if($errCode == '0'){
+            $param = $this->xml2array($toXml);
+            $keyword = isset($param['Content']) ? trim($param['Content']) : '';
+            // 案例1 - 发送事件
+            if (isset($param['Event']) && $paramArr['ToUserName'] == 'gh_3c884a361561') {
+                $contentStr = $param ['Event'] . 'from_callback';
+            }
+            // 案例2 - 返回普通文本
+            elseif ($keyword == "TESTCOMPONENT_MSG_TYPE_TEXT") {
+                $contentStr = "TESTCOMPONENT_MSG_TYPE_TEXT_callback";
+            }
+
+            $result = '';
+            if (!empty($contentStr)) {
+                $xmlTpl = "<xml>
+            <ToUserName><![CDATA[%s]]></ToUserName>
+            <FromUserName><![CDATA[%s]]></FromUserName>
+            <CreateTime>%s</CreateTime>
+            <MsgType><![CDATA[text]]></MsgType>
+            <Content><![CDATA[%s]]></Content>
+            </xml>";
+                $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $contentStr);
+                if (isset($_GET['encrypt_type']) && $_GET['encrypt_type'] == 'aes') { // 密文传输
+                    $encryptMsg = '';
+                    $jm->encryptMsg($result, $_GET['timestamp'], $_GET['nonce'], $encryptMsg);
+                    $result = $encryptMsg;
+                }
+            }
+            echo $result;
+        }
     }
 
     public  function xml2array($xmlstring)
