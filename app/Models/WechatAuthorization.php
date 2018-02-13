@@ -30,7 +30,6 @@ class WechatAuthorization extends Model{
         $model->status = $param['status'];
         $model->expire_time = $param['expire_time'];
         $model->save();
-        dump($model->id);
         return $model->id;
     }
 
