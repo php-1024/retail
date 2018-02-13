@@ -8,7 +8,10 @@ use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
     public function test(){
-        \Wechat::refresh_authorization_info(1);
+
+        //\Wechat::refresh_authorization_info(1);刷新授权令牌
+        $info = WechatAuthorization::getOne([['organization_id',1]]);
+        \Wechat::get_authorizer_info($info->authorizer_appid);
     }
     public function response($appid,Request $request){
         dump($appid);

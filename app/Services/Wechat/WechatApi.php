@@ -15,7 +15,26 @@ class WechatApi{
     }
 
     /*
+     * 获取授权方基本信息
+     * 授权方APPID
+     */
+    public function get_authorizer_info($authorizer_appid){
+        $wxparam = config('app.wechat_open_setting');
+        $component_access_token = $this->get_component_access_token();
+        $url = 'https://api.weixin.qq.com/cgi-bin/component/api_get_authorizer_info?component_access_token='.$component_access_token;
+        $data = array(
+            'component_appid'=>$wxparam['open_appid'],
+            'authorizer_appid'=>$authorizer_appid,
+        );
+        $data = json_encode($data);
+        $re =  \HttpCurl::doPost($url,$data);
+        $re = json_decode($re,true);
+        dump($re);
+    }
+
+    /*
      * 刷新授权调用令牌凭证
+     * $organization_id 绑定的组织ID
      */
     public function refresh_authorization_info($organization_id){
         $info = WechatAuthorization::getOne([['organization_id',$organization_id]]);
