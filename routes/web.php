@@ -457,6 +457,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('open', 'Api\WechatController@open');//登录页面路由
         Route::any('auth', 'Api\WechatController@auth');//登录页面路由
         Route::any('redirect', 'Api\WechatController@redirect');//登录页面路由
+        Route::any('test', 'Api\WechatController@test');//登录页面路由
     });
 });
 /********************商户管理系统*************************/

@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Wechat;
 use App\Models\WechatOpenSetting;
-use App\Models\WechatAuthorizationInfo;
+use App\Models\WechatAuthorization;
 use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 /*
     微信开放平台操作相关接口
@@ -15,11 +15,20 @@ class WechatApi{
     }
 
     /*
-     * 获取授权信息
+     * 刷新授权调用令牌凭证
+     */
+
+    public function refresh_authorization_info($organization_id){
+        $info = WechatAuthorization::getOne([['organization_id',$organization_id]]);
+        dump($info);
+    }
+
+    /*
+     * 授权并保存授权信息
      * $auth_code  公众号授权后回调时返回的授权码
      * $organization_id 该公众号关联组织ID
      */
-    public function get_authorization_info($auth_code,$organization_id){
+    public function get_authorization_info($auth_code){
         $wxparam = config('app.wechat_open_setting');
         $component_access_token = $this->get_component_access_token();
         $url = 'https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token='.$component_access_token;
@@ -38,22 +47,11 @@ class WechatApi{
             //第三方刷新调用接口令牌
             $authorizer_refresh_token = $re['authorization_info']['authorizer_refresh_token'];
 
-            $auth_data = array(
-                'organization_id'=>$organization_id,
-                'authorizer_appid'=>$authorizer_appid,
-                'authorizer_access_token'=>$authorizer_access_token,
-                'authorizer_refresh_token'=>$authorizer_refresh_token,
-                'origin_data'=>$origin_re,
-                'status'=>'1',
-                'expire_time'=>time()+7200,
-            );
-
-            WechatAuthorizationInfo::addInfo($auth_data);
-
             return array(
                 'authorizer_appid'=> $re['authorization_info']['authorizer_appid'],
                 'authorizer_access_token'=>$re['authorization_info']['authorizer_access_token'],
-                'authorizer_refresh_token'=>$re['authorization_info']['authorizer_refresh_token']
+                'authorizer_refresh_token'=>$re['authorization_info']['authorizer_refresh_token'],
+                'origin_re'=>$origin_re,
             );
         }else{
             exit('授权失败，请重新授权');

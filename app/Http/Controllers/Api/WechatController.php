@@ -4,8 +4,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
+use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
+    public function test(){
+        \Wechat::refresh_authorization_info(1);
+    }
     public function response($appid,Request $request){
         dump($appid);
         echo "这里是消息与事件接收URL";
@@ -36,7 +40,25 @@ class WechatController extends Controller{
     public function redirect(){
         $auth_code = $_GET['auth_code'];//授权码
         $expires_in = $_GET['expires_in'];//过期时间
-        $auth_info = \Wechat::get_authorization_info($auth_code,1);//获取授权
+        $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
+
+        DB::beginTransaction();
+        try {
+            $auth_data = array(
+                'organization_id'=>1,
+                'authorizer_appid'=>$auth_info['authorizer_appid'],
+                'authorizer_access_token'=>$auth_info['authorizer_access_token'],
+                'authorizer_refresh_token'=>$auth_info['authorizer_refresh_token'],
+                'origin_data'=>$auth_info['origin_re'],
+                'status'=>'1',
+                'expire_time'=>time()+$expires_in,
+            );
+            WechatAuthorization::addAuthorization($auth_data);
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '保存授权信息失败，请检查', 'status' => '0']);
+        }
+
         //添加所有的已有粉丝进入零壹账号体系,明天再做。
         echo "授权完成";
     }
