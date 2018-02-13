@@ -49,7 +49,6 @@ class WechatController extends Controller{
     //授权回调链接
     public function redirect(){
         $auth_code = $_GET['auth_code'];//授权码
-        $expires_in = $_GET['expires_in'];//过期时间
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
         dump($auth_info);
         DB::beginTransaction();
@@ -61,7 +60,7 @@ class WechatController extends Controller{
                 'authorizer_refresh_token'=>$auth_info['authorizer_refresh_token'],
                 'origin_data'=>$auth_info['origin_re'],
                 'status'=>'1',
-                'expire_time'=>time()+$expires_in,
+                'expire_time'=>time()+7200,
             );
             WechatAuthorization::addAuthorization($auth_data);
         } catch (\Exception $e) {
