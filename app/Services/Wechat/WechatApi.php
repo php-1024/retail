@@ -17,10 +17,48 @@ class WechatApi{
     /*
      * 刷新授权调用令牌凭证
      */
-
     public function refresh_authorization_info($organization_id){
         $info = WechatAuthorization::getOne([['organization_id',$organization_id]]);
-        dump($info);
+        if(empty($info)||empty($info->authorizer_access_token)){
+            exit('您尚未授权，请先前往进行授权操作');
+        }
+        if($info->expire_time - time()>600){//仍未过期直接返回值
+            return array(
+                'authorizer_appid'=> $info->authorizer_appid,
+                'authorizer_access_token'=>$info->authorizer_access_token,
+                'authorizer_refresh_token'=>$info->authorizer_refresh_token,
+            );
+        }
+        $wxparam = config('app.wechat_open_setting');
+        $component_access_token = $this->get_component_access_token();
+        $url = 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token='.$component_access_token;
+        $data = array(
+            'component_appid'=>$wxparam['open_appid'],
+            'authorizer_appid'=>$info->authorizer_appid,
+            'authorizer_refresh_token'=>$info->authorizer_refresh_token,
+        );
+        $data = json_encode($data);
+        $origin_re =  \HttpCurl::doPost($url,$data);
+        $re = json_decode($origin_re,true);
+
+        if(!empty($re['authorizer_access_token'])){
+            $authorizer_access_token = $re['authorizer_access_token'];
+            $authorizer_refresh_token = $re['authorizer_refresh_token'];
+            $auth_data = array(
+                'authorizer_access_token'=>$authorizer_access_token,
+                'authorizer_refresh_token'=>$authorizer_refresh_token,
+                'origin_data'=>$origin_re,
+                'expire_time'=>time()+7200,
+            );
+            WechatAuthorization::editAuthorization([['id',$info->id]],$auth_data);
+            return array(
+                'authorizer_appid'=> $info->authorizer_appid,
+                'authorizer_access_token'=>$authorizer_access_token,
+                'authorizer_refresh_token'=>$authorizer_refresh_token,
+            );
+        }else{
+            return false;
+        }
     }
 
     /*
