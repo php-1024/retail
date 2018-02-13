@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redis;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::any('/',function(){
+    return "你好世界";
+});
 /***************************框架学习整理资料部分***************************/
 Route::get('zeott','Tooling\TestController@test');
 Route::group(['prefix'=>'study'],function(){
