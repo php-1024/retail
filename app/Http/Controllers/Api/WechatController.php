@@ -63,7 +63,7 @@ class WechatController extends Controller{
                 'expire_time'=>time()+7200,
             );
             WechatAuthorization::addAuthorization($auth_data);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dump($e);
             exit();
             DB::rollBack();//事件回滚
