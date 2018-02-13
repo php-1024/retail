@@ -21,7 +21,6 @@ class WechatAuthorization extends Model{
     }
 
     public static function addAuthorization($param){
-        dump($param);
         $model = new WechatAuthorization();
         $model->organization_id = $param['organization_id'];
         $model->authorizer_appid = $param['authorizer_appid'];

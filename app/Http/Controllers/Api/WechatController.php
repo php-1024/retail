@@ -67,7 +67,7 @@ class WechatController extends Controller{
         } catch (\Exception $e) {
             dump($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '保存授权信息失败，请检查', 'status' => '0']);
+           exit('保存授权信息失败，请检查');
         }
 
         //添加所有的已有粉丝进入零壹账号体系,明天再做。
