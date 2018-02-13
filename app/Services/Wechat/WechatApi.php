@@ -15,6 +15,21 @@ class WechatApi{
     }
 
     /*
+     * 发送客服消息
+     */
+    public function send_fans_text($authorizer_access_token,$to_user,$text){
+        $url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$authorizer_access_token;
+        $data = [
+            'touser'=>$to_user,
+            'msgtype'=>'text',
+            'text'=>[
+                'content'=>$text,
+            ],
+        ];
+        $re = \HttpCurl::doPost($url,$data);
+        dump($re);
+    }
+    /*
      * 获取粉丝信息详情
      */
     public function get_fans_info($authorizer_access_token,$open_id){
