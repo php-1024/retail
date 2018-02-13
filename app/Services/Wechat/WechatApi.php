@@ -18,8 +18,6 @@ class WechatApi{
      * 获取粉丝信息详情
      */
     public function get_fans_info($authorizer_access_token,$open_id){
-        $component_access_token = $this->get_component_access_token();
-        //$url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$authorizer_access_token.'&openid='.$open_id.'&lang=zh_CN ';
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$authorizer_access_token.'&openid='.$open_id.'&lang=zh_CN ';
         $re = \HttpCurl::doGet($url);
         dump($re);
