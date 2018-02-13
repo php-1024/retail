@@ -15,6 +15,18 @@ class WechatApi{
     }
 
     /*
+     * 获取粉丝列表
+     * $organization_id 绑定授权组织的ID
+     */
+    public function get_fans_list($organization_id){
+        $auth_info = self::refresh_authorization_info($organization_id);
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$auth_info->authorizer_access_token;
+        $re = \HttpCurl::doGet($url);
+        $re = json_decode($re,true);
+        dump($re);
+    }
+
+    /*
      * 获取授权方基本信息
      * 授权方APPID
      */
