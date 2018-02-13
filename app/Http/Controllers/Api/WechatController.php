@@ -49,7 +49,15 @@ class WechatController extends Controller{
             elseif ($keyword == "TESTCOMPONENT_MSG_TYPE_TEXT") {
                 $contentStr = "TESTCOMPONENT_MSG_TYPE_TEXT_callback";
             }
-
+            // 案例3 - 返回Api文本信息
+            elseif (strpos($keyword, "QUERY_AUTH_CODE:") !== false) {
+                $authcode = str_replace("QUERY_AUTH_CODE:", "", $keyword);
+                $contentStr = $authcode . "_from_api";
+                $auth_info = \Wechat::get_authorization_info($authcode);
+                $accessToken = $auth_info['authorizer_access_token'];
+                \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
+                return 1;
+            }
             $result = '';
             if (!empty($contentStr)) {
                 $xmlTpl = "<xml>
