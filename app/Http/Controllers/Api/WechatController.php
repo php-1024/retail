@@ -12,7 +12,10 @@ class WechatController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
         //$info = WechatAuthorization::getOne([['organization_id',1]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
-        \Wechat::get_fans_list($auth_info['authorizer_access_token']);
+        $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
+        foreach($fans_list['data']['open_id'] as $key=>$val){
+            dump($val);
+        };
     }
     public function response($appid,Request $request){
         dump($appid);
