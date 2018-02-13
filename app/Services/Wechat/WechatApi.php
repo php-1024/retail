@@ -20,8 +20,7 @@ class WechatApi{
      */
     public function get_fans_list($organization_id){
         $auth_info = self::refresh_authorization_info($organization_id);
-        dump($auth_info);
-        $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$auth_info->authorizer_access_token;
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$auth_info['authorizer_access_token'];
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re,true);
         dump($re);
