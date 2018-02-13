@@ -13,9 +13,8 @@ class WechatController extends Controller{
         //$info = WechatAuthorization::getOne([['organization_id',1]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
         $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
-        dump($fans_list);
         foreach($fans_list['data']['openid'] as $key=>$val){
-            dump($val);
+            \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
         };
     }
     public function response($appid,Request $request){
