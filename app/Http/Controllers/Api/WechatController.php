@@ -27,6 +27,7 @@ class WechatController extends Controller{
         $encryptType = empty($_GET['encrypt_type']) ? '' : trim($_GET['encrypt_type']);
         $openid = $appid;
         $input = file_get_contents('php://input');
+        file_put_contents('test.txt',$input);
         $paramArr = $this->xml2array($input);
 
         $jm = \Wechat::WXBizMsgCrypt();
@@ -64,6 +65,7 @@ class WechatController extends Controller{
             }
             echo $result;
         }
+
     }
 
     public  function xml2array($xmlstring)
