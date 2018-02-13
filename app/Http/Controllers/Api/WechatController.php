@@ -8,7 +8,9 @@ use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
     public function test(){
-
+        $xml = '<xml><ToUserName><![CDATA[gh_3c884a361561]]></ToUserName> <FromUserName><![CDATA[ozy4qt1eDxSxzCr0aNT0mXCWfrDE]]></FromUserName> <CreateTime>1426561271</CreateTime> <MsgType><![CDATA[event]]></MsgType> <Event><![CDATA[LOCATION]]></Event> <Latitude>111.000000</Latitude> <Longitude>222.000000</Longitude> <Precision>333.000000</Precision> </xml>';
+        dump($this->xml2array($xml));
+        /*
         $auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
         //$info = WechatAuthorization::getOne([['organization_id',1]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
@@ -18,10 +20,18 @@ class WechatController extends Controller{
             \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
             exit();
         };
+        */
     }
     public function response($appid,Request $request){
         echo $appid.'123';
     }
+
+    public  function xml2array($xmlstring)
+    {
+        $object = simplexml_load_string($xmlstring, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
+        return @json_decode(@json_encode($object),1);
+    }
+
     //接受收授权推送消息。
     public function open(Request $request){
         $timeStamp    =$_GET['timestamp'];
