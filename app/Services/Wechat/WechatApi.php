@@ -26,6 +26,7 @@ class WechatApi{
                 'content'=>$text,
             ],
         ];
+        $data = json_encode($data);
         $re = \HttpCurl::doPost($url,$data);
         dump($re);
     }
