@@ -61,7 +61,22 @@ class WechatController extends Controller{
             'expire_time'=>time()+7200,
         );
         WechatAuthorization::addAuthorization($auth_data);
-
+        DB::beginTransaction();
+        try {
+            $auth_data = array(
+                'organization_id'=>1,
+                'authorizer_appid'=>$auth_info['authorizer_appid'],
+                'authorizer_access_token'=>$auth_info['authorizer_access_token'],
+                'authorizer_refresh_token'=>$auth_info['authorizer_refresh_token'],
+                'origin_data'=>$auth_info['origin_re'],
+                'status'=>'1',
+                'expire_time'=>time()+7200,
+            );
+            WechatAuthorization::addAuthorization($auth_data);
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+           exit('保存授权信息失败，请检查');
+        }
 
         //添加所有的已有粉丝进入零壹账号体系,明天再做。
         echo "授权完成";
