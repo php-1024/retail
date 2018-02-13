@@ -20,8 +20,7 @@ class WechatController extends Controller{
         };
     }
     public function response($appid,Request $request){
-        dump($appid);
-        echo "这里是消息与事件接收URL";
+        echo $appid.'123';
     }
     //接受收授权推送消息。
     public function open(Request $request){
