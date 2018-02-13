@@ -65,6 +65,7 @@ class WechatController extends Controller{
             );
             WechatAuthorization::addAuthorization($auth_data);
         } catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '保存授权信息失败，请检查', 'status' => '0']);
         }
