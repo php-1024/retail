@@ -125,11 +125,10 @@ class WechatApi{
             $authorizer_access_token = $re['authorization_info']['authorizer_access_token'];
             //第三方刷新调用接口令牌
             $authorizer_refresh_token = $re['authorization_info']['authorizer_refresh_token'];
-
             return array(
-                'authorizer_appid'=> $re['authorization_info']['authorizer_appid'],
-                'authorizer_access_token'=>$re['authorization_info']['authorizer_access_token'],
-                'authorizer_refresh_token'=>$re['authorization_info']['authorizer_refresh_token'],
+                'authorizer_appid'=> $authorizer_appid,
+                'authorizer_access_token'=>$authorizer_access_token,
+                'authorizer_refresh_token'=>$authorizer_refresh_token ,
                 'origin_re'=>$origin_re,
             );
         }else{
