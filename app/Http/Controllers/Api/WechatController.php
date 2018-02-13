@@ -19,8 +19,6 @@ class WechatController extends Controller{
         };
     }
     public function response($appid,Request $request){
-        file_put_contents('tssss.txt',$appid);
-        /*
         $timestamp = empty($_GET['timestamp']) ? '' : trim($_GET['timestamp']);
         $nonce = empty($_GET['nonce']) ? '' : trim($_GET ['nonce']);
         $msgSign = empty($_GET['msg_signature']) ? '' : trim($_GET['msg_signature']);
@@ -66,7 +64,6 @@ class WechatController extends Controller{
             }
             echo $result;
         }
-        */
     }
 
     public  function xml2array($xmlstring)
