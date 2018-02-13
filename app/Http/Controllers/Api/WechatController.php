@@ -51,7 +51,7 @@ class WechatController extends Controller{
         $auth_code = $_GET['auth_code'];//授权码
         $expires_in = $_GET['expires_in'];//过期时间
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
-
+        dump($auth_info);
         DB::beginTransaction();
         try {
             $auth_data = array(
