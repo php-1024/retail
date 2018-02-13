@@ -13,7 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        'api/wechat/response',
+        'api/wechat/response/{appid}',
         'api/wechat/open',
     ];
 }
