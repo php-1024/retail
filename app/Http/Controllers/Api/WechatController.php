@@ -9,9 +9,9 @@ use App\Models\WechatAuthorization;
 class WechatController extends Controller{
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
-        //$info = WechatAuthorization::getOne([['organization_id',1]]);
-        //\Wechat::get_authorizer_info($info->authorizer_appid);
-        //$fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
+        $info = WechatAuthorization::getOne([['organization_id',2]]);
+        \Wechat::get_authorizer_info($info->authorizer_appid);
+       // $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
         //dump($fans_list);
         //foreach($fans_list['data']['openid'] as $key=>$val){
             //\Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
