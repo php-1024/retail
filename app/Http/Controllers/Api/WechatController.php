@@ -21,11 +21,9 @@ class WechatController extends Controller{
         //$to_user = 'oyhbt1I_Gpz3u8JYxWP_NIugQhaQ';
         //$text = '你好世界';
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
-
-        $appid = 'wx77212e03020bd1dd';
         $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
 
-        $url = \Wechat::get_web_auth_url($appid,$redirect_url);
+        $url = \Wechat::get_web_auth_url($redirect_url);
         header('location:'.$url);
     }
 
@@ -36,6 +34,7 @@ class WechatController extends Controller{
         $code = trim($_GET['code']);
         $state = trim($_GET['state']);
         if($state == 'lyxkj2018'){
+            $re = \Wechat::get_web_access_token($code);
 
         }else{
             exit('无效的的回调链接');

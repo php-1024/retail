@@ -14,14 +14,25 @@ class WechatApi{
         echo 1234;
     }
 
+    /*
+     * 首次或超时30天后获取并保存网页授权access_token
+     * $auth_code 用户授权后获取的授权码
+     */
+    public function get_web_access_token($auth_code){
+        $wxparam = config('app.wechat_web_setting');
+        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxparam['appid'].'&secret='.$wxparam['appsecret'].'&code='.$auth_code.'&grant_type=authorization_code';
+        $re = \HttpCurl::doGet($url);
+        dump($re);
+    }
 
     /*
      * 获取网页授权链接，
      * $appid:默认公众号ID
      * $redirect_uri:回调链接
      */
-    public function get_web_auth_url($appid,$redirect_uri){
-        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';
+    public function get_web_auth_url($redirect_uri){
+        $wxparam = config('app.wechat_web_setting');
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$wxparam['appid'].'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';
         return $url;
     }
 
