@@ -17,6 +17,8 @@ class WechatApi{
 
     /*
      * 获取网页授权链接，
+     * $appid:默认公众号ID
+     * $redirect_uri:回调链接
      */
     public function get_web_auth_url($appid,$redirect_uri){
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';

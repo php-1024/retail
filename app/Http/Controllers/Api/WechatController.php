@@ -22,8 +22,11 @@ class WechatController extends Controller{
         //$text = '你好世界';
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
 
-        $appid = '';
-        $redirect_url = '';
+        $appid = 'wx77212e03020bd1dd';
+        $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
+
+        $url = \Wechat::get_web_auth_url($appid,$redirect_url);
+        dump($url);
     }
 
     /*
