@@ -20,6 +20,7 @@ class WechatApi{
     public function get_open_web_auth_url($appid,$redirect_url){
         $wxparam = config('app.wechat_open_setting');
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=lyxkj2018&component_appid='.$wxparam['open_appid'].'#wechat_redirect';
+        return $url;
     }
 
     /*

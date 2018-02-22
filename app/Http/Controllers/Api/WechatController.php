@@ -8,9 +8,9 @@ use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
     public function test(){
-        $auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
-        $info = WechatAuthorization::getOne([['organization_id',2]]);
-        \Wechat::get_authorizer_info($info->authorizer_appid);
+        //$auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
+        //$info = WechatAuthorization::getOne([['organization_id',2]]);
+        //\Wechat::get_authorizer_info($info->authorizer_appid);
        // $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
         //dump($fans_list);
         //foreach($fans_list['data']['openid'] as $key=>$val){
@@ -22,7 +22,6 @@ class WechatController extends Controller{
         //$text = '你好世界';
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
         $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
-
         $url = \Wechat::get_web_auth_url($redirect_url);
         header('location:'.$url);
     }
@@ -35,7 +34,11 @@ class WechatController extends Controller{
         $state = trim($_GET['state']);
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_web_access_token($code);
-            $open_id = $re['openid'];
+            dump($re);
+            $appid = 'wxab6d2b312939eb01';
+            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect';
+            $url = \Wechat::get_open_web_auth_url($appid);
+            dump($url);
         }else{
             exit('无效的的回调链接');
         }
@@ -48,13 +51,9 @@ class WechatController extends Controller{
     public function open_web_redirect(){
         $code = trim($_GET['code']);
         $state = trim($_GET['state']);
-        if($state == 'lyxkj2018'){
-            $re = \Wechat::get_web_access_token($code);
-            $open_id = $re['openid'];
-        }else{
-            exit('无效的的回调链接');
-        }
-        echo "这里是回调页面";
+        dump($code);
+        exit();
+
     }
 
     /*
