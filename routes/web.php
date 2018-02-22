@@ -456,11 +456,12 @@ Route::group(['prefix'=>'api'],function() {
 
     //登录页面组
     Route::group(['prefix' => 'wechat'], function () {
-        Route::any('response/{appid}', 'Api\WechatController@response');//登录页面路由
-        Route::any('open', 'Api\WechatController@open');//登录页面路由
-        Route::any('auth', 'Api\WechatController@auth');//登录页面路由
-        Route::any('redirect', 'Api\WechatController@redirect');//登录页面路由
-        Route::any('test', 'Api\WechatController@test');//登录页面路由
+        Route::any('response/{appid}', 'Api\WechatController@response');//开放平台控制公众平台回复函数
+        Route::any('open', 'Api\WechatController@open');//接受公众号收授权推送消息
+        Route::any('auth', 'Api\WechatController@auth');//公众号授权链接页面
+        Route::any('redirect', 'Api\WechatController@redirect');//公众号授权回调链接
+        Route::any('web_redirect', 'Api\WechatController@web_redirect');//网页授权回调路由
+        Route::any('test', 'Api\WechatController@test');//测试函数
     });
 });
 /********************商户管理系统*************************/

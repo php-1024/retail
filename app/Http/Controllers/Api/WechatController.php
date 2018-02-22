@@ -11,17 +11,31 @@ class WechatController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
         //$info = WechatAuthorization::getOne([['organization_id',1]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
-        $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
-        dump($fans_list);
-        foreach($fans_list['data']['openid'] as $key=>$val){
-            \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
-            exit();
-        };
+        //$fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
+        //dump($fans_list);
+        //foreach($fans_list['data']['openid'] as $key=>$val){
+            //\Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
+            //exit();
+        //};
 
         //$to_user = 'oyhbt1I_Gpz3u8JYxWP_NIugQhaQ';
         //$text = '你好世界';
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
+
+        $appid = '';
+        $redirect_url = '';
     }
+
+    /*
+     * 网页授权链接回调函数
+     */
+    public function web_redirect(){
+        echo "这里是回调页面";
+    }
+
+    /*
+     * 开放平台回复函数
+     */
     public function response($appid,Request $request){
         $timestamp = empty($_GET['timestamp']) ? '' : trim($_GET['timestamp']);
         $nonce = empty($_GET['nonce']) ? '' : trim($_GET ['nonce']);
@@ -78,6 +92,9 @@ class WechatController extends Controller{
         }
     }
 
+    /*
+     * XML转化为数组
+     */
     public  function xml2array($xmlstring)
     {
         $object = simplexml_load_string($xmlstring, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
