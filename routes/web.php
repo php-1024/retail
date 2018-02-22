@@ -461,6 +461,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('auth', 'Api\WechatController@auth');//公众号授权链接页面
         Route::any('redirect', 'Api\WechatController@redirect');//公众号授权回调链接
         Route::any('web_redirect', 'Api\WechatController@web_redirect');//网页授权回调路由
+        Route::any('open_web_redirect','Api\WechatController@open_web_redirect');
         Route::any('test', 'Api\WechatController@test');//测试函数
     });
 });
