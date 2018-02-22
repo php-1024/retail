@@ -23,7 +23,8 @@ class WechatController extends Controller{
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
         $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
         $url = \Wechat::get_web_auth_url($redirect_url);
-        header('location:'.$url);
+        echo "<script>location.href='".$url."'</script>";
+        exit();
     }
 
     /*
@@ -34,15 +35,14 @@ class WechatController extends Controller{
         $state = trim($_GET['state']);
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_web_access_token($code);
-            dump($re);
             $appid = 'wxab6d2b312939eb01';
-            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect?open_id='.$re['openid'];
+            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect?appid='.$appid.'&open_id='.$re['openid'];
             $url = \Wechat::get_open_web_auth_url($appid,$redirect_url);
             echo "<script>location.href='".$url."'</script>";
+            exit();
         }else{
             exit('无效的的回调链接');
         }
-        echo "这里是回调页面";
     }
 
     /*
@@ -51,10 +51,16 @@ class WechatController extends Controller{
     public function open_web_redirect(){
         $code = trim($_GET['code']);
         $state = trim($_GET['state']);
-        dump($code);
-        dump($_GET['open_id']);
-        exit();
-
+        $open_id = $_GET['open_id'];
+        $appid = $_GET['appid'];
+        if($state == 'lyxkj2018'){
+            $re = \Wechat::get_open_web_access_token($appid,$code);
+            dump($open_id);
+            dump($re);
+            exit();
+        }else{
+            exit('无效的的回调链接');
+        }
     }
 
     /*

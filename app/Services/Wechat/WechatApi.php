@@ -15,13 +15,25 @@ class WechatApi{
     }
 
     /*
-     * 第三方平台代公众号页面授权链接
+     * 第三方平台代公众号页面授权链接，第一步，通过授权链接获取code
     */
     public function get_open_web_auth_url($appid,$redirect_url){
         $wxparam = config('app.wechat_open_setting');
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=lyxkj2018&component_appid='.$wxparam['open_appid'].'#wechat_redirect';
         return $url;
     }
+    /*
+     * 第三方平台代公众号获取页面授权第二步，获取access_token
+     */
+    public function get_open_web_access_token($appid,$auth_code){
+        $component_access_token = $this->get_component_access_token();
+        $wxparam = config('app.wechat_open_setting');
+        $url = 'https://api.weixin.qq.com/sns/oauth2/component/access_token?appid='.$appid.'&code='.$auth_code.'&grant_type=authorization_code&component_appid='.$wxparam['open_appid'].'&component_access_token='.$component_access_token;
+        $re = \HttpCurl::doGet($url);
+        $re = json_decode($re,true);
+        return $re;
+    }
+
 
     /*
      * 获取用户对于默认零壹公众号的唯一open_id;
