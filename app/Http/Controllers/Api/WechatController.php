@@ -36,7 +36,7 @@ class WechatController extends Controller{
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_web_access_token($code);
             $appid = 'wxab6d2b312939eb01';
-            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect?appid='.$appid.'&open_id='.$re['openid'];
+            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect?param='.$appid.'||'.$re['openid'];
             $url = \Wechat::get_open_web_auth_url($appid,$redirect_url);
             echo "<script>location.href='".$url."'</script>";
             exit();
@@ -51,8 +51,10 @@ class WechatController extends Controller{
     public function open_web_redirect(){
         $code = trim($_GET['code']);
         $state = trim($_GET['state']);
-        $open_id = $_GET['open_id'];
-        $appid = $_GET['appid'];
+        $param = $_GET['param'];
+        $param_arr = explode($param,'||');
+        $appid = $param_arr[0];
+        $open_id = $param_arr[1];
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_open_web_access_token($appid,$code);
             dump($open_id);
