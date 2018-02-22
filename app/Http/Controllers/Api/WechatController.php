@@ -96,7 +96,7 @@ class WechatController extends Controller{
                 \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
                 return 1;
             }else{
-                $contentStr = $param['FromUserName'].'|'.$param['ToUserName'];
+                $contentStr = $openid.'|'.$param['FromUserName'].'|'.$param['ToUserName'];
             }
             $result = '';
             if (!empty($contentStr)) {
