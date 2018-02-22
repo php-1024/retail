@@ -26,7 +26,7 @@ class WechatController extends Controller{
         $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
 
         $url = \Wechat::get_web_auth_url($appid,$redirect_url);
-        dump($url);
+        header('location:'.$url);
     }
 
     /*
