@@ -33,6 +33,7 @@ class WechatController extends Controller{
      * 网页授权链接回调函数
      */
     public function web_redirect(){
+        dump($_GET);
         echo "这里是回调页面";
     }
 
