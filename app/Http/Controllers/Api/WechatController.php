@@ -107,7 +107,7 @@ class WechatController extends Controller{
             <MsgType><![CDATA[text]]></MsgType>
             <Content><![CDATA[%s]]></Content>
             </xml>";
-                $result = sprintf($xmlTpl, $param['FromUserName'], $openid, time(), $contentStr);
+                $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $contentStr);
                 if (isset($_GET['encrypt_type']) && $_GET['encrypt_type'] == 'aes') { // 密文传输
                     $encryptMsg = '';
                     $jm->encryptMsg($result, $_GET['timestamp'], $_GET['nonce'], $encryptMsg);
