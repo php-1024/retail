@@ -36,7 +36,7 @@ class WechatController extends Controller{
             $re = \Wechat::get_web_access_token($code);
             dump($re);
             $appid = 'wxab6d2b312939eb01';
-            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect';
+            $redirect_url = 'http://o2o.01nnt.com/api/wechat/open_web_redirect?open_id='.$re['openid'];
             $url = \Wechat::get_open_web_auth_url($appid);
             dump($url);
         }else{
