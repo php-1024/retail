@@ -52,6 +52,7 @@ class WechatController extends Controller{
         $code = trim($_GET['code']);
         $state = trim($_GET['state']);
         dump($code);
+        dump($_GET['openid']);
         exit();
 
     }
