@@ -52,7 +52,7 @@ class WechatController extends Controller{
         $code = trim($_GET['code']);
         $state = trim($_GET['state']);
         $param = $_GET['param'];
-        $param_arr = explode($param,'||');
+        $param_arr = explode('||',$param);
         $appid = $param_arr[0];
         $open_id = $param_arr[1];
         if($state == 'lyxkj2018'){
