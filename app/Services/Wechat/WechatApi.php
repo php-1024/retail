@@ -14,8 +14,10 @@ class WechatApi{
         echo 1234;
     }
 
+    //public function get_web_url_token
+
     /*
-     * 首次或超时30天后获取并保存网页授权access_token
+     * 获取用户对于默认零壹公众号的唯一open_id;
      * $auth_code 用户授权后获取的授权码
      */
     public function get_web_access_token($auth_code){
@@ -23,7 +25,7 @@ class WechatApi{
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxparam['appid'].'&secret='.$wxparam['appsecret'].'&code='.$auth_code.'&grant_type=authorization_code';
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re);
-        dump($re);
+        return $re;
     }
 
     /*

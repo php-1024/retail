@@ -35,7 +35,7 @@ class WechatController extends Controller{
         $state = trim($_GET['state']);
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_web_access_token($code);
-
+            $open_id = $re['openid'];
         }else{
             exit('无效的的回调链接');
         }
@@ -80,6 +80,8 @@ class WechatController extends Controller{
                 $accessToken = $auth_info['authorizer_access_token'];
                 \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
                 return 1;
+            }else{
+                $contentStr = "你好世界";
             }
             $result = '';
             if (!empty($contentStr)) {
