@@ -22,6 +22,7 @@ class WechatApi{
         $wxparam = config('app.wechat_web_setting');
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxparam['appid'].'&secret='.$wxparam['appsecret'].'&code='.$auth_code.'&grant_type=authorization_code';
         $re = \HttpCurl::doGet($url);
+        $re = json_decode($re);
         dump($re);
     }
 
