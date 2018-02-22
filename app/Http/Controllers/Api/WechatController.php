@@ -76,6 +76,7 @@ class WechatController extends Controller{
         $fromXml = sprintf($format, $paramArr['Encrypt']);
         $toXml='';
         $errCode = $jm->decryptMsg($msgSign, $timestamp, $nonce, $fromXml, $toXml); // 解密
+        file_put_contents('test2.txt',$toXml);
         if($errCode == '0'){
             $param = $this->xml2array($toXml);
             $keyword = isset($param['Content']) ? trim($param['Content']) : '';
