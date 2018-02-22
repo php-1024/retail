@@ -43,6 +43,21 @@ class WechatController extends Controller{
     }
 
     /*
+     * 开放平台代网页授权链接回调函数
+     */
+    public function open_web_redirect(){
+        $code = trim($_GET['code']);
+        $state = trim($_GET['state']);
+        if($state == 'lyxkj2018'){
+            $re = \Wechat::get_web_access_token($code);
+            $open_id = $re['openid'];
+        }else{
+            exit('无效的的回调链接');
+        }
+        echo "这里是回调页面";
+    }
+
+    /*
      * 开放平台回复函数
      */
     public function response($appid,Request $request){
@@ -92,7 +107,7 @@ class WechatController extends Controller{
             <MsgType><![CDATA[text]]></MsgType>
             <Content><![CDATA[%s]]></Content>
             </xml>";
-                $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $contentStr);
+                $result = sprintf($xmlTpl, $openid, $param['ToUserName'], time(), $contentStr);
                 if (isset($_GET['encrypt_type']) && $_GET['encrypt_type'] == 'aes') { // 密文传输
                     $encryptMsg = '';
                     $jm->encryptMsg($result, $_GET['timestamp'], $_GET['nonce'], $encryptMsg);
