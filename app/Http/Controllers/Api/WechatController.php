@@ -39,7 +39,7 @@ class WechatController extends Controller{
                             [
                                 'type'=>'click',
                                 'name'=>'点击事件',
-                                'key'=>'零壹新科技',
+                                'key'=>'1234',
                             ],
                         ],
                    ],
@@ -120,7 +120,7 @@ class WechatController extends Controller{
             elseif ($keyword == "TESTCOMPONENT_MSG_TYPE_TEXT") {
                 $contentStr = "TESTCOMPONENT_MSG_TYPE_TEXT_callback";
             }
-            elseif ($keyword == "零壹新科技") {
+            elseif ($keyword == "1234") {
                 $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容";
             }
             // 案例3 - 返回Api文本信息
