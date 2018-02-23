@@ -31,7 +31,11 @@ class WechatController extends Controller{
 
         /***测试创建自定义菜单****/
         $auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
-        dump($auth_info);
+        $menu_data_test = [
+            'button'=>[
+                'name'=>'百度',
+            ],
+        ];
         /***测试创建自定义菜单****/
     }
 
@@ -104,6 +108,9 @@ class WechatController extends Controller{
             elseif ($keyword == "TESTCOMPONENT_MSG_TYPE_TEXT") {
                 $contentStr = "TESTCOMPONENT_MSG_TYPE_TEXT_callback";
             }
+            elseif ($keyword == "零壹新科技") {
+                $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容";
+            }
             // 案例3 - 返回Api文本信息
             elseif (strpos($keyword, "QUERY_AUTH_CODE:") !== false) {
                 $authcode = str_replace("QUERY_AUTH_CODE:", "", $keyword);
@@ -112,8 +119,6 @@ class WechatController extends Controller{
                 $accessToken = $auth_info['authorizer_access_token'];
                 \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
                 return 1;
-            }elseif($openid=='wxab6d2b312939eb01'){
-                $contentStr = $openid.'|'.$param['FromUserName'].'|'.$param['ToUserName'];
             }
             $result = '';
             if (!empty($contentStr)) {
