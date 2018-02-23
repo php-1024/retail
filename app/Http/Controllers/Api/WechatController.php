@@ -120,10 +120,6 @@ class WechatController extends Controller{
             elseif ($keyword == "TESTCOMPONENT_MSG_TYPE_TEXT") {
                 $contentStr = "TESTCOMPONENT_MSG_TYPE_TEXT_callback";
             }
-            //点击事件触发关键字回复
-            elseif ($param['Event']=='CLICK' && $param['EventKey'] == "1234") {
-                $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容";
-            }
             // 案例3 - 返回Api文本信息
             elseif (strpos($keyword, "QUERY_AUTH_CODE:") !== false) {
                 $authcode = str_replace("QUERY_AUTH_CODE:", "", $keyword);
@@ -132,6 +128,12 @@ class WechatController extends Controller{
                 $accessToken = $auth_info['authorizer_access_token'];
                 \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
                 return 1;
+            }
+            //点击事件触发关键字回复
+            elseif ($param['Event']=='CLICK' && $param['EventKey'] == "1234") {
+                $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容";
+            }else{
+                $contentStr = $param['Event']."||". $param['EventKey'];
             }
             $result = '';
             if (!empty($contentStr)) {
