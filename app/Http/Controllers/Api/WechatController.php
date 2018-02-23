@@ -21,10 +21,18 @@ class WechatController extends Controller{
         //$to_user = 'oyhbt1I_Gpz3u8JYxWP_NIugQhaQ';
         //$text = '你好世界';
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
-        $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
-        $url = \Wechat::get_web_auth_url($redirect_url);
-        echo "<script>location.href='".$url."'</script>";
-        exit();
+
+        /***授权测试***/
+        //$redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
+        //$url = \Wechat::get_web_auth_url($redirect_url);
+        //echo "<script>location.href='".$url."'</script>";
+        //exit();
+        /***授权测试***/
+
+        /***测试创建自定义菜单****/
+        $auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
+        dump($auth_info);
+        /***测试创建自定义菜单****/
     }
 
     /*

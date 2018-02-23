@@ -58,8 +58,22 @@ class WechatApi{
         return $url;
     }
 
+
+
+    /*
+     * 创建自定义菜单
+     * @param $authorizer_access_token
+     * @param $to_user
+     * @param $text
+     */
+    public function create_menu($authorizer_access_token,$menu_data){
+
+    }
+
     /*
      * 发送客服消息
+     * $authorizer_access_token 第三方平台调用接口凭证
+     * $text 发送内容
      */
     public function send_fans_text($authorizer_access_token,$to_user,$text){
         $url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$authorizer_access_token;
