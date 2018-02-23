@@ -91,12 +91,12 @@ class WechatController extends Controller{
                             [
                                 'type'=>'media_id',
                                 'name'=>'图片',
-                                'key'=>'1234',
+                                'media_id'=>'MEDIA_ID1',
                             ],
                             [
                                 'type'=>'media_id',
                                 'name'=>'图文',
-                                'key'=>'1234',
+                                'media_id'=>'MEDIA_ID1',
                             ]
                         ]
                     ],
