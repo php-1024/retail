@@ -191,7 +191,7 @@ class WechatController extends Controller{
             elseif (($param['Event']=='CLICK' && $param['EventKey'] == "1234") || $keyword=='1234') {
                 $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容2";
             }else{
-                $contentStr='';
+                $contentStr='1234';
             }
             $result = '';
             if (!empty($contentStr)) {
