@@ -8,7 +8,7 @@ use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
     public function test(){
-        //$auth_info = \Wechat::refresh_authorization_info(2);//刷新并获取授权令牌
+        $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
         //$info = WechatAuthorization::getOne([['organization_id',2]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
        // $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
@@ -29,9 +29,10 @@ class WechatController extends Controller{
         //exit();
         /***授权测试***/
 
-        /***测试创建自定义菜单****/
-        $auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
 
+        //$auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
+        /***测试创建自定义菜单****/
+        /*
         $menu_data_test = [
             'button'=>[
                     [
@@ -95,7 +96,7 @@ class WechatController extends Controller{
         ];
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
         dump($re);
-
+        */
 
         /***测试创建自定义菜单****/
         /*
