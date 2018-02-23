@@ -190,7 +190,7 @@ class WechatController extends Controller{
                 $contentStr = '你好吗，世界';
             }
             //点击事件触发关键字回复
-            elseif ($param['Event']=='CLICK' && $param['EventKey'] == "1234") {
+            elseif ($param['EventKey'] == "1234") {
                 $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容2";
             }
             $result = '';
