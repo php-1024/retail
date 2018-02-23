@@ -68,7 +68,7 @@ class WechatController extends Controller{
                             ],
                             [
                                 'type'=>'pic_photo_or_album',
-                                'name'=>'拍照或相册发图',
+                                'name'=>'拍照或相册',
                                 'url'=>'http://www.01nnt.com',
                             ],
                             [
