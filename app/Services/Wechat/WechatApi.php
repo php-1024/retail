@@ -69,6 +69,7 @@ class WechatApi{
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$authorizer_access_token;
         $data =  $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url,$data);
+        return $re;
     }
 
     /*
@@ -78,6 +79,7 @@ class WechatApi{
     public function search_menu($authorizer_access_token){
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$authorizer_access_token;
         $re = \HttpCurl::doGet($url);
+        return $re;
     }
 
     /*
