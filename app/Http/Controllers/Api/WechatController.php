@@ -60,17 +60,17 @@ class WechatController extends Controller{
                             [
                                 'type'=>'pic_sysphoto',
                                 'name'=>'系统拍照',
-                                'url'=>'http://www.01nnt.com',
+                                'key'=>'1234',
                             ],
                             [
                                 'type'=>'pic_photo_or_album',
                                 'name'=>'拍照相册',
-                                'url'=>'http://www.01nnt.com',
+                                'key'=>'1234',
                             ],
                             [
                                 'type'=>'pic_weixin',
                                 'name'=>'微信相册',
-                                'url'=>'http://www.01nnt.com',
+                                'key'=>'1234',
                             ]
                         ]
 
@@ -86,9 +86,18 @@ class WechatController extends Controller{
                             [
                                 'type'=>'scancode_push',
                                 'name'=>'扫码事件',
-                                'url'=>'http://www.01nnt.com',
+                                'key'=>'1234',
                             ],
-
+                            [
+                                'type'=>'media_id',
+                                'name'=>'图片',
+                                'key'=>'1234',
+                            ],
+                            [
+                                'type'=>'media_id',
+                                'name'=>'图文',
+                                'key'=>'1234',
+                            ]
                         ]
                     ],
             ],
