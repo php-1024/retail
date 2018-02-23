@@ -62,17 +62,22 @@ class WechatApi{
 
     /*
      * 创建自定义菜单
-     * @param $authorizer_access_token
-     * @param $to_user
-     * @param $text
+     * $authorizer_access_token 第三方平台调用接口凭证
+     * $menu_data 创建的菜单数据
      */
     public function create_menu($authorizer_access_token,$menu_data){
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$authorizer_access_token;
         $data =  $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
-        dump($data);
-
         $re = \HttpCurl::doPost($url,$data);
-        dump($re);
+    }
+
+    /*
+     * 创建自定义菜单
+     * $authorizer_access_token 第三方平台调用接口凭证
+     */
+    public function search_menu($authorizer_access_token){
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$authorizer_access_token;
+        $re = \HttpCurl::doGet($url);
     }
 
     /*
