@@ -88,16 +88,7 @@ class WechatController extends Controller{
                                 'name'=>'扫码事件',
                                 'url'=>'http://www.01nnt.com',
                             ],
-                            [
-                                'type'=>'media_id',
-                                'name'=>'图片',
-                                'url'=>'MEDIA_ID1',
-                            ],
-                            [
-                                'type'=>'media_id',
-                                'name'=>'图文',
-                                'url'=>'MEDIA_ID1',
-                            ]
+
                         ]
                     ],
             ],
