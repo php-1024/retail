@@ -36,19 +36,14 @@ class WechatController extends Controller{
                    [
                        'name'=>'菜单1',
                         'sub_button'=>[
-                            'type'=>'click',
-                            'name'=>'点击事件',
-                            'key'=>'零壹新科技',
+                            [
+                                'type'=>'click',
+                                'name'=>'点击事件',
+                                'key'=>'零壹新科技',
+                            ],
                         ],
                    ],
-                    [
-                        'name'=>'菜单2',
-                        'sub_button'=>[
-                            'type'=>'click',
-                            'name'=>'点击事件',
-                            'key'=>'零壹新科技',
-                        ],
-                    ],
+
             ],
         ];
 
