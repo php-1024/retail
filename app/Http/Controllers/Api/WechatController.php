@@ -48,7 +48,58 @@ class WechatController extends Controller{
                             ],
                         ]
                     ],
+                    [
+                        'name'=>'菜单2',
+                        'sub_button'=>[
+                            [
+                                'type'=>'scancode_waitmsg',
+                                'name'=>'扫码带提示',
+                                'key'=>'1234',
+                            ],
 
+                            [
+                                'type'=>'pic_sysphoto',
+                                'name'=>'系统拍照发图',
+                                'url'=>'http://www.01nnt.com',
+                            ],
+                            [
+                                'type'=>'pic_photo_or_album',
+                                'name'=>'拍照或相册',
+                                'url'=>'http://www.01nnt.com',
+                            ],
+                            [
+                                'type'=>'pic_weixin',
+                                'name'=>'微信相册发图',
+                                'url'=>'http://www.01nnt.com',
+                            ]
+                        ]
+
+                    ],
+                    [
+                        'name'=>'菜单3',
+                        'sub_button'=>[
+                            [
+                                'type'=>'location_select',
+                                'name'=>'发送位置',
+                                'key'=>'1234',
+                            ],
+                            [
+                                'type'=>'scancode_push',
+                                'name'=>'扫码推事件',
+                                'url'=>'http://www.01nnt.com',
+                            ],
+                            [
+                                'type'=>'media_id',
+                                'name'=>'图片',
+                                'url'=>'MEDIA_ID1',
+                            ],
+                            [
+                                'type'=>'media_id',
+                                'name'=>'图文',
+                                'url'=>'MEDIA_ID1',
+                            ]
+                        ]
+                    ],
             ],
         ];
 
