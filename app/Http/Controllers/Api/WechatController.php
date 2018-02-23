@@ -46,7 +46,7 @@ class WechatController extends Controller{
                                 'name'=>'链接事件',
                                 'url'=>'http://www.01nnt.com',
                             ],
-                        ],
+                        ]
                     ],
                     [
                         'name'=>'菜单2',
@@ -75,8 +75,8 @@ class WechatController extends Controller{
                                 'type'=>'pic_weixin',
                                 'name'=>'微信相册发图',
                                 'url'=>'http://www.01nnt.com',
-                            ],
-                        ],
+                            ]
+                        ]
 
                     ],
                     [
@@ -96,8 +96,8 @@ class WechatController extends Controller{
                                 'type'=>'media_id',
                                 'name'=>'图文',
                                 'url'=>'MEDIA_ID1',
-                            ],
-                        ],
+                            ]
+                        ]
                     ],
             ],
         ];
