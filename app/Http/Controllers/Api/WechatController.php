@@ -33,9 +33,16 @@ class WechatController extends Controller{
         $auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
         $menu_data_test = [
             'button'=>[
-                'name'=>'百度',
+                'name'=>'菜单1',
+                "sub_button"=>[
+                    'type'=>'click',
+                    'name'=>'点击事件',
+                    'key'=>'零壹新科技',
+                ],
             ],
         ];
+        $menu_data_test = json_encode($menu_data_test,JSON_UNESCAPED_UNICODE);
+        dump($menu_data_test);
         /***测试创建自定义菜单****/
     }
 
