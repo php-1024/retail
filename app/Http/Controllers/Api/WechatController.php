@@ -47,9 +47,23 @@ class WechatController extends Controller{
                                 'url'=>'http://www.01nnt.com',
                             ],
                         ],
-
                    ],
+                    [
+                        'name'=>'菜单2',
+                        'sub_button'=>[
+                            [
+                                'type'=>'click',
+                                'name'=>'点击事件',
+                                'key'=>'1234',
+                            ],
+                            [
+                                'type'=>'view',
+                                'name'=>'链接事件',
+                                'url'=>'http://www.01nnt.com',
+                            ],
+                        ],
 
+                    ],
             ],
         ];
 
