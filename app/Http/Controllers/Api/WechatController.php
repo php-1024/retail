@@ -31,7 +31,7 @@ class WechatController extends Controller{
 
         /***测试创建自定义菜单****/
         $auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
-        /*
+
         $menu_data_test = [
             'button'=>[
                     [
@@ -95,7 +95,7 @@ class WechatController extends Controller{
         ];
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
         dump($re);
-        */
+
 
         /***测试创建自定义菜单****/
         /*
@@ -104,8 +104,10 @@ class WechatController extends Controller{
         */
 
         /***测试删除自定义菜单****/
+        /*
         $re = \Wechat::delete_menu($auth_info['authorizer_access_token']);
         dump($re);
+        */
     }
 
     /*
