@@ -88,6 +88,7 @@ class WechatController extends Controller{
                                 'name'=>'扫码事件',
                                 'key'=>'1234',
                             ],
+                            /*
                             [
                                 'type'=>'media_id',
                                 'name'=>'图片',
@@ -98,6 +99,7 @@ class WechatController extends Controller{
                                 'name'=>'图文',
                                 'media_id'=>'MEDIA_ID1',
                             ]
+                            */
                         ]
                     ],
             ],
