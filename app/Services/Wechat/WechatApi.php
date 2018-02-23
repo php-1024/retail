@@ -73,11 +73,21 @@ class WechatApi{
     }
 
     /*
-     * 创建自定义菜单
+     * 查询自定义菜单
      * $authorizer_access_token 第三方平台调用接口凭证
      */
     public function search_menu($authorizer_access_token){
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$authorizer_access_token;
+        $re = \HttpCurl::doGet($url);
+        return $re;
+    }
+
+    /*
+     * 查询自定义菜单
+     * $authorizer_access_token 第三方平台调用接口凭证
+     */
+    public function delete_menu($authorizer_access_token){
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='.$authorizer_access_token;
         $re = \HttpCurl::doGet($url);
         return $re;
     }
@@ -106,7 +116,6 @@ class WechatApi{
     public function get_fans_info($authorizer_access_token,$open_id){
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$authorizer_access_token.'&openid='.$open_id.'&lang=zh_CN ';
         $re = \HttpCurl::doGet($url);
-        dump($re);
         $re = json_decode($re,true);
         dump($re);
     }
