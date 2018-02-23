@@ -40,10 +40,18 @@ class WechatController extends Controller{
                             'name'=>'点击事件',
                             'key'=>'零壹新科技',
                         ],
-                   ]
+                   ],
+                    [
+                        'name'=>'菜单2',
+                        'sub_button'=>[
+                            'type'=>'click',
+                            'name'=>'点击事件',
+                            'key'=>'零壹新科技',
+                        ],
+                    ],
             ],
         ];
-        
+
         \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
         /***测试创建自定义菜单****/
     }
