@@ -41,8 +41,7 @@ class WechatController extends Controller{
                 ],
             ],
         ];
-        $menu_data_test = json_encode($menu_data_test,JSON_UNESCAPED_UNICODE);
-        dump($menu_data_test);
+
         /***测试创建自定义菜单****/
     }
 

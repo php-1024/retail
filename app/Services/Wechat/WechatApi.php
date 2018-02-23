@@ -67,7 +67,10 @@ class WechatApi{
      * @param $text
      */
     public function create_menu($authorizer_access_token,$menu_data){
-
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$authorizer_access_token;
+        $data =  $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url,$data);
+        dump($re);
     }
 
     /*
