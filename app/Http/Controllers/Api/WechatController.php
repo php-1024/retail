@@ -120,6 +120,7 @@ class WechatController extends Controller{
             elseif ($keyword == "TESTCOMPONENT_MSG_TYPE_TEXT") {
                 $contentStr = "TESTCOMPONENT_MSG_TYPE_TEXT_callback";
             }
+            //点击事件触发关键字回复
             elseif ($param['Event']=='CLICK' && $param['Event'] == "1234") {
                 $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容";
             }
