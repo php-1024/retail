@@ -53,23 +53,23 @@ class WechatController extends Controller{
                         'sub_button'=>[
                             [
                                 'type'=>'scancode_waitmsg',
-                                'name'=>'扫码带提示',
+                                'name'=>'扫码提示',
                                 'key'=>'1234',
                             ],
 
                             [
                                 'type'=>'pic_sysphoto',
-                                'name'=>'系统拍照发图',
+                                'name'=>'系统拍照',
                                 'url'=>'http://www.01nnt.com',
                             ],
                             [
                                 'type'=>'pic_photo_or_album',
-                                'name'=>'拍照或相册',
+                                'name'=>'拍照相册',
                                 'url'=>'http://www.01nnt.com',
                             ],
                             [
                                 'type'=>'pic_weixin',
-                                'name'=>'微信相册发图',
+                                'name'=>'微信相册',
                                 'url'=>'http://www.01nnt.com',
                             ]
                         ]
@@ -85,7 +85,7 @@ class WechatController extends Controller{
                             ],
                             [
                                 'type'=>'scancode_push',
-                                'name'=>'扫码推事件',
+                                'name'=>'扫码事件',
                                 'url'=>'http://www.01nnt.com',
                             ],
                             [
