@@ -70,7 +70,7 @@ class WechatApi{
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$authorizer_access_token;
         $data =  $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
         dump($data);
-        exit();
+
         $re = \HttpCurl::doPost($url,$data);
         dump($re);
     }
