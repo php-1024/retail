@@ -33,12 +33,14 @@ class WechatController extends Controller{
         $auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
         $menu_data_test = [
             'button'=>[
-                'name'=>'菜单1',
-                "sub_button"=>[
-                    'type'=>'click',
-                    'name'=>'点击事件',
-                    'key'=>'零壹新科技',
-                ],
+                   [
+                       'name'=>'菜单1',
+                        'sub_button'=>[
+                            'type'=>'click',
+                            'name'=>'点击事件',
+                            'key'=>'零壹新科技',
+                        ],
+                   ]
             ],
         ];
         \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
