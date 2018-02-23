@@ -466,3 +466,18 @@ Route::group(['prefix'=>'api'],function() {
     });
 });
 /********************商户管理系统*************************/
+
+/**********************总店系统*********************/
+Route::group(['prefix'=>'catering'],function(){
+
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Catering\LoginController@display')->middleware('CateringCheck');//登录页面路由
+//        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');//验证码路由
+    });
+    //异步提交数据组
+    Route::group(['prefix'=>'ajax'],function(){
+        Route::post('login_check','Company\LoginController@login_check')->middleware('CompanyCheckAjax');                                   //提交登录数据
+    });
+});
+/**********************总店系统*********************/
