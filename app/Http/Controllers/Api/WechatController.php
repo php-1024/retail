@@ -79,26 +79,7 @@ class WechatController extends Controller{
                         ]
 
                     ],
-                    [
-                        'name'=>'菜单3',
-                        'sub_button'=>[
-                            [
-                                'type'=>'location_select',
-                                'name'=>'发送位置',
-                                'key'=>'1234',
-                            ],
-                            [
-                                'type'=>'media_id',
-                                'name'=>'图片',
-                                'url'=>'MEDIA_ID1',
-                            ],
-                            [
-                                'type'=>'media_id',
-                                'name'=>'图文',
-                                'url'=>'MEDIA_ID1',
-                            ]
-                        ]
-                    ],
+
             ],
         ];
 
