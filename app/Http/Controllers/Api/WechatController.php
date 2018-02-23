@@ -93,12 +93,19 @@ class WechatController extends Controller{
                     ],
             ],
         ];
-        \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
+        $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
+        dump($re);
         */
+
         /***测试创建自定义菜单****/
+        /*
         $re = \Wechat::search_menu($auth_info['authorizer_access_token']);
         dump($re);
-        /***测试创建自定义菜单****/
+        */
+
+        /***测试删除自定义菜单****/
+        $re = \Wechat::delete_menu($auth_info['authorizer_access_token']);
+        dump($re);
     }
 
     /*

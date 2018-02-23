@@ -83,7 +83,7 @@ class WechatApi{
     }
 
     /*
-     * 查询自定义菜单
+     * 删除自定义菜单
      * $authorizer_access_token 第三方平台调用接口凭证
      */
     public function delete_menu($authorizer_access_token){
