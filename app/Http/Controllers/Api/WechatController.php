@@ -43,6 +43,7 @@ class WechatController extends Controller{
                    ]
             ],
         ];
+        
         \Wechat::create_menu($auth_info['authorizer_access_token'],$menu_data_test);
         /***测试创建自定义菜单****/
     }
