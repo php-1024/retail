@@ -109,6 +109,10 @@ class WechatController extends Controller{
         $re = \Wechat::delete_menu($auth_info['authorizer_access_token']);
         dump($re);
         */
+
+        /***测试创建用户标签***/
+        $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],'测试标签');
+        dump($re);
     }
 
     /*

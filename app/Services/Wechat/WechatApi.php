@@ -67,7 +67,7 @@ class WechatApi{
      */
     public function create_menu($authorizer_access_token,$menu_data){
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$authorizer_access_token;
-        $data =  $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
+        $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url,$data);
         return $re;
     }
@@ -112,6 +112,8 @@ class WechatApi{
     }
     /*
      * 获取粉丝信息详情
+     *  $authorizer_access_token 第三方平台调用接口凭证
+     * $open_id 粉丝在该公众号下的open_id
      */
     public function get_fans_info($authorizer_access_token,$open_id){
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$authorizer_access_token.'&openid='.$open_id.'&lang=zh_CN ';
@@ -122,12 +124,28 @@ class WechatApi{
 
     /*
      * 获取粉丝列表
-     * $organization_id 绑定授权组织的ID
+     *  $authorizer_access_token 第三方平台调用接口凭证
      */
     public function get_fans_list($authorizer_access_token){
         $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$authorizer_access_token;
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re,true);
+        return $re;
+    }
+
+    /*
+     * 创建粉丝标签
+     * organization_id 绑定授权组织的ID
+     */
+    public function create_fans_tag($authorizer_access_token,$tag_name){
+        $url = 'https://api.weixin.qq.com/cgi-bin/tags/create?access_token='.$authorizer_access_token;
+        $data = [
+            'tag'=>[
+                'name'=>$tag_name,
+            ],
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url,$data);
         return $re;
     }
 
@@ -143,7 +161,7 @@ class WechatApi{
             'component_appid'=>$wxparam['open_appid'],
             'authorizer_appid'=>$authorizer_appid,
         );
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re =  \HttpCurl::doPost($url,$data);
         $re = json_decode($re,true);
         dump($re);
@@ -173,7 +191,7 @@ class WechatApi{
             'authorizer_appid'=>$info->authorizer_appid,
             'authorizer_refresh_token'=>$info->authorizer_refresh_token,
         );
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $origin_re =  \HttpCurl::doPost($url,$data);
         $re = json_decode($origin_re,true);
 
@@ -210,7 +228,7 @@ class WechatApi{
             'component_appid'=>$wxparam['open_appid'],
             'authorization_code'=>$auth_code
         );
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $origin_re =  \HttpCurl::doPost($url,$data);
         $re = json_decode($origin_re,true);
         if(!empty($re['authorization_info'])){
@@ -247,17 +265,13 @@ class WechatApi{
    *获取开放平台的预授权码
    */
     public function get_pre_auth_code(){
-        $auth_info = WechatOpenSetting::getPreAuthCode();
-        if(!empty($auth_info->param_value) && $auth_info->expire_time - time() > 00){//过时前60秒也需要重置了
-            return $auth_info->param_value;
-        }
         $wxparam = config('app.wechat_open_setting');
         $component_access_token = $this->get_component_access_token();
         $url = 'https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token='.$component_access_token;
         $data = array(
             'component_appid'=>$wxparam['open_appid']
         );
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
         if (!empty($re['pre_auth_code'])) {
@@ -287,7 +301,7 @@ class WechatApi{
                 'component_appsecret' => $wxparam['open_appsecret'],
                 'component_verify_ticket' => $ticket_info->param_value
             );
-            $data = json_encode($data);
+            $data = json_encode($data, JSON_UNESCAPED_UNICODE);
             $re = \HttpCurl::doPost($url, $data);
             $re = json_decode($re,true);
             if (!empty($re['component_access_token'])) {
