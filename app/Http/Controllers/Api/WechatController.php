@@ -18,7 +18,7 @@ class WechatController extends Controller{
         $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
         dump($fans_list);
         foreach($fans_list['data']['openid'] as $key=>$val){
-        \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
+            \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
             exit();
         };
 
