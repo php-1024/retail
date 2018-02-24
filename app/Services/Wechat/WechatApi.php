@@ -176,7 +176,6 @@ class WechatApi{
         if(empty($info)||empty($info->authorizer_access_token)){
             exit('您尚未授权，请先前往进行授权操作');
         }
-        dump($info);
         if($info->expire_time - time()>600){//仍未过期直接返回值
             dump($info->expire_time);
             return array(
@@ -196,7 +195,6 @@ class WechatApi{
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $origin_re =  \HttpCurl::doPost($url,$data);
         $re = json_decode($origin_re,true);
-        dump($re);
         if(!empty($re['authorizer_access_token'])){
             $authorizer_access_token = $re['authorizer_access_token'];
             $authorizer_refresh_token = $re['authorizer_refresh_token'];
