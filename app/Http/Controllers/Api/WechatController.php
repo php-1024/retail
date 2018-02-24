@@ -9,25 +9,30 @@ use App\Models\WechatAuthorization;
 class WechatController extends Controller{
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
+
+        /*获取授权方公众号信息*/
         //$info = WechatAuthorization::getOne([['organization_id',2]]);
         //\Wechat::get_authorizer_info($info->authorizer_appid);
-       // $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
-        //dump($fans_list);
-        //foreach($fans_list['data']['openid'] as $key=>$val){
-            //\Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
-            //exit();
-        //};
 
+        /*获取授权公众号的粉丝信息*/
+        $fans_list = \Wechat::get_fans_list(1,$auth_info['authorizer_access_token']);
+       dump($fans_list);
+       foreach($fans_list['data']['openid'] as $key=>$val){
+            \Wechat::get_fans_info($auth_info['authorizer_access_token'],$val);
+            exit();
+        };
+
+        /******测试发送客服消息******/
         //$to_user = 'oyhbt1I_Gpz3u8JYxWP_NIugQhaQ';
         //$text = '你好世界';
         //\Wechat::send_fans_text($auth_info['authorizer_access_token'],$to_user,$text);
 
-        /***授权测试***/
+        /***网页授权测试***/
         //$redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
         //$url = \Wechat::get_web_auth_url($redirect_url);
         //echo "<script>location.href='".$url."'</script>";
         //exit();
-        /***授权测试***/
+        /***网页授权测试***/
 
 
         //$auth_info =  \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
@@ -111,8 +116,10 @@ class WechatController extends Controller{
         */
 
         /***测试创建用户标签***/
+        /*
         $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],'测试标签');
         dump($re);
+        */
     }
 
     /*
