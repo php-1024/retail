@@ -177,6 +177,7 @@ class WechatApi{
             exit('您尚未授权，请先前往进行授权操作');
         }
         if($info->expire_time - time()>600){//仍未过期直接返回值
+            dump($info->expire_time);
             return array(
                 'authorizer_appid'=> $info->authorizer_appid,
                 'authorizer_access_token'=>$info->authorizer_access_token,
