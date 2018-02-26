@@ -157,7 +157,7 @@ class WechatController extends Controller{
             dump($open_id);
             dump($re);
             dump($re['access_token']);
-            $info = \Wechat::get_fans_info($auth_info['authorizer_access_token'],$re['openid']);
+            $info = \Wechat::get_fans_info($auth_info['authorizer_access_token'],$open_id);
             dump($info);
             exit();
         }else{
