@@ -155,6 +155,8 @@ class WechatController extends Controller{
             $re = \Wechat::get_open_web_access_token($appid,$code);
             dump($open_id);
             dump($re);
+            $info = \Wechat::get_fans_info($re['access_token'],$re['openid']);
+            dump($info);
             exit();
         }else{
             exit('无效的的回调链接');
