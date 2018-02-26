@@ -151,12 +151,13 @@ class WechatController extends Controller{
         $param_arr = explode('||',$param);
         $appid = $param_arr[0];
         $open_id = $param_arr[1];
+        $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_open_web_access_token($appid,$code);
             dump($open_id);
             dump($re);
             dump($re['access_token']);
-            $info = \Wechat::get_fans_info($re['access_token'],$re['openid']);
+            $info = \Wechat::get_fans_info($auth_info['authorizer_access_token'],$re['openid']);
             dump($info);
             exit();
         }else{
