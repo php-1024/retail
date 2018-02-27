@@ -105,7 +105,7 @@
                                                     <button type="button" id="deleteBtn" onclick="removeData({{ $val->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                                 </div>
                                             </span>
-                                            <input type="text" class="pull-left" value="{{ $val->sort }}" style="width: 50px; text-align: center;"> {{ $val->menu_name }}
+                                            <input type="text" class="pull-left" value="{{ $val->sort }}" onclick="$(this).focus();" style="width: 50px; text-align: center;"> {{ $val->menu_name }}
 
                                         </div>
                                         @if(count($son_menu[$val->id])>0)
