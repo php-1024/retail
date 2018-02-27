@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">上级菜单</label>
                 <div class="col-sm-8">
-                    <select class="form-control m-b" id="first_menu">
+                    <select class="form-control m-b" id="first_menu" onchange="firstBoxSelect();">
                         <option value="0">无</option>
                         @foreach($list as $key=>$val)
                             <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
