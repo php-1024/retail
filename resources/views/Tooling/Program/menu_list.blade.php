@@ -96,7 +96,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
-                                                <input type="text" class="pull-left" value="{{ $val->sort }}" style="width: 50px; text-align: center;">
+                                                <input type="text" class="pull-left form-control" value="{{ $val->sort }}" style="width: 50px; text-align: center;">
                                                     &nbsp;&nbsp;
                                                 <div class="btn-group">
 
