@@ -86,7 +86,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>"零壹管理程序”菜单结构  <input type="text" class="pull-left form-control" value="0" style="width: 50px; text-align: center;"></h5>
+                            <h5>"零壹管理程序”菜单结构</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="dd" id="nestable2">
@@ -96,7 +96,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
-                                                <input type="text" class="pull-left form-control" value="{{ $val->sort }}" style="width: 50px; text-align: center;">
+                                                <input type="text" class="pull-left" value="{{ $val->sort }}" style="width: 50px; text-align: center;">
                                                     &nbsp;&nbsp;
                                                 <div class="btn-group">
 
