@@ -1,5 +1,5 @@
 <form method="post" role="form" id="currentForm" action="{{ url('tooling/ajax/menu_add_check') }}">
-<input type="hidden" name="_token" value="{{csrf_token()}}">
+<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="second_menu_url" id="second_menu_url" value="{{ url('tooling/ajax/menu_second_get') }}">
 <input type="hidden" name="program_id" id="program_id" value="{{ $info->id }}">
     <input type="hidden" name="parent_id" id="parent_id" value="0">
@@ -105,7 +105,8 @@
             return ;
         }
         var url = $('#second_menu_url').val();
-        $.post(url,{parent_id:pid,program_id:program_id},function(json){
+        var token = $('#_token').val();
+        $.post(url,{'parent_id':pid,'program_id':program_id,'_token':token},function(json){
             alert(json);
         });
         $('#second_box').show();
