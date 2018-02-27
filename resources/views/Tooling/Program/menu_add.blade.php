@@ -107,7 +107,12 @@
         var url = $('#second_menu_url').val();
         var token = $('#_token').val();
         $.post(url,{'parent_id':pid,'program_id':program_id,'_token':token},function(json){
-            alert(json.data.length);
+            if(json.data.length > 0){
+                var html = '<option value="0">无</option>';
+                $.each(json.data,function(i,v){
+                    alert(v.menu_name);
+                });
+            }
         });
         $('#second_box').show();
     }
