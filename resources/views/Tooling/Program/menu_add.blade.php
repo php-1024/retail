@@ -1,6 +1,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('tooling/ajax/menu_add_check') }}">
 <input type="hidden" name="_token" value="{{csrf_token()}}">
 <input type="hidden" name="program_id" id="id" value="{{ $info->id }}">
+    <input type="hidden" name="parent_id" id="parent_id" value="0">
 <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
         <div class="modal-header">
@@ -18,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">上级菜单</label>
                 <div class="col-sm-8">
-                    <select class="form-control m-b" name="parent_id">
+                    <select class="form-control m-b" id="first_menu">
                         <option value="0">无</option>
                         @foreach($list as $key=>$val)
                             <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
@@ -26,20 +27,17 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <button type="button" class="btn btn-info">下一级&nbsp;&nbsp;<i class="fa fa-arrow-circle-down"></i></button>
                 </div>
-            </div>
+                    <button type="button" class="btn btn-info" id="first_btn">下一级&nbsp;&nbsp;<i class="fa fa-arrow-circle-down"></i></button>
+                </div>
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
 
-            <div class="form-group">
+            <div class="form-group" id="second_box" style="display:none;">
                 <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-8">
-                    <select class="form-control m-b" name="parent_id">
+                    <select class="form-control m-b" id="second_menu">
                         <option value="0">无</option>
-                        @foreach($list as $key=>$val)
-                            <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
-                        @endforeach
                     </select>
                 </div>
             </div>
@@ -90,6 +88,11 @@ function postForm() {
     var target = $("#currentForm");
     var url = target.attr("action");
     var data = target.serialize();
+
+    $('#first_btn').click(function(){
+        $('#second_box').show();
+    });
+
     $.post(url, data, function (json) {
         if (json.status == -1) {
             window.location.reload();
