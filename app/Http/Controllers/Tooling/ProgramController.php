@@ -179,6 +179,8 @@ class ProgramController extends Controller{
     public function menu_second_get(Request $request){
         $parent_id = $request->input('parent_id');
         $program_id = $request->input('program_id');
+        $list = ProgramMenu::getList([[ 'parent_id',$parent_id],['program_id',$program_id]],0,'id','asc');
+        return response()->json(['data' =>$list, 'status' => 1]);
     }
     //添加菜单数据检测
     public function menu_add_check(Request $request){

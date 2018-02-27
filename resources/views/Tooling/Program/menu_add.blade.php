@@ -1,6 +1,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('tooling/ajax/menu_add_check') }}">
 <input type="hidden" name="_token" value="{{csrf_token()}}">
-<input type="hidden" name="program_id" id="id" value="{{ $info->id }}">
+    <input type="hidden" name="second_menu_url" id="second_menu_url" value="{{ url('tooling/ajax/menu_second_get') }}">
+<input type="hidden" name="program_id" id="program_id" value="{{ $info->id }}">
     <input type="hidden" name="parent_id" id="parent_id" value="0">
 <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
@@ -90,8 +91,9 @@
        显示二级菜单
      */
     function showSecondBox(){
-        $pid = $('#first_menu').val();
-        if($pid=='0'){
+        var pid = $('#first_menu').val();
+        var program_id = $('#program_id').val();
+        if(pid=='0'){
             swal({
                 title: "提示信息",
                 text: "请选选择一级菜单",
@@ -102,6 +104,10 @@
 
             return ;
         }
+        var url = $('#second_menu_url').val();
+        $.post(url,{parent_id:pid,program_id:program_id},function(json){
+            alert(json);
+        });
         $('#second_box').show();
     }
 //提交表单
