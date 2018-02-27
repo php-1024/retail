@@ -114,6 +114,8 @@
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
+                                                        <input type="text" class="pull-left" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
+                                                        &nbsp;&nbsp;
                                                         <div class="btn-group">
                                                             <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                             <button type="button" id="deleteBtn" onclick="deleteData({{ $vv->id }})" class="block btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
@@ -128,6 +130,9 @@
                                                             <li class="dd-item" data-id="2">
                                                                 <div class="dd-handle">
                                                                     <span class="pull-right">
+                                                                        <input type="text" class="pull-left" value="{{ $vvv->sort }}" style="width: 50px; text-align: center;">
+                                                                        &nbsp;&nbsp;
+
                                                                         <div class="btn-group">
                                                                             <button type="button" onclick="return getEditForm('{{ $vvv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
                                                                             <button type="button" id="deleteBtn" onclick="deleteData({{ $vvv->id }})" class="block btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
