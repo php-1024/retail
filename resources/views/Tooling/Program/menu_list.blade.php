@@ -119,6 +119,24 @@
                                                     </span>
                                                     {{$vv->menu_name}}
                                                 </div>
+                                                @if(count($third_menu[$vv->id])>0)
+                                                    <ol class="dd-list">
+                                                        @foreach($third_menu[$vv->id] as $kkk=>$vvv)
+                                                            <li class="dd-item" data-id="2">
+                                                                <div class="dd-handle">
+                                                                    <span class="pull-right">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" onclick="return getEditForm('{{ $vvv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
+                                                                            <button type="button" id="deleteBtn" onclick="deleteData({{ $vvv->id }})" class="block btn btn-xs btn-warning"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除菜单</button>
+                                                                            <button type="button" id="deleteBtn" onclick="removeData({{ $vvv->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
+                                                                        </div>
+                                                                    </span>
+                                                                    {{$vvv->menu_name}}
+                                                                </div>
+                                                            </li>
+                                                        @endforeach
+                                                    </ol>
+                                                @endif
                                             </li>
                                             @endforeach
                                         </ol>
