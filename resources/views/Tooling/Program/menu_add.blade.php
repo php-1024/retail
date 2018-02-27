@@ -91,7 +91,6 @@ function postForm() {
 
     $('#first_btn').click(function(){
         alert(123);
-        $('#second_box').show();
     });
 
     $.post(url, data, function (json) {
