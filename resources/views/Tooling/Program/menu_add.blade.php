@@ -84,6 +84,16 @@
 </form>
 <script>
     function showSecondBox(){
+        $parent_id = $('#first_menu').val();
+        if($parent_id=='0'){
+            swal({
+                title: "提示信息",
+                text: "请选选择一级菜单",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                //type: "warning"
+            });
+        }
         $('#second_box').show();
     }
 //提交表单
