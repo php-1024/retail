@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">上级菜单</label>
                 <div class="col-sm-8">
-                    <select class="form-control m-b" id="first_menu" onchange="firstBoxSelect(this);">
+                    <select class="form-control m-b" id="first_menu" onchange="firstMenuSelected(this);">
                         <option value="0">无</option>
                         @foreach($list as $key=>$val)
                             <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
@@ -35,7 +35,7 @@
             <div class="form-group" id="second_box" style="display:none;">
                 <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-8">
-                    <select class="form-control m-b" id="second_menu">
+                    <select class="form-control m-b" id="second_menu"  onchange="secondMenuSelected(this);">
                         <option value="0">无</option>
                     </select>
                 </div>
@@ -82,7 +82,7 @@
 </div>
 </form>
 <script>
-    function firstBoxSelect(obj){
+    function firstMenuSelected(obj){
         $pid = $(obj).val();
         $('#parent_id').val($pid);
         $('#second_box').hide();
@@ -124,7 +124,11 @@
                 });
             }
         });
+    }
 
+    function secondMenuSelected(obj){
+        $pid = $(obj).val();
+        $('#parent_id').val($pid);
     }
 //提交表单
 function postForm() {
