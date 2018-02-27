@@ -29,6 +29,19 @@
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">上级菜单</label>
+                <div class="col-sm-10">
+                    <select class="form-control m-b" name="parent_id">
+                        <option value="0">一级菜单</option>
+                        @foreach($list as $key=>$val)
+                            <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
                 <label class="col-sm-2 control-label">根菜单（带链接）</label>
                 <div class="col-sm-10">
                     <select class="form-control m-b" name="is_root">
