@@ -12,26 +12,14 @@
                 <label class="col-sm-2 control-label">菜单名称</label>
                 <div class="col-sm-10"><input type="text" class="form-control" name="menu_name" value="" placeholder="菜单名称"></div>
             </div>
-
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
+
             <div class="form-group">
-                <label class="col-sm-2 control-label">上级菜单</label>
+                <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-10">
                     <select class="form-control m-b" name="parent_id">
                         <option value="0">无</option>
-                        <option value="0">一级菜单</option>
-                        <option value="0">二级菜单</option>
-                    </select>
-                </div>
-            </div>
-            <div style="clear:both"></div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">上级菜单</label>
-                <div class="col-sm-10">
-                    <select class="form-control m-b" name="parent_id">
-                        <option value="0">一级菜单</option>
                         @foreach($list as $key=>$val)
                             <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
                         @endforeach
@@ -40,6 +28,7 @@
             </div>
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">根菜单（带链接）</label>
                 <div class="col-sm-10">
