@@ -90,6 +90,7 @@ function postForm() {
     var data = target.serialize();
 
     $('#first_btn').click(function(){
+        alert(123);
         $('#second_box').show();
     });
 
