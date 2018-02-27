@@ -81,9 +81,15 @@
 </div>
 </form>
 <script>
+    function firstBoxSelect(){
+
+    }
+    /*
+       显示二级菜单
+     */
     function showSecondBox(){
-        $parent_id = $('#first_menu').val();
-        if($parent_id=='0'){
+        $pid = $('#first_menu').val();
+        if($pid=='0'){
             swal({
                 title: "提示信息",
                 text: "请选选择一级菜单",
