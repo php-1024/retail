@@ -25,7 +25,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-2">
                     <button type="button" class="btn btn-info">下一级</button>
                 </div>
             </div>
