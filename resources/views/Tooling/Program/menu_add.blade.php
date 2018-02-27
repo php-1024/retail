@@ -110,11 +110,21 @@
             if(json.data.length > 0){
                 var html = '<option value="0">无</option>';
                 $.each(json.data,function(i,v){
-                    alert(v.menu_name);
+                   html+= '<option value="'+ v.id+'">'+ v.menu_name+'</option>';
+                });
+                $('#second_menu').html(html);
+                $('#second_box').show();
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: '该菜单下没有子菜单',
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
                 });
             }
         });
-        $('#second_box').show();
+
     }
 //提交表单
 function postForm() {
