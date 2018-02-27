@@ -93,6 +93,8 @@
                 confirmButtonText: "确定",
                 //type: "warning"
             });
+
+            return ;
         }
         $('#second_box').show();
     }
