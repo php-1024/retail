@@ -82,7 +82,9 @@
 </form>
 <script>
     function firstBoxSelect(){
-
+        $pid = $('#first_menu').val();
+        $('#parent_id').val($pid);
+        $('#second_box').hide();
     }
     /*
        显示二级菜单
