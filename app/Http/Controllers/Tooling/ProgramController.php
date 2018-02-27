@@ -161,7 +161,7 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $info = Program::find($id);
-        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
+        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'sort','asc');
         $son_menu = [];
         foreach($list as $key=>$val){
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
