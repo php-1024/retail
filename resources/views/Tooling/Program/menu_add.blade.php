@@ -107,7 +107,7 @@
         var url = $('#second_menu_url').val();
         var token = $('#_token').val();
         $.post(url,{'parent_id':pid,'program_id':program_id,'_token':token},function(json){
-            alert(json);
+            alert(json.data.length);
         });
         $('#second_box').show();
     }
