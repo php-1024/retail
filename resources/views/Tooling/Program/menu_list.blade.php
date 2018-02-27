@@ -96,7 +96,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
-
+                                                    <input type="text" class="pull-left" value="{{ $val->sort }}" onfocus="$(this).focus();"  style="width: 50px; text-align: center;">
                                                     &nbsp;&nbsp;
                                                 <div class="btn-group">
 
@@ -105,7 +105,7 @@
                                                     <button type="button" id="deleteBtn" onclick="removeData({{ $val->id }})" class="block btn btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;彻底删除</button>
                                                 </div>
                                             </span>
-                                            <input type="text" class="pull-left" value="{{ $val->sort }}"  style="width: 50px; text-align: center;"> {{ $val->menu_name }}
+                                            {{ $val->menu_name }}
 
                                         </div>
                                         @if(count($son_menu[$val->id])>0)
