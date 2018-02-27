@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">上级菜单</label>
                 <div class="col-sm-8">
-                    <select class="form-control m-b" id="first_menu" onchange="firstBoxSelect();">
+                    <select class="form-control m-b" id="first_menu" onchange="firstBoxSelect(this);">
                         <option value="0">无</option>
                         @foreach($list as $key=>$val)
                             <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
@@ -81,8 +81,8 @@
 </div>
 </form>
 <script>
-    function firstBoxSelect(){
-        $pid = $('#first_menu').val();
+    function firstBoxSelect(obj){
+        $pid = $(obj).val();
         $('#parent_id').val($pid);
         $('#second_box').hide();
     }
