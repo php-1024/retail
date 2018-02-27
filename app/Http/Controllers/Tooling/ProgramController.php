@@ -175,6 +175,11 @@ class ProgramController extends Controller{
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'id','asc');
         return view('Tooling/Program/menu_add',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
+    //获取二级菜单
+    public function menu_second_get(Request $request){
+        $parent_id = $request->input('parent_id');
+        $program_id = $request->input('program_id');
+    }
     //添加菜单数据检测
     public function menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

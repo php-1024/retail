@@ -155,6 +155,7 @@ Route::group(['prefix'=>'tooling'],function(){
 
 
         Route::post('menu_add','Tooling\ProgramController@menu_add')->middleware('ToolingCheckAjax');//获取菜单添加页面
+        Route::post('menu_second_get','Tooling\ProgramController@menu_second_get')->middleware('ToolingCheckAjax');//获取二级菜单
         Route::post('menu_add_check','Tooling\ProgramController@menu_add_check')->middleware('ToolingCheckAjax');//获取添加菜单数据并提交
         Route::post('menu_edit','Tooling\ProgramController@menu_edit')->middleware('ToolingCheckAjax');//获取菜单编辑页面
         Route::post('menu_edit_check','Tooling\ProgramController@menu_edit_check')->middleware('ToolingCheckAjax');//获取编辑菜单数据并提交

@@ -162,6 +162,7 @@ class ToolingCheckAjax {
             case "tooling/ajax/program_parents_node"://获取上级程序ID
             case "tooling/ajax/program_edit"://是否允许弹出修改程序页面
             case "tooling/ajax/menu_add"://是否允许弹出添加页面
+            case "tooling/ajax/menu_second_get"://是否允许获取二级菜单
             case "tooling/ajax/menu_edit"://是否允许弹出修改菜单页面
             case "tooling/ajax/package_edit";//是否允许弹出修改套餐的页面
                 $re = $this->checkIsLogin($request);
