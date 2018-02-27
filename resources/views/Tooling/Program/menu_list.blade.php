@@ -130,7 +130,7 @@
                                                             <li class="dd-item" data-id="2">
                                                                 <div class="dd-handle">
                                                                     <span class="pull-right">
-                                                                        <input type="text" class="pull-left" value="{{ $vvv->sort }}" style="width: 50px; text-align: center;">
+                                                                        <input type="text" value="{{ $vvv->sort }}" style="width: 50px; text-align: center;">
                                                                         &nbsp;&nbsp;
 
                                                                         <div class="btn-group">
