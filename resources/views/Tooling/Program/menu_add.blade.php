@@ -16,14 +16,17 @@
             <div class="hr-line-dashed"></div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label"></label>
-                <div class="col-sm-10">
+                <label class="col-sm-2 control-label">上级菜单</label>
+                <div class="col-sm-8">
                     <select class="form-control m-b" name="parent_id">
                         <option value="0">无</option>
                         @foreach($list as $key=>$val)
                             <option value="{{ $val->id }}">{{ $val->menu_name }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="col-sm-8">
+                    <button type="button" class="btn btn-info">下一级</button>
                 </div>
             </div>
             <div style="clear:both"></div>
