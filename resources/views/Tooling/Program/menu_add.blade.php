@@ -27,7 +27,6 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                </div>
                     <button type="button" class="btn btn-info" id="first_btn" onclick="showSecondBox();">下一级&nbsp;&nbsp;<i class="fa fa-arrow-circle-down"></i></button>
                 </div>
             </div>
