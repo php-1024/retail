@@ -76,10 +76,10 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
         this.start()
     }
 
-    Bjax.DEFAULTS = {
-        backdrop: false
-        , url: ''
-    }
+    // Bjax.DEFAULTS = {
+    //     backdrop: false
+    //     , url: ''
+    // }
 
     Bjax.prototype.start = function () {
         var that = this;
