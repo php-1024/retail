@@ -86,7 +86,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>"零壹管理程序”菜单结构</h5>
+                            <h5>"零壹管理程序”菜单结构  <input type="text" class="pull-left form-control" value="0" style="width: 50px; text-align: center;"></h5>
                         </div>
                         <div class="ibox-content">
                             <div class="dd" id="nestable2">
