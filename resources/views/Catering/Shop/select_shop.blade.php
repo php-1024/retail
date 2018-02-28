@@ -32,7 +32,7 @@
         <div class="col-lg-12 col-sm-6">
             <!--breadcrumbs start -->
             <ul class="breadcrumb">
-                <li><h3 style="margin-top: 10px;"><i class="icon-desktop"></i> 选择要进入的服务商组织</h3></li>
+                <li><h3 style="margin-top: 10px;"><i class="icon-desktop"></i> 选择要进入的总店</h3></li>
             </ul>
             <!--breadcrumbs end -->
         </div>
@@ -43,7 +43,7 @@
             <div class="col-lg-12">
                 <div class="input-group m-bot15 col-lg-3 ">
                     <span class="input-group-addon"><i class="icon-search"></i></span>
-                    <input type="text" class="form-control " placeholder="服务商名称">
+                    <input type="text" class="form-control " placeholder="总店名称">
 
                 </div>
                 <div class="input-group m-bot15 col-lg-2 ">
@@ -73,6 +73,7 @@
         </div>
         @endforeach
     </div>
+</section>
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
 <script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
