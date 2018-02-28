@@ -719,6 +719,9 @@ class ToolingCheckAjax {
         if(empty($request->input('node_name'))){
             return self::res(0,response()->json(['data' => '请输入节点名称', 'status' => '0']));
         }
+        if(empty($request->input('node_show_name'))){
+            return self::res(0,response()->json(['data' => '请输入节点展示名称', 'status' => '0']));
+        }
         if(empty($request->input('route_name'))){
             return self::res(0,response()->json(['data' => '请输入路由名称', 'status' => '0']));
         }

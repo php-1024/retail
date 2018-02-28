@@ -52,8 +52,11 @@
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('tooling/ajax/node_add_check') }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <div class="form-group"><label class="col-sm-2 control-label">节点名称</label>
-
                                     <div class="col-sm-10"><input type="text" name="node_name" class="form-control"  placeholder="节点名称"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">节点展示名称</label>
+                                    <div class="col-sm-10"><input type="text" name="node_show_name" class="form-control"  placeholder="节点展示名称"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">路由名称</label>
