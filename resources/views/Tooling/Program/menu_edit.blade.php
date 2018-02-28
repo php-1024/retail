@@ -22,7 +22,7 @@
                     <label class="col-sm-2 control-label">上级菜单</label>
                     <div class="col-sm-8">
                         <select class="form-control m-b" id="first_menu" onchange="firstMenuSelected(this);">
-                            <option value="0" @if($info->parent_id == 0) selected @endif>一级菜单</option>
+                            <option value="0" @if($info->parent_id == 0) selected @endif>无</option>
                             @foreach($list as $key=>$val)
                                 <option value="{{ $val->id }}" @if((empty($second_list) && $info->parent_id == $val->id) || (!empty($second_list) && $parent_arr[1] == $val->id)) selected @endif>{{ $val->menu_name }}</option>
                             @endforeach
