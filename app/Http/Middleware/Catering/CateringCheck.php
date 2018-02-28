@@ -12,7 +12,7 @@ class CateringCheck{
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
             /*****登录页,如果已经登录则不需要再次登录*****/
-            case "proxy/login"://登录页,如果已经登录则不需要再次登录
+            case "catering/login"://登录页,如果已经登录则不需要再次登录
 //                获取用户登录存储的SessionId
                 $sess_key = Session::get('catering_account_id');
 //                如果不为空跳转到首页
@@ -30,7 +30,7 @@ class CateringCheck{
             /****系统管理****/
             case "proxy/system/setup":                  //参数设置
             case "proxy/system/proxy_info":             //公司信息设置
-            case "proxy":                               //服务商后台首页
+            case "catering":                            //服务商后台首页
             case "proxy/system/select_proxy":           //服务商超级管员进入操作
             case "proxy/system/proxy_structure":        //人员结构
             case "proxy/system/operationlog":           //操作日记
@@ -133,17 +133,17 @@ class CateringCheck{
     //普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('proxy_account_id');
+        $sess_key = Session::get('catering_account_id');
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
-            return self::res(0,redirect('proxy/login'));
+            return self::res(0,redirect('catering/login'));
         }else{
-            $sess_key = Session::get('proxy_account_id');//获取管理员ID
+            $sess_key = Session::get('catering_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('proxy');//连接到我的缓存服务器
-            $admin_data = Redis::get('proxy_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('proxy_system_menu_'.$sess_key);
-            $son_menu_data = Redis::get('proxy_system_son_menu_'.$sess_key);
+            Redis::connect('catering');//连接到我的缓存服务器
+            $admin_data = Redis::get('catering_system_admin_data_'.$sess_key);//获取管理员信息
+            $menu_data = Redis::get('catering_system_menu_'.$sess_key);
+            $son_menu_data = Redis::get('catering_system_son_menu_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单

@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>Musik | Web Application</title>
+    <title>零壹总店管理平台</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Catering/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -65,6 +66,7 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Catering/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
@@ -99,14 +101,14 @@
                 });
             }else{
                 console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor:"#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
-//                changeCaptcha();
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+                changeCaptcha();
             }
         });
     }

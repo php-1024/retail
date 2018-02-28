@@ -264,12 +264,11 @@ class ProgramController extends Controller{
         $program_id = $request->input('program_id');//所属程序ID
         $sort = $request->input('sort');
 
-        $program_info = Program::getPluck([['program_id'=>$program_id]],'program_name');
-
+        $program_info = Program::getPluck([['id',$program_id]],'program_name')->toArray();
         DB::beginTransaction();
         try{
             ProgramMenu::editMenu([['id',$id]],['sort'=>$sort]);
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info['program_name'].'的菜单排序');//保存操作记录
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info[0].'的菜单排序');//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
