@@ -1,36 +1,3 @@
-
-    <div id="sidebar"  class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-            <li class="sub-menu ">
-                <a href="javascript:;">
-                    <i class=""></i>
-                    <span></span>
-                    <span class="arrow open"></span>
-                </a>
-                <ul class="sub">
-                    {{--@foreach($son_menu_data[$val->id] as $k=>$v)--}}
-                    {{--<li @if($route_name == $v->menu_route) class="active" @endif><a href="{{ url($v->menu_route) }}">{{ $v->menu_name }}</a></li>--}}
-                    {{--@endforeach--}}
-
-                </ul>
-            </li>
-            <li>
-                <a href="{{ url('proxy/quit') }}">
-                    <i class="icon-power-off"></i>
-                    <span>退出登陆</span>
-                </a>
-            </li>
-        </ul>
-        <!-- sidebar menu end-->
-    </div>
-
-
-
-
-
-
-
     <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
         <!-- nav -->
         <nav class="nav-primary  hidden-xs">
