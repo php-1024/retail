@@ -234,8 +234,8 @@ class SystemController extends Controller{
     }
     //退出登录
     public function quit(Request $request){
-        Session::put('catering_account_id','');
-        return redirect('catering/login');
+        Session::put('proxy_account_id','');
+        return redirect('proxy/login');
     }
 }
 ?>
