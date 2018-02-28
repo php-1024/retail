@@ -20,6 +20,16 @@ return [
     'proxy_safe_encrypt_key'=>'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
     /*******************服务商**************************/
 
+    /*******************总店**************************/
+    'catering_encrypt_key'=>'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
+    'catering_safe_encrypt_key'=>'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
+    /*******************总店**************************/
+
+    /*******************分店**************************/
+    'branch_encrypt_key'=>'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 分店业务系统登录密码加密盐
+    'branch_safe_encrypt_key'=>'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 分店业务系统全密码加密盐
+    /*******************分店**************************/
+
     /******************微信开放平台相关参数********************/
     'wechat_open_setting'=>[
         'open_appid'=>'wxd22806e3df9e9d35', //开放平台APPID
