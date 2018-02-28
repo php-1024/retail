@@ -19,7 +19,6 @@
         </a>
     </li>
 </ul>
-
 <div class="navbar-right ">
     <ul class="nav navbar-nav m-n hidden-xs nav-user user">
         <li class="dropdown">
@@ -52,14 +51,3 @@
         </li>
     </ul>
 </div>
-
-
-
-
-
-
-
-
-
-
-
