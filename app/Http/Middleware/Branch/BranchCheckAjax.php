@@ -9,8 +9,7 @@ use Session;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
 
-class BranchCheckAjax
-{
+class BranchCheckAjax{
     public function handle($request, Closure $next)
     {
         $route_name = $request->path();//获取当前的页面路由
