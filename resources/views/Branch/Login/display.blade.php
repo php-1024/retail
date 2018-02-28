@@ -29,10 +29,10 @@
             <form class="m-t" role="form" id="currentForm" action="{{ url('branch/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
-                    <input type="email" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
+                    <input type="text" name="username" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
+                    <input type="password" name="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
                     <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
@@ -67,6 +67,8 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
+
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌

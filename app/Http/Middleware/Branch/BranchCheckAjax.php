@@ -1,21 +1,20 @@
 <?php
 /**
- * 检测中间件囖
+ * 检测中间件
  */
-namespace App\Http\Middleware\Catering;
+namespace App\Http\Middleware\Branch;
 use App\Models\Account;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
 
-class CateringCheckAjax
-{
+class BranchCheckAjax{
     public function handle($request, Closure $next)
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "catering/ajax/login_check"://检测登录数据提交
+            case "branch/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
@@ -333,7 +332,6 @@ class CateringCheckAjax
     //检测登录提交数据
     public function checkLoginPost($request)
     {
-        exit(1);
         if (empty($request->input('username'))) {
             return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
         }
@@ -343,7 +341,7 @@ class CateringCheckAjax
         if (empty($request->input('captcha'))) {
             return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
         }
-        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
+        if (Session::get('branch_system_captcha') == $request->input('captcha')) {
             //把参数传递到下一个程序
             return self::res(1, $request);
         } else {
