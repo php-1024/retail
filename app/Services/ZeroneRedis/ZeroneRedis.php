@@ -57,7 +57,7 @@ class ZeroneRedis
      * id - 用户的ID
      */
     public static function create_menu_cache($id){
-        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'id','asc');//获取零壹管理系统的一级菜单
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc');//获取零壹管理系统的一级菜单
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
