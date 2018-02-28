@@ -146,21 +146,19 @@
                 <strong>零壹云管理平台 - 总分店管理系统登录</strong>
             </header>
             <form action="index.html">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
-                    <input type="email" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
+                    <input type="email" name="username" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
+                    <input type="password" name="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
                     <input type="text" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    <img src="http://o2o.01nnt.com/tooling/login/captcha/1516698884" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
+                    <img src="{{ URL('zerone/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
-
-
                 <button type="button" onclick="location.href = 'index.html'" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
-
                 <div class="line line-dashed"></div>
 
             </form>
