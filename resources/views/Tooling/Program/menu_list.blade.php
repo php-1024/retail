@@ -42,10 +42,7 @@
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
-
             <div class="ibox-content m-b-sm border-bottom">
-
                 <div class="row">
                     <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_add') }}">
                     <input type="hidden" id="menu_edit_url" value="{{ url('tooling/ajax/menu_edit') }}">
