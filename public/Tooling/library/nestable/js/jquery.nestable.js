@@ -123,6 +123,7 @@
                 }
             };
 
+            /*
             if (hasTouch) {
                 list.el[0].addEventListener('touchstart', onStartEvent, false);
                 window.addEventListener('touchmove', onMoveEvent, false);
@@ -133,7 +134,7 @@
             list.el.on('mousedown', onStartEvent);
             list.w.on('mousemove', onMoveEvent);
             list.w.on('mouseup', onEndEvent);
-
+            */
         },
 
         serialize: function()
