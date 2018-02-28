@@ -97,7 +97,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
-                                                    <input type="tel" class="pull-left" onchange="return editSort('{{ $val->id }}','{{ $info->id }}');" value="{{ $val->sort }}"  style="width: 50px; text-align: center;">
+                                                    <input type="tel" class="pull-left" onchange="return editSort('{{ $val->id }}','{{ $info->id }}',this);" value="{{ $val->sort }}"  style="width: 50px; text-align: center;">
                                                     &nbsp;&nbsp;
                                                 <div class="btn-group">
 
@@ -264,9 +264,11 @@
         });
     }
 
-    function editSort(id,program_id){
+    function editSort(id,program_id,obj){
         var url = $('#menu_edit_sort_url').val();
         var token = $('#_token').val();
+        var sort = $(obj).val();
+
         if(id=='' || program_id==''){
             swal({
                 title: "提示信息",
@@ -279,7 +281,7 @@
             return;
         }
 
-        var data = {'id':id,'program_id':program_id,'_token':token};
+        var data = {'id':id,'program_id':program_id,'sort':sort,'_token':token};
         $.post(url,data,function(response){
             swal({
                 title: "提示信息",
