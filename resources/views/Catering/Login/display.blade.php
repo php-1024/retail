@@ -153,7 +153,7 @@
                     <input type="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
+                    <input type="text" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
                     <img src="http://o2o.01nnt.com/tooling/login/captcha/1516698884" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
