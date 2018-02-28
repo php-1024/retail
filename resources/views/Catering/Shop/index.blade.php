@@ -19,8 +19,13 @@
 </head>
 <body class="">
 <section class="vbox">
+    <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+        @include('Proxy/Public/Header')
+    </header>
     <section>
         <section class="hbox stretch">
+
+        {{--@include('Proxy/Public/Nav')--}}
             <!-- .aside -->
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
