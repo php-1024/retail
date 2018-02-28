@@ -17,8 +17,6 @@ class BranchCheck{
                 $sess_key = Session::get('branch_account_id');
                 //如果不为空跳转到选择商户组织页面
                 if(!empty($sess_key)) {
-                    dump('1');
-                    dd($sess_key);
                     return redirect('branch');
                 }
                 break;

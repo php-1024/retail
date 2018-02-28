@@ -21,8 +21,6 @@ class LoginController extends Controller
      */
     public function display()
     {
-        $sess_key = Session::get('branch_account_id');
-        dd($sess_key);
         return view('Branch/Login/display');
     }
 
