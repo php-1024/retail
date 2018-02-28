@@ -3,6 +3,7 @@
     <input type="hidden" name="program_id" id="program_id" value="{{ $info->program_id }}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="parent_id" id="parent_id" value="{{ $info->parent_id }}">
+    <input type="hidden" name="second_menu_url" id="second_menu_url" value="{{ url('tooling/ajax/menu_second_get') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
