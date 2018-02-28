@@ -23,7 +23,6 @@
 <div class="navbar-right ">
     <ul class="nav navbar-nav m-n hidden-xs nav-user user">
         <li class="dropdown">
-            
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
                 <i class="icon icon-user"></i>
                 {{ $admin_data['role_name'] }}-{{ $admin_data['account'] }}<b class="caret"></b>
@@ -33,12 +32,11 @@
                     <span class="arrow top"></span>
                     <a href="#"></a>
                 </li>
-                {{--@if($admin_data['is_super'] == 2)--}}
+                @if($admin_data['is_super'] == 2)
                 <li>
                     <a href="{{url('proxy/switch_status')}}">切换商铺</a>
                 </li>
-                {{--@endif--}}
-
+                @endif
                 <li>
                     <a href="profile.html">账号信息</a>
                 </li>
