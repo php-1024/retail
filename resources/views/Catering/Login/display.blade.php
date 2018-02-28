@@ -55,11 +55,11 @@
     </div>
 </footer>
 <!-- / footer -->
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+{{--<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>--}}
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
+{{--<script src="{{asset('public/Catering')}}/js/app.js"></script>--}}
 <script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
