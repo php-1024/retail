@@ -219,6 +219,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = ProgramMenu::find($id);
         $parent_num = explode(',',$info->parent_tree);
+        dump($parent_num);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$info->program_id]],0,'id','asc');
         return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
     }
