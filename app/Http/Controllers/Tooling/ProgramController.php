@@ -269,7 +269,7 @@ class ProgramController extends Controller{
         DB::beginTransaction();
         try{
             ProgramMenu::editMenu([['id',$id]],['sort'=>$sort]);
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info['program_name'].'的菜单排序');//保存操作记录
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info[0].'的菜单排序');//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dump($e);
