@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="css/font.css" type="text/css" />
     <link rel="stylesheet" href="css/app.css" type="text/css" />
     <!--[if lt IE 9]>
-    <script src="js/ie/html5shiv.js"></script>
-    <script src="js/ie/respond.min.js"></script>
-    <script src="js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Branch')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Branch')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Branch')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="bg-success dker">
