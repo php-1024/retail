@@ -96,7 +96,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
-                                                    <input type="tel" class="pull-left" value="{{ $val->sort }}" onclick="$(this).focus();"  style="width: 50px; text-align: center;">
+                                                    <input type="tel" class="pull-left" value="{{ $val->sort }}"  style="width: 50px; text-align: center;">
                                                     &nbsp;&nbsp;
                                                 <div class="btn-group">
 
@@ -114,7 +114,7 @@
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
-                                                            <input type="tel" class="pull-left" value="{{ $vv->sort }}" onclick="$(this).focus();" onclick="$(this).focus();" style="width: 50px; text-align: center;">
+                                                            <input type="tel" class="pull-left" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
                                                         &nbsp;&nbsp;
                                                         <div class="btn-group">
                                                             <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
@@ -130,7 +130,7 @@
                                                             <li class="dd-item" data-id="2">
                                                                 <div class="dd-handle">
                                                                     <span class="pull-right">
-                                                                        <input type="text" value="{{ $vvv->sort }}" onclick="$(this).focus();" style="width: 50px; text-align: center;">
+                                                                        <input type="text" value="{{ $vvv->sort }}" style="width: 50px; text-align: center;">
                                                                         &nbsp;&nbsp;
 
                                                                         <div class="btn-group">
