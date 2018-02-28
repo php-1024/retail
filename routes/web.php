@@ -476,9 +476,20 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('/', 'Catering\LoginController@display');//登录页面路由
         Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');//验证码路由
     });
+
+    //系统首页&&公司资料
+    Route::group(['prefix'=>'/'],function(){
+        Route::any('/', 'Catering\ShopController@display')->middleware('CateringCheck');                            //首页面路由
+        Route::get('quit', 'Company\AccountcenterController@quit');                                                 //退出系统
+        Route::get('company_list', 'Company\AccountcenterController@company_list')->middleware('CompanyCheck');     //商户列表
+        Route::get('company_switch', 'Company\AccountcenterController@company_switch')->middleware('CompanyCheck'); //超级管理员退出当前商户
+    });
+
+
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');                                   //提交登录数据
+        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');//提交登录数据
     });
 });
 /**********************总店系统*********************/
