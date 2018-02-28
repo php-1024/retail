@@ -264,7 +264,7 @@ class ProgramController extends Controller{
         $program_id = $request->input('program_id');//所属程序ID
         $sort = $request->input('sort');
 
-        $program_info = Program::getPluck([['id',$program_id]],'program_name');
+        $program_info = Program::getPluck([['id',$program_id]],'program_name')->toArray();
         dump($program_info);
         DB::beginTransaction();
         try{
