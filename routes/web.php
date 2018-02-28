@@ -478,7 +478,7 @@ Route::group(['prefix'=>'catering'],function(){
     });
 
     Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                //系统首页
-    Route::get('switch_status', 'Proxy\SystemController@switch_status')->middleware('ProxyCheck');                  //超级管理员切换服务商
+    Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');              //超级管理员切换服务商
     Route::get('quit', 'Catering\ShopController@quit');//退出系统
 
 
