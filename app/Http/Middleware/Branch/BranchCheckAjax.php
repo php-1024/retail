@@ -346,7 +346,8 @@ class BranchCheckAjax{
             return self::res(1, $request);
         } else {
             //用户输入验证码错误
-            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
+            $yzm = Session::get('zerone_system_captcha');
+            return self::res(0, response()->json(['data' => '验证码错误'.$yzm, 'status' => '0']));
         }
     }
 
