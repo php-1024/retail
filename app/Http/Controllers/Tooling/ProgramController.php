@@ -218,10 +218,14 @@ class ProgramController extends Controller{
     public function menu_edit(Request $request){
         $id = $request->input('id');
         $info = ProgramMenu::find($id);
-        $parent_num = explode(',',$info->parent_tree);
-        dump($parent_num);
+        $parent_arr = explode(',',$info->parent_tree);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$info->program_id]],0,'id','asc');
-        return view('Tooling/Program/menu_edit',['list'=>$list,'info'=>$info,'action_name'=>'program']);
+
+        $second_list = [];
+        if(count($parent_arr)==3){
+            $second_list  = ProgramMenu::getList([[ 'parent_id',$parent_arr[1]],['program_id',$info->program_id]],0,'id','asc');
+        }
+        return view('Tooling/Program/menu_edit',['list'=>$list,$second_list=>$second_list,'info'=>$info,'action_name'=>'program']);
     }
     //编辑菜单数据检测
     public function menu_edit_check(Request $request){
