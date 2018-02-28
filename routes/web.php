@@ -473,7 +473,7 @@ Route::group(['prefix'=>'catering'],function(){
 
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Catering\LoginController@display');//登录页面路由
+        Route::get('/', 'Catering\LoginController@display')->middleware('CateringCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');//验证码路由
     });
 
