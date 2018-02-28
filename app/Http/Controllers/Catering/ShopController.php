@@ -20,11 +20,11 @@ class ShopController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
-            $key = config("app.catering_encrypt_key");//获取加密盐（总店专用）
-            $password = 'admin';
-            $encrypted = md5($password);//加密密码第一重
-            $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
-            echo $encryptPwd;
+//            $key = config("app.catering_encrypt_key");//获取加密盐（总店专用）
+//            $password = 'admin';
+//            $encrypted = md5($password);//加密密码第一重
+//            $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+//            echo $encryptPwd;
             $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','7']],20,'id');
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
