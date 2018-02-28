@@ -492,7 +492,7 @@ Route::group(['prefix'=>'catering'],function(){
 
 /**********************餐饮分店系统*********************/
 Route::group(['prefix'=>'branch'],function(){
-
+    Route::get('/', 'Branch\DisplayController@display')->middleware('CateringCheck');//分店首页
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
