@@ -257,7 +257,7 @@ class ProgramController extends Controller{
         }
     }
     //编辑菜单排序
-    public function menu_sort_edit(Request $request){
+    public function menu_edit_sort(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
