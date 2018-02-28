@@ -26,7 +26,8 @@
             <header class="wrapper text-center">
                 <strong>零壹云管理平台 - 分店业务系统登录</strong>
             </header>
-            <form action="index.html">
+            <form class="m-t" role="form" id="currentForm" action="{{ url('branch/ajax/login_check') }}">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
                     <input type="email" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
                 </div>
@@ -34,8 +35,9 @@
                     <input type="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="hidden" placeholder="验证码" class="col-sm-6 input-lg text-center no-border" id="captcha_url" value="{{ URL('zerone/login/captcha') }}">
-                    <img src="{{ URL('zerone/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
+                    <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
+                    <input type="hidden" id="captcha_url" value="{{ URL('branch/login/captcha') }}">
+                    <img src="{{ URL('branch/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
 
