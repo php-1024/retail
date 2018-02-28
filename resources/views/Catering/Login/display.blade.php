@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <input type="text" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    {{--<img src="{{ URL('catering/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">--}}
+                    <img src="{{ URL('catering/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
                 <button type="submit" onclick="postForm()" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
@@ -55,60 +55,60 @@
     </div>
 </footer>
 <!-- / footer -->
-{{--<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>--}}
+<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
 <!-- App -->
-{{--<script src="{{asset('public/Catering')}}/js/app.js"></script>--}}
+<script src="{{asset('public/Catering')}}/js/app.js"></script>
 <script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-{{--<script>--}}
-    {{--$(function(){--}}
-        {{--//设置CSRF令牌--}}
-        {{--$.ajaxSetup({--}}
-            {{--headers: {--}}
-                {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-            {{--}--}}
-        {{--});--}}
-    {{--});--}}
-    {{--//更换验证码--}}
-    {{--function changeCaptcha(){--}}
-        {{--var url = $("#captcha_url").val();--}}
-        {{--url = url + "/" + Math.random();--}}
-        {{--$("#login_captcha").attr("src",url);--}}
-    {{--}--}}
+<script>
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+    //更换验证码
+    function changeCaptcha(){
+        var url = $("#captcha_url").val();
+        url = url + "/" + Math.random();
+        $("#login_captcha").attr("src",url);
+    }
 
-    {{--//提交表单--}}
-    {{--function postForm(){--}}
-        {{--var target = $("#currentForm");--}}
-        {{--var url = target.attr("action");--}}
-        {{--var data = target.serialize();--}}
-        {{--console.log(data);--}}
-{{--//        $.post(url,data,function(json){--}}
-{{--//            if(json.status==1){--}}
-{{--//                swal({--}}
-{{--//                    title: "提示信息",--}}
-{{--//                    text: json.data,--}}
-{{--//                    confirmButtonColor: "#DD6B55",--}}
-{{--//                    confirmButtonText: "确定"--}}
-{{--//                },function(){--}}
-{{--//                    window.location.reload();--}}
-{{--//                });--}}
-{{--//            }else{--}}
-{{--//                swal({--}}
-{{--//                    title: "提示信息",--}}
-{{--//                    text: json.data,--}}
-{{--//                    confirmButtonColor:"#DD6B55",--}}
-{{--//                    confirmButtonText: "确定",--}}
-{{--//                    //type: "warning"--}}
-{{--//                });--}}
-{{--//                changeCaptcha();--}}
-{{--//            }--}}
-{{--//        });--}}
-    {{--}--}}
-{{--</script>--}}
+    //提交表单
+    function postForm(){
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        
+//        $.post(url,data,function(json){
+//            if(json.status==1){
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+//                changeCaptcha();
+//            }
+//        });
+    }
+</script>
 </body>
 </html>
