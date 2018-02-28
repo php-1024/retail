@@ -23,13 +23,13 @@ class NodeController extends Controller{
 
         $node_name = $request->input('node_name');//提交上来的节点名称
         $route_name = $request->input('route_name');//提交上来的路由名称
-
+        $node_show_name = $request->input('node_show_name');//提交上来的节点展示名称（可以重复）
         if(Node::checkRowExists([[ 'node_name',$node_name ]])){
             return response()->json(['data' => '节点名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-                Node::addNode(['node_name'=>$node_name,'route_name'=>$route_name]);
+                Node::addNode(['node_name'=>$node_name,'node_show_name'=>$node_show_name,'route_name'=>$route_name]);
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'新增了节点'.$node_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
