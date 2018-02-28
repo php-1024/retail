@@ -5,17 +5,17 @@
     <title>零壹云管理平台 | 分店业务系统</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <link rel="stylesheet" href="js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/font.css" type="text/css" />
-    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Branch')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Branch')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Branch')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Branch')}}/library/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Branch')}}/library/ie/respond.min.js"></script>
+    <script src="{{asset('public/Branch')}}/library/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="bg-success dker">
