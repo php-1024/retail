@@ -23,13 +23,6 @@
 <div class="navbar-right ">
     <ul class="nav navbar-nav m-n hidden-xs nav-user user">
         <li class="dropdown">
-
-        {{--@if($admin_data['is_super'] == 2)--}}
-            <a href="{{url('proxy/switch_status')}}" class="dropdown-toggle bg clear" data-toggle="dropdown">
-                <i class="icon icon-user"></i>
-                切换服务商<b class="caret"></b>
-            </a>
-        {{--@endif--}}
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
                 <i class="icon icon-user"></i>
                 {{ $admin_data['role_name'] }}-{{ $admin_data['account'] }}<b class="caret"></b>
