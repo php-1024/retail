@@ -56,15 +56,15 @@
     </div>
 </footer>
 <!-- / footer -->
-<script src="js/jquery.min.js"></script>
+<script src="{{asset('public/Branch')}}/library/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="js/bootstrap.js"></script>
+<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="js/app.js"></script>
-<script src="js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/app.plugin.js"></script>
-<script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Branch')}}/js/app.js"></script>
+<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Branch')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 </body>
 </html>
