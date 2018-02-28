@@ -12,7 +12,6 @@
     <link href="{{asset('public/Tooling/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <link href="{{asset('public/Tooling/library/font')}}/css/font-awesome.css" rel="stylesheet">
 
-
     <link href="{{asset('public/Tooling')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Tooling')}}/css/style.css" rel="stylesheet">
 
@@ -42,7 +41,10 @@
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+
             <div class="ibox-content m-b-sm border-bottom">
+
                 <div class="row">
                     <input type="hidden" id="menu_add_url" value="{{ url('tooling/ajax/menu_add') }}">
                     <input type="hidden" id="menu_edit_url" value="{{ url('tooling/ajax/menu_edit') }}">
@@ -111,7 +113,7 @@
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
-                                                            <input type="tel" class="pull-left" value="{{ $vv->sort }}" onclick="$(this).select();" style="width: 50px; text-align: center;">
+                                                            <input type="tel" class="pull-left" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
                                                         &nbsp;&nbsp;
                                                         <div class="btn-group">
                                                             <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
