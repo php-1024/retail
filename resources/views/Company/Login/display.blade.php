@@ -40,8 +40,8 @@
                     <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
                 </div>
                 <div class="form-group col-md-6" >
-                    <input type="hidden" id="captcha_url" value="{{ URL('zerone/login/captcha') }}">
-                    <img src="{{ URL('zerone/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
+                    <input type="hidden" id="captcha_url" value="{{ URL('company/login/captcha') }}">
+                    <img src="{{ URL('company/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
                 </div>
                 <button type="button" onclick="postForm();" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
                 <div class="line line-dashed"></div>
