@@ -265,7 +265,7 @@ class ProgramController extends Controller{
         $sort = $request->input('sort');
 
         $program_info = Program::getPluck([['id',$program_id]],'program_name');
-
+        dump($program_info);
         DB::beginTransaction();
         try{
             ProgramMenu::editMenu([['id',$id]],['sort'=>$sort]);
