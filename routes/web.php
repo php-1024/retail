@@ -478,7 +478,7 @@ Route::group(['prefix'=>'catering'],function(){
     });
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');                                   //提交登录数据
+        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheck');                                   //提交登录数据
     });
 });
 /**********************总店系统*********************/
