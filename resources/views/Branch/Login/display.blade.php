@@ -34,13 +34,12 @@
                     <input type="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    <img src="http://o2o.01nnt.com/tooling/login/captcha/1516698884" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
+                    <input type="hidden" placeholder="验证码" class="col-sm-6 input-lg text-center no-border" id="captcha_url" value="{{ URL('zerone/login/captcha') }}">
+                    <img src="{{ URL('zerone/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
 
-                <button type="button" onclick="location.href = 'index.html'" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
-
+                <button type="button" onclick="postForm();" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
                 <div class="line line-dashed"></div>
 
             </form>
@@ -66,5 +65,51 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
+<script>
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+    //更换验证码
+    function changeCaptcha(){
+        var url = $("#captcha_url").val();
+        url = url + "/" + Math.random();
+        $("#login_captcha").attr("src",url);
+    }
+
+    //提交表单
+    function postForm(){
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        console.log(url);
+        var data = target.serialize();
+        console.log(data);
+        $.post(url,data,function(json){
+            if(json.status==1){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+                changeCaptcha();
+            }
+        });
+    }
+</script>
 </body>
 </html>
