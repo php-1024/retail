@@ -423,7 +423,7 @@
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg" >
-                                                    <img src="images/a5.png" class="img-circle" alt="...">
+                                                    <img src="{{asset('public/Catering')}}/img/a5.png" class="img-circle" alt="...">
                                                 </div>
                                             </div>
                                         </div>
@@ -533,7 +533,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-info">
                                 <i class="fa fa-cutlery"></i>
