@@ -151,11 +151,19 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndProgramDelete($request);
                 return self::format_response($re,$next);
                 break;
+
             //检测硬删除程序数据是否合法
             case "tooling/ajax/program_remove":
                 $re = $this->checkLoginAndSuperAndProgramRemove($request);
                 return self::format_response($re,$next);
                 break;
+
+            //检测修改菜单排序数据是否合法
+            case "tooling/ajax/menu_edit_sort":
+                $re = $this->checkLoginAndMenuEditSort($request);
+                return self::format_response($re,$next);
+                break;
+
             //仅检测是否登录
             case "tooling/ajax/node_edit"://是否允许弹出修改节点页面
             case "tooling/ajax/module_edit"://是否允许弹出修改程序页面
@@ -232,6 +240,22 @@ class ToolingCheckAjax {
             }
         }
     }
+
+    //修改程序菜单排序，检测是否登陆，输入数据是否正确
+    public function checkLoginAndMenuEditSort($request){
+        $re = $this->checkIsLogin($request);//判断是否登录
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkMenuEditSort($re['response']);//判断修改密码提交数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //修改密码 检测是否登录 输入数据是否正确
     public function checkLoginAndPasswordEdit($request){
         $re = $this->checkIsLogin($request);//判断是否登录
@@ -538,6 +562,22 @@ class ToolingCheckAjax {
     }
 
     /**********************单项检测************************/
+    //检测修改程序菜单数据提交
+    public function checkMenuEditSort($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('program_id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('sort'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(!is_numeric($request->input('sort'))){
+            return self::res(0,response()->json(['data' => '请输入数字', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测硬删除模块数据提交
     public function checkProgramRemove($request){
         if(empty($request->input('id'))){
