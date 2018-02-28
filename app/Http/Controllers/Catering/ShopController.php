@@ -19,21 +19,27 @@ class ShopController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
-        if($admin_data['is_super'] == 1 ){
-            $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','7']],20,'id');
-            return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
-        }else{
-            $where = [['organization_id',$organization_id]];
-            $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id')->first();//获取负责人id
-            if($account_id != $admin_data['id']) {//如果不是服务商负责人 只允许看自己的登入记录
-                $where[] = ['account_id',$admin_data['id']];
-            }
-            $login_log_list = LoginLog::getList($where,10,'id');//登录记录
-            $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
-            $acc_num = Account::where([['organization_id',$organization_id]])->count();//查询服务商人数
-            $org_num = Organization::where([['parent_id',$organization_id]])->count();//查询服务商附属商务个数
-            return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-        }
+            $key = config("app.catering_encrypt_key");//获取加密盐（总店专用）
+            $password = 'admin';
+            $encrypted = md5($password);//加密密码第一重
+            $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+            echo $encryptPwd;
+//        if($admin_data['is_super'] == 1 ){
+//
+//            $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','7']],20,'id');
+//            return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
+//        }else{
+//            $where = [['organization_id',$organization_id]];
+//            $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id')->first();//获取负责人id
+//            if($account_id != $admin_data['id']) {//如果不是服务商负责人 只允许看自己的登入记录
+//                $where[] = ['account_id',$admin_data['id']];
+//            }
+//            $login_log_list = LoginLog::getList($where,10,'id');//登录记录
+//            $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
+//            $acc_num = Account::where([['organization_id',$organization_id]])->count();//查询服务商人数
+//            $org_num = Organization::where([['parent_id',$organization_id]])->count();//查询服务商附属商务个数
+//            return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+//        }
     }
     //超级管理员选择服务商
     public function select_proxy(Request $request){
