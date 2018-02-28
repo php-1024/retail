@@ -233,8 +233,8 @@ class ShopController extends Controller{
     }
     //退出登录
     public function quit(Request $request){
-        Session::put('proxy_account_id','');
-        return redirect('proxy/login');
+        Session::put('catering_account_id','');
+        return redirect('catering/login');
     }
 }
 ?>

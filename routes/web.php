@@ -481,7 +481,7 @@ Route::group(['prefix'=>'catering'],function(){
     Route::get('switch_status', 'Proxy\SystemController@switch_status')->middleware('ProxyCheck');                  //超级管理员切换服务商
     Route::get('quit', 'Catering\ShopController@quit');//退出系统
 
-    
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');//提交登录数据
