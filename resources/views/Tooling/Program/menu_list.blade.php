@@ -50,6 +50,8 @@
                     <input type="hidden" id="menu_edit_url" value="{{ url('tooling/ajax/menu_edit') }}">
                     <input type="hidden" id="menu_delete_url" value="{{ url('tooling/ajax/menu_delete') }}">
                     <input type="hidden" id="menu_remove_url" value="{{ url('tooling/ajax/menu_remove') }}">
+                    <input type="hidden" id="menu_edit_sort_url" value="{{ url('tooling/ajax/menu_edit_sort') }}">
+
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-1">
                         <div class="form-group">
@@ -259,6 +261,34 @@
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
+        });
+    }
+
+    function editSort(id,program_id){
+        var url = $('#menu_edit_sort_url').val();
+        var token = $('#_token').val();
+        if(id=='' || program_id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'program_id':program_id,'_token':token};
+        $.post(url,data,function(response){
+            swal({
+                title: "提示信息",
+                text: response.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                //window.location.reload();
+            });
         });
     }
 
