@@ -20,7 +20,7 @@
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Proxy/Public/Header')
+        @include('Catering/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
