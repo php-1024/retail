@@ -75,5 +75,9 @@ class Kernel extends HttpKernel
         'CompanyCheck'=>\App\Http\Middleware\Company\CompanyCheck::class,//检测普通页面跳转的中间件
         'CompanyCheckAjax'=>\App\Http\Middleware\Company\CompanyCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************商户平台管理系统*******************************/
+        /**************************商户平台管理系统*******************************/
+        'CateringCheck'=>\App\Http\Middleware\Catering\CateringCheck::class,//检测普通页面跳转的中间件
+        'CateringCheckAjax'=>\App\Http\Middleware\Catering\CateringCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************商户平台管理系统*******************************/
     ];
 }
