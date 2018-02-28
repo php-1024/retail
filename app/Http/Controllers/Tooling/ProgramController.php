@@ -225,7 +225,7 @@ class ProgramController extends Controller{
         if(count($parent_arr)==3){
             $second_list  = ProgramMenu::getList([[ 'parent_id',$parent_arr[1]],['program_id',$info->program_id]],0,'id','asc');
         }
-        return view('Tooling/Program/menu_edit',['list'=>$list,$second_list=>$second_list,'info'=>$info,'action_name'=>'program']);
+        return view('Tooling/Program/menu_edit',['list'=>$list,'second_lis'=>$second_list,'info'=>$info,'action_name'=>'program']);
     }
     //编辑菜单数据检测
     public function menu_edit_check(Request $request){
