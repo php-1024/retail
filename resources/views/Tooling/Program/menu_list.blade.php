@@ -283,14 +283,17 @@
 
         var data = {'id':id,'program_id':program_id,'sort':sort,'_token':token};
         $.post(url,data,function(response){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                //window.location.reload();
-            });
+            if(response.status!='1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    //window.location.reload();
+                });
+            }
+
         });
     }
 
