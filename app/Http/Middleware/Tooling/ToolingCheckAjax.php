@@ -570,7 +570,7 @@ class ToolingCheckAjax {
         if(empty($request->input('program_id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
         }
-        if(empty($request->input('sort'))){
+        if($request->input('sort')==''){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
         }
         if(!is_numeric($request->input('sort'))){
