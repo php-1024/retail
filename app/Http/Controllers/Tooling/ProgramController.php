@@ -256,6 +256,28 @@ class ProgramController extends Controller{
             return response()->json(['data' => '编辑菜单成功', 'status' => '1']);
         }
     }
+    //编辑菜单排序
+    public function menu_sort_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $program_id = $request->input('program_id');//所属程序ID
+        $sort = $request->input('sort');
+
+        $program_info = Program::getPluck([['program_id'=>$program_id]],'program_name');
+
+        DB::beginTransaction();
+        try{
+            ProgramMenu::editMenu([['id',$id]],['sort'=>$sort]);
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info['program_name'].'的菜单排序');//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改菜单排序失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改菜单排序成功', 'status' => '1']);
+
+    }
     //添加程序套餐
     public function package_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
