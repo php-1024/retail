@@ -5,6 +5,7 @@
     <title>零壹云管理平台 | 分店业务系统</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css">
     <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
@@ -36,8 +37,8 @@
                 </div>
                 <div class="form-group">
                     <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    <input type="hidden" id="captcha_url" value="{{ URL('branch/login/captcha') }}">
-                    <img src="{{ URL('branch/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
+                    <input type="hidden" id="captcha_url" value="{{ asset('branch/login/captcha') }}">
+                    <img src="{{ asset('branch/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
 
@@ -67,6 +68,8 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
+
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌

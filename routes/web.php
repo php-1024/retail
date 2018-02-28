@@ -478,7 +478,7 @@ Route::group(['prefix'=>'catering'],function(){
     });
 
     Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                //系统首页
-    Route::get('switch_status', 'Proxy\SystemController@switch_status')->middleware('ProxyCheck');                  //超级管理员切换服务商
+    Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');              //超级管理员切换服务商
     Route::get('quit', 'Catering\ShopController@quit');//退出系统
 
 
@@ -492,10 +492,10 @@ Route::group(['prefix'=>'catering'],function(){
 
 /**********************餐饮分店系统*********************/
 Route::group(['prefix'=>'branch'],function(){
-
+    Route::get('/', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Branch\LoginController@display');//登录页面路由
+        Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
     });
     //异步提交数据组
