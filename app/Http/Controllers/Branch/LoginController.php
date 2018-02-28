@@ -127,6 +127,8 @@ class LoginController extends Controller
                         //构造用户缓存数据
                         \ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                         \ZeroneRedis::create_branch_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+                        $sess_key = Session::get('branch_account_id');
+                        dd($sess_key);
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
                 }
