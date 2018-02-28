@@ -482,3 +482,19 @@ Route::group(['prefix'=>'catering'],function(){
     });
 });
 /**********************总店系统*********************/
+
+
+/**********************餐饮分店系统*********************/
+Route::group(['prefix'=>'branch'],function(){
+
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Branch\LoginController@display');//登录页面路由
+        Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
+    });
+    //异步提交数据组
+    Route::group(['prefix'=>'ajax'],function(){
+        Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
+    });
+});
+/**********************餐饮分店系统*********************/
