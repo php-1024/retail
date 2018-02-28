@@ -12,7 +12,7 @@ class CateringCheck{
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
             /*****登录页,如果已经登录则不需要再次登录*****/
-            case "proxy/login"://登录页,如果已经登录则不需要再次登录
+            case "catering/login"://登录页,如果已经登录则不需要再次登录
 //                获取用户登录存储的SessionId
                 $sess_key = Session::get('catering_account_id');
 //                如果不为空跳转到首页
