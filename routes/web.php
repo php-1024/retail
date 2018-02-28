@@ -500,7 +500,7 @@ Route::group(['prefix'=>'branch'],function(){
     });
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Branch\LoginController@login_check');//提交登录数据
+        Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
     });
 });
 /**********************餐饮分店系统*********************/
