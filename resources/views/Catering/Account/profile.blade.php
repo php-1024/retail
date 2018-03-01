@@ -48,7 +48,7 @@
                                     个人账号信息修改
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="post" id="currentForm" action="{{ url('proxy/ajax/account_info_check') }}">
+                                    <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/profile_check') }}">
                                         <input type="hidden" name="_token"  value="{{csrf_token()}}">
                                         <input type="hidden" name="id" value="{{$user['id']}}">
                                         <input type="hidden" name="organization_id" value="{{$user['organization_id']}}">
@@ -149,6 +149,37 @@
         });
         $('select.styled').customSelect();
     });
+
+
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        console.log(data);
+//        $.post(url, data, function (json) {
+//            if (json.status == -1) {
+//                window.location.reload();
+//            } else if(json.status == 1) {
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
+//            }
+//        });
+    }
+
 </script>
 </body>
 </html>
