@@ -486,12 +486,12 @@ Route::group(['prefix'=>'catering'],function(){
 
     //账号中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Catering\AccountController@profile')->middleware('CompanyCheck');                     //账号信息
-        Route::get('password', 'Catering\AccountController@password')->middleware('CompanyCheck');                   //登入密码修改
-        Route::get('safe_password', 'Catering\AccountController@safe_password')->middleware('CompanyCheck');         //安全密码设置
-        Route::get('message_setting', 'Catering\AccountController@message_setting')->middleware('CompanyCheck');     //消息推送设置
-        Route::get('operation_log', 'Catering\AccountController@operation_log')->middleware('CompanyCheck');         //操作日记
-        Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CompanyCheck');                 //登入日记
+        Route::get('profile', 'Catering\AccountController@profile')->middleware('CateringCheck');                     //账号信息
+        Route::get('password', 'Catering\AccountController@password')->middleware('CateringCheck');                   //登入密码修改
+        Route::get('safe_password', 'Catering\AccountController@safe_password')->middleware('CateringCheck');         //安全密码设置
+        Route::get('message_setting', 'Catering\AccountController@message_setting')->middleware('CateringCheck');     //消息推送设置
+        Route::get('operation_log', 'Catering\AccountController@operation_log')->middleware('CateringCheck');         //操作日记
+        Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CateringCheck');                 //登入日记
     });
 
 
