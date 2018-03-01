@@ -37,7 +37,7 @@ class BranchCheck{
 //                return self::format_response($re,$next);
                 break;
         }
-        return $next($request);
+//        return $next($request);
     }
 
     //检测是否admin或是否有权限
