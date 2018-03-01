@@ -142,15 +142,7 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
 <script>
-    $(function(){
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-        $('select.styled').customSelect();
-    });
-
-
+    
     //提交表单
     function postForm() {
         var target = $("#currentForm");
