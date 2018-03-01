@@ -104,7 +104,7 @@ class BranchCheck{
         if($re['status']=='0'){
             return $re['response'];
         }else{
-            return self::$next($re['response']);
+            return $next($re['response']);
         }
     }
 }
