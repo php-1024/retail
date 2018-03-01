@@ -57,21 +57,21 @@
     <div class="row state-overview" style="margin: 10px;">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
         <input type="hidden" id="url" value="{{url('proxy/system/select_proxy')}}">
-    {{--@foreach($listOrg as $key=>$value)--}}
-        {{--<div class="col-lg-3 col-sm-6">--}}
-            {{--<a href="javascript:;" onclick="postForm('{{$value->id}}')">--}}
-                {{--<section class="panel">--}}
-                    {{--<div class="symbol terques">--}}
-                        {{--<i class="icon-arrow-right"></i>--}}
-                    {{--</div>--}}
-                    {{--<div class="value">--}}
-                        {{--<b>{{$value->organization_name}}</b>--}}
+    @foreach($listOrg as $key=>$value)
+        <div class="col-lg-3 col-sm-6">
+            <a href="javascript:;" onclick="postForm('{{$value->id}}')">
+                <section class="panel">
+                    <div class="symbol terques">
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                    <div class="value">
+                        <b>{{$value->organization_name}}</b>
                         {{--<p>{{$value->warzone['0']['zone_name']}}</p>--}}
-                    {{--</div>--}}
-                {{--</section>--}}
-            {{--</a>--}}
-        {{--</div>--}}
-        {{--@endforeach--}}
+                    </div>
+                </section>
+            </a>
+        </div>
+        @endforeach
     </div>
 </section>
 <!-- js placed at the end of the document so the pages load faster -->

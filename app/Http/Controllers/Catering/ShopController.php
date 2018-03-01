@@ -21,7 +21,6 @@ class ShopController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
             $listOrg = Organization::where([['program_id','7']])->get();
-            dd($listOrg);
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
