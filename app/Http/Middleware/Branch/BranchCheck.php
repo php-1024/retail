@@ -20,9 +20,18 @@ class BranchCheck{
                     return redirect('branch');
                 }
                 break;
-
             /****仅检测是否登录及是否具有权限****/
             case "branch":                             //后台首页
+            case "company/company_switch":              //退出切换商户
+            case "company/company_list":                //所有商户列表
+            case "company/account/profile":             //密码设置
+            case "company/account/password":            //密码设置
+            case "company/account/safe_password":       //安全密码设置
+            case "company/account/operation_log":       //账户中心个人操作日志
+            case "company/account/login_log":           //账户中心个人登陆日志
+            case "company/store/store_add":             //店铺管理创建店铺
+            case "company/store/store_add_second":      //店铺管理立即开店
+            case "company/store/store_list":            //店铺管理
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
@@ -95,7 +104,6 @@ class BranchCheck{
         if($re['status']=='0'){
             return $re['response'];
         }else{
-            dd($re['response']);
             return $next($re['response']);
         }
     }
