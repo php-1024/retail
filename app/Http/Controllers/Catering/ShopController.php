@@ -38,6 +38,7 @@ class ShopController extends Controller{
     //超级管理员选择服务商
     public function select_shop(Request $request){
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_this);
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         if(!empty($account_info)){
@@ -54,7 +55,6 @@ class ShopController extends Controller{
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
             ];
-            dd($admin_data);
             Session::put('catering_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
