@@ -20,7 +20,6 @@ class ShopController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
-            dump($admin_data);
             $listOrg = Organization::where([['program_id','7']])->get();
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
@@ -55,6 +54,7 @@ class ShopController extends Controller{
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
             ];
+            dd($admin_data);
             Session::put('catering_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
