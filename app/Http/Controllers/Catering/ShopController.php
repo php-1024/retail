@@ -61,8 +61,7 @@ class ShopController extends Controller{
             }else{
                 $admin_data['realname'] = '未设置';
             }
-            echo 1;exit;
-            if(!empty($account_info->account_roles)) {
+            if(!empty($account_info->account_roles) && $account_info->account_roles->count() != 0) {
                 foreach ($account_info->account_roles as $key => $val) {
                     $account_info->role = $val;
                 }
@@ -70,6 +69,8 @@ class ShopController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
+            echo 1;exit;
+
             \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
             \ZeroneRedis::create_catering_menu_cache(1);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
