@@ -209,6 +209,46 @@
                                             <td>888笔</td>
                                             <td>&yen;88888.33</td>
                                         </tr>
+                                        <tr>
+                                            <td>刘记鸡煲王【中心城店】</td>
+                                            <td><label class="label label-warning">分店</label></td>
+                                            <td>111笔</td>
+                                            <td>&yen;10000.3</td>
+                                            <td>888笔</td>
+                                            <td>&yen;88888.33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>刘记鸡煲王【中心城店】</td>
+                                            <td><label class="label label-warning">分店</label></td>
+                                            <td>111笔</td>
+                                            <td>&yen;10000.3</td>
+                                            <td>888笔</td>
+                                            <td>&yen;88888.33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>刘记鸡煲王【中心城店】</td>
+                                            <td><label class="label label-warning">分店</label></td>
+                                            <td>111笔</td>
+                                            <td>&yen;10000.3</td>
+                                            <td>888笔</td>
+                                            <td>&yen;88888.33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>刘记鸡煲王【中心城店】</td>
+                                            <td><label class="label label-warning">分店</label></td>
+                                            <td>111笔</td>
+                                            <td>&yen;10000.3</td>
+                                            <td>888笔</td>
+                                            <td>&yen;88888.33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>刘记鸡煲王【中心城店】</td>
+                                            <td><label class="label label-warning">分店</label></td>
+                                            <td>111笔</td>
+                                            <td>&yen;10000.3</td>
+                                            <td>888笔</td>
+                                            <td>&yen;88888.33</td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </section>
