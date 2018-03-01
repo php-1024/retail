@@ -54,7 +54,7 @@ class ShopController extends Controller{
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
             ];
-            Session::put('proxy_account_id',encrypt(1));//存储登录session_id为当前用户ID
+            Session::put('catering_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
                 $admin_data['realname'] = $account_info->account_info->realname;
@@ -69,8 +69,8 @@ class ShopController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-            \ZeroneRedis::create_proxy_menu_cache(1);//生成对应账号的系统菜单
+            \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+            \ZeroneRedis::create_catering_menu_cache(1);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
 
         }else{
@@ -79,7 +79,7 @@ class ShopController extends Controller{
     }
     //超级管理员选择服务商
     public function switch_status(Request $request){
-        return redirect('proxy');
+        return redirect('catering');
     }
 
     //服务商参数设置
