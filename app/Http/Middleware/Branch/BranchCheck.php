@@ -103,6 +103,8 @@ class BranchCheck{
     public static function format_response($re,Closure$next){
         if($re['status']=='0'){
             return $re['response'];
+        }elseif($re['status']=='1'){
+            return $re['response'];
         }else{
             return $next($re['response']);
         }
