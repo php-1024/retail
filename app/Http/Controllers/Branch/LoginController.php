@@ -62,8 +62,8 @@ class LoginController extends Controller
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
-        echo($encryptPwd.'@'.$account_info->password);
-        exit();
+//        echo($encryptPwd.'@'.$account_info->password);
+//        exit();
         //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip', $ip]]);//查询该IP下的错误记录
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
@@ -95,7 +95,7 @@ class LoginController extends Controller
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if ($account_info->organization->program_id <> '8') {//如果账号不属于餐饮分店平台管理系统，则报错，不能登录。8、是餐饮分店管理系统的ID
                             ErrorLog::addErrorTimes($ip, 8);
-                            return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
+                            return response()->json(['data' => '登录账号、手机号或密码输入错误asd', 'status' => '0']);
                         } else {
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
