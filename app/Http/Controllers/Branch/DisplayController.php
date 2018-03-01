@@ -26,11 +26,11 @@ class DisplayController extends Controller
             return redirect('Branch/company_list');
         }
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
-        if (empty($admin_data['safe_password'])){           //先设置安全密码
-            return redirect('Branch/account/password');
-        }else{
+//        if (empty($admin_data['safe_password'])){           //先设置安全密码
+//            return redirect('Branch/account/password');
+//        }else{
             return view('Branch/Display/display',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-        }
+//        }
     }
 }
 
