@@ -28,13 +28,8 @@ class CateringCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****系统管理****/
-            case "catering/system/setup":                  //参数设置
-            case "catering/system/proxy_info":             //公司信息设置
-            case "catering":                               //服务商后台首页
-            case "catering/select_shop":                   //店铺超级管员进入操作
-            case "catering/system/proxy_structure":        //人员结构
-            case "catering/system/operationlog":           //操作日记
-            case "catering/system/loginlog":               //登入日记
+            case "catering":                            //店铺后台首页
+            case "catering/select_shop":                //店铺超级管员进入操作
                 /****系统管理****/
 
                 /****个人信息****/
