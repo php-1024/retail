@@ -26,7 +26,6 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            dump($request);
             return redirect('company/company_list');
         }
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
@@ -40,6 +39,7 @@ class AccountcenterController extends Controller{
     //商户列表（超级管理员使用）
     public function company_list(Request $request)
     {
+        dump($request);
         $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('company');
