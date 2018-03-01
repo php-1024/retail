@@ -20,6 +20,7 @@ class BranchCheck{
                     return redirect('branch');
                 }
                 break;
+                break;
 
             /****仅检测是否登录及是否具有权限****/
             case "branch":                             //后台首页
