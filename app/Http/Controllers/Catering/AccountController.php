@@ -66,7 +66,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        dd($oneAcc);
+        dd($oneAcc['organizationproxyinfo']['proxy_owner']);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
