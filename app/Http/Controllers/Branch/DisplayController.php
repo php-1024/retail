@@ -7,11 +7,8 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use Illuminate\Http\Request;
-use Gregwar\Captcha\CaptchaBuilder;
-use App\Models\Account;
-use App\Models\ErrorLog;
-use App\Models\LoginLog;
 use Session;
 
 class DisplayController extends Controller
