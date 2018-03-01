@@ -100,10 +100,8 @@ class BranchCheck{
         return ['status'=>$status,'response'=>$response];
     }
     //3、格式化返回值
-    public static function format_response($re,Closure$next){
+    public static function format_response($re,Closure $next){
         if($re['status']=='0'){
-            return $re['response'];
-        }elseif($re['status']=='1'){
             return $re['response'];
         }else{
             return $next($re['response']);
