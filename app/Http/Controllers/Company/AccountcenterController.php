@@ -21,12 +21,12 @@ class AccountcenterController extends Controller{
     //系统管理首页
     public function display(Request $request)
     {
-        dump($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
+            dump($request);
             return redirect('company/company_list');
         }
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
