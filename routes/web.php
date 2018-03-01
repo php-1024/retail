@@ -502,7 +502,7 @@ Route::group(['prefix'=>'catering'],function(){
 
         //账号中心
         Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');     //提交登录数据
-        Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');     //提交登录数据
+        Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheckAjax');     //安全密码数据提交
     });
 });
 /**********************总店系统*********************/
