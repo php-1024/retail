@@ -19,8 +19,9 @@ class DisplayController extends Controller
     /*
      * 登录页面
      */
-    public function display()
+    public function display(Request $request)
     {
+        dump($request);
         return view('Branch/Display/display');
     }
 }
