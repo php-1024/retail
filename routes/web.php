@@ -483,6 +483,22 @@ Route::group(['prefix'=>'catering'],function(){
     Route::get('quit', 'Catering\ShopController@quit');                                                             //退出系统
     Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                  //超级管理员选择登入的服务商
 
+
+    //账号中心
+    Route::group(['prefix'=>'account'],function(){
+        Route::get('profile', 'Catering\AccountController@profile')->middleware('CompanyCheck');                     //账号信息
+        Route::get('password', 'Catering\AccountController@password')->middleware('CompanyCheck');                   //登入密码修改
+        Route::get('safe_password', 'Catering\AccountController@safe_password')->middleware('CompanyCheck');         //安全密码设置
+        Route::get('message_setting', 'Catering\AccountController@message_setting')->middleware('CompanyCheck');     //消息推送设置
+        Route::get('operation_log', 'Catering\AccountController@operation_log')->middleware('CompanyCheck');         //操作日记
+        Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CompanyCheck');                 //登入日记
+    });
+
+
+
+
+
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');         //提交登录数据
