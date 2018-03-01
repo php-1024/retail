@@ -72,7 +72,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="" type="password">
+                                            <input type="text" class="form-control" id="input-id-1" value="" type="re_safe_password">
                                         </div>
                                     </div>
 

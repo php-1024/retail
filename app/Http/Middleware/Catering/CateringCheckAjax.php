@@ -35,7 +35,7 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
-            case "proxy/ajax/safe_password_check"://设置安全密码
+            case "catering/ajax/safe_password_check"://设置安全密码
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
