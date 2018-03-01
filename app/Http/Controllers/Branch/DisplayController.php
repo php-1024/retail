@@ -47,6 +47,7 @@ class DisplayController extends Controller
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
             $val->proxyname = $proxy->organization_name;
         }
+        dd("1");
         return  view('Branch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 }
