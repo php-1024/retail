@@ -71,12 +71,14 @@ class AccountController extends Controller{
                 if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){//判断手机号在店铺存不存在
                     return response()->json(['data' => '手机号已存在', 'status' => '0']);
                 }
+
                 if($admin_data['is_super'] != 2) {
                     if(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
                         return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                     }
                     OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改店铺表店铺手机号码
                 }
+                dd(1);
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
 
             }
