@@ -173,7 +173,6 @@ class AccountController extends Controller{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                         \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
-
                     }
                     DB::commit();
                 } catch (\Exception $e) {
