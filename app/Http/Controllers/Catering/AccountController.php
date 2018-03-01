@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 class AccountController extends Controller{
-    //个人信息
+    //账号信息
     public function profile(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -28,9 +28,9 @@ class AccountController extends Controller{
         }
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
             $module_node_list = [];
@@ -49,6 +49,7 @@ class AccountController extends Controller{
                 unset($module);
             }
         }
+        dump($user);
         return view('Catering/Account/profile',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
