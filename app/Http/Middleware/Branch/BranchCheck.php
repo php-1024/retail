@@ -24,7 +24,7 @@ class BranchCheck{
             /****仅检测是否登录及是否具有权限****/
             case "branch":                             //后台首页
                 $re = $this->checkLoginAndRule($request);//判断是否登录
-                return self::format_response($re,$net);
+                return self::format_response($re,$next);
                 break;
         }
         return $next($request);
