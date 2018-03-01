@@ -41,7 +41,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-
+                        @if(empty($oneAcc->safe_password))
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
@@ -84,7 +84,7 @@
                                 </form>
                             </div>
                         </section>
-
+                        @else
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
@@ -135,6 +135,7 @@
                                 </form>
                             </div>
                         </section>
+                        @endif
                     </section>
                 </section>
             </section>
