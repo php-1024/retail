@@ -33,6 +33,7 @@ class BranchCheck{
     //检测是否admin或是否有权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
+        dd($re);
         if($re['status']=='0'){
             return $re;
         }else{
@@ -40,7 +41,6 @@ class BranchCheck{
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                dd($re2);
                 return self::res(1,$re2['response']);
             }
         }
