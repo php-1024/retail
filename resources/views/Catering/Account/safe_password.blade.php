@@ -48,12 +48,15 @@
                                 安全密码设置
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get">
+                                <form class="form-horizontal" method="post" id="SetForm" action="{{ url('catering/ajax/safe_password_check') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" name="id"  value="{{$oneAcc->id}}">
+                                    <input type="hidden" name="is_editing"  value="-1">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">登录账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="200307">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="{{$oneAcc->account}}">
                                         </div>
                                     </div>
 
@@ -61,7 +64,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="safe_password">
                                         </div>
                                     </div>
 
@@ -69,7 +72,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" id="input-id-1" value="" type="password">
                                         </div>
                                     </div>
 
@@ -77,7 +80,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
 
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" onclick="postSetForm()" class="btn btn-success" id="addBtn">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -174,17 +177,44 @@
                     window.location.reload();
                 });
             }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+    //提交表单
+    function postSetForm() {
+        var target = $("#SetForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
                 console.log(json);
 //                swal({
 //                    title: "提示信息",
 //                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定"
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
 //                });
             }
         });
     }
-
 </script>
 </body>
 </html>
