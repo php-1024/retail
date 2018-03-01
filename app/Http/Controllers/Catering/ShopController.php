@@ -37,6 +37,7 @@ class ShopController extends Controller{
     }
     //超级管理员选择服务商
     public function select_shop(Request $request){
+        echo 1;exit;
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
