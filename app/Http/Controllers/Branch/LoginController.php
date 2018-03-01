@@ -68,6 +68,7 @@ class LoginController extends Controller
         if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
             if (!empty($account_info)) {
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
+                    dd($encryptPwd);
                     ErrorLog::addErrorTimes($ip, 8);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif ($account_info->status <> '1') {//查询账号状态
