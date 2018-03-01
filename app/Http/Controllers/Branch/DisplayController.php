@@ -32,6 +32,23 @@ class DisplayController extends Controller
             return view('Branch/Display/display',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 //        }
     }
+
+    //分店列表（超级管理员使用）
+    public function branch_list(Request $request)
+    {
+        $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
+        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
+            return redirect('branch');
+        }
+        $organization_name  = $request->organization_name;
+        $where = ['type'=>'5'];//type=5分店组织
+        $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
+        foreach ($organization as $key=>$val){
+            $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
+            $val->proxyname = $proxy->organization_name;
+        }
+        return  view('Branch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
+    }
 }
 
 ?>
