@@ -37,10 +37,10 @@ class BranchCheck{
             return $re;
         }else{
             $re2 = $this->checkHasRule($re['response']);//判断用户是否admin或是否有权限
-            dd($re2);
             if($re2['status']=='0'){
                 return $re2;
             }else{
+                dd(self::res(1,$re2['response']));
                 return self::res(1,$re2['response']);
             }
         }
