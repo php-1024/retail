@@ -33,7 +33,7 @@
                 </li>
                 @if($admin_data['is_super'] == 2)
                 <li>
-                    <a href="{{url('proxy/switch_status')}}">切换商铺</a>
+                    <a href="{{url('catering/switch_status')}}">切换商铺</a>
                 </li>
                 @endif
                 <li>

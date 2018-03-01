@@ -21,7 +21,7 @@ class CateringCheck{
                 }
                 break;
 
-            case "proxy/switch_status"://超级管理员切换服务商
+            case "catering/switch_status"://超级管理员切换服务商
                 $this->checkLoginAndRuleAndSwitchStatus($request);//判断是否登录
                 break;
 
@@ -94,9 +94,8 @@ class CateringCheck{
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限
-                \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
-
             }
         }
     }

@@ -316,6 +316,7 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 });
 /********************零壹管理系统*************************/
+
 /**********************服务商管理系统*********************/
 Route::group(['prefix'=>'proxy'],function(){
 
@@ -480,7 +481,7 @@ Route::group(['prefix'=>'catering'],function(){
     Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                //系统首页
     Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');              //超级管理员切换服务商
     Route::get('quit', 'Catering\ShopController@quit');                                                             //退出系统
-    Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                 //超级管理员选择登入的服务商
+    Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                  //超级管理员选择登入的服务商
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
