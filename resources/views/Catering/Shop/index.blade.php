@@ -229,12 +229,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($login_log_list as $key=>$val)
                                         <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
+                                            <td>{{  $val->accounts->account }}</td>
+                                            <td>{{  long2ip($val->ip) }}</td>
+                                            <td>{{  $val->ip_position }}</td>
+                                            <td>{{  $val->created_at }}</td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
@@ -252,11 +254,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
+                                        @foreach($operation_log_list as $key=>$val)
+                                            <tr>
+                                                <td>{{ $val->accounts->account }}</td>
+                                                <td>{{ $val->operation_info }}</td>
+                                                <td>{{ $val->created_at }}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
