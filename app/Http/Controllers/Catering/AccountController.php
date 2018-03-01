@@ -49,7 +49,6 @@ class AccountController extends Controller{
                 unset($module);
             }
         }
-        dump($user);
         return view('Catering/Account/profile',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
