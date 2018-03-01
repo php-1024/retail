@@ -147,12 +147,12 @@ class AccountController extends Controller{
                 if($admin_data['is_super'] == 2){
                     Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统设置了安全密码');//在零壹保存操作记录
-                    \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                    \ZeroneRedis::create_catering_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                 }else{
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                     OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
-                    \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+                    \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -168,12 +168,12 @@ class AccountController extends Controller{
                     if($admin_data['is_super'] == 2){
                         Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了安全密码');//在零壹保存操作记录
-                        \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                        \ZeroneRedis::create_catering_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                     }else{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
-                        \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+                        \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                     }
                     DB::commit();
                 } catch (\Exception $e) {
