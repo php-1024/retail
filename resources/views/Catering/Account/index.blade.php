@@ -16,10 +16,6 @@
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
     <![endif]-->
-
-
-
-
 </head>
 <body class="">
 <section class="vbox">
