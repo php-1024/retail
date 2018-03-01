@@ -24,8 +24,6 @@ class BranchCheck{
 
             /****仅检测是否登录及是否具有权限****/
             case "branch":                             //后台首页
-                dd($request);
-
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
@@ -82,6 +80,7 @@ class BranchCheck{
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
+            dd($request);
             //把参数传递到下一个中间件
             return self::res(1,$request);
         }else{
