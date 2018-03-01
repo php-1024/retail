@@ -36,7 +36,6 @@ class DisplayController extends Controller
     //分店列表（超级管理员使用）
     public function branch_list(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('branch');
