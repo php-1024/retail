@@ -209,62 +209,6 @@
                                             <td>888笔</td>
                                             <td>&yen;88888.33</td>
                                         </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </section>
@@ -291,31 +235,6 @@
                                             <td>中国广东深圳</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </section>
@@ -333,26 +252,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
                                         <tr>
                                             <td>10200</td>
                                             <td>修改了登陆密码</td>
