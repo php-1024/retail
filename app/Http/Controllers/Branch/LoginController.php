@@ -91,7 +91,6 @@ class LoginController extends Controller
                         'login_time' => time()//登录时间
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        dd($account_info);
                         if ($account_info->organization->program_id <> '8') {//如果账号不属于餐饮分店平台管理系统，则报错，不能登录。8、是餐饮分店管理系统的ID
                             ErrorLog::addErrorTimes($ip, 8);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误asd', 'status' => '0']);
