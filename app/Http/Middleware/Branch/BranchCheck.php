@@ -33,11 +33,10 @@ class BranchCheck{
             case "company/store/store_add_second":      //店铺管理立即开店
             case "company/store/store_list":            //店铺管理
                 $re = $this->checkLoginAndRule($request);//判断是否登录
-                return $next($re['response']);
-//                return self::format_response($re,$next);
+                return self::format_response($re,$next);
                 break;
         }
-//        return $next($request);
+        return $next($request);
     }
 
     //检测是否admin或是否有权限
