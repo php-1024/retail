@@ -19,6 +19,10 @@ class CateringCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+            case "catering/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndProfile($request);
+                return self::format_response($re, $next);
+                break;
             case "proxy/ajax/proxy_info_check"://检测登录和权限和安全密码和公司信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProxyInfo($request);
                 return self::format_response($re, $next);
@@ -92,6 +96,23 @@ class CateringCheckAjax
             }
         }
     }
+
+
+    //检测登录和权限和安全密码和服务商修改信息
+    public function checkLoginAndRuleAndSafeAndProfile($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkProfile($re['response']);//检测参数是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测登录和权限和安全密码和服务商修改信息
     public function checkLoginAndRuleAndSafeAndProxyInfo($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -173,7 +194,7 @@ class CateringCheckAjax
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
+            $re2 = $this->checkSafePassword($re['response']);//检测安全密码是否正确
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -339,7 +360,7 @@ class CateringCheckAjax
         if($admin_data['is_super'] == '2'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.proxy_safe_encrypt_key");//获取加密盐
+            $key = config("app.catering_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
@@ -368,15 +389,15 @@ class CateringCheckAjax
     //检测是否登录
     public function checkIsLogin($request)
     {
-        $sess_key = Session::get('proxy_account_id');
+        $sess_key = Session::get('catering_account_id');
         //如果为空返回登录失效
         if (empty($sess_key)) {
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         } else {
-            $sess_key = Session::get('proxy_account_id');//获取管理员ID
+            $sess_key = Session::get('catering_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('proxy');//连接到我的缓存服务器
-            $admin_data = Redis::get('proxy_system_admin_data_' . $sess_key);//获取管理员信息
+            Redis::connect('catering');//连接到我的缓存服务器
+            $admin_data = Redis::get('catering_system_admin_data_' . $sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data' => $admin_data]);//添加参数
             //把参数传递到下一个中间件
@@ -413,6 +434,16 @@ class CateringCheckAjax
     }
 
 
+    //检测账号中心-账号信息是否为空
+    public function checkProfile($request){
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '真实姓名不能为空', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '手机号不能为空', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
     //检测公司信息设置
     public function checkProxyInfo($request){
         if (empty($request->input('organization_name'))) {

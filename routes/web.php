@@ -496,12 +496,12 @@ Route::group(['prefix'=>'catering'],function(){
 
 
 
-
-
-
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');         //提交登录数据
+
+        //账号中心
+        Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');         //提交登录数据
     });
 });
 /**********************总店系统*********************/
