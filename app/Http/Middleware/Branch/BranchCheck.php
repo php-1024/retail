@@ -24,7 +24,8 @@ class BranchCheck{
             /****仅检测是否登录及是否具有权限****/
             case "branch":                             //后台首页
                 $re = $this->checkLoginAndRule($request);//判断是否登录
-                return self::format_response($re);
+                dd($re);
+                return self::format_response($re,$next);
                 break;
         }
         return $next($request);
@@ -91,11 +92,12 @@ class BranchCheck{
         return ['status'=>$status,'response'=>$response];
     }
     //3、格式化返回值
-    public static function format_response($re){
+    public static function format_response($re,Closure $next){
         if($re['status']=='0'){
             return $re['response'];
         }else{
-            return $re['response'];
+            dd($next($re['response']));
+            return $next($re['response']);
         }
     }
 }
