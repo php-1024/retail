@@ -40,7 +40,6 @@ class BranchCheck{
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                dd(self::res(1,$re2['response']));
                 return self::res(1,$re2['response']);
             }
         }
