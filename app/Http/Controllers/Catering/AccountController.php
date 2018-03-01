@@ -9,6 +9,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
 use App\Models\OrganizationRole;
+use App\Models\OrganizationStoreinfo;
 use App\Models\ProgramModuleNode;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -65,6 +66,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
+        dd($oneAcc);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
@@ -76,9 +78,9 @@ class AccountController extends Controller{
                     if(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
                         return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                     }
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改店铺表店铺手机号码
+                    OrganizationStoreinfo::editOrganizationStoreinfo([['organization_id', $organization_id]], ['store_owner_mobile' => $mobile]);//修改店铺表店铺手机号码
                 }
-                dd(1);
+
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
 
             }
