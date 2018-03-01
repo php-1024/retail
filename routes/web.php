@@ -473,18 +473,18 @@ Route::group(['prefix'=>'catering'],function(){
 
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Catering\LoginController@display')->middleware('CateringCheck');//登录页面路由
-        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');//验证码路由
+        Route::get('/', 'Catering\LoginController@display')->middleware('CateringCheck');                           //登录页面路由
+        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');                                            //验证码路由
     });
 
     Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                //系统首页
     Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');              //超级管理员切换服务商
-    Route::get('quit', 'Catering\ShopController@quit');//退出系统
-
+    Route::get('quit', 'Catering\ShopController@quit');                                                             //退出系统
+    Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                 //超级管理员选择登入的服务商
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');//提交登录数据
+        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');         //提交登录数据
     });
 });
 /**********************总店系统*********************/
