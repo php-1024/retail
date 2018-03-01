@@ -33,6 +33,7 @@ class BranchCheck{
     //检测是否admin或是否有权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
+        dd($re);
         if($re['status']=='0'){
             return $re;
         }else{
@@ -80,7 +81,6 @@ class BranchCheck{
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
             //把参数传递到下一个中间件
-            dd(self::res(1,$request));
             return self::res(1,$request);
         }else{
             return self::res(0,redirect('branch/login'));
