@@ -42,12 +42,12 @@
                     </li>
                     @if($admin_data['is_super'] == 1)
                         <li>
-                            <a href="{{ url('branch/branch_switch') }}" >切换店铺</a>
+                            <a href="{{ url('/branch/branch_switch') }}" >切换店铺</a>
                         </li>
                     @endif
                     <li class="divider"></li>
                     <li>
-                        <a href="{{ url('branch/quit') }}" >退出登录</a>
+                        <a href="{{ url('/branch/quit') }}" >退出登录</a>
                     </li>
                 </ul>
             </li>
