@@ -46,7 +46,7 @@
                 <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
                 <div class="input-group m-bot15 col-lg-3 "><span class="input-group-addon"><i
                                 class="icon-search"></i></span>
-                    <input type="text"  name="organization_name" value="{{$organization_name}}" class="form-control " placeholder="服务商名称">
+                    <input type="text"  name="organization_name" value="{{$organization_name}}" class="form-control " placeholder="店铺名称">
                 </div>
                 <div class="input-group m-bot15 col-lg-2 ">
                     <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
