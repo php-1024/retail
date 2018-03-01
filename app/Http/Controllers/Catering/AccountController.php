@@ -80,6 +80,7 @@ class AccountController extends Controller{
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
 
             }
+            echo 1;exit;
             if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
                 if($admin_data['is_super'] != 2) {
                     OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改店铺用户信息表 用户姓名
