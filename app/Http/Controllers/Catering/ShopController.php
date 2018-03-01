@@ -20,6 +20,7 @@ class ShopController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
+            dump($admin_data);
             $listOrg = Organization::where([['program_id','7']])->get();
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
@@ -38,7 +39,6 @@ class ShopController extends Controller{
     //超级管理员选择服务商
     public function select_shop(Request $request){
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_this);
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         if(!empty($account_info)){
