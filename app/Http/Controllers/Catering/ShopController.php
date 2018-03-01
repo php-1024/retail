@@ -20,7 +20,8 @@ class ShopController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
-            $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','7']],20,'id');
+            $listOrg = Organization::where([['program_id','7']]);
+            dd($listOrg);
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
