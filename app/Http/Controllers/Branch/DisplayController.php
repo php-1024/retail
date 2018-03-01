@@ -49,6 +49,12 @@ class DisplayController extends Controller
         }
         return  view('Branch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
+
+    //退出登录
+    public function quit(){
+        Session::put('branch_account_id','');
+        return redirect('branch/login');
+    }
 }
 
 ?>
