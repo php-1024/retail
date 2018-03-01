@@ -48,7 +48,7 @@
                                     个人账号信息修改
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="post" id="currentForm" action="{{ url('proxy/ajax/account_info_check') }}">
+                                    <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/profile_check') }}">
                                         <input type="hidden" name="_token"  value="{{csrf_token()}}">
                                         <input type="hidden" name="id" value="{{$user['id']}}">
                                         <input type="hidden" name="organization_id" value="{{$user['organization_id']}}">
@@ -104,29 +104,22 @@
                                     个人系统权限
                                 </header>
                                 <div class="panel-body">
+                                    @foreach($module_node_list as $key=>$val)
                                     <div>
                                         <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单模块
+                                            <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> {{ $val['module_name'] }}
                                         </label>
                                     </div>
                                     <div>
+                                        @foreach($val['program_nodes'] as $kk=>$vv)
                                         <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> 订单编辑
+                                            <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" disabled=""> {{ $vv['node_name'] }}
                                         </label>
                                         &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" disabled=""> 订单查询
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单添加
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" disabled=""> 订单删除
-                                        </label>
+                                        @endforeach
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    @endforeach
                                 </div>
                             </section>
                         </div>
@@ -156,6 +149,37 @@
         });
         $('select.styled').customSelect();
     });
+
+
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        console.log(data);
+//        $.post(url, data, function (json) {
+//            if (json.status == -1) {
+//                window.location.reload();
+//            } else if(json.status == 1) {
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
+//            }
+//        });
+    }
+
 </script>
 </body>
 </html>
