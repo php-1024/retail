@@ -67,6 +67,7 @@ class LoginController extends Controller
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
             if (!empty($account_info)) {
+                dd($account_info->password);
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip, 8);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
