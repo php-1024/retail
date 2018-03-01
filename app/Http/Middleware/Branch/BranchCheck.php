@@ -95,7 +95,7 @@ class BranchCheck{
         if($re['status']=='0'){
             return $re['response'];
         }else{
-            dd($re['response']);
+            dd($next($re['response']));
             return $next($re['response']);
         }
     }
