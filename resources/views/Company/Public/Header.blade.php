@@ -14,7 +14,7 @@
     </div>
     <ul class="nav navbar-nav hidden-xs">
         <li>
-            <a href="javascript:;" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+            <a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted">
                 <i class="fa fa-indent text"></i>
                 <i class="fa fa-dedent text-active"></i>
             </a>
