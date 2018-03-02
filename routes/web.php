@@ -509,6 +509,14 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');     //提交登录数据
         Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheckAjax');     //安全密码数据提交
         Route::post('password_check','Catering\AccountController@password_check')->middleware('CateringCheckAjax');   //安全密码数据提交
+
+        //权限角色
+        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');;////提交添加权限角色数据
+        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');//编辑权限角色弹出框
+        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheckAjax');//编辑权限角色弹出框
+        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheckAjax');;//删除权限角色弹出安全密码框
+        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheckAjax');//删除权限角色弹出安全密码框
+
     });
 });
 /**********************总店系统*********************/
