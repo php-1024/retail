@@ -68,6 +68,7 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
+        dd($oneAcc['account_info']['realname']);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
