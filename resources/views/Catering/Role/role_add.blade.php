@@ -119,7 +119,6 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 
 <!--common script for all pages-->
 <script>
@@ -179,7 +178,7 @@
         });
     }
 
-    
+
 </script>
 </body>
 </html>
