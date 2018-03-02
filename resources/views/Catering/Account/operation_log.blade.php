@@ -68,36 +68,23 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>用户</th>
                                         <th>操作详情</th>
                                         <th>操作时间</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>修改了登录密码</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>修改了登录密码</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>修改了登录密码</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>修改了登录密码</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>修改了登录密码</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
+                                    @foreach($list as $key=>$val)
+                                        <tr>
+                                            <td>{{ $val->accounts->id }}</td>
+                                            <td>{{ $val->accounts->account }}</td>
+
+                                            <td>{{ $roles[$val->id] }}</td>
+
+                                            <td>{{ $val->operation_info }}</td>
+                                            <td>{{ $val->created_at }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -105,36 +92,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                        {!! $list->links() !!}
                                     </div>
                                 </div>
                             </footer>
