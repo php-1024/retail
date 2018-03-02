@@ -21,7 +21,7 @@ class DisplayController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
-        $route_name = $request->path();                     //获取当前的页面路由
+        $route_name = $request->path();                         //获取当前的页面路由
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('branch/branch_list');
         }
@@ -37,18 +37,16 @@ class DisplayController extends Controller
     public function branch_list(Request $request)
     {
         $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
+        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){      //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('branch');
         }
         $organization_name  = $request->organization_name;
         $where = ['type'=>'5'];//type=5分店组织
         $organization = Organization::getBranchAndWarzone($organization_name,$where,20,'id','ASC'); //查询分店
-        dump($organization);
         foreach ($organization as $key=>$val){
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
         }
-        dump($organization);
         return  view('Branch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 }
