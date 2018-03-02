@@ -56,7 +56,7 @@ class Organization extends Model{
     }
 
     //获取单条信息-总店
-    public static function getOneBranch($where){
+    public static function getOneCatering($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
     }
 
