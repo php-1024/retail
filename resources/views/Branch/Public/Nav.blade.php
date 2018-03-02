@@ -9,15 +9,15 @@
                         <li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>
                             @if(empty($val->menu_route))
                                 <a href="{{ url($val->menu_route) }}" class="auto">
-                                    <i class="fa fa-bar-chart-o  text-success"></i>
+                                    <i class="{{ $val->icon_class }}"></i>
                                     <span class="font-bold ">{{ $val->menu_name }}</span>
                                 </a>
                             @else
                             <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
+                                <span class="pull-right text-muted">
+                                  <i class="fa fa-angle-left text"></i>
+                                  <i class="fa fa-angle-down text-active"></i>
+                                </span>
                                 <i class="{{ $val->icon_class }}">
                                 </i>
                                 <span class="font-bold">{{ $val->menu_name }}</span>
