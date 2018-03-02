@@ -7,7 +7,7 @@
                     <ul class="nav" data-ride="collapse">
                         @foreach($menu_data as $key=>$val)
                         <li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>
-                            @if(empty($val->menu_route))
+                            @if(!empty($val->menu_route))
                                 <a href="{{ url($val->menu_route) }}" class="auto">
                                     <i class="{{ $val->icon_class }}"></i>
                                     <span class="font-bold ">{{ $val->menu_name }}</span>
