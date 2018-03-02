@@ -263,11 +263,7 @@ class AccountController extends Controller{
 
         $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
         $list = OperationLog::getProxyPaginate($where,10,'id');
-        $roles = [];
-        foreach($list as $key=>$val){
-            $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
-        }
-        return view('Catering/Account/operation_log',['list'=>$list,'roles'=>$roles,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Catering/Account/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
     public function myloginlog(Request $request){
