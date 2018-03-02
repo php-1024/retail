@@ -26,7 +26,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
                     <i class="icon icon-user"></i>
-                    admin-超级管理员<b class="caret"></b>
+                    欢迎登录！{{ $admin_data['role_name'] }}-{{ $admin_data['account'] }}<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight">
                     <li>
