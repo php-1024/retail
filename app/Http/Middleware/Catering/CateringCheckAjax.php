@@ -58,9 +58,9 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "proxy/ajax/company_assets":   //商户资产划入检测弹出登入和权限
-            case "proxy/ajax/role_edit":        //编辑权限角色弹出框检测登入和权限
-            case "proxy/ajax/role_delete"://编辑权限角色弹出框检测登入和权限
+            case "proxy/ajax/company_assets":       //商户资产划入检测弹出登入和权限
+            case "catering/ajax/role_edit":         //编辑权限角色弹出框检测登入和权限
+            case "catering/ajax/role_delete":       //编辑权限角色弹出框检测登入和权限
             case "proxy/ajax/quick_rule"://快速授权检测登入和权限
             case "proxy/ajax/selected_rule"://快速授权检测登入和权限
             case "proxy/ajax/subordinate_edit"://下级人员列表编辑用户弹出框
