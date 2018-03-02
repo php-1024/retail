@@ -146,6 +146,7 @@
 <script src="{{asset('public/Proxy')}}/js/icheck.min.js"></script>
 
 <!--common script for all pages-->
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     //获取删除权限角色删除密码确认框
