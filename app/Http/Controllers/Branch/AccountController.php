@@ -36,11 +36,16 @@ class AccountController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $realname = $request->input('realname');    //真实姓名
         $mobile = $request->input('mobile');        //手机号码
-        dd(AccountInfo::checkRowExists(['account_id',$admin_data['id']]));
+        $id = AccountInfo::checkRowExists([['account_id',$admin_data['id']]]);
         DB::beginTransaction();
         try {
             Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
-            AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
+            if ($id){
+                AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
+            }else{
+                $admininfo = ['account_id'=>$admin_data['id'],'realname'=>$realname];
+                AccountInfo::addAccountInfo($admininfo);
+            }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
@@ -49,7 +54,6 @@ class AccountController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改个人账号信息失败，请检查', 'status' => '0']);
         }
