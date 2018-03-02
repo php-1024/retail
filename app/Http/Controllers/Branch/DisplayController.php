@@ -25,9 +25,6 @@ class DisplayController extends Controller
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('branch/branch_list');
         }
-        dump($menu_data);
-        dump($son_menu_data);
-        dump($route_name);
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
 //        if (empty($admin_data['safe_password'])){           //先设置安全密码
 //            return redirect('branch/account/password');
