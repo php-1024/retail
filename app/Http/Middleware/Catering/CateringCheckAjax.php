@@ -406,7 +406,7 @@ class CateringCheckAjax
     public function checkRoleAdd($request)
     {
         if (empty($request->input('role_name'))) {
-            return self::res(0, response()->json(['data' => '角色名称', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '角色名称不能为空', 'status' => '0']));
         }
         return self::res(1, $request);
     }

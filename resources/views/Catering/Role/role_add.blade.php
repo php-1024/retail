@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">角色名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" id="input-id-1" value=""  name="role_name">
                                         </div>
                                     </div>
 
@@ -168,12 +168,13 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
             }
         });
     }

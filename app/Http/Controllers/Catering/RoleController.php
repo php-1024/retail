@@ -59,17 +59,18 @@ class RoleController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['program_id'=>2,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = OrganizationRole::addRole(['program_id'=>7,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了权限角色'.$role_name);//保存操作记录
                 }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
             }
@@ -173,7 +174,7 @@ class RoleController extends Controller{
                 }
                 RoleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统编辑了权限角色'.$role_name);//保存操作记录
                 }else{
                     OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 }
@@ -201,7 +202,7 @@ class RoleController extends Controller{
             RoleNode::where('role_id',$id)->delete();//删除角色节点关系
             RoleAccount::where('role_id',$id)->delete();//删除角色账号关系
             if($admin_data['is_super'] == 2){
-                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统删除了权限角色，ID为：'.$id);//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统删除了权限角色，ID为：'.$id);//保存操作记录
 
             }else{
                 OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
