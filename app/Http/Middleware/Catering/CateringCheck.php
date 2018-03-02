@@ -41,10 +41,10 @@ class CateringCheck{
             case "catering/account/login_log":          //登入日记
             /****账号中心****/
 
-                /****下级人员管理--权限角色****/
-            case "proxy/role/role_add":                 //权限角色添加
-            case "proxy/role/role_list":                //权限角色列表
-                /****下级人员管理--权限角色****/
+            /****下属管理--权限角色****/
+            case "catering/role/role_add":               //权限角色添加
+            case "catering/role/role_list":              //权限角色列表
+            /****下属管理--权限角色****/
 
                 /****下级人员管理--添加组****/
             case "proxy/subordinate/subordinate_add":   //下级人员添加
