@@ -43,7 +43,7 @@ class AccountController extends Controller{
             if ($id){
                 AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
             }else{
-                AccountInfo::addAccountInfo(['realname'=>$realname]);
+                AccountInfo::addAccountInfo([['realname'=>$realname]]);
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
