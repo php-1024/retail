@@ -192,9 +192,9 @@ class ProxyController extends Controller{
 
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOneProxy([['id',$id]]);
+        $warzone = Warzone::all();
         echo "12345";
         exit;
-        $warzone = Warzone::all();
         return view('Zerone/Proxy/proxy_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
     }
     //服务商编辑功能提交
