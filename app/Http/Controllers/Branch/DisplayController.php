@@ -42,7 +42,7 @@ class DisplayController extends Controller
         }
         $organization_name  = $request->organization_name;
         $where = ['type'=>'5'];//type=5分店组织
-        $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
+        $organization = Organization::getBranchAndWarzone($organization_name,$where,20,'id','ASC');
         foreach ($organization as $key=>$val){
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
             $val->proxyname = $proxy->organization_name;
