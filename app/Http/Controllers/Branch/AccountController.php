@@ -54,6 +54,85 @@ class AccountController extends Controller{
         return response()->json(['data' => '修改个人账号信息成功', 'status' => '1']);
     }
 
+    //安全密码设置页面
+    public function safe_password(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
+        return view('Branch/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    //安全密码修改设置处理
+    public function safe_password_edit_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');                  //中间件产生的管理员数据参数
+        $route_name = $request->path();                             //获取当前的页面路由
+        $is_editing = $request->input('is_editing');                //是否修改安全密码
+        $old_safe_password = $request->input('old_safe_password');  //原安全密码
+        $safe_password = $request->input('safe_password');          //新安全密码
+        $account = Account::getOne(['id'=>'1']);                    //查询超级管理员的安全密码
+        if ($admin_data['is_super'] == 1){                          //如果是超级管理员获取零壹安全密码加密盐
+            $safe_password_check = $account['safe_password'];
+            $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
+        }else{
+            $safe_password_check = $admin_data['safe_password'];
+            $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
+        }
+        //原安全密码处理
+        $old_encrypted = md5($old_safe_password);//加密原安全密码第一重
+        $old_encryptPwd = md5("lingyikeji".$old_encrypted.$key);//加密原安全密码第二重
+        //新安全密码处理
+        $encrypted = md5($safe_password);//加密安全密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
+        if ($is_editing == '-1'){//设置安全密码
+            DB::beginTransaction();
+            try {
+                //添加操作日志
+                if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                    Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //设置超级管理员安全密码
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统设置了自己的安全密码！');    //保存操作记录
+                }else{//商户本人操作记录
+                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
+                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
+            }
+            $admin_data['safe_password'] = $encryptPwd;
+            ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+            return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
+        }else{//修改安全密码
+            if ($safe_password_check == $old_encryptPwd){
+                DB::beginTransaction();
+                try {
+                    //添加操作日志
+                    if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                        Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //修改超级管理员安全密码
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的安全密码！');    //保存操作记录
+                    }else{//商户本人操作记录
+                        Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
+                        OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                    }
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();//事件回滚
+                    return response()->json(['data' => '安全密码修改失败，请检查', 'status' => '0']);
+                }
+                $admin_data['safe_password'] = $encryptPwd;
+                ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+                return response()->json(['data' => '安全密码修改成功！', 'status' => '1']);
+            }else{
+                return response()->json(['data' => '原安全密码不正确！', 'status' => '0']);
+            }
+        }
+    }
+
+
     //商户信息编辑
     public function branch_info_edit_check(Request $request)
     {
@@ -147,83 +226,6 @@ class AccountController extends Controller{
         }
     }
 
-    //安全密码设置页面
-    public function safe_password(Request $request)
-    {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
-        $route_name = $request->path();                     //获取当前的页面路由
-        $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
-        return view('Company/Accountcenter/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
-    }
-
-    //安全密码修改设置处理
-    public function safe_password_edit_check(Request $request)
-    {
-        $admin_data = $request->get('admin_data');                  //中间件产生的管理员数据参数
-        $route_name = $request->path();                             //获取当前的页面路由
-        $is_editing = $request->input('is_editing');                //是否修改安全密码
-        $old_safe_password = $request->input('old_safe_password');  //原安全密码
-        $safe_password = $request->input('safe_password');          //新安全密码
-        $account = Account::getOne(['id'=>'1']);                    //查询超级管理员的安全密码
-        if ($admin_data['is_super'] == 1){                          //如果是超级管理员获取零壹安全密码加密盐
-            $safe_password_check = $account['safe_password'];
-            $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
-        }else{
-            $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
-        }
-        //原安全密码处理
-        $old_encrypted = md5($old_safe_password);//加密原安全密码第一重
-        $old_encryptPwd = md5("lingyikeji".$old_encrypted.$key);//加密原安全密码第二重
-        //新安全密码处理
-        $encrypted = md5($safe_password);//加密安全密码第一重
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
-        if ($is_editing == '-1'){//设置安全密码
-            DB::beginTransaction();
-            try {
-                //添加操作日志
-                if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                    Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //设置超级管理员安全密码
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统设置了自己的安全密码！');    //保存操作记录
-                }else{//商户本人操作记录
-                    Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
-                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
-                }
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
-            }
-            $admin_data['safe_password'] = $encryptPwd;
-            ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
-            return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
-        }else{//修改安全密码
-            if ($safe_password_check == $old_encryptPwd){
-                DB::beginTransaction();
-                try {
-                    //添加操作日志
-                    if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                        Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //修改超级管理员安全密码
-                        OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的安全密码！');    //保存操作记录
-                    }else{//商户本人操作记录
-                        Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
-                        OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
-                    }
-                    DB::commit();
-                } catch (\Exception $e) {
-                    DB::rollBack();//事件回滚
-                    return response()->json(['data' => '安全密码修改失败，请检查', 'status' => '0']);
-                }
-                $admin_data['safe_password'] = $encryptPwd;
-                ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
-                return response()->json(['data' => '安全密码修改成功！', 'status' => '1']);
-            }else{
-                return response()->json(['data' => '原安全密码不正确！', 'status' => '0']);
-            }
-        }
-    }
 
     //个人操作日志页面
     public function operation_log(Request $request)
