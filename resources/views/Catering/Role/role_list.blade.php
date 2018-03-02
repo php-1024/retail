@@ -276,7 +276,7 @@
             {{--</div>--}}
         {{--</div>--}}
     {{--</div>--}}
-</form>
+{{--</form>--}}
 </div>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
