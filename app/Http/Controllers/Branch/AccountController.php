@@ -44,6 +44,7 @@ class AccountController extends Controller{
                 AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
             }else{
                 $admininfo = ['realname'=>$realname];
+
                 AccountInfo::addAccountInfo($admininfo);
             }
             //添加操作日志
