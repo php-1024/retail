@@ -242,6 +242,18 @@ class AccountController extends Controller{
         }
 
     }
+
+    //消息推送
+    public function message_setting(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Catering/Account/message_setting',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+
+
     //我的操作记录
     public function myoperationlog(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
