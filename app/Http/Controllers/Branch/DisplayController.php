@@ -55,7 +55,6 @@ class DisplayController extends Controller
     //选择店铺
     public function branch_select(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $organization_id = $request->organization_id;
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
