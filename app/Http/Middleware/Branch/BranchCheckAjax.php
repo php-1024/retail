@@ -22,16 +22,16 @@ class BranchCheckAjax{
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-            case "branch/ajax/profile_edit_check"://检测登录，权限，及修改密码的数据
+            case "branch/ajax/profile_edit_check"://检测登录，权限，及修改个人信息的数据
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
+                return self::format_response($re, $next);
+                break;
+            case "branch/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
+                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
             case "company/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
-                return self::format_response($re, $next);
-                break;
-            case "company/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
-                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
             case "company/ajax/compant_info_edit_check"://检测登录，权限，安全密码，及修改商户信息的数据
