@@ -10,7 +10,7 @@
                             @if(empty($val->menu_route))
                                 <a href="{{ url($val->menu_route) }}" class="auto">
                                     <i class="fa fa-bar-chart-o  text-success"></i>
-                                    <span class="font-bold ">分店概况</span>
+                                    <span class="font-bold ">{{ $val->menu_name }}</span>
                                 </a>
                             @else
                             <a href="javascript:;" class="auto">
