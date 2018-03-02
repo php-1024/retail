@@ -53,7 +53,7 @@ class DisplayController extends Controller
     }
 
     //选择店铺
-    public function company_select(Request $request)
+    public function branch_select(Request $request)
     {
         dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
