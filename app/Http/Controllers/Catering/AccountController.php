@@ -214,7 +214,7 @@ class AccountController extends Controller{
         if($admin_data['is_super'] == 2){
             $key = config("app.zerone_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.proxy_encrypt_key");//获取加密盐
+            $key = config("app.catering_encrypt_key");//获取加密盐
         }
 
         $encrypted = md5($password);//加密密码第一重---新密码
@@ -229,7 +229,7 @@ class AccountController extends Controller{
                 if($admin_data['is_super'] == 2){
                     OperationLog::addOperationLog('1','1',$id,$route_name,'在店铺系统修改了登录密码');//保存操作记录-保存到零壹系统
                 }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
