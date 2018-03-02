@@ -75,9 +75,6 @@
                                             <tr>
                                                 <td>{{ $val->accounts->id }}</td>
                                                 <td>{{ $val->accounts->account }}</td>
-
-                                                <td>{{ $roles[$val->id] }}</td>
-
                                                 <td>{{ $val->operation_info }}</td>
                                                 <td>{{ $val->created_at }}</td>
                                             </tr>
