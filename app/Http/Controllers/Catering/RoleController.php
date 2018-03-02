@@ -23,9 +23,9 @@ class RoleController extends Controller{
 
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
 
             $modules = [];
             $nodes = [];

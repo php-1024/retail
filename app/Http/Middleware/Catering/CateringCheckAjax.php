@@ -35,7 +35,7 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
-            case "proxy/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
+            case "catering/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re,$next);
                 break;
