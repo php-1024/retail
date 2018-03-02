@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <title>个人账号信息修改 | 零壹云管理平台 | 分店业务系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/animate.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/app.css" type="text/css" />
-    <link href="{{asset('public/Branch/sweetalert')}}/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Branch/iCheck')}}/css/custom.css" rel="stylesheet" />
+    <link href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Branch/library/iCheck')}}/css/custom.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
