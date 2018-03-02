@@ -70,7 +70,7 @@ class DisplayController extends Controller
     //超级管理员以分店平台普通管理员登录处理
     public function superadmin_login($organization_id)
     {
-        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','7']]);//根据账号查询
         //Admin登陆商户平台要生成的信息
         //重新生成缓存的登录信息
         $admin_data = [
