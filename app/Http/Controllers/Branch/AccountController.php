@@ -36,11 +36,11 @@ class AccountController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $realname = $request->input('realname');    //真实姓名
         $mobile = $request->input('mobile');        //手机号码
-        $id = AccountInfo::checkRowExists([['account_id',$admin_data['id']]]);
+        $id = AccountInfo::checkRowExists([['account_id',$admin_data['id']]]);//查询是否存在该数据false/true
         DB::beginTransaction();
         try {
             Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
-            if ($id){
+            if ($id){//判断是否存在该数据
                 AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
             }else{
                 $admininfo = ['account_id'=>$admin_data['id'],'realname'=>$realname];
@@ -138,41 +138,6 @@ class AccountController extends Controller{
         }
     }
 
-
-    //商户信息编辑
-    public function branch_info_edit_check(Request $request)
-    {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $route_name = $request->path();                     //获取当前的页面路由
-        $id = $request->organization_id;                    //接收组织id
-        $organization_name = $request->organization_name;   //接收组织商户名称
-        $mobile = $request->company_owner_mobile;           //接收负责人手机号码
-        $list = Organization::getOneCompany(['id'=>$id]);   //获取商户组织信息
-        DB::beginTransaction();
-        try{
-            if($list['organization_name']!=$organization_name){
-                Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
-            }
-            if($list['mobile']!=$mobile){
-                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id], ['company_owner_mobile'=>$mobile]);//修改商户表商户手机号码
-                Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
-            }
-            //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户（'.$admin_data['account'].'）的公司资料！');//保存操作记录
-            }else{//商户本人操作记录
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了公司资料');//保存操作记录
-            }
-            DB::commit();//提交事务
-        }catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '修改失败', 'status' => '0']);
-        }
-        return response()->json(['data' => '修改成功', 'status' => '1']);
-    }
-
-
-
     //登录密码页面
     public function password(Request $request)
     {
@@ -182,9 +147,9 @@ class AccountController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
         if (empty($admin_data['safe_password'])){
-            return redirect('company/account/safe_password');
+            return redirect('branch/account/safe_password');
         }else{
-            return view('Company/Accountcenter/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+            return view('Branch/Account/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
         }
     }
 
