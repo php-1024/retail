@@ -142,8 +142,6 @@ class ZeroneCheckAjax
             case "zerone/ajax/company_assets"://商户资产划入检测弹出登入和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
-                echo "789";
-                exit;
                 break;
 
             case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
@@ -763,6 +761,8 @@ class ZeroneCheckAjax
     //格式化返回值
     public static function format_response($re, Closure $next)
     {
+        echo "789";
+        exit;
         if ($re['status'] == '0') {
             return $re['response'];
         } else {
