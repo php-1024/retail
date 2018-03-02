@@ -46,15 +46,18 @@
                                 角色列表
                             </header>
                             <div class="row wrapper">
-                                <form class="form-horizontal" method="get">
+                                <form class="form-horizontal" method="get" id="searchForm" action="">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" id="role_edit_url" value="{{ url('catering/ajax/role_edit') }}">
+                                    <input type="hidden" id="role_delete_comfirm_url" value="{{ url('catering/ajax/role_delete') }}">
                                     <label class="col-sm-1 control-label">角色名称</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                        <input class="input-sm form-control" size="16" type="text" id="role_name" name="role_name" value="{{ $search_data['role_name'] }}">
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>
