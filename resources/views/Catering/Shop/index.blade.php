@@ -25,335 +25,12 @@
     <section>
         <section class="hbox stretch">
 
-        {{--@include('Proxy/Public/Nav')--}}
             <!-- .aside -->
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
-
-
-
-                            <!-- nav -->
-                            <nav class="nav-primary  hidden-xs">
-                                <ul class="nav" data-ride="collapse">
-                                    <li class="active">
-                                        <a href="index.html" class="auto">
-                                            <i class="fa fa-bar-chart-o  text-success"></i>
-                                            <span class="font-bold ">店铺概况</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="jacascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="icon-screen-desktop icon text-success">
-                                            </i>
-                                            <span class="font-bold">账户中心</span>
-                                        </a>
-                                        <ul class="nav">
-                                            <li>
-                                                <a href="profile.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>账号信息</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="password.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>登录密码修改</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="safe_password.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>安全密码设置</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="message_setting.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>消息接收设置</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="operation_log.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>操作日志</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="login_log.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>登录日志</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="icon icon-bubbles text-success">
-                                            </i>
-                                            <span class="font-bold">公众号管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="subscription_setting.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>公众号设置</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="subscription_material.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>图文素材</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="subscription_message.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>消息管理</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="subscription_menu.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>菜单管理</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="fa fa-user text-success">
-                                            </i>
-                                            <span class="font-bold">用户管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="user_tag.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>粉丝标签管理</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="user_list.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>粉丝用户管理</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="user_timeline.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>粉丝用户足迹</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="fa fa-group text-success">
-                                            </i>
-                                            <span class="font-bold">下属管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="role_add.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>角色添加</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="role_list.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>角色列表</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="subordinate_add.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>下属添加</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="subordinate_list.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>下属列表</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="fa fa-money text-success">
-                                            </i>
-                                            <span class="font-bold">财务管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="balance.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>余额管理</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="credit.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>积分管理</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="commission.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>佣金管理</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="fa fa-cog text-success">
-                                            </i>
-                                            <span class="font-bold">支付设置</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="wechat_setting.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>微信支付</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="zerone_setting.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>零舍壹得</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="sheng_setting.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>盛付通</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="kuai_setting.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>快付通</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="icon icon-basket-loaded text-success">
-                                            </i>
-                                            <span class="font-bold">商品管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="goods_category.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>商品分类查询</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="goods_list.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>商品查询</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="fa fa-sitemap text-success">
-                                            </i>
-                                            <span class="font-bold">总分店管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="branch_create.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>创建总分店</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="branch_list.html" class="auto">
-                                                    <i class="fa fa-angle-right text-xs text-info"></i>
-                                                    <span>总分店管理</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" class="auto">
-                        <span class="pull-right text-muted">
-                          <i class="fa fa-angle-left text"></i>
-                          <i class="fa fa-angle-down text-active"></i>
-                        </span>
-                                            <i class="icon icon-target text-success">
-                                            </i>
-                                            <span class="font-bold">营销管理</span>
-                                        </a>
-                                        <ul class="nav dk text-sm">
-                                            <li >
-                                                <a href="card_add.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>添加会员卡</span>
-                                                </a>
-                                            </li>
-                                            <li >
-                                                <a href="card_list.html" class="auto">
-                                                    <i class="fa  fa-angle-right text-xs text-info"></i>
-                                                    <span>会员卡管理</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="login.html" class="auto">
-                                            <i class="icon-logout icon text-danger"></i>
-                                            <span>退出系统</span>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </nav>
-                            <!-- / nav -->
-                        </div>
+                        @include('Catering/Public/Nav')
                     </section>
-
-
                 </section>
             </aside>
             <!-- /.aside -->
@@ -569,22 +246,6 @@
                                             <td><label class="label label-warning">分店</label></td>
                                             <td>111笔</td>
                                             <td>&yen;10000.3</td>
-                                            <td>888</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
                                             <td>888笔</td>
                                             <td>&yen;88888.33</td>
                                         </tr>
@@ -608,37 +269,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($login_log_list as $key=>$val)
                                         <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
+                                            <td>{{  $val->accounts->account }}</td>
+                                            <td>{{  long2ip($val->ip) }}</td>
+                                            <td>{{  $val->ip_position }}</td>
+                                            <td>{{  $val->created_at }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
@@ -656,31 +294,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
+                                        @foreach($operation_log_list as $key=>$val)
+                                            <tr>
+                                                <td>{{ $val->accounts->account }}</td>
+                                                <td>{{ $val->operation_info }}</td>
+                                                <td>{{ $val->created_at }}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>

@@ -20,8 +20,6 @@ class CompanyCheck{
                     return redirect('company');
                 }
                 break;
-                break;
-
             /****仅检测是否登录及是否具有权限****/
             case "company":                             //后台首页
             case "company/company_switch":              //退出切换商户

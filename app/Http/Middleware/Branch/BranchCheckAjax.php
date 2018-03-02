@@ -18,7 +18,7 @@ class BranchCheckAjax{
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "company/ajax/company_select":         //超级管理员选择商户提交数据
+            case "branch/ajax/branch_select":         //超级管理员选择分店提交数据
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -154,13 +154,13 @@ class BranchCheckAjax{
     public function checkIsLogin($request)
     {
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('company_account_id');
+        $sess_key = Session::get('branch_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
-            $sess_key = Session::get('company_account_id');//获取管理员ID
+            $sess_key = Session::get('branch_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('company');//连接到我的缓存服务器
-            $admin_data = Redis::get('company_system_admin_data_'.$sess_key);//获取管理员信息
+            Redis::connect('branch');//连接到我的缓存服务器
+            $admin_data = Redis::get('branch_system_admin_data_'.$sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data'=>$admin_data]);//添加参数
             //把参数传递到下一个中间件
@@ -184,6 +184,8 @@ class BranchCheckAjax{
             }
         }
     }
+
+
     //检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafe($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -264,7 +266,7 @@ class BranchCheckAjax{
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         }else{
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
+            $key = config("app.branch_safe_encrypt_key");//获取安全密码加密盐（商户专用）
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重

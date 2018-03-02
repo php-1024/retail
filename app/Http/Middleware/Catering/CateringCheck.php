@@ -21,29 +21,25 @@ class CateringCheck{
                 }
                 break;
 
-            case "proxy/switch_status"://超级管理员切换服务商
+            case "catering/switch_status"://超级管理员切换服务商
                 $this->checkLoginAndRuleAndSwitchStatus($request);//判断是否登录
                 break;
 
             /****仅检测是否登录及是否具有权限****/
 
-            /****系统管理****/
-            case "proxy/system/setup":                  //参数设置
-            case "proxy/system/proxy_info":             //公司信息设置
-            case "catering":                            //服务商后台首页
-            case "proxy/system/select_proxy":           //服务商超级管员进入操作
-            case "proxy/system/proxy_structure":        //人员结构
-            case "proxy/system/operationlog":           //操作日记
-            case "proxy/system/loginlog":               //登入日记
-                /****系统管理****/
+            /****店铺概况****/
+            case "catering":                            //店铺后台首页
+            case "catering/select_shop":                //店铺超级管员进入操作
+            /****店铺概况****/
 
-                /****个人信息****/
-            case "proxy/persona/account_info":          //个人信息修改
-            case "proxy/persona/safe_password":         //安全密码修改
-            case "proxy/persona/password":              //登入密码修改
-            case "proxy/persona/myoperationlog":        //我的操作记录
-            case "proxy/persona/myloginlog":            //登入密码修改
-                /****个人信息****/
+            /****账号中心****/
+            case "catering/account/profile":            //账号信息
+            case "catering/account/password":           //登入密码修改
+            case "catering/account/safe_password":      //安全密码设置
+            case "catering/account/message_setting":    //消息推送设置
+            case "catering/account/operation_log":      //操作日记
+            case "catering/account/login_log":          //登入日记
+            /****账号中心****/
 
                 /****下级人员管理--权限角色****/
             case "proxy/role/role_add":                 //权限角色添加
@@ -94,9 +90,8 @@ class CateringCheck{
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限
-                \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
-
             }
         }
     }

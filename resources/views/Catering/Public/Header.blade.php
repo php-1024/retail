@@ -19,7 +19,6 @@
         </a>
     </li>
 </ul>
-
 <div class="navbar-right ">
     <ul class="nav navbar-nav m-n hidden-xs nav-user user">
         <li class="dropdown">
@@ -34,7 +33,7 @@
                 </li>
                 @if($admin_data['is_super'] == 2)
                 <li>
-                    <a href="{{url('proxy/switch_status')}}">切换商铺</a>
+                    <a href="{{url('catering/switch_status')}}">切换商铺</a>
                 </li>
                 @endif
                 <li>
@@ -52,14 +51,3 @@
         </li>
     </ul>
 </div>
-
-
-
-
-
-
-
-
-
-
-

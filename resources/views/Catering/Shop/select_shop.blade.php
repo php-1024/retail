@@ -8,7 +8,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
-    <!--external css-->
+    {{--<!--external css-->--}}
     <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{{asset('public/Proxy')}}/css/owl.carousel.css" type="text/css">
@@ -56,7 +56,7 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" id="url" value="{{url('proxy/system/select_proxy')}}">
+        <input type="hidden" id="url" value="{{url('catering/select_shop')}}">
     @foreach($listOrg as $key=>$value)
         <div class="col-lg-3 col-sm-6">
             <a href="javascript:;" onclick="postForm('{{$value->id}}')">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="value">
                         <b>{{$value->organization_name}}</b>
-                        <p>{{$value->warzone['0']['zone_name']}}</p>
+                        {{--<p>{{$value->warzone['0']['zone_name']}}</p>--}}
                     </div>
                 </section>
             </a>

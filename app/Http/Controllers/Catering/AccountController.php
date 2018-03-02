@@ -1,24 +1,20 @@
 <?php
-namespace App\Http\Controllers\Proxy;
+namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\Module;
 use App\Models\OperationLog;
-use App\Models\Organization;
-use App\Models\OrganizationProxyinfo;
 use App\Models\OrganizationRole;
+use App\Models\OrganizationStoreinfo;
 use App\Models\ProgramModuleNode;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
-class PersonaController extends Controller{
-
-
-    //个人信息
-    public function account_info(Request $request){
+class AccountController extends Controller{
+    //账号信息
+    public function profile(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -30,9 +26,9 @@ class PersonaController extends Controller{
         }
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
             $module_node_list = [];
@@ -51,12 +47,11 @@ class PersonaController extends Controller{
                 unset($module);
             }
         }
-
-        return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Account/profile',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改个人信息提交
-    public function account_info_check(Request $request){
+    public function profile_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $mobile = $request->input('mobile');//手机号码
@@ -71,31 +66,33 @@ class PersonaController extends Controller{
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
-                if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){//判断手机号在服务商存不存在
+                if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){//判断手机号在店铺存不存在
                     return response()->json(['data' => '手机号已存在', 'status' => '0']);
                 }
+
                 if($admin_data['is_super'] != 2) {
                     if(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
                         return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                     }
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
+                    OrganizationStoreinfo::editOrganizationStoreinfo([['organization_id', $organization_id]], ['store_owner_mobile' => $mobile]);//修改店铺表店铺手机号码
                 }
+
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
 
             }
             if($oneAcc['account_info']['realname'] != $realname){
                 if($admin_data['is_super'] != 2) {
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改服务商用户信息表 用户姓名
+                    OrganizationStoreinfo::editOrganizationStoreinfo([['organization_id', $organization_id]], ['store_owner' => $realname]);//修改店铺用户信息表 用户姓名
                 }
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             $admin_data['realname'] = $realname;
             $admin_data['mobile'] = $mobile;
             if($admin_data['is_super'] == 2){
-                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了个人信息');//保存操作记录
             }else{
-                \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
-                OperationLog::addOperationLog('2',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
+                \ZeroneRedis::create_catering_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-店铺
+                OperationLog::addOperationLog('7',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -104,7 +101,6 @@ class PersonaController extends Controller{
         }
 
         return response()->json(['data' => '个人信息修改成功', 'status' => '1']);
-
     }
 
     //修改安全密码
@@ -119,7 +115,7 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Proxy/Persona/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Account/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
@@ -135,7 +131,7 @@ class PersonaController extends Controller{
         if($admin_data['is_super'] ==2){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.proxy_safe_encrypt_key");//获取加密盐
+            $key = config("app.catering_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
@@ -148,13 +144,13 @@ class PersonaController extends Controller{
                 $admin_data['safe_password'] = $encryptPwd;
                 if($admin_data['is_super'] == 2){
                     Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统设置了安全密码');//在零壹保存操作记录
-                    \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统设置了安全密码');//在零壹保存操作记录
+                    \ZeroneRedis::create_catering_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                 }else{
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
-                    \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -169,14 +165,13 @@ class PersonaController extends Controller{
                     $admin_data['safe_password'] = $encryptPwd;
                     if($admin_data['is_super'] == 2){
                         Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
-                        OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了安全密码');//在零壹保存操作记录
-                        \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了安全密码');//在零壹保存操作记录
+                        \ZeroneRedis::create_catering_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                     }else{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                        OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
-                        \ZeroneRedis::create_proxy_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
-
+                        OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                        \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                     }
                     DB::commit();
                 } catch (\Exception $e) {
@@ -202,7 +197,7 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Proxy/Persona/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Account/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改登入密码功能提交
@@ -219,7 +214,7 @@ class PersonaController extends Controller{
         if($admin_data['is_super'] == 2){
             $key = config("app.zerone_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.proxy_encrypt_key");//获取加密盐
+            $key = config("app.catering_encrypt_key");//获取加密盐
         }
 
         $encrypted = md5($password);//加密密码第一重---新密码
@@ -232,9 +227,9 @@ class PersonaController extends Controller{
             try {
                 Account::editAccount([['id',$id ]],['password' => $encryptPwd]);
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1',$id,$route_name,'在服务商系统修改了登录密码');//保存操作记录-保存到零壹系统
+                    OperationLog::addOperationLog('1','1',$id,$route_name,'在店铺系统修改了登录密码');//保存操作记录-保存到零壹系统
                 }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -247,8 +242,20 @@ class PersonaController extends Controller{
         }
 
     }
+
+    //消息推送
+    public function message_setting(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Catering/Account/message_setting',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+
+
     //我的操作记录
-    public function myoperationlog(Request $request){
+    public function operation_log(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -256,21 +263,17 @@ class PersonaController extends Controller{
 
         $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
         $list = OperationLog::getProxyPaginate($where,10,'id');
-        $roles = [];
-        foreach($list as $key=>$val){
-            $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
-        }
-        return view('Proxy/Persona/myoperationlog',['list'=>$list,'roles'=>$roles,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Catering/Account/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
-    public function myloginlog(Request $request){
+    public function login_log(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
         $list = LoginLog::getProxyPaginate($where,15,'id');
-        return view('Proxy/Persona/myloginlog',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Catering/Account/login_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 }

@@ -3,7 +3,7 @@
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
             <i class="icon-list"></i>
         </a>
-        <a href="index.html" class="navbar-brand text-lt">
+        <a href="branch" class="navbar-brand text-lt">
             <i class="fa fa-cloud"></i>
 
             <span class="hidden-nav-xs m-l-sm">ZERONE</span>
@@ -14,7 +14,7 @@
     </div>
     <ul class="nav navbar-nav hidden-xs">
         <li>
-            <a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+            <a href="javascript:;" data-toggle="class:nav-xs,nav-xs" class="text-muted">
                 <i class="fa fa-indent text"></i>
                 <i class="fa fa-dedent text-active"></i>
             </a>
@@ -34,15 +34,20 @@
                         <a href="#"></a>
                     </li>
                     <li>
-                        <a href="profile.html">账号信息</a>
+                        <a href="{{ url('/branch/account/profile') }}">账号信息</a>
                     </li>
 
                     <li>
-                        <a href="password.html">修改密码</a>
+                        <a href="{{ url('/branch/account/password') }}">修改密码</a>
                     </li>
+                    @if($admin_data['is_super'] == 1)
+                        <li>
+                            <a href="{{ url('/branch/branch_switch') }}" >切换店铺</a>
+                        </li>
+                    @endif
                     <li class="divider"></li>
                     <li>
-                        <a href="login.html" >退出登录</a>
+                        <a href="{{ url('/branch/quit') }}" >退出登录</a>
                     </li>
                 </ul>
             </li>

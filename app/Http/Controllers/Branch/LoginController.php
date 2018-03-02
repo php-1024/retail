@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;
@@ -92,7 +93,7 @@ class LoginController extends Controller
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if ($account_info->organization->program_id <> '8') {//如果账号不属于餐饮分店平台管理系统，则报错，不能登录。8、是餐饮分店管理系统的ID
                             ErrorLog::addErrorTimes($ip, 8);
-                            return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
+                            return response()->json(['data' => '登录账号、手机号或密码输入错误asd', 'status' => '0']);
                         } else {
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
@@ -112,8 +113,8 @@ class LoginController extends Controller
                                 } else {
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-                                \ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                                \ZeroneRedis::create_branch_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+                                ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                                ZeroneRedis::create_branch_menu_cache($account_info->id);//生成对应账号的商户系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             } else {
                                 return response()->json(['data' => '登录失败', 'status' => '0']);
@@ -125,8 +126,8 @@ class LoginController extends Controller
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
-                        \ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                        \ZeroneRedis::create_branch_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+                        ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        ZeroneRedis::create_branch_menu_cache($account_info->id);//生成对应账号的商户系统菜单
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
                 }
@@ -137,6 +138,12 @@ class LoginController extends Controller
         } else {
             return response()->json(['data' => '您短时间内错误的次数超过' . $allowed_error_times . '次，请稍候再尝试登录 ', 'status' => '0']);
         }
+    }
+
+    //退出登录
+    public function quit(){
+        Session::put('branch_account_id','');
+        return redirect('branch/login');
     }
 }
 
