@@ -31,7 +31,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/safe_password_edit_check') }}">
+                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/safe_password_edit_check') }}">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if(empty($admin_data['safe_password']))
                         <input type="hidden" name="is_editing" value="-1">
@@ -148,7 +148,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 },function(){
-                    window.location.reload('zerone/login');
+                    window.location.reload('branch/login');
                 });
             }else{
                 swal({
