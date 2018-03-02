@@ -78,7 +78,7 @@
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">店铺登陆密码</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">店铺登录密码</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="password" class="form-control" value="">
                                         </div>
@@ -86,7 +86,7 @@
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">重复登陆密码</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">重复登录密码</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="re_password" class="form-control" value="">
                                         </div>

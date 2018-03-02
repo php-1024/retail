@@ -244,10 +244,10 @@ class CompanyCheckAjax
             return self::res(0,response()->json(['data' => '请填写店铺负责人姓名', 'status' => '0']));
         }
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请填写店铺登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请填写店铺登录密码', 'status' => '0']));
         }
         if(empty($request->input('re_password'))){
-            return self::res(0,response()->json(['data' => '请输入重复登陆密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入重复登录密码', 'status' => '0']));
         }
         if(empty($request->input('safe_password'))){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));

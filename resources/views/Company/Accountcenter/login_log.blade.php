@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>登陆日志列表 | 零壹云管理平台 | 商户管理系统</title>
+    <title>登录日志列表 | 零壹云管理平台 | 商户管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
@@ -30,11 +30,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">登陆日志</h3>
+                            <h3 class="m-b-none">登录日志</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                登陆日志列表
+                                登录日志列表
                             </header>
                         <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
@@ -61,9 +61,9 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>登陆IP</th>
-                                        <th>登陆地址</th>
-                                        <th>登陆时间</th>
+                                        <th>登录IP</th>
+                                        <th>登录地址</th>
+                                        <th>登录时间</th>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -43,7 +43,7 @@
                             <div class="panel-body">
                                 <div class="line line-dashed b-b line-lg pull-in"></div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
+                                    <label class="col-sm-2 control-label" for="input-id-1">登录账号</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" disabled="" value="@if($admin_data['is_super']==1) {{$account['account']}} @else {{$admin_data['account']}} @endif">
                                     </div>
@@ -80,7 +80,7 @@
                             <div class="panel-body">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">登录账号</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="input-id-1" disabled="" value="@if($admin_data['is_super']==1) {{$account['account']}} @else {{$admin_data['account']}} @endif">
                                         </div>

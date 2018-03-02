@@ -194,14 +194,14 @@
                         <div class="col-lg-12">
                             <div class="col-lg-6">
                                 <section class="panel panel-default">
-                                    <header class="panel-heading">最近登陆日志</header>
+                                    <header class="panel-heading">最近登录日志</header>
                                     <table class="table table-striped m-b-none">
                                         <thead>
                                         <tr>
-                                            <th>登陆账号</th>
-                                            <th>登陆IP</th>
-                                            <th>登陆地址</th>
-                                            <th>登陆时间</th>
+                                            <th>登录账号</th>
+                                            <th>登录IP</th>
+                                            <th>登录地址</th>
+                                            <th>登录时间</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -285,52 +285,52 @@
                                         <tbody>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         <tr>
                                             <td>10200</td>
-                                            <td>修改了登陆密码</td>
+                                            <td>修改了登录密码</td>
                                             <td>2018-09-09 11:11:11</td>
                                         </tr>
                                         </tbody>

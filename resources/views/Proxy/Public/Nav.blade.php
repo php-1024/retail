@@ -26,7 +26,7 @@
             <li>
                 <a href="{{ url('proxy/quit') }}">
                     <i class="icon-power-off"></i>
-                    <span>退出登陆</span>
+                    <span>退出登录</span>
                 </a>
             </li>
         </ul>

@@ -47,7 +47,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="icon-desktop"></i> 系统管理</a></li>
-                        <li class="active">登陆日志查询</li>
+                        <li class="active">登录日志查询</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -83,15 +83,15 @@
                             <div class="col-sm-12">
                                 <section class="panel">
                                     <header class="panel-heading">
-                                        登陆日志记录
+                                        登录日志记录
                                     </header>
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>用户</th>
-                                            <th>登陆IP</th>
-                                            <th>登陆地址</th>
+                                            <th>登录IP</th>
+                                            <th>登录地址</th>
                                             <th>时间</th>
                                         </tr>
                                         </thead>

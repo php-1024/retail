@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>登陆页面 | 零壹新科技服务商管理平台</title>
+    <title>登录页面 | 零壹新科技服务商管理平台</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
@@ -27,12 +27,12 @@
         <h2 class="form-signin-heading">零壹新科技服务商管理平台</h2>
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
-            <input type="password" class="form-control" placeholder="登陆密码" name="password">
+            <input type="password" class="form-control" placeholder="登录密码" name="password">
             <input type="text" name="captcha" class="form-control" placeholder="验证码" >
             <input type="hidden" id="captcha_url" value="{{ URL('proxy/login/captcha') }}">
             <img src="{{ URL('proxy/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
 
-            <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登陆</button>
+            <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登录</button>
         </div>
 
     </form>

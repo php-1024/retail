@@ -42,7 +42,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="icon-user"></i> 个人信息</a></li>
-                        <li class="active">我的登陆日志</li>
+                        <li class="active">我的登录日志</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -55,15 +55,15 @@
                             <div class="col-sm-12">
                                 <section class="panel">
                                     <header class="panel-heading">
-                                        我的登陆日志
+                                        我的登录日志
                                     </header>
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>用户</th>
-                                            <th>登陆IP</th>
-                                            <th>登陆地址</th>
+                                            <th>登录IP</th>
+                                            <th>登录地址</th>
                                             <th>时间</th>
                                         </tr>
                                         </thead>

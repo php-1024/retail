@@ -85,15 +85,15 @@
                 <div class="col-sm-6">
                     <section class="panel">
                         <header class="panel-heading">
-                            最新登陆记录
+                            最新登录记录
                         </header>
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th>用户</th>
-                                <th>登陆IP</th>
-                                <th>登陆地址</th>
-                                <th>登陆时间</th>
+                                <th>登录IP</th>
+                                <th>登录地址</th>
+                                <th>登录时间</th>
                             </tr>
                             </thead>
                             <tbody>

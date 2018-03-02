@@ -182,10 +182,10 @@ class AccountcenterController extends Controller{
             try {
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                    Account::editAccount([['id','1']],['password' => $new_encryptPwd]);                    //修改超级管理员登陆密码
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的登陆密码！');  //保存操作记录
+                    Account::editAccount([['id','1']],['password' => $new_encryptPwd]);                    //修改超级管理员登录密码
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的登录密码！');  //保存操作记录
                 }else{//商户本人操作记录
-                    Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改商户登陆密码
+                    Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改商户登录密码
                     OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
@@ -307,7 +307,7 @@ class AccountcenterController extends Controller{
         return view('Company/Accountcenter/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //个人登陆日志页面
+    //个人登录日志页面
     public function login_log(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -344,7 +344,7 @@ class AccountcenterController extends Controller{
     public function superadmin_login($organization_id)
     {
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
-        //Admin登陆商户平台要生成的信息
+        //Admin登录商户平台要生成的信息
         //重新生成缓存的登录信息
         $admin_data = [
             'id'=>$account_info->id,                            //用户ID

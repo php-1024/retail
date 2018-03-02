@@ -241,7 +241,7 @@ class ToolingCheckAjax {
         }
     }
 
-    //修改程序菜单排序，检测是否登陆，输入数据是否正确
+    //修改程序菜单排序，检测是否登录，输入数据是否正确
     public function checkLoginAndMenuEditSort($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
