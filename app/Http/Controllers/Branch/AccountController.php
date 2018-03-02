@@ -36,7 +36,6 @@ class AccountController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $realname = $request->input('realname');    //真实姓名
         $mobile = $request->input('mobile');        //手机号码
-        dd($request);
         DB::beginTransaction();
         try {
             Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
