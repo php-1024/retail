@@ -68,7 +68,6 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        dd($oneAcc['account_info']['realname']);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
@@ -84,7 +83,7 @@ class PersonaController extends Controller{
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
 
             }
-            if($oneAcc['organizationproxyinfo']['proxy_owner'] != $realname){
+            if($oneAcc['account_info']['realname'] != $realname){
                 if($admin_data['is_super'] != 2) {
                     OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改服务商用户信息表 用户姓名
                 }

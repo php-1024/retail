@@ -6,12 +6,9 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\Module;
 use App\Models\OperationLog;
-use App\Models\Organization;
-use App\Models\OrganizationProxyinfo;
 use App\Models\OrganizationRole;
 use App\Models\OrganizationStoreinfo;
 use App\Models\ProgramModuleNode;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -19,6 +16,7 @@ class AccountController extends Controller{
     //账号信息
     public function profile(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -66,7 +64,6 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        dd($oneAcc['account_info']['realname']);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
@@ -86,7 +83,7 @@ class AccountController extends Controller{
             }
             if($oneAcc['account_info']['realname'] != $realname){
                 if($admin_data['is_super'] != 2) {
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改店铺用户信息表 用户姓名
+                    OrganizationStoreinfo::editOrganizationStoreinfo([['organization_id', $organization_id]], ['store_owner' => $realname]);//修改店铺用户信息表 用户姓名
                 }
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
