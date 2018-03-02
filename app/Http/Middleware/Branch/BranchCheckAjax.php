@@ -30,7 +30,7 @@ class BranchCheckAjax{
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "company/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
+            case "branch/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;

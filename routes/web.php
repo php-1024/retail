@@ -551,6 +551,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('branch_select','Branch\DisplayController@branch_select')->middleware('BranchCheckAjax');//提交选择分店数据
         Route::post('profile_edit_check', 'Branch\AccountController@profile_edit_check')->middleware('BranchCheckAjax');//个人账号信息修改
         Route::post('safe_password_edit_check', 'Branch\AccountController@safe_password_edit_check')->middleware('BranchCheckAjax');//安全密码设置检测
+        Route::post('password_edit_check', 'Branch\AccountController@password_edit_check')->middleware('BranchCheckAjax');          //密码检测
     });
 });
 /**********************餐饮分店系统*********************/
