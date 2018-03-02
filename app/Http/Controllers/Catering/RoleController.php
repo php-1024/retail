@@ -188,7 +188,7 @@ class RoleController extends Controller{
     //直接输入安全密码操作的页面
     public function role_delete(Request $request){
         $id = $request->input('id');
-        return view('Proxy/Role/role_delete',['id'=>$id]);
+        return view('Catering/Role/role_delete',['id'=>$id]);
     }
     //直接输入安全密码操作的页面
     public function role_delete_check(Request $request){
