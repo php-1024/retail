@@ -515,12 +515,16 @@ Route::group(['prefix'=>'branch'],function(){
     Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
     Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
     Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('BranchCheck'); //超级管理员退出当前店铺
-    Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //超级管理员退出当前店铺
+    //账户中心
+    Route::group(['prefix'=>'account'],function(){
+        Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //超级管理员退出当前店铺
+    });
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
     });
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
