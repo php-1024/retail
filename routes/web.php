@@ -531,6 +531,7 @@ Route::group(['prefix'=>'branch'],function(){
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
         Route::post('branch_select','Branch\DisplayController@branch_select')->middleware('BranchCheckAjax');//提交选择分店数据
+        Route::post('profile_edit_check', 'Company\AccountController@profile_edit_check')->middleware('BranchCheckAjax');//个人账号信息修改
     });
 });
 /**********************餐饮分店系统*********************/
