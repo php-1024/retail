@@ -219,11 +219,11 @@
         </section>
     </section>
 </section>
-<script src="{{asset('public/Branch/')}}js/jquery.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Branch/')}}js/bootstrap.js"></script>
+<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Branch/')}}js/app.js"></script>
+<script src="{{asset('public/Branch')}}/js/app.js"></script>
 <script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Branch/')}}js/app.plugin.js"></script>
 <script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
