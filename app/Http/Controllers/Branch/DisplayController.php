@@ -73,6 +73,7 @@ class DisplayController extends Controller
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','7']]);//根据账号查询
         //Admin登陆商户平台要生成的信息
         //重新生成缓存的登录信息
+        dd($account_info);
         $admin_data = [
             'id'=>$account_info->id,                            //用户ID
             'organization_id'=>$account_info->organization_id,  //组织ID
