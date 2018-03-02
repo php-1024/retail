@@ -165,7 +165,7 @@ class AccountController extends Controller{
             $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
         }else{
             $account = Account::getOne([['id',$admin_data['id']]]);
-            $key = config("app.company_encrypt_key");//获取加密盐（商户专用）
+            $key = config("app.branch_encrypt_key");//获取加密盐（分店专用）
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
@@ -177,10 +177,10 @@ class AccountController extends Controller{
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                     Account::editAccount([['id','1']],['password' => $new_encryptPwd]);                    //修改超级管理员登录密码
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的登录密码！');  //保存操作记录
-                }else{//商户本人操作记录
-                    Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改商户登录密码
-                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统修改了自己的登录密码！');  //保存操作记录
+                }else{//餐饮分店本人操作记录
+                    Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改餐饮分店登录密码
+                    OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {

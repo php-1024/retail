@@ -36,13 +36,13 @@
                                 登录密码修改
                             </header>
                             <div class="panel-body">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/password_edit_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/password_edit_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">登录账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" disabled="" value="@if($admin_data['is_super']= 1) {{$account['account']}} @else {{$admin_data['account']}} @endif">
+                                            <input type="text" class="form-control" disabled="" value="@if($admin_data['is_super']==1) {{$account['account']}} @else {{$admin_data['account']}} @endif">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
