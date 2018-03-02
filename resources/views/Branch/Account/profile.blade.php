@@ -40,10 +40,11 @@
                                 </header>
                                 <div class="panel-body">
                                     <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/profile_edit_check') }}">
+                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="input-id-1">用户账号</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-id-1" disabled="" value="200307">
+                                                <input type="text" class="form-control" id="input-id-1" disabled="" value="{{$user['account']}}">
                                             </div>
                                         </div>
 
@@ -51,7 +52,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="input-id-1">真实姓名</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-id-1"  value="薛志豪">
+                                                <input type="text" name="realname" class="form-control" value="{{$user->account_info['realname']}}">
                                             </div>
                                         </div>
 
@@ -59,25 +60,23 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="input-id-1">手机号码</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-id-1" value="13123456789">
+                                                <input type="text" name="mobile" class="form-control" value="{{$user['mobile']}}">
                                                 <span class="help-block m-b-none">该手机号码可用作登录，与负责人手机号码可分别设置</span>
                                             </div>
-
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="input-id-1">安全密码</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-id-1" value="">
+                                                <input type="password" name="safe_password" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <div class="col-sm-12 col-sm-offset-5">
-
-                                                <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                                <button type="button" onclick="return postForm();" class="btn btn-success" id="addBtn">保存信息</button>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
