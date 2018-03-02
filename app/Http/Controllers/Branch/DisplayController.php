@@ -73,7 +73,6 @@ class DisplayController extends Controller
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','7']]);//根据账号查询
         //Admin登陆商户平台要生成的信息
         //重新生成缓存的登录信息
-        dd($account_info);
         $admin_data = [
             'id'=>$account_info->id,                            //用户ID
             'organization_id'=>$account_info->organization_id,  //组织ID
@@ -87,7 +86,7 @@ class DisplayController extends Controller
             'status'=>$account_info->status,                    //用户状态
             'mobile'=>$account_info->mobile,                    //绑定手机号
         ];
-        Session::put('company_account_id', encrypt(1));         //存储登录session_id为当前用户ID
+        Session::put('branch_account_id', encrypt(1));         //存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
@@ -102,8 +101,8 @@ class DisplayController extends Controller
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        ZeroneRedis::create_company_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-        ZeroneRedis::create_company_menu_cache(1);//生成对应账号的商户系统菜单
+        ZeroneRedis::create_branch_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+        ZeroneRedis::create_branch_menu_cache(1);//生成对应账号的商户系统菜单
     }
 }
 
