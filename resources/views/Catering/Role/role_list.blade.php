@@ -113,7 +113,7 @@
         </section>
     </section>
 </section>
-div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <form class="form-horizontal tasi-form" method="get">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -319,28 +319,75 @@ div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby=
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $('#addBtn').click(function(){
+    //获取删除权限角色删除密码确认框
+    function getDeleteComfirmForm(id){
+        var url = $('#role_delete_comfirm_url').val();
+        var token = $('#_token').val();
+        if(id==''){
             swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
             });
-        });
+            return;
+        }
 
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
+    }
+    //获取用户信息，编辑密码框
+    function getEditForm(id){
+        var url = $('#role_edit_url').val();
+        var token = $('#_token').val();
 
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-        $('#deleteBtn').click(function(){
-            $('#myModal2').modal();
-        });
-        $('.popovers').popover();
-    });
+    }
 </script>
 </body>
 </html>
