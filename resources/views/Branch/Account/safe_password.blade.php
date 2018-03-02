@@ -23,15 +23,15 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('Branch/Public/Nav')
-        <!-- /.aside -->
+            @include('Branch/Public/Nav')
+            <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/safe_password_edit_check') }}">
+                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/safe_password_edit_check') }}">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if(empty($admin_data['safe_password']))
                         <input type="hidden" name="is_editing" value="-1">
@@ -81,7 +81,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">登陆账号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="@if($admin_data['is_super']= 1) {{$account['account']}} @else {{$admin_data['account']}} @endif">
+                                            <input type="text" class="form-control" id="input-id-1" disabled="" value="@if($admin_data['is_super']==1) {{$account['account']}} @else {{$admin_data['account']}} @endif">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -148,7 +148,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 },function(){
-                    window.location.reload('zerone/login');
+                    window.location.reload('branch/login');
                 });
             }else{
                 swal({

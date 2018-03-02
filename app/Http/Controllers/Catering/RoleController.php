@@ -59,14 +59,14 @@ class RoleController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['program_id'=>2,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = OrganizationRole::addRole(['program_id'=>7,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了权限角色'.$role_name);//保存操作记录
                 }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -88,14 +88,14 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
         //查询所有角色列表
-        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',2],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',7],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
 
         //获取角色节点
         $role_module_nodes = [];
         foreach($list as $key=>$val){
             $role_module_nodes[$val->id] = $this->getModuleNode($val->id);//获取角色拥有的所有模块和节点
         }
-        return view('Proxy/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /***
@@ -173,7 +173,7 @@ class RoleController extends Controller{
                 }
                 RoleNode::where('role_id', $id)->whereNotIn('node_id', $node_ids)->forceDelete();
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统编辑了权限角色'.$role_name);//保存操作记录
                 }else{
                     OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 }
@@ -201,7 +201,7 @@ class RoleController extends Controller{
             RoleNode::where('role_id',$id)->delete();//删除角色节点关系
             RoleAccount::where('role_id',$id)->delete();//删除角色账号关系
             if($admin_data['is_super'] == 2){
-                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统删除了权限角色，ID为：'.$id);//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统删除了权限角色，ID为：'.$id);//保存操作记录
 
             }else{
                 OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
