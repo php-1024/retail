@@ -189,10 +189,11 @@ class ProxyController extends Controller{
     }
     //服务商编辑ajaxshow显示页面
     public function proxy_list_edit(Request $request){
-        echo "12345";
-        exit;
+
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOneProxy([['id',$id]]);
+        echo "12345";
+        exit;
         $warzone = Warzone::all();
         return view('Zerone/Proxy/proxy_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
     }
