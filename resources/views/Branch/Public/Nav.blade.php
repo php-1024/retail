@@ -7,7 +7,13 @@
                     <ul class="nav" data-ride="collapse">
                         @foreach($menu_data as $key=>$val)
                         <li @if(in_array($route_name,explode(',',$val->menu_routes_bind))) class="active" @endif>
-                            <a href="{{ url($val->menu_route) }}" class="auto">
+                            @if(empty($val->menu_route))
+                                <a href="{{ url($val->menu_route) }}" class="auto">
+                                    <i class="fa fa-bar-chart-o  text-success"></i>
+                                    <span class="font-bold ">分店概况</span>
+                                </a>
+                            @endif
+                            <a href="javascript:;" class="auto">
                         <span class="pull-right text-muted">
                           <i class="fa fa-angle-left text"></i>
                           <i class="fa fa-angle-down text-active"></i>
