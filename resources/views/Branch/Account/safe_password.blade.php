@@ -2,8 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>零壹云管理平台 | 商户管理系统</title>
-
+    <title>安全密码设置 | 零壹云管理平台 | 分店业务系统</title>
     <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
@@ -20,11 +19,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('Company/Public/Header')
+    @include('Branch/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('Company/Public/Nav')
+        @include('Branch/Public/Nav')
         <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -32,7 +31,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/safe_password_edit_check') }}">
+                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/safe_password_edit_check') }}">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if(empty($admin_data['safe_password']))
                         <input type="hidden" name="is_editing" value="-1">

@@ -495,7 +495,11 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CateringCheck');                 //登入日记
     });
 
-
+    //下属管理--权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add','Catering\RoleController@role_add')->middleware('CateringCheck');                       //添加权限角色
+        Route::get('role_list','Catering\RoleController@role_list')->middleware('CateringCheck');                     //权限角色列表
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
@@ -505,31 +509,49 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');     //提交登录数据
         Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheckAjax');     //安全密码数据提交
         Route::post('password_check','Catering\AccountController@password_check')->middleware('CateringCheckAjax');   //安全密码数据提交
+
+        //权限角色
+        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');;////提交添加权限角色数据
+        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');//编辑权限角色弹出框
+        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheckAjax');//编辑权限角色弹出框
+        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheckAjax');;//删除权限角色弹出安全密码框
+        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheckAjax');//删除权限角色弹出安全密码框
+
     });
 });
 /**********************总店系统*********************/
 
 
 /**********************餐饮分店系统*********************/
-Route::get('branch', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
 Route::group(['prefix'=>'branch'],function(){
-    Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
-    Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
-    Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('BranchCheck'); //超级管理员退出当前店铺
-    //账户中心
-    Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //超级管理员退出当前店铺
-    });
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
+    });
+    Route::get('/', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
+    Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
+    Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
+    Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('BranchCheck'); //超级管理员退出当前店铺
+
+    //账户中心
+    Route::group(['prefix'=>'account'],function(){
+        Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //账号中心-账户信息
+        Route::get('safe_password', 'Branch\AccountController@safe_password')->middleware('BranchCheck');//安全密码
+
+//        Route::get('password', 'Company\AccountcenterController@password')->middleware('CompanyCheck');             //登陆密码页面
+//
+//        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');               //安全密码
+//        Route::get('operation_log', 'Company\AccountcenterController@operation_log')->middleware('CompanyCheck');   //账户中心个人操作日志
+//        Route::get('login_log', 'Company\AccountcenterController@login_log')->middleware('CompanyCheck');           //账户中心个人登陆日志
     });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
         Route::post('branch_select','Branch\DisplayController@branch_select')->middleware('BranchCheckAjax');//提交选择分店数据
+        Route::post('profile_edit_check', 'Branch\AccountController@profile_edit_check')->middleware('BranchCheckAjax');//个人账号信息修改
+        Route::post('safe_password_edit_check', 'Branch\AccountController@safe_password_edit_check')->middleware('BranchCheckAjax');//安全密码设置检测
     });
 });
 /**********************餐饮分店系统*********************/
