@@ -62,7 +62,6 @@ class AccountController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
-        dump($request);
         return view('Branch/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -80,7 +79,7 @@ class AccountController extends Controller{
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         }else{
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.company_safe_encrypt_key");//获取安全密码加密盐（商户专用）
+            $key = config("app.branch_safe_encrypt_key");//获取安全密码加密盐（分店专用）
         }
         //原安全密码处理
         $old_encrypted = md5($old_safe_password);//加密原安全密码第一重
@@ -92,12 +91,12 @@ class AccountController extends Controller{
             DB::beginTransaction();
             try {
                 //添加操作日志
-                if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                if ($admin_data['is_super'] == 1){//超级管理员操作分店的记录
                     Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //设置超级管理员安全密码
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统设置了自己的安全密码！');    //保存操作记录
-                }else{//商户本人操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在分店管理系统设置了自己的安全密码！');    //保存操作记录
+                }else{//分店本人操作记录
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
-                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -105,19 +104,19 @@ class AccountController extends Controller{
                 return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
             }
             $admin_data['safe_password'] = $encryptPwd;
-            ZeroneRedis::create_company_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+            ZeroneRedis::create_branch_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
         }else{//修改安全密码
             if ($safe_password_check == $old_encryptPwd){
                 DB::beginTransaction();
                 try {
                     //添加操作日志
-                    if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                    if ($admin_data['is_super'] == 1){//超级管理员操作分店的记录
                         Account::editAccount([['id','1']],['safe_password' => $encryptPwd]);                        //修改超级管理员安全密码
-                        OperationLog::addOperationLog('1','1','1',$route_name,'在商户管理系统修改了自己的安全密码！');    //保存操作记录
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在分店管理系统修改了自己的安全密码！');    //保存操作记录
                     }else{//商户本人操作记录
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
-                        OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                        OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                     }
                     DB::commit();
                 } catch (\Exception $e) {
