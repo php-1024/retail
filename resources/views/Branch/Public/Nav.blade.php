@@ -12,7 +12,7 @@
                                     <i class="fa fa-bar-chart-o  text-success"></i>
                                     <span class="font-bold ">分店概况</span>
                                 </a>
-                            @endif
+                            @else
                             <a href="javascript:;" class="auto">
                         <span class="pull-right text-muted">
                           <i class="fa fa-angle-left text"></i>
@@ -22,6 +22,7 @@
                                 </i>
                                 <span class="font-bold">{{ $val->menu_name }}</span>
                             </a>
+                            @endif
                             <ul class="nav dk text-sm">
                                 @foreach($son_menu_data[$val->id] as $k=>$v)
                                 <li @if($route_name == $v->menu_route) class="active" @endif>
