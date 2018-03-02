@@ -23,15 +23,7 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndProfile($request);
                 return self::format_response($re, $next);
                 break;
-            case "proxy/ajax/proxy_info_check"://检测登录和权限和安全密码和公司信息是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndProxyInfo($request);
-                return self::format_response($re, $next);
-                break;
-            case "proxy/ajax/account_info_check"://检测登录和权限和安全密码和公司信息是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndAccountInfo($request);
-                return self::format_response($re, $next);
-                break;
-            case "proxy/ajax/password_check"://检测登录和权限和安全密码和公司信息是否为空
+            case "catering/ajax/password_check"://检测登录和权限和安全密码和登入密码
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
@@ -113,20 +105,6 @@ class CateringCheckAjax
         }
     }
 
-    //检测登录和权限和安全密码和服务商修改信息
-    public function checkLoginAndRuleAndSafeAndProxyInfo($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkProxyInfo($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
     //检测登录和权限和安全密码和个人修改信息
     public function checkLoginAndRuleAndSafeAndAccountInfo($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -444,34 +422,7 @@ class CateringCheckAjax
         }
         return self::res(1, $request);
     }
-    //检测公司信息设置
-    public function checkProxyInfo($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测个人信息修改
-    public function checkAccountInfo($request){
-
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测登入密码修改
+    //检测账号中心-登入密码修改
     public function checkPassword($request){
 
         if(empty($request->input('old_password'))){
