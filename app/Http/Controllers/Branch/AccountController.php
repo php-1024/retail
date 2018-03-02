@@ -40,11 +40,12 @@ class AccountController extends Controller{
         try {
             Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
             AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
+            dd('1');
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
             }else{//商户本人操作记录
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
+                OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
