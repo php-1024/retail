@@ -147,7 +147,7 @@ class RoleController extends Controller{
                 unset($module);
             }
         }
-        return view('Proxy/Role/role_edit',['info'=>$info,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
+        return view('Catering/Role/role_edit',['info'=>$info,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
     }
     //下级人员添加
     public function role_edit_check(Request $request){
