@@ -276,7 +276,7 @@
             {{--</div>--}}
         {{--</div>--}}
     {{--</div>--}}
-</form>
+{{--</form>--}}
 </div>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -295,7 +295,6 @@
     function getDeleteComfirmForm(id){
         var url = $('#role_delete_comfirm_url').val();
         var token = $('#_token').val();
-        alert(1);
         if(id==''){
             swal({
                 title: "提示信息",
