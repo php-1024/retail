@@ -175,7 +175,7 @@ class RoleController extends Controller{
                 if($admin_data['is_super'] == 2){
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统编辑了权限角色'.$role_name);//保存操作记录
                 }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了权限角色'.$role_name);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
