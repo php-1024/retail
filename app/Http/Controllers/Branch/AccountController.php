@@ -29,6 +29,31 @@ class AccountController extends Controller{
         return view('Branch/Account/profile',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //个人账号信息修改处理
+    public function profile_edit_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $realname = $request->input('realname');    //真实姓名
+        $mobile = $request->input('mobile');        //手机号码
+        DB::beginTransaction();
+        try {
+            Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
+            AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
+            }else{//商户本人操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改个人账号信息失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改个人账号信息成功', 'status' => '1']);
+    }
+
     //商户信息编辑
     public function branch_info_edit_check(Request $request)
     {
@@ -61,30 +86,7 @@ class AccountController extends Controller{
         return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
-    //账号信息修改处理
-    public function profile_edit_check(Request $request)
-    {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $realname = $request->input('realname');
-        $mobile = $request->input('mobile');
-        DB::beginTransaction();
-        try {
-            Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
-            AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
-            //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
-            }else{//商户本人操作记录
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '修改个人账号信息失败，请检查', 'status' => '0']);
-        }
-        return response()->json(['data' => '修改个人账号信息成功', 'status' => '1']);
-    }
+
 
     //登录密码页面
     public function password(Request $request)

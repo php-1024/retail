@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <title>个人账号信息修改 | 零壹云管理平台 | 分店业务系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/animate.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/app.css" type="text/css" />
-    <link href="{{asset('public/Branch/sweetalert')}}/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Branch/iCheck')}}/css/custom.css" rel="stylesheet" />
+    <link href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Branch/library/iCheck')}}/css/custom.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
@@ -20,12 +20,12 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('Company/Public/Header')
+    @include('Branch/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('Company/Public/Nav')
-        <!-- /.aside -->
+            @include('Branch/Public/Nav')
+            <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
@@ -219,19 +219,18 @@
         </section>
     </section>
 </section>
-<script src="{{asset('public/Branch')}}js/jquery.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Branch')}}js/bootstrap.js"></script>
+<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Branch')}}js/app.js"></script>
-<script src="{{asset('public/Branch/slimscroll')}}/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Branch')}}js/app.plugin.js"></script>
-<script src="{{asset('public/Branch/file-input')}}/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/jPlayer')}}/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/jPlayer')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/jPlayer')}}/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/sweetalert')}}/sweetalert.min.js"></script>
-<script src="{{asset('public/Branch/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/app.js"></script>
+<script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Branch/')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     //custom select box
     $(function(){

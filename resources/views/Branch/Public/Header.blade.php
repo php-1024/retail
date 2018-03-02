@@ -3,7 +3,7 @@
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
             <i class="icon-list"></i>
         </a>
-        <a href="branch" class="navbar-brand text-lt">
+        <a href="{{asset('branch')}}" class="navbar-brand text-lt">
             <i class="fa fa-cloud"></i>
 
             <span class="hidden-nav-xs m-l-sm">ZERONE</span>
@@ -14,7 +14,7 @@
     </div>
     <ul class="nav navbar-nav hidden-xs">
         <li>
-            <a href="javascript:;" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+            <a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted">
                 <i class="fa fa-indent text"></i>
                 <i class="fa fa-dedent text-active"></i>
             </a>

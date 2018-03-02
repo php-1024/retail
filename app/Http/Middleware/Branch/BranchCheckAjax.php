@@ -22,7 +22,7 @@ class BranchCheckAjax{
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-            case "company/ajax/profile_edit_check"://检测登录，权限，及修改密码的数据
+            case "branch/ajax/profile_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
                 return self::format_response($re, $next);
                 break;

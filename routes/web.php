@@ -298,6 +298,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('subordinate_authorize','Zerone\SubordinateController@subordinate_authorize')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
         Route::post('subordinate_authorize_check','Zerone\SubordinateController@subordinate_authorize_check')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
         Route::post('subordinate_delete_confirm','Zerone\SubordinateController@subordinate_delete_confirm')->middleware('ZeroneCheckAjax');//删除下级人员安全密码输入框
+
         Route::post('quick_rule','Zerone\SubordinateController@quick_rule')->middleware('ZeroneCheckAjax');//添加下级人员快速授权
         Route::post('selected_rule','Zerone\SubordinateController@selected_rule')->middleware('ZeroneCheckAjax');//下级人员已经选中的权限
 
@@ -514,21 +515,27 @@ Route::group(['prefix'=>'catering'],function(){
 
 
 /**********************餐饮分店系统*********************/
-Route::get('branch', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
 Route::group(['prefix'=>'branch'],function(){
-    Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
-    Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
-    Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('BranchCheck'); //超级管理员退出当前店铺
-    Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //超级管理员退出当前店铺
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
     });
+    Route::get('/', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
+    Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
+    Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
+    Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('BranchCheck'); //超级管理员退出当前店铺
+
+    //账户中心
+    Route::group(['prefix'=>'account'],function(){
+        Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //超级管理员退出当前店铺
+    });
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
         Route::post('branch_select','Branch\DisplayController@branch_select')->middleware('BranchCheckAjax');//提交选择分店数据
+        Route::post('profile_edit_check', 'Branch\AccountController@profile_edit_check')->middleware('BranchCheckAjax');//个人账号信息修改
     });
 });
 /**********************餐饮分店系统*********************/
