@@ -92,12 +92,11 @@ class AccountController extends Controller{
             if($admin_data['is_super'] == 2){
                 OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了个人信息');//保存操作记录
             }else{
-                \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-店铺
+                \ZeroneRedis::create_catering_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-店铺
                 OperationLog::addOperationLog('7',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
