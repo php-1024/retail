@@ -55,6 +55,7 @@ class AccountController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($re);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改个人账号信息失败，请检查', 'status' => '0']);
         }
