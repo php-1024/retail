@@ -227,9 +227,8 @@
 <script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Branch/')}}/js/app.plugin.js"></script>
 <script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/library/jPlayer')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch/library/jPlayer')}}/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('public/Branch/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
