@@ -24,6 +24,7 @@ class BranchCheck{
             case "branch":                             //后台首页
             case "branch/branch_list":                 //所有分店列表
             case "branch/branch_switch":               //退出切换店铺
+            case "branch/account/profile":             //账号信息
             case "company/account/password":            //密码设置
             case "company/account/safe_password":       //安全密码设置
             case "company/account/operation_log":       //账户中心个人操作日志
@@ -32,10 +33,8 @@ class BranchCheck{
             case "company/store/store_add_second":      //店铺管理立即开店
             case "company/store/store_list":            //店铺管理
                 $re = $this->checkLoginAndRule($request);//判断是否登录
+                dd($re);
                 return self::format_response($re,$next);
-                break;
-            case "branch/account/profile":             //账号信息
-                dd($request);
                 break;
         }
         return $next($request);
