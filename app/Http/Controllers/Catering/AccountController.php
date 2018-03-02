@@ -66,7 +66,6 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        dd($oneAcc['account_info']['realname']);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
@@ -86,7 +85,7 @@ class AccountController extends Controller{
             }
             if($oneAcc['account_info']['realname'] != $realname){
                 if($admin_data['is_super'] != 2) {
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改店铺用户信息表 用户姓名
+                    OrganizationStoreinfo::editOrganizationStoreinfo([['organization_id', $organization_id]], ['store_owner' => $realname]);//修改店铺用户信息表 用户姓名
                 }
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
