@@ -65,7 +65,7 @@
                                                 <group class="checked_box_group_{{ $val['id'] }}">
                                                 <div>
                                                     <label class="i-checks">
-                                                        <input type="checkbox" class="checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}" id="inlineCheckbox1" checked="checked" > {{ $val['module_name'] }}
+                                                        <input type="checkbox" class="checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}" id="inlineCheckbox1" > {{ $val['module_name'] }}
                                                     </label>
                                                 </div>
                                                 <div>
@@ -83,12 +83,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
@@ -105,9 +99,6 @@
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </form>
-
-
-
                             </div>
                         </section>
                     </section>
@@ -129,6 +120,66 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
 <script>
+
+
+    $(document).ready(function() {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+        $('.checkbox_module_name').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('check') ;
+        }).on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            var id = $(this).val();
+            $('.checkbox_node_name_'+id).iCheck('uncheck') ;
+        });
+        $('.checkbox_node_name').on('ifUnchecked',function(event){
+            var group_id = $(this).attr('data-group_id');
+            var tag=false;
+            $('.checkbox_node_name_'+group_id).each(function(i,v){
+                if($('.checkbox_node_name_'+group_id+':eq('+i+')').is(":checked")){
+                    tag=true;
+                }
+            });
+            if(tag==false){
+                $('.checkbox_module_name_'+group_id).iCheck('uncheck') ;
+            }
+        });
+    });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+
+
+
+
+
     //custom select box
     $(function(){
         $('.i-checks').iCheck({
