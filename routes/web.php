@@ -494,7 +494,11 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CateringCheck');                 //登入日记
     });
 
-
+    //下属管理--权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add','Catering\RoleController@role_add')->middleware('CateringCheck');                       //添加权限角色
+        Route::get('role_list','Catering\RoleController@role_list')->middleware('CateringCheck');                     //权限角色列表
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
