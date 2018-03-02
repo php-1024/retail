@@ -67,6 +67,14 @@ class DisplayController extends Controller
 
     }
 
+    //超级管理员退出当前店铺（切换店铺）
+    public function branch_switch(Request $request){
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $admin_data['organization_id'] = 0;
+        ZeroneRedis::create_branch_account_cache(1,$admin_data);//清空所选组织
+        return redirect('branch');
+    }
+
     //超级管理员以分店平台普通管理员登录处理
     public function superadmin_login($organization_id)
     {

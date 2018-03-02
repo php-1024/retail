@@ -23,7 +23,7 @@ class BranchCheck{
             /****仅检测是否登录及是否具有权限****/
             case "branch":                             //后台首页
             case "branch/branch_list":                 //所有分店列表
-            case "company/company_switch":              //退出切换商户
+            case "branch/branch_switch":               //退出切换店铺
             case "company/account/profile":             //密码设置
             case "company/account/password":            //密码设置
             case "company/account/safe_password":       //安全密码设置
