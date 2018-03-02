@@ -1,59 +1,64 @@
-<form method="post" role="form" class="form-horizontal tasi-form" id="currentForm" action="{{ url('proxy/ajax/role_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/role_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">权限角色编辑</h4>
+                <h4 class="modal-title">店铺信息编辑</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal tasi-form" method="get">
+                <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">角色名称</label>
+                        <label class="col-sm-2 control-label" for="input-id-1">角色名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="role_name" placeholder="角色名称" value="{{ $info->role_name }}" placeholder="{{ $info->role_name }}" class="form-control">
+                            <input type="text" class="form-control" id="input-id-1"  name="role_name" placeholder="角色名称" value="{{ $info->role_name }}" placeholder="{{ $info->role_name }}">
                         </div>
                     </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">角色权限</label>
+                        <label class="col-sm-2 control-label" for="input-id-1">角色权限</label>
                         <div class="col-sm-10">
-                            @foreach($module_node_list as $key=>$val)
-                                <group class="checked_box_group_{{ $val['id'] }}">
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" @if(in_array($val['id'],$selected_modules)) checked="checked" @endif class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}"> {{ $val['module_name'] }}
-                                        </label>
-                                    </div>
-                                    <div>
-                                        @foreach($val['program_nodes'] as $kk=>$vv)
-                                            <label class="i-checks">
-                                                <input type="checkbox" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif  data-group_id="{{  $val['id'] }}" class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
-                                            </label>
-                                            &nbsp;&nbsp;
-
-                                        @endforeach
-                                    </div>
-                                </group>
-                                <div style="margin-top: 20px;"></div>
-                            @endforeach
+                            <div class="panel-body">
+                                @foreach($module_node_list as $key=>$val)
+                                    <group class="checked_box_group_{{ $val['id'] }}">
+                                <div>
+                                    <label class="i-checks">
+                                        <input type="checkbox" value="option1" id="inlineCheckbox1"  @if(in_array($val['id'],$selected_modules)) checked="checked" @endif  class="checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}" > {{ $val['module_name'] }}
+                                    </label>
+                                </div>
+                                <div>
+                                    @foreach($val['program_nodes'] as $kk=>$vv)
+                                    <label class="i-checks">
+                                        <input type="checkbox" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif  data-group_id="{{  $val['id'] }}"  id="inlineCheckbox1" class="checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
+                                    </label>
+                                    &nbsp;&nbsp;
+                                    @endforeach
+                                </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    </group>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">安全密码</label>
+                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="安全密码" id="safe_password" name="safe_password">
+                            <input type="text" class="form-control" id="input-id-1" value="" name="safe_password">
                         </div>
                     </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" id="save_btn" onclick="return postForm();">确定</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-success" type="button" id="addBtn" onclick="return postForm();">确定</button>
             </div>
         </div>
     </div>
 </form>
+
 <script>
     $(function(){
         $('.i-checks').iCheck({
