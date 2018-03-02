@@ -66,7 +66,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        dd($oneAcc['organizationstoreinfo']['store_owner']);
+        dd($oneAcc);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
