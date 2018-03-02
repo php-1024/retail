@@ -24,7 +24,7 @@ class BranchCheck{
             case "branch":                             //后台首页
             case "branch/branch_list":                 //所有分店列表
             case "branch/branch_switch":               //退出切换店铺
-            case "company/account/profile":             //密码设置
+            case "branch/account/profile":             //账号信息
             case "company/account/password":            //密码设置
             case "company/account/safe_password":       //安全密码设置
             case "company/account/operation_log":       //账户中心个人操作日志
