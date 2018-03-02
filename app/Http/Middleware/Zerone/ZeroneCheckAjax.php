@@ -761,8 +761,6 @@ class ZeroneCheckAjax
     //格式化返回值
     public static function format_response($re, Closure $next)
     {
-        echo "789";
-        exit;
         if ($re['status'] == '0') {
             return $re['response'];
         } else {
