@@ -18,7 +18,6 @@ class DisplayController extends Controller
      */
     public function display(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
@@ -28,6 +27,7 @@ class DisplayController extends Controller
         }
         dump($menu_data);
         dump($son_menu_data);
+        dump($route_name);
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
 //        if (empty($admin_data['safe_password'])){           //先设置安全密码
 //            return redirect('branch/account/password');
