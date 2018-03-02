@@ -56,7 +56,8 @@ class DisplayController extends Controller
     public function branch_select(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $organization_id = $request->organization_id;
+        $organization_id = $request->organization_id;           //获取当前选择店铺的组织
+        $parent_id = $request->parent_id;                       //获取当前店铺的上级
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
         if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
             $this->superadmin_login($organization_id);      //超级管理员选择身份登录

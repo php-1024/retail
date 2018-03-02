@@ -171,6 +171,15 @@
         });
     }
 
+    //custom select box
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('select.styled').customSelect();
+    });
+
 </script>
 </body>
 </html>
