@@ -45,7 +45,8 @@ class DisplayController extends Controller
         $organization = Organization::getBranchAndWarzone($organization_name,$where,20,'id','ASC');
         dump($organization);
         foreach ($organization as $key=>$val){
-            $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
+            $proxy = Organization::getOneBranch(['id'=>$val->parent_id]);
+            dd($proxy);
             $val->proxyname = $proxy->organization_name;
         }
         return  view('Branch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
