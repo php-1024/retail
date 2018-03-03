@@ -26,6 +26,7 @@ class BranchCheck{
             case "branch/branch_switch":               //退出切换店铺
             case "branch/account/profile":             //账号信息
             case "branch/account/safe_password":       //安全密码设置
+            case "branch/account/message_setting":     //消息接收设置
             case "branch/account/password":            //密码设置
             case "branch/account/operation_log":       //账户中心个人操作日志
             case "branch/account/login_log":           //账户中心个人登录日志

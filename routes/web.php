@@ -558,6 +558,7 @@ Route::group(['prefix'=>'branch'],function(){
     Route::group(['prefix'=>'account'],function(){
         Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //账号中心-账户信息
         Route::get('safe_password', 'Branch\AccountController@safe_password')->middleware('BranchCheck');//安全密码
+        Route::get('message_setting', 'Branch\AccountController@message_setting')->middleware('BranchCheck');//消息接收设置
         Route::get('password', 'Branch\AccountController@password')->middleware('BranchCheck');          //登录密码页面
         Route::get('operation_log', 'Branch\AccountController@operation_log')->middleware('BranchCheck');   //账户中心个人操作日志
         Route::get('login_log', 'Branch\AccountController@login_log')->middleware('BranchCheck');           //账户中心个人登录日志
