@@ -1,13 +1,9 @@
-
 <form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('catering/ajax/subordinate_authorize_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
     <input type="hidden" id="quick_rule_url" value="{{ url('catering/ajax/quick_rule') }}">
     <input type="hidden" id="selected_rule_url" value="{{ url('catering/ajax/selected_rule') }}">
-
-
-
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -24,7 +20,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">权限角色</label>
                         <div class="col-sm-3">
-                            <select class="form-control m-b" name="account">
+                            <select class="form-control m-b" name="role_id" id="role_id">
                                 <option value="0">请选择</option>
                                 @foreach($role_list as $k=>$v)
                                     <option @if($info->account_role == $v->id) selected @endif value="{{ $v->id }}">{{ $v->role_name }}</option>
