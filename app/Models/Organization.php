@@ -37,6 +37,11 @@ class Organization extends Model{
         return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id');
     }
 
+    //和organizationBranchinfo表一对一的关系
+    public function organizationbranchinfo(){
+        return $this->hasOne('App\Models\OrganizationBranchinfo', 'organization_id');
+    }
+
     //和WarzoneProxy表一对一的关系
     public function warzoneProxy(){
         return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
@@ -50,11 +55,14 @@ class Organization extends Model{
     public static function getWarzoneProxyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-    //获取单条信息-服务商
+    //获取单条信息-总店
     public static function getOneProxy($where){
-        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
+        return self::with('warzoneProxy','organizationbranchinfo')->where($where)->first();
     }
-
+//获取单条信息-服务商
+    public static function getOneBranch($where){
+        return self::with('organizationproxyinfo')->where($where)->first();
+    }
     //获取单条信息-总店
     public static function getOneCatering($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
