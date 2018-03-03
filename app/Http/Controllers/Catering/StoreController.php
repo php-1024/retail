@@ -20,7 +20,7 @@ class StoreController extends Controller{
 
     //创建总分店功能提交
     public function branch_create_check(Request $request){
-            dd(1);
+            echo 1 ;exit;
     }
 
 
