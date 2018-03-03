@@ -28,44 +28,38 @@ class CateringCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****店铺概况****/
-            case "catering":                            //店铺后台首页
-            case "catering/select_shop":                //店铺超级管员进入操作
+            case "catering":                                //店铺后台首页
+            case "catering/select_shop":                    //店铺超级管员进入操作
             /****店铺概况****/
 
             /****账号中心****/
-            case "catering/account/profile":            //账号信息
-            case "catering/account/password":           //登入密码修改
-            case "catering/account/safe_password":      //安全密码设置
-            case "catering/account/message_setting":    //消息推送设置
-            case "catering/account/operation_log":      //操作日记
-            case "catering/account/login_log":          //登入日记
+            case "catering/account/profile":                //账号信息
+            case "catering/account/password":               //登入密码修改
+            case "catering/account/safe_password":          //安全密码设置
+            case "catering/account/message_setting":        //消息推送设置
+            case "catering/account/operation_log":          //操作日记
+            case "catering/account/login_log":              //登入日记
             /****账号中心****/
 
             /****下属管理--权限角色****/
-            case "catering/role/role_add":               //权限角色添加
-            case "catering/role/role_list":              //权限角色列表
+            case "catering/role/role_add":                  //权限角色添加
+            case "catering/role/role_list":                 //权限角色列表
             /****下属管理--权限角色****/
 
-                /****下级人员管理--添加组****/
-            case "catering/subordinate/subordinate_add":   //下级人员添加
-            case "catering/subordinate/subordinate_list":  //下级人员列表
-            case "catering/subordinate/quick_rule":        //添加下级人员快速授权
+            /****下级人员管理--添加组****/
+            case "catering/subordinate/subordinate_add":    //下级人员添加
+            case "catering/subordinate/subordinate_list":   //下级人员列表
+            case "catering/subordinate/quick_rule":         //添加下级人员快速授权
+            /****下级人员管理--添加组****/
 
-                /****下级人员管理--添加组****/
 
-                /****系统资产管理****/
-            case "proxy/program/program_list":           //权限角色添加
-            case "proxy/program/program_log":            //权限角色列表
-                /****系统资产管理****/
 
-                /****下辖商户管理****/
-            case "proxy/company/company_register":        //商户注册列表
-            case "proxy/company/company_list":            //商户列表
-            case "proxy/company/company_structure":       //店铺结构
-            case "proxy/company/company_program":         //程序划拨
-                /****下辖商户管理****/
+            /****下辖商户管理****/
+            case "catering/store/branch_create":            //商户注册列表
+            case "catering/store/branch_list":              //商户列表
+            /****下辖商户管理****/
 
-                $re = $this->checkLoginAndRule($request);//判断是否登录
+                $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
                 break;
         }
