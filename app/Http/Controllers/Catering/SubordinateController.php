@@ -78,7 +78,7 @@ class SubordinateController extends Controller{
         $role_id = $request->input('role_id');//用户角色ID
         $module_node_ids = $request->input('module_node_ids');//用户权限节点
 
-        $key = config("app.proxy_encrypt_key");//获取加密盐
+        $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
@@ -110,10 +110,10 @@ class SubordinateController extends Controller{
                 }
                 if($admin_data['is_super'] == 2){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -135,7 +135,7 @@ class SubordinateController extends Controller{
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
         $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
-        return view('Proxy/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //编辑下级人员
