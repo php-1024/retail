@@ -167,14 +167,14 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        get_quick_rule('#role_id');
+
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green'
         });
-    $(document).ready(function () {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        get_quick_rule('#role_id');
     });
     //获取上级程序节点
     function get_quick_rule(obj) {
