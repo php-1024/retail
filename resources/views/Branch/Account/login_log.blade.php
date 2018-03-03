@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
+    <link rel="stylesheet" href="{{asset('public/Branch/library/datepicker')}}/datepicker.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
