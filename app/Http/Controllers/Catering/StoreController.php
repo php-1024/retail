@@ -14,6 +14,7 @@ class StoreController extends Controller{
     //创建总分店
     public function branch_create(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -27,7 +28,6 @@ class StoreController extends Controller{
     public function branch_create_check(Request $request){
 
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
-        dump($admin_data);
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];                 //上级id
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
