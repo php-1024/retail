@@ -50,7 +50,7 @@ class AccountController extends Controller{
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在商户系统修改了商户的个人账号信息！');//保存操作记录
             }else{//商户本人操作记录
-                OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
+                OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了个人账号信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -102,7 +102,7 @@ class AccountController extends Controller{
                     OperationLog::addOperationLog('1','1','1',$route_name,'在分店管理系统设置了自己的安全密码！');    //保存操作记录
                 }else{//分店本人操作记录
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
-                    OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -122,7 +122,7 @@ class AccountController extends Controller{
                         OperationLog::addOperationLog('1','1','1',$route_name,'在分店管理系统修改了自己的安全密码！');    //保存操作记录
                     }else{//商户本人操作记录
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);          //设置商户安全密码
-                        OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                        OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                     }
                     DB::commit();
                 } catch (\Exception $e) {
@@ -180,7 +180,7 @@ class AccountController extends Controller{
                     OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统修改了自己的登录密码！');  //保存操作记录
                 }else{//餐饮分店本人操作记录
                     Account::editAccount([['id',$admin_data['id']]],['password' => $new_encryptPwd]);      //修改餐饮分店登录密码
-                    OperationLog::addOperationLog('8',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -216,7 +216,7 @@ class AccountController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
-            ['program_id','8'], //查询program_id(8)餐饮管理系统的操作日志
+            ['program_id','5'], //查询program_id(5)餐饮管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
@@ -242,7 +242,7 @@ class AccountController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
-            ['program_id','8'], //查询program_id(8)餐饮管理系统的操作日志
+            ['program_id','5'], //查询program_id(5)餐饮管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
