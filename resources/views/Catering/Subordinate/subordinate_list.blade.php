@@ -81,7 +81,7 @@
                                             财务管理员
                                         </td>
                                         <td>
-                                            <img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
+                                            <img src="{{asset('public/Catering')}}/imag/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
                                         </td>
                                         <td>
                                             时光取名叫无心
@@ -110,7 +110,7 @@
                                             财务管理员
                                         </td>
                                         <td>
-                                            <img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
+                                            <img src="{{asset('public/Catering')}}/ima/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
                                         </td>
                                         <td>
                                             <label class="label label-danger">未绑定</label>
