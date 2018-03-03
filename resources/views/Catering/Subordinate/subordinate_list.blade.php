@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Catering')}}/iCheck/css/custom.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -119,12 +121,12 @@
                                 </div>
                             </footer>
                         </section>
-
                     </section>
                 </section>
             </section>
         </section>
     </section>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 </section>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -137,21 +139,154 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
+
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    //冻结用户-解冻
+    function getLockComfirmForm(id,account,status){
+        var url = $('#subordinate_lock').val();
+        var token = $('#_token').val();
+
+        if(id==''){
             swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
             });
+            return;
+        }
+
+        var data = {'id':id,'account':account,'status':status,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-    });
+    }
+
+    //获取用户信息，编辑密码框
+    function getDeleteComfirmForm(id,acconut){
+        var url = $('#subordinate_delete').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'account':acconut,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //获取用户信息，编辑密码框
+    function getAuthorizeForm(id){
+        var url = $('#subordinate_authorize_url').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //获取用户信息，编辑密码框
+    function getEditForm(id){
+        var url = $('#subordinate_edit_url').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>
