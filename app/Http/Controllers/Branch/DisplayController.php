@@ -27,13 +27,12 @@ class DisplayController extends Controller
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('branch/branch_list');
         }
-        dump($admin_data);
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
-//        if (empty($admin_data['safe_password'])){           //先设置安全密码
-//            return redirect('branch/account/password');
-//        }else{
+        if (empty($admin_data['safe_password'])){           //先设置安全密码
+            return redirect('branch/account/password');
+        }else{
             return view('Branch/Display/display',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-//        }
+        }
     }
 
     //分店列表（超级管理员使用）
