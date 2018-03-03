@@ -18,6 +18,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-id-1">用户密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-id-1" name="password">
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">真实姓名</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="input-id-1" name="realname" value="@if(!empty($info->account_info)){{ $info->account_info->realname }}@endif">
