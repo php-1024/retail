@@ -45,7 +45,8 @@
                                 创建总分店
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/branch_create_check') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">模式</label>
@@ -83,7 +84,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">分店名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="刘记鸡煲王">
+                                            <input type="text" class="form-control"  name="organization_name" id="input-id-1" value="刘记鸡煲王">
                                         </div>
                                     </div>
 
@@ -91,7 +92,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人手机号码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="13123456789">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="mobile">
                                         </div>
                                     </div>
 
@@ -99,7 +100,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">负责人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="刘兴文">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="realname">
                                         </div>
                                     </div>
 
@@ -107,15 +108,15 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">登陆密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="password">
                                         </div>
                                     </div>
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">登陆密码</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">重复密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="repassword">
                                         </div>
                                     </div>
 
@@ -124,15 +125,15 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="safe_password" >
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-5">
-                                            <button type="button" class="btn btn-default" onclick="location.href='store_add.html'">返回</button>
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" class="btn btn-default" onclick="history.back()">>返回</button>
+                                            <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -157,20 +158,34 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
+<script>
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
         });
-        $('#save_btn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-    });
+    }
 </script>
 </body>
 </html>
