@@ -79,7 +79,6 @@
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->role_name }}</td>
                                         <td>{{ $val->create_account->account }}</td>
-
                                         <td>
                                             @foreach($role_module_nodes[$val->id] as $k=>$v)
                                             <button data-original-title="订单模块" data-content="@foreach($v as $kk=>$vv){{$vv}}  @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;
@@ -199,27 +198,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
