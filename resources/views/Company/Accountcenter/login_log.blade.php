@@ -36,7 +36,7 @@
                             <header class="panel-heading">
                                 登录日志列表
                             </header>
-                        <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
+                        <form method="get" class="form-horizontal" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                             <div class="row wrapper">
                                     <label class="col-sm-1 control-label">时间范围</label>
