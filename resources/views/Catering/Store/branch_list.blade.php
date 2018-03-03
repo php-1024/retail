@@ -40,7 +40,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">总分店管理</h3>
                         </div>
-                        @foreach($onebranch as $key=>$value)
+                        @foreach($listBranch as $key=>$value)
                         <div class="col-sm-2">
                             <section class="panel panel-default"   style="height: 280px;">
                                 <header class="panel-heading bg-light no-border">
