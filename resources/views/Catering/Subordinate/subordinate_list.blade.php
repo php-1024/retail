@@ -110,7 +110,7 @@
                                             @else
                                                 <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            {{--<button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>--}}
                                         </td>
                                     </tr>
                                     @endforeach
