@@ -34,6 +34,7 @@ class BranchCheck{
             case "branch/goods/category_add":          //添加商品分类
             case "branch/goods/category_list":         //商品分类列表
             case "branch/goods/goods_add":             //添加商品
+            case "branch/goods/goods_edit":            //编辑商品
             case "branch/goods/goods_list":            //商品列表
 
             case "company/store/store_add":             //店铺管理创建店铺
