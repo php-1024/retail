@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <title>登录密码修改 | 零壹云管理平台 | 商户管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Company/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/app.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css">
+    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
-    <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
-    <script src="{{asset('public/Company/library/ie')}}/excanvas.js"></script>
+    <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
+    <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
+    <script src="{{asset('public/Branch/library/ie')}}/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
@@ -77,16 +77,18 @@
         </section>
     </section>
 </section>
-<script src="{{asset('public/Company')}}/js/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="{{asset('public/Company')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Company')}}/js/app.js"></script>
-<script src="{{asset('public/Company/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Company')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Company/library/jPlayer')}}/jquery.jplayer.min.js"></script>
-<script src="{{asset('public/Company/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
+<!-- App -->
+<script src="{{asset('public/Branch')}}/js/app.js"></script>
+<script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
+<script src="{{asset('public/Branch/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
+<script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#editBtn').click(function(){
