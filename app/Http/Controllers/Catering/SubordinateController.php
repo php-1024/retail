@@ -157,9 +157,10 @@ class SubordinateController extends Controller{
         $mobile = $request->input('mobile');//手机号码
         $organization_id = $admin_data['organization_id'];
         if (!empty($password)) {
-            $key = config("app.proxy_encrypt_key");//获取加密盐
+            $key = config("app.catering_encrypt_key");//获取加密盐
             $encrypted = md5($password);//加密密码第一重
             $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+            $data['password'] = $encryptPwd;
         }
        if(Account::checkRowExists([['id','<>',$id],['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
             return response()->json(['data' => '手机号码已存在', 'status' => '0']);
@@ -170,9 +171,6 @@ class SubordinateController extends Controller{
             try {
                 //编辑用户
                 $data['mobile'] = $mobile;
-                if (!empty($password)) {
-                    $data['password'] = $encryptPwd;
-                }
                 Account::editAccount([[ 'id',$id]],$data);
                 if(AccountInfo::checkRowExists([['account_id',$id]])) {
                     AccountInfo::editAccountInfo([['account_id', $id]], ['realname' => $realname]);
@@ -181,10 +179,10 @@ class SubordinateController extends Controller{
                 }
                 if($admin_data['is_super'] == 2){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统编辑了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统编辑了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 }
                 //添加操作日志
                 DB::commit();
