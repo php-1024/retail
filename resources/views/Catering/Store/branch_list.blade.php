@@ -49,7 +49,7 @@
                                         </a>
                                         <div class="clear">
                                             <div class=" m-t-xs m-b-xs">
-                                                {{$value->organization_name}}）
+                                                {{$value->organization_name}}
                                                 <i class="fa fa-cutlery text-success text-lg pull-right"></i>
                                             </div>
 
