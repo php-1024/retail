@@ -15,8 +15,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户账号</label>
                         <div class="col-sm-3">{{ $info->account }}</div>
-                        <div class="col-sm-2"><button type="button" class="btn btn-success"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button></div>
                     </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">权限角色</label>
                         <div class="col-sm-3">
