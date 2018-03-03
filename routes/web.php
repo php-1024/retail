@@ -545,7 +545,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheckAjax');//下级人员已经选中的权限出框
 
         //总分店管理
-        Route::post('branch_create_check','Catering\SubordinateController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
+        Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
 
     });
 });
