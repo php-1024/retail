@@ -35,7 +35,153 @@
             </aside>
             <!-- /.aside -->
             <section id="content">
+                <section class="vbox">
+                    <section class="scrollable padder">
+                        <div class="m-b-md">
+                            <h3 class="m-b-none">总分店管理</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <section class="panel panel-default"   style="height: 280px;">
+                                <header class="panel-heading bg-light no-border">
+                                    <div class="clearfix">
+                                        <a href="#" class="pull-left thumb-md avatar b-3x m-r">
 
+                                        </a>
+                                        <div class="clear">
+                                            <div class=" m-t-xs m-b-xs">
+                                                刘记鸡煲王（总店）
+                                                <i class="fa fa-cutlery text-success text-lg pull-right"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="panel-body ">
+                                    <div>
+                                        分店类型：<label class="label label-success pull-right">总店</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店状态：<label class="label label-success pull-right">正常</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店主账号：<label class="label label-info pull-right">503020</label>
+                                    </div>
+
+                                </div>
+                                <div class="panel-body" style="text-align:center;">
+                                    <button class="btn btn-s-md btn-danger">进入总店</button>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-2">
+                            <section class="panel panel-default"   style="height: 280px;">
+                                <header class="panel-heading bg-light no-border">
+                                    <div class="clearfix">
+                                        <a href="#" class="pull-left thumb-md avatar b-3x m-r">
+
+                                        </a>
+                                        <div class="clear">
+                                            <div class=" m-t-xs m-b-xs">
+                                                刘记鸡煲王（总店）
+                                                <i class="fa fa-cutlery text-success text-lg pull-right"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="panel-body ">
+                                    <div>
+                                        分店类型：<label class="label label-primary pull-right">分店</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店状态：<label class="label label-success pull-right">正常</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店主账号：<label class="label label-info pull-right">503020</label>
+                                    </div>
+
+                                </div>
+                                <div class="panel-body" style="text-align:center;">
+                                    <button class="btn btn-s-md btn-danger">进入分店</button>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-2">
+                            <section class="panel panel-default"   style="height: 280px;">
+                                <header class="panel-heading bg-light no-border">
+                                    <div class="clearfix">
+                                        <a href="#" class="pull-left thumb-md avatar b-3x m-r">
+
+                                        </a>
+                                        <div class="clear">
+                                            <div class=" m-t-xs m-b-xs">
+                                                刘记鸡煲王（龙岗店）
+                                                <i class="fa fa-cutlery text-success text-lg pull-right"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="panel-body ">
+                                    <div>
+                                        分店类型：<label class="label label-primary pull-right">分店</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店状态：<label class="label label-success pull-right">正常</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店主账号：<label class="label label-info pull-right">503020</label>
+                                    </div>
+
+                                </div>
+                                <div class="panel-body" style="text-align:center;">
+                                    <button class="btn btn-s-md btn-danger">进入分店</button>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-2">
+                            <section class="panel panel-default"   style="height: 280px;">
+                                <header class="panel-heading bg-light no-border">
+                                    <div class="clearfix">
+                                        <a href="#" class="pull-left thumb-md avatar b-3x m-r">
+
+                                        </a>
+                                        <div class="clear">
+                                            <div class=" m-t-xs m-b-xs">
+                                                刘记鸡煲王（福田店）
+                                                <i class="fa fa-cutlery text-success text-lg pull-right"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="panel-body ">
+                                    <div>
+                                        分店类型：<label class="label label-primary pull-right">分店</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店状态：<label class="label label-success pull-right">正常</label>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div>
+                                        分店主账号：<label class="label label-info pull-right">503020</label>
+                                    </div>
+
+                                </div>
+                                <div class="panel-body" style="text-align:center;">
+                                    <button class="btn btn-s-md btn-danger">进入分店</button>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </section>
             </section>
         </section>
     </section>
