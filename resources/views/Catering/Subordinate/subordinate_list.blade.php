@@ -184,43 +184,6 @@
             }
         });
     }
-
-    //获取用户信息，编辑密码框
-    function getDeleteComfirmForm(id,acconut){
-        var url = $('#subordinate_delete').val();
-        var token = $('#_token').val();
-
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'account':acconut,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
     //获取用户信息，编辑密码框
     function getAuthorizeForm(id){
         var url = $('#subordinate_authorize_url').val();
