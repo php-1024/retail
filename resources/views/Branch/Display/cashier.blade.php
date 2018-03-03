@@ -57,7 +57,7 @@
                                                                 <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
                                                             </div>
                                                             <div class="col-sm-1">
-                                                                <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
+                                                                <button type="button" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
                                                             </div>
                                                         </form>
                                                     </div>
