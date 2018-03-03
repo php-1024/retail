@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Catering')}}/wizard/css/custom.css" rel="stylesheet" />
+    <link href="{{asset('public/Catering')}}/iCheck/css/custom.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -257,20 +259,24 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-
-
+<script type="text/javascript" src="{{asset('public/Catering')}}/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    $(function(){
+        $('#addBtn').click(function(){
             swal({
                 title: "温馨提示",
                 text: "操作成功",
                 type: "success"
             });
         });
+
+        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
     });
 </script>
 </body>
