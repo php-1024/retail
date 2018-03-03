@@ -27,9 +27,11 @@ class StoreController extends Controller{
     public function branch_create_check(Request $request){
 
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        dump($admin_data);
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];                 //上级id
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
+
         $program_id = '5';                              //分店登入程序为5
         $organization_name = $request->organization_name;
         $type = '5';                                    //分店组织为4
