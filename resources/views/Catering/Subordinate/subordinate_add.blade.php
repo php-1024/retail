@@ -86,6 +86,7 @@
                                                     <label class="col-sm-2 control-label">权限角色</label>
                                                     <div class="col-sm-3">
                                                         <select class="form-control m-b" name="role_id" id="role_id">
+                                                            <option value="0">请选择</option>
                                                             @foreach($role_list as $k=>$v)
                                                                 <option value="{{ $v->id }}">{{ $v->role_name }}</option>
                                                             @endforeach
@@ -95,37 +96,7 @@
                                                 </div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label">用户权限</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="panel-body">
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                                                </label>
-                                                            </div>
-                                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div class="form-group" id="module_node_box"></div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                                 <div class="form-group">
