@@ -132,7 +132,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-5">
-                                            <button type="button" class="btn btn-default" onclick="history.back()">>返回</button>
+                                            <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
                                             <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
