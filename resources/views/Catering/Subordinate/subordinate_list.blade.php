@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Catering')}}/iCheck/css/custom.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -46,6 +48,11 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('catering/ajax/subordinate_edit') }}">
+                                    <input type="hidden" id="subordinate_lock" value="{{ url('catering/ajax/subordinate_lock') }}">
+                                    <input type="hidden" id="subordinate_delete" value="{{ url('catering/ajax/subordinate_delete') }}">
+                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('catering/ajax/subordinate_authorize') }}">
                                     <label class="col-sm-1 control-label">下属账号</label>
 
                                     <div class="col-sm-2">
@@ -74,64 +81,39 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>1</td>
-                                        <td>100021</td>
-                                        <td>
-                                            财务管理员
-                                        </td>
+                                        <td>{{ $val->id }}</td>
+                                        <td>{{ $val->account }}</td>
+                                        <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
                                         <td>
                                             <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
                                         </td>
                                         <td>
                                             时光取名叫无心
                                         </td>
+                                        <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@else <label class="label label-danger">未绑定</label> @endif</td>
+                                        <td>{{ $val->mobile }}</td>
                                         <td>
-                                            李健瑚
+                                            @if($val->status == '1')
+                                                <label class="label label-success">正常</label>
+                                            @else
+                                                <label class="label label-warning">已冻结</label>
+                                            @endif
                                         </td>
+                                        <td>{{ $val->created_at }}</td>
                                         <td>
-                                            13123456789
-                                        </td>
-                                        <td>
-                                            <label class="label label-success">正常</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>100022</td>
-                                        <td>
-                                            财务管理员
-                                        </td>
-                                        <td>
-                                            <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
-                                        </td>
-                                        <td>
-                                            <label class="label label-danger">未绑定</label>
-                                        </td>
-                                        <td>
-                                            <label class="label label-danger">未绑定</label>
-                                        </td>
-                                        <td>
-                                            13123456789
-                                        </td>
-                                        <td>
-                                            <label class="label label-warning">冻结</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-success"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary" onclick="getAuthorizeForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
+                                            @if($val->status=='1')
+                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @else
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
+                                            @endif
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -139,46 +121,17 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                        {{ $list->appends($search_data)->links() }}
                                     </div>
                                 </div>
                             </footer>
                         </section>
-
                     </section>
                 </section>
             </section>
         </section>
     </section>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 </section>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -191,21 +144,154 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
+
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    //冻结用户-解冻
+    function getLockComfirmForm(id,account,status){
+        var url = $('#subordinate_lock').val();
+        var token = $('#_token').val();
+
+        if(id==''){
             swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
             });
+            return;
+        }
+
+        var data = {'id':id,'account':account,'status':status,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-    });
+    }
+
+    //获取用户信息，编辑密码框
+    function getDeleteComfirmForm(id,acconut){
+        var url = $('#subordinate_delete').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'account':acconut,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //获取用户信息，编辑密码框
+    function getAuthorizeForm(id){
+        var url = $('#subordinate_authorize_url').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //获取用户信息，编辑密码框
+    function getEditForm(id){
+        var url = $('#subordinate_edit_url').val();
+        var token = $('#_token').val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>
