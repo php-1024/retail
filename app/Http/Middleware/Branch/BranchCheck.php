@@ -28,8 +28,8 @@ class BranchCheck{
             case "branch/account/safe_password":       //安全密码设置
             case "branch/account/password":            //密码设置
             case "branch/account/operation_log":       //账户中心个人操作日志
+            case "branch/account/login_log":           //账户中心个人登录日志
 
-            case "company/account/login_log":           //账户中心个人登录日志
             case "company/store/store_add":             //店铺管理创建店铺
             case "company/store/store_add_second":      //店铺管理立即开店
             case "company/store/store_list":            //店铺管理

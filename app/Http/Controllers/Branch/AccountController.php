@@ -216,7 +216,7 @@ class AccountController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
-            ['program_id','8'], //查询program_id(3)商户管理系统的操作日志
+            ['program_id','8'], //查询program_id(8)餐饮管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
@@ -242,58 +242,14 @@ class AccountController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
-            ['program_id','3'], //查询program_id(3)商户管理系统的操作日志
+            ['program_id','8'], //查询program_id(8)餐饮管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
-        return view('Company/Accountcenter/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Branch/Account/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-
-    //退出登录
-    public function quit(){
-        Session::put('company_account_id','');
-        return redirect('company/login');
-    }
-
-    //超级管理员以商户平台普通管理员登录处理
-    public function superadmin_login($organization_id)
-    {
-        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
-        //Admin登录商户平台要生成的信息
-        //重新生成缓存的登录信息
-        $admin_data = [
-            'id'=>$account_info->id,                            //用户ID
-            'organization_id'=>$account_info->organization_id,  //组织ID
-            'parent_id'=>$account_info->parent_id,              //上级ID
-            'parent_tree'=>$account_info->parent_tree,          //上级树
-            'deepth'=>$account_info->deepth,                    //账号在组织中的深度
-            'account'=>$account_info->account,                  //用户账号
-            'password'=>$account_info->password,                //用户密码
-            'safe_password'=>$account_info->safe_password,      //安全密码
-            'is_super'=>1,                                      //这里设置成1超级管理员，便于切换各个商户组织
-            'status'=>$account_info->status,                    //用户状态
-            'mobile'=>$account_info->mobile,                    //绑定手机号
-        ];
-        Session::put('company_account_id', encrypt(1));         //存储登录session_id为当前用户ID
-        //构造用户缓存数据
-        if (!empty($account_info->account_info->realname)) {
-            $admin_data['realname'] = $account_info->account_info->realname;
-        } else {
-            $admin_data['realname'] = '未设置';
-        }
-        if (!empty($account_info->account_roles) && $account_info->account_roles->count() != 0) {
-            foreach ($account_info->account_roles as $key => $val) {
-                $account_info->role = $val;
-            }
-            $admin_data['role_name'] = $account_info->role->role_name;
-        } else {
-            $admin_data['role_name'] = '角色未设置';
-        }
-        ZeroneRedis::create_company_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-        ZeroneRedis::create_company_menu_cache(1);//生成对应账号的商户系统菜单
-    }
 
 }
 ?>
