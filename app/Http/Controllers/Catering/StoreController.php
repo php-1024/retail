@@ -14,8 +14,10 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
-        return view('Catering/Store/branch_create',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $package_name = $request->package_name;         //套餐名称
+        $package_id = $request->package_id;             //套餐id
+        $package_program = Package::getList(['id'=>$package_id],0,'id','DESC');   //查询当前所选餐包含的程序
+        return view('Catering/Store/branch_create',['package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
 
     //分店店管理
