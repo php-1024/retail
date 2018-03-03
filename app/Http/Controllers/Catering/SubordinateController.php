@@ -187,7 +187,6 @@ class SubordinateController extends Controller{
                 //添加操作日志
                 DB::commit();
             } catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑下级人员失败，请检查', 'status' => '0']);
             }
@@ -285,7 +284,7 @@ class SubordinateController extends Controller{
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
         $status = $request->input('status');//当前用户的状态
-        return view('Proxy/Subordinate/subordinate_lock',['id'=>$id,'account'=>$account,'status'=>$status]);
+        return view('Catering/Subordinate/subordinate_lock',['id'=>$id,'account'=>$account,'status'=>$status]);
     }
     //冻结解冻下级人员
     public function subordinate_lock_check(Request $request){
@@ -300,19 +299,19 @@ class SubordinateController extends Controller{
                 Account::editAccount([['id',$id]],['status'=>'0']);
                 if($admin_data['is_super'] == 2){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统冻结了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统冻结了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
                 }
             }else{
                 Account::editAccount([['id',$id]],['status'=>'1']);
                 if($admin_data['is_super'] == 2){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统解冻了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统解冻了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
                 }
             }
             DB::commit();
@@ -327,54 +326,12 @@ class SubordinateController extends Controller{
     public function subordinate_delete(Request $request){
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
-        return view('Proxy/Subordinate/subordinate_delete',['id'=>$id,'account'=>$account]);
+        return view('Catering/Subordinate/subordinate_delete',['id'=>$id,'account'=>$account]);
     }
 
     //删除下级人员
     public function subordinate_delete_check(Request $request){
         echo "这里是删除下级人员";
-    }
-
-    //下级人员结构
-    public function subordinate_structure(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $admin_data['organization_id'];//当前组织ID，零壹管理平台组织只能为1
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$admin_data['parent_tree'].$admin_data['id'].',%']],0,'id','asc')->toArray();
-        $structure = $this->create_structure($list,$admin_data['id']);
-        return view('Proxy/Subordinate/subordinate_structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-    }
-    /*
-     * 递归生成人员结构的方法
-     * $list - 结构所有人员的无序列表
-     * $id - 上级ID
-     */
-    private function create_structure($list,$id){
-        $structure = '';
-        foreach($list as $key=>$val){
-            if($val['parent_id'] == $id) {
-                unset($list[$key]);
-                $val['sonlist'] = $this->create_structure($list, $val['id']);
-                //$arr[] = $val;
-                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
-                $structure .= '<div class="dd-handle">';
-                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
-                $structure .= '<span class="label label-info"><i class="icon-user"></i></span>';
-                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
-                if(!empty($val['account_roles'])){
-                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
-                }
-                $structure .= '</div>';
-                $son_menu = $this->create_structure($list, $val['id']);
-                if (!empty($son_menu)) {
-                    $structure .=  $son_menu;
-                }
-                $structure .= '</li></ol>';
-            }
-        }
-        return $structure;
     }
 }
 ?>
