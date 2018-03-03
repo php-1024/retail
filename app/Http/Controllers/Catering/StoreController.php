@@ -7,6 +7,7 @@ use App\Models\Organization;
 use App\Models\OrganizationBranchinfo;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 class StoreController extends Controller{
     //创建总分店
