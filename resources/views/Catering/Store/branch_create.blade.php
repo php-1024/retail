@@ -68,11 +68,11 @@
                                             <div class="btn-group" data-toggle="buttons">
                                                 @if($onebranch != 'true')
                                                     <label class="btn btn-sm btn-success active">
-                                                        <input type="radio" name="type" value="0" checked=""><i class="fa fa-check text-active"></i> 总店
+                                                        <input type="radio" name="type" value="0" checked="checked"><i class="fa fa-check text-active"></i> 总店
                                                     </label>
                                                 @else
                                                     <label class="btn btn-sm btn-info active" style="margin-left: 10px;">
-                                                        <input type="radio" name="type" value="1" checked=""><i class="fa fa-check text-active"></i> 分店
+                                                        <input type="radio" name="type" value="1" checked="checked"><i class="fa fa-check text-active"></i> 分店
                                                     </label>
                                                 @endif
                                             </div>
