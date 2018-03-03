@@ -25,9 +25,9 @@ class AccountController extends Controller{
         }
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(4, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(4,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
             $module_node_list = [];
@@ -91,7 +91,7 @@ class AccountController extends Controller{
                 OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了个人信息');//保存操作记录
             }else{
                 \ZeroneRedis::create_catering_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-店铺
-                OperationLog::addOperationLog('7',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
+                OperationLog::addOperationLog('4',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -148,7 +148,7 @@ class AccountController extends Controller{
 
                 }else{
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                     \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 DB::commit();
@@ -169,7 +169,7 @@ class AccountController extends Controller{
 
                     }else{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                        OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                        OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                         \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                     }
                     DB::commit();
@@ -228,7 +228,7 @@ class AccountController extends Controller{
                 if($admin_data['is_super'] == 2){
                     OperationLog::addOperationLog('1','1',$id,$route_name,'在店铺系统修改了登录密码');//保存操作记录-保存到零壹系统
                 }else{
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {

@@ -132,7 +132,7 @@ class LoginController extends Controller
                     }
                 }
             } else {
-                ErrorLog::addErrorTimes($ip, 7);
+                ErrorLog::addErrorTimes($ip, 4);
                 return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
             }
         } else {
