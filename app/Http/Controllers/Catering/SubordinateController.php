@@ -78,7 +78,7 @@ class SubordinateController extends Controller{
         $role_id = $request->input('role_id');//用户角色ID
         $module_node_ids = $request->input('module_node_ids');//用户权限节点
 
-        $key = config("app.proxy_encrypt_key");//获取加密盐
+        $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
@@ -110,13 +110,14 @@ class SubordinateController extends Controller{
                 }
                 if($admin_data['is_super'] == 2){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统添加了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '添加了下级人员失败，请检查', 'status' => '0']);
             }
