@@ -572,7 +572,10 @@ Route::group(['prefix'=>'branch'],function(){
 
     //商品管理
     Route::group(['prefix'=>'goods'],function(){
-        Route::get('category_add', 'Branch\GoodsController@category_add')->middleware('BranchCheck'); //商品管理-添加商品分类
+        Route::get('category_add', 'Branch\GoodsController@category_add')->middleware('BranchCheck');   //商品管理-添加商品分类
+        Route::get('category_list', 'Branch\GoodsController@category_list')->middleware('BranchCheck'); //商品管理-添加商品分类
+        Route::get('goods_add', 'Branch\GoodsController@goods_add')->middleware('BranchCheck');         //商品管理-添加商品分类
+        Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('BranchCheck');       //商品管理-添加商品分类
     });
 
     //异步提交数据组
