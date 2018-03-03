@@ -250,6 +250,15 @@ class AccountController extends Controller{
         return view('Branch/Account/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+    public function message_setting(Request $request)
+    {
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();                 //获取当前的页面路由
+        return view('Branch/Account/message_setting',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
 
 }
 ?>
