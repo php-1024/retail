@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationBranchinfo;
 use App\Models\Package;
@@ -82,7 +83,6 @@ class StoreController extends Controller{
             ];
             //在管理员表添加信息
             AccountInfo::addAccountInfo($accdatainfo);
-
             //添加操作日志
             if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在店铺理系统创建了店铺：'.$organization_name);    //保存操作记录
