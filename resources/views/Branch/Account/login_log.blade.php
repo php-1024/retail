@@ -41,13 +41,13 @@
                                 <div class="row wrapper">
                                     <label class="col-sm-1 control-label">时间范围</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm branchdate datepicker-input form-control" size="16"
+                                        <input class="input-sm datepicker-input form-control branchdate" size="16"
                                                type="text" name="time_st" value="{{$search_data['time_st']}}"
                                                data-date-format="yyyy-mm-dd">
                                     </div>
                                     <label class="col-sm-1 control-label">到</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm branchdate datepicker-input form-control" size="16"
+                                        <input class="input-sm datepicker-input form-control branchdate" size="16"
                                                type="text" name="time_nd" value="{{$search_data['time_nd']}}"
                                                data-date-format="yyyy-mm-dd">
                                     </div>
@@ -107,6 +107,7 @@
 <script src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Branch/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
+<script src="{{asset('public/Company/library/datepicker')}}/bootstrap-datepicker.js"></script>
 <script>
     $(function(){
         $('.branchdate').datepicker({
