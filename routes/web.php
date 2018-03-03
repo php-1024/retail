@@ -567,6 +567,10 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('login_log', 'Branch\AccountController@login_log')->middleware('BranchCheck');           //账户中心个人登录日志
     });
 
+    //收银台
+    Route::get('cashier', 'Branch\CashierController@cashier')->middleware('BranchCheck');   //收银台
+
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据

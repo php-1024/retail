@@ -57,7 +57,7 @@
                                                                 <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
                                                             </div>
                                                             <div class="col-sm-1">
-                                                                <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
+                                                                <button type="button" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -78,7 +78,7 @@
                                                             <tbody>
                                                             <tr>
                                                                 <td>1</td>
-                                                                <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                                                <td><img src="{{asset('public/Branch/images/m1.jpg')}}" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                                                 <td>100020</td>
                                                                 <td>时光取名叫无心</td>
                                                                 <td>13123456789</td>
@@ -92,7 +92,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
-                                                                <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                                                <td><img src="{{asset('public/Branch/images/m1.jpg')}}" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                                                 <td>100020</td>
                                                                 <td>时光取名叫无心</td>
                                                                 <td>13123456789</td>
@@ -106,7 +106,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
-                                                                <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                                                <td><img src="{{asset('public/Branch/images/m1.jpg')}}" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                                                 <td>100020</td>
                                                                 <td>时光取名叫无心</td>
                                                                 <td>13123456789</td>
@@ -301,7 +301,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -322,7 +322,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -343,7 +343,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -364,7 +364,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -385,7 +385,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -406,7 +406,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 </tbody>
@@ -446,7 +446,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -467,7 +467,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -488,7 +488,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -509,7 +509,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -530,7 +530,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -551,7 +551,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs"  type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 </tbody>
