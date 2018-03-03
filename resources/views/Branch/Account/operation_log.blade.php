@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
+    <link rel="stylesheet" href="{{asset('public/Branch/library/datepicker')}}/datepicker.css">
+
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
@@ -98,7 +100,18 @@
 <script src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Branch/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
+<script src="{{asset('public/Company/library/datepicker')}}/bootstrap-datepicker.js"></script>
 <script>
+    $(function(){
+        $('.branchdate').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+    });
     function searchFormCheck(){
         var url = $('#searchForm').attr('action');
         var data = $('#searchForm').serialize();
