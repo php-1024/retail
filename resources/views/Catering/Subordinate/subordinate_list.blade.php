@@ -99,43 +99,14 @@
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary" onclick="getAuthorizeForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
                                             @if($val->status=='1')
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
                                             @else
-                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
                                             <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                     @endforeach
-                                    <tr>
-                                        <td>2</td>
-                                        <td>100022</td>
-                                        <td>
-                                            财务管理员
-                                        </td>
-                                        <td>
-                                            <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
-                                        </td>
-                                        <td>
-                                            <label class="label label-danger">未绑定</label>
-                                        </td>
-                                        <td>
-                                            <label class="label label-danger">未绑定</label>
-                                        </td>
-                                        <td>
-                                            13123456789
-                                        </td>
-                                        <td>
-                                            <label class="label label-warning">冻结</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-success"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -143,36 +114,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                        {{ $list->appends($search_data)->links() }}
                                     </div>
                                 </div>
                             </footer>
