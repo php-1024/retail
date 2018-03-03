@@ -26,6 +26,7 @@ class OrganizationBranchinfo extends Model{
         $program->proxy_owner = $param['branchinfo_owner'];//分店负责人姓名
         $program->proxy_owner_idcard = $param['branchinfo_owner_idcard'];//分店负责人身份证
         $program->proxy_owner_mobile = $param['branchinfo_mobile'];//分店负责人手机号
+        $program->type = $param['type'];//0为总店 1为分店
         $program->save();
         return $program->id;
     }
