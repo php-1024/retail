@@ -49,7 +49,6 @@ class CateringCheck{
                 /****下级人员管理--添加组****/
             case "catering/subordinate/subordinate_add":   //下级人员添加
             case "catering/subordinate/subordinate_list":  //下级人员列表
-            case "catering/subordinate/subordinate_structure"://下级人员结构
             case "catering/subordinate/quick_rule":        //添加下级人员快速授权
 
                 /****下级人员管理--添加组****/
