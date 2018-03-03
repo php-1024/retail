@@ -3,7 +3,6 @@
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
     <input type="hidden" id="quick_rule_url" value="{{ url('catering/ajax/quick_rule') }}">
-    <input type="hidden" id="selected_rule_url" value="{{ url('catering/ajax/selected_rule') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -30,7 +29,6 @@
                         </select>
                     </div>
                     <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
-                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_selected_rule();"><i class="fa fa-repeat"></i>&nbsp;&nbsp;恢复默认</button></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -69,18 +67,6 @@
             $('#module_node_box').html(response);
         });
     }
-
-    //获取默认已经选择了的程序节点
-    function get_selected_rule(){
-        var url =  $('#selected_rule_url').val();
-        var token = $('#_token').val();
-        var id = $("#id").val();
-        var data = {'_token':token,'id':id}
-        $.post(url,data,function(response){
-            $('#module_node_box').html(response);
-        });
-    }
-
     //提交表单
     function postForm() {
         var target = $("#currentForm");
