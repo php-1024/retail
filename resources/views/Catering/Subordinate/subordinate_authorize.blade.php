@@ -1,59 +1,87 @@
-<form method="post" role="form" id="currentForm" action="{{ url('catering/ajax/subordinate_authorize_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/subordinate_authorize_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
     <input type="hidden" id="quick_rule_url" value="{{ url('catering/ajax/quick_rule') }}">
     <input type="hidden" id="selected_rule_url" value="{{ url('catering/ajax/selected_rule') }}">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content animated fadeIn">
+        <div class="modal-content">
             <div class="modal-header">
-                修改用户
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">编辑用户基本信息</h4>
             </div>
             <div class="modal-body">
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">用户账号</label>
-                    <div class="col-sm-10">{{ $info->account }}</div>
-                </div>
-
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">权限角色</label>
-                    <div class="col-sm-3">
-                        <select class="form-control m-b" name="role_id" id="role_id">
-                            <option value="0">请选择</option>
-                            @foreach($role_list as $k=>$v)
-                                <option @if($info->account_role == $v->id) selected @endif value="{{ $v->id }}">{{ $v->role_name }}</option>
-                            @endforeach
-                        </select>
+                <form class="form-horizontal" method="get">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户账号</label>
+                        <div class="col-sm-3">{{ $info->account }}</div>
+                        <div class="col-sm-2"><button type="button" class="btn btn-success"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button></div>
                     </div>
-                    <div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_quick_rule('#role_id');"><i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;快速授权</button></div>
-                    {{--<div class="col-sm-2"><button type="button" class="btn btn-primary" onclick="get_selected_rule();"><i class="fa fa-repeat"></i>&nbsp;&nbsp;恢复默认</button></div>--}}
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">权限角色</label>
+                        <div class="col-sm-3">
+                            <select class="form-control m-b" name="account">
+                                <option value="0">请选择</option>
+                                @foreach($role_list as $k=>$v)
+                                    <option @if($info->account_role == $v->id) selected @endif value="{{ $v->id }}">{{ $v->role_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-2"><button type="button" class="btn btn-success" onclick="get_quick_rule('#role_id');"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button></div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                <div class="form-group" id="module_node_box"></div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
+                    <div class="form-group" id="module_node_box">
+                        {{--<label class="col-sm-2 control-label">用户权限</label>--}}
+                        {{--<div class="col-sm-10">--}}
+                            {{--<div class="panel-body">--}}
+                                {{--<div>--}}
+                                    {{--<label class="i-checks">--}}
+                                        {{--<input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                                {{--<div>--}}
+                                    {{--<label class="i-checks">--}}
+                                        {{--<input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑--}}
+                                    {{--</label>--}}
+                                    {{--&nbsp;&nbsp;--}}
+                                    {{--<label class="i-checks">--}}
+                                        {{--<input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询--}}
+                                    {{--</label>--}}
+                                    {{--&nbsp;&nbsp;--}}
+                                    {{--<label class="i-checks">--}}
+                                        {{--<input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加--}}
+                                    {{--</label>--}}
+                                    {{--&nbsp;&nbsp;--}}
+                                    {{--<label class="i-checks">--}}
+                                        {{--<input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                                {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">安全密码</label>
-                    <div class="col-sm-10"><input type="password" class="form-control" id="safe_password" name="safe_password"></div>
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
+
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">安全密码</label>
+                        <div class="col-sm-10"><input type="text" class="form-control"  name="safe_password"></div>
+                    </div>
+
+                </form>
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="return postForm();">保存</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-success" type="button" id="addBtn" onclick="return postForm();">确定</button>
             </div>
         </div>
     </div>
 </form>
+
+
+
 <script>
     $(document).ready(function() {
         get_selected_rule();
