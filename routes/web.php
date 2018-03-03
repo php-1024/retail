@@ -470,60 +470,66 @@ Route::group(['prefix'=>'api'],function() {
 });
 /********************商户管理系统*************************/
 
-/**********************总店系统*********************/
+/**********************店铺系统*********************/
 Route::group(['prefix'=>'catering'],function(){
 
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Catering\LoginController@display')->middleware('CateringCheck');                           //登录页面路由
-        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');                                            //验证码路由
+        Route::get('/', 'Catering\LoginController@display')->middleware('CateringCheck');                               //登录页面路由
+        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');                                                //验证码路由
     });
 
-    Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                //系统首页
-    Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');              //超级管理员切换服务商
-    Route::get('quit', 'Catering\ShopController@quit');                                                             //退出系统
-    Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                  //超级管理员选择登入的服务商
+    Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                    //系统首页
+    Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');                  //超级管理员切换服务商
+    Route::get('quit', 'Catering\ShopController@quit');                                                                 //退出系统
+    Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                      //超级管理员选择登入的服务商
 
 
     //账号中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Catering\AccountController@profile')->middleware('CateringCheck');                     //账号信息
-        Route::get('password', 'Catering\AccountController@password')->middleware('CateringCheck');                   //登入密码修改
-        Route::get('safe_password', 'Catering\AccountController@safe_password')->middleware('CateringCheck');         //安全密码设置
-        Route::get('message_setting', 'Catering\AccountController@message_setting')->middleware('CateringCheck');     //消息推送设置
-        Route::get('operation_log', 'Catering\AccountController@operation_log')->middleware('CateringCheck');         //操作日记
-        Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CateringCheck');                 //登入日记
+        Route::get('profile', 'Catering\AccountController@profile')->middleware('CateringCheck');                       //账号信息
+        Route::get('password', 'Catering\AccountController@password')->middleware('CateringCheck');                     //登入密码修改
+        Route::get('safe_password', 'Catering\AccountController@safe_password')->middleware('CateringCheck');           //安全密码设置
+        Route::get('message_setting', 'Catering\AccountController@message_setting')->middleware('CateringCheck');       //消息推送设置
+        Route::get('operation_log', 'Catering\AccountController@operation_log')->middleware('CateringCheck');           //操作日记
+        Route::get('login_log', 'Catering\AccountController@login_log')->middleware('CateringCheck');                   //登入日记
     });
 
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
-        Route::get('role_add','Catering\RoleController@role_add')->middleware('CateringCheck');                       //添加权限角色
-        Route::get('role_list','Catering\RoleController@role_list')->middleware('CateringCheck');                     //权限角色列表
+        Route::get('role_add','Catering\RoleController@role_add')->middleware('CateringCheck');                         //添加权限角色
+        Route::get('role_list','Catering\RoleController@role_list')->middleware('CateringCheck');                       //权限角色列表
     });
 
 
     //下属管理--添加组
     Route::group(['prefix'=>'subordinate'],function(){
-        Route::get('subordinate_add','Catering\SubordinateController@subordinate_add')->middleware('CateringCheck');//添加下级人员
-        Route::get('subordinate_list','Catering\SubordinateController@subordinate_list')->middleware('CateringCheck');//下级人员列表
+        Route::get('subordinate_add','Catering\SubordinateController@subordinate_add')->middleware('CateringCheck');    //添加下级人员
+        Route::get('subordinate_list','Catering\SubordinateController@subordinate_list')->middleware('CateringCheck');  //下级人员列表
+    });
+
+    //总分店管理
+    Route::group(['prefix'=>'store'],function(){
+        Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //添加下级人员
+        Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //下级人员列表
     });
 
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');          //提交登录数据
+        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');             //提交登录数据
 
         //账号中心
-        Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');     //提交登录数据
-        Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheckAjax');     //安全密码数据提交
-        Route::post('password_check','Catering\AccountController@password_check')->middleware('CateringCheckAjax');   //安全密码数据提交
+        Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');       //提交登录数据
+        Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheckAjax');//安全密码数据提交
+        Route::post('password_check','Catering\AccountController@password_check')->middleware('CateringCheckAjax');     //安全密码数据提交
 
         //权限角色
-        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');;////提交添加权限角色数据
-        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');//编辑权限角色弹出框
-        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheckAjax');//编辑权限角色弹出框
-        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheckAjax');;//删除权限角色弹出安全密码框
-        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheckAjax');//删除权限角色弹出安全密码框
+        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');        //提交添加权限角色数据
+        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');                  //编辑权限角色弹出框
+        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheckAjax');      //编辑权限角色弹出框
+        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheckAjax');              //删除权限角色弹出安全密码框
+        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheckAjax');  //删除权限角色弹出安全密码框
 
         //下属管理--添加组
         Route::post('subordinate_add_check','Catering\SubordinateController@subordinate_add_check')->middleware('CateringCheckAjax');//添加下级人员数据提交
@@ -542,7 +548,7 @@ Route::group(['prefix'=>'catering'],function(){
 
     });
 });
-/**********************总店系统*********************/
+/**********************店铺系统*********************/
 
 
 /**********************餐饮分店系统*********************/

@@ -31,10 +31,6 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "proxy/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
-                $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
-                return self::format_response($re,$next);
-                break;
             case "catering/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re,$next);
@@ -104,20 +100,6 @@ class CateringCheckAjax
         }
     }
 
-    //检测登录和权限和安全密码和个人修改信息
-    public function checkLoginAndRuleAndSafeAndAccountInfo($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAccountInfo($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
     //检测登录和权限和安全密码和登入密码修改信息
     public function checkLoginAndRuleAndSafeAndPassword($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -180,21 +162,6 @@ class CateringCheckAjax
         }
     }
 
-
-    //检测是否登录 权限 安全密码 数字不能为空
-    public function checkLoginAndRuleAndSafeAndAssets($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAssets($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
     //检测是否登录 权限 安全密码--权限角色添加
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -464,18 +431,6 @@ class CateringCheckAjax
         }
         return self::res(1,$request);
     }
-
-
-    //检测商户编辑表信息
-    public function checkAssets($request){
-        $num = $request->input('num');
-        if (preg_match("/^[1-9]{1}\d{0,9}$/",$num)){
-            return self::res(1, $request);
-        }else{
-            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
-        }
-    }
-
 
     //检测登录提交数据
     public function checkID($request)
