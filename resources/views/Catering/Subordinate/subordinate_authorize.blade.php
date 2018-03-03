@@ -14,7 +14,7 @@
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户账号</label>
-                        <div class="col-sm-3">{{ $info->account }}</div>
+                        <div class="col-sm-3"><span style="margin-top: 10px;">{{ $info->account }}</span></div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
