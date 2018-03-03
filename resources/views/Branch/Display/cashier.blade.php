@@ -343,7 +343,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
+                                                                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择</button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
