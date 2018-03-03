@@ -168,13 +168,6 @@
 <script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
 
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-
-
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
         get_quick_rule('#role_id');
