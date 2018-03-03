@@ -66,7 +66,7 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">类型</label>
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
-                                                @if($onebranch == 'true')
+                                                @if($onebranch != 'true')
                                                     <label class="btn btn-sm btn-success active">
                                                         <input type="radio" name="type" value="0" checked=""><i class="fa fa-check text-active"></i> 总店
                                                     </label>
