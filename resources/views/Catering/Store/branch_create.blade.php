@@ -116,7 +116,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="" name="repassword">
+                                            <input type="text" class="form-control" id="input-id-1" value="" name="re_password">
                                         </div>
                                     </div>
 
