@@ -74,35 +74,39 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>1</td>
-                                        <td>100021</td>
-                                        <td>
-                                            财务管理员
-                                        </td>
+                                        <td>{{ $val->id }}</td>
+                                        <td>{{ $val->account }}</td>
+                                        <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
                                         <td>
                                             <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
                                         </td>
                                         <td>
                                             时光取名叫无心
                                         </td>
+                                        <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@else <label class="label label-danger">未绑定</label> @endif</td>
+                                        <td>{{ $val->mobile }}</td>
                                         <td>
-                                            李健瑚
+                                            @if($val->status == '1')
+                                                <label class="label label-success">正常</label>
+                                            @else
+                                                <label class="label label-warning">已冻结</label>
+                                            @endif
                                         </td>
+                                        <td>{{ $val->created_at }}</td>
                                         <td>
-                                            13123456789
-                                        </td>
-                                        <td>
-                                            <label class="label label-success">正常</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
-                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary" onclick="getAuthorizeForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
+                                            @if($val->status=='1')
+                                            <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @else
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
+                                            @endif
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     <tr>
                                         <td>2</td>
                                         <td>100022</td>
