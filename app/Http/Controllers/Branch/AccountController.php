@@ -216,7 +216,7 @@ class AccountController extends Controller{
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
-            ['program_id','3'], //查询program_id(3)商户管理系统的操作日志
+            ['program_id','8'], //查询program_id(3)商户管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
