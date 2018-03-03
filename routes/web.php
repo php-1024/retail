@@ -527,7 +527,7 @@ Route::group(['prefix'=>'catering'],function(){
 
         //下属管理--添加组
         Route::post('subordinate_add_check','Catering\SubordinateController@subordinate_add_check')->middleware('CateringCheckAjax');//添加下级人员数据提交
-        Route::post('subordinate_edit','Proxy\Catering@subordinate_edit')->middleware('CateringCheckAjax');//下级人员列表编辑用户弹出框
+        Route::post('subordinate_edit','Catering\SubordinateController@subordinate_edit')->middleware('CateringCheckAjax');//下级人员列表编辑用户弹出框
         Route::post('subordinate_edit_check','Catering\SubordinateController@subordinate_edit_check')->middleware('CateringCheckAjax');//下级人员列表编辑功能提交
         Route::post('subordinate_authorize','Catering\SubordinateController@subordinate_authorize')->middleware('CateringCheckAjax');//下级人员列表用户授权显示页面
         Route::post('subordinate_authorize_check','Catering\SubordinateController@subordinate_authorize_check')->middleware('CateringCheckAjax');//下级人员列表用户授权功能提交页面
