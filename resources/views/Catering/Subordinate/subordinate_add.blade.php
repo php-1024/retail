@@ -47,7 +47,9 @@
                                 添加下级人员
                             </header>
                             <div class="panel-body">
-                                <form method="get" class="form-horizontal">
+                                <form  method="post" class="form-horizontal" id="currentForm" action="{{ url('catering/ajax/subordinate_add_check') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" id="quick_rule_url" value="{{ url('catering/ajax/quick_rule') }}">
                                     <div id="rootwizard">
                                         <ul class="bwizard-steps">
                                             <li class="active"><a href="#tab1" data-toggle="tab"><span style="color:#999;" class="label">1</span> 填写基础资料</a></li>
@@ -59,22 +61,22 @@
 
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">手机号码</label>
-                                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile"></div>
                                                 </div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">用户密码</label>
-                                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                    <div class="col-sm-10"><input type="text" class="form-control" name="password"></div>
                                                 </div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">重复密码</label>
-                                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                    <div class="col-sm-10"><input type="text" class="form-control" name="repassword"></div>
                                                 </div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">真实姓名</label>
-                                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                    <div class="col-sm-10"><input type="text" class="form-control" name="realname"></div>
                                                 </div>
 
                                             </div>
@@ -83,14 +85,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">权限角色</label>
                                                     <div class="col-sm-3">
-                                                        <select class="form-control m-b" name="account">
-                                                            <option>订单管理员</option>
-                                                            <option>装修员</option>
-                                                            <option>客服人员</option>
-                                                            <option>总分店管理员</option>
+                                                        <select class="form-control m-b" name="role_id" id="role_id">
+                                                            @foreach($role_list as $k=>$v)
+                                                                <option value="{{ $v->id }}">{{ $v->role_name }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="col-sm-2"><button type="button" class="btn btn-success"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button></div>
+                                                    <div class="col-sm-2"><button type="button" class="btn btn-success" onclick="get_quick_rule('#role_id');"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button></div>
                                                 </div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>
 
@@ -122,101 +123,6 @@
                                                             </div>
                                                             <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                                                </label>
-                                                            </div>
-                                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                                                </label>
-                                                            </div>
-                                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                                                </label>
-                                                            </div>
-                                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
-                                                                </label>
-                                                                &nbsp;&nbsp;
-                                                                <label class="i-checks">
-                                                                    <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
-                                                                </label>
-                                                            </div>
-                                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +130,7 @@
 
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">安全密码</label>
-                                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                                    <div class="col-sm-10"><input type="text" class="form-control" name="safe_password"></div>
                                                 </div>
 
                                             </div>
@@ -234,14 +140,13 @@
                                                 <li class="previous"><button type="button" class="btn btn-success"><i class="icon-arrow-left"></i>&nbsp;&nbsp;上一步</button></li>
 
                                                 <li class="next disabled hidden"><button type="button" class="btn btn-success">下一步&nbsp;&nbsp;<i class="icon-arrow-right"></i></button></li>
-                                                <li class="finish"><button type="button" id="addBtn" class="btn btn-success">完成&nbsp;&nbsp;<i class="icon-arrow-right"></i></button></li>
+                                                <li class="finish"><button type="button" id="addBtn" class="btn btn-success" onclick="return postForm();">完成&nbsp;&nbsp;<i class="icon-arrow-right"></i></button></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </section>
-
                     </section>
                 </section>
             </section>
