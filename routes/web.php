@@ -531,6 +531,9 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('subordinate_edit_check','Catering\SubordinateController@subordinate_edit_check')->middleware('CateringCheckAjax');//下级人员列表编辑功能提交
         Route::post('subordinate_authorize','Catering\SubordinateController@subordinate_authorize')->middleware('CateringCheckAjax');//下级人员列表用户授权显示页面
         Route::post('subordinate_authorize_check','Catering\SubordinateController@subordinate_authorize_check')->middleware('CateringCheckAjax');//下级人员列表用户授权功能提交页面
+        Route::post('subordinate_delete','Catering\SubordinateController@subordinate_delete')->middleware('CateringCheckAjax');//下级人员列表删除用户显示页面
+        Route::post('subordinate_lock','Catering\SubordinateController@subordinate_lock')->middleware('CateringCheckAjax');//冻结下级人员显示页面
+        Route::post('subordinate_lock_check','Catering\SubordinateController@subordinate_lock_check')->middleware('CateringCheckAjax');//冻结下级人员功能提交
 
         Route::post('quick_rule','Catering\SubordinateController@quick_rule')->middleware('CateringCheckAjax');//添加下级人员快速授权
         Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheckAjax');//下级人员已经选中的权限出框
