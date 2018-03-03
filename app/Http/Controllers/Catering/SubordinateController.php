@@ -202,8 +202,8 @@ class SubordinateController extends Controller{
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        $role_list = OrganizationRole::getList([['program_id',2],['created_by',$admin_data['id']]],0,'id');
-        return view('Proxy/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
+        $role_list = OrganizationRole::getList([['program_id',7],['created_by',$admin_data['id']]],0,'id');
+        return view('Catering/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
     //获取下级人员当前已经选取的节点
@@ -212,9 +212,9 @@ class SubordinateController extends Controller{
         $id = $request->input('id');
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
 
             $modules = [];
             $nodes = [];
@@ -236,12 +236,12 @@ class SubordinateController extends Controller{
         }
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
-        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(2,$id);//获取要操作的用户有的节点
+        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(7,$id);//获取要操作的用户有的节点
         foreach($selected_node_list as $key=>$val){
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
-        return view('Proxy/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
+        return view('Catering/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
 
