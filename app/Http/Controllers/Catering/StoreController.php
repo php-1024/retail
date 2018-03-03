@@ -73,10 +73,10 @@ class StoreController extends Controller{
                 'mobile'           =>$mobile,
             ];
             //在管理员表添加信息
-            $accout_id = Account::addAccount($accdata);
+            $account_id = Account::addAccount($accdata);
 
             $accdatainfo = [
-                'accout_id'        =>$accout_id,
+                'account_id'        =>$account_id,
                 'realname'         =>$realname,
                 'idcard'           =>'',
             ];
