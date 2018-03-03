@@ -84,7 +84,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">分店名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control"  name="organization_name" id="input-id-1" value="刘记鸡煲王">
+                                            <input type="text" class="form-control"  name="organization_name" id="input-id-1" value="">
                                         </div>
                                     </div>
 
