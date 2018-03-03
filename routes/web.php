@@ -570,6 +570,10 @@ Route::group(['prefix'=>'branch'],function(){
     //收银台
     Route::get('cashier', 'Branch\CashierController@cashier')->middleware('BranchCheck');   //收银台
 
+    //商品管理
+    Route::group(['prefix'=>'goods'],function(){
+        Route::get('category_add', 'Branch\GoodsController@category_add')->middleware('BranchCheck'); //商品管理-添加商品分类
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
