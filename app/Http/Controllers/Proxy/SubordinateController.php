@@ -217,7 +217,7 @@ class SubordinateController extends Controller{
         if($account_id == $admin_data['id']) {
             $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(1,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
 
             $modules = [];
             $nodes = [];
