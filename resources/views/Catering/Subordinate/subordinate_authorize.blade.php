@@ -59,7 +59,6 @@
         var url =  $('#quick_rule_url').val();
         var token = $('#_token').val();
         var role_id = $(obj).val();
-        alert(role_id);
         var data = {'_token':token,'role_id':role_id}
         $.post(url,data,function(response){
             $('#module_node_box').html(response);
