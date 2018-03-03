@@ -501,6 +501,14 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('role_list','Catering\RoleController@role_list')->middleware('CateringCheck');                     //权限角色列表
     });
 
+
+    //下属管理--添加组
+    Route::group(['prefix'=>'subordinate'],function(){
+        Route::get('subordinate_add','Catering\SubordinateController@subordinate_add')->middleware('CateringCheck');//添加下级人员
+        Route::get('subordinate_list','Catering\SubordinateController@subordinate_list')->middleware('CateringCheck');//下级人员列表
+    });
+
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');          //提交登录数据
