@@ -59,10 +59,6 @@ class Organization extends Model{
     public static function getOneProxy($where){
         return self::with('warzoneProxy','organizationbranchinfo')->where($where)->first();
     }
-//获取单条信息-服务商
-    public static function getOneBranch($where){
-        return self::with('organizationproxyinfo')->where($where)->first();
-    }
     //获取单条信息-总店
     public static function getOneCatering($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
@@ -147,6 +143,9 @@ class Organization extends Model{
     public static function getCompany($where,$paginate,$orderby,$sort='DESC'){
         return self::with('organizationCompanyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-
+    //获取分页数据-分店
+    public static function getbranch($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('organizationBranchinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
 }
 ?>
