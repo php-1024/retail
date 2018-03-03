@@ -9,11 +9,12 @@ class StoreController extends Controller{
     //创建总分店
     public function branch_create(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-//        Organization::getOneBranch();
+        $organization_id = $admin_data['organization_id'];
+        $onebranch = Organization::getOneBranch([['parent_id',$organization_id]]);
+        dump($onebranch);
         $package_program = Package::getList(['id'=>1],0,'id','DESC');   //查询当前所选餐包含的程序 1为餐饮系统
         return view('Catering/Store/branch_create',['package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
