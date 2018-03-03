@@ -56,7 +56,7 @@
 </form>
 <script>
     $(document).ready(function() {
-        get_quick_rule();
+        get_selected_rule();
     });
 
     //获取上级程序节点
