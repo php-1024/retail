@@ -58,7 +58,7 @@ class SubordinateController extends Controller{
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
         if($role_id <> '0'){
-            $node_list = ProgramModuleNode::getRoleModuleNodes(7,$role_id);//获取当前角色拥有权限的模块和节点
+            $node_list = ProgramModuleNode::getRoleModuleNodes(4,$role_id);//获取当前角色拥有权限的模块和节点
             foreach($node_list as $key=>$val){
                 $selected_modules[] = $val->module_id;
                 $selected_nodes[] = $val->node_id;
@@ -113,7 +113,7 @@ class SubordinateController extends Controller{
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -182,7 +182,7 @@ class SubordinateController extends Controller{
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统编辑了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 }
                 //添加操作日志
                 DB::commit();
@@ -202,7 +202,7 @@ class SubordinateController extends Controller{
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        $role_list = OrganizationRole::getList([['program_id',7],['created_by',$admin_data['id']]],0,'id');
+        $role_list = OrganizationRole::getList([['program_id',4],['created_by',$admin_data['id']]],0,'id');
         return view('Catering/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
@@ -212,9 +212,9 @@ class SubordinateController extends Controller{
         $id = $request->input('id');
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(4, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(4,$admin_data['id']);//获取当前用户具有权限的节点
 
             $modules = [];
             $nodes = [];
@@ -236,7 +236,7 @@ class SubordinateController extends Controller{
         }
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
-        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(7,$id);//获取要操作的用户有的节点
+        $selected_node_list = ProgramModuleNode::getAccountModuleNodes(4,$id);//获取要操作的用户有的节点
         foreach($selected_node_list as $key=>$val){
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
@@ -270,7 +270,7 @@ class SubordinateController extends Controller{
             }
             AccountNode::where('account_id', $id)->whereNotIn('node_id', $module_node_ids)->forceDelete();
             //添加操作日志
-            OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员的授权：'.$account);//保存操作记录
+            OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员的授权：'.$account);//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
@@ -302,7 +302,7 @@ class SubordinateController extends Controller{
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统冻结了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
                 }
             }else{
                 Account::editAccount([['id',$id]],['status'=>'1']);
@@ -311,7 +311,7 @@ class SubordinateController extends Controller{
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统解冻了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
                 }
             }
             DB::commit();
