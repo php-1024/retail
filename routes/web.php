@@ -539,9 +539,8 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //账号中心-账户信息
         Route::get('safe_password', 'Branch\AccountController@safe_password')->middleware('BranchCheck');//安全密码
         Route::get('password', 'Branch\AccountController@password')->middleware('BranchCheck');          //登录密码页面
-//
+        Route::get('operation_log', 'Branch\AccountController@operation_log')->middleware('BranchCheck');   //账户中心个人操作日志
 //        Route::get('profile', 'Company\AccountcenterController@profile')->middleware('CompanyCheck');               //安全密码
-//        Route::get('operation_log', 'Company\AccountcenterController@operation_log')->middleware('CompanyCheck');   //账户中心个人操作日志
 //        Route::get('login_log', 'Company\AccountcenterController@login_log')->middleware('CompanyCheck');           //账户中心个人登录日志
     });
 
