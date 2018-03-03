@@ -23,69 +23,94 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('Branch/Public/Nav')
-        <!-- /.aside -->
+            @include('Branch/Public/Nav')
+            <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">登录日志</h3>
+                            <h3 class="m-b-none">消息接受设置</h3>
                         </div>
-                        <section class="panel panel-default">
-                            <header class="panel-heading">
-                                登录日志列表
-                            </header>
-                            <form method="get" class="form-horizontal" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
-                                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <div class="row wrapper">
-                                    <label class="col-sm-1 control-label">时间范围</label>
-                                    <div class="col-sm-2">
-                                        <input class="input-sm datepicker-input form-control zerodate" size="16"
-                                               type="text" name="time_st" value="{{$search_data['time_st']}}"
-                                               data-date-format="yyyy-mm-dd">
-                                    </div>
-                                    <label class="col-sm-1 control-label">到</label>
-                                    <div class="col-sm-2">
-                                        <input class="input-sm datepicker-input form-control zerodate" size="16"
-                                               type="text" name="time_nd" value="{{$search_data['time_nd']}}"
-                                               data-date-format="yyyy-mm-dd">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="table-responsive">
-                                <table class="table table-striped b-t b-light">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>登录IP</th>
-                                        <th>登录地址</th>
-                                        <th>登录时间</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($login_log_list as $key=>$val)
-                                        <tr>
-                                            <td>{{  $val->accounts->id }}</td>
-                                            <td>{{  long2ip($val->ip) }}</td>
-                                            <td>{{  $val->ip_position }}</td>
-                                            <td>{{  $val->created_at }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <footer class="panel-footer">
-                                <div class="row">
 
-                                    <div class="col-sm-12 text-right text-center-xs">
-                                        {{ $login_log_list->links() }}
+                        <section class="panel panel-default">
+
+                            <header class="panel-heading font-bold">
+                                消息接受设置
+                            </header>
+                            <div class="panel-body">
+                                <form class="form-horizontal" method="get">
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户关注消息推送</label>
+                                        <div class="col-sm-10">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                            </footer>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户下单消息推送</label>
+                                        <div class="col-sm-10">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户付款消息推送</label>
+                                        <div class="col-sm-10 ">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">订单完成消息推送</label>
+                                        <div class="col-sm-10">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户充值消息推送</label>
+                                        <div class="col-sm-10">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        </div>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12 col-sm-offset-6">
+
+                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                        </div>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                </form>
+                            </div>
                         </section>
                     </section>
                 </section>
