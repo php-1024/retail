@@ -2,19 +2,11 @@
 namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\OrganizationRole;
-use App\Models\Module;
-use App\Models\ProgramModuleNode;
-use App\Models\Account;
-use App\Models\AccountNode;
-use App\Models\AccountInfo;
-use App\Models\RoleAccount;
-use App\Models\OperationLog;
 use Session;
 class SubscriptionController extends Controller{
     //公众号设置
     public function subscription_setting(Request $request){
+        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
