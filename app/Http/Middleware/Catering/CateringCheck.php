@@ -58,7 +58,7 @@ class CateringCheck{
             case "catering/subordinate/subordinate_list":   //下级人员列表
             case "catering/subordinate/quick_rule":         //添加下级人员快速授权
             /****下级人员管理--添加组****/
-                
+
             /****总分店管理****/
             case "catering/store/branch_create":            //创建总分店
             case "catering/store/branch_list":              //总分店管理
