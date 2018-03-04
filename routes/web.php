@@ -500,7 +500,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('subscription_setting', 'Catering\SubscriptionController@subscription_setting')->middleware('CateringCheck');      //公众号设置
         Route::get('subscription_material', 'Catering\SubscriptionController@subscription_material')->middleware('CateringCheck');    //图文素材
         Route::get('subscription_message', 'Catering\SubscriptionController@subscription_message')->middleware('CateringCheck');      //消息管理
-        Route::get('subscription_menu', 'Catering\SubscriptionController@subscription_menutting')->middleware('CateringCheck');       //菜单管理
+        Route::get('subscription_menu', 'Catering\SubscriptionController@subscription_menu')->middleware('CateringCheck');       //菜单管理
     });
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
