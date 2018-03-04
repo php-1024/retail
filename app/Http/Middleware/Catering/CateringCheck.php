@@ -41,6 +41,13 @@ class CateringCheck{
             case "catering/account/login_log":              //登入日记
             /****账号中心****/
 
+            /****公众号管理****/
+            case "catering/subscription/subscription_setting":  //操作日记
+            case "catering/subscription/subscription_material": //图文素材
+            case "catering/subscription/subscription_message":  //消息管理
+            case "catering/subscription/subscription_menu":     //菜单管理
+            /****公众号管理****/
+
             /****下属管理--权限角色****/
             case "catering/role/role_add":                  //权限角色添加
             case "catering/role/role_list":                 //权限角色列表
@@ -51,13 +58,11 @@ class CateringCheck{
             case "catering/subordinate/subordinate_list":   //下级人员列表
             case "catering/subordinate/quick_rule":         //添加下级人员快速授权
             /****下级人员管理--添加组****/
-
-
-
-            /****下辖商户管理****/
-            case "catering/store/branch_create":            //商户注册列表
-            case "catering/store/branch_list":              //商户列表
-            /****下辖商户管理****/
+                
+            /****总分店管理****/
+            case "catering/store/branch_create":            //创建总分店
+            case "catering/store/branch_list":              //总分店管理
+            /****总分店管理****/
 
                 $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
