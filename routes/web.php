@@ -497,10 +497,10 @@ Route::group(['prefix'=>'catering'],function(){
 
     //公众号管理
     Route::group(['prefix'=>'subscription'],function(){
-        Route::get('subscription_setting', 'Subscription\AccountController@profile')->middleware('CateringCheck');      //公众号设置
-        Route::get('subscription_material', 'Subscription\AccountController@password')->middleware('CateringCheck');    //图文素材
-        Route::get('subscription_message', 'Subscription\AccountController@safe_password')->middleware('CateringCheck');//消息管理
-        Route::get('subscription_menu', 'Subscription\AccountController@message_setting')->middleware('CateringCheck'); //菜单管理
+        Route::get('subscription_setting', 'Subscription\SubscriptionController@profile')->middleware('CateringCheck');      //公众号设置
+        Route::get('subscription_material', 'Subscription\SubscriptionController@password')->middleware('CateringCheck');    //图文素材
+        Route::get('subscription_message', 'Subscription\SubscriptionController@safe_password')->middleware('CateringCheck');//消息管理
+        Route::get('subscription_menu', 'Subscription\SubscriptionController@message_setting')->middleware('CateringCheck'); //菜单管理
     });
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
