@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8"/>
     <title>角色列表 | 零壹云管理平台 | 总分店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch/library')}}/jPlayer/jplayer.flat.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css"/>
-    <link href="{{asset('public/Branch/library')}}/sweetalert/sweetalert.css" rel="stylesheet"/>
-    <link href="{{asset('public/Branch/library')}}/iCheck/css/custom.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{asset('public/Branch/library')}}/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Branch/library')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Branch/library')}}/iCheck/css/custom.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library')}}/ie/html5shiv.js"></script>
     <script src="{{asset('public/Branch/library')}}/ie/respond.min.js"></script>
@@ -73,7 +73,7 @@
                                             <td>{{ $val->role_name }}</td>
                                             <td>
                                                 @foreach($role_module_nodes[$val->id] as $k=>$v)
-                                                    <button data-original-title="订单模块" data-content="@foreach($v as $kk=>$vv){{$vv}}  @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;
+                                                    <button data-original-title="{{$k}}" data-content="@foreach($v as $kk=>$vv) {{$vv}} @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;
                                                 @endforeach
                                             </td>
                                             <td>{{ $val->created_at }}</td>
@@ -108,8 +108,8 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
@@ -120,9 +120,19 @@
 <script src="{{asset('public/Branch/library')}}/file-input/bootstrap-filestyle.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/jPlayer/demo.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
+
+
 <script type="text/javascript">
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('.popovers').popover();
+    });
+
     //获取删除权限角色删除密码确认框
     function getDeleteComfirmForm(id) {
         var url = $('#role_delete_comfirm_url').val();
