@@ -87,7 +87,7 @@
                                 @foreach($list as $key=>$val)
                                 <tr>
                                     <td>{{ $val->id }}</td>
-                                    <td>{{ $val->program_name }}</td>
+                                    <td class="col-sm-1">{{ $val->program_name }}</td>
                                     <td>{{ $val->program_url }}</td>
                                     <td>
                                         <label class="label label-info" style="display:inline-block"> {{ $pname[$val->id] }}</label>
