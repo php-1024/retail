@@ -506,8 +506,8 @@ Route::group(['prefix'=>'catering'],function(){
     //用户管理
     Route::group(['prefix'=>'user'],function(){
         Route::get('user_tag', 'Catering\UserController@user_tag')->middleware('CateringCheck');                        //粉丝标签管理
-        Route::get('user_list', 'Catering\UserController@user_tag')->middleware('CateringCheck');                       //粉丝用户管理
-        Route::get('user_timeline', 'Catering\UserController@user_tag')->middleware('CateringCheck');                   //粉丝用户足迹
+        Route::get('user_list', 'Catering\UserController@user_list')->middleware('CateringCheck');                      //粉丝用户管理
+        Route::get('user_timeline', 'Catering\UserController@user_timeline')->middleware('CateringCheck');              //粉丝用户足迹
     });
 
     //下属管理--权限角色组
