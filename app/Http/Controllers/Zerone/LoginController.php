@@ -43,9 +43,12 @@ class LoginController extends Controller{
             //获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
             foreach($menu as $key=>$val){
-                $sm = ProgramMenu::son_menu($val->id);
-                dump($sm);
-                exit();
+                $sm = ProgramMenu::son_menu($val->id)->toArray();
+                foreach($sm as $k=>$v){
+                    dump($v->route_name);
+                    exit();
+                }
+
             }
             /**
              * 未完成，这里准备查询用户权限。
