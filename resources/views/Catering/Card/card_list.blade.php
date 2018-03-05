@@ -123,7 +123,7 @@
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>&nbsp;&nbsp;
-                                            <button class="btn btn-primary btn-xs" onclick="location.href='card_goods.html'" id="goodsBtn" type="button"><i class="fa fa-list"></i>&nbsp;&nbsp;调整适用商品</button>&nbsp;&nbsp;
+                                            <button class="btn btn-primary btn-xs" onclick="location.href='{{url('catering/card/card_goods')}}'" id="goodsBtn" type="button"><i class="fa fa-list"></i>&nbsp;&nbsp;调整适用商品</button>&nbsp;&nbsp;
                                             <button class="btn btn-warning btn-xs" id="lockBtn" type="button"><i class="fa fa-lock"></i>&nbsp;&nbsp;停止销售</button>&nbsp;&nbsp;
                                             <button class="btn btn-danger btn-xs" id="deleteBtn" type="button"><i class="fa fa-lock"></i>&nbsp;&nbsp;删除会员卡</button>&nbsp;&nbsp;
                                         </td>
