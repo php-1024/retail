@@ -407,18 +407,21 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
+<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    $(function(){
+        $('#addBtn').click(function(){
             swal({
                 title: "温馨提示",
                 text: "操作成功",
                 type: "success"
             });
         });
+        $('.delete_btn').click(function(){
+            $(this).parent().parent().parent().remove();
+        });
+        $('#nestable1').nestable();
+        $('.chosen-select2').chosen({width:"100%"});
     });
 </script>
 </body>
