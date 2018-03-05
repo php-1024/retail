@@ -23,6 +23,8 @@ class RoleController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
 
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
+        dump($admin_data);
+        dump($account_id);
         if($account_id != $admin_data['id']) {
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
