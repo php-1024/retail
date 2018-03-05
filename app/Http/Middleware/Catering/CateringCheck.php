@@ -67,6 +67,7 @@ class CateringCheck{
 
             /****下级人员管理--添加组****/
             case "catering/finance/balance":                //余额管理
+            case "catering/finance/balance_recharge":       //余额详情
             case "catering/finance/credit":                 //积分管理
             case "catering/finance/commission":             //佣金管理
                 /****下级人员管理--添加组****/
