@@ -198,8 +198,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group text-center">
-                        <button class="btn btn-info" type="button" onclick="location.href='subscription_material3.html'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-info" type="button" onclick="location.href='subscription_material4.html'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material3')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material4')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
