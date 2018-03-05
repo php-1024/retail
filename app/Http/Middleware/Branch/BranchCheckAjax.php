@@ -21,7 +21,8 @@ class BranchCheckAjax{
             case "branch/ajax/branch_select":         //超级管理员选择分店提交数据
             case "branch/ajax/role_edit":             //编辑权限角色弹出框检测登入和权限
             case "branch/ajax/role_delete":           //删除权限角色弹出框检测登入和权限
-                $re = $this->checkLoginAndRule($request);
+            case "branch/ajax/quick_rule":             //快速授权检测登入和权限
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/profile_edit_check"://检测登录，权限，及修改个人信息的数据
@@ -45,9 +46,9 @@ class BranchCheckAjax{
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "company/ajax/store_add_second_check": //商户创建店铺数据检测
-                $re = $this->checkLoginAndRuleAndStoreAdd($request);
-                return self::format_response($re, $next);
+            case "branch/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
+                return self::format_response($re,$next);
                 break;
         }
     }
@@ -90,6 +91,23 @@ class BranchCheckAjax{
             }
         }
     }
+
+
+    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
 
     //检测登录，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
@@ -234,29 +252,28 @@ class BranchCheckAjax{
         return self::res(1,$request);
     }
 
-    //检测添加店铺的数据
-    public function checkStoreAdd(Request $request)
-    {
-        if(empty($request->input('program_id'))){
-            return self::res(0,response()->json(['data' => '请选择店铺模式！', 'status' => '0']));
+    //检测添加下级人员数据
+    public function checkSubordinateAdd($request){
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入用户登录密码', 'status' => '0']));
         }
-        if(empty($request->input('organization_name'))){
-            return self::res(0,response()->json(['data' => '请填写店铺名称', 'status' => '0']));
+        if(empty($request->input('repassword'))){
+            return self::res(0,response()->json(['data' => '请再次输入用户登录密码', 'status' => '0']));
         }
-        if(empty($request->input('tell'))){
-            return self::res(0,response()->json(['data' => '请填写店铺负责人手机号码', 'status' => '0']));
+        if($request->input('password')<>$request->input('repassword')){
+            return self::res(0,response()->json(['data' => '两次登录密码输入不一致', 'status' => '0']));
         }
         if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请填写店铺负责人姓名', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
-        if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请填写店铺登录密码', 'status' => '0']));
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
         }
-        if(empty($request->input('re_password'))){
-            return self::res(0,response()->json(['data' => '请输入重复登录密码', 'status' => '0']));
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
         }
-        if(empty($request->input('safe_password'))){
-            return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
         }
         return self::res(1,$request);
     }
