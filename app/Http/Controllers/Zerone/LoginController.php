@@ -28,17 +28,20 @@ class LoginController extends Controller{
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
         }
         if($id <> 1){
-            //查询用户所具备的所有节点
+            //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$id]]);
-            $account_nodes = $account_info->nodes->toArray();
-
-            foreach($account_nodes->nodes as $key=>$val){
-                dump($val);
+            $account_routes = [];
+            foreach($account_info->nodes as $key=>$val){
+                $account_routes[] = $val->route_name;
             }
             //查询该程序下所有节点
             $program_info = Program::getOne([['id',1]]);
-            dump($program_info);
-            dump($account_nodes);
+            $program_routes = [];
+            foreach($program_info->nodes as $key=>$val){
+                $program_routes[] = $val->route_name;
+            }
+            dump($account_routes);
+            dump($program_routes);
             exit();
             /**
              * 未完成，这里准备查询用户权限。
