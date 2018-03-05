@@ -36,10 +36,10 @@ class BranchCheck{
             case "branch/goods/goods_add":             //添加商品
             case "branch/goods/goods_edit":            //编辑商品
             case "branch/goods/goods_list":            //商品列表
-
-            case "company/store/store_add":             //店铺管理创建店铺
-            case "company/store/store_add_second":      //店铺管理立即开店
-            case "company/store/store_list":            //店铺管理
+            case "branch/role/role_add":               //添加权限角色
+            case "branch/role/role_list":              //权限角色列表
+            case "branch/subordinate/subordinate_add": //添加下级人员
+            case "branch/subordinate/subordinate_list"://下级人员列表
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
