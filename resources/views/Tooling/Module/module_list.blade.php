@@ -91,7 +91,7 @@
                                         <td>{{ $val->module_name }}</td>
                                         <td class="col-lg-5">
                                             @foreach($val->nodes as $kk=>$vv)
-                                                <label class="label label-warning" style="display:inline-block">{{ $vv->node_name }}</label>&nbsp;&nbsp;
+                                                <label class="label label-warning-lite" style="display:inline-block">{{ $vv->node_name }}</label>&nbsp;&nbsp;
                                             @endforeach
                                         </td>
                                         <td>{{ $val->created_at }}</td>
