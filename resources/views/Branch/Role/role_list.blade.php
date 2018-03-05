@@ -126,24 +126,9 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
-        });
-
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#deleteBtn').click(function(){
-            $('#myModal2').modal();
         });
         $('.popovers').popover();
     });
