@@ -536,7 +536,6 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //总分店管理
     });
 
-
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheckAjax');             //提交登录数据
