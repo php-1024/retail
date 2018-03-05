@@ -645,7 +645,8 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('BranchCheckAjax');                        //下属添加_用户权限页面
 
         Route::post('subordinate_add_check', 'Branch\SubordinateController@subordinate_add_check')->middleware('BranchCheckAjax');  //下属添加检测
-        Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('BranchCheckAjax');            //下属编辑检测
+        Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('BranchCheckAjax');            //下属信息编辑页面
+        Route::post('subordinate_edit_check', 'Branch\SubordinateController@subordinate_edit_check')->middleware('BranchCheckAjax');//下属信息编辑检测
         Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('BranchCheckAjax');            //下属冻结检测
         Route::post('subordinate_delete', 'Branch\SubordinateController@subordinate_delete')->middleware('BranchCheckAjax');        //下属删除检测
         Route::post('subordinate_authorize', 'Branch\SubordinateController@subordinate_authorize')->middleware('BranchCheckAjax');  //下属授权检测
