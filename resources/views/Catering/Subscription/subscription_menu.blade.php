@@ -43,10 +43,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="subscription_menu.html" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/subscription_menu')}}" class="list-group-item active">
                                         自定义菜单
                                     </a>
-                                    <a href="subscription_menu2.html" class="list-group-item">
+                                    <a href="{{url('catering/subscription/subscription_menu2')}}" class="list-group-item">
                                         个性化菜单
                                     </a>
 
@@ -401,24 +401,28 @@
 <!-- App -->
 <script src="{{asset('public/Catering')}}/js/app.js"></script>
 <script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-
+<script src="{{asset('public/Catering')}}/js/nestable/jquery.nestable.js"></script>
+<script src="{{asset('public/Catering')}}/js/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    $(function(){
+        $('#addBtn').click(function(){
             swal({
                 title: "温馨提示",
                 text: "操作成功",
                 type: "success"
             });
         });
+        $('.delete_btn').click(function(){
+            $(this).parent().parent().parent().remove();
+        });
+        $('#nestable1').nestable();
+        $('.chosen-select2').chosen({width:"100%"});
     });
 </script>
 </body>
