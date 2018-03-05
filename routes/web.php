@@ -635,6 +635,17 @@ Route::group(['prefix'=>'branch'],function(){
     Route::group(['prefix'=>'order'],function(){
         Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');   //订单管理-现场订单
         Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck'); //订单管理-外卖订单
+        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('BranchCheck'); //预约管理
+    });
+
+    //设备管理
+    Route::group(['prefix'=>'device'],function(){
+        Route::get('room_add', 'Branch\DeviceController@room_add')->middleware('BranchCheck');   //设备管理-添加包厢
+        Route::get('room_list', 'Branch\DeviceController@room_list')->middleware('BranchCheck'); //设备管理-包厢管理
+        Route::get('table_add', 'Branch\DeviceController@table_add')->middleware('BranchCheck'); //设备管理-添加餐桌
+        Route::get('table_list', 'Branch\DeviceController@table_list')->middleware('BranchCheck'); //设备管理-餐桌管理
+        Route::get('printer_add', 'Branch\DeviceController@printer_add')->middleware('BranchCheck'); //设备管理-添加打印机
+        Route::get('printer_list', 'Branch\DeviceController@printer_list')->middleware('BranchCheck'); //设备管理-打印机管理
     });
 
     //下属管理--权限角色组
