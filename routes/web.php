@@ -650,6 +650,35 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('printer_list', 'Branch\DeviceController@printer_list')->middleware('BranchCheck'); //设备管理-打印机管理
     });
 
+
+
+
+
+
+    //用户管理
+    Route::group(['prefix'=>'user'],function(){
+        Route::get('user_tag', 'Branch\UserController@user_tag')->middleware('BranchCheck');            //用户管理-粉丝标签管理
+        Route::get('user_list', 'Branch\UserController@user_list')->middleware('BranchCheck');          //用户管理-粉丝用户管理
+        Route::get('user_timeline', 'Branch\UserController@user_timeline')->middleware('BranchCheck');  //用户管理-粉丝足迹管理
+    });
+
+    //财务管理
+    Route::group(['prefix'=>'finance'],function(){
+        Route::get('balance', 'Branch\FinanceController@balance')->middleware('BranchCheck');   //财务管理-余额管理
+        Route::get('credit', 'Branch\FinanceController@credit')->middleware('BranchCheck');     //财务管理-积分管理
+    });
+
+    //支付设置
+    Route::group(['prefix'=>'paysetting'],function(){
+        Route::get('wechat_setting', 'Branch\PaysettingController@wechat_setting')->middleware('BranchCheck');   //支付设置-微信支付
+        Route::get('zerone_setting', 'Branch\PaysettingController@zerone_setting')->middleware('BranchCheck');   //支付设置-零舍壹得
+        Route::get('shengf_setting', 'Branch\PaysettingController@shengf_setting')->middleware('BranchCheck');   //支付设置-盛付通
+        Route::get('kuaifu_setting', 'Branch\PaysettingController@kuaifu_setting')->middleware('BranchCheck');   //支付设置-快付通
+    });
+
+
+
+
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
         Route::get('role_add', 'Branch\RoleController@role_add')->middleware('BranchCheck');   //添加权限角色
