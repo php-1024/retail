@@ -194,26 +194,44 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">上传本地图片</h4>
+                    <h4 class="modal-title">选择添加类型</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group text-center">
+                        <button class="btn btn-info" type="button" onclick="location.href='subscription_material3.html'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-info" type="button" onclick="location.href='subscription_material4.html'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">删除图文消息确定</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
 
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">本地图片</label>
+                            <label class="col-sm-2 control-label">安全密码</label>
                             <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                <input type="password" value="" placeholder="安全密码" class="form-control" >
                             </div>
                         </div>
-
                         <div style="clear:both;"></div>
-
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="ladda-button btn btn-success" type="button" data-style="expand-right"><span class="ladda-label">提交</span><span class="ladda-spinner"></span></button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
                 </div>
             </div>
         </div>
@@ -232,26 +250,10 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
 
-
-
-
-
-
-<!-- Ladda -->
-<script src="{{asset('public/Catering')}}/ladda/spin.min.js"></script>
-<script src="{{asset('public/Catering')}}/ladda/ladda.min.js"></script>
-<script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
-
 <script type="text/javascript">
     $(function(){
-        var l = $( '.ladda-button' ).ladda();
-        l.click(function(){
-
-            // Start loading
-            l.ladda( 'start' );
-            setTimeout(function(){
-                l.ladda('stop');
-            },12000);
+        $('#deleteBtn').click(function(){
+            $('#myModal2').modal();
         });
 
         $('#addBtn').click(function(){
