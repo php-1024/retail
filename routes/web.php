@@ -552,6 +552,12 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //创建总分店
         Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //总分店管理
     });
+    //营销管理
+    Route::group(['prefix'=>'card'],function(){
+        Route::get('card_add','Catering\CardController@card_add')->middleware('CateringCheck');                         //添加会员卡
+        Route::get('card_list','Catering\CardController@card_list')->middleware('CateringCheck');                       //会员卡管理
+        Route::get('card_goods','Catering\CardController@card_goods')->middleware('CateringCheck');                     //调整适用商品
+    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
@@ -652,10 +658,12 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('BranchCheckAjax');                        //下属添加_用户权限页面
 
         Route::post('subordinate_add_check', 'Branch\SubordinateController@subordinate_add_check')->middleware('BranchCheckAjax');  //下属添加检测
-        Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('BranchCheckAjax');            //下属编辑检测
+        Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('BranchCheckAjax');            //下属信息编辑页面
+        Route::post('subordinate_edit_check', 'Branch\SubordinateController@subordinate_edit_check')->middleware('BranchCheckAjax');//下属信息编辑检测
         Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('BranchCheckAjax');            //下属冻结检测
         Route::post('subordinate_delete', 'Branch\SubordinateController@subordinate_delete')->middleware('BranchCheckAjax');        //下属删除检测
         Route::post('subordinate_authorize', 'Branch\SubordinateController@subordinate_authorize')->middleware('BranchCheckAjax');  //下属授权检测
+        Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('BranchCheckAjax');  //下属授权检测
     });
 });
 /**********************餐饮分店系统*********************/
