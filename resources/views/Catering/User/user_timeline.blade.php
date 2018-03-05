@@ -35,7 +35,104 @@
             </aside>
             <!-- /.aside -->
             <section id="content">
+                <section class="vbox">
+                    <section class="scrollable padder">
+                        <div class="m-b-md">
+                            <h3 class="m-b-none">粉丝用户足迹</h3>
+                        </div>
+                        <section class="panel panel-default">
+                            <header class="panel-heading">
+                                粉丝用户足迹
+                            </header>
+                            <div class="row wrapper">
+                                <form class="form-horizontal" method="get">
+                                    <label class="col-sm-1 control-label">用户账号</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                            <div class="wrapper col-lg-12" style="background: #FFFFFF;">
+                                <section class="comment-list block">
 
+                                    <article id="comment-id-3" class="comment-item">
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
+                                        <span class="arrow left"></span>
+                                        <section class="comment-body panel panel-default">
+                                            <header class="panel-heading">
+                                                <a href="#">100020</a>
+                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
+                                                <span class="text-muted m-l-sm pull-right">
+                              <i class="fa fa-clock-o"></i>
+                              2018-01-29 11:11:11
+                            </span>
+                                            </header>
+                                            <div class="panel-body">
+                                                <div>为订单1000020003004000付款了100元，扣除联盟分润18元，您实际收入82元</div>
+                                            </div>
+                                        </section>
+                                    </article>
+                                    <article id="comment-id-3" class="comment-item">
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
+                                        <span class="arrow left"></span>
+                                        <section class="comment-body panel panel-default">
+                                            <header class="panel-heading">
+                                                <a href="#">100020</a>
+                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
+                                                <span class="text-muted m-l-sm pull-right">
+                              <i class="fa fa-clock-o"></i>
+                              2018-01-29 11:11:11
+                            </span>
+                                            </header>
+                                            <div class="panel-body">
+                                                <div>提交了订单：1000020003004000</div>
+                                            </div>
+                                        </section>
+                                    </article>
+                                    <article id="comment-id-3" class="comment-item">
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
+                                        <span class="arrow left"></span>
+                                        <section class="comment-body panel panel-default">
+                                            <header class="panel-heading">
+                                                <a href="#">100020</a>
+                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
+                                                <span class="text-muted m-l-sm pull-right">
+                              <i class="fa fa-clock-o"></i>
+                              2018-01-29 11:11:11
+                            </span>
+                                            </header>
+                                            <div class="panel-body">
+                                                <div>进入了本店</div>
+                                            </div>
+                                        </section>
+                                    </article>
+                                    <article id="comment-id-3" class="comment-item">
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
+                                        <span class="arrow left"></span>
+                                        <section class="comment-body panel panel-default">
+                                            <header class="panel-heading">
+                                                <a href="#">100020</a>
+                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
+                                                <span class="text-muted m-l-sm pull-right">
+                              <i class="fa fa-clock-o"></i>
+                              2018-01-29 11:11:11
+                            </span>
+                                            </header>
+                                            <div class="panel-body">
+                                                <div>关注了公众号</div>
+                                            </div>
+                                        </section>
+                                    </article>
+                                </section>
+                        </section>
+                        </div>
+                    </section>
+                </section>
+            </section>
             </section>
         </section>
     </section>
