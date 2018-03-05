@@ -2,8 +2,8 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
-    <input type="hidden" id="quick_rule_url" value="{{ url('catering/ajax/quick_rule') }}">
-    <input type="hidden" id="selected_rule_url" value="{{ url('catering/ajax/selected_rule') }}">
+    <input type="hidden" id="quick_rule_url" value="{{ url('branch/ajax/quick_rule') }}">
+    <input type="hidden" id="selected_rule_url" value="{{ url('branch/ajax/selected_rule') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
