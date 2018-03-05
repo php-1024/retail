@@ -634,6 +634,8 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('role_delete', 'Branch\RoleController@role_delete')->middleware('BranchCheckAjax');                 //角色删除弹出
         Route::post('role_delete_check', 'Branch\RoleController@role_delete_check')->middleware('BranchCheckAjax');     //角色删除检测
         Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('BranchCheckAjax');          //下级人员管理权限角色添加
+        Route::post('subordinate_add_check', 'Branch\SubordinateController@subordinate_add_check')->middleware('BranchCheckAjax');  //下属添加检测
+        Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('BranchCheckAjax');                        //下属添加检测
     });
 });
 /**********************餐饮分店系统*********************/
