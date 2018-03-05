@@ -7,6 +7,8 @@ use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
+use App\Models\Program;
+use App\Models\Account;
 
 class ZeroneCheckAjax
 {
