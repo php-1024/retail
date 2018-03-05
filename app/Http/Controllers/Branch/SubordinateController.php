@@ -138,7 +138,7 @@ class SubordinateController extends Controller
     public function subordinate_edit(Request $request){
         $id = $request->input('id');
         $info = Account::getOne([['id',$id]]);
-        return view('Catering/Subordinate/subordinate_edit',['info'=>$info]);
+        return view('Branch/Subordinate/subordinate_edit',['info'=>$info]);
     }
 
     //编辑下级人员数据提交
