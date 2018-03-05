@@ -12,7 +12,7 @@
         <div>
             @if(!empty($pid)) <? $val->nodes = $val->program_nodes ?>@endif
             @foreach($val->nodes as $kk=>$vv)
-            <label class="checkbox-inline i-checks" style=" margin-left: 0px; margin-right: 10px;">
+            <label class="checkbox-inline i-checks" style=" margin-left: 0px; margin-right: 10px; margin-bottom: 10px;">
                 <input type="checkbox" @if(in_array($val->id.'_'.$vv->id,$selected_node))checked="checked"@endif data-group_id="{{ $val->id }}" class="checkbox_node_name checkbox_node_name_{{ $val->id }}" name="module_node_ids[]" value="{{ $val->id.'_'.$vv->id }}"> {{$vv->node_name}}
             </label>
             @endforeach
