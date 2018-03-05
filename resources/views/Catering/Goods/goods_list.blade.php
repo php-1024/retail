@@ -118,7 +118,7 @@
                                         </td>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_detail.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('catering/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -144,7 +144,7 @@
                                         </td>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_detail.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('catering/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -170,7 +170,7 @@
                                         </td>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_detail.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('catering/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     </tbody>
