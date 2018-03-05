@@ -6,6 +6,8 @@ namespace App\Http\Middleware\Zerone;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
+use App\Models\Program;
+use App\Models\Account;
 
 class ZeroneCheck{
     public function handle($request,Closure $next){
