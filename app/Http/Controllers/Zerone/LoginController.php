@@ -46,7 +46,6 @@ class LoginController extends Controller{
                 $sm = ProgramMenu::son_menu($val->id)->toArray();
                 foreach($sm as $k=>$v){
                     dump($v);
-                    exit();
                 }
 
             }
