@@ -101,7 +101,6 @@ class RoleController extends Controller
         foreach($list as $key=>$val){
             $role_module_nodes[$val->id] = $this->getModuleNode($val->id);//获取角色拥有的所有模块和节点
         }
-        dd($list);
         return view('Branch/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -110,7 +109,7 @@ class RoleController extends Controller
      * $role_id 当前角色的ID
      */
     private function getModuleNode($role_id){
-        $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
+        $list = ProgramModuleNode::getRoleModuleNodes(5,$role_id);
         $module_nodes = [];
         foreach($list as $key=>$val){
             $module_nodes[$val['module_name']][] = $val['node_name'];
