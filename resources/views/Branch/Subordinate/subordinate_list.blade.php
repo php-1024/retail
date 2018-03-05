@@ -20,20 +20,14 @@
 </head>
 <body class="">
 <section class="vbox">
-    <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Branch/Public/Header')
-    </header>
+    {{--头部--}}
+    @include('Branch/Public/Header')
+    {{--头部--}}
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            <aside class="bg-black dk aside hidden-print" id="nav">
-                <section class="vbox">
-                    <section class="w-f-md scrollable">
-                        @include('Branch/Public/Nav')
-                    </section>
-                </section>
-            </aside>
-            <!-- /.aside -->
+        @include('Branch/Public/Nav')
+        <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
