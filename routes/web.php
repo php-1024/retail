@@ -630,6 +630,12 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('BranchCheck');       //商品管理-商品列表
     });
 
+    //订单管理
+    Route::group(['prefix'=>'order'],function(){
+        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');   //订单管理-现场订单
+        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck'); //订单管理-外卖订单
+    });
+
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
         Route::get('role_add', 'Branch\RoleController@role_add')->middleware('BranchCheck');   //添加权限角色
