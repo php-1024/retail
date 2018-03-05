@@ -42,7 +42,7 @@ class LoginController extends Controller{
             }
             dump($account_routes);
             dump($program_routes);
-            dump( array_intersect($account_routes,$program_routes));
+            dump( array_diff($program_routes,$account_routes));
             /**
              * 未完成，这里准备查询用户权限。
              */
