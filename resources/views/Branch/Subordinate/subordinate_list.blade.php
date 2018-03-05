@@ -128,307 +128,6 @@
     </section>
 </section>
 <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">编辑用户基本信息</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">用户账号</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="100021">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">真实姓名</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认冻结/解冻操作</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认删除角色</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">编辑用户基本信息</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">权限角色</label>
-                            <div class="col-sm-3">
-                                <select class="form-control m-b" name="account">
-                                    <option>订单管理员</option>
-                                    <option>装修员</option>
-                                    <option>客服人员</option>
-                                    <option>总分店管理员</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <button type="button" class="btn btn-success"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权
-                                </button>
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">用户权限</label>
-                            <div class="col-sm-10">
-                                <div class="panel-body">
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单模块
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单编辑
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
-                                                   checked="checked"> 订单查询
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单添加
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单删除
-                                        </label>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单模块
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单编辑
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
-                                                   checked="checked"> 订单查询
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单添加
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单删除
-                                        </label>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单模块
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单编辑
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
-                                                   checked="checked"> 订单查询
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单添加
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单删除
-                                        </label>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单模块
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单编辑
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
-                                                   checked="checked"> 订单查询
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单添加
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单删除
-                                        </label>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单模块
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option1" id="inlineCheckbox1"
-                                                   checked="checked"> 订单编辑
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option2" id="inlineCheckbox2"
-                                                   checked="checked"> 订单查询
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单添加
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label class="i-checks">
-                                            <input type="checkbox" value="option3" id="inlineCheckbox3"
-                                                   checked="checked"> 订单删除
-                                        </label>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安全密码</label>
-                            <div class="col-sm-10"><input type="text" class="form-control"></div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
@@ -442,102 +141,71 @@
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $('#editBtn').click(function () {
-
-            $('#myModal').modal();
-        });
-
-        $('#ruleBtn').click(function () {
-            $('#myModal4').modal();
-        });
-
-        $('#lockBtn').click(function () {
-
-            $('#myModal2').modal();
-        });
-        $('#deleteBtn').click(function () {
-            $('#myModal3').modal();
-        });
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-        $('#addBtn').click(function () {
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-    });
-
     //冻结用户-解冻
-    function getLockComfirmForm(id, account, status) {
+    function getLockComfirmForm(id,account,status){
         var url = $('#subordinate_lock').val();
         var token = $('#_token').val();
 
-        if (id == '') {
+        if(id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            }, function () {
+            },function(){
                 window.location.reload();
             });
             return;
         }
 
-        var data = {'id': id, 'account': account, 'status': status, '_token': token};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
+        var data = {'id':id,'account':account,'status':status,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                }, function () {
+                },function(){
                     window.location.reload();
                 });
                 return;
-            } else {
+            }else{
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
         });
     }
-
     //获取用户信息，编辑密码框
-    function getAuthorizeForm(id) {
+    function getAuthorizeForm(id){
         var url = $('#subordinate_authorize_url').val();
         var token = $('#_token').val();
 
-        if (id == '') {
+        if(id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            }, function () {
+            },function(){
                 window.location.reload();
             });
             return;
         }
 
-        var data = {'id': id, '_token': token};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                }, function () {
+                },function(){
                     window.location.reload();
                 });
                 return;
-            } else {
+            }else{
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
@@ -545,35 +213,35 @@
     }
 
     //获取用户信息，编辑密码框
-    function getEditForm(id) {
+    function getEditForm(id){
         var url = $('#subordinate_edit_url').val();
         var token = $('#_token').val();
 
-        if (id == '') {
+        if(id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            }, function () {
+            },function(){
                 window.location.reload();
             });
             return;
         }
 
-        var data = {'id': id, '_token': token};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                }, function () {
+                },function(){
                     window.location.reload();
                 });
                 return;
-            } else {
+            }else{
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
