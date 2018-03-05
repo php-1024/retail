@@ -78,11 +78,17 @@ class ZeroneRedis
             $unset_routes = array_diff($program_routes,$account_routes);
             foreach($menu as $key=>$val){
                 $sm = ProgramMenu::son_menu($val['id'])->toArray();//获取子菜单列表
-                //循环判断用户是否具有子菜单权限
+
                 foreach($sm as $k=>$v){
-                    if(in_array($v['menu_route'],$unset_routes)){
+                    //判断子菜单的路由是否在程序的所有路由中，不在的话，取消菜单
+                    if(!in_array($v['menu_route'],$program_routes)){
                         unset($sm[$k]);
                     }
+                    //循环判断用户是否具有子菜单权限,不具备的话，取消菜单
+                    elseif(in_array($v['menu_route'],$unset_routes)){
+                        unset($sm[$k]);
+                    }
+
                 }
                 if(count($sm)<1){//
                     unset($menu[$key]);
