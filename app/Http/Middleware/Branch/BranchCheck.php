@@ -44,12 +44,12 @@ class BranchCheck{
             case "branch/order/order_spot":             //订单管理-现场订单
             case "branch/order/order_takeout":          //订单管理-外卖订单
             case "branch/order/order_appointment":      //预约管理
-            case "branch/order/room_add":               //设备管理-添加包厢
-            case "branch/order/room_list":              //设备管理-包厢管理
-            case "branch/order/table_add":              //设备管理-添加餐桌
-            case "branch/order/table_list":             //设备管理-餐桌管理
-            case "branch/order/printer_add":            //设备管理-添加打印机
-            case "branch/order/printer_list":           //设备管理-打印机管理
+            case "branch/device/room_add":               //设备管理-添加包厢
+            case "branch/device/room_list":              //设备管理-包厢管理
+            case "branch/device/table_add":              //设备管理-添加餐桌
+            case "branch/device/table_list":             //设备管理-餐桌管理
+            case "branch/device/printer_add":            //设备管理-添加打印机
+            case "branch/device/printer_list":           //设备管理-打印机管理
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
