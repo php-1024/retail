@@ -58,6 +58,7 @@ class Module extends Model{
     public static function addModule($param){
         $model = new Module();
         $model->module_name = $param['module_name'];
+        $model->module_show_name = $param['module_show_name'];
         $model->save();
         return $model->id;
     }
