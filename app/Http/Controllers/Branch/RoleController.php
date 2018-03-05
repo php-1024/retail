@@ -85,11 +85,35 @@ class RoleController extends Controller
     //角色列表
     public function role_list(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Role/role_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $role_name = $request->input('role_name');
+        $search_data = ['role_name'=>$role_name];
+        //查询所有角色列表
+        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',7],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+
+        //获取角色节点
+        $role_module_nodes = [];
+        foreach($list as $key=>$val){
+            $role_module_nodes[$val->id] = $this->getModuleNode($val->id);//获取角色拥有的所有模块和节点
+        }
+        return view('Branch/Role/role_list',['list'=>$list,'role_module_nodes'=>$role_module_nodes,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    /***
+     * 私有方法：用于查询并组合角色拥有的权限模块和节点。
+     * $role_id 当前角色的ID
+     */
+    private function getModuleNode($role_id){
+        $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
+        $module_nodes = [];
+        foreach($list as $key=>$val){
+            $module_nodes[$val['module_name']][] = $val['node_name'];
+        }
+        return $module_nodes;
     }
 }
 
