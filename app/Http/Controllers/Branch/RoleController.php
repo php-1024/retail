@@ -59,13 +59,14 @@ class RoleController extends Controller
         $route_name = $request->path();//获取当前的页面路由
         $role_name = $request->input('role_name');//权限角色名称
         $node_ids = $request->input('module_node_ids');//角色权限节点
+        dd($node_ids);
 
         if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
             return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['program_id'=>7,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = OrganizationRole::addRole(['program_id'=>5,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
