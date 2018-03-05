@@ -27,8 +27,8 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('Branch/Public/Nav')
-        <!-- /.aside -->
+            @include('Branch/Public/Nav')
+            <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
@@ -252,62 +252,25 @@
 <script src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
-
-
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        get_quick_rule('#role_id');
+    $(function(){
+        $('#addBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            });
+        });
 
+        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
+            radioClass: 'iradio_square-green',
         });
+
     });
-    //获取上级程序节点
-    function get_quick_rule(obj) {
-        var url = $('#quick_rule_url').val();
-        var token = $('#_token').val();
-        var role_id = $(obj).val();
-        var data = {'_token': token, 'role_id': role_id}
-        $.post(url, data, function (response) {
-            $('#module_node_box').html(response);
-        });
-    }
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if (json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
-                    window.location.reload();
-                });
-            } else {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                });
-            }
-        });
-    }
-
-
-
-
-
-
 </script>
 </body>
 </html>

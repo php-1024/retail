@@ -14,6 +14,14 @@
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">模块展示名称</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" id="edit_module_show_name" name="module_show_name" value="{{ $info->module_show_name }}"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="hr-line-dashed"></div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">模块功能节点</label>
                     <div class="col-sm-4">
@@ -59,6 +67,7 @@ function postForm() {
     var target = $("#currentForm");
     var url = target.attr("action");
     var module_name = $('#edit_module_name').val();
+    var module_show_name = $('#edit_module_show_name').val();
     var _token = $('#_token').val();
     var id = $('#id').val();
     var node = '';
@@ -67,7 +76,7 @@ function postForm() {
         node += 'nodes[]='+$(v).val()+'&';
     });
     node = node.substring(0, node.length-1);
-    var data = 'id='+id+'&_token='+_token+'&module_name='+module_name+'&'+node;
+    var data = 'id='+id+'&_token='+_token+'&module_name='+module_name+'&module_show_name='+module_show_name+'&'+node;
     $.post(url, data, function (json) {
         if (json.status == -1) {
             window.location.reload();
