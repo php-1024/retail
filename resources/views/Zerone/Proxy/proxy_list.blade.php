@@ -208,7 +208,7 @@
 
         var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
-            if(response.status=='0'){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
                     text: response.data,
@@ -244,7 +244,7 @@
 
         var data = {'id':id,'status':status,'_token':token};
         $.post(url,data,function(response){
-            if(response.status=='0'){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
                     text: response.data,
@@ -280,7 +280,7 @@
 
         var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
-            if(response.status=='0'){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
                     text: response.data,
