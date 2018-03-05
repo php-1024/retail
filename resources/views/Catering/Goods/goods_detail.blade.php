@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Catering')}}/trumbowyg/design/css/trumbowyg.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -390,17 +391,43 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
 
+<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<!-- App -->
+<script src="{{asset('public/Catering')}}/js/app.js"></script>
+<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+
+<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
+
+<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+
+<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    $(function(){
+        $('#addBtn').click(function(){
             swal({
                 title: "温馨提示",
                 text: "操作成功",
                 type: "success"
             });
+        });
+        $('#form-content').trumbowyg({
+            lang: 'fr',
+            closable: false,
+            mobile: true,
+            fixedBtnPane: true,
+            fixedFullWidth: true,
+            semantic: true,
+            resetCss: true,
+            autoAjustHeight: true,
+            autogrow: true
         });
     });
 </script>
