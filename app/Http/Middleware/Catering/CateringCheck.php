@@ -79,7 +79,7 @@ class CateringCheck{
             case "catering/payment/sheng_setting":          //盛付通
             case "catering/payment/kuai_setting":           //快付通
             /****支付设置****/
-                
+
             /****总分店管理****/
             case "catering/store/branch_create":            //创建总分店
             case "catering/store/branch_list":              //总分店管理
