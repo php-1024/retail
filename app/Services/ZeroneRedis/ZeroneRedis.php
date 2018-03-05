@@ -6,6 +6,10 @@ use App\Models\Program;
 use App\Models\Account;
 class ZeroneRedis
 {
+    //零壹管理平台无需进行权限判断的路由
+    public $zerone_route_except = [
+        'zerone',
+    ];
     //内部方法，生成账号数据Redis缓存
     /*
      * key_id  - 目前以用户ID作为Redis的key的关键字
@@ -80,8 +84,8 @@ class ZeroneRedis
                 $sm = ProgramMenu::son_menu($val['id'])->toArray();//获取子菜单列表
 
                 foreach($sm as $k=>$v){
-                    //判断子菜单的路由是否在程序的所有路由中，不在的话，取消菜单
-                    if(!in_array($v['menu_route'],$program_routes)){
+                    //判断子菜单的路由是否在程序的所有路由中或是否在无需判断的过滤路由中，不在的话，取消菜单
+                    if(!in_array($v['menu_route'],$program_routes) && !in_array($v['menu_route'],$this->zerone_route_except)){
                         unset($sm[$k]);
                     }
                     //循环判断用户是否具有子菜单权限,不具备的话，取消菜单
@@ -114,7 +118,7 @@ class ZeroneRedis
         Redis::set($menu_key,$menu);
         Redis::set($son_menu_key,$son_menu);
     }
-
+    //
     //内部方法，生成对应程序及账号的菜单
     /*
      * id - 用户的ID
