@@ -125,7 +125,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m0.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m0.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image1.png
@@ -137,7 +137,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m1.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m1.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image2.png
@@ -149,7 +149,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m2.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m2.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image3.png
@@ -161,7 +161,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m3.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m3.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image4.png
@@ -173,7 +173,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m4.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m4.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image5.png
@@ -185,7 +185,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m5.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m5.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image6.png
@@ -197,7 +197,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="images/m6.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Catering')}}/img/m6.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image7.png
