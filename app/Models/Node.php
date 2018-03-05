@@ -102,7 +102,7 @@ class Node extends Model{
     public static function node_selected($module_id){
         return Node::whereIn('id',function($query) use ($module_id){
             $query->select('node_id')->from('module_node')->where('module_id',$module_id)->get();
-        })->get();
+        })->orderBy('id','desc')->get();
     }
 
     //查询未被摸个模块选中的节点
