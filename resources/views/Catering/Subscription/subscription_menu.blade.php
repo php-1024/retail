@@ -406,8 +406,8 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Catering')}}/js/nestable/jquery.nestable.js"></script>
+<script src="{{asset('public/Catering')}}/js/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript">
     $(function(){
         $('#addBtn').click(function(){
