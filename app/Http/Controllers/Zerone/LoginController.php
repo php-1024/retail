@@ -23,10 +23,7 @@ class LoginController extends Controller{
     {
         $id = 25;
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc');//获取零壹管理系统的一级菜单
-        $son_menu = [];
-        foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
-        }
+
         if($id <> 1){
             //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$id]]);
@@ -45,13 +42,20 @@ class LoginController extends Controller{
             foreach($menu as $key=>$val){
                 $sm = ProgramMenu::son_menu($val->id)->toArray();
                 foreach($sm as $k=>$v){
-
+                    if(in_array($v['route_name'],$unset_routes)){
+                        dump($v);
+                    }
                 }
 
             }
             /**
              * 未完成，这里准备查询用户权限。
              */
+        }else{
+            $son_menu = [];
+            foreach($menu as $key=>$val){//获取一级菜单下的子菜单
+                $son_menu[$val->id] = ProgramMenu::son_menu($val->id)->toArray();
+            }
         }
         return view('Zerone/Login/display');
     }
