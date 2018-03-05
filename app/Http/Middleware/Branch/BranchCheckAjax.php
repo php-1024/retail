@@ -51,7 +51,7 @@ class BranchCheckAjax{
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "catering/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+            case "branch/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
                 return self::format_response($re,$next);
                 break;
