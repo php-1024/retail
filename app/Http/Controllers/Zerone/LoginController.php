@@ -61,7 +61,7 @@ class LoginController extends Controller{
         }else{
             $son_menu = [];
             foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-                $son_menu[$val['id']] = ProgramMenu::son_menu($val->id)->toArray();
+                $son_menu[$val['id']] = ProgramMenu::son_menu($val['id'])->toArray();
             }
         }
         dump($son_menu);
