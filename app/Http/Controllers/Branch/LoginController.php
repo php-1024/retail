@@ -22,6 +22,22 @@ class LoginController extends Controller
      */
     public function display()
     {
+        $id = 25;
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc');//获取零壹管理系统的一级菜单
+        $son_menu = [];
+        foreach($menu as $key=>$val){//获取一级菜单下的子菜单
+            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
+        }
+        if($id <> 1){
+            //查询用户所具备的所有节点
+            $account_node_list = Account::getOne([['id',$id]]);
+            dump($account_node_list);
+            exit();
+            /**
+             * 未完成，这里准备查询用户权限。
+             */
+        }
+
         return view('Branch/Login/display');
     }
 
