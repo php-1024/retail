@@ -67,6 +67,7 @@ function postForm() {
     var target = $("#currentForm");
     var url = target.attr("action");
     var module_name = $('#edit_module_name').val();
+    var module_show_name = $('#edit_module_show_name').val();
     var _token = $('#_token').val();
     var id = $('#id').val();
     var node = '';
@@ -75,7 +76,7 @@ function postForm() {
         node += 'nodes[]='+$(v).val()+'&';
     });
     node = node.substring(0, node.length-1);
-    var data = 'id='+id+'&_token='+_token+'&module_name='+module_name+'&'+node;
+    var data = 'id='+id+'&_token='+_token+'&module_name='+module_name+'&module_show_name='+module_show_name+'&'+node;
     $.post(url, data, function (json) {
         if (json.status == -1) {
             window.location.reload();
