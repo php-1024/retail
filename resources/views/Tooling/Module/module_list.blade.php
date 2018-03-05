@@ -89,7 +89,7 @@
                                     <tr>
                                         <td>{{ $val->id }}</td>
                                         <td>{{ $val->module_name }}</td>
-                                        <td>
+                                        <td class="col-lg-5">
                                             @foreach($val->nodes as $kk=>$vv)
                                                 <label class="label label-success" style="display:inline-block">{{ $vv->node_name }}</label>&nbsp;&nbsp;
                                             @endforeach
