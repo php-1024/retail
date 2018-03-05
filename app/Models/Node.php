@@ -109,7 +109,7 @@ class Node extends Model{
     public static function node_unselected($module_id){
         return Node::whereNotIn('id',function($query) use ($module_id){
             $query->select('node_id')->from('module_node')->where('module_id',$module_id)->get();
-        })->get();
+        })->orderBy('id','desc')->get();
     }
 }
 ?>
