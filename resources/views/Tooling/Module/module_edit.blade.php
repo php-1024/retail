@@ -16,8 +16,8 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">模块名称</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" id="edit_module_name" name="module_name" value="{{ $info->module_name }}"></div>
+                    <label class="col-sm-2 control-label">模块展示名称</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" id="edit_module_show_name" name="module_show_name" value="{{ $info->module_show_name }}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
