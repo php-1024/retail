@@ -62,6 +62,7 @@ class LoginController extends Controller{
                 $son_menu[$val['id']] = ProgramMenu::son_menu($val->id)->toArray();
             }
         }
+        dump($son_menu);
         return view('Zerone/Login/display');
     }
     /*
