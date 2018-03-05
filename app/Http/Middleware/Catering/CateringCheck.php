@@ -80,6 +80,12 @@ class CateringCheck{
             case "catering/payment/kuai_setting":           //快付通
             /****支付设置****/
 
+            /****支付设置****/
+            case "catering/goods/goods_category":           //商品分类查询
+            case "catering/goods/goods_list":               //商品查询
+            case "catering/goods/goods_detail":             //商品查看详情
+            /****支付设置****/
+
             /****总分店管理****/
             case "catering/store/branch_create":            //创建总分店
             case "catering/store/branch_list":              //总分店管理
