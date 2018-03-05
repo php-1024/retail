@@ -91,6 +91,12 @@ class CateringCheck{
             case "catering/store/branch_list":              //总分店管理
             /****总分店管理****/
 
+            /****总分店管理****/
+            case "catering/card/card_add":                  //添加会员卡
+            case "catering/card/card_list":                 //会员卡管理
+            case "catering/card/card_goods":                //调整适用商品
+            /****总分店管理****/
+
                 $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
                 break;
