@@ -42,7 +42,7 @@
             <div class="ibox-content m-b-sm border-bottom">
 
                 <div class="row">
-                    <div class="col-sm-1">
+                    <div>
                         <div class="form-group">
                             <button type="button" onclick="history.back()" class=" btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
 
