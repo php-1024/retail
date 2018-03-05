@@ -242,6 +242,41 @@ class SubordinateController extends Controller
         return view('Branch/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
+    //下级人员授权数据提交
+    public function subordinate_authorize_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $role_id = $request->input('role_id');
+        $account = $request->input('account');
+        $module_node_ids = $request->input('module_node_ids');
+        DB::beginTransaction();
+        try {
+            //修改账号与角色间的关系
+            if(RoleAccount::checkRowExists([['account_id',$id ]])) {
+                RoleAccount::editRoleAccount([['account_id', $id]], ['role_id' => $role_id]);//修改账号角色关系
+            }else{
+                RoleAccount::addRoleAccount(['role_id' => $role_id,'account_id'=>$id]);//添加账号角色关系
+            }
+            foreach($module_node_ids as $key=>$val){
+                $vo = AccountNode::getOne([['account_id',$id],['node_id',$val]]);//查询是否存在数据
+                if(is_null($vo)) {//不存在生成插入数据
+                    AccountNode::addAccountNode(['account_id' => $id, 'node_id' => $val]);
+                }else{//存在数据则跳过
+                    continue;
+                }
+            }
+            AccountNode::where('account_id', $id)->whereNotIn('node_id', $module_node_ids)->forceDelete();
+            //添加操作日志
+            OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员的授权：'.$account);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑下级人员授权失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑下级人员授权成功', 'status' => '1']);
+    }
+
     //下级人员列表
     public function subordinate_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
