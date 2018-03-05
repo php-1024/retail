@@ -23,10 +23,7 @@ class LoginController extends Controller{
     {
         $id = 25;
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc');//获取零壹管理系统的一级菜单
-        $son_menu = [];
-        foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
-        }
+
         if($id <> 1){
             //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$id]]);
@@ -34,18 +31,31 @@ class LoginController extends Controller{
             foreach($account_info->nodes as $key=>$val){
                 $account_routes[] = $val->route_name;
             }
-            //查询该程序下所有节点
+            //查询该程序下所有节点的路由
             $program_info = Program::getOne([['id',1]]);
             $program_routes = [];
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
             }
-            dump($account_routes);
-            dump($program_routes);
-            dump( array_diff($program_routes,$account_routes));
+            //获取用户所没有的权限
+            $unset_routes = array_diff($program_routes,$account_routes);
+            foreach($menu as $key=>$val){
+                $sm = ProgramMenu::son_menu($val->id)->toArray();
+                foreach($sm as $k=>$v){
+                    if(in_array($v['route_name'],$unset_routes)){
+                        dump($v);
+                    }
+                }
+
+            }
             /**
              * 未完成，这里准备查询用户权限。
              */
+        }else{
+            $son_menu = [];
+            foreach($menu as $key=>$val){//获取一级菜单下的子菜单
+                $son_menu[$val->id] = ProgramMenu::son_menu($val->id)->toArray();
+            }
         }
         return view('Zerone/Login/display');
     }
