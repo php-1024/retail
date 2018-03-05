@@ -407,7 +407,6 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
-
 <script type="text/javascript">
     $(document).ready(function() {
         $('#editBtn').click(function(){
