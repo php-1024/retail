@@ -22,6 +22,7 @@ class ModuleController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $module_name  = $request->input('module_name');//获取功能模块名称
+        $module_show_name  = $request->input('module_show_name');//获取功能模块展示名称
         $nodes = $request->input('nodes');//获取选择的节点
 
         if(Module::checkRowExists([[ 'module_name',$module_name ]])){
@@ -29,7 +30,7 @@ class ModuleController extends Controller{
         }else{
             DB::beginTransaction();
             try{
-                $module_id = Module::addModule(['module_name'=>$module_name]);
+                $module_id = Module::addModule(['module_name'=>$module_name,'module_show_name'=>$module_show_name]);
                 foreach($nodes as $key=>$val){
                     ModuleNode::addModuleNode(['module_id'=>$module_id,'node_id'=>$val]);
                 }

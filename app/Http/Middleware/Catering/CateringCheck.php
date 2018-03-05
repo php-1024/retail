@@ -48,6 +48,12 @@ class CateringCheck{
             case "catering/subscription/subscription_menu":     //菜单管理
             /****公众号管理****/
 
+            /****用户管理****/
+            case "catering/user/user_tag":                  //粉丝标签管理
+            case "catering/user/user_list":                 //粉丝用户管理
+            case "catering/user/user_timeline":             //粉丝用户足迹
+            /****用户管理****/
+
             /****下属管理--权限角色****/
             case "catering/role/role_add":                  //权限角色添加
             case "catering/role/role_list":                 //权限角色列表

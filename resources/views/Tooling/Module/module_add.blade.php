@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">模块展示名称</label>
-                                    <div class="col-sm-10"><input type="text" name="module_show_name" id="module_name" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="module_show_name" id="module_show_name" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">模块功能节点</label>
@@ -122,6 +122,7 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var module_name = $('#module_name').val();
+        var module_show_name = $('#module_show_name').val();
         var _token = $('#_token').val();
         var node = '';
 
@@ -129,7 +130,7 @@
             node += 'nodes[]='+$(v).val()+'&';
         });
         node = node.substring(0, node.length-1);
-        var data = '_token='+_token+'&module_name='+module_name+'&'+node;
+        var data = '_token='+_token+'&module_name='+module_name+'&module_show_name='+module_show_name+'&'+node;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
