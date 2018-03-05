@@ -42,7 +42,7 @@ class LoginController extends Controller{
             foreach($menu as $key=>$val){
                 $sm = ProgramMenu::son_menu($val->id)->toArray();
                 foreach($sm as $k=>$v){
-                    if(in_array($v['route_name'],$unset_routes)){
+                    if(in_array($v['menu_route'],$unset_routes)){
                         dump($v);
                     }
                 }
