@@ -31,6 +31,10 @@ class LoginController extends Controller{
             //查询用户所具备的所有节点
             $account_info = Account::getOne([['id',$id]]);
             $account_nodes = $account_info->nodes->toArray();
+
+            foreach($account_nodes->nodes as $key=>$val){
+                dump($val);
+            }
             //查询该程序下所有节点
             $program_info = Program::getOne([['id',1]]);
             dump($program_info);
