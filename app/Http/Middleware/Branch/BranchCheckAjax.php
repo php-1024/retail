@@ -23,6 +23,7 @@ class BranchCheckAjax{
             case "branch/ajax/role_delete":           //删除权限角色弹出框检测登入和权限
             case "branch/ajax/quick_rule":            //快速授权检测登入和权限
             case "branch/ajax/subordinate_edit":      //编辑下属人员信息
+            case "branch/ajax/subordinate_authorize": //编辑——授权下属人员
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
