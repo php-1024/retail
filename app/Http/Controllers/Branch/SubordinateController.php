@@ -134,6 +134,19 @@ class SubordinateController extends Controller
         }
     }
 
+    //下属列表
+    public function subordinate_list(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $account = $request->input('account');
+        $search_data = ['account'=>$account];
+        $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
+        $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
+        $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
+        return view('Branch/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
 
     //编辑下级人员
     public function subordinate_edit(Request $request){
@@ -242,18 +255,95 @@ class SubordinateController extends Controller
         return view('Branch/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
-    //下级人员列表
-    public function subordinate_list(Request $request){
+    //下级人员授权数据提交
+    public function subordinate_authorize_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $role_id = $request->input('role_id');
         $account = $request->input('account');
-        $search_data = ['account'=>$account];
-        $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
-        $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
-        $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
-        return view('Branch/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $module_node_ids = $request->input('module_node_ids');
+        DB::beginTransaction();
+        try {
+            //修改账号与角色间的关系
+            if(RoleAccount::checkRowExists([['account_id',$id ]])) {
+                RoleAccount::editRoleAccount([['account_id', $id]], ['role_id' => $role_id]);//修改账号角色关系
+            }else{
+                RoleAccount::addRoleAccount(['role_id' => $role_id,'account_id'=>$id]);//添加账号角色关系
+            }
+            foreach($module_node_ids as $key=>$val){
+                $vo = AccountNode::getOne([['account_id',$id],['node_id',$val]]);//查询是否存在数据
+                if(is_null($vo)) {//不存在生成插入数据
+                    AccountNode::addAccountNode(['account_id' => $id, 'node_id' => $val]);
+                }else{//存在数据则跳过
+                    continue;
+                }
+            }
+            AccountNode::where('account_id', $id)->whereNotIn('node_id', $module_node_ids)->forceDelete();
+            //添加操作日志
+            OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员的授权：'.$account);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑下级人员授权失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑下级人员授权成功', 'status' => '1']);
+    }
+
+
+    //输入安全密码判断是否能冻结的页面
+    public function subordinate_lock(Request $request){
+        $id = $request->input('id');//要操作的用户的ID
+        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        $status = $request->input('status');//当前用户的状态
+        return view('Branch/Subordinate/subordinate_lock',['id'=>$id,'account'=>$account,'status'=>$status]);
+    }
+    //冻结解冻下级人员
+    public function subordinate_lock_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要操作的用户的ID
+        $account = $request->input('account');//要操作的用户的账号,用于记录
+        $status = $request->input('status');//当前用户的状态
+        DB::beginTransaction();
+        try{
+            if($status==1) {
+                Account::editAccount([['id',$id]],['status'=>'0']);
+                if($admin_data['is_super'] == 1){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在分店系统冻结了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+                }
+            }else{
+                Account::editAccount([['id',$id]],['status'=>'1']);
+                if($admin_data['is_super'] == 1){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统解冻了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+                }
+            }
+            DB::commit();
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '操作失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
+    }
+
+    //删除下级人员确定
+    public function subordinate_delete(Request $request){
+        $id = $request->input('id');//要操作的用户的ID
+        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        return view('Catering/Subordinate/subordinate_delete',['id'=>$id,'account'=>$account]);
+    }
+
+    //删除下级人员
+    public function subordinate_delete_check(Request $request){
+        echo "这里是删除下级人员";
     }
 }
 

@@ -24,6 +24,7 @@ class BranchCheckAjax{
             case "branch/ajax/quick_rule":            //快速授权检测登入和权限
             case "branch/ajax/subordinate_edit":      //编辑下属人员信息
             case "branch/ajax/subordinate_authorize": //编辑——授权下属人员
+            case "branch/ajax/subordinate_lock":      //冻结下属页面
             case "branch/ajax/selected_rule":         //编辑——授权下属人员
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -46,7 +47,8 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/role_delete_check"://检测是否登录 权限 安全密码
-                $re = $this->checkLoginAndRuleAndSafe($request);
+            case "branch/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
+            $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
             case "branch/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
@@ -55,6 +57,10 @@ class BranchCheckAjax{
                 break;
             case "branch/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
+                return self::format_response($re,$next);
+                break;
+            case "branch/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
                 return self::format_response($re,$next);
                 break;
         }
@@ -122,6 +128,21 @@ class BranchCheckAjax{
             return $re;
         }else{
             $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateAuthorize($re['response']);//检测数据是否为空
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -310,6 +331,20 @@ class BranchCheckAjax{
         }
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑下级人员权限数据
+    public function checkSubordinateAuthorize($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
         }
         return self::res(1,$request);
     }
