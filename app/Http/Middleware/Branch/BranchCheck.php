@@ -54,8 +54,10 @@ class BranchCheck{
             case "branch/user/user_tag":                //用户管理-粉丝标签管理
             case "branch/user/user_list":               //用户管理-粉丝用户管理
             case "branch/user/user_timeline":           //用户管理-粉丝足迹管理
+
             case "branch/finance/balance":              //财务管理-余额管理
             case "branch/finance/credit":               //财务管理-积分管理
+
             case "branch/paysetting/wechat_setting":    //支付设置-微信支付
             case "branch/paysetting/zerone_setting":    //支付设置-零舍壹得
             case "branch/paysetting/shengf_setting":    //支付设置-盛付通
