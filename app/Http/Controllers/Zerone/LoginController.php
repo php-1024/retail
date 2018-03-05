@@ -21,7 +21,7 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $id = 25;
+        $id = 1;
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
 
         if($id <> 1){
