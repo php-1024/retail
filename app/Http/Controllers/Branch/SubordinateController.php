@@ -134,7 +134,61 @@ class SubordinateController extends Controller
         }
     }
 
+    //编辑下级人员
+    public function subordinate_edit(Request $request){
+        $id = $request->input('id');
+        $info = Account::getOne([['id',$id]]);
+        return view('Catering/Subordinate/subordinate_edit',['info'=>$info]);
+    }
 
+    //编辑下级人员数据提交
+    public function subordinate_edit_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//要编辑的人员的ID
+        $account = $request->input('account');
+        $password = $request->input('password');//登录密码
+        $realname = $request->input('realname');//真实姓名
+        $mobile = $request->input('mobile');//手机号码
+        $organization_id = $admin_data['organization_id'];
+        if (!empty($password)) {
+            $key = config("app.branch_encrypt_key");//获取加密盐
+            $encrypted = md5($password);//加密密码第一重
+            $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+            $data['password'] = $encryptPwd;
+        }
+        if(Account::checkRowExists([['id','<>',$id],['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['id','<>',$id],['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+                //编辑用户
+                $data['mobile'] = $mobile;
+                Account::editAccount([[ 'id',$id]],$data);
+                if(AccountInfo::checkRowExists([['account_id',$id]])) {
+                    AccountInfo::editAccountInfo([['account_id', $id]], ['realname' => $realname]);
+                }else{
+                    AccountInfo::addAccountInfo(['account_id'=>$id,'realname'=>$realname]);
+                }
+                if($admin_data['is_super'] == 2){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在分店系统编辑了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
+                }
+                //添加操作日志
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '编辑下级人员失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '编辑下级人员成功', 'status' => '1']);
+        }
+    }
 
     //下级人员列表
     public function subordinate_list(Request $request){
