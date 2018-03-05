@@ -40,6 +40,9 @@ class BranchCheck{
             case "branch/role/role_list":              //权限角色列表
             case "branch/subordinate/subordinate_add": //添加下级人员
             case "branch/subordinate/subordinate_list"://下级人员列表
+
+            case "branch/order/order_spot":            //下级人员列表
+            case "branch/order/order_takeout":         //下级人员列表
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
