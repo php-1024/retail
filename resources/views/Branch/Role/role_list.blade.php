@@ -71,10 +71,16 @@
                                         <tr>
                                             <td>{{ $val->id }}</td>
                                             <td>{{ $val->role_name }}</td>
+                                            {{--<td>--}}
+                                                {{--@foreach($role_module_nodes[$val->id] as $k=>$v)--}}
+                                                    {{--<button data-original-title="{{$k}}" data-content="@foreach($v as $kk=>$vv) {{$vv}} @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;--}}
+                                                {{--@endforeach--}}
+                                            {{--</td>--}}
                                             <td>
-                                                @foreach($role_module_nodes[$val->id] as $k=>$v)
-                                                    <button data-original-title="订单模块" data-content="@foreach($v as $kk=>$vv){{$vv}}  @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;
-                                                @endforeach
+                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
+                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
+                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
+                                                <button data-original-title="订单模块" data-content="订单添加  订单删除  订单查看 订单编辑" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">订单模块</button>&nbsp;&nbsp;
                                             </td>
                                             <td>{{ $val->created_at }}</td>
                                             <td>
