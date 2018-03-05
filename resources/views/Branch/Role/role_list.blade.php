@@ -120,7 +120,7 @@
 <script src="{{asset('public/Branch/library')}}/file-input/bootstrap-filestyle.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/jPlayer/demo.js"></script>
+<script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 
 
