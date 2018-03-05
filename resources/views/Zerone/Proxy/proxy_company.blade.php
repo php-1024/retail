@@ -44,9 +44,9 @@
                 <div class="row">
                     <div class="col-sm-1">
                         <div class="form-group">
-                            <button type="button" onclick="history.back()" class="block btn btn-info pull-left"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                            <button type="button" onclick="history.back()" class=" btn btn-info pull-left"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
 
-                            <button type="button" id="addBtn" class="block btn btn-primary pull-left"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
+                            <button type="button" id="addBtn" class=" btn btn-primary pull-left"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
                         </div>
                     </div>
                 </div>
