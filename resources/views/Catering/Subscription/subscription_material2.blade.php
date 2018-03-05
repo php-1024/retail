@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="subscription_material.html" class="list-group-item">
+                                    <a href="{{url('catering/subscription/subscription_material')}}" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="subscription_material2.html" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/subscription_material2')}}" class="list-group-item active">
                                         图文素材
                                     </a>
 
