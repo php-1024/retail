@@ -52,7 +52,7 @@
 <script src="{{asset('public/Tooling/library/multiselect')}}/js/multiselect.js"></script>
 <script>
 $(function(){
-    $('#multiselect').multiselect({keepRenderingSort:false});
+    $('#multiselect').multiselect({keepRenderingSort:true});
 });
 //提交表单
 function postForm() {
