@@ -22,7 +22,7 @@ class LoginController extends Controller{
     public function display()
     {
         $id = 25;
-        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc');//获取零壹管理系统的一级菜单
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
 
         if($id <> 1){
             //查询用户所具备的所有节点的路由
@@ -40,13 +40,15 @@ class LoginController extends Controller{
             //获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
             foreach($menu as $key=>$val){
-                $sm = ProgramMenu::son_menu($val->id)->toArray();
+                $sm = ProgramMenu::son_menu($val['id'])->toArray();
                 foreach($sm as $k=>$v){
                     if(in_array($v['menu_route'],$unset_routes)){
-                        dump($v);
+                        unset($sm[$k]);
                     }
                 }
-
+                if(count($sm)<1){//
+                    unset($menu[$key]);
+                }
             }
             /**
              * 未完成，这里准备查询用户权限。
