@@ -601,6 +601,19 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('BranchCheck');       //商品管理-商品列表
     });
 
+    //下属管理--权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add', 'Branch\RoleController@role_add')->middleware('BranchCheck');   //添加权限角色
+        Route::get('role_list', 'Branch\RoleController@role_list')->middleware('BranchCheck'); //权限角色列表
+    });
+
+
+    //下属管理--添加组
+    Route::group(['prefix'=>'subordinate'],function(){
+        Route::get('subordinate_add','Branch\SubordinateController@subordinate_add')->middleware('BranchCheck');    //添加下级人员
+        Route::get('subordinate_list','Branch\SubordinateController@subordinate_list')->middleware('BranchCheck');  //下级人员列表
+    });
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
