@@ -118,7 +118,6 @@ class RoleController extends Controller
 
     //下级人员编辑
     public function role_edit(Request $request){
-        dd($request);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');//权限角色ID
         $info = OrganizationRole::getOne([['id',$id]]);//获取该ID的信息
