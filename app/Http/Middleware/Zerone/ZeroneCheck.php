@@ -6,6 +6,8 @@ namespace App\Http\Middleware\Zerone;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
+use App\Models\Program;
+use App\Models\Account;
 
 class ZeroneCheck{
     public function handle($request,Closure $next){
@@ -85,9 +87,32 @@ class ZeroneCheck{
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if($admin_data['id']!=1){
+        if($admin_data['id']<>1){
             //暂定所有用户都有权限
             //return self::res(1,redirect('zerone'));
+            $route_name = $request->path();//获取当前的页面路由
+
+            //查询用户所具备的所有节点的路由
+            $account_info = Account::getOne([['id',$admin_data['id']]]);
+            $account_routes = [];
+            foreach($account_info->nodes as $key=>$val){
+                $account_routes[] = $val->route_name;
+            }
+
+            //查询该程序下所有节点的路由
+            $program_info = Program::getOne([['id',1]]);
+            $program_routes = [];
+            foreach($program_info->nodes as $key=>$val){
+                $program_routes[] = $val->route_name;
+            }
+
+            //计算数组差集，获取用户所没有的权限
+            $unset_routes = array_diff($program_routes,$account_routes);
+
+            //如果跳转的路由不在该程序的所有节点中。
+            if(!in_array($route_name,$program_routes)){
+                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
+            }
             return self::res(1,$request);
         }else{
             return self::res(1,$request);

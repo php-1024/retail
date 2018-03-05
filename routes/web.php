@@ -532,6 +532,14 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('commission','Catering\FinanceController@commission')->middleware('CateringCheck');                  //佣金管理
     });
 
+    //支付设置
+    Route::group(['prefix'=>'payment'],function(){
+        Route::get('wechat_setting','Catering\PaymentController@wechat_setting')->middleware('CateringCheck');          //微信支付
+        Route::get('zerone_setting','Catering\PaymentController@zerone_setting')->middleware('CateringCheck');          //零舍壹得
+        Route::get('sheng_setting','Catering\PaymentController@sheng_setting')->middleware('CateringCheck');            //盛付通
+        Route::get('kuai_setting','Catering\PaymentController@kuai_setting')->middleware('CateringCheck');              //快付通
+    });
+
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
         Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //创建总分店
