@@ -40,7 +40,7 @@ class Account extends Model{
     //简易型查询单条数据关联查询
     public static function getOne($where)
     {
-        return self::with('organization')->with('account_info')->with('account_roles')->where($where)->first();
+        return self::with('organization')->with('nodes')->with('account_info')->with('account_roles')->where($where)->first();
     }
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){

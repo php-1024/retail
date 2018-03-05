@@ -67,13 +67,15 @@ class ModuleController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $module_name  = $request->input('module_name');//获取功能模块名称
+        $module_show_name  = $request->input('module_show_name');//获取功能模块名称
         $nodes = $request->input('nodes');//获取选择的节点
+
         if(Module::checkRowExists([[ 'module_name',$module_name ],[ 'id','!=',$id ]])){
             return response()->json(['data' => '模块名称已经存在', 'status' => '0']);
         }else{
             DB::beginTransaction();
             try{
-                Module::editModule([[ 'id',$id ]],['module_name'=>$module_name]);
+                Module::editModule([[ 'id',$id ]],['module_name'=>$module_name,'module_show_name'=>$module_show_name]);
                 foreach($nodes as $key=>$val){
                     $vo = ModuleNode::getOne([['module_id',$id],['node_id',$val]]);
                     if(is_null($vo)){

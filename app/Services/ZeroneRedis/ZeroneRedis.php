@@ -2,6 +2,7 @@
 namespace App\Services\ZeroneRedis;
 use Illuminate\Support\Facades\Redis;
 use App\Models\ProgramMenu;
+use App\Models\Account;
 class ZeroneRedis
 {
     //内部方法，生成账号数据Redis缓存
@@ -63,6 +64,10 @@ class ZeroneRedis
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
         }
         if($id <> 1){
+            //查询用户所具备的所有节点
+            $account_node_list = Account::getOne([['id',$id]]);
+            dump($account_node_list);
+            exit();
             /**
              * 未完成，这里准备查询用户权限。
              */
