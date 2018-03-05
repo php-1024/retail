@@ -540,6 +540,13 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('kuai_setting','Catering\PaymentController@kuai_setting')->middleware('CateringCheck');              //快付通
     });
 
+    //商品管理
+    Route::group(['prefix'=>'goods'],function(){
+        Route::get('goods_category','Catering\GoodsController@goods_category')->middleware('CateringCheck');            //商品分类查询
+        Route::get('goods_list','Catering\GoodsController@goods_list')->middleware('CateringCheck');                    //商品查询
+        Route::get('goods_detail','Catering\GoodsController@goods_detail')->middleware('CateringCheck');                //商品查看详情
+    });
+
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
         Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //创建总分店
