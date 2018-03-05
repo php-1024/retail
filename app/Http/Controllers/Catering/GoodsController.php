@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-class GoddsController extends Controller{
+class GoodsController extends Controller{
     //商品分类查询
     public function goods_category(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
