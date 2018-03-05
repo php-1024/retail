@@ -47,6 +47,7 @@ class LoginController extends Controller{
                         unset($sm[$k]);
                     }
                 }
+                dump($sm);
                 if(count($sm)<1){//
                     unset($menu[$key]);
                 }else{
