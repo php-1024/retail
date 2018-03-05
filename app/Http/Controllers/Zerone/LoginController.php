@@ -40,7 +40,8 @@ class LoginController extends Controller{
             //获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
             foreach($menu as $key=>$val){
-                $sm = ProgramMenu::son_menu($val['id'])->toArray();
+                $sm = ProgramMenu::son_menu($val['id'])->toArray();//获取子菜单列表
+                //循环判断用户是否具有子菜单权限
                 foreach($sm as $k=>$v){
                     if(in_array($v['menu_route'],$unset_routes)){
                         unset($sm[$k]);
@@ -48,6 +49,8 @@ class LoginController extends Controller{
                 }
                 if(count($sm)<1){//
                     unset($menu[$key]);
+                }else{
+                    $son_menu[$val['id']] = $sm;
                 }
             }
             /**
@@ -56,7 +59,7 @@ class LoginController extends Controller{
         }else{
             $son_menu = [];
             foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-                $son_menu[$val->id] = ProgramMenu::son_menu($val->id)->toArray();
+                $son_menu[$val['id']] = ProgramMenu::son_menu($val->id)->toArray();
             }
         }
         return view('Zerone/Login/display');
