@@ -24,6 +24,7 @@ class BranchCheckAjax{
             case "branch/ajax/quick_rule":            //快速授权检测登入和权限
             case "branch/ajax/subordinate_edit":      //编辑下属人员信息
             case "branch/ajax/subordinate_authorize": //编辑——授权下属人员
+            case "branch/ajax/subordinate_lock":      //冻结下属页面
             case "branch/ajax/selected_rule":         //编辑——授权下属人员
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -46,7 +47,8 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/role_delete_check"://检测是否登录 权限 安全密码
-                $re = $this->checkLoginAndRuleAndSafe($request);
+            case "branch/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
+            $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
             case "branch/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
