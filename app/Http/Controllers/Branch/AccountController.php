@@ -9,8 +9,6 @@ use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
-use App\Models\Organization;
-use App\Models\OrganizationCompanyinfo;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
