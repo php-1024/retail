@@ -53,6 +53,7 @@ class LoginController extends Controller{
                 }else{
                     $son_menu[$val['id']] = $sm;
                 }
+                unset($sm);
             }
             /**
              * 未完成，这里准备查询用户权限。
