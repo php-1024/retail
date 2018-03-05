@@ -528,6 +528,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('balance','Catering\FinanceController@balance')->middleware('CateringCheck');                        //余额管理
         Route::get('balance_recharge','Catering\FinanceController@balance_recharge')->middleware('CateringCheck');      //余额详情
         Route::get('credit','Catering\FinanceController@credit')->middleware('CateringCheck');                          //积分管理
+        Route::get('credit_recharge','Catering\FinanceController@credit_recharge')->middleware('CateringCheck');        //充值扣费
         Route::get('commission','Catering\FinanceController@commission')->middleware('CateringCheck');                  //佣金管理
     });
 
