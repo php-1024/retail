@@ -8,10 +8,15 @@ namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\AccountInfo;
+use App\Models\AccountNode;
 use App\Models\Module;
+use App\Models\OperationLog;
 use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
+use App\Models\RoleAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class SubordinateController extends Controller
@@ -70,6 +75,65 @@ class SubordinateController extends Controller
         }
         return view('Branch/Subordinate/quick_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
+
+
+    //添加下级人员数据提交
+    public function subordinate_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $password = $request->input('password');//登录密码
+        $realname = $request->input('realname');//用户真实姓名
+        $mobile = $request->input('mobile');//用户手机号码
+        $role_id = $request->input('role_id');//用户角色ID
+        $module_node_ids = $request->input('module_node_ids');//用户权限节点
+
+        $key = config("app.branch_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+
+        $parent_id = $admin_data['id'];//上级ID是当前用户ID
+        $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
+        $deepth = $admin_data['deepth']+1;
+        $organization_id = $admin_data['organization_id'];//当前平台组织id
+
+        $account = Account::max('account');
+        $account = $account+1;
+        if(Account::checkRowExists([[ 'account',$account ]])){//判断零壹管理平台中 ，判断组织中账号是否存在
+            return response()->json(['data' => '账号生成错误，请重试', 'status' => '0']);
+        }elseif(Account::checkRowExists([['organization_id',$organization_id],[ 'mobile',$mobile ]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }elseif(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
+            return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+                //添加用户
+                $account_id=Account::addAccount(['organization_id'=>$organization_id, 'parent_id'=>$parent_id, 'parent_tree'=>$parent_tree, 'deepth'=>$deepth, 'account'=>$account, 'password'=>$encryptPwd,'mobile'=>$mobile]);
+                //添加用户个人信息
+                AccountInfo::addAccountInfo(['account_id'=>$account_id,'realname'=>$realname]);
+                //添加用户角色关系
+                RoleAccount::addRoleAccount(['account_id'=>$account_id,'role_id'=>$role_id]);
+                //添加用户权限节点关系
+                foreach($module_node_ids as $key=>$val){
+                    AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val]);
+                }
+                if($admin_data['is_super'] == 2){
+                    //添加操作日志
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在分店系统添加了下级人员：'.$account);//保存操作记录
+                }else{
+                    //添加操作日志
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了下级人员：'.$account);//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加了下级人员失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加下级人员成功，账号是：'.$account, 'status' => '1']);
+        }
+    }
+
 
 
     //下级人员列表
