@@ -82,7 +82,7 @@
                                         </td>
 
                                         <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='balance_recharge.html'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;余额详情</button>
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="{{url('catering/finance/balance_recharge')}}"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;余额详情</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -99,7 +99,7 @@
                                         </td>
 
                                         <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='balance_recharge.html'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;余额详情</button>
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="{{url('catering/finance/balance_recharge')}}"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;余额详情</button>
                                         </td>
                                     </tr>
                                     </tbody>
