@@ -523,10 +523,17 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('subordinate_list','Catering\SubordinateController@subordinate_list')->middleware('CateringCheck');  //下级人员列表
     });
 
+    //财务管理
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('balance','Catering\FinanceController@balance')->middleware('CateringCheck');                        //余额管理
+        Route::get('credit','Catering\FinanceController@credit')->middleware('CateringCheck');                          //积分管理
+        Route::get('commission','Catering\FinanceController@commission')->middleware('CateringCheck');                  //佣金管理
+    });
+
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //添加下级人员
-        Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //下级人员列表
+        Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //创建总分店
+        Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //总分店管理
     });
 
 
