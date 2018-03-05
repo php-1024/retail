@@ -134,6 +134,7 @@ class SubordinateController extends Controller
         }
     }
 
+
     //编辑下级人员
     public function subordinate_edit(Request $request){
         $id = $request->input('id');
@@ -188,6 +189,19 @@ class SubordinateController extends Controller
             }
             return response()->json(['data' => '编辑下级人员成功', 'status' => '1']);
         }
+    }
+
+
+    //下级人员授权管理
+    public function subordinate_authorize(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $id = $request->input('id');
+        $info = Account::getOne([['id',$id]]);
+        foreach($info->account_roles as $key=>$val){
+            $info->account_role = $val->id;
+        }
+        $role_list = OrganizationRole::getList([['program_id',5],['created_by',$admin_data['id']]],0,'id');
+        return view('Branch/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
     //下级人员列表
