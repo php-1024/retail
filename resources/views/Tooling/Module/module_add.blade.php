@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">模块展示名称</label>
-                                    <div class="col-sm-10"><input type="text" name="module_name" id="module_name" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="module_show_name" id="module_name" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group"><label class="col-sm-2 control-label">模块功能节点</label>
