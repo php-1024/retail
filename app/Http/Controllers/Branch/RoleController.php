@@ -59,20 +59,21 @@ class RoleController extends Controller
         $route_name = $request->path();//获取当前的页面路由
         $role_name = $request->input('role_name');//权限角色名称
         $node_ids = $request->input('module_node_ids');//角色权限节点
+        dd($admin_data);
 
         if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
             return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['program_id'=>7,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = OrganizationRole::addRole(['program_id'=>5,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
-                if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了权限角色'.$role_name);//保存操作记录
+                if($admin_data['is_super'] == 1){
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了权限角色'.$role_name);//保存操作记录
                 }else{
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
