@@ -43,10 +43,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="subscription_menu.html" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/subscription_menu')}}" class="list-group-item active">
                                         自定义菜单
                                     </a>
-                                    <a href="subscription_menu2.html" class="list-group-item">
+                                    <a href="{{url('catering/subscription/subscription_menu2')}}" class="list-group-item">
                                         个性化菜单
                                     </a>
 
