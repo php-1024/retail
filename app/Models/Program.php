@@ -36,6 +36,11 @@ class Program extends Model{
         return $this->belongsToMany('App\Models\Node','program_module_node','program_id','node_id');
     }
 
+    //简易型查询单条数据关联查询
+    public static function getOne($where)
+    {
+        return self::with('nodes')->where($where)->first();
+    }
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Program();

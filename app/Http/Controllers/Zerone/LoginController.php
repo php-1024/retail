@@ -11,6 +11,7 @@ use App\Models\Account;
 use App\Models\ErrorLog;
 use App\Models\LoginLog;
 use App\Models\ProgramMenu;
+use App\Models\Program;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
@@ -27,11 +28,21 @@ class LoginController extends Controller{
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
         }
         if($id <> 1){
-            //查询用户所具备的所有节点
+            //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$id]]);
-            $account_nodes = $account_info->nodes->toArray();
-            dump($account_nodes);
-            exit();
+            $account_routes = [];
+            foreach($account_info->nodes as $key=>$val){
+                $account_routes[] = $val->route_name;
+            }
+            //查询该程序下所有节点
+            $program_info = Program::getOne([['id',1]]);
+            $program_routes = [];
+            foreach($program_info->nodes as $key=>$val){
+                $program_routes[] = $val->route_name;
+            }
+            dump($account_routes);
+            dump($program_routes);
+            dump( array_diff($program_routes,$account_routes));
             /**
              * 未完成，这里准备查询用户权限。
              */
