@@ -630,6 +630,8 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('password_edit_check', 'Branch\AccountController@password_edit_check')->middleware('BranchCheckAjax');          //密码检测
         Route::post('role_edit', 'Branch\RoleController@role_edit')->middleware('BranchCheckAjax');                     //角色编辑弹出
         Route::post('role_edit_check', 'Branch\RoleController@role_edit_check')->middleware('BranchCheckAjax');         //角色编辑检测
+        Route::post('role_delete', 'Branch\RoleController@role_delete')->middleware('BranchCheckAjax');                 //角色删除弹出
+        Route::post('role_delete_check', 'Branch\RoleController@role_delete_check')->middleware('BranchCheckAjax');     //角色删除检测
         Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('BranchCheckAjax');          //下级人员管理权限角色添加
     });
 });
