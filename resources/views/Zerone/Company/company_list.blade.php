@@ -129,7 +129,7 @@
                                             -->
                                             <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/company/company_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
                                             <button type="button" id="programBtn" onclick="location.href='{{url('zerone/company/company_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                            <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/company/company_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
+                                            <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/company/company_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺划拨管理</button>
                                         </td>
 
                                     </tr>
