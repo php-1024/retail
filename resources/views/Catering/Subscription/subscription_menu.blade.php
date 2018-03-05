@@ -35,7 +35,6 @@
             </aside>
             <!-- /.aside -->
             <section id="content">
-
                 <section class="hbox stretch">
                     <!-- side content -->
                     <aside class="aside bg-dark" id="sidebar">
