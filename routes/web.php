@@ -502,6 +502,14 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('subscription_message', 'Catering\SubscriptionController@subscription_message')->middleware('CateringCheck');  //消息管理
         Route::get('subscription_menu', 'Catering\SubscriptionController@subscription_menu')->middleware('CateringCheck');        //菜单管理
     });
+
+    //用户管理
+    Route::group(['prefix'=>'user'],function(){
+        Route::get('user_tag', 'Catering\UserController@user_tag')->middleware('CateringCheck');                        //粉丝标签管理
+        Route::get('user_list', 'Catering\UserController@user_tag')->middleware('CateringCheck');                       //粉丝用户管理
+        Route::get('user_timeline', 'Catering\UserController@user_tag')->middleware('CateringCheck');                   //粉丝用户足迹
+    });
+
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
         Route::get('role_add','Catering\RoleController@role_add')->middleware('CateringCheck');                         //添加权限角色
