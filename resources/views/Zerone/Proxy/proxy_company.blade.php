@@ -45,7 +45,7 @@
                     <div class="col-sm-1">
                         <div class="form-group">
                             <button type="button" onclick="history.back()" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
-                            <label class="control-label" for="amount"> &nbsp;</label>
+
                             <button type="button" id="addBtn" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
                         </div>
                     </div>
