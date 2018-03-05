@@ -49,9 +49,9 @@ class CateringCheck{
             /****公众号管理****/
 
             /****用户管理****/
-            case "catering/User/user_tag":                  //粉丝标签管理
-            case "catering/User/user_list":                 //粉丝用户管理
-            case "catering/User/user_timeline":             //粉丝用户足迹
+            case "catering/user/user_tag":                  //粉丝标签管理
+            case "catering/user/user_list":                 //粉丝用户管理
+            case "catering/user/user_timeline":             //粉丝用户足迹
             /****用户管理****/
 
             /****下属管理--权限角色****/
