@@ -35,8 +35,13 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/role_add_check"://检测登录，权限，安全密码，及添加角色的数据
-                $re = $this->checkLoginAndRuleAndSafeRoleAdd($request);
+            case "branch/ajax/role_edit_check"://检测登录，权限，安全密码，及修改角色的数据
+                $re = $this->checkLoginAndRuleAndSafeRoleAddAndEdit($request);
                 return self::format_response($re, $next);
+                break;
+            case "branch/ajax/role_delete_check"://检测是否登录 权限 安全密码
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
                 break;
             case "company/ajax/store_add_second_check": //商户创建店铺数据检测
                 $re = $this->checkLoginAndRuleAndStoreAdd($request);
@@ -70,12 +75,12 @@ class BranchCheckAjax{
 
 
     //检测登录，权限，安全密码，及添加角色信息的数据
-    public function checkLoginAndRuleAndSafeRoleAdd($request){
+    public function checkLoginAndRuleAndSafeRoleAddAndEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
+            $re2 = $this->checkRoleAddAndEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -207,8 +212,8 @@ class BranchCheckAjax{
 
 
     /*****************************数据检测开始****************************/
-    //检测权限角色添加
-    public function checkRoleAdd($request)
+    //检测权限角色添加、角色编辑
+    public function checkRoleAddAndEdit($request)
     {
         if (empty($request->input('role_name'))) {
             return self::res(0, response()->json(['data' => '角色名称不能为空', 'status' => '0']));
