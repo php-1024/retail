@@ -523,10 +523,17 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('subordinate_list','Catering\SubordinateController@subordinate_list')->middleware('CateringCheck');  //下级人员列表
     });
 
+    //财务管理
+    Route::group(['prefix'=>'finance'],function(){
+        Route::get('balance','Catering\FinanceController@balance')->middleware('CateringCheck');                        //余额管理
+        Route::get('credit','Catering\FinanceController@credit')->middleware('CateringCheck');                          //积分管理
+        Route::get('commission','Catering\FinanceController@commission')->middleware('CateringCheck');                  //佣金管理
+    });
+
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //添加下级人员
-        Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //下级人员列表
+        Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //创建总分店
+        Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //总分店管理
     });
 
 
@@ -621,6 +628,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('profile_edit_check', 'Branch\AccountController@profile_edit_check')->middleware('BranchCheckAjax');//个人账号信息修改
         Route::post('safe_password_edit_check', 'Branch\AccountController@safe_password_edit_check')->middleware('BranchCheckAjax');//安全密码设置检测
         Route::post('password_edit_check', 'Branch\AccountController@password_edit_check')->middleware('BranchCheckAjax');          //密码检测
+        Route::post('role_edit', 'Branch\RoleController@role_edit')->middleware('BranchCheckAjax');          //角色编辑检测
         Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('BranchCheckAjax');          //下级人员管理权限角色添加
     });
 });
