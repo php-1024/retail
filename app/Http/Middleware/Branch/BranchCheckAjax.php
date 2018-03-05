@@ -20,6 +20,7 @@ class BranchCheckAjax{
                 break;
             case "branch/ajax/branch_select":         //超级管理员选择分店提交数据
             case "branch/ajax/role_edit":             //编辑权限角色弹出框检测登入和权限
+            case "branch/ajax/role_delete":           //删除权限角色弹出框检测登入和权限
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
