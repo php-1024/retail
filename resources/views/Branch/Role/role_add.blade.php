@@ -32,314 +32,170 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">分店概况</h3>
+                            <h3 class="m-b-none">角色添加</h3>
                         </div>
+                        <section class="panel panel-default">
+                            <header class="panel-heading font-bold">
+                                角色添加
+                            </header>
+                            <div class="panel-body">
+                                <form class="form-horizontal" method="get">
 
-                        <div class="col-lg-3">
-                            <section class="panel panel-default">
-
-                                <header class="panel-heading font-bold">
-                                    概况
-
-                                    <button id="editBtn" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit "></i>&nbsp;编辑</button>
-                                </header>
-                                <div class="panel-body">
-                                    <form class="form-horizontal" method="get">
-                                        <div class="form-group clearfix text-center m-t">
-                                            <div class="inline">
-                                                <div class="thumb-lg" >
-                                                    <img src="{{url('public/Branch/images/m0.jpg')}}" class="img-circle" alt="...">
-                                                </div>
-                                            </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">角色名称</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">模式</label>
-                                            <div class="col-sm-8">
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">角色权限</label>
+                                        <div class="col-sm-10">
+                                            <div class="panel-body">
                                                 <div>
-                                                    <label class="label label-success m-t-xs">
-                                                        餐饮系统【先吃后付】
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
                                                     </label>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">分店名称</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-info">刘记鸡煲王【龙岗店】</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">类型</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-success">主店</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-info">张老三</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-info">13123456789</label>
-                                            </div>
-                                        </div>
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                    </label>
+                                                </div>
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">状态</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-success">正常运营</label>
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                    </label>
+                                                </div>
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                    </label>
+                                                </div>
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                    </label>
+                                                </div>
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单模块
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option1" id="inlineCheckbox1" checked="checked" > 订单编辑
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option2" id="inlineCheckbox2" checked="checked" > 订单查询
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单添加
+                                                    </label>
+                                                    &nbsp;&nbsp;
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" value="option3" id="inlineCheckbox3" checked="checked" > 订单删除
+                                                    </label>
+                                                </div>
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
                                             </div>
                                         </div>
-
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">店铺地址</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-primary">广东省深圳市龙岗区万汇大厦1606</label>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                </div>
-                            </section>
-                        </div>
-
-                        <div class="col-lg-9 ">
-                            <div class="col-lg-12">
-                                <div class="col-lg-4 state-overview"">
-                                <section class="panel">
-                                    <div class="symbol bg-danger">
-                                        <i class="fa fa-money"></i>
                                     </div>
-                                    <div class="value">
-                                        <h1>168888.03</h1>
-                                        <p>元营收</p>
+
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        </div>
                                     </div>
-                                </section>
-                            </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12 col-sm-offset-6">
 
-                            <div class="col-lg-4 state-overview"">
-                            <section class="panel">
-                                <div class="symbol bg-success">
-                                    <i class="icon icon-user"></i>
-                                </div>
-                                <div class="value">
-                                    <h1>1680</h1>
-                                    <p>个粉丝用户</p>
-                                </div>
-                            </section>
-                        </div>
-
-                        <div class="col-lg-4 state-overview"">
-                        <section class="panel">
-                            <div class="symbol bg-info">
-                                <i class="icon icon-basket-loaded"></i>
-                            </div>
-                            <div class="value">
-                                <h1>100</h1>
-                                <p>个商品</p>
+                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                        </div>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                </form>
                             </div>
                         </section>
-                        </div>
 
-
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="col-lg-4 state-overview"">
-                            <section class="panel">
-                                <div class="symbol bg-warning">
-                                    <i class="fa fa-list"></i>
-                                </div>
-                                <div class="value">
-                                    <h1>666</h1>
-                                    <p>现场订单数</p>
-                                </div>
-                            </section>
-                        </div>
-
-                        <div class="col-lg-4 state-overview"">
-                        <section class="panel">
-                            <div class="symbol bg-primary">
-                                <i class="icon icon-list"></i>
-                            </div>
-                            <div class="value">
-                                <h1>888</h1>
-                                <p>外卖订单</p>
-                            </div>
-                        </section>
-                        </div>
-
-                        <div class="col-lg-4 state-overview"">
-                        <section class="panel">
-                            <div class="symbol bg-dark">
-                                <i class="icon icon-printer"></i>
-                            </div>
-                            <div class="value">
-                                <h1>5</h1>
-                                <p>台打印机</p>
-                            </div>
-                        </section>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="col-lg-6">
-                                <section class="panel panel-default">
-                                    <header class="panel-heading">最近登录日志</header>
-                                    <table class="table table-striped m-b-none">
-                                        <thead>
-                                        <tr>
-                                            <th>登录账号</th>
-                                            <th>登录IP</th>
-                                            <th>登录地址</th>
-                                            <th>登录时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </section>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <section class="panel panel-default">
-                                    <header class="panel-heading">最近操作日志</header>
-                                    <table class="table table-striped m-b-none">
-                                        <thead>
-                                        <tr>
-                                            <th>操作账号</th>
-                                            <th>操作内容</th>
-                                            <th>操作时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </section>
-                            </div>
-                        </div>
-                        </div>
                     </section>
                 </section>
             </section>
