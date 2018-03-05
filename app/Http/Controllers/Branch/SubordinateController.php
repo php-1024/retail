@@ -134,6 +134,19 @@ class SubordinateController extends Controller
         }
     }
 
+    //下属列表
+    public function subordinate_list(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $account = $request->input('account');
+        $search_data = ['account'=>$account];
+        $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
+        $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
+        $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
+        return view('Branch/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
 
     //编辑下级人员
     public function subordinate_edit(Request $request){
@@ -275,20 +288,6 @@ class SubordinateController extends Controller
             return response()->json(['data' => '编辑下级人员授权失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '编辑下级人员授权成功', 'status' => '1']);
-    }
-
-    //下级人员列表
-    public function subordinate_list(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $account = $request->input('account');
-        $search_data = ['account'=>$account];
-        $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
-        $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
-        $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
-        return view('Branch/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 
