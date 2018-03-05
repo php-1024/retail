@@ -204,6 +204,158 @@
         </section>
     </section>
 </section>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content modal-lg">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑会员卡</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">会员卡名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" placeholder="会员卡名称">
+                            </div>
+                        </div>
+
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">折扣比率</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" placeholder="0 - 1 间的 2位小数">
+                            </div>
+                        </div>
+
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">发行数量</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" >
+                            </div>
+                        </div>
+
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">会员卡价格</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" >
+                            </div>
+                        </div>
+
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">有效时间</label>
+                            <div class="col-sm-3">
+                                <input class="input-sm datepicker-input form-control" size="16" type="text" value="" placeholder="开始时间" data-date-format="yyyy-mm-dd">
+                            </div>
+                            <div class="col-sm-1 text-center" style="padding-top: 7px;">
+                                到
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="input-sm datepicker-input form-control" size="16" type="text" value="" placeholder="结束时间" data-date-format="yyyy-mm-dd">
+                            </div>
+                        </div>
+
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class= "col-sm-2 control-label" for="input-id-1">适用店铺范围</label>
+                            <div class="col-sm-10">
+                                <select multiple class="chosen-select2 col-sm-12">
+                                    <option value="AK" selected="selected">所有店铺</option>
+                                    <option value="HI">刘记鸡煲王（总店）</option>
+                                    <option value="CA">刘记鸡煲王（宝能店）</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">停止销售会员卡确定</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                <span class="help-block m-b-none">
+                              <p class="text-danger">停止销售会员卡，将停止在页面的会员卡销售，已经购买了会员卡的用户可以继续使用</p>
+                          </span>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">删除会员卡确定</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                <span class="help-block m-b-none">
+                              <p class="text-danger">只有 未销售出去 或 未开始销售的会员卡才可以删除。</p>
+                          </span>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
@@ -215,20 +367,29 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-
-
+<script type="text/javascript" src="{{asset('public/Catering')}}/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="{{asset('public/Catering')}}/js/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
+    $(function(){
+        $('#addBtn').click(function(){
+
             swal({
                 title: "温馨提示",
                 text: "操作成功",
                 type: "success"
             });
         });
+        $('.chosen-select2').chosen({width:"100%"});
+        $('#editBtn').click(function(){
+            $('#myModal').modal();
+        });
+        $('#lockBtn').click(function(){
+            $('#myModal3').modal();
+        });
+        $('#deleteBtn').click(function(){
+            $('#myModal4').modal();
+        });
+        $('.popovers').popover();
     });
 </script>
 </body>
