@@ -43,7 +43,8 @@ class CateringCheck{
 
             /****公众号管理****/
             case "catering/subscription/subscription_setting":  //操作日记
-            case "catering/subscription/subscription_material": //图文素材
+            case "catering/subscription/subscription_material": //图片素材
+            case "catering/subscription/subscription_material2"://图文素材
             case "catering/subscription/subscription_message":  //消息管理
             case "catering/subscription/subscription_menu":     //菜单管理
             /****公众号管理****/

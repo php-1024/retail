@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="subscription_material.html" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/subscription_material')}}" class="list-group-item active">
                                         图片素材
                                     </a>
-                                    <a href="subscription_material2.html" class="list-group-item ">
+                                    <a href="{{url('catering/subscription/subscription_material2')}}" class="list-group-item ">
                                         图文素材
                                     </a>
 
@@ -212,6 +212,12 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+
+
+
+
+
 
 <!-- Ladda -->
 <script src="{{asset('public/Catering')}}/ladda/spin.min.js"></script>
