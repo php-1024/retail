@@ -40,9 +40,9 @@ class LoginController extends Controller{
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
             }
-            dump($account_routes);
-            dump($program_routes);
-            exit();
+           // dump($account_routes);
+            //dump($program_routes);
+
             /**
              * 未完成，这里准备查询用户权限。
              */
