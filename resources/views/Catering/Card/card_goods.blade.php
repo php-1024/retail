@@ -35,7 +35,208 @@
             </aside>
             <!-- /.aside -->
             <section id="content">
+                <section class="vbox">
+                    <section class="scrollable padder">
+                        <div class="m-b-md">
+                            <h3 class="m-b-none">"黄金会员卡"适用商品</h3>
+                        </div>
+                        <button class="btn btn-s-md btn-success" type="button" onclick="location.href='card_list.html'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
+                        <section class="panel panel-default">
+                            <header class="panel-heading">
+                                商品列表
+                            </header>
+                            <div class="row wrapper">
+                                <form class="form-horizontal" method="get">
+                                    <div class="col-sm-2">
+                                        <select name="account" class="form-control m-b">
+                                            <option>所有分店</option>
+                                            <option>总店</option>
+                                            <option>宝能店</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select name="account" class="form-control m-b">
+                                            <option>所有分类</option>
+                                            <optgroup label="总店">
+                                                <option value="AK">主食</option>
+                                                <option value="HI">酒水饮料</option>
+                                            </optgroup>
+                                            <optgroup label="宝能店">
+                                                <option value="AK">主食</option>
+                                                <option value="HI">饮料</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">商品标题</label>
+
+                                    <div class="col-sm-2">
+                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:20px;"><label class="checkbox m-n i-checks"><input type="checkbox"><i></i></label></th>
+                                        <th>ID</th>
+                                        <th>商品标题</th>
+                                        <th>商品价格</th>
+                                        <th>商品分类</th>
+                                        <th>库存</th>
+                                        <th>商品状态</th>
+                                        <th>隶属分店</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><label class="checkbox m-n i-checks"><input checked="checked" type="checkbox" name="post[]"><i></i></label></td>
+                                        <td>1</td>
+                                        <td>奇味鸡煲</td>
+                                        <td>
+                                            100.00
+                                        </td>
+                                        <td>
+                                            <label class="label label-info">主食</label>
+                                        </td>
+                                        <td>
+                                            999
+                                        </td>
+                                        <td>
+                                            <label class="label label-success">在售</label>
+                                        </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="checkbox m-n i-checks"><input checked="checked" type="checkbox" name="post[]"><i></i></label></td>
+                                        <td>1</td>
+                                        <td>奇味鸡煲</td>
+                                        <td>
+                                            100.00
+                                        </td>
+                                        <td>
+                                            <label class="label label-info">主食</label>
+                                        </td>
+                                        <td>
+                                            999
+                                        </td>
+                                        <td>
+                                            <label class="label label-success">在售</label>
+                                        </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="checkbox m-n i-checks"><input checked="checked" type="checkbox" name="post[]"><i></i></label></td>
+                                        <td>1</td>
+                                        <td>奇味鸡煲</td>
+                                        <td>
+                                            100.00
+                                        </td>
+                                        <td>
+                                            <label class="label label-info">主食</label>
+                                        </td>
+                                        <td>
+                                            999
+                                        </td>
+                                        <td>
+                                            <label class="label label-success">在售</label>
+                                        </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+                                        <td>1</td>
+                                        <td>奇味鸡煲</td>
+                                        <td>
+                                            100.00
+                                        </td>
+                                        <td>
+                                            <label class="label label-info">主食</label>
+                                        </td>
+                                        <td>
+                                            999
+                                        </td>
+                                        <td>
+                                            <label class="label label-success">在售</label>
+                                        </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+                                        <td>1</td>
+                                        <td>奇味鸡煲</td>
+                                        <td>
+                                            100.00
+                                        </td>
+                                        <td>
+                                            <label class="label label-info">主食</label>
+                                        </td>
+                                        <td>
+                                            999
+                                        </td>
+                                        <td>
+                                            <label class="label label-success">在售</label>
+                                        </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-12 text-right text-center-xs">
+                                        <ul class="pagination pull-right">
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="first" href="#first">«</a>
+                                            </li>
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="prev" href="#prev">‹</a>
+                                            </li>
+                                            <li class="footable-page active">
+                                                <a data-page="0" href="#">1</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">2</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">3</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">4</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">5</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="next" href="#next">›</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="last" href="#last">»</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </footer>
+                        </section>
+                    </section>
+                </section>
             </section>
         </section>
     </section>
