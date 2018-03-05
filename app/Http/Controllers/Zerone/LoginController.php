@@ -21,7 +21,7 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        $id = 25;
+        $id = 1;
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
 
         if($id <> 1){
@@ -47,11 +47,13 @@ class LoginController extends Controller{
                         unset($sm[$k]);
                     }
                 }
+                dump($sm);
                 if(count($sm)<1){//
                     unset($menu[$key]);
                 }else{
                     $son_menu[$val['id']] = $sm;
                 }
+                unset($sm);//销毁用于判断的变量
             }
             /**
              * 未完成，这里准备查询用户权限。
@@ -59,9 +61,10 @@ class LoginController extends Controller{
         }else{
             $son_menu = [];
             foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-                $son_menu[$val['id']] = ProgramMenu::son_menu($val->id)->toArray();
+                $son_menu[$val['id']] = ProgramMenu::son_menu($val['id'])->toArray();
             }
         }
+        dump($son_menu);
         return view('Zerone/Login/display');
     }
     /*
