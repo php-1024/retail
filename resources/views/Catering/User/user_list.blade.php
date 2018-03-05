@@ -35,7 +35,112 @@
             </aside>
             <!-- /.aside -->
             <section id="content">
+                <section class="vbox">
+                    <section class="scrollable padder">
+                        <div class="m-b-md">
+                            <h3 class="m-b-none">粉丝用户管理</h3>
+                        </div>
 
+                        <section class="panel panel-default">
+                            <header class="panel-heading">
+                                粉丝用户管理
+                            </header>
+                            <div class="row wrapper">
+                                <form class="form-horizontal" method="get">
+                                    <label class="col-sm-1 control-label">用户账号</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>微信头像</th>
+                                        <th>用户账号</th>
+                                        <th>微信昵称</th>
+                                        <th>关注公众号</th>
+                                        <th>源头商家</th>
+                                        <th>推荐人</th>
+                                        <th>粉丝标签</th>
+                                        <th>注册时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                        <td>100020</td>
+                                        <td>时光取名叫无心</td>
+                                        <td><label class="label label-success">是</label></td>
+                                        <td><label class="label label-info">联盟商户-刘记鸡煲王</label></td>
+                                        <td><label class="label label-primary">联盟用户-张老三</label></td>
+                                        <td>
+                                            <select style="width:100px" class="chosen-select2">
+                                                <option value="AK">无标签</option>
+                                                <option value="AK">粉丝标签1</option>
+                                                <option value="HI">粉丝标签2</option>
+                                                <option value="HI">粉丝标签3</option>
+                                                <option value="HI">粉丝标签4</option>
+                                            </select>
+                                        </td>
+                                        <td>2017-10-22 10:11:11</td>
+                                        <td>
+                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
+                                            <button class="btn btn-warning btn-xs" id="lockBtn"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="panel-footer">
+                                <div class="row">
+
+                                    <div class="col-sm-12 text-right text-center-xs">
+                                        <ul class="pagination pull-right">
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="first" href="#first">«</a>
+                                            </li>
+
+                                            <li class="footable-page-arrow disabled">
+                                                <a data-page="prev" href="#prev">‹</a>
+                                            </li>
+                                            <li class="footable-page active">
+                                                <a data-page="0" href="#">1</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">2</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">3</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">4</a>
+                                            </li>
+                                            <li class="footable-page">
+                                                <a data-page="1" href="#">5</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="next" href="#next">›</a>
+                                            </li>
+                                            <li class="footable-page-arrow">
+                                                <a data-page="last" href="#last">»</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </footer>
+                        </section>
+                    </section>
+                </section>
             </section>
         </section>
     </section>
