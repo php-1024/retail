@@ -73,7 +73,7 @@
                                         </td>
 
                                         <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='credit_recharge.html'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;充值扣费</button>
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='credit_recharge'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;充值扣费</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,7 +87,7 @@
                                         </td>
 
                                         <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='credit_recharge.html'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;充值扣费</button>
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='credit_recharge'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;充值扣费</button>
                                         </td>
                                     </tr>
                                     </tbody>
