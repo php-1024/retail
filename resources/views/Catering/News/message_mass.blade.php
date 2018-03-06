@@ -126,7 +126,7 @@
                                                                                             <i class="fa fa-check text-success"></i>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                                                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                                                                 </div>
                                                                                 <div class="padder-v">
                                                                                     <span>414631616.JPG</span>
@@ -142,7 +142,7 @@
                                                                                             <i class="fa fa-check text-success"></i>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                                                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                                                                 </div>
                                                                                 <div class="padder-v">
                                                                                     <span>414631616.JPG</span>
@@ -158,7 +158,7 @@
                                                                                             <i class="fa fa-check text-success"></i>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                                                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                                                                 </div>
                                                                                 <div class="padder-v">
                                                                                     <span>414631616.JPG</span>
@@ -174,7 +174,7 @@
                                                                                             <i class="fa fa-check text-success"></i>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                                                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                                                                 </div>
                                                                                 <div class="padder-v">
                                                                                     <span>414631616.JPG</span>
@@ -190,7 +190,7 @@
                                                                                             <i class="fa fa-check text-success"></i>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                                                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                                                                 </div>
                                                                                 <div class="padder-v">
                                                                                     <span>414631616.JPG</span>
@@ -206,7 +206,7 @@
                                                                                             <i class="fa fa-check text-success"></i>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                                                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                                                                 </div>
                                                                                 <div class="padder-v">
                                                                                     <span>414631616.JPG</span>
