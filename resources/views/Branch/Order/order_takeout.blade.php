@@ -119,7 +119,7 @@
                                         <th><label class="label label-primary">未付款</label></th>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='order_detail2.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='order_takeout_detail'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     <tr>
