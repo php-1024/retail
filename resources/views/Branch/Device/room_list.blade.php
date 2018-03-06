@@ -196,7 +196,7 @@
         $('#deleteBtn').click(function(){
             $('#myModal').modal();
         });
-        $('#okBtn').click(function(){
+        $('#editBtn').click(function(){
             $('#myModal2').modal();
         });
     });
