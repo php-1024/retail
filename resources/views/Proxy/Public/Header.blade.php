@@ -25,7 +25,7 @@
 
         </li>
         <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="{{ url('proxy/quit') }}">
+            <a class="dropdown-toggle" href="{{ url('proxy/quit') }}">
 
                 <span class="username">退出登录</span>
                 <i class="icon-arrow-right"></i>

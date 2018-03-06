@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Catering')}}/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/Catering')}}/trumbowyg/design/css/trumbowyg.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -57,128 +57,69 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">图文素材</h2>
+                                <h2 class="font-thin m-b">添加多条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" id="addBtn">添加图文 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
-                                    <header class="panel-heading">
-                                        图文素材列表
-                                    </header>
+                                    <form class="form-horizontal" method="get">
+                                        <input type="hidden" id="num" value="1">
+                                        <div class="panel-group m-b" id="target_box" >
 
-                                    <div class="table-responsive">
-                                        <table class="table table-striped b-t b-light">
-                                            <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>素材标题</th>
-                                                <th>素材类型</th>
-                                                <th>添加时间</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='subscription_material5.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>测试图文</td>
-                                                <td>多条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='subscription_material6.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <footer class="panel-footer">
-                                        <div class="row">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#target_box" href="#collapse1">
+                                                        添加图文
+                                                    </a>
+                                                </div>
+                                                <div id="collapse1" class="panel-collapse collapse in" style="height: auto;">
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">图片</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-sm-12 text-right text-center-xs">
-                                                <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
-                                                </ul>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label" for="input-id-1">标题</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label" for="input-id-1">作者</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-2 control-label">正文</div>
+                                                        <div class="col-sm-9">
+                                                            <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </footer>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-sm-offset-6">
+
+                                                <button type="button" class="btn btn-success" id="save_btn">保存信息</button>
+                                            </div>
+                                        </div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    </form>
                                 </section>
                             </section>
                         </section>
@@ -188,54 +129,48 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">选择添加类型</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group text-center">
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material3')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material4')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
-                    </div>
-                    <div style="clear:both;"></div>
-                </div>
-
-            </div>
+<div id="tw_info" style="display:none;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{target_num}">
+                添加图文{target_num}
+            </a>
         </div>
-    </form>
-</div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">删除图文消息确定</h4>
+        <div id="collapse{target_num}" class="panel-collapse collapse in" style="height: auto;">
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-9">
+                    <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                 </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
+            </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                    </form>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-id-1">标题</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input-id-1" value="">
                 </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-id-1">作者</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input-id-1" value="">
+                </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-id-1">正文</label>
+                <div class="col-sm-9">
+                    <textarea id="form-content{target_num}" class="editor" cols="30" rows="10"> </textarea>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -247,17 +182,85 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
+
+<script src="{{asset('public/Catering')}}/js/wysiwyg/jquery.hotkeys.js"></script>
+<script src="{{asset('public/Catering')}}/js/wysiwyg/bootstrap-wysiwyg.js"></script>
+<script src="{{asset('public/Catering')}}/js/wysiwyg/demo.js"></script>
+
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<!-- Ladda -->
+<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
+
+
+<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+
+<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+
+
 
 <script type="text/javascript">
-    $(function(){
-        $('#deleteBtn').click(function(){
-            $('#myModal2').modal();
+    $(document).ready(function() {
+        $('#form-content').trumbowyg({
+
+            lang: 'fr',
+
+            closable: false,
+
+            mobile: true,
+
+            fixedBtnPane: true,
+
+            fixedFullWidth: true,
+
+            semantic: true,
+
+            resetCss: true,
+
+            autoAjustHeight: true,
+
+            autogrow: true
+
         });
 
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
+        $("#addBtn").click(function(){
+
+            var html = $('#tw_info').html();
+            var num = $('#num').val();
+            num++;
+            $('#num').val(num);
+            html = html.replace(/{target_num}/g,num);
+            $('#target_box').append(html);
+            $('#form-content'+num).trumbowyg({
+
+                lang: 'fr',
+
+                closable: false,
+
+                mobile: true,
+
+                fixedBtnPane: true,
+
+                fixedFullWidth: true,
+
+                semantic: true,
+
+                resetCss: true,
+
+                autoAjustHeight: true,
+
+                autogrow: true
+
+            });
+        });
+
+        $('#editor1').wysiwyg();
+        $('#save_btn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            });
         });
     });
 </script>
