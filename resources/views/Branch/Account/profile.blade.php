@@ -94,13 +94,13 @@
                                     @foreach($module_node_list as $key=>$val)
                                     <div>
                                         <label class="i-checks">
-                                            <input type="checkbox" value="{{$val->module_name}}" checked="checked" disabled=""> {{$val->module_name}}
+                                            <input type="checkbox" value="{{$val['module_name']}}" checked="checked" disabled=""> {{$val['module_name']}}
                                         </label>
                                     </div>
                                     <div>
-                                        @foreach($val->program_nodes as $kk=>$vv)
+                                        @foreach($val['program_nodes'] as $kk=>$vv)
                                         <label class="i-checks">
-                                            <input type="checkbox" value="{{$vv->node_name}}" checked="checked" disabled=""> {{$vv->node_name}}
+                                            <input type="checkbox" value="{{$vv['node_name']}}" checked="checked" disabled=""> {{$vv['node_name']}}
                                         </label>
                                         &nbsp;&nbsp;
                                         @endforeach
