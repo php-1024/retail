@@ -122,10 +122,12 @@ class ZeroneRedis
 
     public static function create_proxy_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','2']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
-
+        $account_info = Account::getOne([['id',$id]]);
+        dump($account_info);
+        exit();
         if($id <> 1){
             //查询用户所具备的所有节点的路由
-            $account_info = Account::getOne([['id',$id]]);
+
             $account_routes = [];
             foreach($account_info->nodes as $key=>$val){
                 $account_routes[] = $val->route_name;
