@@ -82,9 +82,8 @@
                                         <td>
                                             @foreach($role_module_nodes[$val->id] as $k=>$v)
                                             <button data-original-title="订单模块" data-content="@foreach($v as $kk=>$vv){{$vv}}  @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                             @endforeach
-
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                         </td>
                                         <td>{{ $val->created_at }}</td>
                                         <td>
