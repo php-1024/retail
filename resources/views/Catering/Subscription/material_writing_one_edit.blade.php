@@ -57,21 +57,23 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">添加单条图文</h2>
+                                <h2 class="font-thin m-b">编辑单条图文</h2>
                                 <div class="row row-sm">
                                     <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
                                     <header class="panel-heading font-bold">
-                                        添加单条图文
+                                        编辑单条图文
                                     </header>
                                     <div class="panel-body">
                                         <form class="form-horizontal" method="get">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
+                                                    <span class="help-block m-b-none col-lg-2"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></span>
                                                     <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+
                                                 </div>
                                             </div>
 
