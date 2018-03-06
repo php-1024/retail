@@ -29,22 +29,37 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">商品查询</h3>
+                            <h3 class="m-b-none">其他分店商品拷贝到本分店</h3>
+                        </div>
+                        <div class="row row-sm">
+                            <button class="btn btn-s-md btn-success" type="button" onclick="location.href='goods_list.html'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                商品列表
+                                其他分店商品列表
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <div class="col-sm-2">
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy.html'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>
+                                        <select name="account" class="form-control m-b">
+                                            <option>所有分店</option>
+                                            <option>总店</option>
+                                            <option>宝能店</option>
+
+                                        </select>
                                     </div>
                                     <div class="col-sm-2">
                                         <select name="account" class="form-control m-b">
-                                            <option value="AK">所有分类</option>
-                                            <option value="AK">主食</option>
-                                            <option value="HI">饮料</option>
+                                            <option>所有分类</option>
+                                            <optgroup label="总店">
+                                                <option value="AK">主食</option>
+                                                <option value="HI">酒水饮料</option>
+                                            </optgroup>
+                                            <optgroup label="宝能店">
+                                                <option value="AK">主食</option>
+                                                <option value="HI">饮料</option>
+                                            </optgroup>
                                         </select>
                                     </div>
                                     <label class="col-sm-1 control-label">商品标题</label>
@@ -55,6 +70,8 @@
 
                                     <div class="col-sm-3">
                                         <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+
+                                        <button type="button" class="btn btn-s-md btn-primary"><i class="fa fa-copy"></i>&nbsp;&nbsp;批量拷贝到本分店</button>
                                     </div>
                                 </form>
                             </div>
@@ -62,6 +79,7 @@
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
+                                        <th style="width:20px;"><label class="checkbox m-n i-checks"><input type="checkbox"><i></i></label></th>
                                         <th>ID</th>
                                         <th>商品标题</th>
                                         <th>商品价格</th>
@@ -69,12 +87,14 @@
                                         <th>库存</th>
                                         <th>排序</th>
                                         <th>商品状态</th>
+                                        <th>隶属分店</th>
                                         <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
+                                        <td><label class="checkbox m-n i-checks"><input checked="checked" type="checkbox" name="post[]"><i></i></label></td>
                                         <td>1</td>
                                         <td>奇味鸡煲</td>
                                         <td>
@@ -92,13 +112,16 @@
                                         <td>
                                             <label class="label label-success">在售</label>
                                         </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_edit'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" ><i class="fa fa-check"></i>&nbsp;&nbsp;拷贝商品</button>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td><label class="checkbox m-n i-checks"><input checked="checked" type="checkbox" name="post[]"><i></i></label></td>
                                         <td>1</td>
                                         <td>奇味鸡煲</td>
                                         <td>
@@ -116,13 +139,16 @@
                                         <td>
                                             <label class="label label-success">在售</label>
                                         </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_edit'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" ><i class="fa fa-check"></i>&nbsp;&nbsp;拷贝商品</button>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td><label class="checkbox m-n i-checks"><input checked="checked" type="checkbox" name="post[]"><i></i></label></td>
                                         <td>1</td>
                                         <td>奇味鸡煲</td>
                                         <td>
@@ -140,10 +166,12 @@
                                         <td>
                                             <label class="label label-success">在售</label>
                                         </td>
+                                        <td>
+                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                        </td>
                                         <td>2017-08-09 11:11:11</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_edit'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" ><i class="fa fa-check"></i>&nbsp;&nbsp;拷贝商品</button>
                                         </td>
                                     </tr>
                                     </tbody>
