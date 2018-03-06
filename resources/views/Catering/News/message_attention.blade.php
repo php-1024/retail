@@ -127,6 +127,134 @@
         </section>
     </section>
 </section>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">选择图文素材</h4>
+                </div>
+                <div class="modal-body">
+                    <section class="panel panel-default">
+                        <header class="panel-heading">
+                            图文素材列表
+                        </header>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped b-t b-light">
+                                <thead>
+                                <tr>
+
+                                    <th>素材标题</th>
+                                    <th>素材类型</th>
+                                    <th>添加时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>测试图文</td>
+                                    <td>单条图文</td>
+                                    <td>2017-08-09 11:11:11</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>测试图文</td>
+                                    <td>单条图文</td>
+                                    <td>2017-08-09 11:11:11</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>测试图文</td>
+                                    <td>单条图文</td>
+                                    <td>2017-08-09 11:11:11</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>测试图文</td>
+                                    <td>单条图文</td>
+                                    <td>2017-08-09 11:11:11</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">选择图片素材</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-sm">
+                        <div class="col-lg-2">
+                            <div class="item">
+                                <div class="pos-rlt">
+                                    <a href="javascript:;"><img src="images/m1.jpg" alt="" class="r r-2x img-full"></a>
+                                </div>
+                                <div class="padder-v">
+                                    <span>414631616.JPG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑文本回复</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
@@ -138,57 +266,21 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-
 <script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
-
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
-
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
-
 <script type="text/javascript">
     $(function(){
-        $('#addKeyWord').click(function(){
-            $('#myModal').modal();
-        });
-        $('#addText').click(function(){
-            $('#myModal2').modal();
-        });
-        $('#addArticle').click(function(){
-            $('#myModal3').modal();
+        $('#editText').click(function(){
+            $('#myModal1').modal();
         });
         $('#editArticle').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#addPicture').click(function(){
-            $('#myModal4').modal();
+            $('#myModal2').modal();
         });
         $('#editPicture').click(function(){
-            $('#myModal4').modal();
-        });
-        $('#editKeyWord').click(function(){
-            $('#myModal5').modal();
-        });
-        $('#deleteKeyWord').click(function(){
-            $('#myModal6').modal();
-        });
-        $('#deleteMaterial').click(function(){
-            $('#myModal7').modal();
-        });
-        $('#editText').click(function(){
-            $('#myModal8').modal();
+            $('#myModal3').modal();
         });
         $('#form-content').trumbowyg({
-            lang: 'fr',
-            closable: false,
-            mobile: true,
-            fixedBtnPane: true,
-            fixedFullWidth: true,
-            semantic: true,
-            resetCss: true,
-            autoAjustHeight: true,
-            autogrow: true
-        });
-        $('#form-content2').trumbowyg({
             lang: 'fr',
             closable: false,
             mobile: true,
@@ -203,27 +295,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
