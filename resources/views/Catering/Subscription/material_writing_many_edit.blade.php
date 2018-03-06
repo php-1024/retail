@@ -57,67 +57,70 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">添加单条图文</h2>
+                                <h2 class="font-thin m-b">编辑多条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
-                                    <header class="panel-heading font-bold">
-                                        添加单条图文
-                                    </header>
-                                    <div class="panel-body">
-                                        <form class="form-horizontal" method="get">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">图片</label>
-                                                <div class="col-sm-10">
-                                                    <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                    <form class="form-horizontal" method="get">
+                                        <input type="hidden" id="num" value="1">
+                                        <div class="panel-group m-b" id="target_box" >
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#target_box" href="#collapse1">
+                                                        编辑图文
+                                                    </a>
+                                                </div>
+                                                <div id="collapse1" class="panel-collapse collapse in" style="height: auto;">
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">图片</label>
+                                                        <div class="col-sm-9">
+                                                            <span class="help-block m-b-none col-lg-2"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></span>
+                                                            <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label" for="input-id-1">标题</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label" for="input-id-1">作者</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-2 control-label">正文</div>
+                                                        <div class="col-sm-9">
+                                                            <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-sm-offset-6">
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-id-1">标题</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" value="">
-                                                </div>
+                                                <button type="button" class="btn btn-success" id="save_btn">保存信息</button>
                                             </div>
-
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-id-1">作者</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" value="">
-                                                </div>
-                                            </div>
-
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-id-1">摘要</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" rows="5"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-id-1">正文</label>
-                                                <div class="col-sm-10">
-                                                    <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
-                                                </div>
-                                            </div>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-12 col-sm-offset-6">
-
-                                                    <button type="button" class="btn btn-success" id="save_btn">保存信息</button>
-                                                </div>
-                                            </div>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    </form>
                                 </section>
                             </section>
                         </section>
@@ -127,6 +130,50 @@
         </section>
     </section>
 </section>
+<div id="tw_info" style="display:none;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{target_num}">
+                添加图文{target_num}
+            </a>
+        </div>
+        <div id="collapse{target_num}" class="panel-collapse collapse in" style="height: auto;">
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-9">
+                    <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-id-1">标题</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input-id-1" value="">
+                </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-id-1">作者</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="input-id-1" value="">
+                </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-id-1">正文</label>
+                <div class="col-sm-9">
+                    <textarea id="form-content{target_num}" class="editor" cols="30" rows="10"> </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
@@ -144,8 +191,10 @@
 
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<!-- Ladda -->
 <script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
 
+<script src="{{asset('public/Catering')}}/trumbowyg/langs/fr.js"></script>
 
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 
@@ -174,6 +223,39 @@
             autogrow: true
 
         });
+
+        $("#addBtn").click(function(){
+
+            var html = $('#tw_info').html();
+            var num = $('#num').val();
+            num++;
+            $('#num').val(num);
+            html = html.replace(/{target_num}/g,num);
+            $('#target_box').append(html);
+            $('#form-content'+num).trumbowyg({
+
+                lang: 'fr',
+
+                closable: false,
+
+                mobile: true,
+
+                fixedBtnPane: true,
+
+                fixedFullWidth: true,
+
+                semantic: true,
+
+                resetCss: true,
+
+                autoAjustHeight: true,
+
+                autogrow: true
+
+            });
+        });
+
+        $('#editor1').wysiwyg();
         $('#save_btn').click(function(){
             swal({
                 title: "温馨提示",
