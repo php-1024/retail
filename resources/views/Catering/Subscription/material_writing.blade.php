@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('catering/subscription/subscription_material')}}" class="list-group-item">
+                                    <a href="{{url('catering/subscription/material_image')}}" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="{{url('catering/subscription/subscription_material2')}}" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/material_writing')}}" class="list-group-item active">
                                         图文素材
                                     </a>
 
@@ -198,8 +198,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group text-center">
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material3')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material4')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/material_writing_one')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/material_writing_many')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
