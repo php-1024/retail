@@ -42,16 +42,16 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="message" class="list-group-item active">
+                                    <a href="{{url('catering/news/message')}}" class="list-group-item active">
                                         关键词自动回复
                                     </a>
-                                    <a href="message_attention" class="list-group-item">
+                                    <a href="{{url('catering/news/message_attention')}}" class="list-group-item">
                                         关注后自动回复
                                     </a>
-                                    <a href="message_default" class="list-group-item ">
+                                    <a href="{{url('catering/news/message_default')}}" class="list-group-item ">
                                         默认回复
                                     </a>
-                                    <a href="message_Mass" class="list-group-item ">
+                                    <a href="{{url('catering/news/message_mass')}}" class="list-group-item ">
                                         消息群发
                                     </a>
                                 </div>

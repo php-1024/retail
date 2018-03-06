@@ -509,7 +509,10 @@ Route::group(['prefix'=>'catering'],function(){
 
     //公众号管理--消息管理
     Route::group(['prefix'=>'news'],function(){
-        Route::get('message', 'Catering\NewsController@message')->middleware('CateringCheck');                          //消息管理
+        Route::get('message', 'Catering\NewsController@message')->middleware('CateringCheck');                          //关键词自动回复
+        Route::get('message_attention', 'Catering\NewsController@message_attention')->middleware('CateringCheck');      //关注后自动回复
+        Route::get('message_default', 'Catering\NewsController@message_default')->middleware('CateringCheck');          //默认回复
+        Route::get('message_mass', 'Catering\NewsController@message_mass')->middleware('CateringCheck');                //消息群发
     });
 
 

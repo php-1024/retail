@@ -53,7 +53,10 @@ class CateringCheck{
             /****公众号管理****/
 
             /****公众号管理-消息管理****/
-            case "catering/news/message":                   //消息管理
+            case "catering/news/message":                   //关键词自动回复
+            case "catering/news/message_attention":         //关注后自动回复
+            case "catering/news/message_default":           //默认回复
+            case "catering/news/message_mass":              //消息群发
             /****公众号管理-消息管理****/
 
             /****用户管理****/
