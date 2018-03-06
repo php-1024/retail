@@ -46,6 +46,9 @@
                                             <div class="btn-group" data-toggle="buttons">
                                                 @foreach($package_program as $key=>$val)
                                                     @foreach($val->programs as $kk=>$vv)
+                                                        @if(empty($vv))
+                                                            暂时没有可选的模式
+                                                        @endif
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
                                                     <input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
                                                 </label>
