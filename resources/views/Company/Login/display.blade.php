@@ -26,13 +26,7 @@
         <a class="navbar-brand block" href="javascript:;"><span class="h1 font-bold">ZERONE</span></a>
         <section class="m-b-lg">
             <header class="wrapper text-center">
-                <strong>零壹云管理系统 - 商户管理平台登录
-                    <?php $num=10000;?>
-                    @for($i=1;$i<=250;$i++)
-                        <?php $num=$num+$num*0.004;?>
-                    @endfor
-                    <?php echo $num;?>
-                </strong>
+                <strong>零壹云管理系统 - 商户管理平台登录</strong>
             </header>
             <form class="m-t" role="form" id="currentForm" action="{{ url('company/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">

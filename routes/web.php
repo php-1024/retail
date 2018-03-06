@@ -504,15 +504,18 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('material_writing_one_edit', 'Catering\SubscriptionController@material_writing_one_edit')->middleware('CateringCheck');  //单条图文编辑
         Route::get('material_writing_many', 'Catering\SubscriptionController@material_writing_many')->middleware('CateringCheck');  //多条图文
         Route::get('material_writing_many_edit', 'Catering\SubscriptionController@material_writing_many_edit')->middleware('CateringCheck');//多条图文编辑
-        Route::get('menu', 'Catering\SubscriptionController@menu')->middleware('CateringCheck');                                    //菜单管理
     });
 
-    //公众号管理--消息管理
+    //公众号管理--消息管理 && 菜单管理
     Route::group(['prefix'=>'news'],function(){
         Route::get('message', 'Catering\NewsController@message')->middleware('CateringCheck');                          //关键词自动回复
         Route::get('message_attention', 'Catering\NewsController@message_attention')->middleware('CateringCheck');      //关注后自动回复
         Route::get('message_default', 'Catering\NewsController@message_default')->middleware('CateringCheck');          //默认回复
         Route::get('message_mass', 'Catering\NewsController@message_mass')->middleware('CateringCheck');                //消息群发
+
+        Route::get('menu_customize', 'Catering\MenuController@menu_customize')->middleware('CateringCheck');            //自定义菜单
+        Route::get('menu_different', 'Catering\MenuController@menu_different')->middleware('CateringCheck');            //个性化菜单
+
     });
 
 
