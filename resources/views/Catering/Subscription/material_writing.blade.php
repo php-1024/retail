@@ -85,7 +85,7 @@
                                                 <td>单条图文</td>
                                                 <td>2017-08-09 11:11:11</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='subscription_material5.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                    <button class="btn btn-info btn-xs" onclick="location.href='{{url('catering/subscription/material_writing_one_edit')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                     <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                 </td>
                                             </tr>
@@ -95,7 +95,7 @@
                                                 <td>多条图文</td>
                                                 <td>2017-08-09 11:11:11</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='subscription_material6.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                    <button class="btn btn-info btn-xs" onclick="location.href='{{url('catering/subscription/material_writing_many_edit')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                     <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                 </td>
                                             </tr>
