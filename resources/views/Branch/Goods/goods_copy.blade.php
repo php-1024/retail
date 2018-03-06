@@ -32,7 +32,7 @@
                             <h3 class="m-b-none">其他分店商品拷贝到本分店</h3>
                         </div>
                         <div class="row row-sm">
-                            <button class="btn btn-s-md btn-success" type="button" onclick="location.href='goods_list.html'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                            <button class="btn btn-s-md btn-success" type="button" onclick="location.href='goods_list'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                             <div class="line line-dashed b-b line-lg pull-in"></div>
                         </div>
                         <section class="panel panel-default">
