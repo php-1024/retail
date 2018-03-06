@@ -72,7 +72,7 @@
                                                 <div>
                                                     @foreach($val['program_nodes'] as $kk=>$vv)
                                                     <label class="i-checks">
-                                                        <input type="checkbox" data-group_id="{{  $val['id'] }}" class="checkbox_module_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}" id="inlineCheckbox1"  > {{ $vv['node_name'] }}
+                                                        <input type="checkbox" data-group_id="{{  $val['id'] }}" class="checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}" id="inlineCheckbox1"  > {{ $vv['node_name'] }}
                                                     </label>
                                                     &nbsp;&nbsp;
                                                     @endforeach
