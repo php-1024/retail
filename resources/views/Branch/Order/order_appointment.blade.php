@@ -179,89 +179,65 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
+                    <h4 class="modal-title">确认取消预约</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
+                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                             <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
+                                <input type="text" class="form-control" id="input-id-1" value="">
                             </div>
                         </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">负责人</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="张老三" placeholder="负责人" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-<!-- App -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">确认预约到店</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" value="">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch')}}/library/file-input/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/file-input/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
@@ -272,6 +248,15 @@
         $('.selected_table').click(function(){
             $('.selected_table').removeClass('btn-success').addClass('btn-info');
             $(this).addClass('btn-success').removeClass('btn-info');
+        });
+    });
+
+    $(document).ready(function() {
+        $('#deleteBtn').click(function(){
+            $('#myModal').modal();
+        });
+        $('#okBtn').click(function(){
+            $('#myModal2').modal();
         });
     });
 </script>
