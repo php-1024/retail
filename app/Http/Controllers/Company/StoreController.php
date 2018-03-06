@@ -105,13 +105,13 @@ class StoreController extends Controller{
     //店铺管理
     public function store_list(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];
         $organization = Organization::getArrayCompany(['parent_id'=>$parent_id]);//type=4为总店组织
+        dd($organization);
         return view('Company/Store/store_list',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
