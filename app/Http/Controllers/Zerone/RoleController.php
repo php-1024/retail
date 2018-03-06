@@ -97,10 +97,9 @@ class RoleController extends Controller{
      */
     private function getModuleNode($role_id){
         $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
-        dump($list);
         $module_nodes = [];
         foreach($list as $key=>$val){
-            $module_nodes[$val['module_name']][] = $val['node_name'];
+            $module_nodes[$val['module_show_name']][] = $val['node_show_name'];
         }
        return $module_nodes;
     }
