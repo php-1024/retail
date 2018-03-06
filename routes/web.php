@@ -660,6 +660,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('table_list', 'Branch\DeviceController@table_list')->middleware('BranchCheck'); //设备管理-餐桌管理
         Route::get('printer_add', 'Branch\DeviceController@printer_add')->middleware('BranchCheck'); //设备管理-添加打印机
         Route::get('printer_list', 'Branch\DeviceController@printer_list')->middleware('BranchCheck'); //设备管理-打印机管理
+        Route::get('printer_goods', 'Branch\DeviceController@printer_goods')->middleware('BranchCheck'); //设备管理-打印机关联商品
     });
 
 

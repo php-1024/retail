@@ -53,6 +53,7 @@ class BranchCheck{
             case "branch/device/table_list":             //设备管理-餐桌管理
             case "branch/device/printer_add":            //设备管理-添加打印机
             case "branch/device/printer_list":           //设备管理-打印机管理
+            case "branch/device/printer_goods":           //设备管理-打印机关联商品
 
             case "branch/user/user_tag":                //用户管理-粉丝标签管理
             case "branch/user/user_list":               //用户管理-粉丝用户管理
