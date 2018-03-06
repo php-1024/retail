@@ -34,7 +34,6 @@ class AccountController extends Controller{
             $modules = [];
             $nodes = [];
             $module_node_list = [];
-            dump($account_node_list);
             //过滤重复选出的节点和模块
             foreach($account_node_list as $key=>$val){
                 $modules[$val->module_id] = $val->module_name;
