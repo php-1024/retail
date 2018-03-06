@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="subscription_material.html" class="list-group-item">
+                                    <a href="{{url('catering/subscription/material_image')}}" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="subscription_material2.html" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/material_writing')}}" class="list-group-item active">
                                         图文素材
                                     </a>
 
@@ -59,7 +59,7 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">添加多条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='subscription_material2.html'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
