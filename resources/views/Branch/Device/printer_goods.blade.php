@@ -34,7 +34,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">"主打印机"关联商品</h3>
                         </div>
-                        <button class="btn btn-s-md btn-success" type="button" onclick="location.href='printer_list.html'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                        <button class="btn btn-s-md btn-success" type="button" onclick="location.href='printer_list'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                         <section class="panel panel-default">
