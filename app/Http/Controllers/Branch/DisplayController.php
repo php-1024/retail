@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\LoginLog;
+use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -32,8 +33,9 @@ class DisplayController extends Controller
             ['program_id','5'], //查询program_id(5)餐饮管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
-        $login_log_list = LoginLog::getList($where,10,'id','DESC');
-        dump($login_log_list);
+        $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
+        $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
+        dump($operation_log_list);
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('branch/branch_list');
         }
@@ -41,7 +43,7 @@ class DisplayController extends Controller
         if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('branch/account/password');
         }else{
-            return view('Branch/Display/display',['login_log_list'=>$login_log_list,'organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Branch/Display/display',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
 
