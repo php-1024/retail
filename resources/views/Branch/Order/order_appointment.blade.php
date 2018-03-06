@@ -240,18 +240,6 @@
 <script type="text/javascript" src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        $('.selected_btn').click(function(){
-            $('.selected_btn').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
-        });
-        $('.selected_table').click(function(){
-            $('.selected_table').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
-        });
-    });
-
-    $(document).ready(function() {
         $('#deleteBtn').click(function(){
             $('#myModal').modal();
         });
