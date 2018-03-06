@@ -49,7 +49,7 @@ class AccountController extends Controller{
                 unset($module);
             }
         }
-        return view('Branch/Account/profile',['account_node_list'=>$module_node_list,'user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Account/profile',['module_node_list'=>$module_node_list,'user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //个人账号信息修改处理
