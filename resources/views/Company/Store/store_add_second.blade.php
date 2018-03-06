@@ -47,13 +47,12 @@
                                                 @foreach($package_program as $key=>$val)
                                                     @if(empty($val->programs))
                                                         暂时没有可选的模式
-                                                    @else
+                                                    @endif
                                                     @foreach($val->programs as $kk=>$vv)
                                                         <label class="btn btn-sm btn-success" style="margin-right: 10px;">
                                                             <input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
                                                         </label>
                                                     @endforeach
-                                                    @endif
                                                 @endforeach
                                             </div>
                                         </div>
