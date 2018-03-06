@@ -638,9 +638,11 @@ Route::group(['prefix'=>'branch'],function(){
 
     //订单管理
     Route::group(['prefix'=>'order'],function(){
-        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');   //订单管理-现场订单
-        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck'); //订单管理-外卖订单
-        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('BranchCheck'); //预约管理
+        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');                       //订单管理-现场订单
+        Route::get('order_spot_detail', 'Branch\OrderController@order_spot_detail')->middleware('BranchCheck');         //订单管理-现场订单详情
+        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck');                 //订单管理-外卖订单
+        Route::get('order_takeout_detail', 'Branch\OrderController@order_takeout_detail')->middleware('BranchCheck');   //订单管理-外卖订单详情
+        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('BranchCheck');         //预约管理
     });
 
     //设备管理
