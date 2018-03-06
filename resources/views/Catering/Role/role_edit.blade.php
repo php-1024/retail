@@ -20,25 +20,6 @@
                         <label class="col-sm-2 control-label" for="input-id-1">角色权限</label>
                         <div class="col-sm-10">
                             <div class="panel-body">
-                                {{--@foreach($module_node_list as $key=>$val)--}}
-                                    {{--<group class="checked_box_group_{{ $val['id'] }}">--}}
-                                {{--<div>--}}
-                                    {{--<label class="i-checks">--}}
-                                        {{--<input type="checkbox" value="option1" id="inlineCheckbox1"  @if(in_array($val['id'],$selected_modules)) checked="checked" @endif  class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}" > {{ $val['module_name'] }}--}}
-                                    {{--</label>--}}
-                                {{--</div>--}}
-                                {{--<div>--}}
-                                    {{--@foreach($val['program_nodes'] as $kk=>$vv)--}}
-                                    {{--<label class="i-checks">--}}
-                                        {{--<input type="checkbox" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif  data-group_id="{{  $val['id'] }}"  id="inlineCheckbox1" class="checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}--}}
-                                    {{--</label>--}}
-                                    {{--&nbsp;&nbsp;--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
-                                {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
-                                    {{--</group>--}}
-                                {{--@endforeach--}}
-
                                 @foreach($module_node_list as $key=>$val)
                                     <group class="checked_box_group_{{ $val['id'] }}">
                                         <div>
