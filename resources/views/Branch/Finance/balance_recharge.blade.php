@@ -47,7 +47,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="input-id-1">用户账号</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="input-id-1" disabled="" value="100021">
+                                                    <input type="text" class="form-control" disabled="" value="100021">
                                                 </div>
                                             </div>
 
@@ -55,7 +55,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="input-id-1">微信昵称</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="input-id-1" disabled="" value="时光取名叫无心">
+                                                    <input type="text" class="form-control" disabled="" value="时光取名叫无心">
                                                 </div>
                                             </div>
 
@@ -98,7 +98,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="input-id-1">充值金额</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="input-id-1" value="100.00">
+                                                    <input type="text" class="form-control" value="100.00">
                                                     <span class="help-block m-b-none">充值金额只保留到小数点后2位</span>
                                                 </div>
 
@@ -108,7 +108,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="input-id-1">备注</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="input-id-1" value="">
+                                                    <input type="text" class="form-control" value="">
                                                 </div>
                                             </div>
 
@@ -116,7 +116,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="input-id-1">安全密码</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="input-id-1" value="">
+                                                    <input type="text" class="form-control" value="">
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>

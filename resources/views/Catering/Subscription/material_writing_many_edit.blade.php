@@ -57,7 +57,7 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">添加多条图文</h2>
+                                <h2 class="font-thin m-b">编辑多条图文</h2>
                                 <div class="row row-sm">
                                     <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
@@ -71,7 +71,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#target_box" href="#collapse1">
-                                                        添加图文
+                                                        编辑图文
                                                     </a>
                                                 </div>
                                                 <div id="collapse1" class="panel-collapse collapse in" style="height: auto;">
@@ -79,6 +79,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">图片</label>
                                                         <div class="col-sm-9">
+                                                            <span class="help-block m-b-none col-lg-2"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></span>
                                                             <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                                                         </div>
                                                     </div>
@@ -172,6 +173,7 @@
         </div>
     </div>
 </div>
+
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
@@ -192,12 +194,11 @@
 <!-- Ladda -->
 <script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
 
+<script src="{{asset('public/Catering')}}/trumbowyg/langs/fr.js"></script>
 
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
-
-
 
 <script type="text/javascript">
     $(document).ready(function() {

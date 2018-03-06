@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">商户号</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">PaySignKey</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" value="">
                                         </div>
                                     </div>
 
@@ -75,7 +75,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">秘钥</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" value="">
                                         </div>
                                     </div>
 

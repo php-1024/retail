@@ -501,10 +501,22 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('material_image', 'Catering\SubscriptionController@material_image')->middleware('CateringCheck');                //图片素材
         Route::get('material_writing', 'Catering\SubscriptionController@material_writing')->middleware('CateringCheck');            //图文素材
         Route::get('material_writing_one', 'Catering\SubscriptionController@material_writing_one')->middleware('CateringCheck');    //单条图文
+        Route::get('material_writing_one_edit', 'Catering\SubscriptionController@material_writing_one_edit')->middleware('CateringCheck');  //单条图文编辑
         Route::get('material_writing_many', 'Catering\SubscriptionController@material_writing_many')->middleware('CateringCheck');  //多条图文
-        Route::get('message', 'Catering\SubscriptionController@message')->middleware('CateringCheck');                              //消息管理
+        Route::get('material_writing_many_edit', 'Catering\SubscriptionController@material_writing_many_edit')->middleware('CateringCheck');//多条图文编辑
         Route::get('menu', 'Catering\SubscriptionController@menu')->middleware('CateringCheck');                                    //菜单管理
     });
+
+    //公众号管理--消息管理
+    Route::group(['prefix'=>'news'],function(){
+        Route::get('message', 'Catering\NewsController@message')->middleware('CateringCheck');                          //关键词自动回复
+        Route::get('message_attention', 'Catering\NewsController@message_attention')->middleware('CateringCheck');      //关注后自动回复
+        Route::get('message_default', 'Catering\NewsController@message_default')->middleware('CateringCheck');          //默认回复
+        Route::get('message_mass', 'Catering\NewsController@message_mass')->middleware('CateringCheck');                //消息群发
+    });
+
+
+
 
     //用户管理
     Route::group(['prefix'=>'user'],function(){
@@ -631,13 +643,16 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('goods_add', 'Branch\GoodsController@goods_add')->middleware('BranchCheck');         //商品管理-添加商品
         Route::get('goods_edit', 'Branch\GoodsController@goods_edit')->middleware('BranchCheck');       //商品管理-编辑商品
         Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('BranchCheck');       //商品管理-商品列表
+        Route::get('goods_copy', 'Branch\GoodsController@goods_copy')->middleware('BranchCheck');       //商品管理-拷贝其他分店商品
     });
 
     //订单管理
     Route::group(['prefix'=>'order'],function(){
-        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');   //订单管理-现场订单
-        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck'); //订单管理-外卖订单
-        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('BranchCheck'); //预约管理
+        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');                       //订单管理-现场订单
+        Route::get('order_spot_detail', 'Branch\OrderController@order_spot_detail')->middleware('BranchCheck');         //订单管理-现场订单详情
+        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck');                 //订单管理-外卖订单
+        Route::get('order_takeout_detail', 'Branch\OrderController@order_takeout_detail')->middleware('BranchCheck');   //订单管理-外卖订单详情
+        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('BranchCheck');         //预约管理
     });
 
     //设备管理
@@ -648,6 +663,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('table_list', 'Branch\DeviceController@table_list')->middleware('BranchCheck'); //设备管理-餐桌管理
         Route::get('printer_add', 'Branch\DeviceController@printer_add')->middleware('BranchCheck'); //设备管理-添加打印机
         Route::get('printer_list', 'Branch\DeviceController@printer_list')->middleware('BranchCheck'); //设备管理-打印机管理
+        Route::get('printer_goods', 'Branch\DeviceController@printer_goods')->middleware('BranchCheck'); //设备管理-打印机关联商品
     });
 
 

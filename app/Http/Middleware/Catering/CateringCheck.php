@@ -42,14 +42,22 @@ class CateringCheck{
             /****账号中心****/
 
             /****公众号管理****/
-            case "catering/subscription/setting":               //操作日记
-            case "catering/subscription/material_image":        //图片素材
-            case "catering/subscription/material_writing":      //图文素材
-            case "catering/subscription/material_writing_one":  //单条图文素材
-            case "catering/subscription/material_writing_many": //多条图文素材
-            case "catering/subscription/message":               //消息管理
-            case "catering/subscription/menu":                  //菜单管理
+            case "catering/subscription/setting":                   //操作日记
+            case "catering/subscription/material_image":            //图片素材
+            case "catering/subscription/material_writing":          //图文素材
+            case "catering/subscription/material_writing_one":      //单条图文素材
+            case "catering/subscription/material_writing_one_edit": //单条图文素材编辑
+            case "catering/subscription/material_writing_many":     //多条图文素材
+            case "catering/subscription/material_writing_many_edit"://多条图文素材编辑
+            case "catering/subscription/menu":                      //菜单管理
             /****公众号管理****/
+
+            /****公众号管理-消息管理****/
+            case "catering/news/message":                   //关键词自动回复
+            case "catering/news/message_attention":         //关注后自动回复
+            case "catering/news/message_default":           //默认回复
+            case "catering/news/message_mass":              //消息群发
+            /****公众号管理-消息管理****/
 
             /****用户管理****/
             case "catering/user/user_tag":                  //粉丝标签管理

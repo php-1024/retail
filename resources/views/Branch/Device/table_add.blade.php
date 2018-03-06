@@ -169,29 +169,25 @@
         </div>
     </form>
 </div>
-<!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch')}}/library/file-input/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/file-input/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        $('.selected_btn').click(function(){
-            $('.selected_btn').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
-        });
-        $('.selected_table').click(function(){
-            $('.selected_table').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
+        $('#addBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            });
         });
     });
 </script>

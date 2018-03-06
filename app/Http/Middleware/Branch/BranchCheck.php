@@ -36,13 +36,16 @@ class BranchCheck{
             case "branch/goods/goods_add":             //添加商品
             case "branch/goods/goods_edit":            //编辑商品
             case "branch/goods/goods_list":            //商品列表
+            case "branch/goods/goods_copy":            //拷贝其他分店商品
             case "branch/role/role_add":               //添加权限角色
             case "branch/role/role_list":              //权限角色列表
             case "branch/subordinate/subordinate_add": //添加下级人员
             case "branch/subordinate/subordinate_list"://下级人员列表
 
             case "branch/order/order_spot":             //订单管理-现场订单
+            case "branch/order/order_spot_detail":      //订单管理-现场订单详情
             case "branch/order/order_takeout":          //订单管理-外卖订单
+            case "branch/order/order_takeout_detail":   //订单管理-外卖订单详情
             case "branch/order/order_appointment":      //预约管理
             case "branch/device/room_add":               //设备管理-添加包厢
             case "branch/device/room_list":              //设备管理-包厢管理
@@ -50,6 +53,7 @@ class BranchCheck{
             case "branch/device/table_list":             //设备管理-餐桌管理
             case "branch/device/printer_add":            //设备管理-添加打印机
             case "branch/device/printer_list":           //设备管理-打印机管理
+            case "branch/device/printer_goods":           //设备管理-打印机关联商品
 
             case "branch/user/user_tag":                //用户管理-粉丝标签管理
             case "branch/user/user_list":               //用户管理-粉丝用户管理
