@@ -513,13 +513,14 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('message_default', 'Catering\NewsController@message_default')->middleware('CateringCheck');          //默认回复
         Route::get('message_mass', 'Catering\NewsController@message_mass')->middleware('CateringCheck');                //消息群发
 
+    });
+    
+    //公众号管理--菜单管理
+    Route::group(['prefix'=>'menu'],function(){
         Route::get('menu_customize', 'Catering\MenuController@menu_customize')->middleware('CateringCheck');            //自定义菜单
         Route::get('menu_different', 'Catering\MenuController@menu_different')->middleware('CateringCheck');            //个性化菜单
 
     });
-
-
-
 
     //用户管理
     Route::group(['prefix'=>'user'],function(){
