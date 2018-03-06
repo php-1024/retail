@@ -128,21 +128,27 @@
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认取消预约</h4>
+                    <h4 class="modal-title">包厢信息编辑</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">包厢名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input-id-1" value="">
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="input-id-1" value="">
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -153,13 +159,14 @@
         </div>
     </form>
 </div>
+
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认预约到店</h4>
+                    <h4 class="modal-title">确认删除包厢</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
@@ -193,10 +200,10 @@
 <script type="text/javascript" src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#deleteBtn').click(function(){
+        $('#editBtn').click(function(){
             $('#myModal').modal();
         });
-        $('#editBtn').click(function(){
+        $('#deleteBtn').click(function(){
             $('#myModal2').modal();
         });
     });
