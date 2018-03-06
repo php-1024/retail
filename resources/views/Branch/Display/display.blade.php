@@ -209,8 +209,8 @@
                                         <tr>
                                             <td>{{$val->accounts->account}}</td>
                                             <td>{{  long2ip($val->ip) }}</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
+                                            <td>{{  $val->ip_position }}</td>
+                                            <td>{{  $val->created_at }}</td>
                                         </tr>
                                         @endforeach
                                         </tbody>
