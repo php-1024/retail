@@ -54,7 +54,7 @@
                                 <section class="comment-list block">
 
                                     <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="images/a9.png" alt="..."></span>
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Branch')}}/images/a9.png" alt="..."></span>
                                         <span class="arrow left"></span>
                                         <section class="comment-body panel panel-default">
                                             <header class="panel-heading">
@@ -71,7 +71,7 @@
                                         </section>
                                     </article>
                                     <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="images/a9.png" alt="..."></span>
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Branch')}}/images/a9.png" alt="..."></span>
                                         <span class="arrow left"></span>
                                         <section class="comment-body panel panel-default">
                                             <header class="panel-heading">
@@ -88,7 +88,7 @@
                                         </section>
                                     </article>
                                     <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="images/a9.png" alt="..."></span>
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Branch')}}/images/a9.png" alt="..."></span>
                                         <span class="arrow left"></span>
                                         <section class="comment-body panel panel-default">
                                             <header class="panel-heading">
@@ -105,7 +105,7 @@
                                         </section>
                                     </article>
                                     <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="images/a9.png" alt="..."></span>
+                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Branch')}}/images/a9.png" alt="..."></span>
                                         <span class="arrow left"></span>
                                         <section class="comment-body panel panel-default">
                                             <header class="panel-heading">

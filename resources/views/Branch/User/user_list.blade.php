@@ -69,7 +69,7 @@
                                     <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                        <td><img src="{{asset('public/Branch')}}/images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                         <td>100020</td>
                                         <td>时光取名叫无心</td>
                                         <td><label class="label label-success">是</label></td>
