@@ -62,7 +62,7 @@ class CateringCheck{
             case "catering/menu/menu_customize":            //自定义菜单
             case "catering/menu/menu_different":            //个性化菜单
             /****公众号管理-菜单管理****/
-                
+
             /****用户管理****/
             case "catering/user/user_tag":                  //粉丝标签管理
             case "catering/user/user_list":                 //粉丝用户管理
