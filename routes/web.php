@@ -497,13 +497,13 @@ Route::group(['prefix'=>'catering'],function(){
 
     //公众号管理
     Route::group(['prefix'=>'subscription'],function(){
-        Route::get('setting', 'Catering\SubscriptionController@setting')->middleware('CateringCheck');    //公众号设置
-        Route::get('material_image', 'Catering\SubscriptionController@material')->middleware('CateringCheck');     //图片素材
-        Route::get('material_writing', 'Catering\SubscriptionController@material2')->middleware('CateringCheck');  //图文素材
-        Route::get('material_one', 'Catering\SubscriptionController@material_one')->middleware('CateringCheck');//单条图文
-        Route::get('material4', 'Catering\SubscriptionController@material4')->middleware('CateringCheck');//多条图文
-        Route::get('message', 'Catering\SubscriptionController@message')->middleware('CateringCheck');    //消息管理
-        Route::get('menu', 'Catering\SubscriptionController@menu')->middleware('CateringCheck');          //菜单管理
+        Route::get('setting', 'Catering\SubscriptionController@setting')->middleware('CateringCheck');                              //公众号设置
+        Route::get('material_image', 'Catering\SubscriptionController@material_image')->middleware('CateringCheck');                //图片素材
+        Route::get('material_writing', 'Catering\SubscriptionController@material_writing')->middleware('CateringCheck');            //图文素材
+        Route::get('material_writing_one', 'Catering\SubscriptionController@material_writing_one')->middleware('CateringCheck');    //单条图文
+        Route::get('material_writing_many', 'Catering\SubscriptionController@material_writing_many')->middleware('CateringCheck');  //多条图文
+        Route::get('message', 'Catering\SubscriptionController@message')->middleware('CateringCheck');                              //消息管理
+        Route::get('menu', 'Catering\SubscriptionController@menu')->middleware('CateringCheck');                                    //菜单管理
     });
 
     //用户管理

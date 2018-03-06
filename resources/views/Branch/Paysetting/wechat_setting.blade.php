@@ -32,104 +32,74 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">积分管理</h3>
+                            <h3 class="m-b-none">微信支付设置</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                积分管理
+                                微信支付设置
                             </header>
                             <div class="row wrapper">
-                                <form class="form-horizontal" method="get">
-                                    <label class="col-sm-1 control-label">用户账号</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
-                                    </div>
-                                </form>
+
+                                <div class="well">
+                                    <h3>温馨提示</h3>
+                                    <p class="text-danger">1.你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
+                                    <p class="text-danger">
+                                        2.零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
+                                    <p class="text-danger">JS API网页支付参数</p>
+                                    <p class="text-danger">支付授权目录: https://o2o.01nnt.com/wechat/</p>
+                                    <p class="text-danger">支付请求实例: https://o2o.01nnt.com/wechat/pay.php//</p>
+                                    <p class="text-danger">共享收货地址: 选择"是"/</p>
+                                </div>
+
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped b-t b-light">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>微信头像</th>
-                                        <th>用户账号</th>
-                                        <th>微信昵称</th>
-                                        <th>积分余额</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><img src="{{asset('public/Branch')}}/images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
-                                        <td>100021</td>
-                                        <td>时光取名叫无心</td>
-                                        <td>
-                                            <p><label class="label label-success">100.00元</label></p>
+                                <form class="form-horizontal" method="get">
 
-                                        </td>
-
-                                        <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='credit_recharge'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;充值扣费</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img src="{{asset('public/Branch')}}/images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
-                                        <td>100020</td>
-                                        <td>时光取名叫无心</td>
-                                        <td>
-                                            <p><label class="label label-success">100.00元</label></p>
-
-                                        </td>
-
-                                        <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="location.href='credit_recharge'"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;充值扣费</button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <footer class="panel-footer">
-                                <div class="row">
-
-                                    <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">商户号</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        </div>
                                     </div>
-                                </div>
-                            </footer>
+
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">PaySignKey</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">秘钥</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">微信网页授权</label>
+                                        <div class="col-sm-8">
+                                            <label>
+                                                <input type="checkbox" checked=""><i></i> 授权回调页面已经设置成o2o.01nnt.com
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12 col-sm-offset-6">
+
+                                            <button type="button" class="btn btn-success" id="addBtn">保存资料</button>
+                                        </div>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                </form>
+                            </div>
                         </section>
 
                     </section>
