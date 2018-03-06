@@ -45,7 +45,7 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 @foreach($package_program as $key=>$val)
-                                                    @if(empty($val->programs))
+                                                    @if(empty(count($val->programs)))
                                                         暂时没有可选的模式
                                                     @endif
                                                     @foreach($val->programs as $kk=>$vv)
