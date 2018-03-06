@@ -67,8 +67,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>角色名称</th>
-                                        <th>角色权限</th>
                                         <th>角色创建人</th>
+                                        <th>角色权限</th>
                                         <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -83,7 +83,6 @@
                                             @foreach($role_module_nodes[$val->id] as $k=>$v)
                                             <button data-original-title="订单模块" data-content="@foreach($v as $kk=>$vv){{$vv}}  @endforeach" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">{{$k}}</button>&nbsp;&nbsp;&nbsp;
                                             @endforeach
-
                                         </td>
                                         <td>{{ $val->created_at }}</td>
                                         <td>
@@ -195,6 +194,14 @@
             }
         });
     }
+
+    $(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('.popovers').popover();
+    });
 </script>
 </body>
 </html>
