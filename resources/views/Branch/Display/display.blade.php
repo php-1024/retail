@@ -230,56 +230,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登录密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
+                                        @foreach($operation_log_list as $key=>$val)
+                                            <tr>
+                                                <td>{{ $val->accounts->id }}</td>
+                                                <td>{{ $val->operation_info }}</td>
+                                                <td>{{ $val->created_at }}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
