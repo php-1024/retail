@@ -121,15 +121,53 @@ class ZeroneRedis
      */
 
     public static function create_proxy_menu_cache($id){
-        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','2']],0,'id','asc');//获取零壹管理系统的一级菜单
-        $son_menu = [];
-        foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
-        }
-        if($id <> 1){
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','2']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
+        $account_info = Account::getOne([['id',$id]]);
+        /******************仍然需要修改*******************/
+        if($id <> 1 && $account_info['parent_id']<>1){
+            //查询用户所具备的所有节点的路由
+
+            $account_routes = [];
+            foreach($account_info->nodes as $key=>$val){
+                $account_routes[] = $val->route_name;
+            }
+            //查询该程序下所有节点的路由
+            $program_info = Program::getOne([['id',2]]);
+            $program_routes = [];
+            foreach($program_info->nodes as $key=>$val){
+                $program_routes[] = $val->route_name;
+            }
+            //获取用户所没有的权限
+            $unset_routes = array_diff($program_routes,$account_routes);
+            foreach($menu as $key=>$val){
+                $sm = ProgramMenu::son_menu($val['id'])->toArray();//获取子菜单列表
+
+                foreach($sm as $k=>$v){
+                    //判断子菜单的路由是否在程序的所有路由中或是否在无需判断的过滤路由中，不在的话，取消菜单
+                    if(!in_array($v['menu_route'],$program_routes) && !in_array($v['menu_route'],config('app.zerone_route_except'))){
+                        unset($sm[$k]);
+                    }
+                    //循环判断用户是否具有子菜单权限,不具备的话，取消菜单
+                    elseif(in_array($v['menu_route'],$unset_routes)){
+                        unset($sm[$k]);
+                    }
+
+                }
+                if(count($sm)<1){//
+                    unset($menu[$key]);
+                }else{
+                    $son_menu[$val['id']] = $sm;
+                }
+                unset($sm);//销毁用于判断的变量
+            }
             /**
              * 未完成，这里准备查询用户权限。
              */
+        }else{
+            $son_menu = [];
+            foreach($menu as $key=>$val){//获取一级菜单下的子菜单
+                $son_menu[$val['id']] = ProgramMenu::son_menu($val['id'])->toArray();
+            }
         }
         $menu = serialize($menu);
         $son_menu = serialize($son_menu);
