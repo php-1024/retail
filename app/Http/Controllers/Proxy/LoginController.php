@@ -20,7 +20,6 @@ class LoginController extends Controller{
      */
     public function display()
     {
-        dump(123);
         return view('Proxy/Login/display');
     }
     /*
