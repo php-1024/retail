@@ -514,7 +514,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('message_mass', 'Catering\NewsController@message_mass')->middleware('CateringCheck');                //消息群发
 
     });
-    
+
     //公众号管理--菜单管理
     Route::group(['prefix'=>'menu'],function(){
         Route::get('menu_customize', 'Catering\MenuController@menu_customize')->middleware('CateringCheck');            //自定义菜单

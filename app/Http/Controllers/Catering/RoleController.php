@@ -23,9 +23,9 @@ class RoleController extends Controller{
 
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(7, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(4, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(7,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(4,$admin_data['id']);//获取当前用户具有权限的节点
 
             $modules = [];
             $nodes = [];
@@ -59,14 +59,14 @@ class RoleController extends Controller{
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['program_id'=>7,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = OrganizationRole::addRole(['program_id'=>4,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
                 if($admin_data['is_super'] == 2){
                     OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统添加了权限角色'.$role_name);//保存操作记录
                 }else{
-                    OperationLog::addOperationLog('7',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
+                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了权限角色'.$role_name);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -88,7 +88,7 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
         //查询所有角色列表
-        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',7],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',4],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
 
         //获取角色节点
         $role_module_nodes = [];
