@@ -34,7 +34,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">积分充值扣费</h3>
                         </div>
-                        <button class="btn btn-s-md btn-success" type="button" onclick="location.href='credit.html'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                        <button class="btn btn-s-md btn-success" type="button" onclick="location.href='credit'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="row">
                             <div class="col-sm-4">
