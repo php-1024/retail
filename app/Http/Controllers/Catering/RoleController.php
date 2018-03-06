@@ -114,7 +114,7 @@ class RoleController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');//权限角色ID
         $info = OrganizationRole::getOne([['id',$id]]);//获取该ID的信息
-        $node_list = ProgramModuleNode::getRoleModuleNodes(2,$id);//获取当前角色拥有权限的模块和节点
+        $node_list = ProgramModuleNode::getRoleModuleNodes(4,$id);//获取当前角色拥有权限的模块和节点
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
 
@@ -125,9 +125,9 @@ class RoleController extends Controller{
 
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(4, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(2,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(4,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
             $module_node_list = [];
