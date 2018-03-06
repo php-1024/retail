@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('catering/subscription/material_image')}}" class="list-group-item">
+                                    <a href="subscription_material.html" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="{{url('catering/subscription/material_writing')}}" class="list-group-item active">
+                                    <a href="subscription_material2.html" class="list-group-item active">
                                         图文素材
                                     </a>
 
@@ -57,128 +57,67 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">图文素材</h2>
+                                <h2 class="font-thin m-b">添加单条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" id="addBtn">添加图文 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='subscription_material2.html'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
-                                    <header class="panel-heading">
-                                        图文素材列表
+                                    <header class="panel-heading font-bold">
+                                        添加单条图文
                                     </header>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-striped b-t b-light">
-                                            <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>素材标题</th>
-                                                <th>素材类型</th>
-                                                <th>添加时间</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='subscription_material5.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>测试图文</td>
-                                                <td>多条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='subscription_material6.html'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <footer class="panel-footer">
-                                        <div class="row">
-
-                                            <div class="col-sm-12 text-right text-center-xs">
-                                                <ul class="pagination pull-right">
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="first" href="#first">«</a>
-                                                    </li>
-
-                                                    <li class="footable-page-arrow disabled">
-                                                        <a data-page="prev" href="#prev">‹</a>
-                                                    </li>
-                                                    <li class="footable-page active">
-                                                        <a data-page="0" href="#">1</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">2</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">3</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">4</a>
-                                                    </li>
-                                                    <li class="footable-page">
-                                                        <a data-page="1" href="#">5</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="next" href="#next">›</a>
-                                                    </li>
-                                                    <li class="footable-page-arrow">
-                                                        <a data-page="last" href="#last">»</a>
-                                                    </li>
-                                                </ul>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal" method="get">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">图片</label>
+                                                <div class="col-sm-10">
+                                                    <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </footer>
+
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-id-1">标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input-id-1" value="">
+                                                </div>
+                                            </div>
+
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-id-1">作者</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input-id-1" value="">
+                                                </div>
+                                            </div>
+
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-id-1">摘要</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" rows="5"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-id-1">正文</label>
+                                                <div class="col-sm-10">
+                                                    <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12 col-sm-offset-6">
+
+                                                    <button type="button" class="btn btn-success" id="save_btn">保存信息</button>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        </form>
+                                    </div>
                                 </section>
                             </section>
                         </section>
