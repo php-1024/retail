@@ -49,9 +49,12 @@ class CateringCheck{
             case "catering/subscription/material_writing_one_edit": //单条图文素材编辑
             case "catering/subscription/material_writing_many":     //多条图文素材
             case "catering/subscription/material_writing_many_edit"://多条图文素材编辑
-            case "catering/subscription/message":                   //消息管理
             case "catering/subscription/menu":                      //菜单管理
             /****公众号管理****/
+
+            /****公众号管理-消息管理****/
+            case "catering/news/message":                   //消息管理
+            /****公众号管理-消息管理****/
 
             /****用户管理****/
             case "catering/user/user_tag":                  //粉丝标签管理
