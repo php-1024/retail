@@ -45,10 +45,10 @@
                                     <a href="{{url('catering/news/message')}}" class="list-group-item">
                                         关键词自动回复
                                     </a>
-                                    <a href="{{url('catering/news/message_attention')}}" class="list-group-item active">
+                                    <a href="{{url('catering/news/message_attention')}}" class="list-group-item">
                                         关注后自动回复
                                     </a>
-                                    <a href="{{url('catering/news/message_default')}}" class="list-group-item ">
+                                    <a href="{{url('catering/news/message_default')}}" class="list-group-item active">
                                         默认回复
                                     </a>
                                     <a href="{{url('catering/news/message_mass')}}" class="list-group-item ">
@@ -62,10 +62,10 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">关注后自动回复</h2>
+                                <h2 class="font-thin m-b">默认回复</h2>
                                 <section class="panel panel-default">
                                     <header class="panel-heading">
-                                        图文素材列表
+                                        默认回复
                                     </header>
 
                                     <div class="table-responsive">
