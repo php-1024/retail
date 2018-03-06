@@ -121,7 +121,6 @@
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script>
     $(document).ready(function() {
         $('.i-checks').iCheck({
