@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\LoginLog;
 use App\Models\Organization;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -24,6 +25,19 @@ class DisplayController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+
+        //只查询自己相关的数据
+        $where = [
+            ['account_id',$admin_data['id']],
+            ['program_id','5'], //查询program_id(5)餐饮管理系统的操作日志
+            ['organization_id',$admin_data['organization_id']]
+        ];
+        $time_st_format = '';
+        $time_nd_format = '';
+        $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
+        $login_log_lists = LoginLog::getList($where,2,'id','DESC');
+        dump($login_log_lists);
+        dump($login_log_list);
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('branch/branch_list');
         }
