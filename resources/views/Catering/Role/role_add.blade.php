@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
     <link href="{{asset('public/Catering')}}/iCheck/css/custom.css" rel="stylesheet" />
+
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -65,13 +66,13 @@
                                                 <group class="checked_box_group_{{ $val['id'] }}">
                                                 <div>
                                                     <label class="i-checks">
-                                                        <input type="checkbox" class="checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}" id="inlineCheckbox1" > {{ $val['module_name'] }}
+                                                        <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" value="{{ $val['id'] }}" id="inlineCheckbox1" > {{ $val['module_name'] }}
                                                     </label>
                                                 </div>
                                                 <div>
                                                     @foreach($val['program_nodes'] as $kk=>$vv)
                                                     <label class="i-checks">
-                                                        <input type="checkbox" data-group_id="{{  $val['id'] }}" class="checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}" id="inlineCheckbox1"  > {{ $vv['node_name'] }}
+                                                        <input type="checkbox" data-group_id="{{  $val['id'] }}" class="checkbox_module_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}" id="inlineCheckbox1"  > {{ $vv['node_name'] }}
                                                     </label>
                                                     &nbsp;&nbsp;
                                                     @endforeach
