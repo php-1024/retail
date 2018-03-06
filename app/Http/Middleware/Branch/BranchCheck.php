@@ -43,7 +43,9 @@ class BranchCheck{
             case "branch/subordinate/subordinate_list"://下级人员列表
 
             case "branch/order/order_spot":             //订单管理-现场订单
+            case "branch/order/order_spot_detail":      //订单管理-现场订单详情
             case "branch/order/order_takeout":          //订单管理-外卖订单
+            case "branch/order/order_takeout_detail":   //订单管理-外卖订单详情
             case "branch/order/order_appointment":      //预约管理
             case "branch/device/room_add":               //设备管理-添加包厢
             case "branch/device/room_list":              //设备管理-包厢管理
