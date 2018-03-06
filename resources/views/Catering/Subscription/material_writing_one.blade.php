@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="subscription_material.html" class="list-group-item">
+                                    <a href="{{url('catering/subscription/material_image')}}" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="subscription_material2.html" class="list-group-item active">
+                                    <a href="{{url('catering/subscription/material_writing')}}" class="list-group-item active">
                                         图文素材
                                     </a>
 
@@ -127,55 +127,6 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">选择添加类型</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group text-center">
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material3')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/subscription_material4')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
-                    </div>
-                    <div style="clear:both;"></div>
-                </div>
-
-            </div>
-        </div>
-    </form>
-</div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">删除图文消息确定</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
@@ -186,17 +137,49 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
+
+<script src="{{asset('public/Catering')}}/js/wysiwyg/jquery.hotkeys.js"></script>
+<script src="{{asset('public/Catering')}}/js/wysiwyg/bootstrap-wysiwyg.js"></script>
+<script src="{{asset('public/Catering')}}/js/wysiwyg/demo.js"></script>
+
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
+
+
+<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+
+<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 
 <script type="text/javascript">
-    $(function(){
-        $('#deleteBtn').click(function(){
-            $('#myModal2').modal();
-        });
+    $(document).ready(function() {
+        $('#form-content').trumbowyg({
 
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
+            lang: 'fr',
+
+            closable: false,
+
+            mobile: true,
+
+            fixedBtnPane: true,
+
+            fixedFullWidth: true,
+
+            semantic: true,
+
+            resetCss: true,
+
+            autoAjustHeight: true,
+
+            autogrow: true
+
+        });
+        $('#save_btn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            });
         });
     });
 </script>
