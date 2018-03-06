@@ -17,7 +17,6 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -121,6 +120,7 @@
 <!--common script for all pages-->
 <script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
 <script>
     $(document).ready(function() {
         $('.i-checks').iCheck({
