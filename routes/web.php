@@ -502,6 +502,8 @@ Route::group(['prefix'=>'catering'],function(){
         Route::get('material_writing', 'Catering\SubscriptionController@material_writing')->middleware('CateringCheck');            //图文素材
         Route::get('material_writing_one', 'Catering\SubscriptionController@material_writing_one')->middleware('CateringCheck');    //单条图文
         Route::get('material_writing_many', 'Catering\SubscriptionController@material_writing_many')->middleware('CateringCheck');  //多条图文
+        Route::get('material_writing_one_edit', 'Catering\SubscriptionController@material_writing_one_edit')->middleware('CateringCheck');  //单条图文编辑
+        Route::get('material_writing_many_edit', 'Catering\SubscriptionController@material_writing_many_edit')->middleware('CateringCheck');//多条图文编辑
         Route::get('message', 'Catering\SubscriptionController@message')->middleware('CateringCheck');                              //消息管理
         Route::get('menu', 'Catering\SubscriptionController@menu')->middleware('CateringCheck');                                    //菜单管理
     });
