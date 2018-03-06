@@ -71,7 +71,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
-                                                    <span class="help-block m-b-none col-lg-2"><img src="{{asset('Public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></span>
+                                                    <span class="help-block m-b-none col-lg-2"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></span>
                                                     <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
 
                                                 </div>
