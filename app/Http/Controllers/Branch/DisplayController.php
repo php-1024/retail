@@ -35,7 +35,7 @@ class DisplayController extends Controller
         $time_st_format = '';
         $time_nd_format = '';
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
-        $login_log_lists = LoginLog::getList($where,10,'id','DESC');
+        $login_log_lists = LoginLog::getList($where,2,'id','DESC');
         dump($login_log_lists);
         dump($login_log_list);
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
