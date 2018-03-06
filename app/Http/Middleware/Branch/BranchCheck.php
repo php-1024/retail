@@ -56,7 +56,9 @@ class BranchCheck{
             case "branch/user/user_timeline":           //用户管理-粉丝足迹管理
 
             case "branch/finance/balance":              //财务管理-余额管理
+            case "branch/finance/balance_recharge":     //财务管理-余额充值扣费
             case "branch/finance/credit":               //财务管理-积分管理
+            case "branch/finance/credit_recharge":      //财务管理-积分充值扣费
 
             case "branch/paysetting/wechat_setting":    //支付设置-微信支付
             case "branch/paysetting/zerone_setting":    //支付设置-零舍壹得

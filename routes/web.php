@@ -664,8 +664,10 @@ Route::group(['prefix'=>'branch'],function(){
 
     //财务管理
     Route::group(['prefix'=>'finance'],function(){
-        Route::get('balance', 'Branch\FinanceController@balance')->middleware('BranchCheck');   //财务管理-余额管理
-        Route::get('credit', 'Branch\FinanceController@credit')->middleware('BranchCheck');     //财务管理-积分管理
+        Route::get('balance', 'Branch\FinanceController@balance')->middleware('BranchCheck');                       //财务管理-余额管理
+        Route::get('balance_recharge', 'Branch\FinanceController@balance_recharge')->middleware('BranchCheck');     //财务管理-余额充值扣费
+        Route::get('credit', 'Branch\FinanceController@credit')->middleware('BranchCheck');                         //财务管理-积分管理
+        Route::get('credit_recharge', 'Branch\FinanceController@credit_recharge')->middleware('BranchCheck');       //财务管理-积分充值扣费
     });
 
     //支付设置

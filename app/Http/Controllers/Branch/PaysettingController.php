@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 
-class CashierController extends Controller
+class PaysettingController extends Controller
 {
 
     public function wechat_setting(Request $request)

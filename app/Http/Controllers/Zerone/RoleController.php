@@ -99,7 +99,7 @@ class RoleController extends Controller{
         $list = ProgramModuleNode::getRoleModuleNodes(1,$role_id);
         $module_nodes = [];
         foreach($list as $key=>$val){
-            $module_nodes[$val['module_name']][] = $val['node_name'];
+            $module_nodes[$val['module_show_name']][] = $val['node_show_name'];
         }
        return $module_nodes;
     }
