@@ -123,7 +123,7 @@ class ZeroneRedis
     public static function create_proxy_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','2']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
         $account_info = Account::getOne([['id',$id]]);
-
+        /******************仍然需要修改*******************/
         if($id <> 1 && $account_info['parent_id']<>1){
             //查询用户所具备的所有节点的路由
 
