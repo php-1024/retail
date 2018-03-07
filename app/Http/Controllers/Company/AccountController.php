@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class AccountcenterController extends Controller{
+class AccountController extends Controller{
 
     //系统管理首页
     public function display(Request $request)
@@ -32,7 +32,7 @@ class AccountcenterController extends Controller{
         if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('company/account/password');
         }else{
-            return view('Company/Accountcenter/display',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Company/Account/display',['organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
 
@@ -45,22 +45,22 @@ class AccountcenterController extends Controller{
         }
         $organization_name  = $request->organization_name;
         $where = ['type'=>'3'];
-        $organization = Organization::getCompanyAndWarzone($organization_name,$where,20,'id','ASC');
+        $organization = Organization::getCompanyAndAccount($organization_name,$where,20,'id','ASC');
         foreach ($organization as $key=>$val){
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
             $val->proxyname = $proxy->organization_name;
         }
-        return  view('Company/Accountcenter/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
+        return  view('Company/Account/company_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
     //选择商户
     public function company_select(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $organization_id = $request->organization_id;
+        $account_id = $request->account_id;           //获取当前选择店铺的组织
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
-        if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
-            $this->superadmin_login($organization_id);      //超级管理员选择身份登录
+        if ($admin_data['is_super'] == '1' && $admin_data['organization_id'] == 0){
+            $this->superadmin_login($account_id);      //超级管理员选择身份登录
             return response()->json(['data' => '成功选择商户，即将前往该商户！', 'status' => '1']);
         }else{
             return response()->json(['data' => '操作失败，请稍后再试！', 'status' => '1']);
@@ -116,7 +116,7 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $user = Account::getOne(['id'=>$admin_data['id']]);
-        return view('Company/Accountcenter/profile',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Company/Account/profile',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //账号信息修改处理
@@ -155,7 +155,7 @@ class AccountcenterController extends Controller{
         if (empty($admin_data['safe_password'])){
             return redirect('company/account/safe_password');
         }else{
-            return view('Company/Accountcenter/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+            return view('Company/Account/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
         }
     }
 
@@ -211,7 +211,7 @@ class AccountcenterController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
-        return view('Company/Accountcenter/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Company/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //安全密码修改设置处理
@@ -304,7 +304,7 @@ class AccountcenterController extends Controller{
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
-        return view('Company/Accountcenter/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Company/Account/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //个人登录日志页面
@@ -330,7 +330,7 @@ class AccountcenterController extends Controller{
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
-        return view('Company/Accountcenter/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Company/Account/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
@@ -341,9 +341,9 @@ class AccountcenterController extends Controller{
     }
 
     //超级管理员以商户平台普通管理员登录处理
-    public function superadmin_login($organization_id)
+    public function superadmin_login($account_id)
     {
-        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        $account_info = Account::getOneAccount([['id',$account_id]]);//根据账号查询
         //Admin登录商户平台要生成的信息
         //重新生成缓存的登录信息
         $admin_data = [
