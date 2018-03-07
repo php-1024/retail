@@ -9,6 +9,7 @@
     <title>零壹新科技程序管理平台</title>
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+
     <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
@@ -16,6 +17,7 @@
     <link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library')}}/iCheck/css/custom.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library')}}/switchery/css/switchery.css" rel="stylesheet">
+    <!-- Mainly scripts -->
 
 </head>
 
