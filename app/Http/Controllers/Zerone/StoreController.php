@@ -31,6 +31,7 @@ class StoreController extends Controller{
             $branch_munber[$val->id]=!empty($oneAssets->program_spare_num)?$oneAssets->program_spare_num:0;
         }
         $aa['aa']=1;
+        $aa['bb']=12;
         return view('Zerone/Store/store_list',['listStore'=>$listStore,'aa'=>$aa,'branch_munbe'=>$branch_munber,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
