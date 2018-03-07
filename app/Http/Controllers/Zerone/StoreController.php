@@ -70,7 +70,7 @@ class StoreController extends Controller{
         $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        $package_id = PackageProgram::where([['program_id',$program_id]])->first('package_id'); //套餐id
+        $package_id = PackageProgram::where([['program_id',$program_id]])->pluck('package_id')->first(); //套餐id
         dd($package_id);
         DB::beginTransaction();
         try{
