@@ -43,7 +43,74 @@ class StoreController extends Controller{
 
     //店铺添加功能提交
     public function store_insert_check(Request $request){
-        dd(1);
+
+        $program_id = $request->program_id;//程序id
+        dd($program_id);
+        $organization_id = $request->input('organization_id');//组织id
+        $organization_name = $request->input('organization_name');//店铺名称
+        $program_munber = $request->input('program_munber');//允许开设分店数量
+        $assets_status = $request->input('assets_status');//是否消耗上级组织的开设分店数量
+        $realname = $request->input('realname');//负责人姓名
+        $password = $request->input('password');//店铺登入密码
+
+        $key = config("app.catering_encrypt_key");//获取加密盐
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+
+        DB::beginTransaction();
+        try{
+            $organization = [
+                'organization_name'=>$organization_name,
+                'parent_id'        =>$organization_parent_id,
+                'parent_tree'      =>$parent_tree,
+                'program_id'       =>$program_id,
+                'type'             =>$type,
+                'status'           =>'1',
+            ];
+            //在组织表创建保存店铺信息
+            $id = Organization::addOrganization($organization);
+            $branchinfo = [
+                'organization_id'      =>$id,
+                'branch_owne'          =>$realname,
+                'branch_owner_idcard'  =>'',
+                'branch_owner_mobile'  =>$mobile,
+                'type'                 =>$branch_type,
+            ];
+            //在分店织信息表创建店铺组织信息
+            OrganizationBranchinfo::addOrganizationBranchinfo($branchinfo);
+            $accdata = [
+                'organization_id'  =>$id,
+                'parent_id'        =>'1',
+                'parent_tree'      =>'0'.','.'1'.',',
+                'deepth'           =>'1',
+                'account'          =>$account,
+                'password'         =>$encryptPwd,
+                'mobile'           =>$mobile,
+            ];
+            //在管理员表添加信息
+            $account_id = Account::addAccount($accdata);
+
+            $accdatainfo = [
+                'account_id'        =>$account_id,
+                'realname'         =>$realname,
+                'idcard'           =>'',
+            ];
+            //在管理员表添加信息
+            AccountInfo::addAccountInfo($accdatainfo);
+            //添加操作日志
+            if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在店铺理系统创建了店铺：'.$organization_name);    //保存操作记录
+            }else{//商户本人操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建了分店：'.$organization_name);//保存操作记录
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '创建分店失败，请稍后再试！', 'status' => '0']);
+        }
+        return response()->json(['data' => '创建分店成功,请前往总分店管理进行管理！', 'status' => '1']);
+
     }
 
     //店铺人员架构
