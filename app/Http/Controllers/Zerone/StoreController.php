@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Session;
 class StoreController extends Controller{
@@ -22,7 +23,6 @@ class StoreController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 //        $organization_id = $request->input('organization_id');//服务商id
 //        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
-
         $list = Package::getPaginage([],15,'id');
         dump($list);
         foreach ($list as $key=>$value){
