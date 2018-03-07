@@ -66,12 +66,12 @@ class Organization extends Model{
 
     //获取-服务商列表
     public static function getListProxy($where){
-        return self::with('organizationCompanyinfo')->with('account')->where($where)->get();
+        return self::with('organizationproxyinfo')->with('account')->where($where)->get();
     }
 
     //获取单条信息-商户
     public static function getOneCompany($where){
-        return self::with('organizationCompanyinfo')->where($where)->first();
+        return self::with('organizationCompanyinfo')->with('account')->where($where)->first();
     }
     //获取-商户列表
     public static function getArrayCompany($where){

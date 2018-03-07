@@ -47,7 +47,6 @@ class StoreController extends Controller{
 
         $program_id = $request->program_id;//程序id
         $organization_id = $request->organization_id;//组织id
-        dd($organization_id);
         $organization_name = $request->organization_name;//店铺名称
         $program_munber = $request->program_munber;//允许开设分店数量
         $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
@@ -55,7 +54,7 @@ class StoreController extends Controller{
         $password = $request->password;//店铺登入密码
         $program_id = '4';//程序id
         $type = '4';//店铺组织
-        $oneOrg = Organization::getListProxy(['id'=>$organization_id]);
+        $oneOrg = Organization::getOneCompany(['id'=>$organization_id]);
         dd($oneOrg);
         $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
