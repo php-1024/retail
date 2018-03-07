@@ -6,7 +6,7 @@
         <div class="modal-body">
             <form method="post" id="currentForm" action="{{ url('zerone/ajax/store_insert_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
+                <input type="hidden" name="id" id="id" value="{{$id}}">
             <div class="form-group">
                 <label class="col-sm-3 control-label">程序名称</label>
                 <div class="col-sm-9"><input type="text" readonly class="form-control" value="微餐饮系统（先吃后付）通用版本"></div>

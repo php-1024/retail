@@ -37,7 +37,7 @@ class StoreController extends Controller{
         $id = $request->input('id');//中间件产生的管理员数据参数
         $list = Program::getOne([['id',$id]]);
             dump($list);
-        return view('Zerone/Store/store_insert');
+        return view('Zerone/Store/store_insert',['id'=>$id]);
     }
 
     //店铺人员架构
