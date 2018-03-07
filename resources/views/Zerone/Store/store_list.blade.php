@@ -101,7 +101,7 @@
                                     <td>
                                         <label class="label label-primary">正常</label>
                                     </td>
-                                    <td>2017-08-08 10:30:30</td>
+                                    <td>{{$value->created_at}}</td>
                                     <td class="text-right">
                                         <button type="button" id="editBtn" class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
