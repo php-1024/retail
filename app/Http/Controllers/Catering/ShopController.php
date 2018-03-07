@@ -17,6 +17,7 @@ class ShopController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
             $organization_name  = $request->organization_name;
+            $where = ['type'=>'4'];
             $listOrg = Organization::where([['program_id','4']])->get();
             $listOrgs = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
             dump($listOrg);
