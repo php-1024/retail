@@ -96,7 +96,7 @@
                                     <td>微餐饮系统（先吃后付）通用版本</td>
                                     <td></td>
                                     <td>刘记鸡煲王</td>
-                                    <td>zos_13123456789</td>
+                                    <td>{{$value->account->account}}</td>
                                     <td>13123456789</td>
                                     <td>
                                         <label class="label label-primary">正常</label>
