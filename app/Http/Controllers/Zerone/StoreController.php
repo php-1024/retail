@@ -52,15 +52,14 @@ class StoreController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $program_id = $request->program_id;//程序id
-        dd($program_id);
+        $program_id = $request->program_id;//程序id--资产程序
         $organization_id = $request->organization_id;//组织id
         $organization_name = $request->organization_name;//店铺名称
         $program_munber = $request->program_munber;//允许开设分店数量
         $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
         $realname = $request->realname;//负责人姓名
         $password = $request->password;//店铺登入密码
-        $program_id = '4';//程序id
+        $program = '4';//程序id --管理程序
         $type = '4';//店铺组织
         $oneOrg = Organization::getOneCompany(['id'=>$organization_id]);
         $parent_tree = $oneOrg['parent_tree'] . ','.$organization_id . ',';//组织树
@@ -94,7 +93,7 @@ class StoreController extends Controller{
                 'organization_name'=>$organization_name,
                 'parent_id'        =>$organization_id,
                 'parent_tree'      =>$parent_tree,
-                'program_id'       =>$program_id,
+                'program_id'       =>$program,
                 'type'             =>$type,
                 'status'           =>'1',
             ];
