@@ -37,8 +37,7 @@ class StoreController extends Controller{
     public function store_insert(Request $request){
         $program_id = $request->input('id');//中间件产生的管理员数据参数
         $program_name = Program::getPluck([['id',$program_id]],'program_name')->first();
-        $listOrg = Organization::getOneProxy([['type','3'],['status','1']]);
-        dump($listOrg);
+        $listOrg = Organization::where([['type','3'],['status','1']]);
         return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name]);
     }
 
