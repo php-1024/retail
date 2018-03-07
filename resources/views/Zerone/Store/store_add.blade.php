@@ -62,17 +62,6 @@
                                     <td>微餐饮系统（先吃后付）通用版本</td>
                                     <td>
                                         <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
                                     </td>
                                     <td class="text-right">
                                         <button type="button" id="addbtn" class="btn  btn-xs btn-danger"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;开设店铺</button>
