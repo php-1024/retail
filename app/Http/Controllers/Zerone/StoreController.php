@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Assets;
 use App\Models\Module;
+use App\Models\Organization;
 use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
@@ -36,7 +37,8 @@ class StoreController extends Controller{
     public function store_insert(Request $request){
         $program_id = $request->input('id');//中间件产生的管理员数据参数
         $program_name = Program::getPluck([['id',$program_id]],'program_name')->first();
-
+        $listOrg = Organization::where([['type','3'],['status','1']])->Orwhere([['type','1']])->pluck('organization_name')->get();
+        dump($listOrg);
         return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name]);
     }
 

@@ -63,7 +63,7 @@
                 </div>
 
                 <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div> 
+                <div class="hr-line-dashed"></div>
 
                 {{--<div class="form-group">--}}
                     {{--<label class="col-sm-3 control-label">店铺管理账号</label>--}}
