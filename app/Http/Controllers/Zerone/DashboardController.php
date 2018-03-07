@@ -43,8 +43,6 @@ class DashboardController extends Controller{
         }
         $login_log_list = LoginLog::getList($where,10,'id');//登录记录
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
-        dump($login_log_list);
-        dump($operation_log_list);
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone'=>$zerone]);
     }
     //参数设置展示
