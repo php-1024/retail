@@ -51,7 +51,7 @@ class StoreController extends Controller{
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
         $program_id = $request->get('program_id');             //程序ID
         $organization_name = $request->get('organization_name');
-        $type = '4';                                    //店铺组织为4
+        $type = '4';                                              //店铺组织为4
         $store_owner = $request->get('realname');            //负责人姓名
         $store_owner_mobile = $request->get('tell');         //负责人电话
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
