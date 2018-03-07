@@ -6,6 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class ProgramMenu extends Model{
     use SoftDeletes;
     protected $table = 'program_menu';
@@ -81,11 +82,16 @@ class ProgramMenu extends Model{
     }
 
     //删除节点的同时删除菜单,并更新该程序下所有用户的菜单缓存
-    public static function deleteNode($route_name){
-        $list = self::where([['menu_route',$route_name]])->get();//获取所有
-        foreach($list as $key=>$val){
-            dump($val['program_id']);
-            exit;
+    public static function deleteNode($route_name)
+    {
+        $list = self::where([['menu_route', $route_name]])->get();//获取所有使用该节点的菜单
+        if (!empty($list)) {
+            foreach ($list as $key => $val) {
+                $organization_list = self::where('program_id',$val['program_id'])->get();//通过程序ID，获取所有使用该程序的组织
+                dump($organization_list);
+
+                exit;
+            }
         }
         self::where([['menu_route',$route_name]])->delete();
     }
