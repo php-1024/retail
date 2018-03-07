@@ -22,7 +22,10 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
+        $organization_name  = $request->organization_name;
+        $where = ['type'=>'4'];
+        $listOrg = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
+        dd($listOrg);
         return view('Zerone/Store/store_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -77,7 +80,6 @@ class StoreController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $package_id = PackageProgram::where([['program_id',$program_id]])->pluck('package_id')->first(); //套餐id
-
 
         DB::beginTransaction();
         try{
