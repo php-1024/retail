@@ -46,7 +46,7 @@
                                             <div class="btn-group" data-toggle="buttons">
                                                 @foreach($package_program as $key=>$val)
                                                     @if(empty(count($val->programs)))
-                                                        <label class="btn btn-sm btn-success" style="margin-right: 10px;">暂时没有可选的模式</label>
+                                                        <label class="btn btn-sm btn-danger" style="margin-right: 10px;">暂时没有可选的模式</label>
                                                     @endif
                                                     @foreach($val->programs as $kk=>$vv)
                                                         <label class="btn btn-sm btn-success" style="margin-right: 10px;">
