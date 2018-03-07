@@ -34,6 +34,8 @@ class StoreController extends Controller{
     }
     //店铺添加
     public function store_insert(Request $request){
+        $id = $request->input('id');//中间件产生的管理员数据参数
+        dump($id);
 
         return view('Zerone/Store/store_insert');
     }
