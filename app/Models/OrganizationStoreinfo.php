@@ -20,12 +20,12 @@ class OrganizationStoreinfo extends Model{
     }
 
     //添加数据
-    public static function addOrganizationProxyinfo($param){
-        $program = new OrganizationProxyinfo();//实例化程序模型
+    public static function addOrganizationStoreinfo($param){
+        $program = new OrganizationStoreinfo();//实例化程序模型
         $program->organization_id = $param['organization_id'];//组织id
-        $program->proxy_owner = $param['proxy_owner'];//服务商负责人姓名
-        $program->proxy_owner_idcard = $param['proxy_owner_idcard'];//服务商负责人身份证
-        $program->proxy_owner_mobile = $param['proxy_owner_mobile'];//服务商负责人手机号
+        $program->store_owner = $param['store_owner'];//商户负责人姓名
+        $program->store_owner_idcard = $param['store_owner_idcard'];//商户负责人身份证
+        $program->store_owner_mobile = $param['store_owner_mobile'];//商户负责人手机号
         $program->save();
         return $program->id;
     }
