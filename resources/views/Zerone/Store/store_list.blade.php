@@ -94,7 +94,7 @@
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->organization_name}}</td>
                                     <td>微餐饮系统（先吃后付）通用版本</td>
-                                    <td>{{$branch_munber->$value->id}}</td>
+                                    <td>{{$branch_munber['$value->id']}}</td>
                                     <td>刘记鸡煲王</td>
                                     <td>zos_13123456789</td>
                                     <td>13123456789</td>
