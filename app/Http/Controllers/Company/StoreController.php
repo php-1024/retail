@@ -39,7 +39,7 @@ class StoreController extends Controller{
         $package_program = Package::getList(['id'=>$package_id],0,'id','DESC');   //查询当前所选餐包含的程序
         dump($package_name);
         dump($package_id);
-        dump($package_program);
+        dd($package_program);
         return view('Company/Store/store_add_second',['package_name'=>$package_name,'package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
