@@ -41,6 +41,11 @@ class StoreController extends Controller{
         return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name,'listOrg'=>$listOrg]);
     }
 
+    //店铺添加功能提交
+    public function store_insert_check(Request $request){
+        dd(1);
+    }
+
     //店铺人员架构
     public function store_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
