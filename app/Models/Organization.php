@@ -79,8 +79,8 @@ class Organization extends Model{
     }
 
     //获取分页数据-商户
-    public static function getCompanyAndWarzone($organization_name,$where,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('warzone');
+    public static function getCompanyAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('account');
         if(!empty($organization_name)){
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
