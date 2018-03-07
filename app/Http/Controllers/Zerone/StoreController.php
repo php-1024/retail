@@ -30,6 +30,7 @@ class StoreController extends Controller{
             $oneAssets = Assets::getOne([['organization_id',$val->id]]);
             $branch_munber[$val->id]=!empty($oneAssets->program_spare_num)?$oneAssets->program_spare_num:0;
         }
+
         return view('Zerone/Store/store_list',['listStore'=>$listStore,'branch_munbe'=>$branch_munber,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
