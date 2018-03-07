@@ -80,8 +80,13 @@ class ProgramMenu extends Model{
         self::where($where)->forceDelete();//删除所有子菜单
     }
 
-    //删除节点的同时删除菜单
+    //删除节点的同时删除菜单,并更新该程序下所有用户的菜单缓存
     public static function deleteNode($route_name){
+        $list = self::where([['menu_route',$route_name]])->get();//获取所有
+        foreach($list as $key=>$val){
+            dump($val['program_id']);
+            exit;
+        }
         self::where([['menu_route',$route_name]])->delete();
     }
 }
