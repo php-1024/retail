@@ -26,6 +26,7 @@ class StoreController extends Controller{
         $where = ['type'=>'4'];
         $branch_munber = [];
         $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id'); //查询店铺
+        dd($listStore);
         foreach($listStore as $key=>$val){
             $oneAssets = Assets::getOne([['organization_id',$val->id]]);
             dump($listStore['organization'][$val->id]);
