@@ -1,10 +1,14 @@
 <?php
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\AccountInfo;
 use App\Models\Assets;
 use App\Models\Module;
 use App\Models\Organization;
+use App\Models\OrganizationStoreinfo;
 use App\Models\Package;
+use App\Models\PackageProgram;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +49,9 @@ class StoreController extends Controller{
     //店铺添加功能提交
     public function store_insert_check(Request $request){
 
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
         $program_id = $request->program_id;//程序id
         $organization_id = $request->organization_id;//组织id
         $organization_name = $request->organization_name;//店铺名称
@@ -55,13 +62,33 @@ class StoreController extends Controller{
         $program_id = '4';//程序id
         $type = '4';//店铺组织
         $oneOrg = Organization::getOneCompany(['id'=>$organization_id]);
-        dd($oneOrg);
+        $parent_tree = $oneOrg['parent_tree'] . ','.$organization_id . ',';//组织树
+
+        $user = Account::max('account');
+        $account  = $user+1;//用户账号
+
         $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $a = PackageProgram::getOne([['program_id',$program_id]]);
+        dd($a);
 
         DB::beginTransaction();
         try{
+
+            Assets::getOne([['program_id',$program_id],['organization_id'=>$organization_id]]);
+
+
+
+
+
+
+
+
+
+
+
+
             $organization = [
                 'organization_name'=>$organization_name,
                 'parent_id'        =>$organization_id,
@@ -72,15 +99,14 @@ class StoreController extends Controller{
             ];
             //在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
-            $branchinfo = [
+            $storeinfo = [
                 'organization_id'      =>$id,
                 'branch_owne'          =>$realname,
                 'branch_owner_idcard'  =>'',
-                'branch_owner_mobile'  =>$mobile,
-                'type'                 =>$branch_type,
+                'branch_owner_mobile'  =>'',
             ];
-            //在分店织信息表创建店铺组织信息
-            OrganizationBranchinfo::addOrganizationBranchinfo($branchinfo);
+            //在店铺织信息表创建店铺组织信息
+            OrganizationStoreinfo::addOrganizationStoreinfo($storeinfo);
             $accdata = [
                 'organization_id'  =>$id,
                 'parent_id'        =>'1',
@@ -88,7 +114,7 @@ class StoreController extends Controller{
                 'deepth'           =>'1',
                 'account'          =>$account,
                 'password'         =>$encryptPwd,
-                'mobile'           =>$mobile,
+                'mobile'           =>'',
             ];
             //在管理员表添加信息
             $account_id = Account::addAccount($accdata);
@@ -101,11 +127,8 @@ class StoreController extends Controller{
             //在管理员表添加信息
             AccountInfo::addAccountInfo($accdatainfo);
             //添加操作日志
-            if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在店铺理系统创建了店铺：'.$organization_name);    //保存操作记录
-            }else{//商户本人操作记录
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建了分店：'.$organization_name);//保存操作记录
-            }
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建了店铺'.$organization_name);//保存操作记录
+
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
