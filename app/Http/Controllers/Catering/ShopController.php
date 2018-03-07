@@ -18,10 +18,8 @@ class ShopController extends Controller{
         if($admin_data['is_super'] == 1 ){
             $organization_name  = $request->organization_name;
             $where = ['type'=>'4'];
-            $listOrg = Organization::where([['program_id','4']])->get();
-            $listOrgs = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
-            dump($listOrg);
-            dump($listOrgs);
+//            $listOrg = Organization::where([['program_id','4']])->get();
+            $listOrg = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
@@ -38,9 +36,11 @@ class ShopController extends Controller{
     }
     //超级管理员选择服务商
     public function select_shop(Request $request){
-        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
-        $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
-        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        $admin_this = $request->get('admin_data');              //中间件产生的管理员数据参数
+//        $organization_id = $request->input('organization_id');  //中间件产生的管理员数据参数
+        $account_id = $request->input('account_id');            //用户ID
+//        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        $account_info = Account::getOneAccount([['id',$account_id]]);//根据账号查询
         if(!empty($account_info)){
             //重新生成缓存的登录信息
             $admin_data = [

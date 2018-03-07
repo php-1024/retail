@@ -59,7 +59,7 @@
         <input type="hidden" id="url" value="{{url('catering/select_shop')}}">
     @foreach($listOrg as $key=>$value)
         <div class="col-lg-3 col-sm-6">
-            <a href="javascript:;" onclick="postForm('{{$value->id}}')">
+            <a href="javascript:;" onclick="postForm('{{$value->id}}','{{$value->account->id}}')">
                 <section class="panel">
                     <div class="symbol terques">
                         <i class="icon-arrow-right"></i>
@@ -92,10 +92,10 @@
 <script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     //提交表单
-    function postForm(organization_id){
+    function postForm(organization_id,account_id){
         var _token = $("#_token").val();
         var url = $("#url").val();
-        var data = {'_token':_token,'organization_id':organization_id};
+        var data = {'_token':_token,'organization_id':organization_id,'account_id':account_id};
         $.post(url,data,function(json){
             if(json.status==1){
                 swal({
