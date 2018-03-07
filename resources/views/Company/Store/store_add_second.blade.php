@@ -39,24 +39,24 @@
                         <div class="panel-body">
                             <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('company/ajax/store_add_second_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">选择模式</label>
-                                        <div class="col-sm-10">
-                                            <div class="btn-group" data-toggle="buttons">
-                                                @foreach($package_program as $key=>$val)
-                                                    @if(empty(count($val->programs)))
-                                                        <label class="btn btn-sm btn-danger" style="margin-right: 10px;">暂时没有可选的模式</label>
-                                                    @endif
-                                                    @foreach($val->programs as $kk=>$vv)
-                                                        <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                            <input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
-                                                        </label>
-                                                    @endforeach
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label class="col-sm-2 control-label" for="input-id-1">选择模式</label>--}}
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<div class="btn-group" data-toggle="buttons">--}}
+                                                {{--@foreach($package_program as $key=>$val)--}}
+                                                    {{--@if(empty(count($val->programs)))--}}
+                                                        {{--<label class="btn btn-sm btn-danger" style="margin-right: 10px;">暂时没有可选的模式</label>--}}
+                                                    {{--@endif--}}
+                                                    {{--@foreach($val->programs as $kk=>$vv)--}}
+                                                        {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
+                                                            {{--<input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}--}}
+                                                        {{--</label>--}}
+                                                    {{--@endforeach--}}
+                                                {{--@endforeach--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺名称</label>

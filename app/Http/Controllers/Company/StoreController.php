@@ -34,12 +34,9 @@ class StoreController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $package_name = $request->package_name;         //套餐名称
-        $package_id = $request->package_id;             //套餐id
-        $package_program = Package::getList(['id'=>$package_id],0,'id','DESC');   //查询当前所选餐包含的程序
-        dump($package_name);
-        dump($package_id);
-        dump($package_program);
-        return view('Company/Store/store_add_second',['package_name'=>$package_name,'package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        //$package_id = $request->package_id;             //套餐id
+        //$package_program = Package::getList(['id'=>$package_id],0,'id','DESC');   //查询当前所选餐包含的程序
+        return view('Company/Store/store_add_second',['package_name'=>$package_name,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //店铺管理
@@ -49,8 +46,6 @@ class StoreController extends Controller{
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];                 //上级id
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
-        $program_id = $request->get('program_id');             //程序ID
-        dd($program_id);
         $organization_name = $request->get('organization_name');
         $type = '4';                                              //店铺组织为4
         $store_owner = $request->get('realname');            //负责人姓名
@@ -68,7 +63,7 @@ class StoreController extends Controller{
                 'organization_name'=>$organization_name,
                 'parent_id'        =>$parent_id,
                 'parent_tree'      =>$parent_tree,
-                'program_id'       =>$program_id,
+                'program_id'       =>'4',//程序id
                 'type'             =>$type,
                 'status'           =>'1',
             ];
