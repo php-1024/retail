@@ -21,7 +21,7 @@
                 <div class="col-sm-9">
                     <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
                         @foreach($organization_name as $key=>$value)
-                        <option value="{{$value->id}}">{{$organization_name->organization_name}}</option>
+                        <option value="{{$value['id']}}">{{$organization_name['organization_name']}}</option>
                         @endforeach
                     </select>
                 </div>
