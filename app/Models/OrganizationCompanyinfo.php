@@ -16,7 +16,7 @@ class OrganizationCompanyinfo extends Model{
 
     //和organization表一对一的关系
     public function Organization(){
-        return $this->belongsto('App\Models\Organization', 'organization_id');//by tang, hasone -->belongsto
+        return $this->belongsto('App\Models\Organization', 'organization_id','id');//by tang, hasone -->belongsto
     }
 
     //添加数据
