@@ -28,16 +28,17 @@ class StoreController extends Controller{
         dump($list);
         $module_list = [];//功能模块列表
         $pname = [];//上级程序名称列表
-//        foreach($list as $key=>$val){
-//            $program_id = $val->id;
-//            $module_list[$val->id] =Module::getListProgram($program_id,[],0,'id');
-//            $ppname = Program::getPluck([['id',$val->complete_id]],'program_name')->toArray();//获取用户名称
-//            if(empty($ppname)){
-//                $pname[$val->id] = '独立主程序';
-//            }else{
-//                $pname[$val->id] = $ppname[0];
-//            }
-//        }
+        foreach($list as $key=>$val){
+            $program_id = $val->id;
+            $module_list[$val->id] =Module::getListProgram($program_id,[],0,'id');
+            dump( $module_list[$val->id]);
+            $ppname = Program::getPluck([['id',$val->complete_id]],'program_name')->toArray();//获取用户名称
+            if(empty($ppname)){
+                $pname[$val->id] = '独立主程序';
+            }else{
+                $pname[$val->id] = $ppname[0];
+            }
+        }
         return view('Zerone/Store/store_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //店铺人员架构
