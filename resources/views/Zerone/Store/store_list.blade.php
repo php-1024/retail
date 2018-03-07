@@ -89,9 +89,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($listStore as $key=>$value)
                                 <tr>
-                                    <td>1</td>
-                                    <td>刘记鸡煲王（总店）</td>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->organization_name}}</td>
                                     <td>微餐饮系统（先吃后付）通用版本</td>
                                     <td>5</td>
                                     <td>刘记鸡煲王</td>
@@ -110,7 +111,7 @@
                                         <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/store/store_config')}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;参数设置</button>
                                     </td>
                                 </tr>
-
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>

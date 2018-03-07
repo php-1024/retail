@@ -22,8 +22,11 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $organization_name  = $request->organization_name;
+        $where = ['type'=>'4'];
+        $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id'); //查询店铺
 
-        return view('Zerone/Store/store_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Store/store_list',['listStore'=>$listStore,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //店铺添加
@@ -57,8 +60,8 @@ class StoreController extends Controller{
         $program_id = $request->program_id;//程序id--资产程序
         $organization_id = $request->organization_id;//组织id
         $organization_name = $request->organization_name;//店铺名称
-        $re = Organization::where(['organization_name'=>$organization_name]);
-        if(!empty($re)){
+        $re = Organization::checkRowExists([['organization_name',$organization_name]]);
+        if($re == 'true'){
             return response()->json(['data' => '店铺名称已存在！', 'status' => '0']);
         }
         $program_munber = $request->program_munber;//允许开设分店数量
@@ -77,7 +80,6 @@ class StoreController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $package_id = PackageProgram::where([['program_id',$program_id]])->pluck('package_id')->first(); //套餐id
-
 
         DB::beginTransaction();
         try{
