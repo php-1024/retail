@@ -7,6 +7,7 @@ use App\Models\Organization;
 use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 class StoreController extends Controller{
     //店铺列表
@@ -45,14 +46,16 @@ class StoreController extends Controller{
     public function store_insert_check(Request $request){
 
         $program_id = $request->program_id;//程序id
-        dd($program_id);
-        $organization_id = $request->input('organization_id');//组织id
-        $organization_name = $request->input('organization_name');//店铺名称
-        $program_munber = $request->input('program_munber');//允许开设分店数量
-        $assets_status = $request->input('assets_status');//是否消耗上级组织的开设分店数量
-        $realname = $request->input('realname');//负责人姓名
-        $password = $request->input('password');//店铺登入密码
-
+        $organization_id = $request->organization_id;//组织id
+        $organization_name = $request->organization_name;//店铺名称
+        $program_munber = $request->program_munber;//允许开设分店数量
+        $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
+        $realname = $request->realname;//负责人姓名
+        $password = $request->password;//店铺登入密码
+        $program_id = '4';//程序id
+        $type = '4';//店铺组织
+        $parent_tree = Organization::where(['id'=>$organization_id])->pluck('parent_tree');
+        dd($parent_tree);
         $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
@@ -61,7 +64,7 @@ class StoreController extends Controller{
         try{
             $organization = [
                 'organization_name'=>$organization_name,
-                'parent_id'        =>$organization_parent_id,
+                'parent_id'        =>$organization_id,
                 'parent_tree'      =>$parent_tree,
                 'program_id'       =>$program_id,
                 'type'             =>$type,
