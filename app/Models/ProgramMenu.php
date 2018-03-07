@@ -79,5 +79,10 @@ class ProgramMenu extends Model{
         self::where('parent_tree','like',$target['parent_tree'].','.$target['id']."%")->forceDelete();//删除所有子菜单
         self::where($where)->forceDelete();//删除所有子菜单
     }
+
+    //删除节点的同时删除菜单
+    public static function deleteNode($route_name){
+        self::where([['menu_route',$route_name]])->delete();
+    }
 }
 ?>
