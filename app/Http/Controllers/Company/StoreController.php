@@ -50,6 +50,7 @@ class StoreController extends Controller{
         $parent_id = $admin_data['id'];                 //上级id
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
         $program_id = $request->get('program_id');             //程序ID
+        dd($program_id);
         $organization_name = $request->get('organization_name');
         $type = '4';                                              //店铺组织为4
         $store_owner = $request->get('realname');            //负责人姓名
