@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\OrganizationCompanyinfo;
+use App\Models\OrganizationStoreinfo;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,8 +53,8 @@ class StoreController extends Controller{
         $program_id = $request->get('program_id');             //程序ID
         $organization_name = $request->get('organization_name');
         $type = '4';                                    //店铺组织为4
-        $company_owner = $request->get('realname');            //负责人姓名
-        $company_owner_mobile = $request->get('tell');         //负责人电话
+        $store_owner = $request->get('realname');            //负责人姓名
+        $store_owner_mobile = $request->get('tell');         //负责人电话
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
         $user = Account::max('account');
         $account  = $user+1;//用户账号
@@ -74,14 +74,14 @@ class StoreController extends Controller{
             ];
             //在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
-            $companyinfo = [
+            $storeinfo = [
                 'organization_id'       =>$id,
-                'company_owner'         =>$company_owner,
-                'company_owner_idcard'  =>'',
-                'company_owner_mobile'  =>$company_owner_mobile,
+                'store_owner'         =>$store_owner,
+                'store_owner_idcard'  =>'',
+                'store_owner_mobile'  =>$store_owner_mobile,
             ];
             //在商户组织信息表创建店铺组织信息      这里需要修改成在店铺组织信息表创建店铺信息
-            OrganizationCompanyinfo::addOrganizationCompanyinfo($companyinfo);
+            OrganizationStoreinfo::addOrganizationStoreinfo($storeinfo);
             $accdata = [
                 'organization_id'  =>$id,
                 'parent_id'        =>$parent_id,
@@ -89,7 +89,7 @@ class StoreController extends Controller{
                 'deepth'           =>$deepth,
                 'account'          =>$account,
                 'password'         =>$encryptPwd,
-                'mobile'           =>$company_owner_mobile,
+                'mobile'           =>$store_owner_mobile,
             ];
             Account::addAccount($accdata);
             //添加操作日志
