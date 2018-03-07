@@ -89,7 +89,7 @@ class Organization extends Model{
 
     //获取分页数据-店铺
     public static function getBranchAndWarzone($organization_name,$where,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('warzone');
+        $model = self::with('account');
         if(!empty($organization_name)){
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
         }
