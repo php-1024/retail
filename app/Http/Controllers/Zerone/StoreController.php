@@ -77,8 +77,11 @@ class StoreController extends Controller{
         try{
 
             if($assets_status == '1' && $organization_id!=1){//如果消耗上级组织开设分店数量并且不是零壹组织
+                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);//查询程序数量
+                if($program_munber > $assets['program_spare_num']){
+                    return response()->json(['data' => '该店铺能使用的程序数量没有那么多！', 'status' => '0']);
+                }
                 dd(1);
-                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);
             }
 
 
