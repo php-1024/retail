@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label" style="padding-top: 7px;">商户名称</label>
                 <div class="col-sm-9">
-                    <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
+                    <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4" name="organization_id">
                         @foreach($listOrg as $key=>$value)
                         <option value="{{$value->id}}">{{$value->organization_name}}</option>
                         @endforeach
@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" style="padding-top: 7px;">消耗程序与分店数量</label>
                     <div class="col-sm-9">
-                        <input type="checkbox" class="js-switch" checked  value="1"/>
+                        <input type="checkbox" class="js-switch" checked name="assets_status"  value="1"/>
                     </div>
                 </div>
                 <div style="clear:both"></div>
@@ -57,7 +57,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">负责人姓名</label>
-                    <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="text" class="form-control" value="" name="realname"></div>
                 </div>
 
                 <div style="clear:both"></div>
@@ -73,7 +73,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">店铺登录密码</label>
-                    <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="password" class="form-control" value="" name="password"></div>
                 </div>
 
                 <div style="clear:both"></div>
@@ -81,7 +81,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">重复登录密码</label>
-                    <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="password" class="form-control" value="" name="re_password"></div>
                 </div>
 
                 <div style="clear:both"></div>
@@ -89,7 +89,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">安全密码</label>
-                    <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="password" class="form-control" value="" name="safe_password"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -124,13 +124,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
