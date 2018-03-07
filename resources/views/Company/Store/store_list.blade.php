@@ -61,7 +61,7 @@
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div>
                                         主账号：<label class="label label-info pull-right">
-                                            {{$val->account->account}}
+                                            {{--{{$val->account->account}}--}}
                                         </label>
                                     </div>
                                 </div>
