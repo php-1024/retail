@@ -34,10 +34,10 @@ class StoreController extends Controller{
     }
     //店铺添加
     public function store_insert(Request $request){
-        $id = $request->input('id');//中间件产生的管理员数据参数
-        $list = Program::getOne([['id',$id]]);
-            dump($list);
-        return view('Zerone/Store/store_insert',['id'=>$id]);
+        $program_id = $request->input('id');//中间件产生的管理员数据参数
+        $program_name = Program::getPluck([['id',$program_id]],'program_name');
+
+        return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name]);
     }
 
     //店铺人员架构
