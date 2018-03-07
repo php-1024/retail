@@ -57,6 +57,7 @@ class StoreController extends Controller{
         $organization_name = $request->organization_name;//店铺名称
         $program_munber = $request->program_munber;//允许开设分店数量
         $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
+        dd($assets_status);
         $realname = $request->realname;//负责人姓名
         $password = $request->password;//店铺登入密码
         $program = '4';//程序id --管理程序
@@ -71,12 +72,13 @@ class StoreController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $package_id = PackageProgram::where([['program_id',$program_id]])->pluck('package_id')->first(); //套餐id
-        $aa = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);
-        dd($aa);
+
+
         DB::beginTransaction();
         try{
 
-
+            if($assets_status!='1'){}
+            $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);
 
 
 
