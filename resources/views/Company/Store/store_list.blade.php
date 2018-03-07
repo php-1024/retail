@@ -62,7 +62,6 @@
                                     <div>
                                         主账号：<label class="label label-info pull-right">
                                             @if(empty($val->account))
-                                            {{--{{$val->account->account}}--}}
                                                 无
                                             @else
                                                 {{$val->account->account}}

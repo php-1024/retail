@@ -66,13 +66,11 @@ class DisplayController extends Controller
     //选择店铺
     public function branch_select(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $organization_id = $request->organization_id;           //获取当前选择店铺的组织
-        $parent_id = $request->parent_id;                       //获取当前店铺的上级
+        $account_id = $request->account_id;           //获取当前选择店铺的组织
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
-        if ($admin_data['is_super'] == '1' && !empty($organization_id) && $admin_data['organization_id'] == 0){
-            $this->superadmin_login($organization_id);      //超级管理员选择身份登录
+        if ($admin_data['is_super'] == '1' && $admin_data['organization_id'] == 0){
+            $this->superadmin_login($account_id);      //超级管理员选择身份登录
             return response()->json(['data' => '成功选择店铺，即将前往该店铺！', 'status' => '1']);
         }else{
             return response()->json(['data' => '操作失败，请稍后再试！', 'status' => '1']);
@@ -89,9 +87,9 @@ class DisplayController extends Controller
     }
 
     //超级管理员以分店平台普通管理员登录处理
-    public function superadmin_login($organization_id)
+    public function superadmin_login($account_id)
     {
-        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','7']]);//根据账号查询
+        $account_info = Account::getOneAccount([['id',$account_id]]);//根据账号查询
         //Admin登录商户平台要生成的信息
         //重新生成缓存的登录信息
         $admin_data = [

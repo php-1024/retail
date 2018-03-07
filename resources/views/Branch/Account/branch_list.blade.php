@@ -62,7 +62,7 @@
         <input type="hidden" id="url" value="{{url('branch/ajax/branch_select')}}">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
-            <a href="javascript:;" onclick="postForm({{$val->id}})">
+            <a href="javascript:;" onclick="postForm({{$val->account->id}})">
                 <section class="panel">
                     <div class="symbol terques"><i class="icon-arrow-right"></i></div>
                     <div class="value"><b>{{ $val->organization_name }}</b>
@@ -101,10 +101,10 @@
 <script src="{{asset('public/Company')}}/js/easy-pie-chart.js"></script>
 <script>
     //提交表单
-    function postForm(organization_id){
+    function postForm(account_id){
         var _token = $("#_token").val();
         var url = $("#url").val();
-        var data = {'_token':_token,'organization_id':organization_id};
+        var data = {'_token':_token,'account_id':account_id};
         $.post(url,data,function(json){
             console.log(json.status);
             if (json.status == 1){
