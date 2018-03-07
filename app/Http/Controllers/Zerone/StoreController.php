@@ -102,6 +102,15 @@ class StoreController extends Controller{
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
             }
 
+            $addAssets = [
+                'package_id'        =>$package_id,
+                'organization_id'   =>$id,
+                'program_id'        =>$program_id,
+                'program_spare_num' =>$program_munber,
+                'program_use_num'   =>'0',
+            ];
+            //程序管理资产数量添加
+            Assets::addAssets($addAssets);
 
             $storeinfo = [
                 'organization_id'     =>$id,
