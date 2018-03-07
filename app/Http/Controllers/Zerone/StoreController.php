@@ -54,8 +54,8 @@ class StoreController extends Controller{
         $password = $request->password;//店铺登入密码
         $program_id = '4';//程序id
         $type = '4';//店铺组织
-        $parent_tree = Organization::where(['id'=>$organization_id])->pluck('parent_tree');
-        dd($parent_tree);
+        $oneOrg = Organization::getListProxy(['id'=>$organization_id]);
+        dd($oneOrg);
         $key = config("app.catering_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
