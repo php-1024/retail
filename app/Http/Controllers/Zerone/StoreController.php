@@ -24,10 +24,12 @@ class StoreController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_name  = $request->organization_name;
         $where = ['type'=>'4'];
+        $branch_munber = '';
         $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id'); //查询店铺
         foreach($listStore as $key=>$val){
             $oneAssets = Assets::getOne([['organization_id',$val->id]]);
-            dump($oneAssets->program_spare_num);
+            $branch_munber[$val->id] = $oneAssets['program_spare_num'];
+            dump($branch_munber);
         }
         return view('Zerone/Store/store_list',['listStore'=>$listStore,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
