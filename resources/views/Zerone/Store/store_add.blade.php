@@ -57,16 +57,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($list as $key=>$val)
                                 <tr>
-                                    <td>1</td>
-                                    <td>微餐饮系统（先吃后付）通用版本</td>
+                                    <td>{{ $val->id }}</td>
+                                    <td>{{ $val->program_name }}</td>
                                     <td>
-                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="订单查询，订单编辑，订单添加，订单删除" style="display:inline-block">订单模块</label>&nbsp;&nbsp;
+                                        @foreach($module_list[$val->id] as $k=>$v)
+                                        <label class="label label-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="@foreach($v->program_nodes as $kk=>$vv)  {{ $vv->node_name }} @endforeach" style="display:inline-block">{{ $v->module_name }}</label>&nbsp;&nbsp;
+                                        @endforeach
                                     </td>
                                     <td class="text-right">
-                                        <button type="button" id="addbtn" class="btn  btn-xs btn-danger"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;开设店铺</button>
+                                        <button type="button" id="addbtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $val->id }})"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;开设店铺</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
