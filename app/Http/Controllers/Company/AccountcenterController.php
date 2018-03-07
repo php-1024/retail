@@ -46,7 +46,6 @@ class AccountcenterController extends Controller{
         $organization_name  = $request->organization_name;
         $where = ['type'=>'3'];
         $organization = Organization::getCompanyAndAccount($organization_name,$where,20,'id','ASC');
-        dump($organization);
         foreach ($organization as $key=>$val){
             $proxy = Organization::getOneProxy(['id'=>$val->parent_id]);
             $val->proxyname = $proxy->organization_name;
