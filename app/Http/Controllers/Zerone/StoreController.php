@@ -25,14 +25,15 @@ class StoreController extends Controller{
 //        $organization_id = $request->input('organization_id');//服务商id
 //        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $list = Package::getPaginage([],15,'id');
-        foreach ($list as $key=>$value){
-            foreach ($value['programs'] as $k=>$v){
-                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
-                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-            }
-        }
         dump($list);
+
+//        foreach ($list as $key=>$value){
+//            foreach ($value['programs'] as $k=>$v){
+//                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
+//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+//            }
+//        }
         return view('Zerone/Store/store_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //店铺人员架构
