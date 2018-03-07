@@ -99,7 +99,11 @@
                                     <td>{{$value->account->account}}</td>
                                     <td>13123456789</td>
                                     <td>
-                                        <label class="label label-primary">正常</label>
+                                        @if($value->status)
+                                            <label class="label label-primary">正常</label>
+                                        @else
+                                            <label class="label label-warning">冻结</label>
+                                        @endif
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
