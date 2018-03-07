@@ -20,11 +20,9 @@
                 <label class="col-sm-3 control-label" style="padding-top: 7px;">商户名称</label>
                 <div class="col-sm-9">
                     <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                        <option value="Mayotte">公司总部</option>
-                        <option value="Mayotte">刘记集团</option>
-                        <option value="Mexico">李记鸡煲连锁</option>
-                        <option value="Micronesia, Federated States of">叶记猪肚鸡</option>
-                        <option value="Moldova, Republic of">韦记莲藕汤</option>
+                        @foreach($organization_name as $key=>$value)
+                        <option value="{{$value->id}}">{{$organization_name->organization_name}}</option>
+                        @endforeach
                     </select>
                 </div>
 
