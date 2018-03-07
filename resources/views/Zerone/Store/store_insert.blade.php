@@ -31,7 +31,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">店铺名称</label>
-                    <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="text" class="form-control" value="" name="organization_name"></div>
                 </div>
 
                 <div style="clear:both"></div>
@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">允许开设分店数量</label>
-                    <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="text" class="form-control" value="" name="program_munber"></div>
                 </div>
 
                 <div style="clear:both"></div>

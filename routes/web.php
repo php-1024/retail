@@ -316,6 +316,7 @@ Route::group(['prefix'=>'zerone'],function(){
 
         //添加店铺
         Route::post('store_insert','Zerone\StoreController@store_insert')->middleware('ZeroneCheckAjax');               //添加店铺ajax显示页面
+        Route::post('store_insert_check','Zerone\StoreController@store_insert_check')->middleware('ZeroneCheckAjax');   //添加店铺数据提交
 
     });
 });

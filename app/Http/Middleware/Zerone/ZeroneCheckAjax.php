@@ -117,6 +117,10 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/store_insert_check"://检测是否登录 权限 安全密码 开设店铺数据是否正确
+                $re = $this->checkLoginAndRuleAndSafeAndStore($request);
+                return self::format_response($re,$next);
+                break;
 
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
@@ -422,6 +426,20 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkAssets($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测是否登录 权限 安全密码 添加店铺参数是否正确
+    public function checkLoginAndRuleAndSafeAndStore($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkStore($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -765,6 +783,33 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测添加店铺信息
+    public function checkStore($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入店铺名称', 'status' => '0']));
+        }
+        $program_munber = $request->input('program_munber');
+        if (!preg_match("/^[1-9]{1}\d{0,9}$/",$program_munber)){
+            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('password'))) {
+            return self::res(0, response()->json(['data' => '请输入登入密码', 'status' => '0']));
+        }
+        if (empty($request->input('re_password'))) {
+            return self::res(0, response()->json(['data' => '请输入重复登入密码', 'status' => '0']));
+        }
+        if ($request->input('password')!=$request->input('re_password')){
+            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
+        }
+
+        return self::res(1, $request);
+    }
+
+
+
     //检测商户编辑表信息
     public function checkAssets($request){
         $num = $request->input('num');
