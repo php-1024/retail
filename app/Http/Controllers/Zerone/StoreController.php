@@ -26,9 +26,10 @@ class StoreController extends Controller{
         $where = ['type'=>'4'];
         $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id'); //查询店铺
         foreach($listStore as $key=>$val){
-           $a = Assets::getOne([['organization_id',$val->id]]);
-           dump($a);
+            $oneAssets = Assets::getOne([['organization_id',$val->id]]);
+            $listStore[$val->id]['branch_munber']=$oneAssets['program_spare_num'];
         }
+        dump($listStore);
         return view('Zerone/Store/store_list',['listStore'=>$listStore,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
