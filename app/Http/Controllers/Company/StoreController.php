@@ -51,17 +51,17 @@ class StoreController extends Controller{
         $route_name = $request->path();                 //获取当前的页面路由
         $parent_id = $admin_data['id'];                 //上级id
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树型关系
-        $program_id = $request->program_id;
-        $organization_name = $request->organization_name;
+        $program_id = $request->get('program_id');             //程序ID
+        $organization_name = $request->get('organization_name');
         $type = '4';                                    //店铺组织为4
-        $company_owner = $request->realname;            //负责人姓名
-        $company_owner_mobile = $request->tell;         //负责人电话
+        $company_owner = $request->get('realname');            //负责人姓名
+        $company_owner_mobile = $request->get('tell');         //负责人电话
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
         $user = Account::max('account');
         $account  = $user+1;//用户账号
-        $password = $request->password;
-        $key = config("app.company_encrypt_key");//获取加密盐
-        $encrypted = md5($password);//加密密码第一重
+        $password = $request->get('password');
+        $key = config("app.catering_encrypt_key");  //获取店铺加密盐
+        $encrypted = md5($password);                    //加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
