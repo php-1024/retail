@@ -20,8 +20,8 @@
                 <label class="col-sm-3 control-label" style="padding-top: 7px;">商户名称</label>
                 <div class="col-sm-9">
                     <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                        @foreach($organization_name as $key=>$value)
-                        <option value="{{$value['id']}}">{{$organization_name['organization_name']}}</option>
+                        @foreach($listOrg as $key=>$value)
+                        <option value="{{$value->id}}">{{$value->organization_name}}</option>
                         @endforeach
                     </select>
                 </div>

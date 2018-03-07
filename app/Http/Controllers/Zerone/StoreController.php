@@ -37,9 +37,8 @@ class StoreController extends Controller{
     public function store_insert(Request $request){
         $program_id = $request->input('id');//程序id
         $program_name = Program::getPluck([['id',$program_id]],'program_name')->first();//程序名字
-        $organization_name = Organization::where([['type','3'],['status','1']])->Orwhere([['type','1']])->pluck('organization_name','id');//上级组织名字，id
-        dump($organization_name);
-        return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name,'organization_name'=>$organization_name]);
+        $listOrg = Organization::where([['type','3'],['status','1']])->Orwhere([['type','1']])->get();//上级组织信息
+        return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name,'listOrg'=>$listOrg]);
     }
 
     //店铺人员架构
