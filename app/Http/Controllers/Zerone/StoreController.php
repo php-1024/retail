@@ -24,7 +24,7 @@ class StoreController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_name  = $request->organization_name;
         $where = ['type'=>'4'];
-        $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询店铺
+        $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id'); //查询店铺
 
         return view('Zerone/Store/store_list',['listStore'=>$listStore,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
