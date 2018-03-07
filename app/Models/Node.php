@@ -42,6 +42,12 @@ class Node extends Model{
         return $this->belongsToMany('App\Models\Program','program_module_node','node_id','program_id');
     }
 
+    //简易型查询单条数据关联查询
+    public static function getOne($where)
+    {
+        return self::where($where)->first();
+    }
+
     //获取总数
     public static function getCount($where=[]){
         return self::where($where)->count();

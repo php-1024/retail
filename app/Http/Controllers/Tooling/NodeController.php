@@ -86,6 +86,9 @@ class NodeController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $current_route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//提交上来的ID
+        $info = Node::getOne([['id',$id]]);
+        dump($info);
+        exit();
         DB::beginTransaction();
         try{
             Node::where('id',$id)->delete();
@@ -96,6 +99,7 @@ class NodeController extends Controller{
              * 未完毕，待其他程序功能完善以后增加
              */
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'删除了节点，ID为：'.$id);//保存操作记录
+
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
