@@ -16,8 +16,12 @@ class ShopController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
+            $organization_name  = $request->organization_name;
+            $where = ['type'=>'4'];
             $listOrg = Organization::where([['program_id','4']])->get();
+            $listOrgs = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
             dump($listOrg);
+            dump($listOrgs);
             return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];

@@ -88,6 +88,15 @@ class Organization extends Model{
     }
 
     //获取分页数据-店铺
+    public static function getCateringAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('account');
+        if(!empty($organization_name)){
+            $model =$model->where('organization_name','like','%'.$organization_name.'%');
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
+    //获取分页数据-店铺分店
     public static function getBranchAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
         $model = self::with('account');
         if(!empty($organization_name)){
