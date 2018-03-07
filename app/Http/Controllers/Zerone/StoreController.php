@@ -47,6 +47,7 @@ class StoreController extends Controller{
 
         $program_id = $request->program_id;//程序id
         $organization_id = $request->organization_id;//组织id
+        dd($organization_id);
         $organization_name = $request->organization_name;//店铺名称
         $program_munber = $request->program_munber;//允许开设分店数量
         $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
