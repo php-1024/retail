@@ -206,9 +206,9 @@
 <script>
     $(document).ready(function() {
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        $('#addbtn').click(function(){
-            $('#myModal').modal();
-        });
+//        $('#addbtn').click(function(){
+//            $('#myModal').modal();
+//        });
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
         $('.i-checks').iCheck({
@@ -216,6 +216,11 @@
             radioClass: 'iradio_square-green',
         });
     });
+
+
+
+
+
 </script>
 
 </body>
