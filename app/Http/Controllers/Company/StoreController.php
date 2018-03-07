@@ -80,7 +80,7 @@ class StoreController extends Controller{
                 'company_owner_idcard'  =>'',
                 'company_owner_mobile'  =>$company_owner_mobile,
             ];
-            //在商户组织信息表创建店铺组织信息
+            //在商户组织信息表创建店铺组织信息      这里需要修改成在店铺组织信息表创建店铺信息
             OrganizationCompanyinfo::addOrganizationCompanyinfo($companyinfo);
             $accdata = [
                 'organization_id'  =>$id,
