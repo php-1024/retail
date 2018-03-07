@@ -57,18 +57,18 @@
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">负责人姓名</label>
                     <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
                 </div>
 
                 <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div> -->
+                <div class="hr-line-dashed"></div> 
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">店铺管理账号</label>
-                    <div class="col-sm-9"><input type="text" readonly class="form-control" value="1321321321"></div>
-                </div>
+                {{--<div class="form-group">--}}
+                    {{--<label class="col-sm-3 control-label">店铺管理账号</label>--}}
+                    {{--<div class="col-sm-9"><input type="text" readonly class="form-control" value="1321321321"></div>--}}
+                {{--</div>--}}
 
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
