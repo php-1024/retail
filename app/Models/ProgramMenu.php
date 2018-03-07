@@ -90,7 +90,7 @@ class ProgramMenu extends Model{
                 $organization_list = Organization::where('program_id',$val['program_id'])->get();//通过程序ID，获取所有使用该程序的组织
                 if(!empty($organization_list)) {
                     foreach ($organization_list as $k => $v) {
-                        $account_list = Account::where(['organization_id',$v->id])->get();
+                        $account_list = Account::where('organization_id',$v->id)->get();
                         dump($account_list);
                     }
                 }
