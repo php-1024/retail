@@ -100,13 +100,13 @@ class StoreController extends Controller{
                 //添加操作日志
                 AssetsOperation::addAssetsOperation($data);//保存操作记录
             }
-            
+
 
             $storeinfo = [
-                'organization_id'      =>$id,
-                'branch_owne'          =>$realname,
-                'branch_owner_idcard'  =>'',
-                'branch_owner_mobile'  =>'',
+                'organization_id'     =>$id,
+                'store_owner'         =>$realname,
+                'store_owner_idcard'  =>'',
+                'store_owner_mobile'  =>'',
             ];
             //在店铺织信息表创建店铺组织信息
             OrganizationStoreinfo::addOrganizationStoreinfo($storeinfo);
