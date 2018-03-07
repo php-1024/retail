@@ -32,9 +32,9 @@ class Organization extends Model{
         return $this->hasMany('App\Models\AssetsOperation', 'draw_organization_id','id');
     }
 
-    //和OrganizationProxyinfo表一对一的关系
+    //和OrganizationCompanyinfo表一对一的关系
     public function organizationCompanyinfo(){
-        return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id');
+        return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id','id');
     }
 
     //和organizationBranchinfo表一对一的关系
