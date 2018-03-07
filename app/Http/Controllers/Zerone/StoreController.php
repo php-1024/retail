@@ -29,7 +29,9 @@ class StoreController extends Controller{
         foreach($list as $key=>$val){
             $program_id = $val->id;
             $module_list[$val->id] =Module::getListProgram($program_id,[],0,'id');
+            dump($module_list);
         }
+        exit;
         return view('Zerone/Store/store_add',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //店铺人员架构
