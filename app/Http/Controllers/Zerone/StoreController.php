@@ -24,7 +24,7 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Program::getPaginage([],15,'id');
+        $list = Program::getPaginage([['complete_id','3']],15,'id');
         dump($list);
         $module_list = [];//功能模块列表
         $pname = [];//上级程序名称列表
