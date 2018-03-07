@@ -50,7 +50,7 @@
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
-                                    <th>序</th>
+                                    <th>id</th>
                                     <th>程序名称</th>
                                     <th>程序模块</th>
                                     <th class="col-sm-2 text-right">操作</th>
