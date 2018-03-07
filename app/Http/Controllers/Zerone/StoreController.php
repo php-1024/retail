@@ -57,7 +57,6 @@ class StoreController extends Controller{
         $organization_name = $request->organization_name;//店铺名称
         $program_munber = $request->program_munber;//允许开设分店数量
         $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
-        dd($assets_status);
         $realname = $request->realname;//负责人姓名
         $password = $request->password;//店铺登入密码
         $program = '4';//程序id --管理程序
@@ -77,9 +76,10 @@ class StoreController extends Controller{
         DB::beginTransaction();
         try{
 
-            if($assets_status!='1'){}
-            $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);
-
+            if($assets_status == '1' && $organization_id!=1){//如果消耗上级组织开设分店数量并且不是零壹组织
+                dd(1);
+                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);
+            }
 
 
 
