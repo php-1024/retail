@@ -90,7 +90,8 @@ class NodeController extends Controller{
         $current_route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//提交上来的ID
         $info = Node::getOne([['id',$id]]);//获取要删除的节点信息
-
+        ProgramMenu::deleteNode($info['route_name']);//删除节点的同时删除菜单
+        exit();
         DB::beginTransaction();
         try{
             ModuleNode::deleteNode($id);//删除模块与节点的关系
