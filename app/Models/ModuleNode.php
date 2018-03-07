@@ -26,6 +26,11 @@ class ModuleNode extends Model{
         $model->save();
     }
 
+    //删除节点时，同时删除关系
+    public static function deleteNode($node_id){
+        return self::where('node_id',$node_id)->delete();
+    }
+
     //修改数据
     public static function editModuleNode($where,$param){
         $model = self::where($where)->first();

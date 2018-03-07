@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Node;
 use App\Models\ModuleNode;
 use App\Models\ProgramModuleNode;
+use App\Models\ProgramMenu;
 use App\Models\ToolingOperationLog;
 use App\Models\RoleNode;
+use App\Models\AccountNode;
+
 class NodeController extends Controller{
     //添加节点
     public function node_add(Request $request){
@@ -86,15 +89,15 @@ class NodeController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $current_route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//提交上来的ID
-        $info = Node::getOne([['id',$id]]);
-        dump($info);
-        exit();
+        $info = Node::getOne([['id',$id]]);//获取要删除的节点信息
+
         DB::beginTransaction();
         try{
-            Node::where('id',$id)->delete();
-            ModuleNode::where('node_id',$id)->delete();
-            RoleNode::where('node_id',$id)->delete();
-            ProgramModuleNode::where('node_id',$id)->delete();
+            ModuleNode::deleteNode($id);//删除模块与节点的关系
+            ProgramModuleNode::deleteNode($id);//删除程序与节点的关系
+            RoleNode::where('node_id',$id)->delete();//删除角色与节点的关系
+
+            Node::where('id',$id)->delete();//删除节点
             /*
              * 未完毕，待其他程序功能完善以后增加
              */
