@@ -14,9 +14,9 @@
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/chosen')}}/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Zerone/library/chosen')}}/css/plugins/switchery/switchery.css" rel="stylesheet">
-    
+    <link href="{{asset('public/Zerone/library')}}/iCheck/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Zerone/library')}}/switchery/css/switchery.css" rel="stylesheet">
+
 </head>
 
 <body class="">
