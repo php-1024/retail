@@ -188,7 +188,7 @@
                                 <tbody>
                                 @foreach($login_log_list as $key=>$val)
                                 <tr>
-                                    {{--<td>{{  $val->accounts->account }}</td>--}}
+                                    <td>{{  $val->accounts->account }}</td>
                                     <td>{{  long2ip($val->ip) }}</td>
                                     <td>{{  $val->ip_position }}</td>
                                     <td>{{  $val->created_at }}</td>
@@ -216,7 +216,7 @@
                                 <tbody>
                                 @foreach($operation_log_list as $key=>$val)
                                     <tr>
-                                        <td>{{ $val->accounts->account }}</td>
+{{--                                        <td>{{ $val->accounts->account }}</td>--}}
                                         <td>{{ $val->operation_info }}</td>
                                         <td>{{ $val->created_at }}</td>
                                     </tr>
