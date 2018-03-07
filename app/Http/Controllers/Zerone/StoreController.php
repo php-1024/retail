@@ -24,7 +24,7 @@ class StoreController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_name  = $request->organization_name;
         $where = ['type'=>'4'];
-        $branch_munber = '';
+        $branch_munber = [];
         $listStore = Organization::getCateringAndAccount($organization_name,$where,20,'id'); //查询店铺
         foreach($listStore as $key=>$val){
             $oneAssets = Assets::getOne([['organization_id',$val->id]]);
