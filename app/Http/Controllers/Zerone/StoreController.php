@@ -71,7 +71,7 @@ class StoreController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $package_id = PackageProgram::where([['program_id',$program_id]])->pluck('package_id')->first(); //套餐id
-        $aa = Assets::getOne([['program_id',$program_id],['organization_id'=>$organization_id]]);
+        $aa = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);
         dd($aa);
         DB::beginTransaction();
         try{
