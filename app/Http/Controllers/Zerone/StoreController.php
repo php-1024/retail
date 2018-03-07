@@ -32,6 +32,12 @@ class StoreController extends Controller{
         }
         return view('Zerone/Store/store_add',['list'=>$list,'module_list'=>$module_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //店铺添加
+    public function store_insert(Request $request){
+
+        return view('Zerone/Store/store_insert');
+    }
+
     //店铺人员架构
     public function store_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

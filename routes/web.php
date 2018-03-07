@@ -314,6 +314,9 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('company_assets','Zerone\CompanyController@company_assets')->middleware('ZeroneCheckAjax');//商户程序管理划入划出显示页面
         Route::post('company_assets_check','Zerone\CompanyController@company_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
 
+        //添加店铺
+        Route::post('store_insert','Zerone\StoreController@store_insert')->middleware('ZeroneCheckAjax');               //添加店铺ajax显示页面
+
     });
 });
 /********************零壹管理系统*************************/
