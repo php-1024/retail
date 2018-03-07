@@ -4,7 +4,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\Assets;
+use App\Models\AssetsOperation;
 use App\Models\Module;
+use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationStoreinfo;
 use App\Models\Package;
@@ -55,6 +57,10 @@ class StoreController extends Controller{
         $program_id = $request->program_id;//程序id--资产程序
         $organization_id = $request->organization_id;//组织id
         $organization_name = $request->organization_name;//店铺名称
+        $re = Organization::where(['organization_name'=>$organization_name]);
+        if(!empty($re)){
+            return response()->json(['data' => '店铺名称已存在！', 'status' => '0']);
+        }
         $program_munber = $request->program_munber;//允许开设分店数量
         $assets_status = $request->assets_status;//是否消耗上级组织的开设分店数量
         $realname = $request->realname;//负责人姓名
@@ -75,24 +81,6 @@ class StoreController extends Controller{
 
         DB::beginTransaction();
         try{
-
-            if($assets_status == '1' && $organization_id!=1){//如果消耗上级组织开设分店数量并且不是零壹组织
-                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);//查询程序数量
-                if($program_munber > $assets['program_spare_num']){
-                    return response()->json(['data' => '该店铺能使用的程序数量没有那么多！', 'status' => '0']);
-                }
-                dd(1);
-            }
-
-
-
-
-
-
-
-
-
-
             $organization = [
                 'organization_name'=>$organization_name,
                 'parent_id'        =>$organization_id,
@@ -103,11 +91,36 @@ class StoreController extends Controller{
             ];
             //在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
+
+            if($assets_status == '1' && $organization_id!=1){//如果消耗上级组织开设分店数量并且不是零壹组织
+                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);//查询程序数量
+                if($program_munber > $assets['program_spare_num']){
+                    return response()->json(['data' => '该店铺能使用的程序数量没有那么多！', 'status' => '0']);
+                }
+                $number = $assets['program_spare_num']-$program_munber; //剩余数量
+                $use_number = $assets['program_use_num']+$program_munber; //使用数量
+                Assets::editAssets([['id',$assets['id']]],['program_spare_num'=>$number,'program_use_num'=>$use_number]);
+
+                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$assets_status,'number'=>$number];
+                //添加操作日志
+                AssetsOperation::addAssetsOperation($data);//保存操作记录
+            }
+
+            $addAssets = [
+                'package_id'        =>$package_id,
+                'organization_id'   =>$id,
+                'program_id'        =>$program_id,
+                'program_spare_num' =>$program_munber,
+                'program_use_num'   =>'0',
+            ];
+            //程序管理资产数量添加
+            Assets::addAssets($addAssets);
+
             $storeinfo = [
-                'organization_id'      =>$id,
-                'branch_owne'          =>$realname,
-                'branch_owner_idcard'  =>'',
-                'branch_owner_mobile'  =>'',
+                'organization_id'     =>$id,
+                'store_owner'         =>$realname,
+                'store_owner_idcard'  =>'',
+                'store_owner_mobile'  =>'',
             ];
             //在店铺织信息表创建店铺组织信息
             OrganizationStoreinfo::addOrganizationStoreinfo($storeinfo);
@@ -135,11 +148,10 @@ class StoreController extends Controller{
 
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '创建分店失败，请稍后再试！', 'status' => '0']);
+            return response()->json(['data' => '创建店铺失败，请稍后再试！', 'status' => '0']);
         }
-        return response()->json(['data' => '创建分店成功,请前往总分店管理进行管理！', 'status' => '1']);
+        return response()->json(['data' => '创建店铺成功,请前往总店铺列表进行管理！', 'status' => '1']);
 
     }
 
