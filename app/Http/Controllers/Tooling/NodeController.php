@@ -95,7 +95,9 @@ class NodeController extends Controller{
         try{
             ModuleNode::deleteNode($id);//删除模块与节点的关系
             ProgramModuleNode::deleteNode($id);//删除程序与节点的关系
-            RoleNode::where('node_id',$id)->delete();//删除角色与节点的关系
+            ProgramMenu::deleteNode($info['route_name']);
+
+            RoleNode::deleteNode($id);//删除角色与节点的关系
 
             Node::where('id',$id)->delete();//删除节点
             /*
