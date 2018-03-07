@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\Assets;
+use App\Models\AssetsOperation;
 use App\Models\Module;
 use App\Models\Organization;
 use App\Models\OrganizationStoreinfo;
@@ -75,24 +76,6 @@ class StoreController extends Controller{
 
         DB::beginTransaction();
         try{
-
-            if($assets_status == '1' && $organization_id!=1){//如果消耗上级组织开设分店数量并且不是零壹组织
-                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);//查询程序数量
-                if($program_munber > $assets['program_spare_num']){
-                    return response()->json(['data' => '该店铺能使用的程序数量没有那么多！', 'status' => '0']);
-                }
-                dd(1);
-            }
-
-
-
-
-
-
-
-
-
-
             $organization = [
                 'organization_name'=>$organization_name,
                 'parent_id'        =>$organization_id,
@@ -103,6 +86,22 @@ class StoreController extends Controller{
             ];
             //在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
+
+            if($assets_status == '1' && $organization_id!=1){//如果消耗上级组织开设分店数量并且不是零壹组织
+                $assets = Assets::getOne([['program_id',$program_id],['organization_id',$organization_id]]);//查询程序数量
+                if($program_munber > $assets['program_spare_num']){
+                    return response()->json(['data' => '该店铺能使用的程序数量没有那么多！', 'status' => '0']);
+                }
+                $number = $assets['program_spare_num']-$program_munber; //剩余数量
+                $use_number = $assets['program_use_num']+$program_munber; //使用数量
+                Assets::editAssets([['id',$assets['id']]],['program_spare_num'=>$number,'program_use_num'=>$use_number]);
+
+                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$assets_status,'number'=>$number];
+                //添加操作日志
+                AssetsOperation::addAssetsOperation($data);//保存操作记录
+            }
+            
+
             $storeinfo = [
                 'organization_id'      =>$id,
                 'branch_owne'          =>$realname,
