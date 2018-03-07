@@ -35,7 +35,7 @@ class StoreController extends Controller{
     //店铺添加
     public function store_insert(Request $request){
         $program_id = $request->input('id');//中间件产生的管理员数据参数
-        $program_name = Program::getPluck([['id',$program_id]],'program_name');
+        $program_name = Program::getPluck([['id',$program_id]],'program_name')->first();
 
         return view('Zerone/Store/store_insert',['program_id'=>$program_id,'program_name'=>$program_name]);
     }
