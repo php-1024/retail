@@ -55,7 +55,7 @@ class Organization extends Model{
     public static function getWarzoneProxyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-    //获取单条信息-商户
+    //获取单条信息-服务商
     public static function getOneProxy($where){
         return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
     }
@@ -66,7 +66,7 @@ class Organization extends Model{
 
     //获取-服务商列表
     public static function getListProxy($where){
-        return self::with('organizationCompanyinfo')->where($where)->get();
+        return self::with('organizationCompanyinfo')->with('account')->where($where)->get();
     }
 
     //获取单条信息-商户
