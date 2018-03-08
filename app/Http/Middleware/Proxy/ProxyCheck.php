@@ -140,7 +140,7 @@ class ProxyCheck{
         }else{
             $sess_key = Session::get('proxy_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('proxy');//连接到我的缓存服务器
+            Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('proxy_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_2_'.$sess_key);
             dump($menu_data);
