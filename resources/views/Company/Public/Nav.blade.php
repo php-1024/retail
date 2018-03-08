@@ -6,7 +6,6 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav" data-ride="collapse">
-                        <?php dump($menu_data);?>
                         @foreach($menu_data as $key=>$val)
                         <li @if(in_array($route_name,explode(',',$val['menu_routes_bind']))) class="active" @endif>
                             <a href="javascript:;" class="auto">
