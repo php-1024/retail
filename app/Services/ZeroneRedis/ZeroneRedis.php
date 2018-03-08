@@ -112,7 +112,9 @@ class ZeroneRedis
         $menu_key = 'zerone_system_menu_'.$program_id.'_'.$id;  //一级菜单的Redis主键。
         $son_menu_key = 'zerone_system_son_menu_'.$program_id.'_'.$id;//子菜单的Redis主键
         Redis::set($menu_key,$menu);
-        Redis::set($son_menu_key,$son_menu);
+        if(!empty($son_menu)) {
+            Redis::set($son_menu_key, $son_menu);
+        }
     }
     //
     //内部方法，生成对应程序及账号的菜单
