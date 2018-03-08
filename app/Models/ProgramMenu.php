@@ -92,9 +92,9 @@ class ProgramMenu extends Model{
                     foreach ($organization_list as $k => $v) {
                         $account_list = Account::where('organization_id',$v->id)->get();//查询这些程序下的所有账号
                         if(!empty($account_list)){
-                            switch($val->program_id){
-
-                            }
+                           foreach($account_list as $kk=>$vv){
+                               dump($vv->id);
+                           }
                         }
                     }
                 }
