@@ -42,5 +42,10 @@ class AccountNode extends Model
         return self::where('node_id',$node_id)->delete();
     }
 
+    //删除节点的同时删除用户权限节点
+    public static function removeNode($node_id){
+        return self::where('node_id',$node_id)->forceDelete();
+    }
+
 }
 ?>

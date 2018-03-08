@@ -52,5 +52,10 @@ class RoleNode extends Model{
     public static function deleteNode($node_id){
         return self::where('node_id',$node_id)->delete();
     }
+
+    //删除节点时，同时删除节点与程序的关联
+    public static function removeNode($node_id){
+        return self::where('node_id',$node_id)->forceDelete();
+    }
 }
 ?>

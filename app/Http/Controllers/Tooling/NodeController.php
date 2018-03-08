@@ -121,10 +121,10 @@ class NodeController extends Controller{
         try{
             ModuleNode::removeNode($id);//删除模块与节点的关系
             ProgramModuleNode::removeNode($id);//删除程序与节点的关系
-            ProgramMenu::deleteNode($info['route_name']);//删除节点的同时删除菜单
-            RoleNode::deleteNode($id);//删除角色与节点的关系
-            AccountNode::deleteNode($id);//删除账号与该节点的关系
-            Node::where('id',$id)->delete();//删除节点
+            ProgramMenu::removeNode($info['route_name']);//删除节点的同时删除菜单
+            RoleNode::removeNode($id);//删除角色与节点的关系
+            AccountNode::removeNode($id);//删除账号与该节点的关系
+            Node::where('id',$id)->forceDelete();//删除节点
 
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$current_route_name,'强制删除了节点，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
