@@ -7,7 +7,7 @@
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav" data-ride="collapse">
                         @foreach($menu_data as $key=>$val)
-                            @dump($val)
+                            <?php dump($val);?>
                         <li @if(in_array($route_name,explode(',',$val['menu_routes_bind']))) class="active" @endif>
                             <a href="javascript:;" class="auto">
                                 <span class="pull-right text-muted">
