@@ -115,7 +115,7 @@
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
-                                                            <input type="tel" autocomplete="off" class="pull-left" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
+                                                            <input type="tel" autocomplete="off" class="pull-left" onchange="return editSort('{{ $vv->id }}','{{ $info->id }}',this);" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
                                                         &nbsp;&nbsp;
                                                         <div class="btn-group">
                                                             <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
@@ -131,7 +131,7 @@
                                                             <li class="dd-item" data-id="2">
                                                                 <div class="dd-handle">
                                                                     <span class="pull-right">
-                                                                        <input type="text" autocomplete="off" value="{{ $vvv->sort }}" style="width: 50px; text-align: center;">
+                                                                        <input type="text" autocomplete="off" value="{{ $vvv->sort }}" onchange="return editSort('{{ $vvv->id }}','{{ $info->id }}',this);" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
                                                                         &nbsp;&nbsp;
 
                                                                         <div class="btn-group">
