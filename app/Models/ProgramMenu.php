@@ -93,12 +93,12 @@ class ProgramMenu extends Model{
                         $account_list = Account::where('organization_id',$v->id)->get();//查询这些程序下的所有账号
                         if(!empty($account_list)){
                            foreach($account_list as $kk=>$vv){
-                               dump($vv->id);
+                               \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
                            }
                         }
+                        \ZeroneRedis::create_menu_cache(1,$val->program_id);//重新生成超级管理员的系统菜单缓存
                     }
                 }
-                exit;
             }
         }
         self::where([['menu_route',$route_name]])->delete();
