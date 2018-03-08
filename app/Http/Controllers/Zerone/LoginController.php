@@ -108,7 +108,7 @@ class LoginController extends Controller{
                                 }
 
                                 \ZeroneRedis::create_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
-                                \ZeroneRedis::create_menu_cache($account_info->id);//生成对应账号的系统菜单
+                                \ZeroneRedis::create_menu_cache($account_info->id,1);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             }else{
                                 return response()->json(['data' => '登录失败', 'status' => '0']);

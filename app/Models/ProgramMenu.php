@@ -87,11 +87,15 @@ class ProgramMenu extends Model{
         $list = self::where([['menu_route', $route_name]])->get();//获取所有使用该节点的菜单
         if (!empty($list)) {
             foreach ($list as $key => $val) {
-                $organization_list = Organization::where('program_id',$val['program_id'])->get();//通过程序ID，获取所有使用该程序的组织
+                $organization_list = Organization::where('program_id',$val->program_id)->get();//通过程序ID，获取所有使用该程序的组织
                 if(!empty($organization_list)) {
                     foreach ($organization_list as $k => $v) {
-                        $account_list = Account::where('organization_id',$v->id)->get();
-                        dump($account_list);
+                        $account_list = Account::where('organization_id',$v->id)->get();//查询这些程序下的所有账号
+                        if(!empty($account_list)){
+                            switch($val->program_id){
+
+                            }
+                        }
                     }
                 }
                 exit;

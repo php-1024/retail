@@ -58,8 +58,8 @@ class ZeroneRedis
     /*
      * id - 用户的ID
      */
-    public static function create_menu_cache($id){
-        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','1']],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
+    public static function create_menu_cache($id,$program_id){
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id',$program_id]],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
 
         if($id <> 1){
             //查询用户所具备的所有节点的路由
@@ -69,7 +69,7 @@ class ZeroneRedis
                 $account_routes[] = $val->route_name;
             }
             //查询该程序下所有节点的路由
-            $program_info = Program::getOne([['id',1]]);
+            $program_info = Program::getOne([['id',$program_id]]);
             $program_routes = [];
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
