@@ -114,7 +114,7 @@ class LoginController extends Controller
                                     $admin_data['role_name'] = '角色未设置';
                                 }
                                 \ZeroneRedis::create_catering_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                                \ZeroneRedis::create_catering_menu_cache($account_info->id);//生成对应账号的商户系统菜单
+                                \ZeroneRedis::create_menu_cache($account_info->id,4);//生成对应账号的商户系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             } else {
                                 return response()->json(['data' => '登录失败', 'status' => '0']);
