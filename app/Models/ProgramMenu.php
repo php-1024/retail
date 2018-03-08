@@ -85,6 +85,7 @@ class ProgramMenu extends Model{
     public static function deleteNode($route_name)
     {
         $list = self::where([['menu_route', $route_name]])->get();//获取所有使用该节点的菜单
+        self::where([['menu_route',$route_name]])->delete();//删除对应的菜单
         if (!empty($list)) {
             foreach ($list as $key => $val) {
                 $organization_list = Organization::where('program_id',$val->program_id)->get();//通过程序ID，获取所有使用该程序的组织
@@ -101,7 +102,7 @@ class ProgramMenu extends Model{
                 }
             }
         }
-        self::where([['menu_route',$route_name]])->delete();
+
     }
 }
 ?>
