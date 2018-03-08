@@ -13,35 +13,35 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">用户账号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-id-1" value="{{ $info->account }}">
+                            <input type="text" class="form-control" disabled value="{{ $info->account }}">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">用户密码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-id-1" name="password">
+                            <input type="text" class="form-control" name="password">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">真实姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-id-1" name="realname" value="@if(!empty($info->account_info)){{ $info->account_info->realname }}@endif">
+                            <input type="text" class="form-control" name="realname" value="@if(!empty($info->account_info)){{ $info->account_info->realname }}@endif">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-id-1"  name="mobile" value="{{ $info->mobile }}">
+                            <input type="text" class="form-control"  name="mobile" value="{{ $info->mobile }}">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-id-1" value=""  name="safe_password">
+                            <input type="text" class="form-control" value=""  name="safe_password">
                         </div>
                     </div>
 
