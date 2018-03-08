@@ -69,7 +69,7 @@
                                     <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td><img src="{{asset('public/Branch')}}/images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                        <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                         <td>100020</td>
                                         <td>时光取名叫无心</td>
                                         <td><label class="label label-success">是</label></td>
@@ -146,14 +146,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
+                    <h4 class="modal-title">添加粉丝标签</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
+                            <label class="col-sm-2 text-right">用户账号</label>
                             <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
+                                <input type="text" value="100020" placeholder="标签名称" class="form-control" disabled="">
                             </div>
                         </div>
                         <div style="clear:both;"></div>
@@ -161,9 +161,29 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">负责人</label>
+                            <label class="col-sm-2 text-right">微信昵称</label>
                             <div class="col-sm-10">
-                                <input type="text" value="张老三" placeholder="负责人" class="form-control">
+                                <input type="text" value="时光取名叫无心" placeholder="安全密码" class="form-control" disabled="">
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">源头</label>
+                            <div class="col-sm-10">
+                                <label class="label label-success">自有店铺-过桥米线</label>
+                                <label class="label label-primary">联盟商户-刘记鸡煲王</label>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">推荐人</label>
+                            <div class="col-sm-10">
+                                <label class="label label-success">自行关注</label>
+                                <label class="label label-primary">联盟用户-张老三</label>
                             </div>
                         </div>
                         <div style="clear:both;"></div>
@@ -172,36 +192,159 @@
                         <div class="form-group">
                             <label class="col-sm-2 text-right">手机号码</label>
                             <div class="col-sm-10">
-                                <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
+                                <input type="text" value="" placeholder="QQ号码" class="form-control">
                             </div>
                         </div>
                         <div style="clear:both;"></div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
+                            <label class="col-sm-2 text-right">QQ号码</label>
                             <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
+                                <input type="text" value="" placeholder="手机号码" class="form-control">
                             </div>
                         </div>
 
                         <div style="clear:both;"></div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
+
 
                         <div class="form-group">
                             <label class="col-sm-2 text-right">安全密码</label>
                             <div class="col-sm-10">
                                 <input type="password" value="" placeholder="安全密码" class="form-control" >
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">粉丝钱包</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">用户账号</label>
+                            <div class="col-sm-10">
+                                <input type="text" value="100020" placeholder="标签名称" class="form-control" disabled="">
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">用户余额</label>
+                            <div class="col-sm-10">
+                                100元
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">用户积分</label>
+                            <div class="col-sm-10">
+                                1000分
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped b-t b-light">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>会员卡名称</th>
+                                <th>适用店铺范围</th>
+                                <th>适用商品范围</th>
+                                <th>折扣率</th>
+                                <th>余额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>钻石会员卡</td>
+                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td>0.9</td>
+                                <td>10000.00元</td>
+
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>钻石会员卡</td>
+                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td>0.9</td>
+                                <td>10000.00元</td>
+
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>钻石会员卡</td>
+                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td>0.9</td>
+                                <td>10000.00元</td>
+
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>钻石会员卡</td>
+                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td>0.9</td>
+                                <td>10000.00元</td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">冻结粉丝确认</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                <span class="help-block m-b-none">
+                              <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
+                          </span>
                             </div>
                         </div>
                         <div style="clear:both;"></div>
@@ -231,15 +374,16 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        $('.selected_btn').click(function(){
-            $('.selected_btn').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
+        $('#editBtn').click(function(){
+            $('#myModal').modal();
         });
-        $('.selected_table').click(function(){
-            $('.selected_table').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
+        $('#balanceBtn').click(function(){
+            $('#myModal2').modal();
         });
+        $('#lockBtn').click(function(){
+            $('#myModal3').modal();
+        });
+        $('.popovers').popover();
     });
 </script>
 </body>
