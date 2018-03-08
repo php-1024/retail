@@ -60,8 +60,6 @@ class ZeroneRedis
      */
     public static function create_menu_cache($id,$program_id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id',$program_id]],0,'sort','asc')->toArray();//获取零壹管理系统的一级菜单
-        dump($program_id);
-        exit();
         if($id <> 1){
             //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$id]]);
@@ -79,7 +77,6 @@ class ZeroneRedis
             $unset_routes = array_diff($program_routes,$account_routes);
             foreach($menu as $key=>$val){
                 $sm = ProgramMenu::son_menu($val['id'])->toArray();//获取子菜单列表
-
                 foreach($sm as $k=>$v){
                     //判断子菜单的路由是否在程序的所有路由中或是否在无需判断的过滤路由中，不在的话，取消菜单
                     if(!in_array($v['menu_route'],$program_routes) && !in_array($v['menu_route'],config('app.zerone_route_except'))){
