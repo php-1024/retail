@@ -105,7 +105,9 @@ class ZeroneRedis
             }
         }
         $menu = serialize($menu);
-        $son_menu = serialize($son_menu);
+        if(!empty($son_menu)) {
+            $son_menu = serialize($son_menu);
+        }
         Redis::connection('zeo');//连接到我的redis服务器
         $menu_key = 'zerone_system_menu_'.$program_id.'_'.$id;  //一级菜单的Redis主键。
         $son_menu_key = 'zerone_system_son_menu_'.$program_id.'_'.$id;//子菜单的Redis主键
