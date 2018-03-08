@@ -95,10 +95,10 @@ class ProgramMenu extends Model{
                         if(!empty($account_list)){
                            foreach($account_list as $kk=>$vv){
 
-                               \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
+                              \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
                            }
                         }
-                        //\ZeroneRedis::create_menu_cache(1,$val->program_id);//重新生成超级管理员的系统菜单缓存
+                        \ZeroneRedis::create_menu_cache(1,$val->program_id);//重新生成超级管理员的系统菜单缓存
                         unset($account_list);
                     }
                 }
