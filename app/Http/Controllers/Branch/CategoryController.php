@@ -78,6 +78,7 @@ class CategoryController extends Controller
     public function category_edit(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $category_id = $request->get('id');
         $where = [
             'program_id' => '5',
