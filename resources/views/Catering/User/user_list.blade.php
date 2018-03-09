@@ -78,7 +78,7 @@
                                         <td>{{$value->id}}</td>
                                         <td><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                         <td>{{$value->user->account}}</td>
-                                        <td>时光取名叫无心</td>
+                                        <td>{{$value->nickname}}</td>
                                         <td><label class="label label-success">是</label></td>
                                         <td><label class="label label-info">
                                                 @if($value->userOrigin->origin_id==$organization_id)
