@@ -52,7 +52,7 @@ class AccountNode extends Model
         foreach($organization_list as $key=>$val){
             $main_account = Account::where('organization_id',$val['id'])->where('parent_id',1)->first();
             foreach($nodes as $k=>$v){
-                AccountNode::addAccountNode(['account_id'=>$main_account['id'],'node'=>$v]);
+                AccountNode::addAccountNode(['account_id'=>$main_account['id'],'node_id'=>$v]);
             }
         }
     }
