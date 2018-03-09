@@ -6,22 +6,17 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class StoreUser extends Model{
+class User extends Model{
     use SoftDeletes;
-    protected $table = 'store_user';
+    protected $table = 'user';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和个人信息表一对一的关系
-    public function userOrigin(){
-        return $this->hasOne('App\Models\UserOrigin', 'user_id','user_id');
-    }
-
     //和账号多对多的关系
-    public function user()
+    public function storeUser()
     {
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->hasOne('App\Models\StoreUser','user_id','id');
     }
 
 
@@ -34,7 +29,7 @@ class StoreUser extends Model{
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::where($where)->with('userOrigin')->with('user')->orderBy($orderby,$sort);
+        $model = self::where($where)->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
