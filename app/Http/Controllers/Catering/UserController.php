@@ -36,7 +36,7 @@ class UserController extends Controller{
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
-        
+
         DB::beginTransaction();
         try {
             $data = [
@@ -96,8 +96,13 @@ class UserController extends Controller{
     }
     //删除会员标签ajax显示页面
     public function member_label_delete(Request $request){
-
-        return view('Catering/User/member_label_delete');
+        $id = $request->id; //会员标签id
+        $oneMemb = MemberLabel::getOneMemberLabel([['id',$id]]);
+        return view('Catering/User/member_label_delete',['oneMemb'=>$oneMemb]);
+    }
+    //删除会员标签ajax显示页面
+    public function member_label_delete_check(Request $request){
+        dd(1);
     }
     //粉丝用户管理
     public function user_list(Request $request){
