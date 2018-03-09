@@ -7,9 +7,7 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
-use App\Models\Organization;
-use App\Services\ZeroneRedis\ZeroneRedis;
+use App\Models\CateringCategory;
 use Illuminate\Http\Request;
 use Session;
 
@@ -22,7 +20,13 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Goods/goods_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $where = [
+            'program_id' => '5',
+            'organization_id' => $admin_data['organization_id'],
+        ];
+        $category = CateringCategory::getList($where,'0','displayorder','DESC');
+        dump($category);
+        return view('Branch/Goods/goods_add',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //添加商品数据操作
