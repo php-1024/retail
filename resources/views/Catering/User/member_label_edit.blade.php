@@ -1,18 +1,18 @@
-
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/member_label_add_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/member_label_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="id" value="{{$oneMemb->id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">添加粉丝标签</h4>
+                <h4 class="modal-title">编辑粉丝标签</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="标签名称" class="form-control" name="member_name">
+                            <input type="text" value="{{$oneMemb->member_name}}" placeholder="标签名称" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>

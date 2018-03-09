@@ -1,14 +1,14 @@
 <?php
 /**
- * organization_category表的模型
+ * catering_goods表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class OrganizationCategory extends Model{
+class CateringGoods extends Model{
     use SoftDeletes;
-    protected $table = 'organization_category';
+    protected $table = 'catering_goods';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -24,63 +24,47 @@ class OrganizationCategory extends Model{
         return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
     }
 
-    //获取单条信息
+    //获取单条餐饮商品信息
     public static function getOne($where){
         return self::with('nodes')->where($where)->first();
     }
 
-    //获取列表
+    //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new OrganizationCategory();
+        $model = new CateringGoods();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加组织栏目分类
-    public static function addCategory($param){
-        $model = new OrganizationCategory();
+    //添加餐饮商品
+    public static function addCateringGoods($param){
+        $model = new CateringGoods();
+        $model->program_id = $param['program_id'];
+        $model->name = $param['name'];
+        $model->keywords = $param['keywords'];
+        $model->details = $param['details'];
+        $model->price = $param['price'];
+        $model->stock = $param['stock'];
+        $model->number = $param['number'];
+        $model->maxbuy = $param['maxbuy'];
+        $model->created_by = $param['created_by'];
+        $model->category_id = $param['category_id'];
+        $model->displayorder = $param['displayorder'];
         $model->program_id = $param['program_id'];
         $model->organization_id = $param['organization_id'];
-        $model->created_by = $param['created_by'];
-        $model->category_sort = $param['category_sort'];
-        $model->category_name = $param['category_name'];
         $model->save();
         return $model->id;
     }
-    //修改数据
-    public static function editCategory($where,$param){
+    
+    //修改餐饮商品数据
+    public static function editCateringGoods($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
             }
             $model->save();
-        }
-    }
-    //查询数据是否存在（仅仅查询ID增加数据查询速度）
-    public static function checkRowExists($where){
-        $row = self::getPluck($where,'id')->toArray();
-        if(empty($row)){
-            return false;
-        }else{
-            return true;
-        }
-    }
-    //获取单行数据的其中一列
-    public static function getPluck($where,$pluck){
-        return self::where($where)->pluck($pluck);
-    }
-
-    //获取操作记录时根据account_id查询角色名
-    public static function getLogsRoleName($account_id){
-        $row = self::whereIn('id',function($query) use ($account_id){
-            $query->from('role_account')->where('account_id',$account_id)->select('role_id');
-        })->first();
-        if(empty($row)){
-            return '系统管理员';
-        }else{
-            return $row->role_name;
         }
     }
 
