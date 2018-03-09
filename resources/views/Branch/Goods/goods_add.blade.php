@@ -96,7 +96,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品详情</label>
                                                 <div class="col-sm-8">
-                                                    <textarea name="details" class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea id="form-content" name="details" class="editor" cols="30" rows="10"> </textarea>
                                                 </div>
                                             </div>
 
