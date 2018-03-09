@@ -62,7 +62,7 @@ class ModuleNode extends Model{
         foreach($module_nodes as $key=>$val){
             $nodes[] = $val['node_id'];
         }
-        self::deleteEditNodes($module_id,$nodes);
+        self::removeEditNodes($module_id,$nodes);
     }
 
     //修改数据时 如果去掉了节点 就要删除对应的节点信息
