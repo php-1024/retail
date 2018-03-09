@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use App\Models\MemberLabel;
 use App\Models\OperationLog;
+use App\Models\Organization;
 use App\Models\StoreUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -130,10 +131,10 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $admin_data['organization_id'];//组织id
-        dump($admin_data);
+        $store_name = Organization::getPluck([['id',$organization_id]],'organization_name');
         $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
         dump($list);
-        return view('Catering/User/user_list',['list'=>$list,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户足迹
     public function user_timeline(Request $request){

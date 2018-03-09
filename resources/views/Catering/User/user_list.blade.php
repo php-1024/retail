@@ -82,7 +82,7 @@
                                         <td><label class="label label-success">是</label></td>
                                         <td><label class="label label-info">
                                                 @if($value->userOrigin->origin_id==$organization_id)
-
+                                                    {{$store_name}}
                                                 @else
                                                     零壹联盟
                                                 @endif</label></td>
