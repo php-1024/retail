@@ -747,7 +747,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('subordinate_lock_check', 'Branch\SubordinateController@subordinate_lock_check')->middleware('BranchCheckAjax');//下属冻结检测
         Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('BranchCheckAjax');                  //下属授权检测
 
-        Route::post('category_add_check', 'Branch\CategoryController@category_add_check');          //栏目添加检测
+        Route::get('category_add_check', 'Branch\CategoryController@category_add_check');          //栏目添加检测
 
     });
 });
