@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
-use App\Models\OrganizationCategory;
+use App\Models\CateringCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -44,7 +44,7 @@ class CategoryController extends Controller
         ];
         DB::beginTransaction();
         try {
-            OrganizationCategory::addCategory($category_data);
+            CateringCategory::addCategory($category_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了栏目分类！');//保存操作记录
@@ -70,8 +70,7 @@ class CategoryController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $category = OrganizationCategory::getPaginage($where,'10','displayorder','DESC');
-        dump($category);
+        $category = CateringCategory::getPaginage($where,'10','displayorder','DESC');
         return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }

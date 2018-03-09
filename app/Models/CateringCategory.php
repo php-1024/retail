@@ -1,14 +1,14 @@
 <?php
 /**
- * organization_category表的模型
+ * catering_category表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class OrganizationCategory extends Model{
+class CateringCategory extends Model{
     use SoftDeletes;
-    protected $table = 'organization_category';
+    protected $table = 'catering_category';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -31,7 +31,7 @@ class OrganizationCategory extends Model{
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new OrganizationCategory();
+        $model = new CateringCategory();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -40,7 +40,7 @@ class OrganizationCategory extends Model{
 
     //添加组织栏目分类
     public static function addCategory($param){
-        $model = new OrganizationCategory();
+        $model = new CateringCategory();
         $model->name = $param['name'];
         $model->created_by = $param['created_by'];
         $model->displayorder = $param['displayorder'];
