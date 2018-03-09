@@ -52,13 +52,14 @@
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/goods_edit_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <input type="hidden" name="goods_id" value="{{$goods->id}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
                                                     <select name="account" class="form-control m-b">
                                                         <option value ="0">请选择</option>
                                                         @foreach($category as $key=>$val)
-                                                            <option value ="{{$val->id}}" @if($val->id == $goods->category->id)selected @endif>{{$val->name}}</option>
+                                                            <option value ="{{$val->id}}">{{$val->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
