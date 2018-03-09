@@ -13,6 +13,12 @@ class MemberLabel extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+
+    //获取单条信息
+    public static function getOneMemberLabel($where){
+        return self::where($where)->first();
+    }
+
     //添加用户
     public static function addMemberLabel($param){
         $model = new MemberLabel();
