@@ -107,6 +107,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
+        dump(ProgramMenu::where('id',3)->count());
         return view('Tooling/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
     //提交编辑程序数据
@@ -119,6 +120,7 @@ class ProgramController extends Controller{
         $complete_id = $request->input('complete_id');//上级程序
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
+
 
         if(Program::checkRowExists([[ 'program_name',$program_name],['id','!=',$id]])){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
