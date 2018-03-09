@@ -99,8 +99,7 @@ class GoodsController extends Controller
     {
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $goods_id = $request->get('goods_id');
-        dd($goods_id);
+        $goods_id = $request->get('goods_id');              //商品ID
         $category_id = $request->get('category_id');        //栏目ID
         $name = $request->get('name');                      //商品名称
         $price = $request->get('price');                    //商品价格
