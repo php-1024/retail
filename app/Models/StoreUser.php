@@ -15,7 +15,7 @@ class StoreUser extends Model{
 
     //和个人信息表一对一的关系
     public function userOrigin(){
-        return $this->hasOne('App\Models\user_origin', 'user_id','user_id');
+        return $this->hasOne('App\Models\userOrigin', 'user_id','user_id');
     }
 
     //简易型查询单条数据关联查询
