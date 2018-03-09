@@ -71,6 +71,7 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
+            case "branch/ajax/goods_edit_check"://检测登录，权限，及添加商品的数据
                 $re = $this->checkLoginAndRuleAndGoodsAdd($request);
                 return self::format_response($re, $next);
                 break;
