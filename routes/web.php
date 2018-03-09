@@ -759,7 +759,7 @@ Route::group(['prefix'=>'branch'],function(){
 
         Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('BranchCheckAjax');          //栏目添加检测
         Route::post('goods_add_check', 'Branch\GoodsController@goods_add_check')->middleware('BranchCheckAjax');                   //商品添加检测
-        Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //商品添加检测
+        Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //上传文件检测
     });
 });
 /**********************餐饮分店系统*********************/
