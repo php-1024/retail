@@ -52,6 +52,7 @@
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/goods_edit_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <input type="hidden" name="goods_id" value="{{$goods->id}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
@@ -107,7 +108,7 @@
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <div class="col-sm-12 col-sm-offset-6">
-                                                    <button type="button" class="btn btn-success" onclick="return postEditForm('{{$goods->id}}');">保存信息</button>
+                                                    <button type="button" class="btn btn-success" onclick="return postEditForm();">保存信息</button>
                                                 </div>
                                             </div>
 
