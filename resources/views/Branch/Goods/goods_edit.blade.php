@@ -32,6 +32,10 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">添加商品</h3>
                         </div>
+                        <div class="row row-sm">
+                            <button class="btn btn-s-md btn-success" type="button" onclick="history.back()" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                        </div>
                         <section class="panel panel-default">
                             <header class="panel-heading text-right bg-light">
                                 <ul class="nav nav-tabs pull-left">
