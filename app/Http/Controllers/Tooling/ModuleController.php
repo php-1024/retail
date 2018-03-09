@@ -105,7 +105,7 @@ class ModuleController extends Controller{
         DB::beginTransaction();
         try{
             Module::where('id',$id)->delete();
-            ModuleNode::deleteModuleNode($id);
+            ModuleNode::deleteEditNodes($id,[]);
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了功能模块，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
@@ -123,7 +123,7 @@ class ModuleController extends Controller{
         DB::beginTransaction();
         try{
             Module::where('id',$id)->forceDelete();
-            ModuleNode::deleteModuleNode($id);
+            ModuleNode::removeEditNodes($id,[]);
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'强制删除了功能模块，ID为：'.$id);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {

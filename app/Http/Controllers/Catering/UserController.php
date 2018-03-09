@@ -143,6 +143,13 @@ class UserController extends Controller{
         $label = MemberLabel::ListMemberLabel([['organization_id',$organization_id]]);//会员标签
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //粉丝用户管理
+    public function store_member_add_check(Request $request){
+        dd(1);
+    }
+
+
+
     //粉丝用户足迹
     public function user_timeline(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

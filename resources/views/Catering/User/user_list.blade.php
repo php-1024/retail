@@ -90,7 +90,7 @@
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this)">
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->id}}')">
                                                     <option value="0">无标签</option>
                                                 @foreach($label as $k=>$v)
                                                     <option value="{{$v->id}}">{{$v->member_name}}</option>
@@ -396,13 +396,14 @@
         });
         $('.popovers').popover();
     });
-    function changeUserTag(obj){
-        alert($(obj).val());
-//        var url = $('#member_label_delete').val();
-//        var token = $('#_token').val();
-//        var data = {'_token':token,'id':id};
-//        var data = {'_token':_token,tagid:tagid,openid:openid,id:id};
-//        $.post(url,data,function(json){});
+    function changeUserTag(obj,user_id){
+        var member_id = $(obj).val();
+        var url = $('#store_member_add_check').val();
+        var token = $('#_token').val();
+        var data = {'_token':_token,'member_id':member_id,'user_id':user_id};
+        $.post(url,data,function(json){
+                console.log(json);
+        });
     }
 </script>
 </body>
