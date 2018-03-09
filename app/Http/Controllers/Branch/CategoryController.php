@@ -7,11 +7,8 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
 use App\Models\OperationLog;
-use App\Models\Organization;
 use App\Models\OrganizationCategory;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -59,6 +56,7 @@ class CategoryController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
         }
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
     }
 
     //商品分类列表
@@ -68,7 +66,13 @@ class CategoryController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Category/category_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $where = [
+            'program_id' => '5',
+            'organization_id' => $admin_data['organization_id'],
+        ];
+        $category = OrganizationCategory::getPaginage($where,'1','category_sort','DESC');
+        dump($category);
+        return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }
 
