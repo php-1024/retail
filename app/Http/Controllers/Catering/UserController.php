@@ -180,7 +180,7 @@ class UserController extends Controller{
 //            DB::rollBack();//事件回滚
 //            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
 //        }
-        return view('Catering/User/user_timeline',['user_id'=>$user_id]);
+        return view('Catering/User/user_list_edit',['user_id'=>$user_id]);
 
     }
 
