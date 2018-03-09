@@ -620,6 +620,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('member_label_delete_check','Catering\UserController@member_label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
 
         Route::post('store_member_add_check','Catering\UserController@store_member_add_check')->middleware('CateringCheckAjax');      //粉丝会员标签功能提交
+        Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                      //列表编辑ajax显示
 
         //总店管理
         Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
