@@ -32,10 +32,8 @@ class GoodsController extends Controller
     //添加商品数据操作
     public function goods_add_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-
 
         $category_id = $request->get('category_id');        //栏目ID
         $name = $request->get('name');                      //商品名称
