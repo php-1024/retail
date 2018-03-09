@@ -78,12 +78,41 @@ class ProgramModuleNode extends Model{
 
     //程序编辑去掉了节点，同时去掉节点。
     public static function deleteProgramModuleNode($program_id,$p_m_ns){
-        $nodes = self::where('program_id', $program_id)->whereNotIn('p_m_n', $p_m_ns)->get();
-        $unselectedNodes = [];//用于存储此次去除的ID
-        foreach($nodes as $key=>$val){
-            $unselectedNodes[] = $val['node_id'];
+        $program_module_nodes = self::where('program_id', $program_id)->whereNotIn('p_m_n', $p_m_ns)->get();
+        $unselect_nodes = [];//用于存储此次去除的ID
+        foreach( $program_module_nodes as $key=>$val){
+            $node_info = Node::where('id',$val['node_id'])->first();
+            ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->forceDelete();//根据节点route_name删除对应程序中对应的菜单
+            $unselect_nodes[] = $val['node_id'];
         }
-        dump($unselectedNodes);
+        $unselect_nodes = array_unique($unselect_nodes);
+
+        //查询该程序下的所有角色
+        $role_list = OrganizationRole::where('program_id',$program_id)->get();
+        if(!empty($role_list)) {
+            foreach ($role_list as $key => $val) {
+                RoleNode::where('role_id',$val['id'])->whereIn('node_id',$unselect_nodes)->forceDelete();//删除对应的角色的相关权限节点。
+            }
+        }
+
+        //查询该程序下的所有组织
+        $organization_list = Organization::where('program_id',$program_id)->get();
+        if(!empty($organization_list)) {
+            foreach ($organization_list as $key => $val) {
+                $account_list = Account::where('organization_id',$val->id)->get();//查询这些程序下的所有账号
+                if(!empty($account_list)){
+                    foreach($account_list as $kk=>$vv){
+                        AccountNode::where('account_id',$vv->id)->whereIn('node_id',$unselect_nodes)->forceDelete();//删除账号的相关权限节点;
+
+                        \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
+                    }
+                }
+                \ZeroneRedis::create_menu_cache(1,$val->program_id);//重新生成超级管理员的系统菜单缓存
+                unset($account_list);
+            }
+        }
+
+        self::where('program_id', $program_id)->whereNotIn('p_m_n', $p_m_ns)->forceDelete();//查询出程序原有的，但是本次编辑去掉的所有节点
     }
 
 }
