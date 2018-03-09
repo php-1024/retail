@@ -57,6 +57,8 @@ class ModuleNode extends Model{
             $program_ids[] = $val['program_id'];
         }
 
+        $program_ids = array_unique($program_ids);//去重
+
         dump($program_ids);
     }
 }

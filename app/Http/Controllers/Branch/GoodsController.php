@@ -22,12 +22,13 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/CateringGoods/goods_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Goods/goods_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //添加商品数据操作
     public function goods_add_check(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $category_name = $request->get('category_name');    //栏目名称
@@ -69,7 +70,7 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/CateringGoods/goods_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Goods/goods_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //商品列表
@@ -79,7 +80,7 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/CateringGoods/goods_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Goods/goods_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //拷贝其他分店商品
@@ -89,7 +90,7 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/CateringGoods/goods_copy',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Goods/goods_copy',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }
 
