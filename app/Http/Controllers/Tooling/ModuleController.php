@@ -58,7 +58,6 @@ class ModuleController extends Controller{
         $info = Module::find($id);
         $node_list_selected = Node::node_selected($id);
         $node_list_unselected = Node::node_unselected($id);
-
         return view('Tooling/Module/module_edit',['info'=>$info,'node_list_selected'=>$node_list_selected,'node_list_unselected'=>$node_list_unselected]);
     }
     //编辑功能模块列表
