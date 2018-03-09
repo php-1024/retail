@@ -66,12 +66,9 @@ class BranchCheckAjax{
 
 
             case "branch/ajax/category_add_check"://检测登录，权限，及修改密码的数据
-                $re = $this->checkLoginPost($request);
+                $re = $this->checkLoginAndRuleAndCategoryAdd($request);
                 return self::format_response($re, $next);
                 break;
-//                $re = $this->checkLoginAndRuleAndCategoryAdd($request);
-//                return self::format_response($re, $next);
-//                break;
         }
     }
 
