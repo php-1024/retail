@@ -95,7 +95,9 @@ class GoodsController extends Controller
 
     public function upload_thumb_check(Request $request)
     {
-        dd($request);
+        $file = $request->file('photo');
+//        $file = $request->photo;
+        dd($file);
     }
 
     //商品列表
