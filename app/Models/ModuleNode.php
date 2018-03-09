@@ -48,7 +48,7 @@ class ModuleNode extends Model{
     //修改数据时 如果去掉了节点 就要删除对应的节点信息
     public static function deleteEditNodes($module_id,$nodes){
         $list =  self::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出模块原有的，但是本次编辑去掉的所有节点
-        $program_module_nodes = ProgramModuleNode::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出在程序中
+        $program_module_nodes = ProgramModuleNode::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出与该模块关联的所有程序及 本次编辑中删除了的节点。
         foreach($list as $key=>$val){
 
 
