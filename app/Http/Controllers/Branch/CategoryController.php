@@ -93,7 +93,7 @@ class CategoryController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
-        $name = $request->get('name');                      //栏目名称
+        $name = $request->get('category_name');                      //栏目名称
         $displayorder = $request->get('displayorder');      //栏目排序
         $category_id = $request->get('category_id');         //栏目id
         if (empty($displayorder)){
