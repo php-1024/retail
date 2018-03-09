@@ -398,13 +398,12 @@
     });
     function changeUserTag(obj,user_id){
         var member_id = $(obj).val();
-        alert(member_id);
         var url = $('#store_member_add_check').val();
         var token = $('#_token').val();
         var data = {'_token':_token,'member_id':member_id,'user_id':user_id};
-//        $.post(url,data,function(json){
-//                console.log(json);
-//        });
+        $.post(url,data,function(json){
+                console.log(json);
+        });
     }
 </script>
 </body>
