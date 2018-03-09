@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
+use App\Models\MemberLabel;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Session;
 class UserController extends Controller{
@@ -20,7 +22,19 @@ class UserController extends Controller{
     }
     //会员标签功能提交
     public function member_label_add_check(Request $request){
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+
+        $member_name = $request->member_name; //会员标签名称
+        $organization_id = $menu_data['organization_id'];//组织id
+        $data = [
+            'member_name'=>$member_name,
+            'organization_id'=>$organization_id,
+            'parent_id'=>0,
+            'member_number'=>0,
+        ];
+        MemberLabel::addMemberLabel($data);
         
+        return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
     }
     //粉丝用户管理
     public function user_list(Request $request){
