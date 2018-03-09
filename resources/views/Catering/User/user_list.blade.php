@@ -92,7 +92,7 @@
                                                 <option value="AK">无标签</option>
                                             </select>
                                         </td>
-                                        <td>2017-10-22 10:11:11</td>
+                                        <td>{{$value->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
                                             <button class="btn btn-primary btn-xs" id="balanceBtn"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
