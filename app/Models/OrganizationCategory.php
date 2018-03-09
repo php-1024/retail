@@ -38,13 +38,14 @@ class OrganizationCategory extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加组织角色
-    public static function addRole($param){
+    //添加组织栏目分类
+    public static function addCategory($param){
         $model = new OrganizationCategory();
         $model->program_id = $param['program_id'];
         $model->organization_id = $param['organization_id'];
         $model->created_by = $param['created_by'];
-        $model->role_name = $param['role_name'];
+        $model->category_sort = $param['category_sort'];
+        $model->category_name = $param['category_name'];
         $model->save();
         return $model->id;
     }
