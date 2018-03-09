@@ -48,6 +48,7 @@
                                     <li><a href="#picture" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;商品图片</a></li>
                                     <li><a href="#option" data-toggle="tab"><i class="fa fa-leaf text-muted"></i>&nbsp;&nbsp;商品规格</a></li>
                                     <li><a href="#other" data-toggle="tab"><i class="fa fa-gears text-muted"></i>&nbsp;&nbsp;其他参数</a></li>
+                                    <li><a href="#other" data-toggle="tab"><i class="fa fa-gears text-muted"></i>&nbsp;&nbsp;积分管理</a></li>
                                 </ul>
                                 <span class="hidden-sm">&nbsp;</span>
                             </header>

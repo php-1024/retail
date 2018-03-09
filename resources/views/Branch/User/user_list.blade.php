@@ -69,7 +69,7 @@
                                     <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                        <td><img src="{{url('public/Branch')}}/images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                         <td>100020</td>
                                         <td>时光取名叫无心</td>
                                         <td><label class="label label-success">是</label></td>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button class="btn btn-success" type="button">确定</button>
                 </div>
             </div>
         </div>
@@ -282,7 +282,7 @@
                                 <td>1</td>
                                 <td>钻石会员卡</td>
                                 <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
                                 <td>0.9</td>
                                 <td>10000.00元</td>
 
@@ -291,7 +291,7 @@
                                 <td>1</td>
                                 <td>钻石会员卡</td>
                                 <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
                                 <td>0.9</td>
                                 <td>10000.00元</td>
 
@@ -300,7 +300,7 @@
                                 <td>1</td>
                                 <td>钻石会员卡</td>
                                 <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
                                 <td>0.9</td>
                                 <td>10000.00元</td>
 
@@ -309,7 +309,7 @@
                                 <td>1</td>
                                 <td>钻石会员卡</td>
                                 <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
+                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
                                 <td>0.9</td>
                                 <td>10000.00元</td>
 
@@ -321,7 +321,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button class="btn btn-success" type="button">确定</button>
                 </div>
             </div>
         </div>
@@ -353,7 +353,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button class="btn btn-success" type="button">确定</button>
                 </div>
             </div>
         </div>
