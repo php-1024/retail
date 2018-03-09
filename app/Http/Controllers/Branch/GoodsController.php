@@ -92,7 +92,6 @@ class GoodsController extends Controller
         ];
         $goods = CateringGoods::getOne(['id'=>$goods_id,'program_id' => '5','organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where,'0','displayorder','DESC');
-        dump($goods);
         return view('Branch/Goods/goods_edit',['category'=>$category,'goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
