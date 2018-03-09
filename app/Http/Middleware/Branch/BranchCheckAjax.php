@@ -130,12 +130,7 @@ class BranchCheckAjax{
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                $re3 = $this->checkSafePassword($re2['response']);//检测是否具有权限
-                if($re3['status']=='0'){
-                    return $re3;
-                }else{
-                    return self::res(1,$re3['response']);
-                }
+                return self::res(1,$re2['response']);
             }
         }
     }
