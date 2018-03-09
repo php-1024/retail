@@ -78,7 +78,7 @@ class ModuleNode extends Model{
                 $account_list = Account::where('organization_id',$val->id)->get();//查询这些程序下的所有账号
                 if(!empty($account_list)){
                     foreach($account_list as $kk=>$vv){
-                        dump($vv);
+                        $account_nodes = AccountNode::where('account_id',$vv->id)->where('node_id',$unselect_nodes)->get();
                        // \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
                     }
                 }
