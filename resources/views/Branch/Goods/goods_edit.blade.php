@@ -668,11 +668,6 @@
         });
     });
 
-    //
-    function addthumb() {
-        $('#myModal3').modal();
-    }
-
     //提交表单
     function postForm() {
         var target = $("#currentForm");
