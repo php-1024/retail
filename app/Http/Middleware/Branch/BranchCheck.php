@@ -31,8 +31,8 @@ class BranchCheck{
             case "branch/account/operation_log":       //账户中心个人操作日志
             case "branch/account/login_log":           //账户中心个人登录日志
             case "branch/cashier":                     //收银台
-            case "branch/goods/category_add":          //添加商品分类
-            case "branch/goods/category_list":         //商品分类列表
+            case "branch/category/category_add":       //添加商品分类
+            case "branch/category/category_list":      //商品分类列表
             case "branch/goods/goods_add":             //添加商品
             case "branch/goods/goods_edit":            //编辑商品
             case "branch/goods/goods_list":            //商品列表
