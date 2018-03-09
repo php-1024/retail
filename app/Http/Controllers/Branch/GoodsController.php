@@ -47,6 +47,7 @@ class GoodsController extends Controller
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
+
         $goods_data = [
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
