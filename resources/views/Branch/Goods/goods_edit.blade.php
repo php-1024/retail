@@ -633,28 +633,6 @@
 <script>
 
     $(document).ready(function() {
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-        $(".addBtn").click(function(){
-            $('#myModal').modal();
-        });
-        $(".deleteBtn").click(function(){
-            $('#myModal1').modal();
-        });
-        $(".editBtn").click(function(){
-            $('#myModal2').modal();
-        });
-        $(".addthumb").click(function(){
-            $('#myModal3').modal();
-        });
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
         $('#form-content').trumbowyg({
             lang: 'fr',
             closable: false,
