@@ -96,15 +96,14 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品详情</label>
                                                 <div class="col-sm-8">
-                                                    <textarea name="details" class="editor" cols="30" rows="10"></textarea>
+                                                    <textarea name="details" class="editor" cols="30" rows="10"> </textarea>
                                                 </div>
                                             </div>
 
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <div class="col-sm-12 col-sm-offset-6">
-
-                                                    <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                                    <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                                 </div>
                                             </div>
 
