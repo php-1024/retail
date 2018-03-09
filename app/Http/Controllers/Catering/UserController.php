@@ -31,6 +31,12 @@ class UserController extends Controller{
 
         $member_name = $request->member_name; //会员标签名称
         $organization_id = $admin_data['organization_id'];//组织id
+
+        $re = MemberLabel::checkRowExists([['organization_id',$organization_id],['member_name',$member_name]]);
+        if($re == 'true'){
+            return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
+        }
+        
         DB::beginTransaction();
         try {
             $data = [
@@ -65,9 +71,14 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+        $organization_id = $admin_data['organization_id'];//组织id
+
         $id = $request->id; //会员标签id
         $member_name = $request->member_name; //会员标签名称
-
+        $re = MemberLabel::checkRowExists([['organization_id',$organization_id],['member_name',$member_name]]);
+        if($re == 'true'){
+            return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
             MemberLabel::editMemberLabel(['id'=>$id],['member_name'=>$member_name]);
