@@ -243,6 +243,12 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
+<!-- Sweet alert -->
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
+<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
+
 
 <script type="text/javascript">
     //添加会员标签
