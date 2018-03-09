@@ -46,8 +46,11 @@ class ModuleNode extends Model{
     }
 
     //修改数据时 如果去掉了节点 就要删除对应的节点信息
-    public static function deleteEditNodes(){
+    public static function deleteEditNodes($module_id,$nodes){
+        $list =  self::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();
+        foreach($list as $key=>$val){
 
+        }
     }
 }
 ?>
