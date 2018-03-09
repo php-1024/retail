@@ -55,6 +55,7 @@ class CateringCheckAjax
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
+            case "catering/ajaxmember_label_add_check"://检测是否登录 权限 安全密码--添加会员标签
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -66,7 +67,8 @@ class CateringCheckAjax
             case "catering/ajax/subordinate_lock":       //添加下级人员快速授权
             case "catering/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
             case "catering/ajax/subordinate_delete":     //添加下级人员用户授权显示页面
-                $re = $this->checkLoginAndRule($request);
+            case "catering/ajax/member_label_add":       //添加会员标签显示页面
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
