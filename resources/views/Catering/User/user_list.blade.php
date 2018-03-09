@@ -88,7 +88,7 @@
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTagchangeUserTag()">
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag()">
                                                 <option value="AK">无标签</option>
                                             </select>
                                         </td>
