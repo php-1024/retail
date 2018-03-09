@@ -49,10 +49,11 @@ class ModuleNode extends Model{
     public static function deleteEditNodes($module_id,$nodes){
         $list =  self::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出模块原有的，但是本次编辑去掉的所有节点
         $program_module_nodes = ProgramModuleNode::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出与该模块关联的所有程序及 本次编辑中删除了的节点。
-        dump($list);
-        dump($program_module_nodes);
-        foreach($list as $key=>$val){
 
+        foreach($program_module_nodes as $key=>$val){
+            $node_info = Node::where('id',$val['node_id'])->first();
+            $menu = ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->get();
+            dump($menu);
 
         }
     }
