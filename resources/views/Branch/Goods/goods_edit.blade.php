@@ -668,6 +668,11 @@
         });
     });
 
+    //弹出上传图片窗口
+    function addthumb() {
+        $('#myModal3').modal();
+    }
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
