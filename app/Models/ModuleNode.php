@@ -52,9 +52,10 @@ class ModuleNode extends Model{
         foreach($module_nodes as $key=>$val){
             $nodes[] = $val['node_id'];
         }
+
+        self::deleteEditNodes($module_id,$nodes);
         dump($nodes);
         exit();
-        self::deleteEditNodes($module_id,$nodes);
     }
 
     //彻底删除模块节点的各种关联关系操作
@@ -70,7 +71,8 @@ class ModuleNode extends Model{
     //修改数据时 如果去掉了节点 就要删除对应的节点信息
     public static function deleteEditNodes($module_id,$nodes){
         $program_module_nodes = ProgramModuleNode::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出与该模块关联的所有程序及 本次编辑中删除了的节点。
-
+        dump($program_module_nodes);
+        exit();
         $program_ids = [];//储存所有相关程序ID
         $unselect_nodes = []; //储存所有本次未选中的节点
         foreach($program_module_nodes as $key=>$val){
