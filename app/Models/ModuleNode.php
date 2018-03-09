@@ -65,9 +65,11 @@ class ModuleNode extends Model{
         //查询该程序下的所有角色
         $role_list = OrganizationRole::whereIn('program_id',$program_ids)->get();
         foreach($role_list as $key=>$val){
-            $role_node = RoleNode::where('role_id',$val['id'])->whereIn('node_id',$unselect_nodes)->get();
-            dump($role_node);
+            //RoleNode::where('role_id',$val['id'])->whereIn('node_id',$unselect_nodes)->forceDelete();//删除对应的角色的相关权限。
         }
+
+        //查询该程序下的所有组织
+        $orginzation_id = Organization::
     }
 }
 ?>
