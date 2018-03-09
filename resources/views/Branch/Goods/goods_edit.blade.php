@@ -587,7 +587,7 @@
 
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" role="form" id="uploadForm" method="POST" action="{{ url('branch/ajax/upload_thumb_check') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url('branch/ajax/upload_thumb_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
