@@ -16,12 +16,6 @@ return [
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
 
-//        文件上传配置
-    'uploads' => [
-        'driver' => 'local',
-        'root' => storage_path('app/uploads'),
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Default Cloud Filesystem Disk
