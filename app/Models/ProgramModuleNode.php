@@ -81,7 +81,7 @@ class ProgramModuleNode extends Model{
         $nodes = self::where('program_id', $program_id)->whereNotIn('p_m_n', $p_m_ns)->get();
         $unselectedNodes = [];//用于存储此次去除的ID
         foreach($nodes as $key=>$val){
-            $unselectedNodes = $val['node_id'];
+            $unselectedNodes[] = $val['node_id'];
         }
         dump($unselectedNodes);
     }
