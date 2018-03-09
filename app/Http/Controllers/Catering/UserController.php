@@ -133,8 +133,8 @@ class UserController extends Controller{
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();
         $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
-        foreach($list->userOrigin as $key=>$value){
-            dump($value);
+        foreach($list as $key=>$value){
+            dump($value->user_id);
         }
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
