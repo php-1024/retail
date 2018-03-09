@@ -1,14 +1,14 @@
 <?php
 /**
- * goods表的模型
+ * catering_goods表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Goods extends Model{
+class CateringGoods extends Model{
     use SoftDeletes;
-    protected $table = 'goods';
+    protected $table = 'catering_goods';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -24,43 +24,42 @@ class Goods extends Model{
         return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
     }
 
-    //获取单条信息
+    //获取单条餐饮商品信息
     public static function getOne($where){
         return self::with('nodes')->where($where)->first();
     }
 
-    //获取列表
+    //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new Goods();
+        $model = new CateringGoods();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加组织栏目分类
-    public static function addGoods($param){
-        $model = new Goods();
+    //添加餐饮商品
+    public static function addCateringGoods($param){
+        $model = new CateringGoods();
         $model->program_id = $param['program_id'];
-        $model->category_id = $param['category_id'];
-        $model->organization_id = $param['organization_id'];
-        $model->goods_sort = $param['goods_sort'];
-        $model->goods_stock = $param['goods_stock'];
-        $model->goods_details = $param['goods_details'];
-        $model->goods_thumb = $param['goods_thumb'];
-        $model->goods_price = $param['goods_price'];
-        $model->goods_name = $param['goods_name'];
+        $model->name = $param['name'];
+        $model->keywords = $param['keywords'];
+        $model->details = $param['details'];
+        $model->price = $param['price'];
+        $model->stock = $param['stock'];
+        $model->number = $param['number'];
+        $model->maxbuy = $param['maxbuy'];
         $model->created_by = $param['created_by'];
-        $model->goods_keywords = $param['goods_keywords'];
-        $model->goods_max = $param['goods_max'];
-
-        $model->goods_name = $param['goods_name'];
+        $model->category_id = $param['category_id'];
+        $model->displayorder = $param['displayorder'];
+        $model->program_id = $param['program_id'];
+        $model->organization_id = $param['organization_id'];
         $model->save();
         return $model->id;
     }
     
-    //修改数据
-    public static function editGoods($where,$param){
+    //修改餐饮商品数据
+    public static function editCateringGoods($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;

@@ -11,7 +11,7 @@ class GoodsController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Catering/Goods/goods_category',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/CateringGoods/goods_category',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查询
     public function goods_list(Request $request){
@@ -20,7 +20,7 @@ class GoodsController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Catering/Goods/goods_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/CateringGoods/goods_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查看详情
     public function goods_detail(Request $request){
@@ -29,7 +29,7 @@ class GoodsController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Catering/Goods/goods_detail',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/CateringGoods/goods_detail',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>
