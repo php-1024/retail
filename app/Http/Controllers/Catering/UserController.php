@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use App\Models\MemberLabel;
 use App\Models\OperationLog;
+use App\Models\StoreUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -128,6 +129,10 @@ class UserController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+        $organization_id = $admin_data['organization_id'];//组织id
+
+        $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
+        dump($list);
         return view('Catering/User/user_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户足迹
