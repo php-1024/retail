@@ -39,8 +39,8 @@ class CategoryController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
-            'category_name' => $category_name,
-            'category_sort' => $category_sort,
+            'name' => $category_name,
+            'displayorder' => $category_sort,
         ];
         DB::beginTransaction();
         try {
