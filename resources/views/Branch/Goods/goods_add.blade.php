@@ -64,7 +64,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品名称</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="奇味鸡煲">
+                                                    <input type="text" class="form-control" name="name">
                                                 </div>
                                             </div>
 
@@ -72,7 +72,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">价格</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="100.00">
+                                                    <input type="text" class="form-control" name="price">
                                                 </div>
                                             </div>
 
@@ -80,7 +80,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">库存</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="999">
+                                                    <input type="text" class="form-control" name="stock">
                                                 </div>
                                             </div>
 
@@ -88,7 +88,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">排序</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="1">
+                                                    <input type="text" class="form-control" name="displayorder">
                                                 </div>
                                             </div>
 
@@ -96,7 +96,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品详情</label>
                                                 <div class="col-sm-8">
-                                                    <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea name="details" class="editor" cols="30" rows="10"></textarea>
                                                 </div>
                                             </div>
 

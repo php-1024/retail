@@ -50,18 +50,24 @@ class ModuleNode extends Model{
         $list =  self::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出模块原有的，但是本次编辑去掉的所有节点
         $program_module_nodes = ProgramModuleNode::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出与该模块关联的所有程序及 本次编辑中删除了的节点。
 
-        $program_ids = [];//储存所有
+        $program_ids = [];//储存所有相关程序ID
+        $unselect_nodes = []; //储存所有本次未选中的节点
         foreach($program_module_nodes as $key=>$val){
             $node_info = Node::where('id',$val['node_id'])->first();//获取对应节点的节点route_name
             //ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->forceDelete();//根据节点route_name删除对应程序中对应的菜单
             $program_ids[] = $val['program_id'];
+            $unselect_nodes[] = $val['node_id'];
         }
 
         $program_ids = array_unique($program_ids);//去重
+        $unselect_nodes = array_unique($program_ids);
+        dump($unselect_nodes);
 
         //查询该程序下的所有角色
         $role_list = OrganizationRole::whereIn('program_id',$program_ids)->get();
-        dump($role_list);
+        foreach($role_list as $key=>$val){
+
+        }
     }
 }
 ?>
