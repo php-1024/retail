@@ -18,6 +18,11 @@ class UserController extends Controller{
 
         return view('Catering/User/member_label_add');
     }
+    //会员标签功能提交
+    public function member_label_add_check(Request $request){
+        dd(1);
+
+    }
     //粉丝用户管理
     public function user_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

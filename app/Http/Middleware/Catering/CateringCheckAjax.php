@@ -55,6 +55,7 @@ class CateringCheckAjax
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
+            case "catering/ajaxmember_label_add_check"://检测是否登录 权限 安全密码--添加会员标签
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
