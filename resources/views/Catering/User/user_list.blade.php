@@ -402,27 +402,7 @@
         var token = $('#_token').val();
         var data = {'_token':_token,'member_id':member_id,'user_id':user_id};
         $.post(url,data,function(json){
-//            if (json.status == -1) {
-//                window.location.reload();
-//            } else if(json.status == 1) {
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                },function(){
-//                    window.location.reload();
-//                });
-//            }else{
                 console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
-//            }
         });
     }
 </script>
