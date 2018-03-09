@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
+use App\Models\CateringGoods;
 use Illuminate\Http\Request;
 use Session;
 
@@ -34,21 +35,30 @@ class GoodsController extends Controller
         dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $category_name = $request->get('category_name');    //栏目名称
-        $category_sort = $request->get('category_sort');    //栏目排序
-        if (empty($category_sort)){
-            $category_sort = '0';
+
+
+        $category_id = $request->get('category_id');        //栏目ID
+        $name = $request->get('name');                      //商品名称
+        $price = $request->get('price');                    //商品价格
+        $stock = $request->get('stock');                    //商品库存
+        $displayorder = $request->get('displayorder');      //商品排序
+        $details = $request->get('details');                //商品详情
+        if ($category_id == 0){
+            return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
-        $category_data = [
+        $goods_data = [
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
-            'category_name' => $category_name,
-            'category_sort' => $category_sort,
+            'name' => $name,
+            'price' => $price,
+            'stock' => $stock,
+            'displayorder' => $displayorder,
+            'details' => $details,
         ];
         DB::beginTransaction();
         try {
-            OrganizationCategory::addCategory($category_data);
+            CateringGoods::addCateringGoods($goods_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了栏目分类！');//保存操作记录
