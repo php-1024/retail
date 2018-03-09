@@ -43,12 +43,12 @@ class CateringGoods extends Model{
         $model = new CateringGoods();
         $model->program_id = $param['program_id'];
         $model->name = $param['name'];
-        $model->keywords = $param['keywords'];
+//        $model->keywords = $param['keywords'];
         $model->details = $param['details'];
         $model->price = $param['price'];
         $model->stock = $param['stock'];
-        $model->number = $param['number'];
-        $model->maxbuy = $param['maxbuy'];
+//        $model->number = $param['number'];
+//        $model->maxbuy = $param['maxbuy'];
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
         $model->displayorder = $param['displayorder'];
