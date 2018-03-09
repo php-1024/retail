@@ -86,7 +86,7 @@ class ModuleController extends Controller{
                     unset($vo);
                 }
                 //删除这次去掉的节点
-                ModuleNode::deleteEditNodes($id,$nodes);
+                ModuleNode::removeEditNodes($id,$nodes);
 
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
