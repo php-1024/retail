@@ -77,17 +77,22 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
-                                        <td>100020</td>
+                                        <td>{{$value->user->account}}</td>
                                         <td>时光取名叫无心</td>
                                         <td><label class="label label-success">是</label></td>
-                                        <td><label class="label label-info">联盟商户-刘记鸡煲王</label></td>
+                                        <td><label class="label label-info">
+                                                @if($value->userOrigin->origin_id==$organization_id)
+                                                    {{$store_name}}
+                                                @else
+                                                    零壹联盟
+                                                @endif</label></td>
                                         <td><label class="label label-primary">联盟用户-张老三</label></td>
                                         <td>
                                             <select style="width:100px" class="chosen-select2">
                                                 <option value="AK">无标签</option>
                                             </select>
                                         </td>
-                                        <td>2017-10-22 10:11:11</td>
+                                        <td>{{$value->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
                                             <button class="btn btn-primary btn-xs" id="balanceBtn"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
