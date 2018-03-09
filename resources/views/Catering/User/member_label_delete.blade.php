@@ -23,8 +23,6 @@
                             <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
                         </div>
                     </div>
-                    <div style="clear:both;"></div>
-
                 </form>
             </div>
             <div class="modal-footer">
