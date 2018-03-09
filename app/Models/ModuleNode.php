@@ -45,21 +45,6 @@ class ModuleNode extends Model{
         $model->save();
     }
 
-    //删除模块节点的各种关联关系操作
-    public static function deleteModuleNode($module_id){
-        $nodes = [];
-        self::deleteEditNodes($module_id,$nodes);
-    }
-
-    //彻底删除模块节点的各种关联关系操作
-    public static function removeModuleNode($module_id){
-        $module_nodes = self::where('module_id',$module_id)->get();
-        $nodes = [];
-        foreach($module_nodes as $key=>$val){
-            $nodes[] = $val['node_id'];
-        }
-        self::removeEditNodes($module_id,$nodes);
-    }
 
     //修改数据时 如果去掉了节点 就要删除对应的节点信息
     public static function deleteEditNodes($module_id,$nodes){
