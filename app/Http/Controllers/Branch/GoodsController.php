@@ -86,11 +86,11 @@ class GoodsController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //获取当前的页面路由
-        $goods = CateringGoods::getOne(['id'=>$goods_id]);
         $where = [
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
+        $goods = CateringGoods::getOne(['id'=>$goods_id,'program_id' => '5','organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where,'0','displayorder','DESC');
         dump($goods);
         return view('Branch/Goods/goods_edit',['category'=>$category,'goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
