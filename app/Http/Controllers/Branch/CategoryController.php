@@ -15,7 +15,7 @@ use Session;
 
 class CategoryController extends Controller
 {
-    //添加商品分类
+    //添加商品分类页面
     public function category_add(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -25,7 +25,7 @@ class CategoryController extends Controller
         return view('Branch/Category/category_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-    //添加商品分类提交检测
+    //添加商品分类操作
     public function category_add_check(Request $request)
     {
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
