@@ -50,6 +50,7 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
+            'category_id' => $category_id,
             'name' => $name,
             'price' => $price,
             'stock' => $stock,
