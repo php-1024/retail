@@ -85,7 +85,7 @@ class ProgramMenu extends Model{
     public static function deleteNode($route_name)
     {
         $list = self::where([['menu_route', $route_name]])->get();//获取所有使用该节点的菜单
-        self::where([['menu_route',$route_name]])->delete();//删除对应的菜单
+        self::deleteMenuByEdit([['menu_route',$route_name]]);//删除对应的菜单
         if (!empty($list)) {
             foreach ($list as $key => $val) {
                 $organization_list = Organization::where('program_id',$val->program_id)->get();//通过程序ID，获取所有使用该程序的组织
@@ -112,7 +112,7 @@ class ProgramMenu extends Model{
     public static function removeNode($route_name)
     {
         $list = self::where([['menu_route', $route_name]])->get();//获取所有使用该节点的菜单
-        self::where([['menu_route',$route_name]])->forceDelete();//删除对应的菜单
+        self::removeMenuByEdit([['menu_route',$route_name]]);//删除对应的菜单
         if (!empty($list)) {
             foreach ($list as $key => $val) {
                 $organization_list = Organization::where('program_id',$val->program_id)->get();//通过程序ID，获取所有使用该程序的组织
@@ -133,6 +133,20 @@ class ProgramMenu extends Model{
         }
     }
 
+    //修改程序或菜单时删除菜单
+    public static function deleteMenuByEdit($where){
+        $menus = ProgramMenu::where($where)->get();//根据节点route_name获取对应程序中对应的菜列表
+        //判断上级菜单下是否有子菜单
+        if(!empty($menus)) {
+            foreach ($menus as $k => $v) {
+                ProgramMenu::where('id',$v['id'])->delete();
+                $count = ProgramMenu::where('parent_id',$v['parent_id'])->count();
+                if($count==0){
+                    self::deleteMenuByEdit([['id',$v['parent_id']]]);
+                }
+            }
+        }
+    }
     //修改程序或菜单时删除菜单
     public static function removeMenuByEdit($where){
         $menus = ProgramMenu::where($where)->get();//根据节点route_name获取对应程序中对应的菜列表
