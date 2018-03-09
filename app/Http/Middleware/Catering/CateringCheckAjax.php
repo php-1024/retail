@@ -47,6 +47,10 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
                 return self::format_response($re,$next);
                 break;
+            case "catering/ajax/member_label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndMemberAdd($request);
+                return self::format_response($re,$next);
+                break;
             case "catering/ajax/branch_create_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndBranchCreate($request);
                 return self::format_response($re,$next);
@@ -66,7 +70,8 @@ class CateringCheckAjax
             case "catering/ajax/subordinate_lock":       //添加下级人员快速授权
             case "catering/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
             case "catering/ajax/subordinate_delete":     //添加下级人员用户授权显示页面
-                $re = $this->checkLoginAndRule($request);
+            case "catering/ajax/member_label_add":       //添加会员标签显示页面
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
@@ -237,7 +242,21 @@ class CateringCheckAjax
             }
         }
     }
-    //检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
+    //检测 登录 和 权限 和 安全密码 和 会员标签添加数据提交
+    public function checkLoginAndRuleAndSafeAndMemberAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMemberAdd($re['response']);//检测数据是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 分店添加数据提交
     public function checkLoginAndRuleAndSafeAndBranchCreate($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -451,6 +470,13 @@ class CateringCheckAjax
         }
         if(empty($request->input('module_node_ids'))){
             return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测添加会员标签
+    public function checkMemberAdd($request){
+        if(empty($request->input('member_name'))){
+            return self::res(0,response()->json(['data' => '请输入会员标签', 'status' => '0']));
         }
         return self::res(1,$request);
     }

@@ -75,5 +75,6 @@ class ProgramModuleNode extends Model{
     public static function removeNode($node_id){
         return self::where('node_id',$node_id)->forceDelete();
     }
+
 }
 ?>

@@ -51,9 +51,13 @@ class ModuleNode extends Model{
         $program_module_nodes = ProgramModuleNode::where('module_id',$module_id)->whereNotIn('node_id',$nodes)->get();//查询出与该模块关联的所有程序及 本次编辑中删除了的节点。
 
         foreach($program_module_nodes as $key=>$val){
-            $node_info = Node::where('id',$val['node_id'])->first();
-            $menu = ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->get();
-            dump($menu);
+            $node_info = Node::where('id',$val['node_id'])->first();//获取对应节点的节点route_name
+            ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->forceDelete();//删除对应程序中对应的菜单
+
+            $organization_list = Organization::where('program_id',$val['program_id'])->get();//找到所有相关程序中的所有组织
+            foreach($organization_list as $key=>$val){
+                dump($val);
+            }
 
         }
     }
