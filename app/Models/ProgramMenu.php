@@ -121,7 +121,6 @@ class ProgramMenu extends Model{
                         $account_list = Account::where('organization_id',$v->id)->get();//查询这些程序下的所有账号
                         if(!empty($account_list)){
                             foreach($account_list as $kk=>$vv){
-
                                 \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
                             }
                         }
@@ -132,7 +131,7 @@ class ProgramMenu extends Model{
                 unset($organization_list);
             }
         }
-
     }
+
 }
 ?>
