@@ -67,8 +67,8 @@
                                     @foreach($category as $key=>$val)
                                     <tr>
                                         <td>{{ $val->id }}</td>
-                                        <td>{{ $val->category_name }}</td>
-                                        <td>{{ $val->category_sort }}</td>
+                                        <td>{{ $val->name }}</td>
+                                        <td>{{ $val->displayorder }}</td>
                                         <td>{{ $val->created_at }}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
