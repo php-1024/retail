@@ -15,6 +15,13 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
+
+//        文件上传配置
+    'uploads' => [
+        'driver' => 'local',
+        'root' => storage_path('app/uploads'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Default Cloud Filesystem Disk
@@ -61,11 +68,6 @@ return [
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
-        ],
-        //        文件上传配置
-        'uploads' => [
-            'driver' => 'local',
-            'root' => storage_path('app/uploads'),
         ],
 
     ],
