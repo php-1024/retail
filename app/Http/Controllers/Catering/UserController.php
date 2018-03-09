@@ -5,6 +5,7 @@ use App\Models\MemberLabel;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\StoreUser;
+use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -132,12 +133,15 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $admin_data['organization_id'];//组织id
-        $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();
+        $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
         $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
-           $info =  UserInfo::getOneUserInfo([['user_id',$value->user_id]]);
-            $list[$key]['nickname']=$info->nickname;
+            $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
+            $user_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
+            $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//推荐人
+
         }
+
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户足迹

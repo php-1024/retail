@@ -12,6 +12,7 @@ use App\Models\CateringGoods;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class GoodsController extends Controller
@@ -95,32 +96,8 @@ class GoodsController extends Controller
 
     public function upload_thumb_check(Request $request)
     {
-        if ($request->isMethod('POST')) {
-//            var_dump($_FILES);
-            $file = $request->file('source');
-            dd($request);
-            //判断文件是否上传成功
-            if ($file->isValid()) {
-                //获取原文件名
-                $originalName = $file->getClientOriginalName();
-                //扩展名
-                $ext = $file->getClientOriginalExtension();
-                //文件类型
-                $type = $file->getClientMimeType();
-                //临时绝对路径
-                $realPath = $file->getRealPath();
-
-                $filename = date('Y-m-d-H-i-S') . '-' . uniqid() . '-' . $ext;
-
-                $bool = Storage::disk('uploads')->put($filename, file_get_contents($realPath));
-
-                var_dump($bool);
-            }
-            //dd($file);
-            exit;
-        }
-
-        return view('student.upload');
+        $a = Storage::put('avatars/1', $fileContents);
+        dd($a);
     }
 
     //商品列表

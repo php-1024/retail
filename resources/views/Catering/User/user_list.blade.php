@@ -86,7 +86,7 @@
                                                 @else
                                                     零壹联盟
                                                 @endif</label></td>
-                                        <td><label class="label label-primary">联盟用户-张老三</label></td>
+                                        <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
                                             <select style="width:100px" class="chosen-select2">
                                                 <option value="AK">无标签</option>
