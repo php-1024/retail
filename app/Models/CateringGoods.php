@@ -25,7 +25,7 @@ class CateringGoods extends Model{
 
     //获取单条餐饮商品信息
     public static function getOne($where){
-        return self::with('nodes')->where($where)->first();
+        return self::with('category')->where($where)->first();
     }
 
     //获取餐饮商品列表

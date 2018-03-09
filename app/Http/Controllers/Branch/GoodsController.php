@@ -87,6 +87,8 @@ class GoodsController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //获取当前的页面路由
         dump($goods_id);
+        $goods = CateringGoods::getOne('id='=>$goods_id);
+        dump($goods);
         return view('Branch/Goods/goods_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
