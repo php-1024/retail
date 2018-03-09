@@ -50,7 +50,7 @@ class OrganizationCategory extends Model{
         return $model->id;
     }
     //修改数据
-    public static function editRole($where,$param){
+    public static function editCategory($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
