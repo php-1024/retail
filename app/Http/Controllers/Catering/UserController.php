@@ -136,10 +136,10 @@ class UserController extends Controller{
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
         $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
-           $nickname =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();
-           $list[$key]['nickname']=$nickname;//微信昵称
-           $user_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
-            dump($user_id);
+            $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
+            $user_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
+            $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//推荐人
+
         }
 
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
