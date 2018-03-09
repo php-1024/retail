@@ -702,6 +702,7 @@
         var target = $("#uploadForm");
         var url = target.attr("action");
         var data = target.serialize();
+        console.log(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
