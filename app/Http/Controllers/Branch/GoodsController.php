@@ -99,9 +99,8 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $goods = CateringGoods::getPaginage($where,'1','displayorder','DESC');;
-        dump($goods);
-        return view('Branch/Goods/goods_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $goods = CateringGoods::getPaginage($where,'1','displayorder','DESC');
+        return view('Branch/Goods/goods_list',['goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //拷贝其他分店商品
