@@ -47,6 +47,8 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" id="store_member_add_check" value="{{ url('catering/ajax/store_member_add_check') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
@@ -88,8 +90,8 @@
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag()">
-                                                    <option value="AK">无标签</option>
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this)">
+                                                    <option value="0">无标签</option>
                                                 @foreach($label as $k=>$v)
                                                     <option value="{{$v->id}}">{{$v->member_name}}</option>
                                                 @endforeach
@@ -394,11 +396,12 @@
         });
         $('.popovers').popover();
     });
-    function changeUserTag(){
-        alert('1');
-//        var url = '';
-//        var tagid = $(obj).val();
-//        var data = {op:'changeusertag',tagid:tagid,openid:openid,id:id};
+    function changeUserTag(obj){
+        alert($(obj).value());
+//        var url = $('#member_label_delete').val();
+//        var token = $('#_token').val();
+//        var data = {'_token':token,'id':id};
+//        var data = {'_token':_token,tagid:tagid,openid:openid,id:id};
 //        $.post(url,data,function(json){});
     }
 </script>
