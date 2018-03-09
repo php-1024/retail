@@ -45,5 +45,9 @@ class ModuleNode extends Model{
         $model->save();
     }
 
+    //修改数据时 如果去掉了节点 就要删除对应的节点信息
+    public static function deleteEditNodes(){
+
+    }
 }
 ?>
