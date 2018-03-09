@@ -103,8 +103,7 @@
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <div class="col-sm-12 col-sm-offset-6">
-
-                                                    <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                                    <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                                 </div>
                                             </div>
 
