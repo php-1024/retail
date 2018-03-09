@@ -45,6 +45,7 @@ class ModuleNode extends Model{
         $model->save();
     }
 
+    //删除模块节点的各种关联关系操作
     public function deleteModuleNode($module_id){
         $module_nodes = self::where(['module_id',$module_id])->get();
         $nodes = [];
