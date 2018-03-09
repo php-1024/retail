@@ -59,7 +59,9 @@ class ModuleNode extends Model{
 
         $program_ids = array_unique($program_ids);//去重
 
-        dump($program_ids);
+        //查询该程序下的所有角色
+        $role_list = OrganizationRole::whereIn('program_id',$program_ids)->get();
+        dump($role_list);
     }
 }
 ?>
