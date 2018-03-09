@@ -89,8 +89,10 @@
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
                                             <select style="width:100px" class="chosen-select2" onchange="changeUserTag()">
-                                                <option value="AK">无标签</option>
-                                                <option value="AK">无标签</option>
+                                                    <option value="AK">无标签</option>
+                                                @foreach($label as $k=>$v)
+                                                    <option value="{{$v->id}}">{{$v->member_name}}</option>
+                                                @endforeach
                                             </select>
                                         </td>
                                         <td>{{$value->created_at}}</td>

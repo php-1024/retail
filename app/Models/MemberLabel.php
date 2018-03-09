@@ -18,7 +18,10 @@ class MemberLabel extends Model{
     public static function getOneMemberLabel($where){
         return self::where($where)->first();
     }
-
+    //获取列表
+    public static function ListMemberLabel($where){
+        return self::where($where)->get();
+    }
     //添加会员标签
     public static function addMemberLabel($param){
         $model = new MemberLabel();
