@@ -13,6 +13,11 @@ class UserRecommender extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //总店用户表表一对一的关系
+    public function user()
+    {
+        return $this->belongsTo('App\Models\StoreUser','user_id','id');
+    }
 
     //简易型查询单条数据关联查询
     public static function getOne($where)

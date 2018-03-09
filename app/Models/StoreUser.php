@@ -27,7 +27,7 @@ class StoreUser extends Model{
     //用户消费推荐表（导流）一对一的关系
     public function userRecommender()
     {
-        return $this->belongsTo('App\Models\UserRecommender','user_id','user_id');
+        return $this->hasOne('App\Models\UserRecommender','user_id','user_id');
     }
 
     //简易型查询单条数据关联查询
