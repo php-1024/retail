@@ -211,17 +211,6 @@
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#copyBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#deleteBtn').click(function(){
-            $('#myModal2').modal();
-        });
-    });
     //获取用户信息，编辑密码框
     function getEditForm(id) {
         var url = $('#role_edit_url').val();
