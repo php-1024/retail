@@ -752,6 +752,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('BranchCheckAjax');                  //下属授权检测
 
         Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('BranchCheckAjax');          //栏目添加检测
+        Route::post('goods_add_check', 'Branch\GoodsController@goods_add_check')->middleware('BranchCheckAjax');                   //商品添加检测
 
     });
 });

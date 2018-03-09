@@ -1,14 +1,14 @@
 <?php
 /**
- * organization_category表的模型
+ * goods表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class OrganizationCategory extends Model{
+class Goods extends Model{
     use SoftDeletes;
-    protected $table = 'organization_category';
+    protected $table = 'goods';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -31,7 +31,7 @@ class OrganizationCategory extends Model{
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new OrganizationCategory();
+        $model = new Goods();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -39,18 +39,28 @@ class OrganizationCategory extends Model{
     }
 
     //添加组织栏目分类
-    public static function addCategory($param){
-        $model = new OrganizationCategory();
+    public static function addGoods($param){
+        $model = new Goods();
         $model->program_id = $param['program_id'];
+        $model->category_id = $param['category_id'];
         $model->organization_id = $param['organization_id'];
+        $model->goods_sort = $param['goods_sort'];
+        $model->goods_stock = $param['goods_stock'];
+        $model->goods_details = $param['goods_details'];
+        $model->goods_thumb = $param['goods_thumb'];
+        $model->goods_price = $param['goods_price'];
+        $model->goods_name = $param['goods_name'];
         $model->created_by = $param['created_by'];
-        $model->category_sort = $param['category_sort'];
-        $model->category_name = $param['category_name'];
+        $model->goods_keywords = $param['goods_keywords'];
+        $model->goods_max = $param['goods_max'];
+
+        $model->goods_name = $param['goods_name'];
         $model->save();
         return $model->id;
     }
+    
     //修改数据
-    public static function editCategory($where,$param){
+    public static function editGoods($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;

@@ -46,7 +46,8 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
-                                        <form class="form-horizontal" method="get">
+                                        <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/goods_add_check') }}">
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">

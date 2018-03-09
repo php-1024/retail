@@ -65,8 +65,12 @@ class BranchCheckAjax{
                 break;
 
 
-            case "branch/ajax/category_add_check"://检测登录，权限，及修改密码的数据
+            case "branch/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
                 $re = $this->checkLoginAndRuleAndCategoryAdd($request);
+                return self::format_response($re, $next);
+                break;
+            case "branch/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
+                $re = $this->checkLoginAndRuleAndGoodsAdd($request);
                 return self::format_response($re, $next);
                 break;
         }
@@ -102,6 +106,27 @@ class BranchCheckAjax{
             return $re;
         }else{
             $re2 = $this->checkCategoryAdd($re['response']);//检测是添加栏目数据
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                $re3 = $this->checkSafePassword($re2['response']);//检测是否具有权限
+                if($re3['status']=='0'){
+                    return $re3;
+                }else{
+                    return self::res(1,$re3['response']);
+                }
+            }
+        }
+    }
+
+
+    //检测登录，权限，及添加商品的数据
+    public function checkLoginAndRuleAndGoodsAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkGoodsAdd($re['response']);//检测是添加栏目数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -452,6 +477,15 @@ class BranchCheckAjax{
 
     //检测添加栏目分类数据
     public function checkCategoryAdd($request){
+        if(empty($request->input('category_name'))){
+            return self::res(0,response()->json(['data' => '请输入分类名称', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+
+    //检测添加商品数据
+    public function checkGoodsAdd($request){
         if(empty($request->input('category_name'))){
             return self::res(0,response()->json(['data' => '请输入分类名称', 'status' => '0']));
         }
