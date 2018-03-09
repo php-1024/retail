@@ -24,7 +24,6 @@
                         </div>
                     </div>
                     <div style="clear:both;"></div>
-
                 </form>
             </div>
             <div class="modal-footer">
