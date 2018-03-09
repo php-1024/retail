@@ -73,8 +73,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$value)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$value->id}}</td>
                                         <td><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                         <td>100020</td>
                                         <td>时光取名叫无心</td>
@@ -93,6 +94,7 @@
                                             <button class="btn btn-warning btn-xs" id="lockBtn"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

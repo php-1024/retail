@@ -133,7 +133,7 @@ class UserController extends Controller{
 
         $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
         dump($list);
-        return view('Catering/User/user_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/User/user_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户足迹
     public function user_timeline(Request $request){

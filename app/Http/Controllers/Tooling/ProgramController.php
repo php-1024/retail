@@ -14,6 +14,7 @@ use App\Models\ProgramModuleNode;
 use App\Models\ProgramMenu;
 use App\Models\PackageProgram;
 use App\Models\Package;
+use App\Models\AccountNode;
 
 class ProgramController extends Controller{
     public function program_add(Request $request)
@@ -106,6 +107,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
+        AccountNode::addNewsNode($id,[1,2]);
         return view('Tooling/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
     //提交编辑程序数据
@@ -126,6 +128,7 @@ class ProgramController extends Controller{
             try{
                 Program::editProgram([[ 'id',$id ]],['program_name'=>$program_name,'program_url'=>$program_url,'complete_id'=>$complete_id,'is_asset'=>$is_asset]);
                 $p_m_ns = [];
+                $new_nodes = [];
                 //循环节点生成多条数据
                 foreach($module_node_ids as $key=>$val){
                     $arr = explode('_',$val);
@@ -135,6 +138,7 @@ class ProgramController extends Controller{
 
                     $vo = ProgramModuleNode::getOne([['program_id',$id],['module_id',$module_id],['node_id',$node_id]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
+                        $new_nodes[] = $node_id;
                         ProgramModuleNode::addProgramModuleNode(['program_id' => $id, 'module_id' => $module_id, 'node_id' => $node_id]);
                     }else{
                         continue;
@@ -142,6 +146,8 @@ class ProgramController extends Controller{
                     unset($vo);
                 }
 
+                //添加的节点添加到该程序中所有主找好中
+                AccountNode::addNewsNode($id,$new_nodes);
                 //删除数据库中不在这次插入的数据
                 ProgramModuleNode::where('program_id', $id)->whereNotIn('p_m_n', $p_m_ns)->forceDelete();
 
