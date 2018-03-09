@@ -110,7 +110,7 @@ class UserController extends Controller{
         $member_name = $request->member_name; //会员标签名称
         DB::beginTransaction();
         try {
-            MemberLabel::where('id',$id)->fordelete();
+            MemberLabel::where('id',$id)->forceDelete();
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$member_name);//保存操作记录
             }
