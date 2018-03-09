@@ -251,6 +251,7 @@
     //获取用户信息，编辑密码框
     function getAddForm(){
         var url = $('#member_label_add').val();
+        alert(url);
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
