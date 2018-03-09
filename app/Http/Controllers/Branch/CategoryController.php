@@ -70,7 +70,7 @@ class CategoryController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $category = OrganizationCategory::getPaginage($where,'10','category_sort','DESC');
+        $category = OrganizationCategory::getPaginage($where,'1','category_sort','DESC');
         dump($category);
         return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
