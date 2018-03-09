@@ -400,7 +400,7 @@
         var member_id = $(obj).val();
         var url = $('#store_member_add_check').val();
         var token = $('#_token').val();
-        var data = {'_token':_token,'member_id':member_id,'user_id':user_id};
+        var data = {'_token':token,'member_id':member_id,'user_id':user_id};
         $.post(url,data,function(json){
                 console.log(json);
         });
