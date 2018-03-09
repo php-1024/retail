@@ -593,15 +593,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
+                    <h4 class="modal-title">图片上传</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
                             <label class="col-sm-2 text-right">店铺LOGO</label>
                             <div class="col-sm-10">
-                                {{--<input type="file" name="source" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">--}}
-                                <input id="file" type="file" class="form-control" name="source">
+                                <input type="file" name="source" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                             </div>
                         </div>
                         <div style="clear:both;"></div>
