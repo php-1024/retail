@@ -107,7 +107,6 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $plist = Program::getList([[ 'complete_id','0' ]],0,'id');
-        AccountNode::addNewsNode($id,[1,2]);
         return view('Tooling/Program/program_edit',['info'=>$info,'plist'=>$plist]);
     }
     //提交编辑程序数据
