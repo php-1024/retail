@@ -98,7 +98,7 @@ class GoodsController extends Controller
         if ($request->isMethod('POST')) {
 //            var_dump($_FILES);
             $file = $request->file('source');
-            dd($file);
+            dd($request);
             //判断文件是否上传成功
             if ($file->isValid()) {
                 //获取原文件名
