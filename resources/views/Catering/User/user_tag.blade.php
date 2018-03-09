@@ -48,6 +48,8 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="member_label_add" value="{{ url('catering/ajax/member_label_add') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+
                                     <div class="col-sm-12">
                                         <button type="button" id="addBtn" class="btn btn-s-md btn-info" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加粉丝标签</button>
                                         <button type="button" class="btn btn-s-md btn-info"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签到本地</button>
@@ -164,7 +166,72 @@
     </section>
 </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑粉丝标签</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">标签名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" value="标签名称" placeholder="标签名称" class="form-control">
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
+
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" value="" placeholder="安全密码" class="form-control" >
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal tasi-form" method="get">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">删除粉丝标签确定</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 text-right">安全密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" value="" placeholder="安全密码" class="form-control" >
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
@@ -178,19 +245,13 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
-<!-- Sweet alert -->
-<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
-<script src="{{asset('public/Tooling/library/chosen')}}/js/chosen.jquery.js"></script>
 
 
 <script type="text/javascript">
-    //添加会员标签
+    //获取用户信息，编辑密码框
     function getAddForm(){
         var url = $('#member_label_add').val();
         var token = $('#_token').val();
-
         var data = {'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
