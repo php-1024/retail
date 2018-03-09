@@ -248,7 +248,7 @@
         var url = $('#member_label_add').val();
         var token = $('#_token').val();
 
-        var data = {'id':id,'account':account,'status':status,'_token':token};
+        var data = {'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
