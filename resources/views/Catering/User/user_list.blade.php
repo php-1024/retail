@@ -88,7 +88,7 @@
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2">
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTagchangeUserTag()">
                                                 <option value="AK">无标签</option>
                                             </select>
                                         </td>
@@ -391,6 +391,13 @@
         });
         $('.popovers').popover();
     });
+    function changeUserTag(){
+        alert('1');
+//        var url = '';
+//        var tagid = $(obj).val();
+//        var data = {op:'changeusertag',tagid:tagid,openid:openid,id:id};
+//        $.post(url,data,function(json){});
+    }
 </script>
 </body>
 </html>
