@@ -48,6 +48,7 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
             case "catering/ajax/member_label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
+            case "catering/ajax/member_label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndMemberAdd($request);
                 return self::format_response($re,$next);
                 break;
@@ -71,6 +72,8 @@ class CateringCheckAjax
             case "catering/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
             case "catering/ajax/subordinate_delete":     //添加下级人员用户授权显示页面
             case "catering/ajax/member_label_add":       //添加会员标签显示页面
+            case "catering/ajax/member_label_edit":      //编辑会员标签显示页面
+            case "catering/ajax/member_label_delete":    //删除会员标签显示页面
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
