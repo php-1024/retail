@@ -79,6 +79,7 @@ class ModuleNode extends Model{
                 if(!empty($account_list)){
                     foreach($account_list as $kk=>$vv){
                         $account_nodes = AccountNode::where('account_id',$vv->id)->where('node_id',$unselect_nodes)->get();
+                        dump($account_nodes);
                        // \ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
                     }
                 }
