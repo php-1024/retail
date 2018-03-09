@@ -50,7 +50,7 @@ class AccountNode extends Model
     public static function addNewsNode($program_id,$nodes){
         $organization_list = Organization::where('program_id',$program_id)->get();
         foreach($organization_list as $key=>$val){
-            $main_account = Account::where('organization_id',$val['id'])->where('parent_id',0)->first();
+            $main_account = Account::where('organization_id',$val['id'])->where('parent_id',1)->first();
             dump($main_account);
         }
     }
