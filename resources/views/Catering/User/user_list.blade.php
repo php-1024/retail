@@ -75,7 +75,7 @@
                                     <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td><img src="images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                        <td><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
                                         <td>100020</td>
                                         <td>时光取名叫无心</td>
                                         <td><label class="label label-success">是</label></td>
@@ -217,7 +217,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 text-right">安全密码</label>
                             <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                <input type="text" value="" placeholder="安全密码" class="form-control" >
                             </div>
                         </div>
                         <div style="clear:both;"></div>
@@ -346,7 +346,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 text-right">安全密码</label>
                             <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                <input type="text" value="" placeholder="安全密码" class="form-control" >
                                 <span class="help-block m-b-none">
                               <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
                           </span>
