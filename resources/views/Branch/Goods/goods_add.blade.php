@@ -639,7 +639,8 @@
                     confirmButtonText: "确定",
                 },function(){
 //                    window.location.reload();
-                    window.location.href = "{{asset("branch/goods/goods_list")}}";
+                    console.log(data);
+                    {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
                 });
             }else{
                 swal({
