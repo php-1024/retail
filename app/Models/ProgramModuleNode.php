@@ -82,14 +82,7 @@ class ProgramModuleNode extends Model{
         $unselect_nodes = [];//用于存储此次去除的ID
         foreach( $program_module_nodes as $key=>$val){
             $node_info = Node::where('id',$val['node_id'])->first();
-            $menus = ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->get();//根据节点route_name获取对应程序中对应的菜列表
-            //判断上级菜单下是否有子菜单
-            if(!empty($menus)) {
-                foreach ($menus as $k => $v) {
-                    ProgramMenu::where('id',$v['id'])->forceDelete();
-                    $count = ProgramMenu::where('id',[''])->count();
-                }
-            }
+            ProgramMenu::removeMenuByEdit([['program_id',$val['program_id']],['menu_route',$node_info['route_name']]]);
             $unselect_nodes[] = $val['node_id'];
         }
         $unselect_nodes = array_unique($unselect_nodes);
