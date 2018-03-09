@@ -6,29 +6,13 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class StoreUser extends Model{
+class UserRecommender extends Model{
     use SoftDeletes;
-    protected $table = 'store_user';
+    protected $table = 'user_recommender';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //用户零壹账号源头表一对一的关系
-    public function userOrigin(){
-        return $this->hasOne('App\Models\UserOrigin', 'user_id','user_id');
-    }
-
-    //零壹粉丝端账号表一对一的关系
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User','user_id','id');
-    }
-
-    //用户消费推荐表（导流）一对一的关系
-    public function userRecommender()
-    {
-        return $this->belongsTo('App\Models\UserRecommender','user_id','user_id');
-    }
 
     //简易型查询单条数据关联查询
     public static function getOne($where)
@@ -39,7 +23,7 @@ class StoreUser extends Model{
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::where($where)->with('userOrigin')->with('user')->orderBy($orderby,$sort);
+        $model = self::where($where)->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
