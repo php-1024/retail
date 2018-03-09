@@ -59,6 +59,7 @@ class CategoryController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
         }
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
     }
 
     //商品分类列表
