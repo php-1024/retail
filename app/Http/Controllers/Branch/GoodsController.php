@@ -97,7 +97,7 @@ class GoodsController extends Controller
     public function upload_thumb_check(Request $request)
     {
 
-        Storage::put('avatars/1', $fileContents);
+//        Storage::put('avatars/1', $fileContents);
         $path = $request->file('avatar')->store('avatars');
 
         return $path;
