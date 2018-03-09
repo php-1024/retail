@@ -47,5 +47,10 @@ class AccountNode extends Model
         return self::where('node_id',$node_id)->forceDelete();
     }
 
+    public static function addNewsNode($program_id,$nodes){
+        $organization_list = Organization::where('program_id',$program_id)->get();
+        dump($organization_list);
+    }
+
 }
 ?>
