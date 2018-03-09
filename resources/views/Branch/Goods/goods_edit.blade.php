@@ -483,7 +483,7 @@
 </section>
 
 
-<div class="modal fade" id="thumb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -648,7 +648,7 @@
             $('#myModal').modal();
         });
         $(".addBtnthumb").click(function(){
-            $('#thumb').modal();
+            $('#myModal8').modal();
         });
         $(".deleteBtn").click(function(){
             $('#myModal1').modal();
