@@ -1,5 +1,6 @@
     <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('branch/ajax/category_edit_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="category_id" value="{{$category->id}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,21 +12,21 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">分类名称</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" value="{{}}">
+                                <input type="text" class="form-control" name="name" value="{{$category->name}}">
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">分类排序</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
+                                <input type="text" class="form-control" name="displayorder" value="{{$category->displayorder}}">
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
+                                <input type="text" class="form-control" name="safe_password" value="">
                             </div>
                         </div>
                     </form>
