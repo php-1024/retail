@@ -587,7 +587,7 @@
 
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('branch/ajax/upload_thumb_check') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" id="uploadForm" method="POST" action="{{ url('branch/ajax/upload_thumb_check') }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -604,12 +604,11 @@
                             </div>
                         </div>
                         <div style="clear:both;"></div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button type="button" class="btn btn-success" onclick="return postForm();">上传图片</button>
+                    <button type="button" class="btn btn-success" onclick="return uploadForm();">上传图片</button>
                 </div>
             </div>
         </div>
@@ -677,6 +676,35 @@
     //提交表单
     function postForm() {
         var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.href = "{{asset("branch/goods/goods_list")}}";
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
+
+    //提交表单
+    function uploadForm() {
+        var target = $("#uploadForm");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
