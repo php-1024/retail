@@ -22,11 +22,10 @@ class UserController extends Controller{
     }
     //会员标签功能提交
     public function member_label_add_check(Request $request){
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
         $member_name = $request->member_name; //会员标签名称
-        $organization_id = $menu_data['organization_id'];//组织id
-        dd($organization_id);
+        $organization_id = $admin_data['organization_id'];//组织id
         $data = [
             'member_name'=>$member_name,
             'organization_id'=>$organization_id,
