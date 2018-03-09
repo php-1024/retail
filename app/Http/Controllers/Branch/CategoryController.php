@@ -78,7 +78,6 @@ class CategoryController extends Controller
     public function category_edit(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $category_id = $request->get('id');
         $where = [
             'program_id' => '5',
@@ -86,7 +85,7 @@ class CategoryController extends Controller
             'id' => $category_id,
         ];
         $category = CateringCategory::getOne($where);
-        return view('Branch/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
     }
 
     //商品分类编辑提交
