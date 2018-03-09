@@ -36,9 +36,6 @@
                             <header class="panel-heading text-right bg-light">
                                 <ul class="nav nav-tabs pull-left">
                                     <li class="active"><a href="#baseinfo" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;基础信息</a></li>
-                                    {{--<li><a href="#picture" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;商品图片</a></li>--}}
-                                    {{--<li><a href="#option" data-toggle="tab"><i class="fa fa-leaf text-muted"></i>&nbsp;&nbsp;商品规格</a></li>--}}
-                                    {{--<li><a href="#other" data-toggle="tab"><i class="fa fa-gears text-muted"></i>&nbsp;&nbsp;其他参数</a></li>--}}
                                 </ul>
                                 <span class="hidden-sm">&nbsp;</span>
                             </header>

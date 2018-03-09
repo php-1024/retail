@@ -587,7 +587,8 @@
 
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('branch/ajax/upload_thumb_check') }}" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -608,7 +609,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button type="button" class="btn btn-success" onclick="return postForm();">上传图片</button>
                 </div>
             </div>
         </div>
