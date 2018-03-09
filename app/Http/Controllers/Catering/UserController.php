@@ -20,7 +20,6 @@ class UserController extends Controller{
     }
     //会员标签功能提交
     public function member_label_add_check(Request $request){
-        dd(1);
 
     }
     //粉丝用户管理
