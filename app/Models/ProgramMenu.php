@@ -140,9 +140,9 @@ class ProgramMenu extends Model{
         if(!empty($menus)) {
             foreach ($menus as $k => $v) {
                 ProgramMenu::where('id',$v['id'])->forceDelete();
-                $count = ProgramMenu::where('id',$v['parent_id'])->count();
+                $count = ProgramMenu::where('parent_id',$v['parent_id'])->count();
                 if($count==0){
-                    ProgramMenu::where('id',$v['parent_id'])->count();
+                    self::removeMenuByEdit([['id',$v['parent_id']]]);
                 }
             }
         }

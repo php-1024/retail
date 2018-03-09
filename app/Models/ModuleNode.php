@@ -54,7 +54,7 @@ class ModuleNode extends Model{
         $unselect_nodes = []; //储存所有本次未选中的节点
         foreach($program_module_nodes as $key=>$val){
             $node_info = Node::where('id',$val['node_id'])->first();
-            ProgramMenu::where('program_id',$val['program_id'])->where('menu_route',$node_info['route_name'])->forceDelete();//根据节点route_name删除对应程序中对应的菜单
+            ProgramMenu::removeMenuByEdit([['program_id',$val['program_id']],['menu_route',$node_info['route_name']]]);
             $program_ids[] = $val['program_id'];//储存所有相关程序ID
             $unselect_nodes[] = $val['node_id'];//储存所有本次未选中的节点
         }
