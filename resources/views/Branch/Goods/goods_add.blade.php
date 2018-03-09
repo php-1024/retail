@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
-                                                    <select name="account" class="form-control m-b">
+                                                    <select name="category_id" class="form-control m-b">
                                                         <option>请选择</option>
                                                         @foreach($category as $key=>$val)
                                                         <option value ="{{$val->id}}">{{$val->name}}</option>
