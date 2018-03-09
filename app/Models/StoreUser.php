@@ -39,7 +39,7 @@ class StoreUser extends Model{
 
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::where($where)->with('userOrigin')->with('user')->orderBy($orderby,$sort);
+        $model = self::where($where)->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
