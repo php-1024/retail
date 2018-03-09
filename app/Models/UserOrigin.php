@@ -16,7 +16,7 @@ class UserOrigin extends Model{
     //和账号多对多的关系
     public function storeUser()
     {
-        return $this->belongsTo('App\Models\storeUser','user_id','user_id');
+        return $this->belongsTo('App\Models\StoreUser','user_id','user_id');
     }
 
 
