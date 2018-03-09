@@ -76,5 +76,15 @@ class ProgramModuleNode extends Model{
         return self::where('node_id',$node_id)->forceDelete();
     }
 
+    //程序编辑去掉了节点，同时去掉节点。
+    public static function deleteProgramModuleNode($program_id,$p_m_ns){
+        $nodes = self::where('program_id', $program_id)->whereNotIn('p_m_n', $p_m_ns)->get();
+        $unselectedNodes = [];//用于存储此次去除的ID
+        foreach($nodes as $key=>$val){
+            $unselectedNodes = $val['node_id'];
+        }
+        dump($unselectedNodes);
+    }
+
 }
 ?>
