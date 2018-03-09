@@ -644,7 +644,7 @@ Route::group(['prefix'=>'branch'],function(){
     //收银台
     Route::get('cashier', 'Branch\CashierController@cashier')->middleware('BranchCheck');   //收银台
 
-    //商品管理
+    //栏目管理
     Route::group(['prefix'=>'category'],function(){
         Route::get('category_add', 'Branch\CategoryController@category_add')->middleware('BranchCheck');   //商品管理-添加商品分类
         Route::get('category_list', 'Branch\CategoryController@category_list')->middleware('BranchCheck'); //商品管理-商品分类列表
@@ -746,6 +746,9 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('BranchCheckAjax');            //下属冻结页面
         Route::post('subordinate_lock_check', 'Branch\SubordinateController@subordinate_lock_check')->middleware('BranchCheckAjax');//下属冻结检测
         Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('BranchCheckAjax');                  //下属授权检测
+
+        Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('BranchCheckAjax');          //栏目添加检测
+
     });
 });
 /**********************餐饮分店系统*********************/
