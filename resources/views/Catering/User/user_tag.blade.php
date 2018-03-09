@@ -265,7 +265,7 @@
                 $('#myModal').modal();
             }
         });
-    };
+    }
 </script>
 </body>
 </html>
