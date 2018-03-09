@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>零壹云管理平台 | 总分店管理系统</title>
+    <title>零壹云管理平台 | 总店管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
@@ -38,7 +38,7 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">店铺概况</h3>
+                            <h3 class="m-b-none">总店概况</h3>
                         </div>
 
                         <div class="col-lg-3">
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">店铺名称</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">总店名称</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">刘记鸡煲王</label>
                                             </div>
