@@ -50,6 +50,7 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
+            'category_id' => $category_id,
             'name' => $name,
             'price' => $price,
             'stock' => $stock,
@@ -58,7 +59,7 @@ class GoodsController extends Controller
         ];
         DB::beginTransaction();
         try {
-            CateringGoods::addCateringGoods($goods_data);
+            $goods_id = CateringGoods::addCateringGoods($goods_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了栏目分类！');//保存操作记录
@@ -71,7 +72,7 @@ class GoodsController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1' , 'goods_id' => $goods_id]);
     }
 
 
