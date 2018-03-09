@@ -27,8 +27,8 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $category = CateringCategory::getList($where,'0','displayorder','DESC');
-        return view('Branch/Goods/goods_add',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
+        return view('Branch/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //添加商品数据操作
@@ -43,7 +43,7 @@ class GoodsController extends Controller
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
-        if ($category_id == 0){
+        if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
         $goods_data = [
@@ -61,10 +61,10 @@ class GoodsController extends Controller
         try {
             $goods_id = CateringGoods::addCateringGoods($goods_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了栏目分类！');//保存操作记录
-            }else{//商户本人操作记录
-                OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了栏目分类！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了栏目分类！');//保存操作记录
+            } else {//商户本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了栏目分类！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -72,10 +72,8 @@ class GoodsController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1' , 'goods_id' => $goods_id]);
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
-
-
 
 
     //编辑商品
@@ -90,9 +88,39 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $goods = CateringGoods::getOne(['id'=>$goods_id,'program_id' => '5','organization_id' => $admin_data['organization_id']]);
-        $category = CateringCategory::getList($where,'0','displayorder','DESC');
-        return view('Branch/Goods/goods_edit',['category'=>$category,'goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
+        $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
+        return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
+
+    public function upload_thumb_check(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+//            var_dump($_FILES);
+            $file = $request->file('source');
+            dd($file);
+            //判断文件是否上传成功
+            if ($file->isValid()) {
+                //获取原文件名
+                $originalName = $file->getClientOriginalName();
+                //扩展名
+                $ext = $file->getClientOriginalExtension();
+                //文件类型
+                $type = $file->getClientMimeType();
+                //临时绝对路径
+                $realPath = $file->getRealPath();
+
+                $filename = date('Y-m-d-H-i-S') . '-' . uniqid() . '-' . $ext;
+
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($realPath));
+
+                var_dump($bool);
+            }
+            //dd($file);
+            exit;
+        }
+
+        return view('student.upload');
     }
 
     //商品列表
@@ -106,8 +134,8 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $goods = CateringGoods::getPaginage($where,'10','displayorder','DESC');
-        return view('Branch/Goods/goods_list',['goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
+        return view('Branch/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //拷贝其他分店商品
@@ -117,7 +145,7 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Goods/goods_copy',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Goods/goods_copy', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 }
 
