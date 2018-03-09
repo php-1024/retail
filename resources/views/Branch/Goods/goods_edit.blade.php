@@ -50,7 +50,8 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
-                                        <form class="form-horizontal" method="get">
+                                        <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/goods_edit_check') }}">
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
@@ -67,7 +68,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品名称</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="奇味鸡煲">
+                                                    <input type="text" class="form-control" name="name" value="{{$goods->name}}">
                                                 </div>
                                             </div>
 
@@ -75,7 +76,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">价格</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="100.00">
+                                                    <input type="text" class="form-control" name="price" value="{{$goods->price}}">
                                                 </div>
                                             </div>
 
@@ -83,7 +84,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">库存</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="999">
+                                                    <input type="text" class="form-control" name="stock" value="{{$goods->stock}}">
                                                 </div>
                                             </div>
 
@@ -91,7 +92,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">排序</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="1">
+                                                    <input type="text" class="form-control" name="displayorder" value="{{$goods->displayorder}}">
                                                 </div>
                                             </div>
 
@@ -99,7 +100,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品详情</label>
                                                 <div class="col-sm-8">
-                                                    <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea id="form-content" name="details" class="editor" cols="30" rows="10"> value="{{$goods->details}}"</textarea>
                                                 </div>
                                             </div>
 
@@ -108,6 +109,7 @@
                                                 <div class="col-sm-12 col-sm-offset-6">
 
                                                     <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                                    <button type="button" class="btn btn-success" onclick="return postForm();">保存信息</button>
                                                 </div>
                                             </div>
 
@@ -634,7 +636,7 @@
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
-//                window.location.reload();
+                window.location.reload();
             } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
@@ -642,7 +644,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    window.location.reload();
+                    window.location.href = "{{asset("branch/goods/goods_list")}}";
                 });
             }else{
                 swal({
