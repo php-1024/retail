@@ -52,6 +52,8 @@ class ModuleNode extends Model{
         foreach($module_nodes as $key=>$val){
             $nodes[] = $val['node_id'];
         }
+        dump($nodes);
+        exit();
         self::deleteEditNodes($module_id,$nodes);
     }
 
