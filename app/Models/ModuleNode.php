@@ -72,11 +72,12 @@ class ModuleNode extends Model{
 
         //查询该程序下的所有组织
         $organization_list = Organization::where('program_id',$program_ids)->get();
-        dump($organization_list);
-        exit();
+
         if(!empty($organization_list)) {
             foreach ($organization_list as $key => $val) {
-                $account_list = Account::where('organization_id',$v->id)->get();//查询这些程序下的所有账号
+                $account_list = Account::where('organization_id',$val->id)->get();//查询这些程序下的所有账号
+                dump($account_list);
+                exit();
                 if(!empty($account_list)){
                     foreach($account_list as $kk=>$vv){
                         //\ZeroneRedis::create_menu_cache($vv->id,$val->program_id);//重新生成对应账号的系统菜单缓存
