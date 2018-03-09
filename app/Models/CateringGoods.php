@@ -18,15 +18,14 @@ class CateringGoods extends Model{
         return $this->belongsto('App\Models\Account','created_by');
     }
 
-    //和功能节点关系表，多对多
-    public function nodes()
-    {
-        return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
+    //和创建者catering_category表多对一的关系
+    public function category(){
+        return $this->belongsto('App\Models\CateringCategory','category_id');
     }
 
     //获取单条餐饮商品信息
     public static function getOne($where){
-        return self::with('nodes')->where($where)->first();
+        return self::with('category')->where($where)->first();
     }
 
     //获取餐饮商品列表
@@ -70,7 +69,7 @@ class CateringGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('create_account')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

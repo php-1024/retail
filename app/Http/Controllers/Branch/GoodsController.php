@@ -85,7 +85,14 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Goods/goods_edit',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $goods_id = $request->get('goods_id');              //获取当前的页面路由
+        $where = [
+            'program_id' => '5',
+            'organization_id' => $admin_data['organization_id'],
+        ];
+        $goods = CateringGoods::getOne(['id'=>$goods_id,'program_id' => '5','organization_id' => $admin_data['organization_id']]);
+        $category = CateringCategory::getList($where,'0','displayorder','DESC');
+        return view('Branch/Goods/goods_edit',['category'=>$category,'goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //商品列表
@@ -95,7 +102,12 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Goods/goods_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $where = [
+            'program_id' => '5',
+            'organization_id' => $admin_data['organization_id'],
+        ];
+        $goods = CateringGoods::getPaginage($where,'10','displayorder','DESC');
+        return view('Branch/Goods/goods_list',['goods'=>$goods,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //拷贝其他分店商品
