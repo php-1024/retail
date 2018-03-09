@@ -486,8 +486,8 @@ class BranchCheckAjax{
 
     //检测添加商品数据
     public function checkGoodsAdd($request){
-        if(empty($request->input('category_name'))){
-            return self::res(0,response()->json(['data' => '请输入分类名称', 'status' => '0']));
+        if(empty($request->input('name'))){
+            return self::res(0,response()->json(['data' => '请输入商品名称!', 'status' => '0']));
         }
         return self::res(1,$request);
     }
