@@ -133,5 +133,19 @@ class ProgramMenu extends Model{
         }
     }
 
+    //修改程序或菜单时删除菜单
+    public static function removeMenuByEdit($where){
+        $menus = ProgramMenu::where($where)->get();//根据节点route_name获取对应程序中对应的菜列表
+        //判断上级菜单下是否有子菜单
+        if(!empty($menus)) {
+            foreach ($menus as $k => $v) {
+                ProgramMenu::where('id',$v['id'])->forceDelete();
+                $count = ProgramMenu::where('id',$v['parent_id'])->count();
+                if($count==0){
+                    ProgramMenu::where('id',$v['parent_id'])->count();
+                }
+            }
+        }
+    }
 }
 ?>
