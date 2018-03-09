@@ -19,6 +19,7 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/branch_select":         //超级管理员选择分店提交数据
+            case "branch/ajax/category_edit":         //栏目编辑页面
             case "branch/ajax/role_edit":             //编辑权限角色弹出框检测登入和权限
             case "branch/ajax/role_delete":           //删除权限角色弹出框检测登入和权限
             case "branch/ajax/quick_rule":            //快速授权检测登入和权限
@@ -67,11 +68,12 @@ class BranchCheckAjax{
 
 
             case "branch/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
+            case "branch/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
                 $re = $this->checkLoginAndRuleAndCategoryAdd($request);
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
-            case "branch/ajax/goods_edit_check"://检测登录，权限，及添加商品的数据
+            case "branch/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
                 $re = $this->checkLoginAndRuleAndGoodsAdd($request);
                 return self::format_response($re, $next);
                 break;
