@@ -64,7 +64,7 @@ return [
     /*
     * 服务商管理系统无需检验权限的路由
     */
-    'zerone_route_except'=>[
+    'proxy_route_except'=>[
         'proxy',//零壹管理平台首页
     ],
 
