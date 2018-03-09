@@ -98,9 +98,9 @@ class GoodsController extends Controller
     {
 
 //        Storage::put('avatars/1', $fileContents);
-        $path = $request->file('avatar')->store('avatars');
+        $path = $request->file('upload_thumb');
 
-        return $path;
+        dd($path);
     }
 
     //商品列表
