@@ -5,6 +5,7 @@ use App\Models\MemberLabel;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\StoreUser;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -134,7 +135,7 @@ class UserController extends Controller{
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();
         $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
-            dump($value->user_id);
+            UserInfo::getOneUserInfo([['user_id',$value->user_id]]);
         }
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
