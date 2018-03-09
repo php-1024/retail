@@ -114,7 +114,7 @@
                                         </form>
                                     </div>
                                     <div class="tab-pane fade in" id="picture">
-                                        <button type="button" class="btn btn-success" id="thumb"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加图片</button>
+                                        <button type="button" class="btn btn-success" id="addBtnthumb"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加图片</button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-stripped">
