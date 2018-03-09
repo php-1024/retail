@@ -50,6 +50,7 @@ class ModuleController extends Controller{
         $module_name = $request->input('module_name');
         $search_data = ['module_name'=>$module_name];
         $list = Module::getPaginage([[ 'module_name','like','%'.$module_name.'%' ]],15,'id');
+        ModuleNode::deleteModuleNode(26);
         return view('Tooling/Module/module_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'module']);
     }
     //编辑功能模块列表
