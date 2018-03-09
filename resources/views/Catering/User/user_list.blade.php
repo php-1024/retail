@@ -397,7 +397,7 @@
         $('.popovers').popover();
     });
     function changeUserTag(obj){
-        alert($(obj).value());
+        alert($(obj).val());
 //        var url = $('#member_label_delete').val();
 //        var token = $('#_token').val();
 //        var data = {'_token':token,'id':id};
