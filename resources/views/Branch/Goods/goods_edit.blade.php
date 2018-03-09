@@ -55,10 +55,10 @@
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
                                                     <select name="account" class="form-control m-b">
-                                                        <option>主食</option>
-                                                        <option>酒水</option>
-                                                        <option>凉菜</option>
-                                                        <option>配料</option>
+                                                        <option value ="0">请选择</option>
+                                                        @foreach($category as $key=>$val)
+                                                            <option value ="{{$val->id}}" @if($val->id == $goods->category->id)selected @endif>{{$val->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
