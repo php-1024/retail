@@ -120,6 +120,7 @@ class ProgramController extends Controller{
         $is_asset = empty($request->input('is_asset'))?'0':'1';//是否资产程序
         $module_node_ids = $request->input('module_node_ids');//节点数组
 
+
         if(Program::checkRowExists([[ 'program_name',$program_name],['id','!=',$id]])){
             return response()->json(['data' => '程序名称已经存在', 'status' => '0']);
         }else{
