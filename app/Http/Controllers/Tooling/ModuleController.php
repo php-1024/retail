@@ -58,7 +58,7 @@ class ModuleController extends Controller{
         $info = Module::find($id);
         $node_list_selected = Node::node_selected($id);
         $node_list_unselected = Node::node_unselected($id);
-        ModuleNode::deleteEditNodes(19,[7,8,9,10,11,12,13,14,15]);
+
         return view('Tooling/Module/module_edit',['info'=>$info,'node_list_selected'=>$node_list_selected,'node_list_unselected'=>$node_list_unselected]);
     }
     //编辑功能模块列表
@@ -86,7 +86,7 @@ class ModuleController extends Controller{
                     unset($vo);
                 }
                 //删除这次去掉的节点
-                ModuleNode::where('module_id',$id)->whereNotIn('node_id',$nodes)->forceDelete();
+                ModuleNode::deleteEditNodes($id,$nodes);
 
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了功能模块'.$module_name);//保存操作记录
                 DB::commit();//提交事务
