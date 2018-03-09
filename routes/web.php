@@ -741,8 +741,8 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('role_edit_check', 'Branch\RoleController@role_edit_check')->middleware('BranchCheckAjax');         //角色编辑检测
         Route::post('role_delete', 'Branch\RoleController@role_delete')->middleware('BranchCheckAjax');                 //角色删除弹出
         Route::post('role_delete_check', 'Branch\RoleController@role_delete_check')->middleware('BranchCheckAjax');     //角色删除检测
-        Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('BranchCheckAjax');          //下级人员管理权限角色添加
-        Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('BranchCheckAjax');                        //下属添加_用户权限页面
+        Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('BranchCheckAjax');           //下级人员管理权限角色添加
+        Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('BranchCheckAjax');            //下属添加_用户权限页面
 
         Route::post('subordinate_add_check', 'Branch\SubordinateController@subordinate_add_check')->middleware('BranchCheckAjax');  //下属添加检测
         Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('BranchCheckAjax');            //下属信息编辑页面
@@ -757,7 +757,6 @@ Route::group(['prefix'=>'branch'],function(){
 
         Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('BranchCheckAjax');          //栏目添加检测
         Route::post('goods_add_check', 'Branch\GoodsController@goods_add_check')->middleware('BranchCheckAjax');                   //商品添加检测
-
     });
 });
 /**********************餐饮分店系统*********************/
