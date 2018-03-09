@@ -26,6 +26,7 @@ class UserController extends Controller{
 
         $member_name = $request->member_name; //会员标签名称
         $organization_id = $menu_data['organization_id'];//组织id
+        dd($organization_id);
         $data = [
             'member_name'=>$member_name,
             'organization_id'=>$organization_id,
@@ -33,7 +34,7 @@ class UserController extends Controller{
             'member_number'=>0,
         ];
         MemberLabel::addMemberLabel($data);
-        
+
         return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
     }
     //粉丝用户管理
