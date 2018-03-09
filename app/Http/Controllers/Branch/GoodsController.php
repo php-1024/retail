@@ -9,7 +9,9 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
 use App\Models\CateringGoods;
+use App\Models\OperationLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class GoodsController extends Controller
