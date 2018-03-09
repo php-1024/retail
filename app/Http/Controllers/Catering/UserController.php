@@ -59,6 +59,30 @@ class UserController extends Controller{
         $oneMemb = MemberLabel::getOneMemberLabel([['id',$id]]);
         return view('Catering/User/member_label_edit',['oneMemb'=>$oneMemb]);
     }
+    //编辑会员标签功能提交
+    public function member_label_edit_check(Request $request){
+
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $id = $request->id; //会员标签id
+        $member_name = $request->member_name; //会员标签名称
+
+        DB::beginTransaction();
+        try {
+            MemberLabel::editMemberLabel(['id'=>$id],['member_name'=>$member_name]);
+            if($admin_data['is_super'] != 2){
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$member_name);//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改会员标签失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
+
+
+    }
     //删除会员标签ajax显示页面
     public function member_label_delete(Request $request){
 

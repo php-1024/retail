@@ -19,7 +19,7 @@ class MemberLabel extends Model{
         return self::where($where)->first();
     }
 
-    //添加用户
+    //添加会员标签
     public static function addMemberLabel($param){
         $model = new MemberLabel();
         $model->organization_id = $param['organization_id'];//组织ID
@@ -28,6 +28,15 @@ class MemberLabel extends Model{
         $model->member_number = $param['member_number'];//粉丝数量
         $model->save();
         return $model->id;
+    }
+
+    //修改数据
+    public static function editMemberLabel($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
     }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
