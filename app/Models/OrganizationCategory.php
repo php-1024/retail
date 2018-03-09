@@ -41,11 +41,11 @@ class OrganizationCategory extends Model{
     //添加组织栏目分类
     public static function addCategory($param){
         $model = new OrganizationCategory();
+        $model->name = $param['name'];
+        $model->created_by = $param['created_by'];
+        $model->displayorder = $param['displayorder'];
         $model->program_id = $param['program_id'];
         $model->organization_id = $param['organization_id'];
-        $model->created_by = $param['created_by'];
-        $model->category_sort = $param['category_sort'];
-        $model->category_name = $param['category_name'];
         $model->save();
         return $model->id;
     }
