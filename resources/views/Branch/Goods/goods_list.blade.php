@@ -74,78 +74,32 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($goods as $key=>$val)
                                     <tr>
-                                        <td>1</td>
-                                        <td>奇味鸡煲</td>
+                                        <td>{{$val->id}}</td>
+                                        <td>{{$val->name}}</td>
                                         <td>
-                                            100.00
+                                            {{$val->price}}
                                         </td>
                                         <td>
-                                            <label class="label label-info">主食</label>
+                                            <label class="label label-info">{{$val->category->name}}</label>
                                         </td>
                                         <td>
-                                            999
+                                            {{$val->stock}}
                                         </td>
                                         <td>
-                                            1
+                                            {{$val->displayorder}}
                                         </td>
                                         <td>
                                             <label class="label label-success">在售</label>
                                         </td>
-                                        <td>2017-08-09 11:11:11</td>
+                                        <td>{{$val->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_edit'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>奇味鸡煲</td>
-                                        <td>
-                                            100.00
-                                        </td>
-                                        <td>
-                                            <label class="label label-info">主食</label>
-                                        </td>
-                                        <td>
-                                            999
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            <label class="label label-success">在售</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_edit'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>奇味鸡煲</td>
-                                        <td>
-                                            100.00
-                                        </td>
-                                        <td>
-                                            <label class="label label-info">主食</label>
-                                        </td>
-                                        <td>
-                                            999
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            <label class="label label-success">在售</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='goods_edit'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
