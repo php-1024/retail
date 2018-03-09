@@ -645,9 +645,13 @@ Route::group(['prefix'=>'branch'],function(){
     Route::get('cashier', 'Branch\CashierController@cashier')->middleware('BranchCheck');   //收银台
 
     //商品管理
+    Route::group(['prefix'=>'category'],function(){
+        Route::get('category_add', 'Branch\CategoryController@category_add')->middleware('BranchCheck');   //商品管理-添加商品分类
+        Route::get('category_list', 'Branch\CategoryController@category_list')->middleware('BranchCheck'); //商品管理-商品分类列表
+    });
+
+    //商品管理
     Route::group(['prefix'=>'goods'],function(){
-        Route::get('category_add', 'Branch\GoodsController@category_add')->middleware('BranchCheck');   //商品管理-添加商品分类
-        Route::get('category_list', 'Branch\GoodsController@category_list')->middleware('BranchCheck'); //商品管理-商品分类列表
         Route::get('goods_add', 'Branch\GoodsController@goods_add')->middleware('BranchCheck');         //商品管理-添加商品
         Route::get('goods_edit', 'Branch\GoodsController@goods_edit')->middleware('BranchCheck');       //商品管理-编辑商品
         Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('BranchCheck');       //商品管理-商品列表
