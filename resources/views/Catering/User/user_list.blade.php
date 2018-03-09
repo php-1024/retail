@@ -84,10 +84,6 @@
                                         <td>
                                             <select style="width:100px" class="chosen-select2">
                                                 <option value="AK">无标签</option>
-                                                <option value="AK">粉丝标签1</option>
-                                                <option value="HI">粉丝标签2</option>
-                                                <option value="HI">粉丝标签3</option>
-                                                <option value="HI">粉丝标签4</option>
                                             </select>
                                         </td>
                                         <td>2017-10-22 10:11:11</td>
@@ -97,7 +93,6 @@
                                             <button class="btn btn-warning btn-xs" id="lockBtn"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                         </td>
                                     </tr>
-
                                     </tbody>
                                 </table>
                             </div>

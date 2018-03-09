@@ -76,7 +76,7 @@ class StoreController extends Controller{
         $program = '4';//程序id --管理程序
         $type = '4';//店铺组织
         $oneOrg = Organization::getOneCompany(['id'=>$organization_id]);
-        $parent_tree = $oneOrg['parent_tree'] . ','.$organization_id . ',';//组织树
+        $parent_tree = $oneOrg['parent_tree'] .$organization_id . ',';//组织树
 
         $user = Account::max('account');
         $account  = $user+1;//用户账号
