@@ -166,7 +166,7 @@ class UserController extends Controller{
 //粉丝用户管理
     public function user_list_edit(Request $request){
 
-        $user_ud = $request->id;//会员标签id
+        $user_id = $request->id;//会员标签id
 //        $user_id = $request->user_id;//用户id
 //
 //        DB::beginTransaction();
@@ -180,7 +180,7 @@ class UserController extends Controller{
 //            DB::rollBack();//事件回滚
 //            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
 //        }
-        return view('Catering/User/user_timeline',['user_ud'=>$user_ud]);
+        return view('Catering/User/user_timeline',['user_id'=>$user_id]);
 
     }
 
