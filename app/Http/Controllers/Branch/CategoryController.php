@@ -7,11 +7,8 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
 use App\Models\OperationLog;
-use App\Models\Organization;
 use App\Models\OrganizationCategory;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
