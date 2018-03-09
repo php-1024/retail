@@ -148,8 +148,9 @@ class ProgramController extends Controller{
                 //添加的节点添加到该程序中所有主找好中
                 AccountNode::addNewsNode($id,$new_nodes);
                 //删除数据库中不在这次插入的数据
-                ProgramModuleNode::where('program_id', $id)->whereNotIn('p_m_n', $p_m_ns)->forceDelete();
 
+                //ProgramModuleNode::where('program_id', $id)->whereNotIn('p_m_n', $p_m_ns)->forceDelete();
+                ProgramModuleNode::deleteProgramModuleNode($id,$p_m_ns);//删除
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
