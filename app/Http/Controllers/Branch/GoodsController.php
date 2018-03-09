@@ -25,7 +25,6 @@ class GoodsController extends Controller
             'organization_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getList($where,'0','displayorder','DESC');
-        dump($category);
         return view('Branch/Goods/goods_add',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
