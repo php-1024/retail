@@ -12,6 +12,7 @@ use App\Models\CateringGoods;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class GoodsController extends Controller
@@ -95,9 +96,8 @@ class GoodsController extends Controller
 
     public function upload_thumb_check(Request $request)
     {
-        $file = $request->file('photo');
-//        $file = $request->photo;
-        dd($file);
+        $a = Storage::put('avatars/1', $fileContents);
+        dump($a);
     }
 
     //商品列表
