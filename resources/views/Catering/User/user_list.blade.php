@@ -80,7 +80,12 @@
                                         <td>{{$value->user->account}}</td>
                                         <td>时光取名叫无心</td>
                                         <td><label class="label label-success">是</label></td>
-                                        <td><label class="label label-info">@if($value->userOrigin->origin_id==)@endif</label></td>
+                                        <td><label class="label label-info">
+                                                @if($value->userOrigin->origin_id==$organization_id)
+
+                                                @else
+                                                    零壹联盟
+                                                @endif</label></td>
                                         <td><label class="label label-primary">联盟用户-张老三</label></td>
                                         <td>
                                             <select style="width:100px" class="chosen-select2">
