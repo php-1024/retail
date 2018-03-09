@@ -90,6 +90,7 @@
                                         <td>
                                             <select style="width:100px" class="chosen-select2" onchange="changeUserTag()">
                                                 <option value="AK">无标签</option>
+                                                <option value="AK">无标签</option>
                                             </select>
                                         </td>
                                         <td>{{$value->created_at}}</td>
