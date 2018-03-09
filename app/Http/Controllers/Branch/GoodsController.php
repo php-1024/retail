@@ -101,7 +101,6 @@ class GoodsController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //商品ID
         $category_id = $request->get('category_id');        //栏目ID
-        dd($category_id);
         $name = $request->get('name');                      //商品名称
         $price = $request->get('price');                    //商品价格
         $stock = $request->get('stock');                    //商品库存
