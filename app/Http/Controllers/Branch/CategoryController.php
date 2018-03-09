@@ -96,7 +96,7 @@ class CategoryController extends Controller
         $name = $request->get('name');                      //栏目名称
         $displayorder = $request->get('displayorder');      //栏目排序
         $category_id = $request->get('category_id')         //栏目id
-        if (empty($category_sort)){
+        if (empty($displayorder)){
             $displayorder = '0';
         }
         $where = [
