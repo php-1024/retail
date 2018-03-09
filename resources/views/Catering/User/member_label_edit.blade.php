@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$oneMemb->member_name}}" placeholder="标签名称" class="form-control">
+                            <input type="text" value="{{$oneMemb->member_name}}" placeholder="标签名称" class="form-control" name="member_name">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
