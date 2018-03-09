@@ -17,6 +17,8 @@
                         </div>
                     </div>
                     <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
@@ -24,7 +26,6 @@
                         </div>
                     </div>
                     <div style="clear:both;"></div>
-
                 </form>
             </div>
             <div class="modal-footer">
