@@ -396,8 +396,8 @@
         });
         $('.popovers').popover();
     });
-    function changeUserTag(id){
-        alert(id);
+    function changeUserTag(obj){
+        alert($(obj).val());
 //        var url = $('#member_label_delete').val();
 //        var token = $('#_token').val();
 //        var data = {'_token':token,'id':id};
