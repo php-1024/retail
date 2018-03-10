@@ -14,6 +14,7 @@ use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
+use App\Models\Module;
 use Illuminate\Support\Facades\DB;
 use Session;
 class ProxyController extends Controller{
@@ -24,6 +25,8 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
+        $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
+        dump($module_node_list);
         return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
@@ -75,6 +78,7 @@ class ProxyController extends Controller{
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
