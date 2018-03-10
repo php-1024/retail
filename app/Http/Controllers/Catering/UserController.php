@@ -5,6 +5,7 @@ use App\Models\Label;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\StoreUser;
+use App\Models\StoreUserLog;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\UserOrigin;
@@ -276,6 +277,9 @@ class UserController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
+        $store_id = $admin_data['organization_id'];//组织id
+        $list = StoreUserLog::getPaginage([['store_id',$store_id]],'5','id');
+        dump($list);
         return view('Catering/User/user_timeline',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
