@@ -72,24 +72,24 @@ class UserController extends Controller{
         return view('Catering/User/label_edit',['oneLabel'=>$oneLabel]);
     }
     //编辑会员标签功能提交
-    public function member_label_edit_check(Request $request){
+    public function label_edit_check(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $organization_id = $admin_data['organization_id'];//组织id
+        $store_id = $admin_data['organization_id'];//组织id
 
         $id = $request->id; //会员标签id
-        $member_name = $request->member_name; //会员标签名称
-        $re = MemberLabel::checkRowExists([['organization_id',$organization_id],['member_name',$member_name]]);
+        $laber_name = $request->laber_name; //会员标签名称
+        $re = Label::checkRowExists([['store_id',$store_id],['laber_name',$laber_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
-            MemberLabel::editMemberLabel(['id'=>$id],['member_name'=>$member_name]);
+            Label::editLabel(['id'=>$id],['laber_name'=>$laber_name]);
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$member_name);//保存操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$laber_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -98,8 +98,8 @@ class UserController extends Controller{
         }
         return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
 
-
     }
+    
     //删除会员标签ajax显示页面
     public function member_label_delete(Request $request){
         $id = $request->id; //会员标签id
