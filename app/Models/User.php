@@ -23,6 +23,11 @@ class User extends Model{
     {
         return $this->hasOne('App\Models\UserInfo','user_id','id');
     }
+    //和店铺粉丝操作记录一对多
+    public function StoreUserLog()
+    {
+        return $this->hasMany('App\Models\StoreUserLog','user_id','id');
+    }
 
 
     //简易型查询单条数据关联查询

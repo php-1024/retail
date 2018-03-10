@@ -13,6 +13,13 @@ class StoreUserLog extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+
+
+    //和组织表一对一的关系
+    public function User(){
+        return $this->belongsTo('App\Models\User', 'user_id','id');
+    }
+
     //简易型查询单条数据关联查询
     public static function getOne($where)
     {
@@ -93,7 +100,7 @@ class StoreUserLog extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->with('User')->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
