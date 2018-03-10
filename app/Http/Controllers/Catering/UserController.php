@@ -101,7 +101,7 @@ class UserController extends Controller{
     }
 
     //删除会员标签ajax显示页面
-    public function abel_delete(Request $request){
+    public function label_delete(Request $request){
         $id = $request->id; //会员标签id
         $oneLabel = Label::getOneLabel([['id',$id]]);
         return view('Catering/User/label_delete',['oneLabel'=>$oneLabel]);
