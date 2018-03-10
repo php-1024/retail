@@ -1,7 +1,6 @@
  <form method="post" class="form-horizontal"  role="form" id="spec_item_add_check" action="{{ url('branch/ajax/spec_item_add_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="spec_id" value="{{$spec_id}}">
-        {{--<input type="hidden" name="spec" value="{{$spec}}">--}}
+        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -40,6 +39,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         var token = $('#_token').val();
+        var goods_id = $('#goods_id').val();
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
@@ -60,7 +60,7 @@
                         url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
                         data:{//这是参数
                             _token:token,
-                            name:'iszmxw',
+                            goods_id:goods_id,
                         },
                         type:'post',//提交方式
                         success:function(data){//后台处理数据成功后的回调函数
