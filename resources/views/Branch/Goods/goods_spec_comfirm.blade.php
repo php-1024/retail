@@ -68,8 +68,8 @@
                 });
                 return;
             }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
+                $('#spec_content').html(response);
+                $('#spec_content').modal();
             }
         });
     }
