@@ -32,7 +32,7 @@
     <div class="line line-dashed b-b line-lg pull-in"></div>
 </form>
 @endforeach
-<div class="modal fade" id="myModal_SpecItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <script>
     //弹出子规格添加页面
     function addSpecItem(spec_id) {
@@ -62,8 +62,8 @@
                 });
                 return;
             }else{
-                $('#myModal_SpecItem').html(response);
-                $('#myModal_SpecItem').modal();
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
