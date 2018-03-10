@@ -183,7 +183,7 @@ class UserController extends Controller{
             $list =  User::getOneUser([['id',$recommender_id]]);
             $data['recommender_name'] = $list->UserInfo->nickname;
         }
-        return view('Catering/User/user_list_edit',['data'=>$data]);
+        return view('Catering/User/user_list_edit',['data'=>$data,'user_id'=>$user_id]);
 
     }
 
