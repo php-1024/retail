@@ -97,7 +97,7 @@ class GoodsController extends Controller
         dump($goods);
         dump($category);
         dump($spec);
-        return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+//        return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //编辑商品操作
