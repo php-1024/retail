@@ -66,7 +66,7 @@ class ProxyController extends Controller{
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
+            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
             foreach($module_node_list as $key=>$val){
                 AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val['node_id']]);
             }
@@ -77,6 +77,7 @@ class ProxyController extends Controller{
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
