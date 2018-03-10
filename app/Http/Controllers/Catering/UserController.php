@@ -31,7 +31,7 @@ class UserController extends Controller{
         return view('Catering/User/label_add');
     }
     //添加会员标签功能提交
-    public function member_label_add_check(Request $request){
+    public function label_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
