@@ -179,7 +179,7 @@ class GoodsController extends Controller
     //子规格添加弹窗
     public function spec_item_add(Request $request)
     {
-
+        dd($request);
     }
 
     //子规格添加
