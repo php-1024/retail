@@ -136,7 +136,7 @@ class UserController extends Controller{
 
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
-        $list = StoreUser::getList([['store_id',$organization_id]],'10','id');
+        $list = StoreUser::getListStoreUser([['store_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
             $user_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
@@ -172,8 +172,9 @@ class UserController extends Controller{
         $organization_id = $admin_data['organization_id'];//组织id
 
         $user_id = $request->id;//会员标签id
-        $data['nickname'] =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
+        $userInfo =  UserInfo::getOneUserInfo([['user_id',$user_id]]);//微信昵称
         $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
+        $data['mobile'] =  StoreUser::getPluck([['user_id',$user_id]],'mobile')->first();//手机号
         $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
         if($yauntou == $organization_id){
             $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
@@ -183,7 +184,7 @@ class UserController extends Controller{
             $list =  User::getOneUser([['id',$recommender_id]]);
             $data['recommender_name'] = $list->UserInfo->nickname;
         }
-        return view('Catering/User/user_list_edit',['data'=>$data,'user_id'=>$user_id]);
+        return view('Catering/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
 
     }
     //粉丝用户管理编辑功能提交
@@ -196,14 +197,14 @@ class UserController extends Controller{
         $mobile = $request->mobile;//手机号
         $user_id = $request->user_id;//用户id
         $nickname = $request->nickname;//微信昵称
-
+        $re = StoreUser::checkRowExists([['mobile',$mobile],['user_id','<>',$user_id]]);
+        if($re == 'true'){
+            return response()->json(['data' => '手机号已存在', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
-            $dataInfo = [
-                'qq'      =>  $qq,
-                'mobile'  =>  $mobile,
-            ];
-            UserInfo::editUserInfo(['user_id'=>$user_id],$dataInfo);
+            StoreUser::editStoreUser(['id'=>$user_id],['mobile'=>$mobile,]);
+            UserInfo::editUserInfo(['user_id'=>$user_id],['qq'=>$qq]);
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
             }
