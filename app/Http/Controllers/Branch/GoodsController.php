@@ -179,7 +179,8 @@ class GoodsController extends Controller
     //子规格添加弹窗
     public function spec_item_add(Request $request)
     {
-        return view('Branch/Goods/goods_spec_comfirm');
+        $spec_id = $request->input('id');
+        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id]);
     }
 
     //子规格添加
