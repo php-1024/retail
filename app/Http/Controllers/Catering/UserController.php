@@ -25,9 +25,9 @@ class UserController extends Controller{
         return view('Catering/User/user_tag',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //添加会员标签ajax显示页面
-    public function member_label_add(Request $request){
+    public function label_add(Request $request){
 
-        return view('Catering/User/member_label_add');
+        return view('Catering/User/label_add');
     }
     //添加会员标签功能提交
     public function member_label_add_check(Request $request){
