@@ -16,7 +16,7 @@
         </div>
         @endforeach
         <div class="m-t col-lg-2">
-            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}},{{$val->goods_id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
+            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}}','{{$val->goods_id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
         </div>
     </div>
     <div style="clear: both;"></div>
@@ -24,3 +24,39 @@
 </form>
 @endforeach
 
+<script>
+    //弹出子规格添加页面
+    function addSpecItem(spec_id,goods_id) {
+        var url = $('#spec_item_add').val();
+        var token = $('#_token').val();
+        if(spec_id==''  || goods_id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'spec_id':spec_id,'goods_id':goods_id,'_token':token};
+        console.log(data);
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal_Spec_Item').html(response);
+                $('#myModal_Spec_Item').modal();
+            }
+        });
+    }
+</script>
