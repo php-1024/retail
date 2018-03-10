@@ -47,8 +47,11 @@
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
-                    alert('添加子规格类成功！');
+                },function(json){
+                    //规格添加成功后异步刷新规格部分
+//                    alert('添加子规格类成功！');
+                    $('#spec_content').html(json);
+                    $('#spec_content').modal();
                     {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
                 });
             }else{
@@ -56,8 +59,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });

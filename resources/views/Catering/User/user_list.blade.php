@@ -94,7 +94,7 @@
                                             <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->id}}')">
                                                     <option value="0">无标签</option>
                                                 @foreach($label as $k=>$v)
-                                                    <option value="{{$v->id}}">{{$v->member_name}}</option>
+                                                    <option value="{{$v->id}}">{{$v->label_name}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
