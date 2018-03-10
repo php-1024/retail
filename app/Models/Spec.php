@@ -32,7 +32,7 @@ class Spec extends Model{
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Spec();
         if(!empty($limit)){
-            $model = $model->with('spec_item')->limit($limit);
+            $model = $model->limit($limit);
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
