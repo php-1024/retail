@@ -221,7 +221,7 @@ class UserController extends Controller{
     public function user_list_lock(Request $request){
 
         $user_id = $request->id;//会员标签id
-        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname');//微信昵称
+        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
 
         return view('Catering/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname]);
 
