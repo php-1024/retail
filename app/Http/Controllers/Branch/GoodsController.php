@@ -141,6 +141,12 @@ class GoodsController extends Controller
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
 
+    //规格类添加
+    public function spec_add_check(Request $request)
+    {
+        dd($request);
+    }
+
     public function upload_thumb_check(Request $request)
     {
 
