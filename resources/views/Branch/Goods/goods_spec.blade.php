@@ -8,21 +8,13 @@
         <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
     </div>
     <div class="m-t">
+        @foreach($val->spec_item as $k=>$v)
         <div class="m-t col-lg-2">
-            <label class="label label-success">米饭</label>
+            <label class="label label-success">{{$v->name}}</label>
             <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
             <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
         </div>
-        <div class="m-t col-lg-2">
-            <label class="label label-success">拉面</label>
-            <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-        </div>
-        <div class="m-t col-lg-2">
-            <label class="label label-success">餐包</label>
-            <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-        </div>
+        @endforeach
         <div class="m-t col-lg-2">
             <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
         </div>
