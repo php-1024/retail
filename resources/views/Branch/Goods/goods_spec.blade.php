@@ -39,6 +39,7 @@
         var url = target.attr("action");
         var token = $('#_token').val();
         var data = {'id':spec_id,'_token':token};
+        alert(spec_id);
         if(spec_id==''){
             swal({
                 title: "提示信息",
