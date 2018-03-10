@@ -1,6 +1,6 @@
  <form method="post" class="form-horizontal"  role="form" id="spec_item_add_check" action="{{ url('branch/ajax/spec_item_add_check') }}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     <input type="hidden" name="goods_id" id="goods_id" value="{{$id}}">
+     <input type="hidden" name="goods_id" id="goods_id" value="{{$goods}}">
      <input type="hidden" name="spec_id" value="{{$spec_id}}">
      <div class="modal-dialog">
             <div class="modal-content">
