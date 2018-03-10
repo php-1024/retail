@@ -196,20 +196,19 @@ class UserController extends Controller{
         $mobile = $request->mobile;//手机号
         $user_id = $request->user_id;//用户id
         $nickname = $request->nickname;//微信昵称
-
+        $re = StoreUser::checkRowExists([['mobile',$mobile]]);
+        if($re == 'true'){
+            return response()->json(['data' => '手机号已存在', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
-            $dataInfo = [
-                'qq'      =>  $qq,
-                'mobile'  =>  $mobile,
-            ];
-            UserInfo::editUserInfo(['user_id'=>$user_id],$dataInfo);
+            User::editUser(['id'=>$user_id],['mobile'=>$mobile,]);
+            StoreUser::editStoreUser(['user_id'=>$user_id],['qq'=>$qq,]);
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }

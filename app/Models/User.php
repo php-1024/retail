@@ -42,7 +42,7 @@ class User extends Model{
     }
 
     //修改数据
-    public static function editNode($where,$param){
+    public static function editUser($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
