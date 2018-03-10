@@ -39,6 +39,7 @@
         var target = $("#spec_item_add_check");
         var url = target.attr("action");
         var data = target.serialize();
+        var token = $('#_token').val();
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
@@ -58,7 +59,7 @@
                     $.ajax({
                         url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
                         data:{//这是参数
-                            id:1,
+                            _token:token,
                             name:'iszmxw',
                         },
                         type:'post',//提交方式
