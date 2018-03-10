@@ -104,9 +104,9 @@
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
                                             <button class="btn btn-primary btn-xs" id="balanceBtn"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
                                             @if($value->status == 1 || $value->status == -1)
-                                                <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm({{$value->id}})"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                                <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('{{$value->id}}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             @else
-                                                <button class="btn btn-success btn-xs" id="lockBtn" onclick="getlockForm({{$value->id}})"><i class="fa fa-lock"></i>&nbsp;&nbsp;解结</button>
+                                                <button class="btn btn-success btn-xs" id="lockBtn" onclick="getlockForm({{$value->id}},'{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;解结</button>
                                             @endif
                                         </td>
                                     </tr>
@@ -243,10 +243,10 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     //冻结粉丝
-    function getlockForm(id){
+    function getlockForm(id,status){
         var url = $('#user_list_lock').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'id':id};
+        var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({

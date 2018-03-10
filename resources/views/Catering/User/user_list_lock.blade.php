@@ -5,7 +5,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">冻结粉丝确认</h4>
+                <h4 class="modal-title">
+                   @if($status == '1')
+                        冻结粉丝确认
+                   @else
+                        解冻粉丝确认
+                   @endif
+                </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
@@ -22,7 +28,11 @@
                         <div class="col-sm-10">
                             <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
                             <span class="help-block m-b-none">
-                              <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
+                               @if($status == '1')
+                                    <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
+                                @else
+                                    <p class="text-danger">解冻了粉丝，粉丝能继续在店里消费。粉丝去其他联盟商家里消费有提成</p>
+                                @endif
                           </span>
                         </div>
                     </div>
