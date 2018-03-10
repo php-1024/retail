@@ -248,7 +248,9 @@
                                     <div class="tab-pane fade in" id="option">
                                         <button type="button" class="addBtn btn btn-info">添加规格&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        @include('Branch/Goods/goods_spec')
+                                        <div id="spec_content">
+                                            @include('Branch/Goods/goods_spec')
+                                        </div>
                                         <table class="table table-bordered table-stripped">
                                             <thead>
                                             <tr>
