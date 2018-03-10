@@ -27,7 +27,6 @@
 <script>
     //弹出子规格添加页面
     function addSpecItem(spec_id,goods_id) {
-        console.log(goods_id);
         var url = $('#spec_item_add').val();
         var token = $('#_token').val();
         if(spec_id==''  || goods_id==''){
