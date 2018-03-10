@@ -279,7 +279,9 @@ class UserController extends Controller{
 
         $store_id = $admin_data['organization_id'];//组织id
         $list = StoreUserLog::getPaginage([['store_id',$store_id]],'5','id');
-        dump($list);
+        foreach($list as $key=>$value){
+            dump($value);
+        }
         return view('Catering/User/user_timeline',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
