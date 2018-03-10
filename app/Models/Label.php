@@ -25,10 +25,10 @@ class Label extends Model{
     //添加会员标签
     public static function addMemberLabel($param){
         $model = new Label();
-        $model->organization_id = $param['organization_id'];//组织ID
-        $model->member_name = $param['label_name'];//组织ID
-        $model->parent_id = $param['parent_id'];//上级id
-        $model->member_number = $param['label_number'];//粉丝数量
+        $model->store_id = $param['store_id'];//总店ID
+        $model->branch_id = $param['branch_id'];//分店id
+        $model->label_name = $param['label_name'];//标签名称
+        $model->label_number = $param['label_number'];//标签粉丝数量
         $model->save();
         return $model->id;
     }
