@@ -68,11 +68,11 @@
 <script>
     //弹出子规格添加
     function addSpecItem(spec_id) {
-        $('#myModal_SpecItem').modal();
-        alert(spec_id);
+        $('#myModal_SpecItem').modal(spec_id);
     }
     //添加子规格提交
-    function spec_item_add() {
+    function spec_item_add(spec_id) {
+        alert(spec_id);
         var target = $("#spec_item_add");
         var url = target.attr("action");
         var token = $('#_token').val();
