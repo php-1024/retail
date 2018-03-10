@@ -159,8 +159,8 @@ class ToolingCheckAjax {
                 break;
 
             //检测修改菜单排序数据是否合法
-            case "tooling/ajax/menu_edit_sort":
-                $re = $this->checkLoginAndMenuEditSort($request);
+            case "tooling/ajax/menu_edit_displayorder":
+                $re = $this->checkLoginAndMenuEditDisplayorder($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -242,12 +242,12 @@ class ToolingCheckAjax {
     }
 
     //修改程序菜单排序，检测是否登录，输入数据是否正确
-    public function checkLoginAndMenuEditSort($request){
+    public function checkLoginAndMenuEditDisplayorder($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkMenuEditSort($re['response']);//判断修改密码提交数据
+            $re2 = $this->checkMenuEditDisplayorder($re['response']);//判断修改密码提交数据
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -563,17 +563,17 @@ class ToolingCheckAjax {
 
     /**********************单项检测************************/
     //检测修改程序菜单数据提交
-    public function checkMenuEditSort($request){
+    public function checkMenuEditDisplayorder($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
         }
         if(empty($request->input('program_id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
         }
-        if($request->input('sort')==''){
+        if($request->input('displayorder')==''){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
         }
-        if(!is_numeric($request->input('sort'))){
+        if(!is_numeric($request->input('displayorder'))){
             return self::res(0,response()->json(['data' => '请输入数字', 'status' => '0']));
         }
         return self::res(1,$request);

@@ -21,7 +21,7 @@ class ProgramMenu extends Model{
 
     //获取子菜单列表
     public static function son_menu($id){
-        return self::getList([['parent_id',$id]],0,'sort','asc');
+        return self::getList([['parent_id',$id]],0,'displayorder','asc');
     }
 
     //获取列表
