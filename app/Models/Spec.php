@@ -20,7 +20,7 @@ class Spec extends Model{
 
     //和创建者Spec表多对一的关系
     public function spec(){
-        return $this->belongsto('App\Models\Spec','goods_id');
+        return $this->belongsto('App\Models\Spec','spec_id');
     }
 
     //获取单条餐饮商品信息
