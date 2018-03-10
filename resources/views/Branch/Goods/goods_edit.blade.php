@@ -487,7 +487,7 @@
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form method="post" class="form-horizontal"  role="form" id="addspecForm" action="{{ url('branch/ajax/goods_spec_check') }}">
+    <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_add_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -515,7 +515,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" onclick="addspec()">确定</button>
+                    <button class="btn btn-success" type="button" onclick="spec_add()">确定</button>
                 </div>
             </div>
         </div>
@@ -686,8 +686,8 @@
     }
 
     //添加规格类提交
-    function addspec() {
-        var target = $("#addspecForm");
+    function spec_add() {
+        var target = $("#spec_add");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
