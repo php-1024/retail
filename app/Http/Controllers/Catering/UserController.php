@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
-use App\Models\MemberLabel;
+use App\Models\Label;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\StoreUser;
@@ -21,8 +21,7 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $admin_data['organization_id'];//组织id
-
-        $list = MemberLabel::getPaginage([['organization_id',$organization_id]],'10','id');
+        $list = Label::getPaginage([['store_id',$organization_id]],'10','id');
         return view('Catering/User/user_tag',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //添加会员标签ajax显示页面
