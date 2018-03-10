@@ -20,8 +20,9 @@ class UserController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $organization_id = $admin_data['organization_id'];//组织id
-        $list = Label::getPaginage([['store_id',$organization_id]],'10','id');
+        $store_id = $admin_data['organization_id'];//组织id
+        $list = Label::getPaginage([['store_id',$store_id]],'10','id');
+
         return view('Catering/User/user_tag',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //添加会员标签ajax显示页面
@@ -34,25 +35,25 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $member_name = $request->member_name; //会员标签名称
-        $organization_id = $admin_data['organization_id'];//组织id
+        $label_name = $request->label_name; //会员标签名称
+        $store_id = $admin_data['organization_id'];//组织id
 
-        $re = MemberLabel::checkRowExists([['organization_id',$organization_id],['member_name',$member_name]]);
+        $re = Label::checkRowExists([['store_id',$store_id],['label_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
 
         DB::beginTransaction();
         try {
-            $data = [
-                'member_name'=>$member_name,
-                'organization_id'=>$organization_id,
-                'parent_id'=>0,
-                'member_number'=>0,
+            $dataLabel = [
+                'store_id'=>$store_id,
+                'branch_id'=>0,
+                'label_name'=>$label_name,
+                'label_number'=>0,
             ];
-            MemberLabel::addMemberLabel($data);
+           Label::addMemberLabel($dataLabel);
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建会员标签成功：'.$member_name);//保存操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建会员标签成功：'.$label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {

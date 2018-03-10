@@ -1,5 +1,5 @@
 
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/member_label_add_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/label_add_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="标签名称" class="form-control" name="member_name">
+                            <input type="text" value="" placeholder="标签名称" class="form-control" name="label_name">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
