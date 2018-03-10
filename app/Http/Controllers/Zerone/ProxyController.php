@@ -14,6 +14,7 @@ use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
+use App\Models\Module;
 use Illuminate\Support\Facades\DB;
 use Session;
 class ProxyController extends Controller{
@@ -25,8 +26,6 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
 
-        $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
-        dump($module_node_list);
         return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
