@@ -197,7 +197,7 @@ class UserController extends Controller{
         $mobile = $request->mobile;//手机号
         $user_id = $request->user_id;//用户id
         $nickname = $request->nickname;//微信昵称
-        $re = StoreUser::checkRowExists([['mobile',$mobile]]);
+        $re = StoreUser::checkRowExists([['mobile',$mobile],['user_id',$user_id]]);
         if($re == 'true'){
             return response()->json(['data' => '手机号已存在', 'status' => '0']);
         }
