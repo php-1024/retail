@@ -11,6 +11,7 @@ use App\Models\CateringCategory;
 use App\Models\CateringGoods;
 use App\Models\OperationLog;
 use App\Models\Spec;
+use App\Models\SpecItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -179,41 +180,40 @@ class GoodsController extends Controller
     //子规格添加弹窗
     public function spec_item_add(Request $request)
     {
-        $spec_id = $request->input('id');
+        $spec_id = $request->input('spec_id');
         return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id]);
     }
 
     //子规格添加
     public function spec_item_add_check(Request $request)
     {
-        dd($request);
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
-        $spec_name = $request->get('spec_name');            //获取规格类名称
-        $goods_id = $request->get('goods_id');              //获取商品ID
-        if (empty($spec_name)){
-            return response()->json(['data' => '请输入规格类名称！', 'status' => '0']);
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $spec_item_name = $request->get('spec_item_name');  //获取子规格类名称
+        $spec_id = $request->get('spec_id');                //获取商品ID
+        if (empty($spec_item_name)){
+            return response()->json(['data' => '请输入子规格类名称！', 'status' => '0']);
         }
-        $spec_data = [
-            'name' => $spec_name,
-            'goods_id' => $goods_id,
+        $spec_item_data = [
+            'name' => $spec_item_name,
+            'spec_id' => $spec_id,
         ];
         DB::beginTransaction();
         try {
-            $spec_id = Spec::addSpec($spec_data);
+            $spec_id = SpecItem::addSpecItem($spec_item_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品规格！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品子规格！');//保存操作记录
             } else {//分店本人操作记录
-                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加商品规格！');//保存操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品子规格！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加规格类失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '添加子规格失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加规格类信息成功', 'status' => '1', 'spec_id' => $spec_id]);
+        return response()->json(['data' => '添加子规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
 
     }
 

@@ -1,6 +1,7 @@
 @foreach($spec as $key=>$val)
-<form method="post" class="form-horizontal"  role="form" id="spec_item_add" action="{{ url('branch/ajax/spec_item_add') }}">
-    <input type="hidden" name="_token" value="{{csrf_token()}}">
+<form method="get" role="form" id="searchForm" action="">
+    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
         <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
@@ -30,15 +31,12 @@
     <div class="line line-dashed b-b line-lg pull-in"></div>
 </form>
 @endforeach
-<div class="modal fade" id="myModal_SpecItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <script>
     //弹出子规格添加页面
     function addSpecItem(spec_id) {
-//        $('#myModal_SpecItem').modal();
-        var target = $("#spec_item_add");
-        var url = target.attr("action");
+        var url = $('#spec_item_add').val();
         var token = $('#_token').val();
-        var data = {'id':spec_id,'_token':token};
         if(spec_id==''){
             swal({
                 title: "提示信息",
@@ -50,6 +48,8 @@
             });
             return;
         }
+        var data = {'spec_id':spec_id,'_token':token};
+        console.log(data);
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
@@ -62,8 +62,8 @@
                 });
                 return;
             }else{
-                $('#myModal_SpecItem').html(response);
-                $('#myModal_SpecItem').modal();
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }

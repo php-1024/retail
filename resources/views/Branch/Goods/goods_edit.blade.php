@@ -249,7 +249,9 @@
                                         <button type="button" class="btn btn-info" onclick="addSpec()">添加规格&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div id="spec_content">
+                                            {{--规格列表--}}
                                             @include('Branch/Goods/goods_spec')
+                                            {{--规格列表--}}
                                         </div>
                                         <table class="table table-bordered table-stripped">
                                             <thead>
@@ -429,7 +431,7 @@
 
 
 
-
+{{--添加规格类--}}
 <div class="modal fade" id="myModal_Spec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_add_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -466,7 +468,7 @@
         </div>
     </form>
 </div>
-
+{{--添加规格类--}}
 
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
