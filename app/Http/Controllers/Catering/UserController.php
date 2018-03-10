@@ -80,16 +80,16 @@ class UserController extends Controller{
         $store_id = $admin_data['organization_id'];//组织id
 
         $id = $request->id; //会员标签id
-        $laber_name = $request->laber_name; //会员标签名称
-        $re = Label::checkRowExists([['store_id',$store_id],['laber_name',$laber_name]]);
+        $label_name = $request->label_name; //会员标签名称
+        $re = Label::checkRowExists([['store_id',$store_id],['laber_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
-            Label::editLabel(['id'=>$id],['laber_name'=>$laber_name]);
+            Label::editLabel(['id'=>$id],['label_name'=>$label_name]);
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$laber_name);//保存操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
