@@ -18,12 +18,17 @@ class User extends Model{
     {
         return $this->hasOne('App\Models\StoreUser','user_id','id');
     }
+    //和账号多对多的关系
+    public function UserInfo()
+    {
+        return $this->hasOne('App\Models\UserInfo','user_id','id');
+    }
 
 
     //简易型查询单条数据关联查询
-    public static function getOne($where)
+    public static function getOneUser($where)
     {
-        return self::where($where)->first();
+        return self::where($where)->with('UserInfo')->first();
     }
 
 
