@@ -212,6 +212,7 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 ProgramMenu::addMenu(['program_id'=>$program_id,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'menu_name'=>$menu_name,'is_root'=>$is_root,'icon_class'=>$icon_class,'menu_route'=>$menu_route,'menu_routes_bind'=>$menu_routes_bind]);
+                ProgramMenu::refreshMenuCache($program_id);
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'添加了菜单'.$menu_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
@@ -254,6 +255,7 @@ class ProgramController extends Controller{
             DB::beginTransaction();
             try{
                 ProgramMenu::editMenu([['id',$id]],['program_id'=>$program_id,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'menu_name'=>$menu_name,'is_root'=>$is_root,'icon_class'=>$icon_class,'menu_route'=>$menu_route,'menu_routes_bind'=>$menu_routes_bind]);
+                ProgramMenu::refreshMenuCache($program_id);
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了菜单'.$menu_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
@@ -275,6 +277,7 @@ class ProgramController extends Controller{
         DB::beginTransaction();
         try{
             ProgramMenu::editMenu([['id',$id]],['sort'=>$sort]);
+            ProgramMenu::refreshMenuCache($program_id);
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info[0].'的菜单排序');//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
@@ -283,6 +286,42 @@ class ProgramController extends Controller{
         }
         return response()->json(['data' => '修改菜单排序成功', 'status' => '1']);
 
+    }
+    //软删除模块
+    public function menu_delete(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        $menu_info = ProgramMenu::getOne([['id',$id]]);
+        DB::beginTransaction();
+        try{
+            ProgramMenu::deleteMenu([['id',$id]]);
+            ProgramMenu::refreshMenuCache($menu_info['program_id']);
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了菜单，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除菜单失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除菜单成功', 'status' => '1']);
+    }
+    //软删除模块
+    public function menu_remove(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');//提交上来的ID
+        $menu_info = ProgramMenu::getOne([['id',$id]]);
+        DB::beginTransaction();
+        try{
+            ProgramMenu::removeMenu([['id',$id]]);
+            ProgramMenu::refreshMenuCache($menu_info['program_id']);
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'彻底删除了菜单，ID为：'.$id);//保存操作记录
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '彻底删除菜单失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '彻底删除菜单成功', 'status' => '1']);
     }
     //添加程序套餐
     public function package_add(Request $request){
@@ -405,38 +444,6 @@ class ProgramController extends Controller{
             return response()->json(['data' => '强制删除套餐失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '强制删除套餐成功', 'status' => '1']);
-    }
-    //软删除模块
-    public function menu_delete(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//提交上来的ID
-        DB::beginTransaction();
-        try{
-            ProgramMenu::deleteMenu([['id',$id]]);
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'删除了菜单，ID为：'.$id);//保存操作记录
-            DB::commit();//提交事务
-        }catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '删除菜单失败，请检查', 'status' => '0']);
-        }
-        return response()->json(['data' => '删除菜单成功', 'status' => '1']);
-    }
-    //软删除模块
-    public function menu_remove(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//提交上来的ID
-        DB::beginTransaction();
-        try{
-            ProgramMenu::removeMenu([['id',$id]]);
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'彻底删除了菜单，ID为：'.$id);//保存操作记录
-            DB::commit();//提交事务
-        }catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '彻底删除菜单失败，请检查', 'status' => '0']);
-        }
-        return response()->json(['data' => '彻底删除菜单成功', 'status' => '1']);
     }
 
     //软删除程序
