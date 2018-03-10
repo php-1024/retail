@@ -263,6 +263,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <th>
                                             <tr>
                                                 <td rowspan="4">米饭</td>
                                             </tr>
@@ -298,6 +299,7 @@
                                                     100.00
                                                 </td>
                                             </tr>
+                                            </th>
                                             <tr>
                                                 <td rowspan="5">
                                                     面
