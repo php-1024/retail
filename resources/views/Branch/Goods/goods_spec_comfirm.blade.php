@@ -69,7 +69,6 @@
                             return;
                         }else{
                             $('#spec_content').html(response);
-                            $('#spec_content').modal();
                         }
                     });
 
