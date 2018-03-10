@@ -191,7 +191,8 @@ class GoodsController extends Controller
     public function spec_item_add(Request $request)
     {
         $spec_id = $request->input('spec_id');
-        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id]);
+        $goods_id = $request->input('goods_id');
+        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
     }
 
     //子规格添加
