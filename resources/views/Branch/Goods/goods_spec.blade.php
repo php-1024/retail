@@ -1,6 +1,6 @@
 @foreach($spec as $key=>$val)
     <div class="m-t">
-        <label class="label label-primary">主食</label>
+        <label class="label label-primary">{{$val->name}}</label>
         <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
         <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
     </div>
