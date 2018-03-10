@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">用户账号</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$data['account']}}" placeholder="标签名称" class="form-control" disabled="">
+                            <input type="text" value="{{$data['account']}}" placeholder="标签名称" class="form-control" disabled="" name="account">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="QQ号码" class="form-control" name="mobile">
+                            <input type="text" value="" placeholder="手机号码" class="form-control" name="mobile">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">QQ号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="手机号码" class="form-control" name="qq">
+                            <input type="text" value="" placeholder="QQ号码" class="form-control" name="qq">
                         </div>
                     </div>
 
