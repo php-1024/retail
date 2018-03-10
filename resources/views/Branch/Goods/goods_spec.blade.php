@@ -29,7 +29,7 @@
 @endforeach
 
 <div class="modal fade" id="myModal_SpecItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_item_add_check') }}">
+    <form method="post" class="form-horizontal"  role="form" id="spec_item_add" action="{{ url('branch/ajax/spec_item_add_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
@@ -72,7 +72,7 @@
     }
     //添加子规格提交
     function spec_item_add() {
-        var target = $("#spec_add");
+        var target = $("#spec_item_add");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
