@@ -30,7 +30,7 @@
     <div class="line line-dashed b-b line-lg pull-in"></div>
 </form>
 @endforeach
-
+<div class="modal fade" id="myModal_SpecItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <script>
     //弹出子规格添加页面
     function addSpecItem(spec_id) {
@@ -39,7 +39,6 @@
         var url = target.attr("action");
         var token = $('#_token').val();
         var data = {'id':spec_id,'_token':token};
-        alert(spec_id);
         if(spec_id==''){
             swal({
                 title: "提示信息",
@@ -63,8 +62,8 @@
                 });
                 return;
             }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
+                $('#myModal_SpecItem').html(response);
+                $('#myModal_SpecItem').modal();
             }
         });
     }
