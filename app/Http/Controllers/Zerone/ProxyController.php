@@ -26,6 +26,7 @@ class ProxyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
         $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
+        dump($module_node_list);
         foreach($module_node_list->program_nodes as $key=>$val){
            dump($val);
         }
