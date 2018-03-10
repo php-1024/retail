@@ -33,15 +33,6 @@
 @endforeach
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <script>
-    $(function(){
-
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
     //弹出子规格添加页面
     function addSpecItem(spec_id) {
         var url = $('#spec_item_add').val();
