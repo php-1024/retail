@@ -193,6 +193,7 @@ class GoodsController extends Controller
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         $spec_id = $request->input('spec_id');
+        dump($request);
         return view('Branch/Goods/goods_spec', ['spec_id'=>$spec_id,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
