@@ -203,8 +203,8 @@ class UserController extends Controller{
         }
         DB::beginTransaction();
         try {
-            User::editUser(['id'=>$user_id],['mobile'=>$mobile,]);
-            StoreUser::editStoreUser(['user_id'=>$user_id],['qq'=>$qq]);
+            StoreUser::editStoreUser(['id'=>$user_id],['mobile'=>$mobile,]);
+            UserInfo::editUserInfo(['user_id'=>$user_id],['qq'=>$qq]);
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
             }
