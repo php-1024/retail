@@ -101,24 +101,24 @@ class UserController extends Controller{
     }
 
     //删除会员标签ajax显示页面
-    public function member_label_delete(Request $request){
+    public function abel_delete(Request $request){
         $id = $request->id; //会员标签id
-        $oneMemb = MemberLabel::getOneMemberLabel([['id',$id]]);
-        return view('Catering/User/member_label_delete',['oneMemb'=>$oneMemb]);
+        $oneLabel = Label::getOneLabel([['id',$id]]);
+        return view('Catering/User/label_delete',['oneLabel'=>$oneLabel]);
     }
     //删除会员标签ajax显示页面
-    public function member_label_delete_check(Request $request){
+    public function label_delete_check(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
         $id = $request->id; //会员标签id
-        $member_name = $request->member_name; //会员标签名称
+        $label_name = $request->label_name; //会员标签名称
         DB::beginTransaction();
         try {
-            MemberLabel::where('id',$id)->forceDelete();
+            Label::where('id',$id)->forceDelete();
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$member_name);//保存操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
