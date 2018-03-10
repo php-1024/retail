@@ -684,7 +684,7 @@
     function addSpecItem(spec_id,goods_id) {
         var url = $('#spec_item_add').val();
         var token = $('#_token').val();
-        if(spec_id==''){
+        if(spec_id==''  || goods_id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
