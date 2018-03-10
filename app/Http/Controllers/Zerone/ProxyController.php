@@ -24,6 +24,9 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
+
+        $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
+        dump($module_node_list);
         return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
@@ -64,7 +67,7 @@ class ProxyController extends Controller{
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
             foreach($module_node_list as $key=>$val){
                 AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val['node_id']]);
             }
