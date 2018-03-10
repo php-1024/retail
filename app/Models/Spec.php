@@ -18,6 +18,11 @@ class Spec extends Model{
         return $this->belongsto('App\Models\CateringGoods','goods_id');
     }
 
+    //和创建者Spec表多对一的关系
+    public function spec(){
+        return $this->belongsto('App\Models\Spec','goods_id');
+    }
+
     //获取单条餐饮商品信息
     public static function getOne($where){
         return self::with('CateringGoods')->where($where)->first();
@@ -29,7 +34,7 @@ class Spec extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('spec')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加餐饮商品
