@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$userInfo['mobile']}}" placeholder="手机号码" class="form-control" name="mobile">
+                            <input type="text" value="{{$data['mobile']}}" placeholder="手机号码" class="form-control" name="mobile">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
