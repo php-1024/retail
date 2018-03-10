@@ -1,6 +1,6 @@
  <form method="post" class="form-horizontal"  role="form" id="spec_item_add_check" action="{{ url('branch/ajax/spec_item_add_check') }}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     {{--<input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">--}}
+     <input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">
      <input type="hidden" name="spec_id" value="{{$spec_id}}">
      <div class="modal-dialog">
             <div class="modal-content">
@@ -28,14 +28,14 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" onclick="spec_item_add()">确定</button>
+                    <button class="btn btn-success" type="button" onclick="spec_item_add_check()">确定</button>
                 </div>
             </div>
         </div>
     </form>
 <script>
     //添加子规格提交
-    function spec_item_add() {
+    function spec_item_add_check() {
         var target = $("#spec_item_add_check");
         var url = target.attr("action");
         var data = target.serialize();
