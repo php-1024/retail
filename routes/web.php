@@ -616,8 +616,8 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
         Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheckAjax');                //编辑会员标签功能提交
         Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheckAjax');    //编辑会员标签功能提交
-        Route::post('member_label_delete','Catering\UserController@member_label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
-        Route::post('member_label_delete_check','Catering\UserController@member_label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
+        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
+        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
 
         Route::post('store_member_add_check','Catering\UserController@store_member_add_check')->middleware('CateringCheckAjax');      //粉丝会员标签功能提交
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                      //列表编辑ajax显示
