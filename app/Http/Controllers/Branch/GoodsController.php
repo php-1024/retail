@@ -149,6 +149,7 @@ class GoodsController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $spec_name = $request->get('spec_name');            //获取规格类名称
         $goods_id = $request->get('goods_id');              //获取商品ID
+        dd($goods_id);
         if (empty($spec_name)){
             return response()->json(['data' => '请输入规格类名称！', 'status' => '0']);
         }
@@ -169,9 +170,9 @@ class GoodsController extends Controller
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '添加规格类失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1', 'spec_id' => $spec_id]);
+        return response()->json(['data' => '添加规格类信息成功', 'status' => '1', 'spec_id' => $spec_id]);
 
     }
 
