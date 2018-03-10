@@ -470,6 +470,10 @@
 </div>
 {{--添加规格类--}}
 
+{{--添加子规格--}}
+<div class="modal fade" id="myModal_Spec_Item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+{{--添加子规格--}}
+
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
         <div class="modal-dialog">
