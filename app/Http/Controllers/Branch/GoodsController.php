@@ -186,13 +186,12 @@ class GoodsController extends Controller
     //子规格添加
     public function spec_item_add_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $spec_item_name = $request->get('spec_item_name');  //获取子规格类名称
         $spec_id = $request->get('spec_id');                //获取商品ID
         if (empty($spec_item_name)){
-            return response()->json(['data' => '请输入规格类名称！', 'status' => '0']);
+            return response()->json(['data' => '请输入子规格类名称！', 'status' => '0']);
         }
         $spec_item_data = [
             'name' => $spec_item_name,
