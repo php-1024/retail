@@ -73,8 +73,8 @@
                                     @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td>{{$value->member_name}}</td>
-                                        <td>{{$value->member_number}}</td>
+                                        <td>{{$value->label_name}}</td>
+                                        <td>{{$value->label_number}}</td>
                                         <td>{{$value->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm('{{$value->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
