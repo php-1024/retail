@@ -489,6 +489,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_add_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
