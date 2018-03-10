@@ -40,43 +40,44 @@
         var url = target.attr("action");
         var data = target.serialize();
         var token = $('#_token').val();
-        $.post(url, data, function (response) {
-            if (response.status == -1) {
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
                 window.location.reload();
-            } else if(response.status == 1) {
+            } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
-                    text: response.data,
+                    text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(response){
+                },function(json){
                     //规格添加成功后异步刷新规格部分
 //                    alert('添加子规格类成功！');
 //                    $('#spec_content').html(json);
 //                    $('#spec_content').modal();
 //                    window.location.reload();
 
-                    $.post(url,data,function(response){
-                        if(response.status=='-1'){
-                            swal({
-                                title: "提示信息",
-                                text: response.data,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "确定",
-                            },function(){
-                                window.location.reload();
-                            });
-                            return;
-                        }else{
-                            $('#spec_content').html(response);
+                    $.ajax({
+                        url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
+                        data:{//这是参数
+                            _token:token,
+                            name:'iszmxw',
+                        },
+                        type:'post',//提交方式
+                        success:function(data){//后台处理数据成功后的回调函数
+                            alert('ok');
+                            $("#spec_content").html(data);
+                        },
+                        error:function(data){//后台处理数据失败后的回调函数
+                            alert('error');
+                            //   alert(data)
                         }
-                    });
+                    })
 
                 });
             }else{
                 swal({
                     title: "提示信息",
-                    text: response.data,
+                    text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 });
