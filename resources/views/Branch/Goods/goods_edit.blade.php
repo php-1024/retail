@@ -487,7 +487,8 @@
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
+    <form method="post" class="form-horizontal"  role="form" id="addspecForm" action="{{ url('branch/ajax/goods_spec_check') }}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -499,14 +500,14 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">规格名称</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
+                                <input type="text" class="form-control" name="spec_name" value="">
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
+                                <input type="text" class="form-control" name="safe_password" value="">
                             </div>
                         </div>
 
@@ -514,7 +515,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
+                    <button class="btn btn-success" type="button" onclick="addspec()">确定</button>
                 </div>
             </div>
         </div>
@@ -671,6 +672,36 @@
                     confirmButtonText: "确定",
                 },function(){
                     window.location.href = "{{asset("branch/goods/goods_list")}}";
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
+
+    //添加规格类提交
+    function addspec() {
+        var target = $("#addspecForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    alert('添加规格类成功！');
+                    {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
                 });
             }else{
                 swal({
