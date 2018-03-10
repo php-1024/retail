@@ -256,46 +256,25 @@
                                         <table class="table table-bordered table-stripped">
                                             <thead>
                                             <tr>
-                                                <th>
-                                                    主食
-                                                </th>
-                                                <th>
-                                                    味道
-                                                </th>
-                                                <th>
-                                                    库存
-                                                </th>
-                                                <th>
-                                                    价格
-                                                </th>
+                                                <th>主食</th>
+                                                <th>味道</th>
+                                                <th>库存</th>
+                                                <th>价格</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td rowspan="4">
-                                                    米饭
-                                                </td>
-                                                <td>
-                                                    甜
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    100.00
-                                                </td>
-
+                                                <td rowspan="4">米饭</td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    酸
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    100.00
-                                                </td>
+                                                <td>甜</td>
+                                                <td>999</td>
+                                                <td>100.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>酸</td>
+                                                <td>999
+                                                </td><td>100.00</td>
                                             </tr>
                                             <tr>
                                                 <td>
