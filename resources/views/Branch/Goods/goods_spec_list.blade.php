@@ -41,6 +41,7 @@
             return;
         }
         var data = {'spec_id':spec_id,'goods_id':goods_id,'_token':token};
+        console.log(data);
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
