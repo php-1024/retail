@@ -250,7 +250,7 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div id="spec_content">
                                             {{--规格列表--}}
-                                            @include('Branch/Goods/goods_spec')
+                                            @include('Branch/Goods/goods_spec_list')
                                             {{--规格列表--}}
                                         </div>
                                         <table class="table table-bordered table-stripped">
