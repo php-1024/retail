@@ -27,6 +27,7 @@ class BranchCheckAjax{
             case "branch/ajax/subordinate_authorize": //编辑——授权下属人员
             case "branch/ajax/subordinate_lock":      //冻结下属页面
             case "branch/ajax/selected_rule":         //编辑——授权下属人员
+            case "branch/ajax/spec_item_add":         //子规格添加弹窗页面
             case "branch/ajax/upload_thumb_check":    //上传图片
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);

@@ -176,6 +176,12 @@ class GoodsController extends Controller
         return response()->json(['data' => '添加规格类信息成功', 'status' => '1', 'spec_id' => $spec_id]);
     }
 
+    //子规格添加弹窗
+    public function spec_item_add(Request $request)
+    {
+
+    }
+
     //子规格添加
     public function spec_item_add_check(Request $request)
     {
