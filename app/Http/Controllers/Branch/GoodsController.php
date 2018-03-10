@@ -94,7 +94,10 @@ class GoodsController extends Controller
         $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        dump($goods);
+        dump($category);
+        dump($spec);
+//        return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //编辑商品操作
