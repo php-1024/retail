@@ -172,7 +172,7 @@ class UserController extends Controller{
         $organization_id = $admin_data['organization_id'];//组织id
 
         $user_id = $request->id;//会员标签id
-        $data['nickname'] =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
+        $userInfo =  UserInfo::getOneUserInfo([['user_id',$user_id]]);//微信昵称
         $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
         $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
         if($yauntou == $organization_id){
@@ -183,7 +183,7 @@ class UserController extends Controller{
             $list =  User::getOneUser([['id',$recommender_id]]);
             $data['recommender_name'] = $list->UserInfo->nickname;
         }
-        return view('Catering/User/user_list_edit',['data'=>$data,'user_id'=>$user_id]);
+        return view('Catering/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
 
     }
     //粉丝用户管理编辑功能提交

@@ -1,6 +1,6 @@
 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/user_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="user_id" value="{{$user_id}}">
+    <input type="hidden" name="user_id" value="{{$userInfo->user_id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">QQ号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="QQ号码" class="form-control" name="qq">
+                            <input type="text" value="{{$userInfo->qq}}" placeholder="QQ号码" class="form-control" name="qq">
                         </div>
                     </div>
 
