@@ -64,9 +64,11 @@
                         },
                         type:'post',//提交方式
                         success:function(data){//后台处理数据成功后的回调函数
+                            alert('ok');
                             $("#spec_content").html(data);
                         },
                         error:function(data){//后台处理数据失败后的回调函数
+                            alert('error');
                             //   alert(data)
                         }
                     })
