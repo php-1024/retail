@@ -20,7 +20,7 @@ class Spec extends Model{
 
     //和创建者spec_item表一对多的关系
     public function spec_item(){
-        return $this->hasOne('App\Models\SpecItem','spec_id');
+        return $this->hasMany('App\Models\SpecItem','spec_id');
     }
 
     //获取单条餐饮商品信息
@@ -34,7 +34,7 @@ class Spec extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->with('spec_item')->where($where)->orderBy($orderby,$sort)->all();
+        return $model->with('spec_item')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加餐饮商品
