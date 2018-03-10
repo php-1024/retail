@@ -66,7 +66,7 @@
                                         <section class="comment-body panel panel-default">
                                             <header class="panel-heading">
                                                 <a href="#">{{$value->User->account}}</a>
-                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
+                                                <label class="label bg-success m-l-xs">{{$value->nickname}}</label>
                                                 <span class="text-muted m-l-sm pull-right">
                               <i class="fa fa-clock-o"></i>
                               2018-01-29 11:11:11
