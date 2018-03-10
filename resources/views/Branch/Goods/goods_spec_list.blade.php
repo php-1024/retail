@@ -16,7 +16,7 @@
         </div>
         @endforeach
         <div class="m-t col-lg-2">
-            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
+            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}},{{$val->goods_id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
         </div>
     </div>
     <div style="clear: both;"></div>

@@ -181,8 +181,8 @@ class GoodsController extends Controller
     public function goods_spec(Request $request)
     {
         $goods_id = $request->get('goods_id');              //获取当前的页面路由
+        dump($goods_id);
         $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        dump($spec);
         return view('Branch/Goods/goods_spec', ['spec'=>$spec,'admin_data']);
     }
 
