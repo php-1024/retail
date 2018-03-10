@@ -172,21 +172,18 @@ class UserController extends Controller{
         $organization_id = $admin_data['organization_id'];//组织id
 
         $user_id = $request->id;//会员标签id
-        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-        $account =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
+        $data['nickname'] =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
+        $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
         $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
         if($yauntou == $organization_id){
-            $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
-        }else{
-            $store_name = '零壹联盟';
+            $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
         }
         $recommender_id =  UserRecommender::getPluck([['user_id',$user_id]],'recommender_id')->first();//推荐人id
         if(!empty($recommender_id)){
             $list =  User::getOneUser([['id',$recommender_id]]);
-            $recommender_name = $list->UserInfo->nickname;
+            $data['recommender_name'] = $list->UserInfo->nickname;
         }
-        dump($recommender_name);
-        return view('Catering/User/user_list_edit',['user_id'=>$user_id]);
+        return view('Catering/User/user_list_edit',['data'=>$data,'user_id'=>$user_id]);
 
     }
 

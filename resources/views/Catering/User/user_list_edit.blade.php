@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">用户账号</label>
                         <div class="col-sm-10">
-                            <input type="text" value="100020" placeholder="标签名称" class="form-control" disabled="">
+                            <input type="text" value="{{$data['account']}}" placeholder="标签名称" class="form-control" disabled="">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">微信昵称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="时光取名叫无心" placeholder="安全密码" class="form-control" disabled="">
+                            <input type="text" value="{{$data['nickname']}}" placeholder="安全密码" class="form-control" disabled="">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -31,8 +31,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">源头</label>
                         <div class="col-sm-10">
-                            <label class="label label-success">自有店铺-过桥米线</label>
-                            <label class="label label-primary">联盟商户-刘记鸡煲王</label>
+                            @if(!empty($data['store_name']))
+                                <label class="label label-success">自有店铺-{{$data['store_name']}}</label>
+                            @else
+                                <label class="label label-primary">联盟商户</label>
+                            @endif
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -41,8 +44,12 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">推荐人</label>
                         <div class="col-sm-10">
-                            <label class="label label-success">自行关注</label>
-                            <label class="label label-primary">联盟用户-张老三</label>
+                            @if(empty($data['recommender_name']))
+                                <label class="label label-success">自行关注</label>
+                            @else
+                                <label class="label label-primary">联盟用户-{{$data['recommender_name']}}</label>
+                            @endif
+
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -51,7 +58,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="QQ号码" class="form-control">
+                            <input type="text" value="" placeholder="QQ号码" class="form-control" name="mobile">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -60,7 +67,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">QQ号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="手机号码" class="form-control">
+                            <input type="text" value="" placeholder="手机号码" class="form-control" name="qq">
                         </div>
                     </div>
 
