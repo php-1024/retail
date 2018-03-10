@@ -238,7 +238,7 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    //添加会员标签
+    //冻结粉丝
     function getlockForm(id){
         var url = $('#user_list_lock').val();
         var token = $('#_token').val();
