@@ -20,7 +20,7 @@ class Spec extends Model{
 
     //和创建者spec_item表一对多的关系
     public function spec_item(){
-        return $this->hasOne('App\Models\SpecItem','spec_id');
+        return $this->hasMany('App\Models\SpecItem','spec_id');
     }
 
     //获取单条餐饮商品信息
