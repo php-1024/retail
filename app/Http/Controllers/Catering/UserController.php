@@ -221,9 +221,10 @@ class UserController extends Controller{
     public function user_list_lock(Request $request){
 
         $user_id = $request->id;//会员标签id
+        $status = $request->status;//冻结或者解锁
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
 
-        return view('Catering/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname]);
+        return view('Catering/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
 
     }
     //粉丝用户管理冻结功能提交
