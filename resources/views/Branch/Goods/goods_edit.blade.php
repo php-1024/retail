@@ -52,10 +52,11 @@
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/goods_edit_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <input type="hidden" name="goods_id" value="{{$goods->id}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
-                                                    <select name="account" class="form-control m-b">
+                                                    <select name="category_id" class="form-control m-b">
                                                         <option value ="0">请选择</option>
                                                         @foreach($category as $key=>$val)
                                                             <option value ="{{$val->id}}" @if($val->id == $goods->category->id)selected @endif>{{$val->name}}</option>
@@ -107,7 +108,7 @@
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <div class="col-sm-12 col-sm-offset-6">
-                                                    <button type="button" class="btn btn-success" onclick="return postForm();">保存信息</button>
+                                                    <button type="button" class="btn btn-success" onclick="return postEditForm();">保存信息</button>
                                                 </div>
                                             </div>
 
@@ -593,12 +594,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
+                    <h4 class="modal-title">上传图片</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
+                            <label class="col-sm-2 text-right">图片信息</label>
                             <div class="col-sm-10">
                                 <input type="file" class="filestyle" style="display: none;" name="upload_thumb" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                             </div>
@@ -652,7 +653,7 @@
     }
 
     //提交表单
-    function postForm() {
+    function postEditForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();

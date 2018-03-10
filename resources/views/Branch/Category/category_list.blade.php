@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>商品分类列表 | 零壹云管理平台 | 商户管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
@@ -23,8 +23,8 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('Branch/Public/Nav')
-            <!-- /.aside -->
+        @include('Branch/Public/Nav')
+        <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
@@ -36,9 +36,15 @@
                                 商品分类列表
                             </header>
                             <div class="row wrapper">
-                                <form class="form-horizontal" method="get">
+                                <form class="form-horizontal" method="get" id="searchForm" action="">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" id="category_edit_url" value="{{ url('branch/ajax/category_edit') }}">
+                                    <input type="hidden" id="category_delete_comfirm_url"
+                                           value="{{ url('branch/ajax/category_delete') }}">
                                     <div class="col-sm-2">
-                                        <button type="button" id="copyBtn" class="btn btn-info"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类</button>
+                                        <button type="button" id="copyBtn" class="btn btn-info"><i
+                                                    class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类
+                                        </button>
                                     </div>
 
                                     <label class="col-sm-1 control-label">分类名称</label>
@@ -48,7 +54,8 @@
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -65,16 +72,20 @@
                                     </thead>
                                     <tbody>
                                     @foreach($category as $key=>$val)
-                                    <tr>
-                                        <td>{{ $val->id }}</td>
-                                        <td>{{ $val->name }}</td>
-                                        <td>{{ $val->displayorder }}</td>
-                                        <td>{{ $val->created_at }}</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $val->id }}</td>
+                                            <td>{{ $val->name }}</td>
+                                            <td>{{ $val->displayorder }}</td>
+                                            <td>{{ $val->created_at }}</td>
+                                            <td>
+                                                <button class="btn btn-info btn-xs"
+                                                        onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
+                                                </button>
+                                                <button class="btn btn-danger btn-xs" id="deleteBtn"><i
+                                                            class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                </button>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -96,47 +107,7 @@
     </section>
 </section>
 
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">分类信息编辑</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">分类名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">分类排序</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
@@ -181,7 +152,8 @@
                         <table class="table table-striped b-t b-light">
                             <thead>
                             <tr>
-                                <th style="width:20px;"><label class="checkbox m-n i-checks"><input type="checkbox"><i></i></label></th>
+                                <th style="width:20px;"><label class="checkbox m-n i-checks"><input
+                                                type="checkbox"><i></i></label></th>
                                 <th>ID</th>
                                 <th>分类名称</th>
                                 <th>分类来源</th>
@@ -190,39 +162,47 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
+                                                                                name="post[]"><i></i></label></td>
                                 <td>1</td>
                                 <td>主食</td>
                                 <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
                                 <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝</button>
+                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
+                                                                                name="post[]"><i></i></label></td>
                                 <td>1</td>
                                 <td>主食</td>
                                 <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
                                 <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝</button>
+                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
+                                                                                name="post[]"><i></i></label></td>
                                 <td>1</td>
                                 <td>主食</td>
                                 <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
                                 <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝</button>
+                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
+                                                                                name="post[]"><i></i></label></td>
                                 <td>1</td>
                                 <td>主食</td>
                                 <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
                                 <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝</button>
+                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -250,42 +230,38 @@
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#copyBtn').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#deleteBtn').click(function(){
-            $('#myModal2').modal();
-        });
-    });
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-//                window.location.reload();
-            } else if(json.status == 1) {
+    //获取用户信息，编辑密码框
+    function getEditForm(id) {
+        var url = $('#category_edit_url').val();
+        var token = $('#_token').val();
+
+        if (id == '') {
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            }, function () {
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id': id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
-                    text: json.data,
+                    text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                return;
+            } else {
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }

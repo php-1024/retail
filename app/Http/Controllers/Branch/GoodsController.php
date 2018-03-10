@@ -63,9 +63,9 @@ class GoodsController extends Controller
             $goods_id = CateringGoods::addCateringGoods($goods_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了栏目分类！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加商品！');//保存操作记录
             } else {//商户本人操作记录
-                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了栏目分类！');//保存操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -92,6 +92,53 @@ class GoodsController extends Controller
         $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
+
+    //编辑商品操作
+    public function goods_edit_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $goods_id = $request->get('goods_id');              //商品ID
+        $category_id = $request->get('category_id');        //栏目ID
+        $name = $request->get('name');                      //商品名称
+        $price = $request->get('price');                    //商品价格
+        $stock = $request->get('stock');                    //商品库存
+        $displayorder = $request->get('displayorder');      //商品排序
+        $details = $request->get('details');                //商品详情
+        if ($category_id == 0) {
+            return response()->json(['data' => '请选择分类！', 'status' => '0']);
+        }
+        $where = [
+            'id' => $goods_id,
+        ];
+        $goods_data = [
+            'program_id' => '5',
+            'organization_id' => $admin_data['organization_id'],
+            'created_by' => $admin_data['id'],
+            'category_id' => $category_id,
+            'name' => $name,
+            'price' => $price,
+            'stock' => $stock,
+            'displayorder' => $displayorder,
+            'details' => $details,
+        ];
+        DB::beginTransaction();
+        try {
+            $goods_id = CateringGoods::editCateringGoods($where,$goods_data);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统编辑了商品！');//保存操作记录
+            } else {//商户本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑商品失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
 
     public function upload_thumb_check(Request $request)

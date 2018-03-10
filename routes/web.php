@@ -620,6 +620,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('member_label_delete_check','Catering\UserController@member_label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
 
         Route::post('store_member_add_check','Catering\UserController@store_member_add_check')->middleware('CateringCheckAjax');      //粉丝会员标签功能提交
+        Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                      //列表编辑ajax显示
 
         //总店管理
         Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
@@ -758,8 +759,11 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('BranchCheckAjax');                  //下属授权检测
 
         Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('BranchCheckAjax');          //栏目添加检测
+        Route::post('category_edit', 'Branch\CategoryController@category_edit')->middleware('BranchCheckAjax');                    //栏目编辑页面
+        Route::post('category_edit_check', 'Branch\CategoryController@category_edit_check')->middleware('BranchCheckAjax');        //栏目编辑检测
         Route::post('goods_add_check', 'Branch\GoodsController@goods_add_check')->middleware('BranchCheckAjax');                   //商品添加检测
-        Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //商品添加检测
+        Route::post('goods_edit_check', 'Branch\GoodsController@goods_edit_check')->middleware('BranchCheckAjax');                 //商品编辑检测
+        Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //上传文件检测
     });
 });
 /**********************餐饮分店系统*********************/
