@@ -10,8 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
 use App\Models\CateringGoods;
 use App\Models\OperationLog;
-use App\Models\Spec;
-use App\Models\SpecItem;
+use App\Models\CateringSpec;
+use App\Models\CateringSpecItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -93,7 +93,7 @@ class GoodsController extends Controller
         ];
         $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
-        $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
@@ -160,7 +160,7 @@ class GoodsController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $spec_id = Spec::addSpec($spec_data);
+            $spec_id = CateringSpec::addCateringSpec($spec_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品规格！');//保存操作记录
@@ -181,7 +181,7 @@ class GoodsController extends Controller
     public function goods_spec(Request $request)
     {
         $goods_id = $request->get('goods_id');              //商品的ID
-        $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
     }
 
@@ -210,7 +210,7 @@ class GoodsController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $spec_id = SpecItem::addSpecItem($spec_item_data);
+            $spec_id = CateringSpecItem::addSpecItem($spec_item_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品子规格！');//保存操作记录
