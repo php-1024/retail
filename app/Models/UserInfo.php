@@ -22,7 +22,7 @@ class UserInfo extends Model{
 
 
     //查询获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    public static function getListUserInfo($where,$limit=0,$orderby,$sort='DESC'){
         $model = self::where($where)->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
@@ -31,7 +31,7 @@ class UserInfo extends Model{
     }
 
     //修改数据
-    public static function editNode($where,$param){
+    public static function editUserInfo($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;

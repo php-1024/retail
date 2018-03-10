@@ -190,21 +190,30 @@ class UserController extends Controller{
     public function user_list_edit_check(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $organization_id = $admin_data['organization_id'];//组织id
+        $route_name = $request->path();//获取当前的页面路由
 
-        $user_id = $request->id;//会员标签id
-        $data['nickname'] =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-        $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
-        $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
-        if($yauntou == $organization_id){
-            $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
+        $qq = $request->qq;//qq号
+        $mobile = $request->mobile;//手机号
+        $user_id = $request->user_id;//用户id
+        $nickname = $request->nickname;//微信昵称
+
+        DB::beginTransaction();
+        try {
+            $dataInfo = [
+                'qq'      =>  $qq,
+                'mobile'  =>  $mobile,
+            ];
+            UserInfo::editUserInfo(['user_id'=>$user_id],$dataInfo);
+            if($admin_data['is_super'] != 2){
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }
-        $recommender_id =  UserRecommender::getPluck([['user_id',$user_id]],'recommender_id')->first();//推荐人id
-        if(!empty($recommender_id)){
-            $list =  User::getOneUser([['id',$recommender_id]]);
-            $data['recommender_name'] = $list->UserInfo->nickname;
-        }
-        return view('Catering/User/user_list_edit',['data'=>$data,'user_id'=>$user_id]);
+        return response()->json(['data' => '修改资料成功！', 'status' => '1']);
 
     }
 
