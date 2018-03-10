@@ -165,8 +165,29 @@ class UserController extends Controller{
 //        }
     }
 
-//粉丝用户管理
+    //粉丝用户管理编辑
     public function user_list_edit(Request $request){
+
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $organization_id = $admin_data['organization_id'];//组织id
+
+        $user_id = $request->id;//会员标签id
+        $data['nickname'] =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
+        $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
+        $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
+        if($yauntou == $organization_id){
+            $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
+        }
+        $recommender_id =  UserRecommender::getPluck([['user_id',$user_id]],'recommender_id')->first();//推荐人id
+        if(!empty($recommender_id)){
+            $list =  User::getOneUser([['id',$recommender_id]]);
+            $data['recommender_name'] = $list->UserInfo->nickname;
+        }
+        return view('Catering/User/user_list_edit',['data'=>$data,'user_id'=>$user_id]);
+
+    }
+    //粉丝用户管理编辑功能提交
+    public function user_list_edit_check(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $admin_data['organization_id'];//组织id
