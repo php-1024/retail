@@ -613,7 +613,7 @@ Route::group(['prefix'=>'catering'],function(){
 
         //用户管理
         Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheckAjax');                  //添加会员标签ajax显示页面
-        Route::post('member_label_add_check','Catering\UserController@member_label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
+        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
         Route::post('member_label_edit','Catering\UserController@member_label_edit')->middleware('CateringCheckAjax');                //编辑会员标签功能提交
         Route::post('member_label_edit_check','Catering\UserController@member_label_edit_check')->middleware('CateringCheckAjax');    //编辑会员标签功能提交
         Route::post('member_label_delete','Catering\UserController@member_label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
