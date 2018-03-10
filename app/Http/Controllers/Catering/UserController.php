@@ -203,12 +203,13 @@ class UserController extends Controller{
                 'qq'      =>  $qq,
                 'mobile'  =>  $mobile,
             ];
-            UserInfo::editUserInfo([['user_id',$user_id]],$dataInfo);
+            UserInfo::editUserInfo(['user_id'=>$user_id],$dataInfo);
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }
