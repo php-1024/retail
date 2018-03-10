@@ -58,7 +58,8 @@
                     $.ajax({
                         url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
                         data:{//这是参数
-                            spec:'{{$spec}}',
+                            id:1,
+                            spec:'11',
                         },
                         type:'post',//提交方式
                         success:function(data){//后台处理数据成功后的回调函数
