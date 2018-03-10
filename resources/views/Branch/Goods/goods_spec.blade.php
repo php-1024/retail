@@ -8,7 +8,7 @@
         <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
     </div>
     <div class="m-t">
-        @foreach($val->spec_item as $k=>$v)
+        @foreach($val->catering_spec_item as $k=>$v)
         <div class="m-t col-lg-2">
             <label class="label label-success">{{$v->name}}</label>
             <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
