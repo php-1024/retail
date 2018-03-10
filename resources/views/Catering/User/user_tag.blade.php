@@ -47,9 +47,9 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="member_label_add" value="{{ url('catering/ajax/member_label_add') }}">
-                                    <input type="hidden" id="member_label_edit" value="{{ url('catering/ajax/member_label_edit') }}">
-                                    <input type="hidden" id="member_label_delete" value="{{ url('catering/ajax/member_label_delete') }}">
+                                    <input type="hidden" id="label_add" value="{{ url('catering/ajax/label_add') }}">
+                                    <input type="hidden" id="label_edit" value="{{ url('catering/ajax/label_edit') }}">
+                                    <input type="hidden" id="label_delete" value="{{ url('catering/ajax/label_delete') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 
                                     <div class="col-sm-12">
@@ -119,7 +119,7 @@
 <script type="text/javascript">
     //添加会员标签
     function getAddForm(){
-        var url = $('#member_label_add').val();
+        var url = $('#label_add').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
@@ -141,7 +141,7 @@
     }
     //编辑会员标签
     function getEditForm(id){
-        var url = $('#member_label_edit').val();
+        var url = $('#label_edit').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id};
         $.post(url,data,function(response){
@@ -163,7 +163,7 @@
     }
     //删除会员标签
     function getDeleteForm(id){
-        var url = $('#member_label_delete').val();
+        var url = $('#label_delete').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id};
         $.post(url,data,function(response){
