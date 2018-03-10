@@ -1,6 +1,8 @@
 @foreach($spec as $key=>$val)
-<form method="post" class="form-horizontal"  role="form" id="spec_item_add" action="{{ url('branch/ajax/spec_item_add') }}">
+<form method="get" role="form" id="searchForm" action="">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" id="role_edit_url" value="{{ url('zerone/ajax/role_edit') }}">
+    <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
         <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
@@ -34,11 +36,8 @@
 <script>
     //弹出子规格添加页面
     function addSpecItem(spec_id) {
-//        $('#myModal_SpecItem').modal();
-        var target = $("#spec_item_add");
-        var url = target.attr("action");
+        var url = $('#spec_item_add').val();
         var token = $('#_token').val();
-        var data = {'id':spec_id,'_token':token};
         if(spec_id==''){
             swal({
                 title: "提示信息",
@@ -50,6 +49,7 @@
             });
             return;
         }
+        var data = {'spec_id':spec_id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
