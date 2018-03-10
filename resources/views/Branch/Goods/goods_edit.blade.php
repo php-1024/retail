@@ -263,11 +263,9 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <th>
+
                                             <tr>
                                                 <td rowspan="4">米饭</td>
-                                            </tr>
-                                            <tr>
                                                 <td>甜</td>
                                                 <td>999</td>
                                                 <td>100.00</td>
@@ -299,7 +297,6 @@
                                                     100.00
                                                 </td>
                                             </tr>
-                                            </th>
                                             <tr>
                                                 <td rowspan="5">
                                                     面
