@@ -50,9 +50,9 @@
                 },function(json){
                     //规格添加成功后异步刷新规格部分
 //                    alert('添加子规格类成功！');
-                    $('#spec_content').html(json);
-                    $('#spec_content').modal();
-                    {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
+//                    $('#spec_content').html(json);
+//                    $('#spec_content').modal();
+                    window.location.reload();
                 });
             }else{
                 swal({
