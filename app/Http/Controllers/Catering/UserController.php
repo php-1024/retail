@@ -182,8 +182,7 @@ class UserController extends Controller{
         }
         $recommender_id =  UserRecommender::getPluck([['user_id',$user_id]],'recommender_id')->first();//推荐人id
         if(!empty($recommender_id)){
-            $list =  User::getOneUser([['id',$user_id]]);
-            dump($list);
+            $list =  User::getOneUser([['id',$recommender_id]]);
             $recommender_name = $list->UserInfo->nickname;
         }
         dump($recommender_name);
