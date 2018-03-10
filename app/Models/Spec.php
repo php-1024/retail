@@ -18,7 +18,7 @@ class Spec extends Model{
         return $this->belongsto('App\Models\CateringGoods','goods_id');
     }
 
-    //和创建者Spec表多对一的关系
+    //和创建者Spec表一对多的关系
     public function spec_item(){
         return $this->hasOne('App\Models\Spec','spec_id');
     }
