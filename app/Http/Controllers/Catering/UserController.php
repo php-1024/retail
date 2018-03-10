@@ -181,9 +181,9 @@ class UserController extends Controller{
             $store_name = '零壹联盟';
         }
         $recommender_id =  UserRecommender::getPluck([['user_id',$user_id]],'recommender_id')->first();//推荐人id
-        dump($recommender_id);
         if(!empty($recommender_id)){
             $list =  User::getOneUser([['id',$user_id]]);
+            dump($list);
             $recommender_name = $list->UserInfo->nickname;
         }
         dump($recommender_name);
