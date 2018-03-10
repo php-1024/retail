@@ -168,7 +168,7 @@ class ProgramController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $info = Program::find($id);
-        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'sort','asc');
+        $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'displayorder','asc');
         $son_menu = [];
         $third_menu = [];
         foreach($list as $key=>$val){
@@ -266,17 +266,17 @@ class ProgramController extends Controller{
         }
     }
     //编辑菜单排序
-    public function menu_edit_sort(Request $request){
+    public function menu_edit_displayorder(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
         $program_id = $request->input('program_id');//所属程序ID
-        $sort = $request->input('sort');
+        $displayorder = $request->input('displayorder');
         
         $program_info = Program::getPluck([['id',$program_id]],'program_name')->toArray();
         DB::beginTransaction();
         try{
-            ProgramMenu::editMenu([['id',$id]],['sort'=>$sort]);
+            ProgramMenu::editMenu([['id',$id]],['displayorder'=>$displayorder]);
             ProgramMenu::refreshMenuCache($program_id);
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info[0].'的菜单排序');//保存操作记录
             DB::commit();//提交事务

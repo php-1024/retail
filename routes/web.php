@@ -159,7 +159,7 @@ Route::group(['prefix'=>'tooling'],function(){
         Route::post('menu_add_check','Tooling\ProgramController@menu_add_check')->middleware('ToolingCheckAjax');//获取添加菜单数据并提交
         Route::post('menu_edit','Tooling\ProgramController@menu_edit')->middleware('ToolingCheckAjax');//获取菜单编辑页面
         Route::post('menu_edit_check','Tooling\ProgramController@menu_edit_check')->middleware('ToolingCheckAjax');//获取编辑菜单数据并提交
-        Route::post('menu_edit_sort','Tooling\ProgramController@menu_edit_sort')->middleware('ToolingCheckAjax');//获取编辑菜单数据并提交
+        Route::post('menu_edit_displayorder','Tooling\ProgramController@menu_edit_displayorder')->middleware('ToolingCheckAjax');//获取编辑菜单数据并提交
 
         Route::post('package_add_check','Tooling\ProgramController@package_add_check')->middleware('ToolingCheckAjax');//获取编辑菜单数据并提交
         Route::post('package_edit','Tooling\ProgramController@package_edit')->middleware('ToolingCheckAjax');//获取程序套餐编辑页面

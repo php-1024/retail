@@ -50,7 +50,7 @@
                     <input type="hidden" id="menu_edit_url" value="{{ url('tooling/ajax/menu_edit') }}">
                     <input type="hidden" id="menu_delete_url" value="{{ url('tooling/ajax/menu_delete') }}">
                     <input type="hidden" id="menu_remove_url" value="{{ url('tooling/ajax/menu_remove') }}">
-                    <input type="hidden" id="menu_edit_sort_url" value="{{ url('tooling/ajax/menu_edit_sort') }}">
+                    <input type="hidden" id="menu_edit_displayorder_url" value="{{ url('tooling/ajax/menu_edit_displayorder') }}">
 
                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                     <div class="col-sm-1">
@@ -97,7 +97,7 @@
                                         <div class="dd-handle">
                                             <span class="label label-primary"><i class="{{ $val->icon_class }}"></i></span>
                                             <span class="pull-right">
-                                                    <input type="tel" autocomplete="off" class="pull-left" onchange="return editSort('{{ $val->id }}','{{ $info->id }}',this);" value="{{ $val->sort }}"  style="width: 50px; text-align: center;">
+                                                    <input type="tel" autocomplete="off" class="pull-left" onchange="return editDisplayorder('{{ $val->id }}','{{ $info->id }}',this);" value="{{ $val->displayorder }}"  style="width: 50px; text-align: center;">
                                                     &nbsp;&nbsp;
                                                 <div class="btn-group">
 
@@ -115,7 +115,7 @@
                                             <li class="dd-item" data-id="2">
                                                 <div class="dd-handle">
                                                     <span class="pull-right">
-                                                            <input type="tel" autocomplete="off" class="pull-left" onchange="return editSort('{{ $vv->id }}','{{ $info->id }}',this);" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
+                                                            <input type="tel" autocomplete="off" class="pull-left" onchange="return editDisplayorder('{{ $vv->id }}','{{ $info->id }}',this);" value="{{ $vv->displayorder }}" style="width: 50px; text-align: center;">
                                                         &nbsp;&nbsp;
                                                         <div class="btn-group">
                                                             <button type="button" onclick="return getEditForm('{{ $vv->id }}');" id="editBtn" class="block btn btn-xs btn-info"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑菜单</button>
@@ -131,7 +131,7 @@
                                                             <li class="dd-item" data-id="2">
                                                                 <div class="dd-handle">
                                                                     <span class="pull-right">
-                                                                        <input type="text" autocomplete="off" value="{{ $vvv->sort }}" onchange="return editSort('{{ $vvv->id }}','{{ $info->id }}',this);" value="{{ $vv->sort }}" style="width: 50px; text-align: center;">
+                                                                        <input type="text" autocomplete="off" value="{{ $vvv->displayorder }}" onchange="return editDisplayorder('{{ $vvv->id }}','{{ $info->id }}',this);" value="{{ $vv->displayorder }}" style="width: 50px; text-align: center;">
                                                                         &nbsp;&nbsp;
 
                                                                         <div class="btn-group">
@@ -264,10 +264,10 @@
         });
     }
 
-    function editSort(id,program_id,obj){
-        var url = $('#menu_edit_sort_url').val();
+    function editDisplayorder(id,program_id,obj){
+        var url = $('#menu_edit_displayorder_url').val();
         var token = $('#_token').val();
-        var sort = $(obj).val();
+        var displayorder = $(obj).val();
 
         if(id=='' || program_id==''){
             swal({
@@ -281,7 +281,7 @@
             return;
         }
 
-        var data = {'id':id,'program_id':program_id,'sort':sort,'_token':token};
+        var data = {'id':id,'program_id':program_id,'displayorder':displayorder,'_token':token};
         $.post(url,data,function(response){
             if(response.status!='1'){
                 swal({
