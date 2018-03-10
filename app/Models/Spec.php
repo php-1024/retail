@@ -25,7 +25,7 @@ class Spec extends Model{
 
     //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new CateringGoods();
+        $model = new Spec();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -34,7 +34,7 @@ class Spec extends Model{
 
     //添加餐饮商品
     public static function addSpec($param){
-        $model = new CateringGoods();
+        $model = new Spec();
         $model->name = $param['name'];
         $model->goods_id = $param['goods_id'];
         $model->save();
