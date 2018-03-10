@@ -217,7 +217,17 @@ class UserController extends Controller{
 
     }
 
-    //粉丝用户管理冻结功能
+    //粉丝用户管理粉丝钱包
+    public function user_list_wallet(Request $request){
+
+        $user_id = $request->id;//会员标签id
+        $status = $request->status;//冻结或者解锁
+        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
+
+        return view('Catering/User/user_list_wallet',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
+
+    }
+    //粉丝用户管理冻结功能显示
     public function user_list_lock(Request $request){
 
         $user_id = $request->id;//会员标签id
