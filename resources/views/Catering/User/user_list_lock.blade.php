@@ -1,6 +1,7 @@
 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/user_list_lock_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="user_id" value="{{$user_id}}">
+    <input type="hidden" name="status" value="{{$status}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
