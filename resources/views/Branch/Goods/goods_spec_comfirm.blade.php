@@ -1,6 +1,7 @@
  <form method="post" class="form-horizontal"  role="form" id="spec_item_add_check" action="{{ url('branch/ajax/spec_item_add_check') }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" name="spec_id" value="{{$spec_id}}">
+        {{--<input type="hidden" name="spec" value="{{$spec}}">--}}
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -52,7 +53,23 @@
 //                    alert('添加子规格类成功！');
 //                    $('#spec_content').html(json);
 //                    $('#spec_content').modal();
-                    window.location.reload();
+//                    window.location.reload();
+
+                    $.ajax({
+                        url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
+                        data:{//这是参数
+                            id:1,
+                            name:'iszmxw',
+                        },
+                        type:'post',//提交方式
+                        success:function(data){//后台处理数据成功后的回调函数
+                            $("#spec_content").html(data);
+                        },
+                        error:function(data){//后台处理数据失败后的回调函数
+                            //   alert(data)
+                        }
+                    })
+
                 });
             }else{
                 swal({

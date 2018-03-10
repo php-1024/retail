@@ -16,7 +16,7 @@
         </div>
         @endforeach
         <div class="m-t col-lg-2">
-            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
+            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}}','{{$spec}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
         </div>
     </div>
     <div style="clear: both;"></div>
@@ -25,7 +25,7 @@
 @endforeach
 <script>
     //弹出子规格添加页面
-    function addSpecItem(spec_id) {
+    function addSpecItem(spec_id,spec) {
         var url = $('#spec_item_add').val();
         var token = $('#_token').val();
         if(spec_id==''){
@@ -39,7 +39,8 @@
             });
             return;
         }
-        var data = {'spec_id':spec_id,'_token':token};
+        var data = {'spec_id':spec_id,'spec':spec,'_token':token};
+        console.log(spec);
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
