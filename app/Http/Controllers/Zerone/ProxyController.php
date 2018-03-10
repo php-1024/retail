@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\AccountNode;
 use App\Models\Assets;
 use App\Models\AssetsOperation;
 use App\Models\OperationLog;
@@ -13,6 +14,7 @@ use App\Models\WarzoneProxy;
 use Illuminate\Http\Request;
 use App\Models\ProxyApply;
 use App\Models\Warzone;
+use App\Models\Module;
 use Illuminate\Support\Facades\DB;
 use Session;
 class ProxyController extends Controller{
@@ -23,6 +25,8 @@ class ProxyController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $warzone_list = Warzone::all();
+        $module_node_list = Module::getListProgram(2, [], 0, 'id');//获取当前系统的所有节点
+        dump($module_node_list);
         return view('Zerone/Proxy/proxy_add',['warzone_list'=>$warzone_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //提交服务商数据
@@ -46,9 +50,10 @@ class ProxyController extends Controller{
         $key = config("app.zerone_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $program_id = 2;
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>2,'type'=>2,'status'=>1];
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$program_id,'type'=>2,'status'=>1];
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
@@ -62,12 +67,18 @@ class ProxyController extends Controller{
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
+            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            foreach($module_node_list as $key=>$val){
+                AccountNode::addAccountNode(['account_id'=>$account_id,'node_id'=>$val['node_id']]);
+            }
+
             $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
             OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
