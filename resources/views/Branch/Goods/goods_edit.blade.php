@@ -412,8 +412,8 @@
 {{--添加规格类--}}
 <div class="modal fade" id="myModal_Spec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_add_check') }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="goods_id" value="{{$goods->id}}">
+        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -608,8 +608,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
@@ -619,6 +618,8 @@
     function spec_add() {
         var target = $("#spec_add");
         var url = target.attr("action");
+        var token = $('#_token').val();
+        var goods_id = $('#goods_id').val();
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
@@ -630,8 +631,21 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    alert('添加规格类成功！');
-                    {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
+                    //规格添加成功后异步刷新规格部分
+                    $.ajax({
+                        url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
+                        data:{
+                            _token:token,
+                            goods_id:goods_id,
+                        },
+                        type:'post',
+                        success:function(data){
+                            $("#spec_content").html(data);
+                        },
+                        error:function(){
+                            alert('添加出错，请稍后再试！');
+                        }
+                    })
                 });
             }else{
                 swal({
@@ -668,8 +682,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
@@ -679,41 +692,6 @@
 
 
 
-<script>
-    //弹出子规格添加页面
-    function addSpecItem(spec_id,goods_id) {
-        var url = $('#spec_item_add').val();
-        var token = $('#_token').val();
-        if(spec_id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-        var data = {'spec_id':spec_id,'goods_id':goods_id,'_token':token};
-        console.log(goods_id);
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal_Spec_Item').html(response);
-                $('#myModal_Spec_Item').modal();
-            }
-        });
-    }
-</script>
+
 </body>
 </html>

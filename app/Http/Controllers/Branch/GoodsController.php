@@ -180,10 +180,9 @@ class GoodsController extends Controller
     //规格部分页面
     public function goods_spec(Request $request)
     {
-        $goods_id = $request->get('goods_id');              //获取当前的页面路由
-        dump($goods_id);
+        $goods_id = $request->get('goods_id');              //商品的ID
         $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_spec', ['spec'=>$spec,'admin_data']);
+        return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
     }
 
 
@@ -191,7 +190,8 @@ class GoodsController extends Controller
     public function spec_item_add(Request $request)
     {
         $spec_id = $request->input('spec_id');
-        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id]);
+        $goods_id = $request->input('goods_id');
+        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
     }
 
     //子规格添加

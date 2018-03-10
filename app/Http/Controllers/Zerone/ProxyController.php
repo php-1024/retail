@@ -122,6 +122,7 @@ class ProxyController extends Controller{
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $proxylist = ProxyApply::getOne([['id',$id]]);//查询申请服务商信息
+        $program_id = 2;
         if($sta == -1 ){
             DB::beginTransaction();
             try{
@@ -164,6 +165,13 @@ class ProxyController extends Controller{
 
                 $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']];
                 OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
+
+                $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+                foreach($module_node_list as $key=>$val){
+                    foreach($val->program_nodes as $k=>$v) {
+                        AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
+                    }
+                }
 
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
