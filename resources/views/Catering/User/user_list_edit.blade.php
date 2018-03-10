@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">微信昵称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$data['nickname']}}" placeholder="安全密码" class="form-control" disabled="">
+                            <input type="text" value="{{$userInfo['nickname']}}" placeholder="安全密码" class="form-control" disabled="">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">QQ号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$userInfo->qq}}" placeholder="QQ号码" class="form-control" name="qq">
+                            <input type="text" value="{{$userInfo['qq']}}" placeholder="QQ号码" class="form-control" name="qq">
                         </div>
                     </div>
 
