@@ -23,38 +23,4 @@
     <div class="line line-dashed b-b line-lg pull-in"></div>
 </form>
 @endforeach
-<script>
-    //弹出子规格添加页面
-    function addSpecItem(spec_id) {
-        var url = $('#spec_item_add').val();
-        var token = $('#_token').val();
-        if(spec_id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-        var data = {'spec_id':spec_id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal_Spec_Item').html(response);
-                $('#myModal_Spec_Item').modal();
-            }
-        });
-    }
-</script>
+

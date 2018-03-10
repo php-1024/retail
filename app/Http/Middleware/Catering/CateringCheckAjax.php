@@ -64,6 +64,7 @@ class CateringCheckAjax
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
             case "catering/ajax/label_delete_check"://检测是否登录 权限 安全密码--删除会员标签
+            case "catering/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -80,6 +81,7 @@ class CateringCheckAjax
             case "catering/ajax/label_delete":    //删除会员标签显示页面
             case "catering/ajax/store_member_add_check":    //粉丝会员标签改变显示页面
             case "catering/ajax/user_list_edit":            //会员列表编辑显示页面
+            case "catering/ajax/user_list_lock":            //会员列表冻结显示页面
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

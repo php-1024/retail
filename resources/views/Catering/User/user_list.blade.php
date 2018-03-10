@@ -49,6 +49,7 @@
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="store_member_add_check" value="{{ url('catering/ajax/store_member_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('catering/ajax/user_list_edit') }}">
+                                    <input type="hidden" id="user_list_lock" value="{{ url('catering/ajax/user_list_lock') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
@@ -102,7 +103,11 @@
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
                                             <button class="btn btn-primary btn-xs" id="balanceBtn"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
-                                            <button class="btn btn-warning btn-xs" id="lockBtn"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @if($value->status == 1 || $value->status == -1)
+                                                <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('{{$value->id}}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @else
+                                                <button class="btn btn-success btn-xs" id="lockBtn" onclick="getlockForm({{$value->id}},'{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;解结</button>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -212,42 +217,9 @@
                                 <td>10000.00元</td>
 
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">冻结粉丝确认</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="" placeholder="安全密码" class="form-control" >
-                                <span class="help-block m-b-none">
-                              <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
-                          </span>
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
@@ -270,6 +242,28 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
+    //冻结粉丝
+    function getlockForm(id,status){
+        var url = $('#user_list_lock').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
     //添加会员标签
     function getEditForm(id){
         var url = $('#user_list_edit').val();

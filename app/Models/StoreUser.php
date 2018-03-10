@@ -31,14 +31,14 @@ class StoreUser extends Model{
     }
 
     //简易型查询单条数据关联查询
-    public static function getOne($where)
+    public static function getOneStoreUser($where)
     {
         return self::where($where)->first();
     }
 
 
     //查询获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    public static function getListStoreUser($where,$limit=0,$orderby,$sort='DESC'){
         $model = self::where($where)->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
@@ -47,7 +47,7 @@ class StoreUser extends Model{
     }
 
     //修改数据
-    public static function editNode($where,$param){
+    public static function editStoreUser($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
