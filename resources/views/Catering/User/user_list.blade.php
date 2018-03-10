@@ -49,7 +49,7 @@
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="store_member_add_check" value="{{ url('catering/ajax/store_member_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('catering/ajax/user_list_edit') }}">
-                                    <input type="hidden" id="user_list_edit" value="{{ url('catering/ajax/user_list_wallet') }}">
+                                    <input type="hidden" id="user_list_wallet" value="{{ url('catering/ajax/user_list_wallet') }}">
                                     <input type="hidden" id="user_list_lock" value="{{ url('catering/ajax/user_list_lock') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
