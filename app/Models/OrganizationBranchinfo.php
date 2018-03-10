@@ -23,7 +23,7 @@ class OrganizationBranchinfo extends Model{
     public static function addOrganizationBranchinfo($param){
         $program = new OrganizationBranchinfo();//实例化程序模型
         $program->organization_id = $param['organization_id'];//组织id
-        $program->branch_owne = $param['branch_owne'];//分店负责人姓名
+        $program->branch_owner = $param['branch_owner'];//分店负责人姓名
         $program->branch_owner_idcard = $param['branch_owner_idcard'];//分店负责人身份证
         $program->branch_owner_mobile = $param['branch_owner_mobile'];//分店负责人手机号
         $program->type = $param['type'];//0为总店 1为分店
