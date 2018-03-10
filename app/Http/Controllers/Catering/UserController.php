@@ -210,7 +210,6 @@ class UserController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }
@@ -218,6 +217,15 @@ class UserController extends Controller{
 
     }
 
+    //粉丝用户管理编辑
+    public function user_list_lock(Request $request){
+
+        $user_id = $request->id;//会员标签id
+        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname');//微信昵称
+
+        return view('Catering/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname]);
+
+    }
     //粉丝用户足迹
     public function user_timeline(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
