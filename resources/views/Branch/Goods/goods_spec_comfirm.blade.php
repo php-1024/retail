@@ -60,7 +60,6 @@
                         },
                         type:'post',
                         success:function(data){
-                            alert('ok');
                             $("#spec_content").html(data);
                         },
                         error:function(){
