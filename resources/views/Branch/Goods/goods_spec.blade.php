@@ -59,5 +59,3 @@
 </div>
 <div style="clear: both;"></div>
 <div class="line line-dashed b-b line-lg pull-in"></div>
-
-12121212121
