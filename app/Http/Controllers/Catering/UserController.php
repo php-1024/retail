@@ -99,7 +99,7 @@ class UserController extends Controller{
         return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
 
     }
-    
+
     //删除会员标签ajax显示页面
     public function member_label_delete(Request $request){
         $id = $request->id; //会员标签id
