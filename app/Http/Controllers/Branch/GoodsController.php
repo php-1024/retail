@@ -144,7 +144,32 @@ class GoodsController extends Controller
     //规格类添加
     public function spec_add_check(Request $request)
     {
-        dd($request);
+        $spec_name = $request->get('spec_name');
+        $goods_id = $request->get('goods_id');
+        if (empty($spec_name)){
+            return response()->json(['data' => '请输入规格类名称！', 'status' => '0']);
+        }
+        $spec_data = [
+            'name' => $spec_name,
+            'goods_id' => $goods_id,
+        ];
+        DB::beginTransaction();
+        try {
+            $goods_id = CateringGoods::addCateringGoods($spec_data);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加商品！');//保存操作记录
+            } else {//商户本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1', 'goods_id' => $goods_id]);
+
     }
 
     public function upload_thumb_check(Request $request)
