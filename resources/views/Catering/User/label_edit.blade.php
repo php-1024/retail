@@ -1,6 +1,6 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/member_label_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/abel_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" value="{{$oneMemb->id}}">
+    <input type="hidden" name="id" value="{{$oneLabel->id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$oneMemb->member_name}}" placeholder="标签名称" class="form-control" name="member_name">
+                            <input type="text" value="{{$oneLabel->label_name}}" placeholder="标签名称" class="form-control" name="member_name">
                         </div>
                     </div>
                     <div style="clear:both;"></div>

@@ -51,7 +51,7 @@ class UserController extends Controller{
                 'label_name'=>$label_name,
                 'label_number'=>0,
             ];
-           Label::addMemberLabel($dataLabel);
+           Label::addLabel($dataLabel);
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建会员标签成功：'.$label_name);//保存操作记录
             }
@@ -66,10 +66,10 @@ class UserController extends Controller{
 
     }
     //编辑会员标签ajax显示页面
-    public function member_label_edit(Request $request){
+    public function label_edit(Request $request){
         $id = $request->id; //会员标签id
-        $oneMemb = MemberLabel::getOneMemberLabel([['id',$id]]);
-        return view('Catering/User/member_label_edit',['oneMemb'=>$oneMemb]);
+        $oneLabel = Label::getOneLabel([['id',$id]]);
+        return view('Catering/User/label_edit',['oneLabel'=>$oneLabel]);
     }
     //编辑会员标签功能提交
     public function member_label_edit_check(Request $request){

@@ -15,15 +15,15 @@ class Label extends Model{
 
 
     //获取单条信息
-    public static function getOneMemberLabel($where){
+    public static function getOneLabel($where){
         return self::where($where)->first();
     }
     //获取列表
-    public static function ListMemberLabel($where){
+    public static function ListLabel($where){
         return self::where($where)->get();
     }
     //添加会员标签
-    public static function addMemberLabel($param){
+    public static function addLabel($param){
         $model = new Label();
         $model->store_id = $param['store_id'];//总店ID
         $model->branch_id = $param['branch_id'];//分店id
@@ -34,7 +34,7 @@ class Label extends Model{
     }
 
     //修改数据
-    public static function editMemberLabel($where,$param){
+    public static function editLabel($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
