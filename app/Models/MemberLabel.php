@@ -6,9 +6,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class MemberLabel extends Model{
+class Label extends Model{
     use SoftDeletes;
-    protected $table = 'member_label';
+    protected $table = 'label';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -24,11 +24,11 @@ class MemberLabel extends Model{
     }
     //添加会员标签
     public static function addMemberLabel($param){
-        $model = new MemberLabel();
+        $model = new Label();
         $model->organization_id = $param['organization_id'];//组织ID
-        $model->member_name = $param['member_name'];//组织ID
+        $model->member_name = $param['label_name'];//组织ID
         $model->parent_id = $param['parent_id'];//上级id
-        $model->member_number = $param['member_number'];//粉丝数量
+        $model->member_number = $param['label_number'];//粉丝数量
         $model->save();
         return $model->id;
     }
