@@ -34,7 +34,7 @@ class Spec extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('spec_item')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加餐饮商品
