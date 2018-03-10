@@ -21,7 +21,7 @@
             <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
         </div>
         <div class="m-t col-lg-2">
-            <button type="button" class="btn btn-info btn-xs" id="addItem"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
+            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
         </div>
     </div>
     <div style="clear: both;"></div>
@@ -67,9 +67,9 @@
 
 <script>
     //弹出子规格添加
-    $("#addItem").click(function(){
+    function addSpecItem() {
         $('#myModal_SpecItem').modal();
-    });
+    }
     //添加子规格提交
     function spec_item_add() {
         var target = $("#spec_add");
