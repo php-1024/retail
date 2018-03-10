@@ -172,6 +172,7 @@ class UserController extends Controller{
         $organization_id = $admin_data['organization_id'];//组织id
 
         $user_id = $request->id;//会员标签id
+        dump($user_id);
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
         $account =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
         $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
