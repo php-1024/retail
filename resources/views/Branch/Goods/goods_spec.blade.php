@@ -21,7 +21,7 @@
             <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
         </div>
         <div class="m-t col-lg-2">
-            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
+            <button type="button" class="btn btn-info btn-xs" onclick="addSpecItem('{{$val->id}}')"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加规格子项</button>
         </div>
     </div>
     <div style="clear: both;"></div>
@@ -67,35 +67,46 @@
 
 <script>
     //弹出子规格添加
-    function addSpecItem() {
+    function addSpecItem(spec_id) {
         $('#myModal_SpecItem').modal();
+        alert(spec_id);
     }
     //添加子规格提交
     function spec_item_add() {
         var target = $("#spec_item_add");
         var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
+        var token = $('#_token').val();
+        var data = {'id':id,'account':account,'status':status,'_token':token};
+
+
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
                 window.location.reload();
-            } else if(json.status == 1) {
+            });
+            return;
+        }
+
+
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
-                    text: json.data,
+                    text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    alert('添加子规格成功！');
-                    {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
+                    window.location.reload();
                 });
+                return;
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
