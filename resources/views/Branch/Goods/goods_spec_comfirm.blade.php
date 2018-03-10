@@ -2,6 +2,7 @@
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
      {{--<input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">--}}
      <input type="hidden" name="spec_id" value="{{$spec_id}}">
+     <input type="hidden" name="spec_id" value="{{$goods_id}}">
      <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
