@@ -646,13 +646,16 @@
             autogrow: true
         });
     });
-
+    //规格添加
+    $(".addBtn").click(function(){
+        $('#myModal').modal();
+    });
     //弹出上传图片窗口
     function addthumb() {
         $('#myModal3').modal();
     }
 
-    //提交表单
+    //编辑提交表单
     function postEditForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
@@ -681,7 +684,7 @@
         });
     }
 
-    //提交表单
+    //上传图片提交表单
     function uploadForm() {
         var target = $("#uploadForm");
         var url = target.attr("action");
