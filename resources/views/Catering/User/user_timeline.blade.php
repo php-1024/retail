@@ -59,12 +59,13 @@
                             <div class="wrapper col-lg-12" style="background: #FFFFFF;">
                                 <section class="comment-list block">
 
+                                    @foreach($list as $key=>$value)
                                     <article id="comment-id-3" class="comment-item">
                                         <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
                                         <span class="arrow left"></span>
                                         <section class="comment-body panel panel-default">
                                             <header class="panel-heading">
-                                                <a href="#">100020</a>
+                                                <a href="#">{{$value->User->account}}</a>
                                                 <label class="label bg-success m-l-xs">时光取名叫无心</label>
                                                 <span class="text-muted m-l-sm pull-right">
                               <i class="fa fa-clock-o"></i>
@@ -72,62 +73,11 @@
                             </span>
                                             </header>
                                             <div class="panel-body">
-                                                <div>为订单1000020003004000付款了100元，扣除联盟分润18元，您实际收入82元</div>
+                                                <div>{{$value->log_info}}</div>
                                             </div>
                                         </section>
                                     </article>
-                                    <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
-                                        <span class="arrow left"></span>
-                                        <section class="comment-body panel panel-default">
-                                            <header class="panel-heading">
-                                                <a href="#">100020</a>
-                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
-                                                <span class="text-muted m-l-sm pull-right">
-                              <i class="fa fa-clock-o"></i>
-                              2018-01-29 11:11:11
-                            </span>
-                                            </header>
-                                            <div class="panel-body">
-                                                <div>提交了订单：1000020003004000</div>
-                                            </div>
-                                        </section>
-                                    </article>
-                                    <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
-                                        <span class="arrow left"></span>
-                                        <section class="comment-body panel panel-default">
-                                            <header class="panel-heading">
-                                                <a href="#">100020</a>
-                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
-                                                <span class="text-muted m-l-sm pull-right">
-                              <i class="fa fa-clock-o"></i>
-                              2018-01-29 11:11:11
-                            </span>
-                                            </header>
-                                            <div class="panel-body">
-                                                <div>进入了本店</div>
-                                            </div>
-                                        </section>
-                                    </article>
-                                    <article id="comment-id-3" class="comment-item">
-                                        <span class="pull-left thumb-sm avatar"><img src="{{asset('public/Catering')}}/img/a9.png" alt="..."></span>
-                                        <span class="arrow left"></span>
-                                        <section class="comment-body panel panel-default">
-                                            <header class="panel-heading">
-                                                <a href="#">100020</a>
-                                                <label class="label bg-success m-l-xs">时光取名叫无心</label>
-                                                <span class="text-muted m-l-sm pull-right">
-                              <i class="fa fa-clock-o"></i>
-                              2018-01-29 11:11:11
-                            </span>
-                                            </header>
-                                            <div class="panel-body">
-                                                <div>关注了公众号</div>
-                                            </div>
-                                        </section>
-                                    </article>
-                                </section>
+                                    @endforeach
                         </section>
                         </div>
                     </section>
