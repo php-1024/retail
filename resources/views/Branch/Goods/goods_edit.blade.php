@@ -246,7 +246,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade in" id="option">
-                                        <button type="button" class="addBtn btn btn-info">添加规格&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-info" id="addSpec">添加规格&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div id="spec_content">
                                             @include('Branch/Goods/goods_spec')
@@ -430,7 +430,7 @@
 
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal_Spec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_add_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="goods_id" value="{{$goods->id}}">
@@ -593,8 +593,8 @@
         });
     });
     //规格添加
-    $(".addBtn").click(function(){
-        $('#myModal').modal();
+    $("#addSpec").click(function(){
+        $('#myModal_Spec').modal();
     });
     //弹出上传图片窗口
     function addthumb() {
