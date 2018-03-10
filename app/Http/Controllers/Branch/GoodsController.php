@@ -179,7 +179,7 @@ class GoodsController extends Controller
 
 
     //规格部分页面
-    public function spec_item_add(Request $request)
+    public function goods_spec(Request $request)
     {
         $spec_id = $request->input('spec_id');
         return view('Branch/Goods/goods_spec',['spec_id'=>$spec_id]);
