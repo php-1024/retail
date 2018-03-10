@@ -32,9 +32,9 @@ class Spec extends Model{
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new Spec();
         if(!empty($limit)){
-            $model = $model->limit($limit);
+            $model = $model->with('spec_item')->limit($limit);
         }
-        return $model->with('spec_item')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加餐饮商品
