@@ -52,6 +52,9 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "catering/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
+                return self::format_response($re,$next);
             case "catering/ajax/branch_create_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndBranchCreate($request);
                 return self::format_response($re,$next);
@@ -255,6 +258,20 @@ class CateringCheckAjax
             return $re;
         }else{
             $re2 = $this->checkLabelAdd($re['response']);//检测数据是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和粉丝用户管理编辑数据提交
+    public function checkLoginAndRuleAndSafeAndUserEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkUserEdit($re['response']);//检测数据是否为空
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -487,6 +504,16 @@ class CateringCheckAjax
         return self::res(1,$request);
     }
 
+    //检测添加总分店数数据
+    public function checkUserEdit($request){
+        if(empty($request->input('qq'))){
+            return self::res(0,response()->json(['data' => '请输qq号', 'status' => '0']));
+        }
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入手机号', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
     //检测添加总分店数数据
     public function checkBranchCreate($request){
         if(empty($request->input('program_id'))){

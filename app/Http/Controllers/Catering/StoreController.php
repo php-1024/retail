@@ -60,7 +60,7 @@ class StoreController extends Controller{
             $id = Organization::addOrganization($organization);
             $branchinfo = [
                 'organization_id'      =>$id,
-                'branch_owne'          =>$realname,
+                'branch_owner'          =>$realname,
                 'branch_owner_idcard'  =>'',
                 'branch_owner_mobile'  =>$mobile,
                 'type'                 =>$branch_type,
