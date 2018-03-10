@@ -180,7 +180,7 @@ class GoodsController extends Controller
     //规格部分页面
     public function goods_spec(Request $request)
     {
-        $goods_id = $request->get('goods_id');              //获取当前的页面路由
+        $goods_id = $request->get('goods_id');              //商品的ID
         $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
     }
