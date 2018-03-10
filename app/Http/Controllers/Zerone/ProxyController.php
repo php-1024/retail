@@ -48,7 +48,7 @@ class ProxyController extends Controller{
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$deepth,'type'=>2,'status'=>1];
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>2,'type'=>2,'status'=>1];
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
