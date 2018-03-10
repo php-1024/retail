@@ -293,13 +293,6 @@
         });
     }
 
-
-
-
-
-
-
-
     function changeUserTag(obj,user_id){
         var member_id = $(obj).val();
         var url = $('#store_member_add_check').val();
