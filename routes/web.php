@@ -623,6 +623,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                 //列表编辑ajax显示
         Route::post('user_list_edit_check','Catering\UserController@user_list_edit_check')->middleware('CateringCheckAjax');     //列表编辑功能提交
         Route::post('user_list_lock','Catering\UserController@user_list_lock')->middleware('CateringCheckAjax');                 //列表冻结ajax显示
+        Route::post('user_list_lock_check','Catering\UserController@user_list_lock_check')->middleware('CateringCheckAjax');     //列表冻结ajax显示
 
         //总店管理
         Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交

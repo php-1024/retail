@@ -203,7 +203,7 @@ class UserController extends Controller{
         }
         DB::beginTransaction();
         try {
-            StoreUser::editStoreUser(['id'=>$user_id],['mobile'=>$mobile,]);
+            StoreUser::editStoreUser(['user_id'=>$user_id],['mobile'=>$mobile,]);
             UserInfo::editUserInfo(['user_id'=>$user_id],['qq'=>$qq]);
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
@@ -217,13 +217,36 @@ class UserController extends Controller{
 
     }
 
-    //粉丝用户管理编辑
+    //粉丝用户管理冻结功能
     public function user_list_lock(Request $request){
 
         $user_id = $request->id;//会员标签id
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
 
         return view('Catering/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname]);
+
+    }
+    //粉丝用户管理冻结功能提交
+    public function user_list_lock_check(Request $request){
+
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $user_id = $request->user_id;//会员标签id
+        $nickname = $request->nickname;//会员标签id
+
+        DB::beginTransaction();
+        try {
+            StoreUser::editStoreUser(['user_id'=>$user_id],['status'=>0,]);
+            if($admin_data['is_super'] != 2){
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了：'.$nickname);//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '冻结失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功！', 'status' => '1']);
 
     }
     //粉丝用户足迹

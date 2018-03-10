@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">微信昵称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$nickname}}" placeholder="安全密码" class="form-control" disabled="">
+                            <input type="text" value="{{$nickname}}" placeholder="安全密码" class="form-control" disabled="" name="$nickname">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
