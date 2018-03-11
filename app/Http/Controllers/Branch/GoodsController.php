@@ -72,7 +72,6 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
         }
@@ -93,7 +92,6 @@ class GoodsController extends Controller
             'organization_id' => $admin_data['organization_id'],
         ];
         $goods_thumb = GoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        dump($goods_thumb);
         $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
@@ -140,7 +138,6 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '编辑商品失败，请检查', 'status' => '0']);
         }
@@ -175,7 +172,6 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加规格类失败，请检查', 'status' => '0']);
         }
@@ -399,7 +395,6 @@ class GoodsController extends Controller
                 }
                 DB::commit();
             } catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
             }
