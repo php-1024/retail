@@ -1,6 +1,10 @@
 @foreach($spec as $key=>$val)
 <form method="get" role="form" id="searchForm" action="">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    <input type="hidden" id="spec_edit" value="{{ url('branch/ajax/spec_edit') }}">
+    <input type="hidden" id="spec_delete" value="{{ url('branch/ajax/spec_delete') }}">
+    <input type="hidden" id="spec_item_edit" value="{{ url('branch/ajax/spec_item_edit') }}">
+    <input type="hidden" id="spec_stem_delete" value="{{ url('branch/ajax/spec_stem_delete') }}">
     <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
