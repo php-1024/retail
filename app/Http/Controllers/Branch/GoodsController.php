@@ -228,9 +228,10 @@ class GoodsController extends Controller
     //编辑规格类弹窗
     public function edit_spec(Request $request)
     {
-        $goods_id = $request->get('goods_id');              //商品的ID
-        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec]);
+        $spec_id = $request->get('spec_id');              //商品的ID
+        $spec = CateringSpec::getList(['id'=>$spec_id],0,'created_at','DESC');
+        dd($spec);
+        return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec,'spec_id'=>$spec_id]);
     }
 
     //删除规格类弹窗
