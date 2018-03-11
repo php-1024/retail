@@ -47,7 +47,7 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="store_member_add_check" value="{{ url('catering/ajax/store_member_add_check') }}">
+                                    <input type="hidden" id="store_label_add_check" value="{{ url('catering/ajax/store_label_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('catering/ajax/user_list_edit') }}">
                                     <input type="hidden" id="user_list_wallet" value="{{ url('catering/ajax/user_list_wallet') }}">
                                     <input type="hidden" id="user_list_lock" value="{{ url('catering/ajax/user_list_lock') }}">
@@ -219,7 +219,7 @@
 
     function changeUserTag(obj,user_id){
         var member_id = $(obj).val();
-        var url = $('#store_member_add_check').val();
+        var url = $('#store_label_add_check').val();
         var token = $('#_token').val();
         var data = {'_token':token,'member_id':member_id,'user_id':user_id};
         $.post(url,data,function(json){
