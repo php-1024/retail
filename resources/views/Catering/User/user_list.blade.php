@@ -218,10 +218,10 @@
     }
 
     function changeUserTag(obj,user_id){
-        var member_id = $(obj).val();
+        var label_id = $(obj).val();
         var url = $('#store_label_add_check').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'member_id':member_id,'user_id':user_id};
+        var data = {'_token':token,'label_id':label_id,'user_id':user_id};
         $.post(url,data,function(json){
                 console.log(json);
         });
