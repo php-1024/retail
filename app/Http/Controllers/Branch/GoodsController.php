@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
 use App\Models\CateringGoods;
+use App\Models\GoodsThumb;
 use App\Models\OperationLog;
 use App\Models\CateringSpec;
 use App\Models\CateringSpecItem;
@@ -371,8 +372,9 @@ class GoodsController extends Controller
     //上传图片处理
     public function upload_thumb_check(Request $request)
     {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
         $goods_id = $request->get('goods_id');
-        dd($goods_id);
         $file = $request->file('upload_thumb');
         if ($file->isValid()) {
             //检验文件是否有效
@@ -380,7 +382,29 @@ class GoodsController extends Controller
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
             $path = $file->move(base_path() . '/uploads', $new_name);   //$path上传后的文件路径
             $file_path =  '/uploads/'.$new_name;
-            return response()->json(['file_path' => $file_path,'status' => '1']);
+            dd($file_path);
+            $goods_thumb = [
+                'goods_id' => $goods_id,
+                'thumb' => $file_path,
+            ];
+            DB::beginTransaction();
+            try {
+                GoodsThumb::addGoodsThumb($goods_thumb);
+                //添加操作日志
+                if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品子规格！');//保存操作记录
+                } else {//分店本人操作记录
+                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品子规格！');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                dd($e);
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '删除规格失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '删除规格信息成功','file_path' => $file_path, 'status' => '1']);
+
+
         } else {
             return response()->json(['status' => '0']);
         }
