@@ -77,23 +77,5 @@
                 });
             }
         });
-
-
-//        $.post(url,data,function(response){
-//            if(response.status=='-1'){
-//                swal({
-//                    title: "提示信息",
-//                    text: response.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                },function(){
-//                    window.location.reload();
-//                });
-//                return;
-//            }else{
-//                $('#spec_content').html(response);
-//                $('#spec_content').modal();
-//            }
-//        });
     }
 </script>
