@@ -609,7 +609,7 @@
     function uploadForm() {
         var formData = new FormData($( "#uploadForm" )[0]);
         $.ajax({
-            url: '{{ url(\'branch/ajax/upload_thumb_check\') }}' ,
+            url: '{{ url('branch/ajax/upload_thumb_check') }}' ,
             type: 'POST',
             data: formData,
             async: false,
