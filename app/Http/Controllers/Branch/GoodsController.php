@@ -371,11 +371,7 @@ class GoodsController extends Controller
     //上传图片处理
     public function upload_thumb_check(Request $request)
     {
-
-//        Storage::put('avatars/1', $fileContents);
-        $path = $request->file('upload_thumb');
-
-        dd($path);
+        dd($request);
     }
 
 

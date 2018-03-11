@@ -476,6 +476,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 text-right">图片信息</label>
                             <div class="col-sm-10">
+                                <input type="file" name="avatar">
                                 <input type="file" class="filestyle" style="display: none;" name="upload_thumb" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                             </div>
                         </div>
