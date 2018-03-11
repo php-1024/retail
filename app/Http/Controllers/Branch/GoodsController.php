@@ -279,6 +279,13 @@ class GoodsController extends Controller
         return response()->json(['data' => '编辑子规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
     }
 
+    //删除规格类操作方法
+    public function spec_delete_check(Request $request)
+    {
+        $spec_id = $request->get('spec_id');              //规格类ID
+        dd($spec_id);
+    }
+
 
     //删除规格类弹窗
     public function spec_delete(Request $request)
