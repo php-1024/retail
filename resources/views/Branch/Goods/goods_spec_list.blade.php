@@ -16,7 +16,7 @@
         <div class="m-t col-lg-2">
             <label class="label label-success">{{$v->name}}</label>
             <button type="button" class="btn editBtn btn-info btn-xs" onclick="editSpecItem('{{$v->id}}')"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn deleteBtn btn-danger btn-xs" onclick="deleteSpecItem('{{$v->id}}')"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn deleteBtn btn-danger btn-xs" onclick="deleteSpecItem('{{$v->id}}','{{$val->goods_id}}')"><i class="fa fa-times"></i></button>
         </div>
         @endforeach
         <div class="m-t col-lg-2">
@@ -104,11 +104,11 @@
     }
 
     //删除子规格
-    function deleteSpecItem(spec_item_id) {
+    function deleteSpecItem(spec_item_id,goods_id) {
         console.log(spec_item_id);       //子规格id
         var url = $('#spec_item_delete').val();
         var token = $('#_token').val();
-        var data = {'spec_item_id':spec_item_id,'_token':token};
+        var data = {'spec_item_id':spec_item_id,'goods_id':goods_id,'_token':token};
         console.log(data)
         $.post(url,data,function(response){
             if(response.status=='-1'){
