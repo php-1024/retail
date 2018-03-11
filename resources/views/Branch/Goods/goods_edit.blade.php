@@ -485,12 +485,7 @@
     </form>
 </div>
 
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-</div>
-
-
-
+{{--上传图片--}}
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url('branch/ajax/upload_thumb_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -519,7 +514,7 @@
         </div>
     </form>
 </div>
-
+{{--上传图片--}}
 
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
