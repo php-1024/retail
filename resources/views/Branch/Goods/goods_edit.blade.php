@@ -463,7 +463,7 @@
 
 {{--上传图片--}}
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url('branch/ajax/upload_thumb_check') }}">
+    <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -607,29 +607,20 @@
 
     //上传图片提交表单
     function uploadForm() {
-        var target = $("#uploadForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        console.log(data);
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.href = "{{asset("branch/goods/goods_list")}}";
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+        var formData = new FormData($( "#uploadForm" )[0]);
+        $.ajax({
+            url: '{{ url(\'branch/ajax/upload_thumb_check\') }}' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                alert(returndata);
+            },
+            error: function (returndata) {
+                alert(returndata);
             }
         });
     }
