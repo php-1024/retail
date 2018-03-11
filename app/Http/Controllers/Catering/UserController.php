@@ -143,15 +143,15 @@ class UserController extends Controller{
             $user_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//推荐人
         }
+        dump($list);
         $label = Label::ListLabel([['store_id',$organization_id]]);//会员标签
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户管理
     public function store_label_add_check(Request $request){
 
-        dd(1);
-//        $member_id = $request->member_id;//会员标签id
-//        $user_id = $request->user_id;//用户id
+        $label_id = $request->label_id;//会员标签id
+        $user_id = $request->user_id;//用户id
 //
 //        DB::beginTransaction();
 //        try {
