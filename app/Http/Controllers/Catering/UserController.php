@@ -162,19 +162,20 @@ class UserController extends Controller{
         DB::beginTransaction();
         try {
             $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['store_id',$store_id]]);//查询粉丝标签关联表有没有数据
-            if(!empty($oneData)){
 
-                if($label_id != 0){
+            if(!empty($oneData)){
+                if($oneData->label_id != 0){
                     //减少原粉丝标签的人数
                     $label_number = Label::getPluck([['id',$oneData->label_id]],'label_number')->first();//获取原粉丝标签的人数
                     $number = $label_number-1;
                     Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
-
-                    //增加现有的粉丝标签人数
-                    $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
-                    $number = $label_number+1;
-                    Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
                 }
+                 if($label_id != 0){
+                     //增加现有的粉丝标签人数
+                     $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
+                     $number = $label_number+1;
+                     Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
+                 }
                 UserLabel::editUserLabel([['id',$oneData->id]],['label_id'=>$label_id]);//修改粉丝标签关联表Label_id
 
             }else{
