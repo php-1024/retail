@@ -456,7 +456,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 
-
+{{--确认删除--}}
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
         <div class="modal-dialog">
@@ -484,44 +484,10 @@
         </div>
     </form>
 </div>
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">编辑规格</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">规格名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+{{--确认删除--}}
 
 
-
+{{--上传图片--}}
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url('branch/ajax/upload_thumb_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -550,7 +516,7 @@
         </div>
     </form>
 </div>
-
+{{--上传图片--}}
 
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
