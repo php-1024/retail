@@ -326,9 +326,9 @@ class GoodsController extends Controller
     //删除子规格弹窗
     public function spec_item_delete(Request $request)
     {
-        $spec_id = $request->get('spec_id');              //规格类ID
-        $spec = CateringSpec::getOne(['id'=>$spec_id]);
-        return view('Branch/Goods/goods_spec_item_delete', ['spec'=>$spec]);
+        $spec_item_id = $request->get('spec_item_id');  //子规格ID
+        $goods_id = $request->get('goods_id');          //商品ID
+        return view('Branch/Goods/goods_spec_item_delete', ['spec_item_id'=>$spec_item_id,'goods_id'=>$goods_id]);
     }
 
 
