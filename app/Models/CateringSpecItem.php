@@ -18,6 +18,12 @@ class CateringSpecItem extends Model{
         return $this->belongsto('App\Models\CateringSpec','spec_id');
     }
 
+    //获取单条数据
+    public static function getOne($where)
+    {
+        return self::with('catering_spec')->where($where)->first();
+    }
+
     //获取餐饮商品规格列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new CateringSpecItem();

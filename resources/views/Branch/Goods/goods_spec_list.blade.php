@@ -60,6 +60,26 @@
     //编辑子规格
     function editSpecItem(spec_item_id) {
         console.log(spec_item_id);
+        var url = $('#spec_item_edit').val();
+        var token = $('#_token').val();
+        var data = {'spec_item_id':spec_item_id,'_token':token};
+        console.log(data)
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
     }
     //删除子规格
     function deleteSpecItem(spec_item_id) {
