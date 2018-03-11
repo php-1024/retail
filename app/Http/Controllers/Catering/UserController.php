@@ -152,6 +152,7 @@ class UserController extends Controller{
 
         $label_id = $request->label_id;//会员标签id
         $user_id = $request->user_id;//用户id
+        $store_id = $request->store_id;//店铺id
 //
 //        DB::beginTransaction();
 //        try {
