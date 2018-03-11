@@ -641,6 +641,7 @@
                         type:'post',
                         success:function(data){
                             $("#spec_content").html(data);
+                            $('#myModal_Spec').modal('hide');
                         },
                         error:function(){
                             alert('添加出错，请稍后再试！');
