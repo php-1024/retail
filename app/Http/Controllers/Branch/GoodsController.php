@@ -249,11 +249,10 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加子规格失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '编辑规格失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加子规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
+        return response()->json(['data' => '编辑规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
 
     }
 
