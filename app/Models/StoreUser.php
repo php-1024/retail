@@ -76,7 +76,7 @@ class StoreUser extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->with('UserLabel')->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
