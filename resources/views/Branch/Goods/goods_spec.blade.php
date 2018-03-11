@@ -11,8 +11,8 @@
         @foreach($val->catering_spec_item as $k=>$v)
         <div class="m-t col-lg-2">
             <label class="label label-success">{{$v->name}}</label>
-            <button type="button" class="btn editBtn btn-info btn-xs" onclick="addSpecItem('{{$v->id}}')"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn deleteBtn btn-danger btn-xs" onclick="deleteSpecItem('{{$v->id}}')"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn editBtn btn-info btn-xs" onclick="editSpecItem('{{$v->id}}')"><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn deleteBtn btn-danger btn-xs" onclick="editSpecItem('{{$v->id}}')"><i class="fa fa-times"></i></button>
         </div>
         @endforeach
         <div class="m-t col-lg-2">
