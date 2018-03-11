@@ -13,14 +13,14 @@
                      <div class="form-group">
                          <label class="col-sm-2 control-label" for="input-id-1">规格名称</label>
                          <div class="col-sm-10">
-                             <input type="text" class="form-control" name="name" value="">
+                             <input type="text" class="form-control" name="spec_item_name" value="">
                          </div>
                      </div>
                      <div class="line line-dashed b-b line-lg pull-in"></div>
                      <div class="form-group">
                          <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                          <div class="col-sm-10">
-                             <input type="text" class="form-control" id="input-id-1" value="">
+                             <input type="text" class="form-control" name="safe_password" value="">
                          </div>
                      </div>
 
