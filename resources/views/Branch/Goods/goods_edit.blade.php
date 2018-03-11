@@ -633,7 +633,7 @@
                 },function(){
                     //规格添加成功后异步刷新规格部分
                     $.ajax({
-                        url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
+                        url:'{{url('branch/ajax/goods_spec')}}',
                         data:{
                             _token:token,
                             goods_id:goods_id,
@@ -641,6 +641,7 @@
                         type:'post',
                         success:function(data){
                             $("#spec_content").html(data);
+                            $('#myModal_Spec').modal('hide');
                         },
                         error:function(){
                             alert('添加出错，请稍后再试！');
