@@ -307,7 +307,8 @@ class GoodsController extends Controller
     public function spec_delete(Request $request)
     {
         $spec_id = $request->get('spec_id');              //规格类ID
-        return view('Branch/Goods/goods_spec_delete', ['spec_id'=>$spec_id]);
+        $spec = CateringSpec::getOne(['id'=>$spec_id]);
+        return view('Branch/Goods/goods_spec_delete', ['spec'=>$spec]);
     }
 
     //编辑子规格弹窗

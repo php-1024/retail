@@ -1,6 +1,7 @@
 <form method="post" class="form-horizontal"  role="form" id="spec_delete_check" action="{{ url('branch/ajax/spec_delete_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="spec_id" value="{{$spec_id}}">
+    <input type="hidden" name="spec_id" id="spec_id" value="{{$spec->id}}">
+    <input type="hidden" name="goods_id" id="goods_id" value="{{$spec->goods_id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -31,7 +32,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         var token = $('#_token').val();
-        var spec_id = $('#spec_id').val();
+        var goods_id = $('#goods_id').val();
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
@@ -47,12 +48,12 @@
                         url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
                         data:{
                             _token:token,
-                            goods_id:spec_id,
+                            goods_id:goods_id,
                         },
                         type:'post',
                         success:function(data){
                             $("#spec_content").html(data);
-                            $('#myModal').modal('hide');
+                            $('#myModal_Spec_Item').modal('hide');
                         },
                         error:function(){
                             alert('添加出错，请稍后再试！');
