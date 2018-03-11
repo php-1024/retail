@@ -164,10 +164,10 @@ class UserController extends Controller{
             $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['store_id',$store_id]]);//查询粉丝标签关联表有没有数据
 
             if(!empty($oneData)){
-                dd($oneData->label_id);
                 if($oneData->label_id != 0){
                     //减少原粉丝标签的人数
                     $label_number = Label::getPluck([['id',$oneData->label_id]],'label_number')->first();//获取原粉丝标签的人数
+                    dd($label_number);
                     $number = $label_number-1;
                     Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
                 }
