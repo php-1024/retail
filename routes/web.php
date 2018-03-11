@@ -769,6 +769,12 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('goods_edit_check', 'Branch\GoodsController@goods_edit_check')->middleware('BranchCheckAjax');                 //商品编辑检测
         Route::any('goods_spec', 'Branch\GoodsController@goods_spec')->middleware('BranchCheckAjax');                             //商品规格页面
         Route::post('spec_add_check', 'Branch\GoodsController@spec_add_check')->middleware('BranchCheckAjax');                     //规格类添加检测
+
+        Route::post('edit_spec', 'Branch\GoodsController@edit_spec')->middleware('BranchCheckAjax');                       //编辑规格类弹窗
+        Route::post('delete_spec', 'Branch\GoodsController@delete_spec')->middleware('BranchCheckAjax');                   //删除规格类弹窗
+        Route::post('edit_spec_item', 'Branch\GoodsController@edit_spec_item')->middleware('BranchCheckAjax');             //编辑子规格类弹窗
+        Route::post('delete_spec_stem', 'Branch\GoodsController@delete_spec_stem')->middleware('BranchCheckAjax');         //删除子规格类弹窗
+
         Route::post('spec_item_add', 'Branch\GoodsController@spec_item_add')->middleware('BranchCheckAjax');                       //子规格添加弹窗
         Route::post('spec_item_add_check', 'Branch\GoodsController@spec_item_add_check')->middleware('BranchCheckAjax');           //子规格添加检测
         Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //上传文件检测

@@ -1,6 +1,10 @@
 @foreach($spec as $key=>$val)
 <form method="get" role="form" id="searchForm" action="">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    <input type="hidden" id="edit_spec" value="{{ url('branch/ajax/edit_spec') }}">
+    <input type="hidden" id="delete_spec" value="{{ url('branch/ajax/delete_spec') }}">
+    <input type="hidden" id="edit_spec_item" value="{{ url('branch/ajax/edit_spec_item') }}">
+    <input type="hidden" id="delete_spec_stem" value="{{ url('branch/ajax/delete_spec_stem') }}">
     <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
@@ -28,6 +32,26 @@
     //编辑规格类
     function editSpec(spec_id) {
         console.log(spec_id);
+        var url = $('#edit_spec').val();
+        var token = $('#_token').val();
+        var data = {'spec_id':spec_id,'_token':token};
+        console.log(data)
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
     }
     //删除规格类
     function deleteSpec(spec_id) {
