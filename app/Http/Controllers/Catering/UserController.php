@@ -168,7 +168,7 @@ class UserController extends Controller{
                     //减少原粉丝标签的人数
                     $label_number = Label::getPluck([['id',$oneData->label_id]],'label_number')->first();//获取原粉丝标签的人数
                     $number = $label_number-1;
-                    Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
+                    Label::editLabel([['id',$oneData->label_id]],['label_number'=>$number]);//修改粉丝标签的人数
                 }
                  if($label_id != 0){
                      //增加现有的粉丝标签人数
