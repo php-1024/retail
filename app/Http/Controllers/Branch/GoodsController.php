@@ -372,7 +372,17 @@ class GoodsController extends Controller
     public function upload_thumb_check(Request $request)
     {
         $file = $request->file('upload_thumb');
-        dd($file);
+        if ($file->isValid()) {
+            //检验文件是否有效
+            $realPath = $file->getRealPath();   //临时文件绝对路径
+
+            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
+            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;
+            $path = $file->move(base_path() . '/storage/uploads', $new_name);
+            return response()->json(['path' => $path]);
+        } else {
+            dd("文件不存在！");
+        }
     }
 
 
