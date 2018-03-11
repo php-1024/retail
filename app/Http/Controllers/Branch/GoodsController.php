@@ -82,7 +82,6 @@ class GoodsController extends Controller
     //编辑商品
     public function goods_edit(Request $request)
     {
-        dump($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
@@ -375,15 +374,13 @@ class GoodsController extends Controller
         $file = $request->file('upload_thumb');
         if ($file->isValid()) {
             //检验文件是否有效
-            $realPath = $file->getRealPath();   //临时文件绝对路径
-
             $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $path = $file->move(base_path() . '/uploads', $new_name);
-            echo $path;
-//            return response()->json(['path' => $path]);
+            $path = $file->move(base_path() . '/uploads', $new_name);   //$path上传后的文件路径
+            $file_path =  '/uploads/'.$new_name;
+            return response()->json(['file_path' => $file_path,'status' => '1']);
         } else {
-            dd("文件不存在！");
+            return response()->json(['status' => '0']);
         }
     }
 

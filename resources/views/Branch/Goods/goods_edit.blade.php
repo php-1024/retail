@@ -618,6 +618,7 @@
             processData: false,
             success: function (returndata) {
                 console.log(returndata);
+                $('#myModal3').modal('hide');
             },
             error: function (returndata) {
                 console.log(returndata);
