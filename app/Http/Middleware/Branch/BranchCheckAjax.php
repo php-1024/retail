@@ -61,6 +61,7 @@ class BranchCheckAjax{
             case "branch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             case "branch/ajax/spec_add_check":          //检测是否登录 权限 安全密码
             case "branch/ajax/spec_edit_check":         //检测是否登录 权限 安全密码
+            case "branch/ajax/spec_item_edit_check":    //检测是否登录 权限 安全密码
             case "branch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);

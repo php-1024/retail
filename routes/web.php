@@ -771,10 +771,11 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('spec_add_check', 'Branch\GoodsController@spec_add_check')->middleware('BranchCheckAjax');                     //规格类添加检测
         Route::post('spec_edit_check', 'Branch\GoodsController@spec_edit_check')->middleware('BranchCheckAjax');                   //规格类编辑检测
 
-        Route::post('spec_edit', 'Branch\GoodsController@spec_edit')->middleware('BranchCheckAjax');                       //编辑规格类弹窗
-        Route::post('spec_delete', 'Branch\GoodsController@spec_delete')->middleware('BranchCheckAjax');                   //删除规格类弹窗
-        Route::post('spec_item_edit', 'Branch\GoodsController@spec_item_edit')->middleware('BranchCheckAjax');             //编辑子规格类弹窗
-        Route::post('spec_stem_delete', 'Branch\GoodsController@spec_stem_delete')->middleware('BranchCheckAjax');         //删除子规格类弹窗
+        Route::post('spec_edit', 'Branch\GoodsController@spec_edit')->middleware('BranchCheckAjax');                        //编辑规格类弹窗
+        Route::post('spec_delete', 'Branch\GoodsController@spec_delete')->middleware('BranchCheckAjax');                    //删除规格类弹窗
+        Route::post('spec_item_edit', 'Branch\GoodsController@spec_item_edit')->middleware('BranchCheckAjax');              //编辑子规格类弹窗
+        Route::post('spec_item_edit_check', 'Branch\GoodsController@spec_item_edit_check')->middleware('BranchCheckAjax');  //编辑子规格检测
+        Route::post('spec_stem_delete', 'Branch\GoodsController@spec_stem_delete')->middleware('BranchCheckAjax');          //删除子规格类弹窗
 
         Route::post('spec_item_add', 'Branch\GoodsController@spec_item_add')->middleware('BranchCheckAjax');                       //子规格添加弹窗
         Route::post('spec_item_add_check', 'Branch\GoodsController@spec_item_add_check')->middleware('BranchCheckAjax');           //子规格添加检测
