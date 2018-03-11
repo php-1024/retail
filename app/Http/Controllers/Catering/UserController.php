@@ -147,7 +147,7 @@ class UserController extends Controller{
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户管理
-    public function store_member_add_check(Request $request){
+    public function store_label_add_check(Request $request){
 
         dd(1);
 //        $member_id = $request->member_id;//会员标签id
