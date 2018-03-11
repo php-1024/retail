@@ -230,7 +230,6 @@ class GoodsController extends Controller
     {
         $spec_id = $request->get('spec_id');              //商品的ID
         $spec = CateringSpec::getOne([['id',$spec_id]]);
-        dd($spec);
         return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec,'spec_id'=>$spec_id]);
     }
 
