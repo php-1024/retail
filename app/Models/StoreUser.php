@@ -24,11 +24,6 @@ class StoreUser extends Model{
         return $this->belongsTo('App\Models\User','user_id','id');
     }
 
-    //UserLabel表一对一的关系
-    public function UserLabel()
-    {
-        return $this->belongsTo('App\Models\UserLabel','user_id','user_id');
-    }
 
     //用户消费推荐表（导流）一对一的关系
     public function userRecommender()
@@ -76,7 +71,7 @@ class StoreUser extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->with('UserLabel')->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
