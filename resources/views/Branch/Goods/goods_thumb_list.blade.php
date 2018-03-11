@@ -17,104 +17,22 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($goods_thumb as $key=>$val)
         <tr>
             <td>
-                <img src="{{asset('public/Branch')}}/images/m0.jpg" style="width: 50px; height: 50px;">
+                <img src="{{asset('/'.$val->thumb)}}" style="width: 50px; height: 50px;">
             </td>
             <td>
-                http://mydomain.com/images/image1.png
+                {{asset('/'.$val->thumb)}}
             </td>
             <td>
-                <input type="text" name="sort" size="3" value="1" />
+                <input type="text" name="displayorder" size="3" value="{{$val->displayorder}}" />
             </td>
             <td>
                 <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
             </td>
         </tr>
-        <tr>
-            <td>
-                <img src="{{asset('public/Branch')}}/images/m1.jpg" style="width: 50px; height: 50px;">
-            </td>
-            <td>
-                http://mydomain.com/images/image2.png
-            </td>
-            <td>
-                <input type="text" name="sort" size="3" value="2" />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="{{asset('public/Branch')}}/images/m2.jpg" style="width: 50px; height: 50px;">
-            </td>
-            <td>
-                http://mydomain.com/images/image3.png
-            </td>
-            <td>
-                <input type="text" name="sort" size="3" value="3" />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="{{asset('public/Branch')}}/images/m3.jpg" style="width: 50px; height: 50px;">
-            </td>
-            <td>
-                http://mydomain.com/images/image4.png
-            </td>
-            <td>
-                <input type="text" name="sort" size="3" value="4" />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="{{asset('public/Branch')}}/images/m4.jpg" style="width: 50px; height: 50px;">
-            </td>
-            <td>
-                http://mydomain.com/images/image5.png
-            </td>
-            <td>
-                <input type="text" name="sort" size="3" value="5" />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="{{asset('public/Branch')}}/images/m5.jpg" style="width: 50px; height: 50px;">
-            </td>
-            <td>
-                http://mydomain.com/images/image6.png
-            </td>
-            <td>
-                <input type="text" name="sort" size="3" value="6" />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="{{asset('public/Branch')}}/images/m6.jpg" style="width: 50px; height: 50px;">
-            </td>
-            <td>
-                http://mydomain.com/images/image7.png
-            </td>
-            <td>
-                <input type="text" name="sort" size="3" value="7" />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
     <div class="line line-dashed b-b line-lg pull-in"></div>
