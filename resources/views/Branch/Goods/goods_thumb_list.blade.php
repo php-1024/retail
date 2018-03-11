@@ -20,7 +20,7 @@
         @foreach($goods_thumb as $key=>$val)
         <tr>
             <td>
-                <img src="{{asset('/'.$val->thumb)}}" style="width: 50px; height: 50px;">
+                <img src="{{asset('/')}}{{$val->thumb}}" style="width: 50px; height: 50px;">
             </td>
             <td>
                 {{asset('/'.$val->thumb)}}
