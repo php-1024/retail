@@ -96,7 +96,7 @@
                                             <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->store_id}}','{{$value->nickname}}')">
                                                     <option value="0">无标签</option>
                                                 @foreach($label as $k=>$v)
-                                                    <option value="{{$v->id}}" @if($v->id == $value->label) selected="selected" @endif>{{$v->label_name}}$v->id == $value->label</option>
+                                                    <option value="{{$v->id}}" @if($v->id == $value->label_id) selected @endif>{{$v->label_name}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
