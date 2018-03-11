@@ -8,6 +8,7 @@ use App\Models\StoreUser;
 use App\Models\StoreUserLog;
 use App\Models\User;
 use App\Models\UserInfo;
+use App\Models\UserLabel;
 use App\Models\UserOrigin;
 use App\Models\UserRecommender;
 use Illuminate\Http\Request;
@@ -150,21 +151,35 @@ class UserController extends Controller{
     //粉丝用户管理
     public function store_label_add_check(Request $request){
 
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
         $label_id = $request->label_id;//会员标签id
         $user_id = $request->user_id;//用户id
         $store_id = $request->store_id;//店铺id
-//
-//        DB::beginTransaction();
-//        try {
-//            MemberLabel::where('id',$id)->forceDelete();
-//            if($admin_data['is_super'] != 2){
-//                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$member_name);//保存操作记录
-//            }
-//            DB::commit();
-//        } catch (\Exception $e) {
-//            DB::rollBack();//事件回滚
-//            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
-//        }
+        $nickname = $request->nickname;//微信昵称
+
+        DB::beginTransaction();
+        try {
+            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['store_id',$store_id]]);
+            if(!empty($oneData)){
+
+            }else{
+                UserLabel::addUserLabel(['label_id'=>$label_id,'user_id'=>$user_id,'store_id'=>$store_id,'branch_id'=>'0']);//粉丝与标签关系表
+                $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();
+                $number = $label_number+1;
+                Label::editLabel([['id',$label_id]],['label_number'=>$number]);
+            }
+            if($admin_data['is_super'] != 2){
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
+            }
+            DB::commit();
+
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
+        }
     }
 
     //粉丝用户管理编辑
