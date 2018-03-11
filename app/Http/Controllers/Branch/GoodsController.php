@@ -371,6 +371,8 @@ class GoodsController extends Controller
     //上传图片处理
     public function upload_thumb_check(Request $request)
     {
+        $goods_id = $request->get('goods_id');
+        dd($goods_id);
         $file = $request->file('upload_thumb');
         if ($file->isValid()) {
             //检验文件是否有效

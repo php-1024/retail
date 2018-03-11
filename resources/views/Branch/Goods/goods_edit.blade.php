@@ -465,6 +465,7 @@
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -574,14 +575,14 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     //规格添加成功后异步刷新规格部分
                     $.ajax({
                         url:'{{url('branch/ajax/goods_spec')}}',
                         data:{
                             _token:token,
-                            goods_id:goods_id,
+                            goods_id:goods_id
                         },
                         type:'post',
                         success:function(data){
@@ -598,8 +599,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
