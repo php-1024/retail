@@ -4,7 +4,7 @@
     <input type="hidden" id="spec_edit" value="{{ url('branch/ajax/spec_edit') }}">
     <input type="hidden" id="spec_delete" value="{{ url('branch/ajax/spec_delete') }}">
     <input type="hidden" id="spec_item_edit" value="{{ url('branch/ajax/spec_item_edit') }}">
-    <input type="hidden" id="spec_stem_delete" value="{{ url('branch/ajax/spec_stem_delete') }}">
+    <input type="hidden" id="spec_item_delete" value="{{ url('branch/ajax/spec_item_delete') }}">
     <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
