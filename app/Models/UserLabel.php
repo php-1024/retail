@@ -13,10 +13,6 @@ class UserLabel extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    public function StoreUser()
-    {
-        return $this->hasOne('App\Models\StoreUser','user_id','user_id');
-    }
 
 
     //简易型查询单条数据关联查询
