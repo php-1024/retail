@@ -144,6 +144,9 @@ class GoodsController extends Controller
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
 
+
+
+
     //规格类添加
     public function spec_add_check(Request $request)
     {
@@ -174,24 +177,6 @@ class GoodsController extends Controller
             return response()->json(['data' => '添加规格类失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '添加规格类信息成功', 'status' => '1', 'spec_id' => $spec_id]);
-    }
-
-
-    //规格部分页面
-    public function goods_spec(Request $request)
-    {
-        $goods_id = $request->get('goods_id');              //商品的ID
-        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
-    }
-
-
-    //子规格添加弹窗
-    public function spec_item_add(Request $request)
-    {
-        $spec_id = $request->input('spec_id');
-        $goods_id = $request->input('goods_id');
-        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
     }
 
     //子规格添加
@@ -227,6 +212,66 @@ class GoodsController extends Controller
 
     }
 
+
+
+    //规格异步加载部分
+    public function goods_spec(Request $request)
+    {
+        $goods_id = $request->get('goods_id');              //商品的ID
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
+    }
+
+
+
+
+    //编辑规格类弹窗
+    public function edit_spec(Request $request)
+    {
+        $goods_id = $request->get('goods_id');              //商品的ID
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/edit_spec', ['spec'=>$spec]);
+    }
+
+    //删除规格类弹窗
+    public function delete_spec(Request $request)
+    {
+        $goods_id = $request->get('goods_id');              //商品的ID
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/delete_spec', ['spec'=>$spec]);
+    }
+
+    //编辑子规格弹窗
+    public function edit_spec_item(Request $request)
+    {
+        $goods_id = $request->get('goods_id');              //商品的ID
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/edit_spec_item', ['spec'=>$spec]);
+    }
+
+    //删除子规格弹窗
+    public function delete_spec_stem(Request $request)
+    {
+        $goods_id = $request->get('goods_id');              //商品的ID
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/delete_spec_stem', ['spec'=>$spec]);
+    }
+
+
+    //添加子规格弹窗
+    public function spec_item_add(Request $request)
+    {
+        $spec_id = $request->input('spec_id');
+        $goods_id = $request->input('goods_id');
+        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
+    }
+
+
+
+
+
+
+    //上传图片处理
     public function upload_thumb_check(Request $request)
     {
 
@@ -235,6 +280,8 @@ class GoodsController extends Controller
 
         dd($path);
     }
+
+
 
     //商品列表
     public function goods_list(Request $request)
