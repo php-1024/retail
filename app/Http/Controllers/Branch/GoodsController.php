@@ -285,15 +285,12 @@ class GoodsController extends Controller
         $spec_id = $request->get('spec_id');              //规格类ID
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
-        $list = CateringSpecItem::getList(['spec_id'=>$spec_id],0,'id','DESC');
-        dd($list);
         DB::beginTransaction();
         try {
             CateringSpec::deleteCateringSpec($spec_id);
-            $list = CateringSpec::getList(['spec_id'=>$spec_id],0,'id','DESC');
-            dd($list);
+            $list = CateringSpecItem::getList(['spec_id'=>$spec_id],0,'id','DESC');
             foreach ($list as $key=>$val){
-                CateringSpecItem::deleteCateringSpecItem($spec_id);
+                CateringSpecItem::deleteCateringSpecItem($val->id);
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
