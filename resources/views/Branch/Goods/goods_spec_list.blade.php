@@ -34,12 +34,12 @@
         console.log(spec_id);
     }
     //编辑子规格
-    function editSpecItem(spec_id) {
-        console.log(spec_id);
+    function editSpecItem(spec_item_id) {
+        console.log(spec_item_id);
     }
     //删除子规格
-    function deleteSpecItem(spec_id) {
-        console.log(spec_id);
+    function deleteSpecItem(spec_item_id) {
+        console.log(spec_item_id);
     }
 
     //弹出子规格添加页面
