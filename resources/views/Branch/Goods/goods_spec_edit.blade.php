@@ -1,6 +1,5 @@
 <form method="post" class="form-horizontal"  role="form" id="spec_edit_check" action="{{ url('branch/ajax/spec_edit_check') }}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     <input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">
      <input type="hidden" name="spec_id" value="{{$spec_id}}">
      <div class="modal-dialog">
          <div class="modal-content">
@@ -13,7 +12,7 @@
                      <div class="form-group">
                          <label class="col-sm-2 control-label" for="input-id-1">规格名称</label>
                          <div class="col-sm-10">
-                             <input type="text" class="form-control" name="spec_item_name" value="">
+                             <input type="text" class="form-control" name="spec_name" value="">
                          </div>
                      </div>
                      <div class="line line-dashed b-b line-lg pull-in"></div>
