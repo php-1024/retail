@@ -229,6 +229,7 @@ class GoodsController extends Controller
     public function edit_spec(Request $request)
     {
         $spec_id = $request->get('spec_id');              //商品的ID
+        dd($spec_id);
         return view('Branch/Goods/goods_spec_edit', ['spec_id'=>$spec_id]);
     }
 
