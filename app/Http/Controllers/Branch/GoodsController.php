@@ -226,7 +226,14 @@ class GoodsController extends Controller
 
 
     //编辑规格类弹窗
-    public function edit_spec(Request $request)
+    public function spec_edit(Request $request)
+    {
+        $spec_id = $request->get('spec_id');              //商品的ID
+        $spec = CateringSpec::getOne([['id',$spec_id]]);
+        return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec,'spec_id'=>$spec_id]);
+    }
+    //编辑规格类检测操作
+    public function spec_edit_check(Request $request)
     {
         $spec_id = $request->get('spec_id');              //商品的ID
         $spec = CateringSpec::getOne([['id',$spec_id]]);
@@ -234,7 +241,7 @@ class GoodsController extends Controller
     }
 
     //删除规格类弹窗
-    public function delete_spec(Request $request)
+    public function spec_delete(Request $request)
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
@@ -242,7 +249,7 @@ class GoodsController extends Controller
     }
 
     //编辑子规格弹窗
-    public function edit_spec_item(Request $request)
+    public function spec_item_edit(Request $request)
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
@@ -250,7 +257,7 @@ class GoodsController extends Controller
     }
 
     //删除子规格弹窗
-    public function delete_spec_stem(Request $request)
+    public function spec_stem_delete(Request $request)
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
