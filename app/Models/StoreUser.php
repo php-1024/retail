@@ -24,7 +24,7 @@ class StoreUser extends Model{
         return $this->belongsTo('App\Models\User','user_id','id');
     }
 
-    //零壹粉丝端账号表一对一的关系
+    //UserLabel表一对一的关系
     public function UserLabel()
     {
         return $this->belongsTo('App\Models\UserLabel','user_id','user_id');
@@ -45,7 +45,7 @@ class StoreUser extends Model{
 
     //查询获取列表
     public static function getListStoreUser($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::where($where)->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort);
+        $model = self::where($where)->with('UserLabel')->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -76,7 +76,7 @@ class StoreUser extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::where($where)->with('UserLabel')->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 }
