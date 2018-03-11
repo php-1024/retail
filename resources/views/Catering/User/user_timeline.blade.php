@@ -69,7 +69,7 @@
                                                 <label class="label bg-success m-l-xs">{{$value->nickname}}</label>
                                                 <span class="text-muted m-l-sm pull-right">
                               <i class="fa fa-clock-o"></i>
-                              2018-01-29 11:11:11
+                              {{$value->created_at}}
                             </span>
                                             </header>
                                             <div class="panel-body">
