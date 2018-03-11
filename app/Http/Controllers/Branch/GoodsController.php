@@ -249,6 +249,7 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加子规格失败，请检查', 'status' => '0']);
         }
