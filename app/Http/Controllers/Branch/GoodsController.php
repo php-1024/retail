@@ -272,6 +272,15 @@ class GoodsController extends Controller
         return view('Branch/Goods/goods_spec_item_edit', ['spec_item'=>$spec_item]);
     }
 
+    //编辑子规格操作方法
+    public function spec_item_edit_check(Request $request)
+    {
+        dd($request);
+        $spec_item_id = $request->get('spec_item_id');              //子规格id
+        $spec_item = CateringSpecItem::getOne(['id'=>$spec_item_id]);
+        return view('Branch/Goods/goods_spec_item_edit', ['spec_item'=>$spec_item]);
+    }
+
     //删除子规格弹窗
     public function spec_stem_delete(Request $request)
     {
