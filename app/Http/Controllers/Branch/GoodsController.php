@@ -324,11 +324,18 @@ class GoodsController extends Controller
     }
 
     //删除子规格弹窗
-    public function spec_stem_delete(Request $request)
+    public function spec_item_delete(Request $request)
     {
-        $goods_id = $request->get('goods_id');              //商品的ID
-        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/delete_spec_stem', ['spec'=>$spec]);
+        $spec_id = $request->get('spec_id');              //规格类ID
+        $spec = CateringSpec::getOne(['id'=>$spec_id]);
+        return view('Branch/Goods/goods_spec_item_delete', ['spec'=>$spec]);
+    }
+
+
+    //删除子规格操作方法
+    public function spec_item_delete_check(Request $request)
+    {
+        dd($request);
     }
 
 
