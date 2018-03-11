@@ -283,9 +283,8 @@ class GoodsController extends Controller
     //删除规格类弹窗
     public function spec_delete(Request $request)
     {
-        $goods_id = $request->get('goods_id');              //商品的ID
-        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/delete_spec', ['spec'=>$spec]);
+        $spec_id = $request->get('spec_id');              //规格类ID
+        return view('Branch/Goods/goods_spec_delete', ['spec_id'=>$spec_id]);
     }
 
     //编辑子规格弹窗
