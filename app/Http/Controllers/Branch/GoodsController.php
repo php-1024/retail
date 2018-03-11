@@ -382,7 +382,6 @@ class GoodsController extends Controller
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
             $path = $file->move(base_path() . '/uploads', $new_name);   //$path上传后的文件路径
             $file_path =  '/uploads/'.$new_name;
-            dd($file_path);
             $goods_thumb = [
                 'goods_id' => $goods_id,
                 'thumb' => $file_path,
