@@ -288,7 +288,11 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
             CateringSpec::deleteCateringSpec($spec_id);
-            CateringSpecItem::deleteCateringSpecItem($spec_id);
+            $list = CateringSpec::getList(['spec_id'=>$spec_id],0,'id','DESC');
+            dd($list);
+            foreach ($list as $key=>$val){
+                CateringSpecItem::deleteCateringSpecItem($spec_id);
+            }
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品规格！');//保存操作记录
