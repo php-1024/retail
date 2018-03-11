@@ -92,6 +92,8 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
+        $goods_thumb = GoodsThumb::getList([['goods_id'=>$goods_id]],0,'created_at','DESC');
+        dd($goods_thumb);
         $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
