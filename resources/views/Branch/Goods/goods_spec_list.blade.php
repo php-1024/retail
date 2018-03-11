@@ -1,10 +1,10 @@
 @foreach($spec as $key=>$val)
 <form method="get" role="form" id="searchForm" action="">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-    <input type="hidden" id="edit_spec" value="{{ url('branch/ajax/edit_spec') }}">
-    <input type="hidden" id="delete_spec" value="{{ url('branch/ajax/delete_spec') }}">
-    <input type="hidden" id="edit_spec_item" value="{{ url('branch/ajax/edit_spec_item') }}">
-    <input type="hidden" id="delete_spec_stem" value="{{ url('branch/ajax/delete_spec_stem') }}">
+    <input type="hidden" id="spec_edit" value="{{ url('branch/ajax/spec_edit') }}">
+    <input type="hidden" id="spec_delete" value="{{ url('branch/ajax/spec_delete') }}">
+    <input type="hidden" id="spec_item_edit" value="{{ url('branch/ajax/spec_item_edit') }}">
+    <input type="hidden" id="spec_stem_delete" value="{{ url('branch/ajax/spec_stem_delete') }}">
     <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
@@ -32,7 +32,7 @@
     //编辑规格类
     function editSpec(spec_id) {
         console.log(spec_id);
-        var url = $('#edit_spec').val();
+        var url = $('#spec_edit').val();
         var token = $('#_token').val();
         var data = {'spec_id':spec_id,'_token':token};
         console.log(data)
