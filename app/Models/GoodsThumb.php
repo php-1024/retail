@@ -15,7 +15,7 @@ class GoodsThumb extends Model{
 
     //和商品表catering_goods表一对多的关系
     public function catering_goods(){
-        return $this->hasMany('App\Models\CateringGoods','goods_id');
+        return $this->hasMany('App\Models\CateringGoods','id');
     }
 
     //获取单条数据
