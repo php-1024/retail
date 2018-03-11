@@ -240,7 +240,7 @@ class GoodsController extends Controller
         $route_name = $request->path();                          //获取当前的页面路由
         DB::beginTransaction();
         try {
-            $spec_id = CateringSpec::editCateringSpec([['id'=>$spec_id]],['name'=>$spec_name]);
+            $spec_id = CateringSpec::editCateringSpec([['id',$spec_id]],['name'=>$spec_name]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统修改了商品规格！');//保存操作记录
