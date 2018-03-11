@@ -230,7 +230,7 @@ class GoodsController extends Controller
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_edit_spec', ['spec'=>$spec]);
+        return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec]);
     }
 
     //删除规格类弹窗
