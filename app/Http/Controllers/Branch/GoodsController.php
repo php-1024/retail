@@ -269,8 +269,7 @@ class GoodsController extends Controller
     {
         $spec_item_id = $request->get('spec_item_id');              //子规格id
         $spec_item = CateringSpecItem::getOne(['id'=>$spec_item_id]);
-        dump($spec_item);
-        return view('Branch/Goods/edit_spec_item', ['spec'=>$spec]);
+        return view('Branch/Goods/edit_spec_item', ['spec_item'=>$spec_item]);
     }
 
     //删除子规格弹窗
