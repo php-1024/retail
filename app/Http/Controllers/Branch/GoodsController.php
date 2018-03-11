@@ -392,18 +392,17 @@ class GoodsController extends Controller
                 GoodsThumb::addGoodsThumb($goods_thumb);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品子规格！');//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
                 } else {//分店本人操作记录
-                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品子规格！');//保存操作记录
+                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
                 dd($e);
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '删除规格失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '删除规格信息成功','file_path' => $file_path, 'status' => '1']);
-
+            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
 
         } else {
             return response()->json(['status' => '0']);

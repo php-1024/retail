@@ -616,6 +616,57 @@
             cache: false,
             contentType: false,
             processData: false,
+            success: function (json) {
+                if (json.status == -1) {
+                    window.location.reload();
+                } else if(json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        //图片添加成功后异步刷新图片列表部分
+                        $.ajax({
+                            url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
+                            data:formData,
+                            type:'post',
+                            success:function(data){
+                                $("#spec_content").html(data);
+                                console.log(json);
+                                $('#myModal3').modal('hide');
+                            },
+                            error:function(){
+                                alert('添加出错，请稍后再试！');
+                            }
+                        })
+                    });
+                }else{
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定"
+                    });
+                }
+            },
+            error: function (json) {
+                console.log(json);
+            }
+        });
+    }
+
+    //上传图片提交表单
+    function uploadForm() {
+        var formData = new FormData($( "#uploadForm" )[0]);
+        $.ajax({
+            url: '{{ url('branch/ajax/upload_thumb_check') }}' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (returndata) {
                 console.log(returndata);
                 $('#myModal3').modal('hide');
