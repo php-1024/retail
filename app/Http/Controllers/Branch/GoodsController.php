@@ -285,6 +285,8 @@ class GoodsController extends Controller
         $spec_id = $request->get('spec_id');              //规格类ID
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
+        $list = CateringSpec::getList(['spec_id'=>$spec_id],0,'id','DESC');
+        dd($list);
         DB::beginTransaction();
         try {
             CateringSpec::deleteCateringSpec($spec_id);
