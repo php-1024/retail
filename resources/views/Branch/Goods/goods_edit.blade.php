@@ -617,10 +617,10 @@
             contentType: false,
             processData: false,
             success: function (returndata) {
-                alert(returndata);
+                console.log(returndata);
             },
             error: function (returndata) {
-                alert(returndata);
+                console.log(returndata);
             }
         });
     }
