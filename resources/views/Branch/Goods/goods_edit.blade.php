@@ -464,7 +464,7 @@
 {{--上传图片--}}
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url('branch/ajax/upload_thumb_check') }}">
-        <input type="hidden" name="_token" id="csrf_token" value="{{csrf_token()}}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -484,7 +484,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button type="submit" class="btn btn-success">上传图片</button>
+                    <button type="button" class="btn btn-success" onclick="return uploadForm();">上传图片</button>
                 </div>
             </div>
         </div>
@@ -535,7 +535,6 @@
     function postEditForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
-        var _token = $("#csrf_token").val();
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
