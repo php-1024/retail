@@ -378,8 +378,9 @@ class GoodsController extends Controller
 
             $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;
-            $path = $file->move(base_path() . '/storage/uploads', $new_name);
-            return response()->json(['path' => $path]);
+            $path = $file->move(base_path() . '/uploads', $new_name);
+            echo $path;
+//            return response()->json(['path' => $path]);
         } else {
             dd("文件不存在！");
         }
