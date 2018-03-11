@@ -41,6 +41,13 @@ class CateringSpec extends Model{
         $model->save();
         return $model->id;
     }
+
+
+    //查询出模型，再删除模型 一定要查询到才能删除
+    public static function deleteCateringSpec($id){
+        $model = Self::find($id);
+        return $model->delete();
+    }
     
     //修改餐饮商品规格数据
     public static function editCateringSpec($where,$param){
