@@ -18,7 +18,7 @@ class CateringSpec extends Model{
         return $this->hasMany('App\Models\CateringSpecItem','spec_id');
     }
 
-    public function getOne($where)
+    public static function getOne($where)
     {
         return self::with('catering_spec_item')->where($where)->first();
     }
