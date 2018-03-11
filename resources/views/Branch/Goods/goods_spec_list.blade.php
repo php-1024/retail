@@ -31,7 +31,7 @@
 <script>
     //编辑规格类
     function editSpec(spec_id) {
-        console.log(spec_id);
+        console.log(spec_id);   //规格类id
         var url = $('#spec_edit').val();
         var token = $('#_token').val();
         var data = {'spec_id':spec_id,'_token':token};
@@ -55,7 +55,27 @@
     }
     //删除规格类
     function deleteSpec(spec_id) {
-        console.log(spec_id);
+        console.log(spec_id);       //规格类id
+        var url = $('#spec_delete').val();
+        var token = $('#_token').val();
+        var data = {'spec_id':spec_id,'_token':token};
+        console.log(data)
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
     }
     //编辑子规格
     function editSpecItem(spec_item_id) {
