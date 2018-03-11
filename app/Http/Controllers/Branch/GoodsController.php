@@ -306,6 +306,29 @@ class GoodsController extends Controller
         return response()->json(['data' => '删除规格信息成功', 'status' => '1']);
     }
 
+    //删除子规格操作方法
+    public function spec_item_delete_check(Request $request)
+    {
+        $spec_item_id = $request->get('spec_item_id');        //子规格ID
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        DB::beginTransaction();
+        try {
+            CateringSpecItem::deleteCateringSpecItem($spec_item_id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品子规格！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品子规格！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除规格失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除规格信息成功', 'status' => '1']);
+    }
+
 
     //删除规格类弹窗
     public function spec_delete(Request $request)
@@ -329,13 +352,6 @@ class GoodsController extends Controller
         $spec_item_id = $request->get('spec_item_id');  //子规格ID
         $goods_id = $request->get('goods_id');          //商品ID
         return view('Branch/Goods/goods_spec_item_delete', ['spec_item_id'=>$spec_item_id,'goods_id'=>$goods_id]);
-    }
-
-
-    //删除子规格操作方法
-    public function spec_item_delete_check(Request $request)
-    {
-        dd($request);
     }
 
 
