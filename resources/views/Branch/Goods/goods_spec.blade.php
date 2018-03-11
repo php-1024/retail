@@ -4,15 +4,15 @@
     <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
-        <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
-        <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+        <button type="button" class="btn editBtn btn-info btn-xs" onclick="editSpec('{{$val->id}}')"><i class="fa fa-edit"></i></button>
+        <button type="button" class="btn deleteBtn btn-danger btn-xs" onclick="deleteSpec('{{$val->id}}')"><i class="fa fa-times"></i></button>
     </div>
     <div class="m-t">
         @foreach($val->catering_spec_item as $k=>$v)
         <div class="m-t col-lg-2">
             <label class="label label-success">{{$v->name}}</label>
-            <button type="button" class="btn editBtn btn-info btn-xs"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn deleteBtn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn editBtn btn-info btn-xs" onclick="addSpecItem('{{$v->id}}')"><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn deleteBtn btn-danger btn-xs" onclick="deleteSpecItem('{{$v->id}}')"><i class="fa fa-times"></i></button>
         </div>
         @endforeach
         <div class="m-t col-lg-2">
