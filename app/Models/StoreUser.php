@@ -24,6 +24,12 @@ class StoreUser extends Model{
         return $this->belongsTo('App\Models\User','user_id','id');
     }
 
+    //零壹粉丝端账号表一对一的关系
+    public function UserLabel()
+    {
+        return $this->belongsTo('App\Models\UserLabel','user_id','user_id');
+    }
+
     //用户消费推荐表（导流）一对一的关系
     public function userRecommender()
     {
