@@ -27,8 +27,8 @@ class DeviceController extends Controller
     //设备管理-添加包厢检测
     public function room_add_check(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
-        dd($admin_data);
         $route_name = $request->path();                         //获取当前的页面路由
         $room_name = $request->get('room_name');    //栏目名称
         $room_data = [
