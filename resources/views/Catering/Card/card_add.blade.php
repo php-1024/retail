@@ -47,11 +47,12 @@
                                 添加会员卡
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/member_add_check') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">会员卡名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" placeholder="会员卡名称">
+                                            <input type="text" class="form-control" id="input-id-1" placeholder="会员卡名称" name="member_name">
                                         </div>
                                     </div>
 
@@ -60,7 +61,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">折扣比率</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" placeholder="0 - 1 间的 2位小数">
+                                            <input type="text" class="form-control" id="input-id-1" placeholder="0 - 1 间的 2位小数" name="discount">
                                         </div>
                                     </div>
 
@@ -69,7 +70,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">发行数量</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" >
+                                            <input type="text" class="form-control" id="input-id-1" name="issue_mun">
                                         </div>
                                     </div>
 
@@ -78,7 +79,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">会员卡价格</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" >
+                                            <input type="text" class="form-control" id="input-id-1" name="card_price">
                                         </div>
                                     </div>
 
@@ -87,13 +88,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">有效时间</label>
                                         <div class="col-sm-3">
-                                            <input class="input-sm datepicker-input form-control" size="16" type="text" value="" placeholder="开始时间" data-date-format="yyyy-mm-dd">
+                                            <input class="input-sm datepicker-input form-control" size="16" type="text" value="" placeholder="开始时间" data-date-format="yyyy-mm-dd" name="start_time">
                                         </div>
                                         <div class="col-sm-1 text-center" style="padding-top: 7px;">
                                             到
                                         </div>
                                         <div class="col-sm-3">
-                                            <input class="input-sm datepicker-input form-control" size="16" type="text" value="" placeholder="结束时间" data-date-format="yyyy-mm-dd">
+                                            <input class="input-sm datepicker-input form-control" size="16" type="text" value="" placeholder="结束时间" data-date-format="yyyy-mm-dd" name="expire_time">
                                         </div>
                                     </div>
 
@@ -102,8 +103,8 @@
                                     <div class="form-group">
                                         <label class= "col-sm-2 control-label" for="input-id-1">适用店铺范围</label>
                                         <div class="col-sm-10">
-                                            <select multiple class="chosen-select col-sm-12">
-                                                <option value="AK" selected="selected">所有店铺</option>
+                                            <select multiple class="chosen-select col-sm-12" name="adapt_store[]">
+                                                <option value="0" >所有分店</option>
                                                 <option value="HI">刘记鸡煲王（总店）</option>
                                                 <option value="CA">刘记鸡煲王（宝能店）</option>
                                             </select>
@@ -113,7 +114,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-5">
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -140,16 +141,34 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="{{asset('public/Catering')}}/js/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
         });
-
-    });
+    }
 </script>
 </body>
 </html>
