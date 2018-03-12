@@ -52,12 +52,16 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "catering/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
+            case "catering/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re,$next);
             case "catering/ajax/branch_create_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndBranchCreate($request);
                 return self::format_response($re,$next);
+            case "catering/ajax/member_add_check"://检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndMemberAdd($request);
+                return self::format_response($re,$next);
+
                 break;
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
@@ -289,6 +293,20 @@ class CateringCheckAjax
             return $re;
         }else{
             $re2 = $this->checkBranchCreate($re['response']);//检测数据是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
+    public function checkLoginAndRuleAndSafeAndMemberAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMemberAdd($re['response']);//检测数据是否为空
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -539,6 +557,28 @@ class CateringCheckAjax
         }
         if($request->input('password') <> $request->input('re_password')){
             return self::res(0,response()->json(['data' => '两次密码输入不一致', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测添加会员卡数据
+    public function checkMemberAdd($request){
+        if(empty($request->input('member_name'))){
+            return self::res(0,response()->json(['data' => '请输入会员卡名称', 'status' => '0']));
+        }
+        if(empty($request->input('discount'))){
+            return self::res(0,response()->json(['data' => '请输入折扣比例', 'status' => '0']));
+        }
+        if(empty($request->input('issue_mun'))){
+            return self::res(0,response()->json(['data' => '请输入发行数量', 'status' => '0']));
+        }
+        if(empty($request->input('card_price'))){
+            return self::res(0,response()->json(['data' => '请输入会员卡价格', 'status' => '0']));
+        }
+        if(empty($request->input('start_time'))){
+            return self::res(0,response()->json(['data' => '请选择开始时间', 'status' => '0']));
+        }
+        if(empty($request->input('expire_time'))){
+            return self::res(0,response()->json(['data' => '请选择结束时间', 'status' => '0']));
         }
         return self::res(1,$request);
     }
