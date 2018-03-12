@@ -36,7 +36,7 @@ class CategoryController extends Controller
         if (empty($category_sort)){
             $category_sort = '0';
         }
-        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         dd($store_id);
         $category_data = [
             'name' => $category_name,
