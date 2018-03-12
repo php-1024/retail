@@ -48,7 +48,7 @@ class CateringRoom extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
