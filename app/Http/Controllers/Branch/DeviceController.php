@@ -21,6 +21,12 @@ class DeviceController extends Controller
         return view('Branch/Device/room_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //设备管理-添加包厢检测
+    public function room_add_check(Request $request)
+    {
+        dd($request);
+    }
+
     //设备管理-包厢管理
     public function room_list(Request $request)
     {

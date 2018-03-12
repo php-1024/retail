@@ -788,6 +788,9 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('spec_item_add', 'Branch\GoodsController@spec_item_add')->middleware('BranchCheckAjax');                       //子规格添加弹窗
         Route::post('spec_item_add_check', 'Branch\GoodsController@spec_item_add_check')->middleware('BranchCheckAjax');           //子规格添加检测
         Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //上传文件检测
+
+
+        Route::post('room_add_check', 'Branch\DeviceController@room_add_check')->middleware('BranchCheck');   //设备管理-添加包厢
     });
 });
 /**********************餐饮分店系统*********************/
