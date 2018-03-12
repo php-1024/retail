@@ -74,7 +74,7 @@
                                         <div class="col-sm-10"><input type="text" name="mobile" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">服务商登录密码</label>
+                                        <label class="col-sm-2 control-label">商户登录密码</label>
                                         <div class="col-sm-10"><input type="password" name="proxy_password" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
