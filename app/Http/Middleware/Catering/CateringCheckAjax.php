@@ -580,6 +580,9 @@ class CateringCheckAjax
         if(empty($request->input('expire_time'))){
             return self::res(0,response()->json(['data' => '请选择结束时间', 'status' => '0']));
         }
+        if(empty($request->input('adapt_store'))){
+            return self::res(0,response()->json(['data' => '请选择适用的分店', 'status' => '0']));
+        }
         return self::res(1,$request);
     }
 
