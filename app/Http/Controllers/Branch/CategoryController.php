@@ -81,8 +81,7 @@ class CategoryController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('id');
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category = CateringCategory::getOne($where);
@@ -101,8 +100,7 @@ class CategoryController extends Controller
             $displayorder = '0';
         }
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category_data = [
