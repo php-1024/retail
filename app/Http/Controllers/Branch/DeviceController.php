@@ -66,7 +66,7 @@ class DeviceController extends Controller
         ];
         $room = CateringRoom::getPaginage($where,1,'created_at','DESC');
         dump($room);
-        return view('Branch/Device/room_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Device/room_list',['room'=>$room,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //设备管理-添加餐桌
