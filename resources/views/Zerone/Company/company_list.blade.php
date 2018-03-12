@@ -48,8 +48,8 @@
 
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label class="control-label" for="amount">服务商名称</label>
-                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入服务商名称" class="form-control">
+                                <label class="control-label" for="amount">商户名称</label>
+                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">
                             </div>
                         </div>
                         {{--<div class="col-sm-3">--}}
@@ -89,7 +89,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>服务商名称</th>
+                                        <th>商户名称</th>
                                         <th>归属服务商</th>
                                         <th>负责人姓名</th>
                                         <th>商户账号</th>
