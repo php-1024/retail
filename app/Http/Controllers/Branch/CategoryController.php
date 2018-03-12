@@ -37,12 +37,11 @@ class CategoryController extends Controller
             $category_sort = '0';
         }
         $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        dd($store_id);
         $category_data = [
             'name' => $category_name,
             'created_by' => $admin_data['id'],
             'displayorder' => $category_sort,
-            'store_id' => '5',
+            'store_id' => $store_id,
             'branch_id' => $admin_data['organization_id'],
         ];
         DB::beginTransaction();
@@ -70,8 +69,7 @@ class CategoryController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getPaginage($where,'10','displayorder','DESC');
         return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
