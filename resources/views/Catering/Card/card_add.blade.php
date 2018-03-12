@@ -113,6 +113,15 @@
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="input-id-1" name="safe_password">
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                    <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-5">
                                             <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
                                         </div>
@@ -159,13 +168,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
