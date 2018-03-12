@@ -415,8 +415,7 @@ class GoodsController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
         $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
         return view('Branch/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
