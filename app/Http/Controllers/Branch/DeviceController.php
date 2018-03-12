@@ -6,7 +6,10 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
+use App\Models\CateringRoom;
+use App\Models\OperationLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class DeviceController extends Controller
@@ -27,9 +30,14 @@ class DeviceController extends Controller
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $room_name = $request->get('room_name');    //栏目名称
+        $room_data = [
+            'name' => $room_name,
+            'program_id' => '5',
+            'organization_id' => $admin_data['organization_id'],
+        ];
         DB::beginTransaction();
         try {
-            CateringCategory::addCategory($category_data);
+            CateringRoom::addRoom($room_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了栏目分类！');//保存操作记录
