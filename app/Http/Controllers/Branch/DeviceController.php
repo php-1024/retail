@@ -64,8 +64,7 @@ class DeviceController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
-        $room = CateringRoom::getPaginage($where,1,'created_at','DESC');
-        dump($room);
+        $room = CateringRoom::getPaginage($where,10,'created_at','DESC');
         return view('Branch/Device/room_list',['room'=>$room,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
