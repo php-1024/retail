@@ -65,6 +65,7 @@ class BranchCheckAjax{
             case "branch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码
             case "branch/ajax/spec_item_delete_check":  //删除规格弹窗页面
             case "branch/ajax/spec_item_edit_check":    //检测是否登录 权限 安全密码
+            case "branch/ajax/room_add_check":          //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;

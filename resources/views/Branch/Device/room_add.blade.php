@@ -40,18 +40,20 @@
                                 添加包厢
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/room_add_check') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">包厢名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" name="room_name" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <input type="text" class="form-control" name="safe_password" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -59,7 +61,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
 
-                                            <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
+                                            <button type="button" class="btn btn-success" onclick="postForm()">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -85,15 +87,33 @@
 <script type="text/javascript" src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
         });
-    });
+    }
 </script>
 </body>
 </html>
