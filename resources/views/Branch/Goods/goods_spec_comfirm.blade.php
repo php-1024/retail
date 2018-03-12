@@ -1,6 +1,6 @@
  <form method="post" class="form-horizontal"  role="form" id="spec_item_add_check" action="{{ url('branch/ajax/spec_item_add_check') }}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     {{--<input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">--}}
+     <input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">
      <input type="hidden" name="spec_id" value="{{$spec_id}}">
      <div class="modal-dialog">
             <div class="modal-content">
@@ -50,30 +50,23 @@
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(json){
+                },function(){
                     //规格添加成功后异步刷新规格部分
-//                    alert('添加子规格类成功！');
-//                    $('#spec_content').html(json);
-//                    $('#spec_content').modal();
-//                    window.location.reload();
-
                     $.ajax({
                         url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
-                        data:{//这是参数
+                        data:{
                             _token:token,
                             goods_id:goods_id,
                         },
-                        type:'post',//提交方式
-                        success:function(data){//后台处理数据成功后的回调函数
-                            alert('ok');
+                        type:'post',
+                        success:function(data){
                             $("#spec_content").html(data);
+                            $('#myModal_Spec_Item').modal('hide');
                         },
-                        error:function(data){//后台处理数据失败后的回调函数
-                            alert('error');
-                            //   alert(data)
+                        error:function(){
+                            alert('添加出错，请稍后再试！');
                         }
                     })
-
                 });
             }else{
                 swal({
@@ -84,23 +77,5 @@
                 });
             }
         });
-
-
-//        $.post(url,data,function(response){
-//            if(response.status=='-1'){
-//                swal({
-//                    title: "提示信息",
-//                    text: response.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                },function(){
-//                    window.location.reload();
-//                });
-//                return;
-//            }else{
-//                $('#spec_content').html(response);
-//                $('#spec_content').modal();
-//            }
-//        });
     }
 </script>

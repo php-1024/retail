@@ -6,39 +6,24 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class User extends Model{
+class UserLabel extends Model{
     use SoftDeletes;
-    protected $table = 'user';
+    protected $table = 'user_label';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和账号多对多的关系
-    public function storeUser()
-    {
-        return $this->hasOne('App\Models\StoreUser','user_id','id');
-    }
-    //和账号多对多的关系
-    public function UserInfo()
-    {
-        return $this->hasOne('App\Models\UserInfo','user_id','id');
-    }
-    //和店铺粉丝操作记录一对多
-    public function StoreUserLog()
-    {
-        return $this->hasMany('App\Models\StoreUserLog','user_id','id');
-    }
 
 
     //简易型查询单条数据关联查询
-    public static function getOneUser($where)
+    public static function getOneUserLabel($where)
     {
-        return self::where($where)->with('UserInfo')->first();
+        return self::where($where)->first();
     }
 
 
     //查询获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    public static function getListUserLabel($where,$limit=0,$orderby,$sort='DESC'){
         $model = self::where($where)->orderBy($orderby,$sort);
         if(!empty($limit)){
             $model = $model->limit($limit);
@@ -46,8 +31,19 @@ class User extends Model{
         return $model->get();
     }
 
+    //粉丝与会员标签关联
+    public static function addUserLabel($param){
+        $model = new UserLabel();
+        $model->store_id = $param['store_id'];//总店ID
+        $model->branch_id = $param['branch_id'];//分店id
+        $model->label_id = $param['label_id'];//标签id
+        $model->user_id = $param['user_id'];//用户id
+        $model->save();
+        return $model->id;
+    }
+
     //修改数据
-    public static function editUser($where,$param){
+    public static function editUserLabel($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;

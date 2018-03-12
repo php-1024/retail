@@ -619,7 +619,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
         Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
 
-        Route::post('store_member_add_check','Catering\UserController@store_member_add_check')->middleware('CateringCheckAjax'); //粉丝会员标签功能提交
+        Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheckAjax');   //粉丝会员标签功能提交
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                 //列表编辑ajax显示
         Route::post('user_list_edit_check','Catering\UserController@user_list_edit_check')->middleware('CateringCheckAjax');     //列表编辑功能提交
         Route::post('user_list_lock','Catering\UserController@user_list_lock')->middleware('CateringCheckAjax');                 //列表冻结ajax显示
@@ -769,6 +769,16 @@ Route::group(['prefix'=>'branch'],function(){
         Route::post('goods_edit_check', 'Branch\GoodsController@goods_edit_check')->middleware('BranchCheckAjax');                 //商品编辑检测
         Route::any('goods_spec', 'Branch\GoodsController@goods_spec')->middleware('BranchCheckAjax');                             //商品规格页面
         Route::post('spec_add_check', 'Branch\GoodsController@spec_add_check')->middleware('BranchCheckAjax');                     //规格类添加检测
+        Route::post('spec_edit_check', 'Branch\GoodsController@spec_edit_check')->middleware('BranchCheckAjax');                   //规格类编辑检测
+
+        Route::post('spec_edit', 'Branch\GoodsController@spec_edit')->middleware('BranchCheckAjax');                        //编辑规格类弹窗
+        Route::post('spec_delete', 'Branch\GoodsController@spec_delete')->middleware('BranchCheckAjax');                    //删除规格类弹窗
+        Route::post('spec_delete_check', 'Branch\GoodsController@spec_delete_check')->middleware('BranchCheckAjax');        //删除规格类检测
+        Route::post('spec_item_edit', 'Branch\GoodsController@spec_item_edit')->middleware('BranchCheckAjax');              //编辑子规格类弹窗
+        Route::post('spec_item_edit_check', 'Branch\GoodsController@spec_item_edit_check')->middleware('BranchCheckAjax');  //编辑子规格检测
+        Route::post('spec_item_delete', 'Branch\GoodsController@spec_item_delete')->middleware('BranchCheckAjax');          //删除子规格类弹窗
+        Route::post('spec_item_delete_check', 'Branch\GoodsController@spec_item_delete_check')->middleware('BranchCheckAjax');          //删除子规格类弹窗
+
         Route::post('spec_item_add', 'Branch\GoodsController@spec_item_add')->middleware('BranchCheckAjax');                       //子规格添加弹窗
         Route::post('spec_item_add_check', 'Branch\GoodsController@spec_item_add_check')->middleware('BranchCheckAjax');           //子规格添加检测
         Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //上传文件检测

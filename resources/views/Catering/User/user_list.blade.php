@@ -47,7 +47,7 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="store_member_add_check" value="{{ url('catering/ajax/store_member_add_check') }}">
+                                    <input type="hidden" id="store_label_add_check" value="{{ url('catering/ajax/store_label_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('catering/ajax/user_list_edit') }}">
                                     <input type="hidden" id="user_list_wallet" value="{{ url('catering/ajax/user_list_wallet') }}">
                                     <input type="hidden" id="user_list_lock" value="{{ url('catering/ajax/user_list_lock') }}">
@@ -93,10 +93,10 @@
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->id}}')">
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->store_id}}','{{$value->nickname}}')">
                                                     <option value="0">无标签</option>
                                                 @foreach($label as $k=>$v)
-                                                    <option value="{{$v->id}}">{{$v->label_name}}</option>
+                                                    <option value="{{$v->id}}" @if($v->id == $value->label_id) selected @endif>{{$v->label_name}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -119,7 +119,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                       {{--{{$list->links()}}--}}
+                                       {{$list->links()}}
                                     </div>
                                 </div>
                             </footer>
@@ -217,13 +217,32 @@
         });
     }
 
-    function changeUserTag(obj,user_id){
-        var member_id = $(obj).val();
-        var url = $('#store_member_add_check').val();
+    function changeUserTag(obj,user_id,store_id,nickname){
+        var label_id = $(obj).val();
+        var url = $('#store_label_add_check').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'member_id':member_id,'user_id':user_id};
+        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'store_id':store_id,'nickname':nickname};
         $.post(url,data,function(json){
-                console.log(json);
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
         });
     }
 </script>

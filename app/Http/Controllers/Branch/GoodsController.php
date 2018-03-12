@@ -9,9 +9,10 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
 use App\Models\CateringGoods;
+use App\Models\GoodsThumb;
 use App\Models\OperationLog;
-use App\Models\Spec;
-use App\Models\SpecItem;
+use App\Models\CateringSpec;
+use App\Models\CateringSpecItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -71,7 +72,6 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
         }
@@ -91,10 +91,11 @@ class GoodsController extends Controller
             'program_id' => '5',
             'organization_id' => $admin_data['organization_id'],
         ];
+        $goods_thumb = GoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
-        $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_edit', ['category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //编辑商品操作
@@ -137,12 +138,14 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '编辑商品失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
+
+
+
 
     //规格类添加
     public function spec_add_check(Request $request)
@@ -160,7 +163,7 @@ class GoodsController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $spec_id = Spec::addSpec($spec_data);
+            $spec_id = CateringSpec::addCateringSpec($spec_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品规格！');//保存操作记录
@@ -169,29 +172,10 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加规格类失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '添加规格类信息成功', 'status' => '1', 'spec_id' => $spec_id]);
-    }
-
-
-    //规格部分页面
-    public function goods_spec(Request $request)
-    {
-        $goods_id = $request->get('goods_id');              //获取当前的页面路由
-        dump($goods_id);
-        $spec = Spec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_spec', ['spec'=>$spec,'admin_data']);
-    }
-
-
-    //子规格添加弹窗
-    public function spec_item_add(Request $request)
-    {
-        $spec_id = $request->input('spec_id');
-        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id]);
     }
 
     //子规格添加
@@ -210,7 +194,7 @@ class GoodsController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $spec_id = SpecItem::addSpecItem($spec_item_data);
+            $spec_id = CateringSpecItem::addSpecItem($spec_item_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品子规格！');//保存操作记录
@@ -219,7 +203,6 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加子规格失败，请检查', 'status' => '0']);
         }
@@ -227,14 +210,202 @@ class GoodsController extends Controller
 
     }
 
+
+
+    //规格异步加载部分
+    public function goods_spec(Request $request)
+    {
+        $goods_id = $request->get('goods_id');              //商品的ID
+        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
+    }
+
+
+
+
+    //编辑规格类弹窗
+    public function spec_edit(Request $request)
+    {
+        $spec_id = $request->get('spec_id');              //商品的ID
+        $spec = CateringSpec::getOne([['id',$spec_id]]);
+        return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec,'spec_id'=>$spec_id]);
+    }
+    //编辑规格类操作方法
+    public function spec_edit_check(Request $request)
+    {
+        $spec_id = $request->get('spec_id');              //规格类ID
+        $spec_name = $request->get('spec_name');          //规格类名称
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        DB::beginTransaction();
+        try {
+            $spec_id = CateringSpec::editCateringSpec([['id',$spec_id]],['name'=>$spec_name]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统修改了商品规格！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了商品规格！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑规格失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
+    }
+
+    //编辑子规格操作方法
+    public function spec_item_edit_check(Request $request)
+    {
+        $spec_item_id = $request->get('spec_item_id');              //子规格id
+        $spec_item_name = $request->get('spec_item_name');              //子规格id
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        DB::beginTransaction();
+        try {
+            $spec_id = CateringSpecItem::editSpecItem([['id',$spec_item_id]],['name'=>$spec_item_name]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统修改了商品子规格！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了商品子规格！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '编辑子规格失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '编辑子规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
+    }
+
+    //删除规格类操作方法
+    public function spec_delete_check(Request $request)
+    {
+        $spec_id = $request->get('spec_id');              //规格类ID
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        DB::beginTransaction();
+        try {
+            CateringSpec::deleteCateringSpec($spec_id);
+            $list = CateringSpecItem::getList(['spec_id'=>$spec_id],0,'id','DESC');
+            foreach ($list as $key=>$val){
+                CateringSpecItem::deleteCateringSpecItem($val->id);
+            }
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品规格！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品规格！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除规格失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除规格信息成功', 'status' => '1']);
+    }
+
+    //删除子规格操作方法
+    public function spec_item_delete_check(Request $request)
+    {
+        $spec_item_id = $request->get('spec_item_id');        //子规格ID
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        DB::beginTransaction();
+        try {
+            CateringSpecItem::deleteCateringSpecItem($spec_item_id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品子规格！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品子规格！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除规格失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除规格信息成功', 'status' => '1']);
+    }
+
+
+    //删除规格类弹窗
+    public function spec_delete(Request $request)
+    {
+        $spec_id = $request->get('spec_id');              //规格类ID
+        $spec = CateringSpec::getOne(['id'=>$spec_id]);
+        return view('Branch/Goods/goods_spec_delete', ['spec'=>$spec]);
+    }
+
+    //编辑子规格弹窗
+    public function spec_item_edit(Request $request)
+    {
+        $spec_item_id = $request->get('spec_item_id');              //子规格id
+        $spec_item = CateringSpecItem::getOne(['id'=>$spec_item_id]);
+        return view('Branch/Goods/goods_spec_item_edit', ['spec_item'=>$spec_item]);
+    }
+
+    //删除子规格弹窗
+    public function spec_item_delete(Request $request)
+    {
+        $spec_item_id = $request->get('spec_item_id');  //子规格ID
+        $goods_id = $request->get('goods_id');          //商品ID
+        return view('Branch/Goods/goods_spec_item_delete', ['spec_item_id'=>$spec_item_id,'goods_id'=>$goods_id]);
+    }
+
+
+    //添加子规格弹窗
+    public function spec_item_add(Request $request)
+    {
+        $spec_id = $request->input('spec_id');
+        $goods_id = $request->input('goods_id');
+        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
+    }
+
+
+
+
+
+
+    //上传图片处理
     public function upload_thumb_check(Request $request)
     {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $goods_id = $request->get('goods_id');
+        $file = $request->file('upload_thumb');
+        if ($file->isValid()) {
+            //检验文件是否有效
+            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
+            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
+            $path = $file->move(base_path() . '/uploads/catering/', $new_name);   //$path上传后的文件路径
+            $file_path =  'uploads/catering/'.$new_name;
+            $goods_thumb = [
+                'goods_id' => $goods_id,
+                'thumb' => $file_path,
+            ];
+            DB::beginTransaction();
+            try {
+                GoodsThumb::addGoodsThumb($goods_thumb);
+                //添加操作日志
+                if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
+                } else {//分店本人操作记录
+                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
 
-//        Storage::put('avatars/1', $fileContents);
-        $path = $request->file('upload_thumb');
-
-        dd($path);
+        } else {
+            return response()->json(['status' => '0']);
+        }
     }
+
+
 
     //商品列表
     public function goods_list(Request $request)

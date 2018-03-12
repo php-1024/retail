@@ -18,17 +18,23 @@ class BranchCheckAjax{
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "branch/ajax/branch_select":         //超级管理员选择分店提交数据
-            case "branch/ajax/category_edit":         //栏目编辑页面
-            case "branch/ajax/role_edit":             //编辑权限角色弹出框检测登入和权限
-            case "branch/ajax/role_delete":           //删除权限角色弹出框检测登入和权限
-            case "branch/ajax/quick_rule":            //快速授权检测登入和权限
-            case "branch/ajax/subordinate_edit":      //编辑下属人员信息
-            case "branch/ajax/subordinate_authorize": //编辑——授权下属人员
-            case "branch/ajax/subordinate_lock":      //冻结下属页面
-            case "branch/ajax/selected_rule":         //编辑——授权下属人员
-            case "branch/ajax/goods_spec":            //商品规格页面
-            case "branch/ajax/spec_item_add":         //子规格添加弹窗页面
+            case "branch/ajax/branch_select":           //超级管理员选择分店提交数据
+            case "branch/ajax/category_edit":           //栏目编辑页面
+            case "branch/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
+            case "branch/ajax/role_delete":             //删除权限角色弹出框检测登入和权限
+            case "branch/ajax/quick_rule":              //快速授权检测登入和权限
+            case "branch/ajax/subordinate_edit":        //编辑下属人员信息
+            case "branch/ajax/subordinate_authorize":   //编辑——授权下属人员
+            case "branch/ajax/subordinate_lock":        //冻结下属页面
+            case "branch/ajax/selected_rule":           //编辑——授权下属人员
+            case "branch/ajax/goods_spec":              //商品规格页面
+
+            case "branch/ajax/spec_item_add":           //子规格添加弹窗页面
+            case "branch/ajax/spec_edit":               //编辑规格弹窗页面
+            case "branch/ajax/spec_delete":             //删除规格弹窗页面
+            case "branch/ajax/spec_item_edit":          //编辑子规格弹窗页面
+            case "branch/ajax/spec_item_delete":        //删除子规格弹窗页面
+
             case "branch/ajax/upload_thumb_check":    //上传图片
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -54,7 +60,11 @@ class BranchCheckAjax{
             case "branch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "branch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             case "branch/ajax/spec_add_check":          //检测是否登录 权限 安全密码
-            case "branch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码·
+            case "branch/ajax/spec_delete_check":       //删除规格弹窗页面
+            case "branch/ajax/spec_edit_check":         //检测是否登录 权限 安全密码
+            case "branch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码
+            case "branch/ajax/spec_item_delete_check":  //删除规格弹窗页面
+            case "branch/ajax/spec_item_edit_check":    //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;

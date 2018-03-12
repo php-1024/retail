@@ -117,133 +117,7 @@
                                     <div class="tab-pane fade in" id="picture">
                                         <button type="button" class="btn btn-success" onclick="return addthumb();"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加图片</button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-stripped">
-                                                <thead>
-                                                <tr>
-                                                    <th>
-                                                        图片预览
-                                                    </th>
-                                                    <th>
-                                                        图片链接
-                                                    </th>
-                                                    <th>
-                                                        图片排序
-                                                    </th>
-                                                    <th>
-
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m0.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image1.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="1" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m1.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image2.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="2" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m2.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image3.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="3" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m3.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image4.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="4" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m4.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image5.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="5" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m5.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image6.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="6" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{asset('public/Branch')}}/images/m6.jpg" style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>
-                                                        http://mydomain.com/images/image7.png
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="sort" size="3" value="7" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <div class="col-sm-12 col-sm-offset-6">
-
-                                                    <button type="button" class="btn btn-success" id="addBtn">保存信息</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('Branch/Goods/goods_thumb_list')
                                     </div>
                                     <div class="tab-pane fade in" id="option">
                                         <button type="button" class="btn btn-info" onclick="addSpec()">添加规格&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
@@ -412,8 +286,8 @@
 {{--添加规格类--}}
 <div class="modal fade" id="myModal_Spec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('branch/ajax/spec_add_check') }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="goods_id" value="{{$goods->id}}">
+        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -452,74 +326,20 @@
 <div class="modal fade" id="myModal_Spec_Item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 {{--添加子规格--}}
 
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认删除</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">编辑规格</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">规格名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 
+{{--确认删除--}}
+{{--<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>--}}
+{{--确认删除--}}
 
+
+{{--上传图片--}}
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url('branch/ajax/upload_thumb_check') }}">
+    <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -545,7 +365,7 @@
         </div>
     </form>
 </div>
-
+{{--上传图片--}}
 
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -608,8 +428,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
@@ -619,6 +438,8 @@
     function spec_add() {
         var target = $("#spec_add");
         var url = target.attr("action");
+        var token = $('#_token').val();
+        var goods_id = $('#goods_id').val();
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
@@ -628,18 +449,31 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
-                    alert('添加规格类成功！');
-                    {{--window.location.href = "{{asset("branch/goods/goods_list")}}";--}}
+                    //规格添加成功后异步刷新规格部分
+                    $.ajax({
+                        url:'{{url('branch/ajax/goods_spec')}}',
+                        data:{
+                            _token:token,
+                            goods_id:goods_id
+                        },
+                        type:'post',
+                        success:function(data){
+                            $("#spec_content").html(data);
+                            $('#myModal_Spec').modal('hide');
+                        },
+                        error:function(){
+                            alert('添加出错，请稍后再试！');
+                        }
+                    })
                 });
             }else{
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
@@ -647,30 +481,72 @@
 
     //上传图片提交表单
     function uploadForm() {
-        var target = $("#uploadForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        console.log(data);
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.href = "{{asset("branch/goods/goods_list")}}";
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+        var formData = new FormData($( "#uploadForm" )[0]);
+        $.ajax({
+            url: '{{ url('branch/ajax/upload_thumb_check') }}' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (json) {
+                if (json.status == -1) {
+                    window.location.reload();
+                } else if(json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        //图片添加成功后异步刷新图片列表部分
+                        $.ajax({
+                            url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
+                            data:formData,
+                            type:'post',
+                            success:function(data){
+                                $("#spec_content").html(data);
+                                console.log(json);
+                                $('#myModal3').modal('hide');
+                            },
+                            error:function(){
+                                alert('添加出错，请稍后再试！');
+                            }
+                        })
+                    });
+                }else{
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定"
+                    });
+                }
+            },
+            error: function (json) {
+                console.log(json);
+            }
+        });
+    }
+
+    //上传图片提交表单
+    function uploadForm() {
+        var formData = new FormData($( "#uploadForm" )[0]);
+        $.ajax({
+            url: '{{ url('branch/ajax/upload_thumb_check') }}' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                console.log(returndata);
+                $('#myModal3').modal('hide');
+            },
+            error: function (returndata) {
+                console.log(returndata);
             }
         });
     }
