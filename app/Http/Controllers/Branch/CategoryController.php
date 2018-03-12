@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
 use App\Models\CateringCategory;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -35,12 +36,14 @@ class CategoryController extends Controller
         if (empty($category_sort)){
             $category_sort = '0';
         }
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
+        dd($store_id);
         $category_data = [
             'name' => $category_name,
             'created_by' => $admin_data['id'],
             'displayorder' => $category_sort,
             'store_id' => '5',
-            'branch_id' => $admin_data['branch_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
         DB::beginTransaction();
         try {
