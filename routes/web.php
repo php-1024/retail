@@ -629,6 +629,12 @@ Route::group(['prefix'=>'catering'],function(){
         //总店管理
         Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
 
+
+        //营销管理
+        Route::post('member_add_check','Catering\CardController@member_add_check')->middleware('CateringCheckAjax');       //添加会员卡功能提交
+
+
+
     });
 });
 /**********************总店系统*********************/
