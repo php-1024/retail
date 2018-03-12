@@ -42,7 +42,7 @@
                             <div class="panel-body">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/room_add_check') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
+                                    <input type="hidden" name="admin_data" id="organization_id" value="{{$admin_data}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">包厢名称</label>
                                         <div class="col-sm-10">
