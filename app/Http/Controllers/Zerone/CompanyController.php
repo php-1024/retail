@@ -50,9 +50,10 @@ class CompanyController extends Controller{
         $key = config("app.zerone_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        $program_id = 3; //'商户组织默认为3'
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
+            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$program_id,'type'=>3,'status'=>1];
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $user = Account::max('account');
@@ -70,6 +71,13 @@ class CompanyController extends Controller{
             $comproxyinfo = ['organization_id'=>$organization_id, 'company_owner'=>$realname, 'company_owner_idcard'=>$idcard, 'company_owner_mobile'=>$mobile];
 
             OrganizationCompanyinfo::addOrganizationCompanyinfo($comproxyinfo);  //添加到服务商组织信息表
+
+            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            foreach($module_node_list as $key=>$val){
+                foreach($val->program_nodes as $k=>$v) {
+                    AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
+                }
+            }
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
