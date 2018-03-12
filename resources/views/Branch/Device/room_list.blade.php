@@ -50,33 +50,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($room as $key=>$val)
                                     <tr>
-                                        <td>1</td>
-                                        <td>大厅</td>
-                                        <td>2017-08-09 11:11:11</td>
+                                        <td>{{$val->id}}</td>
+                                        <td>{{$val->name}}</td>
+                                        <td>{{$val->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>包厢1</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>包厢2</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -84,36 +68,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                        {{$room->links()}}
                                     </div>
                                 </div>
                             </footer>
