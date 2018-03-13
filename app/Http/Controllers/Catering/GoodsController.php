@@ -15,13 +15,11 @@ class GoodsController extends Controller{
 
         $branch_id = $request->branch_id;//分店id
         $category_name = $request->category_name;//分类名称
-        dump($branch_id);
-        dump($category_name);
-
 
 
         $organization_id = $admin_data['organization_id'];
         $list = CateringCategory::getPaginage([['store_id',$organization_id]],'15','id');//获取所有分店分类
+        dump($list);
         $listBranch = Organization::getList([['parent_id',$organization_id]]);
         return view('Catering/Goods/goods_category',['listBranch'=>$listBranch,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
