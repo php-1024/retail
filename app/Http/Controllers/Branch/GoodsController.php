@@ -9,7 +9,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
 use App\Models\CateringGoods;
-use App\Models\GoodsThumb;
+use App\Models\CateringGoodsThumb;
 use App\Models\OperationLog;
 use App\Models\CateringSpec;
 use App\Models\CateringSpecItem;
@@ -92,7 +92,7 @@ class GoodsController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $goods_thumb = GoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         $goods = CateringGoods::getOne(['id' => $goods_id, 'store_id' => $store_id, 'branch_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
@@ -388,7 +388,7 @@ class GoodsController extends Controller
             ];
             DB::beginTransaction();
             try {
-                GoodsThumb::addGoodsThumb($goods_thumb);
+                CateringGoodsThumb::addGoodsThumb($goods_thumb);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                     OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
