@@ -217,6 +217,7 @@ class GoodsController extends Controller
     //图片异步加载部分
     public function goods_thumb(Request $request)
     {
+        dd($request);
         $goods_id = $request->get('goods_id');              //商品的ID
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Branch/Goods/goods_thumb', ['spec'=>$spec]);
