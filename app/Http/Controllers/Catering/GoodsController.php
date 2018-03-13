@@ -40,8 +40,7 @@ class GoodsController extends Controller{
         $store = $admin_data['organization_id'];
 
         $listGoods = CateringGoods::getPaginage([['store_id',$store]],'15','id');
-        dump($listGoods);
-        return view('Catering/Goods/goods_list',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Goods/goods_list',['listGoods'=>$listGoods,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查看详情
     public function goods_detail(Request $request){

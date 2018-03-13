@@ -95,20 +95,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($listGoods as $key=>$value)
                                     <tr>
-                                        <td>1</td>
-                                        <td>奇味鸡煲</td>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->name}}</td>
                                         <td>
-                                            100.00
+                                            {{$value->price}}
                                         </td>
                                         <td>
                                             <label class="label label-info">主食</label>
                                         </td>
                                         <td>
-                                            999
+                                            {{$value->stock}}
                                         </td>
                                         <td>
-                                            1
+                                            {{$value->displayorder}}
                                         </td>
                                         <td>
                                             <label class="label label-success">在售</label>
@@ -116,63 +117,12 @@
                                         <td>
                                             <label class="label label-primary">刘记鸡煲王-总店</label>
                                         </td>
-                                        <td>2017-08-09 11:11:11</td>
+                                        <td>{{$value->updated_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('catering/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>奇味鸡煲</td>
-                                        <td>
-                                            100.00
-                                        </td>
-                                        <td>
-                                            <label class="label label-info">主食</label>
-                                        </td>
-                                        <td>
-                                            999
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            <label class="label label-success">在售</label>
-                                        </td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王-总店</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('catering/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>奇味鸡煲</td>
-                                        <td>
-                                            100.00
-                                        </td>
-                                        <td>
-                                            <label class="label label-info">主食</label>
-                                        </td>
-                                        <td>
-                                            999
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            <label class="label label-success">在售</label>
-                                        </td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王-总店</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('catering/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -180,36 +130,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                      {{$listGoods->links()}}
                                     </div>
                                 </div>
                             </footer>
