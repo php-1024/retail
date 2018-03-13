@@ -15,7 +15,6 @@ class RetailCheck{
             case "retail/login"://登录页,如果已经登录则不需要再次登录
 //                获取用户登录存储的SessionId
                 $sess_key = Session::get('retail_account_id');
-                dump($sess_key);
 //                如果不为空跳转到首页
                 if(!empty($sess_key)) {
                     return redirect('retail');
@@ -138,7 +137,7 @@ class RetailCheck{
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限
-                \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_retail_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
             }
         }
@@ -183,10 +182,10 @@ class RetailCheck{
         }else{
             $sess_key = Session::get('retail_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('zeo');//连接到我的缓存服务器
+            Redis::connect('retail');//连接到我的缓存服务器
             $admin_data = Redis::get('retail_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('zerone_system_menu_4_'.$sess_key);
-            $son_menu_data = Redis::get('zerone_system_son_menu_4_'.$sess_key);
+            $menu_data = Redis::get('retail_system_menu_4_'.$sess_key);
+            $son_menu_data = Redis::get('retail_system_son_menu_4_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
