@@ -115,7 +115,7 @@
                                             <label class="label label-success">在售</label>
                                         </td>
                                         <td>
-                                            <label class="label label-primary">刘记鸡煲王-总店</label>
+                                            <label class="label label-primary">{{$value->organization->organization_name}}</label>
                                         </td>
                                         <td>{{$value->updated_at}}</td>
                                         <td>
