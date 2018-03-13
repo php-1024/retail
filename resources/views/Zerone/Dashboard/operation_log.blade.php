@@ -148,24 +148,24 @@
             format: 'yyyy-mm-dd'
         });
     });
-//    function searchFormCheck(){
-//        var url = $('#searchForm').attr('action');
-//        var data = $('#searchForm').serialize();
-//        $.get(url+'?'+data,function(json){
-//            if(json.status==0){
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                });
-//                return false;
-//            }else{
-//                location.href=url+'?'+data;
-//            }
-//        });
-//        return false;
-//    }
+    function searchFormCheck(){
+        var url = $('#searchForm').attr('action');
+        var data = $('#searchForm').serialize();
+        $.get(url+'?'+data,function(json){
+            if(json.status==0){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                });
+                return false;
+            }else{
+                location.href=url+'?'+data;
+            }
+        });
+        return false;
+    }
 </script>
 
 </body>
