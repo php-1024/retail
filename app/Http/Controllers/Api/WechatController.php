@@ -7,6 +7,10 @@ use App\Models\WechatOpenSetting;
 use App\Models\WechatAuthorization;
 
 class WechatController extends Controller{
+    public function store_auth(){
+
+    }
+
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
 
