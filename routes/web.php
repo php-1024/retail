@@ -650,59 +650,59 @@ Route::group(['prefix'=>'catering'],function(){
 Route::group(['prefix'=>'branch'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
+        Route::get('/', 'Branch\LoginController@display')->middleware('CateringBranchCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
     });
-    Route::get('/', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
+    Route::get('/', 'Branch\DisplayController@display')->middleware('CateringBranchCheck');//分店首页
     Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
-    Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
-    Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('BranchCheck'); //超级管理员退出当前店铺
+    Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('CateringBranchCheck');      //分店列表
+    Route::get('branch_switch', 'Branch\DisplayController@branch_switch')->middleware('CateringBranchCheck'); //超级管理员退出当前店铺
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Branch\AccountController@profile')->middleware('BranchCheck'); //账号中心-账户信息
-        Route::get('safe_password', 'Branch\AccountController@safe_password')->middleware('BranchCheck');//安全密码
-        Route::get('message_setting', 'Branch\AccountController@message_setting')->middleware('BranchCheck');//消息接收设置
-        Route::get('password', 'Branch\AccountController@password')->middleware('BranchCheck');          //登录密码页面
-        Route::get('operation_log', 'Branch\AccountController@operation_log')->middleware('BranchCheck');   //账户中心个人操作日志
-        Route::get('login_log', 'Branch\AccountController@login_log')->middleware('BranchCheck');           //账户中心个人登录日志
+        Route::get('profile', 'Branch\AccountController@profile')->middleware('CateringBranchCheck'); //账号中心-账户信息
+        Route::get('safe_password', 'Branch\AccountController@safe_password')->middleware('CateringBranchCheck');//安全密码
+        Route::get('message_setting', 'Branch\AccountController@message_setting')->middleware('CateringBranchCheck');//消息接收设置
+        Route::get('password', 'Branch\AccountController@password')->middleware('CateringBranchCheck');          //登录密码页面
+        Route::get('operation_log', 'Branch\AccountController@operation_log')->middleware('CateringBranchCheck');   //账户中心个人操作日志
+        Route::get('login_log', 'Branch\AccountController@login_log')->middleware('CateringBranchCheck');           //账户中心个人登录日志
     });
 
     //收银台
-    Route::get('cashier', 'Branch\CashierController@cashier')->middleware('BranchCheck');   //收银台
+    Route::get('cashier', 'Branch\CashierController@cashier')->middleware('CateringBranchCheck');   //收银台
 
     //栏目管理
     Route::group(['prefix'=>'category'],function(){
-        Route::get('category_add', 'Branch\CategoryController@category_add')->middleware('BranchCheck');   //商品管理-添加商品分类
-        Route::get('category_list', 'Branch\CategoryController@category_list')->middleware('BranchCheck'); //商品管理-商品分类列表
+        Route::get('category_add', 'Branch\CategoryController@category_add')->middleware('CateringBranchCheck');   //商品管理-添加商品分类
+        Route::get('category_list', 'Branch\CategoryController@category_list')->middleware('CateringBranchCheck'); //商品管理-商品分类列表
     });
 
     //商品管理
     Route::group(['prefix'=>'goods'],function(){
-        Route::get('goods_add', 'Branch\GoodsController@goods_add')->middleware('BranchCheck');         //商品管理-添加商品
-        Route::get('goods_edit', 'Branch\GoodsController@goods_edit')->middleware('BranchCheck');       //商品管理-编辑商品
-        Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('BranchCheck');       //商品管理-商品列表
-        Route::get('goods_copy', 'Branch\GoodsController@goods_copy')->middleware('BranchCheck');       //商品管理-拷贝其他分店商品
+        Route::get('goods_add', 'Branch\GoodsController@goods_add')->middleware('CateringBranchCheck');         //商品管理-添加商品
+        Route::get('goods_edit', 'Branch\GoodsController@goods_edit')->middleware('CateringBranchCheck');       //商品管理-编辑商品
+        Route::get('goods_list', 'Branch\GoodsController@goods_list')->middleware('CateringBranchCheck');       //商品管理-商品列表
+        Route::get('goods_copy', 'Branch\GoodsController@goods_copy')->middleware('CateringBranchCheck');       //商品管理-拷贝其他分店商品
     });
 
     //订单管理
     Route::group(['prefix'=>'order'],function(){
-        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('BranchCheck');                       //订单管理-现场订单
-        Route::get('order_spot_detail', 'Branch\OrderController@order_spot_detail')->middleware('BranchCheck');         //订单管理-现场订单详情
-        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('BranchCheck');                 //订单管理-外卖订单
-        Route::get('order_takeout_detail', 'Branch\OrderController@order_takeout_detail')->middleware('BranchCheck');   //订单管理-外卖订单详情
-        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('BranchCheck');         //预约管理
+        Route::get('order_spot', 'Branch\OrderController@order_spot')->middleware('CateringBranchCheck');                       //订单管理-现场订单
+        Route::get('order_spot_detail', 'Branch\OrderController@order_spot_detail')->middleware('CateringBranchCheck');         //订单管理-现场订单详情
+        Route::get('order_takeout', 'Branch\OrderController@order_takeout')->middleware('CateringBranchCheck');                 //订单管理-外卖订单
+        Route::get('order_takeout_detail', 'Branch\OrderController@order_takeout_detail')->middleware('CateringBranchCheck');   //订单管理-外卖订单详情
+        Route::get('order_appointment', 'Branch\OrderController@order_appointment')->middleware('CateringBranchCheck');         //预约管理
     });
 
     //设备管理
     Route::group(['prefix'=>'device'],function(){
-        Route::get('room_add', 'Branch\DeviceController@room_add')->middleware('BranchCheck');   //设备管理-添加包厢
-        Route::get('room_list', 'Branch\DeviceController@room_list')->middleware('BranchCheck'); //设备管理-包厢管理
-        Route::get('table_add', 'Branch\DeviceController@table_add')->middleware('BranchCheck'); //设备管理-添加餐桌
-        Route::get('table_list', 'Branch\DeviceController@table_list')->middleware('BranchCheck'); //设备管理-餐桌管理
-        Route::get('printer_add', 'Branch\DeviceController@printer_add')->middleware('BranchCheck'); //设备管理-添加打印机
-        Route::get('printer_list', 'Branch\DeviceController@printer_list')->middleware('BranchCheck'); //设备管理-打印机管理
-        Route::get('printer_goods', 'Branch\DeviceController@printer_goods')->middleware('BranchCheck'); //设备管理-打印机关联商品
+        Route::get('room_add', 'Branch\DeviceController@room_add')->middleware('CateringBranchCheck');   //设备管理-添加包厢
+        Route::get('room_list', 'Branch\DeviceController@room_list')->middleware('CateringBranchCheck'); //设备管理-包厢管理
+        Route::get('table_add', 'Branch\DeviceController@table_add')->middleware('CateringBranchCheck'); //设备管理-添加餐桌
+        Route::get('table_list', 'Branch\DeviceController@table_list')->middleware('CateringBranchCheck'); //设备管理-餐桌管理
+        Route::get('printer_add', 'Branch\DeviceController@printer_add')->middleware('CateringBranchCheck'); //设备管理-添加打印机
+        Route::get('printer_list', 'Branch\DeviceController@printer_list')->middleware('CateringBranchCheck'); //设备管理-打印机管理
+        Route::get('printer_goods', 'Branch\DeviceController@printer_goods')->middleware('CateringBranchCheck'); //设备管理-打印机关联商品
     });
 
 
@@ -712,25 +712,25 @@ Route::group(['prefix'=>'branch'],function(){
 
     //用户管理
     Route::group(['prefix'=>'user'],function(){
-        Route::get('user_tag', 'Branch\UserController@user_tag')->middleware('BranchCheck');            //用户管理-粉丝标签管理
-        Route::get('user_list', 'Branch\UserController@user_list')->middleware('BranchCheck');          //用户管理-粉丝用户管理
-        Route::get('user_timeline', 'Branch\UserController@user_timeline')->middleware('BranchCheck');  //用户管理-粉丝足迹管理
+        Route::get('user_tag', 'Branch\UserController@user_tag')->middleware('CateringBranchCheck');            //用户管理-粉丝标签管理
+        Route::get('user_list', 'Branch\UserController@user_list')->middleware('CateringBranchCheck');          //用户管理-粉丝用户管理
+        Route::get('user_timeline', 'Branch\UserController@user_timeline')->middleware('CateringBranchCheck');  //用户管理-粉丝足迹管理
     });
 
     //财务管理
     Route::group(['prefix'=>'finance'],function(){
-        Route::get('balance', 'Branch\FinanceController@balance')->middleware('BranchCheck');                       //财务管理-余额管理
-        Route::get('balance_recharge', 'Branch\FinanceController@balance_recharge')->middleware('BranchCheck');     //财务管理-余额充值扣费
-        Route::get('credit', 'Branch\FinanceController@credit')->middleware('BranchCheck');                         //财务管理-积分管理
-        Route::get('credit_recharge', 'Branch\FinanceController@credit_recharge')->middleware('BranchCheck');       //财务管理-积分充值扣费
+        Route::get('balance', 'Branch\FinanceController@balance')->middleware('CateringBranchCheck');                       //财务管理-余额管理
+        Route::get('balance_recharge', 'Branch\FinanceController@balance_recharge')->middleware('CateringBranchCheck');     //财务管理-余额充值扣费
+        Route::get('credit', 'Branch\FinanceController@credit')->middleware('CateringBranchCheck');                         //财务管理-积分管理
+        Route::get('credit_recharge', 'Branch\FinanceController@credit_recharge')->middleware('CateringBranchCheck');       //财务管理-积分充值扣费
     });
 
     //支付设置
     Route::group(['prefix'=>'paysetting'],function(){
-        Route::get('wechat_setting', 'Branch\PaysettingController@wechat_setting')->middleware('BranchCheck');   //支付设置-微信支付
-        Route::get('zerone_setting', 'Branch\PaysettingController@zerone_setting')->middleware('BranchCheck');   //支付设置-零舍壹得
-        Route::get('shengf_setting', 'Branch\PaysettingController@shengf_setting')->middleware('BranchCheck');   //支付设置-盛付通
-        Route::get('kuaifu_setting', 'Branch\PaysettingController@kuaifu_setting')->middleware('BranchCheck');   //支付设置-快付通
+        Route::get('wechat_setting', 'Branch\PaysettingController@wechat_setting')->middleware('CateringBranchCheck');   //支付设置-微信支付
+        Route::get('zerone_setting', 'Branch\PaysettingController@zerone_setting')->middleware('CateringBranchCheck');   //支付设置-零舍壹得
+        Route::get('shengf_setting', 'Branch\PaysettingController@shengf_setting')->middleware('CateringBranchCheck');   //支付设置-盛付通
+        Route::get('kuaifu_setting', 'Branch\PaysettingController@kuaifu_setting')->middleware('CateringBranchCheck');   //支付设置-快付通
     });
 
 
@@ -738,68 +738,68 @@ Route::group(['prefix'=>'branch'],function(){
 
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
-        Route::get('role_add', 'Branch\RoleController@role_add')->middleware('BranchCheck');   //添加权限角色
-        Route::get('role_list', 'Branch\RoleController@role_list')->middleware('BranchCheck'); //权限角色列表
+        Route::get('role_add', 'Branch\RoleController@role_add')->middleware('CateringBranchCheck');   //添加权限角色
+        Route::get('role_list', 'Branch\RoleController@role_list')->middleware('CateringBranchCheck'); //权限角色列表
     });
 
 
     //下属管理--添加组
     Route::group(['prefix'=>'subordinate'],function(){
-        Route::get('subordinate_add','Branch\SubordinateController@subordinate_add')->middleware('BranchCheck');    //添加下级人员
-        Route::get('subordinate_list','Branch\SubordinateController@subordinate_list')->middleware('BranchCheck');  //下级人员列表
+        Route::get('subordinate_add','Branch\SubordinateController@subordinate_add')->middleware('CateringBranchCheck');    //添加下级人员
+        Route::get('subordinate_list','Branch\SubordinateController@subordinate_list')->middleware('CateringBranchCheck');  //下级人员列表
     });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Branch\LoginController@login_check')->middleware('BranchCheckAjax');//提交登录数据
-        Route::post('branch_select','Branch\DisplayController@branch_select')->middleware('BranchCheckAjax');//提交选择分店数据
-        Route::post('profile_edit_check', 'Branch\AccountController@profile_edit_check')->middleware('BranchCheckAjax');//个人账号信息修改
-        Route::post('safe_password_edit_check', 'Branch\AccountController@safe_password_edit_check')->middleware('BranchCheckAjax');//安全密码设置检测
-        Route::post('password_edit_check', 'Branch\AccountController@password_edit_check')->middleware('BranchCheckAjax');          //密码检测
-        Route::post('role_edit', 'Branch\RoleController@role_edit')->middleware('BranchCheckAjax');                     //角色编辑弹出
-        Route::post('role_edit_check', 'Branch\RoleController@role_edit_check')->middleware('BranchCheckAjax');         //角色编辑检测
-        Route::post('role_delete', 'Branch\RoleController@role_delete')->middleware('BranchCheckAjax');                 //角色删除弹出
-        Route::post('role_delete_check', 'Branch\RoleController@role_delete_check')->middleware('BranchCheckAjax');     //角色删除检测
-        Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('BranchCheckAjax');           //下级人员管理权限角色添加
-        Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('BranchCheckAjax');            //下属添加_用户权限页面
+        Route::post('login_check','Branch\LoginController@login_check')->middleware('CateringBranchCheckAjax');//提交登录数据
+        Route::post('branch_select','Branch\DisplayController@branch_select')->middleware('CateringBranchCheckAjax');//提交选择分店数据
+        Route::post('profile_edit_check', 'Branch\AccountController@profile_edit_check')->middleware('CateringBranchCheckAjax');//个人账号信息修改
+        Route::post('safe_password_edit_check', 'Branch\AccountController@safe_password_edit_check')->middleware('CateringBranchCheckAjax');//安全密码设置检测
+        Route::post('password_edit_check', 'Branch\AccountController@password_edit_check')->middleware('CateringBranchCheckAjax');          //密码检测
+        Route::post('role_edit', 'Branch\RoleController@role_edit')->middleware('CateringBranchCheckAjax');                     //角色编辑弹出
+        Route::post('role_edit_check', 'Branch\RoleController@role_edit_check')->middleware('CateringBranchCheckAjax');         //角色编辑检测
+        Route::post('role_delete', 'Branch\RoleController@role_delete')->middleware('CateringBranchCheckAjax');                 //角色删除弹出
+        Route::post('role_delete_check', 'Branch\RoleController@role_delete_check')->middleware('CateringBranchCheckAjax');     //角色删除检测
+        Route::post('role_add_check', 'Branch\RoleController@role_add_check')->middleware('CateringBranchCheckAjax');           //下级人员管理权限角色添加
+        Route::post('quick_rule', 'Branch\SubordinateController@quick_rule')->middleware('CateringBranchCheckAjax');            //下属添加_用户权限页面
 
-        Route::post('subordinate_add_check', 'Branch\SubordinateController@subordinate_add_check')->middleware('BranchCheckAjax');  //下属添加检测
-        Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('BranchCheckAjax');            //下属信息编辑页面
-        Route::post('subordinate_edit_check', 'Branch\SubordinateController@subordinate_edit_check')->middleware('BranchCheckAjax');//下属信息编辑检测
-        Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('BranchCheckAjax');            //下属冻结检测
-        Route::post('subordinate_delete', 'Branch\SubordinateController@subordinate_delete')->middleware('BranchCheckAjax');        //下属删除检测
-        Route::post('subordinate_authorize', 'Branch\SubordinateController@subordinate_authorize')->middleware('BranchCheckAjax');  //下属快速授权页面
-        Route::post('subordinate_authorize_check', 'Branch\SubordinateController@subordinate_authorize_check')->middleware('BranchCheckAjax');//下属快速授权检测
-        Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('BranchCheckAjax');            //下属冻结页面
-        Route::post('subordinate_lock_check', 'Branch\SubordinateController@subordinate_lock_check')->middleware('BranchCheckAjax');//下属冻结检测
-        Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('BranchCheckAjax');                  //下属授权检测
+        Route::post('subordinate_add_check', 'Branch\SubordinateController@subordinate_add_check')->middleware('CateringBranchCheckAjax');  //下属添加检测
+        Route::post('subordinate_edit', 'Branch\SubordinateController@subordinate_edit')->middleware('CateringBranchCheckAjax');            //下属信息编辑页面
+        Route::post('subordinate_edit_check', 'Branch\SubordinateController@subordinate_edit_check')->middleware('CateringBranchCheckAjax');//下属信息编辑检测
+        Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('CateringBranchCheckAjax');            //下属冻结检测
+        Route::post('subordinate_delete', 'Branch\SubordinateController@subordinate_delete')->middleware('CateringBranchCheckAjax');        //下属删除检测
+        Route::post('subordinate_authorize', 'Branch\SubordinateController@subordinate_authorize')->middleware('CateringBranchCheckAjax');  //下属快速授权页面
+        Route::post('subordinate_authorize_check', 'Branch\SubordinateController@subordinate_authorize_check')->middleware('CateringBranchCheckAjax');//下属快速授权检测
+        Route::post('subordinate_lock', 'Branch\SubordinateController@subordinate_lock')->middleware('CateringBranchCheckAjax');            //下属冻结页面
+        Route::post('subordinate_lock_check', 'Branch\SubordinateController@subordinate_lock_check')->middleware('CateringBranchCheckAjax');//下属冻结检测
+        Route::post('selected_rule', 'Branch\SubordinateController@selected_rule')->middleware('CateringBranchCheckAjax');                  //下属授权检测
 
-        Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('BranchCheckAjax');          //栏目添加检测
-        Route::post('category_delete', 'Branch\CategoryController@category_delete')->middleware('BranchCheckAjax');          //栏目添加检测
-        Route::post('category_delete_check', 'Branch\CategoryController@category_delete_check')->middleware('BranchCheckAjax');          //栏目添加检测
-        Route::post('category_edit', 'Branch\CategoryController@category_edit')->middleware('BranchCheckAjax');                    //栏目编辑页面
-        Route::post('category_edit_check', 'Branch\CategoryController@category_edit_check')->middleware('BranchCheckAjax');        //栏目编辑检测
-        Route::post('goods_add_check', 'Branch\GoodsController@goods_add_check')->middleware('BranchCheckAjax');                   //商品添加检测
-        Route::post('goods_edit_check', 'Branch\GoodsController@goods_edit_check')->middleware('BranchCheckAjax');                 //商品编辑检测
-        Route::any('goods_spec', 'Branch\GoodsController@goods_spec')->middleware('BranchCheckAjax');                             //商品规格异步加载页面
-        Route::any('goods_thumb', 'Branch\GoodsController@goods_thumb')->middleware('BranchCheckAjax');                           //商品规格异步加载页面
-        Route::post('spec_add_check', 'Branch\GoodsController@spec_add_check')->middleware('BranchCheckAjax');                     //规格类添加检测
-        Route::post('spec_edit_check', 'Branch\GoodsController@spec_edit_check')->middleware('BranchCheckAjax');                   //规格类编辑检测
+        Route::post('category_add_check', 'Branch\CategoryController@category_add_check')->middleware('CateringBranchCheckAjax');          //栏目添加检测
+        Route::post('category_delete', 'Branch\CategoryController@category_delete')->middleware('CateringBranchCheckAjax');          //栏目添加检测
+        Route::post('category_delete_check', 'Branch\CategoryController@category_delete_check')->middleware('CateringBranchCheckAjax');          //栏目添加检测
+        Route::post('category_edit', 'Branch\CategoryController@category_edit')->middleware('CateringBranchCheckAjax');                    //栏目编辑页面
+        Route::post('category_edit_check', 'Branch\CategoryController@category_edit_check')->middleware('CateringBranchCheckAjax');        //栏目编辑检测
+        Route::post('goods_add_check', 'Branch\GoodsController@goods_add_check')->middleware('CateringBranchCheckAjax');                   //商品添加检测
+        Route::post('goods_edit_check', 'Branch\GoodsController@goods_edit_check')->middleware('CateringBranchCheckAjax');                 //商品编辑检测
+        Route::any('goods_spec', 'Branch\GoodsController@goods_spec')->middleware('CateringBranchCheckAjax');                             //商品规格异步加载页面
+        Route::any('goods_thumb', 'Branch\GoodsController@goods_thumb')->middleware('CateringBranchCheckAjax');                           //商品规格异步加载页面
+        Route::post('spec_add_check', 'Branch\GoodsController@spec_add_check')->middleware('CateringBranchCheckAjax');                     //规格类添加检测
+        Route::post('spec_edit_check', 'Branch\GoodsController@spec_edit_check')->middleware('CateringBranchCheckAjax');                   //规格类编辑检测
 
-        Route::post('spec_edit', 'Branch\GoodsController@spec_edit')->middleware('BranchCheckAjax');                        //编辑规格类弹窗
-        Route::post('spec_delete', 'Branch\GoodsController@spec_delete')->middleware('BranchCheckAjax');                    //删除规格类弹窗
-        Route::post('spec_delete_check', 'Branch\GoodsController@spec_delete_check')->middleware('BranchCheckAjax');        //删除规格类检测
-        Route::post('spec_item_edit', 'Branch\GoodsController@spec_item_edit')->middleware('BranchCheckAjax');              //编辑子规格类弹窗
-        Route::post('spec_item_edit_check', 'Branch\GoodsController@spec_item_edit_check')->middleware('BranchCheckAjax');  //编辑子规格检测
-        Route::post('spec_item_delete', 'Branch\GoodsController@spec_item_delete')->middleware('BranchCheckAjax');          //删除子规格类弹窗
-        Route::post('spec_item_delete_check', 'Branch\GoodsController@spec_item_delete_check')->middleware('BranchCheckAjax');          //删除子规格类弹窗
+        Route::post('spec_edit', 'Branch\GoodsController@spec_edit')->middleware('CateringBranchCheckAjax');                        //编辑规格类弹窗
+        Route::post('spec_delete', 'Branch\GoodsController@spec_delete')->middleware('CateringBranchCheckAjax');                    //删除规格类弹窗
+        Route::post('spec_delete_check', 'Branch\GoodsController@spec_delete_check')->middleware('CateringBranchCheckAjax');        //删除规格类检测
+        Route::post('spec_item_edit', 'Branch\GoodsController@spec_item_edit')->middleware('CateringBranchCheckAjax');              //编辑子规格类弹窗
+        Route::post('spec_item_edit_check', 'Branch\GoodsController@spec_item_edit_check')->middleware('CateringBranchCheckAjax');  //编辑子规格检测
+        Route::post('spec_item_delete', 'Branch\GoodsController@spec_item_delete')->middleware('CateringBranchCheckAjax');          //删除子规格类弹窗
+        Route::post('spec_item_delete_check', 'Branch\GoodsController@spec_item_delete_check')->middleware('CateringBranchCheckAjax');          //删除子规格类弹窗
 
-        Route::post('spec_item_add', 'Branch\GoodsController@spec_item_add')->middleware('BranchCheckAjax');                       //子规格添加弹窗
-        Route::post('spec_item_add_check', 'Branch\GoodsController@spec_item_add_check')->middleware('BranchCheckAjax');           //子规格添加检测
-        Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('BranchCheckAjax');             //上传文件检测
+        Route::post('spec_item_add', 'Branch\GoodsController@spec_item_add')->middleware('CateringBranchCheckAjax');                       //子规格添加弹窗
+        Route::post('spec_item_add_check', 'Branch\GoodsController@spec_item_add_check')->middleware('CateringBranchCheckAjax');           //子规格添加检测
+        Route::post('upload_thumb_check', 'Branch\GoodsController@upload_thumb_check')->middleware('CateringBranchCheckAjax');             //上传文件检测
 
 
-        Route::post('room_add_check', 'Branch\DeviceController@room_add_check')->middleware('BranchCheckAjax');   //设备管理-添加包厢检测
+        Route::post('room_add_check', 'Branch\DeviceController@room_add_check')->middleware('CateringBranchCheckAjax');   //设备管理-添加包厢检测
     });
 });
 /**********************餐饮分店系统*********************/
@@ -924,3 +924,173 @@ Route::group(['prefix'=>'retail'],function(){
     });
 });
 /**********************商超简易系统*********************/
+
+
+
+
+
+
+
+
+
+
+
+
+/**********************餐饮分店简版系统*********************/
+Route::group(['prefix'=>'catering_branch'],function(){
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'CateringBranch\LoginController@display')->middleware('CateringBranchCheck');//登录页面路由
+        Route::get('captcha/{tmp}', 'CateringBranch\LoginController@captcha');//验证码路由
+    });
+    Route::get('/', 'CateringBranch\DisplayController@display')->middleware('CateringBranchCheck');//分店首页
+    Route::get('quit', 'CateringBranch\LoginController@quit');                                                 //退出系统
+    Route::get('branch_list', 'CateringBranch\DisplayController@branch_list')->middleware('CateringBranchCheck');      //分店列表
+    Route::get('branch_switch', 'CateringBranch\DisplayController@branch_switch')->middleware('CateringBranchCheck'); //超级管理员退出当前店铺
+
+    //账户中心
+    Route::group(['prefix'=>'account'],function(){
+        Route::get('profile', 'CateringBranch\AccountController@profile')->middleware('CateringBranchCheck'); //账号中心-账户信息
+        Route::get('safe_password', 'CateringBranch\AccountController@safe_password')->middleware('CateringBranchCheck');//安全密码
+        Route::get('message_setting', 'CateringBranch\AccountController@message_setting')->middleware('CateringBranchCheck');//消息接收设置
+        Route::get('password', 'CateringBranch\AccountController@password')->middleware('CateringBranchCheck');          //登录密码页面
+        Route::get('operation_log', 'CateringBranch\AccountController@operation_log')->middleware('CateringBranchCheck');   //账户中心个人操作日志
+        Route::get('login_log', 'CateringBranch\AccountController@login_log')->middleware('CateringBranchCheck');           //账户中心个人登录日志
+    });
+
+    //收银台
+    Route::get('cashier', 'CateringBranch\CashierController@cashier')->middleware('CateringBranchCheck');   //收银台
+
+    //栏目管理
+    Route::group(['prefix'=>'category'],function(){
+        Route::get('category_add', 'CateringBranch\CategoryController@category_add')->middleware('CateringBranchCheck');   //商品管理-添加商品分类
+        Route::get('category_list', 'CateringBranch\CategoryController@category_list')->middleware('CateringBranchCheck'); //商品管理-商品分类列表
+    });
+
+    //商品管理
+    Route::group(['prefix'=>'goods'],function(){
+        Route::get('goods_add', 'CateringBranch\GoodsController@goods_add')->middleware('CateringBranchCheck');         //商品管理-添加商品
+        Route::get('goods_edit', 'CateringBranch\GoodsController@goods_edit')->middleware('CateringBranchCheck');       //商品管理-编辑商品
+        Route::get('goods_list', 'CateringBranch\GoodsController@goods_list')->middleware('CateringBranchCheck');       //商品管理-商品列表
+        Route::get('goods_copy', 'CateringBranch\GoodsController@goods_copy')->middleware('CateringBranchCheck');       //商品管理-拷贝其他分店商品
+    });
+
+    //订单管理
+    Route::group(['prefix'=>'order'],function(){
+        Route::get('order_spot', 'CateringBranch\OrderController@order_spot')->middleware('CateringBranchCheck');                       //订单管理-现场订单
+        Route::get('order_spot_detail', 'CateringBranch\OrderController@order_spot_detail')->middleware('CateringBranchCheck');         //订单管理-现场订单详情
+        Route::get('order_takeout', 'CateringBranch\OrderController@order_takeout')->middleware('CateringBranchCheck');                 //订单管理-外卖订单
+        Route::get('order_takeout_detail', 'CateringBranch\OrderController@order_takeout_detail')->middleware('CateringBranchCheck');   //订单管理-外卖订单详情
+        Route::get('order_appointment', 'CateringBranch\OrderController@order_appointment')->middleware('CateringBranchCheck');         //预约管理
+    });
+
+    //设备管理
+    Route::group(['prefix'=>'device'],function(){
+        Route::get('room_add', 'CateringBranch\DeviceController@room_add')->middleware('CateringBranchCheck');   //设备管理-添加包厢
+        Route::get('room_list', 'CateringBranch\DeviceController@room_list')->middleware('CateringBranchCheck'); //设备管理-包厢管理
+        Route::get('table_add', 'CateringBranch\DeviceController@table_add')->middleware('CateringBranchCheck'); //设备管理-添加餐桌
+        Route::get('table_list', 'CateringBranch\DeviceController@table_list')->middleware('CateringBranchCheck'); //设备管理-餐桌管理
+        Route::get('printer_add', 'CateringBranch\DeviceController@printer_add')->middleware('CateringBranchCheck'); //设备管理-添加打印机
+        Route::get('printer_list', 'CateringBranch\DeviceController@printer_list')->middleware('CateringBranchCheck'); //设备管理-打印机管理
+        Route::get('printer_goods', 'CateringBranch\DeviceController@printer_goods')->middleware('CateringBranchCheck'); //设备管理-打印机关联商品
+    });
+
+
+
+
+
+
+    //用户管理
+    Route::group(['prefix'=>'user'],function(){
+        Route::get('user_tag', 'CateringBranch\UserController@user_tag')->middleware('CateringBranchCheck');            //用户管理-粉丝标签管理
+        Route::get('user_list', 'CateringBranch\UserController@user_list')->middleware('CateringBranchCheck');          //用户管理-粉丝用户管理
+        Route::get('user_timeline', 'CateringBranch\UserController@user_timeline')->middleware('CateringBranchCheck');  //用户管理-粉丝足迹管理
+    });
+
+    //财务管理
+    Route::group(['prefix'=>'finance'],function(){
+        Route::get('balance', 'CateringBranch\FinanceController@balance')->middleware('CateringBranchCheck');                       //财务管理-余额管理
+        Route::get('balance_recharge', 'CateringBranch\FinanceController@balance_recharge')->middleware('CateringBranchCheck');     //财务管理-余额充值扣费
+        Route::get('credit', 'CateringBranch\FinanceController@credit')->middleware('CateringBranchCheck');                         //财务管理-积分管理
+        Route::get('credit_recharge', 'CateringBranch\FinanceController@credit_recharge')->middleware('CateringBranchCheck');       //财务管理-积分充值扣费
+    });
+
+    //支付设置
+    Route::group(['prefix'=>'paysetting'],function(){
+        Route::get('wechat_setting', 'CateringBranch\PaysettingController@wechat_setting')->middleware('CateringBranchCheck');   //支付设置-微信支付
+        Route::get('zerone_setting', 'CateringBranch\PaysettingController@zerone_setting')->middleware('CateringBranchCheck');   //支付设置-零舍壹得
+        Route::get('shengf_setting', 'CateringBranch\PaysettingController@shengf_setting')->middleware('CateringBranchCheck');   //支付设置-盛付通
+        Route::get('kuaifu_setting', 'CateringBranch\PaysettingController@kuaifu_setting')->middleware('CateringBranchCheck');   //支付设置-快付通
+    });
+
+
+
+
+    //下属管理--权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add', 'CateringBranch\RoleController@role_add')->middleware('CateringBranchCheck');   //添加权限角色
+        Route::get('role_list', 'CateringBranch\RoleController@role_list')->middleware('CateringBranchCheck'); //权限角色列表
+    });
+
+
+    //下属管理--添加组
+    Route::group(['prefix'=>'subordinate'],function(){
+        Route::get('subordinate_add','CateringBranch\SubordinateController@subordinate_add')->middleware('CateringBranchCheck');    //添加下级人员
+        Route::get('subordinate_list','CateringBranch\SubordinateController@subordinate_list')->middleware('CateringBranchCheck');  //下级人员列表
+    });
+
+    //异步提交数据组
+    Route::group(['prefix'=>'ajax'],function(){
+        Route::post('login_check','CateringBranch\LoginController@login_check')->middleware('CateringBranchCheckAjax');//提交登录数据
+        Route::post('branch_select','CateringBranch\DisplayController@branch_select')->middleware('CateringBranchCheckAjax');//提交选择分店数据
+        Route::post('profile_edit_check', 'CateringBranch\AccountController@profile_edit_check')->middleware('CateringBranchCheckAjax');//个人账号信息修改
+        Route::post('safe_password_edit_check', 'CateringBranch\AccountController@safe_password_edit_check')->middleware('CateringBranchCheckAjax');//安全密码设置检测
+        Route::post('password_edit_check', 'CateringBranch\AccountController@password_edit_check')->middleware('CateringBranchCheckAjax');          //密码检测
+        Route::post('role_edit', 'CateringBranch\RoleController@role_edit')->middleware('CateringBranchCheckAjax');                     //角色编辑弹出
+        Route::post('role_edit_check', 'CateringBranch\RoleController@role_edit_check')->middleware('CateringBranchCheckAjax');         //角色编辑检测
+        Route::post('role_delete', 'CateringBranch\RoleController@role_delete')->middleware('CateringBranchCheckAjax');                 //角色删除弹出
+        Route::post('role_delete_check', 'CateringBranch\RoleController@role_delete_check')->middleware('CateringBranchCheckAjax');     //角色删除检测
+        Route::post('role_add_check', 'CateringBranch\RoleController@role_add_check')->middleware('CateringBranchCheckAjax');           //下级人员管理权限角色添加
+        Route::post('quick_rule', 'CateringBranch\SubordinateController@quick_rule')->middleware('CateringBranchCheckAjax');            //下属添加_用户权限页面
+
+        Route::post('subordinate_add_check', 'CateringBranch\SubordinateController@subordinate_add_check')->middleware('CateringBranchCheckAjax');  //下属添加检测
+        Route::post('subordinate_edit', 'CateringBranch\SubordinateController@subordinate_edit')->middleware('CateringBranchCheckAjax');            //下属信息编辑页面
+        Route::post('subordinate_edit_check', 'CateringBranch\SubordinateController@subordinate_edit_check')->middleware('CateringBranchCheckAjax');//下属信息编辑检测
+        Route::post('subordinate_lock', 'CateringBranch\SubordinateController@subordinate_lock')->middleware('CateringBranchCheckAjax');            //下属冻结检测
+        Route::post('subordinate_delete', 'CateringBranch\SubordinateController@subordinate_delete')->middleware('CateringBranchCheckAjax');        //下属删除检测
+        Route::post('subordinate_authorize', 'CateringBranch\SubordinateController@subordinate_authorize')->middleware('CateringBranchCheckAjax');  //下属快速授权页面
+        Route::post('subordinate_authorize_check', 'CateringBranch\SubordinateController@subordinate_authorize_check')->middleware('CateringBranchCheckAjax');//下属快速授权检测
+        Route::post('subordinate_lock', 'CateringBranch\SubordinateController@subordinate_lock')->middleware('CateringBranchCheckAjax');            //下属冻结页面
+        Route::post('subordinate_lock_check', 'CateringBranch\SubordinateController@subordinate_lock_check')->middleware('CateringBranchCheckAjax');//下属冻结检测
+        Route::post('selected_rule', 'CateringBranch\SubordinateController@selected_rule')->middleware('CateringBranchCheckAjax');                  //下属授权检测
+
+        Route::post('category_add_check', 'CateringBranch\CategoryController@category_add_check')->middleware('CateringBranchCheckAjax');          //栏目添加检测
+        Route::post('category_delete', 'CateringBranch\CategoryController@category_delete')->middleware('CateringBranchCheckAjax');          //栏目添加检测
+        Route::post('category_delete_check', 'CateringBranch\CategoryController@category_delete_check')->middleware('CateringBranchCheckAjax');          //栏目添加检测
+        Route::post('category_edit', 'CateringBranch\CategoryController@category_edit')->middleware('CateringBranchCheckAjax');                    //栏目编辑页面
+        Route::post('category_edit_check', 'CateringBranch\CategoryController@category_edit_check')->middleware('CateringBranchCheckAjax');        //栏目编辑检测
+        Route::post('goods_add_check', 'CateringBranch\GoodsController@goods_add_check')->middleware('CateringBranchCheckAjax');                   //商品添加检测
+        Route::post('goods_edit_check', 'CateringBranch\GoodsController@goods_edit_check')->middleware('CateringBranchCheckAjax');                 //商品编辑检测
+        Route::any('goods_spec', 'CateringBranch\GoodsController@goods_spec')->middleware('CateringBranchCheckAjax');                             //商品规格异步加载页面
+        Route::any('goods_thumb', 'CateringBranch\GoodsController@goods_thumb')->middleware('CateringBranchCheckAjax');                           //商品规格异步加载页面
+        Route::post('spec_add_check', 'CateringBranch\GoodsController@spec_add_check')->middleware('CateringBranchCheckAjax');                     //规格类添加检测
+        Route::post('spec_edit_check', 'CateringBranch\GoodsController@spec_edit_check')->middleware('CateringBranchCheckAjax');                   //规格类编辑检测
+
+        Route::post('spec_edit', 'CateringBranch\GoodsController@spec_edit')->middleware('CateringBranchCheckAjax');                        //编辑规格类弹窗
+        Route::post('spec_delete', 'CateringBranch\GoodsController@spec_delete')->middleware('CateringBranchCheckAjax');                    //删除规格类弹窗
+        Route::post('spec_delete_check', 'CateringBranch\GoodsController@spec_delete_check')->middleware('CateringBranchCheckAjax');        //删除规格类检测
+        Route::post('spec_item_edit', 'CateringBranch\GoodsController@spec_item_edit')->middleware('CateringBranchCheckAjax');              //编辑子规格类弹窗
+        Route::post('spec_item_edit_check', 'CateringBranch\GoodsController@spec_item_edit_check')->middleware('CateringBranchCheckAjax');  //编辑子规格检测
+        Route::post('spec_item_delete', 'CateringBranch\GoodsController@spec_item_delete')->middleware('CateringBranchCheckAjax');          //删除子规格类弹窗
+        Route::post('spec_item_delete_check', 'CateringBranch\GoodsController@spec_item_delete_check')->middleware('CateringBranchCheckAjax');          //删除子规格类弹窗
+
+        Route::post('spec_item_add', 'CateringBranch\GoodsController@spec_item_add')->middleware('CateringBranchCheckAjax');                       //子规格添加弹窗
+        Route::post('spec_item_add_check', 'CateringBranch\GoodsController@spec_item_add_check')->middleware('CateringBranchCheckAjax');           //子规格添加检测
+        Route::post('upload_thumb_check', 'CateringBranch\GoodsController@upload_thumb_check')->middleware('CateringBranchCheckAjax');             //上传文件检测
+
+
+        Route::post('room_add_check', 'CateringBranch\DeviceController@room_add_check')->middleware('CateringBranchCheckAjax');   //设备管理-添加包厢检测
+    });
+});
+/**********************餐饮分店简版系统*********************/
+
