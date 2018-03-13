@@ -194,11 +194,11 @@ class ProxyController extends Controller{
 //                OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
 
                 $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
-                dd($module_node_list);
                 foreach($module_node_list as $key=>$val){
-                    foreach($val->program_nodes as $k=>$v) {
-                        AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
-                    }
+                    dd($val);
+//                    foreach($val->program_nodes as $k=>$v) {
+//                        AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
+//                    }
                 }
 
                 //添加操作日志
