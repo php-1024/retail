@@ -812,7 +812,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('captcha/{tmp}', 'Retail\LoginController@captcha');                                                  //验证码路由
     });
 
-    Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                    //系统首页
+    Route::get('/', 'Retail\ShopController@display')->middleware('RetailCheck');                                        //系统首页
     Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');                  //超级管理员切换服务商
     Route::get('quit', 'Catering\ShopController@quit');                                                                 //退出系统
     Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                      //超级管理员选择登入的服务商
