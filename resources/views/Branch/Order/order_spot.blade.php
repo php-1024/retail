@@ -175,7 +175,7 @@
 
                                         <td>{{$val->created_at}}</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('branch/order/order_spot')}}?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('branch/order/order_spot_detail')}}?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     @endforeach
