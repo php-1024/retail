@@ -12,7 +12,7 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $url = \Wechat::get_auth_url();
+        $url = \Wechat::get_auth_url($admin_data['organization_id']);
         return view('Wechat/Catering/store_auth',['url'=>$url,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -272,11 +272,11 @@ class WechatController extends Controller{
 
     //授权回调链接
     public function redirect(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $origanization_id = $request->input('origanization_id');//中间件产生的管理员数据参数
         $auth_code = $_GET['auth_code'];//授权码
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
         $auth_data = array(
-            'organization_id'=>$admin_data['organization_id'],
+            'organization_id'=>$origanization_id,
             'authorizer_appid'=>$auth_info['authorizer_appid'],
             'authorizer_access_token'=>$auth_info['authorizer_access_token'],
             'authorizer_refresh_token'=>$auth_info['authorizer_refresh_token'],

@@ -51,9 +51,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">订单编号</label>
                                             <div class="col-sm-9">
                                                 <div>
-
-                                                    10002000300040005
-
+                                                    {{$order->ordersn}}
                                                 </div>
                                             </div>
                                         </div>
@@ -62,9 +60,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">用户账号</label>
                                             <div class="col-sm-9">
                                                 <div>
-
-                                                    100020
-
+                                                    {{$order->account->account}}
                                                 </div>
                                             </div>
                                         </div>
@@ -73,7 +69,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">微信昵称</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    时光取名叫无心
+                                                    {{$order->account->account_info->realname}}
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +78,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">联系方式</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    13123456789
+                                                    {{$order->account->mobile}}
                                                 </div>
                                             </div>
                                         </div>
