@@ -148,9 +148,15 @@
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group text-center">
+                                            @if($order->status==0)
                                             <button class="btn btn-success" type="button" id="addBtn"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
-                                            <button class="btn btn-primary" type="button" id="addBtn"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
-                                            <button class="btn btn-default" type="button" id="addBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                            @endif
+                                            @if($order->status==1 || $order->status==2)
+                                                <button class="btn btn-primary" type="button" id="addBtn"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
+                                            @endif
+                                            @if($order->status==0 || $order->status==1 || $order->status==2)
+                                                <button class="btn btn-default" type="button" id="addBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                            @endif
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                     </form>
