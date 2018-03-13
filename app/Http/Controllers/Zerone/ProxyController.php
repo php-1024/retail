@@ -195,7 +195,7 @@ class ProxyController extends Controller{
 
                 $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
                 foreach($module_node_list as $key=>$val){
-                    dd($val);
+                    dd($val->program_nodes);
 //                    foreach($val->program_nodes as $k=>$v) {
 //                        AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
 //                    }
