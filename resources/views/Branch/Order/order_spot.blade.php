@@ -133,10 +133,33 @@
                                         <td>{{$val->account->account}}</td>
                                         <td>{{$val->account->account_info->realname}}</td>
                                         <td>{{$val->account->mobile}}</td>
-                                        <td><label class="label label-info">在线余额支付</label></td>
+
+                                        {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
+                                        <td><label class="label label-info">
+                                        @if($val->order_type==1)
+                                            余额支付
+                                        @elseif($val->order_type==2)
+                                            在线支付
+                                        @elseif($val->order_type==3)
+                                            货到付款
+                                        @elseif($val->order_type==4)
+                                            现场现金支付
+                                        @elseif($val->order_type==5)
+                                            现场刷卡支付
+                                        @elseif($val->order_type==6)
+                                            现场支付宝支付
+                                        @elseif($val->order_type==7)
+                                            现场微信支付
+                                        @elseif($val->order_type==8)
+                                            线上手动确认付款
+                                        @endif
+                                        </label></td>
+
                                         <td>{{$val->order_price}}</td>
                                         <td>{{$val->seatfee}}</td>
+
                                         <th><label class="label label-primary">未付款</label></th>
+
                                         <td>{{$val->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='order_spot_detail'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
@@ -150,36 +173,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                        {{$list->links()}}
                                     </div>
                                 </div>
                             </footer>
