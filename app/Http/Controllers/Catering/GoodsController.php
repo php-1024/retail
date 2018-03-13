@@ -24,7 +24,7 @@ class GoodsController extends Controller{
 
         $search_data = ['category_name'=>$category_name,'branch_id'=>$branch_id];
 
-        $list = CateringCategory::getPaginage($where,$category_name,'15','id');//获取所有分店分类
+        $list = CateringCategory::getPaginage($where,$category_name,'1','id');//获取所有分店分类
 
         $listBranch = Organization::getList([['parent_id',$admin_data['organization_id']]]);
         return view('Catering/Goods/goods_category',['search_data'=>$search_data,'listBranch'=>$listBranch,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
