@@ -24,6 +24,7 @@ class OrderController extends Controller
         $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $where = [
             'store_id' => $store_id,
+            'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'branch_id' => $admin_data['organization_id'],
         ];
         $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
@@ -31,7 +32,6 @@ class OrderController extends Controller
             $account = Account::getOne([['id',$val->account_id]]);
             $val->account = $account;
         }
-        dump($list);
         return view('Branch/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
