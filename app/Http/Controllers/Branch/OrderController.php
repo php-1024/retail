@@ -29,7 +29,7 @@ class OrderController extends Controller
         $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $account = Account::getOne([['id',$val->account_id]]);
-            $key->account = $account->account;
+            $val->account = $account;
         }
         return view('Branch/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
