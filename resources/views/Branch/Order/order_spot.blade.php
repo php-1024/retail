@@ -126,66 +126,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>1</td>
-                                        <td>10002000300040005</td>
-                                        <td>100020</td>
+                                        <td>{{$val->id}}</td>
+                                        <td>{{$val->ordersn}}</td>
+                                        <td>{{$val->account}}</td>
                                         <td>时光取名叫无心</td>
                                         <td>13123456789</td>
                                         <td><label class="label label-info">在线余额支付</label></td>
-                                        <td>100.00</td>
-                                        <td>12.00</td>
+                                        <td>{{$val->order_price}}</td>
+                                        <td>{{$val->seatfee}}</td>
                                         <th><label class="label label-primary">未付款</label></th>
-                                        <td>2017-08-09 11:11:11</td>
+                                        <td>{{$val->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='order_spot_detail'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>10002000300040005</td>
-                                        <td>100020</td>
-                                        <td>时光取名叫无心</td>
-                                        <td>13123456789</td>
-                                        <td><label class="label label-info">在线余额支付</label></td>
-                                        <td>100.00</td>
-                                        <td>12.00</td>
-                                        <th><label class="label label-warning">已付款</label></th>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>10002000300040005</td>
-                                        <td>100020</td>
-                                        <td>时光取名叫无心</td>
-                                        <td>13123456789</td>
-                                        <td><label class="label label-info">在线余额支付</label></td>
-                                        <td>100.00</td>
-                                        <td>12.00</td>
-                                        <th><label class="label label-success">已完成</label></th>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>10002000300040005</td>
-                                        <td>100020</td>
-                                        <td>时光取名叫无心</td>
-                                        <td>13123456789</td>
-                                        <td><label class="label label-info">在线余额支付</label></td>
-                                        <td>100.00</td>
-                                        <td>12.00</td>
-                                        <th><label class="label label-default">已取消</label></th>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
