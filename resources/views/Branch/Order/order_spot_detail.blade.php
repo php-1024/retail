@@ -87,7 +87,25 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">支付方式</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <label class="label label-info">在线余额支付</label>
+                                                    <label class="label label-info">
+                                                        @if($order->paytype==1)
+                                                            余额支付
+                                                        @elseif($order->paytype==2)
+                                                            在线支付
+                                                        @elseif($order->paytype==3)
+                                                            货到付款
+                                                        @elseif($order->paytype==4)
+                                                            现场现金支付
+                                                        @elseif($order->paytype==5)
+                                                            现场刷卡支付
+                                                        @elseif($order->paytype==6)
+                                                            现场支付宝支付
+                                                        @elseif($order->paytype==7)
+                                                            现场微信支付
+                                                        @elseif($order->paytype==8)
+                                                            线上手动确认付款
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +114,17 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">订单状态</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <label class="label label-primary">未付款</label>
+                                                    @if($order->status==-1)
+                                                        <label class="label label-default">已取消</label>
+                                                    @elseif($order->status==0)
+                                                        <label class="label label-primary">待付款</label>
+                                                    @elseif($order->status==1)
+                                                        <label class="label label-warning">已付款</label>
+                                                    @elseif($order->status==2)
+                                                        <label class="label label-success">配送中</label>
+                                                    @elseif($order->status==3)
+                                                        <label class="label label-info">已完成</label>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -105,7 +133,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">下单时间</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <label class="label label-primary">2017-08-09 11:11:11</label>
+                                                    <label class="label label-primary">{{$order->created_at}}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +142,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">订单备注</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <label class="label label-danger">不要辣</label>
+                                                    <label class="label label-danger">{{$order->remakes}}</label>
                                                 </div>
                                             </div>
                                         </div>
