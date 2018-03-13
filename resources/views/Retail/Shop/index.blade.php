@@ -20,7 +20,7 @@
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Catering/Public/Header')
+        @include('Retail/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
@@ -29,7 +29,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        @include('Catering/Public/Nav')
+                        @include('Retail/Public/Nav')
                     </section>
                 </section>
             </aside>
