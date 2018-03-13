@@ -18,12 +18,6 @@ class CateringCategory extends Model{
         return $this->belongsto('App\Models\Account','created_by');
     }
 
-    //和功能节点关系表，多对多
-    public function nodes()
-    {
-        return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
-    }
-
     //获取单条信息
     public static function getOne($where){
         return self::with('nodes')->where($where)->first();
@@ -61,7 +55,7 @@ class CateringCategory extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('create_account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
