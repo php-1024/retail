@@ -52,7 +52,14 @@ class OrderController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Order/order_spot_detail',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $id = $request->get('id');
+        $order = CateringOrder::getOne([['id',$id]]);
+        foreach ( $order as $key=>$val){
+            $account = Account::getOne([['id',$val->account_id]]);
+            $val->account = $account;
+        }
+        dump($order);
+        return view('Branch/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //订单管理-外卖订单
