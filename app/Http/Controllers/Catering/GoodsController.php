@@ -14,16 +14,20 @@ class GoodsController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $branch_id = $request->branch_id;//分店id
+        if(!empty($branch_id)){
+            $where = ['branch_id'=>$branch_id];
 
+        }else{
+            $where = ['store_id'=>$admin_data['organization_id']];
+        }
         $category_name = $request->category_name;//分类名称
 
+        $search_data = ['category_name'=>$category_name,'branch_id'=>$branch_id];
 
-        $organization_id = $admin_data['organization_id'];
-        dump($organization_id);
+        $list = CateringCategory::getPaginage($where,$category_name,'1','id');//获取所有分店分类
 
-        $list = CateringCategory::getPaginage([['store_id',$organization_id]],$category_name,'15','id');//获取所有分店分类
-        $listBranch = Organization::getList([['parent_id',$organization_id]]);
-        return view('Catering/Goods/goods_category',['listBranch'=>$listBranch,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $listBranch = Organization::getList([['parent_id',$admin_data['organization_id']]]);
+        return view('Catering/Goods/goods_category',['search_data'=>$search_data,'listBranch'=>$listBranch,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查询
     public function goods_list(Request $request){
