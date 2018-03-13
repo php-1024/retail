@@ -503,11 +503,10 @@
                         confirmButtonText: "确定",
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
-                        var url = '{{url('branch/ajax/goods_thumb')}}';//你对数据库的操作路径
+                        var url = '{{url('branch/ajax/goods_thumb')}}';//需要异步加载的页面
                         var goods_id = $("#goods_id").val();
                         var token = $("#_token").val();
                         var data = {'goods_id':goods_id,'_token':token};
-                        console.log(data)
                         $.post(url,data,function(response){
                             if(response.status=='-1'){
                                 swal({
