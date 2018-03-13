@@ -20,7 +20,7 @@ class ShopController extends Controller{
             $where = ['type'=>'9'];
 //            $listOrg = Organization::where([['program_id','4']])->get();
             $listOrg = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
-            return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
+            return view('Retail/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
             $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id')->first();//获取负责人id
