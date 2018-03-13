@@ -117,7 +117,9 @@
                                     <div class="tab-pane fade in" id="picture">
                                         <button type="button" class="btn btn-success" onclick="return addthumb();"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加图片</button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div id="thumb_content">
                                         @include('Branch/Goods/goods_thumb_list')
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade in" id="option">
                                         <button type="button" class="btn btn-info" onclick="addSpec()">添加规格&nbsp;&nbsp;<i class="fa fa-plus"></i></button>
@@ -502,11 +504,15 @@
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
                         $.ajax({
-                            url:'{{url('branch/ajax/goods_spec')}}',//你对数据库的操作路径
-                            data:formData,
-                            type:'post',
-                            success:function(data){
-                                $("#spec_content").html(data);
+                            url:'{{url('branch/ajax/goods_thumb')}}',//你对数据库的操作路径
+                            type: 'POST',
+                            data: formData,
+                            async: false,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success:function(json){
+                                $("#thumb_content").html(json);
                                 console.log(json);
                                 $('#myModal3').modal('hide');
                             },
@@ -526,27 +532,6 @@
             },
             error: function (json) {
                 console.log(json);
-            }
-        });
-    }
-
-    //上传图片提交表单
-    function uploadForm() {
-        var formData = new FormData($( "#uploadForm" )[0]);
-        $.ajax({
-            url: '{{ url('branch/ajax/upload_thumb_check') }}' ,
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (returndata) {
-                console.log(returndata);
-                $('#myModal3').modal('hide');
-            },
-            error: function (returndata) {
-                console.log(returndata);
             }
         });
     }
