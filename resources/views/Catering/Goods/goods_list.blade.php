@@ -103,7 +103,7 @@
                                             {{$value->price}}
                                         </td>
                                         <td>
-                                            <label class="label label-info">主食</label>
+                                            <label class="label label-info">{{$value->category->name}}</label>
                                         </td>
                                         <td>
                                             {{$value->stock}}
