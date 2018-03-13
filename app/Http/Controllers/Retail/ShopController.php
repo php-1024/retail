@@ -80,12 +80,12 @@ class ShopController extends Controller{
     }
     //超级管理员选择店铺
     public function switch_status(Request $request){
-        return redirect('catering');
+        return redirect('retail');
     }
     //退出登录
     public function quit(Request $request){
-        Session::put('catering_account_id','');
-        return redirect('catering/login');
+        Session::put('retail_account_id','');
+        return redirect('retail/login');
     }
 }
 ?>
