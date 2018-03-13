@@ -287,8 +287,17 @@ class WechatController extends Controller{
         );
         WechatAuthorization::addAuthorization($auth_data);
         */
-        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id]);
+        $redirect_url = 'api/catering/store_auth';
+        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'redirect_url'=>$redirect_url]);
 
+    }
+
+    /*
+     * 获取授权方公众号的基本信息
+     */
+    public function get_authorizer_info(Request $request){
+        $organization_id  = $request->input('organization_id');
+        dump($organization_id);
     }
 }
 ?>
