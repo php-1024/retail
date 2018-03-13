@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>零壹云管理平台 | 总分店管理系统</title>
+    <title>零壹云管理平台 | 总店管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
