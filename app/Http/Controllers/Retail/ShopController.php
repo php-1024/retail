@@ -5,6 +5,7 @@ use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Session;
 class ShopController extends Controller{
@@ -55,7 +56,7 @@ class ShopController extends Controller{
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
             ];
-            Session::put('catering_account_id',encrypt(1));//存储登录session_id为当前用户ID
+            Session::put('retail_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
                 $admin_data['realname'] = $account_info->account_info->realname;
