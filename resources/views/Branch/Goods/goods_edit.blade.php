@@ -341,7 +341,7 @@
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="goods_id" value="{{$goods->id}}">
+        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -504,7 +504,10 @@
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
                         var url = '{{url('branch/ajax/goods_thumb')}}';//你对数据库的操作路径
-                        var data = formData;
+                        var goods_id = $("#goods_id").val();
+
+                        var data = {'goods_id':goods_id,'_token':token};
+                        console.log(data)
                         $.post(url,data,function(response){
                             if(response.status=='-1'){
                                 swal({
