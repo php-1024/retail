@@ -73,7 +73,7 @@ class CategoryController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
-        return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Branch/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //商品分类删除弹窗
