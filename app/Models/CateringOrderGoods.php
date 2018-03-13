@@ -30,7 +30,7 @@ class CateringOrderGoods extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('catering_goods')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加商品到购物车
