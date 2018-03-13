@@ -3,13 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
     <![endif]-->
 </head>
