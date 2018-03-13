@@ -54,10 +54,8 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
         $order = CateringOrder::getOne([['id',$id]]);
-        foreach ( $order as $key=>$val){
-            $account = Account::getOne([['id',$val->account_id]]);
-            $val->account = $account;
-        }
+        $account = Account::getOne([['id',$order->account_id]]);
+        $order->account = $account;
         dump($order);
         return view('Branch/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
