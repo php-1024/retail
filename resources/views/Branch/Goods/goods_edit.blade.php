@@ -503,23 +503,24 @@
                         confirmButtonText: "确定",
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
-                        $.ajax({
-                            url:'{{url('branch/ajax/goods_thumb')}}',//你对数据库的操作路径
-                            type: 'POST',
-                            data: formData,
-                            async: false,
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            success:function(json){
-                                $("#thumb_content").html(json);
-                                console.log(json);
-                                $('#myModal3').modal('hide');
-                            },
-                            error:function(){
-                                alert('添加出错，请稍后再试！');
+                        var url = '{{url('branch/ajax/goods_thumb')}}';//你对数据库的操作路径
+                        var data = formData;
+                        $.post(url,data,function(response){
+                            if(response.status=='-1'){
+                                swal({
+                                    title: "提示信息",
+                                    text: response.data,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "确定",
+                                },function(){
+                                    window.location.reload();
+                                });
+                                return;
+                            }else{
+                                $('#thumb_content').html(response);
+                                $('#myModal3').modal();
                             }
-                        })
+                        });
                     });
                 }else{
                     swal({
