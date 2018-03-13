@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Catering;
+namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\LoginLog;
@@ -7,7 +7,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Session;
-class RetailController extends Controller{
+class ShopController extends Controller{
     //添加服务商
     public function display(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
