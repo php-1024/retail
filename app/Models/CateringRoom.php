@@ -31,8 +31,8 @@ class CateringRoom extends Model{
     public static function addRoom($param){
         $model = new CateringRoom();
         $model->name = $param['name'];
-        $model->program_id = $param['program_id'];
-        $model->organization_id = $param['organization_id'];
+        $model->store_id = $param['store_id'];
+        $model->branch_id = $param['organization_id'];
         $model->save();
         return $model->id;
     }
