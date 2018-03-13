@@ -29,6 +29,7 @@ class BranchCheckAjax{
             case "branch/ajax/subordinate_lock":        //冻结下属页面
             case "branch/ajax/selected_rule":           //编辑——授权下属人员
             case "branch/ajax/goods_spec":              //商品规格页面
+            case "branch/ajax/goods_thumb":              //商品规格页面
 
             case "branch/ajax/spec_item_add":           //子规格添加弹窗页面
             case "branch/ajax/spec_edit":               //编辑规格弹窗页面
