@@ -27,7 +27,7 @@
             <header class="wrapper text-center">
                 <strong>零壹云管理平台 - 总店管理系统登录</strong>
             </header>
-            <form role="form" id="currentForm" action="{{ url('catering/ajax/login_check') }}">
+            <form role="form" id="currentForm" action="{{ url('retail/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
