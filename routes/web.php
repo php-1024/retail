@@ -808,8 +808,8 @@ Route::group(['prefix'=>'branch'],function(){
 Route::group(['prefix'=>'retail'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Catering\LoginController@display')->middleware('RetailCheck');                                 //登录页面路由
-        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');                                                //验证码路由
+        Route::get('/', 'Retail\LoginController@display')->middleware('RetailCheck');                                   //登录页面路由
+        Route::get('captcha/{tmp}', 'Retail\LoginController@captcha');                                                  //验证码路由
     });
 
     Route::get('/', 'Catering\ShopController@display')->middleware('CateringCheck');                                    //系统首页
