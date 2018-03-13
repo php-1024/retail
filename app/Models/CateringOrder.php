@@ -13,7 +13,7 @@ class CateringOrder extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和Account表多对一的关系
+    //和Account表一对多的关系
     public function account(){
         return $this->hasMany('App\Models\Account', 'id','account_id');
     }
@@ -36,6 +36,7 @@ class CateringOrder extends Model{
         $model->save();
         return $model->id;
     }
+
     //修改数据
     public static function editOrder($where,$param){
         if($model = self::where($where)->first()){
@@ -48,7 +49,7 @@ class CateringOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('account')->first()->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
