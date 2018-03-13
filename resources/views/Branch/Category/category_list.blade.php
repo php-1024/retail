@@ -40,20 +40,20 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="category_edit_url" value="{{ url('branch/ajax/category_edit') }}">
                                     <input type="hidden" id="category_delete_comfirm_url" value="{{ url('branch/ajax/category_delete') }}">
-                                    <div class="col-sm-2">
-                                        <button type="button" id="copyBtn" class="btn btn-info"><i
-                                                    class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类
-                                        </button>
-                                    </div>
+                                    {{--<div class="col-sm-2">--}}
+                                        {{--<button type="button" id="copyBtn" class="btn btn-info"><i--}}
+                                                    {{--class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类--}}
+                                        {{--</button>--}}
+                                    {{--</div>--}}
 
                                     <label class="col-sm-1 control-label">分类名称</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                        <input class="input-sm form-control" size="16" type="text" name="name" value="">
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
                                         </button>
                                     </div>
                                 </form>
