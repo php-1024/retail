@@ -19,7 +19,9 @@ class OrderController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $where = [
+            'store_id' => $store_id,
             'branch_id' => $admin_data['organization_id'],
         ];
         $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
