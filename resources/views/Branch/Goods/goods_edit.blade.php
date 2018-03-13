@@ -338,10 +338,10 @@
 
 
 {{--上传图片--}}
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal_thumb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="goods_id" value="{{$goods->id}}">
+        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -405,7 +405,7 @@
 
     //弹出上传图片窗口
     function addthumb() {
-        $('#myModal3').modal();
+        $('#myModal_thumb').modal();
     }
 
     //编辑提交表单
@@ -503,8 +503,10 @@
                         confirmButtonText: "确定",
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
-                        var url = '{{url('branch/ajax/goods_thumb')}}';//你对数据库的操作路径
-                        var data = formData;
+                        var url = '{{url('branch/ajax/goods_thumb')}}';//需要异步加载的页面
+                        var goods_id = $("#goods_id").val();
+                        var token = $("#_token").val();
+                        var data = {'goods_id':goods_id,'_token':token};
                         $.post(url,data,function(response){
                             if(response.status=='-1'){
                                 swal({
@@ -518,7 +520,7 @@
                                 return;
                             }else{
                                 $('#thumb_content').html(response);
-                                $('#myModal3').modal();
+                                $('#myModal_thumb').modal('hide');
                             }
                         });
                     });

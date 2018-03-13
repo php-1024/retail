@@ -23,6 +23,11 @@ class CateringGoods extends Model{
         return $this->belongsto('App\Models\CateringCategory','category_id');
     }
 
+    //和organization表一对一的关系
+    public function organization(){
+        return $this->belongsto('App\Models\Organization','branch_id','id');
+    }
+
     //获取单条餐饮商品信息
     public static function getOne($where){
         return self::with('category')->where($where)->first();
@@ -68,7 +73,7 @@ class CateringGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

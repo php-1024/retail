@@ -142,10 +142,20 @@ class ProxyController extends Controller{
 
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
-                $listdata = ['organization_name'=>$proxylist['proxy_name'],'parent_id'=>0,'parent_tree'=>$orgparent_tree,'program_id'=>2,'type'=>2,'status'=>1];
-                $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
+                $orgData = [
+                    'organization_name'=>$proxylist['proxy_name'],
+                    'parent_id'        =>0,
+                    'parent_tree'      =>$orgparent_tree,
+                    'program_id'       =>2,
+                    'type'             =>2,
+                    'status'           =>1
+                ];
+                $organization_id = Organization::addOrganization($orgData); //返回值为商户的id
 
-                $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$proxylist['zone_id']];
+                $proxydata = [
+                    'organization_id'=>$organization_id,
+                    'zone_id'        =>$proxylist['zone_id']
+                ];
                 WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
 
                 $user = Account::max('account');
@@ -155,15 +165,32 @@ class ProxyController extends Controller{
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
                 $password = $proxylist['proxy_password'];//用户密码
-                $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$proxylist['proxy_owner_mobile'],'password'=>$password,'organization_id'=>$organization_id,'account'=>$account];
+                $accdata = [
+                    'parent_id'      =>$parent_id,
+                    'parent_tree'    =>$parent_tree,
+                    'deepth'         =>$deepth,
+                    'mobile'         =>$proxylist['proxy_owner_mobile'],
+                    'password'       =>$password,
+                    'organization_id'=>$organization_id,
+                    'account'        =>$account
+                ];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
                 $realname = $proxylist['proxy_owner'];//负责人姓名
                 $idcard = $proxylist['proxy_owner_idcard'];//负责人身份证号
-                $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
+                $acinfodata = [
+                    'account_id'=>$account_id,
+                    'realname'  =>$realname,
+                    'idcard'    =>$idcard
+                ];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']];
+                $orgproxyinfo = [
+                    'organization_id'   =>$organization_id,
+                    'proxy_owner'       =>$realname,
+                    'proxy_owner_idcard'=>$idcard,
+                    'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']
+                ];
                 OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
 
                 $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
