@@ -25,7 +25,7 @@ class CateringCategory extends Model{
 
     //获取单条信息
     public static function getOne($where){
-        return self::with('nodes')->where($where)->first();
+        return self::where($where)->first();
     }
 
     //获取列表
