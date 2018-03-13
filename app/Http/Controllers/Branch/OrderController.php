@@ -27,6 +27,11 @@ class OrderController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
+        foreach ( $list as $key=>$val){
+            $account = Account::getOne([['id',$val->account_id]]);
+            $val->account = $account;
+        }
+        dump($list);
         return view('Branch/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
