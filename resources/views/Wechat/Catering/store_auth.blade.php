@@ -83,7 +83,7 @@
                                         <div class="form-group">
 
                                             <div class="col-sm-12 text-center">
-                                                <button class="btn btn-success" type="button">绑定公众服务号</button>
+                                                <button class="btn btn-success" type="button" onclick="location.href='{{$url}}'">绑定公众服务号</button>
                                             </div>
 
                                         </div>
