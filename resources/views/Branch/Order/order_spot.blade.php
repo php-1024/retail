@@ -136,21 +136,21 @@
 
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td><label class="label label-info">
-                                        @if($val->order_type==1)
+                                        @if($val->paytype==1)
                                             余额支付
-                                        @elseif($val->order_type==2)
+                                        @elseif($val->paytype==2)
                                             在线支付
-                                        @elseif($val->order_type==3)
+                                        @elseif($val->paytype==3)
                                             货到付款
-                                        @elseif($val->order_type==4)
+                                        @elseif($val->paytype==4)
                                             现场现金支付
-                                        @elseif($val->order_type==5)
+                                        @elseif($val->paytype==5)
                                             现场刷卡支付
-                                        @elseif($val->order_type==6)
+                                        @elseif($val->paytype==6)
                                             现场支付宝支付
-                                        @elseif($val->order_type==7)
+                                        @elseif($val->paytype==7)
                                             现场微信支付
-                                        @elseif($val->order_type==8)
+                                        @elseif($val->paytype==8)
                                             线上手动确认付款
                                         @endif
                                         </label></td>
