@@ -1,14 +1,14 @@
 <?php
 /**
- * goods_thumb表的模型
+ * catering_goods_thumb表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class GoodsThumb extends Model{
+class CateringGoodsThumb extends Model{
     use SoftDeletes;
-    protected $table = 'goods_thumb';
+    protected $table = 'catering_goods_thumb';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -26,7 +26,7 @@ class GoodsThumb extends Model{
 
     //获取餐饮商品图片列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new GoodsThumb();
+        $model = new CateringGoodsThumb();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -35,7 +35,7 @@ class GoodsThumb extends Model{
 
     //添加餐饮商品图片
     public static function addGoodsThumb($param){
-        $model = new GoodsThumb();
+        $model = new CateringGoodsThumb();
         $model->goods_id = $param['goods_id'];
         $model->thumb = $param['thumb'];
         $model->save();
