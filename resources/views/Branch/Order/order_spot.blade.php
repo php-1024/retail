@@ -158,7 +158,20 @@
                                         <td>{{$val->order_price}}</td>
                                         <td>{{$val->seatfee}}</td>
 
-                                        <th><label class="label label-primary">未付款</label></th>
+                                        <th><label class="label label-primary">
+                                                {{---1取消状态，0普通状态，1为已付款，2为已发货，3为成功--}}
+                                                @if($val->status==-1)
+                                                    已取消
+                                                @elseif($val->status==0)
+                                                    普通状态
+                                                @elseif($val->status==1)
+                                                    已付款
+                                                @elseif($val->status==2)
+                                                    已发货
+                                                @elseif($val->status==3)
+                                                    已完成
+                                                @endif
+                                            </label></th>
 
                                         <td>{{$val->created_at}}</td>
                                         <td>

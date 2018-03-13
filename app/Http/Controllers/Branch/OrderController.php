@@ -27,7 +27,7 @@ class OrderController extends Controller
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'branch_id' => $admin_data['organization_id'],
         ];
-        $list = CateringOrder::getPaginage($where,1,'created_at','DESC');
+        $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $account = Account::getOne([['id',$val->account_id]]);
             $val->account = $account;
