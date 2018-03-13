@@ -287,8 +287,7 @@ class WechatController extends Controller{
         );
         WechatAuthorization::addAuthorization($auth_data);
         */
-        $redirect_url = 'api/catering/store_auth';
-        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'redirect_url'=>$redirect_url]);
+        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id]);
 
     }
 
