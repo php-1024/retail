@@ -32,7 +32,15 @@
 
         $('button.confirm').hide();//隐藏弹窗按钮
 
-        var url = $('#redirect_url')
+        var url = $('#get_authorizer_info_url').val();
+        var organization_id = $('#organization_id').val();
+        var redirect_url = $('#redirect_url').val();
+
+        $.post(url,{'organization_id':organization_id},function(data){
+            if(data.status=='1'){
+                window.location.href = redirect_url;
+            }
+        })
     });
 </script>
 </body>
