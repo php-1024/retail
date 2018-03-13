@@ -15,7 +15,7 @@ class CateringOrder extends Model{
 
     //和Account表多对一的关系
     public function account(){
-        return $this->hasMany('App\Models\Account', 'id','account');
+        return $this->hasMany('App\Models\Account', 'id','account_id');
     }
 
     //获取列表
