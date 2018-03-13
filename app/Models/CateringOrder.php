@@ -21,7 +21,7 @@ class CateringOrder extends Model{
     public static function getOne($where)
     {
         $model = self::with('account');
-        return $model->where($where)->get();
+        return $model->where($where)->first();
     }
 
     //获取列表
