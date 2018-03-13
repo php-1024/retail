@@ -45,11 +45,9 @@
                                                     {{--class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类--}}
                                         {{--</button>--}}
                                     {{--</div>--}}
-
                                     <label class="col-sm-1 control-label">分类名称</label>
-
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" name="name" value="">
+                                        <input class="input-sm form-control" size="16" type="text" name="name" value="{{$category_name}}">
                                     </div>
 
                                     <div class="col-sm-3">
