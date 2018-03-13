@@ -15,6 +15,7 @@ class RetailCheck{
             case "retail/login"://登录页,如果已经登录则不需要再次登录
 //                获取用户登录存储的SessionId
                 $sess_key = Session::get('retail_account_id');
+                dd($sess_key);
 //                如果不为空跳转到首页
                 if(!empty($sess_key)) {
                     return redirect('retail');
