@@ -99,6 +99,7 @@ class LoginController extends Controller
                             //插入登录记录
                             if (LoginLog::addLoginLog($account_info['id'], 9, $account_info->organization_id, $ip, $addr)) {//写入登录日志
                                 Session::put('retail_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+
                                 //构造用户缓存数据
                                 if (!empty($account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
