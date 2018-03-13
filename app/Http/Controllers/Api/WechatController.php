@@ -285,10 +285,7 @@ class WechatController extends Controller{
             'expire_time'=>time()+7200,
         );
         WechatAuthorization::addAuthorization($auth_data);
-
-
-        //添加所有的已有粉丝进入零壹账号体系,明天再做。
-        echo "授权完成";
+        return redirect('store_auth');
     }
 }
 ?>
