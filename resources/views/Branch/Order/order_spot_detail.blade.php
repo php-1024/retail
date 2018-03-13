@@ -149,16 +149,19 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group text-center">
                                             @if($order->status==0)
-                                            <button class="btn btn-success" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
+                                                    <button class="btn btn-success" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
                                             @endif
                                             @if($order->status==1 || $order->status==2)
-                                                <button class="btn btn-primary" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
+                                                    <button class="btn btn-primary" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
                                             @endif
                                             @if($order->status==0 || $order->status==1 || $order->status==2)
-                                                <button class="btn btn-default" type="button"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                                    <button class="btn btn-default" type="button"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
                                             @endif
                                             @if($order->status==-1)
-                                                <button class="btn btn-default" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已取消</button>
+                                                    <button class="btn btn-default" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已取消</button>
+                                            @endif
+                                            @if($order->status==3)
+                                                    <button class="btn btn-success" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已完成</button>
                                             @endif
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
