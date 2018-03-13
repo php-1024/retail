@@ -2,13 +2,13 @@
 /**
  * 检测中间件囖
  */
-namespace App\Http\Middleware\Catering;
+namespace App\Http\Middleware\Retail;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
 
-class CateringCheckAjax
+class RetailCheckAjax
 {
     public function handle($request, Closure $next)
     {
