@@ -148,9 +148,21 @@
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-success" type="button" id="addBtn"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
-                                            <button class="btn btn-primary" type="button" id="addBtn"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
-                                            <button class="btn btn-default" type="button" id="addBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                            @if($order->status==0)
+                                                    <button class="btn btn-success" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
+                                            @endif
+                                            @if($order->status==1 || $order->status==2)
+                                                    <button class="btn btn-primary" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
+                                            @endif
+                                            @if($order->status==0 || $order->status==1 || $order->status==2)
+                                                    <button class="btn btn-default" type="button"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                            @endif
+                                            @if($order->status==-1)
+                                                    <button class="btn btn-default" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已取消</button>
+                                            @endif
+                                            @if($order->status==3)
+                                                    <button class="btn btn-success" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已完成</button>
+                                            @endif
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                     </form>
@@ -284,82 +296,6 @@
     </section>
 </section>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">负责人</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="张老三" placeholder="负责人" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
