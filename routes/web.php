@@ -813,9 +813,9 @@ Route::group(['prefix'=>'retail'],function(){
     });
 
     Route::get('/', 'Retail\ShopController@display')->middleware('RetailCheck');                                        //系统首页
-    Route::get('switch_status', 'Catering\ShopController@switch_status')->middleware('CateringCheck');                  //超级管理员切换服务商
-    Route::get('quit', 'Catering\ShopController@quit');                                                                 //退出系统
-    Route::post('select_shop','Catering\ShopController@select_shop')->middleware('CateringCheck');                      //超级管理员选择登入的服务商
+    Route::get('switch_status', 'Retail\ShopController@switch_status')->middleware('RetailCheck');                      //超级管理员切换服务商
+    Route::get('quit', 'Retail\ShopController@quit');                                                                   //退出系统
+    Route::post('select_shop','Retail\ShopController@select_shop')->middleware('RetailCheck');                          //超级管理员选择登入的服务商
 
 
     //账号中心
