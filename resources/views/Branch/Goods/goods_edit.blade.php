@@ -338,7 +338,7 @@
 
 
 {{--上传图片--}}
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal_thumb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
@@ -405,7 +405,7 @@
 
     //弹出上传图片窗口
     function addthumb() {
-        $('#myModal3').modal();
+        $('#myModal_thumb').modal();
     }
 
     //编辑提交表单
@@ -521,7 +521,7 @@
                                 return;
                             }else{
                                 $('#thumb_content').html(response);
-                                $('#myModal3').modal();
+                                $('#myModal_thumb').modal('hide');
                             }
                         });
                     });
