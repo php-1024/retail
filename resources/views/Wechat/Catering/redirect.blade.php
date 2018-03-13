@@ -9,7 +9,8 @@
 </head>
 <body class="">
 <section class="vbox">
-
+    <input type="hidden" name="organization_id" value="{{ $organization_id }}">
+    <input type="hidden" name="redirect_url" value="{{ url($redirect_url) }}">
 </section>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -22,13 +23,15 @@
     $(document).ready(function() {
         swal({
             title: "提示信息",
-            text: '正在对接数据，请勿关闭页面...',
+            text: '正在对接公众号数据，请稍后且勿关闭页面...',
             confirmButtonColor:"#DD6B55",
             confirmButtonText: "确定",
             type: "warning"
-        });
+        });//弹出窗口
 
-        $('button.confirm').hide();
+        $('button.confirm').hide();//隐藏弹窗按钮
+
+
     });
 </script>
 </body>
