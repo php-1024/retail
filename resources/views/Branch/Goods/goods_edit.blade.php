@@ -505,10 +505,14 @@
                         //图片添加成功后异步刷新图片列表部分
                         $.ajax({
                             url:'{{url('branch/ajax/goods_thumb')}}',//你对数据库的操作路径
-                            data:formData,
-                            type:'post',
-                            success:function(data){
-                                $("#thumb_content").html(data);
+                            type: 'POST',
+                            data: formData,
+                            async: false,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success:function(json){
+                                $("#thumb_content").html(json);
                                 console.log(json);
                                 $('#myModal3').modal('hide');
                             },
