@@ -130,7 +130,7 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->ordersn}}</td>
-                                        <td>{{$val->account}}</td>
+                                        <td>{{$val->account->account}}</td>
                                         <td>时光取名叫无心</td>
                                         <td>13123456789</td>
                                         <td><label class="label label-info">在线余额支付</label></td>

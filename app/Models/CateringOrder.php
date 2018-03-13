@@ -13,9 +13,9 @@ class CateringOrder extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和Account表多对一的关系
+    //和Account表一对多的关系
     public function account(){
-        return $this->hasMany('App\Models\Account', 'id','account');
+        return $this->hasMany('App\Models\Account', 'id','account_id');
     }
 
     //获取列表
@@ -36,6 +36,7 @@ class CateringOrder extends Model{
         $model->save();
         return $model->id;
     }
+
     //修改数据
     public static function editOrder($where,$param){
         if($model = self::where($where)->first()){
