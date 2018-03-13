@@ -57,7 +57,7 @@ class OrderController extends Controller
         $order = CateringOrder::getOne([['id',$id]]);
         $account = Account::getOne([['id',$order->account_id]]);    //查询处理订单信息和用户信息
         $order->account = $account;
-        $order_goods = CateringOrderGoods::getOne([['order_id',$order->id]]);
+        $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         dump($order_goods);
         return view('Branch/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
