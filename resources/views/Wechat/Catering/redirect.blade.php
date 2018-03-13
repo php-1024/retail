@@ -9,8 +9,9 @@
 </head>
 <body class="">
 <section class="vbox">
-    <input type="hidden" name="organization_id" value="{{ $organization_id }}">
-    <input type="hidden" name="redirect_url" value="{{ url($redirect_url) }}">
+    <input type="hidden" id="organization_id" value="{{ $organization_id }}">
+    <input type="hidden" id="redirect_url" value="{{ url('api/catering/store_auth') }}">
+    <input type="hidden" id="get_authorizer_info_url" value="{{ url('api/wechat/get_authorizer_info') }}">
 </section>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -31,7 +32,7 @@
 
         $('button.confirm').hide();//隐藏弹窗按钮
 
-
+        var url = $('#redirect_url')
     });
 </script>
 </body>
