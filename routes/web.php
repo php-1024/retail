@@ -471,6 +471,11 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('open_web_redirect','Api\WechatController@open_web_redirect');
         Route::any('test', 'Api\WechatController@test');//测试函数
     });
+
+    //店铺授权页面
+    Route::group(['prefix' => 'catering'] , function(){
+        Route::any('store_auth', 'Api\WechatController@store_auth');//开放平台控制公众平台回复函数
+    });
 });
 /********************商户管理系统*************************/
 
