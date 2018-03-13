@@ -12,6 +12,7 @@
     <input type="hidden" id="organization_id" value="{{ $organization_id }}">
     <input type="hidden" id="redirect_url" value="{{ url('api/catering/store_auth') }}">
     <input type="hidden" id="get_authorizer_info_url" value="{{ url('api/wechat/get_authorizer_info') }}">
+    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 </section>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -22,6 +23,12 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         swal({
             title: "提示信息",
             text: '正在对接公众号数据，请稍后且勿关闭页面...',
@@ -35,8 +42,8 @@
         var url = $('#get_authorizer_info_url').val();
         var organization_id = $('#organization_id').val();
         var redirect_url = $('#redirect_url').val();
-
-        $.post(url,{'organization_id':organization_id},function(data){
+        var token = $('#_token').val();
+        $.post(url,{'organization_id':organization_id,'_token':token},function(data){
             if(data.status=='1'){
                 window.location.href = redirect_url;
             }
