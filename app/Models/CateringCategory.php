@@ -18,15 +18,14 @@ class CateringCategory extends Model{
         return $this->belongsto('App\Models\Account','created_by');
     }
 
-    //和功能节点关系表，多对多
-    public function nodes()
-    {
-        return $this->belongsToMany('App\Models\Node','role_node','role_id','node_id');
+    //和组织表Organization表一对一的关系
+    public function Organization(){
+        return $this->belongsto('App\Models\Organization','branch_id','id');
     }
 
     //获取单条信息
     public static function getOne($where){
-        return self::with('nodes')->where($where)->first();
+        return self::where($where)->first();
     }
 
     //获取列表
@@ -61,7 +60,13 @@ class CateringCategory extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('create_account')->with('Organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
+
+    //查询出模型，再删除模型 一定要查询到才能删除
+    public static function select_delete($id){
+        $model = Self::find($id);
+        return $model->delete();
     }
 }
 ?>

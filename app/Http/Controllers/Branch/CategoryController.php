@@ -75,6 +75,36 @@ class CategoryController extends Controller
         return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //商品分类删除弹窗
+    public function category_delete(Request $request)
+    {
+        $category_id = $request->get('id');              //分类栏目的id
+        return view('Branch/Category/category_delete',['category_id'=>$category_id]);
+    }
+
+    //商品分类删除弹窗
+    public function category_delete_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $category_id = $request->get('category_id');        //获取分类栏目ID
+        DB::beginTransaction();
+        try {
+            CateringCategory::select_delete($category_id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品分类！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品分类！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除分类失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除分类信息成功', 'status' => '1']);
+    }
+
     //商品分类编辑页面
     public function category_edit(Request $request)
     {

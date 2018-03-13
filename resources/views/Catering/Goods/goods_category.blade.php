@@ -76,38 +76,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$value)
                                     <tr>
-                                        <td>1</td>
-                                        <td>主食</td>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->name}}</td>
                                         <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
+                                            <label class="label label-primary">{{$value->Organization->organization_name}}</label>
                                         </td>
-                                        <td>2017-08-09 11:11:11</td>
+                                        <td>{{$value->created_at}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>酒水饮料</td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>凉菜</td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>小菜</td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -115,36 +93,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                       {{$list->links()}}
                                     </div>
                                 </div>
                             </footer>
