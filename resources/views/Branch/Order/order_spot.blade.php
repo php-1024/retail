@@ -130,9 +130,9 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->ordersn}}</td>
-                                        <td>{{$val->account->account->account}}</td>
+                                        <td>{{$val->account->account}}</td>
                                         <td>{{$val->account->account->account_info->realname}}</td>
-                                        <td>{{$val->account->account->mobile}}</td>
+                                        <td>{{$val->account->mobile}}</td>
                                         <td><label class="label label-info">在线余额支付</label></td>
                                         <td>{{$val->order_price}}</td>
                                         <td>{{$val->seatfee}}</td>
