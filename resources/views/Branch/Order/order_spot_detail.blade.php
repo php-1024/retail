@@ -142,7 +142,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">订单备注</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <label class="label label-danger">{{$order->remakes}}</label>
+                                                    <label class="label label-danger">{{$order->remarks}}</label>
                                                 </div>
                                             </div>
                                         </div>
