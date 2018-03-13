@@ -272,7 +272,7 @@ class WechatController extends Controller{
 
     //授权回调链接
     public function redirect(Request $request){
-        $origanization_id = $_GET['origanization_id'];//中间件产生的管理员数据参数
+        $origanization_id = $_GET['organization_id'];//中间件产生的管理员数据参数
         $auth_code = $_GET['auth_code'];//授权码
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
         $auth_data = array(
