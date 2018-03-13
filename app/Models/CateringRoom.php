@@ -32,7 +32,7 @@ class CateringRoom extends Model{
         $model = new CateringRoom();
         $model->name = $param['name'];
         $model->store_id = $param['store_id'];
-        $model->branch_id = $param['organization_id'];
+        $model->branch_id = $param['branch_id'];
         $model->save();
         return $model->id;
     }
