@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\CateringOrder;
+use App\Models\CateringOrderGoods;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Session;
@@ -54,9 +55,10 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
         $order = CateringOrder::getOne([['id',$id]]);
-        $account = Account::getOne([['id',$order->account_id]]);
+        $account = Account::getOne([['id',$order->account_id]]);    //查询处理订单信息和用户信息
         $order->account = $account;
-        dump($order);
+        $order_goods = CateringOrderGoods::getOne([['order_id',$order->id]]);
+        dump($order_goods);
         return view('Branch/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
