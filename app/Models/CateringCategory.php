@@ -59,8 +59,12 @@ class CateringCategory extends Model{
     }
 
     //获取分页列表
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->with('Organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getPaginage($where,$category_name,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('Organization');
+        if(!empty($category_name)){
+            $model = $model->where('name','like','%'.$category_name.'%');
+        }
+        return $model->with('create_account')->with('Organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //查询出模型，再删除模型 一定要查询到才能删除
