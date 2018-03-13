@@ -53,6 +53,15 @@ class ZeroneRedis
         $data_key = 'branch_system_admin_data_'.$key_id;
         Redis::set($data_key,$admin_data);
     }
+    /*
+     * 商品总店平台
+     */
+    public static function create_retail_account_cache($key_id,$admin_data){
+        $admin_data = serialize($admin_data);//序列化数组数据
+        Redis::connection('zeo');//连接到我的redis服务器-餐饮分店平台使用
+        $data_key = 'retail_system_admin_data_'.$key_id;
+        Redis::set($data_key,$admin_data);
+    }
 
     //内部方法，生成对应程序及账号的菜单
     /*
