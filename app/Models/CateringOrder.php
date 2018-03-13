@@ -18,6 +18,12 @@ class CateringOrder extends Model{
         return $this->hasMany('App\Models\Account', 'id','account_id');
     }
 
+    public static function getOne($where)
+    {
+        $model = self::with('account');
+        return $model->where($where)->get();
+    }
+
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new CateringOrder();
