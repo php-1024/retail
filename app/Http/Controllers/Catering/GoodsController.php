@@ -15,7 +15,7 @@ class GoodsController extends Controller{
 
         $branch_id = $request->branch_id;//分店id
         if(!empty($branch_id)){
-            $where = ['$branch_id'=>$branch_id];
+            $where = ['branch_id'=>$branch_id];
 
         }else{
             $where = ['store_id'=>$admin_data['organization_id']];
