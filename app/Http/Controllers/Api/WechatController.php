@@ -297,7 +297,7 @@ class WechatController extends Controller{
     public function get_authorizer_info(Request $request){
         $organization_id  = $request->input('organization_id');
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        dump($auth_info);
+        $authorize_info = \Wechat::get_authorizer_info($auth_info->authorizer_appid);//获取对应公众号的详细信息
     }
 }
 ?>
