@@ -5,6 +5,7 @@ use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Session;
 class ShopController extends Controller{
