@@ -39,8 +39,7 @@
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="category_edit_url" value="{{ url('branch/ajax/category_edit') }}">
-                                    <input type="hidden" id="category_delete_comfirm_url"
-                                           value="{{ url('branch/ajax/category_delete') }}">
+                                    <input type="hidden" id="category_delete_comfirm_url" value="{{ url('branch/ajax/category_delete') }}">
                                     <div class="col-sm-2">
                                         <button type="button" id="copyBtn" class="btn btn-info"><i
                                                     class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类
@@ -78,11 +77,9 @@
                                             <td>{{ $val->displayorder }}</td>
                                             <td>{{ $val->created_at }}</td>
                                             <td>
-                                                <button class="btn btn-info btn-xs"
-                                                        onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
+                                                <button class="btn btn-info btn-xs" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
                                                 </button>
-                                                <button class="btn btn-danger btn-xs" id="deleteBtn"><i
-                                                            class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                <button class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                 </button>
                                             </td>
                                         </tr>
@@ -108,36 +105,6 @@
 </section>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认删除分类</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                                <span class="help-block m-b-none text-danger">删除分类后，原分类下的商品的分类默认为其他</span>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
@@ -230,23 +197,10 @@
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script>
-    //获取用户信息，编辑密码框
+    //编辑分类信息
     function getEditForm(id) {
         var url = $('#category_edit_url').val();
         var token = $('#_token').val();
-
-        if (id == '') {
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            }, function () {
-                window.location.reload();
-            });
-            return;
-        }
-
         var data = {'id': id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
@@ -260,6 +214,30 @@
                 });
                 return;
             } else {
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+
+    //删除分类信息
+    function getDeleteForm(id){
+        var url = $('#category_delete_comfirm_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
