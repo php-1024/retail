@@ -26,7 +26,7 @@
                 </li>
                 @endforeach
                 <li>
-                    <a href="{{ url('catering/quit') }}" class="auto">
+                    <a href="{{ url('retail/quit') }}" class="auto">
                         <i class="icon-logout icon text-danger"></i>
                         <span>退出系统</span>
                     </a>
