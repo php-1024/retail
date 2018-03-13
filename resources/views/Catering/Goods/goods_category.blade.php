@@ -51,14 +51,14 @@
                                         <select name="branch_id" class="form-control m-b">
                                             <option value="0">所有分店</option>
                                             @foreach($listBranch as $key=>$value)
-                                            <option value="{{$value->id}}">{{$value->organization_name}}</option>
+                                            <option value="{{$value->id}}" @if($search_data['branch_id'] == $value->id)selected @endif>{{$value->organization_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <label class="col-sm-1 control-label">分类名称</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="" name="category_name">
+                                        <input class="input-sm form-control" size="16" type="text" value="{{$search_data['branch_id']}}" name="category_name">
                                     </div>
 
                                     <div class="col-sm-3">
@@ -95,7 +95,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                       {{$list->links()}}
+                                       {{$list->appends($search_data)->links()}}
                                     </div>
                                 </div>
                             </footer>
