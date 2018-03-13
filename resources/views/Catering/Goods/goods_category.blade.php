@@ -76,38 +76,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$value)
                                     <tr>
-                                        <td>1</td>
-                                        <td>主食</td>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->name}}</td>
                                         <td>
                                             <label class="label label-primary">刘记鸡煲王（总店）</label>
                                         </td>
                                         <td>2017-08-09 11:11:11</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>酒水饮料</td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>凉菜</td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>小菜</td>
-                                        <td>
-                                            <label class="label label-primary">刘记鸡煲王（总店）</label>
-                                        </td>
-                                        <td>2017-08-09 11:11:11</td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

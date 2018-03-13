@@ -18,6 +18,11 @@ class CateringCategory extends Model{
         return $this->belongsto('App\Models\Account','created_by');
     }
 
+    //和组织表Organization表一对一的关系
+    public function Organization(){
+        return $this->belongsto('App\Models\Organization','branch_id','id');
+    }
+
     //获取单条信息
     public static function getOne($where){
         return self::with('nodes')->where($where)->first();

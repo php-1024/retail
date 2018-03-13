@@ -13,8 +13,7 @@ class GoodsController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];
         $list = CateringCategory::getPaginage([['store_id',$organization_id]],'15','id');
-        dump($list);
-        return view('Catering/Goods/goods_category',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Goods/goods_category',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查询
     public function goods_list(Request $request){
