@@ -21,7 +21,7 @@ class GoodsController extends Controller{
         }
         $category_name = $request->category_name;//分类名称
 
-        $search_data = ['category_name'=>$category_name,'$branch_id'=>$branch_id];
+        $search_data = ['category_name'=>$category_name,'branch_id'=>$branch_id];
 
         $list = CateringCategory::getPaginage([['store_id',$branch_id]],$category_name,'15','id');//获取所有分店分类
 
