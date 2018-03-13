@@ -56,7 +56,7 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" id="url" value="{{url('catering/select_shop')}}">
+        <input type="hidden" id="url" value="{{url('retail/select_shop')}}">
     @foreach($listOrg as $key=>$value)
         <div class="col-lg-3 col-sm-6">
             <a href="javascript:;" onclick="postForm('{{$value->id}}','{{$value->account->id}}')">

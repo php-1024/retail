@@ -30,7 +30,7 @@ class RetailCheck{
 
             /****店铺概况****/
             case "retail":                                  //店铺后台首页
-            case "retail/select_shop":                    //店铺超级管员进入操作
+            case "retail/select_shop":                      //店铺超级管员进入操作
             /****店铺概况****/
 
             /****账号中心****/
