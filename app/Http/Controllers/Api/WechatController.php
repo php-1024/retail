@@ -11,6 +11,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $url = \Wechat::get_auth_url();
         return view('Wechat/Catering/store_auth',['url'=>$url,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
