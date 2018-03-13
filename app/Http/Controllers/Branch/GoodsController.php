@@ -253,7 +253,7 @@ class GoodsController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '编辑规格失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '编辑规格信息成功', 'status' => '1', 'spec_id' => $spec_id]);
+        return response()->json(['data' => '编辑规格信息成功', 'status' => '1']);
     }
 
     //编辑子规格操作方法

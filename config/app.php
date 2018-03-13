@@ -42,6 +42,7 @@ return [
     /*
      * 零壹默认公众平台相关参数
      * 用于建设零壹的账号体系
+     * 零壹服务号
      */
     'wechat_web_setting'=>[
         'appid'=>'wx77212e03020bd1dd',

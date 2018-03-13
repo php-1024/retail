@@ -19,6 +19,7 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "branch/ajax/branch_select":           //超级管理员选择分店提交数据
+            case "branch/ajax/category_delete":           //栏目编辑页面
             case "branch/ajax/category_edit":           //栏目编辑页面
             case "branch/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
             case "branch/ajax/role_delete":             //删除权限角色弹出框检测登入和权限
@@ -57,6 +58,8 @@ class BranchCheckAjax{
                 return self::format_response($re, $next);
                 break;
 
+
+            case "branch/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "branch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "branch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             case "branch/ajax/spec_add_check":          //检测是否登录 权限 安全密码
