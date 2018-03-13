@@ -505,7 +505,7 @@
                         //图片添加成功后异步刷新图片列表部分
                         var url = '{{url('branch/ajax/goods_thumb')}}';//你对数据库的操作路径
                         var goods_id = $("#goods_id").val();
-                        var _token = $("#_token").val();
+                        var token = $("#_token").val();
                         var data = {'goods_id':goods_id,'_token':token};
                         console.log(data)
                         $.post(url,data,function(response){
