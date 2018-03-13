@@ -46,8 +46,14 @@
                  });
                  return;
              }else{
-                 $('#myModal').html(response);
-                 $('#myModal').modal();
+                 swal({
+                     title: "提示信息",
+                     text: response.data,
+                     confirmButtonColor: "#DD6B55",
+                     confirmButtonText: "确定",
+                 },function(){
+                     window.location.reload();
+                 });
              }
          });
      }
