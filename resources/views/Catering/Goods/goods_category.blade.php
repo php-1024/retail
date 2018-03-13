@@ -58,7 +58,7 @@
                                     <label class="col-sm-1 control-label">分类名称</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="{{$search_data['branch_id']}}" name="category_name">
+                                        <input class="input-sm form-control" size="16" type="text" value="{{$search_data['category_name']}}" name="category_name">
                                     </div>
 
                                     <div class="col-sm-3">
