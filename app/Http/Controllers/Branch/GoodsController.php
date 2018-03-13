@@ -13,6 +13,7 @@ use App\Models\GoodsThumb;
 use App\Models\OperationLog;
 use App\Models\CateringSpec;
 use App\Models\CateringSpecItem;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -28,8 +29,7 @@ class GoodsController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         return view('Branch/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
@@ -50,9 +50,10 @@ class GoodsController extends Controller
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_data = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'store_id' => $store_id,
+            'branch_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
             'category_id' => $category_id,
             'name' => $name,
@@ -73,9 +74,9 @@ class GoodsController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '添加商品失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1', 'goods_id' => $goods_id]);
+        return response()->json(['data' => '添加商品成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
 
 
@@ -88,11 +89,11 @@ class GoodsController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //获取当前的页面路由
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_thumb = GoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        $goods = CateringGoods::getOne(['id' => $goods_id, 'program_id' => '5', 'organization_id' => $admin_data['organization_id']]);
+        $goods = CateringGoods::getOne(['id' => $goods_id, 'store_id' => $store_id, 'branch_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Branch/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
@@ -110,6 +111,7 @@ class GoodsController extends Controller
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
@@ -117,8 +119,8 @@ class GoodsController extends Controller
             'id' => $goods_id,
         ];
         $goods_data = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'store_id' => $store_id,
+            'branch_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
             'category_id' => $category_id,
             'name' => $name,
@@ -415,8 +417,7 @@ class GoodsController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
         $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
         return view('Branch/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);

@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
 use App\Models\CateringCategory;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -35,12 +36,13 @@ class CategoryController extends Controller
         if (empty($category_sort)){
             $category_sort = '0';
         }
+        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $category_data = [
             'name' => $category_name,
             'created_by' => $admin_data['id'],
             'displayorder' => $category_sort,
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'store_id' => $store_id,
+            'branch_id' => $admin_data['organization_id'],
         ];
         DB::beginTransaction();
         try {
@@ -67,8 +69,7 @@ class CategoryController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getPaginage($where,'10','displayorder','DESC');
         return view('Branch/Category/category_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
@@ -80,8 +81,7 @@ class CategoryController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('id');
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category = CateringCategory::getOne($where);
@@ -100,8 +100,7 @@ class CategoryController extends Controller
             $displayorder = '0';
         }
         $where = [
-            'program_id' => '5',
-            'organization_id' => $admin_data['organization_id'],
+            'branch_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category_data = [

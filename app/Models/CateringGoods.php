@@ -40,7 +40,6 @@ class CateringGoods extends Model{
     //添加餐饮商品
     public static function addCateringGoods($param){
         $model = new CateringGoods();
-        $model->program_id = $param['program_id'];
         $model->name = $param['name'];
 //        $model->keywords = $param['keywords'];
         $model->details = $param['details'];
@@ -51,8 +50,8 @@ class CateringGoods extends Model{
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
         $model->displayorder = $param['displayorder'];
-        $model->program_id = $param['program_id'];
-        $model->organization_id = $param['organization_id'];
+        $model->store_id = $param['store_id'];
+        $model->branch_id = $param['branch_id'];
         $model->save();
         return $model->id;
     }
