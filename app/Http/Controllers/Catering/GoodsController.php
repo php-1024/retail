@@ -14,14 +14,16 @@ class GoodsController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $branch_id = $request->branch_id;//分店id
-
+        if(!empty($branch_id)){
+            $organization_id = $branch_id;
+        }else{
+            $organization_id = $admin_data['organization_id'];
+        }
         $category_name = $request->category_name;//分类名称
 
-
-        $organization_id = $admin_data['organization_id'];
-        dump($organization_id);
-
+        
         $list = CateringCategory::getPaginage([['store_id',$organization_id]],$category_name,'15','id');//获取所有分店分类
+
         $listBranch = Organization::getList([['parent_id',$organization_id]]);
         return view('Catering/Goods/goods_category',['listBranch'=>$listBranch,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
