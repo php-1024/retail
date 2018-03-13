@@ -28,7 +28,7 @@
     $(document).ready(function() {
         swal({
             title: "提示信息",
-            text: '正在对接数据，请勿关闭页面',
+            text: '正在对接数据，请勿关闭页面...',
             confirmButtonColor:"#DD6B55",
             confirmButtonText: "确定",
             type: "warning"
