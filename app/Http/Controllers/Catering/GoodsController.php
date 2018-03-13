@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Catering;
 use App\Http\Controllers\Controller;
 use App\Models\CateringCategory;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Session;
 class GoodsController extends Controller{
@@ -12,8 +13,9 @@ class GoodsController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];
-        $list = CateringCategory::getPaginage([['store_id',$organization_id]],'15','id');
-        dump($list);
+        $list = CateringCategory::getPaginage([['store_id',$organization_id]],'15','id');//获取所有分店分类
+        $listBranch = Organization::getList([['parent_id',$organization_id]]);
+        dump($listBranch);
         return view('Catering/Goods/goods_category',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查询

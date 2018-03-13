@@ -82,6 +82,11 @@ class Organization extends Model{
         return self::with('organizationCompanyinfo')->with('account')->where($where)->get();
     }
 
+    //获取多条信息
+    public static function getList($where){
+        return self::where($where)->get();
+    }
+
     //获取分页数据-商户
     public static function getCompanyAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
         $model = self::with('account');

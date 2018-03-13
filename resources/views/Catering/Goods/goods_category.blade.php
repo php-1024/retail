@@ -64,6 +64,54 @@
                                         <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
+
+
+
+                                {{--<form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">--}}
+                                    {{--<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-sm-3">--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<label class="control-label" for="date_added">操作时间</label>--}}
+                                                {{--<div class="input-group date">--}}
+                                                    {{--<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-3">--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<label class="control-label" for="date_modified">到</label>--}}
+                                                {{--<div class="input-group date">--}}
+                                                    {{--<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-3">--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<label class="control-label">操作账号</label>--}}
+                                                {{--<input type="text" class="form-control" name="account" value="{{$search_data['account']}}" placeholder="请输入操作人账号">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-3">--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<label class="control-label" for="amount"> &nbsp;</label>--}}
+                                                {{--<button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</form>--}}
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped b-t b-light">
