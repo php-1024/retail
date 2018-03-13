@@ -46,18 +46,19 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <div class="col-sm-2">
-                                        <select name="account" class="form-control m-b">
-                                            <option>所有分店</option>
-                                            <option>总店</option>
-                                            <option>宝能店</option>
-
+                                        <select name="branch_id" class="form-control m-b">
+                                            <option value="0">所有分店</option>
+                                            @foreach($listBranch as $key=>$value)
+                                            <option value="{{$value->id}}">{{$value->organization_name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <label class="col-sm-1 control-label">分类名称</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                        <input class="input-sm form-control" size="16" type="text" value="" name="category_name">
                                     </div>
 
                                     <div class="col-sm-3">

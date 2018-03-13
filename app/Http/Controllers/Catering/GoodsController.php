@@ -16,7 +16,7 @@ class GoodsController extends Controller{
         $list = CateringCategory::getPaginage([['store_id',$organization_id]],'15','id');//获取所有分店分类
         $listBranch = Organization::getList([['parent_id',$organization_id]]);
         dump($listBranch);
-        return view('Catering/Goods/goods_category',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/Goods/goods_category',['listBranch'=>$listBranch,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商品查询
     public function goods_list(Request $request){

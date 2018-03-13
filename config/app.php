@@ -45,8 +45,8 @@ return [
      * 零壹服务号
      */
     'wechat_web_setting'=>[
-        'appid'=>'wx77212e03020bd1dd',
-        'appsecret'=>'c1dcf648be5b7a1df1bcbdd65e0ef94f',
+        'appid'=>'wx3fb8f4754008e524',
+        'appsecret'=>'e889b1da27356de8858ac9b7934fe228',
     ],
 
 
