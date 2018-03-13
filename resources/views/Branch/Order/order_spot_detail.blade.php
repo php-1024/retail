@@ -158,7 +158,7 @@
                                                 <button class="btn btn-default" type="button"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
                                             @endif
                                             @if($order->status==-1)
-                                                <button class="btn btn-default" type="button"><i class="fa fa-times"></i>&nbsp;&nbsp;已取消</button>
+                                                <button class="btn btn-default" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已取消</button>
                                             @endif
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
