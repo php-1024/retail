@@ -33,6 +33,8 @@
             confirmButtonText: "确定",
             type: "warning"
         });
+
+        $('button.confirm').hide();
     });
 </script>
 </body>
