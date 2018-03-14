@@ -59,6 +59,7 @@ class DisplayController extends Controller
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
         }
+        dump($request);
         return  view('CateringBranch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
