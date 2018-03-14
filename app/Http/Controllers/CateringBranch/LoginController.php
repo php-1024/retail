@@ -125,6 +125,7 @@ class LoginController extends Controller
                         Session::put('catering_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
+                        dd($admin_data);
                         //构造用户缓存数据
                         ZeroneRedis::create_catering_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                         ZeroneRedis::create_menu_cache($account_info->id,5);//生成对应账号的商户系统菜单
