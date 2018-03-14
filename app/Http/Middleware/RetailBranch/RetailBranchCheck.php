@@ -54,19 +54,10 @@ class RetailBranchCheck{
             case "retailbranch/device/printer_list":           //设备管理-打印机管理
             case "retailbranch/device/printer_goods":           //设备管理-打印机关联商品
 
-            case "retailbranch/user/user_tag":                //用户管理-粉丝标签管理
             case "retailbranch/user/user_list":               //用户管理-粉丝用户管理
-            case "retailbranch/user/user_timeline":           //用户管理-粉丝足迹管理
 
-            case "retailbranch/finance/balance":              //财务管理-余额管理
-            case "retailbranch/finance/balance_recharge":     //财务管理-余额充值扣费
-            case "retailbranch/finance/credit":               //财务管理-积分管理
-            case "retailbranch/finance/credit_recharge":      //财务管理-积分充值扣费
 
             case "retailbranch/paysetting/wechat_setting":    //支付设置-微信支付
-            case "retailbranch/paysetting/zerone_setting":    //支付设置-零舍壹得
-            case "retailbranch/paysetting/shengf_setting":    //支付设置-盛付通
-            case "retailbranch/paysetting/kuaifu_setting":    //支付设置-快付通
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
