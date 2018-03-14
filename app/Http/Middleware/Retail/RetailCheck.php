@@ -53,7 +53,11 @@ class RetailCheck{
             /****公众号管理-菜单管理****/
             case "retail/menu/menu_customize":            //自定义菜单
             /****公众号管理-菜单管理****/
-                
+
+            /****用户管理****/
+            case "retail/user/user_list":                 //粉丝用户管理
+            /****用户管理****/
+
             /****下属管理--权限角色****/
             case "catering/role/role_add":                  //权限角色添加
             case "catering/role/role_list":                 //权限角色列表

@@ -853,7 +853,7 @@ Route::group(['prefix'=>'retail'],function(){
 
     //用户管理
     Route::group(['prefix'=>'user'],function(){
-        Route::get('user_list', 'Catering\UserController@user_list')->middleware('CateringCheck');                      //粉丝用户管理
+        Route::get('user_list', 'Retail\UserController@user_list')->middleware('RetailCheck');                          //粉丝用户管理
     });
 
     //下属管理--权限角色组
