@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
-        return view('CateringBranch/Login/display');
+        return view('RetailBranch/Login/display');
     }
 
     /*
