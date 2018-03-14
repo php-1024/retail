@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/role_delete_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('Retail/ajax/role_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog">

@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Retail')}}/sweetalert/sweetalert.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="bg-success dker">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    <img src="{{ URL('catering/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
+                    <img src="{{ URL('Retail/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
                 <button type="button" onclick="postForm()" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>

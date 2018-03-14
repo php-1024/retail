@@ -33,7 +33,7 @@
                 </li>
                 @if($admin_data['is_super'] == 2)
                 <li>
-                    <a href="{{url('catering/switch_status')}}">切换商铺</a>
+                    <a href="{{url('Retail/switch_status')}}">切换商铺</a>
                 </li>
                 @endif
                 <li>
@@ -45,7 +45,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="{{ url('catering/quit') }}" >退出登录</a>
+                    <a href="{{ url('Retail/quit') }}" >退出登录</a>
                 </li>
             </ul>
         </li>

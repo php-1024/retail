@@ -15,7 +15,7 @@ class WechatAuthorization extends Model{
 
     //和organization表一对一的关系
     public function organization(){
-        return $this->belongsto('App\Models\Organization', 'organization_id');
+        return $this->belongsto('App\Models\Organization', 'organization_id');//by tang,hasone-->belongsto
     }
 
     //和wechat_authorizer_info表一对一的关系
