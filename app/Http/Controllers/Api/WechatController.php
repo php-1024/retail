@@ -328,6 +328,7 @@ class WechatController extends Controller{
             'business_info'=>json_encode($authorizer_info['business_info']),
             'qrcode_url'=>$authorizer_info['qrcode_url'],
         ];
+        var_dump($data);
         WechatAuthorizerInfo::addAuthorizerInfo($data);
     }
 }
