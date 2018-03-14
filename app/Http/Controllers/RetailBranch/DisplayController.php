@@ -35,11 +35,11 @@ class DisplayController extends Controller
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            return redirect('cateringbranch/branch_list');
+            return redirect('retailbranch/branch_list');
         }
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
         if (empty($admin_data['safe_password'])){           //先设置安全密码
-            return redirect('cateringbranch/account/password');
+            return redirect('retailbranch/account/password');
         }else{
             return view('RetailBranch/Display/display',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
@@ -50,7 +50,7 @@ class DisplayController extends Controller
     {
         $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){      //如果是超级管理员并且已经切换身份成功则跳转
-            return redirect('cateringbranch');
+            return redirect('retailbranch');
         }
         $organization_name  = $request->organization_name;
         $where = ['type'=>'5'];//type=5分店组织
@@ -82,7 +82,7 @@ class DisplayController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
         ZeroneRedis::create_catering_branch_account_cache(1,$admin_data);//清空所选组织
-        return redirect('cateringbranch');
+        return redirect('retailbranch');
     }
 
     //超级管理员以分店平台普通管理员登录处理
