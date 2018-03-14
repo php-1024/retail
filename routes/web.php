@@ -863,9 +863,9 @@ Route::group(['prefix'=>'retail'],function(){
 
     //账号中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Catering\AccountController@profile')->middleware('CateringCheck');                       //账号信息
-        Route::get('password', 'Catering\AccountController@password')->middleware('CateringCheck');                     //登入密码修改
-        Route::get('safe_password', 'Catering\AccountController@safe_password')->middleware('CateringCheck');           //安全密码设置
+        Route::get('profile', 'Retail\AccountController@profile')->middleware('RetailCheck');                           //账号信息
+        Route::get('password', 'Retail\AccountController@password')->middleware('RetailCheck');                         //登入密码修改
+        Route::get('safe_password', 'Retail\AccountController@safe_password')->middleware('RetailCheck');               //安全密码设置
     });
 
     //公众号管理
