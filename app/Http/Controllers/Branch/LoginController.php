@@ -45,9 +45,8 @@ class LoginController extends Controller
     }
 
     //检测登录
-    public function login_check(Request $request)
+    public function login_check()
     {
-        dd($request);
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
         $addr = $addr_arr[0] . $addr_arr[1] . $addr_arr[2] . $addr_arr[3];//获取访问者地址
@@ -140,8 +139,7 @@ class LoginController extends Controller
             return response()->json(['data' => '您短时间内错误的次数超过' . $allowed_error_times . '次，请稍候再尝试登录 ', 'status' => '0']);
         }
     }
-
-    //退出登录
+    //退出登录as
     public function quit(){
         Session::put('branch_account_id','');
         return redirect('branch/login');
