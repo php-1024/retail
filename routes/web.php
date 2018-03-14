@@ -653,6 +653,7 @@ Route::group(['prefix'=>'branch'],function(){
         Route::get('/', 'Branch\LoginController@display')->middleware('BranchCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Branch\LoginController@captcha');//验证码路由
     });
+
     Route::get('/', 'Branch\DisplayController@display')->middleware('BranchCheck');//分店首页
     Route::get('quit', 'Branch\LoginController@quit');                                                 //退出系统
     Route::get('branch_list', 'Branch\DisplayController@branch_list')->middleware('BranchCheck');      //分店列表
