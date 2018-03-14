@@ -127,7 +127,7 @@ class CateringBranchCheck{
             //把参数传递到下一个中间件
             return self::res(1,$request);
         }else{
-            return self::res(0,redirect('branch/login'));
+            return self::res(0,redirect('cateringbranch/login'));
         }
     }
 
