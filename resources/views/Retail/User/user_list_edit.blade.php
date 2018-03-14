@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('Retail/ajax/user_list_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/user_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="user_id" value="{{$userInfo['user_id']}}">
     <div class="modal-dialog">
@@ -50,15 +50,6 @@
                                 <label class="label label-primary">联盟用户-{{$data['recommender_name']}}</label>
                             @endif
 
-                        </div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">手机号码</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="{{$data['mobile']}}" placeholder="手机号码" class="form-control" name="mobile">
                         </div>
                     </div>
                     <div style="clear:both;"></div>

@@ -897,6 +897,13 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('safe_password_check','Retail\AccountController@safe_password_check')->middleware('RetailCheckAjax');//安全密码数据提交
         Route::post('password_check','Retail\AccountController@password_check')->middleware('RetailCheckAjax');          //安全密码数据提交
 
+        //用户管理
+        Route::post('user_list_edit','Retail\UserController@user_list_edit')->middleware('RetailCheckAjax');             //列表编辑ajax显示
+        Route::post('user_list_edit_check','Retail\UserController@user_list_edit_check')->middleware('RetailCheckAjax'); //列表编辑功能提交
+        Route::post('user_list_lock','Retail\UserController@user_list_lock')->middleware('RetailCheckAjax');             //列表冻结ajax显示
+        Route::post('user_list_lock_check','Retail\UserController@user_list_lock_check')->middleware('RetailCheckAjax'); //列表冻结功能提交
+        Route::post('user_list_wallet','Retail\UserController@user_list_wallet')->middleware('RetailCheckAjax');         //列表粉丝钱包ajax显示
+        
         //权限角色
         Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');        //提交添加权限角色数据
         Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');                  //编辑权限角色弹出框
@@ -917,12 +924,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('quick_rule','Catering\SubordinateController@quick_rule')->middleware('CateringCheckAjax');//添加下级人员快速授权
         Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheckAjax');//下级人员已经选中的权限出框
 
-        //用户管理
-        Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                 //列表编辑ajax显示
-        Route::post('user_list_edit_check','Catering\UserController@user_list_edit_check')->middleware('CateringCheckAjax');     //列表编辑功能提交
-        Route::post('user_list_lock','Catering\UserController@user_list_lock')->middleware('CateringCheckAjax');                 //列表冻结ajax显示
-        Route::post('user_list_lock_check','Catering\UserController@user_list_lock_check')->middleware('CateringCheckAjax');     //列表冻结功能提交
-        Route::post('user_list_wallet','Catering\UserController@user_list_wallet')->middleware('CateringCheckAjax');             //列表粉丝钱包ajax显示
+
 
         //总店管理
         Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交

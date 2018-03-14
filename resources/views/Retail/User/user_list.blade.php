@@ -47,9 +47,9 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="user_list_edit" value="{{ url('Retail/ajax/user_list_edit') }}">
-                                    <input type="hidden" id="user_list_wallet" value="{{ url('Retail/ajax/user_list_wallet') }}">
-                                    <input type="hidden" id="user_list_lock" value="{{ url('Retail/ajax/user_list_lock') }}">
+                                    <input type="hidden" id="user_list_edit" value="{{ url('retail/ajax/user_list_edit') }}">
+                                    <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
+                                    <input type="hidden" id="user_list_lock" value="{{ url('retail/ajax/user_list_lock') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
@@ -71,6 +71,7 @@
                                         <th>关注公众号</th>
                                         <th>源头商家</th>
                                         <th>推荐人</th>
+                                        <th>状态</th>
                                         <th>注册时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -90,6 +91,11 @@
                                                     零壹联盟
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
+                                        <td>@if($value->status==0)
+                                                <label class="label label-success">正常</label>
+                                            @else
+                                                <label class="label label-warning">冻结</label>
+                                            @endif</td>
                                         <td>{{$value->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
