@@ -36,7 +36,7 @@
                     <input type="password" name="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="captcha" id="captcha_url" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
+                    <input type="text" name="captcha" id="captcha_url" value="{{ URL('tooling/login/captcha') }} placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
                     <img src="{{ URL('retail/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
