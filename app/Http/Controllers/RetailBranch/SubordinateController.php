@@ -167,7 +167,7 @@ class SubordinateController extends Controller
         $mobile = $request->input('mobile');//手机号码
         $organization_id = $admin_data['organization_id'];
         if (!empty($password)) {
-            $key = config("app.catering_branch_encrypt_key");//获取加密盐
+            $key = config("app.retail_branch_encrypt_key");//获取加密盐
             $encrypted = md5($password);//加密密码第一重
             $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
             $data['password'] = $encryptPwd;
