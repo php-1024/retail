@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatAuthorization;
+use App\Models\WechatAuthorizerInfo;
 
 class WechatController extends Controller{
     public function store_auth(Request $request){
@@ -326,6 +327,8 @@ class WechatController extends Controller{
             'business_info'=>serialize($authorize_info['business_info']),
             'qrcode_url'=>$authorize_info['qrcode_url'],
         ];
+        WechatAuthorizerInfo::addAuthorization();
+
     }
 }
 ?>
