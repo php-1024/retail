@@ -69,8 +69,10 @@ class WechatAuthorization extends Model{
 
     //取消授权时删除用户授权信息
     public static function removeAuth($authorizer_appid){
-        $info = self::where('authorizer_appid',$authorizer_appid)->first();
-        dump($info);
+        if($info = self::where('authorizer_appid',$authorizer_appid)->first()) {
+            WechatAuthorizerInfo::where('authorization_id', $info['id'])->forceDelete();
+            self::where('authorizer_appid', $authorizer_appid)->forceDelete();
+        }
     }
 }
 ?>
