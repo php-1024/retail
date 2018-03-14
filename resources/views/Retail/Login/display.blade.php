@@ -5,14 +5,14 @@
     <title>零壹总店管理平台</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Retail')}}/sweetalert/sweetalert.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -25,7 +25,7 @@
         <a class="navbar-brand block" href="index.html"><span class="h1 font-bold">ZERONE</span></a>
         <section class="m-b-lg">
             <header class="wrapper text-center">
-                <strong>零壹云管理平台 - 总店管理系统登录</strong>
+                <strong>零壹云管理平台 - 零售总店管理系统登录</strong>
             </header>
             <form role="form" id="currentForm" action="{{ url('retail/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -56,17 +56,17 @@
     </div>
 </footer>
 <!-- / footer -->
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script src="{{asset('public/Catering/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Retail')}}/sweetalert/sweetalert.min.js"></script>
 <script>
     $(function(){
         //设置CSRF令牌
