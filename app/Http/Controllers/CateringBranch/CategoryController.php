@@ -4,7 +4,7 @@
  * 栏目管理
  **/
 
-namespace App\Http\Controllers\Branch;
+namespace App\Http\Controllers\CateringBranch;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;

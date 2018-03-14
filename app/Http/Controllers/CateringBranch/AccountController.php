@@ -3,7 +3,7 @@
  *账户中心
  *
  **/
-namespace App\Http\Controllers\Branch;
+namespace App\Http\Controllers\CateringBranch;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;

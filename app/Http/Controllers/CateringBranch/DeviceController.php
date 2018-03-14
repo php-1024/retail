@@ -3,7 +3,7 @@
  *餐饮分店管理系统
  **/
 
-namespace App\Http\Controllers\Branch;
+namespace App\Http\Controllers\CateringBranch;
 
 use App\Http\Controllers\Controller;
 use App\Models\CateringRoom;
