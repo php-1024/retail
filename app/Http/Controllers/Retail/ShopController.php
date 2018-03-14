@@ -84,7 +84,7 @@ class ShopController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
+        $where = [['operation_log.organization_id',$admin_data['organization_id']]];
         $list = OperationLog::getProxyPaginate($where,10,'id');
         return view('Retail/Shop/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
@@ -94,7 +94,7 @@ class ShopController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
+        $where = [['login_log.organization_id',$admin_data['organization_id']]];
         $list = LoginLog::getProxyPaginate($where,15,'id');
         return view('Retail/Shop/login_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
