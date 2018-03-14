@@ -130,7 +130,7 @@ class AccountController extends Controller{
         if($admin_data['is_super'] ==2){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.catering_safe_encrypt_key");//获取加密盐
+            $key = config("app.retail_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
@@ -143,7 +143,7 @@ class AccountController extends Controller{
                 $admin_data['safe_password'] = $encryptPwd;
                 if($admin_data['is_super'] == 2){
                     Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统设置了安全密码');//在零壹保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在零售总店系统设置了安全密码');//在零壹保存操作记录
                     \ZeroneRedis::create_retail_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                 }else{
@@ -164,7 +164,7 @@ class AccountController extends Controller{
                     $admin_data['safe_password'] = $encryptPwd;
                     if($admin_data['is_super'] == 2){
                         Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
-                        OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了安全密码');//在零壹保存操作记录
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在零售总店系统修改了安全密码');//在零壹保存操作记录
                         \ZeroneRedis::create_retail_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                     }else{
@@ -213,7 +213,7 @@ class AccountController extends Controller{
         if($admin_data['is_super'] == 2){
             $key = config("app.zerone_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.catering_encrypt_key");//获取加密盐
+            $key = config("app.retail_encrypt_key");//获取加密盐
         }
 
         $encrypted = md5($password);//加密密码第一重---新密码
@@ -226,9 +226,9 @@ class AccountController extends Controller{
             try {
                 Account::editAccount([['id',$id ]],['password' => $encryptPwd]);
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1',$id,$route_name,'在店铺系统修改了登录密码');//保存操作记录-保存到零壹系统
+                    OperationLog::addOperationLog('1','1',$id,$route_name,'在零售总店系统修改了登录密码');//保存操作记录-保存到零壹系统
                 }else{
-                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('9',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
