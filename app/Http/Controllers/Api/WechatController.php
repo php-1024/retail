@@ -273,24 +273,24 @@ class WechatController extends Controller{
 
     //授权回调链接
     public function redirect(Request $request){
-        $organization_id = $_GET['organization_id'] = 6;//中间件产生的管理员数据参数
-        /*
+        $organization_id = $_GET['organization_id'];//中间件产生的管理员数据参数
         $auth_code = $_GET['auth_code'];//授权码
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
-        $auth_data = array(
-            'organization_id'=>$organization_id,
-            'authorizer_appid'=>$auth_info['authorizer_appid'],
-            'authorizer_access_token'=>$auth_info['authorizer_access_token'],
-            'authorizer_refresh_token'=>$auth_info['authorizer_refresh_token'],
-            'origin_data'=>$auth_info['origin_re'],
-            'status'=>'1',
-            'expire_time'=>time()+7200,
-        );
-        $id = WechatAuthorization::addAuthorization($auth_data);
-        */
-        $id = 1;
-        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id]);
-
+        if(WechatAuthorization::checkRowExists($organization_id,$auth_info['authorizer_appid'])){
+            return response()->json(['data' => '您的店铺已绑定公众号 或者 您的公众号已经授权到其他店铺', 'status' => '1']);
+        }else {
+            $auth_data = array(
+                'organization_id' => $organization_id,
+                'authorizer_appid' => $auth_info['authorizer_appid'],
+                'authorizer_access_token' => $auth_info['authorizer_access_token'],
+                'authorizer_refresh_token' => $auth_info['authorizer_refresh_token'],
+                'origin_data' => $auth_info['origin_re'],
+                'status' => '1',
+                'expire_time' => time() + 7200,
+            );
+            $id = WechatAuthorization::addAuthorization($auth_data);
+            return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id]);
+        }
     }
 
     /*
@@ -300,10 +300,8 @@ class WechatController extends Controller{
         $organization_id  = $request->input('organization_id');
         $id = $request->input('id');
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        //$this->pull_authorizer_info($id,$auth_info,'');
-        $this->pull_fans_list($organization_id,$auth_info,0);
-
-
+        $this->pull_authorizer_info($id,$auth_info,'');
+        return response()->json(['data' => '拉取成功', 'status' => '1']);
     }
 
     /*
@@ -324,29 +322,6 @@ class WechatController extends Controller{
             'business_info'=>serialize($authorizer_info['business_info']),
             'qrcode_url'=>$authorizer_info['qrcode_url'],
         ];
-        WechatAuthorizerInfo::addAuthorizerInfo($data);
-    }
-
-    /*
-     * 拉取公众号粉丝信息
-     * $id 公众号ID
-     * $organization_id 公众号绑定组织的ID
-     * $auth_info 授权第三方平台的令牌信息
-     * $i 拉取的次数
-     * $open_id,开始拉取的open_id
-     */
-    private function pull_fans_list($organization_id,$auth_info,$i,$open_id){
-        $fans_data = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
-
-        foreach($fans_data['data'] as $key=>$val){
-            var_dump($val);
-            $i++;
-        }
-
-
-        if($fans_data['total']-$i > 0){
-            $this->pull_fans_list($organization_id,$auth_info,$i,$fans_data['next_openid']);
-        }
     }
 }
 ?>
