@@ -284,9 +284,9 @@ class ZeroneRedis
         Redis::connection('retail');//连接到我的redis服务器——商户平台使用
         $menu_key = 'retail_system_menu_'.$id;  //一级菜单的Redis主键。
         $son_menu_key = 'retail_system_son_menu_'.$id;//子菜单的Redis主键
-        dd($menu_key);
         Redis::set($menu_key,$menu);
         Redis::set($son_menu_key,$son_menu);
+        dd(Redis::set());
     }
 }
 ?>
