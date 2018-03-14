@@ -133,7 +133,7 @@ class AccountController extends Controller{
                 return response()->json(['data' => '设置安全密码失败，请检查', 'status' => '0']);
             }
             $admin_data['safe_password'] = $encryptPwd;
-            ZeroneRedis::create_branch_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
+            ZeroneRedis::create_catering_branch_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存
             return response()->json(['data' => '安全密码设置成功', 'status' => '1']);
         }else{//修改安全密码
             if ($safe_password_check == $old_encryptPwd){
@@ -188,7 +188,7 @@ class AccountController extends Controller{
             $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
         }else{
             $account = Account::getOne([['id',$admin_data['id']]]);
-            $key = config("app.branch_encrypt_key");//获取加密盐（分店专用）
+            $key = config("app.catering_branch_encrypt_key");//获取加密盐（分店专用）
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重

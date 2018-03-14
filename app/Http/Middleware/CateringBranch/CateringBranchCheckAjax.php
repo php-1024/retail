@@ -293,10 +293,10 @@ class CateringBranchCheckAjax{
     public function checkIsLogin($request)
     {
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('branch_account_id');
+        $sess_key = Session::get('catering_branch_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
-            $sess_key = Session::get('branch_account_id');//获取管理员ID
+            $sess_key = Session::get('catering_branch_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('branch');//连接到我的缓存服务器
             $admin_data = Redis::get('branch_system_admin_data_'.$sess_key);//获取管理员信息
@@ -430,7 +430,7 @@ class CateringBranchCheckAjax{
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         }else{
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.branch_safe_encrypt_key");//获取安全密码加密盐（商户专用）
+            $key = config("app.catering_branch_safe_encrypt_key");//获取安全密码加密盐（商户专用）
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
