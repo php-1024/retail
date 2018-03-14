@@ -99,7 +99,7 @@ class LoginController extends Controller
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
                             if (LoginLog::addLoginLog($account_info['id'], 10, $account_info->organization_id, $ip, $addr)) {//写入登录日志
-                                Session::put('catering_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                Session::put('retail_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if (!empty($account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
@@ -123,7 +123,7 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        Session::put('catering_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                        Session::put('retail_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
@@ -143,7 +143,7 @@ class LoginController extends Controller
 
     //退出登录
     public function quit(){
-        Session::put('catering_branch_account_id','');
+        Session::put('retail_branch_account_id','');
         return redirect('retailbranch/login');
     }
 }
