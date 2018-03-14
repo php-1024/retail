@@ -2,7 +2,7 @@
 /**
  * 检测中间件
  */
-namespace App\Http\Middleware\Branch;
+namespace App\Http\Middleware\CateringBranch;
 use App\Models\Account;
 use Closure;
 use Session;
