@@ -83,7 +83,6 @@ class DisplayController extends Controller
     public function branch_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
-        dd($admin_data);
         ZeroneRedis::create_catering_branch_account_cache(1,$admin_data);//清空所选组织
         return redirect('cateringbranch');
     }
