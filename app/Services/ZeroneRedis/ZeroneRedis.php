@@ -50,7 +50,7 @@ class ZeroneRedis
     public static function create_catering_branch_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
         Redis::connection('zeo');//连接到我的redis服务器-餐饮分店平台使用
-        $data_key = 'catering_branch_system_admin_data_'.$key_id;
+        $data_key = 'cateringbranch_system_admin_data_'.$key_id;
         Redis::set($data_key,$admin_data);
     }
     /*
