@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Catering;
+namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
