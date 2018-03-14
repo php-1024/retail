@@ -42,7 +42,6 @@ class UserController extends Controller{
         $user_id = $request->id;//会员标签id
         $userInfo =  UserInfo::getOneUserInfo([['user_id',$user_id]]);//微信昵称
         $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
-        $data['mobile'] =  StoreUser::getPluck([['user_id',$user_id]],'mobile')->first();//手机号
         $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
         if($yauntou == $organization_id){
             $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
