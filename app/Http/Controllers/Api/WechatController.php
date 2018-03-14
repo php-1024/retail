@@ -18,7 +18,8 @@ class WechatController extends Controller{
 
         $wechat_info = [];
         if($org_info = Organization::where('id',$admin_data['organization_id'])->first()) {//如果该组织授权了公众号
-            $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
+           dump($org_info);
+            //$wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
         }
 
       //  $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
