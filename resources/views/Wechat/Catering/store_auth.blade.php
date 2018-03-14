@@ -144,7 +144,7 @@
                                         <div class="form-group">
 
                                             <div class="col-sm-12 text-center">
-                                                <img src="{{$qrcode}}" style="width: 150px; height: 150px;">
+                                                <img src="{{$wechat_info['zerone_qrcode_url']}}" style="width: 150px; height: 150px;">
                                             </div>
 
                                         </div>

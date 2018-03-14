@@ -1,4 +1,4 @@
-<form method="post" class="form-horizontal"  role="form" id="spec_edit_check" action="{{ url('cateringbranch/ajax/spec_edit_check') }}">
+<form method="post" class="form-horizontal"  role="form" id="spec_edit_check" action="{{ url('retailbranch/ajax/spec_edit_check') }}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
      <input type="hidden" name="spec_id" value="{{$spec_id}}">
      <div class="modal-dialog">
@@ -52,7 +52,7 @@
                 },function(){
                     //规格添加成功后异步刷新规格部分
                     $.ajax({
-                        url:'{{url('cateringbranch/ajax/goods_spec')}}',//你对数据库的操作路径
+                        url:'{{url('retailbranch/ajax/goods_spec')}}',//你对数据库的操作路径
                         data:{
                             _token:token,
                             goods_id:goods_id,

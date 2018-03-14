@@ -41,10 +41,10 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('cateringbranch/ajax/subordinate_edit') }}">
-                                    <input type="hidden" id="subordinate_lock" value="{{ url('cateringbranch/ajax/subordinate_lock') }}">
-                                    <input type="hidden" id="subordinate_delete" value="{{ url('cateringbranch/ajax/subordinate_delete') }}">
-                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('cateringbranch/ajax/subordinate_authorize') }}">
+                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('retailbranch/ajax/subordinate_edit') }}">
+                                    <input type="hidden" id="subordinate_lock" value="{{ url('retailbranch/ajax/subordinate_lock') }}">
+                                    <input type="hidden" id="subordinate_delete" value="{{ url('retailbranch/ajax/subordinate_delete') }}">
+                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('retailbranch/ajax/subordinate_authorize') }}">
                                     <label class="col-sm-1 control-label">下属账号</label>
 
                                     <div class="col-sm-2">
