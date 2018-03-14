@@ -1,6 +1,6 @@
 <?php
 /**
- *餐饮分店管理系统
+ *零售分店管理系统
  **/
 
 namespace App\Http\Controllers\RetailBranch;

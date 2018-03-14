@@ -88,7 +88,7 @@ class SubordinateController extends Controller
         $role_id = $request->input('role_id');//用户角色ID
         $module_node_ids = $request->input('module_node_ids');//用户权限节点
 
-        $key = config("app.catering_branch_encrypt_key");//获取加密盐
+        $key = config("app.retail_branch_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
