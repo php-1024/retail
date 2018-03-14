@@ -319,7 +319,7 @@ class WechatController extends Controller{
         dump($authorizer_info);
         $data = [
             'authorization_id'=>$id,
-            'nickname'=>$authorizer_info['nickname'],
+            'nickname'=>$authorizer_info['nick_name'],
             'head_img'=>$authorizer_info['head_img'],
             'service_type_info'=>$authorizer_info['service_type_info'],
             'verify_type_info'=>$authorizer_info['verify_type_info'],
