@@ -61,6 +61,8 @@ class ZeroneRedis
         Redis::connection('zeo');//连接到我的redis服务器-餐饮分店平台使用
         $data_key = 'catering_branch_system_admin_data_'.$key_id;
         Redis::set($data_key,$admin_data);
+        $admin_data = Redis::get('catering_branch_system_admin_data'.$sess_key);//获取管理员信息
+        dump($admin_data);
     }
     /*
      * 零售总店平台
