@@ -35,6 +35,7 @@ class DisplayController extends Controller
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
+            dd($request);
             return redirect('cateringbranch/branch_list');
         }
         $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
