@@ -1128,7 +1128,6 @@ Route::group(['prefix'=>'retailbranch'],function(){
         Route::get('goods_add', 'RetailBranch\GoodsController@goods_add')->middleware('RetailBranchCheck');         //商品管理-添加商品
         Route::get('goods_edit', 'RetailBranch\GoodsController@goods_edit')->middleware('RetailBranchCheck');       //商品管理-编辑商品
         Route::get('goods_list', 'RetailBranch\GoodsController@goods_list')->middleware('RetailBranchCheck');       //商品管理-商品列表
-        Route::get('goods_copy', 'RetailBranch\GoodsController@goods_copy')->middleware('RetailBranchCheck');       //商品管理-拷贝其他分店商品
     });
 
     //订单管理
