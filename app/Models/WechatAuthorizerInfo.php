@@ -16,7 +16,7 @@ class WechatAuthorizerInfo extends Model{
         return self::where($where)->first();
     }
 
-    public static function addAuthorization($param){
+    public static function addAuthorizerInfo($param){
         $model = new WechatWebAuthorization();
         $model->authorization_id = $param['authorization_id'];
         $model->nickname = $param['nickname'];
@@ -31,7 +31,7 @@ class WechatAuthorizerInfo extends Model{
         $model->save();
         return $model->id;
     }
-    public static function editAuthorization($where,$param){
+    public static function editAuthorizerInfo($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;

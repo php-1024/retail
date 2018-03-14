@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatAuthorization;
+use App\Models\WechatAuthorizerInfo;
 
 class WechatController extends Controller{
     public function store_auth(Request $request){
@@ -313,9 +314,20 @@ class WechatController extends Controller{
      * 获取公众号的基本信息
      */
     private function pull_authorizer_info($id,$auth_info){
-        dump($id);
         $authorize_info = \Wechat::get_authorizer_info($auth_info['authorizer_appid']);//获取对应公众号的详细信息
-        dump($authorize_info);
+        $data = [
+            'authorization_id'=>$id,
+            'nickname'=>$authorize_info['nickname'],
+            'head_img'=>$authorize_info['head_img'],
+            'service_type_info'=>$authorize_info['service_type_info'],
+            'verify_type_info'=>$authorize_info['verify_type_info'],
+            'user_name'=>$authorize_info['user_name'],
+            'principal_name'=>$authorize_info['principal_name'],
+            'alias'=>$authorize_info['alias'],
+            'business_info'=>serialize($authorize_info['business_info']),
+            'qrcode_url'=>$authorize_info['qrcode_url'],
+        ];
+        WechatAuthorizerInfo::addAuthorizerInfo($data);
     }
 }
 ?>
