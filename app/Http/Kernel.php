@@ -86,9 +86,14 @@ class Kernel extends HttpKernel
         'BranchCheckAjax'=>\App\Http\Middleware\Branch\BranchCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹分店管理系统*******************************/
 
-        /**************************商超简易管理系统*******************************/
+        /**************************零壹分店管理系统简版*******************************/
+        'CateringBranchCheck'=>\App\Http\Middleware\CateringBranch\CateringBranchCheck::class,//检测普通页面跳转的中间件
+        'CateringBranchCheckAjax'=>\App\Http\Middleware\CateringBranch\CateringBranchCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************零壹分店管理系统简版*******************************/
+
+        /**************************零售总店管理系统*******************************/
         'RetailCheck'=>\App\Http\Middleware\Retail\RetailCheck::class,//检测普通页面跳转的中间件
         'RetailCheckAjax'=>\App\Http\Middleware\Retail\RetailCheckAjax::class,//检测Ajax数据提交的中间件
-        /**************************商超简易管理系统*******************************/
+        /**************************零售总店管理系统*******************************/
     ];
 }
