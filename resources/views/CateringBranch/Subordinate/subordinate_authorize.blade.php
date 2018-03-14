@@ -1,9 +1,9 @@
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('branch/ajax/subordinate_authorize_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('cateringbranch/ajax/subordinate_authorize_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
-    <input type="hidden" id="quick_rule_url" value="{{ url('branch/ajax/quick_rule') }}">
-    <input type="hidden" id="selected_rule_url" value="{{ url('branch/ajax/selected_rule') }}">
+    <input type="hidden" id="quick_rule_url" value="{{ url('cateringbranch/ajax/quick_rule') }}">
+    <input type="hidden" id="selected_rule_url" value="{{ url('cateringbranch/ajax/selected_rule') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

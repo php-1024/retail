@@ -1,11 +1,11 @@
 @foreach($spec as $key=>$val)
 <form method="get" role="form" id="searchForm" action="">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-    <input type="hidden" id="spec_edit" value="{{ url('branch/ajax/spec_edit') }}">
-    <input type="hidden" id="spec_delete" value="{{ url('branch/ajax/spec_delete') }}">
-    <input type="hidden" id="spec_item_edit" value="{{ url('branch/ajax/spec_item_edit') }}">
-    <input type="hidden" id="spec_item_delete" value="{{ url('branch/ajax/spec_item_delete') }}">
-    <input type="hidden" id="spec_item_add" value="{{ url('branch/ajax/spec_item_add') }}">
+    <input type="hidden" id="spec_edit" value="{{ url('cateringbranch/ajax/spec_edit') }}">
+    <input type="hidden" id="spec_delete" value="{{ url('cateringbranch/ajax/spec_delete') }}">
+    <input type="hidden" id="spec_item_edit" value="{{ url('cateringbranch/ajax/spec_item_edit') }}">
+    <input type="hidden" id="spec_item_delete" value="{{ url('cateringbranch/ajax/spec_item_delete') }}">
+    <input type="hidden" id="spec_item_add" value="{{ url('cateringbranch/ajax/spec_item_add') }}">
     <div class="m-t">
         <label class="label label-primary">{{$val->name}}</label>
         <button type="button" class="btn editBtn btn-info btn-xs" onclick="editSpec('{{$val->id}}')"><i class="fa fa-edit"></i></button>

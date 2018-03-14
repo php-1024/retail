@@ -37,7 +37,7 @@
                                 添加商品分类
                             </header>
                             <div class="panel-body">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/category_add_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('cateringbranch/ajax/category_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">分类名称</label>

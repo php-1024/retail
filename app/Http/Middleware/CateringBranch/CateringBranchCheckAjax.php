@@ -34,7 +34,7 @@ class CateringBranchCheckAjax{
             case "cateringbranch/ajax/spec_item_add":           //子规格添加弹窗页面
             case "cateringbranch/ajax/spec_edit":               //编辑规格弹窗页面
             case "cateringbranch/ajax/spec_delete":             //删除规格弹窗页面
-            case "branch/ajax/spec_item_edit":          //编辑子规格弹窗页面
+            case "cateringbranch/ajax/spec_item_edit":          //编辑子规格弹窗页面
             case "cateringbranch/ajax/spec_item_delete":        //删除子规格弹窗页面
 
             case "cateringbranch/ajax/upload_thumb_check":    //上传图片
