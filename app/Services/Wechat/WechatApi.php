@@ -126,8 +126,8 @@ class WechatApi{
      * 获取粉丝列表
      *  $authorizer_access_token 第三方平台调用接口凭证
      */
-    public function get_fans_list($authorizer_access_token){
-        $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$authorizer_access_token;
+    public function get_fans_list($authorizer_access_token,$next_openid=''){
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$authorizer_access_token.'&next_openid='.$next_openid;
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re,true);
         return $re;

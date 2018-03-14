@@ -301,7 +301,7 @@ class WechatController extends Controller{
         $id = $request->input('id');
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         //$this->pull_authorizer_info($id,$auth_info);
-        $this->pull_fans_list($id,$organization_id,$auth_info);
+        $this->pull_fans_list($id,$organization_id,$auth_info,0);
 
 
     }
@@ -329,10 +329,17 @@ class WechatController extends Controller{
 
     /*
      * 拉取公众号粉丝信息
+     * $id 公众号ID
+     * $organization_id 公众号绑定组织的ID
+     * $auth_info 授权第三方平台的令牌信息
+     * $i 拉取的次数
      */
-    private function pull_fans_list($id,$organization_id,$auth_info){
+    private function pull_fans_list($id,$organization_id,$auth_info,$i){
         $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
-        var_dump($fans_list);
+
+        foreach($fans_list['data'] as $key=>$val){
+            var_dump($val);
+        }
     }
 }
 ?>
