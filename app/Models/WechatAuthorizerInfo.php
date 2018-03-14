@@ -17,7 +17,7 @@ class WechatAuthorizerInfo extends Model{
     }
 
     public static function addAuthorizerInfo($param){
-        $model = new WechatWebAuthorization();
+        $model = new WechatAuthorizerInfo();
         $model->authorization_id = $param['authorization_id'];
         $model->nickname = $param['nickname'];
         $model->head_img = $param['head_img'];
