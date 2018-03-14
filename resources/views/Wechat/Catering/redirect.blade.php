@@ -9,6 +9,7 @@
 </head>
 <body class="">
 <section class="vbox">
+    <input type="hidden" id="id" value="{{ $id }}">
     <input type="hidden" id="organization_id" value="{{ $organization_id }}">
     <input type="hidden" id="redirect_url" value="{{ url('api/catering/store_auth') }}">
     <input type="hidden" id="get_authorizer_info_url" value="{{ url('api/wechat/get_authorizer_info') }}">
@@ -42,8 +43,9 @@
         var url = $('#get_authorizer_info_url').val();
         var organization_id = $('#organization_id').val();
         var redirect_url = $('#redirect_url').val();
+        var id = $('#id').val();
         var token = $('#_token').val();
-        $.post(url,{'organization_id':organization_id,'_token':token},function(data){
+        $.post(url,{'organization_id':organization_id,'_token':token,'id':id},function(data){
             if(data.status=='1'){
                 window.location.href = redirect_url;
             }

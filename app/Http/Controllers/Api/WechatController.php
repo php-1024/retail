@@ -285,25 +285,35 @@ class WechatController extends Controller{
             'status'=>'1',
             'expire_time'=>time()+7200,
         );
-        WechatAuthorization::addAuthorization($auth_data);
+        $id = WechatAuthorization::addAuthorization($auth_data);
         */
-        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id]);
+        $id = 1;
+        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id]);
 
     }
 
     /*
-     * 获取授权方公众号的基本信息
+     * 从微信端拉取授权方公众号的基本信息 与 拉取它的所有粉丝 并保存到数据库
      */
-    public function get_authorizer_info(Request $request){
+    public function pull_authorizer_data(Request $request){
         $organization_id  = $request->input('organization_id');
+        $id = $request->input('id');
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        $authorize_info = \Wechat::get_authorizer_info($auth_info['authorizer_appid']);//获取对应公众号的详细信息
-
-
+        $this->get_authorizer_info($id,$auth_info);
+        /*
         $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
         foreach($fans_list as $key=>$val){
             dump($val);
         }
+        */
+
+    }
+
+    /*
+     * 获取公众号的基本信息
+     */
+    public function get_authorizer_info($id,$auth_info){
+        $authorize_info = \Wechat::get_authorizer_info($auth_info['authorizer_appid']);//获取对应公众号的详细信息
         dump($authorize_info);
     }
 }
