@@ -49,7 +49,7 @@ class AccountController extends Controller{
                 unset($module);
             }
         }
-        return view('Branch/Account/profile',['module_node_list'=>$module_node_list,'user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('CateringBranch/Account/profile',['module_node_list'=>$module_node_list,'user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //个人账号信息修改处理
@@ -91,7 +91,7 @@ class AccountController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
-        return view('Branch/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('CateringBranch/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //安全密码修改设置处理
@@ -172,7 +172,7 @@ class AccountController extends Controller{
         if (empty($admin_data['safe_password'])){
             return redirect('branch/account/safe_password');
         }else{
-            return view('Branch/Account/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+            return view('CateringBranch/Account/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
         }
     }
 
@@ -244,7 +244,7 @@ class AccountController extends Controller{
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
-        return view('Branch/Account/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('CateringBranch/Account/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //个人登录日志页面
@@ -270,7 +270,7 @@ class AccountController extends Controller{
         ];
         $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
-        return view('Branch/Account/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('CateringBranch/Account/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     public function message_setting(Request $request)
@@ -279,7 +279,7 @@ class AccountController extends Controller{
         $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
-        return view('Branch/Account/message_setting',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('CateringBranch/Account/message_setting',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 

@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Category/category_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('CateringBranch/Category/category_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //添加商品分类操作
@@ -73,14 +73,14 @@ class CategoryController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
-        return view('Branch/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('CateringBranch/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //商品分类删除弹窗
     public function category_delete(Request $request)
     {
         $category_id = $request->get('id');              //分类栏目的id
-        return view('Branch/Category/category_delete',['category_id'=>$category_id]);
+        return view('CateringBranch/Category/category_delete',['category_id'=>$category_id]);
     }
 
     //商品分类删除弹窗
@@ -116,7 +116,7 @@ class CategoryController extends Controller
             'id' => $category_id,
         ];
         $category = CateringCategory::getOne($where);
-        return view('Branch/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
+        return view('CateringCateringBranch/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
     }
 
     //商品分类编辑提交

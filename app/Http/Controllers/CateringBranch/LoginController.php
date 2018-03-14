@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
-        return view('Branch/Login/display');
+        return view('CateringBranch/Login/display');
     }
 
     /*
@@ -143,7 +143,7 @@ class LoginController extends Controller
     //退出登录
     public function quit(){
         Session::put('branch_account_id','');
-        return redirect('branch/login');
+        return redirect('catering_branch/login');
     }
 }
 
