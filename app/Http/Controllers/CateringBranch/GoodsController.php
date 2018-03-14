@@ -32,7 +32,7 @@ class GoodsController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
-        return view('Branch/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('CateringBranch/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //添加商品数据操作
@@ -96,7 +96,7 @@ class GoodsController extends Controller
         $goods = CateringGoods::getOne(['id' => $goods_id, 'store_id' => $store_id, 'branch_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('CateringBranch/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //编辑商品操作
@@ -219,7 +219,7 @@ class GoodsController extends Controller
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_thumb', ['goods_thumb'=>$goods_thumb]);
+        return view('CateringBranch/Goods/goods_thumb', ['goods_thumb'=>$goods_thumb]);
     }
 
     //规格异步加载部分
@@ -227,7 +227,7 @@ class GoodsController extends Controller
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Branch/Goods/goods_spec', ['spec'=>$spec]);
+        return view('CateringBranch/Goods/goods_spec', ['spec'=>$spec]);
     }
 
 
@@ -238,7 +238,7 @@ class GoodsController extends Controller
     {
         $spec_id = $request->get('spec_id');              //商品的ID
         $spec = CateringSpec::getOne([['id',$spec_id]]);
-        return view('Branch/Goods/goods_spec_edit', ['spec'=>$spec,'spec_id'=>$spec_id]);
+        return view('CateringBranch/Goods/goods_spec_edit', ['spec'=>$spec,'spec_id'=>$spec_id]);
     }
     //编辑规格类操作方法
     public function spec_edit_check(Request $request)
@@ -344,7 +344,7 @@ class GoodsController extends Controller
     {
         $spec_id = $request->get('spec_id');              //规格类ID
         $spec = CateringSpec::getOne(['id'=>$spec_id]);
-        return view('Branch/Goods/goods_spec_delete', ['spec'=>$spec]);
+        return view('CateringBranch/Goods/goods_spec_delete', ['spec'=>$spec]);
     }
 
     //编辑子规格弹窗
@@ -352,7 +352,7 @@ class GoodsController extends Controller
     {
         $spec_item_id = $request->get('spec_item_id');              //子规格id
         $spec_item = CateringSpecItem::getOne(['id'=>$spec_item_id]);
-        return view('Branch/Goods/goods_spec_item_edit', ['spec_item'=>$spec_item]);
+        return view('CateringBranch/Goods/goods_spec_item_edit', ['spec_item'=>$spec_item]);
     }
 
     //删除子规格弹窗
@@ -360,7 +360,7 @@ class GoodsController extends Controller
     {
         $spec_item_id = $request->get('spec_item_id');  //子规格ID
         $goods_id = $request->get('goods_id');          //商品ID
-        return view('Branch/Goods/goods_spec_item_delete', ['spec_item_id'=>$spec_item_id,'goods_id'=>$goods_id]);
+        return view('CateringBranch/Goods/goods_spec_item_delete', ['spec_item_id'=>$spec_item_id,'goods_id'=>$goods_id]);
     }
 
 
@@ -369,7 +369,7 @@ class GoodsController extends Controller
     {
         $spec_id = $request->input('spec_id');
         $goods_id = $request->input('goods_id');
-        return view('Branch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
+        return view('CateringBranch/Goods/goods_spec_comfirm',['spec_id'=>$spec_id,'goods_id'=>$goods_id]);
     }
 
 
@@ -428,7 +428,7 @@ class GoodsController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
-        return view('Branch/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('CateringBranch/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //拷贝其他分店商品
@@ -438,7 +438,7 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Branch/Goods/goods_copy', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('CateringBranch/Goods/goods_copy', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 }
 

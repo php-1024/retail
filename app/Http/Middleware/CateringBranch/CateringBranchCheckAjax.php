@@ -14,87 +14,87 @@ class CateringBranchCheckAjax{
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "branch/ajax/login_check"://检测登录数据提交
+            case "cateringbranch/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering_branch/ajax/branch_select":           //超级管理员选择分店提交数据
-            case "catering_branch/ajax/category_delete":           //栏目编辑页面
-            case "catering_branch/ajax/category_edit":           //栏目编辑页面
-            case "catering_branch/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
-            case "catering_branch/ajax/role_delete":             //删除权限角色弹出框检测登入和权限
-            case "catering_branch/ajax/quick_rule":              //快速授权检测登入和权限
-            case "catering_branch/ajax/subordinate_edit":        //编辑下属人员信息
-            case "catering_branch/ajax/subordinate_authorize":   //编辑——授权下属人员
-            case "catering_branch/ajax/subordinate_lock":        //冻结下属页面
-            case "catering_branch/ajax/selected_rule":           //编辑——授权下属人员
-            case "catering_branch/ajax/goods_spec":              //商品规格页面
-            case "catering_branch/ajax/goods_thumb":              //商品规格页面
+            case "cateringbranch/ajax/branch_select":           //超级管理员选择分店提交数据
+            case "cateringbranch/ajax/category_delete":           //栏目编辑页面
+            case "cateringbranch/ajax/category_edit":           //栏目编辑页面
+            case "cateringbranch/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
+            case "cateringbranch/ajax/role_delete":             //删除权限角色弹出框检测登入和权限
+            case "cateringbranch/ajax/quick_rule":              //快速授权检测登入和权限
+            case "cateringbranch/ajax/subordinate_edit":        //编辑下属人员信息
+            case "cateringbranch/ajax/subordinate_authorize":   //编辑——授权下属人员
+            case "cateringbranch/ajax/subordinate_lock":        //冻结下属页面
+            case "cateringbranch/ajax/selected_rule":           //编辑——授权下属人员
+            case "cateringbranch/ajax/goods_spec":              //商品规格页面
+            case "cateringbranch/ajax/goods_thumb":              //商品规格页面
 
-            case "catering_branch/ajax/spec_item_add":           //子规格添加弹窗页面
-            case "catering_branch/ajax/spec_edit":               //编辑规格弹窗页面
-            case "catering_branch/ajax/spec_delete":             //删除规格弹窗页面
+            case "cateringbranch/ajax/spec_item_add":           //子规格添加弹窗页面
+            case "cateringbranch/ajax/spec_edit":               //编辑规格弹窗页面
+            case "cateringbranch/ajax/spec_delete":             //删除规格弹窗页面
             case "branch/ajax/spec_item_edit":          //编辑子规格弹窗页面
-            case "catering_branch/ajax/spec_item_delete":        //删除子规格弹窗页面
+            case "cateringbranch/ajax/spec_item_delete":        //删除子规格弹窗页面
 
-            case "catering_branch/ajax/upload_thumb_check":    //上传图片
+            case "cateringbranch/ajax/upload_thumb_check":    //上传图片
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering_branch/ajax/profile_edit_check"://检测登录，权限，及修改个人信息的数据
+            case "cateringbranch/ajax/profile_edit_check"://检测登录，权限，及修改个人信息的数据
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering_branch/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
+            case "cateringbranch/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering_branch/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
+            case "cateringbranch/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering_branch/ajax/role_add_check"://检测登录，权限，安全密码，及添加角色的数据
-            case "catering_branch/ajax/role_edit_check"://检测登录，权限，安全密码，及修改角色的数据
+            case "cateringbranch/ajax/role_add_check"://检测登录，权限，安全密码，及添加角色的数据
+            case "cateringbranch/ajax/role_edit_check"://检测登录，权限，安全密码，及修改角色的数据
                 $re = $this->checkLoginAndRuleAndSafeRoleAddAndEdit($request);
                 return self::format_response($re, $next);
                 break;
 
 
-            case "catering_branch/ajax/category_delete_check":   //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/spec_add_check":          //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/spec_delete_check":       //删除规格弹窗页面
-            case "catering_branch/ajax/spec_edit_check":         //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/spec_item_delete_check":  //删除规格弹窗页面
-            case "catering_branch/ajax/spec_item_edit_check":    //检测是否登录 权限 安全密码
-            case "catering_branch/ajax/room_add_check":          //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/category_delete_check":   //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/spec_add_check":          //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/spec_delete_check":       //删除规格弹窗页面
+            case "cateringbranch/ajax/spec_edit_check":         //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/spec_item_delete_check":  //删除规格弹窗页面
+            case "cateringbranch/ajax/spec_item_edit_check":    //检测是否登录 权限 安全密码
+            case "cateringbranch/ajax/room_add_check":          //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
 
-            case "catering_branch/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+            case "cateringbranch/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "catering_branch/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+            case "cateringbranch/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "catering_branch/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+            case "cateringbranch/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
                 return self::format_response($re,$next);
                 break;
 
 
-            case "catering_branch/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
-            case "catering_branch/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
+            case "cateringbranch/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
+            case "cateringbranch/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
                 $re = $this->checkLoginAndRuleAndCategoryAdd($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering_branch/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
-            case "catering_branch/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
+            case "cateringbranch/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
+            case "cateringbranch/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
                 $re = $this->checkLoginAndRuleAndGoodsAdd($request);
                 return self::format_response($re, $next);
                 break;
