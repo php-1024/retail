@@ -19,15 +19,15 @@ class RetailCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "catering/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
+            case "retail/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProfile($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering/ajax/password_check"://检测登录和权限和安全密码和登入密码
+            case "retail/ajax/password_check"://检测登录和权限和安全密码和登入密码
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering/ajax/safe_password_check"://设置安全密码
+            case "retail/ajax/safe_password_check"://设置安全密码
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
