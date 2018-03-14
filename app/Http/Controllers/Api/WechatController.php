@@ -22,11 +22,15 @@ class WechatController extends Controller{
         if(isset($org_info->wechatAuthorization)) {//如果该组织授权了公众号
             $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
 
-            /**获取公众号带参数关注二维码**/
-            $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-            $imgre = \Wechat::createQrcode($auth_info['authorizer_access_token'],$admin_data['organization_id']);//测试创建临时二维码
-            if($imgre){
-                $qrcode = $imgre;
+            //如果没有带参数的二维码
+            if(empty($wechat_info['zerone_qrcode_url'])) {
+                /**获取公众号带参数关注二维码**/
+                $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+                $imgre = \Wechat::createQrcode($auth_info['authorizer_access_token'], $admin_data['organization_id']);//测试创建临时二维码
+                if ($imgre) {
+                    WechatAuthorizerInfo::editAuthorizerInfo([['id',$org_info->wechatAuthorization->id]],['zerone_qrcode_url'=>$imgre]);
+                    $wechat_info['zerone_qrcode_url'] = $imgre;
+                }
             }
         }
 
