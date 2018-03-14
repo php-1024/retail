@@ -857,8 +857,14 @@ Route::group(['prefix'=>'retail'],function(){
 
     Route::get('/', 'Retail\ShopController@display')->middleware('RetailCheck');                                        //系统首页
     Route::get('switch_status', 'Retail\ShopController@switch_status')->middleware('RetailCheck');                      //超级管理员切换服务商
+    //总店概况
+    Route::group(['prefix'=>'shop'],function(){
+        Route::get('operation_log', 'Retail\ShopController@operation_log')->middleware('RetailCheck');                  //操作日记
+        Route::get('login_log', 'Retail\ShopController@login_log')->middleware('RetailCheck');                          //登入日记
+    });
     Route::get('quit', 'Retail\ShopController@quit');                                                                   //退出系统
     Route::post('select_shop','Retail\ShopController@select_shop')->middleware('RetailCheck');                          //超级管理员选择登入的服务商
+
 
 
     //账号中心
