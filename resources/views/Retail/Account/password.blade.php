@@ -48,7 +48,7 @@
                                 登录密码修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('Retail/ajax/password_check') }}">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('retail/ajax/password_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -140,14 +140,13 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
