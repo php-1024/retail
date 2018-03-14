@@ -117,7 +117,9 @@ class CateringBranchCheck{
             $sess_key = Session::get('catering_branch_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('branch_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = Redis::get('cateringbranch_system_admin_data'.$sess_key);//获取管理员信息
+//            dd($sess_key);
+            dd($admin_data);
             $menu_data = Redis::get('zerone_system_menu_5_'.$sess_key);
             $son_menu_data = Redis::get('zerone_system_son_menu_5_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
@@ -125,7 +127,8 @@ class CateringBranchCheck{
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
             //把参数传递到下一个中间件
-            return self::res(1,$request);
+            dd($admin_data);
+//            return self::res(1,$request);
         }else{
             return self::res(0,redirect('cateringbranch/login'));
         }
