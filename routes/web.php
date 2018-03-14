@@ -884,8 +884,8 @@ Route::group(['prefix'=>'retail'],function(){
 
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('branch_create','Catering\StoreController@branch_create')->middleware('CateringCheck');              //创建总分店
-        Route::get('branch_list','Catering\StoreController@branch_list')->middleware('CateringCheck');                  //总分店管理
+        Route::get('branch_create','Retail\StoreController@branch_create')->middleware('RetailCheck');                  //创建总分店
+        Route::get('branch_list','Retail\StoreController@branch_list')->middleware('RetailCheck');                      //总分店管理
     });
 
     //异步提交数据组
