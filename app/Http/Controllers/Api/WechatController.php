@@ -16,7 +16,7 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $url = \Wechat::get_auth_url($admin_data['organization_id']);
 
-        $org_info = Organization::where('id',$admin_data['organization_id'])->first()
+        $org_info = Organization::where('id',$admin_data['organization_id'])->first();
         if(isset($org_info->wechatAuthorization)) {//如果该组织授权了公众号
             $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
         }
