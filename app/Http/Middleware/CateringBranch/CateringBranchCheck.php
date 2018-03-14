@@ -17,9 +17,9 @@ class CateringBranchCheck{
                 $sess_key = Session::get('catering_branch_account_id');
                 dd($sess_key);
                 //如果不为空跳转到选择商户组织页面
-//                if(!empty($sess_key)) {
-//                    return redirect('cateringbranch');
-//                }
+                if(!empty($sess_key)) {
+                    return redirect('cateringbranch');
+                }
                 break;
             /****仅检测是否登录及是否具有权限****/
             case "cateringbranch":                             //后台首页
