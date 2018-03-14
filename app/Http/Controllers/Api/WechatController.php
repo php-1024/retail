@@ -16,14 +16,17 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $url = \Wechat::get_auth_url($admin_data['organization_id']);
 
+        $wechat_info = [];
         $org_info = Organization::where('id',$admin_data['organization_id'])->first();
         if(isset($org_info->wechatAuthorization)) {//如果该组织授权了公众号
             $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
+
+            /**获取公众号带参数关注二维码**/
+            $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+            \Wechat::createLsQrcode($auth_info['authorizer_access_token'],'2591000',$admin_data['organization_id']);//测试创建临时二维码
         }
 
-      //  $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
 
-        //\Wechat::createLsQrcode($auth_info['authorizer_access_token'],'2591000',$admin_data['organization_id']);//测试创建临时二维码
 
         return view('Wechat/Catering/store_auth',['url'=>$url,'wechat_info'=>$wechat_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }

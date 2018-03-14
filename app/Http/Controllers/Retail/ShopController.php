@@ -5,11 +5,10 @@ use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Session;
 class ShopController extends Controller{
-    //添加服务商
+    //首页
     public function display(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数

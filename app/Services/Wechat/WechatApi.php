@@ -351,8 +351,12 @@ class WechatApi{
                 ]
             ],
         ];
-        $data = json_encode($data);
-        dump($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        dump($re);
+
     }
 
     /*
