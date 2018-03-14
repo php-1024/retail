@@ -332,9 +332,7 @@ class WechatController extends Controller{
      */
     private function pull_fans_list($id,$organization_id,$auth_info){
         $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
-        foreach($fans_list as $key=>$val){
-            dump($val);
-        }
+        var_dump($fans_list);
     }
 }
 ?>
