@@ -320,15 +320,15 @@ class WechatController extends Controller{
         exit();
         $data = [
             'authorization_id'=>$id,
-            'nickname'=>$authorize_info['nickname'],
-            'head_img'=>$authorize_info['head_img'],
-            'service_type_info'=>$authorize_info['service_type_info'],
-            'verify_type_info'=>$authorize_info['verify_type_info'],
-            'user_name'=>$authorize_info['user_name'],
-            'principal_name'=>$authorize_info['principal_name'],
-            'alias'=>$authorize_info['alias'],
-            'business_info'=>serialize($authorize_info['business_info']),
-            'qrcode_url'=>$authorize_info['qrcode_url'],
+            'nickname'=>$authorizer_info['nickname'],
+            'head_img'=>$authorizer_info['head_img'],
+            'service_type_info'=>$authorizer_info['service_type_info'],
+            'verify_type_info'=>$authorizer_info['verify_type_info'],
+            'user_name'=>$authorizer_info['user_name'],
+            'principal_name'=>$authorizer_info['principal_name'],
+            'alias'=>$authorizer_info['alias'],
+            'business_info'=>serialize($authorizer_info['business_info']),
+            'qrcode_url'=>$authorizer_info['qrcode_url'],
         ];
         WechatAuthorizerInfo::addAuthorizerInfo($data);
     }
