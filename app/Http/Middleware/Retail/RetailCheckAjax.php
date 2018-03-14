@@ -15,6 +15,7 @@ class RetailCheckAjax
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
             case "retail/ajax/login_check"://检测登录数据提交
+                dd(1);
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
@@ -437,7 +438,6 @@ class RetailCheckAjax
     //检测登录提交数据
     public function checkLoginPost($request)
     {
-        dd(1);
         if (empty($request->input('username'))) {
             return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
         }
