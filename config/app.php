@@ -41,6 +41,12 @@ return [
     'retail_safe_encrypt_key'=>'wfdsajflkjdlsagdasg4h56s4dfd2j456hgfj3df45uty45u6u6y5k46jhg132fhg56df4h65fd56h',//零壹云管理平台 - 商超总店业务系统全密码加密盐
     /*******************商超总店**************************/
 
+
+    /*******************商超分店**************************/
+    'retail_branch_encrypt_key'=>'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 商超分店业务系统登录密码加密盐
+    'retail_branch_safe_encrypt_key'=>'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 商超分店业务系统全密码加密盐
+    /*******************商超分店**************************/
+
     /******************微信开放平台相关参数********************/
     'wechat_open_setting'=>[
         'open_appid'=>'wxd22806e3df9e9d35', //开放平台APPID

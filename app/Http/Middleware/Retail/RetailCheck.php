@@ -75,20 +75,14 @@ class RetailCheck{
             /****支付设置****/
 
             /****支付设置****/
-            case "catering/goods/goods_category":           //商品分类查询
-            case "catering/goods/goods_list":               //商品查询
-            case "catering/goods/goods_detail":             //商品查看详情
+            case "retail/goods/goods_category":           //商品分类查询
+            case "retail/goods/goods_list":               //商品查询
+            case "retail/goods/goods_detail":             //商品查看详情
             /****支付设置****/
 
             /****总分店管理****/
-            case "catering/store/branch_create":            //创建总分店
-            case "catering/store/branch_list":              //总分店管理
-            /****总分店管理****/
-
-            /****总分店管理****/
-            case "catering/card/card_add":                  //添加会员卡
-            case "catering/card/card_list":                 //会员卡管理
-            case "catering/card/card_goods":                //调整适用商品
+            case "retail/store/branch_create":            //创建总分店
+            case "retail/store/branch_list":              //总分店管理
             /****总分店管理****/
 
                 $re = $this->checkLoginAndRule($request);   //判断是否登录

@@ -188,7 +188,7 @@ class AccountController extends Controller{
             $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
         }else{
             $account = Account::getOne([['id',$admin_data['id']]]);
-            $key = config("app.catering_branch_encrypt_key");//获取加密盐（分店专用）
+            $key = config("app.retail_branch_encrypt_key");//获取加密盐（分店专用）
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重

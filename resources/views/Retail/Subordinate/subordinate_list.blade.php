@@ -3,26 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总分店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Catering')}}/iCheck/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Retail')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Retail')}}/iCheck/css/custom.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Catering/Public/Header')
+        @include('Retail/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
@@ -31,7 +31,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        @include('Catering/Public/Nav')
+                        @include('Retail/Public/Nav')
                     </section>
                 </section>
             </aside>
@@ -49,10 +49,10 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('catering/ajax/subordinate_edit') }}">
-                                    <input type="hidden" id="subordinate_lock" value="{{ url('catering/ajax/subordinate_lock') }}">
-                                    <input type="hidden" id="subordinate_delete" value="{{ url('catering/ajax/subordinate_delete') }}">
-                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('catering/ajax/subordinate_authorize') }}">
+                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('Retail/ajax/subordinate_edit') }}">
+                                    <input type="hidden" id="subordinate_lock" value="{{ url('Retail/ajax/subordinate_lock') }}">
+                                    <input type="hidden" id="subordinate_delete" value="{{ url('Retail/ajax/subordinate_delete') }}">
+                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('Retail/ajax/subordinate_authorize') }}">
                                     <label class="col-sm-1 control-label">下属账号</label>
 
                                     <div class="col-sm-2">
@@ -87,7 +87,7 @@
                                         <td>{{ $val->account }}</td>
                                         <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
                                         <td>
-                                            <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
+                                            <img src="{{asset('public/Retail')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
                                         </td>
                                         <td>
                                             时光取名叫无心
@@ -133,18 +133,18 @@
     </section>
     <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 </section>
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-<script src="{{asset('public/Catering')}}/iCheck/js/icheck.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/iCheck/js/icheck.min.js"></script>
 
 
 
