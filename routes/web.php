@@ -876,22 +876,20 @@ Route::group(['prefix'=>'retail'],function(){
 
     //公众号管理
     Route::group(['prefix'=>'subscription'],function(){
-        Route::get('setting', 'Catering\SubscriptionController@setting')->middleware('CateringCheck');                              //公众号设置
-        Route::get('material_image', 'Catering\SubscriptionController@material_image')->middleware('CateringCheck');                //图片素材
+        Route::get('setting', 'Retail\SubscriptionController@setting')->middleware('RetailCheck');                      //公众号设置
     });
 
     //公众号管理--消息管理 && 菜单管理
     Route::group(['prefix'=>'news'],function(){
-        Route::get('message', 'Catering\NewsController@message')->middleware('CateringCheck');                          //关键词自动回复
-        Route::get('message_attention', 'Catering\NewsController@message_attention')->middleware('CateringCheck');      //关注后自动回复
-        Route::get('message_default', 'Catering\NewsController@message_default')->middleware('CateringCheck');          //默认回复
-        Route::get('message_mass', 'Catering\NewsController@message_mass')->middleware('CateringCheck');                //消息群发
+        Route::get('message', 'Retail\NewsController@message')->middleware('RetailCheck');                              //关键词自动回复
+        Route::get('message_attention', 'Retail\NewsController@message_attention')->middleware('RetailCheck');          //关注后自动回复
+        Route::get('message_default', 'Retail\NewsController@message_default')->middleware('RetailCheck');              //默认回复
 
     });
 
     //公众号管理--菜单管理
     Route::group(['prefix'=>'menu'],function(){
-        Route::get('menu_customize', 'Catering\MenuController@menu_customize')->middleware('CateringCheck');            //自定义菜单
+        Route::get('menu_customize', 'Retail\MenuController@menu_customize')->middleware('RetailCheck');                //自定义菜单
     });
 
     //用户管理
