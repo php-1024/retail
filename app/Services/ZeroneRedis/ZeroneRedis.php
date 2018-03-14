@@ -270,7 +270,6 @@ class ZeroneRedis
      */
     public static function create_retail_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','9']],0,'id','asc');//获取分店管理平台系统的一级菜单
-        dd($menu);
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
@@ -285,6 +284,7 @@ class ZeroneRedis
         Redis::connection('retail');//连接到我的redis服务器——商户平台使用
         $menu_key = 'retail_system_menu_'.$id;  //一级菜单的Redis主键。
         $son_menu_key = 'retail_system_son_menu_'.$id;//子菜单的Redis主键
+        dd($menu_key);
         Redis::set($menu_key,$menu);
         Redis::set($son_menu_key,$son_menu);
     }
