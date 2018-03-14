@@ -69,6 +69,7 @@ class ZeroneRedis
      */
     public static function create_menu_cache($id,$program_id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id',$program_id]],0,'displayorder','asc')->toArray();//获取零壹管理系统的一级菜单
+        dd($menu);
         if($id <> 1){
             //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$id]]);
@@ -221,7 +222,6 @@ class ZeroneRedis
      */
     public static function create_catering_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','4']],0,'id','asc');//获取商户系统的一级菜单
-        dump($menu);
 
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
