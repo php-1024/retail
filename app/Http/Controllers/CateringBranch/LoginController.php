@@ -98,7 +98,7 @@ class LoginController extends Controller
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
                             if (LoginLog::addLoginLog($account_info['id'], 5, $account_info->organization_id, $ip, $addr)) {//写入登录日志
-                                Session::put('branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                Session::put('catering_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if (!empty($account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
@@ -113,7 +113,7 @@ class LoginController extends Controller
                                 } else {
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-                                ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                                ZeroneRedis::create_catering_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                                 ZeroneRedis::create_menu_cache($account_info->id,5);//生成对应账号的商户系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             } else {
@@ -122,11 +122,11 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        Session::put('branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                        Session::put('catering_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
-                        ZeroneRedis::create_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        ZeroneRedis::create_catering_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                         ZeroneRedis::create_menu_cache($account_info->id,5);//生成对应账号的商户系统菜单
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
@@ -142,7 +142,7 @@ class LoginController extends Controller
 
     //退出登录
     public function quit(){
-        Session::put('branch_account_id','');
+        Session::put('catering_branch_account_id','');
         return redirect('cateringbranch/login');
     }
 }
