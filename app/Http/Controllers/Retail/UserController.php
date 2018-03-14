@@ -32,53 +32,6 @@ class UserController extends Controller{
         }
         return view('Retail/User/user_list',['list'=>$list,'store_name'=>$store_name,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //粉丝用户管理
-    public function store_label_add_check(Request $request){
-
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $label_id = $request->label_id;//会员标签id
-        $user_id = $request->user_id;//用户id
-        $store_id = $request->store_id;//店铺id
-        $nickname = $request->nickname;//微信昵称
-
-        DB::beginTransaction();
-        try {
-            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['store_id',$store_id]]);//查询粉丝标签关联表有没有数据
-
-            if(!empty($oneData)){
-                if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
-                    //减少原粉丝标签的人数
-                    $label_number = Label::getPluck([['id',$oneData->label_id]],'label_number')->first();//获取原粉丝标签的人数
-                    $number = $label_number-1;
-                    Label::editLabel([['id',$oneData->label_id]],['label_number'=>$number]);//修改粉丝标签的人数
-                }
-                 if($label_id != 0){ //选择无标签的时候 不执行
-                     //增加现有的粉丝标签人数
-                     $add_label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
-                     $add_number = $add_label_number+1;
-                     Label::editLabel([['id',$label_id]],['label_number'=>$add_number]);//修改粉丝标签的人数
-                 }
-                UserLabel::editUserLabel([['id',$oneData->id]],['label_id'=>$label_id]);//修改粉丝标签关联表Label_id
-
-            }else{
-                UserLabel::addUserLabel(['label_id'=>$label_id,'user_id'=>$user_id,'store_id'=>$store_id,'branch_id'=>'0']);//粉丝与标签关系表
-                $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
-                $number = $label_number+1;
-                Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
-            }
-            if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
-            }
-            DB::commit();
-
-        } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '操作失败！', 'status' => '0']);
-        }
-        return response()->json(['data' => '操作成功！', 'status' => '1']);
-    }
 
     //粉丝用户管理编辑
     public function user_list_edit(Request $request){
@@ -182,21 +135,6 @@ class UserController extends Controller{
             return response()->json(['data' => '操作失败！', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功！', 'status' => '1']);
-
-    }
-    //粉丝用户足迹
-    public function user_timeline(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $store_id = $admin_data['organization_id'];//组织id
-        $list = StoreUserLog::getPaginage([['store_id',$store_id]],'5','id');
-        foreach($list as $key=>$value){
-            $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]],'nickname')->first();//微信昵称
-        }
-        return view('Retail/User/user_timeline',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>
