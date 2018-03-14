@@ -88,7 +88,7 @@ class AccountController extends Controller{
             $admin_data['realname'] = $realname;
             $admin_data['mobile'] = $mobile;
             if($admin_data['is_super'] == 2){
-                OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了个人信息');//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售总店系统修改了个人信息');//保存操作记录
             }else{
                 \ZeroneRedis::create_retail_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-店铺
                 OperationLog::addOperationLog('9',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
