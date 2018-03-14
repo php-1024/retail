@@ -125,7 +125,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">公众号主体</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">公众服务号</label>
+                                                <label class="label label-info">{{$wechat_info['principal_name']}}</label>
                                             </div>
 
                                         </div>
