@@ -28,7 +28,7 @@ class WechatController extends Controller{
                 $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
 
                 $imgre = \Wechat::createQrcode($auth_info['authorizer_access_token'], $admin_data['organization_id']);//测试创建临时二维码
-                dump($imgre);
+
                 if ($imgre) {
                     WechatAuthorizerInfo::editAuthorizerInfo([['id',$org_info->wechatAuthorization->id]],['zerone_qrcode_url'=>$imgre]);
                     $wechat_info['zerone_qrcode_url'] = $imgre;
