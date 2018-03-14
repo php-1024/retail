@@ -21,6 +21,10 @@ class WechatController extends Controller{
             $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
         }
 
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+
+        \Wechat::createLsQrcode($auth_info['authorizer_access_token'],'2591000',$admin_data['organization_id']);//测试创建临时二维码
+
         return view('Wechat/Catering/store_auth',['url'=>$url,'wechat_info'=>$wechat_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 

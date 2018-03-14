@@ -336,6 +336,31 @@ class WechatApi{
             return false;
         }
     }
+    /*
+     * 获取生成临时二维码的Ticket
+     * $authorizer_access_token 接口调用凭证
+     */
+    public function createLsQrcode($authorizer_access_token,$expire_seconds,$sence_str){
+        $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$authorizer_access_token;
+        $data = [
+            'expire_seconds'=>$expire_seconds,
+            'action_name'=>'QR_STR_SCENE',//默认采用字符串而非ID模式
+            'action_info'=>[
+                'scene'=>[
+                    'scene_str'=>$sence_str,
+                ]
+            ],
+        ];
+        $data = json_encode($data);
+        dump($data);
+    }
+
+    /*
+     * 获取生成永久二维码的Ticket
+     */
+    public function createQrcode($authorizer_access_token){
+
+    }
 
     /*
      * 返回加密解密类
