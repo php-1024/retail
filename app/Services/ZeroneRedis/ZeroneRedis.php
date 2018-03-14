@@ -286,7 +286,7 @@ class ZeroneRedis
         $son_menu_key = 'retail_system_son_menu_'.$id;//子菜单的Redis主键
         Redis::set($menu_key,$menu);
         Redis::set($son_menu_key,$son_menu);
-        dd(Redis::set());
+        dd(Redis::all());
     }
 }
 ?>
