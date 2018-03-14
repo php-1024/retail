@@ -36,8 +36,8 @@
                     <input type="password" name="password" placeholder="登录密码" class="form-control  input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    <img src="{{ URL('Retail/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
+                    <input type="text" id="captcha_url" value="{{ URL('retail/login/captcha') }}" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
+                    <img src="{{ URL('retail/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
                 <button type="button" onclick="postForm()" class="btn btn-lg btn-warning lt b-white b-2x btn-block"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
