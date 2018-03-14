@@ -877,9 +877,9 @@ Route::group(['prefix'=>'retail'],function(){
 
     //商品管理
     Route::group(['prefix'=>'goods'],function(){
-        Route::get('goods_category','Catering\GoodsController@goods_category')->middleware('CateringCheck');            //商品分类查询
-        Route::get('goods_list','Catering\GoodsController@goods_list')->middleware('CateringCheck');                    //商品查询
-        Route::get('goods_detail','Catering\GoodsController@goods_detail')->middleware('CateringCheck');                //商品查看详情
+        Route::get('goods_category','Retail\GoodsController@goods_category')->middleware('RetailCheck');                //商品分类查询
+        Route::get('goods_list','Retail\GoodsController@goods_list')->middleware('RetailCheck');                        //商品查询
+        Route::get('goods_detail','Retail\GoodsController@goods_detail')->middleware('RetailCheck');                    //商品查看详情
     });
 
     //总分店管理
