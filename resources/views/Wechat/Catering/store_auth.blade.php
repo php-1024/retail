@@ -193,42 +193,42 @@
                                         <tr>
                                             <td>图文素材</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>消息群发</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>自动回复</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>模板消息</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>粉丝管理</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>标签管理</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>自定义菜单</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         <tr>
                                             <td>个性化菜单</td>
                                             <td><i class="fa fa-times text-lg text-danger"></i></td>
-                                            <td><i class="fa fa-check text-lg text-success"></td>
+                                            <td><i class="fa fa-check text-lg text-success"></i></td>
                                         </tr>
                                         </tbody>
                                     </table>
