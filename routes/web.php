@@ -871,8 +871,8 @@ Route::group(['prefix'=>'retail'],function(){
 
     //支付设置
     Route::group(['prefix'=>'payment'],function(){
-        Route::get('wechat_setting','Catering\PaymentController@wechat_setting')->middleware('CateringCheck');          //微信支付
-        Route::get('sheng_setting','Catering\PaymentController@sheng_setting')->middleware('CateringCheck');            //盛付通
+        Route::get('wechat_setting','Retail\PaymentController@wechat_setting')->middleware('RetailCheck');              //微信支付
+        Route::get('sheng_setting','Retail\PaymentController@sheng_setting')->middleware('RetailCheck');                //盛付通
     });
 
     //商品管理
