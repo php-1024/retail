@@ -143,7 +143,7 @@ class LoginController extends Controller
     //退出登录
     public function quit(){
         Session::put('branch_account_id','');
-        return redirect('catering_branch/login');
+        return redirect('cateringbranch/login');
     }
 }
 
