@@ -1143,28 +1143,13 @@ Route::group(['prefix'=>'retailbranch'],function(){
 
     //用户管理
     Route::group(['prefix'=>'user'],function(){
-        Route::get('user_tag', 'RetailBranch\UserController@user_tag')->middleware('RetailBranchCheck');            //用户管理-粉丝标签管理
         Route::get('user_list', 'RetailBranch\UserController@user_list')->middleware('RetailBranchCheck');          //用户管理-粉丝用户管理
-        Route::get('user_timeline', 'RetailBranch\UserController@user_timeline')->middleware('RetailBranchCheck');  //用户管理-粉丝足迹管理
-    });
-
-    //财务管理
-    Route::group(['prefix'=>'finance'],function(){
-        Route::get('balance', 'RetailBranch\FinanceController@balance')->middleware('RetailBranchCheck');                       //财务管理-余额管理
-        Route::get('balance_recharge', 'RetailBranch\FinanceController@balance_recharge')->middleware('RetailBranchCheck');     //财务管理-余额充值扣费
-        Route::get('credit', 'RetailBranch\FinanceController@credit')->middleware('RetailBranchCheck');                         //财务管理-积分管理
-        Route::get('credit_recharge', 'RetailBranch\FinanceController@credit_recharge')->middleware('RetailBranchCheck');       //财务管理-积分充值扣费
     });
 
     //支付设置
     Route::group(['prefix'=>'paysetting'],function(){
         Route::get('wechat_setting', 'RetailBranch\PaysettingController@wechat_setting')->middleware('RetailBranchCheck');   //支付设置-微信支付
-        Route::get('zerone_setting', 'RetailBranch\PaysettingController@zerone_setting')->middleware('RetailBranchCheck');   //支付设置-零舍壹得
-        Route::get('shengf_setting', 'RetailBranch\PaysettingController@shengf_setting')->middleware('RetailBranchCheck');   //支付设置-盛付通
-        Route::get('kuaifu_setting', 'RetailBranch\PaysettingController@kuaifu_setting')->middleware('RetailBranchCheck');   //支付设置-快付通
     });
-
-
 
 
     //下属管理--权限角色组
