@@ -300,8 +300,8 @@ class WechatController extends Controller{
         $organization_id  = $request->input('organization_id');
         $id = $request->input('id');
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        //$this->pull_authorizer_info($id,$auth_info);
-        $this->pull_fans_list($id,$organization_id,$auth_info,0);
+        //$this->pull_authorizer_info($id,$auth_info,'');
+        $this->pull_fans_list($organization_id,$auth_info,0);
 
 
     }
