@@ -277,7 +277,7 @@ class WechatController extends Controller{
         $auth_code = $_GET['auth_code'];//授权码
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
         if(WechatAuthorization::checkRowExists($organization_id,$auth_info['authorizer_appid'])){
-            return response()->json(['data' => '您的店铺已绑定公众号 或者 您的公众号已经授权到其他店铺', 'status' => '1']);
+            return response()->json(['data' => '您的店铺已绑定公众号 或者 您的公众号已经授权到其他店铺', 'status' => '-1']);
         }else {
             $auth_data = array(
                 'organization_id' => $organization_id,
@@ -322,6 +322,7 @@ class WechatController extends Controller{
             'business_info'=>serialize($authorizer_info['business_info']),
             'qrcode_url'=>$authorizer_info['qrcode_url'],
         ];
+        WechatAuthorizerInfo::addAuthorizerInfo($data);
     }
 }
 ?>
