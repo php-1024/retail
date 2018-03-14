@@ -116,7 +116,7 @@ class CategoryController extends Controller
             'id' => $category_id,
         ];
         $category = CateringCategory::getOne($where);
-        return view('CateringCateringBranch/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
+        return view('CateringBranch/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
     }
 
     //商品分类编辑提交
