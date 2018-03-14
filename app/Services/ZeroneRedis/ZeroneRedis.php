@@ -54,7 +54,7 @@ class ZeroneRedis
         Redis::set($data_key,$admin_data);
     }
     /*
-     * 商超总店平台
+     * 零售总店平台
      */
     public static function create_retail_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
@@ -221,6 +221,8 @@ class ZeroneRedis
      */
     public static function create_catering_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','4']],0,'id','asc');//获取商户系统的一级菜单
+        dump($menu);
+
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);

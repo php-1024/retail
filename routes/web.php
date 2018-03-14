@@ -469,7 +469,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('redirect', 'Api\WechatController@redirect');//公众号授权回调链接
         Route::any('web_redirect', 'Api\WechatController@web_redirect');//网页授权回调路由
         Route::any('open_web_redirect','Api\WechatController@open_web_redirect');
-        Route::any('get_authorizer_info', 'Api\WechatController@get_authorizer_info');//获取微信平台的授权信息
+        Route::any('pull_authorizer_data', 'Api\WechatController@pull_authorizer_data');//获取微信平台的授权信息
         Route::any('test', 'Api\WechatController@test');//测试函数
     });
 

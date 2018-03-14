@@ -71,7 +71,6 @@ class ShopController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            dd($admin_data);
             \ZeroneRedis::create_retail_account_cache(1,$admin_data);//生成账号数据的Redis缓存
             \ZeroneRedis::create_retail_menu_cache(1);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
