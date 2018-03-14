@@ -158,11 +158,18 @@ return [
             'database' => 4,
         ],
         //定义一个自己的缓存的服务器，总店平台使用
-        'branch' => [
+        'catering_branch' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 5,
+        ],
+        //定义一个自己的缓存的服务器，总店平台使用
+        'branch' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 6,
         ],
         //定义一个自己的缓存的服务器，总店平台使用
         'retail' => [
