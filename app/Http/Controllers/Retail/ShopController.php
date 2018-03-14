@@ -12,7 +12,6 @@ class ShopController extends Controller{
     //添加服务商
     public function display(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -72,6 +71,7 @@ class ShopController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
+            dd($admin_data);
             \ZeroneRedis::create_retail_account_cache(1,$admin_data);//生成账号数据的Redis缓存
             \ZeroneRedis::create_retail_menu_cache(1);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
