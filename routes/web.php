@@ -1139,22 +1139,6 @@ Route::group(['prefix'=>'retailbranch'],function(){
         Route::get('order_appointment', 'RetailBranch\OrderController@order_appointment')->middleware('RetailBranchCheck');         //预约管理
     });
 
-    //设备管理
-    Route::group(['prefix'=>'device'],function(){
-        Route::get('room_add', 'RetailBranch\DeviceController@room_add')->middleware('RetailBranchCheck');   //设备管理-添加包厢
-        Route::get('room_list', 'RetailBranch\DeviceController@room_list')->middleware('RetailBranchCheck'); //设备管理-包厢管理
-        Route::get('table_add', 'RetailBranch\DeviceController@table_add')->middleware('RetailBranchCheck'); //设备管理-添加餐桌
-        Route::get('table_list', 'RetailBranch\DeviceController@table_list')->middleware('RetailBranchCheck'); //设备管理-餐桌管理
-        Route::get('printer_add', 'RetailBranch\DeviceController@printer_add')->middleware('RetailBranchCheck'); //设备管理-添加打印机
-        Route::get('printer_list', 'RetailBranch\DeviceController@printer_list')->middleware('RetailBranchCheck'); //设备管理-打印机管理
-        Route::get('printer_goods', 'RetailBranch\DeviceController@printer_goods')->middleware('RetailBranchCheck'); //设备管理-打印机关联商品
-    });
-
-
-
-
-
-
     //用户管理
     Route::group(['prefix'=>'user'],function(){
         Route::get('user_tag', 'RetailBranch\UserController@user_tag')->middleware('RetailBranchCheck');            //用户管理-粉丝标签管理
@@ -1230,7 +1214,6 @@ Route::group(['prefix'=>'retailbranch'],function(){
         Route::post('upload_thumb_check', 'RetailBranch\GoodsController@upload_thumb_check')->middleware('RetailBranchCheckAjax');             //上传文件检测
 
 
-        Route::post('room_add_check', 'RetailBranch\DeviceController@room_add_check')->middleware('RetailBranchCheckAjax');   //设备管理-添加包厢检测
     });
 });
 /**********************零售分店简版系统*********************/

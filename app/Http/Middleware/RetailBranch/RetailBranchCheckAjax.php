@@ -57,7 +57,6 @@ class RetailBranchCheckAjax{
             case "retailbranch/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "retailbranch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "retailbranch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/room_add_check":          //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
