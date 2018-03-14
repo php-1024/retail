@@ -81,7 +81,7 @@ class DisplayController extends Controller
     public function branch_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
-        ZeroneRedis::create_catering_branch_account_cache(1,$admin_data);//清空所选组织
+        ZeroneRedis::create_retail_branch_account_cache(1,$admin_data);//清空所选组织
         return redirect('retailbranch');
     }
 
@@ -104,7 +104,7 @@ class DisplayController extends Controller
             'status'=>$account_info->status,                    //用户状态
             'mobile'=>$account_info->mobile,                    //绑定手机号
         ];
-        Session::put('catering_branch_account_id', encrypt(1));         //存储登录session_id为当前用户ID
+        Session::put('retail_branch_account_id', encrypt(1));         //存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
@@ -119,7 +119,7 @@ class DisplayController extends Controller
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        ZeroneRedis::create_catering_branch_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+        ZeroneRedis::create_retail_branch_account_cache(1, $admin_data);//生成账号数据的Redis缓存
         ZeroneRedis::create_branch_menu_cache(1);//生成对应账号的商户系统菜单
     }
 }
