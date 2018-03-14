@@ -430,7 +430,7 @@ class RetailBranchCheckAjax{
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         }else{
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.catering_branch_safe_encrypt_key");//获取安全密码加密盐（商户专用）
+            $key = config("app.retail_branch_safe_encrypt_key");//获取安全密码加密盐（商户专用）
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
