@@ -33,12 +33,9 @@ class RetailCheck{
             /****店铺概况****/
 
             /****账号中心****/
-            case "catering/account/profile":                //账号信息
-            case "catering/account/password":               //登入密码修改
-            case "catering/account/safe_password":          //安全密码设置
-            case "catering/account/message_setting":        //消息推送设置
-            case "catering/account/operation_log":          //操作日记
-            case "catering/account/login_log":              //登入日记
+            case "retail/account/profile":                //账号信息
+            case "retail/account/password":               //登入密码修改
+            case "retail/account/safe_password":          //安全密码设置
             /****账号中心****/
 
             /****公众号管理****/

@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Catering;
+namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
@@ -25,9 +25,9 @@ class AccountController extends Controller{
         }
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(4, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(9, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
-            $account_node_list = ProgramModuleNode::getAccountModuleNodes(4,$admin_data['id']);//获取当前用户具有权限的节点
+            $account_node_list = ProgramModuleNode::getAccountModuleNodes(9,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];
             $nodes = [];
             $module_node_list = [];
@@ -46,7 +46,7 @@ class AccountController extends Controller{
                 unset($module);
             }
         }
-        return view('Catering/Account/profile',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Retail/Account/profile',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改个人信息提交
@@ -91,7 +91,7 @@ class AccountController extends Controller{
                 OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了个人信息');//保存操作记录
             }else{
                 \ZeroneRedis::create_retail_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-店铺
-                OperationLog::addOperationLog('4',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
+                OperationLog::addOperationLog('9',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -114,7 +114,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Catering/Account/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Retail/Account/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
@@ -148,7 +148,7 @@ class AccountController extends Controller{
 
                 }else{
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    OperationLog::addOperationLog('9',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
                     \ZeroneRedis::create_retail_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 DB::commit();
@@ -169,7 +169,7 @@ class AccountController extends Controller{
 
                     }else{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                        OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
+                        OperationLog::addOperationLog('9',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
                         \ZeroneRedis::create_retail_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                     }
                     DB::commit();
@@ -196,7 +196,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Catering/Account/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Retail/Account/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改登入密码功能提交
@@ -239,41 +239,6 @@ class AccountController extends Controller{
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '0']);
         }
-
     }
-
-    //消息推送
-    public function message_setting(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        return view('Catering/Account/message_setting',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
-    }
-
-
-
-    //我的操作记录
-    public function operation_log(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
-        $list = OperationLog::getProxyPaginate($where,10,'id');
-        return view('Catering/Account/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
-    }
-    //我的登入记录
-    public function login_log(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
-        $list = LoginLog::getProxyPaginate($where,15,'id');
-        return view('Catering/Account/login_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
-    }
-
 }
 ?>
