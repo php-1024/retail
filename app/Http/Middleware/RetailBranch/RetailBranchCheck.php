@@ -14,7 +14,7 @@ class RetailBranchCheck{
             /*****登录页,如果已经登录则不需要再次登录*****/
             case "retailbranch/login"://登录页,如果已经登录则不需要再次登录
                 //获取用户登录存储的SessionId
-                $sess_key = Session::get('catering_branch_account_id');
+                $sess_key = Session::get('retail_branch_account_id');
                 //如果不为空跳转到选择商户组织页面
                 if(!empty($sess_key)) {
                     return redirect('retailbranch');
@@ -111,13 +111,13 @@ class RetailBranchCheck{
     //1、普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('catering_branch_account_id');
+        $sess_key = Session::get('retail_branch_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
-            $sess_key = Session::get('catering_branch_account_id');//获取管理员ID
+            $sess_key = Session::get('retail_branch_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('catering_branch_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = Redis::get('retail_branch_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_5_'.$sess_key);
             $son_menu_data = Redis::get('zerone_system_son_menu_5_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
