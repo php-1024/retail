@@ -107,25 +107,25 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众微信号</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">公众号ID</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">lingyixinkeji</label>
+                                                <label class="label label-info">{{$wechat_info['user_name']}}</label>
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众号昵称</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">公众号名称</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">零壹新科技</label>
+                                                <label class="label label-info">{{$wechat_info['nickname']}}</label>
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众号类型</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">公众号主体</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">公众服务号</label>
+                                                <label class="label label-info">{{$wechat_info['principal_name']}}</label>
                                             </div>
 
                                         </div>
