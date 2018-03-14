@@ -81,19 +81,24 @@ class Kernel extends HttpKernel
         'CateringCheckAjax'=>\App\Http\Middleware\Catering\CateringCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹总店管理系统*******************************/
 
-        /**************************零壹分店管理系统*******************************/
+        /**************************零壹餐饮分店管理系统*******************************/
         'BranchCheck'=>\App\Http\Middleware\Branch\BranchCheck::class,//检测普通页面跳转的中间件
         'BranchCheckAjax'=>\App\Http\Middleware\Branch\BranchCheckAjax::class,//检测Ajax数据提交的中间件
-        /**************************零壹分店管理系统*******************************/
+        /**************************零壹餐饮分店管理系统*******************************/
 
-        /**************************零壹分店管理系统简版*******************************/
+        /**************************零壹餐饮分店管理系统简版*******************************/
         'CateringBranchCheck'=>\App\Http\Middleware\CateringBranch\CateringBranchCheck::class,//检测普通页面跳转的中间件
         'CateringBranchCheckAjax'=>\App\Http\Middleware\CateringBranch\CateringBranchCheckAjax::class,//检测Ajax数据提交的中间件
-        /**************************零壹分店管理系统简版*******************************/
+        /**************************零壹餐饮分店管理系统简版*******************************/
 
         /**************************零售总店管理系统*******************************/
         'RetailCheck'=>\App\Http\Middleware\Retail\RetailCheck::class,//检测普通页面跳转的中间件
         'RetailCheckAjax'=>\App\Http\Middleware\Retail\RetailCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零售总店管理系统*******************************/
+
+        /**************************零售分店管理系统简版*******************************/
+        'RetailBranchCheck'=>\App\Http\Middleware\RetailBranch\RetailBranchCheck::class,//检测普通页面跳转的中间件
+        'RetailBranchCheckAjax'=>\App\Http\Middleware\RetailBranch\RetailBranchCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************零售分店管理系统简版*******************************/
     ];
 }
