@@ -37,9 +37,7 @@ class ShopController extends Controller{
     //超级管理员选择服务商
     public function select_shop(Request $request){
         $admin_this = $request->get('admin_data');              //中间件产生的管理员数据参数
-//        $organization_id = $request->input('organization_id');  //中间件产生的管理员数据参数
         $account_id = $request->input('account_id');            //用户ID
-//        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
         $account_info = Account::getOneAccount([['id',$account_id]]);//根据账号查询
         if(!empty($account_info)){
             //重新生成缓存的登录信息

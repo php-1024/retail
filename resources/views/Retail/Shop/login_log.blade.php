@@ -109,7 +109,6 @@
 <!-- App -->
 <script src="{{asset('public/Retail')}}/js/app.js"></script>
 <script src="{{asset('public/Retail')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
 <script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/demo.js"></script>
