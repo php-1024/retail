@@ -890,12 +890,12 @@ Route::group(['prefix'=>'retail'],function(){
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Retail\LoginController@login_check')->middleware('RetailCheck');                     //提交登录数据
+        Route::post('login_check','Retail\LoginController@login_check')->middleware('RetailCheckAjax');                  //提交登录数据
 
         //账号中心
-        Route::post('profile_check','Retail\AccountController@profile_check')->middleware('RetailCheck');       //提交登录数据
-        Route::post('safe_password_check','Retail\AccountController@safe_password_check')->middleware('RetailCheck');//安全密码数据提交
-        Route::post('password_check','Retail\AccountController@password_check')->middleware('RetailCheck');     //安全密码数据提交
+        Route::post('profile_check','Retail\AccountController@profile_check')->middleware('RetailCheckAjax');            //提交登录数据
+        Route::post('safe_password_check','Retail\AccountController@safe_password_check')->middleware('RetailCheckAjax');//安全密码数据提交
+        Route::post('password_check','Retail\AccountController@password_check')->middleware('RetailCheckAjax');          //安全密码数据提交
 
         //权限角色
         Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');        //提交添加权限角色数据
