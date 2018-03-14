@@ -50,7 +50,7 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
-                                        <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('cateringbranch/ajax/goods_edit_check') }}">
+                                        <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retailbranch/ajax/goods_edit_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <input type="hidden" name="goods_id" value="{{$goods->id}}">
                                             <div class="form-group">
@@ -287,7 +287,7 @@
 
 {{--添加规格类--}}
 <div class="modal fade" id="myModal_Spec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('cateringbranch/ajax/spec_add_check') }}">
+    <form method="post" class="form-horizontal"  role="form" id="spec_add" action="{{ url('retailbranch/ajax/spec_add_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
@@ -455,7 +455,7 @@
                 },function(){
                     //规格添加成功后异步刷新规格部分
                     $.ajax({
-                        url:'{{url('cateringbranch/ajax/goods_spec')}}',
+                        url:'{{url('retailbranch/ajax/goods_spec')}}',
                         data:{
                             _token:token,
                             goods_id:goods_id
@@ -485,7 +485,7 @@
     function uploadForm() {
         var formData = new FormData($( "#uploadForm" )[0]);
         $.ajax({
-            url: '{{ url('cateringbranch/ajax/upload_thumb_check') }}' ,
+            url: '{{ url('retailbranch/ajax/upload_thumb_check') }}' ,
             type: 'POST',
             data: formData,
             async: false,
@@ -503,7 +503,7 @@
                         confirmButtonText: "确定",
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
-                        var url = '{{url('cateringbranch/ajax/goods_thumb')}}';//需要异步加载的页面
+                        var url = '{{url('retailbranch/ajax/goods_thumb')}}';//需要异步加载的页面
                         var goods_id = $("#goods_id").val();
                         var token = $("#_token").val();
                         var data = {'goods_id':goods_id,'_token':token};

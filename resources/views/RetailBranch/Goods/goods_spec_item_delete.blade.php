@@ -1,4 +1,4 @@
-<form method="post" class="form-horizontal"  role="form" id="spec_item_delete_check" action="{{ url('cateringbranch/ajax/spec_item_delete_check') }}">
+<form method="post" class="form-horizontal"  role="form" id="spec_item_delete_check" action="{{ url('retailbranch/ajax/spec_item_delete_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="spec_item_id" id="spec_item_id" value="{{$spec_item_id}}">
     <input type="hidden" name="goods_id" id="goods_id" value="{{$goods_id}}">
@@ -45,7 +45,7 @@
                 },function(){
                     //规格添加成功后异步刷新规格部分
                     $.ajax({
-                        url:'{{url('cateringbranch/ajax/goods_spec')}}',//你对数据库的操作路径
+                        url:'{{url('retailbranch/ajax/goods_spec')}}',//你对数据库的操作路径
                         data:{
                             _token:token,
                             goods_id:goods_id,

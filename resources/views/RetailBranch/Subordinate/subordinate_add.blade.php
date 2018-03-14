@@ -40,9 +40,9 @@
                                 添加下级人员
                             </header>
                             <div class="panel-body">
-                                <form  method="post" class="form-horizontal" id="currentForm" action="{{ url('cateringbranch/ajax/subordinate_add_check') }}">
+                                <form  method="post" class="form-horizontal" id="currentForm" action="{{ url('retailbranch/ajax/subordinate_add_check') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="quick_rule_url" value="{{ url('cateringbranch/ajax/quick_rule') }}">
+                                    <input type="hidden" id="quick_rule_url" value="{{ url('retailbranch/ajax/quick_rule') }}">
                                     <div id="rootwizard">
                                         <ul class="bwizard-steps">
                                             <li class="active"><a href="#tab1" data-toggle="tab"><span style="color:#999;" class="label">1</span> 填写基础资料</a></li>

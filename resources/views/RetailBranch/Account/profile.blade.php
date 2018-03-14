@@ -39,7 +39,7 @@
                                     个人账号信息修改
                                 </header>
                                 <div class="panel-body">
-                                    <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('cateringbranch/ajax/profile_edit_check') }}">
+                                    <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retailbranch/ajax/profile_edit_check') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="input-id-1">用户账号</label>
