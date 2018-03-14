@@ -277,7 +277,7 @@ class WechatController extends Controller{
         $auth_code = $_GET['auth_code'];//授权码
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
         if(WechatAuthorization::checkRowExists($organization_id,$auth_info['authorizer_appid'])){
-
+            return '您的店铺已绑定公众号 或者 您的公众号已经授权到其他店铺';
         }else {
             $auth_data = array(
                 'organization_id' => $organization_id,
@@ -289,9 +289,8 @@ class WechatController extends Controller{
                 'expire_time' => time() + 7200,
             );
             $id = WechatAuthorization::addAuthorization($auth_data);
+            return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id]);
         }
-        return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id]);
-
     }
 
     /*
