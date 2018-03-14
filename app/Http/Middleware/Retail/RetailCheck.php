@@ -69,19 +69,9 @@ class RetailCheck{
             case "retail/subordinate/quick_rule":         //添加下级人员快速授权
             /****下级人员管理--添加组****/
 
-            /****财务管理****/
-            case "catering/finance/balance":                //余额管理
-            case "catering/finance/balance_recharge":       //余额详情
-            case "catering/finance/credit":                 //积分管理
-            case "catering/finance/credit_recharge":        //充值扣费
-            case "catering/finance/commission":             //佣金管理
-            /****财务管理****/
-
             /****支付设置****/
-            case "catering/payment/wechat_setting":         //微信支付
-            case "catering/payment/zerone_setting":         //零舍壹得
-            case "catering/payment/sheng_setting":          //盛付通
-            case "catering/payment/kuai_setting":           //快付通
+            case "retail/payment/wechat_setting":         //微信支付
+            case "retail/payment/sheng_setting":          //盛付通
             /****支付设置****/
 
             /****支付设置****/
