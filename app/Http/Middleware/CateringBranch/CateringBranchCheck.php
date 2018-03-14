@@ -15,11 +15,10 @@ class CateringBranchCheck{
             case "cateringbranch/login"://登录页,如果已经登录则不需要再次登录
                 //获取用户登录存储的SessionId
                 $sess_key = Session::get('catering_branch_account_id');
-                dd($sess_key);
                 //如果不为空跳转到选择商户组织页面
-//                if(!empty($sess_key)) {
-//                    return redirect('cateringbranch');
-//                }
+                if(!empty($sess_key)) {
+                    return redirect('cateringbranch');
+                }
                 break;
             /****仅检测是否登录及是否具有权限****/
             case "cateringbranch":                             //后台首页
@@ -126,7 +125,8 @@ class CateringBranchCheck{
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
             //把参数传递到下一个中间件
-            return self::res(1,$request);
+            dd($request);
+//            return self::res(1,$request);
         }else{
             return self::res(0,redirect('cateringbranch/login'));
         }
