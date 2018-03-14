@@ -15,12 +15,12 @@ class WechatAuthorization extends Model{
 
     //和organization表一对一的关系
     public function organization(){
-        return $this->belongsto('App\Models\Organization', 'organization_id');//by tang,hasone-->belongsto
+        return $this->belongsto('App\Models\Organization', 'organization_id');
     }
 
     //和wechat_authorizer_info表一对一的关系
-    public function getWechatAuthorizerInfo(){
-        return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
+    public function wechatAuthorizerInfo(){
+        return $this->hasOne('App\Models\WechatAuthorizerInfo', 'authorization_id');
     }
 
     //简易型查询单条数据关联查询
