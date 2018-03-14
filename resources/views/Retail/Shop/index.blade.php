@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Retail/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
@@ -54,7 +54,7 @@
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg" >
-                                                    <img src="{{asset('public/Catering')}}/img/a5.png" class="img-circle" alt="...">
+                                                    <img src="{{asset('public/Retail')}}/img/a5.png" class="img-circle" alt="...">
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +140,7 @@
 
                         <div class="col-lg-9 ">
                             <div class="col-lg-12">
-                                <div class="col-lg-4 state-overview"">
+                                <div class="col-lg-4 state-overview">
                                 <section class="panel">
                                     <div class="symbol bg-danger">
                                         <i class="fa fa-money"></i>
@@ -152,7 +152,7 @@
                                 </section>
                             </div>
 
-                            <div class="col-lg-4 state-overview"">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-success">
                                     <i class="icon icon-user"></i>
@@ -380,18 +380,18 @@
         </div>
     </form>
 </div>
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Retail')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Retail')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#editBtn').click(function(){
