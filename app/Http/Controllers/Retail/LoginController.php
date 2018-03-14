@@ -36,7 +36,7 @@ class LoginController extends Controller
         //获取验证码的内容
         $phrase = $builder->getPhrase();
         //把内容存入session
-        Session::flash('Retail_system_captcha', $phrase);
+        Session::flash('retail_system_captcha', $phrase);
         //生成图片
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');

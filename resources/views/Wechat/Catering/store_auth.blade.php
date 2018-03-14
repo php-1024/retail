@@ -139,16 +139,16 @@
 
                                         </div>
 
-                                        <!--
+
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
 
                                             <div class="col-sm-12 text-center">
-                                                <i class="fa fa-qrcode" style="font-size: 100px;"></i>
+                                                <img src="{{$qrcode}}" style="width: 150px; height: 150px;">
                                             </div>
 
                                         </div>
-                                        -->
+
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
