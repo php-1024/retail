@@ -20,11 +20,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('Branch/Public/Header')
+    @include('CateringBranch/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('Branch/Public/Nav')
+            @include('CateringBranch/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
