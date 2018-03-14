@@ -41,6 +41,7 @@
                             <h3 class="m-b-none">公众号设置</h3>
                         </div>
                         <div class="col-lg-4">
+                            @if(empty($wechat_info))
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
                                     店铺公众号设置
@@ -90,7 +91,7 @@
                                     </form>
                                 </div>
                             </section>
-
+                            @else
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
                                     店铺公众号设置
@@ -150,6 +151,7 @@
                                     </form>
                                 </div>
                             </section>
+                            @endif
                         </div>
                         <div class="col-lg-8">
                             <section class="panel panel-default">
