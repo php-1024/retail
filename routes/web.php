@@ -1112,8 +1112,6 @@ Route::group(['prefix'=>'retailbranch'],function(){
         Route::get('safe_password', 'RetailBranch\AccountController@safe_password')->middleware('RetailBranchCheck');//安全密码
         Route::get('message_setting', 'RetailBranch\AccountController@message_setting')->middleware('RetailBranchCheck');//消息接收设置
         Route::get('password', 'RetailBranch\AccountController@password')->middleware('RetailBranchCheck');          //登录密码页面
-        Route::get('operation_log', 'RetailBranch\AccountController@operation_log')->middleware('RetailBranchCheck');   //账户中心个人操作日志
-        Route::get('login_log', 'RetailBranch\AccountController@login_log')->middleware('RetailBranchCheck');           //账户中心个人登录日志
     });
 
     //收银台

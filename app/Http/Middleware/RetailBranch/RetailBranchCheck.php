@@ -28,8 +28,7 @@ class RetailBranchCheck{
             case "retailbranch/account/safe_password":       //安全密码设置
             case "retailbranch/account/message_setting":     //消息接收设置
             case "retailbranch/account/password":            //密码设置
-            case "retailbranch/account/operation_log":       //账户中心个人操作日志
-            case "retailbranch/account/login_log":           //账户中心个人登录日志
+
             case "retailbranch/cashier":                     //收银台
             case "retailbranch/category/category_add":       //添加商品分类
             case "retailbranch/category/category_list":      //商品分类列表
