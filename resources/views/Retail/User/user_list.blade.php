@@ -47,7 +47,6 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="store_label_add_check" value="{{ url('Retail/ajax/store_label_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('Retail/ajax/user_list_edit') }}">
                                     <input type="hidden" id="user_list_wallet" value="{{ url('Retail/ajax/user_list_wallet') }}">
                                     <input type="hidden" id="user_list_lock" value="{{ url('Retail/ajax/user_list_lock') }}">
