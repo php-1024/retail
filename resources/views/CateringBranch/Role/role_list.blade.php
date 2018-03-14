@@ -41,9 +41,9 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="role_edit_url" value="{{ url('branch/ajax/role_edit') }}">
+                                    <input type="hidden" id="role_edit_url" value="{{ url('cateringbranch/ajax/role_edit') }}">
                                     <input type="hidden" id="role_delete_comfirm_url"
-                                           value="{{ url('branch/ajax/role_delete') }}">
+                                           value="{{ url('cateringbranch/ajax/role_delete') }}">
                                     <label class="col-sm-1 control-label">角色名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" id="role_name"

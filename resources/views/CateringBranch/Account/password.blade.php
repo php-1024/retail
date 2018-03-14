@@ -36,7 +36,7 @@
                                 登录密码修改
                             </header>
                             <div class="panel-body">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('branch/ajax/password_edit_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('cateringbranch/ajax/password_edit_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">

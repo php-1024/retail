@@ -39,7 +39,7 @@
                                 角色添加
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" id="currentForm" method="post" action="{{url('branch/ajax/role_add_check')}}">
+                                <form class="form-horizontal" id="currentForm" method="post" action="{{url('cateringbranch/ajax/role_add_check')}}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">角色名称</label>
