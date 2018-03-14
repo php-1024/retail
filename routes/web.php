@@ -1114,8 +1114,6 @@ Route::group(['prefix'=>'retailbranch'],function(){
         Route::get('password', 'RetailBranch\AccountController@password')->middleware('RetailBranchCheck');          //登录密码页面
     });
 
-    //收银台
-    Route::get('cashier', 'RetailBranch\CashierController@cashier')->middleware('RetailBranchCheck');   //收银台
 
     //栏目管理
     Route::group(['prefix'=>'category'],function(){
@@ -1148,6 +1146,8 @@ Route::group(['prefix'=>'retailbranch'],function(){
     Route::group(['prefix'=>'paysetting'],function(){
         Route::get('wechat_setting', 'RetailBranch\PaysettingController@wechat_setting')->middleware('RetailBranchCheck');   //支付设置-微信支付
     });
+
+
 
 
     //下属管理--权限角色组
