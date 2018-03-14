@@ -104,7 +104,7 @@ class DisplayController extends Controller
             'status'=>$account_info->status,                    //用户状态
             'mobile'=>$account_info->mobile,                    //绑定手机号
         ];
-        Session::put('catering_branch_account_id', encrypt(1));         //存储登录session_id为当前用户ID
+        Session::put('retail_branch_account_id', encrypt(1));         //存储登录session_id为当前用户ID
         //构造用户缓存数据
         if (!empty($account_info->account_info->realname)) {
             $admin_data['realname'] = $account_info->account_info->realname;
