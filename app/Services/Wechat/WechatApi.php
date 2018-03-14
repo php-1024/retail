@@ -329,11 +329,13 @@ class WechatApi{
             $param = $this->xml2array($msg);
             switch ($param ['InfoType']) {
                 case 'component_verify_ticket' : // 授权凭证
+                        file_put_contents('testopen1.txt','123');
                         $component_verify_ticket = $param ['ComponentVerifyTicket'];
                         WechatOpenSetting::editComponentVerifyTicket($component_verify_ticket,time()+550);
                     break;
                 case 'unauthorized' : // 取消授权
-                    $status = 2;
+                    file_put_contents('testopen2.txt',$param['AuthorizerAppid']);
+                    WechatAuthorization::removeAuth($param['AuthorizerAppid']);
                     break;
                 case 'authorized' : // 授权
                     $status = 1;
