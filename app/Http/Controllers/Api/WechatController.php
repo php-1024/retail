@@ -333,10 +333,11 @@ class WechatController extends Controller{
      * $organization_id 公众号绑定组织的ID
      * $auth_info 授权第三方平台的令牌信息
      * $i 拉取的次数
+     * $open_id,开始拉取的open_id
      */
-    private function pull_fans_list($organization_id,$auth_info,$i){
+    private function pull_fans_list($organization_id,$auth_info,$i,$open_id){
         $fans_data = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
-        var_dump($fans_data);
+
         foreach($fans_data['data'] as $key=>$val){
             var_dump($val);
             $i++;
@@ -344,7 +345,7 @@ class WechatController extends Controller{
 
 
         if($fans_data['total']-$i > 0){
-            //$this->
+            $this->pull_fans_list($organization_id,$auth_info,$i,$fans_data['next_openid']);
         }
     }
 }
