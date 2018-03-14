@@ -34,20 +34,20 @@
                         <a href="#"></a>
                     </li>
                     <li>
-                        <a href="{{ url('/branch/account/profile') }}">账号信息</a>
+                        <a href="{{ url('/cateringbranch/account/profile') }}">账号信息</a>
                     </li>
 
                     <li>
-                        <a href="{{ url('/branch/account/password') }}">修改密码</a>
+                        <a href="{{ url('/cateringbranch/account/password') }}">修改密码</a>
                     </li>
                     @if($admin_data['is_super'] == 1)
                         <li>
-                            <a href="{{ url('/branch/branch_switch') }}" >切换店铺</a>
+                            <a href="{{ url('/cateringbranch/branch_switch') }}" >切换店铺</a>
                         </li>
                     @endif
                     <li class="divider"></li>
                     <li>
-                        <a href="{{ url('/branch/quit') }}" >退出登录</a>
+                        <a href="{{ url('/cateringbranch/quit') }}" >退出登录</a>
                     </li>
                 </ul>
             </li>
