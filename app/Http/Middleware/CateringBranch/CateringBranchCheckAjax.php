@@ -294,6 +294,7 @@ class CateringBranchCheckAjax{
     {
         //获取用户登录存储的SessionId
         $sess_key = Session::get('catering_branch_account_id');
+        dd($sess_key);
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
             $sess_key = Session::get('catering_branch_account_id');//获取管理员ID
