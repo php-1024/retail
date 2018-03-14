@@ -437,6 +437,7 @@ class RetailCheckAjax
     //检测登录提交数据
     public function checkLoginPost($request)
     {
+        dd(1);
         if (empty($request->input('username'))) {
             return self::res(0, response()->json(['data' => '请输入用户名或手机号码', 'status' => '0']));
         }
