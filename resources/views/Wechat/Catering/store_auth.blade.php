@@ -98,6 +98,14 @@
                                 </header>
                                 <div class="panel-body">
                                     <form class="form-horizontal" method="get">
+                                        <div class="form-group clearfix text-center m-t">
+                                            <div class="inline">
+                                                <div class="thumb-lg">
+                                                    <img src="{{ $wechat_info['head_img'] }}" class="img-circle" alt="...">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">公众微信号</label>
                                             <div class="col-sm-8">
