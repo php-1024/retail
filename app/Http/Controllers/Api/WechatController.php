@@ -300,18 +300,14 @@ class WechatController extends Controller{
         $organization_id  = $request->input('organization_id');
         $id = $request->input('id');
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        $this->pull_authorizer_info($id,$auth_info);
-        /*
-        $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
-        foreach($fans_list as $key=>$val){
-            dump($val);
-        }
-        */
+        //$this->pull_authorizer_info($id,$auth_info);
+        $this->pull_fans_list($id,$organization_id,$auth_info,0);
+
 
     }
 
     /*
-     * 获取公众号的基本信息
+     * 拉取公众号的基本信息
      */
     private function pull_authorizer_info($id,$auth_info){
         $authorizer_data = \Wechat::get_authorizer_info($auth_info['authorizer_appid']);//获取对应公众号的详细信息
@@ -329,6 +325,21 @@ class WechatController extends Controller{
             'qrcode_url'=>$authorizer_info['qrcode_url'],
         ];
         WechatAuthorizerInfo::addAuthorizerInfo($data);
+    }
+
+    /*
+     * 拉取公众号粉丝信息
+     * $id 公众号ID
+     * $organization_id 公众号绑定组织的ID
+     * $auth_info 授权第三方平台的令牌信息
+     * $i 拉取的次数
+     */
+    private function pull_fans_list($id,$organization_id,$auth_info,$i){
+        $fans_list = \Wechat::get_fans_list($auth_info['authorizer_access_token']);//粉丝列表
+
+        foreach($fans_list['data'] as $key=>$val){
+            var_dump($val);
+        }
     }
 }
 ?>
