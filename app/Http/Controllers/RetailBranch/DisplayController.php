@@ -60,7 +60,7 @@ class DisplayController extends Controller
             $val->cateringname = $catering->organization_name;
         }
         dump($request);
-        return  view('CateringBranch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
+        return  view('RetailBranch/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
     //选择店铺
