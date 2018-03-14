@@ -25,7 +25,7 @@
         <a class="navbar-brand block" href="index.html"><span class="h1 font-bold">ZERONE</span></a>
         <section class="m-b-lg">
             <header class="wrapper text-center">
-                <strong>零壹云管理平台 - 总店管理系统登录</strong>
+                <strong>零壹云管理平台 - 零售总店管理系统登录</strong>
             </header>
             <form role="form" id="currentForm" action="{{ url('retail/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
