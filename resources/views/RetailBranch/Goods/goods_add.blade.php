@@ -276,7 +276,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    window.location.href = "{{asset("cateringbranch/goods/goods_list")}}";
+                    window.location.href = "{{asset("retailbranch/goods/goods_list")}}";
                 });
             }else{
                 swal({
