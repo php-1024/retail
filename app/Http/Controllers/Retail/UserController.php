@@ -61,19 +61,14 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $qq = $request->qq;//qq号
-        $mobile = $request->mobile;//手机号
         $user_id = $request->user_id;//用户id
         $nickname = $request->nickname;//微信昵称
-        $re = StoreUser::checkRowExists([['mobile',$mobile],['user_id','<>',$user_id]]);
-        if($re == 'true'){
-            return response()->json(['data' => '手机号已存在', 'status' => '0']);
-        }
+
         DB::beginTransaction();
         try {
-            StoreUser::editStoreUser(['user_id'=>$user_id],['mobile'=>$mobile]);
             UserInfo::editUserInfo(['user_id'=>$user_id],['qq'=>$qq]);
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
+                OperationLog::addOperationLog('9',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {

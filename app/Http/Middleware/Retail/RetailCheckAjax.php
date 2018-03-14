@@ -47,11 +47,7 @@ class RetailCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
                 return self::format_response($re,$next);
                 break;
-            case "retail/ajax/label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
-            case "retail/ajax/label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
-                return self::format_response($re,$next);
-                break;
+
             case "retail/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re,$next);
@@ -525,9 +521,6 @@ class RetailCheckAjax
     public function checkUserEdit($request){
         if(empty($request->input('qq'))){
             return self::res(0,response()->json(['data' => '请输qq号', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入手机号', 'status' => '0']));
         }
         return self::res(1,$request);
     }
