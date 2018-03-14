@@ -47,9 +47,9 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="user_list_edit" value="{{ url('Retail/ajax/user_list_edit') }}">
-                                    <input type="hidden" id="user_list_wallet" value="{{ url('Retail/ajax/user_list_wallet') }}">
-                                    <input type="hidden" id="user_list_lock" value="{{ url('Retail/ajax/user_list_lock') }}">
+                                    <input type="hidden" id="user_list_edit" value="{{ url('retail/ajax/user_list_edit') }}">
+                                    <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
+                                    <input type="hidden" id="user_list_lock" value="{{ url('retail/ajax/user_list_lock') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
