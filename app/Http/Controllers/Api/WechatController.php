@@ -315,6 +315,8 @@ class WechatController extends Controller{
      */
     private function pull_authorizer_info($id,$auth_info){
         $authorize_info = \Wechat::get_authorizer_info($auth_info['authorizer_appid']);//获取对应公众号的详细信息
+        dump($authorize_info);
+        exit();
         $data = [
             'authorization_id'=>$id,
             'nickname'=>$authorize_info['nickname'],
