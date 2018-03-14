@@ -112,11 +112,11 @@ class CateringBranchCheck{
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('catering_branch_account_id');
-        dd($sess_key);
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
             $sess_key = Session::get('catering_branch_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
+            dd($sess_key);
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('catering_branch_system_admin_data'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_5_'.$sess_key);
