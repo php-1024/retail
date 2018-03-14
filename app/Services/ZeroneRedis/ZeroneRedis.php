@@ -69,8 +69,7 @@ class ZeroneRedis
         $admin_data = serialize($admin_data);//序列化数组数据
         Redis::connection('zeo');//连接到我的redis服务器-餐饮分店平台使用
         $data_key = 'retail_system_admin_data_'.$key_id;
-        $aa = Redis::set($data_key,$admin_data);
-        dd($aa);
+        Redis::set($data_key,$admin_data);
     }
 
     //内部方法，生成对应程序及账号的菜单
@@ -280,6 +279,7 @@ class ZeroneRedis
      */
     public static function create_retail_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','9']],0,'id','asc');//获取分店管理平台系统的一级菜单
+        dd($menu);
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
             $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
