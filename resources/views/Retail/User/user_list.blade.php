@@ -71,6 +71,7 @@
                                         <th>关注公众号</th>
                                         <th>源头商家</th>
                                         <th>推荐人</th>
+                                        <th>状态</th>
                                         <th>注册时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -90,6 +91,11 @@
                                                     零壹联盟
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
+                                        <td>@if($value->status==0)
+                                                <label class="label label-success">正常</label>
+                                            @else
+                                                <label class="label label-warning">冻结</label>
+                                            @endif</td>
                                         <td>{{$value->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
