@@ -95,7 +95,7 @@
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('branch/goods/goods_edit')}}?goods_id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('cateringbranch/goods/goods_edit')}}?goods_id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
