@@ -54,7 +54,7 @@ class ZeroneRedis
         Redis::set($data_key,$admin_data);
     }
     /*
-     * 商超总店平台
+     * 零售总店平台
      */
     public static function create_retail_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
