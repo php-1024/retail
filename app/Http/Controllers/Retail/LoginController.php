@@ -1,13 +1,12 @@
 <?php
 /**
- *商户管理系统登录界面
+ *零售总店管理系统登录界面
  *
  **/
 
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;

@@ -847,7 +847,7 @@ Route::group(['prefix'=>'branch'],function(){
 
 
 
-/**********************商超简易系统*********************/
+/**********************零售总店系统*********************/
 Route::group(['prefix'=>'retail'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
@@ -965,7 +965,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
     });
 });
-/**********************商超简易系统*********************/
+/**********************零售总店系统*********************/
 
 
 
