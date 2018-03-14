@@ -49,7 +49,7 @@
                                 <div class="panel-body">
                                     <form class="form-horizontal" method="get">
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众微信号</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">公众号ID</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-danger">未绑定</label>
                                             </div>
@@ -57,7 +57,7 @@
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众号昵称</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">公众号名称</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-danger">未绑定</label>
                                             </div>
@@ -65,7 +65,7 @@
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众号类型</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">公众号主体</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-danger">未绑定</label>
                                             </div>
