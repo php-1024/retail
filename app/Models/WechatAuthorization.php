@@ -66,5 +66,11 @@ class WechatAuthorization extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
+
+    //取消授权时删除用户授权信息
+    public static function removeAuth($authorizer_appid){
+        $info = self::where('authorizer_appid',$authorizer_appid)->first();
+        dump($info);
+    }
 }
 ?>
