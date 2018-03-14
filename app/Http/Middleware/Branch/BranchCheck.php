@@ -118,6 +118,7 @@ class BranchCheck{
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('branch_system_admin_data_'.$sess_key);//获取管理员信息
+            dd($admin_data);
             $menu_data = Redis::get('zerone_system_menu_5_'.$sess_key);
             $son_menu_data = Redis::get('zerone_system_son_menu_5_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
