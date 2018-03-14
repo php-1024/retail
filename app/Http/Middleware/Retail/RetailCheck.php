@@ -48,20 +48,12 @@ class RetailCheck{
             case "retail/news/message":                   //关键词自动回复
             case "retail/news/message_attention":         //关注后自动回复
             case "retail/news/message_default":           //默认回复
-            case "retail/news/message_mass":              //消息群发
             /****公众号管理-消息管理****/
 
             /****公众号管理-菜单管理****/
-            case "catering/menu/menu_customize":            //自定义菜单
-            case "catering/menu/menu_different":            //个性化菜单
+            case "retail/menu/menu_customize":            //自定义菜单
             /****公众号管理-菜单管理****/
-
-            /****用户管理****/
-            case "catering/user/user_tag":                  //粉丝标签管理
-            case "catering/user/user_list":                 //粉丝用户管理
-            case "catering/user/user_timeline":             //粉丝用户足迹
-            /****用户管理****/
-
+                
             /****下属管理--权限角色****/
             case "catering/role/role_add":                  //权限角色添加
             case "catering/role/role_list":                 //权限角色列表
