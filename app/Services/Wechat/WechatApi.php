@@ -355,7 +355,6 @@ class WechatApi{
 
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
-        dump($re);
         if(empty($re['ticket'])){
             return false;
         }else{
