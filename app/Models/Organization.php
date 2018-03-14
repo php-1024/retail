@@ -46,6 +46,11 @@ class Organization extends Model{
         return $this->hasOne('App\Models\OrganizationBranchinfo', 'organization_id');
     }
 
+    //和wechat_authorization表一对一的关系
+    public function getWechatAuthorization(){
+        return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
+    }
+
     //和WarzoneProxy表一对一的关系
     public function warzoneProxy(){
         return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
