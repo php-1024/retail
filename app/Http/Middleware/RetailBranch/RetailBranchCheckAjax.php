@@ -28,14 +28,8 @@ class RetailBranchCheckAjax{
             case "retailbranch/ajax/subordinate_authorize":   //编辑——授权下属人员
             case "retailbranch/ajax/subordinate_lock":        //冻结下属页面
             case "retailbranch/ajax/selected_rule":           //编辑——授权下属人员
-            case "retailbranch/ajax/goods_spec":              //商品规格页面
             case "retailbranch/ajax/goods_thumb":              //商品规格页面
 
-            case "retailbranch/ajax/spec_item_add":           //子规格添加弹窗页面
-            case "retailbranch/ajax/spec_edit":               //编辑规格弹窗页面
-            case "retailbranch/ajax/spec_delete":             //删除规格弹窗页面
-            case "retailbranch/ajax/spec_item_edit":          //编辑子规格弹窗页面
-            case "retailbranch/ajax/spec_item_delete":        //删除子规格弹窗页面
 
             case "retailbranch/ajax/upload_thumb_check":    //上传图片
             $re = $this->checkLoginAndRule($request);
@@ -63,12 +57,6 @@ class RetailBranchCheckAjax{
             case "retailbranch/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "retailbranch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "retailbranch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/spec_add_check":          //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/spec_delete_check":       //删除规格弹窗页面
-            case "retailbranch/ajax/spec_edit_check":         //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/spec_item_add_check":     //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/spec_item_delete_check":  //删除规格弹窗页面
-            case "retailbranch/ajax/spec_item_edit_check":    //检测是否登录 权限 安全密码
             case "retailbranch/ajax/room_add_check":          //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
