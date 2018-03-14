@@ -365,8 +365,25 @@ class WechatApi{
     /*
      * 获取生成永久二维码的Ticket
      */
-    public function createQrcode($authorizer_access_token){
+    public function createQrcode($authorizer_access_token,$sence_str){
+        $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$authorizer_access_token;
+        $data = [
+            'action_name'=>'QR_STR_SCENE',//默认采用字符串而非ID模式
+            'action_info'=>[
+                'scene'=>[
+                    'scene_str'=>$sence_str,
+                ]
+            ],
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
 
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        if(empty($re['ticket'])){
+            return false;
+        }else{
+            return 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$re['ticket'];
+        }
     }
 
     /*

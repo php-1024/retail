@@ -28,10 +28,7 @@ class WechatController extends Controller{
             if($imgre){
                 $qrcode = $imgre;
             }
-
         }
-
-
 
         return view('Wechat/Catering/store_auth',['url'=>$url,'wechat_info'=>$wechat_info,'qrcode'=>$qrcode,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
