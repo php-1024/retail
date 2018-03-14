@@ -17,7 +17,9 @@ class WechatController extends Controller{
         $url = \Wechat::get_auth_url($admin_data['organization_id']);
 
         $org_info = Organization::where('id',$admin_data['organization_id'])->first();
-        dump($org_info);
+
+        $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;
+        dump($wechat_info);
 
         return view('Wechat/Catering/store_auth',['url'=>$url,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }

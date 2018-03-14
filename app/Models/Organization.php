@@ -47,7 +47,7 @@ class Organization extends Model{
     }
 
     //和wechat_authorization表一对一的关系
-    public function getWechatAuthorization(){
+    public function wechatAuthorization(){
         return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
     }
 
