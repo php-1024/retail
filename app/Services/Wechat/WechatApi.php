@@ -335,6 +335,7 @@ class WechatApi{
                     break;
                 case 'unauthorized' : // 取消授权
                     file_put_contents('testopen2.txt',$param['AuthorizerAppid']);
+                    WechatAuthorization::removeAuth($param['AuthorizerAppid']);
                     break;
                 case 'authorized' : // 授权
                     $status = 1;

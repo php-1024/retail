@@ -37,9 +37,9 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <div class="col-sm-2">
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>
-                                    </div>
+                                    {{--<div class="col-sm-2">--}}
+                                        {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
+                                    {{--</div>--}}
                                     <div class="col-sm-2">
                                         <select name="account" class="form-control m-b">
                                             <option value="AK">所有分类</option>
