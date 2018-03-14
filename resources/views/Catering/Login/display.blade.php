@@ -37,6 +37,8 @@
                 </div>
                 <div class="form-group">
                     <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
+                    
+                    <input type="hidden" id="captcha_url" value="{{ URL('catering/login/captcha') }}">
                     <img src="{{ URL('catering/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onclick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
