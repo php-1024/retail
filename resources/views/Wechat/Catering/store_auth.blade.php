@@ -117,7 +117,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">公众号名称</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">{{$wechat_info['nick_name']}}</label>
+                                                <label class="label label-info">{{$wechat_info['nickname']}}</label>
                                             </div>
                                         </div>
 
