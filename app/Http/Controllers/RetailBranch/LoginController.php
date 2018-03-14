@@ -1,6 +1,6 @@
 <?php
 /**
- *餐饮分店管理系统
+ * 零售分店管理系统
  * 登录界面
  **/
 
@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
-        return view('CateringBranch/Login/display');
+        return view('RetailBranch/Login/display');
     }
 
     /*
@@ -58,7 +58,7 @@ class LoginController extends Controller
         if ($account_info->id == 1) {
             $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
         } else {
-            $key = config("app.catering_branch_encrypt_key");//获取加密盐（分店专用）
+            $key = config("app.retail_branch_encrypt_key");//获取加密盐（分店专用）
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
