@@ -30,6 +30,8 @@ class RetailCheck{
             /****店铺概况****/
             case "retail":                                  //店铺后台首页
             case "retail/select_shop":                      //店铺超级管员进入操作
+            case "retail/shop/operation_log":               //店铺操作记录
+            case "retail/shop/login_log":                   //店铺登入记录
             /****店铺概况****/
 
             /****账号中心****/
@@ -39,8 +41,6 @@ class RetailCheck{
             /****账号中心****/
 
             /****公众号管理****/
-            //case "catering/subscription/setting":                   //公众号授权
-            case "api/catering/store_auth"://公众号授权
             case "catering/subscription/material_image":            //图片素材
             case "catering/subscription/material_writing":          //图文素材
             case "catering/subscription/material_writing_one":      //单条图文素材
