@@ -293,10 +293,10 @@ class CateringBranchCheckAjax{
     public function checkIsLogin($request)
     {
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('branch_account_id');
+        $sess_key = Session::get('catering_branch_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
-            $sess_key = Session::get('branch_account_id');//获取管理员ID
+            $sess_key = Session::get('catering_branch_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('branch');//连接到我的缓存服务器
             $admin_data = Redis::get('branch_system_admin_data_'.$sess_key);//获取管理员信息
