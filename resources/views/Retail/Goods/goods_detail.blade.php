@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/trumbowyg/design/css/trumbowyg.css">
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Retail')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/trumbowyg/design/css/trumbowyg.css">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Retail')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Catering/Public/Header')
+        @include('Retail/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
@@ -30,7 +30,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        @include('Catering/Public/Nav')
+                        @include('Retail/Public/Nav')
                     </section>
                 </section>
             </aside>
@@ -127,7 +127,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m0.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m0.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image1.png
@@ -139,7 +139,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m1.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m1.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image2.png
@@ -151,7 +151,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m2.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m2.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image3.png
@@ -163,7 +163,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m3.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m3.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image4.png
@@ -175,7 +175,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m4.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m4.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image5.png
@@ -187,7 +187,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m5.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m5.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image6.png
@@ -199,7 +199,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Catering')}}/img/m6.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/img/m6.jpg" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         http://mydomain.com/images/image7.png
@@ -379,36 +379,36 @@
         </section>
     </section>
 </section>
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/sweetalert/sweetalert.min.js"></script>
 
 
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/js/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/sweetalert/sweetalert.min.js"></script>
 
-<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
+<script src="{{asset('public/Retail')}}/trumbowyg/trumbowyg.js"></script>
 
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="{{asset('public/Retail')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script src="{{asset('public/Retail')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 
 <script type="text/javascript">
     $(function(){
