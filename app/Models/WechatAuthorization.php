@@ -13,6 +13,15 @@ class WechatAuthorization extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
+    //和organization表一对一的关系
+    public function organization(){
+        return $this->belongsto('App\Models\Organization', 'organization_id');//by tang,hasone-->belongsto
+    }
+
+    //和wechat_authorizer_info表一对一的关系
+    public function getWechatAuthorizerInfo(){
+        return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
+    }
 
     //简易型查询单条数据关联查询
     public static function getOne($where)
