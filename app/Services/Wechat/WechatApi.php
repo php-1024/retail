@@ -326,15 +326,33 @@ class WechatApi{
         $msg = '';
         $errCode = $jm->decryptMsg($msg_sign, $timeStamp, $nonce, $from_xml, $msg);
         if ($errCode == 0) {
-            $xml = new \DOMDocument();
-            $xml->loadXML($msg);
-            $array_e = $xml->getElementsByTagName('ComponentVerifyTicket');
-            $component_verify_ticket = $array_e->item(0)->nodeValue;
-            WechatOpenSetting::editComponentVerifyTicket($component_verify_ticket,time()+550);
+            $param = $this->xml2array($msg);
+            switch ($param ['InfoType']) {
+                case 'component_verify_ticket' : // 授权凭证
+                        $component_verify_ticket = $param ['ComponentVerifyTicket'];
+                        WechatOpenSetting::editComponentVerifyTicket($component_verify_ticket,time()+550);
+                    break;
+                case 'unauthorized' : // 取消授权
+                    $status = 2;
+                    break;
+                case 'authorized' : // 授权
+                    $status = 1;
+                    break;
+                case 'updateauthorized' : // 更新授权
+                    break;
+            }
             return true;
         }else{
             return false;
         }
+    }
+    /*
+     * XML转化为数组
+     */
+    public  function xml2array($xmlstring)
+    {
+        $object = simplexml_load_string($xmlstring, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
+        return @json_decode(@json_encode($object),1);
     }
     /*
      * 获取生成临时二维码的Ticket

@@ -149,15 +149,15 @@
 
                                         </div>
 
-
+                                        <!--
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
 
                                             <div class="col-sm-12 text-center">
                                                 <button class="btn btn-danger" type="button">解除绑定</button>
                                             </div>
-
                                         </div>
+                                        -->
                                     </form>
                                 </div>
                             </section>
