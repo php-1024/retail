@@ -12,62 +12,62 @@ class RetailBranchCheck{
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
             /*****登录页,如果已经登录则不需要再次登录*****/
-            case "cateringbranch/login"://登录页,如果已经登录则不需要再次登录
+            case "retailbranch/login"://登录页,如果已经登录则不需要再次登录
                 //获取用户登录存储的SessionId
                 $sess_key = Session::get('catering_branch_account_id');
                 //如果不为空跳转到选择商户组织页面
                 if(!empty($sess_key)) {
-                    return redirect('cateringbranch');
+                    return redirect('retailbranch');
                 }
                 break;
             /****仅检测是否登录及是否具有权限****/
-            case "cateringbranch":                             //后台首页
-            case "cateringbranch/branch_list":                 //所有分店列表
-            case "cateringbranch/branch_switch":               //退出切换店铺
-            case "cateringbranch/account/profile":             //账号信息
-            case "cateringbranch/account/safe_password":       //安全密码设置
-            case "cateringbranch/account/message_setting":     //消息接收设置
-            case "cateringbranch/account/password":            //密码设置
-            case "cateringbranch/account/operation_log":       //账户中心个人操作日志
-            case "cateringbranch/account/login_log":           //账户中心个人登录日志
-            case "cateringbranch/cashier":                     //收银台
-            case "cateringbranch/category/category_add":       //添加商品分类
-            case "cateringbranch/category/category_list":      //商品分类列表
-            case "cateringbranch/goods/goods_add":             //添加商品
-            case "cateringbranch/goods/goods_edit":            //编辑商品
-            case "cateringbranch/goods/goods_list":            //商品列表
-            case "cateringbranch/goods/goods_copy":            //拷贝其他分店商品
-            case "cateringbranch/role/role_add":               //添加权限角色
-            case "cateringbranch/role/role_list":              //权限角色列表
-            case "cateringbranch/subordinate/subordinate_add": //添加下级人员
-            case "cateringbranch/subordinate/subordinate_list"://下级人员列表
+            case "retailbranch":                             //后台首页
+            case "retailbranch/branch_list":                 //所有分店列表
+            case "retailbranch/branch_switch":               //退出切换店铺
+            case "retailbranch/account/profile":             //账号信息
+            case "retailbranch/account/safe_password":       //安全密码设置
+            case "retailbranch/account/message_setting":     //消息接收设置
+            case "retailbranch/account/password":            //密码设置
+            case "retailbranch/account/operation_log":       //账户中心个人操作日志
+            case "retailbranch/account/login_log":           //账户中心个人登录日志
+            case "retailbranch/cashier":                     //收银台
+            case "retailbranch/category/category_add":       //添加商品分类
+            case "retailbranch/category/category_list":      //商品分类列表
+            case "retailbranch/goods/goods_add":             //添加商品
+            case "retailbranch/goods/goods_edit":            //编辑商品
+            case "retailbranch/goods/goods_list":            //商品列表
+            case "retailbranch/goods/goods_copy":            //拷贝其他分店商品
+            case "retailbranch/role/role_add":               //添加权限角色
+            case "retailbranch/role/role_list":              //权限角色列表
+            case "retailbranch/subordinate/subordinate_add": //添加下级人员
+            case "retailbranch/subordinate/subordinate_list"://下级人员列表
 
-            case "cateringbranch/order/order_spot":             //订单管理-现场订单
-            case "cateringbranch/order/order_spot_detail":      //订单管理-现场订单详情
-            case "cateringbranch/order/order_takeout":          //订单管理-外卖订单
-            case "cateringbranch/order/order_takeout_detail":   //订单管理-外卖订单详情
-            case "cateringbranch/order/order_appointment":      //预约管理
-            case "cateringbranch/device/room_add":               //设备管理-添加包厢
-            case "cateringbranch/device/room_list":              //设备管理-包厢管理
-            case "cateringbranch/device/table_add":              //设备管理-添加餐桌
-            case "cateringbranch/device/table_list":             //设备管理-餐桌管理
-            case "cateringbranch/device/printer_add":            //设备管理-添加打印机
-            case "cateringbranch/device/printer_list":           //设备管理-打印机管理
-            case "cateringbranch/device/printer_goods":           //设备管理-打印机关联商品
+            case "retailbranch/order/order_spot":             //订单管理-现场订单
+            case "retailbranch/order/order_spot_detail":      //订单管理-现场订单详情
+            case "retailbranch/order/order_takeout":          //订单管理-外卖订单
+            case "retailbranch/order/order_takeout_detail":   //订单管理-外卖订单详情
+            case "retailbranch/order/order_appointment":      //预约管理
+            case "retailbranch/device/room_add":               //设备管理-添加包厢
+            case "retailbranch/device/room_list":              //设备管理-包厢管理
+            case "retailbranch/device/table_add":              //设备管理-添加餐桌
+            case "retailbranch/device/table_list":             //设备管理-餐桌管理
+            case "retailbranch/device/printer_add":            //设备管理-添加打印机
+            case "retailbranch/device/printer_list":           //设备管理-打印机管理
+            case "retailbranch/device/printer_goods":           //设备管理-打印机关联商品
 
-            case "cateringbranch/user/user_tag":                //用户管理-粉丝标签管理
-            case "cateringbranch/user/user_list":               //用户管理-粉丝用户管理
-            case "cateringbranch/user/user_timeline":           //用户管理-粉丝足迹管理
+            case "retailbranch/user/user_tag":                //用户管理-粉丝标签管理
+            case "retailbranch/user/user_list":               //用户管理-粉丝用户管理
+            case "retailbranch/user/user_timeline":           //用户管理-粉丝足迹管理
 
-            case "cateringbranch/finance/balance":              //财务管理-余额管理
-            case "cateringbranch/finance/balance_recharge":     //财务管理-余额充值扣费
-            case "cateringbranch/finance/credit":               //财务管理-积分管理
-            case "cateringbranch/finance/credit_recharge":      //财务管理-积分充值扣费
+            case "retailbranch/finance/balance":              //财务管理-余额管理
+            case "retailbranch/finance/balance_recharge":     //财务管理-余额充值扣费
+            case "retailbranch/finance/credit":               //财务管理-积分管理
+            case "retailbranch/finance/credit_recharge":      //财务管理-积分充值扣费
 
-            case "cateringbranch/paysetting/wechat_setting":    //支付设置-微信支付
-            case "cateringbranch/paysetting/zerone_setting":    //支付设置-零舍壹得
-            case "cateringbranch/paysetting/shengf_setting":    //支付设置-盛付通
-            case "cateringbranch/paysetting/kuaifu_setting":    //支付设置-快付通
+            case "retailbranch/paysetting/wechat_setting":    //支付设置-微信支付
+            case "retailbranch/paysetting/zerone_setting":    //支付设置-零舍壹得
+            case "retailbranch/paysetting/shengf_setting":    //支付设置-盛付通
+            case "retailbranch/paysetting/kuaifu_setting":    //支付设置-快付通
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;
@@ -127,7 +127,7 @@ class RetailBranchCheck{
             //把参数传递到下一个中间件
             return self::res(1,$request);
         }else{
-            return self::res(0,redirect('cateringbranch/login'));
+            return self::res(0,redirect('retailbranch/login'));
         }
     }
 
