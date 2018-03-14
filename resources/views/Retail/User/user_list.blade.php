@@ -47,7 +47,6 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="store_label_add_check" value="{{ url('Retail/ajax/store_label_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('Retail/ajax/user_list_edit') }}">
                                     <input type="hidden" id="user_list_wallet" value="{{ url('Retail/ajax/user_list_wallet') }}">
                                     <input type="hidden" id="user_list_lock" value="{{ url('Retail/ajax/user_list_lock') }}">
@@ -72,7 +71,6 @@
                                         <th>关注公众号</th>
                                         <th>源头商家</th>
                                         <th>推荐人</th>
-                                        <th>粉丝标签</th>
                                         <th>注册时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -92,14 +90,6 @@
                                                     零壹联盟
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
-                                        <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->store_id}}','{{$value->nickname}}')">
-                                                    <option value="0">无标签</option>
-                                                @foreach($label as $k=>$v)
-                                                    <option value="{{$v->id}}" @if($v->id == $value->label_id) selected @endif>{{$v->label_name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </td>
                                         <td>{{$value->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
@@ -213,35 +203,6 @@
             }else{
                 $('#myModal').html(response);
                 $('#myModal').modal();
-            }
-        });
-    }
-
-    function changeUserTag(obj,user_id,store_id,nickname){
-        var label_id = $(obj).val();
-        var url = $('#store_label_add_check').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'store_id':store_id,'nickname':nickname};
-        $.post(url,data,function(json){
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
             }
         });
     }
