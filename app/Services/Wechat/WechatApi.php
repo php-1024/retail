@@ -334,7 +334,7 @@ class WechatApi{
                         WechatOpenSetting::editComponentVerifyTicket($component_verify_ticket,time()+550);
                     break;
                 case 'unauthorized' : // 取消授权
-                    file_put_contents('testopen2.txt','123');
+                    file_put_contents('testopen2.txt',$param['AuthorizerAppid']);
                     break;
                 case 'authorized' : // 授权
                     $status = 1;
