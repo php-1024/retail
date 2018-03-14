@@ -23,7 +23,8 @@ class WechatController extends Controller{
 
             /**获取公众号带参数关注二维码**/
             $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-            \Wechat::createLsQrcode($auth_info['authorizer_access_token'],'2591000',$admin_data['organization_id']);//测试创建临时二维码
+            $imgre = \Wechat::createLsQrcode($auth_info['authorizer_access_token'],'2591000',$admin_data['organization_id']);//测试创建临时二维码
+
         }
 
 

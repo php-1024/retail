@@ -355,8 +355,12 @@ class WechatApi{
 
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
-        dump($re);
 
+        if(!empty($re['ticket'])){
+            return false;
+        }else{
+            return 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$re['ticket'];
+        }
     }
 
     /*
