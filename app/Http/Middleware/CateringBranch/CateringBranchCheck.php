@@ -125,8 +125,7 @@ class CateringBranchCheck{
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);//添加参数
             //把参数传递到下一个中间件
-            dd($admin_data);
-//            return self::res(1,$request);
+            return self::res(1,$request);
         }else{
             return self::res(0,redirect('cateringbranch/login'));
         }
