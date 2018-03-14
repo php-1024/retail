@@ -35,7 +35,7 @@ class RetailBranchCheck{
             case "retailbranch/goods/goods_add":             //添加商品
             case "retailbranch/goods/goods_edit":            //编辑商品
             case "retailbranch/goods/goods_list":            //商品列表
-            case "retailbranch/goods/goods_copy":            //拷贝其他分店商品
+
             case "retailbranch/role/role_add":               //添加权限角色
             case "retailbranch/role/role_list":              //权限角色列表
             case "retailbranch/subordinate/subordinate_add": //添加下级人员
