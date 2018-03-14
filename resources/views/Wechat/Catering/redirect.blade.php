@@ -12,7 +12,7 @@
     <input type="hidden" id="id" value="{{ $id }}">
     <input type="hidden" id="organization_id" value="{{ $organization_id }}">
     <input type="hidden" id="redirect_url" value="{{ url('api/catering/store_auth') }}">
-    <input type="hidden" id="get_authorizer_info_url" value="{{ url('api/wechat/get_authorizer_info') }}">
+    <input type="hidden" id="get_authorizer_info_url" value="{{ url('api/wechat/pull_authorizer_data') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 </section>
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
