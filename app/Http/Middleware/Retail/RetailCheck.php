@@ -59,14 +59,14 @@ class RetailCheck{
             /****用户管理****/
 
             /****下属管理--权限角色****/
-            case "catering/role/role_add":                  //权限角色添加
-            case "catering/role/role_list":                 //权限角色列表
+            case "retail/role/role_add":                  //权限角色添加
+            case "retail/role/role_list":                 //权限角色列表
             /****下属管理--权限角色****/
 
             /****下级人员管理--添加组****/
-            case "catering/subordinate/subordinate_add":    //下级人员添加
-            case "catering/subordinate/subordinate_list":   //下级人员列表
-            case "catering/subordinate/quick_rule":         //添加下级人员快速授权
+            case "retail/subordinate/subordinate_add":    //下级人员添加
+            case "retail/subordinate/subordinate_list":   //下级人员列表
+            case "retail/subordinate/quick_rule":         //添加下级人员快速授权
             /****下级人员管理--添加组****/
 
             /****财务管理****/

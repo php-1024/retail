@@ -858,15 +858,15 @@ Route::group(['prefix'=>'retail'],function(){
 
     //下属管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
-        Route::get('role_add','Catering\RoleController@role_add')->middleware('CateringCheck');                         //添加权限角色
-        Route::get('role_list','Catering\RoleController@role_list')->middleware('CateringCheck');                       //权限角色列表
+        Route::get('role_add','Retail\RoleController@role_add')->middleware('RetailCheck');                             //添加权限角色
+        Route::get('role_list','Retail\RoleController@role_list')->middleware('RetailCheck');                           //权限角色列表
     });
 
 
     //下属管理--添加组
     Route::group(['prefix'=>'subordinate'],function(){
-        Route::get('subordinate_add','Catering\SubordinateController@subordinate_add')->middleware('CateringCheck');    //添加下级人员
-        Route::get('subordinate_list','Catering\SubordinateController@subordinate_list')->middleware('CateringCheck');  //下级人员列表
+        Route::get('subordinate_add','Retail\SubordinateController@subordinate_add')->middleware('RetailCheck');        //添加下级人员
+        Route::get('subordinate_list','Retail\SubordinateController@subordinate_list')->middleware('RetailCheck');      //下级人员列表
     });
 
     //支付设置
