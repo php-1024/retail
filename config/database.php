@@ -157,7 +157,7 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => 4,
         ],
-        //定义一个自己的缓存的服务器，分店平台简版使用
+        //定义一个自己的缓存的服务器，餐饮分店平台简版使用
         'catering_branch' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
@@ -177,6 +177,13 @@ return [
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 9,
+        ],
+        //定义一个自己的缓存的服务器，商超分店平台简版使用
+        'retail_branch' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 10,
         ],
         //定义一个公司测试集群redis服务片区，测试使用
         'clusters' => [
