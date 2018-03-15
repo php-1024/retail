@@ -193,14 +193,9 @@ Route::group(['prefix'=>'zerone'],function(){
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
 
-    //登录页面组
-    Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
-        Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
-    });
-
     //系统管理分组
     Route::group(['prefix'=>'dashboard'],function(){
+        Route::get('setup','Zerone\DashboardController@setup')->middleware('ZeroneCheck');//参数设置展示
         Route::get('warzone','Zerone\DashboardController@warzone')->middleware('ZeroneCheck');//战区管理展示
         Route::get('structure','Zerone\DashboardController@structure')->middleware('ZeroneCheck');//人员结构
         Route::get('operation_log','Zerone\DashboardController@operation_log')->middleware('ZeroneCheck');//所有操作记录
@@ -208,9 +203,120 @@ Route::group(['prefix'=>'zerone'],function(){
     });
 
 
+    //个人中心组
+    Route::group(['prefix'=>'personal'],function(){
+        Route::get('/','Zerone\PersonalController@display')->middleware('ZeroneCheck');//个人资料
+        Route::get('password_edit','Zerone\PersonalController@password_edit')->middleware('ZeroneCheck');//登录密码修改
+        Route::get('safe_password','Zerone\PersonalController@safe_password')->middleware('ZeroneCheck');//安全密码设置
+        Route::get('operation_log','Zerone\PersonalController@operation_log')->middleware('ZeroneCheck');//我的操作日志
+        Route::get('login_log','Zerone\PersonalController@login_log')->middleware('ZeroneCheck');//我的登录日志
+    });
+
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
+        Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
+    });
+
+    //权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add','Zerone\RoleController@role_add')->middleware('ZeroneCheck');//添加权限角色
+        Route::get('role_list','Zerone\RoleController@role_list')->middleware('ZeroneCheck');//权限角色列表
+    });
+
+    //下级人员权限组
+    Route::group(['prefix'=>'subordinate'],function(){
+        Route::get('subordinate_add','Zerone\SubordinateController@subordinate_add')->middleware('ZeroneCheck');//添加下级人员
+        Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list')->middleware('ZeroneCheck');//下级人员列表
+        Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure')->middleware('ZeroneCheck');//下级人员结构
+    });
+    //服务商管理
+    Route::group(['prefix'=>'proxy'],function(){
+        Route::get('proxy_add','Zerone\ProxyController@proxy_add')->middleware('ZeroneCheck');//添加服务商
+        Route::get('proxy_examinelist','Zerone\ProxyController@proxy_examinelist')->middleware('ZeroneCheck');//服务商审核列表
+        Route::get('proxy_list','Zerone\ProxyController@proxy_list')->middleware('ZeroneCheck');//服务商列表
+        Route::get('proxy_structure','Zerone\ProxyController@proxy_structure')->middleware('ZeroneCheck');//服务商人员架构
+        Route::get('proxy_program','Zerone\ProxyController@proxy_program')->middleware('ZeroneCheck');//服务商程序管理
+        Route::get('proxy_company','Zerone\ProxyController@proxy_company')->middleware('ZeroneCheck');//服务商商户划拨
+    });
+    //商户管理
+    Route::group(['prefix'=>'company'],function(){
+        Route::get('company_add','Zerone\CompanyController@company_add')->middleware('ZeroneCheck');//添加商户
+        Route::get('company_examinelist','Zerone\CompanyController@company_examinelist')->middleware('ZeroneCheck');//商户审核列表
+        Route::get('company_list','Zerone\CompanyController@company_list')->middleware('ZeroneCheck');//商户列表
+        Route::get('company_structure','Zerone\CompanyController@company_structure')->middleware('ZeroneCheck');//商户人员架构
+        Route::get('company_program','Zerone\CompanyController@company_program')->middleware('ZeroneCheck');//商户程序管理
+        Route::get('company_store','Zerone\CompanyController@company_store')->middleware('ZeroneCheck');//商户划拨管理
+    });
+    //店铺管理
+    Route::group(['prefix'=>'store'],function(){
+        Route::get('store_add','Zerone\StoreController@store_add')->middleware('ZeroneCheck');//添加店铺
+        Route::get('store_list','Zerone\StoreController@store_list')->middleware('ZeroneCheck');//店铺列表
+        Route::get('store_structure','Zerone\StoreController@store_structure')->middleware('ZeroneCheck');//店铺人员架构
+        Route::get('store_branchlist','Zerone\StoreController@store_branchlist')->middleware('ZeroneCheck');//分店管理
+        Route::get('store_config','Zerone\StoreController@store_config')->middleware('ZeroneCheck');//分店设置参数
+    });
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登录数据
+
+        Route::post('role_add_check','Zerone\RoleController@role_add_check')->middleware('ZeroneCheckAjax');//提交添加权限角色数据
+        Route::post('role_edit','Zerone\RoleController@role_edit')->middleware('ZeroneCheckAjax');//编辑权限角色弹出框
+        Route::post('role_edit_check','Zerone\RoleController@role_edit_check')->middleware('ZeroneCheckAjax');//提交编辑权限角色数据
+        Route::post('role_delete_comfirm','Zerone\RoleController@role_delete_comfirm');//删除权限角色弹出安全密码框
+        Route::post('role_delete','Zerone\RoleController@role_delete')->middleware('ZeroneCheckAjax');//删除权限角色弹出安全密码框
+
+        Route::post('warzone_add','Zerone\DashboardController@warzone_add')->middleware('ZeroneCheckAjax');//战区管理编辑战区
+        Route::post('warzone_add_check','Zerone\DashboardController@warzone_add_check')->middleware('ZeroneCheckAjax');//战区管理编辑战区
+        Route::post('warzone_delete','Zerone\DashboardController@warzone_delete')->middleware('ZeroneCheckAjax');//战区管理去确认删除战区
+        Route::post('warzone_delete_confirm','Zerone\DashboardController@warzone_delete_confirm')->middleware('ZeroneCheckAjax');//战区管理删除战区弹出框
+        Route::post('warzone_edit','Zerone\DashboardController@warzone_edit')->middleware('ZeroneCheckAjax');//战区管理编辑战区
+        Route::post('warzone_edit_check','Zerone\DashboardController@warzone_edit_check')->middleware('ZeroneCheckAjax');//战区管理编辑战区
+        Route::post('setup_edit_check','Zerone\DashboardController@setup_edit_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
+
+        Route::post('password_edit_check','Zerone\PersonalController@password_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改密码
+        Route::post('safe_password_edit_check','Zerone\PersonalController@safe_password_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改密码
+        Route::post('personal_edit_check','Zerone\PersonalController@personal_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改个人信息
+
+        Route::post('proxy_add_check','Zerone\ProxyController@proxy_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
+        Route::post('proxy_examine','Zerone\ProxyController@proxy_examine')->middleware('ZeroneCheckAjax');//服务商审核页面显示
+        Route::post('proxy_examine_check','Zerone\ProxyController@proxy_examine_check')->middleware('ZeroneCheckAjax');//服务商审核数据提交
+        Route::post('proxy_list_edit','Zerone\ProxyController@proxy_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
+        Route::post('proxy_list_edit_check','Zerone\ProxyController@proxy_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
+        Route::post('proxy_list_frozen','Zerone\ProxyController@proxy_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
+        Route::post('proxy_list_frozen_check','Zerone\ProxyController@proxy_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
+        Route::post('proxy_list_delete','Zerone\ProxyController@proxy_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
+        Route::post('proxy_assets','Zerone\ProxyController@proxy_assets')->middleware('ZeroneCheckAjax');//服务商程序管理划入划出显示页面
+        Route::post('proxy_assets_check','Zerone\ProxyController@proxy_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交
+
+        Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
+        Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
+        Route::post('subordinate_edit_check','Zerone\SubordinateController@subordinate_edit_check')->middleware('ZeroneCheckAjax');//提交编辑下级人员数据提交
+        Route::post('subordinate_lock_confirm','Zerone\SubordinateController@subordinate_lock_confirm')->middleware('ZeroneCheckAjax');//冻结下级人员安全密码输入框
+        Route::post('subordinate_lock','Zerone\SubordinateController@subordinate_lock')->middleware('ZeroneCheckAjax');//提交冻结下级人员数据
+        Route::post('subordinate_authorize','Zerone\SubordinateController@subordinate_authorize')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
+        Route::post('subordinate_authorize_check','Zerone\SubordinateController@subordinate_authorize_check')->middleware('ZeroneCheckAjax');//下级人员授权管理弹出框
+        Route::post('subordinate_delete_confirm','Zerone\SubordinateController@subordinate_delete_confirm')->middleware('ZeroneCheckAjax');//删除下级人员安全密码输入框
+
+        Route::post('quick_rule','Zerone\SubordinateController@quick_rule')->middleware('ZeroneCheckAjax');//添加下级人员快速授权
+        Route::post('selected_rule','Zerone\SubordinateController@selected_rule')->middleware('ZeroneCheckAjax');//下级人员已经选中的权限
+
+
+        Route::post('company_add_check','Zerone\CompanyController@company_add_check')->middleware('ZeroneCheckAjax');//商户申请提交编辑参数设置
+        Route::post('company_examine','Zerone\CompanyController@company_examine')->middleware('ZeroneCheckAjax');//商户审核页面显示
+        Route::post('company_examine_check','Zerone\CompanyController@company_examine_check')->middleware('ZeroneCheckAjax');//商户审核提交数据
+        Route::post('company_list_edit','Zerone\CompanyController@company_list_edit')->middleware('ZeroneCheckAjax');//商户编辑页面显示
+        Route::post('company_list_edit_check','Zerone\CompanyController@company_list_edit_check')->middleware('ZeroneCheckAjax');//商户编辑数据提交
+        Route::post('company_list_frozen','Zerone\CompanyController@company_list_frozen')->middleware('ZeroneCheckAjax');//商户冻结页面显示
+        Route::post('company_list_frozen_check','Zerone\CompanyController@company_list_frozen_check')->middleware('ZeroneCheckAjax');//商户冻结数据提交
+        Route::post('company_list_delete','Zerone\CompanyController@company_list_delete')->middleware('ZeroneCheckAjax');//商户删除页面显示
+        Route::post('company_assets','Zerone\CompanyController@company_assets')->middleware('ZeroneCheckAjax');//商户程序管理划入划出显示页面
+        Route::post('company_assets_check','Zerone\CompanyController@company_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
+
+        //添加店铺
+        Route::post('store_insert','Zerone\StoreController@store_insert')->middleware('ZeroneCheckAjax');               //添加店铺ajax显示页面
+        Route::post('store_insert_check','Zerone\StoreController@store_insert_check')->middleware('ZeroneCheckAjax');   //添加店铺数据提交
 
     });
 });
