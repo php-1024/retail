@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" id="currentFrom" method="post" enctype="multipart/form-data" action="{{ url('api/ajax/meterial_image_upload_check') }}">
+<form class="form-horizontal tasi-form" id="currentForm" method="post" enctype="multipart/form-data" action="{{ url('api/ajax/meterial_image_upload_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content">
