@@ -618,8 +618,8 @@ Route::group(['prefix'=>'api'],function() {
 
     //微信接口中页面使用Ajax的部分
     Route::group(['prefix' => 'ajax'] , function(){
-        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheck');//上传图片素材
-        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheck');//上传图片素材
+        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
     });
 });
 /*********************接口路由*************************/

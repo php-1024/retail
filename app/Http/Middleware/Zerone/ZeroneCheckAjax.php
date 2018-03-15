@@ -36,7 +36,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加角色
+            case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加权限角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
@@ -204,7 +204,21 @@ class ZeroneCheckAjax
             }
         }
     }
-    
+
+    //检测登录和权限和安全密码和添加权限角色
+    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
@@ -294,20 +308,7 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码和添加角色
-    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
 
     //检测登录和权限
     public function checkLoginAndRule($request){
@@ -468,33 +469,6 @@ class ZeroneCheckAjax
         return self::res(1,$request);
     }
 
-    //检测编辑下级人员权限数据
-    public function checkSubordinateAuthorize($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测编辑下级人员数据
-    public function checkSubordinateEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-
     //检测修改设置安全密码
     public function checkSafepasswordEdit($request){
         if(empty($request->input('is_editing'))){
@@ -527,6 +501,46 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
+
+    //检测添加权限角色数据
+    public function checkRoleAdd($request){
+        if(empty($request->input('role_name'))){
+            return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑下级人员权限数据
+    public function checkSubordinateAuthorize($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('role_id'))){
+            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
+        }
+        if(empty($request->input('module_node_ids'))){
+            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测编辑下级人员数据
+    public function checkSubordinateEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+        if(empty($request->input('realname'))){
+            return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
+        }
+        if(empty($request->input('mobile'))){
+            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+
     //检测添加下级人员数据
     public function checkSubordinateAdd($request){
         if(empty($request->input('password'))){
@@ -566,16 +580,7 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测添加权限角色数据
-    public function checkRoleAdd($request){
-        if(empty($request->input('role_name'))){
-            return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选角色权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
 
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
