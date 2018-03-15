@@ -58,13 +58,13 @@ class WechatController extends Controller{
      */
     public function meterial_image_upload(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Wechat/Catering/material_image_upload',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Wechat/Catering/material_image_upload',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
 
     public function meterial_image_upload_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $file = $request->file('image');
         if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
             return response()->json(['status' => '0','data'=>'错误的图片格式']);
@@ -72,8 +72,8 @@ class WechatController extends Controller{
 
         if ($file->isValid()) {
             //检验文件是否有效
-            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
-            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
+
+            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();  //重命名
             $path = $file->move(base_path() . '/uploads/wechat/', $new_name);   //$path上传后的文件路径
             $file_path =  'uploads/wechat/'.$new_name;
             dump($path);
