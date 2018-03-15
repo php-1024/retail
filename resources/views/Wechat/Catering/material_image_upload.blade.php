@@ -27,3 +27,4 @@
         </div>
     </div>
 </form>
+<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
