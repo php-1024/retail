@@ -96,7 +96,7 @@ class CategoryController extends Controller
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品分类！');//保存操作记录
             } else {//分店本人操作记录
-                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品分类！');//保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品分类！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -112,7 +112,7 @@ class CategoryController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('id');
         $where = [
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category = CateringCategory::getOne($where);
@@ -131,7 +131,7 @@ class CategoryController extends Controller
             $displayorder = '0';
         }
         $where = [
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category_data = [

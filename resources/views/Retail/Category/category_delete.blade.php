@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="category_delete_check" method="post" action="{{url('retailbranch/ajax/category_delete_check')}}">
+<form class="form-horizontal" id="category_delete_check" method="post" action="{{url('retail/ajax/category_delete_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
      <input type="hidden" name="category_id" id="_token" value="{{$category_id}}">
         <div class="modal-dialog">
