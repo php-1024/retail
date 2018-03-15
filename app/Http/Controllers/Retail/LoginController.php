@@ -62,11 +62,9 @@ class LoginController extends Controller
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
-//        dd($encryptPwd);
         //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip', $ip]]);//查询该IP下的错误记录
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
-        dd($username.$password);
         if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
             if (!empty($account_info)) {
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
@@ -115,7 +113,7 @@ class LoginController extends Controller
                                 } else {
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-                                ZeroneRedis::create_retail_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                                ZeroneRedis::create_retail_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                                 ZeroneRedis::create_menu_cache($account_info->id,10);//生成对应账号的商户系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             } else {
@@ -128,7 +126,7 @@ class LoginController extends Controller
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
-                        ZeroneRedis::create_retail_branch_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        ZeroneRedis::create_retail_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                         ZeroneRedis::create_menu_cache($account_info->id,10);//生成对应账号的商户系统菜单
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
