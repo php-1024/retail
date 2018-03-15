@@ -30,6 +30,15 @@
 <script src="{{asset('public/Catering')}}/ladda/ladda.min.js"></script>
 <script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
 <script>
+    $(function(){
+
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
     //提交表单
     var l = $( '.ladda-button' ).ladda();
     function postForm() {
