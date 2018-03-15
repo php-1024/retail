@@ -650,6 +650,7 @@ class ZeroneCheckAjax
         if (empty($request->input('captcha'))) {
             return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
         }
+        
 //        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
             //把参数传递到下一个程序
             return self::res(1, $request);
