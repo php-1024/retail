@@ -49,9 +49,9 @@ class GoodsController extends Controller
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
-        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_data = [
-            'fansmanage_id' => $store_id,
+            'fansmanage_id' => $fansmanage_id,
             'restaurant_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
             'category_id' => $category_id,
@@ -90,9 +90,9 @@ class GoodsController extends Controller
         $where = [
             'restaurant_id' => $admin_data['organization_id'],
         ];
-        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        $goods = CateringGoods::getOne(['id' => $goods_id, 'fansmanage_id' => $store_id, 'restaurant_id' => $admin_data['organization_id']]);
+        $goods = CateringGoods::getOne(['id' => $goods_id, 'fansmanage_id' => $fansmanage_id, 'restaurant_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Retail/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
@@ -110,7 +110,7 @@ class GoodsController extends Controller
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
-        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
@@ -118,7 +118,7 @@ class GoodsController extends Controller
             'id' => $goods_id,
         ];
         $goods_data = [
-            'fansmanage_id' => $store_id,
+            'fansmanage_id' => $fansmanage_id,
             'restaurant_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
             'category_id' => $category_id,
@@ -128,6 +128,7 @@ class GoodsController extends Controller
             'displayorder' => $displayorder,
             'details' => $details,
         ];
+
         DB::beginTransaction();
         try {
             $goods_id = CateringGoods::editCateringGoods($where,$goods_data);
