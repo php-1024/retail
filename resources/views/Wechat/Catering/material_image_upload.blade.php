@@ -28,3 +28,24 @@
     </div>
 </form>
 <script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<!-- Ladda -->
+<script src="{{asset('public/Catering')}}/ladda/spin.min.js"></script>
+<script src="{{asset('public/Catering')}}/ladda/ladda.min.js"></script>
+<script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
+<script>
+    $(function(){
+        var l = $( '.ladda-button' ).ladda();
+        l.click(function(){
+
+            // Start loading
+            l.ladda( 'start' );
+            setTimeout(function(){
+                l.ladda('stop');
+            },12000);
+        });
+
+        $('#addBtn').click(function(){
+            $('#myModal').modal();
+        });
+    });
+</script>
