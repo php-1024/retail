@@ -9,6 +9,9 @@ use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
 
 class WechatController extends Controller{
+    /*
+     * 店铺授权
+     */
     public function store_auth(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -37,6 +40,13 @@ class WechatController extends Controller{
         }
 
         return view('Wechat/Catering/store_auth',['url'=>$url,'wechat_info'=>$wechat_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    /*
+     * 图片素材
+     */
+    public function material_image(){
+        echo "这里是图片素材";
     }
 
     public function test(){
