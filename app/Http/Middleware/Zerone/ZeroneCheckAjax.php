@@ -21,6 +21,7 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+            //个人中心
             case "zerone/ajax/personal_edit_check"://检测是否登录 权限 安全密码 及修改个人信息提交数据
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
@@ -36,6 +37,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            //下级人员
             case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加权限角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
@@ -45,6 +47,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
                 return self::format_response($re, $next);
                 break;
+
 
             case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
@@ -120,12 +123,16 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+
+            //下级管理
+            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登录和权限
+            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登录和权限
+
             case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
             case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登录和权限
-            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登录和权限
-            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登录和权限
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登录和权限
+
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
             case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
             case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
@@ -150,8 +157,8 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
+            case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndID($request);
                 return self::format_response($re, $next);
                 break;
@@ -159,6 +166,7 @@ class ZeroneCheckAjax
     }
     /******************************复合检测*********************************/
 
+    /*****个人中心******/
 
     //检测 登录 和 权限 和 安全密码 和 及修改个人信息提交数据
     public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
@@ -205,6 +213,9 @@ class ZeroneCheckAjax
         }
     }
 
+
+    /*****下级管理******/
+
     //检测登录和权限和安全密码和添加权限角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -227,6 +238,21 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测登录和权限和安全密码和ID是否为空 删除角色
+    public function checkLoginAndRuleAndSafeAndID($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkID($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -294,23 +320,6 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码和ID是否为空
-    public function checkLoginAndRuleAndSafeAndID($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkID($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-
-
 
     //检测登录和权限
     public function checkLoginAndRule($request){
