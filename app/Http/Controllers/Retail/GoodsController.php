@@ -32,7 +32,7 @@ class GoodsController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
-        return view('RetailBranch/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('Retail/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //添加商品数据操作
@@ -96,7 +96,7 @@ class GoodsController extends Controller
         $goods = CateringGoods::getOne(['id' => $goods_id, 'store_id' => $store_id, 'branch_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('RetailBranch/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('Retail/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //编辑商品操作
@@ -152,7 +152,7 @@ class GoodsController extends Controller
     {
         $goods_id = $request->get('goods_id');              //商品的ID
         $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('RetailBranch/Goods/goods_thumb', ['goods_thumb'=>$goods_thumb]);
+        return view('Retail/Goods/goods_thumb', ['goods_thumb'=>$goods_thumb]);
     }
 
 
@@ -207,7 +207,7 @@ class GoodsController extends Controller
             'branch_id' => $admin_data['organization_id'],
         ];
         $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
-        return view('RetailBranch/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 }
 

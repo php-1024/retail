@@ -33,7 +33,7 @@ class SubordinateController extends Controller
         $module_node_list = Module::getListProgram(5, [], 0, 'id');//获取当前系统的所有模块和节点
         $selected_modules = [];//选中的模块
         $selected_nodes = [];//选中的节点
-        return view('RetailBranch/Subordinate/subordinate_add',['selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules,'module_node_list'=>$module_node_list,'role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Retail/Subordinate/subordinate_add',['selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules,'module_node_list'=>$module_node_list,'role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //快速授权功能
@@ -73,7 +73,7 @@ class SubordinateController extends Controller
                 $selected_nodes[] = $val->node_id;
             }
         }
-        return view('RetailBranch/Subordinate/quick_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
+        return view('Retail/Subordinate/quick_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
 
@@ -145,14 +145,14 @@ class SubordinateController extends Controller
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'].$admin_data['id'].',';
         $list = Account::getPaginage([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.'%'],[ 'account','like','%'.$account.'%' ]],15,'id');
-        return view('RetailBranch/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Retail/Subordinate/subordinate_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //编辑下级人员
     public function subordinate_edit(Request $request){
         $id = $request->input('id');
         $info = Account::getOne([['id',$id]]);
-        return view('RetailBranch/Subordinate/subordinate_edit',['info'=>$info]);
+        return view('Retail/Subordinate/subordinate_edit',['info'=>$info]);
     }
 
     //编辑下级人员数据提交
@@ -214,7 +214,7 @@ class SubordinateController extends Controller
             $info->account_role = $val->id;
         }
         $role_list = OrganizationRole::getList([['program_id',5],['created_by',$admin_data['id']]],0,'id');
-        return view('RetailBranch/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
+        return view('Retail/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
     //获取下级人员当前已经选取的节点
@@ -252,7 +252,7 @@ class SubordinateController extends Controller
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
-        return view('RetailBranch/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
+        return view('Retail/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
     //下级人员授权数据提交
@@ -296,7 +296,7 @@ class SubordinateController extends Controller
         $id = $request->input('id');//要操作的用户的ID
         $account = $request->input('account');//要操作的管理员的账号,用于记录
         $status = $request->input('status');//当前用户的状态
-        return view('RetailBranch/Subordinate/subordinate_lock',['id'=>$id,'account'=>$account,'status'=>$status]);
+        return view('Retail/Subordinate/subordinate_lock',['id'=>$id,'account'=>$account,'status'=>$status]);
     }
     //冻结解冻下级人员
     public function subordinate_lock_check(Request $request){
