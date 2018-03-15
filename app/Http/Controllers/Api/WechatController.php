@@ -66,8 +66,10 @@ class WechatController extends Controller{
 
     public function meterial_image_upload_check(Request $request){
         $file = $request->file('image');
-        dump($file);
-        exit();
+        if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
+            return response()->json(['status' => '0','data'=>'错误的图片格式']);
+        }
+
         if ($file->isValid()) {
             //检验文件是否有效
             $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名

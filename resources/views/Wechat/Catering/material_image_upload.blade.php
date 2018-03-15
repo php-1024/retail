@@ -42,7 +42,7 @@
     //提交表单
     var l = $( '.ladda-button' ).ladda();
     function postForm() {
-        var url = target.attr("action");
+        var url = $( "#currentForm" ).attr("action");
         var data = new FormData($( "#currentForm" )[0]);
 
         l.ladda( 'start' );
