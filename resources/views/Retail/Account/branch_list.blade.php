@@ -8,23 +8,19 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.html">
     <title>选择店铺 | 零壹餐饮系统管理平台</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/bootstrap-reset.css" type="text/css"/>
-    <!--external css-->
-    <link rel="stylesheet" href="{{asset('public/Company/library/font-awesome')}}/css/font-awesome.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Company/library/sweetalert')}}/sweetalert.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Company/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/owl.carousel.css" type="text/css">
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Company')}}/css/style-responsive.css" type="text/css"/>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
-    <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
+    <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
+    <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
+    <script src="{{asset('public/Branch/library/ie')}}/excanvas.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
@@ -59,7 +55,7 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" id="url" value="{{url('retailbranch/ajax/branch_select')}}">
+        <input type="hidden" id="url" value="{{url('retail/ajax/branch_select')}}">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
             <a href="javascript:;" onclick="postForm({{$val->account->id}})">
@@ -82,23 +78,18 @@
     </div>
     <!--state overview end-->
 </section>
-
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Company')}}/js/jquery.js"></script>
-<script src="{{asset('public/Company')}}/js/jquery-1.8.3.min.js"></script>
-<script src="{{asset('public/Company')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Company')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Company')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="{{asset('public/Company')}}/js/jquery.sparkline.js" type="text/javascript"></script>
-<script src="{{asset('public/Company/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.js"></script>
-<script src="{{asset('public/Company/library/sweetalert')}}/sweetalert.min.js"></script>
-<script src="{{asset('public/Company')}}/js/owl.carousel.js"></script>
-<script src="{{asset('public/Company')}}/js/jquery.customSelect.min.js"></script>
-<!--common script for all pages-->
-<script src="{{asset('public/Company')}}/js/common-scripts.js"></script>
-<!--script for this page-->
-<script src="{{asset('public/Company')}}/js/sparkline-chart.js"></script>
-<script src="{{asset('public/Company')}}/js/easy-pie-chart.js"></script>
+<!-- App -->
+<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
+<!-- App -->
+<script src="{{asset('public/Branch')}}/js/app.js"></script>
+<script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
+<script src="{{asset('public/Branch/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
+<script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
 <script>
     //提交表单
     function postForm(account_id){
