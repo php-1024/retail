@@ -31,12 +31,13 @@
 <script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
 <script>
     //提交表单
+    var l = $( '.ladda-button' ).ladda();
     function postForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
 
-        //$( '.ladda-button' ).ladda( 'start' );
+        l.ladda( 'start' );
 
         $.post(url, data, function (json) {
             if (json.status == -1) {
@@ -50,7 +51,7 @@
                 },function(){
                     window.location.reload();
                 });
-               // $( '.ladda-button' ).ladda('stop');
+               l.ladda('stop');
             }else{
                 swal({
                     title: "提示信息",
@@ -59,7 +60,7 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-               // $( '.ladda-button' ).ladda('stop');
+               l.ladda('stop');
             }
         });
     }
