@@ -275,8 +275,8 @@
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
-                    window.location.href = "{{asset("retail/goods/goods_list")}}";
+                },function(json){
+                    window.location.href = "{{asset("retail/goods/goods_edit?goods_id=")}}"+json.goods_id;
                 });
             }else{
                 swal({

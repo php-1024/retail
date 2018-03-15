@@ -57,8 +57,8 @@ class CateringGoods extends Model{
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
         $model->displayorder = $param['displayorder'];
+        $model->fansmanage_id = $param['fansmanage_id'];
         $model->restaurant_id = $param['restaurant_id'];
-        $model->branch_id = $param['branch_id'];
         $model->save();
         return $model->id;
     }
