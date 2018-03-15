@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" enctype="multipart/form-data" action="{{ url('api/ajax/meterial_image_upload_check') }}">
+<form class="form-horizontal tasi-form" id="currentFrom" method="post" enctype="multipart/form-data" action="{{ url('api/ajax/meterial_image_upload_check') }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,7 +18,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="ladda-button btn btn-success" type="button" data-style="expand-right"><span class="ladda-label">提交</span><span class="ladda-spinner"></span></button>
+                <button class="ladda-button btn btn-success" onclick="return postForm();" type="button" data-style="expand-right"><span class="ladda-label">提交</span><span class="ladda-spinner"></span></button>
             </div>
         </div>
     </div>
@@ -29,26 +29,13 @@
 <script src="{{asset('public/Catering')}}/ladda/ladda.min.js"></script>
 <script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
 <script>
-    $(function(){
-        var l = $( '.ladda-button' ).ladda();
-        l.click(function(){
-
-            // Start loading
-            l.ladda( 'start' );
-            setTimeout(function(){
-                l.ladda('stop');
-            },12000);
-        });
-    });
-
     //提交表单
     function postForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
 
-        var l = $( '.ladda-button' ).ladda();
-        l.ladda( 'start' );
+        $( '.ladda-button' ).ladda( 'start' );
 
         $.post(url, data, function (json) {
             if (json.status == -1) {
@@ -62,7 +49,7 @@
                 },function(){
                     window.location.reload();
                 });
-                l.ladda('stop');
+                $( '.ladda-button' ).ladda('stop');
             }else{
                 swal({
                     title: "提示信息",
@@ -71,7 +58,7 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-                l.ladda('stop');
+                $( '.ladda-button' ).ladda('stop');
             }
         });
     }
