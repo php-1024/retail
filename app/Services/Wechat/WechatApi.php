@@ -257,7 +257,7 @@ class WechatApi{
         $pre_auth_code = $this->get_pre_auth_code();//预授权码
         $redirect_url = 'http://o2o.01nnt.com/api/wechat/redirect';//回调链接
         $auth_type = 3;//1则商户扫码后，手机端仅展示公众号、2表示仅展示小程序，3表示公众号和小程序都展示
-        $url = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=" . $open_appid . "&pre_auth_code=" . $pre_auth_code . "&redirect_uri=".$redirect_url.'?zerone_param='.$origanization_id."@@'.$redirect_route_name.'&auth_type=".$auth_type;
+        $url = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=" . $open_appid . "&pre_auth_code=" . $pre_auth_code . "&redirect_uri=".$redirect_url."?zerone_param=".$origanization_id."@@".$redirect_route_name."&auth_type=".$auth_type;
         return $url;
     }
     /*
