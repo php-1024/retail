@@ -480,3 +480,26 @@ Route::group(['prefix'=>'retail'],function(){
     });
 });
 /**********************零售版店铺*********************/
+
+/*********************接口路由*************************/
+Route::group(['prefix'=>'api'],function() {
+
+    //微信通用路由组
+    Route::group(['prefix' => 'wechat'], function () {
+        Route::any('response/{appid}', 'Api\WechatController@response');//开放平台控制公众平台回复函数
+        Route::any('open', 'Api\WechatController@open');//接受公众号收授权推送消息
+        Route::any('auth', 'Api\WechatController@auth');//公众号授权链接页面
+        Route::any('redirect', 'Api\WechatController@redirect');//公众号授权回调链接
+        Route::any('web_redirect', 'Api\WechatController@web_redirect');//网页授权回调路由
+        Route::any('open_web_redirect','Api\WechatController@open_web_redirect');
+        Route::any('pull_authorizer_data', 'Api\WechatController@pull_authorizer_data');//获取微信平台的授权信息
+        Route::any('test', 'Api\WechatController@test');//测试函数
+    });
+
+    //餐饮版店铺授权页面
+    Route::group(['prefix' => 'catering'] , function(){
+        Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('CateringCheck');//开放平台控制公众平台回复函数
+        Route::any('material_image', 'Api\WechatController@material_image')->middleware('CateringCheck');//图片素材
+    });
+});
+/*********************接口路由*************************/
