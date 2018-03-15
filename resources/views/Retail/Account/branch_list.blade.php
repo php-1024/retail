@@ -10,6 +10,7 @@
     <title>选择店铺 | 零壹餐饮系统管理平台</title>
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap-reset.css">
+    <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css" type="text/css"/>
     <link rel="stylesheet" href="{{asset('public/Branch/library/font-awesome')}}/css/font-awesome.css">
     <link rel="stylesheet" href="{{asset('public/Branch/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.css">
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/owl.carousel.css">
