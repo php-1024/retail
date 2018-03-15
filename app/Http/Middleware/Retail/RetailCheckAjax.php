@@ -14,74 +14,74 @@ class RetailCheckAjax{
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "retailbranch/ajax/login_check"://检测登录数据提交
+            case "retail/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "retailbranch/ajax/branch_select":           //超级管理员选择分店提交数据
-            case "retailbranch/ajax/category_delete":           //栏目编辑页面
-            case "retailbranch/ajax/category_edit":           //栏目编辑页面
-            case "retailbranch/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
-            case "retailbranch/ajax/role_delete":             //删除权限角色弹出框检测登入和权限
-            case "retailbranch/ajax/quick_rule":              //快速授权检测登入和权限
-            case "retailbranch/ajax/subordinate_edit":        //编辑下属人员信息
-            case "retailbranch/ajax/subordinate_authorize":   //编辑——授权下属人员
-            case "retailbranch/ajax/subordinate_lock":        //冻结下属页面
-            case "retailbranch/ajax/selected_rule":           //编辑——授权下属人员
-            case "retailbranch/ajax/goods_thumb":              //商品规格页面
+            case "retail/ajax/branch_select":           //超级管理员选择分店提交数据
+            case "retail/ajax/category_delete":           //栏目编辑页面
+            case "retail/ajax/category_edit":           //栏目编辑页面
+            case "retail/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
+            case "retail/ajax/role_delete":             //删除权限角色弹出框检测登入和权限
+            case "retail/ajax/quick_rule":              //快速授权检测登入和权限
+            case "retail/ajax/subordinate_edit":        //编辑下属人员信息
+            case "retail/ajax/subordinate_authorize":   //编辑——授权下属人员
+            case "retail/ajax/subordinate_lock":        //冻结下属页面
+            case "retail/ajax/selected_rule":           //编辑——授权下属人员
+            case "retail/ajax/goods_thumb":              //商品规格页面
 
 
-            case "retailbranch/ajax/upload_thumb_check":    //上传图片
+            case "retail/ajax/upload_thumb_check":    //上传图片
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-            case "retailbranch/ajax/profile_edit_check"://检测登录，权限，及修改个人信息的数据
+            case "retail/ajax/profile_edit_check"://检测登录，权限，及修改个人信息的数据
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "retailbranch/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
+            case "retail/ajax/safe_password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "retailbranch/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
+            case "retail/ajax/password_edit_check"://检测登录，权限，及修改密码的数据
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "retailbranch/ajax/role_add_check"://检测登录，权限，安全密码，及添加角色的数据
-            case "retailbranch/ajax/role_edit_check"://检测登录，权限，安全密码，及修改角色的数据
+            case "retail/ajax/role_add_check"://检测登录，权限，安全密码，及添加角色的数据
+            case "retail/ajax/role_edit_check"://检测登录，权限，安全密码，及修改角色的数据
                 $re = $this->checkLoginAndRuleAndSafeRoleAddAndEdit($request);
                 return self::format_response($re, $next);
                 break;
 
 
-            case "retailbranch/ajax/category_delete_check":   //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/role_delete_check":       //检测是否登录 权限 安全密码
-            case "retailbranch/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
+            case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
+            case "retail/ajax/role_delete_check":       //检测是否登录 权限 安全密码
+            case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
 
-            case "retailbranch/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+            case "retail/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "retailbranch/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+            case "retail/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "retailbranch/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+            case "retail/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
                 return self::format_response($re,$next);
                 break;
 
 
-            case "retailbranch/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
-            case "retailbranch/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
+            case "retail/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
+            case "retail/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
                 $re = $this->checkLoginAndRuleAndCategoryAdd($request);
                 return self::format_response($re, $next);
                 break;
-            case "retailbranch/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
-            case "retailbranch/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
+            case "retail/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
+            case "retail/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
                 $re = $this->checkLoginAndRuleAndGoodsAdd($request);
                 return self::format_response($re, $next);
                 break;
@@ -280,10 +280,10 @@ class RetailCheckAjax{
     public function checkIsLogin($request)
     {
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('retail_branch_account_id');
+        $sess_key = Session::get('retail_account_id');
         //如果为空跳转到登录页面
         if(!empty($sess_key)) {
-            $sess_key = Session::get('retail_branch_account_id');//获取管理员ID
+            $sess_key = Session::get('retail_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('retail_branch');  //连接到我的缓存服务器
             $admin_data = Redis::get('retail_branch_system_admin_data_'.$sess_key);//获取管理员信息

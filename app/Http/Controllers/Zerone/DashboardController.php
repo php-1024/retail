@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Province;
-use App\Models\Setup;
 use App\Models\Warzone;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
