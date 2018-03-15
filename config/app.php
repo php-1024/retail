@@ -15,6 +15,7 @@ return [
     'company_safe_encrypt_key'=>'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
     /*******************商户***************************/
 
+
     /*******************服务商**************************/
     'proxy_encrypt_key'=>'sdfdsf121s2dfdsfds121s2df45dsf12dsf45dsf12sd45sdf12ds',//零壹管理平台登录密码加密盐
     'proxy_safe_encrypt_key'=>'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
@@ -36,16 +37,27 @@ return [
     /*******************餐饮分店简版**************************/
 
 
+    /**
+     * 原有的商超总店
+     * retail_encrypt_key
+     * retail_safe_encrypt_key
+     */
     /*******************商超总店**************************/
-    'retail_encrypt_key'=>'sdhjfkdshkjf312sf21dsf12sdf21dsf21ds1f2dsf5ds4f5dsf4sd4f5dsf2ds1f2ds12f',//零壹云管理平台 - 商超总店业务系统登录密码加密盐
-    'retail_safe_encrypt_key'=>'wfdsajflkjdlsagdasg4h56s4dfd2j456hgfj3df45uty45u6u6y5k46jhg132fhg56df4h65fd56h',//零壹云管理平台 - 商超总店业务系统全密码加密盐
+    'old_retail_encrypt_key'=>'sdhjfkdshkjf312sf21dsf12sdf21dsf21ds1f2dsf5ds4f5dsf4sd4f5dsf2ds1f2ds12f',//零壹云管理平台 - 商超总店业务系统登录密码加密盐
+    'old_retail_safe_encrypt_key'=>'wfdsajflkjdlsagdasg4h56s4dfd2j456hgfj3df45uty45u6u6y5k46jhg132fhg56df4h65fd56h',//零壹云管理平台 - 商超总店业务系统全密码加密盐
     /*******************商超总店**************************/
 
 
-    /*******************商超分店**************************/
-    'retail_branch_encrypt_key'=>'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 商超分店业务系统登录密码加密盐
-    'retail_branch_safe_encrypt_key'=>'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 商超分店业务系统全密码加密盐
-    /*******************商超分店**************************/
+    /*************
+     * 2018年03-15
+     * 最新整理
+     **********/
+    /*******************零售版店铺**************************/
+    'retail_encrypt_key'=>'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 零售版店铺登录密码加密盐
+    'retail_safe_encrypt_key'=>'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 零售版店铺全密码加密盐
+    /*******************零售版店铺**************************/
+
+
 
     /******************微信开放平台相关参数********************/
     'wechat_open_setting'=>[
