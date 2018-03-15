@@ -4,7 +4,7 @@
  * 登录界面
  **/
 
-namespace App\Http\Controllers\RetailBranch;
+namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Services\ZeroneRedis\ZeroneRedis;
@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
-        return view('RetailBranch/Login/display');
+        return view('Retail/Login/display');
     }
 
     /*
@@ -144,7 +144,7 @@ class LoginController extends Controller
     //退出登录
     public function quit(){
         Session::put('retail_branch_account_id','');
-        return redirect('retailbranch/login');
+        return redirect('retail/login');
     }
 }
 
