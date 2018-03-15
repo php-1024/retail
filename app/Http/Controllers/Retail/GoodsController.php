@@ -29,7 +29,7 @@ class GoodsController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         return view('Retail/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
@@ -40,7 +40,6 @@ class GoodsController extends Controller
     {
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-
         $category_id = $request->get('category_id');        //栏目ID
         $name = $request->get('name');                      //商品名称
         $price = $request->get('price');                    //商品价格
@@ -52,8 +51,8 @@ class GoodsController extends Controller
         }
         $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_data = [
-            'store_id' => $store_id,
-            'branch_id' => $admin_data['organization_id'],
+            'fansmanage_id' => $store_id,
+            'restaurant_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
             'category_id' => $category_id,
             'name' => $name,
@@ -69,7 +68,7 @@ class GoodsController extends Controller
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品！');//保存操作记录
             } else {//商户本人操作记录
-                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -89,11 +88,11 @@ class GoodsController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //获取当前的页面路由
         $where = [
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
         ];
         $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        $goods = CateringGoods::getOne(['id' => $goods_id, 'store_id' => $store_id, 'branch_id' => $admin_data['organization_id']]);
+        $goods = CateringGoods::getOne(['id' => $goods_id, 'store_id' => $store_id, 'restaurant_id' => $admin_data['organization_id']]);
         $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
         $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Retail/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
@@ -119,8 +118,8 @@ class GoodsController extends Controller
             'id' => $goods_id,
         ];
         $goods_data = [
-            'store_id' => $store_id,
-            'branch_id' => $admin_data['organization_id'],
+            'fansmanage_id' => $store_id,
+            'restaurant_id' => $admin_data['organization_id'],
             'created_by' => $admin_data['id'],
             'category_id' => $category_id,
             'name' => $name,
@@ -204,7 +203,7 @@ class GoodsController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
         ];
         $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
         return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
