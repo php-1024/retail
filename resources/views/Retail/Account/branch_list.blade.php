@@ -8,13 +8,14 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.html">
     <title>选择店铺 | 零壹餐饮系统管理平台</title>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap-reset.css">
+    <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch/library/font-awesome')}}/css/font-awesome.css">
     <link rel="stylesheet" href="{{asset('public/Branch/library/jquery-easy-pie-chart')}}/jquery.easy-pie-chart.css">
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap-reset.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/owl.carousel.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/style-responsive.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/owl.carousel.css">
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/style.css">
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/style-responsive.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
@@ -82,6 +83,7 @@
 <script src="{{asset('public/Branch')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
 <!--common script for all pages-->
 <script src="{{asset('public/Branch')}}/js/common-scripts.js"></script>
 <script>
