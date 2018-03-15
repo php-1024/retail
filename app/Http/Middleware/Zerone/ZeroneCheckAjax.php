@@ -31,11 +31,6 @@ class ZeroneCheckAjax
                 return self::format_response($re, $next);
                 break;
 
-            case "zerone/ajax/setup_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑系统参数设置
-                $re = $this->checkLoginAndRuleAndSafeAndSetupEdit($request);
-                return self::format_response($re, $next);
-                break;
-
             case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProxyAdd($request);
                 return self::format_response($re,$next);
@@ -283,20 +278,6 @@ class ZeroneCheckAjax
             return $re;
         }else{
             $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登录和权限和安全密码和编辑系统参数而设置
-    public function checkLoginAndRuleAndSafeAndSetupEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSetupEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -558,16 +539,7 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测编辑系统参数设置数据
-    public function checkSetupEdit($request){
-        if(empty($request->input('serviceurl'))){
-            return self::res(0,response()->json(['data' => '请输入服务商通道链接', 'status' => '0']));
-        }
-        if(empty($request->input('merchanturl'))){
-            return self::res(0,response()->json(['data' => '请输入商户通道链接', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
     //检测编辑权限角色数据
     public function checkRoleEdit($request){
         if(empty($request->input('id'))){

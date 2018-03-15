@@ -191,25 +191,8 @@
 <script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
 
 <script type="text/javascript">
-    $(function(){
-        var l = $( '.ladda-button' ).ladda();
-        l.click(function(){
-
-            // Start loading
-            l.ladda( 'start' );
-            setTimeout(function(){
-                l.ladda('stop');
-            },12000);
-        });
-
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
-        });
-    });
-
     //弹出图片上传框
     function getUploadForm(){
-
         var url = $('#material_image_upload_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
