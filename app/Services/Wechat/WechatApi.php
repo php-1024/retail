@@ -408,7 +408,8 @@ class WechatApi{
      * 上传永久图片素材
      */
     public function uploadimg($authorizer_access_token,$file){
-        $url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=".$authorizer_access_token."&type=image";
+        //$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=".$authorizer_access_token."&type=image";//临时素材链接
+        $url = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=".$authorizer_access_token;//永久素材链接
         if(class_exists('\CURLFile')){
             $data = [
                 'media' => new \CURLFile(realpath($file)),
