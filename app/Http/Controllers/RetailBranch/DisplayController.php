@@ -29,7 +29,7 @@ class DisplayController extends Controller
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
-            ['program_id','5'], //查询program_id(5)餐饮管理系统的操作日志
+            ['program_id','10'], //查询program_id(10)零售管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
@@ -37,11 +37,10 @@ class DisplayController extends Controller
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('retailbranch/branch_list');
         }
-        $organization = Organization::getOneCompany(['id' => $admin_data['organization_id']]);
         if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('retailbranch/account/password');
         }else{
-            return view('RetailBranch/Display/display',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'organization'=>$organization,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('RetailBranch/Display/display',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
 
