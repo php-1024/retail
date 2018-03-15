@@ -31,6 +31,11 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 修改安全密码权限数据提交
+                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
@@ -82,12 +87,6 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-
-
-            case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 修改安全密码权限数据提交
-                $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
-                return self::format_response($re,$next);
-                break;
             case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
                 return self::format_response($re,$next);
@@ -159,20 +158,7 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    //检测登录，权限，及修改安全密码的数据
-    public function checkLoginAndRuleAndSafepasswordEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
 
     //检测 登录 和 权限 和 安全密码 和 及修改个人信息提交数据
     public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
@@ -204,9 +190,21 @@ class ZeroneCheckAjax
         }
     }
 
-
-
-
+    //检测登录，权限，及修改安全密码的数据
+    public function checkLoginAndRuleAndSafepasswordEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    
 
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
