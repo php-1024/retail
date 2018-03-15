@@ -19,11 +19,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('RetailBranch/Public/Nav')
+        @include('Retail/Public/Nav')
         <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -36,7 +36,7 @@
                                 登录密码修改
                             </header>
                             <div class="panel-body">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retailbranch/ajax/password_edit_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/password_edit_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">

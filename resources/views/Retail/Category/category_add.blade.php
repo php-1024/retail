@@ -19,11 +19,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('RetailBranch/Public/Nav')
+        @include('Retail/Public/Nav')
         <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -37,7 +37,7 @@
                                 添加商品分类
                             </header>
                             <div class="panel-body">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retailbranch/ajax/category_add_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/category_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">分类名称</label>
