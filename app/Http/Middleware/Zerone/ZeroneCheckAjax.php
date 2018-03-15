@@ -204,7 +204,7 @@ class ZeroneCheckAjax
             }
         }
     }
-    
+
 
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
