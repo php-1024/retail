@@ -28,7 +28,7 @@ class CateringGoods extends Model{
         return $this->belongsto('App\Models\Organization','branch_id','id');
     }
 
-    //和organization表一对一的关系
+    //和CateringGoodsThumb表一对多的关系
     public function goodsThumb(){
         return $this->hasMany('App\Models\CateringGoodsThumb','goods_id','id');
     }
