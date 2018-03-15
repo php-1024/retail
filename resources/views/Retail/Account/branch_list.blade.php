@@ -82,6 +82,7 @@
 <script src="{{asset('public/Branch')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/jquery.scrollTo.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
 <!--common script for all pages-->
 <script src="{{asset('public/Branch')}}/js/common-scripts.js"></script>
 <script>
