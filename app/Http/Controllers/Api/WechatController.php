@@ -75,7 +75,7 @@ class WechatController extends Controller{
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();  //重命名
             $path = $file->move(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/', $new_name);   //$path上传后的文件路径
             $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-
+            $path = $this->object_to_array($path);
             var_dump($path->pathName);
             exit();
             \Wechat::uploadimg($admin_data['organization_id'],$path->pathname);
@@ -83,6 +83,20 @@ class WechatController extends Controller{
         } else {
             return response()->json(['status' => '0']);
         }
+    }
+
+    //对象转换为数组
+    private function object_to_array($obj) {
+        $obj = (array)$obj;
+        foreach ($obj as $k => $v) {
+            if (gettype($v) == 'resource') {
+                return;
+            }
+            if (gettype($v) == 'object' || gettype($v) == 'array') {
+                $obj[$k] = (array)object_to_array($v);
+            }
+        }
+        return $obj;
     }
 
     public function test(){
