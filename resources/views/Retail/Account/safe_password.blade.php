@@ -19,11 +19,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('RetailBranch/Public/Nav')
+            @include('Retail/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -31,7 +31,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">安全密码</h3>
                         </div>
-                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retailbranch/ajax/safe_password_edit_check') }}">
+                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/safe_password_edit_check') }}">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if(empty($admin_data['safe_password']))
                         <input type="hidden" name="is_editing" value="-1">

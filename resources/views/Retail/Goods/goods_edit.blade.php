@@ -20,11 +20,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('RetailBranch/Public/Nav')
+            @include('Retail/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -48,7 +48,7 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
-                                        <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retailbranch/ajax/goods_edit_check') }}">
+                                        <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/goods_edit_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <input type="hidden" name="goods_id" value="{{$goods->id}}">
                                             <div class="form-group">
@@ -236,7 +236,7 @@
     function uploadForm() {
         var formData = new FormData($( "#uploadForm" )[0]);
         $.ajax({
-            url: '{{ url('retailbranch/ajax/upload_thumb_check') }}' ,
+            url: '{{ url('retail/ajax/upload_thumb_check') }}' ,
             type: 'POST',
             data: formData,
             async: false,

@@ -21,12 +21,12 @@
 <body class="">
 <section class="vbox">
     {{--头部--}}
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     {{--头部--}}
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('RetailBranch/Public/Nav')
+            @include('Retail/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -41,10 +41,10 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('retailbranch/ajax/subordinate_edit') }}">
-                                    <input type="hidden" id="subordinate_lock" value="{{ url('retailbranch/ajax/subordinate_lock') }}">
-                                    <input type="hidden" id="subordinate_delete" value="{{ url('retailbranch/ajax/subordinate_delete') }}">
-                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('retailbranch/ajax/subordinate_authorize') }}">
+                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('retail/ajax/subordinate_edit') }}">
+                                    <input type="hidden" id="subordinate_lock" value="{{ url('retail/ajax/subordinate_lock') }}">
+                                    <input type="hidden" id="subordinate_delete" value="{{ url('retail/ajax/subordinate_delete') }}">
+                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('retail/ajax/subordinate_authorize') }}">
                                     <label class="col-sm-1 control-label">下属账号</label>
 
                                     <div class="col-sm-2">

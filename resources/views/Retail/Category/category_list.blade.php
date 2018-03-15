@@ -19,11 +19,11 @@
 </head>
 <body class="">
 <section class="vbox">
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-        @include('RetailBranch/Public/Nav')
+        @include('Retail/Public/Nav')
         <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
@@ -38,8 +38,8 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="category_edit_url" value="{{ url('retailbranch/ajax/category_edit') }}">
-                                    <input type="hidden" id="category_delete_comfirm_url" value="{{ url('retailbranch/ajax/category_delete') }}">
+                                    <input type="hidden" id="category_edit_url" value="{{ url('retail/ajax/category_edit') }}">
+                                    <input type="hidden" id="category_delete_comfirm_url" value="{{ url('retail/ajax/category_delete') }}">
                                     {{--<div class="col-sm-2">--}}
                                         {{--<button type="button" id="copyBtn" class="btn btn-info"><i--}}
                                                     {{--class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店分类--}}

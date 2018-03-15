@@ -27,7 +27,7 @@
             <header class="wrapper text-center">
                 <strong>零壹云管理平台 - 分店业务系统登录</strong>
             </header>
-            <form class="m-t" role="form" id="currentForm" action="{{ url('retailbranch/ajax/login_check') }}">
+            <form class="m-t" role="form" id="currentForm" action="{{ url('retail/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="账号|手机号码" class="form-control  input-lg text-center no-border">
@@ -37,8 +37,8 @@
                 </div>
                 <div class="form-group">
                     <input type="text" name="captcha" placeholder="验证码" class="col-sm-6 input-lg text-center no-border">
-                    <input type="hidden" id="captcha_url" value="{{ asset('retailbranch/login/captcha') }}">
-                    <img src="{{ asset('retailbranch/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
+                    <input type="hidden" id="captcha_url" value="{{ asset('retail/login/captcha') }}">
+                    <img src="{{ asset('retail/login/captcha') }}/{{ time() }}" class="col-sm-6" id="login_captcha" onClick="return changeCaptcha();">
                     <div style="clear: both;"></div>
                 </div>
 

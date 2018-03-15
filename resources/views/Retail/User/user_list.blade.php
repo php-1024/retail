@@ -21,12 +21,12 @@
 <body class="">
 <section class="vbox">
     {{--头部--}}
-    @include('RetailBranch/Public/Header')
+    @include('Retail/Public/Header')
     {{--头部--}}
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('RetailBranch/Public/Nav')
+            @include('Retail/Public/Nav')
             <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
