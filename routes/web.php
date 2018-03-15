@@ -740,132 +740,6 @@ Route::group(['prefix'=>'branch'],function(){
 
 
 
-/**********************零售总店系统*********************/
-Route::group(['prefix'=>'retail'],function(){
-    //登录页面组
-    Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Retail\LoginController@display')->middleware('RetailCheck');                                   //登录页面路由
-        Route::get('captcha/{tmp}', 'Retail\LoginController@captcha');                                                  //验证码路由
-    });
-
-    Route::get('/', 'Retail\ShopController@display')->middleware('RetailCheck');                                        //系统首页
-    Route::get('switch_status', 'Retail\ShopController@switch_status')->middleware('RetailCheck');                      //超级管理员切换服务商
-    //总店概况
-    Route::group(['prefix'=>'shop'],function(){
-        Route::get('operation_log', 'Retail\ShopController@operation_log')->middleware('RetailCheck');                  //操作日记
-        Route::get('login_log', 'Retail\ShopController@login_log')->middleware('RetailCheck');                          //登入日记
-    });
-    Route::get('quit', 'Retail\ShopController@quit');                                                                   //退出系统
-    Route::post('select_shop','Retail\ShopController@select_shop')->middleware('RetailCheck');                          //超级管理员选择登入的服务商
-
-
-
-    //账号中心
-    Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Retail\AccountController@profile')->middleware('RetailCheck');                           //账号信息
-        Route::get('password', 'Retail\AccountController@password')->middleware('RetailCheck');                         //登入密码修改
-        Route::get('safe_password', 'Retail\AccountController@safe_password')->middleware('RetailCheck');               //安全密码设置
-    });
-
-    //公众号管理
-    Route::group(['prefix'=>'subscription'],function(){
-        Route::get('setting', 'Retail\SubscriptionController@setting')->middleware('RetailCheck');                      //公众号设置
-    });
-
-    //公众号管理--消息管理 && 菜单管理
-    Route::group(['prefix'=>'news'],function(){
-        Route::get('message', 'Retail\NewsController@message')->middleware('RetailCheck');                              //关键词自动回复
-        Route::get('message_attention', 'Retail\NewsController@message_attention')->middleware('RetailCheck');          //关注后自动回复
-        Route::get('message_default', 'Retail\NewsController@message_default')->middleware('RetailCheck');              //默认回复
-
-    });
-
-    //公众号管理--菜单管理
-    Route::group(['prefix'=>'menu'],function(){
-        Route::get('menu_customize', 'Retail\MenuController@menu_customize')->middleware('RetailCheck');                //自定义菜单
-    });
-
-    //用户管理
-    Route::group(['prefix'=>'user'],function(){
-        Route::get('user_list', 'Retail\UserController@user_list')->middleware('RetailCheck');                          //粉丝用户管理
-    });
-
-    //下属管理--权限角色组
-    Route::group(['prefix'=>'role'],function(){
-        Route::get('role_add','Retail\RoleController@role_add')->middleware('RetailCheck');                             //添加权限角色
-        Route::get('role_list','Retail\RoleController@role_list')->middleware('RetailCheck');                           //权限角色列表
-    });
-
-
-    //下属管理--添加组
-    Route::group(['prefix'=>'subordinate'],function(){
-        Route::get('subordinate_add','Retail\SubordinateController@subordinate_add')->middleware('RetailCheck');        //添加下级人员
-        Route::get('subordinate_list','Retail\SubordinateController@subordinate_list')->middleware('RetailCheck');      //下级人员列表
-    });
-
-    //支付设置
-    Route::group(['prefix'=>'payment'],function(){
-        Route::get('wechat_setting','Retail\PaymentController@wechat_setting')->middleware('RetailCheck');              //微信支付
-        Route::get('sheng_setting','Retail\PaymentController@sheng_setting')->middleware('RetailCheck');                //盛付通
-    });
-
-    //商品管理
-    Route::group(['prefix'=>'goods'],function(){
-        Route::get('goods_category','Retail\GoodsController@goods_category')->middleware('RetailCheck');                //商品分类查询
-        Route::get('goods_list','Retail\GoodsController@goods_list')->middleware('RetailCheck');                        //商品查询
-        Route::get('goods_detail','Retail\GoodsController@goods_detail')->middleware('RetailCheck');                    //商品查看详情
-    });
-
-    //总分店管理
-    Route::group(['prefix'=>'store'],function(){
-        Route::get('branch_create','Retail\StoreController@branch_create')->middleware('RetailCheck');                  //创建总分店
-        Route::get('branch_list','Retail\StoreController@branch_list')->middleware('RetailCheck');                      //总分店管理
-    });
-
-    //异步提交数据组
-    Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Retail\LoginController@login_check')->middleware('RetailCheckAjax');                  //提交登录数据
-
-        //账号中心
-        Route::post('profile_check','Retail\AccountController@profile_check')->middleware('RetailCheckAjax');            //提交登录数据
-        Route::post('safe_password_check','Retail\AccountController@safe_password_check')->middleware('RetailCheckAjax');//安全密码数据提交
-        Route::post('password_check','Retail\AccountController@password_check')->middleware('RetailCheckAjax');          //安全密码数据提交
-
-        //用户管理
-        Route::post('user_list_edit','Retail\UserController@user_list_edit')->middleware('RetailCheckAjax');             //列表编辑ajax显示
-        Route::post('user_list_edit_check','Retail\UserController@user_list_edit_check')->middleware('RetailCheckAjax'); //列表编辑功能提交
-        Route::post('user_list_lock','Retail\UserController@user_list_lock')->middleware('RetailCheckAjax');             //列表冻结ajax显示
-        Route::post('user_list_lock_check','Retail\UserController@user_list_lock_check')->middleware('RetailCheckAjax'); //列表冻结功能提交
-        Route::post('user_list_wallet','Retail\UserController@user_list_wallet')->middleware('RetailCheckAjax');         //列表粉丝钱包ajax显示
-        
-        //权限角色
-        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');        //提交添加权限角色数据
-        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');                  //编辑权限角色弹出框
-        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheckAjax');      //编辑权限角色弹出框
-        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheckAjax');              //删除权限角色弹出安全密码框
-        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheckAjax');  //删除权限角色弹出安全密码框
-
-        //下属管理--添加组
-        Route::post('subordinate_add_check','Catering\SubordinateController@subordinate_add_check')->middleware('CateringCheckAjax');//添加下级人员数据提交
-        Route::post('subordinate_edit','Catering\SubordinateController@subordinate_edit')->middleware('CateringCheckAjax');//下级人员列表编辑用户弹出框
-        Route::post('subordinate_edit_check','Catering\SubordinateController@subordinate_edit_check')->middleware('CateringCheckAjax');//下级人员列表编辑功能提交
-        Route::post('subordinate_authorize','Catering\SubordinateController@subordinate_authorize')->middleware('CateringCheckAjax');//下级人员列表用户授权显示页面
-        Route::post('subordinate_authorize_check','Catering\SubordinateController@subordinate_authorize_check')->middleware('CateringCheckAjax');//下级人员列表用户授权功能提交页面
-        Route::post('subordinate_delete','Catering\SubordinateController@subordinate_delete')->middleware('CateringCheckAjax');//下级人员列表删除用户显示页面
-        Route::post('subordinate_lock','Catering\SubordinateController@subordinate_lock')->middleware('CateringCheckAjax');//冻结下级人员显示页面
-        Route::post('subordinate_lock_check','Catering\SubordinateController@subordinate_lock_check')->middleware('CateringCheckAjax');//冻结下级人员功能提交
-
-        Route::post('quick_rule','Catering\SubordinateController@quick_rule')->middleware('CateringCheckAjax');//添加下级人员快速授权
-        Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheckAjax');//下级人员已经选中的权限出框
-
-
-
-        //总店管理
-        Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
-    });
-});
-/**********************零售总店系统*********************/
-
 
 
 /**********************餐饮分店简版系统*********************/
@@ -1028,10 +902,8 @@ Route::group(['prefix'=>'cateringbranch'],function(){
 
 
 
-
-
-/**********************零售分店简版系统*********************/
-Route::group(['prefix'=>'retailbranch'],function(){
+/**********************零售版店铺*********************/
+Route::group(['prefix'=>'retail'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'RetailBranch\LoginController@display')->middleware('RetailBranchCheck');//登录页面路由
@@ -1133,9 +1005,6 @@ Route::group(['prefix'=>'retailbranch'],function(){
         Route::post('goods_edit_check', 'RetailBranch\GoodsController@goods_edit_check')->middleware('RetailBranchCheckAjax');                 //商品编辑检测
         Route::any('goods_thumb', 'RetailBranch\GoodsController@goods_thumb')->middleware('RetailBranchCheckAjax');                           //商品规格异步加载页面
         Route::post('upload_thumb_check', 'RetailBranch\GoodsController@upload_thumb_check')->middleware('RetailBranchCheckAjax');             //上传文件检测
-
-
     });
 });
-/**********************零售分店简版系统*********************/
-
+/**********************零售版店铺*********************/
