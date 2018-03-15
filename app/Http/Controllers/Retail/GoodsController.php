@@ -53,8 +53,6 @@ class GoodsController extends Controller{
         $goods_id = $request->goods_id;//商品id
 
         $onedata = CateringGoods::getOne([['id',$goods_id]]);
-
-        dump($onedata);
         return view('Retail/Goods/goods_detail',['onedata'=>$onedata,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
