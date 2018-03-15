@@ -66,6 +66,7 @@ class LoginController extends Controller
         //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip', $ip]]);//查询该IP下的错误记录
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
+        dd($username.$password);
         if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
             if (!empty($account_info)) {
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
@@ -99,7 +100,7 @@ class LoginController extends Controller
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
                             if (LoginLog::addLoginLog($account_info['id'], 10, $account_info->organization_id, $ip, $addr)) {//写入登录日志
-                                Session::put('retail_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                Session::put('retail_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if (!empty($account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
@@ -123,7 +124,7 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        Session::put('retail_branch_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                        Session::put('retail_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
@@ -143,7 +144,7 @@ class LoginController extends Controller
 
     //退出登录
     public function quit(){
-        Session::put('retail_branch_account_id','');
+        Session::put('retail_account_id','');
         return redirect('retail/login');
     }
 }
