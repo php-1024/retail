@@ -61,7 +61,19 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $file = $request->file('upload_thumb');
+        if ($file->isValid()) {
+            //检验文件是否有效
+            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
+            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
+            $path = $file->move(base_path() . '/uploads/catering/', $new_name);   //$path上传后的文件路径
+            $file_path =  'uploads/wechat/'.$new_name;
 
+            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
+
+        } else {
+            return response()->json(['status' => '0']);
+        }
     }
 
     public function test(){
