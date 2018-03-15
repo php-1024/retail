@@ -220,6 +220,21 @@ class ZeroneCheckAjax
         }
     }
 
+    //检测登录和权限和安全密码和编辑角色
+    public function checkLoginAndRuleAndSafeAndRoleEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -294,20 +309,7 @@ class ZeroneCheckAjax
         }
     }
 
-    //检测登录和权限和安全密码和添加角色
-    public function checkLoginAndRuleAndSafeAndRoleEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkRoleEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
 
 
     //检测登录和权限
