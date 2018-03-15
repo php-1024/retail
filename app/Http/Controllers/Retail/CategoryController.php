@@ -4,7 +4,7 @@
  * 栏目管理
  **/
 
-namespace App\Http\Controllers\RetailBranch;
+namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;

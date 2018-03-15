@@ -2,7 +2,7 @@
 /**
  *账户中心
  **/
-namespace App\Http\Controllers\RetailBranch;
+namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;

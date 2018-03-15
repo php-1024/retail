@@ -3,7 +3,7 @@
  *餐饮分店管理系统
  */
 
-namespace App\Http\Controllers\RetailBranch;
+namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
