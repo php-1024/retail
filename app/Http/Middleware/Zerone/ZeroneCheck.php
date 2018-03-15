@@ -22,6 +22,12 @@ class ZeroneCheck{
                     return redirect('zerone');
                 }
                 break;
+
+            case "zerone"://后台首页
+
+                $re = $this->checkLoginAndRule($request);//判断是否登录
+                return self::format_response($re,$next);
+                break;
         }
         return $next($request);
     }
