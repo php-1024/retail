@@ -185,7 +185,6 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
-
 <!-- Ladda -->
 <script src="{{asset('public/Catering')}}/ladda/spin.min.js"></script>
 <script src="{{asset('public/Catering')}}/ladda/ladda.min.js"></script>
