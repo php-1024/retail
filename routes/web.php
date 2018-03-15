@@ -190,6 +190,13 @@ Route::group(['prefix'=>'tooling'],function(){
 
 /**********************零壹管理系统*********************/
 Route::group(['prefix'=>'zerone'],function(){
+
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
+        Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
+    });
+
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
 
@@ -201,7 +208,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('login_log','Zerone\DashboardController@login_log')->middleware('ZeroneCheck');//所有登录记录
     });
 
-
     //个人中心组
     Route::group(['prefix'=>'personal'],function(){
         Route::get('/','Zerone\PersonalController@display')->middleware('ZeroneCheck');//个人资料
@@ -209,12 +215,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('safe_password','Zerone\PersonalController@safe_password')->middleware('ZeroneCheck');//安全密码设置
         Route::get('operation_log','Zerone\PersonalController@operation_log')->middleware('ZeroneCheck');//我的操作日志
         Route::get('login_log','Zerone\PersonalController@login_log')->middleware('ZeroneCheck');//我的登录日志
-    });
-
-    //登录页面组
-    Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
-        Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
     });
 
     //权限角色组
@@ -229,6 +229,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('subordinate_list','Zerone\SubordinateController@subordinate_list')->middleware('ZeroneCheck');//下级人员列表
         Route::get('subordinate_structure','Zerone\SubordinateController@subordinate_structure')->middleware('ZeroneCheck');//下级人员结构
     });
+
     //服务商管理
     Route::group(['prefix'=>'proxy'],function(){
         Route::get('proxy_add','Zerone\ProxyController@proxy_add')->middleware('ZeroneCheck');//添加服务商

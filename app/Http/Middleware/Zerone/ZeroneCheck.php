@@ -36,8 +36,8 @@ class ZeroneCheck{
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
             case "zerone/personal/login_log":           //个人中心——我的登录日志
 
-            case "zerone/role/role_add"://添加权限角色
-            case "zerone/role/role_list"://权限角色列表
+            case "zerone/role/role_add":              //添加权限角色
+            case "zerone/role/role_list":             //权限角色列表
             case "zerone/subordinate/subordinate_add"://添加下级人员
             case "zerone/subordinate/subordinate_list"://下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
