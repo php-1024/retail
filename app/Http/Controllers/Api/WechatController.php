@@ -57,6 +57,14 @@ class WechatController extends Controller{
      * 图片素材上传
      */
     public function meterial_image_upload(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Wechat/Catering/material_image_upload',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    public function meterial_image_upload_check(Request $request){
         $file = $request->file('image');
         if ($file->isValid()) {
             //检验文件是否有效
