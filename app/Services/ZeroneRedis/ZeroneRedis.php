@@ -113,7 +113,6 @@ class ZeroneRedis
                     elseif(in_array($v['menu_route'],$unset_routes)){
                         unset($sm[$k]);
                     }
-
                 }
                 if(count($sm)<1){//
                     unset($menu[$key]);
@@ -122,9 +121,7 @@ class ZeroneRedis
                 }
                 unset($sm);//销毁用于判断的变量
             }
-            /**
-             * 未完成，这里准备查询用户权限。
-             */
+
         }else{
             $son_menu = [];
             foreach($menu as $key=>$val){//获取一级菜单下的子菜单
