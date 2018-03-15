@@ -77,18 +77,13 @@
     </div>
     <!--state overview end-->
 </section>
-<!-- App -->
-<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
-<!-- App -->
-<script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
-<script src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
-<script src="{{asset('public/Branch/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Branch')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<!--common script for all pages-->
+<script src="{{asset('public/Branch')}}/js/common-scripts.js"></script>
 <script>
     //提交表单
     function postForm(account_id){
