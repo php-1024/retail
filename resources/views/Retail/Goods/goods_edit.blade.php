@@ -219,7 +219,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    window.location.href = "{{asset("retailbranch/goods/goods_list")}}";
+                    window.location.href = "{{asset("retail/goods/goods_list")}}";
                 });
             }else{
                 swal({
@@ -254,7 +254,7 @@
                         confirmButtonText: "确定",
                     },function(){
                         //图片添加成功后异步刷新图片列表部分
-                        var url = '{{url('retailbranch/ajax/goods_thumb')}}';//需要异步加载的页面
+                        var url = '{{url('retail/ajax/goods_thumb')}}';//需要异步加载的页面
                         var goods_id = $("#goods_id").val();
                         var token = $("#_token").val();
                         var data = {'goods_id':goods_id,'_token':token};
