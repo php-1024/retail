@@ -418,7 +418,6 @@ class WechatApi{
                 'media' => '@' . $file,
             ];
         }
-        $data = json_encode($data, JSON_UNESCAPED_UNICODE).'r\n';
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re);
         return $re;
