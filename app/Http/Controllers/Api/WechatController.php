@@ -14,8 +14,7 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        dump($route_name);
-        $url = \Wechat::get_auth_url($admin_data['organization_id']);
+        $url = \Wechat::get_auth_url($admin_data['organization_id'],$route_name);
 
         $wechat_info = [];
         $qrcode = '';
@@ -296,7 +295,10 @@ class WechatController extends Controller{
 
     //授权回调链接
     public function redirect(Request $request){
-        $organization_id = $_GET['organization_id'];//中间件产生的管理员数据参数
+        $zerone_param = $_GET['zerone_param'];//中间件产生的管理员数据参数
+        $arr = explode('@@',$zerone_param);
+        $organization_id = trim($arr[0]);
+        $redirect_url = trim($arr[1]);
         $auth_code = $_GET['auth_code'];//授权码
         $auth_info = \Wechat::get_authorization_info($auth_code);//获取授权
         if(WechatAuthorization::checkRowExists($organization_id,$auth_info['authorizer_appid'])){
@@ -312,7 +314,7 @@ class WechatController extends Controller{
                 'expire_time' => time() + 7200,
             );
             $id = WechatAuthorization::addAuthorization($auth_data);
-            return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id]);
+            return view('Wechat/Catering/redirect',['organization_id'=>$organization_id,'id'=>$id,'redirect_url'=>$redirect_url]);
         }
     }
 
