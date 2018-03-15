@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="get">
+<form class="form-horizontal tasi-form" method="post" enctype="multipart/form-data" action="{{ url('api/ajax/meterial_image_upload_check') }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,17 +7,13 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
-
                     <div class="form-group">
                         <label class="col-sm-2 text-right">本地图片</label>
                         <div class="col-sm-10">
-                            <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="file" name="image" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
                     </div>
-
                     <div style="clear:both;"></div>
-
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -43,9 +39,40 @@
                 l.ladda('stop');
             },12000);
         });
-
-        $('#addBtn').click(function(){
-            $('#myModal').modal();
-        });
     });
+
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+
+        var l = $( '.ladda-button' ).ladda();
+        l.ladda( 'start' );
+
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                l.ladda('stop');
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+                l.ladda('stop');
+            }
+        });
+    }
 </script>
