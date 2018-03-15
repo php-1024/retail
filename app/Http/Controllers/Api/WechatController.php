@@ -72,12 +72,10 @@ class WechatController extends Controller{
 
         if ($file->isValid()) {
             //检验文件是否有效
-
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();  //重命名
-            $path = $file->move(base_path() . '/uploads/wechat/', $new_name);   //$path上传后的文件路径
-            $file_path =  'uploads/wechat/'.$new_name;
+            $path = $file->move(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/', $new_name);   //$path上传后的文件路径
             dump($path);
-            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
+            return response()->json(['data' => '上传商品图片信息成功', 'status' => '1']);
         } else {
             return response()->json(['status' => '0']);
         }
