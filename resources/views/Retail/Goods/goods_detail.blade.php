@@ -57,7 +57,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="主食">
+                                                    <input type="text" class="form-control" id="input-id-1" disabled="" value="{{$onedata->category->name}}">
                                                 </div>
                                             </div>
 
@@ -65,7 +65,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品名称</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="奇味鸡煲">
+                                                    <input type="text" class="form-control" id="input-id-1"  value="{{$onedata->name}}">
                                                 </div>
                                             </div>
 
@@ -73,7 +73,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">价格</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="100.00">
+                                                    <input type="text" class="form-control" id="input-id-1" value="{{$onedata->price}}">
                                                 </div>
                                             </div>
 
@@ -81,7 +81,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">库存</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="999">
+                                                    <input type="text" class="form-control" id="input-id-1" value="{{$onedata->stock}}">
                                                 </div>
                                             </div>
 
@@ -89,7 +89,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">排序</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" value="1">
+                                                    <input type="text" class="form-control" id="input-id-1" value="{{$onedata->displayorder}}">
                                                 </div>
                                             </div>
 
@@ -97,7 +97,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品详情</label>
                                                 <div class="col-sm-8">
-                                                    <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea id="form-content" class="editor" cols="30" rows="10" >{{$onedata->details}} </textarea>
                                                 </div>
                                             </div>
 
