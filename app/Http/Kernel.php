@@ -72,5 +72,11 @@ class Kernel extends HttpKernel
         /**************************零壹总店管理系统*******************************/
 
 
+        /**************************零壹总店管理系统*******************************/
+        'RetailCheck'=>\App\Http\Middleware\Retail\RetailCheck::class,//检测普通页面跳转的中间件
+        'RetailCheckAjax'=>\App\Http\Middleware\Retail\RetailCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************零壹总店管理系统*******************************/
+
+
     ];
 }
