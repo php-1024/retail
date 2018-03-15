@@ -192,7 +192,7 @@ Route::group(['prefix'=>'tooling'],function(){
 Route::group(['prefix'=>'zerone'],function(){
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
-    
+
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
