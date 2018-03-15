@@ -198,10 +198,9 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
     });
-    
+
     //系统管理分组
     Route::group(['prefix'=>'dashboard'],function(){
-        Route::get('setup','Zerone\DashboardController@setup')->middleware('ZeroneCheck');//参数设置展示
         Route::get('warzone','Zerone\DashboardController@warzone')->middleware('ZeroneCheck');//战区管理展示
         Route::get('structure','Zerone\DashboardController@structure')->middleware('ZeroneCheck');//人员结构
         Route::get('operation_log','Zerone\DashboardController@operation_log')->middleware('ZeroneCheck');//所有操作记录
