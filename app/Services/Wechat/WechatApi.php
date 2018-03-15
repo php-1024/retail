@@ -409,13 +409,19 @@ class WechatApi{
      */
     public function uploadimg($authorizer_access_token,$file){
         $url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=".$authorizer_access_token."&type=image";
-        $data = [
-            'media'=>'@'.$file,
-        ];
-        var_dump($data);
-       // $data = json_encode($data, JSON_UNESCAPED_UNICODE).'r\n';
+        if(class_exists('\CURLFile')){
+            $data = [
+                'media' => new \CURLFile(realpath($file)),
+            ];
+        }else {
+            $data = [
+                'media' => '@' . $file,
+            ];
+        }
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE).'r\n';
         $re = \HttpCurl::doPost($url, $data);
-        var_dump($re);
+        $re = json_decode($re);
+        return $re;
     }
 
     /*
