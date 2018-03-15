@@ -128,6 +128,7 @@ class GoodsController extends Controller
             'displayorder' => $displayorder,
             'details' => $details,
         ];
+
         DB::beginTransaction();
         try {
             $goods_id = CateringGoods::editCateringGoods($where,$goods_data);
