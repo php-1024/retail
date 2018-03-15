@@ -125,7 +125,7 @@
                                                 @foreach($onedata->goodsThumb as $key=>$value)
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Retail')}}/{{$value->thumb}}" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset($value->thumb)}}" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
                                                         {{$value->thumb}}
