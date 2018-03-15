@@ -461,7 +461,7 @@ Route::group(['prefix'=>'company'],function(){
 
 Route::group(['prefix'=>'api'],function() {
 
-    //登录页面组
+    //通用路由组
     Route::group(['prefix' => 'wechat'], function () {
         Route::any('response/{appid}', 'Api\WechatController@response');//开放平台控制公众平台回复函数
         Route::any('open', 'Api\WechatController@open');//接受公众号收授权推送消息
@@ -473,9 +473,10 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('test', 'Api\WechatController@test');//测试函数
     });
 
-    //店铺授权页面
+    //餐饮版店铺授权页面
     Route::group(['prefix' => 'catering'] , function(){
-        Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('CateringCheck');;//开放平台控制公众平台回复函数
+        Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('CateringCheck');//开放平台控制公众平台回复函数
+        Route::any('material_image', 'Api\WechatController@material_image')->middleware('CateringCheck');//图片素材
     });
 });
 /********************商户管理系统*************************/
