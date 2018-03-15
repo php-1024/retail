@@ -36,13 +36,13 @@ class CategoryController extends Controller
         if (empty($category_sort)){
             $category_sort = '0';
         }
-        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $category_data = [
             'name' => $category_name,
             'created_by' => $admin_data['id'],
             'displayorder' => $category_sort,
-            'store_id' => $store_id,
-            'branch_id' => $admin_data['organization_id'],
+            'fansmanage_id' => $fansmanage_id,
+            'restaurant_id' => $admin_data['organization_id'],
         ];
         DB::beginTransaction();
         try {
@@ -70,7 +70,7 @@ class CategoryController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $category_name = $request->get('name');
         $where = [
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
         ];
         $category = CateringCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
         return view('Retail/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
