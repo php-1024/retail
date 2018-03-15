@@ -39,20 +39,40 @@
 
         l.ladda( 'start' );
 
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
+
+        $.ajax({
+            url: url ,  /*这是处理文件上传的servlet*/
+            type: 'POST',
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (json) {
+                if (json.status == -1) {
                     window.location.reload();
-                });
-               l.ladda('stop');
-            }else{
+                } else if(json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                    l.ladda('stop');
+                }else{
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        //type: "warning"
+                    });
+                    l.ladda('stop');
+                }
+            },
+            error: function (json) {
                 swal({
                     title: "提示信息",
                     text: json.data,
@@ -60,8 +80,10 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-               l.ladda('stop');
+                l.ladda('stop');
             }
         });
+
+
     }
 </script>
