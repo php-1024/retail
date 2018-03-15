@@ -122,18 +122,20 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach($onedata->goodsThumb as $key=>$value)
                                                 <tr>
                                                     <td>
-                                                        <img src="{{asset('public/Retail')}}/img/m0.jpg" style="width: 50px; height: 50px;">
+                                                        <img src="{{asset('public/Retail')}}/{{$value->thumb}}" style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>
-                                                        http://mydomain.com/images/image1.png
+                                                        {{$value->thumb}}
                                                     </td>
                                                     <td>
-                                                        1
+                                                        {{$value->id}}
                                                     </td>
 
                                                 </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
