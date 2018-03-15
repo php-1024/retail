@@ -57,7 +57,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="input-id-1" disabled="" value="主食">
+                                                    <input type="text" class="form-control" id="input-id-1" value="主食">
                                                 </div>
                                             </div>
 
