@@ -66,14 +66,17 @@ class WechatController extends Controller{
 
     public function meterial_image_upload_check(Request $request){
         $file = $request->file('image');
-        dump($file);
-        exit();
+        if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
+            return response()->json(['status' => '0','data'=>'错误的图片格式']);
+        }
+
         if ($file->isValid()) {
             //检验文件是否有效
             $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $path = $file->move(base_path() . '/uploads/catering/', $new_name);   //$path上传后的文件路径
+            $path = $file->move(base_path() . '/uploads/wechat/', $new_name);   //$path上传后的文件路径
             $file_path =  'uploads/wechat/'.$new_name;
+            dump($path);
             return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
         } else {
             return response()->json(['status' => '0']);
