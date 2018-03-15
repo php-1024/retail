@@ -410,9 +410,9 @@ class WechatApi{
     public function uploadimg($authorizer_access_token,$file){
         $url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token='.$authorizer_access_token;
         $data = [
-            'media'=>'@'.$file.'r\n',
+            'media'=>'@'.$file,
         ];
-        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE).'r\n';
         $re = \HttpCurl::doPost($url, $data);
         var_dump($re);
     }
