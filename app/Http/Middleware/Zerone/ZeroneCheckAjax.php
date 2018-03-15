@@ -23,7 +23,7 @@ class ZeroneCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    
+
     //检测登录和权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
