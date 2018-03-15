@@ -192,13 +192,20 @@ Route::group(['prefix'=>'tooling'],function(){
 Route::group(['prefix'=>'zerone'],function(){
     Route::get('/', 'Zerone\DashboardController@display')->middleware('ZeroneCheck');//系统首页
     Route::get('quit','Zerone\DashboardController@quit');//退出系统
-    
+
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Zerone\LoginController@display')->middleware('ZeroneCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Zerone\LoginController@captcha');//验证码路由
     });
 
+    //系统管理分组
+    Route::group(['prefix'=>'dashboard'],function(){
+        Route::get('warzone','Zerone\DashboardController@warzone')->middleware('ZeroneCheck');//战区管理展示
+        Route::get('structure','Zerone\DashboardController@structure')->middleware('ZeroneCheck');//人员结构
+        Route::get('operation_log','Zerone\DashboardController@operation_log')->middleware('ZeroneCheck');//所有操作记录
+        Route::get('login_log','Zerone\DashboardController@login_log')->middleware('ZeroneCheck');//所有登录记录
+    });
 
 
     //异步提交数据组

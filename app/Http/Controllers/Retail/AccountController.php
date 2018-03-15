@@ -2,7 +2,7 @@
 /**
  *账户中心
  **/
-namespace App\Http\Controllers\RetailBranch;
+namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
@@ -48,7 +48,7 @@ class AccountController extends Controller{
                 unset($module);
             }
         }
-        return view('RetailBranch/Account/profile',['module_node_list'=>$module_node_list,'user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Account/profile',['module_node_list'=>$module_node_list,'user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //个人账号信息修改处理
@@ -90,7 +90,7 @@ class AccountController extends Controller{
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
-        return view('RetailBranch/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Account/safe_password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //安全密码修改设置处理
@@ -169,9 +169,9 @@ class AccountController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $account = Account::getOne(['id'=>'1']);            //获取超级管理员账号
         if (empty($admin_data['safe_password'])){
-            return redirect('retailbranch/account/safe_password');
+            return redirect('retail/account/safe_password');
         }else{
-            return view('RetailBranch/Account/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+            return view('Retail/Account/password',['account'=>$account,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
         }
     }
 
@@ -225,7 +225,7 @@ class AccountController extends Controller{
         $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
-        return view('RetailBranch/Account/message_setting',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Retail/Account/message_setting',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 

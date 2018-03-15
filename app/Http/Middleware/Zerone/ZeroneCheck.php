@@ -22,6 +22,18 @@ class ZeroneCheck{
                     return redirect('zerone');
                 }
                 break;
+
+            case "zerone":                           //后台首页
+            case "zerone/dashboard/operation_log":   //战区管理所有操作记录
+            case "zerone/dashboard/login_log":       //战区管理所有登录记录
+            case "zerone/dashboard/warzone":         //战区管理首页权限
+            case "zerone/dashboard/setup/setup_edit"://参数设置权限
+            case "zerone/dashboard/setup":           //参数设置权限
+            case "zerone/dashboard/structure":       //人员结构
+
+                $re = $this->checkLoginAndRule($request);//判断是否登录
+                return self::format_response($re,$next);
+                break;
         }
         return $next($request);
     }
