@@ -58,8 +58,6 @@ class WechatApi{
         return $url;
     }
 
-
-
     /*
      * 创建自定义菜单
      * $authorizer_access_token 第三方平台调用接口凭证
@@ -404,6 +402,19 @@ class WechatApi{
         }else{
             return 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$re['ticket'];
         }
+    }
+
+    /*
+     * 上传永久图片素材
+     */
+    public function uploadimg($authorizer_access_token,$file){
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token='.$authorizer_access_token;
+        $data = [
+            'media'=>'@'.$file,
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url, $data);
+        dump($re);
     }
 
     /*
