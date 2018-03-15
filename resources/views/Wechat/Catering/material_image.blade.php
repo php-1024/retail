@@ -59,7 +59,7 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">图片素材</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" id="addBtn">上传图片 &nbsp;&nbsp;<i class="fa fa-upload"></i></button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="getUploadForm();" id="addBtn">上传图片 &nbsp;&nbsp;<i class="fa fa-upload"></i></button>
                                     <input type="hidden" id="material_image_upload_url" value="{{ url('api/ajax/meterial_image_upload') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
