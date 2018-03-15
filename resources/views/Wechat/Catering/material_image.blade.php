@@ -59,7 +59,9 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">图片素材</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" id="addBtn">上传图片 &nbsp;&nbsp;<i class="fa fa-upload"></i></button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="getUploadForm();" id="addBtn">上传图片 &nbsp;&nbsp;<i class="fa fa-upload"></i></button>
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" id="material_image_upload_url" value="{{ url('api/ajax/meterial_image_upload') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="row row-sm">
@@ -182,11 +184,6 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
-
-
-
-
 
 
 <!-- Ladda -->
@@ -210,6 +207,31 @@
             $('#myModal').modal();
         });
     });
+
+    //弹出图片上传框
+    function getUploadForm(){
+
+        var url = $('#material_image_upload_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>
