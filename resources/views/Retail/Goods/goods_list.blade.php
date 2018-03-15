@@ -119,7 +119,7 @@
                                         </td>
                                         <td>{{$value->updated_at}}</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('retail/goods/goods_detail')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('retail/goods/goods_detail').'?&goods_id=$value->id'}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     @endforeach
