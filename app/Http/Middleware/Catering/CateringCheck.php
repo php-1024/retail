@@ -44,7 +44,7 @@ class CateringCheck{
             /****公众号管理****/
             //case "catering/subscription/setting":                   //公众号授权
             case "api/catering/store_auth"://公众号授权
-            case "catering/subscription/material_image":            //图片素材
+            case "api/catering/material_image"://图片素材
             case "catering/subscription/material_writing":          //图文素材
             case "catering/subscription/material_writing_one":      //单条图文素材
             case "catering/subscription/material_writing_one_edit": //单条图文素材编辑
