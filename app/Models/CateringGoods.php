@@ -28,9 +28,14 @@ class CateringGoods extends Model{
         return $this->belongsto('App\Models\Organization','branch_id','id');
     }
 
+    //和organization表一对一的关系
+    public function goodsThumb(){
+        return $this->hasMany('App\Models\GoodsThumb','goods_id','id');
+    }
+
     //获取单条餐饮商品信息
     public static function getOne($where){
-        return self::with('category')->where($where)->first();
+        return self::with('category')->with('goodsThumb')->where($where)->first();
     }
 
     //获取餐饮商品列表
