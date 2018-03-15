@@ -408,11 +408,12 @@ class WechatApi{
      * 上传永久图片素材
      */
     public function uploadimg($authorizer_access_token,$file){
-        $url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token='.$authorizer_access_token;
+        $url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=".$authorizer_access_token."&type=image";
         $data = [
-            'media'=>'@'.$file.'r\n',
+            'media'=>'@'.$file,
         ];
-        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        var_dump($data);
+       // $data = json_encode($data, JSON_UNESCAPED_UNICODE).'r\n';
         $re = \HttpCurl::doPost($url, $data);
         var_dump($re);
     }
