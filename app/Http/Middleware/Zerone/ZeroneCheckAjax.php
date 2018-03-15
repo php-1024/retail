@@ -26,27 +26,42 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndPersonalEdit($request);
                 return self::format_response($re,$next);
                 break;
-
             case "zerone/ajax/password_edit_check"://检测 登录 和 权限 和 安全密码 和 修改登录密码权限数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndPasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
-
             case "zerone/ajax/safe_password_edit_check"://检测 登录 和 权限 和 修改安全密码权限数据提交
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re,$next);
                 break;
+
+
 
             //下级人员
             case "zerone/ajax/role_add_check"://检测登录和权限和安全密码和添加权限角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re, $next);
                 break;
-
             case "zerone/ajax/role_edit_check"://检测登录和权限和安全密码和编辑角色
                 $re = $this->checkLoginAndRuleAndSafeAndRoleEdit($request);
                 return self::format_response($re, $next);
                 break;
+            case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
+                return self::format_response($re,$next);
+                break;
+            case "zerone/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
+                return self::format_response($re,$next);
+                break;
+            case "zerone/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
+                return self::format_response($re,$next);
+                break;
+
+
+
+
 
 
             case "zerone/ajax/proxy_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
@@ -75,20 +90,8 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
-                return self::format_response($re,$next);
-                break;
 
-            case "zerone/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
-                return self::format_response($re,$next);
-                break;
 
-            case "zerone/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
-                return self::format_response($re,$next);
-                break;
 
             case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
@@ -132,12 +135,13 @@ class ZeroneCheckAjax
             case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
             case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登录和权限
             case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登录和权限
+            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登录和权限
+            case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登录和权限
+
 
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
             case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
             case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
-            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登录和权限
-            case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登录和权限
 
 
             case "zerone/ajax/proxy_examine"://服务商审核检测弹出登入和权限
@@ -167,7 +171,6 @@ class ZeroneCheckAjax
     /******************************复合检测*********************************/
 
     /*****个人中心******/
-
     //检测 登录 和 权限 和 安全密码 和 及修改个人信息提交数据
     public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -182,7 +185,6 @@ class ZeroneCheckAjax
             }
         }
     }
-
     //检测登录和权限和安全密码 修改登录密码
     public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -197,7 +199,6 @@ class ZeroneCheckAjax
             }
         }
     }
-
     //检测登录，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -214,8 +215,9 @@ class ZeroneCheckAjax
     }
 
 
-    /*****下级管理******/
 
+
+    /*****下级管理******/
     //检测登录和权限和安全密码和添加权限角色
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -230,7 +232,6 @@ class ZeroneCheckAjax
             }
         }
     }
-
     //检测登录和权限和安全密码和编辑角色
     public function checkLoginAndRuleAndSafeAndRoleEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -245,8 +246,7 @@ class ZeroneCheckAjax
             }
         }
     }
-
-    //检测登录和权限和安全密码和ID是否为空 删除角色
+    //检测登录和权限和安全密码和ID是否为空 删除角色-冻结角色
     public function checkLoginAndRuleAndSafeAndID($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -260,7 +260,34 @@ class ZeroneCheckAjax
             }
         }
     }
-
+    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+    public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
     public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -276,35 +303,14 @@ class ZeroneCheckAjax
         }
     }
 
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
+
+
+
+
+
+
 
     //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
     public function checkLoginAndRuleAndSafeAndProxyAdd($request){
@@ -452,6 +458,9 @@ class ZeroneCheckAjax
     }
 
     /******************************单项检测*********************************/
+
+
+    /*****个人中心******/
     //检测编辑个人信息数据
     public function checkPersonalEdit(Request $request){
         if(empty($request->input('realname'))){
@@ -513,6 +522,7 @@ class ZeroneCheckAjax
         return self::res(1,$request);
     }
 
+    /*****下级管理******/
     //检测添加权限角色数据
     public function checkRoleAdd($request){
         if(empty($request->input('role_name'))){
@@ -550,8 +560,6 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-
-
     //检测添加下级人员数据
     public function checkSubordinateAdd($request){
         if(empty($request->input('password'))){
@@ -577,7 +585,6 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-
     //检测编辑权限角色数据
     public function checkRoleEdit($request){
         if(empty($request->input('id'))){
@@ -591,6 +598,15 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
+
+
+    
+
+
+
+
+
+
 
 
     //检测安全密码是否输入正确
