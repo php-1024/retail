@@ -43,8 +43,8 @@ class CateringCategory extends Model{
         $model->name = $param['name'];
         $model->created_by = $param['created_by'];
         $model->displayorder = $param['displayorder'];
-        $model->store_id = $param['store_id'];
-        $model->branch_id = $param['branch_id'];
+        $model->fansmanage_id = $param['fansmanage_id'];
+        $model->restaurant_id = $param['restaurant_id'];
         $model->save();
         return $model->id;
     }
