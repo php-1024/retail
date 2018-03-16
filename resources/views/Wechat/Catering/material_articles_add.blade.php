@@ -257,7 +257,7 @@
             var html = $('#tw_info').html();
             var num = $('#num').val();
             num++;
-            if(num>=10){
+            if(num>10){
                 swal({
                     title: "提示信息",
                     text: "每次最多只能添加10条图文素材哦",
