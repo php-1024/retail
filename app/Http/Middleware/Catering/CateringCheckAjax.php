@@ -89,8 +89,8 @@ class CateringCheckAjax
             case "catering/ajax/user_list_wallet":          //会员列表粉丝钱包显示页面
             case "api/ajax/meterial_image_upload":
             case "api/ajax/meterial_image_upload_check":
-            case "material_image_delete_comfirm":
-            case "material_image_delete_check":
+            case "api/ajax/material_image_delete_comfirm":
+            case "api/ajax/material_image_delete_check":
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
