@@ -8,11 +8,11 @@ use App\Models\Assets;
 use App\Models\AssetsOperation;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\OrganizationProxyinfo;
+use App\Models\OrganizationAgentinfo;
 use App\Models\Package;
-use App\Models\WarzoneProxy;
+use App\Models\Warzoneagent;
 use Illuminate\Http\Request;
-use App\Models\ProxyApply;
+use App\Models\AgentApply;
 use App\Models\Warzone;
 use App\Models\Module;
 use Illuminate\Support\Facades\DB;
@@ -54,8 +54,8 @@ class AgentController extends Controller{
             $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$program_id,'type'=>2,'status'=>1];
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
-            $proxydata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
-            WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
+            $agentdata = ['organization_id'=>$organization_id,'zone_id'=>$zone_id];
+            Warzoneagent::addWarzoneagent($agentdata);//战区关联服务商
             $user = Account::max('account');
             $account  = $user+1;//用户账号
             $accdata = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$encryptPwd,'organization_id'=>$organization_id,'account'=>$account];
@@ -72,13 +72,12 @@ class AgentController extends Controller{
                 }
             }
 
-            $orgproxyinfo = ['organization_id'=>$organization_id, 'proxy_owner'=>$realname, 'proxy_owner_idcard'=>$idcard, 'proxy_owner_mobile'=>$mobile];
-            OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
+            $orgagentinfo = ['organization_id'=>$organization_id, 'agent_owner'=>$realname, 'agent_owner_idcard'=>$idcard, 'agent_owner_mobile'=>$mobile];
+            Organizationagentinfo::addOrganizationagentinfo($orgagentinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
@@ -93,42 +92,42 @@ class AgentController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $proxy_name = $request->input('proxy_name');
-        $proxy_owner_mobile = $request->input('proxy_owner_mobile');
-        $search_data = ['proxy_name'=>$proxy_name,'proxy_owner_mobile'=>$proxy_owner_mobile];
+        $agent_name = $request->input('agent_name');
+        $agent_owner_mobile = $request->input('agent_owner_mobile');
+        $search_data = ['agent_name'=>$agent_name,'agent_owner_mobile'=>$agent_owner_mobile];
         $where = [];
-        if(!empty($proxy_name)){
-            $where[] = ['proxy_name','like','%'.$proxy_name.'%'];
+        if(!empty($agent_name)){
+            $where[] = ['agent_name','like','%'.$agent_name.'%'];
         }
-        if(!empty($proxy_owner_mobile)){
-            $where[] = ['proxy_owner_mobile',$proxy_owner_mobile];
+        if(!empty($agent_owner_mobile)){
+            $where[] = ['agent_owner_mobile',$agent_owner_mobile];
         }
 
-        $list = ProxyApply::getPaginage($where,'15','id');
+        $list = agentApply::getPaginage($where,'15','id');
         return view('Zerone/Agent/agent_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
-    public function proxy_examine(Request $request){
+    public function agent_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $info =  ProxyApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Proxy/proxy_examine',['info'=>$info,'sta'=>$sta]);
+        $info =  agentApply::getOne([['id',$id]]);//获取该ID的信息
+        return view('Zerone/agent/agent_examine',['info'=>$info,'sta'=>$sta]);
     }
     //服务商审核数据提交
-    public function proxy_examine_check(Request $request){
+    public function agent_examine_check(Request $request){
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $proxylist = ProxyApply::getOne([['id',$id]]);//查询申请服务商信息
+        $agentlist = agentApply::getOne([['id',$id]]);//查询申请服务商信息
         $program_id = 2;
         if($sta == -1 ){
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply([['id',$id]],['status'=>$sta]);//拒绝通过
+                agentApply::editagentApply([['id',$id]],['status'=>$sta]);//拒绝通过
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$proxylist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$agentlist['agent_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -138,12 +137,12 @@ class AgentController extends Controller{
         }elseif($sta == 1){
             DB::beginTransaction();
             try{
-                ProxyApply::editProxyApply([['id',$id]],['status'=>$sta]);//申请通过
+                agentApply::editagentApply([['id',$id]],['status'=>$sta]);//申请通过
 
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
                 $orgData = [
-                    'organization_name'=>$proxylist['proxy_name'],
+                    'organization_name'=>$agentlist['agent_name'],
                     'parent_id'        =>0,
                     'parent_tree'      =>$orgparent_tree,
                     'program_id'       =>2,
@@ -152,11 +151,11 @@ class AgentController extends Controller{
                 ];
                 $organization_id = Organization::addOrganization($orgData); //返回值为商户的id
 
-                $proxydata = [
+                $agentdata = [
                     'organization_id'=>$organization_id,
-                    'zone_id'        =>$proxylist['zone_id']
+                    'zone_id'        =>$agentlist['zone_id']
                 ];
-                WarzoneProxy::addWarzoneProxy($proxydata);//战区关联服务商
+                Warzoneagent::addWarzoneagent($agentdata);//战区关联服务商
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
@@ -164,20 +163,20 @@ class AgentController extends Controller{
                 $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
 
-                $password = $proxylist['proxy_password'];//用户密码
+                $password = $agentlist['agent_password'];//用户密码
                 $accdata = [
                     'parent_id'      =>$parent_id,
                     'parent_tree'    =>$parent_tree,
                     'deepth'         =>$deepth,
-                    'mobile'         =>$proxylist['proxy_owner_mobile'],
+                    'mobile'         =>$agentlist['agent_owner_mobile'],
                     'password'       =>$password,
                     'organization_id'=>$organization_id,
                     'account'        =>$account
                 ];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
-                $realname = $proxylist['proxy_owner'];//负责人姓名
-                $idcard = $proxylist['proxy_owner_idcard'];//负责人身份证号
+                $realname = $agentlist['agent_owner'];//负责人姓名
+                $idcard = $agentlist['agent_owner_idcard'];//负责人身份证号
                 $acinfodata = [
                     'account_id'=>$account_id,
                     'realname'  =>$realname,
@@ -185,13 +184,13 @@ class AgentController extends Controller{
                 ];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $orgproxyinfo = [
+                $orgagentinfo = [
                     'organization_id'   =>$organization_id,
-                    'proxy_owner'       =>$realname,
-                    'proxy_owner_idcard'=>$idcard,
-                    'proxy_owner_mobile'=>$proxylist['proxy_owner_mobile']
+                    'agent_owner'       =>$realname,
+                    'agent_owner_idcard'=>$idcard,
+                    'agent_owner_mobile'=>$agentlist['agent_owner_mobile']
                 ];
-                OrganizationProxyinfo::addOrganizationProxyinfo($orgproxyinfo);  //添加到服务商组织信息表
+                Organizationagentinfo::addOrganizationagentinfo($orgagentinfo);  //添加到服务商组织信息表
 
                 $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
                 foreach($module_node_list as $key=>$val){
@@ -201,7 +200,7 @@ class AgentController extends Controller{
                 }
 
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$proxylist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$agentlist['agent_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -213,7 +212,7 @@ class AgentController extends Controller{
 
 
     //服务商列表
-    public function proxy_list(Request $request){
+    public function agent_list(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -228,21 +227,21 @@ class AgentController extends Controller{
         }
         $listorg = Organization::getPaginage($where,'5','id');
         foreach ($listorg as $k=>$v){
-            $zone_id = $v['warzoneProxy']['zone_id'];
+            $zone_id = $v['warzoneagent']['zone_id'];
             $listorg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
         }
-        return view('Zerone/Proxy/proxy_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/agent/agent_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
-    public function proxy_list_edit(Request $request){
+    public function agent_list_edit(Request $request){
 
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOneProxy([['id',$id]]);
+        $listorg = Organization::getOneagent([['id',$id]]);
         $warzone = Warzone::all();
-        return view('Zerone/Proxy/proxy_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
+        return view('Zerone/agent/agent_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
     }
     //服务商编辑功能提交
-    public function proxy_list_edit_check(Request $request){
+    public function agent_list_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
@@ -263,19 +262,19 @@ class AgentController extends Controller{
 
         DB::beginTransaction();
         try{
-            $list = Organization::getOneProxy(['id'=>$id]);
+            $list = Organization::getOneagent(['id'=>$id]);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);
             $account_id = $acc['id'];
             if($list['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
             if($list['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                Organizationagentinfo::editOrganizationagentinfo([['organization_id',$id]], ['agent_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
 
-            if($list['organizationproxyinfo']['proxy_owner'] != $realname){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+            if($list['organizationagentinfo']['agent_owner'] != $realname){
+                Organizationagentinfo::editOrganizationagentinfo([['organization_id',$id]],['agent_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             if(!empty($password)){
@@ -286,11 +285,11 @@ class AgentController extends Controller{
             }
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+                Organizationagentinfo::editOrganizationagentinfo([['organization_id',$id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
-            $waprlist = WarzoneProxy::getOne([['organization_id',$id]]);
+            $waprlist = Warzoneagent::getOne([['organization_id',$id]]);
             if($waprlist['zone_id'] != $zone_id){
-                WarzoneProxy::editWarzoneProxy([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+                Warzoneagent::editWarzoneagent([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
             }
 
             //添加操作日志
@@ -304,19 +303,19 @@ class AgentController extends Controller{
     }
 
     //服务商冻结ajaxshow显示页面
-    public function proxy_list_frozen(Request $request){
+    public function agent_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结状态
-        $list = Organization::getOneProxy([['id',$id]]);//服务商信息
-        return view('Zerone/Proxy/proxy_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
+        $list = Organization::getOneagent([['id',$id]]);//服务商信息
+        return view('Zerone/agent/agent_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //服务商冻结功能提交
-    public function proxy_list_frozen_check(Request $request){
+    public function agent_list_frozen_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//服务商id
-        $list = Organization::getOneProxy([['id',$id]]);
+        $list = Organization::getOneagent([['id',$id]]);
             DB::beginTransaction();
             try{
                 if($status == '1'){
@@ -338,24 +337,24 @@ class AgentController extends Controller{
             return response()->json(['data' => '操作成功', 'status' => '1']);
     }
     //服务商删除ajaxshow显示页面
-    public function proxy_list_delete(Request $request){
+    public function agent_list_delete(Request $request){
         $id = $request->input('id');//服务商id
 
-        return view('Zerone/Proxy/proxy_list_delete');
+        return view('Zerone/agent/agent_list_delete');
     }
 //服务商下级人员架构
-    public function proxy_structure(Request $request){
+    public function agent_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
 
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
+        $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->account_structure($list,$oneOrg['id']);
-        return view('Zerone/Proxy/proxy_structure',['listOrg'=>$listOrg,'oneOrg'=>$oneOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/agent/agent_structure',['listOrg'=>$listOrg,'oneOrg'=>$oneOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
        /*
         * 递归生成人员结构的方法
@@ -390,13 +389,13 @@ class AgentController extends Controller{
     }
 
     //服务商程序管理
-    public function proxy_program(Request $request){
+    public function agent_program(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
+        $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $list = Package::getPaginage([],15,'id');
         foreach ($list as $key=>$value){
             foreach ($value['programs'] as $k=>$v){
@@ -405,21 +404,21 @@ class AgentController extends Controller{
                 $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
             }
         }
-        return view('Zerone/Proxy/proxy_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/agent/agent_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //服务商程序管理页面划入js显示
-    public function proxy_assets(Request $request){
+    public function agent_assets(Request $request){
         $organization_id = $request->input('organization_id'); //服务商id
         $package_id = $request->input('package_id');//套餐id
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
+        $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
         $status = $request->input('status');//状态
-        return view('Zerone/Proxy/proxy_assets',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
+        return view('Zerone/agent/agent_assets',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
     }
 
     //服务商程序管理页面划入划出检测
-    public function proxy_assets_check(Request $request){
+    public function agent_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
         if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
@@ -470,13 +469,13 @@ class AgentController extends Controller{
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
     //服务商程序管理
-    public function proxy_company(Request $request){
+    public function agent_company(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Zerone/Proxy/proxy_company',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/agent/agent_company',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>

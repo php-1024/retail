@@ -126,6 +126,11 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            //系统管理
+            case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
+
 
             //下级管理
             case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登录和权限
@@ -139,16 +144,12 @@ class ZeroneCheckAjax
             case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登录和权限
 
 
-            case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
-            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
-            case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
-
-
-            case "zerone/ajax/proxy_examine"://服务商审核检测弹出登入和权限
-            case "zerone/ajax/proxy_list_edit"://服务商列表修改弹出检测登入和权限
-            case "zerone/ajax/proxy_list_frozen"://服务商列表冻结弹出检测登入和权限
-            case "zerone/ajax/proxy_list_delete"://服务商列表删除弹出检测登入和权限
-            case "zerone/ajax/proxy_assets"://服务商列表划入检测弹出登入和权限
+            //服务商管理
+            case "zerone/ajax/agent_examine"://服务商审核检测弹出登入和权限
+            case "zerone/ajax/agent_list_edit"://服务商列表修改弹出检测登入和权限
+            case "zerone/ajax/agent_list_frozen"://服务商列表冻结弹出检测登入和权限
+            case "zerone/ajax/agent_list_delete"://服务商列表删除弹出检测登入和权限
+            case "zerone/ajax/agent_assets"://服务商列表划入检测弹出登入和权限
 
             case "zerone/ajax/company_examine"://商户审核检测弹出登录和权限
             case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限

@@ -6,9 +6,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class ProxyApply extends Model{
+class AgentApply extends Model{
     use SoftDeletes;
-    protected $table = 'proxy_apply';
+    protected $table = 'agent_apply';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -20,7 +20,7 @@ class ProxyApply extends Model{
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new ProxyApply();
+        $model = new AgentApply();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -29,7 +29,7 @@ class ProxyApply extends Model{
 
     //添加数据
     public static function addProxyApply($param){
-        $program = new ProxyApply();//实例化程序模型
+        $program = new AgentApply();//实例化程序模型
         $program->program_name = $param['program_name'];//程序名称
         $program->program_url = $param['program_url'];//程序名称
         $program->complete_id = $param['complete_id'];//上级程序
