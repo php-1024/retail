@@ -82,9 +82,9 @@
                                 <tr>
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->program_name}}</td>
-                                    <td><div> <span class="label label-primary">剩余：@if(!empty($v->program_balance)){{$v->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                    <td><div> <span class="label label-primary">剩余：@if(!empty($value->program_balance)){{$value->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
 
-                                    <td><div><span class="label label-warning">已用：@if(!empty($v->program_used_num)){{$v->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                    <td><div><span class="label label-warning">已用：@if(!empty($value->program_used_num)){{$value->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
                                         <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
