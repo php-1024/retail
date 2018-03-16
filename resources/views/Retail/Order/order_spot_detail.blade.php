@@ -46,7 +46,7 @@
                                 </header>
                                 <div class="panel-body">
                                     <form class="form-horizontal" method="get">
-                                        <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/order_status') }}">
+                                        <input type="hidden" id="order_status_comfirm_url" value="{{ url('retail/ajax/order_status') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
                                             <label class="col-sm-3 text-right" for="input-id-1">订单编号</label>
