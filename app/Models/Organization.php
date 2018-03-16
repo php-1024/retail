@@ -46,6 +46,7 @@ class Organization extends Model{
     public function warzoneAgent(){
         return $this->hasOne('App\Models\WarzoneAgent', 'agent_id');
     }
+
     //和WarzoneAgent表 warzone表 一对一的关系
     public function warzone(){
         return $this->belongsToMany('App\Models\Warzone','warzone_proxy','agent_id','zone_id')->select('zone_name');
