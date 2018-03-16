@@ -49,7 +49,7 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
         $order = CateringOrder::getOne([['id',$id]]);
-        dump($order);
+        dd($order);
         $user = User::getOneUser([['id',$order->user_id]]);        //查询处理订单信息和用户信息
         $order->user = $user;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
