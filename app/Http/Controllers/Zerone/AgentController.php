@@ -452,7 +452,7 @@ class AgentController extends Controller{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
-                $data = ['operator_id'=>$admin_data['id'],'fr_organization_id'=>1,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
+                $data = ['operator_id'=>$admin_data['id'],'fr_organization_id'=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
                 OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
