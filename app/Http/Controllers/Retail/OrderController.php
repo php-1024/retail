@@ -65,8 +65,7 @@ class OrderController extends Controller
             $val->order_goods = $goods;
             $order_price += $val->price;
         }
-        dump($order_price);
-        return view('Retail/Order/order_spot_detail',['order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //订单管理-外卖订单
