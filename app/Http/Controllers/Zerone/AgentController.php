@@ -197,8 +197,8 @@ class AgentController extends Controller{
                 }
             }
 
-            $orgagentinfo = ['organization_id'=>$organization_id, 'agent_owner'=>$realname, 'agent_owner_idcard'=>$idcard, 'agent_owner_mobile'=>$mobile];
-            Organizationagentinfo::addOrganizationagentinfo($orgagentinfo);  //添加到服务商组织信息表
+            $orgagentinfo = ['agent_id'=>$organization_id, 'agent_owner'=>$realname, 'agent_owner_idcard'=>$idcard, 'agent_owner_mobile'=>$mobile];
+            OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
