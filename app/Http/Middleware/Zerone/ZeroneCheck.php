@@ -42,12 +42,12 @@ class ZeroneCheck{
             case "zerone/subordinate/subordinate_list"://下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
 
-            case "zerone/proxy/proxy_add":              //添加服务商
-            case "zerone/proxy/proxy_examinelist":      //服务商审核列表
-            case "zerone/proxy/proxy_list":             //服务商列表
-            case "zerone/proxy/proxy_structure":        //服务商人员架构
-            case "zerone/proxy/proxy_program":          //服务商程序管理
-            case "zerone/proxy/proxy_company":          //服务商商户划拨
+            case "zerone/agent/agent_add":              //添加服务商
+            case "zerone/agent/agent_examinelist":      //服务商审核列表
+            case "zerone/agent/agent_list":             //服务商列表
+            case "zerone/agent/agent_structure":        //服务商人员架构
+            case "zerone/agent/agent_program":          //服务商程序管理
+            case "zerone/agent/agent_company":          //服务商商户划拨
 
             case "zerone/company/company_add":          //添加商户
             case "zerone/company/company_examinelist":  //商户审核列表

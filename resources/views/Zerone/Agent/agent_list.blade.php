@@ -38,9 +38,9 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-            <input type="hidden" id="proxy_list_edit" value="{{ url('zerone/ajax/proxy_list_edit') }}">
-            <input type="hidden" id="proxy_list_frozen" value="{{ url('zerone/ajax/proxy_list_frozen') }}">
-            <input type="hidden" id="proxy_list_delete" value="{{ url('zerone/ajax/proxy_list_delete') }}">
+            <input type="hidden" id="agent_list_edit" value="{{ url('zerone/ajax/agent_list_edit') }}">
+            <input type="hidden" id="agent_list_frozen" value="{{ url('zerone/ajax/agent_list_frozen') }}">
+            <input type="hidden" id="agent_list_delete" value="{{ url('zerone/ajax/agent_list_delete') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="searchForm" action="">
@@ -54,7 +54,7 @@
                         {{--<div class="col-sm-3">--}}
                         {{--<div class="form-group">--}}
                         {{--<label class="control-label" for="amount">手机号码</label>--}}
-                        {{--<input type="text" id="amount" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码" class="form-control">--}}
+                        {{--<input type="text" id="amount" name="agent_owner_mobile" value="{{ $search_data['agent_owner_mobile'] }}" placeholder="手机号码" class="form-control">--}}
                         {{--</div>--}}
                         {{--</div>--}}
                         {{--<div class="col-sm-3">--}}
@@ -104,10 +104,10 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value['zone_name']}}</td>
-                                        <td>{{$value->organizationproxyinfo->proxy_owner}}</td>
+                                        <td>{{$value->organizationagentinfo->agent_owner}}</td>
 
 
-                                        <td>{{$value->organizationproxyinfo->proxy_owner_mobile}}</td>
+                                        <td>{{$value->organizationagentinfo->agent_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
@@ -126,10 +126,10 @@
                                                 <!--
                                                 <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
 -->
-                                                <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary" onclick="location.href='{{url('zerone/proxy/proxy_structure')}}?organization_id={{$value->id}}'"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
+                                                <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary" onclick="location.href='{{url('zerone/agent/agent_structure')}}?organization_id={{$value->id}}'"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
 
-                                                <button type="button" id="programBtn" onclick="location.href='{{url('zerone/proxy/proxy_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                                <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/proxy/proxy_company')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
+                                                <button type="button" id="programBtn" onclick="location.href='{{url('zerone/agent/agent_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
+                                                <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/agent/agent_company')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;商户划拨管理</button>
                                             </td>
                                     </tr>
                                 @endforeach
@@ -192,7 +192,7 @@
     //编辑
     function getEditForm(id){
 
-        var url = $('#proxy_list_edit').val();
+        var url = $('#agent_list_edit').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
@@ -228,7 +228,7 @@
     //冻结
     function getFrozenForm(id,status){
 
-        var url = $('#proxy_list_frozen').val();
+        var url = $('#agent_list_frozen').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
@@ -264,7 +264,7 @@
     //删除
     function getDeleteForm(id){
 
-        var url = $('#proxy_list_delete').val();
+        var url = $('#agent_list_delete').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
