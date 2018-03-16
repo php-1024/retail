@@ -151,13 +151,13 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group text-center">
                                             @if($order->status==0)
-                                                    <button class="btn btn-success" type="button" onclick="getPostForm('{{ $order->id }}','0')"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
+                                                    <button class="btn btn-success" type="button" onclick="getPostForm('{{ $order->id }}','1')"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
                                             @endif
                                             @if($order->status==1 || $order->status==2)
-                                                    <button class="btn btn-primary" type="button" onclick="getPostForm('{{ $order->id }}','1')"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
+                                                    <button class="btn btn-primary" type="button" onclick="getPostForm('{{ $order->id }}','3')"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
                                             @endif
                                             @if($order->status==0 || $order->status==1 || $order->status==2)
-                                                    <button class="btn btn-default" type="button" onclick="getPostForm('{{ $order->id }}','2')"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                                    <button class="btn btn-default" type="button" onclick="getPostForm('{{ $order->id }}','-1')"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
                                             @endif
                                             @if($order->status==-1)
                                                     <button class="btn btn-default" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已取消</button>
