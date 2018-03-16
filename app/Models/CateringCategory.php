@@ -13,7 +13,7 @@ class CateringCategory extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和创建者account表多对一的关系
+    //和创建者account表一对一的关系
     public function create_account(){
         return $this->belongsto('App\Models\Account','created_by');
     }
