@@ -59,11 +59,11 @@ class OrderController extends Controller
         $account = Account::getOne([['id',$order->user_id]]);    //查询处理订单信息和用户信息
         $order->account = $account;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
-        $order_price = 0.00;
+        $order_price = 0.00;    //设置订单的初始总价
         foreach ($order_goods as $key=>$val){
             $goods = CateringGoods::getOne([['id',$val->goods_id]]);
             $val->order_goods = $goods;
-            $order_price += $val->price;
+            $order_price += $val->price;        //计算订单总价
         }
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
