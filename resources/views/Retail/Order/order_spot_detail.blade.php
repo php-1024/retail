@@ -222,8 +222,6 @@
                                             <td>
                                                 <label class="label label-danger">¥100012.00</label>
                                             </td>
-                                            <td></td>
-                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
