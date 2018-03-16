@@ -2,13 +2,13 @@
 /**
  * 检测中间件囖
  */
-namespace App\Http\Middleware\Catering;
+namespace App\Http\Middleware\Fansmanage;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
 
-class CateringCheckAjax
+class FansmanageCheckAjax
 {
     public function handle($request, Closure $next)
     {
@@ -89,8 +89,6 @@ class CateringCheckAjax
             case "catering/ajax/user_list_wallet":          //会员列表粉丝钱包显示页面
             case "api/ajax/meterial_image_upload":
             case "api/ajax/meterial_image_upload_check":
-            case "api/ajax/material_image_delete_comfirm":
-            case "api/ajax/material_image_delete_check":
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
