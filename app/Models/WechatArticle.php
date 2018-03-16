@@ -22,6 +22,7 @@ class WechatArticle extends Model{
         $model->title = $param['title'];
         $model->image_id = $param['image_id'];
         $model->type = $param['type'];
+        $model->media_id = $param['media_id'];
         $model->content = $param['content'];
         $model->save();
         return $model->id;
