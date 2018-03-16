@@ -30,10 +30,9 @@ class OrderController extends Controller
         ];
         $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
-            $account = Account::getOne([['id',$val->account_id]]);
+            $account = Account::getOne([['id',$val->user_id]]);
             $val->account = $account;
         }
-        dd($list);
         return view('Retail/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -56,7 +55,7 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
         $order = CateringOrder::getOne([['id',$id]]);
-        $account = Account::getOne([['id',$order->account_id]]);    //查询处理订单信息和用户信息
+        $account = Account::getOne([['id',$order->user_id]]);    //查询处理订单信息和用户信息
         $order->account = $account;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         dump($order_goods);

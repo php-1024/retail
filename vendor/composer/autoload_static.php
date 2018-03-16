@@ -365,7 +365,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Http\\Controllers\\Zerone\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/DashboardController.php',
         'App\\Http\\Controllers\\Zerone\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/LoginController.php',
         'App\\Http\\Controllers\\Zerone\\PersonalController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/PersonalController.php',
-        'App\\Http\\Controllers\\Zerone\\ProxyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/ProxyController.php',
+        'App\\Http\\Controllers\\Zerone\\ProxyController' => __DIR__ . '/../..',
         'App\\Http\\Controllers\\Zerone\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/RoleController.php',
         'App\\Http\\Controllers\\Zerone\\StoreController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/StoreController.php',
         'App\\Http\\Controllers\\Zerone\\SubordinateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/SubordinateController.php',
