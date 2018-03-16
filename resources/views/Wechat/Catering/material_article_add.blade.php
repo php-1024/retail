@@ -68,6 +68,7 @@
                                     </header>
                                     <div class="panel-body">
                                         <form class="form-horizontal" method="get">
+                                            <input type="hidden" id="#material_image_select_url" value="{{ url('api/ajax/meterial_iamge_select') }}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
@@ -182,6 +183,30 @@
             });
         });
     });
+
+    //弹出图片上传框
+    function selectImageForm(){
+        var url = $('#material_image_select_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>
