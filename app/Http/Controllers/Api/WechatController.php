@@ -144,6 +144,12 @@ class WechatController extends Controller{
         return view('Wechat/Catering/material_article_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+    /*
+     * 图片选择页面
+     */
+    public function meterial_image_selected(Request $request){
+
+    }
 
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
