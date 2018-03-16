@@ -185,6 +185,7 @@ class WechatController extends Controller{
                 'organization_id'=>$admin_data['organization_id'],
                 'title'=>$title,
                 'image_id'=>$img_id,
+                'media_id'=>$re['media_id'],
                 'type'=>'1',
                 'content'=>serialize($data),
             ];
