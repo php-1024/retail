@@ -20,7 +20,7 @@ class CateringCategory extends Model{
 
     //和组织表Organization表一对一的关系
     public function Organization(){
-        return $this->belongsto('App\Models\Organization','branch_id','id');
+        return $this->belongsto('App\Models\Organization','fansmanage_id');
     }
 
     //获取单条信息
