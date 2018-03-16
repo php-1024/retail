@@ -6,7 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class WarzoneProxy extends Model{
+class WarzoneAgent extends Model{
     use SoftDeletes;
     protected $table = 'warzone_agent';
     protected $primaryKey = 'id';
