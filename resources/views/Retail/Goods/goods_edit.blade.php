@@ -116,7 +116,7 @@
                                         <button type="button" class="btn btn-success" onclick="return addthumb();"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加图片</button>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div id="thumb_content">
-                                        @include('Branch/Goods/goods_thumb_list')
+                                        @include('Retail/Goods/goods_thumb_list')
                                         </div>
                                     </div>
                                 </div>

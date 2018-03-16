@@ -22,15 +22,15 @@ class OrderController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $store_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $restaurant_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $where = [
-            'store_id' => $store_id,
+            'fansmanage_id' => $restaurant_id,
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
-            'branch_id' => $admin_data['organization_id'],
+            'restaurant_id' => $admin_data['organization_id'],
         ];
         $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
-            $account = Account::getOne([['id',$val->account_id]]);
+            $account = Account::getOne([['id',$val->user_id]]);
             $val->account = $account;
         }
         return view('Retail/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
@@ -55,7 +55,7 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
         $order = CateringOrder::getOne([['id',$id]]);
-        $account = Account::getOne([['id',$order->account_id]]);    //查询处理订单信息和用户信息
+        $account = Account::getOne([['id',$order->user_id]]);    //查询处理订单信息和用户信息
         $order->account = $account;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         dump($order_goods);

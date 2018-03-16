@@ -6,9 +6,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class WarzoneProxy extends Model{
+class WarzoneAgent extends Model{
     use SoftDeletes;
-    protected $table = 'warzone_proxy';
+    protected $table = 'warzone_agent';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -24,7 +24,7 @@ class WarzoneProxy extends Model{
     }
     //添加数据
     public static function addWarzoneProxy($param){
-        $program = new WarzoneProxy();//实例化程序模型
+        $program = new WarzoneAgent();//实例化程序模型
         $program->zone_id = $param['zone_id'];//程序名称
         $program->organization_id = $param['organization_id'];//程序名称
         $program->save();

@@ -426,7 +426,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Models\\ToolingOperationLog' => __DIR__ . '/../..' . '/app/Models/ToolingOperationLog.php',
         'App\\Models\\Warzone' => __DIR__ . '/../..' . '/app/Models/Warzone.php',
         'App\\Models\\WarzoneProvince' => __DIR__ . '/../..' . '/app/Models/WarzoneProvince.php',
-        'App\\Models\\WarzoneProxy' => __DIR__ . '/../..' . '/app/Models/WarzoneProxy.php',
+        'App\\Models\\WarzoneProxy' => __DIR__ . '/../..',
         'App\\Models\\WechatOpenSetting' => __DIR__ . '/../..' . '/app/Models/WechatOpenSetting.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

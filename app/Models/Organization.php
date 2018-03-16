@@ -51,26 +51,26 @@ class Organization extends Model{
         return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
     }
 
-    //和WarzoneProxy表一对一的关系
-    public function warzoneProxy(){
-        return $this->hasOne('App\Models\WarzoneProxy', 'organization_id');
+    //和WarzoneAgent表一对一的关系
+    public function warzoneAgent(){
+        return $this->hasOne('App\Models\WarzoneAgent', 'organization_id');
     }
-    //和WarzoneProxy表 warzone表 一对一的关系
+    //和WarzoneAgent表 warzone表 一对一的关系
     public function warzone(){
         return $this->belongsToMany('App\Models\Warzone','warzone_proxy','organization_id','zone_id')->select('zone_name');
     }
 
     //获取分页数据-商户
-    public static function getWarzoneProxyAndWarzone($where,$paginate,$orderby,$sort='DESC'){
+    public static function getWarzoneAgentAndWarzone($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取单条信息-服务商
     public static function getOneProxy($where){
-        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->first();
+        return self::with('warzoneAgent','organizationproxyinfo')->where($where)->first();
     }
     //获取单条信息-总店
     public static function getOneCatering($where){
-        return self::with('warzoneProxy','organizationbranchinfo')->where($where)->first();
+        return self::with('warzoneAgent','organizationbranchinfo')->where($where)->first();
     }
 
     //获取-服务商列表
@@ -160,7 +160,7 @@ class Organization extends Model{
     }
     //获取分页数据-服务商
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('warzoneProxy','organizationproxyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzoneAgent','organizationproxyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取分页数据-商户
     public static function getCompany($where,$paginate,$orderby,$sort='DESC'){

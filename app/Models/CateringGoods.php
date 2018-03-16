@@ -51,17 +51,14 @@ class CateringGoods extends Model{
     public static function addCateringGoods($param){
         $model = new CateringGoods();
         $model->name = $param['name'];
-//        $model->keywords = $param['keywords'];
         $model->details = $param['details'];
         $model->price = $param['price'];
         $model->stock = $param['stock'];
-//        $model->number = $param['number'];
-//        $model->maxbuy = $param['maxbuy'];
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
         $model->displayorder = $param['displayorder'];
-        $model->store_id = $param['store_id'];
-        $model->branch_id = $param['branch_id'];
+        $model->fansmanage_id = $param['fansmanage_id'];
+        $model->restaurant_id = $param['restaurant_id'];
         $model->save();
         return $model->id;
     }

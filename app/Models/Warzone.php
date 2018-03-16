@@ -18,8 +18,8 @@ class Warzone extends Model{
         return $this->hasMany('App\Models\ProxyApply', 'zone_id');
     }
     //和WarzoneProxy表一对多的关系
-    public function warzoneProxy(){
-        return $this->hasMany('App\Models\WarzoneProxy', 'zone_id');
+    public function WarzoneAgent(){
+        return $this->hasMany('App\Models\WarzoneAgent', 'zone_id');
     }
 
     //获取单行数据
