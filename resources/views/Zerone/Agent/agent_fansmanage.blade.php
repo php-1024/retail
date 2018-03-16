@@ -207,7 +207,7 @@
 <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
 <!-- Page-Level Scripts -->
-<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
+<script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
 <script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
 
 <script>
