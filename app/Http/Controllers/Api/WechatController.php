@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatImage;
+use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
@@ -187,6 +188,8 @@ class WechatController extends Controller{
                 'type'=>'1',
                 'content'=>serialize($data),
             ];
+            WechatArticle::addWechatArticle($zdata);
+            return response()->json(['data'=>'上传图文素材成功','status' => '0']);
         }else{
             return response()->json(['data'=>'上传图文素材失败','status' => '0']);
         }
