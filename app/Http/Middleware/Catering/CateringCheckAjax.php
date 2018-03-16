@@ -390,7 +390,6 @@ class CateringCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
-
         if($admin_data['is_super'] == '2'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{

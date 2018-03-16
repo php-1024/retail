@@ -19,7 +19,7 @@ class ShopController extends Controller{
             $organization_name  = $request->organization_name;
             $where = ['type'=>'4'];
 //            $listOrg = Organization::where([['program_id','4']])->get();
-            $listOrg = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
+            $listOrg = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
             return view('Fansmanage/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
