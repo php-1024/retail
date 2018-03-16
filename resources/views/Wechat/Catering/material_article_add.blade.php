@@ -126,7 +126,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-12 col-sm-offset-6">
 
-                                                    <button type="button" class="btn btn-success" id="save_btn">保存信息</button>
+                                                    <button type="button" class="btn btn-success" onclick="return postForm();" id="save_btn">保存信息</button>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -218,6 +218,34 @@
 
                 $('#myModal').html(response);
                 $('#myModal').modal();
+            }
+        });
+    }
+
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }
