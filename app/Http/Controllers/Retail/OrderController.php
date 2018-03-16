@@ -37,7 +37,6 @@ class OrderController extends Controller
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
         }
-        dump($list);
         return view('Retail/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
