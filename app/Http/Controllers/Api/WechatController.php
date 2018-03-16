@@ -21,7 +21,6 @@ class WechatController extends Controller{
         $url = \Wechat::get_auth_url($admin_data['organization_id'],$route_name);
 
         $wechat_info = [];
-        $qrcode = '';
         $org_info = Organization::where('id',$admin_data['organization_id'])->first();
         if(isset($org_info->wechatAuthorization)) {//如果该组织授权了公众号
             $wechat_info = $org_info->wechatAuthorization->wechatAuthorizerInfo;//获取公众号信息
@@ -108,7 +107,9 @@ class WechatController extends Controller{
     }
     public function material_image_delete_check(Request $request){
         $id = $request->input('id');
-        dump($id);
+        $image_info = WechatImage::getOne([['id',$id]]);
+        $auth_info = \Wechat::refresh_authorization_info($image_info['organization_id']);//刷新并获取授权令牌
+        var_dump($auth_info);
     }
 
     /*
