@@ -45,6 +45,7 @@
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/goods_add_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <input type="hidden" name="goods_id" value="{{$goods_id}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
@@ -258,7 +259,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(json){
-                    alert(json.goods_id);
+                    alert(json);
                     {{--window.location.href = "{{asset("retail/goods/goods_edit?goods_id=")}}"+json.goods_id;--}}
                 });
             }else{
