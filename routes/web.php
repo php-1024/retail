@@ -772,15 +772,15 @@ Route::group(['prefix'=>'api'],function() {
 
     //餐饮版店铺授权页面
     Route::group(['prefix' => 'catering'] , function(){
-        Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('FansmanageCheck');//开放平台控制公众平台回复函数
-        Route::any('material_image', 'Api\WechatController@material_image')->middleware('FansmanageCheck');//图片素材
-        Route::any('material_article','Api\WechatController@material_article')->middleware('FansmanageCheck');
+        Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('CateringCheck');//开放平台控制公众平台回复函数
+        Route::any('material_image', 'Api\WechatController@material_image')->middleware('CateringCheck');//图片素材
+        Route::any('material_article','Api\WechatController@material_article')->middleware('CateringCheck');
     });
 
     //微信接口中页面使用Ajax的部分
     Route::group(['prefix' => 'ajax'] , function(){
-        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
-        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('FansmanageCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
         Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
         Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
         Route::any('material_image_delete_comfirm', 'Api\WechatController@material_image_delete_comfirm')->middleware('CateringCheckAjax');//删除图片素材弹窗
