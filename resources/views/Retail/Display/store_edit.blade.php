@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="password" value="" placeholder="安全密码" class="form-control" >
+                            <input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control" >
                         </div>
                     </div>
                     <div style="clear:both;"></div>
