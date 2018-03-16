@@ -17,7 +17,7 @@ class WechatImage extends Model{
     }
 
     public static function WechatImage($param){
-        $model = new WechatAuthorizerInfo();
+        $model = new WechatImage();
         $model->organization_id = $param['organization_id'];
         $model->filename = $param['filename'];
         $model->filepath = $param['filepath'];
