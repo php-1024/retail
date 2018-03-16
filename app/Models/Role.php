@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model{
     use SoftDeletes;
-    protected $table = 'role';
+    protected $table = 'organization_role';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -85,7 +85,7 @@ class Role extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('create_account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('create_account')->with('nodes')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
