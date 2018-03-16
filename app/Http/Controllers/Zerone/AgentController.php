@@ -424,7 +424,6 @@ class AgentController extends Controller{
         }
 
         $organization_id = $request->input('organization_id');//服务商id
-        dd($organization_id);
         $program_id = $request->input('program_id');//程序id
         $number = $request->input('number');//数量
         $status = $request->input('status');//判断划入或者划出
