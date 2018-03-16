@@ -35,7 +35,7 @@
                             <h3 class="m-b-none">现场订单详情</h3>
                         </div>
                         <div class="row row-sm">
-                            <button class="btn btn-s-md btn-success" type="button" onclick="location.href='order_spot'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                            <button class="btn btn-s-md btn-success" type="button" onclick="history.back()'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                             <div class="line line-dashed b-b line-lg pull-in"></div>
                         </div>
                         <div class="col-lg-4">
@@ -45,8 +45,10 @@
                                     现场订单详情
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="get">
+                                    <form class="form-horizontal" method="post">
 
+                                        <input type="hidden" id="order_status_comfirm_url" value="{{ url('retail/ajax/order_status') }}">
+                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
                                             <label class="col-sm-3 text-right" for="input-id-1">订单编号</label>
                                             <div class="col-sm-9">
@@ -149,13 +151,13 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group text-center">
                                             @if($order->status==0)
-                                                    <button class="btn btn-success" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
+                                                    <button class="btn btn-success" type="button" onclick="getPostForm('{{ $order->id }}','1')"><i class="fa fa-check"></i>&nbsp;&nbsp;确认付款</button>
                                             @endif
                                             @if($order->status==1 || $order->status==2)
-                                                    <button class="btn btn-primary" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
+                                                    <button class="btn btn-primary" type="button" onclick="getPostForm('{{ $order->id }}','3')"><i class="fa fa-check"></i>&nbsp;&nbsp;完成订单</button>
                                             @endif
                                             @if($order->status==0 || $order->status==1 || $order->status==2)
-                                                    <button class="btn btn-default" type="button"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
+                                                    <button class="btn btn-default" type="button" onclick="getPostForm('{{ $order->id }}','-1')"><i class="fa fa-times"></i>&nbsp;&nbsp;取消订单</button>
                                             @endif
                                             @if($order->status==-1)
                                                     <button class="btn btn-default" type="button"><i class="fa fa-check"></i>&nbsp;&nbsp;已取消</button>
@@ -169,7 +171,6 @@
                                 </div>
                             </section>
                         </div>
-
                         {{--购物车--}}
                         <div class="col-lg-8">
                             <section class="panel panel-default">
@@ -236,7 +237,7 @@
         </section>
     </section>
 </section>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -262,6 +263,29 @@
             $(this).addClass('btn-success').removeClass('btn-info');
         });
     });
+
+    //确认订单
+    function getPostForm(order_id,status){
+        var url = $('#order_status_comfirm_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'order_id':order_id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>

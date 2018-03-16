@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatImage;
+use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
@@ -133,7 +134,7 @@ class WechatController extends Controller{
     }
 
     /*
-     * 添加图文素材页面
+     * 添加单条图文素材页面
      */
     public function material_article_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -178,7 +179,33 @@ class WechatController extends Controller{
             ],
         ];
 
-        \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        if(!empty($re['media_id'])){
+            $zdata = [
+                'organization_id'=>$admin_data['organization_id'],
+                'title'=>$title,
+                'image_id'=>$img_id,
+                'media_id'=>$re['media_id'],
+                'type'=>'1',
+                'content'=>serialize($data),
+            ];
+            WechatArticle::addWechatArticle($zdata);
+            return response()->json(['data'=>'上传图文素材成功','status' => '0']);
+        }else{
+            return response()->json(['data'=>'上传图文素材失败','status' => '0']);
+        }
+    }
+
+    /*
+     * 添加多条图文素材页面
+     */
+    public function material_articles_add(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        return view('Wechat/Catering/material_articles_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*

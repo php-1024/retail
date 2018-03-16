@@ -30,6 +30,7 @@ class RetailCheckAjax{
             case "retail/ajax/selected_rule":           //编辑——授权下属人员
             case "retail/ajax/goods_thumb":             //商品规格页面
             case "retail/ajax/goods_delete":            //商品删除弹窗
+            case "retail/ajax/order_status":            //订单状态修改确认弹窗
 
 
             case "retail/ajax/upload_thumb_check":    //上传图片
@@ -57,6 +58,7 @@ class RetailCheckAjax{
 
             case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
+            case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);

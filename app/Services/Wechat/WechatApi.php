@@ -442,10 +442,8 @@ class WechatApi{
      * 添加图文素材
      */
     public function upload_article($authorizer_access_token,$data){
-        $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN';
+        $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token='.$authorizer_access_token;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-        dump($data);
-        exit();
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
         return $re;
