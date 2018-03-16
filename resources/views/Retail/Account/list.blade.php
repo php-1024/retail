@@ -55,7 +55,7 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" id="url" value="{{url('retail/ajax/branch_select')}}">
+        <input type="hidden" id="url" value="{{url('retail/ajax/select')}}">
         @foreach($organization as $key=>$val)
         <div class="col-lg-3 col-sm-6">
             <a href="javascript:;" onclick="postForm({{$val->account->id}})">
