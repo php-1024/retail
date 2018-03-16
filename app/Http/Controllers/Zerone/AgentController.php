@@ -490,7 +490,7 @@ class AgentController extends Controller{
         DB::beginTransaction();
         try{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
-            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>'$organization_id','parent_tree'=>$parent_tree]);
+            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
