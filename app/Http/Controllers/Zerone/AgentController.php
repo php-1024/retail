@@ -10,7 +10,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
 use App\Models\Package;
-use App\Models\Warzoneagent;
+use App\Models\WarzoneAgent;
 use Illuminate\Http\Request;
 use App\Models\AgentApply;
 use App\Models\Warzone;
@@ -155,7 +155,7 @@ class AgentController extends Controller{
                     'organization_id'=>$organization_id,
                     'zone_id'        =>$agentlist['zone_id']
                 ];
-                Warzoneagent::addWarzoneAgent($agentdata);//战区关联服务商
+                WarzoneAgent::addWarzoneAgent($agentdata);//战区关联服务商
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
