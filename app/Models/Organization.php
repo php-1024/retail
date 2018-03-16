@@ -24,12 +24,12 @@ class Organization extends Model{
         return $this->hasOne('App\Models\OrganizationAgentinfo', 'agent_id');
     }
     //和assetsOperation表一对多的关系
-    public function assetsOperation(){
-        return $this->hasMany('App\Models\AssetsOperation', 'organization_id','id');
+    public function fr_organization_id(){
+        return $this->hasMany('App\Models\AssetsAllocation', 'fr_organization_id','id');
     }
     //和assetsOperation表一对多的关系
-    public function assetsOperation_draw(){
-        return $this->hasMany('App\Models\AssetsOperation', 'draw_organization_id','id');
+    public function to_organization_id(){
+        return $this->hasMany('App\Models\AssetsAllocation', 'to_organization_id','id');
     }
 
     //和organizationBranchinfo表一对一的关系
