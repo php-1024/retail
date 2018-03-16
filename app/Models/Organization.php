@@ -21,7 +21,7 @@ class Organization extends Model{
 
     //和OrganizationProxyinfo表一对一的关系
     public function organizationAgentinfo(){
-        return $this->hasOne('App\Models\OrganizationAgentinfo', 'organization_id');
+        return $this->hasOne('App\Models\OrganizationAgentinfo', 'agent_id');
     }
     //和assetsOperation表一对多的关系
     public function assetsOperation(){
