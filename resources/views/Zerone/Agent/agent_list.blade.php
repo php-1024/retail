@@ -228,7 +228,7 @@
     //冻结
     function getLockForm(id,status){
 
-        var url = $('#agent_list_frozen').val();
+        var url = $('#agent_list_lock').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
