@@ -154,12 +154,31 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $img_id = $request->input('img_id');
+        $thumb_media_id = $request->input('thumb_media_id');
         $title = $request->input('title');
         $author = $request->input('author');
         $digest = $request->input('digest');
         $origin_url = $request->input('origin_url');
         $content = $request->input('content');
-        
+
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+
+        $data = [
+            'articles'=>[
+                [
+                    'title'=>$title,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'author'=>$author,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'digest'=>$digest,
+                    'show_cover_pic'=>1,
+                    'content'=>$content,
+                    'content_source_url'=>$origin_url
+                ],
+            ],
+        ];
+
+        \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
     }
 
     /*
