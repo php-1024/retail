@@ -69,6 +69,7 @@ class CateringCheckAjax
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
             case "catering/ajax/label_delete_check"://检测是否登录 权限 安全密码--删除会员标签
             case "catering/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
+            case "api/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -90,7 +91,6 @@ class CateringCheckAjax
             case "api/ajax/meterial_image_upload":
             case "api/ajax/meterial_image_upload_check":
             case "api/ajax/material_image_delete_comfirm":
-            case "api/ajax/material_image_delete_check":
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
