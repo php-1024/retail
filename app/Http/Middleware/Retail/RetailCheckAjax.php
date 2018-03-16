@@ -56,6 +56,7 @@ class RetailCheckAjax{
                 break;
 
 
+            case "retail/ajax/store_edit":              //检测是否登录 权限 安全密码
             case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
