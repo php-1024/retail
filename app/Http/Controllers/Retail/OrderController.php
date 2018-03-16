@@ -54,7 +54,7 @@ class OrderController extends Controller
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         dd($order_goods);
         $order_price = 0.00;    //设置订单的初始总价
-        foreach ( as $key=>$val){
+        foreach ($order_goods as $key=>$val){
             $goods = CateringGoods::getOne([['id',$val->goods_id]]);
             $val->order_goods = $goods;
             $order_price += $val->price;        //计算订单总价
