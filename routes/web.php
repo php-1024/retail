@@ -627,6 +627,7 @@ Route::group(['prefix'=>'api'],function() {
     Route::group(['prefix' => 'ajax'] , function(){
         Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
         Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('material_image_delete', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
     });
 });
 /*********************接口路由*************************/
