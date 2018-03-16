@@ -121,7 +121,7 @@ class WechatController extends Controller{
     }
 
     /*
-     * 图文素材
+     * 图文素材列表
      */
     public function material_article(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -130,6 +130,18 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         return view('Wechat/Catering/material_article',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    /*
+     * 添加图文素材页面
+     */
+    public function meterial_article_add(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        return view('Wechat/Catering/meterial_article_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 

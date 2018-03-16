@@ -96,7 +96,7 @@
                                         <td>{{$val->created_at}}</td>
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="location.href='{{url('retail/goods/goods_edit')}}?goods_id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -122,6 +122,7 @@
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
+        <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,30 +173,25 @@
             });
         });
     });
-    //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-//                window.location.reload();
-            } else if(json.status == 1) {
+    //删除商品信息
+    function getDeleteForm(id){
+        var url = $('#category_delete_comfirm_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
-                    text: json.data,
+                    text: response.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
+                    confirmButtonText: "确定",
                 },function(){
                     window.location.reload();
                 });
+                return;
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
