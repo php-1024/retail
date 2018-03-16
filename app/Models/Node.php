@@ -16,7 +16,7 @@ class Node extends Model{
     //和权限角色关系表，多对多
     public function roles()
     {
-        return $this->belongsToMany('App\Models\OrganizationRole','role_node','node_id','role_id');
+        return $this->belongsToMany('App\Models\Role','role_node','node_id','role_id');
     }
 
     //和账号节点表多对多的关系
