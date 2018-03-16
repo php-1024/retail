@@ -230,6 +230,19 @@
 <script src="{{asset('public/Branch/library')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 <script src="{{asset('public/Branch/library')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#form-content').trumbowyg({
+            lang: 'fr',
+            closable: false,
+            mobile: true,
+            fixedBtnPane: true,
+            fixedFullWidth: true,
+            semantic: true,
+            resetCss: true,
+            autoAjustHeight: true,
+            autogrow: true
+        });
+    });
     //提交表单
     function postForm() {
         var target = $("#currentForm");
