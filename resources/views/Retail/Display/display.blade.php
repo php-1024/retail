@@ -31,7 +31,7 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">分店概况</h3>
+                            <h3 class="m-b-none">店铺概况</h3>
                         </div>
 
                         <div class="col-lg-3">
