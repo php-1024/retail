@@ -85,6 +85,8 @@
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        @if($order->status==-1 || $order->status==0)
+                                        @else
                                         <div class="form-group">
                                             <label class="col-sm-3 text-right" for="input-id-1">支付方式</label>
                                             <div class="col-sm-9">
@@ -112,6 +114,7 @@
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        @endif
                                         <div class="form-group">
                                             <label class="col-sm-3 text-right" for="input-id-1">订单状态</label>
                                             <div class="col-sm-9">
