@@ -66,22 +66,16 @@
                                 </div>
                                 <div class="row row-sm">
                                     @foreach($list as $key=>$val)
-                                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                            <div class="item">
-                                                <div class="pos-rlt">
-                                                    <div class="item-overlay opacity r r-2x bg-black">
-                                                        <div class="center text-center m-t-n">
-                                                            <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" class="r r-2x img-full"></a>
-                                                </div>
-                                                <div class="padder-v">
-                                                    <span>{{ $val->filename }}</span>
-                                                </div>
+                                    <div class="col-lg-2">
+                                        <div class="item">
+                                            <div class="pos-rlt">
+                                                <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
+                                            </div>
+                                            <div class="padder-v">
+                                                <span>{{ $val->filename }}</span>
                                             </div>
                                         </div>
-
+                                    </div>
                                     @endforeach
                                     </div>
                                 </div>
