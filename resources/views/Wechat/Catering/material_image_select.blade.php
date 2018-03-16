@@ -13,9 +13,6 @@
                                 <div class="pos-rlt">
                                     <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
                                 </div>
-                                <div class="padder-v">
-                                    <span>{{ $val->filename }}</span>
-                                </div>
                             </div>
                         </div>
                     @endforeach
