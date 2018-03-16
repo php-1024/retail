@@ -270,7 +270,7 @@ class AgentController extends Controller{
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$id]], ['agent_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
-
+            dd(1);
             if($list['organizationagentinfo']['agent_owner'] != $realname){
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$id]],['agent_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
