@@ -194,7 +194,7 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label">正文</div>
                 <div class="col-sm-9">
-                    <textarea id="form-content{target_num}" class="editor" cols="30" name="content_1" rows="10"> </textarea>
+                    <textarea id="form-content{target_num}" class="editor" cols="30" name="content_{target_num}" rows="10"> </textarea>
                 </div>
             </div>
         </div>
