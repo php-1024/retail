@@ -185,7 +185,7 @@ class AgentController extends Controller{
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
                 $orgagentinfo = [
-                    'organization_id'   =>$organization_id,
+                    'agent_id'          =>$organization_id,
                     'agent_owner'       =>$realname,
                     'agent_owner_idcard'=>$idcard,
                     'agent_owner_mobile'=>$agentlist['agent_owner_mobile']

@@ -22,7 +22,7 @@ class OrganizationAgentinfo extends Model{
     //添加数据
     public static function addOrganizationAgentinfo($param){
         $program = new OrganizationAgentinfo();//实例化程序模型
-        $program->organization_id = $param['organization_id'];//组织id
+        $program->agent_id = $param['agent_id'];//组织id
         $program->agent_owner = $param['agent_owner'];//服务商负责人姓名
         $program->agent_owner_idcard = $param['agent_owner_idcard'];//服务商负责人身份证
         $program->agent_owner_mobile = $param['agent_owner_mobile'];//服务商负责人手机号
