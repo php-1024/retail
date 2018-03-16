@@ -155,7 +155,7 @@ class AgentController extends Controller{
                     'organization_id'=>$organization_id,
                     'zone_id'        =>$agentlist['zone_id']
                 ];
-                Warzoneagent::addWarzoneAgent($agentdata);//战区关联服务商
+                WarzoneAgent::addWarzoneAgent($agentdata);//战区关联服务商
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
