@@ -35,7 +35,7 @@ class CateringGoods extends Model{
 
     //和CateringOrderGoods表一对一的关系
     public function CateringOrderGoods(){
-        return $this->belongsTo('App\Models\CateringOrderGoods','order_id');
+        return $this->belongsTo('App\Models\CateringOrderGoods','goods_id');
     }
 
     //获取单条餐饮商品信息
