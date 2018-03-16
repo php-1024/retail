@@ -77,7 +77,7 @@
                                     </div>
 
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
@@ -143,7 +143,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
