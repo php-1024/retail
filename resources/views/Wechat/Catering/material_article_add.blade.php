@@ -67,7 +67,7 @@
                                         添加单条图文
                                     </header>
                                     <div class="panel-body">
-                                        <form class="form-horizontal" method="get">
+                                        <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_article_add_check') }}">
                                             <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
@@ -118,7 +118,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">正文</label>
                                                 <div class="col-sm-10">
-                                                    <textarea id="form-content" content class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea id="form-content" name="content" class="editor" cols="30" rows="10"> </textarea>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
