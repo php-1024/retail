@@ -149,12 +149,8 @@ class WechatController extends Controller{
      */
     public function material_image_select(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        fo
+        return view('Wechat/Catering/material_image_select',['list'=>$list]);
     }
 
     public function test(){
