@@ -189,13 +189,6 @@
             autogrow: true
 
         });
-        $('#save_btn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
     });
 
     //弹出图片上传框
