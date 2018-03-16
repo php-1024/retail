@@ -438,9 +438,7 @@ class AgentController extends Controller{
                     $num = $re['program_balance']+$number;
                     OrganizationAssets::editAssets([['id',$id]],['program_balance'=>$num]);
                 }
-                $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
-                //添加操作日志
-                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
+
             } else{//划出
                 if(empty($re)){
                     return response()->json(['data' => '数量不足', 'status' => '0']);
@@ -452,10 +450,10 @@ class AgentController extends Controller{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
-                $data = ['operator_id'=>$admin_data['id'],'fr_organization_id'=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
-                //添加操作日志
-                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
+            $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
+            //添加操作日志
+            OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
