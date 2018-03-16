@@ -25,7 +25,7 @@ class CateringGoods extends Model{
 
     //和organization表一对一的关系
     public function organization(){
-        return $this->belongsto('App\Models\Organization','branch_id','id');
+        return $this->belongsto('App\Models\Organization','restaurant_id','id');
     }
 
     //和CateringGoodsThumb表一对多的关系
