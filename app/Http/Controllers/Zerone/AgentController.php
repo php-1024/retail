@@ -405,11 +405,11 @@ class AgentController extends Controller{
     //服务商程序管理页面划入js显示
     public function agent_assets(Request $request){
         $organization_id = $request->input('organization_id'); //服务商id
-        $package_id = $request->input('package_id');//套餐id
+        $program_id = $request->input('program_id');//套餐id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
-        $listPac = Package::getOnePackage([['id',$package_id]]);
+        $listProgram = Program::getListProgram([['id',$program_id]]);
         $status = $request->input('status');//状态
-        return view('Zerone/agent/agent_assets',['listOrg'=>$listOrg,'listPac'=>$listPac,'status'=>$status]);
+        return view('Zerone/agent/agent_assets',['listOrg'=>$listOrg,'listProgram'=>$listProgram,'status'=>$status]);
     }
 
     //服务商程序管理页面划入划出检测
