@@ -59,12 +59,16 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">添加多条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('api/catering/material_article')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
-                                    <form class="form-horizontal" method="get">
+                                    <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_articles_add_check') }}">
+                                        <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
+                                        <input type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
+                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+
                                         <input type="hidden" id="num" value="1">
                                         <div class="panel-group m-b" id="target_box" >
 
