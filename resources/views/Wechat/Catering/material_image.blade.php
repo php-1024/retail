@@ -81,7 +81,7 @@
                                 </div>
 
 
-                                    {{ $list->appends($search_data)->links() }}
+                                    {{ $list->links() }}
 
                             </section>
                         </section>
