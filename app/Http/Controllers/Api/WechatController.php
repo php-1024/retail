@@ -145,6 +145,13 @@ class WechatController extends Controller{
     }
 
     /*
+     *单条图文素材添加检测
+     */
+    public function material_article_add_check(Request $request){
+        var_dump($request->input());
+    }
+
+    /*
      * 图片选择页面
      */
     public function material_image_select(Request $request){
