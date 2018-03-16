@@ -39,6 +39,8 @@
 
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
+            <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+            <input type="hidden" id="agent_fansmanage_add" value="{{ url('zerone/ajax/agent_fansmanage_add') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
 
@@ -47,7 +49,7 @@
                         <div class="form-group">
                             <button type="button" onclick="history.back()" class=" btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
 
-                            <button type="button" id="addBtn" class=" btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
+                            <button type="button" onclick="getAddFansmanageForm()" class=" btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
                         </div>
                     </div>
                 </div>
@@ -105,57 +107,9 @@
         @include('Zerone/Public/Footer')
 
     </div>
-    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content animated fadeIn">
-                <div class="modal-header">
-                    <h3>“刘记新科技有限公司”商户划入</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" style="padding-top: 7px;">请选择商户</label>
-                        <div class="col-sm-9">
-                            <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                                <option value="Mayotte">刘记集团</option>
-                                <option value="Mexico">李记鸡煲连锁</option>
-                                <option value="Micronesia, Federated States of">叶记猪肚鸡</option>
-                                <option value="Moldova, Republic of">韦记莲藕汤</option>
-                            </select>
-                        </div>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" style="padding-top: 7px;">消耗程序与分店数量</label>
-                        <div class="col-sm-9">
-                            <input type="checkbox" class="js-switch" checked  value="1"/>
-                        </div>
-
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">安全密码</label>
-                        <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
-                    </div>
-                    <div style="clear:both"></div>
-                    <div class="hr-line-dashed"></div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary saveBtn">保存</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content animated fadeIn">
                     <div class="modal-header">
@@ -190,9 +144,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>
@@ -212,11 +163,6 @@
 
 <script>
     $(document).ready(function() {
-        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        // activate Nestable for list 2
-        $('#addBtn').click(function(){
-            $('#myModal2').modal();
-        });
 
         $('#removeBtn').click(function(){
             $('#myModal').modal();
@@ -235,6 +181,56 @@
             });
         });
     });
+
+
+
+
+    //编辑
+    function getAddFansmanageForm(){
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        // activate Nestable for list 2
+        var url = $('#agent_fansmanage_add').val();
+        var token = $('#_token').val();
+//        if(id==''){
+//            swal({
+//                title: "提示信息",
+//                text: '数据传输错误',
+//                confirmButtonColor: "#DD6B55",
+//                confirmButtonText: "确定",
+//            },function(){
+//                window.location.reload();
+//            });
+//            return;
+//        }
+
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
 </script>
 
 </body>
