@@ -78,19 +78,19 @@ class OrderController extends Controller
         $status = $request->get('status');              //订单状态
         DB::beginTransaction();
         try {
-            CateringGoods::select_delete($goods_id);
+            CateringOrder::editOrder(['id'=>$order_id],[['status'=>$status]]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
             } else {//分店本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了订单状态！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '删除商品失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '删除商品成功', 'status' => '1']);
+        return response()->json(['data' => '修改订单状态成功！', 'status' => '1']);
     }
 
 }
