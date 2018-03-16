@@ -72,7 +72,7 @@
                                                 <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
                                             </div>
                                             <div class="padder-v">
-                                                <span>{{ $val->filename }}</span>
+                                                <span>{{ $val->filename }}</span>&nbsp;&nbsp;<button class="btn btn-xs btn-danger"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                             </div>
                                         </div>
                                     </div>
@@ -80,15 +80,9 @@
                                     </div>
                                 </div>
 
-                                <ul class="pagination pagination">
-                                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                                </ul>
+
+                                    {{ $list->links() }}
+
                             </section>
                         </section>
                     </section>
@@ -138,6 +132,11 @@
                 $('#myModal').modal();
             }
         });
+    }
+
+    //删除素材图片
+    function deleteImage(){
+
     }
 </script>
 </body>
