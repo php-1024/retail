@@ -68,7 +68,7 @@
                                         <input autocomplete="off" type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                         <input autocomplete="off" type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
                                         <input autocomplete="off" type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                        <input  autocomplete="off" type="hidden" id="num" value="1">
+                                        <input  autocomplete="off" type="hidden" name="num" id="num" value="1">
                                         <div class="panel-group m-b" id="target_box" >
 
                                             <div class="panel panel-default">
@@ -257,6 +257,17 @@
             var html = $('#tw_info').html();
             var num = $('#num').val();
             num++;
+            if(num>10){
+                swal({
+                    title: "提示信息",
+                    text: "每次最多只能添加10条图文素材哦",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    return;
+                });
+                return ;
+            }
             $('#num').val(num);
             html = html.replace(/{target_num}/g,num);
             $('#target_box').append(html);
