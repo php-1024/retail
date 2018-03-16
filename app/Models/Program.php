@@ -43,7 +43,7 @@ class Program extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->with('packages')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加数据
