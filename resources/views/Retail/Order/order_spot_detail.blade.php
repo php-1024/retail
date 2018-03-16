@@ -46,6 +46,7 @@
                                 </header>
                                 <div class="panel-body">
                                     <form class="form-horizontal" method="post">
+
                                         <input type="hidden" id="order_status_comfirm_url" value="{{ url('retail/ajax/order_status') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
