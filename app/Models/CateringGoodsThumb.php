@@ -13,9 +13,9 @@ class CateringGoodsThumb extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和商品表catering_goods表一对多的关系
+    //和商品表catering_goods表多对一的关系
     public function catering_goods(){
-        return $this->hasMany('App\Models\CateringGoods','id');
+        return $this->belongsto('App\Models\CateringGoods','id');
     }
 
     //获取单条数据
