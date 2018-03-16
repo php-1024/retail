@@ -656,8 +656,8 @@ Route::group(['prefix'=>'retail'],function(){
     });
     Route::get('/', 'Retail\DisplayController@display')->middleware('RetailCheck');//分店首页
     Route::get('quit', 'Retail\LoginController@quit');                                                 //退出系统
-    Route::get('branch_list', 'Retail\DisplayController@branch_list')->middleware('RetailCheck');      //分店列表
-    Route::get('branch_switch', 'Retail\DisplayController@branch_switch')->middleware('RetailCheck'); //超级管理员退出当前店铺
+    Route::get('list', 'Retail\DisplayController@branch_list')->middleware('RetailCheck');      //分店列表
+    Route::get('switch', 'Retail\DisplayController@branch_switch')->middleware('RetailCheck'); //超级管理员退出当前店铺
 
     //账户中心
     Route::group(['prefix'=>'account'],function(){
