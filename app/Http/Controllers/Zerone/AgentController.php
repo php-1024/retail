@@ -306,7 +306,7 @@ class AgentController extends Controller{
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结状态
         $list = Organization::getOneagent([['id',$id]]);//服务商信息
-        return view('Zerone/agent/agent_list_lock',['id'=>$id,'list'=>$list,'status'=>$status]);
+        return view('Zerone/Agent/agent_list_lock',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //服务商冻结功能提交
     public function agent_list_lock_check(Request $request){
@@ -330,6 +330,7 @@ class AgentController extends Controller{
                 }
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '操作失败', 'status' => '0']);
             }
