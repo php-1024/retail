@@ -70,7 +70,7 @@
                                     <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
-                                                <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$val->organization_id.'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
+                                                <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$val->organization_id.'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
                                             </div>
                                             <div class="padder-v">
                                                 <span>{{ $val->filename }}</span>&nbsp;&nbsp;<button class="btn btn-xs btn-danger" onclick="return getDeleteComfirmForm('{{$val->id}}');"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
