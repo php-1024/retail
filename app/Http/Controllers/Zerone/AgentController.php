@@ -463,8 +463,6 @@ class AgentController extends Controller{
     }
     //商户划拨管理
     public function agent_fansmanage(Request $request){
-        $a = Organization::getList([['type',3]]);
-        dd(count($a));
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -483,7 +481,13 @@ class AgentController extends Controller{
     //商户划拨归属功能提交
     public function agent_fansmanage_add_check(Request $request){
 
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
+        if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
+            $to_organization_id = 1;
+        }else{
+            $to_organization_id = $admin_data['organization_id'];
+        }
 
         $organization_id = $request->organization_id;//服务商id
         $oneAgent = Organization::getOne([['id',$organization_id]]);//服务商信息
@@ -494,12 +498,27 @@ class AgentController extends Controller{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
             Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>'$organization_id','parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
-            if(!empty($datastore)){
+            if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
                 }
+                if($status == 1){//消耗程序数量
+                    $number = count($datastore);//计算店铺数量
+                    $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$program_id]]);//查询服务商程序数量信息
+                    if($Assets->program_balance >= $number){//如果服务商剩余程序数量足够
+                        $program_balance = $Assets->program_balance - $number;//剩余数量
+                        $program_used_num = $Assets->program_used_num + $number;//使用数量
+                        OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
+                        $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$fansmanage_id,'program_id'=>$program_id,'status'=>0,'number'=>$number];
+                        //添加操作日志
+                        OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
+                    }else{
+                        return response()->json(['data' => '该服务商的程序数量不够', 'status' => '0']);
+                    }
+                }
             }
+
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
