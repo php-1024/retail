@@ -648,7 +648,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
 });
 /**********************粉丝管理系统*********************/
 
-/**********************零售版店铺*********************/
+/**********************零售版店铺管理系统*********************/
 Route::group(['prefix'=>'retail'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
@@ -751,11 +751,13 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('goods_delete', 'Retail\GoodsController@goods_delete')->middleware('RetailCheckAjax');                         //商品删除弹窗
         Route::post('goods_delete_check', 'Retail\GoodsController@goods_delete_check')->middleware('RetailCheckAjax');             //商品删除检测
         Route::post('goods_edit_check', 'Retail\GoodsController@goods_edit_check')->middleware('RetailCheckAjax');                 //商品编辑检测
+        Route::post('order_status', 'Retail\OrderController@order_status')->middleware('RetailCheckAjax');                         //修改订单状态弹窗
+        Route::post('order_status_check', 'Retail\OrderController@order_status_check')->middleware('RetailCheckAjax');             //修改订单状态检测
         Route::any('goods_thumb', 'Retail\GoodsController@goods_thumb')->middleware('RetailCheckAjax');                           //商品规格异步加载页面
         Route::post('upload_thumb_check', 'Retail\GoodsController@upload_thumb_check')->middleware('RetailCheckAjax');             //上传文件检测
     });
 });
-/**********************零售版店铺*********************/
+/**********************零售版店铺管理系统*********************/
 
 /*********************接口路由*************************/
 Route::group(['prefix'=>'api'],function() {

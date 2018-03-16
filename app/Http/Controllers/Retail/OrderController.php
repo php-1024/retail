@@ -58,6 +58,38 @@ class OrderController extends Controller
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+
+    //修改订单状态确认密码弹窗
+    public function order_status(Request $request)
+    {
+        $order_id = $request->get('order_id');          //订单ID
+        $status = $request->get('status');              //订单状态
+        return view('Retail/Order/order_delete',['order_id'=>$order_id,'status'=>$status]);
+    }
+
+    //修改订单状态确认操作
+    public function order_status_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $goods_id = $request->get('goods_id');        //获取分类栏目ID
+        DB::beginTransaction();
+        try {
+            CateringGoods::select_delete($goods_id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除商品失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除商品成功', 'status' => '1']);
+    }
+
 }
 
 ?>
