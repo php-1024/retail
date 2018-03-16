@@ -409,7 +409,7 @@ class AgentController extends Controller{
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $listProgram = Program::getListProgram([['id',$program_id]]);
         $status = $request->input('status');//状态
-        return view('Zerone/agent/agent_assets',['listOrg'=>$listOrg,'listProgram'=>$listProgram,'status'=>$status]);
+        return view('Zerone/Agent/agent_assets',['listOrg'=>$listOrg,'listProgram'=>$listProgram,'status'=>$status]);
     }
 
     //服务商程序管理页面划入划出检测
