@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
+use App\Models\WechatImage;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
@@ -76,16 +77,18 @@ class WechatController extends Controller{
             $path = $file->move(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/', $new_name);   //$path上传后的文件路径
             $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
             $re = \Wechat::uploadimg($auth_info['authorizer_access_token'],base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
-            dump($re);
-            exit();
+
             if(!empty($re['media_id'])) {
                 $data = [
                     'organization_id' => $admin_data['organization_id'],
                     'filename' => $new_name,
                     'filepath' => base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name,
                     'media_id' => $re['media_id'],
-                    ''
+                    'wechat_url' => $re['url']
                 ];
+                WechatImage::addWechatImage($data);
+            }else{
+                @unlink(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
             }
             return response()->json(['data' => '上传商品图片信息成功', 'status' => '1']);
         } else {
