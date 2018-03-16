@@ -47,9 +47,9 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="label_add" value="{{ url('catering/ajax/label_add') }}">
-                                    <input type="hidden" id="label_edit" value="{{ url('catering/ajax/label_edit') }}">
-                                    <input type="hidden" id="label_delete" value="{{ url('catering/ajax/label_delete') }}">
+                                    <input type="hidden" id="label_add" value="{{ url('fansmanage/ajax/label_add') }}">
+                                    <input type="hidden" id="label_edit" value="{{ url('fansmanage/ajax/label_edit') }}">
+                                    <input type="hidden" id="label_delete" value="{{ url('fansmanage/ajax/label_delete') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 
                                     <div class="col-sm-12">

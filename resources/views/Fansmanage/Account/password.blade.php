@@ -48,7 +48,7 @@
                                 登录密码修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/password_check') }}">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('fansmanage/ajax/password_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>

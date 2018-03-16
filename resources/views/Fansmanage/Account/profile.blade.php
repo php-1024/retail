@@ -48,7 +48,7 @@
                                     个人账号信息修改
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/profile_check') }}">
+                                    <form class="form-horizontal" method="post" id="currentForm" action="{{ url('fansmanage/ajax/profile_check') }}">
                                         <input type="hidden" name="_token"  value="{{csrf_token()}}">
                                         <input type="hidden" name="id" value="{{$user['id']}}">
                                         <input type="hidden" name="organization_id" value="{{$user['organization_id']}}">
