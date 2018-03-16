@@ -18,9 +18,14 @@ class CateringOrder extends Model{
         return $this->belongsTo('App\Models\User','user_id');
     }
 
+    //和CateringOrderGoods表一对多的关系
+    public function CateringOrderGoods(){
+        return $this->hasMany('App\Models\CateringOrderGoods','order_id');
+    }
+
     public static function getOne($where)
     {
-        $model = self::with('User');
+        $model = self::with('User')->with('CateringOrderGoods');
         return $model->where($where)->first();
     }
 

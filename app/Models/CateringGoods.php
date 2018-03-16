@@ -33,6 +33,11 @@ class CateringGoods extends Model{
         return $this->hasMany('App\Models\CateringGoodsThumb','goods_id');
     }
 
+    //和CateringOrderGoods表一对一的关系
+    public function CateringOrderGoods(){
+        return $this->belongsTo('App\Models\CateringOrderGoods','goods_id');
+    }
+
     //获取单条餐饮商品信息
     public static function getOne($where){
         return self::with('category')->with('goodsThumb')->where($where)->first();
