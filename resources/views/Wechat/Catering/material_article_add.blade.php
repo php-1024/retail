@@ -68,11 +68,12 @@
                                     </header>
                                     <div class="panel-body">
                                         <form class="form-horizontal" method="get">
-                                            <input type="hidden" id="#material_image_select_url" value="{{ url('api/ajax/meterial_iamge_select') }}">
+                                            <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
+                                            <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
-                                                    <button class="btn btn-info" type="button">选择图片素材</button>
+                                                    <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
                                                 </div>
                                             </div>
 
@@ -185,7 +186,7 @@
     });
 
     //弹出图片上传框
-    function selectImageForm(){
+    function selectImageForm(i){
         var url = $('#material_image_select_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
