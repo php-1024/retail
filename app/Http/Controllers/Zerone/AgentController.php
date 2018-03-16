@@ -483,12 +483,6 @@ class AgentController extends Controller{
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
-        if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
-            $to_organization_id = 1;
-        }else{
-            $to_organization_id = $admin_data['organization_id'];
-        }
-
         $organization_id = $request->organization_id;//服务商id
         $oneAgent = Organization::getOne([['id',$organization_id]]);//服务商信息
         $status = $request->status;//服务商id
@@ -500,6 +494,7 @@ class AgentController extends Controller{
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
+                    $program_id = Organization::getPluck([['id',$fansmanage_id]],'program_id')->first();
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
                 }
