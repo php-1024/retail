@@ -91,7 +91,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/agent_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+            case "zerone/ajax/agent_list_lock_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -148,7 +148,7 @@ class ZeroneCheckAjax
             //服务商管理
             case "zerone/ajax/agent_examine"://服务商审核检测弹出登入和权限
             case "zerone/ajax/agent_list_edit"://服务商列表修改弹出检测登入和权限
-            case "zerone/ajax/agent_list_frozen"://服务商列表冻结弹出检测登入和权限
+            case "zerone/ajax/agent_list_lock"://服务商列表冻结弹出检测登入和权限
             case "zerone/ajax/agent_list_delete"://服务商列表删除弹出检测登入和权限
             case "zerone/ajax/agent_assets"://服务商列表划入检测弹出登入和权限
 
