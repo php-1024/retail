@@ -257,6 +257,17 @@
             var html = $('#tw_info').html();
             var num = $('#num').val();
             num++;
+            if(num>=10){
+                swal({
+                    title: "提示信息",
+                    text: "每次最多只能添加10条图文素材哦",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    return;
+                });
+                return ;
+            }
             $('#num').val(num);
             html = html.replace(/{target_num}/g,num);
             $('#target_box').append(html);
