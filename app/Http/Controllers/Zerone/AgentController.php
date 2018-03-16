@@ -125,7 +125,7 @@ class AgentController extends Controller{
         if($status == -1 ){
             DB::beginTransaction();
             try{
-                agentApply::editagentApply([['id',$id]],['status'=>$status]);//拒绝通过
+                AgentApply::editAgentApply([['id',$id]],['status'=>$status]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$agentlist['agent_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -137,7 +137,7 @@ class AgentController extends Controller{
         }elseif($status == 1){
             DB::beginTransaction();
             try{
-                agentApply::editagentApply([['id',$id]],['status'=>$status]);//申请通过
+                AgentApply::editAgentApply([['id',$id]],['status'=>$status]);//申请通过
 
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
@@ -155,7 +155,7 @@ class AgentController extends Controller{
                     'organization_id'=>$organization_id,
                     'zone_id'        =>$agentlist['zone_id']
                 ];
-                Warzoneagent::addWarzoneagent($agentdata);//战区关联服务商
+                WarzoneAgent::addWarzoneAgent($agentdata);//战区关联服务商
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
@@ -190,7 +190,7 @@ class AgentController extends Controller{
                     'agent_owner_idcard'=>$idcard,
                     'agent_owner_mobile'=>$agentlist['agent_owner_mobile']
                 ];
-                Organizationagentinfo::addOrganizationagentinfo($orgagentinfo);  //添加到服务商组织信息表
+                OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);  //添加到服务商组织信息表
 
                 $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
                 foreach($module_node_list as $key=>$val){
@@ -203,6 +203,7 @@ class AgentController extends Controller{
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$agentlist['agent_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }

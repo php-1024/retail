@@ -220,7 +220,7 @@
                                             <td></td>
                                             <td><label class="label label-info">总计</label></td>
                                             <td>
-                                                <label class="label label-danger">¥100012.00</label>
+                                                <label class="label label-danger">¥{{$order_price}}</label>
                                             </td>
                                         </tr>
                                         </tbody>

@@ -23,7 +23,7 @@ class WarzoneAgent extends Model{
         return self::where($where)->first();
     }
     //添加数据
-    public static function addWarzoneProxy($param){
+    public static function addWarzoneAgent($param){
         $program = new WarzoneAgent();//实例化程序模型
         $program->zone_id = $param['zone_id'];//程序名称
         $program->organization_id = $param['organization_id'];//程序名称
@@ -31,7 +31,7 @@ class WarzoneAgent extends Model{
         return $program->id;
     }
     //修改数据
-    public static function editWarzoneProxy($where,$param){
+    public static function editWarzoneAgent($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
