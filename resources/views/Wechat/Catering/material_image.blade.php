@@ -74,7 +74,7 @@
                                                 </div>
                                             </div>
                                             <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
+                                                <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
                                             </div>
                                             <div class="padder-v">
                                                 <span>{{ $val->filename }}</span>
