@@ -13,14 +13,14 @@ class CateringOrder extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和Account表一对多的关系
-    public function account(){
-        return $this->hasMany('App\Models\Account', 'id','user_id');
+    //和User表多对一的关系
+    public function User(){
+        return $this->belongsTo('App\Models\User','user_id');
     }
 
     public static function getOne($where)
     {
-        $model = self::with('account');
+        $model = self::with('User');
         return $model->where($where)->first();
     }
 
