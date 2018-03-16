@@ -50,7 +50,7 @@ class OrderController extends Controller
         $id = $request->get('id');
         $order = CateringOrder::getOne([['id',$id]]);
         $user = User::getOneUser([['id',$order->user_id]]);        //查询处理订单信息和用户信息
-        $order->account = $user;
+        $order->user = $user;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         $order_price = 0.00;    //设置订单的初始总价
         foreach ($order_goods as $key=>$val){

@@ -62,7 +62,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">用户账号</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->account->account}}
+                                                    {{$order->user->account}}
                                                 </div>
                                             </div>
                                         </div>
@@ -71,7 +71,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">微信昵称</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->account->account_info->realname}}
+                                                    {{$order->user->UserInfo->nickname}}
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">联系方式</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->account->mobile}}
+                                                    {{$order->user->mobile}}
                                                 </div>
                                             </div>
                                         </div>
