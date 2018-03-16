@@ -38,7 +38,6 @@ class OrganizationAssetsallocation extends Model{
         $program->account_id = $param['operator_id'];//操作人id
         $program->organization_id = $param['fr_organization_id '];//划入组织
         $program->draw_organization_id = $param['to_organization_id'];//划出组织
-        $program->package_id = $param['package_id'];//套餐id
         $program->program_id = $param['program_id'];//程序id
         $program->status = $param['status'];//操作状态
         $program->number = $param['number'];//操作数量
