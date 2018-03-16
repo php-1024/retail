@@ -474,7 +474,7 @@ class AgentController extends Controller{
     }
 //服务商程序管理
     public function agent_fansmanage_add(Request $request){
-        
+
         return view('Zerone/Agent/agent_fansmanage_add');
     }
 
