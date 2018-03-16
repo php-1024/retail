@@ -14,7 +14,7 @@ class CateringOrderGoods extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和CateringGoods表一对一的关系
-    public function catering_goods(){
+    public function CateringGoods(){
         return $this->hasOne('App\Models\CateringGoods','goods_id');
     }
 
