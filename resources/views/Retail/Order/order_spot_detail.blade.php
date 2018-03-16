@@ -183,10 +183,8 @@
                                             <th>ID</th>
                                             <th>商品标题</th>
                                             <th>数量</th>
-                                            <th>规格</th>
                                             <th>商品价格</th>
                                             <th>状态</th>
-                                            <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -197,9 +195,6 @@
                                             <td>{{$val->order_goods->name}}</td>
                                             <td>
                                                 {{$val->total}}
-                                            </td>
-                                            <td>
-                                                米饭 + 辣
                                             </td>
                                             <td>
                                                 <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->order_goods->price}}">
@@ -217,38 +212,8 @@
                                                     {{--<option>已上菜</option>--}}
                                                 {{--</select>--}}
                                             </th>
-                                            <td>
-                                                <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-plus"></i></button>
-                                                <input type="text" id="exampleInputPassword2" class="text-center" value="{{$val->total}}" size="4">
-                                                <button type="button" class="btn btn-danger btn-xs"> <i class="fa fa-minus"></i></button>
-                                            </td>
                                         </tr>
                                         @endforeach
-
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                            <td><label class="label label-info">商品总计</label></td>
-                                            <td>
-                                                <label class="label label-danger">¥100000.00</label>
-                                            </td>
-                                            <td></td>
-                                            <td><label class="label label-danger">2份</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><label class="label label-info">餐位费</label></td>
-
-                                            <td>
-                                                <label class="label label-danger">¥12.00</label>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
                                         <tr>
                                             <td></td>
                                             <td></td>
@@ -259,18 +224,6 @@
                                             </td>
                                             <td></td>
                                             <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <button class="btn btn-info btn-xs" type="button" id="addBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;加减菜</button>
-                                                <button class="btn btn-danger btn-xs" type="button" id="addBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;修改价格</button>
-                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
