@@ -24,24 +24,29 @@ class ZeroneCheck{
                 break;
 
             /****仅检测是否登录及是否具有权限****/
+
+            //系统管理
             case "zerone":                           //后台首页
             case "zerone/dashboard/operation_log":   //战区管理所有操作记录
             case "zerone/dashboard/login_log":       //战区管理所有登录记录
             case "zerone/dashboard/warzone":         //战区管理首页权限
             case "zerone/dashboard/structure":       //人员结构
 
+            //个人中心
             case "zerone/personal":                     //个人中心——个人资料
             case "zerone/personal/password_edit":       //个人中心——密码修改
             case "zerone/personal/safe_password":       //个人中心——安全密码设置
             case "zerone/personal/operation_log":       //个人中心——我的操作日志
             case "zerone/personal/login_log":           //个人中心——我的登录日志
 
-            case "zerone/role/role_add":              //添加权限角色
-            case "zerone/role/role_list":             //权限角色列表
-            case "zerone/subordinate/subordinate_add"://添加下级人员
-            case "zerone/subordinate/subordinate_list"://下级人员列表
+            //下级管理
+            case "zerone/role/role_add":                    //添加权限角色
+            case "zerone/role/role_list":                   //权限角色列表
+            case "zerone/subordinate/subordinate_add":      //添加下级人员
+            case "zerone/subordinate/subordinate_list":     //下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
 
+            //服务商管理
             case "zerone/agent/agent_add":              //添加服务商
             case "zerone/agent/agent_examinelist":      //服务商审核列表
             case "zerone/agent/agent_list":             //服务商列表
