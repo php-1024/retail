@@ -13,11 +13,7 @@ class Program extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和配套多对多的关系
-    public function packages()
-    {
-        return $this->belongsToMany('App\Models\Package','package_program','program_id','package_id');
-    }
+
 
     //和程序菜单表一对多的关系
     public function menus(){
@@ -47,7 +43,7 @@ class Program extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->with('packages')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加数据
