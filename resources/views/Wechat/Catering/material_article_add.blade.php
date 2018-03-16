@@ -67,7 +67,7 @@
                                         添加单条图文
                                     </header>
                                     <div class="panel-body">
-                                        <form class="form-horizontal" method="get">
+                                        <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_article_add_check') }}">
                                             <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
@@ -118,7 +118,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">正文</label>
                                                 <div class="col-sm-10">
-                                                    <textarea id="form-content" content class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea id="form-content" name="content" class="editor" cols="30" rows="10"> </textarea>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -126,7 +126,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-12 col-sm-offset-6">
 
-                                                    <button type="button" class="btn btn-success" id="save_btn">保存信息</button>
+                                                    <button type="button" class="btn btn-success" onclick="return postForm();" id="save_btn">保存信息</button>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -218,6 +218,34 @@
 
                 $('#myModal').html(response);
                 $('#myModal').modal();
+            }
+        });
+    }
+
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }
