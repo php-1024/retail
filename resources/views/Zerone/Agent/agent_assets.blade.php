@@ -1,5 +1,5 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/proxy_assets_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
     <input type="hidden" name="package_id" value="{{$listPac->id}}">
