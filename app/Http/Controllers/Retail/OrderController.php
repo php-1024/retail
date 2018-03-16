@@ -55,10 +55,10 @@ class OrderController extends Controller
         $order_price = 0.00;    //设置订单的初始总价
         foreach ($order_goods as $key=>$val){
             $goods = CateringGoods::getOne([['id',$val->goods_id]]);
+            dd($goods);
             $val->order_goods = $goods;
             $order_price += $val->price;        //计算订单总价
         }
-        dd($order_goods);
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
