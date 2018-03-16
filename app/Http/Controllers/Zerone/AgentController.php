@@ -463,7 +463,8 @@ class AgentController extends Controller{
     }
     //商户划拨管理
     public function agent_fansmanage(Request $request){
-
+        $a = Organization::getList([[]]);
+        dd(count($a));
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -482,7 +483,31 @@ class AgentController extends Controller{
     //商户划拨归属功能提交
     public function agent_fansmanage_add_check(Request $request){
 
-       dd(1);
+
+
+        $organization_id = $request->organization_id;//服务商id
+        $oneAgent = Organization::getOne([['id',$organization_id]]);//服务商信息
+        $status = $request->status;//服务商id
+        $fansmanage_id = $request->fansmanage_id;//商户id
+        DB::beginTransaction();
+        try{
+            $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
+            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>'$organization_id','parent_tree'=>$parent_tree]);
+            $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
+            if(!empty($datastore)){
+                foreach($datastore as $key=>$value){
+                    $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
+                    Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
+                }
+            }
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
+
     }
 }
 ?>
