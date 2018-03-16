@@ -109,9 +109,9 @@ class AgentController extends Controller{
     //服务商审核ajaxshow显示页面
     public function agent_examine(Request $request){
         $id = $request->input('id');//服务商id
-        $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
+        $status= $request->input('status');//是否通过值 1为通过 -1为不通过
         $info =  agentApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/agent/agent_examine',['info'=>$info,'sta'=>$sta]);
+        return view('Zerone/Agent/agent_examine',['info'=>$info,'status'=>$status]);
     }
     //服务商审核数据提交
     public function agent_examine_check(Request $request){
@@ -119,13 +119,13 @@ class AgentController extends Controller{
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
-        $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
+        $status = $request->input('status');//是否通过值 1为通过 -1为不通过
         $agentlist = agentApply::getOne([['id',$id]]);//查询申请服务商信息
         $program_id = 2;
-        if($sta == -1 ){
+        if($status == -1 ){
             DB::beginTransaction();
             try{
-                agentApply::editagentApply([['id',$id]],['status'=>$sta]);//拒绝通过
+                agentApply::editagentApply([['id',$id]],['status'=>$status]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$agentlist['agent_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -134,10 +134,10 @@ class AgentController extends Controller{
                 return response()->json(['data' => '拒绝失败', 'status' => '0']);
             }
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
-        }elseif($sta == 1){
+        }elseif($status == 1){
             DB::beginTransaction();
             try{
-                agentApply::editagentApply([['id',$id]],['status'=>$sta]);//申请通过
+                agentApply::editagentApply([['id',$id]],['status'=>$status]);//申请通过
 
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商
