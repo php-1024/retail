@@ -12,7 +12,7 @@ use App\Models\OrganizationAgentinfo;
 use App\Models\Package;
 use App\Models\WarzoneAgent;
 use Illuminate\Http\Request;
-use App\Models\AgentApply;
+use App\Models\OrganizationAgentapply;
 use App\Models\Warzone;
 use App\Models\Module;
 use Illuminate\Support\Facades\DB;
@@ -37,14 +37,14 @@ class AgentController extends Controller{
             $where[] = ['agent_owner_mobile',$agent_owner_mobile];
         }
 
-        $list = agentApply::getPaginage($where,'15','id');
+        $list = OrganizationAgentapply::getPaginage($where,'15','id');
         return view('Zerone/Agent/agent_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
     public function agent_examine(Request $request){
         $id = $request->input('id');//服务商id
         $status= $request->input('status');//是否通过值 1为通过 -1为不通过
-        $info =  agentApply::getOne([['id',$id]]);//获取该ID的信息
+        $info =  OrganizationAgentapply::getOne([['id',$id]]);//获取该ID的信息
         return view('Zerone/Agent/agent_examine',['info'=>$info,'status'=>$status]);
     }
     //服务商审核数据提交
@@ -54,12 +54,12 @@ class AgentController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
-        $agentlist = agentApply::getOne([['id',$id]]);//查询申请服务商信息
+        $agentlist = OrganizationAgentapply::getOne([['id',$id]]);//查询申请服务商信息
         $program_id = 2;
         if($status == -1 ){
             DB::beginTransaction();
             try{
-                AgentApply::editAgentApply([['id',$id]],['status'=>$status]);//拒绝通过
+                OrganizationAgentapply::editOrganizationAgentapply([['id',$id]],['status'=>$status]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了服务商：'.$agentlist['agent_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -71,7 +71,7 @@ class AgentController extends Controller{
         }elseif($status == 1){
             DB::beginTransaction();
             try{
-                AgentApply::editAgentApply([['id',$id]],['status'=>$status]);//申请通过
+                OrganizationAgentapply::editOrganizationAgentapply([['id',$id]],['status'=>$status]);//申请通过
 
                 $orgparent_tree = '0'.',';//服务商组织树
                 //添加服务商

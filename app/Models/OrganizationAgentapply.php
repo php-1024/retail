@@ -38,7 +38,7 @@ class OrganizationAgentapply extends Model{
         return $program->id;
     }
     //修改数据
-    public static function editAgentApply($where,$param){
+    public static function editOrganizationAgentapply($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
