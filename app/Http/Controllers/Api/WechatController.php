@@ -77,7 +77,7 @@ class WechatController extends Controller{
             $path = $file->move(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/', $new_name);   //$path上传后的文件路径
             $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
             $re = \Wechat::uploadimg($auth_info['authorizer_access_token'],base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
-
+            dump($re);
             if(!empty($re['media_id'])) {
                 $data = [
                     'organization_id' => $admin_data['organization_id'],
