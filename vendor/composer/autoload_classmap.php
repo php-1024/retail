@@ -103,7 +103,7 @@ return array(
     'App\\Models\\ToolingOperationLog' => $baseDir . '/app/Models/ToolingOperationLog.php',
     'App\\Models\\Warzone' => $baseDir . '/app/Models/Warzone.php',
     'App\\Models\\WarzoneProvince' => $baseDir . '/app/Models/WarzoneProvince.php',
-    'App\\Models\\WarzoneProxy' => $baseDir . '/app/Models/WarzoneProxy.php',
+    'App\\Models\\WarzoneProxy' => $baseDir . '/app/Models/WarzoneAgent.php',
     'App\\Models\\WechatOpenSetting' => $baseDir . '/app/Models/WechatOpenSetting.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
