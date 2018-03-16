@@ -214,6 +214,7 @@ class GoodsController extends Controller
     //删除商品弹窗
     public function goods_delete(Request $request)
     {
+        dd($request);
         $goods_id = $request->get('id');              //分类栏目的id
         return view('Retail/Goods/goods_delete',['goods_id'=>$goods_id]);
     }
