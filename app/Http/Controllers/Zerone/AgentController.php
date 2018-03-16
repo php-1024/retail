@@ -330,19 +330,13 @@ class AgentController extends Controller{
                 }
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '操作失败', 'status' => '0']);
             }
             return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-    //服务商删除ajaxshow显示页面
-    public function agent_list_delete(Request $request){
-        $id = $request->input('id');//服务商id
 
-        return view('Zerone/agent/agent_list_delete');
-    }
-//服务商下级人员架构
+    //服务商下级人员架构
     public function agent_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
