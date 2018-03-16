@@ -425,6 +425,20 @@ class WechatApi{
     }
 
     /*
+     * 永久删除素材
+     */
+    public function delete_meterial($authorizer_access_token,$media_id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/material/del_material?access_token='.$authorizer_access_token;
+        $data = [
+            'media_id'=>$media_id
+        ];
+        $data = json_encode($data);
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        return $re;
+    }
+
+    /*
      * 返回加密解密类
      */
     public function WXBizMsgCrypt(){

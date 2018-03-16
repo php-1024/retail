@@ -80,15 +80,9 @@
                                     </div>
                                 </div>
 
-                                <ul class="pagination pagination">
-                                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                                </ul>
+
+                                    {{ $list->appends($search_data)->links() }}
+
                             </section>
                         </section>
                     </section>
@@ -138,6 +132,11 @@
                 $('#myModal').modal();
             }
         });
+    }
+
+    //删除素材图片
+    function deleteImage(){
+
     }
 </script>
 </body>

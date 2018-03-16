@@ -64,6 +64,9 @@ class WechatController extends Controller{
         return view('Wechat/Catering/material_image_upload',['admin_data'=>$admin_data,'route_name'=>$route_name]);
     }
 
+    /*
+     * 图片上传检测
+     */
     public function meterial_image_upload_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -94,6 +97,13 @@ class WechatController extends Controller{
             return response()->json(['status' => '0']);
         }
     }
+    /*
+     * 删除图片
+     *
+     */
+    public function delete_material_image(Request $request){
+
+    }
 
     /*
      * 图文素材
@@ -107,19 +117,6 @@ class WechatController extends Controller{
         return view('Wechat/Catering/material_article',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //对象转换为数组
-    private function object_to_array($obj) {
-        $obj = (array)$obj;
-        foreach ($obj as $k => $v) {
-            if (gettype($v) == 'resource') {
-                return;
-            }
-            if (gettype($v) == 'object' || gettype($v) == 'array') {
-                $obj[$k] = (array)object_to_array($v);
-            }
-        }
-        return $obj;
-    }
 
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
