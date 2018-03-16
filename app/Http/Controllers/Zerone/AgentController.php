@@ -476,7 +476,7 @@ class AgentController extends Controller{
     public function agent_fansmanage_add(Request $request){
 
         $organization_id = $request->organization_id;//服务商id
-        $list = Organization::getList([['type'=>3],['parent_id','<>',$organization_id]]);
+        $list = Organization::getList([['type',3],['parent_id','<>',$organization_id]]);
         return view('Zerone/Agent/agent_fansmanage_add',['list'=>$list]);
     }
 
