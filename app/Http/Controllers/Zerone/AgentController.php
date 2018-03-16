@@ -472,5 +472,12 @@ class AgentController extends Controller{
         $list = Organization::getPaginageFansmanage([['parent_id',$organization_id]],'10','id');
         return view('Zerone/Agent/agent_fansmanage',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+//服务商程序管理
+    public function agent_fansmanage_add(Request $request){
+        
+        return view('Zerone/Agent/agent_fansmanage_add');
+    }
+
+
 }
 ?>
