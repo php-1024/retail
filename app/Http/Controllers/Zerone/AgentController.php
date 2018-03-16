@@ -285,7 +285,7 @@ class AgentController extends Controller{
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
-            $waprlist = Warzoneagent::getOne([['organization_id',$id]]);
+            $waprlist = Warzoneagent::getOne([['agent_id',$id]]);
             if($waprlist['zone_id'] != $zone_id){
                 WarzoneAgent::editWarzoneAgent([['agent_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
             }
