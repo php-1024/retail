@@ -774,7 +774,8 @@ Route::group(['prefix'=>'api'],function() {
     Route::group(['prefix' => 'catering'] , function(){
         Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('CateringCheck');//开放平台控制公众平台回复函数
         Route::any('material_image', 'Api\WechatController@material_image')->middleware('CateringCheck');//图片素材
-        Route::any('material_article','Api\WechatController@material_article')->middleware('CateringCheck');
+        Route::any('material_article','Api\WechatController@material_article')->middleware('CateringCheck');//图文素材列表
+        Route::any('material_article_add','Api\WechatController@material_article_add')->middleware('CateringCheck');//图文素材列表
     });
 
     //微信接口中页面使用Ajax的部分
