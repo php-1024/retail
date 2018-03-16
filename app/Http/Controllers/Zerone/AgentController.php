@@ -169,7 +169,7 @@ class AgentController extends Controller{
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
-        $password = $request->input('agent_password');//用户密码
+        $password = $request->input('password');//用户密码
         dd($password);
         $key = config("app.agent_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
