@@ -107,7 +107,8 @@ class WechatController extends Controller{
         return view('Wechat/Catering/material_image_delete_comfirm',['id'=>$id]);
     }
     public function material_image_delete(Request $request){
-
+        $id = $request->input('id');
+        dump($id);
     }
 
     /*
