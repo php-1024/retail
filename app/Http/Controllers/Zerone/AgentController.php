@@ -212,7 +212,6 @@ class AgentController extends Controller{
 
     //服务商列表
     public function agent_list(Request $request){
-        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
