@@ -65,93 +65,18 @@
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="row row-sm">
+                                    @foreach($list as $key=>$val)
                                     <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
                                                 <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
                                             </div>
                                             <div class="padder-v">
-                                                <span>414631616.JPG</span>
+                                                <span>{{ $val->filename }}</span>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <div class="item">
-                                            <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                            </div>
-                                            <div class="padder-v">
-                                                <span>414631616.JPG</span>
-                                            </div>
-                                        </div>
+                                    @endforeach
                                     </div>
                                 </div>
 

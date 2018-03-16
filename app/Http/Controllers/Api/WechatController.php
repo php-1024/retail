@@ -71,7 +71,6 @@ class WechatController extends Controller{
         if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
             return response()->json(['status' => '0','data'=>'错误的图片格式']);
         }
-
         if ($file->isValid()) {
             //检验文件是否有效
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();  //重命名
