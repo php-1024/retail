@@ -148,7 +148,7 @@ class WechatController extends Controller{
      * 图片选择页面
      */
     public function material_image_select(Request $request){
-        var_dump(123);
+
     }
 
     public function test(){
