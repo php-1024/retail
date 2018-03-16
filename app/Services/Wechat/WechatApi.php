@@ -420,7 +420,7 @@ class WechatApi{
             ];
         }
         $re = \HttpCurl::doPost($url, $data);
-        $re = json_decode($re);
+        $re = json_decode($re,true);
         return $re;
     }
 
