@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_list_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_fansmanage_add_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$organization_id}}">
     <div class="modal-dialog modal-lg">
