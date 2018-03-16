@@ -31,7 +31,7 @@
         var url = $(obj).attr('src');
 
         $('#img_show_'+i).attr('src',url).show();
-        $('#media_id_'+i).val(url).show();
-        $('#img_id_'+i).val(url).show();
+        $('#media_id_'+i).val(media_id);
+        $('#img_id_'+i).val(id);
     }
 </script>
