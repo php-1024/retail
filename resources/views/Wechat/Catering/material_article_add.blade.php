@@ -74,7 +74,8 @@
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
                                                     <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
-                                                    <img src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;">
+                                                    <br/><br/>
+                                                    <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;">
                                                 </div>
                                             </div>
 
