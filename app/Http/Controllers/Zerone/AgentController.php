@@ -10,7 +10,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
 use App\Models\Package;
-use App\Models\Warzoneagent;
+use App\Models\WarzoneAgent;
 use Illuminate\Http\Request;
 use App\Models\AgentApply;
 use App\Models\Warzone;
