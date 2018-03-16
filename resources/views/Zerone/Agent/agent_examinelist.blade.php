@@ -165,7 +165,7 @@
     });
 
     //审核
-    function getEditForm(id,sta){
+    function getEditForm(id,status){
 
         var url = $('#agent_examine').val();
         var token = $('#_token').val();
@@ -181,7 +181,7 @@
             return;
         }
 
-        var data = {'id':id,'sta':sta,'_token':token};
+        var data = {'id':id,'status':status,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
