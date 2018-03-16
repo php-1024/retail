@@ -29,7 +29,7 @@ class OrganizationAgentinfo extends Model{
         $program->save();
         return $program->id;
     }
-    
+
     //修改数据
     public static function editOrganizationAgentinfo($where,$param){
         $model = self::where($where)->first();
