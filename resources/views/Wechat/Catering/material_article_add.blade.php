@@ -59,7 +59,7 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">添加单条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('catering/subscription/material_writing')}}'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('api/catering/material_article')}}'" id="addBtn"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
