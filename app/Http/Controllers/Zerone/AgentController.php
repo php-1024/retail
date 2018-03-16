@@ -169,12 +169,10 @@ class AgentController extends Controller{
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
-        $password = $request->input('password');//用户密码
+        $password = $request->input('agent_password');//用户密码
         $key = config("app.agent_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        dd($encryptPwd);
-
         $program_id = 2;
         DB::beginTransaction();
         try{
@@ -198,9 +196,8 @@ class AgentController extends Controller{
                     AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
                 }
             }
-
-            $orgagentinfo = ['organization_id'=>$organization_id, 'agent_owner'=>$realname, 'agent_owner_idcard'=>$idcard, 'agent_owner_mobile'=>$mobile];
-            Organizationagentinfo::addOrganizationagentinfo($orgagentinfo);  //添加到服务商组织信息表
+            $orgagentinfo = ['agent_id'=>$organization_id, 'agent_owner'=>$realname, 'agent_owner_idcard'=>$idcard, 'agent_owner_mobile'=>$mobile];
+            OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);  //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
@@ -232,7 +229,7 @@ class AgentController extends Controller{
             $zone_id = $v['warzoneagent']['zone_id'];
             $listorg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
         }
-        return view('Zerone/agent/agent_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Agent/agent_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商编辑ajaxshow显示页面
     public function agent_list_edit(Request $request){
