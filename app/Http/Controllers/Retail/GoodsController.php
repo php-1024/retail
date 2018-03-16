@@ -75,7 +75,7 @@ class GoodsController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加商品失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加商品成功', 'status' => '1', 'goods_id' => $goods_id]);
+        return response()->json(['data' => '添加商品成功', 'status' => '1', 'id' => $goods_id]);
     }
 
 

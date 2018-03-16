@@ -15,7 +15,7 @@
                     </a>
                     <ul class="nav">
                         @foreach($son_menu_data[$val['id']] as $k=>$v)
-                        <li @if($route_name == $v['menu_route'])class="active" @endif>
+                        <li @if($route_name == $v['menu_route'] || in_array($route_name,explode(',',$v['menu_routes_bind'])))class="active" @endif>
                             <a href="{{ url($v['menu_route']) }}" class="auto">
                                 <i class="fa fa-angle-right text-xs text-info"></i>
                                 <span>{{ $v['menu_name'] }}</span>
