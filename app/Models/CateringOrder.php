@@ -37,8 +37,8 @@ class CateringOrder extends Model{
     public static function addOrder($param){
         $model = new CateringOrder();
         $model->name = $param['name'];
-        $model->store_id = $param['store_id'];
-        $model->branch_id = $param['branch_id'];
+        $model->fansmanage_id = $param['fansmanage_id'];
+        $model->restaurant_id = $param['restaurant_id'];
         $model->save();
         return $model->id;
     }
