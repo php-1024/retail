@@ -52,9 +52,9 @@ class Organization extends Model{
         return $this->belongsToMany('App\Models\Warzone','warzone_proxy','agent_id','zone_id')->select('zone_name');
     }
 
-    //获取分页数据-商户
-    public static function getWarzoneAgentAndWarzone($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    //获取单条数据
+    public static function getOne($where){
+        return self::where($where)->first();
     }
     //获取单条信息-服务商
     public static function getOneAgent($where){
