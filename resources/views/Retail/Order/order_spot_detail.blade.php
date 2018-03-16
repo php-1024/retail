@@ -185,6 +185,7 @@
                                             <th>数量</th>
                                             <th>商品价格</th>
                                             <th>状态</th>
+                                            <th>状态</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -208,8 +209,22 @@
                                                     未知状态
                                                 @endif
                                                 {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
-                                                    {{--<option>待上菜</option>--}}
-                                                    {{--<option>已上菜</option>--}}
+                                                {{--<option>待上菜</option>--}}
+                                                {{--<option>已上菜</option>--}}
+                                                {{--</select>--}}
+                                            </th>
+
+                                            <th>
+                                                @if($val->status == 0)
+                                                    待上菜
+                                                @elseif($val->status == 1)
+                                                    已上菜
+                                                @else
+                                                    未知状态
+                                                @endif
+                                                {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
+                                                {{--<option>待上菜</option>--}}
+                                                {{--<option>已上菜</option>--}}
                                                 {{--</select>--}}
                                             </th>
                                         </tr>
