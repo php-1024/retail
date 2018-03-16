@@ -111,7 +111,7 @@ class AgentController extends Controller{
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
         $info =  agentApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/agent/agent_examine',['info'=>$info,'sta'=>$sta]);
+        return view('Zerone/Agent/agent_examine',['info'=>$info,'sta'=>$sta]);
     }
     //服务商审核数据提交
     public function agent_examine_check(Request $request){
