@@ -74,6 +74,8 @@
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
                                                     <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
+                                                    <br/><br/>
+                                                    <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;">
                                                 </div>
                                             </div>
 
@@ -190,7 +192,7 @@
     function selectImageForm(i){
         var url = $('#material_image_select_url').val();
         var token = $('#_token').val();
-        var data = {'_token':token};
+        var data = {'_token':token,'i':i};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({

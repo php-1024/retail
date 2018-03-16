@@ -22,8 +22,8 @@ class RetailCheck{
                 break;
             /****仅检测是否登录及是否具有权限****/
             case "retail":                             //后台首页
-            case "retail/branch_list":                 //所有分店列表
-            case "retail/branch_switch":               //退出切换店铺
+            case "retail/retail_list":                 //所有分店列表
+            case "retail/retail_switch":               //退出切换店铺
             case "retail/account/profile":             //账号信息
             case "retail/account/safe_password":       //安全密码设置
             case "retail/account/message_setting":     //消息接收设置

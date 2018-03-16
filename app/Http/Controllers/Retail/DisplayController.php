@@ -35,7 +35,7 @@ class DisplayController extends Controller
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            return redirect('retail/list');
+            return redirect('retail/retail_list');
         }
         if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('retail/account/password');
@@ -44,8 +44,8 @@ class DisplayController extends Controller
         }
     }
 
-    //分店列表（超级管理员使用）
-    public function branch_list(Request $request)
+    //零售店铺列表（超级管理员使用）
+    public function retail_list(Request $request)
     {
         $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){      //如果是超级管理员并且已经切换身份成功则跳转
@@ -58,7 +58,7 @@ class DisplayController extends Controller
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
         }
-        return  view('Retail/Account/list',['organization'=>$organization,'organization_name'=>$organization_name]);
+        return  view('Retail/Account/retail_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
     //选择店铺
