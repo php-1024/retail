@@ -154,7 +154,7 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        dump($list);
+        fo
     }
 
     public function test(){
