@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">程序名称</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{$oneProgram->Program_name}}" class="form-control" disabled="">
+                            <input type="text" value="{{$oneProgram->program_name}}" class="form-control" disabled="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,13 +68,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
