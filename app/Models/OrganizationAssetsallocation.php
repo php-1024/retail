@@ -6,9 +6,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class AssetsAllocation extends Model{
+class OrganizationAssetsallocation extends Model{
     use SoftDeletes;
-    protected $table = 'assets_allocation';
+    protected $table = 'organization_assetsallocation';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -34,7 +34,7 @@ class AssetsAllocation extends Model{
     }
     //添加数据
     public static function addAssetsOperation($param){
-        $program = new AssetsAllocation();//实例化程序模型
+        $program = new OrganizationAssetsallocation();//实例化程序模型
         $program->account_id = $param['operator_id'];//操作人id
         $program->organization_id = $param['fr_organization_id '];//划入组织
         $program->draw_organization_id = $param['to_organization_id'];//划出组织
