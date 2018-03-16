@@ -79,7 +79,11 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">图片</label>
                                                         <div class="col-sm-9">
-                                                            <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                                            <button class="btn btn-info" type="button" onclick="selectImageForm(1);">选择图片素材</button>
+                                                            <br/><br/>
+                                                            <img id="img_show_1" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;display:none">
+                                                            <input type="hidden" name="img_id" id="img_id_1" id="_token" value="">
+                                                            <input type="hidden" name="thumb_media_id" id="media_id_1" id="_token" value="">
                                                         </div>
                                                     </div>
 
@@ -253,16 +257,31 @@
 
             });
         });
-
-        $('#editor1').wysiwyg();
-        $('#save_btn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
     });
+
+    //弹出图片上传框
+    function selectImageForm(i){
+        var url = $('#material_image_select_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'i':i};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>
