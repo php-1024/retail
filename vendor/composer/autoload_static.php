@@ -406,7 +406,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Models\\ProgramMenu' => __DIR__ . '/../..' . '/app/Models/ProgramMenu.php',
         'App\\Models\\ProgramModuleNode' => __DIR__ . '/../..' . '/app/Models/ProgramModuleNode.php',
         'App\\Models\\Province' => __DIR__ . '/../..' . '/app/Models/Province.php',
-        'App\\Models\\ProxyApply' => __DIR__ . '/../..' . '/app/Models/ProxyApply.php',
+        'App\\Models\\ProxyApply' => __DIR__ . '/../..',
         'App\\Models\\RoleAccount' => __DIR__ . '/../..' . '/app/Models/RoleAccount.php',
         'App\\Models\\RoleNode' => __DIR__ . '/../..' . '/app/Models/RoleNode.php',
         'App\\Models\\Setup' => __DIR__ . '/../..' . '/app/Models/Setup.php',
