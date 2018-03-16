@@ -232,7 +232,6 @@ Route::group(['prefix'=>'zerone'],function(){
 
     //服务商管理
     Route::group(['prefix'=>'agent'],function(){
-
         Route::get('agent_examinelist','Zerone\AgentController@agent_examinelist')->middleware('ZeroneCheck');//服务商审核列表
         Route::get('agent_add','Zerone\AgentController@agent_add')->middleware('ZeroneCheck');                //添加服务商
         Route::get('agent_list','Zerone\AgentController@agent_list')->middleware('ZeroneCheck');              //服务商列表
