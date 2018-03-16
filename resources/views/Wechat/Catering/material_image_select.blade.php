@@ -19,17 +19,19 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
             </div>
         </div>
     </div>
 </form>
 <script>
     function select_img(obj,i){
+        var id = $(obj).attr('data-id');
         var media_id = $(obj).attr('data-media_id');
         var url = $(obj).attr('src');
 
-        alert(url);
-        alert(media_id);
+        $('#img_show_'+i).attr('src',url).show();
+        $('#media_id_'+i).attr('media',url).show();
+        $('#img_id_'+i).attr('media',url).show();
     }
 </script>

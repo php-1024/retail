@@ -62,7 +62,7 @@ class DisplayController extends Controller
     }
 
     //选择店铺
-    public function branch_select(Request $request)
+    public function retail_select(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $account_id = $request->account_id;           //获取当前选择店铺的组织
@@ -73,7 +73,6 @@ class DisplayController extends Controller
         }else{
             return response()->json(['data' => '操作失败，请稍后再试！', 'status' => '1']);
         }
-
     }
 
     //超级管理员退出当前店铺（切换店铺）
