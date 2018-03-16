@@ -33,7 +33,7 @@ class OrganizationAssetsallocation extends Model{
         return self::where($where)->first();
     }
     //添加数据
-    public static function addAssetsOperation($param){
+    public static function addOrganizationAssetsallocation($param){
         $program = new OrganizationAssetsallocation();//实例化程序模型
         $program->account_id = $param['operator_id'];//操作人id
         $program->organization_id = $param['fr_organization_id '];//划入组织
