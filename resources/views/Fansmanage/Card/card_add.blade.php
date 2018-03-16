@@ -47,7 +47,7 @@
                                 添加会员卡
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/member_add_check') }}">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('fansmanage/ajax/member_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">会员卡名称</label>

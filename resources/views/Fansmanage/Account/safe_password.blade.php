@@ -48,7 +48,7 @@
                                 安全密码设置
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" id="SetForm" action="{{ url('catering/ajax/safe_password_check') }}">
+                                <form class="form-horizontal" method="post" id="SetForm" action="{{ url('fansmanage/ajax/safe_password_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                     <input type="hidden" name="is_editing"  value="-1">
@@ -94,7 +94,7 @@
                                 安全密码修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="get" method="post" id="currentForm" action="{{ url('catering/ajax/safe_password_check') }}">
+                                <form class="form-horizontal" method="get" method="post" id="currentForm" action="{{ url('fansmanage/ajax/safe_password_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                     <input type="hidden" name="is_editing"  value="1">

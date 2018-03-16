@@ -1,5 +1,5 @@
 
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/label_delete_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/label_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{$oneLabel->id}}">
     <div class="modal-dialog">
