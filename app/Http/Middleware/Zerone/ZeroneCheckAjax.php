@@ -87,12 +87,12 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAgentAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/agent_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re,$next);
-                break;
             case "zerone/ajax/agent_list_edit_check"://服务商 检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
+                return self::format_response($re,$next);
+                break;
+            case "zerone/ajax/agent_list_frozen_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
+                $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
             case "zerone/ajax/proxy_assets_check"://检测是否登录 权限 安全密码 数字不能为空
@@ -356,6 +356,21 @@ class ZeroneCheckAjax
             }
         }
     }
+    //编辑服务商 检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafeAndOrgEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
 
     //检测登录和权限
     public function checkLoginAndRule($request){
@@ -385,20 +400,7 @@ class ZeroneCheckAjax
             }
         }
     }
-    //服务商 检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndOrgEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
     //商户 检测登录和权限和安全密码
     public function checkLoginAndRuleAndSafeAndComEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
