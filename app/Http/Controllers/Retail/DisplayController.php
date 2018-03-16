@@ -73,7 +73,6 @@ class DisplayController extends Controller
         }else{
             return response()->json(['data' => '操作失败，请稍后再试！', 'status' => '1']);
         }
-
     }
 
     //超级管理员退出当前店铺（切换店铺）

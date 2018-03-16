@@ -42,7 +42,7 @@
                     </li>
                     @if($admin_data['is_super'] == 1)
                         <li>
-                            <a href="{{ url('/retail/switch') }}" >切换店铺</a>
+                            <a href="{{ url('/retail/retail_switch') }}" >切换店铺</a>
                         </li>
                     @endif
                     <li class="divider"></li>
