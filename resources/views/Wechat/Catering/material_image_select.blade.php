@@ -29,7 +29,6 @@
         var media_id = $(obj).attr('data-media_id');
         var url = $(obj).attr('src');
 
-        alert(url);
-        alert(media_id);
+        $('#img_show_'+i).attr('src',url);
     }
 </script>
