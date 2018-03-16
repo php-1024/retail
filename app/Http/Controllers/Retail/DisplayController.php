@@ -76,7 +76,7 @@ class DisplayController extends Controller
     }
 
     //超级管理员退出当前店铺（切换店铺）
-    public function branch_switch(Request $request){
+    public function retail_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
         ZeroneRedis::create_retail_account_cache(1,$admin_data);//清空所选组织
