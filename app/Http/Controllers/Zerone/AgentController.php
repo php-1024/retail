@@ -408,7 +408,6 @@ class AgentController extends Controller{
         $program_id = $request->input('program_id');//套餐id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $oneProgram = Program::getOne([['id',$program_id]]);
-        dump($oneProgram);
         $status = $request->input('status');//状态
         return view('Zerone/Agent/agent_assets',['listOrg'=>$listOrg,'oneProgram'=>$oneProgram,'status'=>$status]);
     }
@@ -424,9 +423,8 @@ class AgentController extends Controller{
         }
 
         $organization_id = $request->input('organization_id');//服务商id
-        $package_id = $request->input('package_id');//套餐id
         $program_id = $request->input('program_id');//程序id
-        $number = $request->input('num');//数量
+        $number = $request->input('number');//数量
         $status = $request->input('status');//判断划入或者划出
         DB::beginTransaction();
         try{
