@@ -211,18 +211,35 @@ class GoodsController extends Controller
     }
 
 
-    //删除商品
+    //删除商品弹窗
     public function goods_delete(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
-        $where = [
-            'restaurant_id' => $admin_data['organization_id'],
-        ];
-        $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
-        return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        $goods_id = $request->get('id');              //分类栏目的id
+        return view('Retail/Goods/goods_delete',['goods_id'=>$goods_id]);
+    }
+
+    //删除商品操作
+    public function goods_delete_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $goods_id = $request->get('goods_id');        //获取分类栏目ID
+        dd($goods_id);
+        DB::beginTransaction();
+        try {
+            CateringCategory::select_delete($goods_id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品分类！');//保存操作记录
+            } else {//分店本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品分类！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除分类失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除分类信息成功', 'status' => '1']);
     }
 }
 
