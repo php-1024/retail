@@ -18,16 +18,11 @@ class WechatImage extends Model{
 
     public static function WechatImage($param){
         $model = new WechatAuthorizerInfo();
-        $model->authorization_id = $param['authorization_id'];
-        $model->nickname = $param['nickname'];
-        $model->head_img = $param['head_img'];
-        $model->service_type_info = $param['service_type_info'];
-        $model->verify_type_info = $param['verify_type_info'];
-        $model->user_name = $param['user_name'];
-        $model->principal_name = $param['principal_name'];
-        $model->alias = $param['alias'];
-        $model->business_info = $param['business_info'];
-        $model->qrcode_url = $param['qrcode_url'];
+        $model->organization_id = $param['organization_id'];
+        $model->filename = $param['filename'];
+        $model->filepath = $param['filepath'];
+        $model->media_id = $param['media_id'];
+        $model->wechat_url = $param['wechat_url'];
         $model->save();
         return $model->id;
     }
