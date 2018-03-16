@@ -135,7 +135,7 @@ class WechatController extends Controller{
     /*
      * 添加图文素材页面
      */
-    public function meterial_article_add(Request $request){
+    public function material_article_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
