@@ -25,7 +25,7 @@ class CateringOrderGoods extends Model{
 
     public static function getOne($where)
     {
-        $model = self::with('catering_goods')->with('CateringOrder');
+        $model = self::with('CateringGoods')->with('CateringOrder');
         return $model->where($where)->first();
     }
 
@@ -35,7 +35,7 @@ class CateringOrderGoods extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->with('catering_goods')->with('CateringOrder')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('CateringGoods')->with('CateringOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加商品到购物车
