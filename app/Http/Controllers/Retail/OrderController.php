@@ -77,7 +77,7 @@ class OrderController extends Controller
         $status = $request->get('status');              //订单状态
         DB::beginTransaction();
         try {
-            CateringOrder::editOrder(['id'=>$order_id],[['status'=>$status]]);
+            CateringOrder::editOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
