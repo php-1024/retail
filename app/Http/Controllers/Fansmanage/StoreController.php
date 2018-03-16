@@ -20,7 +20,7 @@ class StoreController extends Controller{
         $organization_id = $admin_data['organization_id'];
         $onebranch = Organization::checkRowExists([['parent_id',$organization_id],['type',5]]); //查询有没有总店，如果有，接下来创建的都是分店
         $package_program = Package::getList(['id'=>1],0,'id','DESC');   //查询当前所选餐包含的程序 1为餐饮系统
-        return view('Catering/Store/branch_create',['onebranch'=>$onebranch,'onebranch'=>$onebranch,'package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Store/branch_create',['onebranch'=>$onebranch,'onebranch'=>$onebranch,'package_program'=>$package_program,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
 
     //创建总分店功能提交
@@ -112,7 +112,7 @@ class StoreController extends Controller{
         $organization_id = $admin_data['organization_id'];
         $listBranch = Organization::getbranch([['parent_id',$organization_id],['type',5]],'10','id'); //查询有没有总店，如果有，接下来创建的都是分店
 
-        return view('Catering/Store/branch_list',['listBranch'=>$listBranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Store/branch_list',['listBranch'=>$listBranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 }
