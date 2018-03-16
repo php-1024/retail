@@ -57,6 +57,11 @@ class Organization extends Model{
         return $this->hasMany('App\Models\CateringCategory', 'fansmanage_id');
     }
 
+    //和RetailCategory表一对多的关系
+    public function RetailCategory(){
+        return $this->hasMany('App\Models\RetailCategory', 'fansmanage_id');
+    }
+
     //获取单条数据
     public static function getOne($where){
         return self::where($where)->first();

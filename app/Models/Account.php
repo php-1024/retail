@@ -48,6 +48,11 @@ class Account extends Model{
         return $this->hasMany('App\Models\CateringCategory', 'created_by');
     }
 
+    //和零售分类表RetailCategory一对多的关系
+    public function RetailCategory(){
+        return $this->hasMany('App\Models\RetailCategory', 'created_by');
+    }
+
     //简易型查询单条数据关联查询
     public static function getOne($where)
     {
