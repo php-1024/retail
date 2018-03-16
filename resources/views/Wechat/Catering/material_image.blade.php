@@ -62,6 +62,7 @@
                                     <button class="btn btn-s-md btn-success" type="button" onclick="getUploadForm();" id="addBtn">上传图片 &nbsp;&nbsp;<i class="fa fa-upload"></i></button>
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="material_image_upload_url" value="{{ url('api/ajax/meterial_image_upload') }}">
+                                    <input type="hidden" id="material_image_delete_comfirm_url" value="{{ url('api/ajax/material_image_delete_comfirm') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="row row-sm">
@@ -72,17 +73,14 @@
                                                 <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
                                             </div>
                                             <div class="padder-v">
-                                                <span>{{ $val->filename }}</span>&nbsp;&nbsp;<button class="btn btn-xs btn-danger"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                                <span>{{ $val->filename }}</span>&nbsp;&nbsp;<button class="btn btn-xs btn-danger" onclick="return getDeleteComfirmForm('{{$val->id}}');"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                             </div>
                                         </div>
                                     </div>
                                     @endforeach
                                     </div>
                                 </div>
-
-
                                     {{ $list->links() }}
-
                             </section>
                         </section>
                     </section>
@@ -110,6 +108,49 @@
 <script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
 
 <script type="text/javascript">
+    $(function(){
+
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+    //获取删除权限角色删除密码确认框
+    function getDeleteComfirmForm(id){
+        var url = $('#material_image_delete_comfirm_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
     //弹出图片上传框
     function getUploadForm(){
         var url = $('#material_image_upload_url').val();

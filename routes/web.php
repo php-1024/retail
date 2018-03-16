@@ -232,7 +232,6 @@ Route::group(['prefix'=>'zerone'],function(){
 
     //服务商管理
     Route::group(['prefix'=>'agent'],function(){
-
         Route::get('agent_examinelist','Zerone\AgentController@agent_examinelist')->middleware('ZeroneCheck');//服务商审核列表
         Route::get('agent_add','Zerone\AgentController@agent_add')->middleware('ZeroneCheck');                //添加服务商
         Route::get('agent_list','Zerone\AgentController@agent_list')->middleware('ZeroneCheck');              //服务商列表
@@ -780,8 +779,15 @@ Route::group(['prefix'=>'api'],function() {
 
     //微信接口中页面使用Ajax的部分
     Route::group(['prefix' => 'ajax'] , function(){
+<<<<<<< HEAD
         Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
         Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('FansmanageCheckAjax');//上传图片素材
+=======
+        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('material_image_delete_comfirm', 'Api\WechatController@material_image_delete_comfirm')->middleware('CateringCheckAjax');//删除图片素材弹窗
+        Route::any('material_image_delete_check', 'Api\WechatController@material_image_delete_check')->middleware('CateringCheckAjax');//检测删除图片素材数据
+>>>>>>> 45afa0a417bded7a8d61cf0af9c9929661c0bf92
     });
 });
 /*********************接口路由*************************/

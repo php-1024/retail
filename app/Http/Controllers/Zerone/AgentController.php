@@ -212,7 +212,6 @@ class AgentController extends Controller{
 
     //服务商列表
     public function agent_list(Request $request){
-
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -224,6 +223,8 @@ class AgentController extends Controller{
         if(!empty($organization_name)){
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
+        dd($where);
+
         $listorg = Organization::getPaginage($where,'5','id');
         foreach ($listorg as $k=>$v){
             $zone_id = $v['warzoneagent']['zone_id'];
@@ -237,7 +238,7 @@ class AgentController extends Controller{
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOneagent([['id',$id]]);
         $warzone = Warzone::all();
-        return view('Zerone/agent/agent_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
+        return view('Zerone/Agent/agent_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
     }
     //服务商编辑功能提交
     public function agent_list_edit_check(Request $request){
