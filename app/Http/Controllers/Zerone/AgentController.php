@@ -76,11 +76,11 @@ class AgentController extends Controller{
             try{
                 OrganizationAgentapply::editOrganizationAgentapply([['id',$id]],['status'=>$status]);//申请通过
 
-                $orgparent_tree = '0'.',';//服务商组织树
+                $orgparent_tree = '0'.','.'1'.',';//服务商组织树
                 //添加服务商
                 $orgData = [
                     'organization_name'=>$agentlist['agent_name'],
-                    'parent_id'        =>0,
+                    'parent_id'        =>1,
                     'parent_tree'      =>$orgparent_tree,
                     'program_id'       =>2,
                     'type'             =>2,
@@ -468,7 +468,8 @@ class AgentController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Zerone/Agent/agent_fansmanage',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $list = Organization::getPaginageFansmanage([['type',3]],'10','id');
+        return view('Zerone/Agent/agent_fansmanage',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
 ?>
