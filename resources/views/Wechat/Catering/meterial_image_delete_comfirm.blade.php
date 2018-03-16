@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/meterial_image_delete') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('api/ajax/meterial_image_delete') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">
