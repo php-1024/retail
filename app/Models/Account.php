@@ -38,6 +38,11 @@ class Account extends Model{
         return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
 
+    //和餐饮商品表CateringGoods一对多的关系
+    public function CateringGoods(){
+        return $this->hasMany('App\Models\CateringGoods', 'created_by');
+    }
+
     //和餐饮分类表CateringCategory一对多的关系
     public function CateringCategory(){
         return $this->hasMany('App\Models\CateringCategory', 'created_by');
