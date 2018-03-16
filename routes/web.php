@@ -719,7 +719,7 @@ Route::group(['prefix'=>'retail'],function(){
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Retail\LoginController@login_check')->middleware('RetailCheckAjax');//提交登录数据
-        Route::post('retail_select','Retail\DisplayController@retail_check')->middleware('RetailCheckAjax');//提交选择分店数据
+        Route::post('retail_select','Retail\DisplayController@retail_select')->middleware('RetailCheckAjax');//提交选择分店数据
         Route::post('profile_edit_check', 'Retail\AccountController@profile_edit_check')->middleware('RetailCheckAjax');//个人账号信息修改
         Route::post('safe_password_edit_check', 'Retail\AccountController@safe_password_edit_check')->middleware('RetailCheckAjax');//安全密码设置检测
         Route::post('password_edit_check', 'Retail\AccountController@password_edit_check')->middleware('RetailCheckAjax');          //密码检测
