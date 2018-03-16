@@ -20,8 +20,8 @@ class Organization extends Model{
     }
 
     //和OrganizationProxyinfo表一对一的关系
-    public function organizationProxyinfo(){
-        return $this->hasOne('App\Models\OrganizationProxyinfo', 'organization_id');
+    public function organizationAgentinfo(){
+        return $this->hasOne('App\Models\OrganizationAgentinfo', 'organization_id');
     }
     //和assetsOperation表一对多的关系
     public function assetsOperation(){
@@ -30,15 +30,6 @@ class Organization extends Model{
     //和assetsOperation表一对多的关系
     public function assetsOperation_draw(){
         return $this->hasMany('App\Models\AssetsOperation', 'draw_organization_id','id');
-    }
-
-    //和OrganizationCompanyinfo表一对一的关系
-    public function organizationCompanyinfo(){
-        return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id','id');
-    }
-    //和organizationStoreinfo表一对一的关系
-    public function organizationStoreinfo(){
-        return $this->hasOne('App\Models\OrganizationCompanyinfo', 'organization_id','id');
     }
 
     //和organizationBranchinfo表一对一的关系
@@ -65,44 +56,27 @@ class Organization extends Model{
         return self::with('warzone')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取单条信息-服务商
-    public static function getOneProxy($where){
-        return self::with('warzoneAgent','organizationproxyinfo')->where($where)->first();
+    public static function getOneAgent($where){
+        return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->first();
     }
     //获取单条信息-总店
     public static function getOneCatering($where){
-        return self::with('warzoneAgent','organizationbranchinfo')->where($where)->first();
+        return self::with('warzoneAgent')->with('organizationbranchinfo')->where($where)->first();
     }
 
     //获取-服务商列表
-    public static function getListProxy($where){
-        return self::with('organizationproxyinfo')->with('account')->where($where)->get();
+    public static function getListAgent($where){
+        return self::with('organizationAgentinfo')->with('account')->where($where)->get();
     }
 
-    //获取单条信息-商户
-    public static function getOneCompany($where){
-        return self::with('organizationCompanyinfo')->with('account')->where($where)->first();
-    }
-    //获取-商户列表
-    public static function getArrayCompany($where){
-        return self::with('organizationCompanyinfo')->with('account')->where($where)->get();
-    }
 
     //获取多条信息
     public static function getList($where){
         return self::where($where)->get();
     }
-
-    //获取分页数据-商户
-    public static function getCompanyAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('account');
-        if(!empty($organization_name)){
-            $model =$model->where('organization_name','like','%'.$organization_name.'%');
-        }
-        return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
-    }
-
+    
     //获取分页数据-店铺
-    public static function getCateringAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
+    public static function getOrganizationAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
         $model = self::with('account');
         if(!empty($organization_name)){
             $model =$model->where('organization_name','like','%'.$organization_name.'%');
@@ -110,19 +84,6 @@ class Organization extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
-    //获取分页数据-店铺分店
-    public static function getBranchAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('account');
-        if(!empty($organization_name)){
-            $model =$model->where('organization_name','like','%'.$organization_name.'%');
-        }
-        return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
-    }
-
-    //获取单条信息和organizationproxyinfo的信息
-    public static function getOneAndorganizationproxyinfo($where){
-        return self::with('organizationproxyinfo')->where($where)->first();
-    }
     //添加数据
     public static function addOrganization($param){
         $organization = new Organization();//实例化程序模型
@@ -160,11 +121,7 @@ class Organization extends Model{
     }
     //获取分页数据-服务商
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('warzoneAgent','organizationproxyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
-    }
-    //获取分页数据-商户
-    public static function getCompany($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organizationCompanyinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取分页数据-分店
     public static function getbranch($where,$paginate,$orderby,$sort='DESC'){
