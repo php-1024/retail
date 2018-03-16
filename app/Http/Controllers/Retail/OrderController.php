@@ -86,6 +86,7 @@ class OrderController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
         }
