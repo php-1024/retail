@@ -171,7 +171,7 @@
                         </div>
 
                         {{--购物车--}}
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
                                     购物车 {{$order->account->account_info->realname}} 003号桌 12人
