@@ -104,8 +104,8 @@
                                         <td>{{$value->created_at}}</td>
                                         <td class="text-right">
                                             @if($value->status == 0)
-                                                <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }},this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                                <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm({{ $value->id }},this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                                <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm('{{ $value->id }}',this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm('{{ $value->id }}',this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
                                             @else
                                                 <label class="label label-primary">已审核</label>
                                             @endif

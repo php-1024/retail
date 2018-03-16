@@ -281,16 +281,16 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('safe_password_edit_check','Zerone\PersonalController@safe_password_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改密码
         Route::post('personal_edit_check','Zerone\PersonalController@personal_edit_check')->middleware('ZeroneCheckAjax');//个人中心修改个人信息
 
-        Route::post('proxy_add_check','Zerone\ProxyController@proxy_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
-        Route::post('proxy_examine','Zerone\ProxyController@proxy_examine')->middleware('ZeroneCheckAjax');//服务商审核页面显示
-        Route::post('proxy_examine_check','Zerone\ProxyController@proxy_examine_check')->middleware('ZeroneCheckAjax');//服务商审核数据提交
-        Route::post('proxy_list_edit','Zerone\ProxyController@proxy_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
-        Route::post('proxy_list_edit_check','Zerone\ProxyController@proxy_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
-        Route::post('proxy_list_frozen','Zerone\ProxyController@proxy_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
-        Route::post('proxy_list_frozen_check','Zerone\ProxyController@proxy_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
-        Route::post('proxy_list_delete','Zerone\ProxyController@proxy_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
-        Route::post('proxy_assets','Zerone\ProxyController@proxy_assets')->middleware('ZeroneCheckAjax');//服务商程序管理划入划出显示页面
-        Route::post('proxy_assets_check','Zerone\ProxyController@proxy_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交
+        Route::post('agent_add_check','Zerone\AgentController@agent_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
+        Route::post('agent_examine','Zerone\AgentController@agent_examine')->middleware('ZeroneCheckAjax');//服务商审核页面显示
+        Route::post('agent_examine_check','Zerone\AgentController@agent_examine_check')->middleware('ZeroneCheckAjax');//服务商审核数据提交
+        Route::post('agent_list_edit','Zerone\AgentController@agent_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
+        Route::post('agent_list_edit_check','Zerone\AgentController@agent_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
+        Route::post('agent_list_frozen','Zerone\AgentController@agent_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
+        Route::post('agent_list_frozen_check','Zerone\AgentController@agent_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
+        Route::post('agent_list_delete','Zerone\AgentController@agent_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
+        Route::post('agent_assets','Zerone\AgentController@agent_assets')->middleware('ZeroneCheckAjax');//服务商程序管理划入划出显示页面
+        Route::post('agent_assets_check','Zerone\AgentController@agent_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交
 
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
