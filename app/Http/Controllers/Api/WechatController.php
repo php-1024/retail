@@ -108,7 +108,8 @@ class WechatController extends Controller{
     }
     public function material_image_delete_check(Request $request){
         $id = $request->input('id');
-        dump($id);
+        $image_info = WechatImage::getOne([['id',$id]]);
+        dump($image_info);
     }
 
     /*
