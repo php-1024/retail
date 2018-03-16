@@ -21,7 +21,7 @@ class Organization extends Model{
 
     //和OrganizationProxyinfo表一对一的关系
     public function organizationAgentinfo(){
-        return $this->hasOne('App\Models\OrganizationAgentinfo', 'agent_id');
+        return $this->hasOne('App\Models\OrganizationAgentinfo', 'organization_id');
     }
     //和assetsOperation表一对多的关系
     public function assetsOperation(){
@@ -74,8 +74,7 @@ class Organization extends Model{
     public static function getList($where){
         return self::where($where)->get();
     }
-
-
+    
     //获取分页数据-店铺
     public static function getOrganizationAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
         $model = self::with('account');

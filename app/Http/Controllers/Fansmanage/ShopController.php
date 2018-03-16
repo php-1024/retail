@@ -19,7 +19,7 @@ class ShopController extends Controller{
             $organization_name  = $request->organization_name;
             $where = ['type'=>'4'];
 //            $listOrg = Organization::where([['program_id','4']])->get();
-            $listOrg = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
+            $listOrg = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
             return view('Fansmanage/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
@@ -80,12 +80,12 @@ class ShopController extends Controller{
     }
     //超级管理员选择店铺
     public function switch_status(Request $request){
-        return redirect('catering');
+        return redirect('fansmanage');
     }
     //退出登录
     public function quit(Request $request){
         Session::put('catering_account_id','');
-        return redirect('catering/login');
+        return redirect('fansmanage/login');
     }
 }
 ?>

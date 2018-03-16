@@ -267,12 +267,12 @@ class AgentController extends Controller{
                 Organization::editOrganization([['id',$id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
             if($list['mobile']!=$mobile){
-                Organizationagentinfo::editOrganizationagentinfo([['organization_id',$id]], ['agent_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+                OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$id]], ['agent_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
 
             if($list['organizationagentinfo']['agent_owner'] != $realname){
-                Organizationagentinfo::editOrganizationagentinfo([['organization_id',$id]],['agent_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+                OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$id]],['agent_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             if(!empty($password)){
@@ -283,11 +283,11 @@ class AgentController extends Controller{
             }
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                Organizationagentinfo::editOrganizationagentinfo([['organization_id',$id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
+                OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
             $waprlist = Warzoneagent::getOne([['organization_id',$id]]);
             if($waprlist['zone_id'] != $zone_id){
-                Warzoneagent::editWarzoneagent([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+                WarzoneAgent::editWarzoneAgent([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
             }
 
             //添加操作日志
