@@ -19,6 +19,7 @@ class RetailCheckAjax{
                 return self::format_response($re, $next);
                 break;
             case "retail/ajax/retail_select":           //超级管理员选择分店提交数据
+            case "retail/ajax/store_edit":              //店铺信息编辑弹窗页面
             case "retail/ajax/category_delete":           //栏目编辑页面
             case "retail/ajax/category_edit":           //栏目编辑页面
             case "retail/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
@@ -56,7 +57,6 @@ class RetailCheckAjax{
                 break;
 
 
-            case "retail/ajax/store_edit":              //检测是否登录 权限 安全密码
             case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
