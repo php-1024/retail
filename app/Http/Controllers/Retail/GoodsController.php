@@ -1,7 +1,7 @@
 <?php
 /**
- *餐饮分店管理系统
- * 登录界面
+ * 零售店铺管理系统
+ * 商品管理
  **/
 
 namespace App\Http\Controllers\Retail;

@@ -52,6 +52,11 @@ class Organization extends Model{
         return $this->belongsToMany('App\Models\Warzone','warzone_proxy','agent_id','zone_id')->select('zone_name');
     }
 
+    //和RetailGoods表一对多的关系
+    public function RetailGoods(){
+        return $this->hasMany('App\Models\RetailGoods', 'restaurant_id');
+    }
+
     //和CateringCategory表一对多的关系
     public function CateringCategory(){
         return $this->hasMany('App\Models\CateringCategory', 'fansmanage_id');

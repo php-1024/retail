@@ -18,6 +18,11 @@ class RetailCategory extends Model{
         return $this->belongsto('App\Models\Account','created_by');
     }
 
+    //和零售分类RetailGoods表一对多的关系
+    public function RetailGoods(){
+        return $this->hasMany('App\Models\RetailGoods','category_id');
+    }
+
     //和组织表Organization表多对一的关系
     public function Organization(){
         return $this->belongsto('App\Models\Organization','fansmanage_id');
