@@ -112,7 +112,7 @@ class WechatController extends Controller{
 
         $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$image_info['media_id']);
         dump($re);
-        if($re['error_code']=='0'){
+        if($re['errcode']=='0'){
             @unlink($image_info['filepath']);
             WechatImage::where('id',$id)->forceDelete();
         }
