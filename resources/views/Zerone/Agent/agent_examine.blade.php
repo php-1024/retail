@@ -1,8 +1,8 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_examine_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{$info->id}}">
-    <input type="hidden" name="sta" id="status" value="{{$status}}">
+    <input type="hidden" name="id"  value="{{$info->id}}">
+    <input type="hidden" name="status"  value="{{$status}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
