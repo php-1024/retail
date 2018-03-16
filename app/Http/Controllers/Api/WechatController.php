@@ -93,7 +93,7 @@ class WechatController extends Controller{
             }
             return response()->json(['data' => '上传商品图片信息成功', 'status' => '1']);
         } else {
-            return response()->json(['status' => '0']);
+            return response()->json(['data'=>'上传图片失败','status' => '0']);
         }
     }
     /*
@@ -114,6 +114,9 @@ class WechatController extends Controller{
         if($re['errcode']=='0'){
             @unlink($image_info['filepath']);
             WechatImage::where('id',$id)->forceDelete();
+            return response()->json(['data'=>'删除图片素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'删除图片素材失败','status' => '0']);
         }
     }
 
