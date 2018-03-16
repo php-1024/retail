@@ -468,7 +468,8 @@ class AgentController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Organization::getPaginageFansmanage([['type',3]],'10','id');
+        $organization_id = $request->organization_id;//服务商id
+        $list = Organization::getPaginageFansmanage([['parent_id',$organization_id]],'10','id');
         return view('Zerone/Agent/agent_fansmanage',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 }
