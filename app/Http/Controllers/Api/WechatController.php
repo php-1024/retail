@@ -104,7 +104,7 @@ class WechatController extends Controller{
     //直接输入安全密码操作的页面--删除
     public function material_image_delete_comfirm(Request $request){
         $id = $request->input('id');
-        return view('Zerone/Role/role_delete_comfirm',['id'=>$id]);
+        return view('Wechat/Catering/material_image_delete_comfirm',['id'=>$id]);
     }
     public function material_image_delete(Request $request){
 
