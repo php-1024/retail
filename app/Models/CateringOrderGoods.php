@@ -15,7 +15,7 @@ class CateringOrderGoods extends Model{
 
     //和CateringGoods表一对一的关系
     public function CateringGoods(){
-        return $this->hasOne('App\Models\CateringGoods','goods_id','id');
+        return $this->hasOne('App\Models\CateringGoods','goods_id');
     }
 
     //和CateringOrder表多对一的关系
@@ -35,7 +35,7 @@ class CateringOrderGoods extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->with('CateringOrder')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('CateringGoods')->with('CateringOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加商品到购物车
