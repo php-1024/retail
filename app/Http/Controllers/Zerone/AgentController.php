@@ -287,7 +287,7 @@ class AgentController extends Controller{
             }
             $waprlist = Warzoneagent::getOne([['organization_id',$id]]);
             if($waprlist['zone_id'] != $zone_id){
-                WarzoneAgent::editWarzoneAgent([['organization_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
+                WarzoneAgent::editWarzoneAgent([['agent_id',$id]],['zone_id'=>$zone_id]);//修改战区关联表 战区id
             }
 
             //添加操作日志
