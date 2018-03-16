@@ -77,5 +77,11 @@ class CateringGoods extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
+
+    //查询出模型，再删除模型 一定要查询到才能删除
+    public static function select_delete($id){
+        $model = Self::find($id);
+        return $model->delete();
+    }
 }
 ?>
