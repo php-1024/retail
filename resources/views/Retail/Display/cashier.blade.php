@@ -673,7 +673,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
+                            <label class="col-sm-2 text-right">零售名称</label>
                             <div class="col-sm-10">
                                 <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
                             </div>
