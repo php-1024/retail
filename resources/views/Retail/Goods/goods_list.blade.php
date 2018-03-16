@@ -38,6 +38,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     {{--<div class="col-sm-2">--}}
                                         {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
                                     {{--</div>--}}
