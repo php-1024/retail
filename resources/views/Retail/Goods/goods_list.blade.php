@@ -37,6 +37,7 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
                                     {{--<div class="col-sm-2">--}}
                                         {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
                                     {{--</div>--}}
@@ -122,7 +123,6 @@
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
-        <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

@@ -748,6 +748,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('category_edit_check', 'Retail\CategoryController@category_edit_check')->middleware('RetailCheckAjax');        //栏目编辑检测
         Route::post('goods_add_check', 'Retail\GoodsController@goods_add_check')->middleware('RetailCheckAjax');                   //商品添加检测
         Route::post('goods_edit_check', 'Retail\GoodsController@goods_edit_check')->middleware('RetailCheckAjax');                 //商品编辑检测
+        Route::post('goods_delete', 'Retail\GoodsController@goods_delete')->middleware('RetailCheckAjax');                 //商品编辑检测
         Route::any('goods_thumb', 'Retail\GoodsController@goods_thumb')->middleware('RetailCheckAjax');                           //商品规格异步加载页面
         Route::post('upload_thumb_check', 'Retail\GoodsController@upload_thumb_check')->middleware('RetailCheckAjax');             //上传文件检测
     });
