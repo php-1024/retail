@@ -149,8 +149,9 @@ class WechatController extends Controller{
      */
     public function material_image_select(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $i = $request->input('i');
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/material_image_select',['list'=>$list]);
+        return view('Wechat/Catering/material_image_select',['list'=>$list,'i'=>$i]);
     }
 
     public function test(){

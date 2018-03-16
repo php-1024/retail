@@ -11,7 +11,7 @@
                         <div class="col-lg-2">
                             <div class="item">
                                 <div class="pos-rlt">
-                                    <a href="javascript:;"><img data-id="{{$val->id}}" data-media_id="{{$val->media_id}}" src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
+                                    <a href="javascript:;"><img data-id="{{$val->id}}" onclick="select_img(this,'{{$i}}')" data-media_id="{{$val->media_id}}" src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
                                 </div>
                             </div>
                         </div>
@@ -24,3 +24,12 @@
         </div>
     </div>
 </form>
+<script>
+    function select_img(obj,i){
+        var media_id = $(obj).attr('data-media_id');
+        var url = $(obj).attr('src');
+
+        alert(url);
+        alert(media_id);
+    }
+</script>

@@ -192,7 +192,7 @@
     function selectImageForm(i){
         var url = $('#material_image_select_url').val();
         var token = $('#_token').val();
-        var data = {'_token':token};
+        var data = {'_token':token,'i':i};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
