@@ -199,7 +199,7 @@
                 <div class="modal-body">
                     <div class="form-group text-center">
                         <button class="btn btn-info" type="button" onclick="location.href='{{url('api/catering/material_article_add')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('catering/subscription/material_writing_many')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('api/catering/material_articles_add')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
