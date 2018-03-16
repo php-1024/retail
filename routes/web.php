@@ -237,7 +237,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('agent_list','Zerone\AgentController@agent_list')->middleware('ZeroneCheck');              //服务商列表
         Route::get('agent_structure','Zerone\AgentController@agent_structure')->middleware('ZeroneCheck');    //服务商人员架构
         Route::get('agent_program','Zerone\AgentController@agent_program')->middleware('ZeroneCheck');        //服务商程序管理
-        Route::get('agent_company','Zerone\AgentController@agent_company')->middleware('ZeroneCheck');        //服务商商户划拨
+        Route::get('agent_fansmanage','Zerone\AgentController@agent_fansmanage')->middleware('ZeroneCheck');  //服务商商户划拨
     });
     //商户管理
     Route::group(['prefix'=>'company'],function(){
