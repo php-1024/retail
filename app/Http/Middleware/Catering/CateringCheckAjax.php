@@ -66,6 +66,7 @@ class CateringCheckAjax
 
             case "api/ajax/material_article_add_check":  //单条文章素材上传检测
                 $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
+                return self::format_response($re,$next);
                 break;
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
