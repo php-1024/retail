@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrganizationAgentinfo extends Model{
     use SoftDeletes;
-    protected $table = 'organization_Agentinfo';
+    protected $table = 'organization_agentinfo';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
