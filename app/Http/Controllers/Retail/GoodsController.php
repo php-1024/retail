@@ -209,6 +209,21 @@ class GoodsController extends Controller
         $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
         return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
+
+
+    //删除商品
+    public function goods_delete(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $where = [
+            'restaurant_id' => $admin_data['organization_id'],
+        ];
+        $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
+        return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
 }
 
 ?>
