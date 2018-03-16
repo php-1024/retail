@@ -60,8 +60,8 @@ class OrderController extends Controller
         $order->account = $account;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         foreach ($order_goods as $key=>$val){
-            $order_goods = CateringGoods::getOne([['id',$val->goods_id]]);
-            $val->order_goods = $order_goods;
+            $goods = CateringGoods::getOne([['id',$val->goods_id]]);
+            $val->order_goods = $goods;
         }
         dump($order_goods);
         return view('Retail/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
