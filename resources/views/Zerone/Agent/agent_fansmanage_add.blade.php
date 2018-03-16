@@ -1,5 +1,3 @@
-<link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
-<link href="{{asset('public/Zerone/library')}}/switchery/css/switchery.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <div class="modal-dialog modal-lg">

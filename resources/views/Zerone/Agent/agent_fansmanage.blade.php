@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <button type="button" onclick="history.back()" class=" btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
 
-                            <button type="button" onclick="getAddFansmanageForm()" class=" btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
+                            <button type="button" onclick="getAddFansmanageForm('{{$organization_id}}')" class=" btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;商户划入归属</button>
                         </div>
                     </div>
                 </div>
@@ -186,24 +186,24 @@
 
 
     //编辑
-    function getAddFansmanageForm(){
+    function getAddFansmanageForm(organization_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
         var url = $('#agent_fansmanage_add').val();
         var token = $('#_token').val();
-//        if(id==''){
-//            swal({
-//                title: "提示信息",
-//                text: '数据传输错误',
-//                confirmButtonColor: "#DD6B55",
-//                confirmButtonText: "确定",
-//            },function(){
-//                window.location.reload();
-//            });
-//            return;
-//        }
+        if(organization_id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
 
-        var data = {'_token':token};
+        var data = {'organization_id':organization_id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
