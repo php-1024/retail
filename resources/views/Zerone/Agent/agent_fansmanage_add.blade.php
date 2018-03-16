@@ -1,5 +1,3 @@
-<link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
-<link href="{{asset('public/Zerone/library')}}/switchery/css/switchery.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <div class="modal-dialog modal-lg">
@@ -11,11 +9,10 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" style="padding-top: 7px;">请选择商户</label>
                     <div class="col-sm-9">
-                        <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                            <option value="Mayotte">刘记集团</option>
-                            <option value="Mexico">李记鸡煲连锁</option>
-                            <option value="Micronesia, Federated States of">叶记猪肚鸡</option>
-                            <option value="Moldova, Republic of">韦记莲藕汤</option>
+                        <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4" name="fansmanage_id">
+                            @foreach($list as $key=>$value)
+                            <option value="{{$value->id}}">{{$value->organization_name}}</option>
+                            @endforeach
                         </select>
                     </div>
 

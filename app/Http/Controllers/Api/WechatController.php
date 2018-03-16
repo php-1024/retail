@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatImage;
+use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
@@ -148,7 +149,50 @@ class WechatController extends Controller{
      *单条图文素材添加检测
      */
     public function material_article_add_check(Request $request){
-        var_dump($request->input());
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $img_id = $request->input('img_id');
+        $thumb_media_id = $request->input('thumb_media_id');
+        $title = $request->input('title');
+        $author = $request->input('author');
+        $digest = $request->input('digest');
+        $origin_url = $request->input('origin_url');
+        $content = $request->input('content');
+
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+
+        $data = [
+            'articles'=>[
+                [
+                    'title'=>$title,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'author'=>$author,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'digest'=>$digest,
+                    'show_cover_pic'=>1,
+                    'content'=>$content,
+                    'content_source_url'=>$origin_url
+                ],
+            ],
+        ];
+
+        $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        if(!empty($re['media_id'])){
+            $zdata = [
+                'organization_id'=>$admin_data['organization_id'],
+                'title'=>$title,
+                'image_id'=>$img_id,
+                'type'=>'1',
+                'content'=>serialize($data),
+            ];
+            WechatArticle::addWechatArticle($zdata);
+            return response()->json(['data'=>'上传图文素材成功','status' => '0']);
+        }else{
+            return response()->json(['data'=>'上传图文素材失败','status' => '0']);
+        }
     }
 
     /*
