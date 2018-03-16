@@ -232,7 +232,7 @@
 
                                             <td><label class="label label-info">商品总计</label></td>
                                             <td>
-                                                <label class="label label-danger">{{$val->price}}</label>
+                                                <label class="label label-danger">¥100000.00</label>
                                             </td>
                                             <td></td>
                                             <td><label class="label label-danger">2份</label></td>
