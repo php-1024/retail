@@ -230,24 +230,7 @@
 <script src="{{asset('public/Branch/library')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 <script src="{{asset('public/Branch/library')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
-
     $(document).ready(function() {
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-        $(".addBtn").click(function(){
-            $('#myModal').modal();
-        });
-        $(".deleteBtn").click(function(){
-            $('#myModal1').modal();
-        });
-        $(".editBtn").click(function(){
-            $('#myModal2').modal();
-        });
         $('#form-content').trumbowyg({
             lang: 'fr',
             closable: false,
@@ -260,7 +243,6 @@
             autogrow: true
         });
     });
-
     //提交表单
     function postForm() {
         var target = $("#currentForm");
@@ -276,15 +258,15 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(json){
-                    window.location.href = "{{asset("retail/goods/goods_edit?goods_id=")}}"+json.goods_id;
+                    alert(json.goods_id);
+                    {{--window.location.href = "{{asset("retail/goods/goods_edit?goods_id=")}}"+json.goods_id;--}}
                 });
             }else{
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });

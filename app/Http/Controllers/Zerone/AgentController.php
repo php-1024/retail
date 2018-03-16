@@ -330,19 +330,13 @@ class AgentController extends Controller{
                 }
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '操作失败', 'status' => '0']);
             }
             return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-    //服务商删除ajaxshow显示页面
-    public function agent_list_delete(Request $request){
-        $id = $request->input('id');//服务商id
 
-        return view('Zerone/agent/agent_list_delete');
-    }
-//服务商下级人员架构
+    //服务商下级人员架构
     public function agent_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -354,7 +348,7 @@ class AgentController extends Controller{
         $oneOrg = Account::getOne([['organization_id',$organization_id],['parent_id','1']]);
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$oneOrg['parent_tree'].$oneOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->account_structure($list,$oneOrg['id']);
-        return view('Zerone/agent/agent_structure',['listOrg'=>$listOrg,'oneOrg'=>$oneOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Agent/agent_structure',['listOrg'=>$listOrg,'oneOrg'=>$oneOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
        /*
         * 递归生成人员结构的方法
@@ -397,6 +391,7 @@ class AgentController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $list = Package::getPaginage([],15,'id');
+        dd($list);
         foreach ($list as $key=>$value){
             foreach ($value['programs'] as $k=>$v){
                 $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
@@ -404,7 +399,7 @@ class AgentController extends Controller{
                 $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
             }
         }
-        return view('Zerone/agent/agent_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Agent/agent_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     //服务商程序管理页面划入js显示
