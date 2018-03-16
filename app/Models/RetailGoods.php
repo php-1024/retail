@@ -53,7 +53,7 @@ class RetailGoods extends Model{
     }
 
     //添加餐饮商品
-    public static function addCateringGoods($param){
+    public static function addRetailGoods($param){
         $model = new RetailGoods();
         $model->name = $param['name'];
         $model->details = $param['details'];
@@ -69,7 +69,7 @@ class RetailGoods extends Model{
     }
     
     //修改餐饮商品数据
-    public static function editCateringGoods($where,$param){
+    public static function editRetailGoods($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
