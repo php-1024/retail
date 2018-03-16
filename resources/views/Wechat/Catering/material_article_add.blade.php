@@ -68,7 +68,7 @@
                                     </header>
                                     <div class="panel-body">
                                         <form class="form-horizontal" method="get">
-                                            <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/meterial_iamge_select') }}">
+                                            <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/meterial_image_select') }}">
                                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
