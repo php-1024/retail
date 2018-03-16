@@ -6,10 +6,9 @@
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
-use App\Models\CateringGoods;
-use App\Models\CateringOrder;
-use App\Models\CateringOrderGoods;
+use App\Models\RetailGoods;
+use App\Models\RetailOrder;
+use App\Models\RetailOrderGoods;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\User;
@@ -32,7 +31,7 @@ class OrderController extends Controller
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'restaurant_id' => $admin_data['organization_id'],
         ];
-        $list = CateringOrder::getPaginage($where,10,'created_at','DESC');
+        $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
@@ -48,13 +47,13 @@ class OrderController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
-        $order = CateringOrder::getOne([['id',$id]]);
+        $order = RetailOrder::getOne([['id',$id]]);
         $user = User::getOneUser([['id',$order->user_id]]);        //查询处理订单信息和用户信息
         $order->user = $user;
-        $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
+        $order_goods = RetailOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         $order_price = 0.00;    //设置订单的初始总价
         foreach ($order_goods as $key=>$val){
-            $goods = CateringGoods::getOne([['id',$val->goods_id]]);
+            $goods = RetailGoods::getOne([['id',$val->goods_id]]);
             $val->order_goods = $goods;
             $order_price += $val->price;        //计算订单总价
         }
@@ -79,7 +78,7 @@ class OrderController extends Controller
         $status = $request->get('status');              //订单状态
         DB::beginTransaction();
         try {
-            CateringOrder::editOrder(['id'=>$order_id],['status'=>$status]);
+            RetailOrder::editOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
