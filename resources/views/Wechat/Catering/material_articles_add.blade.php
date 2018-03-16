@@ -65,10 +65,10 @@
                                 </div>
                                 <section class="panel panel-default">
                                     <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_articles_add_check') }}">
-                                        <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
-                                        <input type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
-                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                        <input type="hidden" id="num" autocomplete="off" value="1">
+                                        <input autocomplete="off" type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
+                                        <input autocomplete="off" type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
+                                        <input autocomplete="off" type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                        <input  autocomplete="off" type="hidden" id="num" value="1">
                                         <div class="panel-group m-b" id="target_box" >
 
                                             <div class="panel panel-default">
@@ -85,8 +85,8 @@
                                                             <button class="btn btn-info" type="button" onclick="selectImageForm(1);">选择图片素材</button>
                                                             <br/><br/>
                                                             <img id="img_show_1" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;display:none">
-                                                            <input type="hidden" name="img_id_1" id="img_id_1" id="_token" value="">
-                                                            <input type="hidden" name="thumb_media_id_1" id="media_id_1" id="_token" value="">
+                                                            <input autocomplete="off" type="hidden" name="img_id_1" id="img_id_1" id="_token" value="">
+                                                            <input  autocomplete="off" type="hidden" name="thumb_media_id_1" id="media_id_1" id="_token" value="">
                                                         </div>
                                                     </div>
 
@@ -95,7 +95,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">标题</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="title_1" value="">
+                                                            <input autocomplete="off" type="text" class="form-control" name="title_1" value="">
                                                         </div>
                                                     </div>
 
@@ -103,7 +103,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">作者</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="author_1" value="">
+                                                            <input autocomplete="off" type="text" class="form-control" name="author_1" value="">
                                                         </div>
                                                     </div>
 
@@ -111,7 +111,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">原文地址</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="origin_url_1" value="">
+                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_1" value="">
                                                         </div>
                                                     </div>
 
@@ -160,8 +160,8 @@
                     <button class="btn btn-info" type="button" onclick="selectImageForm('{target_num}');">选择图片素材</button>
                     <br/><br/>
                     <img id="img_show_{target_num}" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;display:none">
-                    <input type="hidden" name="img_id_{target_num}" id="img_id_{target_num}" id="_token" value="">
-                    <input type="hidden" name="thumb_media_id_{target_num}" id="media_id_{target_num}" id="_token" value="">
+                    <input  autocomplete="off" type="hidden" name="img_id_{target_num}" id="img_id_{target_num}" id="_token" value="">
+                    <input  autocomplete="off" type="hidden" name="thumb_media_id_{target_num}" id="media_id_{target_num}" id="_token" value="">
                 </div>
             </div>
 
@@ -170,7 +170,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">标题</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="title_{target_num}" value="">
+                    <input  autocomplete="off" type="text" class="form-control" name="title_{target_num}" value="">
                 </div>
             </div>
 
@@ -178,7 +178,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">作者</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="author_{target_num}" value="">
+                    <input  autocomplete="off" type="text" class="form-control" name="author_{target_num}" value="">
                 </div>
             </div>
 
@@ -186,7 +186,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">原文地址</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="origin_url_{target_num}" value="">
+                    <input  autocomplete="off" type="text" class="form-control" name="origin_url_{target_num}" value="">
                 </div>
             </div>
 
