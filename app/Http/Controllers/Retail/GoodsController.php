@@ -70,11 +70,8 @@ class GoodsController extends Controller
             } else {//商户本人操作记录
                 OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
             }
-            dd($goods_id);
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
-
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加商品失败，请检查', 'status' => '0']);
         }
