@@ -31,7 +31,7 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">分店概况</h3>
+                            <h3 class="m-b-none">店铺概况</h3>
                         </div>
 
                         <div class="col-lg-3">
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">分店名称</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">店铺名称</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">刘记鸡煲王【龙岗店】</label>
                                             </div>
@@ -261,7 +261,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
+                            <label class="col-sm-2 text-right">店铺名称</label>
                             <div class="col-sm-10">
                                 <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
                             </div>
