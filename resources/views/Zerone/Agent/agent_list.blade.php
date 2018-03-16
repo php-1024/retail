@@ -39,7 +39,7 @@
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
             <input type="hidden" id="agent_list_edit" value="{{ url('zerone/ajax/agent_list_edit') }}">
-            <input type="hidden" id="agent_list_frozen" value="{{ url('zerone/ajax/agent_list_frozen') }}">
+            <input type="hidden" id="agent_list_lock" value="{{ url('zerone/ajax/agent_list_lock') }}">
             <input type="hidden" id="agent_list_delete" value="{{ url('zerone/ajax/agent_list_delete') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
@@ -119,9 +119,9 @@
                                             <td class="text-right">
                                                 <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                 @if($value->status == 1)
-                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                                 @elseif($value->status == 0)
-                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-info" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                                 @endif
                                                 <!--
                                                 <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
@@ -226,7 +226,7 @@
         });
     }
     //冻结
-    function getFrozenForm(id,status){
+    function getLockForm(id,status){
 
         var url = $('#agent_list_frozen').val();
         var token = $('#_token').val();

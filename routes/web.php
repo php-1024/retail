@@ -290,8 +290,8 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('agent_add_check','Zerone\AgentController@agent_add_check')->middleware('ZeroneCheckAjax');//提交编辑参数设置
         Route::post('agent_list_edit','Zerone\AgentController@agent_list_edit')->middleware('ZeroneCheckAjax');//服务商编辑显示页面
         Route::post('agent_list_edit_check','Zerone\AgentController@agent_list_edit_check')->middleware('ZeroneCheckAjax');//服务商编辑数据提交
-        Route::post('agent_list_frozen','Zerone\AgentController@agent_list_frozen')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
-        Route::post('agent_list_frozen_check','Zerone\AgentController@agent_list_frozen_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
+        Route::post('agent_list_lock','Zerone\AgentController@agent_list_lock')->middleware('ZeroneCheckAjax');//服务商冻结显示页面
+        Route::post('agent_list_lock_check','Zerone\AgentController@agent_list_lock_check')->middleware('ZeroneCheckAjax');//服务商冻结提交功能
         Route::post('agent_list_delete','Zerone\AgentController@agent_list_delete')->middleware('ZeroneCheckAjax');//服务商删除显示页面
         Route::post('agent_assets','Zerone\AgentController@agent_assets')->middleware('ZeroneCheckAjax');//服务商程序管理划入划出显示页面
         Route::post('agent_assets_check','Zerone\AgentController@agent_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交

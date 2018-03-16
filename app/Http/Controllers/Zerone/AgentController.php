@@ -302,14 +302,14 @@ class AgentController extends Controller{
     }
 
     //服务商冻结ajaxshow显示页面
-    public function agent_list_frozen(Request $request){
+    public function agent_list_lock(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结状态
         $list = Organization::getOneagent([['id',$id]]);//服务商信息
-        return view('Zerone/agent/agent_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
+        return view('Zerone/agent/agent_list_lock',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //服务商冻结功能提交
-    public function agent_list_frozen_check(Request $request){
+    public function agent_list_lock_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
