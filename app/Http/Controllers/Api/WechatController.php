@@ -178,7 +178,18 @@ class WechatController extends Controller{
             ],
         ];
 
-        \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        if(!empty($re['media_id'])){
+            $zdata = [
+                'organization_id'=>$admin_data['organization_id'],
+                'title'=>$title,
+                'image_id'=>$img_id,
+                'type'=>'1',
+                'content'=>serialize($data),
+            ];
+        }else{
+            return response()->json(['data'=>'上传图文素材失败','status' => '0']);
+        }
     }
 
     /*
