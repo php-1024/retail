@@ -71,7 +71,6 @@ class OrderController extends Controller
     //修改订单状态确认操作
     public function order_status_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $order_id = $request->get('order_id');          //订单ID
