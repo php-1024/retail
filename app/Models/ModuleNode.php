@@ -62,7 +62,7 @@ class ModuleNode extends Model{
         $unselect_nodes = array_unique($unselect_nodes);
 
         //查询该程序下的所有角色
-        $role_list = OrganizationRole::whereIn('program_id',$program_ids)->get();
+        $role_list = Role::whereIn('program_id',$program_ids)->get();
         if(!empty($role_list)) {
             foreach ($role_list as $key => $val) {
                 RoleNode::where('role_id',$val['id'])->whereIn('node_id',$unselect_nodes)->delete();//删除对应的角色的相关权限节点。
@@ -106,7 +106,7 @@ class ModuleNode extends Model{
         $unselect_nodes = array_unique($unselect_nodes);
 
         //查询该程序下的所有角色
-        $role_list = OrganizationRole::whereIn('program_id',$program_ids)->get();
+        $role_list = Role::whereIn('program_id',$program_ids)->get();
         if(!empty($role_list)) {
             foreach ($role_list as $key => $val) {
                 RoleNode::where('role_id',$val['id'])->whereIn('node_id',$unselect_nodes)->forceDelete();//删除对应的角色的相关权限节点。

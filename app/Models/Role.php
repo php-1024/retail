@@ -6,7 +6,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class OrganizationRole extends Model{
+class Role extends Model{
     use SoftDeletes;
     protected $table = 'organization_role';
     protected $primaryKey = 'id';
@@ -31,7 +31,7 @@ class OrganizationRole extends Model{
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new OrganizationRole();
+        $model = new Role();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -40,7 +40,7 @@ class OrganizationRole extends Model{
 
     //添加组织角色
     public static function addRole($param){
-        $model = new OrganizationRole();
+        $model = new Role();
         $model->program_id = $param['program_id'];
         $model->organization_id = $param['organization_id'];
         $model->created_by = $param['created_by'];

@@ -4,7 +4,7 @@ Use App\Http\Controllers\Controller;
 Use Illuminate\Http\Request;
 Use Illuminate\Support\Facades\DB;
 Use App\Models\Module;
-Use App\Models\OrganizationRole;
+Use App\Models\Role;
 Use App\Models\RoleNode;
 Use App\Models\OperationLog;
 Use App\Models\ProgramModuleNode;
@@ -51,12 +51,12 @@ class RoleController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $role_name = $request->input('role_name');//权限角色名称
         $node_ids = $request->input('module_node_ids');//角色权限节点
-        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
+        if(Role::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
             return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
-                $role_id = OrganizationRole::addRole(['program_id'=>1,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
+                $role_id = Role::addRole(['program_id'=>1,'organization_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'role_name' => $role_name]);//添加角色并获取它的ID
                 foreach ($node_ids as $key => $val) {
                     RoleNode::addRoleNode(['role_id' => $role_id, 'node_id' => $val]);
                 }
@@ -80,7 +80,7 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');
         $search_data = ['role_name'=>$role_name];
         //查询所有角色列表
-        $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
+        $list = Role::getPaginage([['created_by',$admin_data['id']],['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
 
         //获取角色节点
         $role_module_nodes = [];
@@ -107,7 +107,7 @@ class RoleController extends Controller{
     public function role_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');//权限角色ID
-        $info = OrganizationRole::getOne([['id',$id]]);//获取该ID的信息
+        $info = Role::getOne([['id',$id]]);//获取该ID的信息
         $node_list = ProgramModuleNode::getRoleModuleNodes(1,$id);//获取当前角色拥有权限的模块和节点
         $selected_nodes = [];//选中的节点
         $selected_modules = [];//选中的模块
@@ -150,12 +150,12 @@ class RoleController extends Controller{
         $role_name = $request->input('role_name');//权限角色名称
         $node_ids = $request->input('module_node_ids');//角色权限节点
 
-        if(OrganizationRole::checkRowExists([['id','<>',$id],['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断非本条数据是否有相同的的角色
+        if(Role::checkRowExists([['id','<>',$id],['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断非本条数据是否有相同的的角色
             return response()->json(['data' => '存在另一个相同的权限角色名称', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
-                OrganizationRole::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
+                Role::editRole([['id',$id]],['role_name' => $role_name]);//修改角色名称
                 foreach ($node_ids as $key => $val) {
                     $vo = RoleNode::getOne([['role_id',$id],['node_id',$val]]);//查询是否存在数据
                     if(is_null($vo)) {//不存在生成插入数据
@@ -188,7 +188,7 @@ class RoleController extends Controller{
         $id = $request->input('id');//提交上来的ID
         DB::beginTransaction();
         try{
-            OrganizationRole::where('id',$id)->delete();//删除权限角色
+            Role::where('id',$id)->delete();//删除权限角色
             RoleNode::where('role_id',$id)->delete();//删除角色节点关系
             RoleAccount::where('role_id',$id)->delete();//删除角色账号关系
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了权限角色，ID为：'.$id);//保存操作记录
