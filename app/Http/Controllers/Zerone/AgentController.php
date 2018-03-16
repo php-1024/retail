@@ -224,6 +224,7 @@ class AgentController extends Controller{
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
         $listorg = Organization::getPaginage($where,'5','id');
+        dump($listorg);
         foreach ($listorg as $k=>$v){
             $zone_id = $v['warzoneagent']['zone_id'];
             $listorg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
