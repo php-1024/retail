@@ -87,7 +87,7 @@ class AgentController extends Controller{
     }
 
     //服务商审核列表
-    public function proxy_examinelist(Request $request){
+    public function agent_examinelist(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -105,7 +105,7 @@ class AgentController extends Controller{
         }
 
         $list = ProxyApply::getPaginage($where,'15','id');
-        return view('Zerone/Proxy/proxy_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Agent/agent_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //服务商审核ajaxshow显示页面
     public function proxy_examine(Request $request){
