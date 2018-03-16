@@ -10,6 +10,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
 use App\Models\Package;
+use App\Models\Program;
 use App\Models\WarzoneAgent;
 use Illuminate\Http\Request;
 use App\Models\OrganizationAgentapply;
@@ -390,8 +391,8 @@ class AgentController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
-        dd($listOrg);
-//        $list = Package::getPaginage([],15,'id');
+        $list = Program::getPaginage([['complete_id',3]],15,'id');
+        dd($list);
 //        foreach ($list as $key=>$value){
 //            foreach ($value['programs'] as $k=>$v){
 //                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
