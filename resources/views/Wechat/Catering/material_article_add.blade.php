@@ -77,7 +77,7 @@
                                                     <br/><br/>
                                                     <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;display:none">
                                                     <input type="hidden" name="img_id" id="img_id_0" id="_token" value="">
-                                                    <input type="hidden" name="media_id" id="media_id_0" id="_token" value="">
+                                                    <input type="hidden" name="thumb_media_id" id="media_id_0" id="_token" value="">
                                                 </div>
                                             </div>
 
@@ -86,7 +86,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">标题</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" value="">
+                                                    <input type="text" class="form-control" id="input-id-1" name="title" value="">
                                                 </div>
                                             </div>
 
