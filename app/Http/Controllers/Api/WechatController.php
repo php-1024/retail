@@ -148,7 +148,18 @@ class WechatController extends Controller{
      *单条图文素材添加检测
      */
     public function material_article_add_check(Request $request){
-        var_dump($request->input());
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $img_id = $request->input('img_id');
+        $title = $request->input('title');
+        $author = $request->input('author');
+        $digest = $request->input('digest');
+        $origin_url = $request->input('origin_url');
+        $content = $request->input('content');
+        
     }
 
     /*

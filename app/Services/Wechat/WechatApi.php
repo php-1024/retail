@@ -432,7 +432,18 @@ class WechatApi{
         $data = [
             'media_id'=>$media_id
         ];
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        return $re;
+    }
+
+    /*
+     * 添加图文素材
+     */
+    public function upload_article($authorizer_access_token,$data){
+        $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN';
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
         return $re;
