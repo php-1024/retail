@@ -45,5 +45,14 @@ class WechatImage extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
+
+    //获取列表
+    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+        $model = self::where($where)->orderBy($orderby,$sort);
+        if(!empty($limit)){
+            $model = $model->limit($limit);
+        }
+        return $model->get();
+    }
 }
 ?>
