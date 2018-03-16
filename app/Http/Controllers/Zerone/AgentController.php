@@ -218,13 +218,13 @@ class AgentController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_name = $request->input('organization_name');
-        dd($organization_name);
         $search_data = ['organization_name'=>$organization_name];
         $where = [['type','2']];
         if(!empty($organization_name)){
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
         $listorg = Organization::getPaginage($where,'5','id');
+        dd($listorg);
         foreach ($listorg as $k=>$v){
             $zone_id = $v['warzoneagent']['zone_id'];
             $listorg[$k]['zone_name'] = Warzone::where([['id',$zone_id]])->pluck('zone_name')->first();
@@ -237,7 +237,7 @@ class AgentController extends Controller{
         $id = $request->input('id');//服务商id
         $listorg = Organization::getOneagent([['id',$id]]);
         $warzone = Warzone::all();
-        return view('Zerone/agent/agent_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
+        return view('Zerone/Agent/agent_list_edit',['listorg'=>$listorg,'warzone'=>$warzone]);
     }
     //服务商编辑功能提交
     public function agent_list_edit_check(Request $request){
