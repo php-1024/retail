@@ -19,10 +19,10 @@ class WechatArticle extends Model{
     public static function addWechatArticle($param){
         $model = new WechatImage();
         $model->organization_id = $param['organization_id'];
-        $model->filename = $param['filename'];
-        $model->filepath = $param['filepath'];
-        $model->media_id = $param['media_id'];
-        $model->wechat_url = $param['wechat_url'];
+        $model->title = $param['title'];
+        $model->image_id = $param['image_id'];
+        $model->type = $param['type'];
+        $model->content = $param['content'];
         $model->save();
         return $model->id;
     }
