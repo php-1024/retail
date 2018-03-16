@@ -232,12 +232,12 @@ Route::group(['prefix'=>'zerone'],function(){
 
     //服务商管理
     Route::group(['prefix'=>'agent'],function(){
-        Route::get('agent_add','Zerone\ProxyController@agent_add')->middleware('ZeroneCheck');                //添加服务商
-        Route::get('agent_examinelist','Zerone\ProxyController@agent_examinelist')->middleware('ZeroneCheck');//服务商审核列表
-        Route::get('agent_list','Zerone\ProxyController@agent_list')->middleware('ZeroneCheck');              //服务商列表
-        Route::get('agent_structure','Zerone\ProxyController@agent_structure')->middleware('ZeroneCheck');    //服务商人员架构
-        Route::get('agent_program','Zerone\ProxyController@agent_program')->middleware('ZeroneCheck');        //服务商程序管理
-        Route::get('agent_company','Zerone\ProxyController@agent_company')->middleware('ZeroneCheck');        //服务商商户划拨
+        Route::get('agent_add','Zerone\AgentController@agent_add')->middleware('ZeroneCheck');                //添加服务商
+        Route::get('agent_examinelist','Zerone\AgentController@agent_examinelist')->middleware('ZeroneCheck');//服务商审核列表
+        Route::get('agent_list','Zerone\AgentController@agent_list')->middleware('ZeroneCheck');              //服务商列表
+        Route::get('agent_structure','Zerone\AgentController@agent_structure')->middleware('ZeroneCheck');    //服务商人员架构
+        Route::get('agent_program','Zerone\AgentController@agent_program')->middleware('ZeroneCheck');        //服务商程序管理
+        Route::get('agent_company','Zerone\AgentController@agent_company')->middleware('ZeroneCheck');        //服务商商户划拨
     });
     //商户管理
     Route::group(['prefix'=>'company'],function(){
