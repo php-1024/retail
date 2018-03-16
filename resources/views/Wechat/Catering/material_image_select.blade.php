@@ -11,7 +11,7 @@
                         <div class="col-lg-2">
                             <div class="item">
                                 <div class="pos-rlt">
-                                    <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
+                                    <a href="javascript:;"><img data-id="{{$val->id}}" data-media_id="{{$val->media_id}}" src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
                                 </div>
                             </div>
                         </div>
