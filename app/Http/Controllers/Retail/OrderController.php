@@ -62,7 +62,7 @@ class OrderController extends Controller
         foreach ($order_goods as $key=>$val){
             $goods = CateringGoods::getOne([['id',$val->goods_id]]);
             $val->order_goods = $goods;
-            $order_price += $val->price;
+            $order_price .= $val->price;
         }
         dd($order_price);
         return view('Retail/Order/order_spot_detail',['order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
