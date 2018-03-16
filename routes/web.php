@@ -232,8 +232,9 @@ Route::group(['prefix'=>'zerone'],function(){
 
     //服务商管理
     Route::group(['prefix'=>'agent'],function(){
-        Route::get('agent_add','Zerone\AgentController@agent_add')->middleware('ZeroneCheck');                //添加服务商
+
         Route::get('agent_examinelist','Zerone\AgentController@agent_examinelist')->middleware('ZeroneCheck');//服务商审核列表
+        Route::get('agent_add','Zerone\AgentController@agent_add')->middleware('ZeroneCheck');                //添加服务商
         Route::get('agent_list','Zerone\AgentController@agent_list')->middleware('ZeroneCheck');              //服务商列表
         Route::get('agent_structure','Zerone\AgentController@agent_structure')->middleware('ZeroneCheck');    //服务商人员架构
         Route::get('agent_program','Zerone\AgentController@agent_program')->middleware('ZeroneCheck');        //服务商程序管理
@@ -619,6 +620,7 @@ Route::group(['prefix'=>'api'],function() {
     Route::group(['prefix' => 'catering'] , function(){
         Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('CateringCheck');//开放平台控制公众平台回复函数
         Route::any('material_image', 'Api\WechatController@material_image')->middleware('CateringCheck');//图片素材
+        Route::any('material_article','Api\WechatController@material_article')->middleware('CateringCheck');
     });
 
     //微信接口中页面使用Ajax的部分

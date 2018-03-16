@@ -10,16 +10,15 @@ return [
     'zerone_safe_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdfd21a1',//零壹管理平台安全密码加密盐
     /*******************零壹平台**************************/
 
+    /*******************服务商**************************/
+    'agent_encrypt_key'=>'sdfdsf121s2dfdsfds121s2df45dsf12dsf45dsf12sd45sdf12ds',//零壹管理平台登录密码加密盐
+    'agent_safe_encrypt_key'=>'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
+    /*******************服务商**************************/
+
     /*******************商户***************************/
     'company_encrypt_key'=>'asdfghjklqwerasxczdfgrtijnjhbjhgysjughaysasaisdsyssd',//零壹管理平台登录密码加密盐
     'company_safe_encrypt_key'=>'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
     /*******************商户***************************/
-
-
-    /*******************服务商**************************/
-    'proxy_encrypt_key'=>'sdfdsf121s2dfdsfds121s2df45dsf12dsf45dsf12sd45sdf12ds',//零壹管理平台登录密码加密盐
-    'proxy_safe_encrypt_key'=>'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
-    /*******************服务商**************************/
 
     /*******************总店**************************/
     'catering_encrypt_key'=>'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
