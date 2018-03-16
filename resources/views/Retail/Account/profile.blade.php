@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>个人账号信息修改 | 零壹云管理平台 | 分店业务系统</title>
+    <title>个人账号信息修改 | 零壹云管理平台 | 零售版店铺管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch/css')}}/animate.css" type="text/css" />
