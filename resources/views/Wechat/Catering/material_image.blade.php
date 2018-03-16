@@ -69,7 +69,7 @@
                                     <div class="col-lg-2">
                                         <div class="item">
                                             <div class="pos-rlt">
-                                                <a href="track-detail.html"><img src="{{asset('upload/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" class="r r-2x img-full"></a>
+                                                <a href="track-detail.html"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
                                             </div>
                                             <div class="padder-v">
                                                 <span>{{ $val->filename }}</span>
