@@ -261,42 +261,6 @@
             }
         });
     }
-    //删除
-    function getDeleteForm(id){
-
-        var url = $('#agent_list_delete').val();
-        var token = $('#_token').val();
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-
-                $('#myModal2').html(response);
-                $('#myModal2').modal();
-            }
-        });
-    }
 </script>
 </div>
 </body>
