@@ -10,6 +10,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
 use App\Models\OrganizationAssets;
+use App\Models\OrganizationAssetsallocation;
 use App\Models\Package;
 use App\Models\Program;
 use App\Models\WarzoneAgent;
@@ -407,9 +408,9 @@ class AgentController extends Controller{
         $organization_id = $request->input('organization_id'); //服务商id
         $program_id = $request->input('program_id');//套餐id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
-        $listProgram = Program::getListProgram([['id',$program_id]]);
+        $oneProgram = Program::getOne([['id',$program_id]]);
         $status = $request->input('status');//状态
-        return view('Zerone/agent/agent_assets',['listOrg'=>$listOrg,'listProgram'=>$listProgram,'status'=>$status]);
+        return view('Zerone/Agent/agent_assets',['listOrg'=>$listOrg,'oneProgram'=>$oneProgram,'status'=>$status]);
     }
 
     //服务商程序管理页面划入划出检测
@@ -417,47 +418,47 @@ class AgentController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
         if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
-            $draw_organization_id = 1;
+            $to_organization_id = 1;
         }else{
-            $draw_organization_id = $admin_data['organization_id'];
+            $to_organization_id = $admin_data['organization_id'];
         }
 
         $organization_id = $request->input('organization_id');//服务商id
-        $package_id = $request->input('package_id');//套餐id
         $program_id = $request->input('program_id');//程序id
-        $number = $request->input('num');//数量
+        $number = $request->input('number');//数量
         $status = $request->input('status');//判断划入或者划出
         DB::beginTransaction();
         try{
-            $re = Assets::getOne([['organization_id',$organization_id],['package_id',$package_id],['program_id',$program_id]]);
+            $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$program_id]]);
             $id=$re['id'];
             if($status == '1'){//划入
                 if(empty($re)){
-                    Assets::addAssets(['organization_id'=>$organization_id,'package_id'=>$package_id,'program_id'=>$program_id,'program_spare_num'=>$number,'program_use_num'=>'0']);
+                    OrganizationAssets::addAssets(['organization_id'=>$organization_id,'program_id'=>$program_id,'program_balance'=>$number,'program_used_num'=>'0']);
                 }else{
-                    $num = $re['program_spare_num']+$number;
-                    Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
+                    $num = $re['program_balance']+$number;
+                    OrganizationAssets::editAssets([['id',$id]],['program_balance'=>$num]);
                 }
-                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
+                $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
-                AssetsOperation::addAssetsOperation($data);//保存操作记录
+                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             } else{//划出
                 if(empty($re)){
                     return response()->json(['data' => '数量不足', 'status' => '0']);
                 }else{
-                    if($re['program_spare_num'] >= $number){//划出数量小于或等于剩余数量
-                        $num = $re['program_spare_num'] - $number;
-                        Assets::editAssets([['id',$id]],['program_spare_num'=>$num]);
+                    if($re['program_balance'] >= $number){//划出数量小于或等于剩余数量
+                        $num = $re['program_balance'] - $number;
+                        OrganizationAssets::editAssets([['id',$id]],['program_balance'=>$num]);
                     }else{
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
-                $data = ['account_id'=>$admin_data['id'],'organization_id'=>$organization_id,'draw_organization_id'=>$draw_organization_id,'program_id'=>$program_id,'package_id'=>$package_id,'status'=>$status,'number'=>$number];
+                $data = ['operator_id'=>$admin_data['id'],'fr_organization_id'=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
                 //添加操作日志
-                AssetsOperation::addAssetsOperation($data);//保存操作记录
+                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
