@@ -123,9 +123,6 @@
                                                 @elseif($value->status == 0)
                                                 <button type="button" id="lockBtn" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                                 @endif
-                                                <!--
-                                                <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
--->
                                                 <button type="button" id="peoplesBtn" class="btn btn-outline btn-xs btn-primary" onclick="location.href='{{url('zerone/agent/agent_structure')}}?organization_id={{$value->id}}'"><i class="fa fa-users"></i>&nbsp;&nbsp;人员架构</button>
 
                                                 <button type="button" id="programBtn" onclick="location.href='{{url('zerone/agent/agent_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>

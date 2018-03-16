@@ -124,6 +124,10 @@ class Organization extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
+    //获取分页数据-服务商
+    public static function getPaginageFansmanage($where,$paginate,$orderby,$sort='DESC'){
+        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    }
     //获取分页数据-分店
     public static function getbranch($where,$paginate,$orderby,$sort='DESC'){
         return self::with('organizationBranchinfo')->with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
