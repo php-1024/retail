@@ -37,6 +37,12 @@ class Account extends Model{
     public function roles(){
         return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
+
+    //和餐饮分类表CateringCategory一对一的关系
+    public function CateringCategory(){
+        return $this->hasOne('App\Models\CateringCategory', 'created_by');
+    }
+
     //简易型查询单条数据关联查询
     public static function getOne($where)
     {
