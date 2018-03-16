@@ -453,7 +453,6 @@ class AgentController extends Controller{
                     }
                 }
                 $data = ['operator_id'=>$admin_data['id'],'fr_organization_id'=>$organization_id,'to_organization_id'=>$to_organization_id,'program_id'=>$program_id,'status'=>$status,'number'=>$number];
-                dd($data);
                 //添加操作日志
                 OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
