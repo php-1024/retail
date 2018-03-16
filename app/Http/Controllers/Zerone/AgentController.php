@@ -169,12 +169,10 @@ class AgentController extends Controller{
         $parent_tree = $admin_data['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
         $mobile = $request->input('mobile');//手机号码
-        $password = $request->input('password');//用户密码
+        $password = $request->input('agent_password');//用户密码
         $key = config("app.agent_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        dd($encryptPwd);
-
         $program_id = 2;
         DB::beginTransaction();
         try{
@@ -205,6 +203,7 @@ class AgentController extends Controller{
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
