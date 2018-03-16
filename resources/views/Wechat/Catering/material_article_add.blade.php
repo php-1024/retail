@@ -72,7 +72,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
                                                 <div class="col-sm-10">
-                                                    <button class="btn btn-info" type="button">选择图片素材</button>
+                                                    <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
                                                 </div>
                                             </div>
 
