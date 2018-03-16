@@ -171,7 +171,7 @@
                         </div>
 
                         {{--购物车--}}
-                        <div class="col-lg-8">
+                        <div class="col-lg-5">
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
                                     购物车 {{$order->account->account_info->realname}} 003号桌 12人
@@ -184,7 +184,6 @@
                                             <th>商品标题</th>
                                             <th>数量</th>
                                             <th>商品价格</th>
-                                            <th>状态</th>
                                             <th>状态</th>
                                         </tr>
                                         </thead>
@@ -209,22 +208,8 @@
                                                     未知状态
                                                 @endif
                                                 {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
-                                                {{--<option>待上菜</option>--}}
-                                                {{--<option>已上菜</option>--}}
-                                                {{--</select>--}}
-                                            </th>
-
-                                            <th>
-                                                @if($val->status == 0)
-                                                    待上菜
-                                                @elseif($val->status == 1)
-                                                    已上菜
-                                                @else
-                                                    未知状态
-                                                @endif
-                                                {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
-                                                {{--<option>待上菜</option>--}}
-                                                {{--<option>已上菜</option>--}}
+                                                    {{--<option>待上菜</option>--}}
+                                                    {{--<option>已上菜</option>--}}
                                                 {{--</select>--}}
                                             </th>
                                         </tr>
