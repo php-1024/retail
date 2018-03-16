@@ -55,7 +55,7 @@ class CateringOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('User')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
