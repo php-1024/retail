@@ -16,8 +16,8 @@ class WechatImage extends Model{
         return self::where($where)->first();
     }
 
-    public static function WechatImage($param){
-        $model = new WechatAuthorizerInfo();
+    public static function addWechatImage($param){
+        $model = new WechatImage();
         $model->organization_id = $param['organization_id'];
         $model->filename = $param['filename'];
         $model->filepath = $param['filepath'];

@@ -77,6 +77,16 @@ class WechatController extends Controller{
             $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
             $re = \Wechat::uploadimg($auth_info['authorizer_access_token'],base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
             dump($re);
+            exit();
+            if(!empty($re['media_id'])) {
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'filename' => $new_name,
+                    'filepath' => base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name,
+                    'media_id' => $re['media_id'],
+                    ''
+                ];
+            }
             return response()->json(['data' => '上传商品图片信息成功', 'status' => '1']);
         } else {
             return response()->json(['status' => '0']);

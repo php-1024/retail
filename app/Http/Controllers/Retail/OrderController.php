@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\CateringGoods;
 use App\Models\CateringOrder;
 use App\Models\CateringOrderGoods;
 use App\Models\Organization;
@@ -58,6 +59,10 @@ class OrderController extends Controller
         $account = Account::getOne([['id',$order->user_id]]);    //查询处理订单信息和用户信息
         $order->account = $account;
         $order_goods = CateringOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
+        foreach ($order_goods as $key=>$val){
+            $goods = CateringGoods::getOne([['id',$val->goods_id]]);
+            $val->order_goods = $goods;
+        }
         dump($order_goods);
         return view('Retail/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
