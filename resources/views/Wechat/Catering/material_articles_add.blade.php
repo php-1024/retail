@@ -68,7 +68,7 @@
                                         <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                         <input type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                        <input type="hidden" id="num" value="1">
+                                        <input type="hidden" id="num" autocomplete="off" value="1">
                                         <div class="panel-group m-b" id="target_box" >
 
                                             <div class="panel panel-default">
