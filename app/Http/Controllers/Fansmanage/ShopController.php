@@ -20,7 +20,7 @@ class ShopController extends Controller{
             $where = ['type'=>'4'];
 //            $listOrg = Organization::where([['program_id','4']])->get();
             $listOrg = Organization::getCateringAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
-            return view('Catering/Shop/select_shop',['listOrg'=>$listOrg]);
+            return view('Fansmanage/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
             $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id')->first();//获取负责人id
@@ -31,7 +31,7 @@ class ShopController extends Controller{
             $operation_log_list = OperationLog::getList($where,5,'id');//操作记录
             $acc_num = Account::where([['organization_id',$organization_id]])->count();//查询服务商人数
             $org_num = Organization::where([['parent_id',$organization_id]])->count();//查询服务商附属商务个数
-            return view('Catering/Shop/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Fansmanage/Shop/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
     //超级管理员选择服务商
