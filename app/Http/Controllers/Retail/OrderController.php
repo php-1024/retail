@@ -12,6 +12,7 @@ use App\Models\CateringOrder;
 use App\Models\CateringOrderGoods;
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class OrderController extends Controller
@@ -70,9 +71,11 @@ class OrderController extends Controller
     //修改订单状态确认操作
     public function order_status_check(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
-        $goods_id = $request->get('goods_id');        //获取分类栏目ID
+        $order_id = $request->get('order_id');          //订单ID
+        $status = $request->get('status');              //订单状态
         DB::beginTransaction();
         try {
             CateringGoods::select_delete($goods_id);
