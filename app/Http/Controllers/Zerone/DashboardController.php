@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 use App\Models\Statistics;
-use App\Models\Role;
+use App\Models\OrganizationRole;
 
 class DashboardController extends Controller{
 
@@ -172,7 +172,7 @@ class DashboardController extends Controller{
         $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
         $roles = [];
         foreach($list as $key=>$val){
-            $roles[$val->id] = Role::getLogsRoleName($val->account_id);
+            $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
         }
         return view('Zerone/Dashboard/operation_log',['list'=>$list,'roles'=>$roles,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }

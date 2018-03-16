@@ -16,7 +16,7 @@ class Account extends Model{
     //和账号多对多的关系
     public function account_roles()
     {
-        return $this->belongsToMany('App\Models\Role','role_account','account_id','role_id');
+        return $this->belongsToMany('App\Models\OrganizationRole','role_account','account_id','role_id');
     }
 
     //和个人信息表一对一的关系
@@ -35,7 +35,7 @@ class Account extends Model{
     }
     //和权限角色表创建者一对多的关系
     public function roles(){
-        return $this->hasMany('App\Models\Role', 'created_by');
+        return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
     //简易型查询单条数据关联查询
     public static function getOne($where)

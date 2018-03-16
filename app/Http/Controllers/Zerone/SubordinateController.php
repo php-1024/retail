@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Role;
+use App\Models\OrganizationRole;
 use App\Models\Module;
 use App\Models\ProgramModuleNode;
 use App\Models\Account;
@@ -20,7 +20,7 @@ class SubordinateController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
-        $role_list = Role::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+        $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -190,7 +190,7 @@ class SubordinateController extends Controller{
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        $role_list = Role::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
+        $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
         return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 

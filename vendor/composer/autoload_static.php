@@ -399,7 +399,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Models\\Organization' => __DIR__ . '/../..' . '/app/Models/Organization.php',
         'App\\Models\\OrganizationCompanyinfo' => __DIR__ . '/../..' . '/app/Models/OrganizationCompanyinfo.php',
         'App\\Models\\OrganizationProxyinfo' => __DIR__ . '/../..',
-        'App\\Models\\Role' => __DIR__ . '/../..',
+        'App\\Models\\OrganizationRole' => __DIR__ . '/../..' . '/app/Models/OrganizationRole.php',
         'App\\Models\\Package' => __DIR__ . '/../..' . '/app/Models/Package.php',
         'App\\Models\\PackageProgram' => __DIR__ . '/../..' . '/app/Models/PackageProgram.php',
         'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',

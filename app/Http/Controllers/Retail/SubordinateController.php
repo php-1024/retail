@@ -12,7 +12,7 @@ use App\Models\AccountInfo;
 use App\Models\AccountNode;
 use App\Models\Module;
 use App\Models\OperationLog;
-use App\Models\Role;
+use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
 use App\Models\RoleAccount;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class SubordinateController extends Controller
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         //获取当前用户添加的权限角色
-        $role_list = Role::getList([['program_id',5],['created_by',$admin_data['id']]],0,'id');
+        $role_list = OrganizationRole::getList([['program_id',5],['created_by',$admin_data['id']]],0,'id');
         $module_node_list = Module::getListProgram(5, [], 0, 'id');//获取当前系统的所有模块和节点
         $selected_modules = [];//选中的模块
         $selected_nodes = [];//选中的节点
@@ -213,7 +213,7 @@ class SubordinateController extends Controller
         foreach($info->account_roles as $key=>$val){
             $info->account_role = $val->id;
         }
-        $role_list = Role::getList([['program_id',5],['created_by',$admin_data['id']]],0,'id');
+        $role_list = OrganizationRole::getList([['program_id',5],['created_by',$admin_data['id']]],0,'id');
         return view('Retail/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 

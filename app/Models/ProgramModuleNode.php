@@ -88,7 +88,7 @@ class ProgramModuleNode extends Model{
         $unselect_nodes = array_unique($unselect_nodes);
 
         //查询该程序下的所有角色
-        $role_list = Role::where('program_id',$program_id)->get();
+        $role_list = OrganizationRole::where('program_id',$program_id)->get();
         if(!empty($role_list)) {
             foreach ($role_list as $key => $val) {
                 RoleNode::where('role_id',$val['id'])->whereIn('node_id',$unselect_nodes)->forceDelete();//删除对应的角色的相关权限节点。
