@@ -18,7 +18,7 @@ class RetailCheckAjax{
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/branch_select":           //超级管理员选择分店提交数据
+            case "retail/ajax/retail_select":           //超级管理员选择分店提交数据
             case "retail/ajax/category_delete":           //栏目编辑页面
             case "retail/ajax/category_edit":           //栏目编辑页面
             case "retail/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
