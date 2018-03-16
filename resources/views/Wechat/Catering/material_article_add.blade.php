@@ -185,7 +185,7 @@
     });
 
     //弹出图片上传框
-    function selectImageForm(){
+    function selectImageForm(i){
         var url = $('#material_image_select_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
