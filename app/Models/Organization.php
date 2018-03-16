@@ -44,11 +44,11 @@ class Organization extends Model{
 
     //和WarzoneAgent表一对一的关系
     public function warzoneAgent(){
-        return $this->hasOne('App\Models\WarzoneAgent', 'organization_id');
+        return $this->hasOne('App\Models\WarzoneAgent', 'agent_id');
     }
     //和WarzoneAgent表 warzone表 一对一的关系
     public function warzone(){
-        return $this->belongsToMany('App\Models\Warzone','warzone_proxy','organization_id','zone_id')->select('zone_name');
+        return $this->belongsToMany('App\Models\Warzone','warzone_proxy','agent_id','zone_id')->select('zone_name');
     }
 
     //获取分页数据-商户
@@ -74,7 +74,7 @@ class Organization extends Model{
     public static function getList($where){
         return self::where($where)->get();
     }
-    
+
     //获取分页数据-店铺
     public static function getOrganizationAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){
         $model = self::with('account');
