@@ -26,7 +26,7 @@ class WarzoneAgent extends Model{
     public static function addWarzoneAgent($param){
         $program = new WarzoneAgent();//实例化程序模型
         $program->zone_id = $param['zone_id'];//程序名称
-        $program->organization_id = $param['organization_id'];//程序名称
+        $program->agent_id = $param['agent_id'];//程序名称
         $program->save();
         return $program->id;
     }
