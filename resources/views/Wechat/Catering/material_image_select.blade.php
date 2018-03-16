@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
             </div>
         </div>
     </div>
