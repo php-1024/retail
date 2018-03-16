@@ -75,7 +75,9 @@
                                                 <div class="col-sm-10">
                                                     <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
                                                     <br/><br/>
-                                                    <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;">
+                                                    <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;display:none">
+                                                    <input type="hidden" name="img_id" id="img_id_0" id="_token" value="">
+                                                    <input type="hidden" name="media_id" id="media_id_0" id="_token" value="">
                                                 </div>
                                             </div>
 

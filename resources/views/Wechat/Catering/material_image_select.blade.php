@@ -26,9 +26,12 @@
 </form>
 <script>
     function select_img(obj,i){
+        var id = $(obj).attr('data-id');
         var media_id = $(obj).attr('data-media_id');
         var url = $(obj).attr('src');
 
-        $('#img_show_'+i).attr('src',url);
+        $('#img_show_'+i).attr('src',url).show();
+        $('#media_id_'+i).attr('media',url).show();
+        $('#img_id_'+i).attr('media',url).show();
     }
 </script>
