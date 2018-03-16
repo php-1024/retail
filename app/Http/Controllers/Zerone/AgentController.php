@@ -78,7 +78,6 @@ class AgentController extends Controller{
             OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'添加了服务商：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '注册失败', 'status' => '0']);
         }
