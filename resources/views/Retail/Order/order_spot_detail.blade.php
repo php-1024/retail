@@ -237,7 +237,7 @@
         </section>
     </section>
 </section>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
