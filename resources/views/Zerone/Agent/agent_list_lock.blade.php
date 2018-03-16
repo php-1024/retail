@@ -1,5 +1,5 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_list_frozen_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_list_lock_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <input type="hidden" name="status" id="status" value="{{$status}}">
