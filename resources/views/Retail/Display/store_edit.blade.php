@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
+                            <input type="text" value="刘记鸡煲王【龙岗店】" name="organization_name" placeholder="店铺名称" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            <input type="text" value="张老三" placeholder="负责人" class="form-control">
+                            <input type="text" value="张老三" name="owner" placeholder="负责人" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
+                            <input type="text" value="13123456789" name="mobile" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -44,15 +44,14 @@
                         </div>
                     </div>
 
-                    <div style="clear:both;"></div>
-
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">店铺地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
-                        </div>
-                    </div>
+                    {{--<div style="clear:both;"></div>--}}
+                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-sm-2 text-right">店铺地址</label>--}}
+                        {{--<div class="col-sm-10">--}}
+                            {{--<input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
