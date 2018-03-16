@@ -66,10 +66,17 @@ class Kernel extends HttpKernel
         'ZeroneCheckAjax'=>\App\Http\Middleware\Zerone\ZeroneCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹平台管理系统*******************************/
 
+
         /**************************零壹总店管理系统*******************************/
         'CateringCheck'=>\App\Http\Middleware\Catering\CateringCheck::class,//检测普通页面跳转的中间件
         'CateringCheckAjax'=>\App\Http\Middleware\Catering\CateringCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹总店管理系统*******************************/
+
+
+        /**************************零壹粉丝管理系统*******************************/
+        'FansmanageCheck'=>\App\Http\Middleware\Fansmanage\FansmanageCheck::class,//检测普通页面跳转的中间件
+        'FansmanageCheckAjax'=>\App\Http\Middleware\Fansmanage\FansmanageCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************零壹粉丝管理系统*******************************/
 
 
         /**************************零壹总店管理系统*******************************/
