@@ -395,11 +395,10 @@ class AgentController extends Controller{
         $list = Program::getPaginage([['complete_id',3]],15,'id');
         foreach ($list as $key=>$value){
             $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$value['id']]]);
-            dump($re);
-//            $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-//            $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+            $list[$key]['program_balance'] = $re['program_balance'];
+            $list[$key]['program_used_num']= $re['program_used_num'];
         }
-        exit();
+
         return view('Zerone/Agent/agent_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
