@@ -111,6 +111,7 @@ class WechatController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info($image_info['organization_id']);//刷新并获取授权令牌
 
         $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$image_info['media_id']);
+        dump($re);
         if($re['error_code']=='0'){
             @unlink($image_info['filepath']);
             WechatImage::where('id',$id)->forceDelete();
