@@ -95,7 +95,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_assets_check"://检测是否登录 权限 安全密码 数字不能为空
+            case "zerone/ajax/agent_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
@@ -627,6 +627,15 @@ class ZeroneCheckAjax
         return self::res(1, $request);
     }
 
+    //检测程序划拨数量不为空
+    public function checkAssets($request){
+        $number = $request->input('number');
+        if (preg_match("/^[1-9]{1}\d{0,9}$/",$number)){
+            return self::res(1, $request);
+        }else{
+            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
+        }
+    }
 
 
 
@@ -827,18 +836,6 @@ class ZeroneCheckAjax
         }
 
         return self::res(1, $request);
-    }
-
-
-
-    //检测商户编辑表信息
-    public function checkAssets($request){
-        $num = $request->input('num');
-        if (preg_match("/^[1-9]{1}\d{0,9}$/",$num)){
-            return self::res(1, $request);
-        }else{
-            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
-        }
     }
 
 
