@@ -58,7 +58,6 @@ class OrderController extends Controller
             $val->order_goods = $goods;
             $order_price += $val->price;        //计算订单总价
         }
-        dd($order_goods);
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
