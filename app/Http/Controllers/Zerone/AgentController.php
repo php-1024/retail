@@ -9,6 +9,7 @@ use App\Models\AssetsOperation;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
+use App\Models\OrganizationAssets;
 use App\Models\Package;
 use App\Models\Program;
 use App\Models\WarzoneAgent;
@@ -392,14 +393,13 @@ class AgentController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $list = Program::getPaginage([['complete_id',3]],15,'id');
-        dd($list);
-//        foreach ($list as $key=>$value){
-//            foreach ($value['programs'] as $k=>$v){
-//                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
-//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-//            }
-//        }
+        foreach ($list as $key=>$value){
+            $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$value['id']]]);
+            dump($re);
+//            $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+//            $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+        }
+        exit();
         return view('Zerone/Agent/agent_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
