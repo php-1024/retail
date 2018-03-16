@@ -28,7 +28,7 @@ class AgentApply extends Model{
     }
 
     //添加数据
-    public static function addProxyApply($param){
+    public static function addAgentApply($param){
         $program = new AgentApply();//实例化程序模型
         $program->program_name = $param['program_name'];//程序名称
         $program->program_url = $param['program_url'];//程序名称
@@ -38,7 +38,7 @@ class AgentApply extends Model{
         return $program->id;
     }
     //修改数据
-    public static function editProxyApply($where,$param){
+    public static function editAgentApply($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
