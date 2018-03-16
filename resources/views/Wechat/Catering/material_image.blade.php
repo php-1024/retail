@@ -72,7 +72,7 @@
                                                 <a href="javascript:;"><img src="{{asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$val->filename)}}" alt="" style="height: 200px; width: 200px;"></a>
                                             </div>
                                             <div class="padder-v">
-                                                <span>{{ $val->filename }}</span>
+                                                <span>{{ $val->filename }}</span><span><i class="icon icon-remove"></i>删除</span>
                                             </div>
                                         </div>
                                     </div>
