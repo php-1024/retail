@@ -1,5 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="organization_id" value="{{$organization_id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -24,7 +25,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" style="padding-top: 7px;">消耗程序与分店数量</label>
                     <div class="col-sm-9">
-                        <input type="checkbox" class="js-switch" checked  value="1"/>
+                        <input type="checkbox" class="js-switch" checked  value="1" name="status"/>
                     </div>
 
                 </div>
@@ -34,7 +35,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">安全密码</label>
-                    <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
+                    <div class="col-sm-9"><input type="password" class="form-control" value="" name="safe_password"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -43,7 +44,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary saveBtn">保存</button>
+                <button type="button" class="btn btn-primary saveBtn" onclick="postForm()">保存</button>
             </div>
         </div>
     </div>
