@@ -63,7 +63,6 @@ class OrderController extends Controller
             $goods = CateringGoods::getOne([['id',$val->goods_id]]);
             $val->order_goods = $goods;
         }
-        dump($order_goods);
         return view('Retail/Order/order_spot_detail',['order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 

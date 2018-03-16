@@ -190,54 +190,40 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
+                                        @foreach($order_goods as $key=>$val)
                                         <tr>
-                                            <td>1</td>
-                                            <td>奇味鸡煲</td>
+                                            <td>{{$val->id}}</td>
+                                            <td>{{$val->order_goods->name}}</td>
                                             <td>
-                                                1
+                                                {{$val->total}}
                                             </td>
                                             <td>
                                                 米饭 + 辣
                                             </td>
                                             <td>
-                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="50">
+                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->order_goods->price}}">
                                             </td>
                                             <th>
-                                                <select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">
-                                                    <option>待上菜</option>
-                                                    <option>已上菜</option>
-                                                </select>
+                                                @if($val->status == 0)
+                                                    待上菜
+                                                @elseif($val->status == 1)
+                                                    已上菜
+                                                @else
+                                                    未知状态
+                                                @endif
+                                                {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
+                                                    {{--<option>待上菜</option>--}}
+                                                    {{--<option>已上菜</option>--}}
+                                                {{--</select>--}}
                                             </th>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-plus"></i></button>
-                                                <input type="text" id="exampleInputPassword2" class="text-center" value="1" size="4">
+                                                <input type="text" id="exampleInputPassword2" class="text-center" value="{{$val->total}}" size="4">
                                                 <button type="button" class="btn btn-danger btn-xs"> <i class="fa fa-minus"></i></button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>麻辣鸡煲</td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                米饭 + 辣
-                                            </td>
-                                            <td>
-                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="50">
-                                            </td>
-                                            <th>
-                                                <select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">
-                                                    <option>待上菜</option>
-                                                    <option>已上菜</option>
-                                                </select>
-                                            </th>
-                                            <td>
-                                                <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-plus"></i></button>
-                                                <input type="text" id="exampleInputPassword2" class="text-center" value="1" size="4">
-                                                <button type="button" class="btn btn-danger btn-xs"> <i class="fa fa-minus"></i></button>
-                                            </td>
-                                        </tr>
+                                        @endforeach
 
                                         <tr>
                                             <td></td>
@@ -246,7 +232,7 @@
 
                                             <td><label class="label label-info">商品总计</label></td>
                                             <td>
-                                                <label class="label label-danger">¥100000.00</label>
+                                                <label class="label label-danger">{{$val->price}}</label>
                                             </td>
                                             <td></td>
                                             <td><label class="label label-danger">2份</label></td>
