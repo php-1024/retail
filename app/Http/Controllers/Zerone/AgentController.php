@@ -475,7 +475,7 @@ class AgentController extends Controller{
     public function agent_fansmanage_add(Request $request){
 
         $organization_id = $request->organization_id;//服务商id
-        $list = Organization::getList([['type',3],['parent_id','<>',$organization_id]]);
+        $list = Organization::getList([['type',3],['parent_id','<>',$organization_id],['parent_id','1']]);
         return view('Zerone/Agent/agent_fansmanage_add',['list'=>$list,'organization_id'=>$organization_id]);
     }
     //商户划拨归属功能提交
@@ -523,7 +523,6 @@ class AgentController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'划拨了商户:'.$fansmanage_name.'-归属于服务商：'.$oneAgent['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
