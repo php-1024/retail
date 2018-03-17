@@ -24,7 +24,7 @@ class OrganizationFansmanageinfo extends Model{
         $program = new OrganizationFansmanageinfo();//实例化程序模型
         $program->fansmanage_id = $param['fansmanage_id'];//组织id
         $program->fansmanage_owner = $param['fansmanage_owner'];//商户负责人姓名
-        $program->fanamanage_owner_idcard = $param['fanamanage_owner_idcard'];//商户负责人身份证
+        $program->fansmanage_owner_mobile = $param['fansmanage_owner_mobile'];//商户负责人身份证
         $program->fansmanage_owner_mobile = $param['fansmanage_owner_mobile'];//商户负责人手机号
         $program->save();
         return $program->id;
