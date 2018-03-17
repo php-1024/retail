@@ -16,6 +16,7 @@ class WechatArticle extends Model{
         return self::where($where)->first();
     }
 
+    //添加微信文章
     public static function addWechatArticle($param){
         $model = new WechatArticle();
         $model->organization_id = $param['organization_id'];
@@ -25,6 +26,15 @@ class WechatArticle extends Model{
         $model->content = $param['content'];
         $model->save();
         return $model->id;
+    }
+
+    //修改文章
+    public static function editWechatArticle($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
     }
 
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
