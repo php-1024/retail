@@ -235,6 +235,7 @@
     //上传图片提交表单
     function uploadForm() {
         var formData = new FormData($( "#uploadForm" )[0]);
+        console.log(formData);
         $.ajax({
             url: '{{ url('retail/ajax/upload_thumb_check') }}' ,
             type: 'POST',
