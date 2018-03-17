@@ -90,7 +90,7 @@
                                                         多条图文
                                                     @endif
                                                 </td>
-                                                <td>{{$val->create_time}}</td>
+                                                <td>{{$val->created_time}}</td>
                                                 <td>
                                                     <button class="btn btn-info btn-xs" onclick="location.href='{{url('catering/subscription/material_writing_one_edit')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                     <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
