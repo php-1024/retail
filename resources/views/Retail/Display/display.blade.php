@@ -340,6 +340,11 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#editBtn').click(function(){
+            $('#myModal').modal();
+        });
+    });
     //编辑店铺信息
     function EditStore(){
         var target = $("#store_edit_check");
