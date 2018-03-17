@@ -40,8 +40,8 @@ class FansmanageController extends Controller{
     public function fansmanage_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $info =  fansmanageApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/fansmanage/fansmanage_examine',['info'=>$info,'sta'=>$sta]);
+        $info =  OrganizationFansmanageapply::getOne([['id',$id]]);//获取该ID的信息
+        return view('Zerone/Fansmanage/fansmanage_examine',['info'=>$info,'sta'=>$sta]);
     }
     //商户审核数据提交
     public function fansmanage_examine_check(Request $request){
