@@ -50,12 +50,13 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
+        dd($status);
         $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请服务商信息
 
         if($status == -1 ){
             DB::beginTransaction();
             try{
-                fansmanageApply::editfansmanageApply([['id',$id]],['status'=>$status]);//拒绝通过
+                OrganizationFansmanageapply::editfansmanageApply([['id',$id]],['status'=>$status]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1','1',$admin_this['id'],$route_name,'拒绝了商户：'.$oneFansmanage['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -74,7 +75,7 @@ class FansmanageController extends Controller{
 
             DB::beginTransaction();
             try{
-                fansmanageApply::editfansmanageApply([['id',$id]],['status'=>$status]);//申请通过
+                OrganizationFansmanageapply::editfansmanageApply([['id',$id]],['status'=>$status]);//申请通过
                 //添加服务商
                 $listdata = ['organization_name'=>$fansmanagelist['fansmanage_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
                 $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
