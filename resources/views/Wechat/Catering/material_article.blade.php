@@ -60,6 +60,7 @@
                                 <h2 class="font-thin m-b">图文素材</h2>
                                 <div class="row row-sm">
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn">添加图文 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="material_article_delete_comfirm_url" value="{{ url('api/ajax/material_article_delete_comfirm') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
