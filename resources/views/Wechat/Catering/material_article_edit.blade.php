@@ -70,7 +70,7 @@
                                         <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_article_edit_check') }}">
                                             <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                             <input type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
-                                            <input type="hidden" id="id" name="id" value="{{ url('api/catering/material_article') }}">
+                                            <input type="hidden" id="id" name="id" value="{{ $id }}">
                                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
