@@ -25,7 +25,7 @@ class RetailCategory extends Model{
 
     //和组织表Organization表多对一的关系
     public function Organization(){
-        return $this->belongsto('App\Models\Organization','fansmanage_id');
+        return $this->belongsto('App\Models\Organization','retail_id');
     }
 
     //获取单条信息

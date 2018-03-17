@@ -175,10 +175,6 @@
         });
     }
 
-    //删除素材图片
-    function deleteImage(){
-
-    }
 </script>
 </body>
 </html>
