@@ -47,19 +47,19 @@ class ZeroneCheck{
             case "zerone/subordinate/subordinate_structure"://下级人员列表
 
             //服务商管理
-            case "zerone/agent/agent_add":              //添加服务商
-            case "zerone/agent/agent_examinelist":      //服务商审核列表
-            case "zerone/agent/agent_list":             //服务商列表
-            case "zerone/agent/agent_structure":        //服务商人员架构
-            case "zerone/agent/agent_program":          //服务商程序管理
-            case "zerone/agent/agent_fansmanage":       //服务商商户划拨
+            case "zerone/agent/agent_add":                  //添加服务商
+            case "zerone/agent/agent_examinelist":          //服务商审核列表
+            case "zerone/agent/agent_list":                 //服务商列表
+            case "zerone/agent/agent_structure":            //服务商人员架构
+            case "zerone/agent/agent_program":              //服务商程序管理
+            case "zerone/agent/agent_fansmanage":           //服务商商户划拨
 
-            case "zerone/company/company_add":          //添加商户
-            case "zerone/company/company_examinelist":  //商户审核列表
-            case "zerone/company/company_list":         //商户列表
-            case "zerone/company/company_structure":    //商户店铺架构
-            case "zerone/company/company_program":      //商户程序管理
-            case "zerone/company/company_store":        //商户划拨管理
+            case "zerone/fansmanage/fansmanage_add":          //添加商户
+            case "zerone/fansmanage/fansmanage_examinelist":  //商户审核列表
+            case "zerone/fansmanage/fansmanage_list":         //商户列表
+            case "zerone/fansmanage/fansmanage_structure":    //商户店铺架构
+            case "zerone/fansmanage/fansmanage_program":      //商户程序管理
+            case "zerone/fansmanage/fansmanage_store":        //商户划拨管理
 
             case "zerone/store/store_add":              //店铺添加
             case "zerone/store/store_list":             //店铺列表
