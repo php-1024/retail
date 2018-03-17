@@ -47,7 +47,7 @@
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg" >
-                                                    <img src="images/m0.jpg" class="img-circle" alt="...">
+                                                    <img src="{{asset('public/Branch/images/m0.jpg')}}" class="img-circle" alt="...">
                                                 </div>
                                             </div>
                                         </div>
