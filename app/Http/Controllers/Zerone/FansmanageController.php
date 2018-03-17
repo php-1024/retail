@@ -6,7 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\OrganizationFansmanageapply;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\Organizationfansmanageinfo;
+use App\Models\OrganizationFansmanageinfo;
 use App\Models\AccountNode;
 use App\Models\Module;
 use Illuminate\Http\Request;
@@ -67,7 +67,7 @@ class FansmanageController extends Controller{
         }elseif($status == 1){
 
             $oneagent = Organization::getOne([['id',$oneFansmanage['agent_id']]]);//查询商户推荐上级组织信息
-            dd($oneagent);
+
             $parent_id = $oneFansmanage['agent_id'];//零壹或者服务商organization_id
             $parent_tree = $oneagent['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
             $mobile = $oneFansmanage['fansmanage_owner_mobile'];//手机号码
@@ -91,24 +91,43 @@ class FansmanageController extends Controller{
                 $account  = $user+1;//用户账号
                 $fansmanage_password =  $oneFansmanage['fansmanage_password'];//用户密码
 
-                $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
-                $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
-                $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$fansmanage_password,'organization_id'=>$organization_id,'account'=>$account];
+                $Accparent_tree = '0'.',';//管理员组织树
+
+                $accdata = [
+                    'parent_id'      =>'0',
+                    'parent_tree'    =>$Accparent_tree,
+                    'deepth'         =>'1',
+                    'mobile'         =>$mobile,
+                    'password'       =>$fansmanage_password,
+                    'organization_id'=>$organization_id,
+                    'account'        =>$account
+                ];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
-                $realname = $fansmanagelist['fansmanage_owner'];//负责人姓名
-                $idcard = $fansmanagelist['fansmanage_owner_idcard'];//负责人身份证号
-                $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
+                $realname = $oneFansmanage['fansmanage_owner'];//负责人姓名
+                $idcard = $oneFansmanage['fansmanage_owner_idcard'];//负责人身份证号
+
+                $acinfodata = [
+                    'account_id'=>$account_id,
+                    'realname'  =>$realname,
+                    'idcard'    =>$idcard
+                ];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $fansmanageinfo = ['organization_id'=>$organization_id, 'fansmanage_owner'=>$realname, 'fansmanage_owner_idcard'=>$idcard, 'fansmanage_owner_mobile'=>$fansmanagelist['fansmanage_owner_mobile']];
+                $fansmanageinfo = [
+                    'organization_id'        =>$organization_id,
+                    'fansmanage_owner'       =>$realname,
+                    'fansmanage_owner_idcard'=>$idcard,
+                    'fansmanage_owner_mobile'=>$oneFansmanage['fansmanage_owner_mobile']
+                ];
 
-                Organizationfansmanageinfo::addOrganizationfansmanageinfo($fansmanageinfo);  //添加到服务商组织信息表
+                OrganizationFansmanageinfo::addOrganizationFansmanageinfo($fansmanageinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$fansmanagelist['fansmanage_name']);//保存操作记录
+                OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'服务商审核通过：'.$oneFansmanage['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
