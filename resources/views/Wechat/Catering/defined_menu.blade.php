@@ -50,6 +50,7 @@
                                         个性化菜单
                                     </a>
                                     <input type="hidden" id="defined_menu_add_url" value="{{ url('api/ajax/defined_menu_add') }}">
+                                    <input type="hidden" id="defined_menu_get_url" value="{{ url('api/ajax/defined_menu_get') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 </div>
                             </section>
@@ -136,6 +137,27 @@
     });
 
     function get_menu_add_box(){
+        var url = $('#defined_menu_add_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#ctrl_box').html(response);
+            }
+        });
+    }
+
+    function get_menu(){
         var url = $('#defined_menu_add_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
