@@ -49,7 +49,7 @@ class RetailCategory extends Model{
         $model->created_by = $param['created_by'];
         $model->displayorder = $param['displayorder'];
         $model->fansmanage_id = $param['fansmanage_id'];
-        $model->restaurant_id = $param['restaurant_id'];
+        $model->retail_id = $param['retail_id'];
         $model->save();
         return $model->id;
     }
