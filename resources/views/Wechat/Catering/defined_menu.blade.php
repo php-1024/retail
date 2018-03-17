@@ -43,13 +43,14 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('catering/menu/menu_customize')}}" class="list-group-item active">
+                                    <a href="{{url('api/catering/defined_menu')}}" class="list-group-item active">
                                         自定义菜单
                                     </a>
-                                    <a href="{{url('catering/menu/menu_different')}}" class="list-group-item">
+                                    <a href="{{url('api/catering/style_menu')}}" class="list-group-item">
                                         个性化菜单
                                     </a>
-
+                                    <input type="hidden" id="defined_menu_add_url" value="{{ url('api/ajax/defined_menu_add') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 </div>
                             </section>
                         </section>
@@ -303,6 +304,16 @@
         $('#nestable1').nestable();
         $('.chosen-select2').chosen({width:"100%"});
     });
+
+    function get_menu_add_box(){
+        var url = $('#defined_menu_add_url').val();
+        var target = $('#ctrl_box');
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(json){
+            alert(json);
+        });
+    }
 </script>
 </body>
 </html>
