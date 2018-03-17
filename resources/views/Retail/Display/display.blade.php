@@ -358,7 +358,7 @@
         var formData = $( "#store_edit" ).serialize();
         console.log(formData);
         $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}',
+            url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
             data: formData,
             async: false,

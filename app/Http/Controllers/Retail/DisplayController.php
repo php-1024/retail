@@ -122,7 +122,7 @@ class DisplayController extends Controller
     }
 
     //店铺信息编辑检测
-    public function store_edit_check(Request $request)
+    public function store_edit(Request $request)
     {
         dd($request);
     }
