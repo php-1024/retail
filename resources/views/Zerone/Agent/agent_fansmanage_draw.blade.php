@@ -7,15 +7,11 @@
                 <h3>“刘记新科技有限公司”商户划出</h3>
             </div>
             <div class="modal-body">
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-
                 <div class="form-group">
                     <label class="col-sm-3 control-label" style="padding-top: 7px;">消耗程序与分店数量</label>
                     <div class="col-sm-9">
                         <input type="checkbox" class="js-switch" checked  value="1" name="status"/>
                     </div>
-
                 </div>
 
                 <div style="clear:both"></div>
