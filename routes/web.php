@@ -706,15 +706,6 @@ Route::group(['prefix'=>'retail'],function(){
     });
 
 
-
-
-    //下属管理--权限角色组
-    Route::group(['prefix'=>'role'],function(){
-        Route::get('role_add', 'Retail\RoleController@role_add')->middleware('RetailCheck');   //添加权限角色
-        Route::get('role_list', 'Retail\RoleController@role_list')->middleware('RetailCheck'); //权限角色列表
-    });
-
-
     //下属管理--添加组
     Route::group(['prefix'=>'subordinate'],function(){
         Route::get('subordinate_add','Retail\SubordinateController@subordinate_add')->middleware('RetailCheck');    //添加下级人员
@@ -729,12 +720,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('profile_edit_check', 'Retail\AccountController@profile_edit_check')->middleware('RetailCheckAjax');//个人账号信息修改
         Route::post('safe_password_edit_check', 'Retail\AccountController@safe_password_edit_check')->middleware('RetailCheckAjax');//安全密码设置检测
         Route::post('password_edit_check', 'Retail\AccountController@password_edit_check')->middleware('RetailCheckAjax');          //密码检测
-        Route::post('role_edit', 'Retail\RoleController@role_edit')->middleware('RetailCheckAjax');                     //角色编辑弹出
-        Route::post('role_edit_check', 'Retail\RoleController@role_edit_check')->middleware('RetailCheckAjax');         //角色编辑检测
-        Route::post('role_delete', 'Retail\RoleController@role_delete')->middleware('RetailCheckAjax');                 //角色删除弹出
-        Route::post('role_delete_check', 'Retail\RoleController@role_delete_check')->middleware('RetailCheckAjax');     //角色删除检测
-        Route::post('role_add_check', 'Retail\RoleController@role_add_check')->middleware('RetailCheckAjax');           //下级人员管理权限角色添加
-        Route::post('quick_rule', 'Retail\SubordinateController@quick_rule')->middleware('RetailCheckAjax');            //下属添加_用户权限页面
+
 
         Route::post('subordinate_add_check', 'Retail\SubordinateController@subordinate_add_check')->middleware('RetailCheckAjax');  //下属添加检测
         Route::post('subordinate_edit', 'Retail\SubordinateController@subordinate_edit')->middleware('RetailCheckAjax');            //下属信息编辑页面
