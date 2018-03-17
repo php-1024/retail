@@ -158,7 +158,7 @@
     }
 
     function get_menu(){
-        var url = $('#defined_menu_add_url').val();
+        var url = $('#defined_menu_get_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
@@ -173,7 +173,7 @@
                 });
                 return;
             }else{
-                $('#ctrl_box').html(response);
+                $('#menu_box').html(response);
             }
         });
     }
