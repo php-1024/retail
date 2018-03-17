@@ -120,7 +120,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">正文</label>
                                                 <div class="col-sm-10">
-                                                    <textarea id="form-content" name="content" class="editor" cols="30" rows="10">{{$info['content']}} </textarea>
+                                                    <textarea id="form-content" name="content" class="editor" cols="30" rows="10">{{$val['content']}} </textarea>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
