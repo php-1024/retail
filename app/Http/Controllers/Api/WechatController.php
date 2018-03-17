@@ -383,7 +383,6 @@ class WechatController extends Controller{
         $flag = true;
 
         $article_info = WechatArticle::getOne([['id',$id]]);
-        var_dump($article_info);
         $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
 
         for($i=1;$i<=$num;$i++){
@@ -408,7 +407,6 @@ class WechatController extends Controller{
             ];
 
             $re = \Wechat::update_meterial($auth_info['authorizer_access_token'],$article_info['media_id'],$i-1,$data);
-            var_dump($re);
             if($re['errcode'] <> '0'){
                 $flag = false;
             }
