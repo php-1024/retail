@@ -15,7 +15,7 @@ class RetailGoodsThumb extends Model{
 
     //和商品表RetailGoods表多对一的关系
     public function RetailGoods(){
-        return $this->belongsto('App\Models\RetailGoods','id');
+        return $this->belongsto('App\Models\RetailGoods','goods_id','id');
     }
 
     //获取单条数据
