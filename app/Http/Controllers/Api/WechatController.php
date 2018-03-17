@@ -264,7 +264,6 @@ class WechatController extends Controller{
         }
     }
 
-
     /*
     * 编辑单条图文素材页面
     */
@@ -364,9 +363,9 @@ class WechatController extends Controller{
         $article_info = WechatArticle::getOne([['id',$id]]);
         $article_info['content'] = unserialize( $article_info['content'] );
         $article_info = $article_info->toArray();
-        $articles = $article_info['content']['articles'][0];
+        $articles = $article_info['content']['articles'];
         dump($articles);
-        return view('Wechat/Catering/material_article_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Wechat/Catering/material_articles_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
