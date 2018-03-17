@@ -354,14 +354,14 @@
             $('#myModal').modal();
         });
     });
-    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+
     //编辑店铺信息
     function EditStore() {
         var formData = $( "#store_edit" ).serialize();
         console.log(formData);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit_check') }}',
-            type: 'POST',
+            type: 'post',
             data: formData,
             async: false,
             cache: false,
