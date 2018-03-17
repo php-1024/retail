@@ -113,6 +113,7 @@ class Organization extends Model{
         $organization->parent_id = $param['parent_id'];//多级组织的关系
         $organization->parent_tree = $param['parent_tree'];//上级程序
         $organization->program_id = $param['program_id'];//组织关系树
+        $organization->asset_id = $param['asset_id'];//下级组织使用程序id（商户使用）
         $organization->type = $param['type'];//类型 2为服务商
         $organization->status = $param['status'];//状态 1-正常 0-冻结
         $organization->save();

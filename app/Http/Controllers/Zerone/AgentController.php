@@ -140,17 +140,43 @@ class AgentController extends Controller {
         $program_id = 2;
         DB::beginTransaction();
         try {
-            $listdata = ['organization_name' => $organization_name, 'parent_id' => $parent_id, 'parent_tree' => $parent_tree, 'program_id' => $program_id, 'type' => 2, 'status' => 1];
+            $listdata = [
+                'organization_name' => $organization_name,
+                'parent_id'         => $parent_id,
+                'parent_tree'       => $parent_tree,
+                'program_id'        => $program_id,
+                'type'              => 2,
+                'status'            => 1,
+                'asset_id'          => 0
+            ];
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
-            $agentdata = ['organization_id' => $organization_id, 'zone_id' => $zone_id];
+
+            $agentdata = [
+                'organization_id' => $organization_id,
+                'zone_id' => $zone_id
+            ];
             Warzoneagent::addWarzoneagent($agentdata); //战区关联服务商
+
             $user = Account::max('account');
             $account = $user + 1; //用户账号
-            $accdata = ['parent_id' => $parent_id, 'parent_tree' => $parent_tree, 'deepth' => $deepth, 'mobile' => $mobile, 'password' => $encryptPwd, 'organization_id' => $organization_id, 'account' => $account];
+            $accdata = [
+                'parent_id'       => $parent_id,
+                'parent_tree'     => $parent_tree,
+                'deepth'          => $deepth,
+                'mobile'          => $mobile,
+                'password'        => $encryptPwd,
+                'organization_id' => $organization_id,
+                'account'         => $account
+            ];
             $account_id = Account::addAccount($accdata); //添加账号返回id
+
             $realname = $request->input('realname'); //负责人姓名
             $idcard = $request->input('idcard'); //负责人身份证号
-            $acinfodata = ['account_id' => $account_id, 'realname' => $realname, 'idcard' => $idcard];
+            $acinfodata = [
+                'account_id' => $account_id,
+                'realname'   => $realname,
+                'idcard'     => $idcard
+            ];
             AccountInfo::addAccountInfo($acinfodata); //添加到管理员信息表
             $module_node_list = Module::getListProgram($program_id, [], 0, 'id'); //获取当前系统的所有节点
             foreach ($module_node_list as $key => $val) {
@@ -158,7 +184,12 @@ class AgentController extends Controller {
                     AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
                 }
             }
-            $orgagentinfo = ['agent_id' => $organization_id, 'agent_owner' => $realname, 'agent_owner_idcard' => $idcard, 'agent_owner_mobile' => $mobile];
+            $orgagentinfo = [
+                'agent_id'           => $organization_id,
+                'agent_owner'        => $realname,
+                'agent_owner_idcard' => $idcard,
+                'agent_owner_mobile' => $mobile
+            ];
             OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo); //添加到服务商组织信息表
             //添加操作日志
             OperationLog::addOperationLog('1', $admin_this['organization_id'], $admin_this['id'], $route_name, '添加了服务商：' . $organization_name); //保存操作记录
