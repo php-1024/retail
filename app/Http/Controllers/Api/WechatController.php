@@ -209,7 +209,7 @@ class WechatController extends Controller{
     }
 
     /*
-     *
+     *检测添加多条图文
      */
     public function material_articles_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
