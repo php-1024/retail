@@ -346,9 +346,10 @@
     });
     //编辑店铺信息
     function EditStore(){
-        var target = $("#store_edit_check");
-        var url = target.attr("action");
-        var data = target.serialize();
+        var url = $("#store_edit_check").val();
+        var _token = $("#_token").val();
+        var organization_id = $("#organization_id").val();
+        var data = {'_token':_token,'organization_id':organization_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
