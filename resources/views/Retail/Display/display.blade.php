@@ -43,7 +43,6 @@
                                     <button id="editBtn" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit "></i>&nbsp;编辑</button>
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="get">
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg" >
