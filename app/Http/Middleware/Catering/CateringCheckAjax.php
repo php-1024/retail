@@ -64,6 +64,16 @@ class CateringCheckAjax
 
                 break;
 
+            case "api/ajax/material_article_add_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/material_articles_add_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
+                return self::format_response($re,$next);
+                break;
+
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
@@ -88,9 +98,11 @@ class CateringCheckAjax
             case "catering/ajax/user_list_edit":            //会员列表编辑显示页面
             case "catering/ajax/user_list_lock":            //会员列表冻结显示页面
             case "catering/ajax/user_list_wallet":          //会员列表粉丝钱包显示页面
-            case "api/ajax/meterial_image_upload":
-            case "api/ajax/meterial_image_upload_check":
-            case "api/ajax/material_image_delete_comfirm":
+            case "api/ajax/meterial_image_upload":          //图片上传弹窗
+            case "api/ajax/meterial_image_upload_check":   //图片上传检测
+            case "api/ajax/material_image_delete_comfirm": //图片上传确认弹窗
+            case "api/ajax/material_image_select":        //图片选择弹窗
+
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -98,6 +110,32 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    public function checkLoginAndRuleAndMaterialArticleAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    public function checkLoginAndRuleAndMaterialArticlesAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测登录，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -585,6 +623,49 @@ class CateringCheckAjax
         }
         if(empty($request->input('adapt_store'))){
             return self::res(0,response()->json(['data' => '请选择适用的分店', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    public function checkMaterialArticleAdd($request){
+        if(empty($request->input('img_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('thumb_media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('title'))){
+            return self::res(0,response()->json(['data' => '请输入文章标题', 'status' => '0']));
+        }
+        if(empty($request->input('author'))){
+            return self::res(0,response()->json(['data' => '请填写文章作者', 'status' => '0']));
+        }
+
+        if(empty($request->input('content'))){
+            return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    public function checkMaterialArticlesAdd($request){
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
         }
         return self::res(1,$request);
     }

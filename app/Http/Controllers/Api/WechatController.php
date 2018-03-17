@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatImage;
+use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
@@ -133,17 +134,126 @@ class WechatController extends Controller{
     }
 
     /*
-     * 添加图文素材页面
+     * 添加单条图文素材页面
      */
-    public function meterial_article_add(Request $request){
+    public function material_article_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Wechat/Catering/meterial_article_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Wechat/Catering/material_article_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+    /*
+     *单条图文素材添加检测
+     */
+    public function material_article_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $img_id = $request->input('img_id');
+        $thumb_media_id = $request->input('thumb_media_id');
+        $title = $request->input('title');
+        $author = $request->input('author');
+        $digest = $request->input('digest');
+        $origin_url = $request->input('origin_url');
+        $content = $request->input('content');
+
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+
+        $data = [
+            'articles'=>[
+                [
+                    'title'=>$title,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'author'=>$author,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'digest'=>$digest,
+                    'show_cover_pic'=>1,
+                    'content'=>$content,
+                    'content_source_url'=>$origin_url
+                ],
+            ],
+        ];
+
+        $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        if(!empty($re['media_id'])){
+            $zdata = [
+                'organization_id'=>$admin_data['organization_id'],
+                'title'=>$title,
+                'media_id'=>$re['media_id'],
+                'type'=>'1',
+                'content'=>serialize($data),
+            ];
+            WechatArticle::addWechatArticle($zdata);
+            return response()->json(['data'=>'上传图文素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'上传图文素材失败','status' => '0']);
+        }
+    }
+
+    /*
+     * 添加多条图文素材页面
+     */
+    public function material_articles_add(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        return view('Wechat/Catering/material_articles_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    /*
+     *检测添加多条图文
+     */
+    public function material_articles_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $num = $request->get('num');
+        $data['articles'] = [];
+        $title='';
+        $image_id = '';
+        for($i=1;$i<=$num;$i++){
+            array_push($data['articles'],[
+                'title'=>$request->get('title_'.$i),
+                'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
+                'author'=>$request->get('author_'.$i),
+                'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
+                'digest'=>'',
+                'show_cover_pic'=>1,
+                'content'=>$request->get('content_'.$i),
+                'content_source_url'=>$request->get('origin_url_'.$i),
+            ]);
+        }
+        var_dump($data);
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+        $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        if(!empty($re['media_id'])){
+            $zdata = [
+                'organization_id'=>$admin_data['organization_id'],
+                'title'=>$request->get('title_1'),
+                'media_id'=>$re['media_id'],
+                'type'=>'2',
+                'content'=>serialize($data),
+            ];
+            WechatArticle::addWechatArticle($zdata);
+            return response()->json(['data'=>'上传图文素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'上传图文素材失败','status' => '0']);
+        }
+    }
+    /*
+     * 图片选择页面
+     */
+    public function material_image_select(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $i = $request->input('i');
+        $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
+        return view('Wechat/Catering/material_image_select',['list'=>$list,'i'=>$i]);
+    }
 
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌

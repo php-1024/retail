@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>登录密码修改 | 零壹云管理平台 | 商户管理系统</title>
+    <title>登录密码修改 | 零壹云管理平台 | 零售版店铺管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
@@ -37,6 +37,8 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     {{--<div class="col-sm-2">--}}
                                         {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
                                     {{--</div>--}}
@@ -120,34 +122,7 @@
     </section>
 </section>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认删除商品</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input-id-1" value="">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -175,7 +150,7 @@
     });
     //删除商品信息
     function getDeleteForm(id){
-        var url = $('#category_delete_comfirm_url').val();
+        var url = $('#goods_delete_comfirm_url').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id};
         $.post(url,data,function(response){

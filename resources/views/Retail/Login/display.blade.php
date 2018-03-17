@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>零壹云管理平台 | 分店业务系统</title>
+    <title>零壹云管理平台 | 零售版店铺管理系统</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css">
@@ -25,7 +25,7 @@
         <a class="navbar-brand block" href="index.html"><span class="h1 font-bold">ZERONE</span></a>
         <section class="m-b-lg">
             <header class="wrapper text-center">
-                <strong>零壹云管理平台 - 分店业务系统登录</strong>
+                <strong>零壹云管理平台 - 零售版店铺管理系统登录</strong>
             </header>
             <form class="m-t" role="form" id="currentForm" action="{{ url('retail/ajax/login_check') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">

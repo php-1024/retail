@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
-use App\Models\CateringCategory;
+use App\Models\RetailCategory;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +46,7 @@ class CategoryController extends Controller
         ];
         DB::beginTransaction();
         try {
-            CateringCategory::addCategory($category_data);
+            RetailCategory::addCategory($category_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统添加了栏目分类！');//保存操作记录
@@ -72,7 +72,7 @@ class CategoryController extends Controller
         $where = [
             'restaurant_id' => $admin_data['organization_id'],
         ];
-        $category = CateringCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
+        $category = RetailCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
         return view('Retail/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -91,7 +91,7 @@ class CategoryController extends Controller
         $category_id = $request->get('category_id');        //获取分类栏目ID
         DB::beginTransaction();
         try {
-            CateringCategory::select_delete($category_id);
+            RetailCategory::select_delete($category_id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统删除了商品分类！');//保存操作记录
@@ -115,7 +115,7 @@ class CategoryController extends Controller
             'restaurant_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
-        $category = CateringCategory::getOne($where);
+        $category = RetailCategory::getOne($where);
         return view('Retail/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
     }
 
@@ -140,7 +140,7 @@ class CategoryController extends Controller
         ];
         DB::beginTransaction();
         try {
-            CateringCategory::editCategory($where,$category_data);
+            RetailCategory::editCategory($where,$category_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮分店管理系统修改了栏目分类！');//保存操作记录

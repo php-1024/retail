@@ -2,9 +2,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class WechatImage extends Model{
+class WechatArticle extends Model{
     use SoftDeletes;
-    protected $table = 'wechat_image';
+    protected $table = 'wechat_article';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -16,13 +16,13 @@ class WechatImage extends Model{
         return self::where($where)->first();
     }
 
-    public static function addWechatImage($param){
-        $model = new WechatImage();
+    public static function addWechatArticle($param){
+        $model = new WechatArticle();
         $model->organization_id = $param['organization_id'];
-        $model->filename = $param['filename'];
-        $model->filepath = $param['filepath'];
+        $model->title = $param['title'];
+        $model->type = $param['type'];
         $model->media_id = $param['media_id'];
-        $model->wechat_url = $param['wechat_url'];
+        $model->content = $param['content'];
         $model->save();
         return $model->id;
     }

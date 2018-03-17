@@ -29,6 +29,18 @@ class User extends Model{
         return $this->hasMany('App\Models\StoreUserLog','user_id','id');
     }
 
+    //和餐饮店铺订单CateringOrder一对多
+    public function CateringOrder()
+    {
+        return $this->hasMany('App\Models\CateringOrder','user_id','id');
+    }
+
+    //和零售店铺订单RetailOrder一对多
+    public function RetailOrder()
+    {
+        return $this->hasMany('App\Models\RetailOrder','user_id','id');
+    }
+
 
     //简易型查询单条数据关联查询
     public static function getOneUser($where)

@@ -35,7 +35,7 @@ class DisplayController extends Controller
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
-            return redirect('retail/branch_list');
+            return redirect('retail/retail_list');
         }
         if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('retail/account/password');
@@ -44,8 +44,8 @@ class DisplayController extends Controller
         }
     }
 
-    //分店列表（超级管理员使用）
-    public function branch_list(Request $request)
+    //零售店铺列表（超级管理员使用）
+    public function retail_list(Request $request)
     {
         $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
         if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){      //如果是超级管理员并且已经切换身份成功则跳转
@@ -58,11 +58,11 @@ class DisplayController extends Controller
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
         }
-        return  view('Retail/Account/branch_list',['organization'=>$organization,'organization_name'=>$organization_name]);
+        return  view('Retail/Account/retail_list',['organization'=>$organization,'organization_name'=>$organization_name]);
     }
 
     //选择店铺
-    public function branch_select(Request $request)
+    public function retail_select(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $account_id = $request->account_id;           //获取当前选择店铺的组织
@@ -73,11 +73,10 @@ class DisplayController extends Controller
         }else{
             return response()->json(['data' => '操作失败，请稍后再试！', 'status' => '1']);
         }
-
     }
 
     //超级管理员退出当前店铺（切换店铺）
-    public function branch_switch(Request $request){
+    public function retail_switch(Request $request){
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
         ZeroneRedis::create_retail_account_cache(1,$admin_data);//清空所选组织
@@ -119,7 +118,13 @@ class DisplayController extends Controller
             $admin_data['role_name'] = '角色未设置';
         }
         ZeroneRedis::create_retail_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-        ZeroneRedis::create_branch_menu_cache(1);//生成对应账号的商户系统菜单
+        ZeroneRedis::create_retail_menu_cache(1);//生成对应账号的商户系统菜单
+    }
+
+    //店铺信息编辑检测
+    public function store_edit_check(Request $request)
+    {
+        dd($request);
     }
 }
 

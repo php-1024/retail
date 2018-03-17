@@ -18,7 +18,8 @@ class RetailCheckAjax{
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/branch_select":           //超级管理员选择分店提交数据
+            case "retail/ajax/retail_select":           //超级管理员选择分店提交数据
+            case "retail/ajax/store_edit_check":        //店铺信息编辑弹窗页面
             case "retail/ajax/category_delete":           //栏目编辑页面
             case "retail/ajax/category_edit":           //栏目编辑页面
             case "retail/ajax/role_edit":               //编辑权限角色弹出框检测登入和权限
@@ -28,7 +29,9 @@ class RetailCheckAjax{
             case "retail/ajax/subordinate_authorize":   //编辑——授权下属人员
             case "retail/ajax/subordinate_lock":        //冻结下属页面
             case "retail/ajax/selected_rule":           //编辑——授权下属人员
-            case "retail/ajax/goods_thumb":              //商品规格页面
+            case "retail/ajax/goods_thumb":             //商品规格页面
+            case "retail/ajax/goods_delete":            //商品删除弹窗
+            case "retail/ajax/order_status":            //订单状态修改确认弹窗
 
 
             case "retail/ajax/upload_thumb_check":    //上传图片
@@ -53,8 +56,9 @@ class RetailCheckAjax{
                 return self::format_response($re, $next);
                 break;
 
-
             case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
+            case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
+            case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             $re = $this->checkLoginAndRuleAndSafe($request);

@@ -1,46 +1,46 @@
 <?php
 /**
- * catering_order表的模型
+ * retail_order_goods表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class CateringOrder extends Model{
+class RetailOrderGoods extends Model{
     use SoftDeletes;
-    protected $table = 'catering_order';
+    protected $table = 'retail_order_goods';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和User表多对一的关系
-    public function User(){
-        return $this->belongsTo('App\Models\User','user_id');
+    //和RetailGoods表一对一的关系
+    public function RetailGoods(){
+        return $this->hasOne('App\Models\RetailGoods','goods_id');
     }
 
-    //和CateringOrderGoods表一对多的关系
-    public function CateringOrderGoods(){
-        return $this->hasMany('App\Models\CateringOrderGoods','order_id');
+    //和RetailOrder表多对一的关系
+    public function RetailOrder(){
+        return $this->belongsTo('App\Models\RetailOrder', 'order_id');
     }
 
     public static function getOne($where)
     {
-        $model = self::with('User')->with('CateringOrderGoods');
+        $model = self::with('RetailGoods')->with('RetailOrder');
         return $model->where($where)->first();
     }
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new CateringOrder();
+        $model = new RetailOrderGoods();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('RetailOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加组织栏目分类
+    //添加商品到购物车
     public static function addOrder($param){
-        $model = new CateringOrder();
+        $model = new RetailOrderGoods();
         $model->name = $param['name'];
         $model->fansmanage_id = $param['fansmanage_id'];
         $model->restaurant_id = $param['restaurant_id'];
@@ -60,7 +60,7 @@ class CateringOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('User')->with('CateringOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('RetailGoods')->with('RetailOrder')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

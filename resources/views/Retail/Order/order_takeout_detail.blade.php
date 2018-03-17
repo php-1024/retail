@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>零壹云管理平台 | 分店业务系统</title>
+    <title>零壹云管理平台 | 零售版店铺管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
@@ -280,7 +280,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
+                            <label class="col-sm-2 text-right">店铺名称</label>
                             <div class="col-sm-10">
                                 <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
                             </div>

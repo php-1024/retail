@@ -82,9 +82,9 @@
                                 <tr>
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->program_name}}</td>
-                                    <td><div> <span class="label label-primary">剩余：@if(!empty($v->program_balance)){{$v->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                    <td><div> <span class="label label-primary">剩余：@if(!empty($value->program_balance)){{$value->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
 
-                                    <td><div><span class="label label-warning">已用：@if(!empty($v->program_used_num)){{$v->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                    <td><div><span class="label label-warning">已用：@if(!empty($value->program_used_num)){{$value->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
                                         <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
@@ -128,12 +128,12 @@
 
 <script>
     //程序划入
-    function getAssetsAdd(package_id,status) {
+    function getAssetsAdd(program_id,status) {
 
         var url = $('#agent_assets').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
-        if (package_id == '') {
+        if (program_id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
@@ -145,7 +145,7 @@
             return;
         }
 
-        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
+        var data = {'program_id': program_id, 'status':status, 'organization_id':organization_id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
@@ -166,11 +166,11 @@
     }
 
     //程序划出
-    function getAssetsReduce(package_id,status) {
+    function getAssetsReduce(program_id,status) {
         var url = $('#agent_assets').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
-        if (package_id == '') {
+        if (program_id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
@@ -182,7 +182,7 @@
             return;
         }
 
-        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
+        var data = {'program_id': program_id, 'status':status, 'organization_id':organization_id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({

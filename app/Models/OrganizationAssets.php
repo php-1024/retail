@@ -22,8 +22,8 @@ class OrganizationAssets extends Model{
         $program = new OrganizationAssets();//实例化程序模型
         $program->organization_id = $param['organization_id'];//组织id
         $program->program_id = $param['program_id'];//程序名称
-        $program->program_spare_num = $param['program_balance'];//剩余数量
-        $program->program_use_num = $param['program_used_num'];//使用数量
+        $program->program_balance = $param['program_balance'];//剩余数量
+        $program->program_used_num = $param['program_used_num'];//使用数量
         $program->save();
         return $program->id;
     }
@@ -35,5 +35,6 @@ class OrganizationAssets extends Model{
         }
         $model->save();
     }
+
 }
 ?>

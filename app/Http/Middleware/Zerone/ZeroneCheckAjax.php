@@ -95,11 +95,14 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/proxy_assets_check"://检测是否登录 权限 安全密码 数字不能为空
+            case "zerone/ajax/agent_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
-
+            case "zerone/ajax/agent_fansmanage_add_check"://商户冻结  检测 登录 和 权限 和 安全密码 商户划入归属
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
 
 
             case "zerone/ajax/company_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
@@ -150,6 +153,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/agent_list_edit"://服务商列表修改弹出检测登入和权限
             case "zerone/ajax/agent_list_lock"://服务商列表冻结弹出检测登入和权限
             case "zerone/ajax/agent_assets"://服务商列表划入检测弹出登入和权限
+            case "zerone/ajax/agent_fansmanage_add"://服务商列表商户划拨管理-商户划入归属
 
             //商户管理
             case "zerone/ajax/company_examine"://商户审核检测弹出登录和权限
@@ -627,6 +631,15 @@ class ZeroneCheckAjax
         return self::res(1, $request);
     }
 
+    //检测程序划拨数量不为空
+    public function checkAssets($request){
+        $number = $request->input('number');
+        if (preg_match("/^[1-9]{1}\d{0,9}$/",$number)){
+            return self::res(1, $request);
+        }else{
+            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
+        }
+    }
 
 
 
@@ -827,18 +840,6 @@ class ZeroneCheckAjax
         }
 
         return self::res(1, $request);
-    }
-
-
-
-    //检测商户编辑表信息
-    public function checkAssets($request){
-        $num = $request->input('num');
-        if (preg_match("/^[1-9]{1}\d{0,9}$/",$num)){
-            return self::res(1, $request);
-        }else{
-            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
-        }
     }
 
 
