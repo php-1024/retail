@@ -147,28 +147,24 @@ class FansmanageController extends Controller{
     }
     //注册提交商户数据
     public function fansmanage_add_check(Request $request){
-        $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
-        $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('organization_id');//零壹或者服务商organization_id
+        $agent = $request->input('organization_id');//零壹或者服务商organization_id
         $organization_name = $request->input('organization_name');//商户名称
-        $where = [['organization_name',$organization_name],['id','<>',$id]];
+        $where = [['organization_name',$organization_name],['id','<>',$agent]];
 
-        $name = Organization::checkRowExists($where);
-
-        if($name == 'true'){
+        if(Organization::checkRowExists($where)){
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
 
-
-        $list = Organization::getOneProxy([['id',$id]]);
+        $list = Organization::getOne([['id',$id]]);
 
         $parent_id = $id;//上级组织 零壹或者服务商organization_id
         $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $mobile = $request->input('mobile');//手机号码
 
         $password = $request->input('password');//用户密码
-        $key = config("app.zerone_encrypt_key");//获取加密盐
+        $key = config("app.fansmanage_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $program_id = 3; //'商户组织默认为3'

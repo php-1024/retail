@@ -75,11 +75,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">商户登录密码</label>
-                                        <div class="col-sm-10"><input type="password" name="proxy_password" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="password" name="fansmanage_password" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">重复登录密码</label>
-                                        <div class="col-sm-10"><input type="password" name="re_proxy_password" class="form-control"></div>
+                                        <div class="col-sm-10"><input type="password" name="re_fansmanage_password" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">安全密码</label>
