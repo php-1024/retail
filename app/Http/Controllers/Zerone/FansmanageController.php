@@ -50,7 +50,6 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
-        dd($status);
         $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请服务商信息
 
         if($status == -1 ){
