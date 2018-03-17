@@ -50,6 +50,7 @@
                                         个性化菜单
                                     </a>
                                     <input type="hidden" id="defined_menu_add_url" value="{{ url('api/ajax/defined_menu_add') }}">
+                                    <input type="hidden" id="defined_menu_get_url" value="{{ url('api/ajax/defined_menu_get') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 </div>
                             </section>
@@ -60,180 +61,8 @@
                         <section class="vbox">
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">自定义菜单</h2>
-                                <div class="col-sm-4">
-                                    <div class="dd" id="nestable1">
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                          <span class="pull-right">
-                                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                          </span>
-                                                    主菜单1
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                          <span class="pull-right">
-                                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                          </span>
-                                                    主菜单2
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                          <span class="pull-right">
-                                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                          </span>
-                                                    主菜单3
-                                                </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle">
-                                                  <span class="pull-right">
-                                                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                  </span>
-                                                            子菜单1
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                        </ol>
+                                <div class="col-sm-4" id="menu_box">
 
-                                    </div>
                                 </div>
                                 <div class="col-sm-8">
 
@@ -305,6 +134,7 @@
         $('.chosen-select2').chosen({width:"100%"});
 
         get_menu_add_box();
+        get_menu();
     });
 
     function get_menu_add_box(){
@@ -324,6 +154,27 @@
                 return;
             }else{
                 $('#ctrl_box').html(response);
+            }
+        });
+    }
+
+    function get_menu(){
+        var url = $('#defined_menu_get_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#menu_box').html(response);
             }
         });
     }

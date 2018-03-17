@@ -454,6 +454,11 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         return view('Wechat/Catering/defined_menu_add');
     }
+    public function defined_menu_get(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        return view('Wechat/Catering/defined_menu_get');
+    }
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
 
 
