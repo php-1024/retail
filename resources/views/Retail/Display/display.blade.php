@@ -266,6 +266,18 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#editBtn').click(function(){
+            $('#myModal').modal();
+        });
+        $('#save_btn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            });
+        });
+    });
     //删除商品信息
     function getEditForm(id){
         var url = $('#store_edit_comfirm_url').val();
