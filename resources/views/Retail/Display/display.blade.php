@@ -248,9 +248,8 @@
         </section>
     </section>
 </section>
-
+<form class="form-horizontal" id="store_edit_check" method="post" action="{{url('retail/ajax/store_edit_check')}}">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" id="store_edit_check" method="post" action="{{url('retail/ajax/store_edit_check')}}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
         <div class="modal-dialog">
@@ -324,9 +323,8 @@
                 </div>
             </div>
         </div>
-    </form>
 </div>
-
+</form>
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
