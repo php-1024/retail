@@ -484,10 +484,6 @@ class AgentController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
-            $admin_data['organization_id'] = 1;
-        }
-
         $organization_id = $request->organization_id;//服务商id
         $oneAgent = Organization::getOne([['id',$organization_id]]);//服务商信息
         $status = $request->status;//是否消耗程序数量
@@ -520,7 +516,7 @@ class AgentController extends Controller{
                 }
             }
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'划拨了商户:'.$fansmanage_name.'-归属于服务商：'.$oneAgent['organization_name']);//保存操作记录
+            OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'划拨了商户:'.$fansmanage_name.'-归属于服务商：'.$oneAgent['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
@@ -545,13 +541,23 @@ class AgentController extends Controller{
     //商户划拨归属划出功能提交
     public function agent_fansmanage_draw_check(Request $request){
 
+        /*划出默认归属零壹*/
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
         $organization_id = $request->organization_id;//服务商id
+
+        $organization_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//服务商名称
+
         $fansmanage_id = $request->fansmanage_id;//划出商户id
+        $status = $request->status;//是否消耗程序数量
+
+        $fansmanage_name = Organization::getPluck([['id',$fansmanage_id]],'organization_name')->first();//店铺名称
 
         DB::beginTransaction();
         try{
-            $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
-            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
+            $parent_tree ='0'.','.'1'.',';//组织树
+            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>'1','parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore->toArray())){//如果有店铺
                 foreach($datastore as $key=>$value){
@@ -562,31 +568,31 @@ class AgentController extends Controller{
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
-                    if($Assets['program_balance'] >= $number){//如果服务商剩余程序数量足够
-                        $program_balance = $Assets->program_balance - $number;//剩余数量
-                        $program_used_num = $Assets->program_used_num + $number;//使用数量
+                    if(!empty($Assets)){//如果存在
+                        $program_balance = $Assets->program_balance + $number;//剩余数量
+                        $program_used_num = $Assets->program_used_num - $number;//使用数量
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
-                        $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$fansmanage_id,'program_id'=>$asset_id,'status'=>'0','number'=>$number];
-                        //添加操作日志
-                        OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
                     }else{
-                        return response()->json(['data' => '该服务商的程序数量不够', 'status' => '0']);
+                        $data = ['program_id'=>$asset_id,'organization_id '=>$organization_id,'program_balance'=>$number,'program_used_num'=>'0'];
+                       OrganizationAssets::addAssets($data);
                     }
+                    $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>'1','to_organization_id'=>$organization_id,'program_id'=>$asset_id,'status'=>'2','number'=>$number];
+                    //添加操作日志
+                    OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
                 }
             }
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'划拨了商户:'.$fansmanage_name.'-归属于服务商：'.$oneAgent['organization_name']);//保存操作记录
+            OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'从服务商:'.$organization_name.'-划出了商户：'.$fansmanage_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
-
-
-
+    
 
 }
 ?>
