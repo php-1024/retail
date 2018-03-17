@@ -11,6 +11,7 @@ use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationRetailinfo;
 use App\Models\Program;
 use App\Models\RetailGoodsThumb;
 use App\Services\ZeroneRedis\ZeroneRedis;
@@ -130,35 +131,42 @@ class DisplayController extends Controller
     //店铺信息编辑检测
     public function store_edit_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
-        $route_name = $request->path();                          //获取当前的页面路由
-        $goods_id = $request->get('goods_id');
-        $file = $request->file('upload_thumb');
+        $admin_data = $request->get('admin_data');                      //中间件产生的管理员数据参数
+        $route_name = $request->path();                                     //获取当前的页面路由
+        $organization_id = $request->get('organization_id');            //获取姓名
+        $organization_name = $request->get('organization_name');        //获取组织ID
+        $retail_owner = $request->get('retail_owner');                  //获取负责人姓名
+        $retail_owner_mobile = $request->get('mobile');    //获取负责人手机号码
+        $retail_address = $request->get('retail_address');              //获取店铺地址
+        $file = $request->file('retail_logo');
         if ($file->isValid()) {
             //检验文件是否有效
             $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $path = $file->move(base_path() . '/uploads/catering/', $new_name);   //$path上传后的文件路径
-            $file_path =  'uploads/catering/'.$new_name;
-            $goods_thumb = [
-                'goods_id' => $goods_id,
-                'thumb' => $file_path,
+            $path = $file->move(base_path() . '/uploads/retail/', $new_name);   //$path上传后的文件路径
+            $file_path =  'uploads/retail/'.$new_name;
+            $retail_info = [
+                'retail_logo' => $file_path,
+                'retail_owner' => $retail_owner,
+                'retail_owner_mobile' => $retail_owner_mobile,
+                'retail_address' => $retail_address,
             ];
             DB::beginTransaction();
             try {
-                RetailGoodsThumb::addGoodsThumb($goods_thumb);
+                Organization::editOrganization([['id',$organization_id]],[['organization_name',$organization_name]]);
+                OrganizationRetailinfo::editOrganizationRetailinfo([['id'=>$organization_id]],$retail_info);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售店铺管理系统修改了店铺信息！');//保存操作记录
                 } else {//分店本人操作记录
-                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
+                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺信息！');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '修改店铺信息失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
+            return response()->json(['data' => '修改店铺信息成功','file_path' => $file_path, 'status' => '1']);
 
         } else {
             return response()->json(['status' => '0']);
