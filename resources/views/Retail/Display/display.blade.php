@@ -274,7 +274,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">分店名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
+                            <input type="text" value="刘记鸡煲王【龙岗店】" name="store_name" placeholder="店铺名称" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -284,7 +284,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            <input type="text" value="张老三" placeholder="负责人" class="form-control">
+                            <input type="text" value="张老三" name="owner" placeholder="负责人" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -293,7 +293,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
+                            <input type="text" value="13123456789" name="mobile" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -302,7 +302,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺LOGO</label>
                         <div class="col-sm-10">
-                            <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="file" name="retail_logo" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -311,7 +311,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺地址</label>
                         <div class="col-sm-10">
-                            <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
+                            <input type="text" value="广东省深圳市龙岗区万汇大厦1606" name="address" placeholder="店铺地址" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -320,7 +320,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="password" value="" placeholder="安全密码" class="form-control" >
+                            <input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control" >
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -354,13 +354,13 @@
             $('#myModal').modal();
         });
     });
-
+    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     //编辑店铺信息
     function EditStore() {
-        var formData = new FormData($( "#store_edit" )[0]);
+        var formData = $( "#store_edit" ).serialize();
         console.log(formData);
         $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}' ,
+            url: '{{ url('retail/ajax/store_edit_check') }}',
             type: 'POST',
             data: formData,
             async: false,
