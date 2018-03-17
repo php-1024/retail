@@ -48,14 +48,15 @@ class FansmanageController extends Controller{
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//查找当前操作人员数据
         $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//服务商id
+        $agent_id = $request->input('id');//服务商id
+        dd($agent_id);
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
         $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请服务商信息
 
         if($status == -1 ){
             DB::beginTransaction();
             try{
-                OrganizationFansmanageapply::editfansmanageApply([['id',$id]],['status'=>$status]);//拒绝通过
+                OrganizationFansmanageapply::editFansmanageApply([['id',$id]],['status'=>$status]);//拒绝通过
                 //添加操作日志
                 OperationLog::addOperationLog('1','1',$admin_this['id'],$route_name,'拒绝了商户：'.$oneFansmanage['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
@@ -70,7 +71,7 @@ class FansmanageController extends Controller{
 
             $parent_id = $id;//零壹或者服务商organization_id
             $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
-            $mobile = $fansmanagelist['fansmanage_owner_mobile'];//手机号码
+            $mobile = $oneFansmanage['fansmanage_owner_mobile'];//手机号码
 
             DB::beginTransaction();
             try{
