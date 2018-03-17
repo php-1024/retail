@@ -534,7 +534,6 @@ class AgentController extends Controller{
     public function agent_fansmanage_draw(Request $request){
 
         $organization_id = $request->organization_id;//服务商id
-        dump($organization_id);
         return view('Zerone/Agent/agent_fansmanage_draw',['organization_id'=>$organization_id]);
     }
 

@@ -86,7 +86,7 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button type="button"  onclick="getDrawFansmanageForm('{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;划出归属</button>
+                                        <button type="button"  onclick="getDrawFansmanageForm('{{$organization_id}}','{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;划出归属</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -146,7 +146,7 @@
 
 
 
-    //编辑
+    //商户划入
     function getAddFansmanageForm(organization_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
@@ -182,8 +182,8 @@
             }
         });
     }
-    //编辑
-    function getDrawFansmanageForm(organization_id){
+    //商户划出
+    function getDrawFansmanageForm(organization_id,fansmanage_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
         var url = $('#agent_fansmanage_draw').val();
@@ -200,7 +200,7 @@
             return;
         }
 
-        var data = {'organization_id':organization_id,'_token':token};
+        var data = {'organization_id':organization_id,'fansmanage_id':fansmanage_id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
