@@ -115,8 +115,7 @@
 
                         <div class="col-lg-9 ">
                             <div class="col-lg-12">
-                                <div class="col-lg-4 state-overview"
-                                ">
+                                <div class="col-lg-4 state-overview">
                                 <section class="panel">
                                     <div class="symbol bg-danger">
                                         <i class="fa fa-money"></i>
@@ -128,8 +127,7 @@
                                 </section>
                             </div>
 
-                            <div class="col-lg-4 state-overview"
-                            ">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-success">
                                     <i class="icon icon-user"></i>
@@ -141,8 +139,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"
-                        ">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-info">
                                 <i class="icon icon-basket-loaded"></i>
@@ -158,8 +155,7 @@
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="col-lg-4 state-overview"
-                            ">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-warning">
                                     <i class="fa fa-list"></i>
@@ -171,8 +167,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"
-                        ">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-primary">
                                 <i class="icon icon-list"></i>
@@ -184,8 +179,7 @@
                         </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"
-                        ">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-dark">
                                 <i class="icon icon-printer"></i>
