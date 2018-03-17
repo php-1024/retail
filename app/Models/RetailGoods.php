@@ -63,7 +63,7 @@ class RetailGoods extends Model{
         $model->category_id = $param['category_id'];
         $model->displayorder = $param['displayorder'];
         $model->fansmanage_id = $param['fansmanage_id'];
-        $model->restaurant_id = $param['restaurant_id'];
+        $model->retail_id = $param['retail_id'];
         $model->save();
         return $model->id;
     }
