@@ -271,6 +271,7 @@
                     <h4 class="modal-title">店铺信息编辑</h4>
                 </div>
                 <div class="modal-body">
+                    <form class="form-horizontal" method="get">
                         <div class="form-group">
                             <label class="col-sm-2 text-right">分店名称</label>
                             <div class="col-sm-10">
@@ -324,6 +325,7 @@
                             </div>
                         </div>
                         <div style="clear:both;"></div>
+                    </form>
 
                 </div>
                 <div class="modal-footer">
