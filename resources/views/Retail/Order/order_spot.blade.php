@@ -60,7 +60,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div style="clear: both;"></div>
                                     <div>
                                         <div class="col-sm-2">
                                             <select name="account" class="form-control m-b">
