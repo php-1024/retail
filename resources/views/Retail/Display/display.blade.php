@@ -31,7 +31,7 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">分店概况</h3>
+                            <h3 class="m-b-none">店铺概况</h3>
                         </div>
 
                         <div class="col-lg-3">
@@ -114,7 +114,7 @@
 
                         <div class="col-lg-9 ">
                             <div class="col-lg-12">
-                                <div class="col-lg-4 state-overview"">
+                                <div class="col-lg-4 state-overview">
                                 <section class="panel">
                                     <div class="symbol bg-danger">
                                         <i class="fa fa-money"></i>
@@ -126,7 +126,7 @@
                                 </section>
                             </div>
 
-                            <div class="col-lg-4 state-overview"">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-success">
                                     <i class="icon icon-user"></i>
@@ -138,7 +138,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-info">
                                 <i class="icon icon-basket-loaded"></i>
@@ -154,7 +154,7 @@
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="col-lg-4 state-overview"">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-warning">
                                     <i class="fa fa-list"></i>
@@ -166,7 +166,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-primary">
                                 <i class="icon icon-list"></i>
@@ -178,7 +178,7 @@
                         </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-dark">
                                 <i class="icon icon-printer"></i>
@@ -194,78 +194,25 @@
                         <div class="col-lg-12">
                             <div class="col-lg-6">
                                 <section class="panel panel-default">
-                                    <header class="panel-heading">最近登陆日志</header>
+                                    <header class="panel-heading">最近登录日志</header>
                                     <table class="table table-striped m-b-none">
                                         <thead>
                                         <tr>
-                                            <th>登陆账号</th>
-                                            <th>登陆IP</th>
-                                            <th>登陆地址</th>
-                                            <th>登陆时间</th>
+                                            <th>登录账号</th>
+                                            <th>登录IP</th>
+                                            <th>登录地址</th>
+                                            <th>登录时间</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>192.168.1.1</td>
-                                            <td>中国广东深圳</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
+                                        @foreach($login_log_list as $key=>$val)
+                                            <tr>
+                                                <td>{{$val->accounts->account}}</td>
+                                                <td>{{  long2ip($val->ip) }}</td>
+                                                <td>{{  $val->ip_position }}</td>
+                                                <td>{{  $val->created_at }}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
@@ -283,56 +230,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10200</td>
-                                            <td>修改了登陆密码</td>
-                                            <td>2018-09-09 11:11:11</td>
-                                        </tr>
+                                        @foreach($operation_log_list as $key=>$val)
+                                            <tr>
+                                                <td>{{ $val->accounts->id }}</td>
+                                                <td>{{ $val->operation_info }}</td>
+                                                <td>{{ $val->created_at }}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
