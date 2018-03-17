@@ -152,7 +152,7 @@ class AgentController extends Controller {
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $agentdata = [
-                'organization_id' => $organization_id,
+                'agent_id' => $organization_id,
                 'zone_id' => $zone_id
             ];
             Warzoneagent::addWarzoneagent($agentdata); //战区关联服务商
