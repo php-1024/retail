@@ -115,7 +115,7 @@ class FansmanageController extends Controller{
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
                 $fansmanageinfo = [
-                    'organization_id'        =>$organization_id,
+                    'fansmanage_id'          =>$organization_id,
                     'fansmanage_owner'       =>$realname,
                     'fansmanage_owner_idcard'=>$idcard,
                     'fansmanage_owner_mobile'=>$oneFansmanage['fansmanage_owner_mobile']
