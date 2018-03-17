@@ -228,7 +228,6 @@ class WechatController extends Controller{
                 'content_source_url'=>$request->get('origin_url_'.$i),
             ]);
         }
-        var_dump($data);
         $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
         $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
         if(!empty($re['media_id'])){
