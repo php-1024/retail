@@ -146,28 +146,6 @@ class WechatController extends Controller{
     }
 
     /*
-     * 删除图片
-     *
-     */
-    //直接输入安全密码操作的页面--删除
-    public function material_article_delete_comfirm(Request $request){
-        $id = $request->input('id');
-        return view('Wechat/Catering/material_article_delete_comfirm',['id'=>$id]);
-    }
-    public function material_article_delete_check(Request $request){
-        $id = $request->input('id');
-        $article_info = WechatArticle::getOne([['id',$id]]);
-        $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
-        $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$article_info['media_id']);
-        if($re['errcode']=='0'){
-            WechatArticle::where('id',$id)->forceDelete();
-            return response()->json(['data'=>'删除图文素材成功','status' => '1']);
-        }else{
-            return response()->json(['data'=>'删除图文素材失败','status' => '0']);
-        }
-    }
-
-    /*
      *单条图文素材添加检测
      */
     public function material_article_add_check(Request $request){
@@ -215,6 +193,7 @@ class WechatController extends Controller{
         }
     }
 
+
     /*
      * 添加多条图文素材页面
      */
@@ -223,7 +202,6 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
         return view('Wechat/Catering/material_articles_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -266,6 +244,45 @@ class WechatController extends Controller{
             return response()->json(['data'=>'上传图文素材失败','status' => '0']);
         }
     }
+
+    /*
+   * 删除图文
+   *
+   */
+    //直接输入安全密码操作的页面--删除
+    public function material_article_delete_comfirm(Request $request){
+        $id = $request->input('id');
+        return view('Wechat/Catering/material_article_delete_comfirm',['id'=>$id]);
+    }
+    public function material_article_delete_check(Request $request){
+        $id = $request->input('id');
+        $article_info = WechatArticle::getOne([['id',$id]]);
+        $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
+        $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$article_info['media_id']);
+        if($re['errcode']=='0'){
+            WechatArticle::where('id',$id)->forceDelete();
+            return response()->json(['data'=>'删除图文素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'删除图文素材失败','status' => '0']);
+        }
+    }
+
+
+    /*
+    * 编辑单条图文素材页面
+    */
+    public function material_article_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $article_info = WechatArticle::getOne([['id',$id]]);
+        $article_info->content = unserialize($article_info->content);
+        dump($article_info);
+        return view('Wechat/Catering/material_articles_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
     /*
      * 图片选择页面
      */
