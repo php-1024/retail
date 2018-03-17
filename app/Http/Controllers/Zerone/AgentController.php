@@ -494,14 +494,14 @@ class AgentController extends Controller{
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
-                    $asset_id = $value->program_id;
-                    dd($asset_id);
+                    $asset_id = $value->program_id;//店铺用的程序id
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
                 }
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
-                    $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$program_id]]);//查询服务商程序数量信息
+                    $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
+                    dd($Assets);
                     if($Assets->program_balance >= $number){//如果服务商剩余程序数量足够
                         $program_balance = $Assets->program_balance - $number;//剩余数量
                         $program_used_num = $Assets->program_used_num + $number;//使用数量
