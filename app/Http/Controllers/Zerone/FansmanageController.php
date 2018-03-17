@@ -24,7 +24,7 @@ class FansmanageController extends Controller{
         $fansmanage_name = $request->input('fansmanage_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
         $search_data = ['fansmanage_name'=>$fansmanage_name,'fansmanage_owner_mobile'=>$fansmanage_owner_mobile];
-        $where = [];
+        $where = [['status','<>','1']];
         if(!empty($fansmanage_name)){
             $where[] = ['fansmanage_name','like','%'.$fansmanage_name.'%'];
         }
@@ -48,8 +48,7 @@ class FansmanageController extends Controller{
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//查找当前操作人员数据
         $route_name = $request->path();//获取当前的页面路由
-        $agent_id = $request->input('id');//服务商id
-        dd($agent_id);
+        $id = $request->input('id');//商户id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
         $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请服务商信息
 
