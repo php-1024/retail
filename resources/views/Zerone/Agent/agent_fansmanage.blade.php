@@ -30,7 +30,7 @@
                         <a href="JavaScript:;">服务商管理</a>
                     </li>
                     <li >
-                        <strong>“{{$organization_name}}”服务商管理</strong>
+                        <strong>“{{$organization_name}}”商户管理</strong>
                     </li>
                 </ol>
             </div>
@@ -61,7 +61,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“刘记新科技有限公司”商户管理</h5>
+                            <h5>“{{$organization_name}}”商户管理</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
