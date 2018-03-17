@@ -52,9 +52,19 @@ class Organization extends Model{
         return $this->belongsToMany('App\Models\Warzone','warzone_proxy','agent_id','zone_id')->select('zone_name');
     }
 
-    //和CateringCategory表一对一的关系
+    //和RetailGoods表一对多的关系
+    public function RetailGoods(){
+        return $this->hasMany('App\Models\RetailGoods', 'restaurant_id');
+    }
+
+    //和CateringCategory表一对多的关系
     public function CateringCategory(){
-        return $this->hasOne('App\Models\CateringCategory', 'fansmanage_id');
+        return $this->hasMany('App\Models\CateringCategory', 'fansmanage_id');
+    }
+
+    //和RetailCategory表一对多的关系
+    public function RetailCategory(){
+        return $this->hasMany('App\Models\RetailCategory', 'fansmanage_id');
     }
 
     //获取单条数据

@@ -13,14 +13,19 @@ class CateringOrderGoods extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和Account表一对多的关系
-    public function catering_goods(){
-        return $this->hasMany('App\Models\CateringGoods', 'id','goods_id');
+    //和CateringGoods表一对一的关系
+    public function CateringGoods(){
+        return $this->hasOne('App\Models\CateringGoods','goods_id');
+    }
+
+    //和CateringOrder表多对一的关系
+    public function CateringOrder(){
+        return $this->belongsTo('App\Models\CateringOrder', 'order_id');
     }
 
     public static function getOne($where)
     {
-        $model = self::with('catering_goods');
+        $model = self::with('CateringGoods')->with('CateringOrder');
         return $model->where($where)->first();
     }
 
@@ -30,7 +35,7 @@ class CateringOrderGoods extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->with('catering_goods')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('CateringOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
     //添加商品到购物车
@@ -55,7 +60,7 @@ class CateringOrderGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('catering_goods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('CateringGoods')->with('CateringOrder')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

@@ -1,22 +1,19 @@
 <?php
 /**
- *餐饮分店管理系统
- * 登录界面
+ * 零售店铺管理系统
+ * 商品管理
  **/
 
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
-use App\Models\CateringCategory;
-use App\Models\CateringGoods;
-use App\Models\CateringGoodsThumb;
+use App\Models\RetailCategory;
+use App\Models\RetailGoods;
+use App\Models\RetailGoodsThumb;
 use App\Models\OperationLog;
-use App\Models\CateringSpec;
-use App\Models\CateringSpecItem;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Session;
 
 class GoodsController extends Controller
@@ -31,7 +28,7 @@ class GoodsController extends Controller
         $where = [
             'restaurant_id' => $admin_data['organization_id'],
         ];
-        $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
+        $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');
         return view('Retail/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
@@ -63,7 +60,7 @@ class GoodsController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $goods_id = CateringGoods::addCateringGoods($goods_data);
+            $goods_id = RetailGoods::addRetailGoods($goods_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品！');//保存操作记录
@@ -91,11 +88,10 @@ class GoodsController extends Controller
             'restaurant_id' => $admin_data['organization_id'],
         ];
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        $goods = CateringGoods::getOne(['id' => $goods_id, 'fansmanage_id' => $fansmanage_id, 'restaurant_id' => $admin_data['organization_id']]);
-        $category = CateringCategory::getList($where, '0', 'displayorder', 'DESC');
-        $spec = CateringSpec::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        return view('Retail/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'spec'=>$spec,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        $goods_thumb = RetailGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        $goods = RetailGoods::getOne(['id' => $goods_id, 'fansmanage_id' => $fansmanage_id, 'restaurant_id' => $admin_data['organization_id']]);
+        $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');
+        return view('Retail/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //编辑商品操作
@@ -131,7 +127,7 @@ class GoodsController extends Controller
 
         DB::beginTransaction();
         try {
-            $goods_id = CateringGoods::editCateringGoods($where,$goods_data);
+            $goods_id = RetailGoods::editRetailGoods($where,$goods_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统编辑了商品！');//保存操作记录
@@ -151,7 +147,7 @@ class GoodsController extends Controller
     public function goods_thumb(Request $request)
     {
         $goods_id = $request->get('goods_id');              //商品的ID
-        $goods_thumb = CateringGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        $goods_thumb = RetailGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
         return view('Retail/Goods/goods_thumb', ['goods_thumb'=>$goods_thumb]);
     }
 
@@ -175,7 +171,7 @@ class GoodsController extends Controller
             ];
             DB::beginTransaction();
             try {
-                CateringGoodsThumb::addGoodsThumb($goods_thumb);
+                RetailGoodsThumb::addGoodsThumb($goods_thumb);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                     OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
@@ -206,7 +202,7 @@ class GoodsController extends Controller
         $where = [
             'restaurant_id' => $admin_data['organization_id'],
         ];
-        $goods = CateringGoods::getPaginage($where, '10', 'displayorder', 'DESC');
+        $goods = RetailGoods::getPaginage($where, '10', 'displayorder', 'DESC');
         return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
@@ -226,7 +222,7 @@ class GoodsController extends Controller
         $goods_id = $request->get('goods_id');        //获取分类栏目ID
         DB::beginTransaction();
         try {
-            CateringGoods::select_delete($goods_id);
+            RetailGoods::select_delete($goods_id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录

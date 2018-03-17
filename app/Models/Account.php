@@ -38,9 +38,24 @@ class Account extends Model{
         return $this->hasMany('App\Models\OrganizationRole', 'created_by');
     }
 
-    //和餐饮分类表CateringCategory一对一的关系
+    //和餐饮商品表CateringGoods一对多的关系
+    public function CateringGoods(){
+        return $this->hasMany('App\Models\CateringGoods', 'created_by');
+    }
+
+    //和餐饮商品表RetailGoods一对多的关系
+    public function RetailGoods(){
+        return $this->hasMany('App\Models\RetailGoods', 'created_by');
+    }
+
+    //和餐饮分类表CateringCategory一对多的关系
     public function CateringCategory(){
-        return $this->hasOne('App\Models\CateringCategory', 'created_by');
+        return $this->hasMany('App\Models\CateringCategory', 'created_by');
+    }
+
+    //和零售分类表RetailCategory一对多的关系
+    public function RetailCategory(){
+        return $this->hasMany('App\Models\RetailCategory', 'created_by');
     }
 
     //简易型查询单条数据关联查询

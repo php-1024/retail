@@ -35,5 +35,6 @@ class OrganizationAssets extends Model{
         }
         $model->save();
     }
+
 }
 ?>

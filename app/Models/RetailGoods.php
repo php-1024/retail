@@ -1,14 +1,14 @@
 <?php
 /**
- * catering_goods表的模型
+ * retail_goods表的模型
  *
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class CateringGoods extends Model{
+class RetailGoods extends Model{
     use SoftDeletes;
-    protected $table = 'catering_goods';
+    protected $table = 'retail_goods';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -18,9 +18,9 @@ class CateringGoods extends Model{
         return $this->belongsto('App\Models\Account','created_by');
     }
 
-    //和创建者catering_category表多对一的关系
+    //和创建者catering_category表一对一的关系
     public function category(){
-        return $this->belongsto('App\Models\CateringCategory','category_id');
+        return $this->belongsTo('App\Models\RetailCategory','category_id');
     }
 
     //和organization表一对一的关系
@@ -28,24 +28,24 @@ class CateringGoods extends Model{
         return $this->belongsto('App\Models\Organization','restaurant_id','id');
     }
 
-    //和CateringGoodsThumb表一对多的关系
-    public function goodsThumb(){
-        return $this->hasMany('App\Models\CateringGoodsThumb','goods_id');
+    //和RetailGoodsThumb表一对多的关系
+    public function RetailGoodsThumb(){
+        return $this->hasMany('App\Models\RetailGoodsThumb','goods_id');
     }
 
-    //和CateringOrderGoods表一对一的关系
-    public function CateringOrderGoods(){
-        return $this->belongsTo('App\Models\CateringOrderGoods','goods_id');
+    //和RetailOrderGoods表一对一的关系
+    public function RetailOrderGoods(){
+        return $this->belongsTo('App\Models\RetailOrderGoods','goods_id');
     }
 
     //获取单条餐饮商品信息
     public static function getOne($where){
-        return self::with('category')->with('goodsThumb')->where($where)->first();
+        return self::with('category')->with('RetailGoodsThumb')->where($where)->first();
     }
 
     //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new CateringGoods();
+        $model = new RetailGoods();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -53,8 +53,8 @@ class CateringGoods extends Model{
     }
 
     //添加餐饮商品
-    public static function addCateringGoods($param){
-        $model = new CateringGoods();
+    public static function addRetailGoods($param){
+        $model = new RetailGoods();
         $model->name = $param['name'];
         $model->details = $param['details'];
         $model->price = $param['price'];
@@ -69,7 +69,7 @@ class CateringGoods extends Model{
     }
     
     //修改餐饮商品数据
-    public static function editCateringGoods($where,$param){
+    public static function editRetailGoods($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;

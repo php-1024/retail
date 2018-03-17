@@ -393,7 +393,7 @@ class AgentController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
-        $list = Program::getPaginage([['complete_id',3]],15,'id');
+        $list = Program::getPaginage([['is_asset','1']],15,'id');
         foreach ($list as $key=>$value){
             $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$value['id']]]);
             $list[$key]['program_balance'] = $re['program_balance'];
@@ -483,12 +483,6 @@ class AgentController extends Controller{
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
-        if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
-            $to_organization_id = 1;
-        }else{
-            $to_organization_id = $admin_data['organization_id'];
-        }
-
         $organization_id = $request->organization_id;//服务商id
         $oneAgent = Organization::getOne([['id',$organization_id]]);//服务商信息
         $status = $request->status;//服务商id
@@ -496,21 +490,22 @@ class AgentController extends Controller{
         DB::beginTransaction();
         try{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
-            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>'$organization_id','parent_tree'=>$parent_tree]);
+            Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
+                    $asset_id = $value->program_id;//店铺用的程序id
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
                 }
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
-                    $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$program_id]]);//查询服务商程序数量信息
+                    $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
                     if($Assets->program_balance >= $number){//如果服务商剩余程序数量足够
                         $program_balance = $Assets->program_balance - $number;//剩余数量
                         $program_used_num = $Assets->program_used_num + $number;//使用数量
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
-                        $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$fansmanage_id,'program_id'=>$program_id,'status'=>0,'number'=>$number];
+                        $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$fansmanage_id,'program_id'=>$asset_id,'status'=>'0','number'=>$number];
                         //添加操作日志
                         OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
                     }else{
