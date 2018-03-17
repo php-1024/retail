@@ -103,6 +103,12 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/agent_fansmanage_draw_check"://商户冻结  检测 登录 和 权限 和 安全密码 商户划出归属
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
+
+
 
 
             case "zerone/ajax/company_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
