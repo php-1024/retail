@@ -39,16 +39,14 @@
 
                                 <header class="panel-heading font-bold">
                                     概况
-                                    <button class="btn btn-default btn-xs pull-right" id="editBtn"><i
-                                                class="fa fa-edit "></i>&nbsp;编辑
-                                    </button>
+
+                                    <button id="editBtn" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit "></i>&nbsp;编辑</button>
                                 </header>
                                 <div class="panel-body">
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
-                                                <div class="thumb-lg">
-                                                    <img src="{{url('public/Branch/images/m0.jpg')}}" class="img-circle"
-                                                         alt="...">
+                                                <div class="thumb-lg" >
+                                                    <img src="{{asset('public/Branch/images/m0.jpg')}}" class="img-circle" alt="...">
                                                 </div>
                                             </div>
                                         </div>
@@ -64,7 +62,7 @@
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">店铺名称</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">分店名称</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">刘记鸡煲王【龙岗店】</label>
                                             </div>
@@ -112,11 +110,9 @@
                                 </div>
                             </section>
                         </div>
-
                         <div class="col-lg-9 ">
                             <div class="col-lg-12">
-                                <div class="col-lg-4 state-overview"
-                                ">
+                                <div class="col-lg-4 state-overview">
                                 <section class="panel">
                                     <div class="symbol bg-danger">
                                         <i class="fa fa-money"></i>
@@ -128,8 +124,7 @@
                                 </section>
                             </div>
 
-                            <div class="col-lg-4 state-overview"
-                            ">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-success">
                                     <i class="icon icon-user"></i>
@@ -141,8 +136,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"
-                        ">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-info">
                                 <i class="icon icon-basket-loaded"></i>
@@ -158,8 +152,7 @@
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="col-lg-4 state-overview"
-                            ">
+                            <div class="col-lg-4 state-overview">
                             <section class="panel">
                                 <div class="symbol bg-warning">
                                     <i class="fa fa-list"></i>
@@ -171,8 +164,7 @@
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"
-                        ">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-primary">
                                 <i class="icon icon-list"></i>
@@ -184,8 +176,7 @@
                         </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview"
-                        ">
+                        <div class="col-lg-4 state-overview">
                         <section class="panel">
                             <div class="symbol bg-dark">
                                 <i class="icon icon-printer"></i>
@@ -357,9 +348,6 @@
     function EditStore() {
         var formData = new FormData($( "#store_edit" )[0]);
         var _token = $('#_token').val();
-//        formData.append('_token',_token);
-        console.log(_token);
-        console.log(formData);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
