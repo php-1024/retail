@@ -500,9 +500,10 @@ class AgentController extends Controller{
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
                 }
+
                 if($status == 1){//消耗程序数量
+                    dd(1);
                     $number = count($datastore);//计算店铺数量
-                    dd($number);
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
                     if($Assets['program_balance'] >= $number){//如果服务商剩余程序数量足够
                         $program_balance = $Assets->program_balance - $number;//剩余数量
