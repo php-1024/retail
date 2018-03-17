@@ -471,7 +471,7 @@ class AgentController extends Controller{
         $list = Organization::getPaginageFansmanage([['parent_id',$organization_id]],'10','id');
         return view('Zerone/Agent/agent_fansmanage',['organization_id'=>$organization_id,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //商户划拨归属Ajax显示页面
+    //商户划拨归属Ajax显示页面--划入
     public function agent_fansmanage_add(Request $request){
 
         $organization_id = $request->organization_id;//服务商id
@@ -528,6 +528,13 @@ class AgentController extends Controller{
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
 
+    }
+
+    //商户划拨归属Ajax显示页面--划出
+    public function agent_fansmanage_draw(Request $request){
+
+        $organization_id = $request->organization_id;//服务商id
+        return view('Zerone/Agent/agent_fansmanage_draw',['organization_id'=>$organization_id]);
     }
 }
 ?>
