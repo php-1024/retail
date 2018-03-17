@@ -1,10 +1,11 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/agent_fansmanage_draw_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$organization_id}}">
+    <input type="hidden" name="fansmanage_id" value="{{$onedata->id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <h3>“刘记新科技有限公司”商户划出</h3>
+                <h3>“{{$onedata->organization_name}}”商户划出</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -53,13 +54,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
