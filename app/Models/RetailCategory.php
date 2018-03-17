@@ -15,17 +15,21 @@ class RetailCategory extends Model{
 
     //和创建者account表多对一的关系
     public function create_account(){
-        return $this->belongsto('App\Models\Account','created_by');
+        return $this->belongsto('App\Models\Account','created_by','id');
     }
 
     //和零售分类RetailGoods表一对多的关系
     public function RetailGoods(){
-        return $this->hasMany('App\Models\RetailGoods','category_id');
+        return $this->hasMany('App\Models\RetailGoods','category_id','id');
     }
 
     //和组织表Organization表多对一的关系
     public function Organization(){
+<<<<<<< HEAD
+        return $this->belongsto('App\Models\Organization','retail_id','id');
+=======
         return $this->belongsto('App\Models\Organization','retail_id');
+>>>>>>> 4fc2fd868a1ca915b8b8c854a9fc01f8fdb284a9
     }
 
     //获取单条信息
