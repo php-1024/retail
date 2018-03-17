@@ -212,8 +212,6 @@ class WechatController extends Controller{
 
         $num = $request->get('num');
         $data['articles'] = [];
-        $title='';
-        $image_id = '';
         for($i=1;$i<=$num;$i++){
             array_push($data['articles'],[
                 'title'=>$request->get('title_'.$i),
@@ -378,7 +376,52 @@ class WechatController extends Controller{
     public function material_articles_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
 
+        $num = $request->get('num');
+        $adata['articles'] = [];
+        $flag = true;
+
+        $article_info = WechatArticle::getOne([['id',$id]]);
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+
+        for($i=1;$i<=$num;$i++){
+            array_push($adata['articles'],[
+                'title'=>$request->get('title_'.$i),
+                'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
+                'author'=>$request->get('author_'.$i),
+                'digest'=>'',
+                'show_cover_pic'=>1,
+                'content'=>$request->get('content_'.$i),
+                'content_source_url'=>$request->get('origin_url_'.$i),
+            ]);
+
+            $data = [
+                'title'=>$request->get('title_'.$i),
+                'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
+                'author'=>$request->get('author_'.$i),
+                'digest'=>'',
+                'show_cover_pic'=>1,
+                'content'=>$request->get('content_'.$i),
+                'content_source_url'=>$request->get('origin_url_'.$i),
+            ];
+
+            $re = \Wechat::update_meterial($auth_info['authorizer_access_token'],$article_info['media_id'],$i-1,$data);
+            if($re['errcode'] <> '0'){
+                $flag = false;
+            }
+        }
+
+        if($flag){
+            $zdata = [
+                'title'=>$request->get('title_1'),
+                'content'=>serialize($adata),
+            ];
+            WechatArticle::editWechatArticle([['id',$id]],$zdata);
+            return response()->json(['data'=>'编辑图文素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'编辑图文素材失败','status' => '0']);
+        }
 
     }
     /*
