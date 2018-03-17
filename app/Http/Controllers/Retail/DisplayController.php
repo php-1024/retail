@@ -42,6 +42,7 @@ class DisplayController extends Controller
         if (empty($admin_data['safe_password'])){           //先设置安全密码
             return redirect('retail/account/password');
         }else{
+            dump($request);
             return view('Retail/Display/display',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
