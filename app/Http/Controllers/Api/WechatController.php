@@ -306,8 +306,20 @@ class WechatController extends Controller{
 
         $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
 
-
+        //提交到微信公众号的数据
         $data = [
+            'articles'=>[
+                    'title'=>$title,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'author'=>$author,
+                    'digest'=>$digest,
+                    'show_cover_pic'=>1,
+                    'content'=>$content,
+                    'content_source_url'=>$origin_url
+            ],
+        ];
+        //保存在零壹的数据
+        $adata = [
             'articles'=>[
                 [
                     'title'=>$title,
@@ -326,7 +338,7 @@ class WechatController extends Controller{
         if($re['errcode'] == '0'){
             $zdata = [
                 'title'=>$title,
-                'content'=>serialize($data),
+                'content'=>serialize($adata),
             ];
             WechatArticle::editWechatArticle([['id',$id]],$zdata);
             return response()->json(['data'=>'编辑图文素材成功','status' => '1']);
