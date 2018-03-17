@@ -660,7 +660,7 @@ class ZeroneCheckAjax
 
     /*****服务商管理******/
 
-    
+
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
