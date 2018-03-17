@@ -88,7 +88,7 @@
                                                         单条图文
                                                     @else
                                                         多条图文
-                                                    @endif;
+                                                    @endif
                                                 </td>
                                                 <td>{{$val->create_time}}</td>
                                                 <td>
