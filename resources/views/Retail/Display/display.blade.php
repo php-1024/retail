@@ -350,7 +350,6 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(function(){
-
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
