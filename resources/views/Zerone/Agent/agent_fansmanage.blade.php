@@ -41,6 +41,7 @@
 
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
             <input type="hidden" id="agent_fansmanage_add" value="{{ url('zerone/ajax/agent_fansmanage_add') }}">
+            <input type="hidden" id="agent_fansmanage_draw" value="{{ url('zerone/ajax/agent_fansmanage_draw') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
 
@@ -85,7 +86,7 @@
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
-                                        <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;划出归属</button>
+                                        <button type="button"  onclick="getDrawFansmanageForm('{{$organization_id}}','{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;划出归属</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -103,49 +104,9 @@
                 </div>
             </div>
         </div>
-
         @include('Zerone/Public/Footer')
-
     </div>
     <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
-        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content animated fadeIn">
-                    <div class="modal-header">
-                        <h3>“刘记新科技有限公司”商户划出</h3>
-                    </div>
-                    <div class="modal-body">
-
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" style="padding-top: 7px;">归还程序与分店数量</label>
-                            <div class="col-sm-9">
-                                <input type="checkbox" class="js-switch2" checked  value="1"/>
-                            </div>
-
-                        </div>
-
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">安全密码</label>
-                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
-                        </div>
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary saveBtn">保存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
@@ -185,7 +146,7 @@
 
 
 
-    //编辑
+    //商户划入
     function getAddFansmanageForm(organization_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
@@ -221,13 +182,42 @@
             }
         });
     }
+    //商户划出
+    function getDrawFansmanageForm(organization_id,fansmanage_id){
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        // activate Nestable for list 2
+        var url = $('#agent_fansmanage_draw').val();
+        var token = $('#_token').val();
+        if(organization_id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
 
-
-
-
-
-
-
+        var data = {'organization_id':organization_id,'fansmanage_id':fansmanage_id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 
 
 

@@ -296,6 +296,8 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('agent_assets_check','Zerone\AgentController@agent_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交
         Route::post('agent_fansmanage_add','Zerone\AgentController@agent_fansmanage_add')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划入归属
         Route::post('agent_fansmanage_add_check','Zerone\AgentController@agent_fansmanage_add_check')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划入归属功能提交
+        Route::post('agent_fansmanage_draw','Zerone\AgentController@agent_fansmanage_draw')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划出归属
+        Route::post('agent_fansmanage_draw_check','Zerone\AgentController@agent_fansmanage_draw_check')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划出归属功能提交
 
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
@@ -722,7 +724,7 @@ Route::group(['prefix'=>'retail'],function(){
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Retail\LoginController@login_check')->middleware('RetailCheckAjax');//提交登录数据
         Route::post('retail_select','Retail\DisplayController@retail_select')->middleware('RetailCheckAjax');//提交选择分店数据
-        Route::post('store_edit_check', 'Retail\DisplayController@store_edit_check')->middleware('RetailCheckAjax');;    //分店店铺信息编辑弹窗
+        Route::post('store_edit', 'Retail\DisplayController@store_edit')->middleware('RetailCheckAjax');;    //分店店铺信息编辑弹窗
         Route::post('profile_edit_check', 'Retail\AccountController@profile_edit_check')->middleware('RetailCheckAjax');//个人账号信息修改
         Route::post('safe_password_edit_check', 'Retail\AccountController@safe_password_edit_check')->middleware('RetailCheckAjax');//安全密码设置检测
         Route::post('password_edit_check', 'Retail\AccountController@password_edit_check')->middleware('RetailCheckAjax');          //密码检测
@@ -796,6 +798,8 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('material_image_select', 'Api\WechatController@material_image_select')->middleware('CateringCheckAjax');//弹出图片选择框
         Route::any('material_article_add_check','Api\WechatController@material_article_add_check')->middleware('CateringCheckAjax');//添加单条图文检测
         Route::any('material_articles_add_check','Api\WechatController@material_articles_add_check')->middleware('CateringCheckAjax');//添加多条图文检测
+        Route::any('material_article_delete_comfirm','Api\WechatController@material_article_delete_comfirm')->middleware('CateringCheckAjax');//添加单条图文检测
+        Route::any('material_article_delete_check','Api\WechatController@material_article_delete_check')->middleware('CateringCheckAjax');//添加单条图文检测
     });
 });
 /*********************接口路由*************************/

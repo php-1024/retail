@@ -25,7 +25,11 @@ class RetailCategory extends Model{
 
     //和组织表Organization表多对一的关系
     public function Organization(){
+<<<<<<< HEAD
         return $this->belongsto('App\Models\Organization','retail_id','id');
+=======
+        return $this->belongsto('App\Models\Organization','retail_id');
+>>>>>>> 4fc2fd868a1ca915b8b8c854a9fc01f8fdb284a9
     }
 
     //获取单条信息
@@ -49,7 +53,7 @@ class RetailCategory extends Model{
         $model->created_by = $param['created_by'];
         $model->displayorder = $param['displayorder'];
         $model->fansmanage_id = $param['fansmanage_id'];
-        $model->restaurant_id = $param['restaurant_id'];
+        $model->retail_id = $param['retail_id'];
         $model->save();
         return $model->id;
     }

@@ -349,19 +349,28 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#editBtn').click(function () {
-            $('#myModal').modal();
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
     });
-    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+    $('#editBtn').click(function () {
+        $('#myModal').modal();
+    });
+
     //编辑店铺信息
     function EditStore() {
-        var formData = $( "#store_edit" ).serialize();
+        var formData = new FormData($( "#store_edit" )[0]);
+        var _token = $('_token').val();
+        formData.append('_token',_token);
+        console.log(_token);
         console.log(formData);
         $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}',
-            type: 'POST',
+            url: '{{ url('retail/ajax/store_edit') }}',
+            type: 'post',
             data: formData,
             async: false,
             cache: false,

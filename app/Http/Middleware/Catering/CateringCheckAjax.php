@@ -101,6 +101,7 @@ class CateringCheckAjax
             case "api/ajax/meterial_image_upload":          //图片上传弹窗
             case "api/ajax/meterial_image_upload_check":   //图片上传检测
             case "api/ajax/material_image_delete_comfirm": //图片上传确认弹窗
+            case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
             case "api/ajax/material_image_select":        //图片选择弹窗
 
             $re = $this->checkLoginAndRule($request);
