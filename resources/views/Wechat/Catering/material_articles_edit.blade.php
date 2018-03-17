@@ -120,7 +120,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-2 control-label">正文</div>
                                                         <div class="col-sm-9">
-                                                            <textarea id="form-content1" class="editor" cols="30" name="content_{{$key+1}}" rows="10">$val['content'] </textarea>
+                                                            <textarea id="form-content1" class="editor" cols="30" name="content_{{$key+1}}" rows="10">{{$val['content']}} </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
