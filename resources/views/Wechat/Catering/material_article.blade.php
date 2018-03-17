@@ -79,66 +79,24 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($list as $key=>$val)
                                             <tr>
-                                                <td>1</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
+                                                <td>{{$val->id}}</td>
+                                                <td>{{$val->title}}</td>
+                                                <td>
+                                                    @if($val->type == '1')
+                                                        单条图文
+                                                    @else
+                                                        多条图文
+                                                    @endif;
+                                                </td>
+                                                <td>{{$val->create_time}}</td>
                                                 <td>
                                                     <button class="btn btn-info btn-xs" onclick="location.href='{{url('catering/subscription/material_writing_one_edit')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                     <button class="btn btn-danger btn-xs" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>测试图文</td>
-                                                <td>多条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='{{url('catering/subscription/material_writing_many_edit')}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>测试图文</td>
-                                                <td>单条图文</td>
-                                                <td>2017-08-09 11:11:11</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                </td>
-                                            </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
