@@ -37,6 +37,11 @@ class Organization extends Model{
         return $this->hasOne('App\Models\OrganizationBranchinfo', 'organization_id');
     }
 
+    //和organizationRetailinfo表一对一的关系
+    public function OrganizationRetailinfo(){
+        return $this->hasOne('App\Models\OrganizationRetailinfo', 'organization_id');
+    }
+
     //和wechat_authorization表一对一的关系
     public function wechatAuthorization(){
         return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
@@ -69,7 +74,7 @@ class Organization extends Model{
 
     //获取单条数据
     public static function getOne($where){
-        return self::where($where)->first();
+        return self::with('OrganizationRetailinfo')->where($where)->first();
     }
     //获取单条信息-服务商
     public static function getOneAgent($where){
