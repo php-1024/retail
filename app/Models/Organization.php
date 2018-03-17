@@ -69,7 +69,7 @@ class Organization extends Model{
 
     //和RetailCategory表一对多的关系
     public function RetailCategory(){
-        return $this->hasMany('App\Models\RetailCategory', ' retaurant_id');
+        return $this->hasMany('App\Models\RetailCategory', 'retail_id');
     }
 
     //获取单条数据

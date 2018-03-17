@@ -11,6 +11,7 @@ use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\Program;
 use App\Models\RetailGoodsThumb;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -43,8 +44,10 @@ class DisplayController extends Controller
             return redirect('retail/account/password');
         }else{
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
-
+            $program = Program::getOne([['id',$organization->program_id]]);
+            $organization->program_name = $program;
             dump($organization);
+
             return view('Retail/Display/display',['organization'=>$organization,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }

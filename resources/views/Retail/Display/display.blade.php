@@ -94,7 +94,7 @@
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">张老三</label>
+                                                <label class="label label-info">{{$organization->OrganizationRetailinfo->retail_owner}}</label>
                                             </div>
                                         </div>
 
@@ -103,7 +103,7 @@
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">13123456789</label>
+                                                <label class="label label-info">{{$organization->OrganizationRetailinfo->retail_owner_mobile}}</label>
                                             </div>
                                         </div>
 
@@ -112,7 +112,13 @@
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">状态</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-success">正常运营</label>
+                                                <label class="label label-success">
+                                                    @if($organization->status == 1)
+                                                        正常运营
+                                                    @elseif($organization->status == 0)
+                                                        冻结中
+                                                    @endif
+                                                </label>
                                             </div>
                                         </div>
 
@@ -121,7 +127,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">店铺地址</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-primary">广东省深圳市龙岗区万汇大厦1606</label>
+                                                <label class="label label-primary">{{$organization->OrganizationRetailinfo->retail_address}}</label>
                                             </div>
                                         </div>
 
