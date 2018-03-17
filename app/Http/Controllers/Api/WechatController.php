@@ -344,7 +344,6 @@ class WechatController extends Controller{
         }else{
             return response()->json(['data'=>'编辑图文素材失败','status' => '0']);
         }
-
     }
 
     /*
@@ -375,6 +374,13 @@ class WechatController extends Controller{
         return view('Wechat/Catering/material_articles_edit',['id'=>$id,'num'=>$num,'articles'=>$articles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+
+    public function material_articles_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+
+    }
     /*
      * 图片选择页面
      */
