@@ -389,7 +389,7 @@ class ComposerStaticInit1708003cd15a9f552ca4c1b8ad90d78a
         'App\\Models\\AccountNode' => __DIR__ . '/../..' . '/app/Models/AccountNode.php',
         'App\\Models\\Assets' => __DIR__ . '/../..',
         'App\\Models\\AssetsOperation' => __DIR__ . '/../..',
-        'App\\Models\\CompanyApply' => __DIR__ . '/../..' . '/app/Models/CompanyApply.php',
+        'App\\Models\\CompanyApply' => __DIR__ . '/../..',
         'App\\Models\\ErrorLog' => __DIR__ . '/../..' . '/app/Models/ErrorLog.php',
         'App\\Models\\LoginLog' => __DIR__ . '/../..' . '/app/Models/LoginLog.php',
         'App\\Models\\Module' => __DIR__ . '/../..' . '/app/Models/Module.php',
