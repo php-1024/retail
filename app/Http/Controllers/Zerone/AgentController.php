@@ -489,7 +489,6 @@ class AgentController extends Controller{
         $status = $request->status;//是否消耗程序数量
         $fansmanage_id = $request->fansmanage_id;//商户id
         $fansmanage_name = Organization::getPluck([['id',$fansmanage_id]],'organization_name')->first();
-        dd($fansmanage_name);
         DB::beginTransaction();
         try{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
@@ -577,6 +576,7 @@ class AgentController extends Controller{
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
                     }else{
                         $data = ['program_id'=>$asset_id,'organization_id '=>$organization_id,'program_balance'=>$number,'program_used_num'=>'0'];
+                        dd($data);
                        OrganizationAssets::addAssets($data);
                     }
                     $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>'1','to_organization_id'=>$organization_id,'program_id'=>$asset_id,'status'=>'2','number'=>$number];
