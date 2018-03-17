@@ -306,7 +306,7 @@ class WechatController extends Controller{
 
         $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
 
-
+        //提交到微信公众号的数据
         $data = [
             'articles'=>[
                     'title'=>$title,
@@ -318,7 +318,7 @@ class WechatController extends Controller{
                     'content_source_url'=>$origin_url
             ],
         ];
-
+        //保存在零壹的数据
         $adata = [
             'articles'=>[
                 [
