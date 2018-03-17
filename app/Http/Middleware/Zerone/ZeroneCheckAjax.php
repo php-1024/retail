@@ -154,6 +154,7 @@ class ZeroneCheckAjax
             case "zerone/ajax/agent_list_lock"://服务商列表冻结弹出检测登入和权限
             case "zerone/ajax/agent_assets"://服务商列表划入检测弹出登入和权限
             case "zerone/ajax/agent_fansmanage_add"://服务商列表商户划拨管理-商户划入归属
+            case "zerone/ajax/agent_fansmanage_draw"://服务商列表商户划拨管理-商户划出归属
 
             //商户管理
             case "zerone/ajax/company_examine"://商户审核检测弹出登录和权限
