@@ -205,7 +205,7 @@
                                                 {{$val->total}}
                                             </td>
                                             <td>
-                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->order_goods->price}}">
+                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="@if(!empty($val->order_goods->price)){{$val->order_goods->price}}@endif">
                                             </td>
                                             <th>
                                                 @if($val->status == 0)
