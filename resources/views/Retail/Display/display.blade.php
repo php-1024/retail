@@ -355,7 +355,7 @@
 
     //编辑店铺信息
     function EditStore() {
-        var formData = $( "#store_edit" ).serialize();
+        var formData = $( "#_token" ).serialize();
         console.log(formData);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit') }}',
