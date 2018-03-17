@@ -39,7 +39,6 @@
 
                                 <header class="panel-heading font-bold">
                                     概况
-
                                     <button id="editBtn" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit "></i>&nbsp;编辑</button>
                                 </header>
                                 <div class="panel-body">
