@@ -121,13 +121,7 @@ class DisplayController extends Controller
         ZeroneRedis::create_retail_menu_cache(1);//生成对应账号的商户系统菜单
     }
 
-    public function store_edit(Request $request)
-    {
-        $organization_id = $request->get('id');              //组织ID
-        return view('Retail/Display/store_edit',['organization_id'=>$organization_id]);
-    }
-
-
+    //店铺信息编辑检测
     public function store_edit_check(Request $request)
     {
         dd($request);
