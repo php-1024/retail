@@ -264,7 +264,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
+        <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
