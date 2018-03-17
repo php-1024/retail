@@ -296,6 +296,8 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('agent_assets_check','Zerone\AgentController@agent_assets_check')->middleware('ZeroneCheckAjax');//服务商程序管理划入数据提交
         Route::post('agent_fansmanage_add','Zerone\AgentController@agent_fansmanage_add')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划入归属
         Route::post('agent_fansmanage_add_check','Zerone\AgentController@agent_fansmanage_add_check')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划入归属功能提交
+        Route::post('agent_fansmanage_draw','Zerone\AgentController@agent_fansmanage_draw')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划出归属
+        Route::post('agent_fansmanage_draw_check','Zerone\AgentController@agent_fansmanage_draw_check')->middleware('ZeroneCheckAjax');//商户划拨管理-商户划出归属功能提交
 
         Route::post('subordinate_add_check','Zerone\SubordinateController@subordinate_add_check')->middleware('ZeroneCheckAjax');//添加下级人员数据提交
         Route::post('subordinate_edit','Zerone\SubordinateController@subordinate_edit')->middleware('ZeroneCheckAjax');//编辑下级人员弹出框
