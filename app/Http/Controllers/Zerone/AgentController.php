@@ -27,7 +27,7 @@ class AgentController extends Controller {
         $agent_name = $request->input('agent_name');
         $agent_owner_mobile = $request->input('agent_owner_mobile');
         $search_data = ['agent_name' => $agent_name, 'agent_owner_mobile' => $agent_owner_mobile];
-        $where = [];
+        $where = [['status','<>','1']];
         if (!empty($agent_name)) {
             $where[] = ['agent_name', 'like', '%' . $agent_name . '%'];
         }
