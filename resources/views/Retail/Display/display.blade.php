@@ -271,33 +271,33 @@
                     <h4 class="modal-title">店铺信息编辑</h4>
                 </div>
                 <div class="modal-body">
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-2 text-right">分店名称</label>--}}
-                        {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" value="刘记鸡煲王【龙岗店】" name="store_name" placeholder="店铺名称" class="form-control">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div style="clear:both;"></div>--}}
-                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">分店名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="刘记鸡煲王【龙岗店】" name="store_name" placeholder="店铺名称" class="form-control">
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
 
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-2 text-right">负责人</label>--}}
-                        {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" value="张老三" name="owner" placeholder="负责人" class="form-control">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div style="clear:both;"></div>--}}
-                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">负责人</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="张老三" name="owner" placeholder="负责人" class="form-control">
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-2 text-right">手机号码</label>--}}
-                        {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" value="13123456789" name="mobile" placeholder="手机号码" class="form-control">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div style="clear:both;"></div>--}}
-                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">手机号码</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="13123456789" name="mobile" placeholder="手机号码" class="form-control">
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺LOGO</label>
@@ -308,22 +308,22 @@
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-2 text-right">店铺地址</label>--}}
-                        {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" value="广东省深圳市龙岗区万汇大厦1606" name="address" placeholder="店铺地址" class="form-control">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div style="clear:both;"></div>--}}
-                    {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">店铺地址</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="广东省深圳市龙岗区万汇大厦1606" name="address" placeholder="店铺地址" class="form-control">
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-2 text-right">安全密码</label>--}}
-                        {{--<div class="col-sm-10">--}}
-                            {{--<input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control" >--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div style="clear:both;"></div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">安全密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control" >
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
 
                 </div>
                 <div class="modal-footer">
@@ -361,6 +361,10 @@
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
             data: formData,
+            async: true,
+            cache: true,
+            contentType: true,
+            processData: true,
             success: function (json) {
                 if (json.status == -1) {
                     window.location.reload();
