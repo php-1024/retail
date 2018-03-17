@@ -61,6 +61,7 @@ class DisplayController extends Controller
         $organization_name  = $request->organization_name;
         $where = ['organization_id'=>'10'];//organization_id=10为零售版本组织，type=4为店铺类型的组织
         $organization = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
+        dd($organization);
         foreach ($organization as $key=>$val){
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
