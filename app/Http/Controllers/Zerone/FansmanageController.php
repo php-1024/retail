@@ -50,7 +50,7 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//商户id
         $status = $request->input('status');//是否通过值 1为通过 -1为不通过
-        $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请服务商信息
+        $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请商户信息
 
         if($status == -1 ){
             DB::beginTransaction();
@@ -66,22 +66,30 @@ class FansmanageController extends Controller{
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
         }elseif($status == 1){
 
-            $list = Organization::getOneProxy([['id',$id]]);
+            $oneagent = Organization::getOne([['id',$oneFansmanage['agent_id']]]);//查询商户推荐上级组织信息
 
-            $parent_id = $id;//零壹或者服务商organization_id
-            $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
+            $parent_id = $oneFansmanage['agent_id'];//零壹或者服务商organization_id
+            $parent_tree = $oneagent['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
             $mobile = $oneFansmanage['fansmanage_owner_mobile'];//手机号码
 
             DB::beginTransaction();
             try{
                 OrganizationFansmanageapply::editfansmanageApply([['id',$id]],['status'=>$status]);//申请通过
                 //添加服务商
-                $listdata = ['organization_name'=>$fansmanagelist['fansmanage_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
-                $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
+                $Orgdata = [
+                    'organization_name'=>$oneFansmanage['fansmanage_name'],
+                    'parent_id'        =>$parent_id,
+                    'parent_tree'      =>$parent_tree,
+                    'program_id'       =>'3',
+                    'asset_id'         =>'0',
+                    'type'             =>'3',
+                    'status'           =>'1'
+                ];
+                $organization_id = Organization::addOrganization($Orgdata); //返回值为商户的id
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
-                $fansmanage_password =  $fansmanagelist['fansmanage_password'];//用户密码
+                $fansmanage_password =  $oneFansmanage['fansmanage_password'];//用户密码
 
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
                 $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
