@@ -354,7 +354,7 @@
             $('#myModal').modal();
         });
     });
-
+    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     //编辑店铺信息
     function EditStore() {
         var formData = $( "#store_edit" ).serialize();

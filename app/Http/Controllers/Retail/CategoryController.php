@@ -42,7 +42,7 @@ class CategoryController extends Controller
             'created_by' => $admin_data['id'],
             'displayorder' => $category_sort,
             'fansmanage_id' => $fansmanage_id,
-            'restaurant_id' => $admin_data['organization_id'],
+            'retail_id' => $admin_data['retail_id'],
         ];
         DB::beginTransaction();
         try {
@@ -70,7 +70,7 @@ class CategoryController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $category_name = $request->get('name');
         $where = [
-            'restaurant_id' => $admin_data['organization_id'],
+            'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
         return view('Retail/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
@@ -112,7 +112,7 @@ class CategoryController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('id');
         $where = [
-            'restaurant_id' => $admin_data['organization_id'],
+            'retail_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category = RetailCategory::getOne($where);
@@ -131,7 +131,7 @@ class CategoryController extends Controller
             $displayorder = '0';
         }
         $where = [
-            'restaurant_id' => $admin_data['organization_id'],
+            'retail_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category_data = [
