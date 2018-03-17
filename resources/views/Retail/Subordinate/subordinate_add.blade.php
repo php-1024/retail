@@ -42,7 +42,6 @@
                             <div class="panel-body">
                                 <form  method="post" class="form-horizontal" id="currentForm" action="{{ url('retail/ajax/subordinate_add_check') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="quick_rule_url" value="{{ url('retail/ajax/quick_rule') }}">
                                     <div id="rootwizard">
                                         <ul class="bwizard-steps">
                                             <li class="active"><a href="#tab1" data-toggle="tab"><span style="color:#999;" class="label">1</span> 填写基础资料</a></li>
@@ -50,7 +49,6 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab1">
-
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">手机号码</label>
                                                     <div class="col-sm-10"><input type="text" class="form-control" name="mobile"></div>
@@ -71,10 +69,9 @@
                                                     <div class="col-sm-10"><input type="text" class="form-control" name="realname"></div>
                                                 </div>
                                             </div>
-
                                             <ul class="pager wizard">
                                                 <li class="finish">
-                                                    <button type="button" id="addBtn" class="btn btn-success" onclick="return postForm();">完成&nbsp;&nbsp;<i class="icon-arrow-right"></i></button>
+                                                    <button type="button" id="addBtn" class="btn btn-success" onclick="return postForm();">创建账号&nbsp;&nbsp;<i class="icon-arrow-right"></i></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -103,25 +100,6 @@
 <script src="{{asset('public/Branch/library')}}/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        get_quick_rule('#role_id');
-
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
-    });
-    //获取上级程序节点
-    function get_quick_rule(obj) {
-        var url = $('#quick_rule_url').val();
-        var token = $('#_token').val();
-        var role_id = $(obj).val();
-        var data = {'_token': token, 'role_id': role_id}
-        $.post(url, data, function (response) {
-            $('#module_node_box').html(response);
-        });
-    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");
