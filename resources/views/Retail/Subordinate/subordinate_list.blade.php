@@ -62,9 +62,6 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>用户账号</th>
-                                        <th>用户角色</th>
-                                        <th>微信头像</th>
-                                        <th>微信昵称</th>
                                         <th>真实姓名</th>
                                         <th>手机号码</th>
                                         <th>用户状态</th>
@@ -77,13 +74,6 @@
                                         <tr>
                                             <td>{{ $val->id }}</td>
                                             <td>{{ $val->account }}</td>
-                                            <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
-                                            <td>
-                                                <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
-                                            </td>
-                                            <td>
-                                                时光取名叫无心
-                                            </td>
                                             <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@else <label class="label label-danger">未绑定</label> @endif</td>
                                             <td>{{ $val->mobile }}</td>
                                             <td>
