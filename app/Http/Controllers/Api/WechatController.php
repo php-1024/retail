@@ -224,7 +224,7 @@ class WechatController extends Controller{
                 'digest'=>'',
                 'show_cover_pic'=>1,
                 'content'=>$request->get('content_'.$i),
-                'content_source_url'=>$request->get('$origin_url_'.$i),
+                'content_source_url'=>$request->get('origin_url_'.$i),
             ]);
         }
         var_dump($data);
