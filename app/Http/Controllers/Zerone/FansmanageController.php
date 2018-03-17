@@ -127,19 +127,12 @@ class FansmanageController extends Controller{
                 OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'服务商审核通过：'.$oneFansmanage['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
             return response()->json(['data' => '申请通过', 'status' => '1']);
         }
     }
-
-
-
-
-
-
 
 
 
@@ -150,7 +143,6 @@ class FansmanageController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $list = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
-
         return view('Zerone/Fansmanage/fansmanage_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
     //注册提交商户数据
