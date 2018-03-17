@@ -46,13 +46,13 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">商户名称</label>
-                            <input type="text" id="proxy_name" name="company_name" value="{{ $search_data['company_name'] }}" placeholder="请输入服务商名称" class="form-control">
+                            <input type="text" id="proxy_name" name="fansmanage_name" value="{{ $search_data['fansmanage_name'] }}" placeholder="请输入服务商名称" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="amount">手机号码</label>
-                            <input type="text" id="proxy_owner_mobile" name="company_owner_mobile" value="{{ $search_data['company_owner_mobile'] }}" placeholder="手机号码" class="form-control">
+                            <input type="text" id="proxy_owner_mobile" name="fansmanage_owner_mobile" value="{{ $search_data['fansmanage_owner_mobile'] }}" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -70,7 +70,7 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                            <input type="hidden" id="company_examine" value="{{ url('zerone/ajax/company_examine') }}">
+                            <input type="hidden" id="fansmanage_examine" value="{{ url('zerone/ajax/fansmanage_examine') }}">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
@@ -89,12 +89,12 @@
                                 @foreach($list as $key=>$value)
                                 <tr>
                                     <td>{{$value->id}}</td>
-                                    <td>{{$value->company_name}}</td>
+                                    <td>{{$value->fansmanage_name}}</td>
                                     <td>{{$value->organization->organization_name}}</td>
-                                    <td>{{$value->company_owner}}</td>
+                                    <td>{{$value->fansmanage_owner}}</td>
 
-                                    <td>{{$value->company_owner_idcard}}</td>
-                                    <td>{{$value->company_owner_mobile}}</td>
+                                    <td>{{$value->fansmanage_owner_idcard}}</td>
+                                    <td>{{$value->fansmanage_owner_mobile}}</td>
                                     <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
                                         @elseif($value->status == 1)<label class="label label-primary">已通过</label>
                                         @elseif($value->status == -1)<label class="label label-danger">未通过</label>
@@ -166,7 +166,7 @@ $(function(){
 //审核
 function getEditForm(id,sta){
 
-    var url = $('#company_examine').val();
+    var url = $('#fansmanage_examine').val();
     var token = $('#_token').val();
     if(id==''){
         swal({

@@ -46,7 +46,7 @@
                         <div class="col-sm-1">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="button" onclick="location.href='companylist.html'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                <button type="button" onclick="location.href='fansmanagelist.html'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                             </div>
                         </div>
                         <div class="col-sm-1">

@@ -1,5 +1,5 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/company_examine_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_examine_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$info->id}}">
     <input type="hidden" name="sta" id="sta" value="{{$sta}}">
@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">服务商名称</label>
-                    <div class="col-sm-10">{{$info->company_name}}</div>
+                    <div class="col-sm-10">{{$info->fansmanage_name}}</div>
                 </div>
                 <div style="clear:both"></div>
             </div>
