@@ -309,7 +309,6 @@ class WechatController extends Controller{
 
         $data = [
             'articles'=>[
-                [
                     'title'=>$title,
                     'thumb_media_id'=>$thumb_media_id,
                     'author'=>$author,
@@ -317,7 +316,6 @@ class WechatController extends Controller{
                     'show_cover_pic'=>1,
                     'content'=>$content,
                     'content_source_url'=>$origin_url
-                ],
             ],
         ];
 
