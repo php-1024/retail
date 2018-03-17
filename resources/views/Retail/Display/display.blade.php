@@ -355,12 +355,12 @@
 
     //编辑店铺信息
     function EditStore() {
-        var _token = $("#_token").val();
-        console.log(_token);
+        var data = $("#store_edit").serialize();
+        console.log(data);
         $.post({
             url: 'http://o2o.01nnt.com/retail/ajax/store_edit',
             type: 'post',
-            data: {'_token':_token},
+            data: data,
             async: true,
             cache: true,
             contentType: true,
