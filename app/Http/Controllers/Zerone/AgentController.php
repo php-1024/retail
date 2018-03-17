@@ -393,7 +393,7 @@ class AgentController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
-        $list = Program::getPaginage([['complete_id',3]],15,'id');
+        $list = Program::getPaginage([['is_asset',0]],15,'id');
         foreach ($list as $key=>$value){
             $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$value['id']]]);
             $list[$key]['program_balance'] = $re['program_balance'];
@@ -494,6 +494,7 @@ class AgentController extends Controller{
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
+                    dd($value);
                     $program_id = Organization::getPluck([['id',$fansmanage_id]],'program_id')->first();
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
