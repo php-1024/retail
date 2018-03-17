@@ -288,8 +288,11 @@ class WechatController extends Controller{
         /*
          * 根据media_id查询相关图片数据
          */
-        $image_info = WechatImage::getOne([['media_id',$article_info['content']['media_id']]]);
-        dump($image_info);
+        $image_info = WechatImage::getOne([['media_id',$article_info['content']['articles'][0]['thumb_media_id']]]);
+
+        $info = $article_info['content']['articles'][0];
+        $info['image_url'] = $image_info['filename'];
+        dump($info);
 
         return view('Wechat/Catering/material_articles_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
