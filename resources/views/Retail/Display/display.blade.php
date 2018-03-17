@@ -250,7 +250,7 @@
 </section>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <input type="hidden" id="store_edit_check" value="{{url('retail/ajax/store_edit_check')}}">
+    <form class="form-horizontal" id="store_edit_check" method="post" action="{{url('retail/ajax/store_edit_check')}}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
         <div class="modal-dialog">
@@ -320,10 +320,11 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" onclick="EditStore('{{$admin_data['organization_id']}}')">确定</button>
+                    <button class="btn btn-success" type="button" onclick="EditStore('{{$admin_data['organization_id']}}')">确定</button>
                 </div>
             </div>
         </div>
+    </form>
 </div>
 
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
@@ -346,10 +347,9 @@
     });
     //编辑店铺信息
     function EditStore(){
-        var url = $("#store_edit_check").val();
-        var _token = $("#_token").val();
-        var organization_id = $("#organization_id").val();
-        var data = {'_token':_token,'organization_id':organization_id};
+        var target = $("#store_edit_check");
+        var url = target.attr("action");
+        var data = target.serialize();
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
