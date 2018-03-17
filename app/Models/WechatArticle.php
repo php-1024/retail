@@ -20,7 +20,6 @@ class WechatArticle extends Model{
         $model = new WechatArticle();
         $model->organization_id = $param['organization_id'];
         $model->title = $param['title'];
-        $model->image_id = $param['image_id'];
         $model->type = $param['type'];
         $model->media_id = $param['media_id'];
         $model->content = $param['content'];
