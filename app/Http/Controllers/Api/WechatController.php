@@ -43,6 +43,7 @@ class WechatController extends Controller{
         return view('Wechat/Catering/store_auth',['url'=>$url,'wechat_info'=>$wechat_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
+    /**************************************************************************图文素材开始*********************************************************************************/
     /*
      * 图片素材
      */
@@ -286,7 +287,9 @@ class WechatController extends Controller{
         $info = $article_info['content']['articles'][0];
         return view('Wechat/Catering/material_article_edit',['info'=>$info,'id'=>$id,'image_info'=>$image_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-
+    /*
+     * 编辑单条图文数据提交
+     */
     public function material_article_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -372,7 +375,9 @@ class WechatController extends Controller{
         return view('Wechat/Catering/material_articles_edit',['id'=>$id,'num'=>$num,'articles'=>$articles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-
+    /*
+     * 编辑多条图文数据提交
+     */
     public function material_articles_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -433,6 +438,11 @@ class WechatController extends Controller{
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
         return view('Wechat/Catering/material_image_select',['list'=>$list,'i'=>$i]);
     }
+    /**************************************************************************图文素材结束*********************************************************************************/
+
+
+
+
 
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
@@ -550,6 +560,7 @@ class WechatController extends Controller{
         */
     }
 
+    /**************************************************************************接收推送消息及回复开始*********************************************************************************/
     /*
      * 网页授权链接回调函数
      */
@@ -681,13 +692,6 @@ class WechatController extends Controller{
         }
     }
 
-    //授权链接
-    public function auth(){
-        $url = \Wechat::get_auth_url();
-        echo "<a href='".$url."'>授权入口</a>";
-        //header('location:'.$url);
-    }
-
     //授权回调链接
     public function redirect(Request $request){
         $zerone_param = $_GET['zerone_param'];//中间件产生的管理员数据参数
@@ -744,5 +748,6 @@ class WechatController extends Controller{
         ];
         WechatAuthorizerInfo::addAuthorizerInfo($data);
     }
+    /**************************************************************************接收推送消息及回复结束*********************************************************************************/
 }
 ?>
