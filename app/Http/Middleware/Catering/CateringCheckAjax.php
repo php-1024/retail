@@ -649,6 +649,7 @@ s
 
     public function checkMaterialArticlesAdd($request){
         $num = $request->input('num');
+        dump($num);
         for($i=1;$i<=$num;$i++){
             if(empty($request->input('img_id_'.$i))){
                 return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
