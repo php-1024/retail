@@ -570,8 +570,8 @@ class AgentController extends Controller{
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
-                    dd($Assets);
                     if(!empty($Assets)){//如果存在
+                        dd($Assets);
                         $program_balance = $Assets->program_balance + $number;//剩余数量
                         $program_used_num = $Assets->program_used_num - $number;//使用数量
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
