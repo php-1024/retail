@@ -394,7 +394,6 @@ class AgentController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
         $list = Program::getPaginage([['is_asset','1']],15,'id');
-        dump($list);
         foreach ($list as $key=>$value){
             $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$value['id']]]);
             $list[$key]['program_balance'] = $re['program_balance'];
