@@ -109,8 +109,8 @@ class FansmanageController extends Controller{
 
                 $acinfodata = [
                     'account_id'=>$account_id,
-                    'realname'=>$realname,
-                    'idcard'=>$idcard
+                    'realname'  =>$realname,
+                    'idcard'    =>$idcard
                 ];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
@@ -121,12 +121,13 @@ class FansmanageController extends Controller{
                     'fansmanage_owner_mobile'=>$oneFansmanage['fansmanage_owner_mobile']
                 ];
 
-                OrganizationFansmanageinfo::addOrganizationfansmanageinfo($fansmanageinfo);  //添加到服务商组织信息表
+                OrganizationFansmanageinfo::addOrganizationFansmanageinfo($fansmanageinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$fansmanagelist['fansmanage_name']);//保存操作记录
+                OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'服务商审核通过：'.$oneFansmanage['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
