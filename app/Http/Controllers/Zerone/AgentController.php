@@ -427,7 +427,7 @@ class AgentController extends Controller {
             $data = Organization::getList([['parent_id', $value['id']]]); //商户信息下级店铺信息
             $list[$key]['store'] =  count($data); //计算店铺数量
             $list[$key]['program_name'] = Program::getPluck([['id',$value['asset_id']]],'program_name')->first();//程序名字
-            $list[$key]['program_balance'] = OrganizationAssets::getPluck([['program_id',$value['asset_id']],['organization',$value['id']]],'program_balance')->first();//程序剩余数量
+            $list[$key]['program_balance'] = OrganizationAssets::getPluck([['program_id',$value['asset_id']],['organization_id',$value['id']]],'program_balance')->first();//程序剩余数量
         }
         dump($list);
         return view('Zerone/Agent/agent_fansmanage', ['organization_name' => $organization_name, 'organization_id' => $organization_id, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
