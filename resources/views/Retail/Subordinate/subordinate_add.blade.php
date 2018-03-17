@@ -46,7 +46,6 @@
                                     <div id="rootwizard">
                                         <ul class="bwizard-steps">
                                             <li class="active"><a href="#tab1" data-toggle="tab"><span style="color:#999;" class="label">1</span> 填写基础资料</a></li>
-                                            <li class=""><a href="#tab2" data-toggle="tab"><span style="color:#999;" class="label">2</span> 指派权限</a></li>
                                         </ul>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="tab-content">
@@ -71,41 +70,9 @@
                                                     <label class="col-sm-2 control-label">真实姓名</label>
                                                     <div class="col-sm-10"><input type="text" class="form-control" name="realname"></div>
                                                 </div>
-
-                                            </div>
-                                            <div class="tab-pane" id="tab2">
-
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label">权限角色</label>
-                                                    <div class="col-sm-3">
-                                                        <select class="form-control m-b" name="role_id" id="role_id">
-                                                            <option value="0">请选择</option>
-                                                            @foreach($role_list as $k=>$v)
-                                                                <option value="{{ $v->id }}">{{ $v->role_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <button type="button" class="btn btn-success" onclick="get_quick_rule('#role_id');"><i class="icon-arrow-down"></i>&nbsp;&nbsp;快速授权</button>
-                                                    </div>
-                                                </div>
-                                                <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                                <div class="form-group" id="module_node_box"></div>
-                                                <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label">安全密码</label>
-                                                    <div class="col-sm-10"><input type="text" class="form-control" name="safe_password"></div>
-                                                </div>
-
                                             </div>
 
                                             <ul class="pager wizard">
-
-                                                <li class="previous"><button type="button" class="btn btn-success"><i class="icon-arrow-left"></i>&nbsp;&nbsp;上一步</button></li>
-
-                                                <li class="next disabled hidden"><button type="button" class="btn btn-success">下一步&nbsp;&nbsp;<i class="icon-arrow-right"></i></button></li>
                                                 <li class="finish">
                                                     <button type="button" id="addBtn" class="btn btn-success" onclick="return postForm();">完成&nbsp;&nbsp;<i class="icon-arrow-right"></i></button>
                                                 </li>
