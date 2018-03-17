@@ -290,11 +290,10 @@ class WechatController extends Controller{
         $image_info = WechatImage::getOne([['media_id',$article_info['content']['articles'][0]['thumb_media_id']]]);
 
         $info = $article_info['content']['articles'][0];
-        $info['id'] = $id;
-        $info['image_url'] = $image_info['filename'];
 
 
-        return view('Wechat/Catering/material_article_edit',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+        return view('Wechat/Catering/material_article_edit',['info'=>$info,'id'=>$id,'image_info'=>$image_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
