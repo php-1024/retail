@@ -122,9 +122,41 @@ class DisplayController extends Controller
     }
 
     //店铺信息编辑检测
-    public function store_edit(Request $request)
+    public function store_edit_check(Request $request)
     {
-        dd($request);
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $goods_id = $request->get('goods_id');
+        $file = $request->file('upload_thumb');
+        if ($file->isValid()) {
+            //检验文件是否有效
+            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
+            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
+            $path = $file->move(base_path() . '/uploads/catering/', $new_name);   //$path上传后的文件路径
+            $file_path =  'uploads/catering/'.$new_name;
+            $goods_thumb = [
+                'goods_id' => $goods_id,
+                'thumb' => $file_path,
+            ];
+            DB::beginTransaction();
+            try {
+                RetailGoodsThumb::addGoodsThumb($goods_thumb);
+                //添加操作日志
+                if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
+                } else {//分店本人操作记录
+                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
+
+        } else {
+            return response()->json(['status' => '0']);
+        }
     }
 }
 
