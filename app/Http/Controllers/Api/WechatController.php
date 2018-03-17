@@ -319,12 +319,26 @@ class WechatController extends Controller{
             ],
         ];
 
+        $adata = [
+            'articles'=>[
+                [
+                    'title'=>$title,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'author'=>$author,
+                    'digest'=>$digest,
+                    'show_cover_pic'=>1,
+                    'content'=>$content,
+                    'content_source_url'=>$origin_url
+                ],
+            ],
+        ];
+
         $re = \Wechat::update_meterial($auth_info['authorizer_access_token'],$article_info['media_id'],0,$data);
 
         if($re['errcode'] == '0'){
             $zdata = [
                 'title'=>$title,
-                'content'=>serialize($data),
+                'content'=>serialize($adata),
             ];
             WechatArticle::editWechatArticle([['id',$id]],$zdata);
             return response()->json(['data'=>'编辑图文素材成功','status' => '1']);
