@@ -329,7 +329,7 @@ class WechatController extends Controller{
                 'title'=>$title,
                 'content'=>serialize($data),
             ];
-            WechatArticle::addWechatArticle($zdata);
+            WechatArticle::editWechatArticle([['id',$id]],$zdata);
             return response()->json(['data'=>'编辑图文素材成功','status' => '0']);
         }else{
             return response()->json(['data'=>'编辑图文素材失败','status' => '0']);
