@@ -383,6 +383,7 @@ class WechatController extends Controller{
         $flag = true;
 
         $article_info = WechatArticle::getOne([['id',$id]]);
+        var_dump($article_info);
         $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
 
         for($i=1;$i<=$num;$i++){
