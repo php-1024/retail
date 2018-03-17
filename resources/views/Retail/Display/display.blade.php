@@ -355,7 +355,7 @@
 
     //编辑店铺信息
     function EditStore() {
-        var _token = $( "#_token" ).val();
+        var _token = $("#_token").val();
         console.log(_token);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit') }}',
