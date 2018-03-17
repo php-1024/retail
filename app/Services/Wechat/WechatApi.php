@@ -443,15 +443,12 @@ class WechatApi{
      */
     public function update_meterial($authorizer_access_token,$media_id,$index,$content_data){
         $url = 'https://api.weixin.qq.com/cgi-bin/material/update_news?access_token='.$authorizer_access_token;
-
         $data = $content_data;
         $data['media_id'] = $media_id;
         $data['index'] = $index;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-        var_dump($data);
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
-        dump($re);
         return $re;
     }
 
