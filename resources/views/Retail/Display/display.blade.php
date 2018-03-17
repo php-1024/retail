@@ -357,9 +357,6 @@
     function EditStore() {
         var formData = new FormData($( "#store_edit" )[0]);
         var _token = $('#_token').val();
-//        formData.append('_token',_token);
-        console.log(_token);
-        console.log(formData);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
