@@ -112,7 +112,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">原文地址</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" name="origin_url" value="@if(!empty($content_source_url)){{$info['content_source_url']}}@endif">
+                                                    <input type="text" class="form-control" id="input-id-1" name="origin_url" value="@if(!empty($info['content_source_url'])){{$info['content_source_url']}}@endif">
                                                 </div>
                                             </div>
 

@@ -96,7 +96,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">标题</label>
                                                         <div class="col-sm-9">
-                                                            <input autocomplete="off" type="text" class="form-control" name="title_{{$key+1}}" value="">
+                                                            <input autocomplete="off" type="text" class="form-control" name="title_{{$key+1}}" value="{{$val['title']}}">
                                                         </div>
                                                     </div>
 
@@ -104,7 +104,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">作者</label>
                                                         <div class="col-sm-9">
-                                                            <input autocomplete="off" type="text" class="form-control" name="author_{{$key+1}}" value="">
+                                                            <input autocomplete="off" type="text" class="form-control" name="author_{{$key+1}}" value="{{$val['author']}}">
                                                         </div>
                                                     </div>
 
@@ -112,7 +112,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">原文地址</label>
                                                         <div class="col-sm-9">
-                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_{{$key+1}}" value="">
+                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_{{$key+1}}" value="@if(!empty($val['content_source_url'])){{$info['content_source_url']}}@endif">
                                                         </div>
                                                     </div>
 
@@ -120,7 +120,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-2 control-label">正文</div>
                                                         <div class="col-sm-9">
-                                                            <textarea id="form-content1" class="editor" cols="30" name="content_{{$key+1}}" rows="10"> </textarea>
+                                                            <textarea id="form-content1" class="editor" cols="30" name="content_{{$key+1}}" rows="10">$val['content'] </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
