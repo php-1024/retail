@@ -489,7 +489,6 @@ class AgentController extends Controller{
         $status = $request->status;//是否消耗程序数量
         $fansmanage_id = $request->fansmanage_id;//商户id
         $fansmanage_name = Organization::getPluck([['id',$fansmanage_id]],'organization_name')->first();
-        dd($fansmanage_name);
         DB::beginTransaction();
         try{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
@@ -570,6 +569,7 @@ class AgentController extends Controller{
                 }
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
+                    dd($number);
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
                     if(!empty($Assets)){//如果存在
                         $program_balance = $Assets->program_balance + $number;//剩余数量
