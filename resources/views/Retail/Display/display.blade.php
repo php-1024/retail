@@ -358,7 +358,7 @@
         var _token = $("#_token").val();
         console.log(_token);
         $.post({
-            url: '{{ url('retail/ajax/store_edit') }}',
+            url: 'http://o2o.01nnt.com/retail/ajax/store_edit',
             type: 'post',
             data: {'_token':_token},
             async: true,
