@@ -187,7 +187,7 @@ class WechatController extends Controller{
                 'content'=>serialize($data),
             ];
             WechatArticle::addWechatArticle($zdata);
-            return response()->json(['data'=>'上传图文素材成功','status' => '0']);
+            return response()->json(['data'=>'上传图文素材成功','status' => '1']);
         }else{
             return response()->json(['data'=>'上传图文素材失败','status' => '0']);
         }
@@ -240,7 +240,7 @@ class WechatController extends Controller{
                 'content'=>serialize($data),
             ];
             WechatArticle::addWechatArticle($zdata);
-            return response()->json(['data'=>'上传图文素材成功','status' => '0']);
+            return response()->json(['data'=>'上传图文素材成功','status' => '1']);
         }else{
             return response()->json(['data'=>'上传图文素材失败','status' => '0']);
         }
