@@ -288,9 +288,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">分店名称</label>
+                        <label class="col-sm-2 text-right">店铺名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="刘记鸡煲王【龙岗店】" name="store_name" placeholder="店铺名称" class="form-control">
+                            <input type="text" value="{{$organization->organization_name}}" name="organization_name" placeholder="店铺名称" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -300,7 +300,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            <input type="text" value="张老三" name="owner" placeholder="负责人" class="form-control">
+                            <input type="text" value="{{$organization->OrganizationRetailinfo->retail_owner}}" name="retail_owner" placeholder="负责人" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -309,7 +309,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="13123456789" name="mobile" placeholder="手机号码" class="form-control">
+                            <input type="text" value="{{$organization->OrganizationRetailinfo->retail_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -318,7 +318,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺LOGO</label>
                         <div class="col-sm-10">
-                            <input type="file" name="retail_logo" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="file" name="retail_logo" value="{{$organization->OrganizationRetailinfo->retail_logo}}" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -327,7 +327,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺地址</label>
                         <div class="col-sm-10">
-                            <input type="text" value="广东省深圳市龙岗区万汇大厦1606" name="address" placeholder="店铺地址" class="form-control">
+                            <input type="text" value="{{$organization->OrganizationRetailinfo->retail_address}}" name="retail_address" placeholder="店铺地址" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
