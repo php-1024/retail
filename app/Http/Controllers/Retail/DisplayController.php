@@ -153,7 +153,7 @@ class DisplayController extends Controller
             ];
             DB::beginTransaction();
             try {
-                Organization::editOrganization([['id',$organization_id]],[['organization_name'=>$organization_name]]);
+                Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
                 OrganizationRetailinfo::editOrganizationRetailinfo([['id'=>$organization_id]],$retail_info);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
@@ -163,7 +163,6 @@ class DisplayController extends Controller
                 }
                 DB::commit();
             } catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '修改店铺信息失败，请检查', 'status' => '0']);
             }
