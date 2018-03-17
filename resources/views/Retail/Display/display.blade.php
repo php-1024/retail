@@ -261,7 +261,7 @@
 
 {{--编辑店铺信息--}}
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" role="form" id="store_edit" method="post" action="">
+    <form class="form-horizontal" role="form" id="store_edit" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
         <div class="modal-dialog">
@@ -360,7 +360,7 @@
         var formData = $( "#store_edit" ).serialize();
         console.log(formData);
         $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}' ,
+            url: '{{ url('retail/ajax/store_edit_check') }}',
             type: 'POST',
             data: formData,
             async: false,
