@@ -43,60 +43,69 @@
                                     <button id="editBtn" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit "></i>&nbsp;编辑</button>
                                 </header>
                                 <div class="panel-body">
-                                        <div class="form-group clearfix text-center m-t">
-                                            <div class="inline">
-                                                <div class="thumb-lg" >
-                                                    <img src="{{asset('public/Branch/images/m0.jpg')}}" class="img-circle" alt="...">
-                                                </div>
+                                    <div class="form-group clearfix text-center m-t">
+                                        <div class="inline">
+                                            <div class="thumb-lg" >
+                                                <img src="{{asset('public/Branch/images/m0.jpg')}}" class="img-circle" alt="...">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">模式</label>
-                                            <div class="col-sm-8">
-                                                <div>
-                                                    <label class="label label-success m-t-xs">
-                                                        餐饮系统【先吃后付】
-                                                    </label>
-                                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 text-right" for="input-id-1">模式</label>
+                                        <div class="col-sm-8">
+                                            <div>
+                                                <label class="label label-success m-t-xs">
+                                                    餐饮系统【先吃后付】
+                                                </label>
                                             </div>
                                         </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">分店名称</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">刘记鸡煲王【龙岗店】</label>
                                             </div>
                                         </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
+
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">类型</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-success">主店</label>
                                             </div>
                                         </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
+
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">张老三</label>
                                             </div>
                                         </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
+
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">13123456789</label>
                                             </div>
                                         </div>
 
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">状态</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-success">正常运营</label>
                                             </div>
                                         </div>
 
+                                    <div style="clear:both;"></div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">店铺地址</label>
@@ -105,8 +114,8 @@
                                             </div>
                                         </div>
 
-
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                             </section>
                         </div>
