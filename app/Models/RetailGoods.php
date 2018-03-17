@@ -15,27 +15,27 @@ class RetailGoods extends Model{
 
     //和创建者account表多对一的关系
     public function create_account(){
-        return $this->belongsto('App\Models\Account','created_by');
+        return $this->belongsto('App\Models\Account','created_by','id');
     }
 
-    //和创建者catering_category表一对一的关系
+    //和创建者catering_category多对一的关系
     public function category(){
-        return $this->belongsTo('App\Models\RetailCategory','category_id');
+        return $this->belongsTo('App\Models\RetailCategory','category_id','id');
     }
 
     //和organization表一对一的关系
     public function organization(){
-        return $this->belongsto('App\Models\Organization','restaurant_id','id');
+        return $this->belongsto('App\Models\Organization','retail_id','id');
     }
 
     //和RetailGoodsThumb表一对多的关系
     public function RetailGoodsThumb(){
-        return $this->hasMany('App\Models\RetailGoodsThumb','goods_id');
+        return $this->hasMany('App\Models\RetailGoodsThumb','goods_id','id');
     }
 
-    //和RetailOrderGoods表一对一的关系
-    public function RetailOrderGoods(){
-        return $this->belongsTo('App\Models\RetailOrderGoods','goods_id');
+    //和RetailOrder表多对多的关系
+    public function RetailOrder(){
+        return $this->belongsToMany('App\Models\RetailOrder','retail_order_goods','goods_id','order_id');
     }
 
     //获取单条餐饮商品信息

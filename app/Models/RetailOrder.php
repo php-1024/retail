@@ -15,12 +15,12 @@ class RetailOrder extends Model{
 
     //和User表多对一的关系
     public function User(){
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\User','user_id','id');
     }
 
     //和RetailOrderGoods表一对多的关系
     public function RetailOrderGoods(){
-        return $this->hasMany('App\Models\RetailOrderGoods','order_id');
+        return $this->hasMany('App\Models\RetailOrderGoods','order_id','id');
     }
 
     public static function getOne($where)

@@ -13,14 +13,10 @@ class RetailOrderGoods extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和RetailGoods表一对一的关系
-    public function RetailGoods(){
-        return $this->hasOne('App\Models\RetailGoods','goods_id');
-    }
 
     //和RetailOrder表多对一的关系
     public function RetailOrder(){
-        return $this->belongsTo('App\Models\RetailOrder', 'order_id');
+        return $this->belongsTo('App\Models\RetailOrder', 'order_id','id');
     }
 
     public static function getOne($where)
