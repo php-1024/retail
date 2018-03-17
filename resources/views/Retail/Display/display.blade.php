@@ -335,6 +335,7 @@
 </div>
 {{--编辑店铺信息--}}
 
+
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
