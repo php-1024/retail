@@ -79,6 +79,10 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "api/ajax/material_articles_edit_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticlesEdit($request);
+                return self::format_response($re,$next);
+                break;
 
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
@@ -119,12 +123,13 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    public function checkLoginAndRuleAndMaterialArticleEdit($request){
+    //检测登陆，权限，和多条图文修改
+    public function checkLoginAndRuleAndMaterialArticlesEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -132,6 +137,21 @@ class CateringCheckAjax
             }
         }
     }
+    //检测登陆，权限，和图文修改
+    public function checkLoginAndRuleAndMaterialArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限和上传多条图文素材
     public function checkLoginAndRuleAndMaterialArticleAdd($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -145,6 +165,7 @@ class CateringCheckAjax
             }
         }
     }
+    //检测登陆，权限和上传图文素材
     public function checkLoginAndRuleAndMaterialArticlesAdd($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -649,6 +670,7 @@ class CateringCheckAjax
         return self::res(1,$request);
     }
 
+    //检测编辑多条图文素材
     public function checkMaterialArticleEdit($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
@@ -671,6 +693,34 @@ class CateringCheckAjax
         return self::res(1,$request);
     }
 
+    //检测编辑单条图文素材
+    public function checkMaterialArticlesEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
+
+    //检测上传单条图文素材
     public function checkMaterialArticleAdd($request){
         if(empty($request->input('img_id'))){
             return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
@@ -691,6 +741,7 @@ class CateringCheckAjax
         return self::res(1,$request);
     }
 
+    //检测上传多条图文素材
     public function checkMaterialArticlesAdd($request){
         $num = $request->input('num');
         for($i=1;$i<=$num;$i++){
