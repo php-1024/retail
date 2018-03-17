@@ -364,8 +364,16 @@ class WechatController extends Controller{
         $article_info['content'] = unserialize( $article_info['content'] );
         $article_info = $article_info->toArray();
         $articles = $article_info['content']['articles'];
-        dump($articles);
-        return view('Wechat/Catering/material_articles_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+        foreach($articles as $key=>$val){
+            $image_info = WechatImage::getOne([['media_id',$val['thumb_media_id']]])->toArray();
+            $articles[$key]['image_info'] = $image_info;
+            unset($image_info);
+        }
+
+        $num = count($article_info);
+
+        return view('Wechat/Catering/material_articles_edit',['id'=>$id,'num'=>$num,'articles'=>$articles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
