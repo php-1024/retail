@@ -232,7 +232,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 },function(){
-                    window.location.href = $('#material_article_url').val();
+                   window.location.reload();
                 });
             }else{
                 swal({
