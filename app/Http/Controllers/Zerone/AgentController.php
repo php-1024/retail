@@ -576,8 +576,9 @@ class AgentController extends Controller{
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
                     }else{
                         $data = ['program_id'=>$asset_id,'organization_id '=>$organization_id,'program_balance'=>$number,'program_used_num'=>'0'];
-                        dd($data);
                        OrganizationAssets::addAssets($data);
+                        dd($data);
+
                     }
                     $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>'1','to_organization_id'=>$organization_id,'program_id'=>$asset_id,'status'=>'2','number'=>$number];
                     //添加操作日志
