@@ -727,11 +727,8 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('subordinate_edit_check', 'Retail\SubordinateController@subordinate_edit_check')->middleware('RetailCheckAjax');//下属信息编辑检测
         Route::post('subordinate_lock', 'Retail\SubordinateController@subordinate_lock')->middleware('RetailCheckAjax');            //下属冻结检测
         Route::post('subordinate_delete', 'Retail\SubordinateController@subordinate_delete')->middleware('RetailCheckAjax');        //下属删除检测
-        Route::post('subordinate_authorize', 'Retail\SubordinateController@subordinate_authorize')->middleware('RetailCheckAjax');  //下属快速授权页面
-        Route::post('subordinate_authorize_check', 'Retail\SubordinateController@subordinate_authorize_check')->middleware('RetailCheckAjax');//下属快速授权检测
         Route::post('subordinate_lock', 'Retail\SubordinateController@subordinate_lock')->middleware('RetailCheckAjax');            //下属冻结页面
         Route::post('subordinate_lock_check', 'Retail\SubordinateController@subordinate_lock_check')->middleware('RetailCheckAjax');//下属冻结检测
-        Route::post('selected_rule', 'Retail\SubordinateController@selected_rule')->middleware('RetailCheckAjax');                  //下属授权检测
 
         Route::post('category_add_check', 'Retail\CategoryController@category_add_check')->middleware('RetailCheckAjax');          //栏目添加检测
         Route::post('category_delete', 'Retail\CategoryController@category_delete')->middleware('RetailCheckAjax');          //栏目添加检测

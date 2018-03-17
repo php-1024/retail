@@ -67,7 +67,7 @@ class FansmanageController extends Controller{
         }elseif($status == 1){
 
             $oneagent = Organization::getOne([['id',$oneFansmanage['agent_id']]]);//查询商户推荐上级组织信息
-
+            dd($oneagent);
             $parent_id = $oneFansmanage['agent_id'];//零壹或者服务商organization_id
             $parent_tree = $oneagent['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
             $mobile = $oneFansmanage['fansmanage_owner_mobile'];//手机号码

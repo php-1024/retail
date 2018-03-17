@@ -62,9 +62,6 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>用户账号</th>
-                                        <th>用户角色</th>
-                                        <th>微信头像</th>
-                                        <th>微信昵称</th>
                                         <th>真实姓名</th>
                                         <th>手机号码</th>
                                         <th>用户状态</th>
@@ -77,13 +74,6 @@
                                         <tr>
                                             <td>{{ $val->id }}</td>
                                             <td>{{ $val->account }}</td>
-                                            <td>@foreach($val->account_roles as $k=>$v) {{$v->role_name}} @endforeach</td>
-                                            <td>
-                                                <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
-                                            </td>
-                                            <td>
-                                                时光取名叫无心
-                                            </td>
                                             <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@else <label class="label label-danger">未绑定</label> @endif</td>
                                             <td>{{ $val->mobile }}</td>
                                             <td>
@@ -96,7 +86,6 @@
                                             <td>{{ $val->created_at }}</td>
                                             <td>
                                                 <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                <button type="button" id="ruleBtn" class="btn  btn-xs btn-primary" onclick="getAuthorizeForm({{ $val->id }})"><i class="fa fa-certificate"></i>&nbsp;&nbsp;授权</button>
                                                 @if($val->status=='1')
                                                     <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
                                                 @else
@@ -176,42 +165,6 @@
             }
         });
     }
-    //获取用户信息，编辑密码框
-    function getAuthorizeForm(id){
-        var url = $('#subordinate_authorize_url').val();
-        var token = $('#_token').val();
-
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
     //获取用户信息，编辑密码框
     function getEditForm(id){
         var url = $('#subordinate_edit_url').val();
