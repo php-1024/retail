@@ -336,27 +336,28 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "确定",
                     },function(){
-                        //图片添加成功后异步刷新图片列表部分
-                        var url = '{{url('retail/ajax/goods_thumb')}}';//需要异步加载的页面
-                        var goods_id = $("#goods_id").val();
-                        var token = $("#_token").val();
-                        var data = {'goods_id':goods_id,'_token':token};
-                        $.post(url,data,function(response){
-                            if(response.status=='-1'){
-                                swal({
-                                    title: "提示信息",
-                                    text: response.data,
-                                    confirmButtonColor: "#DD6B55",
-                                    confirmButtonText: "确定",
-                                },function(){
-                                    window.location.reload();
-                                });
-                                return;
-                            }else{
-                                $('#thumb_content').html(response);
-                                $('#myModal_thumb').modal('hide');
-                            }
-                        });
+                        alert('123');
+                        {{--//图片添加成功后异步刷新图片列表部分--}}
+                        {{--var url = '{{url('retail/ajax/goods_thumb')}}';//需要异步加载的页面--}}
+                        {{--var goods_id = $("#goods_id").val();--}}
+                        {{--var token = $("#_token").val();--}}
+                        {{--var data = {'goods_id':goods_id,'_token':token};--}}
+                        {{--$.post(url,data,function(response){--}}
+                            {{--if(response.status=='-1'){--}}
+                                {{--swal({--}}
+                                    {{--title: "提示信息",--}}
+                                    {{--text: response.data,--}}
+                                    {{--confirmButtonColor: "#DD6B55",--}}
+                                    {{--confirmButtonText: "确定",--}}
+                                {{--},function(){--}}
+                                    {{--window.location.reload();--}}
+                                {{--});--}}
+                                {{--return;--}}
+                            {{--}else{--}}
+                                {{--$('#thumb_content').html(response);--}}
+                                {{--$('#myModal_thumb').modal('hide');--}}
+                            {{--}--}}
+                        {{--});--}}
                     });
                 }else{
                     swal({
