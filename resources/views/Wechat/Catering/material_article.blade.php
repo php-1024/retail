@@ -94,7 +94,7 @@
                                                 </td>
                                                 <td>{{$val->created_at}}</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='@if($val->type == '1'){{ url('api/catering/material_article_edit')}}@else{{ url('api/catering/material_articles_edit')}}@endif'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                    <button class="btn btn-info btn-xs" onclick="location.href='@if($val->type == '1'){{ url('api/catering/material_article_edit?id='.$val->id)}}@else{{ url('api/catering/material_articles_edit?id='.$val->id)}}@endif'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                     <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="return getDeleteComfirmForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                 </td>
                                             </tr>

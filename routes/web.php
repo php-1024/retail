@@ -785,6 +785,8 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('material_article','Api\WechatController@material_article')->middleware('CateringCheck');//图文素材列表
         Route::any('material_article_add','Api\WechatController@material_article_add')->middleware('CateringCheck');//图文素材列表
         Route::any('material_articles_add','Api\WechatController@material_articles_add')->middleware('CateringCheck');//添加多条图文列表
+        Route::any('material_article_edit','Api\WechatController@material_article_edit')->middleware('CateringCheck');//添加多条图文列表
+        Route::any('material_articles_edit','Api\WechatController@material_articles_edit')->middleware('CateringCheck');//添加多条图文列表
     });
 
     //微信接口中页面使用Ajax的部分
