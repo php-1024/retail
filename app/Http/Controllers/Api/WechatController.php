@@ -150,8 +150,6 @@ class WechatController extends Controller{
      */
     public function material_article_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
         $img_id = $request->input('img_id');
@@ -213,11 +211,23 @@ class WechatController extends Controller{
      */
     public function material_articles_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-
+        $num = $request->get('num');
+        $data['articles'] = [];
+        for($i=1;$i<=$num;$i++){
+            array_push($data['articles'],[
+                'title'=>$request->get('title_'.$i),
+                'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
+                'author'=>$request->get('author_'.$i),
+                'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
+                'digest'=>'',
+                'show_cover_pic'=>1,
+                'content'=>$request->get('content_'.$i),
+                'content_source_url'=>$request->get('origin_url_'.$i),
+            ]);
+        }
+        var_dump($data);
     }
     /*
      * 图片选择页面
