@@ -355,12 +355,12 @@
 
     //编辑店铺信息
     function EditStore() {
-        var formData = $( "#_token" ).val();
+        var _token = $( "#_token" ).val();
         console.log(formData);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
-            data: formData,
+            data: {'_token':_token},
             async: true,
             cache: true,
             contentType: true,
