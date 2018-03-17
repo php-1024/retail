@@ -120,7 +120,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-2 control-label">正文</div>
                                                         <div class="col-sm-9">
-                                                            <textarea id="form-content1" class="editor" cols="30" name="content_{{$key+1}}" rows="10">{{$val['content']}} </textarea>
+                                                            <textarea id="form-content{{$key+1}}" class="editor" cols="30" name="content_{{$key+1}}" rows="10">{{$val['content']}} </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -232,27 +232,20 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#form-content1').trumbowyg({
-
-            lang: 'fr',
-
-            closable: false,
-
-            mobile: true,
-
-            fixedBtnPane: true,
-
-            fixedFullWidth: true,
-
-            semantic: true,
-
-            resetCss: true,
-
-            autoAjustHeight: true,
-
-            autogrow: true
-
-        });
+        var num = $('#num').val();
+        for(var i = 1 ; i<=num ; i++){
+            $('#form-content'+i).trumbowyg({
+                lang: 'fr',
+                closable: false,
+                mobile: true,
+                fixedBtnPane: true,
+                fixedFullWidth: true,
+                semantic: true,
+                resetCss: true,
+                autoAjustHeight: true,
+                autogrow: true
+            });
+        }
 
         $("#addBtn").click(function(){
 
