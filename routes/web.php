@@ -795,7 +795,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('material_image_delete_check', 'Api\WechatController@material_image_delete_check')->middleware('CateringCheckAjax');//检测删除图片素材数据
         Route::any('material_image_select', 'Api\WechatController@material_image_select')->middleware('CateringCheckAjax');//弹出图片选择框
         Route::any('material_article_add_check','Api\WechatController@material_article_add_check')->middleware('CateringCheckAjax');//添加单条图文检测
-        Route::any('material_articles_add_check','Api\WechatController@material_articles_add_check')->middleware('CateringCheck');//添加多条图文检测
+        Route::any('material_articles_add_check','Api\WechatController@material_articles_add_check')->middleware('CateringCheckAjax');//添加多条图文检测
     });
 });
 /*********************接口路由*************************/
