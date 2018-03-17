@@ -57,24 +57,25 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">添加多条图文</h2>
+                                <h2 class="font-thin m-b">编辑多条图文</h2>
                                 <div class="row row-sm">
                                     <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('api/catering/material_article')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
-                                    <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_articles_add_check') }}">
+                                    <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_articles_edit_check') }}">
                                         <input autocomplete="off" type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                         <input autocomplete="off" type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
                                         <input autocomplete="off" type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                        <input  autocomplete="off" type="hidden" name="num" id="num" value="1">
+                                        <input autocomplete="off" type="hidden" name="id" id="id" value="{{csrf_token()}}">
+                                        <input  autocomplete="off" type="hidden" name="num" id="num" value="{{$num}}">
                                         <div class="panel-group m-b" id="target_box" >
-
+                                            @foreach($articles as $key=>$val)
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#target_box" href="#collapse1">
-                                                        添加图文
+                                                        编辑图文{{ $key+1 }}
                                                     </a>
                                                 </div>
                                                 <div id="collapse1" class="panel-collapse collapse in" style="height: auto;">
@@ -124,6 +125,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endforeach
                                         </div>
 
                                         </div>
@@ -149,7 +151,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#target_box" href="#collapse{target_num}">
-                添加图文{target_num}
+                编辑图文{target_num}
             </a>
         </div>
         <div id="collapse{target_num}" class="panel-collapse collapse in" style="height: auto;">
