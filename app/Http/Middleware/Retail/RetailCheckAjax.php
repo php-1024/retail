@@ -31,8 +31,6 @@ class RetailCheckAjax{
             case "retail/ajax/goods_thumb":             //商品规格页面
             case "retail/ajax/goods_delete":            //商品删除弹窗
             case "retail/ajax/order_status":            //订单状态修改确认弹窗
-
-            case "retail/ajax/store_edit":              //店铺信息编辑弹窗页面
             case "retail/ajax/upload_thumb_check":    //上传图片
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -55,6 +53,7 @@ class RetailCheckAjax{
                 return self::format_response($re, $next);
                 break;
 
+            case "retail/ajax/store_edit_check":              //店铺信息编辑弹窗页面
             case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
             case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
