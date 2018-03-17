@@ -33,6 +33,8 @@ class SubordinateController extends Controller
         $module_node_list = Module::getListProgram(5, [], 0, 'id');//获取当前系统的所有模块和节点
         $selected_modules = [];//选中的模块
         $selected_nodes = [];//选中的节点
+        dump($role_list);
+        dump($module_node_list);
         return view('Retail/Subordinate/subordinate_add',['selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules,'module_node_list'=>$module_node_list,'role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
