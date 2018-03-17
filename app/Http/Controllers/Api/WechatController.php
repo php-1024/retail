@@ -305,6 +305,7 @@ class WechatController extends Controller{
         $content = $request->input('content');
 
         $article_info = WechatArticle::getOne([['id',$id]]);
+        dump($article_info);
         $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
         dump($auth_info);
 
