@@ -347,9 +347,8 @@
     //编辑店铺信息
     function EditStore() {
         var formData = new FormData($( "#store_edit" )[0]);
-        var _token = $('#_token').val();
         $.ajax({
-            url: '{{ url('retail/ajax/store_edit') }}',
+            url: '{{ url('retail/ajax/store_edit_check') }}',
             type: 'post',
             data: formData,
             async: false,
