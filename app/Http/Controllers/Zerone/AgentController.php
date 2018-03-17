@@ -423,6 +423,7 @@ class AgentController extends Controller {
         $organization_id = $request->organization_id; //服务商id
         $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
         $list = Organization::getPaginageFansmanage([['parent_id', $organization_id]], '10', 'id');
+        dump($list);
         return view('Zerone/Agent/agent_fansmanage', ['organization_name' => $organization_name, 'organization_id' => $organization_id, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
     //商户划拨归属Ajax显示页面--划入
