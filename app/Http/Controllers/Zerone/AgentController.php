@@ -492,6 +492,7 @@ class AgentController extends Controller{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
             Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
+            dd($datastore);
             if(is_array($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
                     $asset_id = $value->program_id;//店铺用的程序id
