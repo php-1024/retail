@@ -439,6 +439,19 @@ class WechatApi{
     }
 
     /*
+     * 修改永久素材
+     */
+    public function update_meterial($authorizer_access_token,$media_id,$index,$data){
+        $url = 'https://api.weixin.qq.com/cgi-bin/material/update_news?access_token='.$authorizer_access_token;
+        $data['media_id'] = $media_id;
+        $data['index'] = $index;
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        return $re;
+    }
+
+    /*
      * 添加图文素材
      */
     public function upload_article($authorizer_access_token,$data){

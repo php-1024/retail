@@ -74,6 +74,13 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "api/ajax/material_article_edit_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticleEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+
+
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
@@ -112,6 +119,19 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    public function checkLoginAndRuleAndMaterialArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     public function checkLoginAndRuleAndMaterialArticleAdd($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -625,6 +645,28 @@ class CateringCheckAjax
         }
         if(empty($request->input('adapt_store'))){
             return self::res(0,response()->json(['data' => '请选择适用的分店', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    public function checkMaterialArticleEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('img_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('thumb_media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('title'))){
+            return self::res(0,response()->json(['data' => '请输入文章标题', 'status' => '0']));
+        }
+        if(empty($request->input('author'))){
+            return self::res(0,response()->json(['data' => '请填写文章作者', 'status' => '0']));
+        }
+        if(empty($request->input('content'))){
+            return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
         }
         return self::res(1,$request);
     }
