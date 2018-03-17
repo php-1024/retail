@@ -355,7 +355,7 @@
 
     //编辑店铺信息
     function EditStore() {
-        var formData = $( "#store_edit" ).serialize();
+        var formData = new FormData($( "#store_edit" )[0]);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
