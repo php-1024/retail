@@ -357,7 +357,7 @@
     function EditStore() {
         var _token = $("#_token").val();
         console.log(_token);
-        $.ajax({
+        $.post({
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
             data: {'_token':_token},
