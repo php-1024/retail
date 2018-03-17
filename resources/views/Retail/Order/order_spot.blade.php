@@ -41,27 +41,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <div>
-                                        <div class="col-sm-2">
-                                            <select name="account" class="form-control m-b">
-                                                <option>所有包厢</option>
-                                                <option>大厅</option>
-                                                <option>包厢1</option>
-                                                <option>包厢2</option>
-                                                <option>包厢3</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <select name="account" class="form-control m-b">
-                                                <option>所有餐桌</option>
-                                                <option>001</option>
-                                                <option>002</option>
-                                                <option>003</option>
-                                                <option>004</option>
-                                            </select>
-                                        </div>
-
                                         <label class="col-sm-1 control-label">用户账号</label>
-
                                         <div class="col-sm-2">
                                             <input class="input-sm form-control" size="16" type="text" value="">
                                         </div>
@@ -80,7 +60,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div style="clear: both;"></div>
                                     <div>
                                         <div class="col-sm-2">
                                             <select name="account" class="form-control m-b">
@@ -91,20 +70,9 @@
                                                 <option>已取消</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <select name="account" class="form-control m-b">
-                                                <option>导出时间段</option>
-                                                <option>当日</option>
-                                                <option>最近一周</option>
-                                                <option>最近一个月</option>
-                                                <option>最近三个月</option>
-                                            </select>
-                                        </div>
                                         <div class="col-sm-3">
-                                            <button type="button" class="btn btn-s-md btn-primary"><i class="fa fa-download"></i>&nbsp;&nbsp;按条件导出</button>
                                             <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
