@@ -355,6 +355,7 @@
     });
     //删除商品信息
     function getEditForm(id){
+        $('#myModal').modal();
         var url = $('#store_edit_comfirm_url').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id};
