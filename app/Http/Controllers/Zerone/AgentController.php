@@ -494,8 +494,8 @@ class AgentController extends Controller{
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore)){//如果有店铺
                 foreach($datastore as $key=>$value){
-                    dd($value);
-                    $program_id = Organization::getPluck([['id',$fansmanage_id]],'program_id')->first();
+                    $asset_id = Organization::getPluck([['id',$fansmanage_id]],'asset_id')->first();
+                    dd($asset_id);
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
                     Organization::editOrganization([['id',$value->id]],['parent_tree'=>$storeParent_tree]);
                 }
