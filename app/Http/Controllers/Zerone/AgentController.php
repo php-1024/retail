@@ -393,7 +393,7 @@ class AgentController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $listOrg = Organization::getOneagent([['id',$organization_id]]);
-        $list = Program::getPaginage([['is_asset',1]],15,'id');
+        $list = Program::getPaginage([['is_asset',0]],15,'id');
         foreach ($list as $key=>$value){
             $re = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$value['id']]]);
             $list[$key]['program_balance'] = $re['program_balance'];
