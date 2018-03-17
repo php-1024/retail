@@ -85,7 +85,7 @@
                                                         <div class="col-sm-9">
                                                             <button class="btn btn-info" type="button" onclick="selectImageForm({{$key+1}});">选择图片素材</button>
                                                             <br/><br/>
-                                                            <img id="img_show_1" src="{{url('uploads/wechat')}}/{{$admin_data['organization_id']}}/{{$val['image_info']['filename']}}" style="width: 100px; height:100px;">
+                                                            <img id="img_show_{{$key+1}}" src="{{url('uploads/wechat')}}/{{$admin_data['organization_id']}}/{{$val['image_info']['filename']}}" style="width: 100px; height:100px;">
                                                             <input autocomplete="off" type="hidden" name="img_id_{{$key+1}}" id="img_id_{{$key+1}}" id="_token" value="{{$val['image_info']['id']}}">
                                                             <input  autocomplete="off" type="hidden" name="thumb_media_id_{{$key+1}}" id="media_id_{{$key+1}}" id="_token" value="{{$val['image_info']['media_id']}}">
                                                         </div>
