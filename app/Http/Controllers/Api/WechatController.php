@@ -396,7 +396,7 @@ class WechatController extends Controller{
                 'content_source_url'=>$request->get('origin_url_'.$i),
             ]);
 
-            $data = [
+            $data['articles'] = [
                 'title'=>$request->get('title_'.$i),
                 'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
                 'author'=>$request->get('author_'.$i),
