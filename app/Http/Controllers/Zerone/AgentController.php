@@ -501,12 +501,11 @@ class AgentController extends Controller{
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
-                    dd($Assets);
                     if($Assets->program_balance >= $number){//如果服务商剩余程序数量足够
                         $program_balance = $Assets->program_balance - $number;//剩余数量
                         $program_used_num = $Assets->program_used_num + $number;//使用数量
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
-                        $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$fansmanage_id,'program_id'=>$program_id,'status'=>'0','number'=>$number];
+                        $data = ['operator_id'=>$admin_data['id'],'fr_organization_id '=>$organization_id,'to_organization_id'=>$fansmanage_id,'program_id'=>$asset_id,'status'=>'0','number'=>$number];
                         //添加操作日志
                         OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
                     }else{
