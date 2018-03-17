@@ -3,31 +3,28 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
-use App\Models\AssetsOperation;
-use App\Models\CompanyApply;
+use App\Models\fansmanageApply;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\OrganizationCompanyinfo;
-use App\Models\Package;
-use App\Models\Assets;
+use App\Models\Organizationfansmanageinfo;
 use App\Models\AccountNode;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
-class CompanyController extends Controller{
+class FansmanageController extends Controller{
     //添加服务商
-    public function company_add(Request $request){
+    public function fansmanage_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $list = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
 
-        return view('Zerone/Company/company_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
+        return view('Zerone/Fansmanage/fansmanage_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
     //注册提交商户数据
-    public function company_add_check(Request $request){
+    public function fansmanage_add_check(Request $request){
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -70,9 +67,9 @@ class CompanyController extends Controller{
             $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
             AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-            $comproxyinfo = ['organization_id'=>$organization_id, 'company_owner'=>$realname, 'company_owner_idcard'=>$idcard, 'company_owner_mobile'=>$mobile];
+            $comproxyinfo = ['organization_id'=>$organization_id, 'fansmanage_owner'=>$realname, 'fansmanage_owner_idcard'=>$idcard, 'fansmanage_owner_mobile'=>$mobile];
 
-            OrganizationCompanyinfo::addOrganizationCompanyinfo($comproxyinfo);  //添加到服务商组织信息表
+            Organizationfansmanageinfo::addOrganizationfansmanageinfo($comproxyinfo);  //添加到服务商组织信息表
 
             $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
             foreach($module_node_list as $key=>$val){
@@ -93,49 +90,49 @@ class CompanyController extends Controller{
     }
 
     //商户审核列表
-    public function company_examinelist(Request $request){
+    public function fansmanage_examinelist(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $company_name = $request->input('company_name');
-        $company_owner_mobile = $request->input('company_owner_mobile');
-        $search_data = ['company_name'=>$company_name,'company_owner_mobile'=>$company_owner_mobile];
+        $fansmanage_name = $request->input('fansmanage_name');
+        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
+        $search_data = ['fansmanage_name'=>$fansmanage_name,'fansmanage_owner_mobile'=>$fansmanage_owner_mobile];
         $where = [];
-        if(!empty($company_name)){
-            $where[] = ['company_name','like','%'.$company_name.'%'];
+        if(!empty($fansmanage_name)){
+            $where[] = ['fansmanage_name','like','%'.$fansmanage_name.'%'];
         }
 
-        if(!empty($company_owner_mobile)){
-            $where[] = ['company_owner_mobile',$company_owner_mobile];
+        if(!empty($fansmanage_owner_mobile)){
+            $where[] = ['fansmanage_owner_mobile',$fansmanage_owner_mobile];
         }
 
-        $list = CompanyApply::getPaginage($where,'15','id');
-        return view('Zerone/Company/company_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $list = fansmanageApply::getPaginage($where,'15','id');
+        return view('Zerone/fansmanage/fansmanage_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户审核ajaxshow显示页面
-    public function company_examine(Request $request){
+    public function fansmanage_examine(Request $request){
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $info =  CompanyApply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Company/company_examine',['info'=>$info,'sta'=>$sta]);
+        $info =  fansmanageApply::getOne([['id',$id]]);//获取该ID的信息
+        return view('Zerone/fansmanage/fansmanage_examine',['info'=>$info,'sta'=>$sta]);
     }
     //商户审核数据提交
-    public function company_examine_check(Request $request){
+    public function fansmanage_examine_check(Request $request){
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//查找当前操作人员数据
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
         $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $companylist = CompanyApply::getOne([['id',$id]]);//查询申请服务商信息
+        $fansmanagelist = fansmanageApply::getOne([['id',$id]]);//查询申请服务商信息
 
         if($sta == -1 ){
             DB::beginTransaction();
             try{
-                CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//拒绝通过
+                fansmanageApply::editfansmanageApply([['id',$id]],['status'=>$sta]);//拒绝通过
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$companylist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$fansmanagelist['proxy_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -148,35 +145,35 @@ class CompanyController extends Controller{
 
             $parent_id = $id;//零壹或者服务商organization_id
             $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
-            $mobile = $companylist['company_owner_mobile'];//手机号码
+            $mobile = $fansmanagelist['fansmanage_owner_mobile'];//手机号码
 
             DB::beginTransaction();
             try{
-                CompanyApply::editCompanyApply([['id',$id]],['status'=>$sta]);//申请通过
+                fansmanageApply::editfansmanageApply([['id',$id]],['status'=>$sta]);//申请通过
                 //添加服务商
-                $listdata = ['organization_name'=>$companylist['company_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
+                $listdata = ['organization_name'=>$fansmanagelist['fansmanage_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
                 $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
                 $user = Account::max('account');
                 $account  = $user+1;//用户账号
-                $company_password =  $companylist['company_password'];//用户密码
+                $fansmanage_password =  $fansmanagelist['fansmanage_password'];//用户密码
 
                 $deepth = $admin_data['deepth']+1;  //用户在该组织里的深度
                 $Accparent_tree = $admin_data['parent_tree'].$admin_data['id'].',';//管理员组织树
-                $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$company_password,'organization_id'=>$organization_id,'account'=>$account];
+                $accdata = ['parent_id'=>$admin_data['id'],'parent_tree'=>$Accparent_tree,'deepth'=>$deepth,'mobile'=>$mobile,'password'=>$fansmanage_password,'organization_id'=>$organization_id,'account'=>$account];
                 $account_id = Account::addAccount($accdata);//添加账号返回id
 
-                $realname = $companylist['company_owner'];//负责人姓名
-                $idcard = $companylist['company_owner_idcard'];//负责人身份证号
+                $realname = $fansmanagelist['fansmanage_owner'];//负责人姓名
+                $idcard = $fansmanagelist['fansmanage_owner_idcard'];//负责人身份证号
                 $acinfodata = ['account_id'=>$account_id,'realname'=>$realname,'idcard'=>$idcard];
                 AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
 
-                $companyinfo = ['organization_id'=>$organization_id, 'company_owner'=>$realname, 'company_owner_idcard'=>$idcard, 'company_owner_mobile'=>$companylist['company_owner_mobile']];
+                $fansmanageinfo = ['organization_id'=>$organization_id, 'fansmanage_owner'=>$realname, 'fansmanage_owner_idcard'=>$idcard, 'fansmanage_owner_mobile'=>$fansmanagelist['fansmanage_owner_mobile']];
 
-                OrganizationCompanyinfo::addOrganizationCompanyinfo($companyinfo);  //添加到服务商组织信息表
+                Organizationfansmanageinfo::addOrganizationfansmanageinfo($fansmanageinfo);  //添加到服务商组织信息表
 
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$companylist['company_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'服务商审核通过：'.$fansmanagelist['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
@@ -188,7 +185,7 @@ class CompanyController extends Controller{
 
 
     //服务商列表
-    public function company_list(Request $request){
+    public function fansmanage_list(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -196,30 +193,30 @@ class CompanyController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_name = $request->input('organization_name');
-        $company_owner_mobile = $request->input('company_owner_mobile');
+        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
 
-        $search_data = ['organization_name'=>$organization_name,'company_owner_mobile'=>$company_owner_mobile];
+        $search_data = ['organization_name'=>$organization_name,'fansmanage_owner_mobile'=>$fansmanage_owner_mobile];
         $where = [['type','3']];
         if(!empty($organization_name)){
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
 
-        $listorg = Organization::getCompany($where,'5','id');
+        $listorg = Organization::getfansmanage($where,'5','id');
         foreach ($listorg as $k=>$v){
             $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
             $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
         }
-        return view('Zerone/Company/company_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/fansmanage/fansmanage_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户编辑ajaxshow显示页面
-    public function company_list_edit(Request $request){
+    public function fansmanage_list_edit(Request $request){
         $id = $request->input('id');//服务商id
-        $listorg = Organization::getOneCompany([['id',$id]]);
+        $listorg = Organization::getOnefansmanage([['id',$id]]);
         $proxy = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
-        return view('Zerone/Company/company_list_edit',compact('listorg','proxy'));
+        return view('Zerone/fansmanage/fansmanage_list_edit',compact('listorg','proxy'));
     }
     //服务商编辑功能提交
-    public function company_list_edit_check(Request $request){
+    public function fansmanage_list_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
@@ -233,19 +230,19 @@ class CompanyController extends Controller{
 
         DB::beginTransaction();
         try{
-            $list = Organization::getOneCompany(['id'=>$id]); //获取商户组织信息
+            $list = Organization::getOnefansmanage(['id'=>$id]); //获取商户组织信息
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
             if($list['organization_name']!=$organization_name){
                 Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
             if($list['mobile']!=$mobile){
-                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id], ['company_owner_mobile'=>$mobile]);//修改商户表商户手机号码
+                Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id], ['fansmanage_owner_mobile'=>$mobile]);//修改商户表商户手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
 
-            if($list['organizationcompanyinfo']['company_owner'] != $realname){
-                $companydata = ['company_owner'=>$realname];
-                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],$companydata);//修改商户信息表 用户姓名
+            if($list['organizationfansmanageinfo']['fansmanage_owner'] != $realname){
+                $fansmanagedata = ['fansmanage_owner'=>$realname];
+                Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id],$fansmanagedata);//修改商户信息表 用户姓名
                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             if(!empty($password)){
@@ -257,7 +254,7 @@ class CompanyController extends Controller{
             }
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                OrganizationCompanyinfo::editOrganizationCompanyinfo(['organization_id'=>$id],['company_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
+                Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id],['fansmanage_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
             }
 
             if($list['parent_id'] != $parent_id){
@@ -278,14 +275,14 @@ class CompanyController extends Controller{
     }
 
     //商户冻结ajaxshow显示页面
-    public function company_list_frozen(Request $request){
+    public function fansmanage_list_frozen(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结操作状态
         $list = Organization::getOneProxy([['id',$id]]);//服务商信息
-        return view('Zerone/Company/company_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
+        return view('Zerone/fansmanage/fansmanage_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //商户冻结功能提交
-    public function company_list_frozen_check(Request $request){
+    public function fansmanage_list_frozen_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//服务商id
@@ -314,25 +311,25 @@ class CompanyController extends Controller{
 
     }
     //商户删除ajaxshow显示页面
-    public function company_list_delete(Request $request){
+    public function fansmanage_list_delete(Request $request){
 //        $id = $request->input('id');//服务商id
 //        $listorg = Organization::getOneProxy(['id'=>$id]);
 //        $warzone = Warzone::all();
-        return view('Zerone/Company/company_list_delete');
+        return view('Zerone/fansmanage/fansmanage_list_delete');
     }
 
     //商户下级店铺架构
-    public function company_structure(Request $request){
+    public function fansmanage_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOneCompany([['id',$organization_id]]);
-        $list = Organization::getArrayCompany([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
+        $listOrg = Organization::getOnefansmanage([['id',$organization_id]]);
+        $list = Organization::getArrayfansmanage([['parent_tree','like','%'.$listOrg['parent_tree'].$listOrg['id'].',%']],0,'id','asc')->toArray();
         $structure = $this->Com_structure($list,$organization_id);
-        return view('Zerone/Company/company_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/fansmanage/fansmanage_structure',['listOrg'=>$listOrg,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 
@@ -348,7 +345,7 @@ class CompanyController extends Controller{
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure .= '【商户】'. $val['organization_name']. '-'.$val['organization_companyinfo']['company_owner'].'-'.$val['organization_companyinfo']['company_owner_mobile'];
+                $structure .= '【商户】'. $val['organization_name']. '-'.$val['organization_fansmanageinfo']['fansmanage_owner'].'-'.$val['organization_fansmanageinfo']['fansmanage_owner_mobile'];
                 $structure .= '</div>';
                 $son_menu = $this->Com_structure($list, $val['id']);
                 if (!empty($son_menu)) {
@@ -361,7 +358,7 @@ class CompanyController extends Controller{
     }
 
     //商户程序管理
-    public function company_program(Request $request){
+    public function fansmanage_program(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -377,20 +374,20 @@ class CompanyController extends Controller{
                 $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
             }
         }
-        return view('Zerone/Company/company_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/fansmanage/fansmanage_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户资产页面划入js显示
-    public function company_assets(Request $request){
+    public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
         $listOrg = Organization::getOneProxy([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
 
-        return view('Zerone/Company/company_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        return view('Zerone/fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
-    public function company_assets_check(Request $request){
+    public function fansmanage_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
         if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
@@ -440,13 +437,13 @@ class CompanyController extends Controller{
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
     //商户程序管理
-    public function company_store(Request $request){
+    public function fansmanage_store(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Zerone/Company/company_store',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/fansmanage/fansmanage_store',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 }

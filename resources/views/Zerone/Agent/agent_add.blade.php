@@ -82,14 +82,14 @@
                                     <div class="col-sm-10"><input type="password" name="re_agent_password" class="form-control"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">安全密码</label>
+                                    <label class="col-sm-2 control-label red">安全密码</label>
                                     <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
 
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认申请</button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认提交</button>
                                     </div>
                                 </div>
                             </form>
