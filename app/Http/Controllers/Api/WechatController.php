@@ -366,7 +366,7 @@ class WechatController extends Controller{
         $article_info = $article_info->toArray();
         $articles = $article_info['content']['articles'][0];
         dump($articles);
-        return view('Wechat/Catering/material_article_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Wechat/Catering/material_articles_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
