@@ -320,7 +320,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" onclick="EditStore('{{$admin_data['organization_id']}}')">确定</button>
+                    <button class="btn btn-success" onclick="EditStore('{{$admin_data['organization_id']}}')">确定</button>
                 </div>
             </div>
         </div>
