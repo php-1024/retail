@@ -305,9 +305,9 @@ class WechatController extends Controller{
         $content = $request->input('content');
 
         $article_info = WechatArticle::getOne([['id',$id]]);
-        var_dump($article_info);
+
         $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
-        dump($auth_info);
+
 
         $data = [
             'articles'=>[
@@ -332,7 +332,7 @@ class WechatController extends Controller{
                 'content'=>serialize($data),
             ];
             WechatArticle::editWechatArticle([['id',$id]],$zdata);
-            return response()->json(['data'=>'编辑图文素材成功','status' => '0']);
+            return response()->json(['data'=>'编辑图文素材成功','status' => '1']);
         }else{
             return response()->json(['data'=>'编辑图文素材失败','status' => '0']);
         }
