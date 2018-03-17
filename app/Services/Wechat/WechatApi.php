@@ -446,7 +446,7 @@ class WechatApi{
         $data['media_id'] = $media_id;
         $data['index'] = $index;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-        dump($data);
+        var_dump($data);
         $re = \HttpCurl::doPost($url, $data);
         $re = json_decode($re,true);
         dump($re);
