@@ -366,7 +366,7 @@ class WechatController extends Controller{
         $articles = $article_info['content']['articles'];
 
         foreach($articles as $key=>$val){
-            $image_info = WechatImage::getOne([['media_id',$val['thumb_media_id']]]);
+            $image_info = WechatImage::getOne([['media_id',$val['thumb_media_id']]])->toArray();
             $articles[$key]['image_info'] = $image_info;
             unset($image_info);
         }
