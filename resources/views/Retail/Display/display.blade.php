@@ -44,7 +44,6 @@
                                     </button>
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="get">
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg">
