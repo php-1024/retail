@@ -45,7 +45,9 @@
                                     <div class="form-group clearfix text-center m-t">
                                         <div class="inline">
                                             <div class="thumb-lg" >
+                                                @if(!empty($organization->OrganizationRetailinfo->retail_logo))
                                                 <img src="{{asset('/'.$organization->OrganizationRetailinfo->retail_logo)}}" class="img-circle" alt="...">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

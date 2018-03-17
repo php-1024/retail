@@ -59,8 +59,8 @@ class DisplayController extends Controller
             return redirect('retail');
         }
         $organization_name  = $request->organization_name;
-        $where = ['type'=>'5'];//type=5分店组织
-        $organization = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
+        $where = [['program_id','10'],['type','4']];//program_id=10为零售版本程序，type=4为店铺类型的组织
+        $organization = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //所有零售版本店铺
         foreach ($organization as $key=>$val){
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
