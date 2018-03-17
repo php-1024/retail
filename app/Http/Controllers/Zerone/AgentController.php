@@ -482,18 +482,23 @@ class AgentController extends Controller{
     public function agent_fansmanage_add_check(Request $request){
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        if($admin_data['organization_id'] == 0){//超级管理员没有组织id，操作默认为零壹公司操作
+            $admin_data['organization_id'] = 1;
+        }
 
         $organization_id = $request->organization_id;//服务商id
         $oneAgent = Organization::getOne([['id',$organization_id]]);//服务商信息
         $status = $request->status;//服务商id
         $fansmanage_id = $request->fansmanage_id;//商户id
+        $fansmanage_name = Organization::getPluck([['id',$fansmanage_id]],'organization_name')->first();
         DB::beginTransaction();
         try{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
             Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
             if(!empty($datastore->toArray())){//如果有店铺
-                dd(1);
                 foreach($datastore as $key=>$value){
                     $asset_id = $value->program_id;//店铺用的程序id
                     $storeParent_tree = $parent_tree.$fansmanage_id.',';//商户店铺的组织树
@@ -501,6 +506,7 @@ class AgentController extends Controller{
                 }
                 if($status == 1){//消耗程序数量
                     $number = count($datastore);//计算店铺数量
+                    dd($number);
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
                     if($Assets->program_balance >= $number){//如果服务商剩余程序数量足够
                         $program_balance = $Assets->program_balance - $number;//剩余数量
@@ -514,7 +520,8 @@ class AgentController extends Controller{
                     }
                 }
             }
-
+            //添加操作日志
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'划拨了商户:'.$fansmanage_name.'-归属于服务商：'.$oneAgent['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
