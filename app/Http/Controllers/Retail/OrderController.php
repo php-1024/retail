@@ -29,7 +29,7 @@ class OrderController extends Controller
         $where = [
             'fansmanage_id' => $restaurant_id,
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
-            'restaurant_id' => $admin_data['organization_id'],
+            'retail_id' => $admin_data['organization_id'],
         ];
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){

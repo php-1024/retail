@@ -468,8 +468,9 @@ class AgentController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->organization_id;//服务商id
+        $organization_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();
         $list = Organization::getPaginageFansmanage([['parent_id',$organization_id]],'10','id');
-        return view('Zerone/Agent/agent_fansmanage',['organization_id'=>$organization_id,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Agent/agent_fansmanage',['organization_name'=>$organization_name,'organization_id'=>$organization_id,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户划拨归属Ajax显示页面--划入
     public function agent_fansmanage_add(Request $request){
@@ -587,7 +588,6 @@ class AgentController extends Controller{
             OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'从服务商:'.$organization_name.'-划出了商户：'.$fansmanage_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
