@@ -112,7 +112,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">原文地址</label>
                                                         <div class="col-sm-9">
-                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_{{$key+1}}" value="@if(!empty($val['content_source_url'])){{$info['content_source_url']}}@endif">
+                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_{{$key+1}}" value="@if(!empty($val['content_source_url'])){{$val['content_source_url']}}@endif">
                                                         </div>
                                                     </div>
 
