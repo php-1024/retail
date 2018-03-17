@@ -148,8 +148,7 @@ class AgentController extends Controller {
     }
     //提交服务商数据
     public function agent_add_check(Request $request) {
-        $admin_data = Account::where('id', 1)->first(); //查找超级管理员的数据
-        $admin_this = $request->get('admin_data'); //中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
         $organization_name = $request->input('organization_name'); //服务商名称
         $where = [['organization_name', $organization_name]];
@@ -157,40 +156,41 @@ class AgentController extends Controller {
             return response()->json(['data' => '服务商名称已存在', 'status' => '0']);
         }
         $zone_id = $request->input('zone_id'); //战区id
-        $parent_id = $admin_data['id']; //上级ID是当前用户ID
-        $parent_tree = $admin_data['parent_tree'] . $parent_id . ','; //树是上级的树拼接上级的ID；
-        $deepth = $admin_data['deepth'] + 1; //用户在该组织里的深度
+
+        $parent_tree = '0'.','.'1'.','; //树是上级的树拼接上级的ID；
+
         $mobile = $request->input('mobile'); //手机号码
         $password = $request->input('agent_password'); //用户密码
         $key = config("app.agent_encrypt_key"); //获取加密盐
         $encrypted = md5($password); //加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key); //加密密码第二重
-        $program_id = 2;
+
         DB::beginTransaction();
         try {
-            $listdata = [
+            $Orgdata = [
                 'organization_name' => $organization_name,
-                'parent_id'         => $parent_id,
+                'parent_id'         => '1',
                 'parent_tree'       => $parent_tree,
-                'program_id'        => $program_id,
-                'type'              => 2,
-                'status'            => 1,
-                'asset_id'          => 0
+                'program_id'        => '2',
+                'type'              => '2',
+                'status'            => '1',
+                'asset_id'          => '0'
             ];
-            $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
+            $organization_id = Organization::addOrganization($Orgdata); //返回值为商户的id
 
             $agentdata = [
                 'agent_id' => $organization_id,
-                'zone_id' => $zone_id
+                'zone_id'  => $zone_id
             ];
             Warzoneagent::addWarzoneagent($agentdata); //战区关联服务商
 
             $user = Account::max('account');
             $account = $user + 1; //用户账号
+            $Accparent_tree = '0'.',';
             $accdata = [
-                'parent_id'       => $parent_id,
-                'parent_tree'     => $parent_tree,
-                'deepth'          => $deepth,
+                'parent_id'       => '0',
+                'parent_tree'     => $Accparent_tree,
+                'deepth'          => '1',
                 'mobile'          => $mobile,
                 'password'        => $encryptPwd,
                 'organization_id' => $organization_id,
@@ -206,7 +206,7 @@ class AgentController extends Controller {
                 'idcard'     => $idcard
             ];
             AccountInfo::addAccountInfo($acinfodata); //添加到管理员信息表
-            $module_node_list = Module::getListProgram($program_id, [], 0, 'id'); //获取当前系统的所有节点
+            $module_node_list = Module::getListProgram('2', [], 0, 'id'); //获取当前系统的所有节点
             foreach ($module_node_list as $key => $val) {
                 foreach ($val->program_nodes as $k => $v) {
                     AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
@@ -220,11 +220,11 @@ class AgentController extends Controller {
             ];
             OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo); //添加到服务商组织信息表
             //添加操作日志
-            OperationLog::addOperationLog('1', $admin_this['organization_id'], $admin_this['id'], $route_name, '添加了服务商：' . $organization_name); //保存操作记录
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '添加了服务商：' . $organization_name); //保存操作记录
             DB::commit(); //提交事务
-
         }
         catch(Exception $e) {
+            dd($e);
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '提交失败', 'status' => '0']);
         }
