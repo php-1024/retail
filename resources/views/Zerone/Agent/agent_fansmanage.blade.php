@@ -81,8 +81,7 @@
                                     <td>{{$value->organization_name}}</td>
 
                                     <td>
-                                        <label class="label label-success" style="display:inline-block">微餐饮系统（先吃后付）通用版本：程序1套，分店5家</label><br />
-                                        <label class="label label-success" style="display:inline-block">微餐饮系统（自选店模式）通用版本：程序1套，分店5家</label>
+                                        <label class="label label-success" style="display:inline-block">{{$value['program_name']}}：程序1套，分店{{$value['store']}}家</label><br />
                                     </td>
                                     <td>{{$value->created_at}}</td>
                                     <td class="text-right">
