@@ -47,6 +47,7 @@ class DisplayController extends Controller
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
             $program = Program::getOne([['id',$organization->program_id]]);
             $organization->program_name = $program;
+            dump($organization);
             return view('Retail/Display/display',['organization'=>$organization,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
@@ -59,8 +60,8 @@ class DisplayController extends Controller
             return redirect('retail');
         }
         $organization_name  = $request->organization_name;
-        $where = ['organization_id'=>'10','type'=>'4'];//organization_id=10为零售版本组织，type=4为店铺类型的组织
-        $organization = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
+        $where = [['program_id','10'],['type','4']];//program_id=10为零售版本程序，type=4为店铺类型的组织
+        $organization = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //所有零售版本店铺
         foreach ($organization as $key=>$val){
             $catering = Organization::getOneCatering(['id'=>$val->parent_id]);
             $val->cateringname = $catering->organization_name;
