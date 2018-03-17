@@ -264,7 +264,6 @@ class WechatController extends Controller{
         }
     }
 
-
     /*
     * 编辑单条图文素材页面
     */
@@ -306,7 +305,7 @@ class WechatController extends Controller{
 
         $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
 
-
+        //提交到微信公众号的数据
         $data = [
             'articles'=>[
                     'title'=>$title,
@@ -318,13 +317,27 @@ class WechatController extends Controller{
                     'content_source_url'=>$origin_url
             ],
         ];
+        //保存在零壹的数据
+        $adata = [
+            'articles'=>[
+                [
+                    'title'=>$title,
+                    'thumb_media_id'=>$thumb_media_id,
+                    'author'=>$author,
+                    'digest'=>$digest,
+                    'show_cover_pic'=>1,
+                    'content'=>$content,
+                    'content_source_url'=>$origin_url
+                ],
+            ],
+        ];
 
         $re = \Wechat::update_meterial($auth_info['authorizer_access_token'],$article_info['media_id'],0,$data);
 
         if($re['errcode'] == '0'){
             $zdata = [
                 'title'=>$title,
-                'content'=>serialize($data),
+                'content'=>serialize($adata),
             ];
             WechatArticle::editWechatArticle([['id',$id]],$zdata);
             return response()->json(['data'=>'编辑图文素材成功','status' => '1']);
@@ -332,6 +345,27 @@ class WechatController extends Controller{
             return response()->json(['data'=>'编辑图文素材失败','status' => '0']);
         }
 
+    }
+
+    /*
+    * 编辑多条图文素材页面
+    */
+    public function material_articles_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+
+        /*
+         * 获取文章数据
+         */
+        $article_info = WechatArticle::getOne([['id',$id]]);
+        $article_info['content'] = unserialize( $article_info['content'] );
+        $article_info = $article_info->toArray();
+        $articles = $article_info['content']['articles'];
+        dump($articles);
+        return view('Wechat/Catering/material_articles_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*

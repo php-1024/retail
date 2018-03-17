@@ -90,9 +90,8 @@
                                 <tr>
                                     <td>{{$value->id}}</td>
                                     <td>{{$value->fansmanage_name}}</td>
-                                    <td>{{$value->organization->organization_name}}</td>
+                                    <td>{{$value->agent->organization_name}}</td>
                                     <td>{{$value->fansmanage_owner}}</td>
-
                                     <td>{{$value->fansmanage_owner_idcard}}</td>
                                     <td>{{$value->fansmanage_owner_mobile}}</td>
                                     <td>@if($value->status == 0)<label class="label label-warning">待审核</label>

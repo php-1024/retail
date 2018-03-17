@@ -54,8 +54,9 @@ class ZeroneCheck{
             case "zerone/agent/agent_program":              //服务商程序管理
             case "zerone/agent/agent_fansmanage":           //服务商商户划拨
 
-            case "zerone/fansmanage/fansmanage_add":          //添加商户
+            //商户管理
             case "zerone/fansmanage/fansmanage_examinelist":  //商户审核列表
+            case "zerone/fansmanage/fansmanage_add":          //添加商户
             case "zerone/fansmanage/fansmanage_list":         //商户列表
             case "zerone/fansmanage/fansmanage_structure":    //商户店铺架构
             case "zerone/fansmanage/fansmanage_program":      //商户程序管理

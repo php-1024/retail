@@ -13,9 +13,9 @@ class OrganizationFansmanageapply extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和organization表一对一的关系
-    public function organization(){
-        return $this->hasOne('App\Models\Organization', 'id','proxy_id');
+    //和organization表一对一的关系-查询上级组织
+    public function agent(){
+        return $this->belongsTo('App\Models\Organization', 'agent_id','id');
     }
 
     //获取列表
@@ -67,7 +67,7 @@ class OrganizationFansmanageapply extends Model{
 
     //获取程序分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('agent')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //获取单行数据的其中一列
