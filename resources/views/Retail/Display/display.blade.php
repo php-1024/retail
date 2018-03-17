@@ -357,7 +357,7 @@
     function EditStore() {
         var data = $("#store_edit").serialize();
         console.log(data);
-        $.post({
+        $.ajax({
             url: 'http://o2o.01nnt.com/retail/ajax/store_edit',
             type: 'post',
             data: data,
