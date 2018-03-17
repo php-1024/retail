@@ -407,6 +407,7 @@ class WechatController extends Controller{
             ];
 
             $re = \Wechat::update_meterial($auth_info['authorizer_access_token'],$article_info['media_id'],$i-1,$data);
+            var_dump($re);
             if($re['errcode'] <> '0'){
                 $flag = false;
             }
