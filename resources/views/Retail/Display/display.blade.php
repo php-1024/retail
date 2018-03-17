@@ -319,7 +319,7 @@
     function uploadForm() {
         var formData = new FormData($( "#uploadForm" )[0]);
         $.ajax({
-            url: '{{ url('retail/ajax/upload_thumb_check') }}' ,
+            url: '{{ url('retail/ajax/store_edit_check') }}' ,
             type: 'POST',
             data: formData,
             async: false,
