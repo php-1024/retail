@@ -343,13 +343,15 @@
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch')}}/library/file-input/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/file-input/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/trumbowyg/trumbowyg.js"></script>
+<script src="{{asset('public/Branch/library')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="{{asset('public/Branch/library')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#editBtn').click(function () {
