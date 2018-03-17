@@ -372,12 +372,6 @@ class RetailCheckAjax{
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
         }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
-        }
         return self::res(1,$request);
     }
 
