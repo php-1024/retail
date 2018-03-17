@@ -158,7 +158,13 @@ class WechatController extends Controller{
         $id = $request->input('id');
         $article_info = WechatArticle::getOne([['id',$id]]);
         $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
-        dump($auth_info);
+        $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$article_info['media_id']);
+        if($re['errcode']=='0'){
+            WechatArticle::where('id',$id)->forceDelete();
+            return response()->json(['data'=>'删除图文素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'删除图文素材失败','status' => '0']);
+        }
     }
 
     /*
