@@ -75,11 +75,12 @@ class AgentController extends Controller {
                 //添加服务商
                 $orgData = [
                     'organization_name' => $oneAgent['agent_name'],
-                    'parent_id'         => 1,
+                    'parent_id'         => '1',
                     'parent_tree'       => $orgparent_tree,
-                    'program_id'        => 2,
-                    'type'              => 2,
-                    'status'            => 1
+                    'program_id'        => '2',
+                    'type'              => '2',
+                    'status'            => '1',
+                    'asset_id'          => '0'
                 ];
                 $organization_id = Organization::addOrganization($orgData); //返回值为商户的id
 
