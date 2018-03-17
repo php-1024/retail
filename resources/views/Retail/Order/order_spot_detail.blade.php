@@ -196,7 +196,11 @@
                                         @foreach($order_goods as $key=>$val)
                                         <tr>
                                             <td>{{$val->id}}</td>
-                                            <td>{{$val->order_goods->name}}</td>
+                                            <td>
+                                                @if(!empty($val->order_goods->name))
+                                                {{$val->order_goods->name}}
+                                                @endif
+                                            </td>
                                             <td>
                                                 {{$val->total}}
                                             </td>
