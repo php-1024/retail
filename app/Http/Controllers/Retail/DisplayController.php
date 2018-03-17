@@ -154,7 +154,7 @@ class DisplayController extends Controller
             DB::beginTransaction();
             try {
                 Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
-                OrganizationRetailinfo::editOrganizationRetailinfo([['id'=>$organization_id]],$retail_info);
+                OrganizationRetailinfo::editOrganizationRetailinfo([['organization_id'=>$organization_id]],$retail_info);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                     OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售店铺管理系统修改了店铺信息！');//保存操作记录
