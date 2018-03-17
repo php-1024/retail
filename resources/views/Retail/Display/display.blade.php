@@ -56,7 +56,7 @@
                                         <div class="col-sm-8">
                                             <div>
                                                 <label class="label label-success m-t-xs">
-                                                    餐饮系统【先吃后付】
+                                                    {{$organization->program_name->program_name}}
                                                 </label>
                                             </div>
                                         </div>
