@@ -197,11 +197,10 @@ class AgentController extends Controller {
 
         }
         catch(Exception $e) {
-            dd($e);
             DB::rollBack(); //事件回滚
-            return response()->json(['data' => '注册失败', 'status' => '0']);
+            return response()->json(['data' => '提交失败', 'status' => '0']);
         }
-        return response()->json(['data' => '注册成功', 'status' => '1']);
+        return response()->json(['data' => '提交成功', 'status' => '1']);
     }
     //服务商列表
     public function agent_list(Request $request) {
