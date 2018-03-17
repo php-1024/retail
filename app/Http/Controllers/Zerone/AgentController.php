@@ -489,12 +489,12 @@ class AgentController extends Controller{
         $status = $request->status;//是否消耗程序数量
         $fansmanage_id = $request->fansmanage_id;//商户id
         $fansmanage_name = Organization::getPluck([['id',$fansmanage_id]],'organization_name')->first();
+        dd($fansmanage_name);
         DB::beginTransaction();
         try{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
             Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
-            dd($datastore);
 
             if(!empty($datastore->toArray())){//如果有店铺
                 foreach($datastore as $key=>$value){
