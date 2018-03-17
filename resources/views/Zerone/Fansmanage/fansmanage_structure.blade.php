@@ -73,7 +73,7 @@
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            {{ $listOrg['organization_name']. '-'.$listOrg['organizationCompanyinfo']['company_owner'].'-'.$listOrg['organizationCompanyinfo']['company_owner_mobile'] }}
+                                            {{ $listOrg['organization_name']. '-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner'].'-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner_mobile'] }}
                                         </div>
 
                                         {!! $structure  !!}

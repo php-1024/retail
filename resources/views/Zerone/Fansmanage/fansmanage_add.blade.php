@@ -47,7 +47,7 @@
 
                             </div>
                             <div class="ibox-content">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/company_add_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group"><label class="col-sm-2 control-label">归属服务商</label>
                                         <div class="col-sm-10">

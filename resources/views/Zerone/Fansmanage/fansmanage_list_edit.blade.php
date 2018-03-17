@@ -1,5 +1,5 @@
 <link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/company_list_edit_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
     <div class="modal-dialog modal-lg">
@@ -28,19 +28,19 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人姓名</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationCompanyinfo->company_owner}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationfansmanageinfo->fansmanage_owner}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationCompanyinfo->company_owner_idcard}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationfansmanageinfo->fansmanage_owner_idcard}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">手机号码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationCompanyinfo->company_owner_mobile}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationfansmanageinfo->fansmanage_owner_mobile}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>

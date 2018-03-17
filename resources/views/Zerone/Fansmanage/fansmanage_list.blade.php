@@ -38,9 +38,9 @@
             </div>
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="company_list_edit" value="{{ url('zerone/ajax/company_list_edit') }}">
-                <input type="hidden" id="company_list_frozen" value="{{ url('zerone/ajax/company_list_frozen') }}">
-                <input type="hidden" id="company_list_delete" value="{{ url('zerone/ajax/company_list_delete') }}">
+                <input type="hidden" id="fansmanage_list_edit" value="{{ url('zerone/ajax/fansmanage_list_edit') }}">
+                <input type="hidden" id="fansmanage_list_frozen" value="{{ url('zerone/ajax/fansmanage_list_frozen') }}">
+                <input type="hidden" id="fansmanage_list_delete" value="{{ url('zerone/ajax/fansmanage_list_delete') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
                     <form method="get" role="form" id="searchForm" action="">
@@ -105,9 +105,9 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->proxy_name}}</td>
-                                        <td>{{$value->organizationCompanyinfo->company_owner}}</td>
+                                        <td>{{$value->organizationfansmanageinfo->fansmanage_owner}}</td>
                                         <td>{{$value->account}}</td>
-                                        <td>{{$value->organizationCompanyinfo->company_owner_mobile}}</td>
+                                        <td>{{$value->organizationfansmanageinfo->fansmanage_owner_mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
@@ -127,9 +127,9 @@
                                             <!--
                                             <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
                                             -->
-                                            <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/company/company_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
-                                            <button type="button" id="programBtn" onclick="location.href='{{url('zerone/company/company_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
-                                            <button type="button" id="companyBtn" onclick="location.href='{{url('zerone/company/company_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺划拨管理</button>
+                                            <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
+                                            <button type="button" id="programBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
+                                            <button type="button" id="fansmanageBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺划拨管理</button>
                                         </td>
 
                                     </tr>
@@ -193,7 +193,7 @@ $(function(){
 //编辑
 function getEditForm(id){
 
-    var url = $('#company_list_edit').val();
+    var url = $('#fansmanage_list_edit').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
@@ -229,7 +229,7 @@ function getEditForm(id){
 //冻结
 function getFrozenForm(id,status){
 
-    var url = $('#company_list_frozen').val();
+    var url = $('#fansmanage_list_frozen').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
@@ -265,7 +265,7 @@ function getFrozenForm(id,status){
 //删除
 function getDeleteForm(id){
 
-    var url = $('#company_list_delete').val();
+    var url = $('#fansmanage_list_delete').val();
     var token = $('#_token').val();
     if(id==''){
         swal({
