@@ -349,6 +349,7 @@
     function EditStore(){
         var target = $("#store_edit_check");
         var url = target.attr("action");
+        alert(url);
         var data = target.serialize();
         $.post(url,data,function(response){
             if(response.status=='-1'){
