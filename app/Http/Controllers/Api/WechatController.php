@@ -156,16 +156,14 @@ class WechatController extends Controller{
     }
     public function material_article_delete_check(Request $request){
         $id = $request->input('id');
-        $image_info = WechatImage::getOne([['id',$id]]);
-        $auth_info = \Wechat::refresh_authorization_info($image_info['organization_id']);//刷新并获取授权令牌
-
-        $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$image_info['media_id']);
+        $article_info = WechatArticle::getOne([['id',$id]]);
+        $auth_info = \Wechat::refresh_authorization_info($article_info['organization_id']);//刷新并获取授权令牌
+        $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$article_info['media_id']);
         if($re['errcode']=='0'){
-            @unlink($image_info['filepath']);
-            WechatImage::where('id',$id)->forceDelete();
-            return response()->json(['data'=>'删除图片素材成功','status' => '1']);
+            WechatArticle::where('id',$id)->forceDelete();
+            return response()->json(['data'=>'删除图文素材成功','status' => '1']);
         }else{
-            return response()->json(['data'=>'删除图片素材失败','status' => '0']);
+            return response()->json(['data'=>'删除图文素材失败','status' => '0']);
         }
     }
 
