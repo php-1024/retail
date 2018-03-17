@@ -294,7 +294,7 @@ class WechatController extends Controller{
         $info['image_url'] = $image_info['filename'];
 
 
-        return view('Wechat/Catering/material_articles_edit',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Wechat/Catering/material_article_edit',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
