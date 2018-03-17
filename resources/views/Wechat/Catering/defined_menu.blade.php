@@ -303,6 +303,8 @@
         });
         $('#nestable1').nestable();
         $('.chosen-select2').chosen({width:"100%"});
+
+        get_menu_add_box();
     });
 
     function get_menu_add_box(){
