@@ -66,7 +66,7 @@
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">分店名称</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">刘记鸡煲王【龙岗店】</label>
+                                                <label class="label label-info">{{$organization->organization_name}}</label>
                                             </div>
                                         </div>
 
@@ -75,7 +75,17 @@
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">类型</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-success">主店</label>
+                                                <label class="label label-success">
+                                                    @if($organization->type == 1)
+                                                        零壹组织
+                                                    @elseif($organization->type == 2)
+                                                        服务商组织
+                                                    @elseif($organization->type == 3)
+                                                        商户组织
+                                                    @elseif($organization->type == 4)
+                                                        店铺组织
+                                                    @endif
+                                                </label>
                                             </div>
                                         </div>
 
