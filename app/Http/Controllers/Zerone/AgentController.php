@@ -424,7 +424,8 @@ class AgentController extends Controller {
         $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
         $list = Organization::getPaginageFansmanage([['parent_id', $organization_id]], '10', 'id');
         foreach($list as $key=>$value){
-            $list[$key]['liststore'] = Organization::getList([['parent_id', $value['id']]]); //商户信息下级店铺信息
+            $data = Organization::getList([['parent_id', $value['id']]]); //商户信息下级店铺信息
+            $list[$key]['store'] =  count($data); //计算店铺数量
             $list[$key]['program_name'] = Program::getPluck([['id',$value['asset_id']]],'program_name')->first();//程序名字
         }
         dump($list);
