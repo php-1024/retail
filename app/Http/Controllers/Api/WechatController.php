@@ -396,7 +396,7 @@ class WechatController extends Controller{
                 'content_source_url'=>$request->get('origin_url_'.$i),
             ]);
 
-            $data = [
+            $data['articles'] = [
                 'title'=>$request->get('title_'.$i),
                 'thumb_media_id'=>$request->get('thumb_media_id_'.$i),
                 'author'=>$request->get('author_'.$i),
@@ -407,6 +407,7 @@ class WechatController extends Controller{
             ];
 
             $re = \Wechat::update_meterial($auth_info['authorizer_access_token'],$article_info['media_id'],$i-1,$data);
+            var_dump($re);
             if($re['errcode'] <> '0'){
                 $flag = false;
             }
