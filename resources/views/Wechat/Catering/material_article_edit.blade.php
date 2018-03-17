@@ -77,7 +77,7 @@
                                                 <div class="col-sm-10">
                                                     <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
                                                     <br/><br/>
-                                                    <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/{{$admin_data['organization_id']}}/{{$image_info['filename']}}" style="width: 100px; height:100px;">
+                                                    <img id="img_show_0" src="{{url('uploads/wechat')}}/{{$admin_data['organization_id']}}/{{$image_info['filename']}}" style="width: 100px; height:100px;">
                                                     <input type="hidden" name="img_id" id="img_id_0" value="{{$image_info['id']}}">
                                                     <input type="hidden" name="thumb_media_id" id="media_id_0"  value="{{$image_info['media_id']}}">
                                                 </div>
@@ -112,7 +112,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">原文地址</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" name="origin_url" value="@if(!empty($content_source_url)){{$info['content_source_url']}}@endif">
+                                                    <input type="text" class="form-control" id="input-id-1" name="origin_url" value="@if(!empty($info['content_source_url'])){{$info['content_source_url']}}@endif">
                                                 </div>
                                             </div>
 

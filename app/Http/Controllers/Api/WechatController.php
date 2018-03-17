@@ -370,7 +370,6 @@ class WechatController extends Controller{
             $articles[$key]['image_info'] = $image_info;
             unset($image_info);
         }
-
         $num = count($articles);
 
         return view('Wechat/Catering/material_articles_edit',['id'=>$id,'num'=>$num,'articles'=>$articles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);

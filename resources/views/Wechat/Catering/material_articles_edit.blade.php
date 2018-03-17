@@ -86,8 +86,8 @@
                                                             <button class="btn btn-info" type="button" onclick="selectImageForm({{$key+1}});">选择图片素材</button>
                                                             <br/><br/>
                                                             <img id="img_show_1" src="{{url('uploads/wechat')}}/{{$admin_data['organization_id']}}/{{$val['image_info']['filename']}}" style="width: 100px; height:100px;">
-                                                            <input autocomplete="off" type="hidden" name="img_id_1" id="img_id_1" id="_token" value="">
-                                                            <input  autocomplete="off" type="hidden" name="thumb_media_id_1" id="media_id_1" id="_token" value="">
+                                                            <input autocomplete="off" type="hidden" name="img_id_{{$key+1}}" id="img_id_{{$key+1}}" id="_token" value="{{$val['image_info']['id']}}">
+                                                            <input  autocomplete="off" type="hidden" name="thumb_media_id_{{$key+1}}" id="media_id_{{$key+1}}" id="_token" value="{{$val['image_info']['media_id']}}">
                                                         </div>
                                                     </div>
 
@@ -96,7 +96,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">标题</label>
                                                         <div class="col-sm-9">
-                                                            <input autocomplete="off" type="text" class="form-control" name="title_1" value="">
+                                                            <input autocomplete="off" type="text" class="form-control" name="title_{{$key+1}}" value="{{$val['title']}}">
                                                         </div>
                                                     </div>
 
@@ -104,7 +104,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">作者</label>
                                                         <div class="col-sm-9">
-                                                            <input autocomplete="off" type="text" class="form-control" name="author_1" value="">
+                                                            <input autocomplete="off" type="text" class="form-control" name="author_{{$key+1}}" value="{{$val['author']}}">
                                                         </div>
                                                     </div>
 
@@ -112,7 +112,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">原文地址</label>
                                                         <div class="col-sm-9">
-                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_1" value="">
+                                                            <input  autocomplete="off" type="text" class="form-control" name="origin_url_{{$key+1}}" value="@if(!empty($val['content_source_url'])){{$val['content_source_url']}}@endif">
                                                         </div>
                                                     </div>
 
@@ -120,7 +120,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-2 control-label">正文</div>
                                                         <div class="col-sm-9">
-                                                            <textarea id="form-content1" class="editor" cols="30" name="content_1" rows="10"> </textarea>
+                                                            <textarea id="form-content{{$key+1}}" class="editor" cols="30" name="content_{{$key+1}}" rows="10">{{$val['content']}} </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -232,27 +232,20 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#form-content1').trumbowyg({
-
-            lang: 'fr',
-
-            closable: false,
-
-            mobile: true,
-
-            fixedBtnPane: true,
-
-            fixedFullWidth: true,
-
-            semantic: true,
-
-            resetCss: true,
-
-            autoAjustHeight: true,
-
-            autogrow: true
-
-        });
+        var num = $('#num').val();
+        for(var i = 1 ; i<=num ; i++){
+            $('#form-content'+i).trumbowyg({
+                lang: 'fr',
+                closable: false,
+                mobile: true,
+                fixedBtnPane: true,
+                fixedFullWidth: true,
+                semantic: true,
+                resetCss: true,
+                autoAjustHeight: true,
+                autogrow: true
+            });
+        }
 
         $("#addBtn").click(function(){
 
