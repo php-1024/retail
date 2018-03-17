@@ -182,13 +182,12 @@ class WechatController extends Controller{
             $zdata = [
                 'organization_id'=>$admin_data['organization_id'],
                 'title'=>$title,
-                'image_id'=>$img_id,
                 'media_id'=>$re['media_id'],
                 'type'=>'1',
                 'content'=>serialize($data),
             ];
             WechatArticle::addWechatArticle($zdata);
-            return response()->json(['data'=>'上传图文素材成功','status' => '0']);
+            return response()->json(['data'=>'上传图文素材成功','status' => '1']);
         }else{
             return response()->json(['data'=>'上传图文素材失败','status' => '0']);
         }
@@ -215,6 +214,8 @@ class WechatController extends Controller{
 
         $num = $request->get('num');
         $data['articles'] = [];
+        $title='';
+        $image_id = '';
         for($i=1;$i<=$num;$i++){
             array_push($data['articles'],[
                 'title'=>$request->get('title_'.$i),
@@ -227,7 +228,21 @@ class WechatController extends Controller{
                 'content_source_url'=>$request->get('origin_url_'.$i),
             ]);
         }
-        var_dump($data);
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+        $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        if(!empty($re['media_id'])){
+            $zdata = [
+                'organization_id'=>$admin_data['organization_id'],
+                'title'=>$request->get('title_1'),
+                'media_id'=>$re['media_id'],
+                'type'=>'2',
+                'content'=>serialize($data),
+            ];
+            WechatArticle::addWechatArticle($zdata);
+            return response()->json(['data'=>'上传图文素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'上传图文素材失败','status' => '0']);
+        }
     }
     /*
      * 图片选择页面

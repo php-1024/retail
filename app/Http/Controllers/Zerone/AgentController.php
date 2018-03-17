@@ -475,7 +475,7 @@ class AgentController extends Controller{
     public function agent_fansmanage_add(Request $request){
 
         $organization_id = $request->organization_id;//服务商id
-        $list = Organization::getList([['type',3],['parent_id','<>',$organization_id]]);
+        $list = Organization::getList([['type',3],['parent_id','<>',$organization_id],['parent_id','1']]);
         return view('Zerone/Agent/agent_fansmanage_add',['list'=>$list,'organization_id'=>$organization_id]);
     }
     //商户划拨归属功能提交
@@ -508,7 +508,6 @@ class AgentController extends Controller{
                     $number = count($datastore);//计算店铺数量
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
                     if($Assets['program_balance'] >= $number){//如果服务商剩余程序数量足够
-                        dd(1);
                         $program_balance = $Assets->program_balance - $number;//剩余数量
                         $program_used_num = $Assets->program_used_num + $number;//使用数量
                         OrganizationAssets::editAssets([['id',$Assets->id]],['program_balance'=>$program_balance,'program_used_num'=>$program_used_num]);//修改数量
@@ -524,7 +523,6 @@ class AgentController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'划拨了商户:'.$fansmanage_name.'-归属于服务商：'.$oneAgent['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
