@@ -238,7 +238,6 @@ class AgentController extends Controller {
         $realname = $request->input('realname'); //用户名字
         $idcard = $request->input('idcard'); //用户身份证号
         $mobile = $request->input('mobile'); //用户手机号
-        $password = $request->input('password'); //登入密码
         $where = [['organization_name', $organization_name], ['id', '<>', $id]];
         $name = Organization::checkRowExists($where);
         if ($name == 'true') {
@@ -261,13 +260,6 @@ class AgentController extends Controller {
             if ($list['organizationagentinfo']['agent_owner'] != $realname) {
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner' => $realname]); //修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id', $account_id]], ['realname' => $realname]); //修改用户管理员信息表 用户名
-
-            }
-            if (!empty($password)) {
-                $key = config("app.zerone_encrypt_key"); //获取加密盐
-                $encrypted = md5($password); //加密密码第一重
-                $encryptPwd = md5("lingyikeji" . $encrypted . $key); //加密密码第二重
-                Account::editAccount([['organization_id', $id], ['parent_id', '1']], ['password' => $encryptPwd]); //修改管理员表登入密码
 
             }
             if ($acc['idcard'] != $idcard) {
