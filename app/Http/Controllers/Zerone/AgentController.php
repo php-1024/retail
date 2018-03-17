@@ -494,6 +494,8 @@ class AgentController extends Controller{
             $parent_tree = $oneAgent['parent_tree'].$organization_id.',';//组织树
             Organization::editOrganization([['id',$fansmanage_id]],['parent_id'=>$organization_id,'parent_tree'=>$parent_tree]);
             $datastore = Organization::getList([['parent_id',$fansmanage_id]]);//商户信息下级分店信息
+            dd($datastore);
+
             if(!empty($datastore->toArray())){//如果有店铺
                 foreach($datastore as $key=>$value){
                     $asset_id = $value->program_id;//店铺用的程序id
@@ -502,7 +504,6 @@ class AgentController extends Controller{
                 }
 
                 if($status == 1){//消耗程序数量
-                    dd(1);
                     $number = count($datastore);//计算店铺数量
                     $Assets = OrganizationAssets::getOne([['organization_id',$organization_id],['program_id',$asset_id]]);//查询服务商程序数量信息
                     if($Assets['program_balance'] >= $number){//如果服务商剩余程序数量足够
