@@ -84,7 +84,7 @@
                                                         <div class="col-sm-9">
                                                             <button class="btn btn-info" type="button" onclick="selectImageForm(1);">选择图片素材</button>
                                                             <br/><br/>
-                                                            <img id="img_show_1" src="http://o2o.01nnt.com/uploads/wechat/6/20180316033708570.jpg" style="width: 100px; height:100px;display:none">
+                                                            <img id="img_show_1" src="" style="width: 100px; height:100px;display:none">
                                                             <input autocomplete="off" type="hidden" name="img_id_1" id="img_id_1" id="_token" value="">
                                                             <input  autocomplete="off" type="hidden" name="thumb_media_id_1" id="media_id_1" id="_token" value="">
                                                         </div>
