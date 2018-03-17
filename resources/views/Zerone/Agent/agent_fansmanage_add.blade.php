@@ -23,7 +23,7 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label" style="padding-top: 7px;">消耗程序与分店数量</label>
+                    <label class="col-sm-3 control-label" style="padding-top: 7px;">是否消耗程序</label>
                     <div class="col-sm-9">
                         <input type="checkbox" class="js-switch" checked  value="1" name="status"/>
                     </div>
