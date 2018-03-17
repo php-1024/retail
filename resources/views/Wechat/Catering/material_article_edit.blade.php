@@ -70,6 +70,7 @@
                                         <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_article_edit_check') }}">
                                             <input type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
                                             <input type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
+                                            <input type="hidden" id="id" name="id" value="{{ url('api/catering/material_article') }}">
                                             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">图片</label>
@@ -77,8 +78,8 @@
                                                     <button class="btn btn-info" type="button" onclick="selectImageForm(0);">选择图片素材</button>
                                                     <br/><br/>
                                                     <img id="img_show_0" src="http://o2o.01nnt.com/uploads/wechat/{{$admin_data['organization_id']}}/{{$image_info['filename']}}" style="width: 100px; height:100px;">
-                                                    <input type="hidden" name="img_id" id="img_id_0" id="_token" value="">
-                                                    <input type="hidden" name="thumb_media_id" id="media_id_0" id="_token" value="">
+                                                    <input type="hidden" name="img_id" id="img_id_0" value="{{$image_info['id']}}">
+                                                    <input type="hidden" name="thumb_media_id" id="media_id_0"  value="{{$image_info['media_id']}}">
                                                 </div>
                                             </div>
 
@@ -87,7 +88,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">标题</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" name="title" value="">
+                                                    <input type="text" class="form-control" id="input-id-1" name="title" value="{{$info['title']}}">
                                                 </div>
                                             </div>
 
@@ -95,7 +96,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">作者</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" name="author" value="">
+                                                    <input type="text" class="form-control" id="input-id-1" name="author" value="{{$info['author']}}">
                                                 </div>
                                             </div>
 
@@ -103,7 +104,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">摘要</label>
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control" rows="5" name="digest"></textarea>
+                                                    <textarea class="form-control" rows="5" name="digest">{{$info['digest']}}</textarea>
                                                 </div>
                                             </div>
 
@@ -111,7 +112,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">原文地址</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input-id-1" name="origin_url" value="">
+                                                    <input type="text" class="form-control" id="input-id-1" name="origin_url" value="{{$info['content_source_url	']}}">
                                                 </div>
                                             </div>
 
@@ -119,7 +120,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">正文</label>
                                                 <div class="col-sm-10">
-                                                    <textarea id="form-content" name="content" class="editor" cols="30" rows="10"> </textarea>
+                                                    <textarea id="form-content" name="content" class="editor" cols="30" rows="10">{{$info['content']}} </textarea>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
