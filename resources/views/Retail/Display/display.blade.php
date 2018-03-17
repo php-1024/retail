@@ -361,10 +361,6 @@
             url: '{{ url('retail/ajax/store_edit') }}',
             type: 'post',
             data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
             success: function (json) {
                 if (json.status == -1) {
                     window.location.reload();
