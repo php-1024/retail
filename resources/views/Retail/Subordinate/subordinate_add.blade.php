@@ -68,6 +68,12 @@
                                                     <label class="col-sm-2 control-label">真实姓名</label>
                                                     <div class="col-sm-10"><input type="text" class="form-control" name="realname"></div>
                                                 </div>
+
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">输入安全密码确认创建</label>
+                                                    <div class="col-sm-5"><input type="text" class="form-control" name="safe_password"></div>
+                                                </div>
                                             </div>
                                             <ul class="pager wizard">
                                                 <li class="finish">
