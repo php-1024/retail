@@ -49,6 +49,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div style="clear:both;"></div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-4 text-right" for="input-id-1">模式</label>
                                         <div class="col-sm-8">
