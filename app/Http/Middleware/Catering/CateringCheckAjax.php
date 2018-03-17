@@ -68,6 +68,11 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
                 return self::format_response($re,$next);
                 break;
+s
+            case "api/ajax/material_articles_add_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
+                return self::format_response($re,$next);
+                break;
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
@@ -111,6 +116,19 @@ class CateringCheckAjax
             return $re;
         }else{
             $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    public function checkLoginAndRuleAndMaterialArticlesAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -625,6 +643,29 @@ class CateringCheckAjax
 
         if(empty($request->input('content'))){
             return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    public function checkMaterialArticlesAdd($request){
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
         }
         return self::res(1,$request);
     }
