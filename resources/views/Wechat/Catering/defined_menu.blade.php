@@ -309,11 +309,22 @@
 
     function get_menu_add_box(){
         var url = $('#defined_menu_add_url').val();
-        var target = $('#ctrl_box');
         var token = $('#_token').val();
         var data = {'_token':token};
-        $.post(url,data,function(json){
-            alert(json);
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#ctrl_box').html(response);
+            }
         });
     }
 </script>
