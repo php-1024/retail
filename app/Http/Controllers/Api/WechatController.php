@@ -349,6 +349,27 @@ class WechatController extends Controller{
     }
 
     /*
+    * 编辑多条图文素材页面
+    */
+    public function material_articles_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+
+        /*
+         * 获取文章数据
+         */
+        $article_info = WechatArticle::getOne([['id',$id]]);
+        $article_info['content'] = unserialize( $article_info['content'] );
+        $article_info = $article_info->toArray();
+        $articles = $article_info['content']['articles'][0];
+        dump($articles);
+        return view('Wechat/Catering/material_article_edit',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    /*
      * 图片选择页面
      */
     public function material_image_select(Request $request){
