@@ -771,7 +771,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('material_articles_add','Api\WechatController@material_articles_add')->middleware('CateringCheck');//添加多条图文列表
         Route::any('material_article_edit','Api\WechatController@material_article_edit')->middleware('CateringCheck');//添加多条图文列表
         Route::any('material_articles_edit','Api\WechatController@material_articles_edit')->middleware('CateringCheck');//添加多条图文列表
-        Route::any('defined_menu','Api\WechatController@defined_menu')->middleware('CateringCheck');//添加多条图文列表
+        Route::any('defined_menu','Api\WechatController@defined_menu')->middleware('CateringCheck');//自定义菜单管理页面
     });
 
     //微信接口中页面使用Ajax的部分
@@ -789,6 +789,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('material_article_delete_check','Api\WechatController@material_article_delete_check')->middleware('CateringCheckAjax');//添加单条图文检测
         Route::any('material_article_edit_check','Api\WechatController@material_article_edit_check')->middleware('CateringCheckAjax');//添加单条图文检测
         Route::any('material_articles_edit_check','Api\WechatController@material_articles_edit_check')->middleware('CateringCheckAjax');//添加多条图文检测
+        Route::any('defined_menu_add','Api\WechatController@defined_menu_add')->middleware('CateringCheckAjax');//添加自定义菜单板块
     });
 });
 /*********************接口路由*************************/

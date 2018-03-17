@@ -115,6 +115,7 @@ class CateringCheckAjax
             case "api/ajax/material_image_delete_comfirm": //图片上传确认弹窗
             case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
             case "api/ajax/material_image_select":        //图片选择弹窗
+            case "api/ajax/defined_menu_add":              //自定义菜单添加
 
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
