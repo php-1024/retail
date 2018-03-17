@@ -34,7 +34,6 @@ class FansmanageController extends Controller{
         }
 
         $list = OrganizationFansmanageapply::getPaginage($where,'15','id');
-        dd($list);
         return view('Zerone/Fansmanage/fansmanage_examinelist',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户审核ajaxshow显示页面
