@@ -129,7 +129,7 @@ class CateringCheckAjax
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
+            $re2 = $this->checkMaterialArticlesEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
