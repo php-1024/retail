@@ -302,7 +302,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺LOGO</label>
                         <div class="col-sm-10">
-                            <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="file" name="retail_logo" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
