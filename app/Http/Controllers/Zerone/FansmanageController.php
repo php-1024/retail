@@ -24,7 +24,7 @@ class FansmanageController extends Controller{
         $fansmanage_name = $request->input('fansmanage_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
         $search_data = ['fansmanage_name'=>$fansmanage_name,'fansmanage_owner_mobile'=>$fansmanage_owner_mobile];
-        $where = [];
+        $where = [['status','<>','1']];
         if(!empty($fansmanage_name)){
             $where[] = ['fansmanage_name','like','%'.$fansmanage_name.'%'];
         }
@@ -39,42 +39,42 @@ class FansmanageController extends Controller{
     //商户审核ajaxshow显示页面
     public function fansmanage_examine(Request $request){
         $id = $request->input('id');//服务商id
-        $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
+        $status = $request->input('status');//是否通过值 1为通过 -1为不通过
         $info =  OrganizationFansmanageapply::getOne([['id',$id]]);//获取该ID的信息
-        return view('Zerone/Fansmanage/fansmanage_examine',['info'=>$info,'sta'=>$sta]);
+        return view('Zerone/Fansmanage/fansmanage_examine',['info'=>$info,'status'=>$status]);
     }
     //商户审核数据提交
     public function fansmanage_examine_check(Request $request){
         $admin_data = Account::where('id',1)->first();//查找超级管理员的数据
         $admin_this = $request->get('admin_data');//查找当前操作人员数据
         $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//服务商id
-        $sta = $request->input('sta');//是否通过值 1为通过 -1为不通过
-        $fansmanagelist = fansmanageApply::getOne([['id',$id]]);//查询申请服务商信息
+        $id = $request->input('id');//商户id
+        $status = $request->input('status');//是否通过值 1为通过 -1为不通过
+        $oneFansmanage = OrganizationFansmanageapply::getOne([['id',$id]]);//查询申请服务商信息
 
-        if($sta == -1 ){
+        if($status == -1 ){
             DB::beginTransaction();
             try{
-                fansmanageApply::editfansmanageApply([['id',$id]],['status'=>$sta]);//拒绝通过
+                OrganizationFansmanageapply::editFansmanageApply([['id',$id]],['status'=>$status]);//拒绝通过
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_this['organization_id'],$admin_this['id'],$route_name,'拒绝了商户：'.$fansmanagelist['proxy_name']);//保存操作记录
+                OperationLog::addOperationLog('1','1',$admin_this['id'],$route_name,'拒绝了商户：'.$oneFansmanage['fansmanage_name']);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '拒绝失败', 'status' => '0']);
             }
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
-        }elseif($sta == 1){
+        }elseif($status == 1){
 
             $list = Organization::getOneProxy([['id',$id]]);
 
             $parent_id = $id;//零壹或者服务商organization_id
             $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
-            $mobile = $fansmanagelist['fansmanage_owner_mobile'];//手机号码
+            $mobile = $oneFansmanage['fansmanage_owner_mobile'];//手机号码
 
             DB::beginTransaction();
             try{
-                fansmanageApply::editfansmanageApply([['id',$id]],['status'=>$sta]);//申请通过
+                OrganizationFansmanageapply::editfansmanageApply([['id',$id]],['status'=>$status]);//申请通过
                 //添加服务商
                 $listdata = ['organization_name'=>$fansmanagelist['fansmanage_name'],'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>3,'type'=>3,'status'=>1];
                 $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
