@@ -277,9 +277,20 @@ class WechatController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');
+
+        /*
+         * 获取文章数据
+         */
         $article_info = WechatArticle::getOne([['id',$id]]);
         $article_info->content = unserialize($article_info->content);
-        dump($article_info->toArray());
+        $article_info = $article_info->toArray();
+        dump($article_info);
+        /*
+         * 根据media_id查询相关图片数据
+         */
+        $image_info = WechatImage::getOne([['media_id',$article_info['content']['media_id']]]);
+        dump($image_info);
+
         return view('Wechat/Catering/material_articles_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
