@@ -110,21 +110,25 @@ class ZeroneCheckAjax
 
 
 
-
-            case "zerone/ajax/company_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndComEdit($request);
-                return self::format_response($re,$next);
-                break;
-            case "zerone/ajax/company_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
-            case "zerone/ajax/company_list_frozen_check"://商户冻结  检测 登录 和 权限 和 安全密码
+            //商户管理
+            case "zerone/ajax/fansmanage_examine_check"://商户审核  检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/company_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
+            case "zerone/ajax/fansmanage_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndComEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "zerone/ajax/fansmanage_list_frozen_check"://商户冻结  检测 登录 和 权限 和 安全密码
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
+            case "zerone/ajax/fansmanage_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
+            case "zerone/ajax/fansmanage_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
@@ -163,11 +167,11 @@ class ZeroneCheckAjax
             case "zerone/ajax/agent_fansmanage_draw"://服务商列表商户划拨管理-商户划出归属
 
             //商户管理
-            case "zerone/ajax/company_examine"://商户审核检测弹出登录和权限
-            case "zerone/ajax/company_list_edit"://商户编辑检测弹出登入和权限
-            case "zerone/ajax/company_list_frozen"://商户冻结检测弹出登入和权限
-            case "zerone/ajax/company_list_delete"://商户删除检测弹出登入和权限
-            case "zerone/ajax/company_assets"://商户资产划入检测弹出登入和权限
+            case "zerone/ajax/fansmanage_examine"://商户审核检测弹出登录和权限
+            case "zerone/ajax/fansmanage_list_edit"://商户编辑检测弹出登入和权限
+            case "zerone/ajax/fansmanage_list_frozen"://商户冻结检测弹出登入和权限
+            case "zerone/ajax/fansmanage_list_delete"://商户删除检测弹出登入和权限
+            case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
 
             case "zerone/ajax/store_insert":    //添加店铺-开设店铺 检测弹出登入和权限
                 $re = $this->checkLoginAndRule($request);
@@ -380,6 +384,8 @@ class ZeroneCheckAjax
             }
         }
     }
+
+    /*****服务商管理******/
 
 
     //检测登录和权限
@@ -652,7 +658,9 @@ class ZeroneCheckAjax
 
 
 
+    /*****服务商管理******/
 
+    
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
