@@ -260,82 +260,37 @@
 
 
 {{--编辑店铺信息--}}
+{{--上传图片--}}
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal" role="form" id="store_edit" method="post" enctype="multipart/form-data" action="">
+    <form class="form-horizontal" role="form" id="uploadForm" method="post" enctype="multipart/form-data" action="">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="organization_id" id="organization_id" value="{{$admin_data['organization_id']}}">
+        <input type="hidden" name="goods_id" id="goods_id" value="{{$goods->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
+                    <h4 class="modal-title">上传图片</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 text-right">分店名称</label>
+                            <label class="col-sm-2 text-right">图片信息</label>
                             <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">负责人</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="张老三" placeholder="负责人" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
+                                <input type="file" class="filestyle" style="display: none;" name="upload_thumb" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                             </div>
                         </div>
                         <div style="clear:both;"></div>
                     </form>
-
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" onclick="return EditStore()">确定</button>
+                    <button type="button" class="btn btn-success" onclick="return uploadForm();">上传图片</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+{{--上传图片--}}
 {{--编辑店铺信息--}}
 
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
@@ -360,11 +315,11 @@
     });
 
     //编辑店铺信息
-    function EditStore() {
-        var formData = new FormData($( "#store_edit" )[0]);
-        console.log(formData);
+    //上传图片提交表单
+    function uploadForm() {
+        var formData = new FormData($( "#uploadForm" )[0]);
         $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}' ,
+            url: '{{ url('retail/ajax/upload_thumb_check') }}' ,
             type: 'POST',
             data: formData,
             async: false,
