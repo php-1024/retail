@@ -1,5 +1,4 @@
-<link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_list_frozen_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_list_lock_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <input type="hidden" name="status" id="status" value="{{$status}}">
@@ -32,7 +31,6 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     //提交表单
     function postForm() {
@@ -53,13 +51,14 @@
                     window.location.reload();
                 });
             }else{
-                 swal({
-                     title: "提示信息",
-                     text: json.data,
-                     confirmButtonColor: "#DD6B55",
-                     confirmButtonText: "确定",
-                     //type: "warning"
-                 });
+                console.log(json);
+//                 swal({
+//                     title: "提示信息",
+//                     text: json.data,
+//                     confirmButtonColor: "#DD6B55",
+//                     confirmButtonText: "确定",
+//                     //type: "warning"
+//                 });
             }
         });
     }
