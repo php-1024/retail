@@ -328,7 +328,7 @@ class FansmanageController extends Controller{
         return view('Zerone/Fansmanage/fansmanage_list_lock',['data'=>$data,'status'=>$status]);
     }
     //商户冻结功能提交
-    public function fansmanage_list_frozen_check(Request $request){
+    public function fansmanage_list_lock_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//商户id
@@ -356,13 +356,6 @@ class FansmanageController extends Controller{
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
 
-    }
-    //商户删除ajaxshow显示页面
-    public function fansmanage_list_delete(Request $request){
-//        $id = $request->input('id');//服务商id
-//        $listorg = Organization::getOneProxy(['id'=>$id]);
-//        $warzone = Warzone::all();
-        return view('Zerone/fansmanage/fansmanage_list_delete');
     }
 
     //商户下级店铺架构
