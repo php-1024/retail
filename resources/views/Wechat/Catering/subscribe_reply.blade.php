@@ -64,6 +64,7 @@
                                     <header class="panel-heading">
                                         图文素材列表
                                         <input type="hidden" id="id" value="@if(!empty($info)){{$info['id']}}@endif">
+                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     </header>
 
                                     <div class="table-responsive">
@@ -85,7 +86,7 @@
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-xs" id="editText"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;编辑文字</button>
+                                                    <button class="btn btn-danger btn-xs" id="editText" onclick="return getEditTextForm();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;编辑文字</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -229,29 +230,7 @@
     </form>
 </div>
 
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">编辑文本回复</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -268,28 +247,28 @@
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $('#editText').click(function(){
-            $('#myModal1').modal();
+    //弹出文本输入框
+    function getEditTextForm(){
+        var url = $('#auto_reply_edit_text_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-        $('#editArticle').click(function(){
-            $('#myModal2').modal();
-        });
-        $('#editPicture').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#form-content').trumbowyg({
-            lang: 'fr',
-            closable: false,
-            mobile: true,
-            fixedBtnPane: true,
-            fixedFullWidth: true,
-            semantic: true,
-            resetCss: true,
-            autoAjustHeight: true,
-            autogrow: true
-        });
-    });
+    }
 </script>
 </body>
 </html>
