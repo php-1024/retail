@@ -854,6 +854,30 @@ class CateringCheckAjax
         return self::res(1,$request);
     }
 
+    //检测非关键字默认自动回复文本消息的内容
+    public function checkDefaultReplyArticleEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkDefaultReplyImageEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkDefaultReplyTextEdit($request){
+        if(empty($request->input('text_info'))){
+            return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
     //检测关注后自动回复文本消息的内容
     public function checkSubscribeReplyArticleEdit($request){
         if(empty($request->input('media_id'))){
