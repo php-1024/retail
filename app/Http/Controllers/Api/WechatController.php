@@ -807,7 +807,6 @@ class WechatController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
-        dump($info);
         return view('Wechat/Catering/subscribe_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 

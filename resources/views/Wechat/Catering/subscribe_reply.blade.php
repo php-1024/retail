@@ -63,6 +63,7 @@
                                 <section class="panel panel-default">
                                     <header class="panel-heading">
                                         图文素材列表
+                                        <input type="hidden" id="id" value="@if(!empty($info)){{$info['id']}}@endif">
                                     </header>
 
                                     <div class="table-responsive">
@@ -79,7 +80,7 @@
                                                 <td>文字回复</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" checked="checked">
+                                                        <input type="checkbox" value="1" @if(!empty($info) && $info['type']=='1') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
@@ -91,7 +92,7 @@
                                                 <td>图文素材</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox">
+                                                        <input type="checkbox" value="1" @if(!empty($info) && $info['type']=='3') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
@@ -103,7 +104,7 @@
                                                 <td>图片素材</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox">
+                                                        <input type="checkbox" value="1" @if(!empty($info) && $info['type']=='2') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
