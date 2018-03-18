@@ -66,17 +66,17 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“{{$listOrg->organization_name}}”店铺架构</h5>
+                            <h5>“{{$onefansmanage->organization_name}}”店铺架构</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            {{ $listOrg['organization_name']. '-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner'].'-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner_mobile'] }}
-                                        </div>
+                                        {{--<div class="dd-handle">--}}
+                                            {{--{{ $listOrg['organization_name']. '-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner'].'-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner_mobile'] }}--}}
+                                        {{--</div>--}}
 
-                                        {!! $structure  !!}
+                                        {{--{!! $structure  !!}--}}
 
                                     </li>
                                 </ol>

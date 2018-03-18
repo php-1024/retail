@@ -365,7 +365,7 @@ class FansmanageController extends Controller{
 
         $organization_id = $request->input('organization_id');//服务商id
         $onefansmanage = Organization::getOnefansmanage([['id',$organization_id]]);
-        $list = Organization::getList([['parent_tree','like','%'.$onefansmanage['parent_tree'].$onefansmanage['id'].',%']],0,'id','asc')->toArray();
+        $list = Organization::getList([['parent_tree','like','%'.$onefansmanage['parent_tree'].$onefansmanage['id'].',%']]);
         $structure = $this->Com_structure($list,$organization_id);
 
         return view('Zerone/Fansmanage/fansmanage_structure',['onefansmanage'=>$onefansmanage,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
