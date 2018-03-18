@@ -44,7 +44,7 @@ class Organization extends Model{
 
     //和organizationBranchinfo表一对一的关系
     public function fansmanageinfo(){
-        return $this->hasOne('App\Models\OrganizationFansmanageinfo', 'organization_id');
+        return $this->hasOne('App\Models\OrganizationFansmanageinfo', 'fansmanage_id');
     }
 
 
