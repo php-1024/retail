@@ -695,13 +695,13 @@ class WechatController extends Controller{
         try {
             $data = ['reply_type'=>$reply_type,'reply_info'=>$reply_info,'media_id'=>$media_id];
             WechatReply::editWechatReply([['id',$id]],$data);
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$info['keyword'].'的文本回复内容');//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$info['keyword'].'的图片回复内容');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '修改自动回复关键字的文本回复失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '修改自动回复关键字的图片回复失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '修改自动回复关键字的文本回复成功', 'status' => '1']);
+        return response()->json(['data' => '修改自动回复关键字的图片回复成功', 'status' => '1']);
     }
 
     /*
@@ -714,7 +714,34 @@ class WechatController extends Controller{
         $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
         return view('Wechat/Catering/auto_reply_edit_article',['id'=>$id,'info'=>$info,'list'=>$list]);
     }
+    /*
+    * 编辑自动回复文本内容
+    */
+    public function auto_reply_edit_article_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $article_id = $request->input('article_id');
+        $article_info = WechatArticle::getOne([['id',$article_id]]);
 
+        $media_id = $article_info['media_id'];
+        $reply_info = $article_info['title'];
+
+        $reply_type = 3;
+        $info = WechatReply::getOne([['id',$id]]);
+
+        DB::beginTransaction();
+        try {
+            $data = ['reply_type'=>$reply_type,'reply_info'=>$reply_info,'media_id'=>$media_id];
+            WechatReply::editWechatReply([['id',$id]],$data);
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$info['keyword'].'的文本回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改自动回复关键字的图文回复失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改自动回复关键字的图文回复成功', 'status' => '1']);
+    }
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
