@@ -704,7 +704,16 @@ class WechatController extends Controller{
         return response()->json(['data' => '修改自动回复关键字的文本回复成功', 'status' => '1']);
     }
 
-
+    /*
+  * 关键字自动回复回复图片内容
+  */
+    public function auto_reply_edit_article(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $id = $request->input('id');
+        $info = WechatReply::getOne([['id',$id]]);
+        $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
+        return view('Wechat/Catering/auto_reply_edit_image',['id'=>$id,'info'=>$info,'list'=>$list]);
+    }
 
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
