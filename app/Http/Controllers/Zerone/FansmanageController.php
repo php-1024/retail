@@ -366,7 +366,7 @@ class FansmanageController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $onefansmanage = Organization::getOnefansmanage([['id',$organization_id]]);
 
-        $list = Organization::getOneFansmanage([['parent_tree','like','%'.$onefansmanage['parent_tree'].$onefansmanage['id'].',%']]);
+        $list = Organization::getListFansmanage([['parent_tree','like','%'.$onefansmanage['parent_tree'].$onefansmanage['id'].',%']]);
         $structure = $this->Com_structure($list,$organization_id);
         dd($structure);
         return view('Zerone/Fansmanage/fansmanage_structure',['onefansmanage'=>$onefansmanage,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -377,9 +377,7 @@ class FansmanageController extends Controller{
     private function Com_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
-            dd($val);
             if($val['parent_id'] == $id) {
-
                 unset($list[$key]);
                 $val['sonlist'] = $this->Com_structure($list, $val['id']);
                 //$arr[] = $val;

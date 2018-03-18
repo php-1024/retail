@@ -102,7 +102,10 @@ class Organization extends Model{
         return self::with('organizationAgentinfo')->with('account')->where($where)->get();
     }
 
-
+    //获取多条信息商户
+    public static function getListFansmanage($where){
+        return self::with('fansmanageinfo')->where($where)->get();
+    }
     //获取多条信息
     public static function getList($where){
         return self::where($where)->get();
