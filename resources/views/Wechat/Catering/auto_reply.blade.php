@@ -86,7 +86,7 @@
                                                 @if($val->type == '1')
                                                     <label class="label label-success">精确</label>
                                                 @else
-                                                    <label class="label label-success">模糊</label>
+                                                    <label class="label label-info">模糊</label>
                                                 @endif
                                             </td>
                                             <td>{{$val->created_at}}</td>
