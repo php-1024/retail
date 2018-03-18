@@ -534,6 +534,48 @@ class FansmanageController extends Controller{
         $onedata = Organization::getOne([['id', $store_id]]);
         return view('Zerone/Fansmanage/fansmanage_store_draw',['onedata'=>$onedata,'onefansmanage'=>$onefansmanage]);
     }
+    //商户店铺管理--划出功能提交
+    public function fansmanage_store_draw_check(Request $request){
+
+        /*划出默认归属零壹*/
+        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
+        $route_name = $request->path(); //获取当前的页面路由
+        $fansmanage_id = $request->fansmanage_id; //商户id
+        $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name')->first(); //商户名称
+        $store_id = $request->store_id; //划出店铺id
+        $status = $request->status; //是否消耗程序数量
+        $storeData = Organization::getOne([['id', $store_id]]); //店铺信息
+        DB::beginTransaction();
+        try {
+            $parent_tree = '0' . ',' . '1' . ','; //组织树
+            Organization::editOrganization([['id', $store_id]], ['parent_id' => '1', 'parent_tree' => $parent_tree]);
+
+            if ($status == 1) { //归还程序数量
+                $Assets = OrganizationAssets::getOne([['organization_id', $fansmanage_id], ['program_id', $storeData['program_id']]]); //查询商户程序数量信息
+                if (!empty($Assets)) { //如果存在
+                    $program_balance = $Assets->program_balance + 1; //剩余数量
+                    $program_used_num = $Assets->program_used_num - 1; //使用数量
+                    OrganizationAssets::editAssets([['id', $Assets->id]], ['program_balance' => $program_balance, 'program_used_num' => $program_used_num]); //修改数量
+                } else {
+                    $data = ['program_id' => $storeData['program_id'], 'organization_id' => $fansmanage_id, 'program_balance' => '1', 'program_used_num' => '0'];
+                    OrganizationAssets::addAssets($data);
+                }
+                $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => '1', 'to_organization_id' => $fansmanage_id, 'program_id' => $storeData['program_id'], 'status' => '2', 'number' => '1'];
+                //添加操作日志
+                OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
+            }
+            //添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '从商户:' . $fansmanage_name . '-划出了店铺：' . $storeData['organization_name']); //保存操作记录
+            DB::commit(); //提交事务
+
+        }
+        catch(Exception $e) {
+            dd($e);
+            DB::rollBack(); //事件回滚
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
+    }
 
 }
 ?>
