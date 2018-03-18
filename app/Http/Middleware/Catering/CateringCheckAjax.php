@@ -84,7 +84,7 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "api/ajax/auto_replay_add_check"://测试添加自动回复添加
+            case "api/ajax/auto_reply_add_check"://测试添加自动回复添加
                 $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
                 break;
 
