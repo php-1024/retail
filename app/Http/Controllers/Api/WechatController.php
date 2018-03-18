@@ -815,7 +815,7 @@ class WechatController extends Controller{
     public function subscribe_reply_text_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
-        return view('Wechat/Catering/subscribe_reply',['info'=>$info]);
+        return view('Wechat/Catering/subscribe_reply_text_edit',['info'=>$info]);
     }
     //关注后文本回复保存
     public function subscribe_reply_text_edit_check(Request $request){
