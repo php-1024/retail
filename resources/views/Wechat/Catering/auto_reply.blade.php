@@ -61,7 +61,7 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">关键词自动回复</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-success" id="addKeyWord">新建关键字 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
+                                    <button class="btn btn-success" id="addKeyWord" onclick="return getAddForm();">新建关键字 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="_token" id="auto_apply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
