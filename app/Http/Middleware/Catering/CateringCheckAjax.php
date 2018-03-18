@@ -84,6 +84,9 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "api/ajax/auto_replay_add_check"://测试添加自动回复添加
+                $re = $this->checkLoginAndRuleAndAutoReplyAddCheck($request);
+                break;
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
@@ -125,6 +128,20 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测登陆，权限，添加自动回复关键字
+    public function checkLoginAndRuleAndAutoReplyAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测登陆，权限，和多条图文修改
     public function checkLoginAndRuleAndMaterialArticlesEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -692,6 +709,15 @@ class CateringCheckAjax
         if(empty($request->input('content'))){
             return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
         }
+        return self::res(1,$request);
+    }
+
+    //检测关键字自定义回复
+    public function checkAutoReplyAdd($request){
+        if(empty($request->input('keyword'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+
         return self::res(1,$request);
     }
 

@@ -794,6 +794,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('defined_menu_add','Api\WechatController@defined_menu_add')->middleware('CateringCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_get','Api\WechatController@defined_menu_get')->middleware('CateringCheckAjax');//获取自定义菜单数据
         Route::any('auto_reply_add','Api\WechatController@auto_reply_add')->middleware('CateringCheckAjax');
+        Route::any('auto_replay_add_check','Api\WechatController@auto_reply_add_check')->middleware('CateringCheckAjax');
     });
 });
 /*********************接口路由*************************/
