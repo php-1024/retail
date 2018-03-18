@@ -29,7 +29,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                <button class="btn btn-success" type="button" id="save_btn" onclick="return postForm();">确定</button>
             </div>
         </div>
     </div>
@@ -43,5 +43,32 @@ function select_img(obj){
     $('#image_id').val(image_id);
     $('.item').find('.item-overlay').hide();
     target.find('.item-overlay').show();
+}
+//提交表单
+function postForm() {
+    var target = $("#currentForm");
+    var url = target.attr("action");
+    var data = target.serialize();
+    $.post(url, data, function (json) {
+        if (json.status == -1) {
+            window.location.reload();
+        } else if(json.status == 1) {
+            swal({
+                title: "提示信息",
+                text: json.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定"
+            },function(){
+                window.location.reload();
+            });
+        }else{
+            swal({
+                title: "提示信息",
+                text: json.data,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定"
+            });
+        }
+    });
 }
 </script>
