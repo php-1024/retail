@@ -82,12 +82,12 @@
                                                 <td>文字回复</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" class="reply_type" autocomplete="off" value="1" @if(!empty($info) && $info['reply_type']=='1') checked="checked" @endif>
+                                                        <input type="checkbox" disabled class="reply_type" autocomplete="off" value="1" @if(!empty($info) && $info['reply_type']=='1') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-xs "  id="editText" disabled onclick="return getEditTextForm();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;编辑文字</button>
+                                                    <button class="btn btn-danger btn-xs "  id="editText" onclick="return getEditTextForm();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;编辑文字</button>
                                                 </td>
                                             </tr>
                                             <tr>
