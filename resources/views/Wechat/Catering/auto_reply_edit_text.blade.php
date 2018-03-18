@@ -23,9 +23,7 @@
     </div>
 </form>
 <script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
-
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
-
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
     $(function(){
