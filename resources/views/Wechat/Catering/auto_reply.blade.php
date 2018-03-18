@@ -104,14 +104,12 @@
                                                     @if($val['reply_type']=='1')
                                                         <div>
                                                             <button class="btn btn-info btn-xs" id="editText"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                            <button class="btn btn-danger btn-xs" id="deleteMaterial"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                             <label class="label label-primary">文本</label>&nbsp;&nbsp;
                                                              {{str_limit($val->reply_info,20,'...')}}&nbsp;&nbsp;
                                                         </div>
                                                     @elseif($val['reply_type']=='2')
                                                         <div>
                                                             <button class="btn btn-info btn-xs" id="editArticle"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                            <button class="btn btn-danger btn-xs" id="deleteBtn2"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                             <label class="label label-primary">图文</label>&nbsp;&nbsp;
                                                             测试回复啊啊啊啊啊...&nbsp;&nbsp;
 
@@ -119,7 +117,6 @@
                                                     @elseif($val['reply_type']=='3')
                                                         <div>
                                                             <button class="btn btn-info btn-xs" id="editPicture"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                            <button class="btn btn-danger btn-xs" id="deleteBtn2"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                             <label class="label label-primary">图片</label>&nbsp;&nbsp;
                                                             <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
 
