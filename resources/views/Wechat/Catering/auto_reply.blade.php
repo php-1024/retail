@@ -80,10 +80,16 @@
                                         <tbody>
                                         @foreach($list as $key=>$val)
                                         <tr>
-                                            <td>1</td>
-                                            <td>测试</td>
-                                            <td><label class="label label-success">模糊</label></td>
-                                            <td>2017-08-09 11:11:11</td>
+                                            <td>{{$val->id}}</td>
+                                            <td>{{$val->keyword}}</td>
+                                            <td>
+                                                @if($val->type == '1')
+                                                    <label class="label label-success">精确</label>
+                                                @else
+                                                    <label class="label label-success">模糊</label>
+                                                @endif
+                                            </td>
+                                            <td>{{$val->created_at}}</td>
                                             <td>
                                                 @if(empty($val['reply_type']))
                                                 <p>
@@ -492,6 +498,29 @@
     //弹出图片上传框
     function getAddForm(){
         var url = $('#auto_reply_add_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //弹出图片上传框
+    function getEditTextForm(){
+        var url = $('#auto_reply_add_text_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
