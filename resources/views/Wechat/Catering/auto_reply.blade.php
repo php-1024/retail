@@ -66,6 +66,7 @@
                                     <input type="hidden" name="_token" id="auto_reply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_text_url" value="{{ url('api/ajax/auto_reply_edit_text') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_image_url" value="{{ url('api/ajax/auto_reply_edit_image') }}">
+                                    <input type="hidden" name="_token" id="auto_reply_edit_article_url" value="{{ url('api/ajax/auto_reply_edit_article_url') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">
@@ -346,6 +347,40 @@
     //弹出图片选择框
     function getAutoEditImageForm(id){
         var url = $('#auto_reply_edit_image_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //弹出图片选择框
+    function getAutoEditArticleForm(id){
+        var url = $('#auto_reply_edit_article_url').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
