@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
+                        <textarea id="form-content" class="editor" cols="30" rows="10">{{$info['reply_info']}}</textarea>
                     </div>
                 </form>
             </div>
@@ -27,7 +27,6 @@
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
     $(function(){
-        alert(123);
         $('#form-content').trumbowyg({
             lang: 'fr',
             closable: false,
