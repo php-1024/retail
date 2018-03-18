@@ -12,6 +12,8 @@
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
+    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+    <script src="{{asset('public/Zerone/library/switchery')}}/js/switchery.js"></script>
 </head>
 
 <body class="">
