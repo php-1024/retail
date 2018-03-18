@@ -603,7 +603,7 @@ class WechatController extends Controller{
     /*
      * 添加关键字测试
      */
-    public function auto_replay_add_check(Request $request){
+    public function auto_reply_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $keyword = $request->input('keyword');//关键字
