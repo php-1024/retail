@@ -419,9 +419,9 @@ class FansmanageController extends Controller{
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
         $listOrg = Organization::getOnefansmanage([['id',$organization_id]]);
-        $listPac = Package::getOnePackage([['id',$package_id]]);
+//        $listPac = Package::getOnePackage([['id',$package_id]]);
 
-        return view('Zerone/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        return view('Zerone/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request){
