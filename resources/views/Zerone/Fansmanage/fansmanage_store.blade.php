@@ -91,7 +91,7 @@
                                         <td>
                                             <label class="label label-success" style="display:inline-block">店铺</label>
                                         </td>
-                                        <td>微餐饮系统（先吃后付）通用版本</td>
+                                        <td>{{$value->program->program_name}}</td>
                                         <td>{{$value->created_at}}</td>
                                         <td class="text-right">
                                             <button type="button" onclick="getDrawStoreForm('{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
