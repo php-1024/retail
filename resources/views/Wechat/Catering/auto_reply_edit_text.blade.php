@@ -27,6 +27,7 @@
 <script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
     $(function(){
+        alert(123);
         $('#form-content').trumbowyg({
             lang: 'fr',
             closable: false,
