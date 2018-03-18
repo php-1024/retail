@@ -36,7 +36,6 @@
 <script>
 function select_img(obj){
     var target = $(obj);
-    var media_id = target.data('media_id');
     var image_id = target.data('id');
     $('#image_id').val(image_id);
     $('.item').find('.item-overlay').hide();
