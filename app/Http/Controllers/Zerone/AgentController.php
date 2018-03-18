@@ -413,6 +413,7 @@ class AgentController extends Controller {
         $program_id = $request->input('program_id'); //套餐id
         $listOrg = Organization::getOneagent([['id', $organization_id]]);
         $oneProgram = Program::getOne([['id', $program_id]]);
+        dd($oneProgram);
         $status = $request->input('status'); //状态
         return view('Zerone/Agent/agent_assets', ['listOrg' => $listOrg, 'oneProgram' => $oneProgram, 'status' => $status]);
     }
