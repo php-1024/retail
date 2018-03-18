@@ -257,7 +257,6 @@ class FansmanageController extends Controller{
 
         $list = Organization::getPaginageFansmanage($where,'5','id');
         foreach ($list as $k=>$v){
-            $list[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'0'],'account')->first();
             $list[$k]['agent_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
         }
         dump($list);
