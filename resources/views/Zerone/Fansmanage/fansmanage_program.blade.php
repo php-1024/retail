@@ -70,8 +70,9 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>套餐名称</th>
-                                    <th>包含程序</th>
+                                    <th>程序名称</th>
+                                    <th>剩余数量</th>
+                                    <th>使用数量</th>
                                     <th>添加时间</th>
                                     <th class="text-right">操作</th>
                                 </tr>
