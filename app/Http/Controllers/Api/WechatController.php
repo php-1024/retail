@@ -600,6 +600,34 @@ class WechatController extends Controller{
     public function auto_reply_add(Request $request){
         return view('Wechat/Catering/auto_reply_add');
     }
+    /*
+     * 添加关键字测试
+     */
+    public function auto_replay_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $keyword = $request->input('keyword');//关键字
+        $organization_id = $request->input('organization_id');//角色权限节点
+        $appinfo = WechatAuthorization::getOne([['organization_id',$organization_id]]);
+        $appid = $appinfo['appid'];
+        dump($appid);
+        exit();
+
+        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
+            return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了自动回复关键字'.$role_name);//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加权限角色成功', 'status' => '1']);
+        }
+    }
 
 
     public function subscribe_reply(Request $request){
