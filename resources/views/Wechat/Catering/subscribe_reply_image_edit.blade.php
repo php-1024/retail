@@ -13,7 +13,7 @@
                         <div class="col-lg-2">
                             <div class="item" data-id="{{$val->id}}" onclick="select_img(this)" data-media_id="{{$val->media_id}}">
                                 <div class="pos-rlt">
-                                    <div class="item-overlay opacity bg-black" style="height: 100px; width: 100px; @if($info['media_id']==$val['media_id']) display:block;@endif">
+                                    <div class="item-overlay opacity bg-black" style="height: 100px; width: 100px; @if($info['image_media_id']==$val['media_id']) display:block;@endif">
                                         <div class="text-info padder m-t-sm text-sm">
                                             <i class="fa fa-check text-success"></i>
                                         </div>
