@@ -14,8 +14,8 @@ class Warzone extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和proxyappy表一对多的关系
-    public function proxyapply(){
-        return $this->hasMany('App\Models\ProxyApply', 'zone_id');
+    public function warzone_agent(){
+        return $this->hasMany('App\Models\warzone_agent', 'zone_id');
     }
     //和WarzoneProxy表一对多的关系
     public function WarzoneAgent(){
@@ -34,7 +34,7 @@ class Warzone extends Model{
     }
     //获取战区分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='ASC'){
-        return self::with('province')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('province')->with('warzone_agent')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //添加战区
