@@ -765,7 +765,7 @@ class WechatController extends Controller{
         }
         $xmlTpl.="</Articles>
                 </xml> ";
-        $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], count($article_data));
+        $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'],time(), count($article_data));
         return $result;
     }
 
