@@ -292,6 +292,9 @@ class FansmanageController extends Controller{
             }
 
             if($data['account']['mobile']!=$mobile){
+                if(Account::checkRowExists([['mobile',$mobile]])){
+                    return response()->json(['data' => '手机号已存在', 'status' => '0']);
+                }
                 OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id'=>$id], ['fansmanage_owner_mobile'=>$mobile]);//修改商户表商户手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
