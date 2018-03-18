@@ -34,7 +34,7 @@ class Warzone extends Model{
     }
     //获取战区分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='ASC'){
-        return self::with('province')->with('WarzoneAgent')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('province')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //添加战区

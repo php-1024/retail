@@ -93,11 +93,11 @@
                                         @endforeach
                                     </td>
                                     <td >
-                                        @if($val->warzone_agent->count())
-                                                {{$val->warzone_agent->count()}}位服务商
-                                        @else
-                                        0位服务商
-                                        @endif
+                                        {{--@if($val->warzone_agent->count())--}}
+                                                {{--{{$val->warzone_agent->count()}}位服务商--}}
+                                        {{--@else--}}
+                                        {{--0位服务商--}}
+                                        {{--@endif--}}
                                     </td>
                                     <td class="text-right">
                                         <button type="button" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
