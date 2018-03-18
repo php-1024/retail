@@ -67,6 +67,7 @@
                                     <input type="hidden" name="_token" id="auto_reply_edit_text_url" value="{{ url('api/ajax/auto_reply_edit_text') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_image_url" value="{{ url('api/ajax/auto_reply_edit_image') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_article_url" value="{{ url('api/ajax/auto_reply_edit_article') }}">
+                                    <input type="hidden" name="_token" id="auto_reply_edit_url" value="{{ url('api/ajax/auto_reply_edit') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">
@@ -176,34 +177,6 @@
     </form>
 </div>
 
-<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">确认删除回复内容</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="" placeholder="安全密码" class="form-control">
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
 
 <script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -219,29 +192,6 @@
 
 
 <script type="text/javascript">
-    $(function(){
-        $('#addArticle').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#editArticle').click(function(){
-            $('#myModal3').modal();
-        });
-        $('#addPicture').click(function(){
-            $('#myModal4').modal();
-        });
-        $('#editPicture').click(function(){
-            $('#myModal4').modal();
-        });
-        $('#editKeyWord').click(function(){
-            $('#myModal5').modal();
-        });
-        $('#deleteKeyWord').click(function(){
-            $('#myModal6').modal();
-        });
-        $('#deleteMaterial').click(function(){
-            $('#myModal7').modal();
-        });
-    });
 
     //弹出图片上传框
     function getAddForm(){
@@ -337,6 +287,40 @@
     //弹出图片选择框
     function getAutoEditArticleForm(id){
         var url = $('#auto_reply_edit_article_url').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //弹出关键字修改框
+    function getAutoEditArticleForm(id){
+        var url = $('#auto_reply_edit_url').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
