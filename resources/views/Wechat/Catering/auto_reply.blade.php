@@ -416,7 +416,6 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
 
-
 <script type="text/javascript">
     $(function(){
         $('#addArticle').click(function(){
