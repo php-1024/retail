@@ -106,7 +106,7 @@
                                                             <button class="btn btn-info btn-xs" id="editText"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                             <button class="btn btn-danger btn-xs" id="deleteMaterial"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                             <label class="label label-primary">文本</label>&nbsp;&nbsp;
-                                                             {{str_limit('张三a李四王五',10,'...')}}&nbsp;&nbsp;
+                                                             {{str_limit('张三abs李四王五',10,'...')}}&nbsp;&nbsp;
                                                         </div>
                                                     @elseif($val['reply_type']=='2')
                                                         <div>
