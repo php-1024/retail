@@ -4,17 +4,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <h3>编辑服务商</h3>
+                <h3>编辑商户</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">归属服务商</label>
                     <div class="col-sm-10">
-                        <select class="form-control m-b" name="parent_id">
-                            @foreach($proxy as $k=>$v)
-                                <option value="{{$v->id}}" @if($listorg->parent_id == $v->id) selected @endif>{{$v->organization_name}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col-sm-10">测试服务商</div>
                     </div>
                 </div>
                 <div style="clear:both"></div>

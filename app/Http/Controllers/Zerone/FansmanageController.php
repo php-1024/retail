@@ -265,7 +265,6 @@ class FansmanageController extends Controller{
     public function fansmanage_list_edit(Request $request){
         $id = $request->input('id');//商户id
         $listorg = Organization::getOneFansmanage([['id',$id]]);
-        $proxy = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
         return view('Zerone/Fansmanage/fansmanage_list_edit',['listorg'=>$listorg,'proxy'=>$proxy]);
     }
     //服务商编辑功能提交
