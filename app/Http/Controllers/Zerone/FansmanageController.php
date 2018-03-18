@@ -274,7 +274,7 @@ class FansmanageController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $id = $request->input('id');//商户id
+        $fansmanage_id = $request->input('id');//商户id
         $organization_name = $request->input('organization_name');//商户名称
         $realname = $request->input('realname');//用户名字
         $idcard = $request->input('idcard');//用户身份证号
@@ -282,12 +282,15 @@ class FansmanageController extends Controller{
 
         DB::beginTransaction();
         try{
-            $onefansmanage = Organization::getOneFansmanage(['id'=>$id]); //获取商户组织信息
-            $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
-            if($list['organization_name']!=$organization_name){
-                Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
+            $onefansmanage = Organization::getOneFansmanage(['id'=>$fansmanage_id]); //获取商户组织信息
+            dd($onefansmanage);
+            if($onefansmanage['organization_name']!=$organization_name){
+                if(Organization::checkRowExists([['organization_name',$organization_name]])){
+                    return response()->json(['data' => '商户名称已存在', 'status' => '0']);
+                }
+                Organization::editOrganization(['id'=>$fansmanage_id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
-            if($list['mobile']!=$mobile){
+            if($onefansmanage['mobile']!=$mobile){
                 Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id], ['fansmanage_owner_mobile'=>$mobile]);//修改商户表商户手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
@@ -320,6 +323,7 @@ class FansmanageController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了商户：'.$list['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
