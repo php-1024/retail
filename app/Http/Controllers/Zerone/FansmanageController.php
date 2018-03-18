@@ -142,25 +142,25 @@ class FansmanageController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
+        $list = Organization::where([['status','1'],['type',[1,2]]])->get();
+        
         return view('Zerone/Fansmanage/fansmanage_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
     //注册提交商户数据
     public function fansmanage_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $agent = $request->input('organization_id');//零壹或者服务商organization_id
+        $agent_id = $request->input('organization_id');//零壹或者服务商organization_id
         $organization_name = $request->input('organization_name');//商户名称
-        $where = [['organization_name',$organization_name],['id','<>',$agent]];
-
+        $where = [['organization_name',$organization_name]];
         if(Organization::checkRowExists($where)){
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
 
-        $list = Organization::getOne([['id',$id]]);
+        $oneAgent = Organization::getOne([['id',$agent_id]]);
 
-        $parent_id = $id;//上级组织 零壹或者服务商organization_id
-        $parent_tree = $list['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
+        $parent_id = $agent_id;//上级组织 零壹或者服务商organization_id
+        $parent_tree = $oneAgent['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
         $mobile = $request->input('mobile');//手机号码
 
         $password = $request->input('password');//用户密码
@@ -168,9 +168,17 @@ class FansmanageController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         $program_id = 3; //'商户组织默认为3'
+
         DB::beginTransaction();
         try{
-            $listdata = ['organization_name'=>$organization_name,'parent_id'=>$parent_id,'parent_tree'=>$parent_tree,'program_id'=>$program_id,'type'=>3,'status'=>1];
+            $listdata = [
+                'organization_name'=>$organization_name,
+                'parent_id'=>$parent_id,
+                'parent_tree'=>$parent_tree,
+                'program_id'=>$program_id,
+                'type'=>3,
+                'status'=>1
+            ];
             $organization_id = Organization::addOrganization($listdata); //返回值为商户的id
 
             $user = Account::max('account');
