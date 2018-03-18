@@ -105,7 +105,7 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->agent_name}}</td>
-                                        <td></td>
+                                        <td>{{$value->fansmanageinfo->fansmanage_owner}}</td>
                                         <td>{{$value->account->account}}</td>
                                         <td>{{$value->account->mobile}}</td>
                                         <td>
