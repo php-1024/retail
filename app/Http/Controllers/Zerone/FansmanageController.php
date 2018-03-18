@@ -520,7 +520,6 @@ class FansmanageController extends Controller{
             DB::commit(); //提交事务
         }
         catch(Exception $e) {
-            dd($e);
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
@@ -528,6 +527,7 @@ class FansmanageController extends Controller{
     }
     //商户店铺管理--划出
     public function fansmanage_store_draw(Request $request){
+        dd(1);
         return view('Zerone/Fansmanage/fansmanage_store_draw');
     }
 
