@@ -669,9 +669,11 @@ class WechatController extends Controller{
     * 关键字自动回复回复图片内容
     */
     public function auto_reply_edit_image(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
         $info = WechatReply::getOne([['id',$id]]);
-        return view('Wechat/Catering/auto_reply_edit_image',['id'=>$id,'info'=>$info]);
+        $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
+        return view('Wechat/Catering/auto_reply_edit_image',['id'=>$id,'info'=>$info,'list'=>$list]);
     }
 
     public function subscribe_reply(Request $request){
