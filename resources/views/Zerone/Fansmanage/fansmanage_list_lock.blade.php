@@ -17,8 +17,9 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">安全密码</label>
+                    <label class="col-sm-2 control-label">管理员安全密码</label>
                     <div class="col-sm-10"><input type="password" name="safe_password" class="form-control" value=""></div>
+                    <span style="color: red">谨慎操作，如果冻结了，该商户所有人员无法登入</span>
                 </div>
                 <div style="clear:both"></div>
 
