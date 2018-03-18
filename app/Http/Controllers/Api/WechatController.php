@@ -659,13 +659,15 @@ class WechatController extends Controller{
                 $accessToken = $auth_info['authorizer_access_token'];
                 \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
                 return 1;
-            }elseif ($keyword=='aaa'){
-                $contentStr = '你好吗，世界';
+            }else{
+               return $this->zerone_response($jm,$param,$appid,$_GET['encrypt_type'],$_GET['timestamp'],$_GET['nonce']);
             }
             //点击事件触发关键字回复
+            /*
             elseif ($param['EventKey'] == "1234") {
                 $contentStr = $openid.'||'.$param['FromUserName'].'||'.$param['ToUserName']."||测试内容2";
             }
+            */
             $result = '';
             if (!empty($contentStr)) {
                 $xmlTpl = "<xml>
@@ -684,6 +686,39 @@ class WechatController extends Controller{
             }
             echo $result;
         }
+    }
+
+    /**
+     * 除全网发布外零壹的回复
+     * $jm - 微信加密类
+     * $param - 来源内容
+     * $appid - 哪个公众号内传过来的消息
+     * $encrypt_type - 是否密文传输
+     * $timestamp,$nonce - 加密消息要用的数据
+     */
+    private function zerone_response($jm,$param,$appid,$encrypt_type,$timestamp,$nonce){
+        $result = $this->zerone_response_text($param,'测试回复内容|'.$appid);
+        if (isset($encrypt_type) && $_GET['encrypt_type'] == 'aes') { // 密文传输
+            $encryptMsg = '';
+            $jm->encryptMsg($result, $timestamp, $nonce, $encryptMsg);
+            $result = $encryptMsg;
+        }
+        return $result;
+    }
+
+    /*
+     * 回复文本消息
+     */
+    private function zerone_response_text($param,$contentStr){
+        $xmlTpl = "<xml>
+            <ToUserName><![CDATA[%s]]></ToUserName>
+            <FromUserName><![CDATA[%s]]></FromUserName>
+            <CreateTime>%s</CreateTime>
+            <MsgType><![CDATA[text]]></MsgType>
+            <Content><![CDATA[%s]]></Content>
+            </xml>";
+        $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $contentStr);
+        return $result;
     }
 
     /*
