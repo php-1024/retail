@@ -611,7 +611,6 @@ class WechatController extends Controller{
         $appinfo = WechatAuthorization::getOne([['organization_id',$organization_id]]);
         dump($appinfo);
         $appid = $appinfo['appid'];
-        dump($appid);
         exit();
 
         if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
