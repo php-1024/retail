@@ -323,6 +323,100 @@ Route::group(['prefix'=>'zerone'],function(){
 });
 /********************零壹管理系统*************************/
 
+
+/**********************服务商管理系统*********************/
+Route::group(['prefix'=>'agent'],function(){
+
+    //登录页面组
+    Route::group(['prefix'=>'login'],function(){
+        Route::get('/', 'Agent\LoginController@display')->middleware('AgentCheck');//登录页面路由
+        Route::get('captcha/{tmp}', 'Agent\LoginController@captcha');//验证码路由
+    });
+
+
+    Route::get('/', 'Proxy\SystemController@display')->middleware('ProxyCheck');//系统首页
+    Route::get('switch_status', 'Proxy\SystemController@switch_status')->middleware('ProxyCheck');//超级管理员切换服务商
+    Route::get('quit', 'Proxy\SystemController@quit');//退出系统
+
+    //系统管理分组
+    Route::group(['prefix'=>'system'],function(){
+        Route::post('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
+        Route::get('setup','Proxy\SystemController@setup')->middleware('ProxyCheck');//服务商参数设置
+        Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
+        Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
+        Route::get('operationlog','Proxy\SystemController@operationlog')->middleware('ProxyCheck');//操作日志
+        Route::get('loginlog','Proxy\SystemController@loginlog')->middleware('ProxyCheck');//登录日志
+    });
+    //个人信息分组
+    Route::group(['prefix'=>'persona'],function(){
+        Route::get('account_info','Proxy\PersonaController@account_info')->middleware('ProxyCheck');//个人信息修改
+        Route::get('safe_password','Proxy\PersonaController@safe_password')->middleware('ProxyCheck');//安全密码修改
+        Route::get('password','Proxy\PersonaController@password')->middleware('ProxyCheck');//登入密码修改
+        Route::get('myoperationlog','Proxy\PersonaController@myoperationlog')->middleware('ProxyCheck');//我的操作记录
+        Route::get('myloginlog','Proxy\PersonaController@myloginlog')->middleware('ProxyCheck');//我的登入记录
+    });
+    //下级人员管理--权限角色组
+    Route::group(['prefix'=>'role'],function(){
+        Route::get('role_add','Proxy\RoleController@role_add')->middleware('ProxyCheck');//添加权限角色
+        Route::get('role_list','Proxy\RoleController@role_list')->middleware('ProxyCheck');//权限角色列表
+    });
+    //下级人员管理--添加组
+    Route::group(['prefix'=>'subordinate'],function(){
+        Route::get('subordinate_add','Proxy\SubordinateController@subordinate_add')->middleware('ProxyCheck');//添加下级人员
+        Route::get('subordinate_list','Proxy\SubordinateController@subordinate_list')->middleware('ProxyCheck');//下级人员列表
+        Route::get('subordinate_structure','Proxy\SubordinateController@subordinate_structure')->middleware('ProxyCheck');//下级人员结构
+    });
+
+    //系统资产管理
+    Route::group(['prefix'=>'program'],function(){
+        Route::get('program_list','Proxy\ProgramController@program_list')->middleware('ProxyCheck');//资产
+        Route::get('program_log','Proxy\ProgramController@program_log')->middleware('ProxyCheck');//权限角色列表
+    });
+
+    //下辖商户管理
+    Route::group(['prefix'=>'company'],function(){
+        Route::get('company_register','Proxy\CompanyController@company_register')->middleware('ProxyCheck');//商户注册列表
+        Route::get('company_list','Proxy\CompanyController@company_list')->middleware('ProxyCheck');//商户列表
+        Route::get('company_structure','Proxy\CompanyController@company_structure')->middleware('ProxyCheck');//店铺结构
+        Route::get('company_program','Proxy\CompanyController@company_program')->middleware('ProxyCheck');//程序划拨
+    });
+
+    //异步提交数据组
+    Route::group(['prefix'=>'ajax'],function(){
+        Route::post('login_check','Proxy\LoginController@login_check')->middleware('ProxyCheckAjax');//提交登录数据
+        Route::post('proxy_info_check','Proxy\SystemController@proxy_info_check')->middleware('ProxyCheckAjax');//提交公司信息修改
+
+        Route::post('account_info_check','Proxy\PersonaController@account_info_check')->middleware('ProxyCheckAjax');//个人信息修改
+        Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置
+        Route::post('password_check','Proxy\PersonaController@password_check')->middleware('ProxyCheckAjax');//登入密码修改
+
+        Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
+        Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
+
+        Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;////提交添加权限角色数据
+        Route::post('role_edit','Proxy\RoleController@role_edit')->middleware('ProxyCheckAjax');//编辑权限角色弹出框
+        Route::post('role_edit_check','Proxy\RoleController@role_edit_check')->middleware('ProxyCheckAjax');//编辑权限角色弹出框
+        Route::post('role_delete','Proxy\RoleController@role_delete')->middleware('ProxyCheckAjax');;//删除权限角色弹出安全密码框
+        Route::post('role_delete_check','Proxy\RoleController@role_delete_check')->middleware('ProxyCheckAjax');//删除权限角色弹出安全密码框
+
+        Route::post('subordinate_add_check','Proxy\SubordinateController@subordinate_add_check')->middleware('ProxyCheckAjax');//添加下级人员数据提交
+        Route::post('subordinate_edit','Proxy\SubordinateController@subordinate_edit')->middleware('ProxyCheckAjax');//下级人员列表编辑用户弹出框
+        Route::post('subordinate_edit_check','Proxy\SubordinateController@subordinate_edit_check')->middleware('ProxyCheckAjax');//下级人员列表编辑功能提交
+        Route::post('subordinate_authorize','Proxy\SubordinateController@subordinate_authorize')->middleware('ProxyCheckAjax');//下级人员列表用户授权显示页面
+        Route::post('subordinate_authorize_check','Proxy\SubordinateController@subordinate_authorize_check')->middleware('ProxyCheckAjax');//下级人员列表用户授权功能提交页面
+        Route::post('subordinate_delete','Proxy\SubordinateController@subordinate_delete')->middleware('ProxyCheckAjax');//下级人员列表删除用户显示页面
+        Route::post('subordinate_lock','Proxy\SubordinateController@subordinate_lock')->middleware('ProxyCheckAjax');//冻结下级人员显示页面
+        Route::post('subordinate_lock_check','Proxy\SubordinateController@subordinate_lock_check')->middleware('ProxyCheckAjax');//冻结下级人员功能提交
+
+        Route::post('quick_rule','Proxy\SubordinateController@quick_rule')->middleware('ProxyCheckAjax');//添加下级人员快速授权
+        Route::post('selected_rule','Proxy\SubordinateController@selected_rule')->middleware('ProxyCheckAjax');//下级人员已经选中的权限出框
+
+    });
+});
+/********************服务商管理系统*************************/
+
+
+
 /**********************总店系统*********************/
 Route::group(['prefix'=>'catering'],function(){
 
