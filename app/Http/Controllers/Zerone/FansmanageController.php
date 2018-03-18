@@ -157,12 +157,15 @@ class FansmanageController extends Controller{
         if(Organization::checkRowExists($where)){
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
+        $mobile = $request->input('mobile');//手机号码
+        if(Account::checkRowExists([['mobile',$mobile]])){
+            return response()->json(['data' => '手机号已存在', 'status' => '0']);
+        }
 
         $oneAgent = Organization::getOne([['id',$agent_id]]);
 
         $parent_id = $agent_id;//上级组织 零壹或者服务商organization_id
         $parent_tree = $oneAgent['parent_tree'].$parent_id.',';//树是上级的树拼接上级的ID；
-        $mobile = $request->input('mobile');//手机号码
         $asset_id = $request->input('asset_id');//开设店铺使用程序id
 
         $password = $request->input('password');//用户密码
