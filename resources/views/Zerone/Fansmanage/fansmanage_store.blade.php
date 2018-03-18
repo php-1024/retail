@@ -170,42 +170,42 @@
         // activate Nestable for list 2
     });
 
-    //商户划入
-    function getAddStoreForm(organization_id){
-        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        // activate Nestable for list 2
-        var url = $('#fansmanage_store_add').val();
-        var token = $('#_token').val();
-        if(organization_id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'organization_id':organization_id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
+//    //商户划入
+//    function getAddStoreForm(organization_id){
+//        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+//        // activate Nestable for list 2
+//        var url = $('#fansmanage_store_add').val();
+//        var token = $('#_token').val();
+//        if(organization_id==''){
+//            swal({
+//                title: "提示信息",
+//                text: '数据传输错误',
+//                confirmButtonColor: "#DD6B55",
+//                confirmButtonText: "确定",
+//            },function(){
+//                window.location.reload();
+//            });
+//            return;
+//        }
+//
+//        var data = {'organization_id':organization_id,'_token':token};
+//        $.post(url,data,function(response){
+//            if(response.status=='-1'){
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//                return;
+//            }else{
+//                $('#myModal').html(response);
+//                $('#myModal').modal();
+//            }
+//        });
+//    }
     //商户划出
     function getDrawStoreForm(organization_id,fansmanage_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});

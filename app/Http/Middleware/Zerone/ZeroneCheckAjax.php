@@ -168,8 +168,8 @@ class ZeroneCheckAjax
             case "zerone/ajax/fansmanage_store_add"://商户店铺划入检测弹出登入和权限
             case "zerone/ajax/fansmanage_store_draw"://商户店铺划出检测弹出登入和权限
 
-                $re = $this->checkIsLogin($request);
-                return self::format_response($re,$next);
+                $re = $this->checkLoginAndRule($request);
+                return self::format_response($re, $next);
                 break;
 
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
