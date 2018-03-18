@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <textarea id="form-content" class="editor" cols="30" rows="10">{{$info['reply_info']}}</textarea>
+                        <textarea id="form-content" class="editor" name="reply_info" cols="30" rows="10">{{$info['reply_info']}}</textarea>
                     </div>
                 </form>
             </div>
