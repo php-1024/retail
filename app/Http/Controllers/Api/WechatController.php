@@ -633,7 +633,7 @@ class WechatController extends Controller{
     }
 
     /*
-    * 添加关键字
+    * 添加关键字文本回复
     */
     public function auto_reply_edit_text(Request $request){
         $id = $request->input('id');
@@ -663,6 +663,15 @@ class WechatController extends Controller{
             return response()->json(['data' => '修改自动回复关键字的文本回复失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '修改自动回复关键字的文本回复成功', 'status' => '1']);
+    }
+
+    /*
+    * 关键字自动回复回复图片内容
+    */
+    public function auto_reply_edit_image(Request $request){
+        $id = $request->input('id');
+        $info = WechatReply::getOne([['id',$id]]);
+        return view('Wechat/Catering/auto_reply_edit_image',['id'=>$id,'info'=>$info]);
     }
 
     public function subscribe_reply(Request $request){
