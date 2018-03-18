@@ -104,7 +104,7 @@
                                 <tr>
                                     <td colspan="99">
                                         <ul class="pagination pull-right">
-                                            {{$list->links()}}
+                                            {{--{{$list->links()}}--}}
                                         </ul>
                                     </td>
                                 </tr>
