@@ -1,4 +1,3 @@
-<link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
@@ -28,25 +27,19 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人姓名</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationfansmanageinfo->fansmanage_owner}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value=""></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationfansmanageinfo->fansmanage_owner_idcard}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value=""></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">手机号码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationfansmanageinfo->fansmanage_owner_mobile}}"></div>
-                </div>
-                <div style="clear:both"></div>
-                <div class="hr-line-dashed"></div>
-
-                <div class="form-group"><label class="col-sm-2 control-label">商户陆密码</label>
-                    <div class="col-sm-10"><input type="password" class="form-control" value="" name="password"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value=""></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -67,7 +60,6 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     //提交表单
     function postForm() {
@@ -88,13 +80,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
