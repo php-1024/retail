@@ -81,7 +81,7 @@ class FansmanageController extends Controller{
                     'parent_id'        =>$parent_id,
                     'parent_tree'      =>$parent_tree,
                     'program_id'       =>'3',
-                    'asset_id'         =>'0',
+                    'asset_id'         =>$oneFansmanage['asset_id'],
                     'type'             =>'3',
                     'status'           =>'1'
                 ];
