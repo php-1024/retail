@@ -53,5 +53,15 @@ class WechatReply extends Model{
         }
         return $model->get();
     }
+
+    //修改
+    public static function editWechatReply($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
 }
 ?>
