@@ -269,22 +269,21 @@ class FansmanageController extends Controller{
 
         return view('Zerone/Fansmanage/fansmanage_list_edit',['data'=>$data]);
     }
-    //服务商编辑功能提交
+    //商户编辑功能提交
     public function fansmanage_list_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//服务商id
-        $parent_id = $request->input('parent_id');//上级id
 
-        $organization_name = $request->input('organization_name');//服务商名称
+        $id = $request->input('id');//商户id
+        $organization_name = $request->input('organization_name');//商户名称
         $realname = $request->input('realname');//用户名字
         $idcard = $request->input('idcard');//用户身份证号
         $mobile = $request->input('mobile');//用户手机号
-        $password = $request->input('password');//登入密码
 
         DB::beginTransaction();
         try{
-            $list = Organization::getOnefansmanage(['id'=>$id]); //获取商户组织信息
+            $onefansmanage = Organization::getOnefansmanage(['id'=>$id]); //获取商户组织信息
+            dd($onefansmanage);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
             if($list['organization_name']!=$organization_name){
                 Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
