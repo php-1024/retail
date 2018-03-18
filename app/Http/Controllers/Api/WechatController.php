@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+use App\Models\WechatReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\WechatOpenSetting;
@@ -9,6 +10,7 @@ use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\Organization;
+use App\Models\OperationLog;
 
 class WechatController extends Controller{
     /*
@@ -607,26 +609,25 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $keyword = $request->input('keyword');//关键字
+        $type = $request->input('type');//1-精确 2-模糊
         $organization_id = $admin_data['organization_id'];//角色权限节点
         $appinfo = WechatAuthorization::getOne([['organization_id',$organization_id]]);
+        $authorizer_appid = $appinfo['authorizer_appid'];
 
-        $appid = $appinfo['authorizer_appid'];
-        dump($appid);
-        exit();
-
-        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
-            return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
+        if(WechatReply::checkRowExists([['organization_id',$organization_id],['keyword',$keyword]])){//判断是否添加过相同的的角色
+            return response()->json(['data' => '您添加的关键字已经存在', 'status' => '0']);
         }else {
             DB::beginTransaction();
             try {
-
+                $data = ['organization_id'=>$organization_id,'authorizer_appid'=>$authorizer_appid,'keyword'=>$keyword,'type'=>$type];
+                WechatReply::addWechatReply($data);
                 OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了自动回复关键字'.$keyword);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加关键字失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加权限角色成功', 'status' => '1']);
+            return response()->json(['data' => '添加关键字成功', 'status' => '1']);
         }
     }
 
