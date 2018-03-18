@@ -28,13 +28,13 @@
         @include('Zerone/Public/Header')
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
-                    <h2>“刘记餐饮集团”店铺管理</h2>
+                    <h2>“{{$organization_name}}”店铺管理</h2>
                     <ol class="breadcrumb">
                         <li class="active">
-                            <a href="JavaScript:;">商户管理</a>
+                            <a href="JavaScript:;">店铺管理</a>
                         </li>
                         <li >
-                            <strong>“刘记餐饮集团”店铺管理</strong>
+                            <strong>“{{$organization_name}}”店铺管理</strong>
                         </li>
                     </ol>
                 </div>
@@ -69,7 +69,7 @@
                     <div class="col-lg-12">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>“刘记餐饮集团”店铺管理</h5>
+                                <h5>“{{$organization_name}}”店铺管理</h5>
                             </div>
                             <div class="ibox-content">
                                 <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
@@ -177,12 +177,12 @@
         });
     }
     //商户划出
-    function getDrawStoreForm(organization_id,fansmanage_id){
+    function getDrawStoreForm(fansmanage_id,store_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
         var url = $('#fansmanage_store_draw').val();
         var token = $('#_token').val();
-        if(organization_id==''){
+        if(store_id==''){
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
@@ -193,7 +193,7 @@
             });
             return;
         }
-        var data = {'organization_id':organization_id,'fansmanage_id':fansmanage_id,'_token':token};
+        var data = {'fansmanage_id':fansmanage_id,'store_id':store_id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
