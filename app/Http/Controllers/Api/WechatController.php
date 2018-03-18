@@ -655,7 +655,7 @@ class WechatController extends Controller{
         DB::beginTransaction();
         try {
             $data = ['reply_type'=>$reply_type,'reply_info'=>$reply_info,'media_id'=>''];
-            WechatReply::addWechatReply($data);
+            WechatReply::editWechatReply([['id',$id]],$data);
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$info['keyword'].'的文本回复内容');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
