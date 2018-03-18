@@ -442,17 +442,6 @@
         $('#editText').click(function(){
             $('#myModal8').modal();
         });
-        $('#form-content2').trumbowyg({
-            lang: 'fr',
-            closable: false,
-            mobile: true,
-            fixedBtnPane: true,
-            fixedFullWidth: true,
-            semantic: true,
-            resetCss: true,
-            autoAjustHeight: true,
-            autogrow: true
-        });
     });
 
     //弹出图片上传框
