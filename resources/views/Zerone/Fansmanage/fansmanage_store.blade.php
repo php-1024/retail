@@ -78,56 +78,26 @@
                                         <th>序</th>
                                         <th>店铺名称</th>
                                         <th>店铺类型</th>
-                                        <th>归属总店</th>
                                         <th>使用系统程序</th>
-
-
+                                        <th>创建时间</th>
                                         <th class="col-sm-2 text-right" >操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$value)
                                     <tr>
-                                        <td>1</td>
-                                        <td>刘记鸡煲王总店</td>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->organization_name}}</td>
                                         <td>
-                                            <label class="label label-success" style="display:inline-block">总店</label>
-                                        </td>
-                                        <td>
-                                            -
+                                            <label class="label label-success" style="display:inline-block">店铺</label>
                                         </td>
                                         <td>微餐饮系统（先吃后付）通用版本</td>
+                                        <td>{{$value->created_at}}</td>
                                         <td class="text-right">
-                                            <button type="button" onclick="getDrawStoreForm()" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
+                                            <button type="button" onclick="getDrawStoreForm('{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>刘记鸡煲王宝能店</td>
-                                        <td>
-                                            <label class="label label-primary" style="display:inline-block">分店</label>
-                                        </td>
-                                        <td>
-                                            刘记鸡煲王总店
-                                        </td>
-                                        <td>微餐饮系统（先吃后付）通用版本</td>
-                                        <td class="text-right">
-                                            -
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>刘记鸡煲王龙城店</td>
-                                        <td>
-                                            <label class="label label-primary" style="display:inline-block">分店</label>
-                                        </td>
-                                        <td>
-                                            刘记鸡煲王总店
-                                        </td>
-                                        <td>微餐饮系统（先吃后付）通用版本</td>
-                                        <td class="text-right">
-                                            -
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
