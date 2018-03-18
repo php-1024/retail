@@ -89,50 +89,44 @@
             </div>
         </div>
             @include('Zerone/Public/Footer')
-
     </div>
-
-    {{--<!-- Page-Level Scripts -->--}}
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-
-    <!-- Data picker -->
-    <script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
-
-
-
-
-    <script>
-        $(document).ready(function() {
-            // activate Nestable for list 2
-            $('#nestable2').nestable();
-
-            $('#nestable-menu').on('click', function (e) {
-                var target = $(e.target),
-                    action = target.data('action');
-                if (action === 'expand-all') {
-                    $('.dd').nestable('expandAll');
-                }
-                if (action === 'collapse-all') {
-                    $('.dd').nestable('collapseAll');
-                }
-            });
-            $('#expand-all').click(function(){
-                $('.dd').nestable('expandAll');
-            });
-            $('#collapse-all').click(function(){
-                $('.dd').nestable('collapseAll');
-            });
-        });
-    </script>
-
 </div>
+{{--<!-- Page-Level Scripts -->--}}
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+
+<!-- Data picker -->
+<script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // activate Nestable for list 2
+        $('#nestable2').nestable();
+
+        $('#nestable-menu').on('click', function (e) {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
+        });
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
+        });
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
+    });
+</script>
 </body>
 
 </html>
