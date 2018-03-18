@@ -902,7 +902,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('default_reply_image_edit','Api\WechatController@default_reply_image_edit')->middleware('CateringCheckAjax');
         Route::any('default_reply_image_edit_check','Api\WechatController@default_reply_image_edit_check')->middleware('CateringCheckAjax');
         Route::any('default_reply_article_edit','Api\WechatController@default_reply_article_edit')->middleware('CateringCheckAjax');
-        Route::any('default_reply_article_edit_check','Api\WechatController@default_reply_article_edit_check')->middleware('CateringCheckAjax')
+        Route::any('default_reply_article_edit_check','Api\WechatController@default_reply_article_edit_check')->middleware('CateringCheckAjax');
     });
 });
 /*********************接口路由*************************/
