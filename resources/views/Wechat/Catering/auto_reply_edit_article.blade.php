@@ -38,7 +38,7 @@
                                 </td>
                                 <td>2017-08-09 11:11:11</td>
                                 <td>
-                                    <button data-id="{{$val->id}}" onclick="return select_article(this);" class="btn btn-info btn-xs choose_btn" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    <button data-id="{{$val->id}}" onclick="return select_article(this);" class="btn @if($info['media_id']==$val['media_id']) btn-success @else btn-info @endif btn-xs choose_btn" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
                                 </td>
                             </tr>
                             @endforeach
