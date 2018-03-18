@@ -322,10 +322,10 @@ class FansmanageController extends Controller{
 
     //商户冻结ajaxshow显示页面
     public function fansmanage_list_lock(Request $request){
-        $id = $request->input('id');//服务商id
+        $id = $request->input('id');//商户id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOneData([['id',$id]]);//商户信息
-        return view('Zerone/Fansmanage/fansmanage_list_lock',['id'=>$id,'list'=>$list,'status'=>$status]);
+        $data = Organization::getOneData([['id',$id]]);//商户信息
+        return view('Zerone/Fansmanage/fansmanage_list_lock',['data'=>$data,'status'=>$status]);
     }
     //商户冻结功能提交
     public function fansmanage_list_frozen_check(Request $request){
@@ -333,23 +333,24 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->input('id');//商户id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOneData([['id',$id]]);
+        $data = Organization::getOneData([['id',$id]]);
         DB::beginTransaction();
         try{
             if($status == '1'){
-                Organization::editOrganization([['id',$id]],['status'=>'0']);
+                Organization::editOrganization([['id',$id]],['status'=>'0']);//商户冻结
                 Account::editOrganizationBatch([['organization_id',$id]],['status'=>'0']);
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了服务商：'.$list['organization_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了商户：'.$data['organization_name']);//保存操作记录
             }
             elseif($status == '0'){
                 Organization::editOrganization([['id',$id]],['status'=>'1']);
                 Account::editOrganizationBatch([['organization_id',$id]],['status'=>'1']);
                 //添加操作日志
-                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了服务商：'.$list['organization_name']);//保存操作记录
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了商户：'.$data['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
