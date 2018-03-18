@@ -23,19 +23,19 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人姓名</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value=""></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$data->fansmanageinfo->fansmanage_owner}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value=""></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$data->fansmanageinfo->fansmanage_owner_idcard}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">手机号码</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value=""></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$data->fansmanageinfo->fansmanage_owner_mobile}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
