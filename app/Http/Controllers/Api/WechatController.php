@@ -750,6 +750,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');
         $info = WechatReply::getOne([['id',$id]]);
+            dump($info);
         return view('Wechat/Catering/auto_reply_edit',['id'=>$id,'info'=>$info]);
     }
 
