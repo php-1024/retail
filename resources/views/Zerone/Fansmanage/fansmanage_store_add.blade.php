@@ -1,3 +1,12 @@
+<link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
+<link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+<link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
+<link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
+<link href="{{asset('public/Zerone/library/chosen')}}/css/chosen.css" rel="stylesheet">
+<link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+<link href="{{asset('public/Zerone/library/iCheck')}}/css/custom.css" rel="stylesheet">
+<link href="{{asset('public/Zerone/library/switchery')}}/css/switchery.css" rel="stylesheet">
 <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
         <div class="modal-header">
@@ -45,3 +54,17 @@
             <button type="button" class="btn btn-primary saveBtn">保存</button>
         </div>
     </div>
+</div>
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Zerone/library/chosen')}}/js/chosen.jquery.js"></script>
+<script src="{{asset('public/Tooling/library/switchery')}}/js/switchery.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
