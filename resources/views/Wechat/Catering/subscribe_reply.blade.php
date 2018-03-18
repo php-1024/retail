@@ -101,7 +101,7 @@
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-xs" id="editArticle"><i class="fa fa-tasks"></i>&nbsp;&nbsp;编辑图文</button>
+                                                    <button class="btn btn-danger btn-xs" id="editArticle" onclick="return getEditArticleForm();"><i class="fa fa-tasks"></i>&nbsp;&nbsp;编辑图文</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -113,7 +113,7 @@
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-xs" id="editPicture"><i class="icon icon-picture"></i>&nbsp;&nbsp;编辑图片</button>
+                                                    <button class="btn btn-danger btn-xs" id="editPicture" onclick="return getEditImageForm();"><i class="icon icon-picture"></i>&nbsp;&nbsp;编辑图片</button>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -170,7 +170,7 @@
         });
     }
     //弹出图片输入框
-    function getEditTextForm(){
+    function getEditImageForm(){
         var url = $('#subscribe_reply_image_edit_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
@@ -192,7 +192,7 @@
         });
     }
     //弹出图文输入框
-    function getEditTextForm(){
+    function getEditArticleForm(){
         var url = $('#subscribe_reply_article_edit_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
