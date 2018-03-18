@@ -1,6 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_list_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{$listorg->id}}">
+    <input type="hidden" name="id" id="id" value="{{$data->id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -17,7 +17,7 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">商户名称</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$data->organization_name}}"></div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>

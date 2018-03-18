@@ -264,8 +264,9 @@ class FansmanageController extends Controller{
     //商户编辑ajaxshow显示页面
     public function fansmanage_list_edit(Request $request){
         $id = $request->input('id');//商户id
-        $listorg = Organization::getOneFansmanage([['id',$id]]);
-        return view('Zerone/Fansmanage/fansmanage_list_edit',['listorg'=>$listorg]);
+        $data = Organization::getOneFansmanage([['id',$id]]);
+        dump($data);
+        return view('Zerone/Fansmanage/fansmanage_list_edit',['data'=>$data]);
     }
     //服务商编辑功能提交
     public function fansmanage_list_edit_check(Request $request){
