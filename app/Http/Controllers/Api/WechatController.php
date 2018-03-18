@@ -856,7 +856,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/subscribe_reply_image_edit',['list'=>$list,'info'=>$info]);
+        return view('Wechat/Catering/subscribe_reply_text_edit',['list'=>$list,'info'=>$info]);
     }
     //关注后图片回复保存
     public function subscribe_reply_image_edit_check(Request $request){
@@ -896,7 +896,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/subscribe_reply_image_edit',['list'=>$list,'info'=>$info]);
+        return view('Wechat/Catering/subscribe_reply_article_edit',['list'=>$list,'info'=>$info]);
     }
     //关注后图文回复保存
     public function subscribe_reply_article_article_check(Request $request){
