@@ -153,6 +153,8 @@ class CateringCheckAjax
             case "api/ajax/auto_reply_edit"://修改自动回复关键字
             case "api/ajax/auto_reply_delete_confirm"://删除关键字弹窗
             case "api/ajax/subscribe_reply_text_edit"://修改关注后文本回复弹窗
+            case "api/ajax/subscribe_reply_image_edit"://修改关注后图片回复弹窗
+            case "api/ajax/subscribe_reply_article_edit"://修改关注后图文回复弹窗
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

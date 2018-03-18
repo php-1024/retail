@@ -855,6 +855,7 @@ class WechatController extends Controller{
     public function subscribe_reply_image_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
         return view('Wechat/Catering/subscribe_reply_image_edit',['info'=>$info]);
     }
     //关注后图片回复保存
