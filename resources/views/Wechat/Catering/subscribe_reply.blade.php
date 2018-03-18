@@ -65,7 +65,9 @@
                                         图文素材列表
                                         <input type="hidden" id="id" value="@if(!empty($info)){{$info['id']}}@endif">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                        <input type="hidden" name="_token" id="subscribe_reply_text_edit_url" value="{{ url('api/ajax/subscribe_reply_text_edit') }}">
+                                        <input type="hidden" id="subscribe_reply_text_edit_url" value="{{ url('api/ajax/subscribe_reply_text_edit') }}">
+                                        <input type="hidden" id="subscribe_reply_article_edit_url" value="{{ url('api/ajax/subscribe_reply_article_edit') }}">
+                                        <input type="hidden" id="subscribe_reply_image_edit_url" value="{{ url('api/ajax/subscribe_reply_image_edit') }}">
                                     </header>
 
                                     <div class="table-responsive">
@@ -127,109 +129,6 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">选择图文素材</h4>
-                </div>
-                <div class="modal-body">
-                    <section class="panel panel-default">
-                        <header class="panel-heading">
-                            图文素材列表
-                        </header>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped b-t b-light">
-                                <thead>
-                                <tr>
-
-                                    <th>素材标题</th>
-                                    <th>素材类型</th>
-                                    <th>添加时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>测试图文</td>
-                                    <td>单条图文</td>
-                                    <td>2017-08-09 11:11:11</td>
-                                    <td>
-                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>测试图文</td>
-                                    <td>单条图文</td>
-                                    <td>2017-08-09 11:11:11</td>
-                                    <td>
-                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>测试图文</td>
-                                    <td>单条图文</td>
-                                    <td>2017-08-09 11:11:11</td>
-                                    <td>
-                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>测试图文</td>
-                                    <td>单条图文</td>
-                                    <td>2017-08-09 11:11:11</td>
-                                    <td>
-                                        <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </section>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">选择图片素材</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row row-sm">
-                        <div class="col-lg-2">
-                            <div class="item">
-                                <div class="pos-rlt">
-                                    <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                                </div>
-                                <div class="padder-v">
-                                    <span>414631616.JPG</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
@@ -251,6 +150,50 @@
     //弹出文本输入框
     function getEditTextForm(){
         var url = $('#subscribe_reply_text_edit_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //弹出图片输入框
+    function getEditTextForm(){
+        var url = $('#subscribe_reply_image_edit_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //弹出图文输入框
+    function getEditTextForm(){
+        var url = $('#subscribe_reply_article_edit_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
