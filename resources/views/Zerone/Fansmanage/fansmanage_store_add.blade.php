@@ -1,4 +1,3 @@
-<div class="modal inmodal">
 <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
         <div class="modal-header">
@@ -46,5 +45,4 @@
             <button type="button" class="btn btn-primary saveBtn">保存</button>
         </div>
     </div>
-</div>
 </div>
