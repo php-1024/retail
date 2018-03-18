@@ -1,6 +1,7 @@
 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_edit_image_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
+    <input type="hidden" name="media_id" id="media_id" value="">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,9 +12,14 @@
                 <div class="row row-sm">
                     @foreach($list as $key=>$val)
                         <div class="col-lg-2">
-                            <div class="item">
+                            <div class="item" data-id="{{$val->id}}" onclick="select_img(this)" data-media_id="{{$val->media_id}}">
                                 <div class="pos-rlt">
-                                    <a href="javascript:;"><img data-id="{{$val->id}}" onclick="select_img(this,'{{$i}}')" data-media_id="{{$val->media_id}}" src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
+                                    <div class="item-overlay opacity r r-2x bg-black">
+                                        <div class="text-info padder m-t-sm text-sm">
+                                            <i class="fa fa-check text-success"></i>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;"><img  src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
                                 </div>
                             </div>
                         </div>
@@ -27,3 +33,12 @@
         </div>
     </div>
 </form>
+<script>
+function select_img(obj){
+    var target = $(obj);
+    var media_id = target.data('media_id');
+    $('#media_id').val(media_id);
+    target.find('.item-overlay').hide();
+    target.find('.item-overlay').show();
+}
+</script>
