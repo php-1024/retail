@@ -821,12 +821,10 @@ class WechatController extends Controller{
     public function subscribe_reply_text_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
         $text_info = $request->input('text_info');
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         $authorizer_appid = $appinfo['authorizer_appid'];
-
 
         DB::beginTransaction();
         try {
@@ -851,6 +849,46 @@ class WechatController extends Controller{
             return response()->json(['data' => '修改关注自动回复的文本回复内容失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '修改关注自动回复的文本回复内容成功', 'status' => '1']);
+    }
+
+    //关注后图片回复内容弹窗
+    public function subscribe_reply_image_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        return view('Wechat/Catering/subscribe_reply_image_edit',['info'=>$info]);
+    }
+    //关注后图片回复保存
+    public function subscribe_reply_image_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $media_id = $request->input('media_id');
+        $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        $authorizer_appid = $appinfo['authorizer_appid'];
+
+        DB::beginTransaction();
+        try {
+            if(empty($info)){
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'authorizer_appid' => $authorizer_appid,
+                    'image_media_id' => $media_id,
+                    'reply_type' => '1',
+                ];
+                WechatSubscribeReply::addWechatSubscribeReply($data);
+            }else{
+                $data = ['image_media_id' => $media_id,'reply_type' => '1'];
+                WechatSubscribeReply::editWechatSubscribeReply([['organization_id',$admin_data['organization_id']]],$data);
+            }
+
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了关注自动回复'.$info['keyword'].'的图片回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改关注自动回复的图片回复内容失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改关注自动回复的图片回复内容成功', 'status' => '1']);
     }
 
     public function default_reply(Request $request){
