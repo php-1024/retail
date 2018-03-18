@@ -419,6 +419,8 @@ class FansmanageController extends Controller{
         $program_id = $request->input('program_id'); //套餐id
         $oneData = Organization::getOneagent([['id', $organization_id]]);
         $oneProgram = Program::getOne([['id', $program_id]]);
+        dd($oneProgram);
+
         $status = $request->input('status'); //状态
         return view('Zerone/Fansmanage/fansmanage_assets',['oneData'=>$oneData ,'oneProgram'=>$oneProgram,'status'=>$status]);
     }
