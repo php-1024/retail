@@ -931,13 +931,136 @@ class WechatController extends Controller{
         }
         return response()->json(['data' => '修改关注自动回复的图文回复内容成功', 'status' => '1']);
     }
+
+    //默认回复
     public function default_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        return view('Wechat/Catering/default_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
 
-        return view('Wechat/Catering/auto_reply',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    //默认文本回复内容弹窗
+    public function default_reply_text_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        return view('Wechat/Catering/default_reply_text_edit',['info'=>$info]);
+    }
+    //默认文本回复保存
+    public function default_reply_text_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $text_info = $request->input('text_info');
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        $authorizer_appid = $appinfo['authorizer_appid'];
+
+        DB::beginTransaction();
+        try {
+            if(empty($info)){
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'authorizer_appid' => $authorizer_appid,
+                    'text_info' => $text_info,
+                    'reply_type' => '1',
+                ];
+                WechatDefaultReply::addWechatDefaultReply($data);
+            }else{
+                $data = ['text_info'=>$text_info,'reply_type' => '1'];
+                WechatDefaultReply::editWechatDefaultReply([['organization_id',$admin_data['organization_id']]],$data);
+            }
+
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了关注自动回复'.$info['keyword'].'的文本回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改关注自动回复的文本回复内容失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改关注自动回复的文本回复内容成功', 'status' => '1']);
+    }
+
+    //默认图片回复内容弹窗
+    public function default_reply_image_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
+        return view('Wechat/Catering/default_reply_image_edit',['list'=>$list,'info'=>$info]);
+    }
+    //默认图片回复保存
+    public function default_reply_image_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $media_id = $request->input('media_id');
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        $authorizer_appid = $appinfo['authorizer_appid'];
+
+        DB::beginTransaction();
+        try {
+            if(empty($info)){
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'authorizer_appid' => $authorizer_appid,
+                    'image_media_id' => $media_id,
+                    'reply_type' => '2',
+                ];
+                WechatDefaultReply::addWechatDefaultReply($data);
+            }else{
+                $data = ['image_media_id' => $media_id,'reply_type' => '2'];
+                WechatDefaultReply::editWechatDefaultReply([['organization_id',$admin_data['organization_id']]],$data);
+            }
+
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了关注自动回复'.$info['keyword'].'的图片回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改关注自动回复的图片回复内容失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改关注自动回复的图片回复内容成功', 'status' => '1']);
+    }
+    //默认图文回复内容弹窗
+    public function default_reply_article_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
+        return view('Wechat/Catering/default_reply_article_edit',['list'=>$list,'info'=>$info]);
+    }
+    //默认图文回复保存
+    public function default_reply_article_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $media_id = $request->input('media_id');
+        $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        $authorizer_appid = $appinfo['authorizer_appid'];
+
+        DB::beginTransaction();
+        try {
+            if(empty($info)){
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'authorizer_appid' => $authorizer_appid,
+                    'article_media_id' => $media_id,
+                    'reply_type' => '3',
+                ];
+                WechatDefaultReply::addWechatDefaultReply($data);
+            }else{
+                $data = ['article_media_id' => $media_id,'reply_type' => '3'];
+                WechatDefaultReply::editWechatDefaultReply([['organization_id',$admin_data['organization_id']]],$data);
+            }
+
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了关注自动回复'.$info['keyword'].'的图文回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改关注自动回复的图文回复内容失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改关注自动回复的图文回复内容成功', 'status' => '1']);
     }
     /**************************************************************************消息回复管理结束*********************************************************************************/
 
