@@ -507,7 +507,7 @@ class FansmanageController extends Controller{
                     $program_balance = $Assets->program_balance - 1; //剩余数量
                     $program_used_num = $Assets->program_used_num + 1; //使用数量
                     OrganizationAssets::editAssets([['id', $Assets->id]], ['program_balance' => $program_balance, 'program_used_num' => $program_used_num]); //修改数量
-                    $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $fansmanage_id, 'to_organization_id' => $store_id, 'program_id' => $asset_id, 'status' => '0', 'number' => '1'];
+                    $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $fansmanage_id, 'to_organization_id' => $store_id, 'program_id' => $oneStore['program_id'], 'status' => '0', 'number' => '1'];
                     //添加操作日志
                     OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
 
