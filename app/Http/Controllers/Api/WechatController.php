@@ -705,6 +705,7 @@ class WechatController extends Controller{
         //$result = $this->zerone_response_text($param,'测试回复内容|'.$appid);
         //$result = $this->zerone_response_image($param,'bosoFPsCynb5D_7F_IPAPKd_FOPDaqpXw62tH8u_t8Q');
         $result = $this->zerone_response_article($param,[['title'=>'今天礼拜天','description'=>'礼拜天人很少','picurl'=>'http://mmbiz.qpic.cn/mmbiz_jpg/Ft65fsDXhHpXW7QhsteXl5j1FX5ia9kCWwApHTWEfVrOibuZmSwaYhlxRS0ibPiccGv5lGGxSWCmnbBwuhVzCq0vvw/0?wx_fmt=jpeg','url'=>'http://o2o.01nnt.com']]);
+        file_put_contents('result.txt',$result);
         if (isset($encrypt_type) && $_GET['encrypt_type'] == 'aes') { // 密文传输
             $encryptMsg = '';
             $jm->encryptMsg($result, $timestamp, $nonce, $encryptMsg);
