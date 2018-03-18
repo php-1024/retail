@@ -781,6 +781,24 @@ class WechatController extends Controller{
         $id = $request->input('id');
         return view('Wechat/Catering/auto_reply_delete_confirm',['id'=>$id]);
     }
+    /*
+     * 删除图文回复数据提交
+     */
+    public function auto_reply_delete_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        DB::beginTransaction();
+        try {
+            WechatReply::where('id',$id)->delete();
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除了自动回复关键字');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除自动回复关键字失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除自动回复关键字成功', 'status' => '1']);
+    }
 
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

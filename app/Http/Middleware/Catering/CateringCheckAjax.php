@@ -116,6 +116,7 @@ class CateringCheckAjax
             case "catering/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
             case "api/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
             case "api/ajax/material_article_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
+            case "api/ajax/auto_reply_delete_check"://检测是否登陆 权限 安全密码--删除关键字
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
