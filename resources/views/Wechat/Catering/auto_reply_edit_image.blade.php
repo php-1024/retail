@@ -2,6 +2,7 @@
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <input type="hidden" name="media_id" id="media_id" value="">
+    <input type="hidden" name="image_id" id="image_id" value="">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -37,7 +38,9 @@
 function select_img(obj){
     var target = $(obj);
     var media_id = target.data('media_id');
+    var image_id = target.data('id');
     $('#media_id').val(media_id);
+    $('#image_id').val(image_id);
     $('.item').find('.item-overlay').hide();
     target.find('.item-overlay').show();
 }
