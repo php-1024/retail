@@ -377,6 +377,7 @@ class FansmanageController extends Controller{
     private function Com_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){
+            dd($val);
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->Com_structure($list, $val['id']);
