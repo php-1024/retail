@@ -859,7 +859,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('defined_menu','Api\WechatController@defined_menu')->middleware('CateringCheck');//自定义菜单管理页面
         Route::any('auto_reply','Api\WechatController@auto_reply')->middleware('CateringCheck');//关键词自动回复
         Route::any('subscribe_reply','Api\WechatController@subscribe_reply')->middleware('CateringCheck');//关注事件自动回复
-        Route::any('default_reply','Api\WechatController@subscribe_reply')->middleware('CateringCheck');//默认回复
+        Route::any('default_reply','Api\WechatController@default_reply')->middleware('CateringCheck');//默认回复
     });
 
     //微信接口中页面使用Ajax的部分
