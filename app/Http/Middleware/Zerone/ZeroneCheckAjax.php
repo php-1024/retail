@@ -123,11 +123,11 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndFansmanageEdit($request);
                 return self::format_response($re,$next);
                 break;
-
             case "zerone/ajax/fansmanage_list_lock_check"://商户冻结  检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
+
 
             case "zerone/ajax/fansmanage_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
@@ -387,6 +387,7 @@ class ZeroneCheckAjax
     }
 
 
+
     /*****商户管理******/
     //检测 登录 和 权限 和 安全密码 和 添加商户的数据提交
     public function checkLoginAndRuleAndSafeAndFansmanageAdd($request){
@@ -418,6 +419,7 @@ class ZeroneCheckAjax
     }
 
 
+    /*****公用部分******/
     //检测登录和权限
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
@@ -446,12 +448,6 @@ class ZeroneCheckAjax
             }
         }
     }
-
-
-
-
-
-
     //检测是否登录 权限 安全密码 数字不能为空
     public function checkLoginAndRuleAndSafeAndAssets($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -466,6 +462,17 @@ class ZeroneCheckAjax
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
     //检测是否登录 权限 安全密码 添加店铺参数是否正确
     public function checkLoginAndRuleAndSafeAndStore($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -482,6 +489,31 @@ class ZeroneCheckAjax
     }
 
     /******************************单项检测*********************************/
+
+    /*****系统管理******/
+    //检测战区添加表信息
+    public function checkWarzoneAdd($request){
+        if (empty($request->input('zone_name'))) {
+            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
+        }
+        if (empty($request->input('province_id'))) {
+            return self::res(0, response()->json(['data' => '请选择战区包含省份', 'status' => '0']));
+        }
+        if (empty($request->input('safe_password'))) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测战区编辑表信息
+    public function checkWarzoneEdit($request){
+        if (empty($request->input('zone_name'))) {
+            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
+        }
+        if (empty($request->input('safe_password'))) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
 
 
     /*****个人中心******/
@@ -718,9 +750,7 @@ class ZeroneCheckAjax
     }
 
 
-
-
-
+    /*****公用部分******/
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
@@ -816,29 +846,17 @@ class ZeroneCheckAjax
         }
     }
 
-    //检测战区添加表信息
-    public function checkWarzoneAdd($request){
-        if (empty($request->input('zone_name'))) {
-            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
-        }
-        if (empty($request->input('province_id'))) {
-            return self::res(0, response()->json(['data' => '请选择战区包含省份', 'status' => '0']));
-        }
-        if (empty($request->input('safe_password'))) {
-            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测战区编辑表信息
-    public function checkWarzoneEdit($request){
-        if (empty($request->input('zone_name'))) {
-            return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
-        }
-        if (empty($request->input('safe_password'))) {
-            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     //检测添加店铺信息
