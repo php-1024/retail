@@ -18,7 +18,7 @@ class WechatSubscribeReply extends Model{
 
     public static function addWechatSubscribeReply($param){
         $model = new WechatSubscribeReply();
-        $model->organization_id = $param['organization_id']=="";
+        $model->organization_id = $param['organization_id'];
         $model->authorizer_appid = $param['authorizer_appid'];
         $model->reply_type = $param['reply_type'];
         $model->text_info = !isset($param['text_info'])?"":$param["text_info"];
