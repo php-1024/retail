@@ -1,10 +1,10 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_store_add_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="organization_id" value="{{$organization_id}}">
+    <input type="hidden" name="organization_id" value="{{$data->id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <h3>“刘记新科技有限公司”商户划入</h3>
+                <h3>“{{$data->organization_name}}”店铺划入</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -69,13 +69,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
