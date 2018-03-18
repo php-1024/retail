@@ -583,6 +583,9 @@ class WechatController extends Controller{
         */
     }
     /**************************************************************************消息回复管理开始*********************************************************************************/
+    /*
+     * 关键字自动回复列表
+     */
     public function auto_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -591,6 +594,41 @@ class WechatController extends Controller{
 
         return view('Wechat/Catering/auto_reply',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    /*
+     * 添加关键字
+     */
+    public function auto_reply_add(Request $request){
+        return view('Wechat/Catering/auto_reply_add');
+    }
+    /*
+     * 添加关键字测试
+     */
+    public function auto_reply_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $keyword = $request->input('keyword');//关键字
+        $organization_id = $admin_data['organization_id'];//角色权限节点
+        $appinfo = WechatAuthorization::getOne([['organization_id',$organization_id]]);
+        dump($appinfo);
+        $appid = $appinfo['appid'];
+        exit();
+
+        if(OrganizationRole::checkRowExists([['organization_id',$admin_data['organization_id']],['created_by',$admin_data['id']],['role_name',$role_name]])){//判断是否添加过相同的的角色
+            return response()->json(['data' => '您已经添加过相同的权限角色名称', 'status' => '0']);
+        }else {
+            DB::beginTransaction();
+            try {
+
+                OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'添加了自动回复关键字'.$keyword);//保存操作记录
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '添加权限角色失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '添加权限角色成功', 'status' => '1']);
+        }
+    }
+
 
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
