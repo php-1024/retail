@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">关键字</label>
                         <div class="col-sm-10">
-                            <input type="text" value="刘记鸡煲王" placeholder="店铺名称" class="form-control">
+                            <input type="text" value="" name="keyword" placeholder="请输入关键字" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -18,14 +18,15 @@
                         <div class="col-sm-10">
                             <div class="radio col-sm-2">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" checked="" value="option2">
-                                    模糊
+                                    <input type="radio" name="type" id="optionsRadios2" checked="" value="2">
+                                    精确
+
                                 </label>
                             </div>
                             <div class="radio col-sm-2">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                    精确
+                                    <input type="radio" name="type" id="optionsRadios2" value="1">
+                                    模糊
                                 </label>
                             </div>
                         </div>
