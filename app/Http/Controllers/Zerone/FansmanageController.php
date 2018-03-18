@@ -494,14 +494,15 @@ class FansmanageController extends Controller{
         $route_name = $request->path(); //获取当前的页面路由
         $fansmanage_id = $request->fansmanage_id; //商户id
         $oneFansmanage = Organization::getOne([['id', $fansmanage_id]]); //商户信息
+        dd($oneFansmanage);
         $status = $request->status; //是否消耗程序数量
         $store_id = $request->store_id; //商户id
         $oneStore = Organization::getOne([['id', $store_id]]);
         DB::beginTransaction();
         try {
+
             $parent_tree = $oneFansmanage['parent_tree'] . $fansmanage_id . ','; //组织树
             Organization::editOrganization([['id', $store_id]], ['parent_id' => $fansmanage_id, 'parent_tree' => $parent_tree]);
-
             if ($status == 1) { //消耗程序数量
                 $Assets = OrganizationAssets::getOne([['organization_id', $fansmanage_id], ['program_id', $oneStore['program_id']]]); //查询服务商程序数量信息
                 if ($Assets['program_balance'] >= 1) { //如果服务商剩余程序数量足够
@@ -513,7 +514,7 @@ class FansmanageController extends Controller{
                     OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
 
                 } else {
-                    return response()->json(['data' => '该服务商的程序数量不够', 'status' => '0']);
+                    return response()->json(['data' => '该商户的程序数量不够', 'status' => '0']);
                 }
             }
             //添加操作日志
