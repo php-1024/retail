@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
     <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/trumbowyg/design/css/trumbowyg.css">
+
     <!--[if lt IE 9]>
     <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
@@ -64,6 +64,7 @@
                                     <button class="btn btn-success" id="addKeyWord" onclick="return getAddForm();">新建关键字 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="_token" id="auto_reply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
+                                    <input type="hidden" name="_token" id="auto_reply_edit_text_url" value="{{ url('api/ajax/auto_reply_edit_text') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">
@@ -93,7 +94,7 @@
                                             <td>
                                                 @if(empty($val['reply_type']))
                                                 <p>
-                                                    <button class="btn btn-info btn-sm" id="addText"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
+                                                    <button class="btn btn-info btn-sm" id="addText" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
                                                     <button class="btn btn-info btn-sm" id="addArticle"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图文回复</button>
                                                     <button class="btn btn-info btn-sm" id="addPicture"><i class="icon icon-picture"></i>&nbsp;&nbsp;图片回复</button>
                                                     <button class="btn btn-info btn-sm" id="editKeyWord"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
@@ -172,29 +173,7 @@
 </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">文本回复</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <textarea id="form-content" class="editor" cols="30" rows="10"> </textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
@@ -436,17 +415,10 @@
 <script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
 
-<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
 
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
-
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 
 <script type="text/javascript">
     $(function(){
-        $('#addText').click(function(){
-            $('#myModal2').modal();
-        });
         $('#addArticle').click(function(){
             $('#myModal3').modal();
         });
@@ -519,10 +491,22 @@
         });
     }
     //弹出图片上传框
-    function getEditTextForm(){
-        var url = $('#auto_reply_add_text_url').val();
+    function getAutoEditTextForm(id){
+        var url = $('#auto_reply_edit_text_url').val();
         var token = $('#_token').val();
-        var data = {'_token':token};
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
@@ -535,7 +519,6 @@
                 });
                 return;
             }else{
-
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }

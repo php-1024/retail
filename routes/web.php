@@ -783,6 +783,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('defined_menu_get','Api\WechatController@defined_menu_get')->middleware('CateringCheckAjax');//获取自定义菜单数据
         Route::any('auto_reply_add','Api\WechatController@auto_reply_add')->middleware('CateringCheckAjax');
         Route::any('auto_reply_add_check','Api\WechatController@auto_reply_add_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_text','Api\WechatController@auto_reply_edit_text')->middleware('CateringCheckAjax');
     });
 });
 /*********************接口路由*************************/
