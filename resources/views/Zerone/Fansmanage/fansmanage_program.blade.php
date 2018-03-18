@@ -163,12 +163,12 @@
         });
     }
     //程序划出
-    function getAssetsReduce(package_id,status) {
+    function getAssetsReduce(program_id,status) {
 
         var url = $('#fansmanage_assets').val();
         var token = $('#_token').val();
         var organization_id = $('#organization_id').val();
-        if (package_id == '') {
+        if (program_id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
@@ -180,7 +180,7 @@
             return;
         }
 
-        var data = {'package_id': package_id, 'status':status, 'organization_id':organization_id, '_token': token};
+        var data = {'program_id': program_id, 'status':status, 'organization_id':organization_id, '_token': token};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
