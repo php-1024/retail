@@ -19,7 +19,12 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $url = \Wechat::get_auth_url($admin_data['organization_id'],$route_name);
+
+        $url = "";
+        if(WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]])){
+            $url = \Wechat::get_auth_url($admin_data['organization_id'],$route_name);
+        }
+
         $wechat_info = [];
         $org_info = Organization::where('id',$admin_data['organization_id'])->first();
         if(isset($org_info->wechatAuthorization)) {//如果该组织授权了公众号
@@ -736,6 +741,28 @@ class WechatController extends Controller{
                 </xml>";
         $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $media_id);
         return $result;
+    }
+    /*
+     * 回复文本信息
+     */
+    private function zerone_response_article($param,$article_data){
+        $xmltpl = "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[news]]></MsgType>
+                <ArticleCount>%s</ArticleCount>
+                <Articles>";
+        foreach($article_data as $key=>$val){
+            $xmltpl.="<item>
+<Title><![CDATA[title1]]></Title>
+<Description><![CDATA[description1]]></Description>
+<PicUrl><![CDATA[picurl]]></PicUrl>
+<Url><![CDATA[url]]></Url>
+</item>";
+        }
+        $xmltpl.="</Articles>
+                </xml> ";
     }
 
     /*
