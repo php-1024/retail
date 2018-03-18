@@ -602,8 +602,9 @@ class WechatController extends Controller{
     public function auto_reply_add(Request $request){
         return view('Wechat/Catering/auto_reply_add');
     }
+
     /*
-     * 添加关键字测试
+     * 添加关键字数据
      */
     public function auto_reply_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -631,6 +632,36 @@ class WechatController extends Controller{
         }
     }
 
+    /*
+    * 添加关键字
+    */
+    public function auto_reply_edit_text(Request $request){
+        return view('Wechat/Catering/auto_reply_edit_text');
+    }
+
+    /*
+     * 编辑自动回复文本内容
+     */
+    public function auto_reply_edit_text_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $reply_type = 1;
+        $reply_info = $request->input('reply_info');
+        $info = WechatReply::getOne([['id',$id]]);
+
+        DB::beginTransaction();
+        try {
+            $data = ['reply_type'=>$reply_type,'reply_info'=>$reply_info];
+            WechatReply::addWechatReply($data);
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$info['keyword'].'的文本回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改自动回复关键字的文本回复失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改自动回复关键字的文本回复成功', 'status' => '1']);
+    }
 
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
