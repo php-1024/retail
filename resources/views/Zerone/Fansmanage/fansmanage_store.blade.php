@@ -94,7 +94,7 @@
                                         <td>{{$value->program->program_name}}</td>
                                         <td>{{$value->created_at}}</td>
                                         <td class="text-right">
-                                            <button type="button" onclick="getDrawStoreForm('{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
+                                            <button type="button" onclick="getDrawStoreForm('{{$organization_id}}','{{$value->id}}')" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
                                         </td>
                                     </tr>
                                     @endforeach
