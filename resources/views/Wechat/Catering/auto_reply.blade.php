@@ -63,7 +63,7 @@
                                 <div class="row row-sm">
                                     <button class="btn btn-success" id="addKeyWord" onclick="return getAddForm();">新建关键字 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" name="_token" id="auto_apply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
+                                    <input type="hidden" name="_token" id="auto_reply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">
@@ -537,7 +537,7 @@
 
     //弹出图片上传框
     function getAddForm(){
-        var url = $('#auto_replu_add_url').val();
+        var url = $('#auto_reply_add_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
