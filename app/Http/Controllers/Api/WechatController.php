@@ -801,6 +801,7 @@ class WechatController extends Controller{
         return response()->json(['data' => '删除自动回复关键字成功', 'status' => '1']);
     }
 
+    //关注后回复
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -808,6 +809,39 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         return view('Wechat/Catering/subscribe_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    //关注后文本回复保存
+    public function subscribe_reply_text_edit(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $text_info = $request->input('text_info');
+        $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
+        $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        $authorizer_appid = $appinfo['authorizer_appid'];
+
+        DB::beginTransaction();
+        try {
+            if(empty($info)){
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'authorizer_appid' => $authorizer_appid,
+                    'text_info' => $text_info
+                ];
+                WechatSubscribeReply::addWechatSubscribeReply($data);
+            }else{
+                $data = ['text_info'=>$text_info];
+                WechatSubscribeReply::editWechatSubscribeReply([['organization_id',$admin_data['organization_id']]],$data);
+            }
+
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$info['keyword'].'的文本回复内容');//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改自动回复关键字的图文回复失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改自动回复关键字的图文回复成功', 'status' => '1']);
     }
 
     public function default_reply(Request $request){

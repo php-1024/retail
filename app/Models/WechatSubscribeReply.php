@@ -16,12 +16,14 @@ class WechatSubscribeReply extends Model{
         return self::where($where)->first();
     }
 
-    public static function addWechatReply($param){
-        $model = new WechatReply();
-        $model->organization_id = $param['organization_id'];
+    public static function addWechatSubscribeReply($param){
+        $model = new WechatSubscribeReply();
+        $model->organization_id = $param['organization_id']=="";
         $model->authorizer_appid = $param['authorizer_appid'];
-        $model->keyword = $param['keyword'];
-        $model->type = $param['type'];
+        $model->type = $param['reply_type'];
+        $model->text_info = $param['text_info']==""?"":$param["text_info"];
+        $model->image_media_id = $param['image_media_id']==""?"":$param["image_media_id"];
+        $model->article_media_id = $param['article_media_id']==""?"":$param["article_media_id"];
         $model->save();
         return $model->id;
     }
@@ -55,7 +57,7 @@ class WechatSubscribeReply extends Model{
     }
 
     //修改
-    public static function editWechatReply($where,$param){
+    public static function editWechatSubscribeReply($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
