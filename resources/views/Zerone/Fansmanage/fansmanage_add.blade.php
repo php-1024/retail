@@ -62,7 +62,7 @@
                                         <div class="col-sm-10">
                                             <select class="form-control m-b" name="asset_id">
                                                 @foreach($listProgram as $k=>$v)
-                                                    <option value="{{$value->id}}">{{$value->program_name}}</option>
+                                                    <option value="{{$v->id}}">{{$v->program_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
