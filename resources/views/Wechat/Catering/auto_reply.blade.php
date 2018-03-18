@@ -78,12 +78,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($list as $key=>$val)
                                         <tr>
                                             <td>1</td>
                                             <td>测试</td>
                                             <td><label class="label label-success">模糊</label></td>
                                             <td>2017-08-09 11:11:11</td>
                                             <td>
+                                                @if(empty($val['reply_type']))
                                                 <p>
                                                     <button class="btn btn-info btn-sm" id="addText"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
                                                     <button class="btn btn-info btn-sm" id="addArticle"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图文回复</button>
@@ -91,114 +93,66 @@
                                                     <button class="btn btn-info btn-sm" id="editKeyWord"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
                                                     <button class="btn btn-danger btn-sm" id="deleteKeyWord"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
                                                 </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>测试</td>
-                                            <td><label class="label label-primary">精确</label></td>
-                                            <td>2017-08-09 11:11:11</td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-info btn-xs" id="editText"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs" id="deleteMaterial"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                    <label class="label label-primary">文本</label>&nbsp;&nbsp;
-                                                    测试图文...&nbsp;&nbsp;
+                                                @elseif($val['reply_type']=='1')
+                                                    <div>
+                                                        <button class="btn btn-info btn-xs" id="editText"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                        <button class="btn btn-danger btn-xs" id="deleteMaterial"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                                        <label class="label label-primary">文本</label>&nbsp;&nbsp;
+                                                        测试图文...&nbsp;&nbsp;
 
-                                                </div>
-                                                <div class="line line-dashed b-b line-lg pull-in"></div>
-                                                <div>
-                                                    <button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
-                                                    <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>测试</td>
-                                            <td><label class="label label-success">模糊</label></td>
-                                            <td>2017-08-09 11:11:11</td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-info btn-xs" id="editArticle"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs" id="deleteBtn2"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                    <label class="label label-primary">图文</label>&nbsp;&nbsp;
-                                                    测试回复啊啊啊啊啊...&nbsp;&nbsp;
+                                                    </div>
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div>
+                                                        <button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
+                                                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
+                                                    </div>
+                                                @elseif($val['reply_type']=='2')
+                                                    <div>
+                                                        <button class="btn btn-info btn-xs" id="editArticle"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                        <button class="btn btn-danger btn-xs" id="deleteBtn2"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                                        <label class="label label-primary">图文</label>&nbsp;&nbsp;
+                                                        测试回复啊啊啊啊啊...&nbsp;&nbsp;
 
-                                                </div>
-                                                <div class="line line-dashed b-b line-lg pull-in"></div>
-                                                <div>
-                                                    <button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
-                                                    <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>测试</td>
-                                            <td><label class="label label-success">模糊</label></td>
-                                            <td>2017-08-09 11:11:11</td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-info btn-xs" id="editPicture"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                    <button class="btn btn-danger btn-xs" id="deleteBtn2"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                                                    <label class="label label-primary">图片</label>&nbsp;&nbsp;
-                                                    <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
+                                                    </div>
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div>
+                                                        <button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
+                                                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
+                                                    </div>
+                                                @elseif($val['reply_type']=='3')
+                                                    <div>
+                                                        <button class="btn btn-info btn-xs" id="editPicture"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                        <button class="btn btn-danger btn-xs" id="deleteBtn2"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                                        <label class="label label-primary">图片</label>&nbsp;&nbsp;
+                                                        <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
 
-                                                </div>
-                                                <div class="line line-dashed b-b line-lg pull-in"></div>
-                                                <div>
-                                                    <button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
-                                                    <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
-                                                </div>
+                                                    </div>
+                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                    <div>
+                                                        <button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>
+                                                        <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
+                                                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                         </tbody>
+                                        @endforeach
                                     </table>
                                 </div>
                                 <footer class="panel-footer">
                                     <div class="row">
 
                                         <div class="col-sm-12 text-right text-center-xs">
-                                            <ul class="pagination pull-right">
-                                                <li class="footable-page-arrow disabled">
-                                                    <a data-page="first" href="#first">«</a>
-                                                </li>
-
-                                                <li class="footable-page-arrow disabled">
-                                                    <a data-page="prev" href="#prev">‹</a>
-                                                </li>
-                                                <li class="footable-page active">
-                                                    <a data-page="0" href="#">1</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">2</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">3</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">4</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">5</a>
-                                                </li>
-                                                <li class="footable-page-arrow">
-                                                    <a data-page="next" href="#next">›</a>
-                                                </li>
-                                                <li class="footable-page-arrow">
-                                                    <a data-page="last" href="#last">»</a>
-                                                </li>
-                                            </ul>
+                                            {{$list->links()}}
                                         </div>
                                     </div>
                                 </footer>
