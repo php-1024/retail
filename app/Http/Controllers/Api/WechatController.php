@@ -755,10 +755,10 @@ class WechatController extends Controller{
                 <Articles>";
         foreach($article_data as $key=>$val){
             $xmltpl.="<item>
-<Title><![CDATA[title1]]></Title>
-<Description><![CDATA[description1]]></Description>
-<PicUrl><![CDATA[picurl]]></PicUrl>
-<Url><![CDATA[url]]></Url>
+<Title><![CDATA[".$val['title']."]]></Title>
+<Description><![CDATA[".$val['description']."]]></Description>
+<PicUrl><![CDATA[".$val['picurl']."]]></PicUrl>
+<Url><![CDATA[".$val['url']."]]></Url>
 </item>";
         }
         $xmltpl.="</Articles>
