@@ -255,7 +255,7 @@ class FansmanageController extends Controller{
             $where[] = ['organization_name','like','%'.$organization_name.'%'];
         }
 
-        $listorg = Organization::getList($where,'5','id');
+        $listorg = Organization::getPaginageFansmanage($where,'5','id');
 //        foreach ($listorg as $k=>$v){
 //            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
 //            $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
