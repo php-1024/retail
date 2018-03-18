@@ -182,8 +182,6 @@ class WechatController extends Controller{
         ];
 
         $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
-        var_dump($re);
-        exit();
         if(!empty($re['media_id'])){
             $zdata = [
                 'organization_id'=>$admin_data['organization_id'],
