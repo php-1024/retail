@@ -94,7 +94,7 @@
                                                 <td>图文素材</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" autocomplete="off" class="reply_type" value="3" @if(!empty($info) && $info['reply_type']=='3') checked="checked" @endif>
+                                                        <input type="checkbox" disabled autocomplete="off" class="reply_type" value="3" @if(!empty($info) && $info['reply_type']=='3') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
@@ -106,7 +106,7 @@
                                                 <td>图片素材</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" autocomplete="off"  class="reply_type" value="2" @if(!empty($info) && $info['reply_type']=='2') checked="checked" @endif>
+                                                        <input type="checkbox" disabled autocomplete="off"  class="reply_type" value="2" @if(!empty($info) && $info['reply_type']=='2') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
