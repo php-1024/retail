@@ -636,7 +636,8 @@ class WechatController extends Controller{
     * 添加关键字
     */
     public function auto_reply_edit_text(Request $request){
-        return view('Wechat/Catering/auto_reply_edit_text');
+        $id = $request->input('id');
+        return view('Wechat/Catering/auto_reply_edit_text',['id'=>$id]);
     }
 
     /*

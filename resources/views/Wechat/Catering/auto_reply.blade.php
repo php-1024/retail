@@ -94,7 +94,7 @@
                                             <td>
                                                 @if(empty($val['reply_type']))
                                                 <p>
-                                                    <button class="btn btn-info btn-sm" id="addText"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
+                                                    <button class="btn btn-info btn-sm" id="addText" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
                                                     <button class="btn btn-info btn-sm" id="addArticle"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图文回复</button>
                                                     <button class="btn btn-info btn-sm" id="addPicture"><i class="icon icon-picture"></i>&nbsp;&nbsp;图片回复</button>
                                                     <button class="btn btn-info btn-sm" id="editKeyWord"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
@@ -419,9 +419,6 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#addText').click(function(){
-            $('#myModal2').modal();
-        });
         $('#addArticle').click(function(){
             $('#myModal3').modal();
         });
