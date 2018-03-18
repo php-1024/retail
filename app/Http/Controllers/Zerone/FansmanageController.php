@@ -527,7 +527,6 @@ class FansmanageController extends Controller{
     }
     //商户店铺管理--划出
     public function fansmanage_store_draw(Request $request){
-        dd(1);
         return view('Zerone/Fansmanage/fansmanage_store_draw');
     }
 
