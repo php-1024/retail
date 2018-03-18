@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('subscribe_reply_article_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/subscribe_reply_article_edit_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="media_id" id="media_id" value="">
     <div class="modal-dialog modal-lg">
