@@ -100,14 +100,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($listorg as $key=>$value)
+                                    @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->proxy_name}}</td>
-                                        <td>{{$value->organizationfansmanageinfo->fansmanage_owner}}</td>
-                                        <td>{{$value->account}}</td>
-                                        <td>{{$value->organizationfansmanageinfo->fansmanage_owner_mobile}}</td>
+                                        <td>{{$value->agent_name}}</td>
+                                        <td>{{$value['fansmanageinfo']['fansmanage_owner']}}</td>
+                                        <td>{{$value->account->account}}</td>
+                                        <td>{{$value->account->mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
@@ -124,9 +124,6 @@
                                             <button type="button" class="btn  btn-xs btn-info" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
 
-                                            <!--
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger" onclick="getDeleteForm({{ $value->id }})"><i class="fa fa-remove"></i>&nbsp;&nbsp;删除</button>
-                                            -->
                                             <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
                                             <button type="button" id="programBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
                                             <button type="button" id="fansmanageBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺划拨管理</button>
@@ -139,7 +136,7 @@
                                     <tr>
                                         <td colspan="9" class="footable-visible">
                                             <ul class="pagination pull-right">
-                                           {{$listorg->appends($search_data)->links()}}
+                                           {{$list->appends($search_data)->links()}}
                                             </ul>
                                         </td>
                                     </tr>
@@ -152,154 +149,110 @@
                     </div>
                 </div>
             </div>
-            @include('Zerone/Public/Footer')
-            </div>
-
-            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
-            <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
-            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        @include('Zerone/Public/Footer')
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
-
-    {{--<!-- Page-Level Scripts -->--}}
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-    <script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
-    <script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
-
-    <script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
-    <script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
-    <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
-
-    <script>
-
-$(function(){
-
-    //设置CSRF令牌
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-});
-
-//编辑
-function getEditForm(id){
-
-    var url = $('#fansmanage_list_edit').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
-        });
-        return;
-    }
-
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }else{
-
-            $('#myModal').html(response);
-            $('#myModal').modal();
-        }
-    });
-}
-//冻结
-function getFrozenForm(id,status){
-
-    var url = $('#fansmanage_list_frozen').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
-        });
-        return;
-    }
-
-    var data = {'id':id,'status':status,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }else{
-
-            $('#myModal3').html(response);
-            $('#myModal3').modal();
-        }
-    });
-}
-//删除
-function getDeleteForm(id){
-
-    var url = $('#fansmanage_list_delete').val();
-    var token = $('#_token').val();
-    if(id==''){
-        swal({
-            title: "提示信息",
-            text: '数据传输错误',
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-        },function(){
-            window.location.reload();
-        });
-        return;
-    }
-
-    var data = {'id':id,'_token':token};
-    $.post(url,data,function(response){
-        if(response.status=='-1'){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }else{
-
-            $('#myModal2').html(response);
-            $('#myModal2').modal();
-        }
-    });
-}
-    </script>
 </div>
-</body>
 
+{{--<!-- Page-Level Scripts -->--}}
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Zerone/library/sweetalert')}}/js/sweetalert.min.js"></script>
+
+<script src="{{asset('public/Zerone')}}/js/switchery.js"></script>
+<script src="{{asset('public/Zerone')}}/js/footable.all.min.js"></script>
+<script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
+
+<script>
+    $(function(){
+
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+
+    //编辑
+    function getEditForm(id){
+
+        var url = $('#fansmanage_list_edit').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //冻结
+    function getFrozenForm(id,status){
+
+        var url = $('#fansmanage_list_frozen').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'status':status,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+</script>
+</body>
 </html>

@@ -47,6 +47,12 @@ class Program extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
+    //获取多条数据
+    public static function getListProgram($where){
+
+        return self::where($where)->get();
+    }
+
     //添加数据
     public static function addProgram($param){
         $program = new Program();//实例化程序模型

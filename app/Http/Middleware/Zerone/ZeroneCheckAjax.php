@@ -88,7 +88,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
             case "zerone/ajax/agent_list_edit_check"://服务商 检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndOrgEdit($request);
+                $re = $this->checkLoginAndRuleAndSafeAndAgentEdit($request);
                 return self::format_response($re,$next);
                 break;
             case "zerone/ajax/agent_list_lock_check"://检测 登录 和 权限 和 安全密码 和数据是否为空
@@ -115,8 +115,12 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
+            case "zerone/ajax/fansmanage_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
+                $re = $this->checkLoginAndRuleAndSafeAndFansmanageAdd($request);
+                return self::format_response($re,$next);
+                break;
             case "zerone/ajax/fansmanage_list_edit_check"://商户 检测 登录 和 权限 和 安全密码 和数据是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndComEdit($request);
+                $re = $this->checkLoginAndRuleAndSafeAndFansmanageEdit($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -124,10 +128,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/fansmanage_add_check"://检测商户名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
-                $re = $this->checkLoginAndRuleAndSafeAndCompanyAdd($request);
-                return self::format_response($re,$next);
-                break;
+
             case "zerone/ajax/fansmanage_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
@@ -371,12 +372,12 @@ class ZeroneCheckAjax
         }
     }
     //编辑服务商 检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndOrgEdit($request){
+    public function checkLoginAndRuleAndSafeAndAgentEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkOrgEditData($re['response']);//检测是否具有权限
+            $re2 = $this->checkAgentEditData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -385,7 +386,36 @@ class ZeroneCheckAjax
         }
     }
 
-    /*****服务商管理******/
+
+    /*****商户管理******/
+    //检测 登录 和 权限 和 安全密码 和 添加商户的数据提交
+    public function checkLoginAndRuleAndSafeAndFansmanageAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkFansmanageAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登录和权限和安全密码 和 商户编辑
+    public function checkLoginAndRuleAndSafeAndFansmanageEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkFansmanageEditData($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
 
     //检测登录和权限
@@ -417,34 +447,8 @@ class ZeroneCheckAjax
         }
     }
 
-    //商户 检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafeAndComEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkComEditData($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 添加服务商的数据提交
-    public function checkLoginAndRuleAndSafeAndCompanyAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkCompanyAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
+
 
 
 
@@ -643,7 +647,22 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
-
+    //检测服务商编辑表信息
+    public function checkAgentEditData($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
     //检测程序划拨数量不为空
     public function checkAssets($request){
         $number = $request->input('number');
@@ -658,7 +677,48 @@ class ZeroneCheckAjax
 
 
 
-    /*****服务商管理******/
+    /*****商户管理******/
+
+    //检测商户申请表信息
+    public function checkFansmanageAdd($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        if (empty($request->input('fansmanage_password'))) {
+            return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
+        }elseif ($request->input('fansmanage_password')!=$request->input('re_fansmanage_password')){
+            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测商户编辑表信息
+    public function checkFansmanageEditData($request){
+        if (empty($request->input('organization_name'))) {
+            return self::res(0, response()->json(['data' => '请输入商户名称', 'status' => '0']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('idcard'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+
+
 
 
     //检测安全密码是否输入正确
@@ -756,27 +816,6 @@ class ZeroneCheckAjax
         }
     }
 
-    //检测商户申请表信息
-    public function checkCompanyAdd($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        if (empty($request->input('proxy_password'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
-        }elseif ($request->input('proxy_password')!=$request->input('re_proxy_password')){
-            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
     //检测战区添加表信息
     public function checkWarzoneAdd($request){
         if (empty($request->input('zone_name'))) {
@@ -800,38 +839,8 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
-    //检测服务商编辑表信息
-    public function checkOrgEditData($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-    //检测商户编辑表信息
-    public function checkComEditData($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入商户名称', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('idcard'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
+
+
     //检测添加店铺信息
     public function checkStore($request){
         if (empty($request->input('organization_name'))) {

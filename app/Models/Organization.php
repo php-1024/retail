@@ -42,6 +42,12 @@ class Organization extends Model{
         return $this->hasOne('App\Models\OrganizationRetailinfo', 'organization_id');
     }
 
+    //和organizationBranchinfo表一对一的关系
+    public function fansmanageinfo(){
+        return $this->hasOne('App\Models\OrganizationFansmanageinfo', 'fansmanage_id');
+    }
+
+
     //和wechat_authorization表一对一的关系
     public function wechatAuthorization(){
         return $this->hasOne('App\Models\WechatAuthorization', 'organization_id');
@@ -80,9 +86,15 @@ class Organization extends Model{
     public static function getOneAgent($where){
         return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->first();
     }
+    //获取单条信息-商户
+    public static function getOneFansmanage($where){
+        return  self::with((['account'=>function($query){
+            $query->where('deepth','1');
+        }]))->with('fansmanageinfo')->where($where)->first();
+    }
     //获取单条信息-总店
     public static function getOneCatering($where){
-        return self::with('warzoneAgent')->with('organizationbranchinfo')->where($where)->first();
+        return self::with('organizationbranchinfo')->where($where)->first();
     }
 
     //获取-服务商列表
@@ -145,9 +157,11 @@ class Organization extends Model{
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-    //获取分页数据-服务商
+    //获取分页数据-商户
     public static function getPaginageFansmanage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with(['account'=>function($query){
+            $query->where('deepth','1');
+        }])->with('fansmanageinfo')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取分页数据-分店
     public static function getbranch($where,$paginate,$orderby,$sort='DESC'){
