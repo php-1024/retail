@@ -14,7 +14,7 @@
                         <div class="col-lg-2">
                             <div class="item" data-id="{{$val->id}}" onclick="select_img(this)" data-media_id="{{$val->media_id}}">
                                 <div class="pos-rlt">
-                                    <div class="item-overlay opacity r r-2x bg-black">
+                                    <div class="item-overlay opacity bg-black" style="height: 100px; width: 100px;">
                                         <div class="text-info padder m-t-sm text-sm">
                                             <i class="fa fa-check text-success"></i>
                                         </div>
@@ -38,7 +38,7 @@ function select_img(obj){
     var target = $(obj);
     var media_id = target.data('media_id');
     $('#media_id').val(media_id);
-    target.find('.item-overlay').hide();
+    $('.item').find('.item-overlay').hide();
     target.find('.item-overlay').show();
 }
 </script>
