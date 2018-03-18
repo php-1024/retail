@@ -121,7 +121,7 @@
                                                     @if($val['reply_type']<>'1')<button class="btn btn-info btn-sm" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>@endif
                                                     @if($val['reply_type']<>'3')<button class="btn btn-info btn-sm" onclick="return getAutoEditArticleForm('{{$val->id}}')"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>@endif
                                                         @if($val['reply_type']<>'2')<button class="btn btn-info btn-sm" onclick="return getAutoEditImageForm('{{$val->id}}')"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>@endif
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
+                                                    <button class="btn btn-info btn-sm" onclick="return getAutoEditForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
                                                     <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
                                                 </div>
 
@@ -319,7 +319,7 @@
         });
     }
     //弹出关键字修改框
-    function getAutoEditArticleForm(id){
+    function getAutoEditForm(id){
         var url = $('#auto_reply_edit_url').val();
         var token = $('#_token').val();
         if(id==''){
