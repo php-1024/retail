@@ -712,7 +712,7 @@ class WechatController extends Controller{
         $id = $request->input('id');
         $info = WechatReply::getOne([['id',$id]]);
         $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/auto_reply_edit_image',['id'=>$id,'info'=>$info,'list'=>$list]);
+        return view('Wechat/Catering/auto_reply_edit_article',['id'=>$id,'info'=>$info,'list'=>$list]);
     }
 
     public function subscribe_reply(Request $request){
