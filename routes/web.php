@@ -244,7 +244,7 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('fansmanage_add','Zerone\FansmanageController@fansmanage_add')->middleware('ZeroneCheck');                //添加商户
         Route::get('fansmanage_examinelist','Zerone\FansmanageController@fansmanage_examinelist')->middleware('ZeroneCheck');//商户审核列表
         Route::get('fansmanage_list','Zerone\FansmanageController@fansmanage_list')->middleware('ZeroneCheck');              //商户列表
-        Route::get('fansmanage_structure','Zerone\FansmanageController@fansmanage_structure')->middleware('ZeroneCheck');    //商户人员架构
+        Route::get('fansmanage_structure','Zerone\FansmanageController@fansmanage_structure')->middleware('ZeroneCheck');    //商户店铺架构
         Route::get('fansmanage_program','Zerone\FansmanageController@fansmanage_program')->middleware('ZeroneCheck');        //商户程序管理
         Route::get('fansmanage_store','Zerone\FansmanageController@fansmanage_store')->middleware('ZeroneCheck');            //商户划拨管理
     });
@@ -320,7 +320,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('fansmanage_list_edit_check','Zerone\FansmanageController@fansmanage_list_edit_check')->middleware('ZeroneCheckAjax');//商户编辑数据提交
         Route::post('fansmanage_list_lock','Zerone\FansmanageController@fansmanage_list_lock')->middleware('ZeroneCheckAjax');//商户冻结页面显示
         Route::post('fansmanage_list_lock_check','Zerone\FansmanageController@fansmanage_list_lock_check')->middleware('ZeroneCheckAjax');//商户冻结数据提交
-        Route::post('fansmanage_list_delete','Zerone\FansmanageController@fansmanage_list_delete')->middleware('ZeroneCheckAjax');//商户删除页面显示
         Route::post('fansmanage_assets','Zerone\FansmanageController@fansmanage_assets')->middleware('ZeroneCheckAjax');//商户程序管理划入划出显示页面
         Route::post('fansmanage_assets_check','Zerone\FansmanageController@fansmanage_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
 
