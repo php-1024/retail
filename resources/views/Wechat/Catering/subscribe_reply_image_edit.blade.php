@@ -1,6 +1,5 @@
 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_edit_image_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{$id}}">
     <input type="hidden" name="media_id" id="media_id" value="">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
