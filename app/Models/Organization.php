@@ -88,11 +88,13 @@ class Organization extends Model{
     }
     //获取单条信息-商户
     public static function getOneFansmanage($where){
-        return self::with('account')->with('fansmanageinfo')->where($where)->first();
+        $model = self::with('account');
+        $model =$model->where('deepth','1');
+        return $model->with('fansmanageinfo')->where($where)->first();
     }
     //获取单条信息-总店
     public static function getOneCatering($where){
-        return self::with('warzoneAgent')->with('organizationbranchinfo')->where($where)->first();
+        return self::with('organizationbranchinfo')->where($where)->first();
     }
 
     //获取-服务商列表
