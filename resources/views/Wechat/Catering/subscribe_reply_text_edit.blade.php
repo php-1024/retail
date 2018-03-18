@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <textarea id="form-content" class="editor" name="reply_info" cols="30" rows="10">@if(!empty($info)){{$info['text_info']}}@endif</textarea>
+                        <textarea id="form-content" class="editor" name="text_info" cols="30" rows="10">@if(!empty($info)){{$info['text_info']}}@endif</textarea>
                     </div>
                 </form>
             </div>
