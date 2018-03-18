@@ -93,44 +93,35 @@
                                             </td>
                                             <td>{{$val->created_at}}</td>
                                             <td>
-                                                @if(empty($val['reply_type']))
-                                                <p>
-                                                    <button class="btn btn-info btn-sm" id="addText" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>
-                                                    <button class="btn btn-info btn-sm" id="addArticle"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图文回复</button>
-                                                    <button class="btn btn-info btn-sm" id="addPicture"><i class="icon icon-picture"></i>&nbsp;&nbsp;图片回复</button>
-                                                    <button class="btn btn-info btn-sm" id="editKeyWord"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
-                                                    <button class="btn btn-danger btn-sm" id="deleteKeyWord"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
-                                                </p>
-                                                @else
-                                                    @if($val['reply_type']=='1')
-                                                        <div>
-                                                            <button class="btn btn-info btn-xs" id="editText" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                            <label class="label label-primary">文本</label>&nbsp;&nbsp;
-                                                             {{str_limit($val->reply_info,20,'...')}}&nbsp;&nbsp;
-                                                        </div>
-                                                    @elseif($val['reply_type']=='2')
-                                                        <div>
-                                                            <button class="btn btn-info btn-xs" id="editArticle"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                            <label class="label label-primary">图文</label>&nbsp;&nbsp;
-                                                            测试回复啊啊啊啊啊...&nbsp;&nbsp;
-
-                                                        </div>
-                                                    @elseif($val['reply_type']=='3')
-                                                        <div>
-                                                            <button class="btn btn-info btn-xs" id="editPicture"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                            <label class="label label-primary">图片</label>&nbsp;&nbsp;
-                                                            <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
-
-                                                        </div>
-                                                    @endif
-                                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                @if($val['reply_type']=='1')
                                                     <div>
-                                                        @if($val['reply_type']<>'1')<button class="btn btn-info btn-sm" ><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>@endif
-                                                        @if($val['reply_type']<>'2')<button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>@endif                                                                       @if($val['reply_type']<>'3')<button class="btn btn-info btn-sm"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>@endif
-                                                        <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
-                                                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
+                                                        <button class="btn btn-info btn-xs" id="editText" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                        <label class="label label-primary">文本</label>&nbsp;&nbsp;
+                                                         {{str_limit($val->reply_info,20,'...')}}&nbsp;&nbsp;
+                                                    </div>
+                                                @elseif($val['reply_type']=='2')
+                                                    <div>
+                                                        <button class="btn btn-info btn-xs" id="editArticle"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                        <label class="label label-primary">图文</label>&nbsp;&nbsp;
+                                                        测试回复啊啊啊啊啊...&nbsp;&nbsp;
+
+                                                    </div>
+                                                @elseif($val['reply_type']=='3')
+                                                    <div>
+                                                        <button class="btn btn-info btn-xs" id="editPicture"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                        <label class="label label-primary">图片</label>&nbsp;&nbsp;
+                                                        <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
+
                                                     </div>
                                                 @endif
+                                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                <div>
+                                                    @if($val['reply_type']<>'1')<button class="btn btn-info btn-sm" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>@endif
+                                                    @if($val['reply_type']<>'2')<button class="btn btn-info btn-sm"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>@endif                                                                       @if($val['reply_type']<>'3')<button class="btn btn-info btn-sm" onclick="return getAutoEditImageForm('{{$val->id}}')"><i class="fa fa-tasks"></i>&nbsp;&nbsp;图片回复</button>@endif
+                                                    <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑关键字</button>
+                                                    <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除关键字</button>
+                                                </div>
+
                                             </td>
                                         </tr>
                                         </tbody>
