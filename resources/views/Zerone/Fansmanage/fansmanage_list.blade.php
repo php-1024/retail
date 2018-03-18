@@ -100,13 +100,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($listorg as $key=>$value)
+                                    @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
+                                        <td>{{$value->agent_name}}</td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$value->account}}</td>
                                         <td></td>
                                         <td>
                                             @if($value->status == 1)
@@ -136,7 +136,7 @@
                                     <tr>
                                         <td colspan="9" class="footable-visible">
                                             <ul class="pagination pull-right">
-                                           {{$listorg->appends($search_data)->links()}}
+                                           {{$list->appends($search_data)->links()}}
                                             </ul>
                                         </td>
                                     </tr>
