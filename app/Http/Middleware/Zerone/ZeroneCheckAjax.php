@@ -422,7 +422,6 @@ class ZeroneCheckAjax
             if($re2['status']=='0'){
                 return $re2;
             }else{
-                dd(1);
                 return self::res(1,$re2['response']);
             }
         }
