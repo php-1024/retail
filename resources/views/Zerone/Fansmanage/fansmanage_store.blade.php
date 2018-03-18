@@ -193,7 +193,6 @@
             });
             return;
         }
-
         var data = {'organization_id':organization_id,'fansmanage_id':fansmanage_id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
@@ -212,13 +211,6 @@
             }
         });
     }
-
-
-
-
-
-
-
 </script>
 
 </body>
