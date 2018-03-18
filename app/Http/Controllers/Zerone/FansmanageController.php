@@ -477,7 +477,6 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id'); //商户id
         $list = Organization::getPaginageStore([['type','4'],['parent_id',$organization_id]],'10','id');
-        dump($list);
         return view('Zerone/Fansmanage/fansmanage_store',['list'=>$list,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户店铺管理--划入
