@@ -93,11 +93,11 @@
                                         @endforeach
                                     </td>
                                     <td >
-                                        {{--@if($val->proxyapply->count())--}}
-                                                {{--{{$val->proxyapply->count()}}位服务商--}}
-                                        {{--@else--}}
-                                        {{--0位服务商--}}
-                                        {{--@endif--}}
+                                        @if($val->WarzoneAgent->count())
+                                                {{$val->WarzoneAgent->count()}}位服务商
+                                        @else
+                                        0位服务商
+                                        @endif
                                     </td>
                                     <td class="text-right">
                                         <button type="button" onclick="getEditForm({{ $val->id }})"  class="btn  btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
@@ -124,10 +124,6 @@
         @include('Zerone/Public/Footer')
         {{--添加战区弹出图层--}}
         <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
-        {{--删除战区弹出图层--}}
-        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true"></div>
-        {{--编辑战区弹出图层--}}
-        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
         <!-- Mainly scripts -->
         <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
@@ -194,8 +190,8 @@
                         });
                         return;
                     }else{
-                        $('#myModal1').html(response);
-                        $('#myModal1').modal();
+                        $('#myModal').html(response);
+                        $('#myModal').modal();
                     }
                 });
             }
@@ -228,8 +224,8 @@
                         });
                         return;
                     }else{
-                        $('#myModal2').html(response);
-                        $('#myModal2').modal();
+                        $('#myModal').html(response);
+                        $('#myModal').modal();
                     }
                 });
             }

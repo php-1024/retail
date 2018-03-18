@@ -166,6 +166,9 @@ class ZeroneCheckAjax
             case "zerone/ajax/fansmanage_list_delete"://商户删除检测弹出登入和权限
             case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
 
+                $re = $this->checkIsLogin($request);
+                return self::format_response($re,$next);
+                break;
 
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
             case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
