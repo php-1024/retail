@@ -411,7 +411,6 @@ class FansmanageController extends Controller{
             $list[$key]['program_balance'] = $re['program_balance'];
             $list[$key]['program_used_num'] = $re['program_used_num'];
         }
-        dump($list);
         return view('Zerone/Fansmanage/fansmanage_program',['list'=>$list,'data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户资产页面划入js显示
@@ -419,10 +418,10 @@ class FansmanageController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
+        $listOrg = Organization::getOnefansmanage([['id',$organization_id]]);
         $listPac = Package::getOnePackage([['id',$package_id]]);
 
-        return view('Zerone/fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        return view('Zerone/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request){
