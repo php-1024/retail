@@ -19,14 +19,14 @@
                         <div class="col-sm-10">
                             <div class="radio col-sm-2">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios2" checked="" value="2">
+                                    <input type="radio" name="type" id="optionsRadios2" checked="" value="1">
                                     精确
 
                                 </label>
                             </div>
                             <div class="radio col-sm-2">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios2" value="1">
+                                    <input type="radio" name="type" id="optionsRadios2" value="2">
                                     模糊
                                 </label>
                             </div>
