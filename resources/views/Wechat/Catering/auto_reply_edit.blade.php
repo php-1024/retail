@@ -1,5 +1,6 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_add_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_edit_article_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">关键字</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" name="keyword" placeholder="请输入关键字" class="form-control">
+                            <input type="text" value="" name="keyword" placeholder="请输入关键字" value="{{$info->keyword}}" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -19,14 +20,14 @@
                         <div class="col-sm-10">
                             <div class="radio col-sm-2">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios2" checked="" value="1">
+                                    <input type="radio" name="type" id="optionsRadios2" @if($info->type=='1')checked=""@endif value="1">
                                     精确
 
                                 </label>
                             </div>
                             <div class="radio col-sm-2">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios2" value="2">
+                                    <input type="radio" name="type" id="optionsRadios2" @if($info->type=='2')checked=""@endif value="2">
                                     模糊
                                 </label>
                             </div>
