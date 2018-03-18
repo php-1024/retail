@@ -115,12 +115,12 @@ class CateringCheckAjax
                 break;
 
             case "api/ajax/subscribe_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndSubscribeReplyEdit($request);
+                $re = $this->checkLoginAndRuleAndSubscribeReplyImageEdit($request);
                 return self::format_response($re,$next);
                 break;
 
-            case "api/ajax/subscribe_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndSubscribeReplyEdit($request);
+            case "api/ajax/subscribe_reply_article_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyArticleEdit($request);
                 return self::format_response($re,$next);
                 break;
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
