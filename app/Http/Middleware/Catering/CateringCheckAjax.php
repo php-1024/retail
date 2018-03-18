@@ -86,6 +86,7 @@ class CateringCheckAjax
 
             case "api/ajax/auto_reply_add_check"://测试添加自动回复添加
                 $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
+                return self::format_response($re,$next);
                 break;
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
