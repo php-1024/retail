@@ -1,4 +1,5 @@
-<form class="form-horizontal tasi-form" method="get">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_add_check') }}">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -40,3 +41,33 @@
         </div>
     </div>
 </form>
+
+<script>
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+</script>
