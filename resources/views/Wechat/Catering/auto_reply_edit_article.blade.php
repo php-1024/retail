@@ -1,4 +1,7 @@
-<form class="form-horizontal tasi-form" method="get">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_edit_article_check') }}">
+    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="id" id="id" value="{{$id}}">
+    <input type="hidden" name="article_id" id="article_id" value="">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,7 +38,7 @@
                                 </td>
                                 <td>2017-08-09 11:11:11</td>
                                 <td>
-                                    <button class="btn btn-info btn-xs" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    <button data-id="{{$val->id}}" onclick="return select_article(this);" class="btn btn-info btn-xs choose_btn" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -52,3 +55,40 @@
         </div>
     </div>
 </form>
+<script>
+    function select_article(obj){
+        var target = $(obj);
+        var article_id = target.data('id');
+        $('#article_id').val(article_id);
+        $('.choose_btn').removeClass('btn-success').addClass('btn-info');
+        $(obj).removeClass('btn-info').addClass('btn-success');
+
+    }
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+</script>
