@@ -1,30 +1,13 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
         <div class="modal-header">
-            <h3>“刘记餐饮集团”店铺划出</h3>
+            <h3>“{{$onedata->organization_name}}”店铺划出</h3>
         </div>
         <div class="modal-body">
             <div class="form-group">
                 <label class="col-sm-3 control-label">划出店铺</label>
-                <div class="col-sm-9"><input type="text" class="form-control" value="刘记鸡煲王" readonly></div>
+                <div class="col-sm-9"><input type="text" class="form-control" value="{{$onedata->organization_name}}" readonly></div>
             </div>
-            <div style="clear:both"></div>
-            <div class="hr-line-dashed"></div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label" style="padding-top: 7px;">划给商户</label>
-                <div class="col-sm-9">
-                    <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                        <option value="Mayotte">公司总部</option>
-                        <option value="Mayotte">刘记集团</option>
-                        <option value="Mexico">李记鸡煲连锁</option>
-                        <option value="Micronesia, Federated States of">叶记猪肚鸡</option>
-                        <option value="Moldova, Republic of">韦记莲藕汤</option>
-                    </select>
-                </div>
-
-            </div>
-
             <div style="clear:both"></div>
             <div class="hr-line-dashed"></div>
 

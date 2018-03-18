@@ -531,7 +531,7 @@ class FansmanageController extends Controller{
         $fansmanage_id = $request->fansmanage_id; //商户id
         $store_id = $request->store_id; //划出店铺id
         $onedata = Organization::getOne([['id', $store_id]]);
-        return view('Zerone/Fansmanage/fansmanage_store_draw');
+        return view('Zerone/Fansmanage/fansmanage_store_draw',['onedata'=>$onedata,'fansmanage_id'=>$fansmanage_id]);
     }
 
 }
