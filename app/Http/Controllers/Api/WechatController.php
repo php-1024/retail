@@ -699,6 +699,7 @@ class WechatController extends Controller{
     private function zerone_response($jm,$param,$appid,$encrypt_type,$timestamp,$nonce){
         //$result = $this->zerone_response_text($param,'测试回复内容|'.$appid);
         $result = $this->response($param,'bosoFPsCynb5D_7F_IPAPKd_FOPDaqpXw62tH8u_t8Q');
+        file_put_contents('result.txt',$result);
         if (isset($encrypt_type) && $_GET['encrypt_type'] == 'aes') { // 密文传输
             $encryptMsg = '';
             $jm->encryptMsg($result, $timestamp, $nonce, $encryptMsg);
