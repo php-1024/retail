@@ -487,6 +487,45 @@ class FansmanageController extends Controller{
         $data = Organization::getOne([['id',$organization_id]]);
         return view('Zerone/Fansmanage/fansmanage_store_add',['list' => $list, 'data' => $data]);
     }
+    //商户店铺管理--划入数据提交
+    public function fansmanage_store_add_check(Request $request){
+        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
+        $route_name = $request->path(); //获取当前的页面路由
+        $fansmanage_id = $request->fansmanage_id; //商户id
+        $oneFansmanage = Organization::getOne([['id', $fansmanage_id]]); //商户信息
+        $status = $request->status; //是否消耗程序数量
+        $store_id = $request->store_id; //商户id
+        $oneStore = Organization::getOne([['id', $store_id]]);
+        DB::beginTransaction();
+        try {
+            $parent_tree = $oneFansmanage['parent_tree'] . $fansmanage_id . ','; //组织树
+            Organization::editOrganization([['id', $store_id]], ['parent_id' => $fansmanage_id, 'parent_tree' => $parent_tree]);
+
+            if ($status == 1) { //消耗程序数量
+                $Assets = OrganizationAssets::getOne([['organization_id', $fansmanage_id], ['program_id', $oneStore['program_id']]]); //查询服务商程序数量信息
+                if ($Assets['program_balance'] >= 1) { //如果服务商剩余程序数量足够
+                    $program_balance = $Assets->program_balance - 1; //剩余数量
+                    $program_used_num = $Assets->program_used_num + 1; //使用数量
+                    OrganizationAssets::editAssets([['id', $Assets->id]], ['program_balance' => $program_balance, 'program_used_num' => $program_used_num]); //修改数量
+                    $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $fansmanage_id, 'to_organization_id' => $store_id, 'program_id' => $asset_id, 'status' => '0', 'number' => '1'];
+                    //添加操作日志
+                    OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
+
+                } else {
+                    return response()->json(['data' => '该服务商的程序数量不够', 'status' => '0']);
+                }
+            }
+            //添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '划拨了店铺:' . $oneStore['organization_name'] . '-归属于商户：' . $oneFansmanage['organization_name']); //保存操作记录
+            DB::commit(); //提交事务
+        }
+        catch(Exception $e) {
+            dd($e);
+            DB::rollBack(); //事件回滚
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
+    }
     //商户店铺管理--划出
     public function fansmanage_store_draw(Request $request){
         return view('Zerone/Fansmanage/fansmanage_store_draw');
