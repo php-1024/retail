@@ -676,7 +676,7 @@ class WechatController extends Controller{
         return view('Wechat/Catering/auto_reply_edit_image',['id'=>$id,'info'=>$info,'list'=>$list]);
     }
     /*
-    * 编辑自动回复文本内容
+    * 编辑自动回复图片内容
     */
     public function auto_reply_edit_image_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -715,7 +715,7 @@ class WechatController extends Controller{
         return view('Wechat/Catering/auto_reply_edit_article',['id'=>$id,'info'=>$info,'list'=>$list]);
     }
     /*
-    * 编辑自动回复文本内容
+    * 编辑自动回复图文内容
     */
     public function auto_reply_edit_article_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -751,6 +751,27 @@ class WechatController extends Controller{
         $id = $request->input('id');
         $info = WechatReply::getOne([['id',$id]]);
         return view('Wechat/Catering/auto_reply_edit',['id'=>$id,'info'=>$info]);
+    }
+    /*
+   * 编辑关键字数据提交
+   */
+    public function auto_reply_edit_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->input('id');
+        $keyword = $request->input('keyword');
+        $type = $request->input('type');
+        DB::beginTransaction();
+        try {
+            $data = ['keyword'=>$keyword,'type'=>$type];
+            WechatReply::editWechatReply([['id',$id]],$data);
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了自动回复关键字'.$keyword);//保存操作记录
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改自动回复关键字失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改自动回复关键字成功', 'status' => '1']);
     }
 
     public function subscribe_reply(Request $request){
