@@ -383,7 +383,7 @@ class FansmanageController extends Controller{
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
-                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
+                $structure .= '<span class="pull-right">创建时间：'.$val['created_at'].'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
                 $structure .= '【商户】'. $val['organization_name']. '-'.$val['fansmanageinfo']['fansmanage_owner'].'-'.$val['fansmanageinfo']['fansmanage_owner_mobile'];
                 $structure .= '</div>';
