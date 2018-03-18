@@ -826,8 +826,7 @@ class WechatController extends Controller{
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $appinfo = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         $authorizer_appid = $appinfo['authorizer_appid'];
-        dump($admin_data);
-        exit();
+
         DB::beginTransaction();
         try {
             if(empty($info)){
