@@ -894,9 +894,9 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('subscribe_reply_text_edit','Api\WechatController@subscribe_reply_text_edit')->middleware('CateringCheckAjax');
         Route::any('subscribe_reply_text_edit_check','Api\WechatController@subscribe_reply_text_edit_check')->middleware('CateringCheckAjax');
         Route::any('subscribe_reply_image_edit','Api\WechatController@subscribe_reply_image_edit')->middleware('CateringCheckAjax');
-        Route::any('subscribe_reply_image_edit_check','Api\WechatController@subscribe_reply_text_image_check')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_image_edit_check','Api\WechatController@subscribe_reply_image_edit_check')->middleware('CateringCheckAjax');
         Route::any('subscribe_reply_article_edit','Api\WechatController@subscribe_reply_article_edit')->middleware('CateringCheckAjax');
-        Route::any('subscribe_reply_article_edit_check','Api\WechatController@subscribe_reply_text_article_check')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_article_edit_check','Api\WechatController@subscribe_reply_article_edit_check')->middleware('CateringCheckAjax');
     });
 });
 /*********************接口路由*************************/
