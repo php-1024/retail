@@ -891,6 +891,8 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('auto_reply_edit_check','Api\WechatController@auto_reply_edit_check')->middleware('CateringCheckAjax');
         Route::any('auto_reply_delete_confirm','Api\WechatController@auto_reply_delete_confirm')->middleware('CateringCheckAjax');
         Route::any('auto_reply_delete_check','Api\WechatController@auto_reply_delete_check')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_text_edit','Api\WechatController@subscribe_reply_text_edit')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_text_edit_check','Api\WechatController@subscribe_reply_text_edit_check')->middleware('CateringCheckAjax');
     });
 });
 /*********************接口路由*************************/
