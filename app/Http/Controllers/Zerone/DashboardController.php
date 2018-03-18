@@ -53,11 +53,11 @@ class DashboardController extends Controller{
         $zone_name = $request->input('zone_name');//搜索时输入的战区名称
         $search_data['zone_name'] = $zone_name;//分页参数
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],15,'id');//战区列表
-        dump($warzone);
         return view('Zerone/Dashboard/warzone',['zone_name'=>$zone_name,'search_data'=>$search_data,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
+        dd(1);
         $zone_id = $request->input('id');
         $zone_info = Warzone::getOne(['id'=>$zone_id]);
         $province = Province::getList([],0,'id','asc');
