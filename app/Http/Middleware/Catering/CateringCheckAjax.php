@@ -756,7 +756,7 @@ class CateringCheckAjax
 
     //检测关键字自定义回复图片内容
     public function checkAutoReplyEditImage($request){
-        if(empty($request->input('reply_info'))){
+        if(empty($request->input('image_id'))){
             return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
         }
         return self::res(1,$request);
