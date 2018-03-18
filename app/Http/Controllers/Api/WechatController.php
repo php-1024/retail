@@ -609,6 +609,7 @@ class WechatController extends Controller{
         $keyword = $request->input('keyword');//关键字
         $organization_id = $admin_data['organization_id'];//角色权限节点
         $appinfo = WechatAuthorization::getOne([['organization_id',$organization_id]]);
+        dump($appinfo);
         $appid = $appinfo['appid'];
         dump($appid);
         exit();
