@@ -479,11 +479,12 @@ class FansmanageController extends Controller{
 
         return view('Zerone/Fansmanage/fansmanage_store',['organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //商户程序管理
+    //商户店铺管理--划入
     public function fansmanage_store_add(Request $request){
+        dd(1);
         return view('Zerone/Fansmanage/fansmanage_store_add');
     }
-    //商户程序管理
+    //商户店铺管理--划出
     public function fansmanage_store_draw(Request $request){
         return view('Zerone/Fansmanage/fansmanage_store_draw');
     }
