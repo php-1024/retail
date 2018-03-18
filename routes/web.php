@@ -889,7 +889,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('auto_reply_edit_article_check','Api\WechatController@auto_reply_edit_article_check')->middleware('CateringCheckAjax');
         Route::any('auto_reply_edit','Api\WechatController@auto_reply_edit')->middleware('CateringCheckAjax');
         Route::any('auto_reply_edit_check','Api\WechatController@auto_reply_edit_check')->middleware('CateringCheckAjax');
-        Route::any('auto_reply_delete_comfirm','Api\WechatController@auto_reply_delete_comfirm')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_delete_confirm','Api\WechatController@auto_reply_delete_confirm')->middleware('CateringCheckAjax');
     });
 });
 /*********************接口路由*************************/

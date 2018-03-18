@@ -774,6 +774,14 @@ class WechatController extends Controller{
         return response()->json(['data' => '修改自动回复关键字成功', 'status' => '1']);
     }
 
+    /*
+   * 删除图文回复关键字
+   */
+    public function auto_reply_delete_confirm(Request $request){
+        $id = $request->input('id');
+        return view('Wechat/Catering/auto_reply_delete_confirm',['id'=>$id]);
+    }
+
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
