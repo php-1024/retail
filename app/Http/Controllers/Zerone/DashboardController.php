@@ -57,7 +57,6 @@ class DashboardController extends Controller{
     }
     //战区管理编辑弹出
     public function warzone_edit(Request $request){
-        dd(1);
         $zone_id = $request->input('id');
         $zone_info = Warzone::getOne(['id'=>$zone_id]);
         $province = Province::getList([],0,'id','asc');
