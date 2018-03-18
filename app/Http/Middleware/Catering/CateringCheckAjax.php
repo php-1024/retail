@@ -89,7 +89,7 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "auto_reply_edit_text_check"://测试添加文章
+            case "api/ajax/auto_reply_edit_text_check"://测试添加文章
                 $re = $this->checkLoginAndRuleAndAutoReplyEditText($request);
                 return self::format_response($re,$next);
                 break;
