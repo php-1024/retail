@@ -86,6 +86,10 @@ class Organization extends Model{
     public static function getOneAgent($where){
         return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->first();
     }
+    //获取单条信息-商户
+    public static function getOneFansmanage($where){
+        return self::where($where)->first();
+    }
     //获取单条信息-总店
     public static function getOneCatering($where){
         return self::with('warzoneAgent')->with('organizationbranchinfo')->where($where)->first();
