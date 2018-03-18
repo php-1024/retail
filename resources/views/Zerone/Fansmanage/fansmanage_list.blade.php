@@ -100,43 +100,43 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {{--@foreach($listorg as $key=>$value)--}}
-                                    {{--<tr>--}}
-                                        {{--<td>{{$value->id}}</td>--}}
-                                        {{--<td>{{$value->organization_name}}</td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td>--}}
-                                            {{--@if($value->status == 1)--}}
-                                                {{--<label class="label label-primary">正常</label>--}}
-                                            {{--@elseif($value->status == 0)--}}
-                                                {{--<label class="label label-danger">已冻结</label>--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
-                                        {{--<td>{{ $value->created_at }}</td>--}}
-                                        {{--<td class="text-right">--}}
-                                            {{--<button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
-                                            {{--@if($value->status == 1)--}}
-                                            {{--<button type="button" class="btn  btn-xs btn-warning" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>--}}
-                                            {{--@elseif($value->status == 0)--}}
-                                            {{--<button type="button" class="btn  btn-xs btn-info" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>--}}
-                                            {{--@endif--}}
-                                            {{----}}
-                                            {{--<button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>--}}
-                                            {{--<button type="button" id="programBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>--}}
-                                            {{--<button type="button" id="fansmanageBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺划拨管理</button>--}}
-                                        {{--</td>--}}
+                                    @foreach($listorg as $key=>$value)
+                                    <tr>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->organization_name}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            @if($value->status == 1)
+                                                <label class="label label-primary">正常</label>
+                                            @elseif($value->status == 0)
+                                                <label class="label label-danger">已冻结</label>
+                                            @endif
+                                        </td>
+                                        <td>{{ $value->created_at }}</td>
+                                        <td class="text-right">
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            @if($value->status == 1)
+                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @elseif($value->status == 0)
+                                            <button type="button" class="btn  btn-xs btn-info" onclick="getFrozenForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            @endif
 
-                                    {{--</tr>--}}
-                                    {{--@endforeach--}}
+                                            <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
+                                            <button type="button" id="programBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>
+                                            <button type="button" id="fansmanageBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺划拨管理</button>
+                                        </td>
+
+                                    </tr>
+                                    @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <td colspan="9" class="footable-visible">
                                             <ul class="pagination pull-right">
-                                           {{$listorg->appends($search_data)->links()}}
+                                           {{--{{$listorg->appends($search_data)->links()}}--}}
                                             </ul>
                                         </td>
                                     </tr>
