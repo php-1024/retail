@@ -686,7 +686,7 @@ class WechatController extends Controller{
         $image_info = WechatImage::getOne([['id',$image_id]]);
 
         $media_id = $image_info['media_id'];
-        $reply_info = asset('uploads/wechat/'.$admin_data['organization_id'].'/'.$image_info['filename']);
+        $reply_info = $image_info['filename'];
 
         $reply_type = 2;
         $info = WechatReply::getOne([['id',$id]]);
