@@ -133,12 +133,6 @@ class ZeroneCheckAjax
                 break;
 
 
-
-            case "zerone/ajax/store_insert_check"://检测是否登录 权限 安全密码 开设店铺数据是否正确
-                $re = $this->checkLoginAndRuleAndSafeAndStore($request);
-                return self::format_response($re,$next);
-                break;
-
             //系统管理
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
             case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
@@ -172,10 +166,6 @@ class ZeroneCheckAjax
             case "zerone/ajax/fansmanage_list_delete"://商户删除检测弹出登入和权限
             case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
 
-            case "zerone/ajax/store_insert":    //添加店铺-开设店铺 检测弹出登入和权限
-                $re = $this->checkLoginAndRule($request);
-                return self::format_response($re, $next);
-                break;
 
             case "zerone/ajax/role_delete"://删除权限角色 检测 登录 和 权限 和 安全密码 和 ID是否为空
             case "zerone/ajax/subordinate_lock"://冻结下级人员 检测 登录 和 权限 和 安全密码 和 ID是否为空
@@ -843,46 +833,6 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //检测添加店铺信息
-    public function checkStore($request){
-        if (empty($request->input('organization_name'))) {
-            return self::res(0, response()->json(['data' => '请输入店铺名称', 'status' => '0']));
-        }
-        $program_munber = $request->input('program_munber');
-        if (!preg_match("/^[1-9]{1}\d{0,9}$/",$program_munber)){
-            return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
-        }
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('password'))) {
-            return self::res(0, response()->json(['data' => '请输入登入密码', 'status' => '0']));
-        }
-        if (empty($request->input('re_password'))) {
-            return self::res(0, response()->json(['data' => '请输入重复登入密码', 'status' => '0']));
-        }
-        if ($request->input('password')!=$request->input('re_password')){
-            return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
-        }
-
-        return self::res(1, $request);
-    }
-
-
     //检测登录提交数据
     public function checkID($request)
     {

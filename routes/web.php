@@ -248,14 +248,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::get('fansmanage_program','Zerone\FansmanageController@fansmanage_program')->middleware('ZeroneCheck');        //商户程序管理
         Route::get('fansmanage_store','Zerone\FansmanageController@fansmanage_store')->middleware('ZeroneCheck');            //商户划拨管理
     });
-    //店铺管理
-    Route::group(['prefix'=>'store'],function(){
-        Route::get('store_add','Zerone\StoreController@store_add')->middleware('ZeroneCheck');//添加店铺
-        Route::get('store_list','Zerone\StoreController@store_list')->middleware('ZeroneCheck');//店铺列表
-        Route::get('store_structure','Zerone\StoreController@store_structure')->middleware('ZeroneCheck');//店铺人员架构
-        Route::get('store_branchlist','Zerone\StoreController@store_branchlist')->middleware('ZeroneCheck');//分店管理
-        Route::get('store_config','Zerone\StoreController@store_config')->middleware('ZeroneCheck');//分店设置参数
-    });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
@@ -322,10 +314,6 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('fansmanage_list_lock_check','Zerone\FansmanageController@fansmanage_list_lock_check')->middleware('ZeroneCheckAjax');//商户冻结数据提交
         Route::post('fansmanage_assets','Zerone\FansmanageController@fansmanage_assets')->middleware('ZeroneCheckAjax');//商户程序管理划入划出显示页面
         Route::post('fansmanage_assets_check','Zerone\FansmanageController@fansmanage_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
-
-        //添加店铺
-        Route::post('store_insert','Zerone\StoreController@store_insert')->middleware('ZeroneCheckAjax');               //添加店铺ajax显示页面
-        Route::post('store_insert_check','Zerone\StoreController@store_insert_check')->middleware('ZeroneCheckAjax');   //添加店铺数据提交
 
     });
 });
