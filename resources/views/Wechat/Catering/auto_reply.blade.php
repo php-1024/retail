@@ -442,17 +442,6 @@
         $('#editText').click(function(){
             $('#myModal8').modal();
         });
-        $('#form-content').trumbowyg({
-            lang: 'fr',
-            closable: false,
-            mobile: true,
-            fixedBtnPane: true,
-            fixedFullWidth: true,
-            semantic: true,
-            resetCss: true,
-            autoAjustHeight: true,
-            autogrow: true
-        });
         $('#form-content2').trumbowyg({
             lang: 'fr',
             closable: false,
