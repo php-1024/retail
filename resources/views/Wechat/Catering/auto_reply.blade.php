@@ -110,7 +110,7 @@
                                                     <div>
                                                         <button class="btn btn-info btn-xs" id="editPicture" onclick="return getAutoEditImageForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                         <label class="label label-primary">图片</label>&nbsp;&nbsp;
-                                                        <img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
+                                                        <img src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->reply_info)}}" alt="" class="r r-2x img-full" style="width:100px; height: 100px">&nbsp;&nbsp;
 
                                                     </div>
                                                 @endif
