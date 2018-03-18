@@ -62,7 +62,8 @@
                                 <h2 class="font-thin m-b">关键词自动回复</h2>
                                 <div class="row row-sm">
                                     <button class="btn btn-success" id="addKeyWord">新建关键字 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
-
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" name="_token" id="auto_apply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">
@@ -209,49 +210,7 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">添加关键字</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">关键字</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王" placeholder="店铺名称" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">适配类型</label>
-                            <div class="col-sm-10">
-                                <div class="radio col-sm-2">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" checked="" value="option2">
-                                        模糊
-                                    </label>
-                                </div>
-                                <div class="radio col-sm-2">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        精确
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form class="form-horizontal tasi-form" method="get">
@@ -525,9 +484,6 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#addKeyWord').click(function(){
-            $('#myModal').modal();
-        });
         $('#addText').click(function(){
             $('#myModal2').modal();
         });
@@ -578,6 +534,30 @@
             autogrow: true
         });
     });
+
+    //弹出图片上传框
+    function getAddForm(){
+        var url = $('#auto_replu_add_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>

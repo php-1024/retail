@@ -583,6 +583,9 @@ class WechatController extends Controller{
         */
     }
     /**************************************************************************消息回复管理开始*********************************************************************************/
+    /*
+     * 关键字自动回复列表
+     */
     public function auto_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -591,6 +594,13 @@ class WechatController extends Controller{
 
         return view('Wechat/Catering/auto_reply',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    /*
+     * 添加关键字
+     */
+    public function auto_reply_add(Request $request){
+        return view('Wechat/Catering/auto_reply_add');
+    }
+
 
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
