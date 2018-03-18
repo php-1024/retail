@@ -230,7 +230,6 @@ class FansmanageController extends Controller{
             OperationLog::addOperationLog('1','1',$admin_data['id'],$route_name,'添加了商户：'.$organization_name);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '提交失败', 'status' => '0']);
         }
