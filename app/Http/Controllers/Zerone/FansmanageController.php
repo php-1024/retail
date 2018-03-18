@@ -415,13 +415,12 @@ class FansmanageController extends Controller{
     }
     //商户资产页面划入js显示
     public function fansmanage_assets(Request $request){
-        $organization_id = $request->input('organization_id');//服务商id
-        $package_id = $request->input('package_id');//套餐id
-        $status = $request->input('status');//状态
-        $listOrg = Organization::getOnefansmanage([['id',$organization_id]]);
-//        $listPac = Package::getOnePackage([['id',$package_id]]);
-
-        return view('Zerone/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg ,'status'=>$status]);
+        $organization_id = $request->input('organization_id'); //服务商id
+        $program_id = $request->input('program_id'); //套餐id
+        $oneData = Organization::getOneagent([['id', $organization_id]]);
+        $oneProgram = Program::getOne([['id', $program_id]]);
+        $status = $request->input('status'); //状态
+        return view('Zerone/Fansmanage/fansmanage_assets',['oneData'=>$oneData ,'oneProgram'=>$oneProgram,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request){
