@@ -107,6 +107,10 @@ class Organization extends Model{
     public static function getList($where){
         return self::where($where)->get();
     }
+    //获取多条信息
+    public static function getOneData($where){
+        return self::where($where)->first();
+    }
 
     //获取分页数据-店铺
     public static function getOrganizationAndAccount($organization_name,$where,$paginate,$orderby,$sort='DESC'){

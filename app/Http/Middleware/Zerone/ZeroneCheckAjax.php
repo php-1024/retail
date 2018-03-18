@@ -124,7 +124,7 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "zerone/ajax/fansmanage_list_frozen_check"://商户冻结  检测 登录 和 权限 和 安全密码
+            case "zerone/ajax/fansmanage_list_lock_check"://商户冻结  检测 登录 和 权限 和 安全密码
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -170,7 +170,7 @@ class ZeroneCheckAjax
             //商户管理
             case "zerone/ajax/fansmanage_examine"://商户审核检测弹出登录和权限
             case "zerone/ajax/fansmanage_list_edit"://商户编辑检测弹出登入和权限
-            case "zerone/ajax/fansmanage_list_frozen"://商户冻结检测弹出登入和权限
+            case "zerone/ajax/fansmanage_list_lock"://商户冻结检测弹出登入和权限
             case "zerone/ajax/fansmanage_list_delete"://商户删除检测弹出登入和权限
             case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
 

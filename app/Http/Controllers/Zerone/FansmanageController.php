@@ -321,19 +321,19 @@ class FansmanageController extends Controller{
     }
 
     //商户冻结ajaxshow显示页面
-    public function fansmanage_list_frozen(Request $request){
+    public function fansmanage_list_lock(Request $request){
         $id = $request->input('id');//服务商id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOneProxy([['id',$id]]);//服务商信息
-        return view('Zerone/fansmanage/fansmanage_list_frozen',['id'=>$id,'list'=>$list,'status'=>$status]);
+        $list = Organization::getOneData([['id',$id]]);//商户信息
+        return view('Zerone/Fansmanage/fansmanage_list_lock',['id'=>$id,'list'=>$list,'status'=>$status]);
     }
     //商户冻结功能提交
     public function fansmanage_list_frozen_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//服务商id
+        $id = $request->input('id');//商户id
         $status = $request->input('status');//冻结操作状态
-        $list = Organization::getOneProxy([['id',$id]]);
+        $list = Organization::getOneData([['id',$id]]);
         DB::beginTransaction();
         try{
             if($status == '1'){
