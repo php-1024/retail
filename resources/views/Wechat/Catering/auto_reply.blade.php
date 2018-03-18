@@ -66,7 +66,7 @@
                                     <input type="hidden" name="_token" id="auto_reply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_text_url" value="{{ url('api/ajax/auto_reply_edit_text') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_image_url" value="{{ url('api/ajax/auto_reply_edit_image') }}">
-                                    <input type="hidden" name="_token" id="auto_reply_edit_article_url" value="{{ url('api/ajax/auto_reply_edit_article_url') }}">
+                                    <input type="hidden" name="_token" id="auto_reply_edit_article_url" value="{{ url('api/ajax/auto_reply_edit_article') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">
