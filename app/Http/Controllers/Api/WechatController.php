@@ -834,11 +834,11 @@ class WechatController extends Controller{
                     'organization_id' => $admin_data['organization_id'],
                     'authorizer_appid' => $authorizer_appid,
                     'text_info' => $text_info,
-                    'reply_type' => 1,
+                    'reply_type' => '1',
                 ];
                 WechatSubscribeReply::addWechatSubscribeReply($data);
             }else{
-                $data = ['text_info'=>$text_info,'reply_type' => 1];
+                $data = ['text_info'=>$text_info,'reply_type' => '1'];
                 WechatSubscribeReply::editWechatSubscribeReply([['organization_id',$admin_data['organization_id']]],$data);
             }
 
