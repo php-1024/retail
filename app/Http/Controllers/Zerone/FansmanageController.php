@@ -378,9 +378,9 @@ class FansmanageController extends Controller{
         $structure = '';
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
-                dd($val);
                 unset($list[$key]);
                 $val['sonlist'] = $this->Com_structure($list, $val['id']);
+                dd($val['sonlist']);
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
