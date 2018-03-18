@@ -899,7 +899,7 @@ class WechatController extends Controller{
         return view('Wechat/Catering/subscribe_reply_article_edit',['list'=>$list,'info'=>$info]);
     }
     //关注后图文回复保存
-    public function subscribe_reply_article_article_check(Request $request){
+    public function subscribe_reply_article_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $media_id = $request->input('media_id');
