@@ -65,6 +65,7 @@
                                         图文素材列表
                                         <input type="hidden" id="id" value="@if(!empty($info)){{$info['id']}}@endif">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                        <input type="hidden" name="_token" id="subscribe_reply_text_edit_url" value="{{ url('api/ajax/subscribe_reply_text_edit') }}">
                                     </header>
 
                                     <div class="table-responsive">
@@ -249,7 +250,7 @@
 <script type="text/javascript">
     //弹出文本输入框
     function getEditTextForm(){
-        var url = $('#auto_reply_edit_text_url').val();
+        var url = $('#subscribe_reply_text_edit_url').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
