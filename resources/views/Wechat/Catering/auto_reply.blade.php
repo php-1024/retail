@@ -65,7 +65,7 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="_token" id="auto_reply_add_url" value="{{ url('api/ajax/auto_reply_add') }}">
                                     <input type="hidden" name="_token" id="auto_reply_edit_text_url" value="{{ url('api/ajax/auto_reply_edit_text') }}">
-                                    <input type="hidden" name="_token" id="auto_reply_edit_image_url" value="{{ url('api/ajax/auto_reply_image_text') }}">
+                                    <input type="hidden" name="_token" id="auto_reply_edit_image_url" value="{{ url('api/ajax/auto_reply_edit_image') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="table-responsive">

@@ -9,16 +9,15 @@
             </div>
             <div class="modal-body">
                 <div class="row row-sm">
-                    <div class="col-lg-2">
-                        <div class="item">
-                            <div class="pos-rlt">
-                                <a href="javascript:;"><img src="{{asset('public/Catering')}}/img/m1.jpg" alt="" class="r r-2x img-full"></a>
-                            </div>
-                            <div class="padder-v">
-                                <span>414631616.JPG</span>
+                    @foreach($list as $key=>$val)
+                        <div class="col-lg-2">
+                            <div class="item">
+                                <div class="pos-rlt">
+                                    <a href="javascript:;"><img data-id="{{$val->id}}" onclick="select_img(this,'{{$i}}')" data-media_id="{{$val->media_id}}" src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="modal-footer">

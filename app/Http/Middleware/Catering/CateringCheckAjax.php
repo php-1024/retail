@@ -127,7 +127,7 @@ class CateringCheckAjax
             case "api/ajax/defined_menu_get":              //自定义菜单添加
             case "api/ajax/auto_reply_add":              //自定义菜单添加
             case "api/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
-            case "api/ajax/auto_reply_image_text":      //修改关键字回复图片内容
+            case "api/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
