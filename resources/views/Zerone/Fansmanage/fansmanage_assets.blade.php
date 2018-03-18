@@ -2,7 +2,7 @@
 <form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
-    <input type="hidden" name="package_id" value="{{$listPac->id}}">
+    {{--<input type="hidden" name="package_id" value="{{$listPac->id}}">--}}
     <input type="hidden" name="status" value="{{$status}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
