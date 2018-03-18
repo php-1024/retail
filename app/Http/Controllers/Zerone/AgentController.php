@@ -537,9 +537,10 @@ class AgentController extends Controller {
     //商户划拨归属Ajax显示页面--划出
     public function agent_fansmanage_draw(Request $request) {
         $organization_id = $request->organization_id; //服务商id
+        $oneAgent = Organization::getOne([['id', $organization_id]]);
         $fansmanage_id = $request->fansmanage_id; //划出商户id
         $onedata = Organization::getOne([['id', $fansmanage_id]]);
-        return view('Zerone/Agent/agent_fansmanage_draw', ['onedata' => $onedata, 'organization_id' => $organization_id]);
+        return view('Zerone/Agent/agent_fansmanage_draw', ['onedata' => $onedata, 'oneAgent' => $oneAgent]);
     }
     //商户划拨归属划出功能提交
     public function agent_fansmanage_draw_check(Request $request) {
