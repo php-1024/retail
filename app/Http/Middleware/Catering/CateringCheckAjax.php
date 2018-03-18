@@ -123,6 +123,22 @@ class CateringCheckAjax
                 $re = $this->checkLoginAndRuleAndSubscribeReplyArticleEdit($request);
                 return self::format_response($re,$next);
                 break;
+
+            case "api/ajax/default_reply_text_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndDefaultReplyTextEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/default_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndDefaultReplyImageEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/default_reply_article_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndDefaultReplyArticleEdit($request);
+                return self::format_response($re,$next);
+                break;
+
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
@@ -165,6 +181,9 @@ class CateringCheckAjax
             case "api/ajax/subscribe_reply_text_edit"://修改关注后文本回复弹窗
             case "api/ajax/subscribe_reply_image_edit"://修改关注后图片回复弹窗
             case "api/ajax/subscribe_reply_article_edit"://修改关注后图文回复弹窗
+            case "api/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
+            case "api/ajax/default_reply_image_edit"://修改关注后图片回复弹窗
+            case "api/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -172,6 +191,49 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测登陆，权限，修改关注后自动回复图文内容
+    public function checkLoginAndRuleAndDefaultReplyArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndDefaultReplyImageEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndDefaultReplyTextEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyTextEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测登陆，权限，修改关注后自动回复图文内容
     public function checkLoginAndRuleAndSubscribeReplyArticleEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -214,6 +276,7 @@ class CateringCheckAjax
             }
         }
     }
+
     //检测登陆，权限，修改关键字
     public function checkLoginAndRuleAndAutoReplyEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
