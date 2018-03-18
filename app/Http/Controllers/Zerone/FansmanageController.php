@@ -494,13 +494,14 @@ class FansmanageController extends Controller{
         $route_name = $request->path(); //获取当前的页面路由
         $fansmanage_id = $request->fansmanage_id; //商户id
         $oneFansmanage = Organization::getOne([['id', $fansmanage_id]]); //商户信息
-        dd($oneFansmanage);
         $status = $request->status; //是否消耗程序数量
         $store_id = $request->store_id; //商户id
         $oneStore = Organization::getOne([['id', $store_id]]);
+        if($oneFansmanage['asset_id'] !=$oneStore['program_id']){
+            return response()->json(['data' => '该商户的程序与此分店程序不匹配', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
-
             $parent_tree = $oneFansmanage['parent_tree'] . $fansmanage_id . ','; //组织树
             Organization::editOrganization([['id', $store_id]], ['parent_id' => $fansmanage_id, 'parent_tree' => $parent_tree]);
             if ($status == 1) { //消耗程序数量
