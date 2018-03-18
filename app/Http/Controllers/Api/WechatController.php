@@ -21,7 +21,7 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $url = "";
-        if(WechatAuthorization::getOne(['organization_id',$admin_data['organization_id']])){
+        if(WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]])){
             $url = \Wechat::get_auth_url($admin_data['organization_id'],$route_name);
         }
 
