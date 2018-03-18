@@ -417,6 +417,7 @@ class FansmanageController extends Controller{
     public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id'); //服务商id
         $program_id = $request->input('program_id'); //套餐id
+        dd($program_id);
         $oneData = Organization::getOneagent([['id', $organization_id]]);
         $oneProgram = Program::getOne([['id', $program_id]]);
         dd($oneProgram);
