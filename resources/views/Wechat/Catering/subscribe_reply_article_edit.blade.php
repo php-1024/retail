@@ -1,7 +1,6 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_edit_article_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('subscribe_reply_article_edit_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{$id}}">
-    <input type="hidden" name="article_id" id="article_id" value="">
+    <input type="hidden" name="media_id" id="media_id" value="">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,20 +26,20 @@
                             </thead>
                             <tbody>
                             @foreach($list as $key=>$val)
-                            <tr>
-                                <td>{{$val->title}}</td>
-                                <td>
-                                    @if($val->type == '1')
-                                    单条图文
-                                    @else
-                                    多条图文
-                                    @endif
-                                </td>
-                                <td>{{$val->created_at}}</td>
-                                <td>
-                                    <button data-id="{{$val->id}}" onclick="return select_article(this);" class="btn @if($info['media_id']==$val['media_id']) btn-success @else btn-info @endif btn-xs choose_btn" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{$val->title}}</td>
+                                    <td>
+                                        @if($val->type == '1')
+                                            单条图文
+                                        @else
+                                            多条图文
+                                        @endif
+                                    </td>
+                                    <td>{{$val->created_at}}</td>
+                                    <td>
+                                        <button data-id="{{$val->id}}" data-media_id="{{$val->media_id}}" onclick="return select_article(this);" class="btn @if($info['article_media_id']==$val['media_id']) btn-success @else btn-info @endif btn-xs choose_btn" type="button"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择</button>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -58,8 +57,8 @@
 <script>
     function select_article(obj){
         var target = $(obj);
-        var article_id = target.data('id');
-        $('#article_id').val(article_id);
+        var media_id = target.data('media_id');
+        $('#media_id').val(media_id);
         $('.choose_btn').removeClass('btn-success').addClass('btn-info');
         $(obj).removeClass('btn-info').addClass('btn-success');
 
