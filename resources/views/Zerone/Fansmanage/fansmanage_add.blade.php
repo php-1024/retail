@@ -58,6 +58,15 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group"><label class="col-sm-2 control-label">使用程序</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control m-b" name="asset_id">
+                                                @foreach($listProgram as $k=>$v)
+                                                    <option value="{{$value->id}}">{{$value->program_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">商户名称</label>
                                         <div class="col-sm-10"><input type="text" name="organization_name" class="form-control"></div>
                                     </div>
@@ -82,7 +91,7 @@
                                         <div class="col-sm-10"><input type="password" name="re_fansmanage_password" class="form-control"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">安全密码</label>
+                                        <label class="col-sm-2 control-label"><span style="color: red">管理员安全密码</span></label>
                                         <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
                                     </div>
                                     <div class="hr-line-dashed"></div>

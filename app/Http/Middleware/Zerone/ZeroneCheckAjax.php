@@ -387,7 +387,7 @@ class ZeroneCheckAjax
     }
 
 
-    /*****服务商管理******/
+    /*****商户管理******/
     //检测 登录 和 权限 和 安全密码 和 添加商户的数据提交
     public function checkLoginAndRuleAndSafeAndFansmanageAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -661,7 +661,7 @@ class ZeroneCheckAjax
 
 
 
-    /*****服务商管理******/
+    /*****商户管理******/
 
     //检测商户申请表信息
     public function checkFansmanageAdd($request){
