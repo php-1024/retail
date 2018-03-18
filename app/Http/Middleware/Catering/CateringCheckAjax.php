@@ -129,7 +129,7 @@ class CateringCheckAjax
     }
     /******************************复合检测*********************************/
     //检测登陆，权限，添加自动回复关键字
-    public function checkLoginAndRuleAndAutoReplyAdd($request){
+    public function checkLoginAndRuleAndAutoReplyAddCheck($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
