@@ -165,6 +165,8 @@ class ZeroneCheckAjax
             case "zerone/ajax/fansmanage_list_lock"://商户冻结检测弹出登入和权限
             case "zerone/ajax/fansmanage_list_delete"://商户删除检测弹出登入和权限
             case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
+            case "zerone/ajax/fansmanage_store_add"://商户店铺划入检测弹出登入和权限
+            case "zerone/ajax/fansmanage_store_draw"://商户店铺划出检测弹出登入和权限
 
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re,$next);

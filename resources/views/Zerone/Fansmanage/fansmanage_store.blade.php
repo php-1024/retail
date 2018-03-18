@@ -56,7 +56,7 @@
                         <div class="col-sm-1">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="button" id="addBtn" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;店铺划入归属</button>
+                                <button type="button"  onclick="getAddStoreForm()" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;店铺划入归属</button>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                         </td>
                                         <td>微餐饮系统（先吃后付）通用版本</td>
                                         <td class="text-right">
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
+                                            <button type="button" onclick="getDrawStoreForm()" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -126,84 +126,11 @@
                                             -
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td>2</td>
-                                        <td>刘记猪肚鸡总店</td>
-                                        <td>
-                                            <label class="label label-success" style="display:inline-block">总店</label>
-                                        </td>
-                                        <td>
-                                            -
-                                        </td>
-                                        <td>微餐饮系统（自选店模式）通用版本</td>
-                                        <td class="text-right">
-                                            <button type="button" id="removeBtn" class="btn  btn-xs btn-danger"><i class="fa fa-remove"></i>&nbsp;&nbsp;店铺划出</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>刘记猪肚鸡宝能店</td>
-                                        <td>
-                                            <label class="label label-primary" style="display:inline-block">分店</label>
-                                        </td>
-                                        <td>
-                                            刘记猪肚鸡总店
-                                        </td>
-                                        <td>微餐饮系统（自选店模式）通用版本</td>
-                                        <td class="text-right">
-                                            -
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>刘记猪肚鸡龙城店</td>
-                                        <td>
-                                            <label class="label label-primary" style="display:inline-block">分店</label>
-                                        </td>
-                                        <td>
-                                            刘记猪肚鸡总店
-                                        </td>
-                                        <td>微餐饮系统（自选店模式）通用版本</td>
-                                        <td class="text-right">
-                                            -
-                                        </td>
-                                    </tr>
-
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <td colspan="9" class="footable-visible">
-                                            <ul class="pagination pull-right">
-                                                <li class="footable-page-arrow disabled">
-                                                    <a data-page="first" href="#first">«</a>
-                                                </li>
 
-                                                <li class="footable-page-arrow disabled">
-                                                    <a data-page="prev" href="#prev">‹</a>
-                                                </li>
-                                                <li class="footable-page active">
-                                                    <a data-page="0" href="#">1</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">2</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">3</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">4</a>
-                                                </li>
-                                                <li class="footable-page">
-                                                    <a data-page="1" href="#">5</a>
-                                                </li>
-                                                <li class="footable-page-arrow">
-                                                    <a data-page="next" href="#next">›</a>
-                                                </li>
-                                                <li class="footable-page-arrow">
-                                                    <a data-page="last" href="#last">»</a>
-                                                </li>
-                                            </ul>
                                         </td>
                                     </tr>
                                     </tfoot>
@@ -215,118 +142,8 @@
             </div>
         @include('Zerone/Public/Footer')
         </div>
-
-        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content animated fadeIn">
-                    <div class="modal-header">
-                        <h3>“刘记餐饮集团”店铺划入</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" style="padding-top: 7px;">请选择要划入的店铺</label>
-                            <div class="col-sm-9">
-                                <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                                    <option value="Mayotte">刘记鸡煲王</option>
-                                    <option value="Mexico">李记鸡煲王</option>
-                                    <option value="Micronesia, Federated States of">叶记猪肚鸡</option>
-                                    <option value="Moldova, Republic of">韦记莲藕汤</option>
-                                </select>
-                            </div>
-
-                        </div>
-
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" style="padding-top: 7px;">消耗程序与分店数量</label>
-                            <div class="col-sm-9">
-                                <input type="checkbox" class="js-switch" checked  value="1"/>
-                            </div>
-
-                        </div>
-
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">安全密码</label>
-                            <div class="col-sm-9"><input type="text" class="form-control" value=""></div>
-                        </div>
-                        <div style="clear:both"></div>
-                        <div class="hr-line-dashed"></div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary saveBtn">保存</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content animated fadeIn">
-                        <div class="modal-header">
-                            <h3>“刘记餐饮集团”店铺划出</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">划出店铺</label>
-                                <div class="col-sm-9"><input type="text" class="form-control" value="刘记鸡煲王" readonly></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" style="padding-top: 7px;">划给商户</label>
-                                <div class="col-sm-9">
-                                    <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4">
-                                        <option value="Mayotte">公司总部</option>
-                                        <option value="Mayotte">刘记集团</option>
-                                        <option value="Mexico">李记鸡煲连锁</option>
-                                        <option value="Micronesia, Federated States of">叶记猪肚鸡</option>
-                                        <option value="Moldova, Republic of">韦记莲藕汤</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" style="padding-top: 7px;">归还程序与分店数量</label>
-                                <div class="col-sm-9">
-                                    <input type="checkbox" class="js-switch2" checked  value="1"/>
-                                </div>
-
-                            </div>
-
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">安全密码</label>
-                                <div class="col-sm-9"><input type="password" class="form-control" value=""></div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="hr-line-dashed"></div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary saveBtn">保存</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+</div>
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
 <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
@@ -349,23 +166,87 @@
         var elem = document.querySelector('.js-switch2');
         var switchery = new Switchery(elem, { color: '#1AB394' });
         // activate Nestable for list 2
-        $('#addBtn').click(function(){
-            $('#myModal2').modal();
-        });
+    });
 
-        $('#removeBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('.saveBtn').click(function(){
+    //商户划入
+    function getAddStoreForm(organization_id){
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        // activate Nestable for list 2
+        var url = $('#agent_fansmanage_add').val();
+        var token = $('#_token').val();
+        if(organization_id==''){
             swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
             },function(){
                 window.location.reload();
             });
+            return;
+        }
+
+        var data = {'organization_id':organization_id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-    });
+    }
+    //商户划出
+    function getDrawStoreForm(organization_id,fansmanage_id){
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        // activate Nestable for list 2
+        var url = $('#agent_fansmanage_draw').val();
+        var token = $('#_token').val();
+        if(organization_id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'organization_id':organization_id,'fansmanage_id':fansmanage_id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+
+
+
+
+
+
 </script>
 
 </body>

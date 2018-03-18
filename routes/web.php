@@ -314,6 +314,8 @@ Route::group(['prefix'=>'zerone'],function(){
         Route::post('fansmanage_list_lock_check','Zerone\FansmanageController@fansmanage_list_lock_check')->middleware('ZeroneCheckAjax');//商户冻结数据提交
         Route::post('fansmanage_assets','Zerone\FansmanageController@fansmanage_assets')->middleware('ZeroneCheckAjax');//商户程序管理划入划出显示页面
         Route::post('fansmanage_assets_check','Zerone\FansmanageController@fansmanage_assets_check')->middleware('ZeroneCheckAjax');//商户程序管理划入数据提交
+        Route::post('fansmanage_store_add','Zerone\FansmanageController@fansmanage_assets_check')->middleware('ZeroneCheckAjax');//商户店铺管理划入数据提交
+        Route::post('fansmanage_store_draw','Zerone\FansmanageController@fansmanage_assets_check')->middleware('ZeroneCheckAjax');//商户店铺管理划出数据提交
 
     });
 });

@@ -475,8 +475,17 @@ class FansmanageController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        $organization_id = $request->input('organization_id'); //商户id
 
-        return view('Zerone/Fansmanage/fansmanage_store',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Fansmanage/fansmanage_store',['organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+    //商户程序管理
+    public function fansmanage_store_add(Request $request){
+        return view('Zerone/Fansmanage/fansmanage_store_add');
+    }
+    //商户程序管理
+    public function fansmanage_store_draw(Request $request){
+        return view('Zerone/Fansmanage/fansmanage_store_draw');
     }
 
 }
