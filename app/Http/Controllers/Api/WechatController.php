@@ -177,6 +177,8 @@ class WechatController extends Controller{
         ];
 
         $re = \Wechat::upload_article($auth_info['authorizer_access_token'],$data);
+        var_dump($re);
+        exit();
         if(!empty($re['media_id'])){
             $zdata = [
                 'organization_id'=>$admin_data['organization_id'],
@@ -736,6 +738,28 @@ class WechatController extends Controller{
                 </xml>";
         $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $media_id);
         return $result;
+    }
+    /*
+     * 回复文本信息
+     */
+    private function zerone_response_article($param,$article_data){
+        $xmltpl = "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[news]]></MsgType>
+                <ArticleCount>%s</ArticleCount>
+                <Articles>";
+        foreach($article_data as $key=>$val){
+            $xmltpl.="<item>
+<Title><![CDATA[title1]]></Title>
+<Description><![CDATA[description1]]></Description>
+<PicUrl><![CDATA[picurl]]></PicUrl>
+<Url><![CDATA[url]]></Url>
+</item>";
+        }
+        $xmltpl.="</Articles>
+                </xml> ";
     }
 
     /*
