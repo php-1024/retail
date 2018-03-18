@@ -274,7 +274,7 @@ class FansmanageController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $fansmanage_id = $request->input('id');//商户id
+        $id = $request->input('id');//商户id
         $organization_name = $request->input('organization_name');//商户名称
         $realname = $request->input('realname');//用户名字
         $idcard = $request->input('idcard');//用户身份证号
@@ -282,45 +282,33 @@ class FansmanageController extends Controller{
 
         DB::beginTransaction();
         try{
-            $onefansmanage = Organization::getOneFansmanage(['id'=>$fansmanage_id]); //获取商户组织信息
-            dd($onefansmanage);
-            if($onefansmanage['organization_name']!=$organization_name){
+            $data = Organization::getOneFansmanage(['id'=>$id]); //获取商户组织信息
+
+            if($data['organization_name']!=$organization_name){
                 if(Organization::checkRowExists([['organization_name',$organization_name]])){
                     return response()->json(['data' => '商户名称已存在', 'status' => '0']);
                 }
-                Organization::editOrganization(['id'=>$fansmanage_id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
+                Organization::editOrganization(['id'=>$id], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
-            if($onefansmanage['mobile']!=$mobile){
-                Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id], ['fansmanage_owner_mobile'=>$mobile]);//修改商户表商户手机号码
+
+            if($data['account']['mobile']!=$mobile){
+                OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id'=>$id], ['fansmanage_owner_mobile'=>$mobile]);//修改商户表商户手机号码
                 Account::editAccount(['organization_id'=>$id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
             }
 
-            if($list['organizationfansmanageinfo']['fansmanage_owner'] != $realname){
-                $fansmanagedata = ['fansmanage_owner'=>$realname];
-                Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id],$fansmanagedata);//修改商户信息表 用户姓名
-                AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
-            }
-            if(!empty($password)){
-                $key = config("app.zerone_encrypt_key");//获取加密盐
-                $encrypted = md5($password);//加密密码第一重
-                $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-                $accountdata = ['password'=>$encryptPwd];
-                Account::editAccount(['organization_id'=>$id,'parent_id'=>'1'],$accountdata);//修改管理员表登入密码
-            }
-            if($acc['idcard'] != $idcard){
-                AccountInfo::editAccountInfo(['account_id'=>$acc['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                Organizationfansmanageinfo::editOrganizationfansmanageinfo(['organization_id'=>$id],['fansmanage_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
+            if($data['fansmanageinfo']['fansmanage_owner'] != $realname){
+                OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id'=>$id],['fansmanage_owner'=>$realname]);//修改商户信息表 用户姓名
+                AccountInfo::editAccountInfo(['account_id'=>$data['account']['id']],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
 
-            if($list['parent_id'] != $parent_id){
-                $porxy = Organization::getOneProxy(['id'=>$parent_id]); //获取选择更换的上级服务商信息
-                $parent_tree = $porxy['parent_tree'].$parent_id.',';//组织树
-                $data = ['parent_id'=>$parent_id,'parent_tree'=>$parent_tree];
-                Organization::editOrganization(['id'=>$id],$data);//修改商户的上级服务商信息
+            if($data['fansmanageinfo']['fansmanage_owner_idcard'] != $idcard){
+                AccountInfo::editAccountInfo(['account_id'=>$data['account']['id']],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
+                OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id'=>$id],['fansmanage_owner_idcard'=>$idcard]);//修改商户信息表 身份证号
             }
+
 
             //添加操作日志
-            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了商户：'.$list['organization_name']);//保存操作记录
+            OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了商户信息：'.$data['organization_name']);//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
