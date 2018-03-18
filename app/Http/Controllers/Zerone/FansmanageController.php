@@ -365,9 +365,9 @@ class FansmanageController extends Controller{
 
         $organization_id = $request->input('organization_id');//服务商id
         $onefansmanage = Organization::getOnefansmanage([['id',$organization_id]]);
-        $list = Organization::getList([['parent_tree','like','%'.$onefansmanage['parent_tree'].$onefansmanage['id'].',%']],0,'id','asc')->toArray();
-        $structure = $this->Com_structure($list,$organization_id);
 
+        $list = Organization::getListFansmanage([['parent_tree','like','%'.$onefansmanage['parent_tree'].$onefansmanage['id'].',%']]);
+        $structure = $this->Com_structure($list,$organization_id);
         return view('Zerone/Fansmanage/fansmanage_structure',['onefansmanage'=>$onefansmanage,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -382,9 +382,9 @@ class FansmanageController extends Controller{
                 //$arr[] = $val;
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
-                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
+                $structure .= '<span class="pull-right">创建时间：'.$val['created_at'].'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure .= '【商户】'. $val['organization_name']. '-'.$val['organization_fansmanageinfo']['fansmanage_owner'].'-'.$val['organization_fansmanageinfo']['fansmanage_owner_mobile'];
+                $structure .= '【商户】'. $val['organization_name']. '-'.$val['fansmanageinfo']['fansmanage_owner'].'-'.$val['fansmanageinfo']['fansmanage_owner_mobile'];
                 $structure .= '</div>';
                 $son_menu = $this->Com_structure($list, $val['id']);
                 if (!empty($son_menu)) {

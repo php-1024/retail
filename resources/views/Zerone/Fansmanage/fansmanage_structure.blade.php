@@ -25,13 +25,13 @@
             @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“{{$listOrg->organization_name}}”店铺结构</h2>
+                <h2>“{{$onefansmanage->organization_name}}”店铺结构</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“{{$listOrg->organization_name}}”店铺结构</strong>
+                        <strong>“{{$onefansmanage->organization_name}}”店铺结构</strong>
                     </li>
                 </ol>
             </div>
@@ -66,14 +66,14 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“{{$listOrg->organization_name}}”店铺架构</h5>
+                            <h5>“{{$onefansmanage->organization_name}}”店铺架构</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
                                         <div class="dd-handle">
-                                            {{ $listOrg['organization_name']. '-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner'].'-'.$listOrg['organizationfansmanageinfo']['fansmanage_owner_mobile'] }}
+                                            {{ $onefansmanage['organization_name']. '-'.$onefansmanage['fansmanageinfo']['fansmanage_owner'].'-'.$onefansmanage['fansmanageinfo']['fansmanage_owner_mobile'] }}
                                         </div>
 
                                         {!! $structure  !!}
@@ -89,50 +89,44 @@
             </div>
         </div>
             @include('Zerone/Public/Footer')
-
     </div>
-
-    {{--<!-- Page-Level Scripts -->--}}
-    <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-    <script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
-    <script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
-    <script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
-    <script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
-
-    <!-- Data picker -->
-    <script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
-
-
-
-
-    <script>
-        $(document).ready(function() {
-            // activate Nestable for list 2
-            $('#nestable2').nestable();
-
-            $('#nestable-menu').on('click', function (e) {
-                var target = $(e.target),
-                    action = target.data('action');
-                if (action === 'expand-all') {
-                    $('.dd').nestable('expandAll');
-                }
-                if (action === 'collapse-all') {
-                    $('.dd').nestable('collapseAll');
-                }
-            });
-            $('#expand-all').click(function(){
-                $('.dd').nestable('expandAll');
-            });
-            $('#collapse-all').click(function(){
-                $('.dd').nestable('collapseAll');
-            });
-        });
-    </script>
-
 </div>
+{{--<!-- Page-Level Scripts -->--}}
+<script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
+<script src="{{asset('public/Zerone/library/bootstrap')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Zerone/library/metisMenu')}}/js/jquery.metisMenu.js"></script>
+<script src="{{asset('public/Zerone/library/slimscroll')}}/js/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{asset('public/Zerone')}}/js/inspinia.js"></script>
+<script src="{{asset('public/Zerone/library/pace')}}/js/pace.min.js"></script>
+
+<!-- Data picker -->
+<script src="{{asset('public/Zerone/library/nestable')}}/js/jquery.nestable.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // activate Nestable for list 2
+        $('#nestable2').nestable();
+
+        $('#nestable-menu').on('click', function (e) {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
+        });
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
+        });
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
+    });
+</script>
 </body>
 
 </html>
