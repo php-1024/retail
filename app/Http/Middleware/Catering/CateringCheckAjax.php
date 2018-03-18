@@ -833,7 +833,7 @@ class CateringCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测关键字自定义回复
+    //检测自动回复关键字
     public function checkAutoReplyAdd($request){
         if(empty($request->input('keyword'))){
             return self::res(0,response()->json(['data' => '请输入关键字', 'status' => '0']));
