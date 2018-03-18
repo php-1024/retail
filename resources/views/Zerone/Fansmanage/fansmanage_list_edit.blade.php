@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">归属服务商</label>
                     <div class="col-sm-10">
-                        <div class="col-sm-10">测试服务商</div>
+                        <div class="col-sm-10"><input type="text" class="form-control" value="测试服务商" disabled></div>
                     </div>
                 </div>
                 <div style="clear:both"></div>
