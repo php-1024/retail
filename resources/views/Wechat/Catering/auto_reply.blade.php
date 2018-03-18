@@ -103,7 +103,7 @@
                                                 @else
                                                     @if($val['reply_type']=='1')
                                                         <div>
-                                                            <button class="btn btn-info btn-xs" id="editText"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                            <button class="btn btn-info btn-xs" id="editText" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                             <label class="label label-primary">文本</label>&nbsp;&nbsp;
                                                              {{str_limit($val->reply_info,20,'...')}}&nbsp;&nbsp;
                                                         </div>
