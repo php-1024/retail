@@ -110,6 +110,16 @@ class CateringCheckAjax
                 break;
 
             case "api/ajax/subscribe_reply_text_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyTextEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/subscribe_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/subscribe_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
                 $re = $this->checkLoginAndRuleAndSubscribeReplyEdit($request);
                 return self::format_response($re,$next);
                 break;
@@ -162,13 +172,41 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    //检测登陆，权限，修改关注后自动回复文本内容
-    public function checkLoginAndRuleAndSubscribeReplyEdit($request){
+    //检测登陆，权限，修改关注后自动回复图文内容
+    public function checkLoginAndRuleAndSubscribeReplyArticleEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkSubscribeReplyEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSubscribeReplyArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndSubscribeReplyImageEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndSubscribeReplyTextEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyTextEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -817,7 +855,23 @@ class CateringCheckAjax
     }
 
     //检测关注后自动回复文本消息的内容
-    public function checkSubscribeReplyEdit($request){
+    public function checkSubscribeReplyArticleEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkSubscribeReplyImageEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkSubscribeReplyTextEdit($request){
         if(empty($request->input('text_info'))){
             return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
         }
