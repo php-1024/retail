@@ -117,7 +117,7 @@
 
                                                     </div>
                                                 @endif
-                                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                                @if(!empty($val['reply_type']))<div class="line line-dashed b-b line-lg pull-in"></div>@endif
                                                 <div>
                                                     @if($val['reply_type']<>'1')<button class="btn btn-info btn-sm" onclick="return getAutoEditTextForm('{{$val->id}}')"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;文本回复</button>@endif
                                                     @if($val['reply_type']<>'3')<button class="btn btn-info btn-sm" onclick="return getAutoEditArticleForm('{{$val->id}}')"><i class="icon icon-picture"></i>&nbsp;&nbsp;图文回复</button>@endif
