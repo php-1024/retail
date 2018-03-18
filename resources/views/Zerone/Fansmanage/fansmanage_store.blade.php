@@ -58,7 +58,7 @@
                         <div class="col-sm-1">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="button"  onclick="getAddStoreForm()" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;店铺划入归属</button>
+                                <button type="button"  onclick="getAddStoreForm('{{$organization_id}}')" class="block btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;店铺划入归属</button>
                             </div>
                         </div>
                     </div>
