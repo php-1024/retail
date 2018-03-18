@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\OrganizationAssets;
 use App\Models\OrganizationFansmanageapply;
 use App\Models\OperationLog;
 use App\Models\Organization;
@@ -403,27 +404,24 @@ class FansmanageController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOne([['id',$organization_id]]);
-        $list = array();
-//        $list = Package::getPaginage([],15,'id');
-//        foreach ($list as $key=>$value){
-//            foreach ($value['programs'] as $k=>$v){
-//                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
-//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-//            }
-//        }
-        return view('Zerone/Fansmanage/fansmanage_program',['list'=>$list,'listOrg'=>$listOrg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $data = Organization::getOne([['id',$organization_id]]);
+        $list = Program::getPaginage([['is_asset', '1']], 15, 'id');
+        foreach ($list as $key => $value) {
+            $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $value['id']]]);
+            $list[$key]['program_balance'] = $re['program_balance'];
+            $list[$key]['program_used_num'] = $re['program_used_num'];
+        }
+        return view('Zerone/Fansmanage/fansmanage_program',['list'=>$list,'data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户资产页面划入js显示
     public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
-        $listPac = Package::getOnePackage([['id',$package_id]]);
+        $listOrg = Organization::getOnefansmanage([['id',$organization_id]]);
+//        $listPac = Package::getOnePackage([['id',$package_id]]);
 
-        return view('Zerone/fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        return view('Zerone/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request){

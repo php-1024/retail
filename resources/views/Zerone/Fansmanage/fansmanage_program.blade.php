@@ -27,13 +27,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“{{$listOrg->organization_name}}”程序管理</h2>
+                <h2>“{{$data->organization_name}}”程序管理</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“{{$listOrg->organization_name}}”程序管理</strong>
+                        <strong>“{{$data->organization_name}}”程序管理</strong>
                     </li>
                 </ol>
             </div>
@@ -58,46 +58,39 @@
 
             <div class="row">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg->id}}">
+                <input type="hidden" name="organization_id" id="organization_id" value="{{$data->id}}">
                 <input type="hidden" id="fansmanage_assets" value="{{ url('zerone/ajax/fansmanage_assets') }}">
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“{{$listOrg->organization_name}}”程序管理</h5>
+                            <h5>“{{$data->organization_name}}”程序管理</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>套餐名称</th>
-                                    <th>包含程序</th>
+                                    <th>程序名称</th>
+                                    <th>剩余数量</th>
+                                    <th>使用数量</th>
                                     <th>添加时间</th>
                                     <th class="text-right">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($list as $key=>$value)
-                                <tr>
-                                    <td>{{$value->id}}</td>
-                                    {{--<td>{{$value->package_name}}</td>--}}
+                                    <tr>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->program_name}}</td>
+                                        <td><div> <span class="label label-primary">剩余：@if(!empty($value->program_balance)){{$value->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
 
-                                    {{--<td>--}}
-                                        {{--@foreach($value->programs as $k=>$v)--}}
-                                        {{--<div>--}}
-                                            {{--<span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;--}}
-                                            {{--<span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;--}}
-                                            {{--<span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;--}}
-                                        {{--</div>--}}
-                                        {{--<div style=" margin-top: 20px;"></div>--}}
-                                        {{--@endforeach--}}
-                                    {{--</td>--}}
-                                    <td>{{$value->created_at}}</td>
-                                    <td class="text-right">
+                                        <td><div><span class="label label-warning">已用：@if(!empty($value->program_used_num)){{$value->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                        <td>{{$value->created_at}}</td>
+                                        <td class="text-right">
                                             <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
                                             <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
