@@ -256,7 +256,6 @@ class FansmanageController extends Controller{
         }
 
         $listorg = Organization::getList($where,'5','id');
-        dd($listorg);
 //        foreach ($listorg as $k=>$v){
 //            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
 //            $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
