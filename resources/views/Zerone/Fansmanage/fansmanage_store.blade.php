@@ -42,7 +42,9 @@
             </div>
 
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
+                <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                <input type="hidden" id="fansmanage_store_add" value="{{ url('zerone/ajax/fansmanage_store_add') }}">
+                <input type="hidden" id="fansmanage_store_draw" value="{{ url('zerone/ajax/fansmanage_store_draw') }}">
 
                 <div class="ibox-content m-b-sm border-bottom">
 
@@ -50,7 +52,7 @@
                         <div class="col-sm-1">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
-                                <button type="button" onclick="location.href='fansmanagelist.html'" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                <button type="button" onclick="history.back()" class="block btn btn-info"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                             </div>
                         </div>
                         <div class="col-sm-1">
@@ -172,7 +174,7 @@
     function getAddStoreForm(organization_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
-        var url = $('#agent_fansmanage_add').val();
+        var url = $('#fansmanage_store_add').val();
         var token = $('#_token').val();
         if(organization_id==''){
             swal({
@@ -208,7 +210,7 @@
     function getDrawStoreForm(organization_id,fansmanage_id){
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
         // activate Nestable for list 2
-        var url = $('#agent_fansmanage_draw').val();
+        var url = $('#fansmanage_store_draw').val();
         var token = $('#_token').val();
         if(organization_id==''){
             swal({
