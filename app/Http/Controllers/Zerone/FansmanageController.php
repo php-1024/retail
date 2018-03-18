@@ -476,8 +476,9 @@ class FansmanageController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id'); //商户id
+        $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
         $list = Organization::getPaginageStore([['type','4'],['parent_id',$organization_id]],'10','id');
-        return view('Zerone/Fansmanage/fansmanage_store',['list'=>$list,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Fansmanage/fansmanage_store',['organization_name'=>$organization_name,'list'=>$list,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户店铺管理--划入
     public function fansmanage_store_add(Request $request){
@@ -527,6 +528,9 @@ class FansmanageController extends Controller{
     }
     //商户店铺管理--划出
     public function fansmanage_store_draw(Request $request){
+        $fansmanage_id = $request->fansmanage_id; //商户id
+        $store_id = $request->store_id; //划出店铺id
+        $onedata = Organization::getOne([['id', $store_id]]);
         return view('Zerone/Fansmanage/fansmanage_store_draw');
     }
 
