@@ -660,7 +660,7 @@ class WechatController extends Controller{
                 \Wechat::send_fans_text($accessToken, $param['FromUserName'], $contentStr);
                 return 1;
             }else{
-                $contentStr = '你好吗，世界';
+               return $this->zerone_response($jm,$param,$appid,$_GET['encrypt_type'],$_GET['timestamp'],$_GET['nonce']);
             }
             //点击事件触发关键字回复
             /*
