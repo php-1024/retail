@@ -484,7 +484,8 @@ class FansmanageController extends Controller{
 
         $organization_id = $request->organization_id; //服务商id
         $list = Organization::getList([['type', 4], ['parent_id', '<>', $organization_id], ['parent_id', '1']]);
-        return view('Zerone/Fansmanage/fansmanage_store_add',['list' => $list, 'organization_id' => $organization_id]);
+        $data = Organization::getOne([['id',$organization_id]]);
+        return view('Zerone/Fansmanage/fansmanage_store_add',['list' => $list, 'data' => $data]);
     }
     //商户店铺管理--划出
     public function fansmanage_store_draw(Request $request){

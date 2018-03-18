@@ -99,11 +99,11 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/agent_fansmanage_add_check"://商户冻结  检测 登录 和 权限 和 安全密码 商户划入归属
+            case "zerone/ajax/agent_fansmanage_add_check":// 检测 登录 和 权限 和 安全密码 商户划入归属
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/agent_fansmanage_draw_check"://商户冻结  检测 登录 和 权限 和 安全密码 商户划出归属
+            case "zerone/ajax/agent_fansmanage_draw_check":// 检测 登录 和 权限 和 安全密码 商户划出归属
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -131,7 +131,14 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
-
+            case "zerone/ajax/fansmanage_store_add_check"://检测 登录 和 权限 和 安全密码 店铺划入归属
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
+            case "zerone/ajax/fansmanage_store_draw_check"://检测 登录 和 权限 和 安全密码 店铺划出归属
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
 
             //系统管理
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
