@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Models\OrganizationFansmanageinfo;
 use App\Models\AccountNode;
 use App\Models\Module;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -142,8 +143,9 @@ class FansmanageController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Organization::where([['status','1'],['type','in',[1,2]]])->get();
-
+        $list = Organization::whereIn('type',[1,2])->where([['status','1']])->get();
+        $listProgram = Program::getListProgram([['is_asset','1']]);
+        dump($listProgram);
         return view('Zerone/Fansmanage/fansmanage_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'list'=>$list]);
     }
     //注册提交商户数据
