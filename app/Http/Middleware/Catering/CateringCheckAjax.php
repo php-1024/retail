@@ -816,11 +816,8 @@ class CateringCheckAjax
 
     //检测关注后自动回复文本消息的内容
     public function checkSubscribeReplyEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        if(empty($request->input('keyword'))){
-            return self::res(0,response()->json(['data' => '请输入关键字', 'status' => '0']));
+        if(empty($request->input('text_info'))){
+            return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
         }
         return self::res(1,$request);
     }
