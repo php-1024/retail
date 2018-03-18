@@ -81,19 +81,19 @@
                                                 <td>文字回复</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="reply_type" value="1" @if(!empty($info) && $info['reply_type']=='1') checked="checked" @endif>
+                                                        <input type="checkbox" class="reply_type" value="1" @if(!empty($info) && $info['reply_type']=='1') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-xs" name="reply_type" id="editText" onclick="return getEditTextForm();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;编辑文字</button>
+                                                    <button class="btn btn-danger btn-xs " n id="editText" onclick="return getEditTextForm();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;编辑文字</button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>图文素材</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="reply_type" value="1" @if(!empty($info) && $info['reply_type']=='3') checked="checked" @endif>
+                                                        <input type="checkbox"  class="reply_type" value="3" @if(!empty($info) && $info['reply_type']=='3') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
@@ -105,7 +105,7 @@
                                                 <td>图片素材</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" value="1" @if(!empty($info) && $info['reply_type']=='2') checked="checked" @endif>
+                                                        <input type="checkbox"  class="reply_type" value="2" @if(!empty($info) && $info['reply_type']=='2') checked="checked" @endif>
                                                         <span></span>
                                                     </label>
                                                 </td>
