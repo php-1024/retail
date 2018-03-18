@@ -85,7 +85,7 @@ class CateringCheckAjax
                 break;
 
             case "api/ajax/auto_replay_add_check"://测试添加自动回复添加
-                $re = $this->checkLoginAndRuleAndAutoReplyAddCheck($request);
+                $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
                 break;
 
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
@@ -129,7 +129,7 @@ class CateringCheckAjax
     }
     /******************************复合检测*********************************/
     //检测登陆，权限，添加自动回复关键字
-    public function checkLoginAndRuleAndAutoReplyAddCheck($request){
+    public function checkLoginAndRuleAndAutoReplyAdd($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
