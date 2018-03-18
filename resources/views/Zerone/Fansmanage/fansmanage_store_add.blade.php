@@ -1,6 +1,6 @@
 <form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/fansmanage_store_add_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="organization_id" value="{{$data->id}}">
+    <input type="hidden" name="fansmanage_id" value="{{$data->id}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" style="padding-top: 7px;">请选择要划入的店铺</label>
                     <div class="col-sm-9">
-                        <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4" name="fansmanage_id">
+                        <select data-placeholder="请选择省份" class="chosen-select" style="width:350px;" tabindex="4" name="store_id">
                             @foreach($list as $key=>$value)
                                 <option value="{{$value->id}}">{{$value->organization_name}}</option>
                             @endforeach
