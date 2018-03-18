@@ -282,7 +282,7 @@ class FansmanageController extends Controller{
 
         DB::beginTransaction();
         try{
-            $onefansmanage = Organization::getOnefansmanage(['id'=>$id]); //获取商户组织信息
+            $onefansmanage = Organization::getOneFansmanage(['id'=>$id]); //获取商户组织信息
             dd($onefansmanage);
             $acc = Account::getOne(['organization_id'=>$id,'parent_id'=>'1']);//获取商户负责人信息
             if($list['organization_name']!=$organization_name){
