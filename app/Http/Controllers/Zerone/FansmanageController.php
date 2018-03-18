@@ -259,7 +259,6 @@ class FansmanageController extends Controller{
         foreach ($list as $k=>$v){
             $list[$k]['agent_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
         }
-        dump($list);
         return view('Zerone/Fansmanage/fansmanage_list',['search_data'=>$search_data,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户编辑ajaxshow显示页面
