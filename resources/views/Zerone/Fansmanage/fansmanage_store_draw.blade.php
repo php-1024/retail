@@ -41,7 +41,6 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Zerone/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     //提交表单
     function postForm() {
