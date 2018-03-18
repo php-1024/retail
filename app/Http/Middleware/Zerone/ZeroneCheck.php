@@ -62,12 +62,6 @@ class ZeroneCheck{
             case "zerone/fansmanage/fansmanage_program":      //商户程序管理
             case "zerone/fansmanage/fansmanage_store":        //商户划拨管理
 
-            case "zerone/store/store_add":              //店铺添加
-            case "zerone/store/store_list":             //店铺列表
-            case "zerone/store/store_structure":        //店铺人员架构
-            case "zerone/store/store_branchlist":       //分店管理
-            case "zerone/store/store_config":           //分店设置参数
-
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re,$next);
                 break;

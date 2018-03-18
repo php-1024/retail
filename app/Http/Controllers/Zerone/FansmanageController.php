@@ -462,10 +462,8 @@ class FansmanageController extends Controller{
             //添加操作日志
             OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
             DB::commit(); //提交事务
-
         }
         catch(Exception $e) {
-            dd($e);
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
@@ -478,7 +476,7 @@ class FansmanageController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        return view('Zerone/fansmanage/fansmanage_store',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Zerone/Fansmanage/fansmanage_store',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 }
