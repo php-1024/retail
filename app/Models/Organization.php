@@ -80,7 +80,7 @@ class Organization extends Model{
 
     //和Program表一对一的关系
     public function program(){
-        return $this->belongsTo('App\Models\Program', 'asset_id','id');
+        return $this->belongsTo('App\Models\Program', 'program_id','id');
     }
 
     //获取单条数据
