@@ -257,10 +257,10 @@ class FansmanageController extends Controller{
 
         $listorg = Organization::getList($where,'5','id');
         dd($listorg);
-        foreach ($listorg as $k=>$v){
-            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
+//        foreach ($listorg as $k=>$v){
+//            $listorg[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
 //            $listorg[$k]['proxy_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
-        }
+//        }
         return view('Zerone/Fansmanage/fansmanage_list',['search_data'=>$search_data,'listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户编辑ajaxshow显示页面

@@ -104,9 +104,9 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
-                                        <td>{{$value->proxy_name}}</td>
                                         <td></td>
-                                        <td>{{$value->account}}</td>
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td>
                                             @if($value->status == 1)
