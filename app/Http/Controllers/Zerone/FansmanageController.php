@@ -257,7 +257,7 @@ class FansmanageController extends Controller{
 
         $list = Organization::getPaginageFansmanage($where,'5','id');
         foreach ($list as $k=>$v){
-            $list[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'1'],'account')->first();
+            $list[$k]['account'] = Account::getPluck(['organization_id'=>$v['id'],'parent_id'=>'0'],'account')->first();
             $list[$k]['agent_name'] = Organization::getPluck(['id'=>$v['parent_id']],'organization_name')->first();
         }
         return view('Zerone/Fansmanage/fansmanage_list',['search_data'=>$search_data,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
