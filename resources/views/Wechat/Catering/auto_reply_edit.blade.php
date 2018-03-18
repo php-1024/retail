@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">关键字</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" name="keyword" placeholder="请输入关键字" value="{{$info->keyword}}" class="form-control">
+                            <input type="text" name="keyword" placeholder="请输入关键字" value="{{$info->keyword}}" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
