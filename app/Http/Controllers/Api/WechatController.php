@@ -697,7 +697,8 @@ class WechatController extends Controller{
      * $timestamp,$nonce - 加密消息要用的数据
      */
     private function zerone_response($jm,$param,$appid,$encrypt_type,$timestamp,$nonce){
-        $result = $this->zerone_response_text($param,'测试回复内容|'.$appid);
+        //$result = $this->zerone_response_text($param,'测试回复内容|'.$appid);
+        $result = $this->response($param,'bosoFPsCynb5D_7F_IPAPKd_FOPDaqpXw62tH8u_t8Q');
         if (isset($encrypt_type) && $_GET['encrypt_type'] == 'aes') { // 密文传输
             $encryptMsg = '';
             $jm->encryptMsg($result, $timestamp, $nonce, $encryptMsg);
@@ -718,6 +719,22 @@ class WechatController extends Controller{
             <Content><![CDATA[%s]]></Content>
             </xml>";
         $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $contentStr);
+        return $result;
+    }
+    /*
+     * 回复图片消息
+     */
+    private function zerone_response_image($param,$media_id){
+        $xmlTpl = "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[image]]></MsgType>
+                <Image>
+                <MediaId><![CDATA[%s]]></MediaId>
+                </Image>
+                </xml>";
+        $result = sprintf($xmlTpl, $param['FromUserName'], $param['ToUserName'], time(), $media_id);
         return $result;
     }
 
