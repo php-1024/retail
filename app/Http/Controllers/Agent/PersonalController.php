@@ -6,7 +6,6 @@ use App\Models\AccountInfo;
 use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\OrganizationAgentinfo;
-use App\Models\OrganizationProxyinfo;
 use App\Models\ProgramModuleNode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +15,6 @@ class PersonalController extends Controller{
     //个人信息
     public function account_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -94,7 +92,6 @@ class PersonalController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
