@@ -5,8 +5,10 @@ use App\Models\Account;
 use App\Models\Assets;
 use App\Models\AssetsOperation;
 use App\Models\Organization;
+use App\Models\OrganizationAssets;
 use App\Models\OrganizationFansmanageapply;
 use App\Models\Package;
+use App\Models\Program;
 use App\Models\ProxyApply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -90,15 +92,12 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
-        $list = array();
-//        $list = Package::getPaginage([],15,'id');
-//        foreach ($list as $key=>$value){
-//            foreach ($value['programs'] as $k=>$v){
-//                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
-//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-//            }
-//        }
+        $list = Program::getPaginage([['is_asset','1']],15,'id');
+        foreach ($list as $key=>$value) {
+            $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$value['id']]]);
+            $list[$key]['program_balance'] = $re['program_balance'];
+            $list[$key]['program_used_num'] = $re['program_used_num'];
+        }
         return view('Agent/Fansmanage/fansmanage_program',['oneFansmanage'=>$oneFansmanage,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //程序划拨
