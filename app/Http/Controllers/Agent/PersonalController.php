@@ -5,6 +5,7 @@ use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\Module;
 use App\Models\OperationLog;
+use App\Models\OrganizationAgentinfo;
 use App\Models\OrganizationProxyinfo;
 use App\Models\ProgramModuleNode;
 use Illuminate\Http\Request;
@@ -73,27 +74,26 @@ class PersonalController extends Controller{
                     if(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
                         return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                     }
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
+                    OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $organization_id]], ['agent_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
                 }
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
 
             }
             if($oneAcc['account_info']['realname'] != $realname){
                 if($admin_data['is_super'] != 2) {
-                    OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id', $organization_id]], ['proxy_owner' => $realname]);//修改服务商用户信息表 用户姓名
+                    OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $organization_id]], ['agent_owner' => $realname]);//修改服务商用户信息表 用户姓名
                 }
                 AccountInfo::editAccountInfo([['account_id',$id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
             }
             $admin_data['realname'] = $realname;
             $admin_data['mobile'] = $mobile;
-            if($admin_data['is_super'] == 2){
-                OperationLog::addOperationLog('1','1','1',$route_name,'在服务商系统修改了个人信息');//保存操作记录
-            }else{
-                \ZeroneRedis::create_proxy_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
+            if($admin_data['is_super'] != 2){
+                \ZeroneRedis::create_agent_account_cache($admin_data['id'],$admin_data);//生成账号数据的Redis缓存-服务商
                 OperationLog::addOperationLog('2',$organization_id,$id,$route_name,'修改了个人信息');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '个人信息修改失败，请检查', 'status' => '0']);
         }
