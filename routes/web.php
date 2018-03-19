@@ -383,9 +383,9 @@ Route::group(['prefix'=>'agent'],function(){
         Route::post('login_check','Agent\LoginController@login_check')->middleware('AgentCheckAjax');//提交登录数据
         Route::post('agent_info_check','Agent\SystemController@agent_info_check')->middleware('AgentCheckAjax');//提交公司信息修改
 
-        Route::post('account_info_check','Proxy\PersonaController@account_info_check')->middleware('ProxyCheckAjax');//个人信息修改
-        Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置
-        Route::post('password_check','Proxy\PersonaController@password_check')->middleware('ProxyCheckAjax');//登入密码修改
+        Route::post('account_info_check','Agent\PersonaController@account_info_check')->middleware('AgentCheckAjax');//个人信息修改
+        Route::post('safe_password_check','Agent\PersonaController@safe_password_check')->middleware('AgentCheckAjax');//安全密码设置
+        Route::post('password_check','Agent\PersonaController@password_check')->middleware('AgentCheckAjax');//登入密码修改
 
         Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
         Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
