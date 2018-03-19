@@ -557,10 +557,10 @@ Route::group(['prefix'=>'catering'],function(){
         //用户管理
         Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheckAjax');                  //添加会员标签ajax显示页面
         Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
-        Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheck');                //编辑会员标签功能提交
-        Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheck');    //编辑会员标签功能提交
-        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheck');            //删除会员标签功能提交
-        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheck');//删除会员标签功能提交
+        Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheckAjax');                //编辑会员标签功能提交
+        Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheckAjax');    //编辑会员标签功能提交
+        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
+        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
 
         Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheck');   //粉丝会员标签功能提交
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheck');                 //列表编辑ajax显示
