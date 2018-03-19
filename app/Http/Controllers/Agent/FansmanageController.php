@@ -155,32 +155,31 @@ class FansmanageController extends Controller{
                 //添加操作日志
                 OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
-//            else{//划出
-//                if(empty($re)){
-//                    return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
-//                }else{
-//                    if($re['program_spare_num'] >= $number){//划出数量小于或等于剩余数量
-//                        $num = $re['program_spare_num'] - $number;
-//                        OrganizationAssets::editAssets([['id',$id]],['program_spare_num'=>$num]);
-//                    }else{
-//                        return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
-//                    }
-//                }
-//                    $proxyNum = $oneProxy['program_spare_num'] + $number;//剩余数量
-//                    $proxyUseNum = $oneProxy['program_use_num'] - $number;//使用数量
-//                    Assets::editAssets([['id', $oneProxy['id']]], ['program_spare_num' => $proxyNum, 'program_use_num' => $proxyUseNum]);//修改服务商系统数量
-//                $data = [
-//                    'operator_id'=>$operator_id,
-//                    'fr_organization_id'=>$fr_organization_id,
-//                    'to_organization_id'=>$to_organization_id,
-//                    'program_id'=>$program_id,
-//                    'package_id'=>$package_id,
-//                    'status'=>$status,
-//                    'number'=>$number
-//                ];
-//                //添加操作日志
-//                AssetsOperation::addAssetsOperation($data);//保存操作记录
-//            }
+            else{//划出
+                if(empty($re)){
+                    return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
+                }else{
+                    if($re['program_balance'] >= $number){//划出数量小于或等于剩余数量
+                        $num = $re['program_balance'] - $number;
+                        OrganizationAssets::editAssets([['id',$id]],['program_balance'=>$num]);
+                    }else{
+                        return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
+                    }
+                }
+                    $agentNum = $oneAgent['program_balance'] + $number;//剩余数量
+                    $agentUseNum = $oneAgent['program_used_num'] - $number;//使用数量
+                OrganizationAssets::editAssets([['id',$oneAgent['id']]], ['program_balance' => $agentNum, 'program_used_num' => $agentUseNum]);//修改服务商系统数量
+                $data = [
+                    'operator_id'=>$operator_id,
+                    'fr_organization_id'=>$organization_id,
+                    'to_organization_id'=>$to_organization_id,
+                    'program_id'=>$program_id,
+                    'status'=>$status,
+                    'number'=>$number
+                ];
+                //添加操作日志
+                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
+            }
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
@@ -189,7 +188,6 @@ class FansmanageController extends Controller{
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-
 
 }
 ?>
