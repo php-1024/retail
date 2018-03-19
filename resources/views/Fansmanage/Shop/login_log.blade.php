@@ -117,6 +117,14 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
 <script>
+    $('.zerodate').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true,
+        format: 'yyyy-mm-dd'
+    });
     function searchFormCheck(){
         var url = $('#searchForm').attr('action');
         var data = $('#searchForm').serialize();
