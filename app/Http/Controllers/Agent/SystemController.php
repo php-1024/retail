@@ -128,15 +128,12 @@ class SystemController extends Controller{
                 $admin_data['realname'] = $realname;
             }
 
-            if($acc['idcard'] != $idcard){
+            if($agent['organizationAgentinfo']['agent_owner_idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$organization_id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
 
-            if($admin_data['is_super'] == 2) {
-                //添加操作日志
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在服务商系统修改了服务商：' . $agent['organization_name']);//保存操作记录
-            }else{
+            if($admin_data['is_super'] != 2) {
                 OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商：' . $agent['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
