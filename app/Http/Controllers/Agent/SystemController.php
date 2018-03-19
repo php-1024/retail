@@ -24,7 +24,7 @@ class SystemController extends Controller{
         if($admin_data['is_super'] == 1 ){
             $list = Organization::getPaginage([['program_id','2']],20,'id');
             foreach($list as $key=>$value){
-                $list[$key]['warzone'] = Warzone::getOne([['id', $value['warzoneAgent']['zone_id']]]);
+                $list[$key]['warzone'] = Warzone::getPluck([['id', $value['warzoneAgent']['zone_id']]],'zone_name')->first();
             }
             dump($list);
             return view('Agent/System/select_agent',['list'=>$list]);
