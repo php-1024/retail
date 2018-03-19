@@ -103,10 +103,10 @@ class FansmanageController extends Controller{
     //程序划拨
     public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
-        $package_id = $request->input('package_id');//套餐id
+        $program_id = $request->input('program_id');//套餐id
         $status = $request->input('status');//状态
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
-        $oneProgram = Program::getOne([['id',$package_id]]);
+        $oneProgram = Program::getOne([['id',$program_id]]);
         return view('Agent/Fansmanage/fansmanage_assets',['oneFansmanage'=>$oneFansmanage, 'oneProgram'=>$oneProgram ,'status'=>$status]);
     }
     //商户资产页面划入js显示
