@@ -583,7 +583,6 @@ class FansmanageCheckAjax
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data' => $admin_data]);//添加参数
             //把参数传递到下一个中间件
-            dd($request);
             return self::res(1, $request);
         }
     }
