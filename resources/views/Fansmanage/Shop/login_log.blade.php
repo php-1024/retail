@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Zerone/library/datepicker')}}/css/datepicker3.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Fansmanage')}}/js/ie/html5shiv.js"></script>
     <script src="{{asset('public/Fansmanage')}}/js/ie/respond.min.js"></script>
@@ -114,6 +115,7 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
 <script>
     function searchFormCheck(){
         var url = $('#searchForm').attr('action');
