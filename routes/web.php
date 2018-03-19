@@ -348,9 +348,9 @@ Route::group(['prefix'=>'agent'],function(){
     });
     //个人信息分组
     Route::group(['prefix'=>'personal'],function(){
-        Route::get('account_info','Proxy\PersonalController@account_info')->middleware('AgentCheck');//个人信息修改
-        Route::get('safe_password','Proxy\PersonalController@safe_password')->middleware('AgentCheck');//安全密码修改
-        Route::get('password','Proxy\PersonalController@password')->middleware('AgentCheck');//登入密码修改
+        Route::get('account_info','Agent\PersonalController@account_info')->middleware('AgentCheck');//个人信息修改
+        Route::get('safe_password','Agent\PersonalController@safe_password')->middleware('AgentCheck');//安全密码修改
+        Route::get('password','Agent\PersonalController@password')->middleware('AgentCheck');//登入密码修改
     });
     //下级人员管理--权限角色组
     Route::group(['prefix'=>'role'],function(){
