@@ -66,7 +66,7 @@
                     </div>
                     <div class="value">
                         <b>{{$value->organization_name}}</b>
-                        <p>{{$value->warzoneAgent->zone_id}}</p>
+                        <p>@if($value['warzone']){{$value['warzone']}}@else还没划入战区@endif</p>
                     </div>
                 </section>
             </a>
