@@ -36,8 +36,8 @@ class OrganizationAssetsallocation extends Model{
     public static function addOrganizationAssetsallocation($param){
         $program = new OrganizationAssetsallocation();//实例化程序模型
         $program->operator_id = $param['operator_id'];//操作人id
-        $program->fr_organization_id = $param['fr_organization_id '];//划入组织
-        $program->to_organization_id = $param['to_organization_id'];//划出组织
+        $program->fr_organization_id = $param['fr_organization_id '];//划出组织
+        $program->to_organization_id = $param['to_organization_id'];//划入组织
         $program->program_id = $param['program_id'];//程序id
         $program->status = $param['status'];//操作状态
         $program->number = $param['number'];//操作数量
