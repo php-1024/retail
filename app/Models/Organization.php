@@ -89,7 +89,7 @@ class Organization extends Model{
     }
     //获取单条信息-服务商
     public static function getOneAgent($where){
-        return self::with('warzone')->with('organizationAgentinfo')->where($where)->first();
+        return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->first();
     }
     //获取单条信息-商户
     public static function getOneFansmanage($where){
