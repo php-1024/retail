@@ -361,9 +361,9 @@ Route::group(['prefix'=>'agent'],function(){
 
     //下辖商户管理
     Route::group(['prefix'=>'fansmanage'],function(){
-        Route::get('fansmanage_list','Agent\FansmanageController@fansmanage_list')->middleware('ProxyCheck');//商户列表
-        Route::get('fansmanage_structure','Agent\FansmanageController@fansmanage_structure')->middleware('ProxyCheck');//店铺结构
-        Route::get('fansmanage_program','Agent\FansmanageController@fansmanage_program')->middleware('ProxyCheck');//程序划拨
+        Route::get('fansmanage_list','Agent\FansmanageController@fansmanage_list')->middleware('AgentCheck');//商户列表
+        Route::get('fansmanage_structure','Agent\FansmanageController@fansmanage_structure')->middleware('AgentCheck');//店铺结构
+        Route::get('fansmanage_program','Agent\FansmanageController@fansmanage_program')->middleware('AgentCheck');//程序划拨
     });
 
     //异步提交数据组
