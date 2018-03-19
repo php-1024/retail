@@ -143,13 +143,13 @@ class UserController extends Controller{
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
         $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'10','id');
-        dump($list);
         foreach($list as $key=>$value){
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
             $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
             $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['fansmanage_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
+        dump($list);
         $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
         return view('Fansmanage/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
