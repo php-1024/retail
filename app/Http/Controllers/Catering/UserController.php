@@ -39,6 +39,7 @@ class UserController extends Controller{
 
         $label_name = $request->label_name; //会员标签名称
         $fansmanage_id = $admin_data['organization_id'];//组织id
+        dd($fansmanage_id);
 
         $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
