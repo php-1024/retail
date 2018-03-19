@@ -99,6 +99,64 @@ class PersonalController extends Controller{
         return response()->json(['data' => '个人信息修改成功', 'status' => '1']);
 
     }
+    //修改登入密码显示页面
+    public function password(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $admin_data['id'];
+        if($admin_data['is_super'] == 2){
+            $oneAcc = Account::getOne([['id',1]]);
+        }else{
+            $oneAcc = Account::getOne([['id',$id]]);
+        }
+        return view('Agent/Personal/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+
+    }
+
+    //修改登入密码功能提交
+    public function password_check(Request $request){
+
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+
+        $id = $request->input('id'); //获取修改登入密码的id
+        $account = Account::getOne([['id',$id]]);//获取用户信息
+
+        $old_password = $request->input('old_password'); //原密码
+        $password = $request->input('password');//新密码
+        if($admin_data['is_super'] == 2){
+            $key = config("app.zerone_encrypt_key");//获取加密盐
+        }else{
+            $key = config("app.agent_encrypt_key");//获取加密盐
+        }
+
+        $encrypted = md5($password);//加密密码第一重---新密码
+        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重---新密码
+        $old_encrypted = md5($old_password);//加密密码第一重---原密码
+        $old_encryptPwd = md5("lingyikeji".$old_encrypted.$key);//加密码第二重---原密码
+
+        if ($account['password'] == $old_encryptPwd){
+            DB::beginTransaction();
+            try {
+                Account::editAccount([['id',$id ]],['password' => $encryptPwd]);
+                if($admin_data['is_super'] != 2){
+                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                dd($e);
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '登录密码修改成功！', 'status' => '1']);
+        }else{
+            return response()->json(['data' => '原密码不正确！', 'status' => '0']);
+        }
+
+    }
+
 
     //修改安全密码
     public function safe_password(Request $request){
@@ -128,7 +186,7 @@ class PersonalController extends Controller{
         if($admin_data['is_super'] ==2){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.proxy_safe_encrypt_key");//获取加密盐
+            $key = config("app.agent_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
@@ -183,63 +241,7 @@ class PersonalController extends Controller{
         }
     }
 
-    //修改登入密码显示页面
-    public function password(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $admin_data['id'];
-        if($admin_data['is_super'] == 2){
-            $oneAcc = Account::getOne([['id',1]]);
-        }else{
-            $oneAcc = Account::getOne([['id',$id]]);
-        }
-        return view('Agent/Personal/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
-    }
-    //修改登入密码功能提交
-    public function password_check(Request $request){
-
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $id = $request->input('id'); //获取修改登入密码的id
-        $account = Account::getOne([['id',$id]]);//获取用户信息
-
-        $old_password = $request->input('old_password'); //原密码
-        $password = $request->input('password');//新密码
-        if($admin_data['is_super'] == 2){
-            $key = config("app.zerone_encrypt_key");//获取加密盐
-        }else{
-            $key = config("app.proxy_encrypt_key");//获取加密盐
-        }
-
-        $encrypted = md5($password);//加密密码第一重---新密码
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重---新密码
-        $old_encrypted = md5($old_password);//加密密码第一重---原密码
-        $old_encryptPwd = md5("lingyikeji".$old_encrypted.$key);//加密码第二重---原密码
-
-        if ($account['password'] == $old_encryptPwd){
-            DB::beginTransaction();
-            try {
-                Account::editAccount([['id',$id ]],['password' => $encryptPwd]);
-                if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1',$id,$route_name,'在服务商系统修改了登录密码');//保存操作记录-保存到零壹系统
-                }else{
-                    OperationLog::addOperationLog('2',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
-                }
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '修改登录密码失败，请检查', 'status' => '0']);
-            }
-            return response()->json(['data' => '登录密码修改成功！', 'status' => '1']);
-        }else{
-            return response()->json(['data' => '原密码不正确！', 'status' => '0']);
-        }
-
-    }
 
 }
 ?>

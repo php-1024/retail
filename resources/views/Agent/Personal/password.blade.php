@@ -63,7 +63,7 @@
                             登入密码修改
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('Agent/ajax/password_check') }}">
+                            <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('agent/ajax/password_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="hidden" name="id"  value="{{$oneAcc->id}}">
                                 <div class="form-group">
@@ -143,13 +143,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
