@@ -22,7 +22,7 @@ class FansmanageController extends Controller{
         $fansmana_owner_mobile = $request->input('fansmana_owner_mobile');
         $search_data = ['fansmana_name'=>$fansmana_name,'fansmana_owner_mobile'=>$fansmana_owner_mobile];
 
-        $where = [['parent_id',$admin_data['organization_id']]];
+        $where = [['agent_id',$admin_data['organization_id']]];
         if(!empty($fansmana_name)){
             $where[] = ['fansmana_name','like','%'.$fansmana_name.'%'];
         }
