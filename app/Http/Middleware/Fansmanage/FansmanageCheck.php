@@ -27,8 +27,10 @@ class FansmanageCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****店铺概况****/
-            case "fansmanage":                                //店铺后台首页
-            case "fansmanage/select_shop":                    //店铺超级管员进入操作
+            case "fansmanage":                                  //店铺后台首页
+            case "fansmanage/select_shop":                      //店铺超级管员进入操作
+            case "fansmanage/operation_log":                    //操作日记
+            case "fansmanage/login_log":                        //登入日记
             /****店铺概况****/
 
             /****账号中心****/
@@ -36,8 +38,6 @@ class FansmanageCheck{
             case "fansmanage/account/password":               //登入密码修改
             case "fansmanage/account/safe_password":          //安全密码设置
             case "fansmanage/account/message_setting":        //消息推送设置
-            case "fansmanage/account/operation_log":          //操作日记
-            case "fansmanage/account/login_log":              //登入日记
                 /****账号中心****/
 
                 $re = $this->checkLoginAndRule($request);   //判断是否登录

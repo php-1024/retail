@@ -30,8 +30,6 @@ class CateringCheck{
             /****店铺概况****/
             case "catering":                                //店铺后台首页
             case "catering/select_shop":                    //店铺超级管员进入操作
-            case "catering/operation_log":                  //操作日记
-            case "catering/login_log":                      //登入日记
             /****店铺概况****/
 
             /****账号中心****/
@@ -39,6 +37,8 @@ class CateringCheck{
             case "catering/account/password":               //登入密码修改
             case "catering/account/safe_password":          //安全密码设置
             case "catering/account/message_setting":        //消息推送设置
+            case "catering/account/operation_log":          //操作日记
+            case "catering/account/login_log":              //登入日记
             /****账号中心****/
 
             /****公众号管理****/
