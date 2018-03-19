@@ -25,6 +25,12 @@ return [
     'catering_safe_encrypt_key'=>'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
     /*******************总店**************************/
 
+
+    /*******************粉丝管理系统**************************/
+    'fansmanage_encrypt_key'=>'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
+    'fansmanage_safe_encrypt_key'=>'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
+    /*******************粉丝管理系统**************************/
+
     /*******************餐饮分店**************************/
     'branch_encrypt_key'=>'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店业务系统登录密码加密盐
     'branch_safe_encrypt_key'=>'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店业务系统全密码加密盐
@@ -34,18 +40,6 @@ return [
     'catering_branch_encrypt_key'=>'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店简版业务系统登录密码加密盐
     'catering_branch_safe_encrypt_key'=>'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店简版业务系统全密码加密盐
     /*******************餐饮分店简版**************************/
-
-
-    /**
-     * 原有的商超总店
-     * retail_encrypt_key
-     * retail_safe_encrypt_key
-     */
-    /*******************商超总店**************************/
-    'old_retail_encrypt_key'=>'sdhjfkdshkjf312sf21dsf12sdf21dsf21ds1f2dsf5ds4f5dsf4sd4f5dsf2ds1f2ds12f',//零壹云管理平台 - 商超总店业务系统登录密码加密盐
-    'old_retail_safe_encrypt_key'=>'wfdsajflkjdlsagdasg4h56s4dfd2j456hgfj3df45uty45u6u6y5k46jhg132fhg56df4h65fd56h',//零壹云管理平台 - 商超总店业务系统全密码加密盐
-    /*******************商超总店**************************/
-
 
     /*************
      * 2018年03-15
