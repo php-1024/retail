@@ -90,6 +90,7 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
+        $list = array();
 //        $list = Package::getPaginage([],15,'id');
 //        foreach ($list as $key=>$value){
 //            foreach ($value['programs'] as $k=>$v){
