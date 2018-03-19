@@ -171,6 +171,13 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => 6,
         ],
+        //定义一个自己的缓存的服务器，粉丝管理平台使用
+        'fansmanage' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 7,
+        ],
         //定义一个自己的缓存的服务器，总店平台使用
         'retail_old' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
