@@ -590,6 +590,10 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::get('/', 'Fansmanage\LoginController@display')->middleware('FansmanageCheck');                               //登录页面路由
         Route::get('captcha/{tmp}', 'Fansmanage\LoginController@captcha');                                                //验证码路由
     });
+    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');                                    //系统首页
+    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');                  //超级管理员切换服务商
+    Route::get('quit', 'Fansmanage\ShopController@quit');                                                                   //退出系统
+    Route::post('select_shop','Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');                      //超级管理员选择登入的服务商
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
