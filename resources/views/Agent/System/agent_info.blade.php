@@ -69,7 +69,7 @@
                                     <input type="hidden" name="organization_id" value="{{$data->id}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">所属战区</label>
-                                        <div class="col-sm-10">{{$data->}}</div>
+                                        <div class="col-sm-10">{{$warzone->zone_name}}</div>
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">公司名称</label>
                                         <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$data->organization_name}}"></div>
