@@ -13,40 +13,37 @@ use Illuminate\Support\Facades\DB;
 use Session;
 class FansmanageController extends Controller{
     //商户注册列表
-    public function fansmana_register(Request $request){
+    public function fansmanage_register(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $fansmana_name = $request->input('fansmana_name');
-        $fansmana_owner_mobile = $request->input('fansmana_owner_mobile');
-        $search_data = ['fansmana_name'=>$fansmana_name,'fansmana_owner_mobile'=>$fansmana_owner_mobile];
+        $fansmanage_name = $request->input('fansmanage_name');
+        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
+        $search_data = ['fansmanage_name'=>$fansmanage_name,'fansmanage_owner_mobile'=>$fansmanage_owner_mobile];
 
         $where = [['agent_id',$admin_data['organization_id']]];
-        if(!empty($fansmana_name)){
-            $where[] = ['fansmana_name','like','%'.$fansmana_name.'%'];
+        if(!empty($fansmanage_name)){
+            $where[] = ['fansmanage_name','like','%'.$fansmanage_name.'%'];
         }
-        if(!empty($fansmana_owner_mobile)){
-            $where[] = ['fansmana_owner_mobile',$fansmana_owner_mobile];
+        if(!empty($fansmanage_owner_mobile)){
+            $where[] = ['fansmanage_owner_mobile',$fansmanage_owner_mobile];
         }
-        $list = OrganizationFansmanageapply::getPaginage($where,'15','id');
-        return view('Agent/Fansmana/fansmana_register',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $list = Organizationfansmanageapply::getPaginage($where,'15','id');
+        return view('Agent/Fansmanage/fansmanage_register',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户列表
-    public function fansmana_list(Request $request){
+    public function fansmanage_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
-        $list = Organization::getPaginageFansmanage([['parent_id',$organization],['program_id',3]],10,'id');
-        foreach ($list as $key=>$val){
-            $list[$key]['account'] = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account')->first();
-        }
-        return view('Agent/Fansmana/fansmana_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $list = Organization::getPaginagefansmanage([['parent_id',$organization],['program_id',3]],10,'id');
+        return view('Agent/Fansmanage/fansmanage_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //店铺结构
-    public function company_structure(Request $request){
+    public function fansmanage_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -59,7 +56,7 @@ class FansmanageController extends Controller{
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
         //根据获取的人员组成结构树
         $structure = $this->create_structure($list,$oneAcc['id']);
-        return view('Proxy/Company/company_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/Fansmanage/fansmanage_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     private function create_structure($list,$id){
@@ -86,22 +83,23 @@ class FansmanageController extends Controller{
     }
 
     //程序划拨
-    public function company_program(Request $request){
+    public function fansmanage_program(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
-        $list = Package::getPaginage([],15,'id');
-        foreach ($list as $key=>$value){
-            foreach ($value['programs'] as $k=>$v){
-                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
-                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-            }
-        }
-        return view('Proxy/Company/company_program',['listOrg'=>$listOrg,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
+        $list = array();
+//        $list = Package::getPaginage([],15,'id');
+//        foreach ($list as $key=>$value){
+//            foreach ($value['programs'] as $k=>$v){
+//                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
+//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+//            }
+//        }
+        return view('Agent/Fansmanage/fansmanage_program',['oneFansmanage'=>$oneFansmanage,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //程序划拨
     public function company_assets(Request $request){
