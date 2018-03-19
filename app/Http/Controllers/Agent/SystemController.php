@@ -6,7 +6,7 @@ use App\Models\AccountInfo;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\OrganizationProxyinfo;
+use App\Models\OrganizationAgentinfo;
 use App\Models\OrganizationRole;
 use App\Models\Warzone;
 use App\Models\WarzoneAgent;
@@ -90,6 +90,7 @@ class SystemController extends Controller{
     //公司信息设置
     public function agent_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -99,7 +100,7 @@ class SystemController extends Controller{
         return view('Agent/System/agent_info',['warzone'=>$warzone,'data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //公司信息设置
-    public function proxy_info_check(Request $request){
+    public function agent_info_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
@@ -109,28 +110,27 @@ class SystemController extends Controller{
         $mobile = $request->input('mobile');//负责人手机号
         DB::beginTransaction();
         try{
-            $list = Organization::getOneProxy([['id',$organization_id]]);
+            $agent= Organization::getOneAgent([['id',$organization_id]]);
             $acc = Account::getOne([['id',$admin_data['id']]]);
             $account_id = $acc['id'];
-            if($list['organization_name']!=$organization_name){
+            if($agent['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$organization_id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
             }
-            if($list['mobile']!=$mobile){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]], ['proxy_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
+            if($agent['mobile']!=$mobile){
+                OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$organization_id]], ['agent_owner_mobile'=>$mobile]);//修改服务商表服务商手机号码
                 Account::editAccount(['organization_id'=>$organization_id],['mobile'=>$mobile]);//修改用户管理员信息表 手机号
-                $admin_data['realname'] = $realname;
-
+                $admin_data['mobile'] = $mobile;
             }
 
-            if($list['organizationproxyinfo']['proxy_owner'] != $realname){
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner'=>$realname]);//修改服务商用户信息表 用户姓名
+            if($agent['organizationAgentinfo']['agent_owner'] != $realname){
+                OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$organization_id]],['agent_owner'=>$realname]);//修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['realname'=>$realname]);//修改用户管理员信息表 用户名
+                $admin_data['realname'] = $realname;
             }
 
             if($acc['idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
-                OrganizationProxyinfo::editOrganizationProxyinfo([['organization_id',$organization_id]],['proxy_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
-                $admin_data['mobile'] = $mobile;
+                OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$organization_id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
 
             if($admin_data['is_super'] == 2) {
@@ -141,14 +141,15 @@ class SystemController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
         if($acc['idcard'] != $idcard || $list['mobile']!=$mobile){
             if($admin_data['is_super'] == 2) {
-                \ZeroneRedis::create_proxy_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_agent_account_cache(1, $admin_data);//生成账号数据的Redis缓存
             }else{
-                \ZeroneRedis::create_proxy_account_cache($account_id, $admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_agent_account_cache($account_id, $admin_data);//生成账号数据的Redis缓存
             }
         }
         return response()->json(['data' => '修改成功', 'status' => '1']);
