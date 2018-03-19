@@ -40,6 +40,7 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
         $list = Organization::getPaginagefansmanage([['parent_id',$organization],['program_id',3]],10,'id');
+        dump($list);
         foreach ($list as $key=>$val){
             $list[$key]['account'] = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account')->first();
         }
