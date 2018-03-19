@@ -38,7 +38,15 @@ class FansmanageCheck{
             case "fansmanage/account/password":               //登入密码修改
             case "fansmanage/account/safe_password":          //安全密码设置
             case "fansmanage/account/message_setting":        //消息推送设置
-                /****账号中心****/
+            /****账号中心****/
+
+
+
+            /****用户管理****/
+            case "fansmanage/user/user_tag":                  //粉丝标签管理
+            case "fansmanage/user/user_list":                 //粉丝用户管理
+            case "fansmanage/user/user_timeline":             //粉丝用户足迹
+            /****用户管理****/
 
                 $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
