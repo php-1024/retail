@@ -2,7 +2,7 @@
 /**
  * 检测中间件囖
  */
-namespace App\Http\Middleware\Fansmanage;
+namespace App\Http\Middleware\Fansmagage;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -14,88 +14,394 @@ class FansmanageCheckAjax
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "fansmanage/ajax/login_check"://检测登录数据提交
+            case "catering/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "fansmanage/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
+            case "catering/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProfile($request);
                 return self::format_response($re, $next);
                 break;
-            case "fansmanage/ajax/password_check"://检测登录和权限和安全密码和登入密码
+            case "catering/ajax/password_check"://检测登录和权限和安全密码和登入密码
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
-            case "fansmanage/ajax/safe_password_check"://设置安全密码
+            case "catering/ajax/safe_password_check"://设置安全密码
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "fansmanage/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
+            case "catering/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
                 $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+            case "catering/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+            case "catering/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
+            case "catering/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
-            case "fansmanage/ajax/label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
+            case "catering/ajax/label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
+            case "catering/ajax/label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
+            case "catering/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re,$next);
-            case "fansmanage/ajax/branch_create_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
+            case "catering/ajax/branch_create_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndBranchCreate($request);
                 return self::format_response($re,$next);
-            case "fansmanage/ajax/member_add_check"://检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
+            case "catering/ajax/member_add_check"://检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndMemberAdd($request);
                 return self::format_response($re,$next);
-
                 break;
 
-            case "fansmanage/ajax/role_edit_check"://检测是否登录 权限 安全密码
-            case "fansmanage/ajax/role_delete_check"://检测是否登录 权限 安全密码
-            case "fansmanage/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
-            case "fansmanage/ajax/label_delete_check"://检测是否登录 权限 安全密码--删除会员标签
-            case "fansmanage/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
+            case "api/ajax/material_article_add_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/material_articles_add_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/material_article_edit_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticleEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/material_articles_edit_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticlesEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/auto_reply_add_check"://检测添加自动回复关键字
+                $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/auto_reply_edit_text_check"://检测自动回复文章数据提交
+                $re = $this->checkLoginAndRuleAndAutoReplyEditText($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/auto_reply_edit_image_check"://检测自动回复图片素材啊数据提交
+                $re = $this->checkLoginAndRuleAndAutoReplyEditImage($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/auto_reply_edit_article_check"://检测自动回复图文素材啊数据提交
+                $re = $this->checkLoginAndRuleAndAutoReplyEditArticle($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/auto_reply_edit_check"://检测自动回复图文素材啊数据提交
+                $re = $this->checkLoginAndRuleAndAutoReplyEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/subscribe_reply_text_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyTextEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/subscribe_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyImageEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/subscribe_reply_article_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyArticleEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/default_reply_text_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndDefaultReplyTextEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/default_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndDefaultReplyImageEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "api/ajax/default_reply_article_edit_check"://检测馆周后自动回复文本素材啊数据提交
+                $re = $this->checkLoginAndRuleAndDefaultReplyArticleEdit($request);
+                return self::format_response($re,$next);
+                break;
+
+            case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
+            case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
+            case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
+            case "catering/ajax/label_delete_check"://检测是否登录 权限 安全密码--删除会员标签
+            case "catering/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
+            case "api/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
+            case "api/ajax/material_article_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
+            case "api/ajax/auto_reply_delete_check"://检测是否登陆 权限 安全密码--删除关键字
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/role_edit":                 //编辑权限角色弹出框检测登入和权限
-            case "fansmanage/ajax/role_delete":               //编辑权限角色弹出框检测登入和权限
-            case "fansmanage/ajax/quick_rule":                //快速授权检测登入和权限
-            case "fansmanage/ajax/selected_rule":             //快速授权检测登入和权限
-            case "fansmanage/ajax/subordinate_edit":          //下级人员列表编辑用户弹出框
-            case "fansmanage/ajax/subordinate_lock":          //添加下级人员快速授权
-            case "fansmanage/ajax/subordinate_authorize":     //添加下级人员用户授权显示页面
-            case "fansmanage/ajax/subordinate_delete":        //添加下级人员用户授权显示页面
-            case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
-            case "fansmanage/ajax/label_edit":                //编辑会员标签显示页面
-            case "fansmanage/ajax/label_delete":              //删除会员标签显示页面
-            case "fansmanage/ajax/store_label_add_check":     //粉丝会员标签改变显示页面
-            case "fansmanage/ajax/user_list_edit":            //会员列表编辑显示页面
-            case "fansmanage/ajax/user_list_lock":            //会员列表冻结显示页面
-            case "fansmanage/ajax/user_list_wallet":          //会员列表粉丝钱包显示页面
-            case "api/ajax/meterial_image_upload":
-            case "api/ajax/meterial_image_upload_check":
-            $re = $this->checkLoginAndRule($request);
+            case "catering/ajax/role_edit":                 //编辑权限角色弹出框检测登入和权限
+            case "catering/ajax/role_delete":               //编辑权限角色弹出框检测登入和权限
+            case "catering/ajax/quick_rule":                //快速授权检测登入和权限
+            case "catering/ajax/selected_rule":             //快速授权检测登入和权限
+            case "catering/ajax/subordinate_edit":          //下级人员列表编辑用户弹出框
+            case "catering/ajax/subordinate_lock":          //添加下级人员快速授权
+            case "catering/ajax/subordinate_authorize":     //添加下级人员用户授权显示页面
+            case "catering/ajax/subordinate_delete":        //添加下级人员用户授权显示页面
+            case "catering/ajax/label_add":                 //添加会员标签显示页面
+            case "catering/ajax/label_edit":                //编辑会员标签显示页面
+            case "catering/ajax/label_delete":              //删除会员标签显示页面
+            case "catering/ajax/store_label_add_check":     //粉丝会员标签改变显示页面
+            case "catering/ajax/user_list_edit":            //会员列表编辑显示页面
+            case "catering/ajax/user_list_lock":            //会员列表冻结显示页面
+            case "catering/ajax/user_list_wallet":          //会员列表粉丝钱包显示页面
+            case "api/ajax/meterial_image_upload":          //图片上传弹窗
+            case "api/ajax/meterial_image_upload_check":   //图片上传检测
+            case "api/ajax/material_image_delete_comfirm": //图片上传确认弹窗
+            case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
+            case "api/ajax/material_image_select":        //图片选择弹窗
+            case "api/ajax/defined_menu_add":              //自定义菜单添加
+            case "api/ajax/defined_menu_get":              //自定义菜单添加
+            case "api/ajax/auto_reply_add":              //自定义菜单添加
+            case "api/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
+            case "api/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
+            case "api/ajax/auto_reply_edit_article":    //修改关键字回复图文内容
+            case "api/ajax/auto_reply_edit"://修改自动回复关键字
+            case "api/ajax/auto_reply_delete_confirm"://删除关键字弹窗
+            case "api/ajax/subscribe_reply_text_edit"://修改关注后文本回复弹窗
+            case "api/ajax/subscribe_reply_image_edit"://修改关注后图片回复弹窗
+            case "api/ajax/subscribe_reply_article_edit"://修改关注后图文回复弹窗
+            case "api/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
+            case "api/ajax/default_reply_image_edit"://修改关注后图片回复弹窗
+            case "api/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
+                $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
         }
     }
     /******************************复合检测*********************************/
+    //检测登陆，权限，修改关注后自动回复图文内容
+    public function checkLoginAndRuleAndDefaultReplyArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndDefaultReplyImageEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndDefaultReplyTextEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyTextEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测登陆，权限，修改关注后自动回复图文内容
+    public function checkLoginAndRuleAndSubscribeReplyArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndSubscribeReplyImageEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关注后自动回复文本内容
+    public function checkLoginAndRuleAndSubscribeReplyTextEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyTextEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测登陆，权限，修改关键字
+    public function checkLoginAndRuleAndAutoReplyEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关键字自动回复图文内容
+    public function checkLoginAndRuleAndAutoReplyEditArticle($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyEditArticle($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改关键字自动回复图片内容
+    public function checkLoginAndRuleAndAutoReplyEditImage($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyEditImage($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，修改自动回复关键字文本内容
+    public function checkLoginAndRuleAndAutoReplyEditText($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyEditText($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，添加自动回复关键字
+    public function checkLoginAndRuleAndAutoReplyAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，和多条图文修改
+    public function checkLoginAndRuleAndMaterialArticlesEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticlesEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限，和图文修改
+    public function checkLoginAndRuleAndMaterialArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限和上传多条图文素材
+    public function checkLoginAndRuleAndMaterialArticleAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测登陆，权限和上传图文素材
+    public function checkLoginAndRuleAndMaterialArticlesAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     //检测登录，权限，及修改安全密码的数据
     public function checkLoginAndRuleAndSafepasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -388,7 +694,6 @@ class FansmanageCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
-
         if($admin_data['is_super'] == '2'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
@@ -584,6 +889,197 @@ class FansmanageCheckAjax
         }
         if(empty($request->input('adapt_store'))){
             return self::res(0,response()->json(['data' => '请选择适用的分店', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑多条图文素材
+    public function checkMaterialArticleEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('img_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('thumb_media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('title'))){
+            return self::res(0,response()->json(['data' => '请输入文章标题', 'status' => '0']));
+        }
+        if(empty($request->input('author'))){
+            return self::res(0,response()->json(['data' => '请填写文章作者', 'status' => '0']));
+        }
+        if(empty($request->input('content'))){
+            return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测非关键字默认自动回复文本消息的内容
+    public function checkDefaultReplyArticleEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkDefaultReplyImageEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkDefaultReplyTextEdit($request){
+        if(empty($request->input('text_info'))){
+            return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkSubscribeReplyArticleEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkSubscribeReplyImageEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测关注后自动回复文本消息的内容
+    public function checkSubscribeReplyTextEdit($request){
+        if(empty($request->input('text_info'))){
+            return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测修改关键字内容
+    public function checkAutoReplyEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('keyword'))){
+            return self::res(0,response()->json(['data' => '请输入关键字', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测关键字自定义回复图文内容
+    public function checkAutoReplyEditArticle($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('article_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测关键字自定义回复图片内容
+    public function checkAutoReplyEditImage($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('image_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测关键字自定义回复文本内容
+    public function checkAutoReplyEditText($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('reply_info'))){
+            return self::res(0,response()->json(['data' => '请输入自动回复文本内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    //检测自动回复关键字
+    public function checkAutoReplyAdd($request){
+        if(empty($request->input('keyword'))){
+            return self::res(0,response()->json(['data' => '请输入关键字', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测编辑单条图文素材
+    public function checkMaterialArticlesEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
+
+    //检测上传单条图文素材
+    public function checkMaterialArticleAdd($request){
+        if(empty($request->input('img_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('thumb_media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('title'))){
+            return self::res(0,response()->json(['data' => '请输入文章标题', 'status' => '0']));
+        }
+        if(empty($request->input('author'))){
+            return self::res(0,response()->json(['data' => '请填写文章作者', 'status' => '0']));
+        }
+
+        if(empty($request->input('content'))){
+            return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测上传多条图文素材
+    public function checkMaterialArticlesAdd($request){
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
         }
         return self::res(1,$request);
     }

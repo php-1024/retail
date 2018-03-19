@@ -37,7 +37,7 @@ class LoginController extends Controller
         //获取验证码的内容
         $phrase = $builder->getPhrase();
         //把内容存入session
-        Session::flash('catering_system_captcha', $phrase);
+        Session::flash('fansmanage_system_captcha', $phrase);
         //生成图片
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
@@ -58,7 +58,7 @@ class LoginController extends Controller
         if ($account_info->id == 1) {
             $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
         } else {
-            $key = config("app.catering_encrypt_key");//获取加密盐（店铺专用）
+            $key = config("app.fansmanage_encrypt_key");//获取加密盐（店铺专用）
         }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
@@ -98,7 +98,7 @@ class LoginController extends Controller
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
                             if (LoginLog::addLoginLog($account_info['id'], 4, $account_info->organization_id, $ip, $addr)) {//写入登录日志
-                                Session::put('catering_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                Session::put('fansmanage_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if (!empty($account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
@@ -113,7 +113,7 @@ class LoginController extends Controller
                                 } else {
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-                                \ZeroneRedis::create_catering_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                                \ZeroneRedis::create_fansmanage_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                                 \ZeroneRedis::create_menu_cache($account_info->id,4);//生成对应账号的商户系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             } else {
@@ -122,11 +122,11 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        Session::put('catering_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                        Session::put('fansmanage_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
-                        \ZeroneRedis::create_catering_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        \ZeroneRedis::create_fansmanage_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
                         \ZeroneRedis::create_menu_cache($account_info->id,4);//生成对应账号的商户系统菜单
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
