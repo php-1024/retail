@@ -75,6 +75,7 @@ class CateringCheck{
 
             /****用户管理****/
             case "catering/user/user_tag":                  //粉丝标签管理
+            case "catering/ajax/label_add":                 //粉丝标签添加弹窗
             case "catering/user/user_list":                 //粉丝用户管理
             case "catering/user/user_timeline":             //粉丝用户足迹
             /****用户管理****/
