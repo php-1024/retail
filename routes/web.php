@@ -355,8 +355,8 @@ Route::group(['prefix'=>'agent'],function(){
 
     //系统资产管理
     Route::group(['prefix'=>'program'],function(){
-        Route::get('program_list','Proxy\ProgramController@program_list')->middleware('ProxyCheck');//资产
-        Route::get('program_log','Proxy\ProgramController@program_log')->middleware('ProxyCheck');//权限角色列表
+        Route::get('program_list','Agent\ProgramController@program_list')->middleware('AgentCheck');//资产
+        Route::get('program_log','Agent\ProgramController@program_log')->middleware('AgentCheck');//权限角色列表
     });
 
     //下辖商户管理

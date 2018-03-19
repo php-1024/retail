@@ -43,8 +43,8 @@ class AgentCheck{
             /****个人信息****/
 
             /****系统资产管理****/
-            case "proxy/program/program_list":           //权限角色添加
-            case "proxy/program/program_log":            //权限角色列表
+            case "agent/program/program_list":           //系统资产列表
+            case "agent/program/program_log":            //资产划拨记录
             /****系统资产管理****/
             
             /****下辖商户管理****/
