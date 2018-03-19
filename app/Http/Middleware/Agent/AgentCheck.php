@@ -28,13 +28,13 @@ class AgentCheck{
             /****仅检测是否登录及是否具有权限****/
 
             /****系统管理****/
-            case "proxy/system/setup":                  //参数设置
-            case "proxy/system/proxy_info":             //公司信息设置
-            case "proxy":                               //服务商后台首页
-            case "proxy/system/select_proxy":           //服务商超级管员进入操作
-            case "proxy/system/proxy_structure":        //人员结构
-            case "proxy/system/operationlog":           //操作日记
-            case "proxy/system/loginlog":               //登入日记
+            case "agent/system/setup":                  //参数设置
+            case "agent/system/proxy_info":             //公司信息设置
+            case "agent":                               //服务商后台首页
+            case "agent/system/select_proxy":           //服务商超级管员进入操作
+            case "agent/system/proxy_structure":        //人员结构
+            case "agent/system/operationlog":           //操作日记
+            case "agent/system/loginlog":               //登入日记
             /****系统管理****/
 
             /****个人信息****/
@@ -94,7 +94,7 @@ class AgentCheck{
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限
-                \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_agent_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
 
             }
@@ -133,15 +133,15 @@ class AgentCheck{
     //普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('proxy_account_id');
+        $sess_key = Session::get('agent_account_id');
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
-            return self::res(0,redirect('proxy/login'));
+            return self::res(0,redirect('agent/login'));
         }else{
-            $sess_key = Session::get('proxy_account_id');//获取管理员ID
+            $sess_key = Session::get('agent_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('proxy_system_admin_data_'.$sess_key);//获取管理员信息
+            $admin_data = Redis::get('agent_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_2_'.$sess_key);
             $son_menu_data = Redis::get('zerone_system_son_menu_2_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息

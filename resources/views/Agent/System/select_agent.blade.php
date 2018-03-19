@@ -56,7 +56,7 @@
     <!--state overview start-->
     <div class="row state-overview" style="margin: 10px;">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
-        <input type="hidden" id="url" value="{{url('Agent/system/select_Agent')}}">
+        <input type="hidden" id="url" value="{{url('agent/system/select_agent')}}">
     @foreach($listOrg as $key=>$value)
         <div class="col-lg-3 col-sm-6">
             <a href="javascript:;" onclick="postForm('{{$value->id}}')">
@@ -65,8 +65,8 @@
                         <i class="icon-arrow-right"></i>
                     </div>
                     <div class="value">
-                        <b>{{$value->organization_name}}</b>
-                        <p>{{$value->warzone['0']['zone_name']}}</p>
+                        {{--<b>{{$value->organization_name}}</b>--}}
+                        {{--<p>{{$value->warzone['0']['zone_name']}}</p>--}}
                     </div>
                 </section>
             </a>
