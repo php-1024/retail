@@ -45,6 +45,16 @@ class ZeroneRedis
         Redis::set($data_key,$admin_data);
     }
     /*
+     * 粉丝管理平台
+     */
+    public static function create_fansmanage_account_cache($key_id,$admin_data){
+        $admin_data = serialize($admin_data);//序列化数组数据
+        Redis::connection('zeo');//连接到我的redis服务器-商户平台使用
+        $data_key = 'fansmanage_system_admin_data_'.$key_id;
+        Redis::set($data_key,$admin_data);
+    }
+
+    /*
      * 餐饮分店平台简版
      */
     public static function create_catering_branch_account_cache($key_id,$admin_data){
