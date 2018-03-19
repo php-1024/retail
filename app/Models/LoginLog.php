@@ -70,7 +70,7 @@ class LoginLog extends Model{
         return $model->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取联表分页数据
-    public static function getProxyPaginate($where,$paginate,$orderby,$sort='DESC'){
+    public static function getAgentPaginate($where,$paginate,$orderby,$sort='DESC'){
         $model = self::join('account',function($join){
             $join->on('login_log.account_id','=','account.id');
         })->where($where)->select('account.account','login_log.*');

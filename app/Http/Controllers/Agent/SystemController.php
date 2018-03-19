@@ -219,8 +219,8 @@ class SystemController extends Controller{
             $where[] = ['account.account','like','%'.$account.'%'];
         }
         $search_data = ['account'=>$account];
-        $list = LoginLog::getProxyPaginate($where,15,'id');
-        return view('Proxy/System/loginlog',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $list = LoginLog::getAgentPaginate($where,15,'id');
+        return view('Agent/System/loginlog',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //退出登录
     public function quit(Request $request){
