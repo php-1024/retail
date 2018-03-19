@@ -75,11 +75,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">商户名称</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" name="Agent_name" value="{{ $search_data['Agent_name'] }}" placeholder="商户名称">
+                                        <input type="text" class="form-control" name="fansmanage_name" value="{{ $search_data['fansmanage_name'] }}" placeholder="商户名称">
                                     </div>
                                     <label class="control-label col-lg-1" for="inputSuccess">手机号码</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" name="Agent_owner_mobile" value="{{ $search_data['Agent_owner_mobile'] }}" placeholder="手机号码">
+                                        <input type="text" class="form-control" name="fansmanage_owner_mobile" value="{{ $search_data['fansmanage_owner_mobile'] }}" placeholder="手机号码">
                                     </div>
                                     <div class="col-lg-2">
                                         <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
@@ -116,12 +116,12 @@
                                         @foreach($list as $key=>$value)
                                             <tr>
                                                 <td>{{$value->id}}</td>
-                                                <td>{{$value->Agent_name}}</td>
+                                                <td>{{$value->fansmanage_name}}</td>
                                                 <td>{{$value->warzone->zone_name}}</td>
-                                                <td>{{$value->Agent_owner}}</td>
+                                                <td>{{$value->fansmanage_owner}}</td>
 
-                                                <td>{{$value->Agent_owner_idcard}}</td>
-                                                <td>{{$value->Agent_owner_mobile}}</td>
+                                                <td>{{$value->fansmanage_owner_idcard}}</td>
+                                                <td>{{$value->fansmanage_owner_mobile}}</td>
                                                 <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
                                                     @elseif($value->status == 1)<label class="label label-primary">已通过</label>
                                                     @elseif($value->status == -1)<label class="label label-danger">已拒绝</label>

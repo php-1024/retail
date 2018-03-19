@@ -360,11 +360,10 @@ Route::group(['prefix'=>'agent'],function(){
     });
 
     //下辖商户管理
-    Route::group(['prefix'=>'company'],function(){
-        Route::get('company_register','Proxy\CompanyController@company_register')->middleware('ProxyCheck');//商户注册列表
-        Route::get('company_list','Proxy\CompanyController@company_list')->middleware('ProxyCheck');//商户列表
-        Route::get('company_structure','Proxy\CompanyController@company_structure')->middleware('ProxyCheck');//店铺结构
-        Route::get('company_program','Proxy\CompanyController@company_program')->middleware('ProxyCheck');//程序划拨
+    Route::group(['prefix'=>'fansmanage'],function(){
+        Route::get('fansmanage_list','Agent\FansmanageController@fansmanage_list')->middleware('ProxyCheck');//商户列表
+        Route::get('fansmanage_structure','Agent\FansmanageController@fansmanage_structure')->middleware('ProxyCheck');//店铺结构
+        Route::get('fansmanage_program','Agent\FansmanageController@fansmanage_program')->middleware('ProxyCheck');//程序划拨
     });
 
     //异步提交数据组
@@ -376,8 +375,8 @@ Route::group(['prefix'=>'agent'],function(){
         Route::post('safe_password_check','Agent\PersonalController@safe_password_check')->middleware('AgentCheckAjax');//安全密码设置
         Route::post('password_check','Agent\PersonalController@password_check')->middleware('AgentCheckAjax');//登入密码修改
 
-        Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
-        Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
+        Route::post('fansmanage_assets','Agent\FansmanageController@fansmanage_assets')->middleware('AgentCheckAjax');//程序划入划出显示页面
+        Route::post('fansmanage_assets_check','Agent\FansmanageController@fansmanage_assets_check')->middleware('AgentCheckAjax');//程序划入划出功能提交
 
 
         Route::post('quick_rule','Proxy\SubordinateController@quick_rule')->middleware('ProxyCheckAjax');//添加下级人员快速授权
