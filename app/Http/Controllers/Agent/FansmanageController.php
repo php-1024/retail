@@ -121,7 +121,7 @@ class FansmanageController extends Controller{
             $operator_id =$admin_data['id'];
         }
 
-        $organization_id = $request->input('organization_id');//服务商id
+        $organization_id = $request->input('organization_id');//商户id
         $program_id = $request->input('program_id');//程序id
         $number = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
