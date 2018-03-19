@@ -5,6 +5,7 @@
  **/
 namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Support\Facades\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;
@@ -95,7 +96,7 @@ class LoginController extends Controller{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
                             if(LoginLog::addLoginLog($account_info['id'],2,$account_info->organization->id,$ip,$addr)) {//写入登录日志
-                                Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                                Session::put('agent_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
 
                                 //构造用户缓存数据
                                 if(!empty( $account_info->account_info->realname)) {
@@ -111,7 +112,7 @@ class LoginController extends Controller{
                                 }else{
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-                                \ZeroneRedis::create_proxy_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
+                                \ZeroneRedis::create_agent_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                                 \ZeroneRedis::create_menu_cache($account_info->id,2);//生成对应账号的系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             }else{
@@ -121,11 +122,11 @@ class LoginController extends Controller{
                     }else{
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                         //插入登录记录
-                            Session::put('proxy_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
+                            Session::put('agent_account_id',encrypt($account_info->id));//存储登录session_id为当前用户ID
                             $admin_data['realname'] = '系统管理员';
                             $admin_data['role_name'] = '系统管理员';
                             //构造用户缓存数据
-                            \ZeroneRedis::create_proxy_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
+                            \ZeroneRedis::create_agent_account_cache($account_info->id,$admin_data);//生成账号数据的Redis缓存
                             \ZeroneRedis::create_menu_cache($account_info->id,2);//生成对应账号的系统菜单
                             return response()->json(['data' => '登录成功', 'status' => '1']);
                     }

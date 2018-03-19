@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Proxy;
+namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
@@ -22,8 +22,9 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
-            $listOrg = Organization::getWarzoneProxyAndWarzone([['program_id','2']],20,'id');
-            return view('Proxy/System/select_proxy',['listOrg'=>$listOrg]);
+            $listOrg=array();
+//            $listOrg = Organization::getWarzoneAgentAndWarzone([['program_id','2']],20,'id');
+            return view('Agent/System/select_agent',['listOrg'=>$listOrg]);
         }else{
             $where = [['organization_id',$organization_id]];
             $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id')->first();//获取负责人id
@@ -34,7 +35,7 @@ class SystemController extends Controller{
             $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
             $acc_num = Account::where([['organization_id',$organization_id]])->count();//查询服务商人数
             $org_num = Organization::where([['parent_id',$organization_id]])->count();//查询服务商附属商务个数
-            return view('Proxy/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Agent/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
     //超级管理员选择服务商
@@ -56,7 +57,7 @@ class SystemController extends Controller{
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
             ];
-            Session::put('proxy_account_id',encrypt(1));//存储登录session_id为当前用户ID
+            Session::put('agent_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
                 $admin_data['realname'] = $account_info->account_info->realname;
@@ -71,8 +72,8 @@ class SystemController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            \ZeroneRedis::create_proxy_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-            \ZeroneRedis::create_proxy_menu_cache(1);//生成对应账号的系统菜单
+            \ZeroneRedis::create_agent_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+            \ZeroneRedis::create_agent_menu_cache(1);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
 
         }else{
@@ -81,7 +82,7 @@ class SystemController extends Controller{
     }
     //超级管理员选择服务商
     public function switch_status(Request $request){
-        return redirect('proxy');
+        return redirect('agent');
     }
 
     //服务商参数设置

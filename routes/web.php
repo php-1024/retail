@@ -334,9 +334,9 @@ Route::group(['prefix'=>'agent'],function(){
     });
 
 
-    Route::get('/', 'Proxy\SystemController@display')->middleware('ProxyCheck');//系统首页
-    Route::get('switch_status', 'Proxy\SystemController@switch_status')->middleware('ProxyCheck');//超级管理员切换服务商
-    Route::get('quit', 'Proxy\SystemController@quit');//退出系统
+    Route::get('/', 'Agent\SystemController@display')->middleware('ProxyCheck');//系统首页
+    Route::get('switch_status', 'Agent\SystemController@switch_status')->middleware('ProxyCheck');//超级管理员切换服务商
+    Route::get('quit', 'Agent\SystemController@quit');//退出系统
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
