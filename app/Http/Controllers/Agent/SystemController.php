@@ -72,7 +72,7 @@ class SystemController extends Controller{
                 $admin_data['role_name'] = '角色未设置';
             }
             \ZeroneRedis::create_agent_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-            \ZeroneRedis::create_agent_menu_cache(1);//生成对应账号的系统菜单
+            \ZeroneRedis::create_menu_cache(1,2);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
 
         }else{
@@ -234,8 +234,8 @@ class SystemController extends Controller{
     }
     //退出登录
     public function quit(Request $request){
-        Session::put('proxy_account_id','');
-        return redirect('proxy/login');
+        Session::put('agent_account_id','');
+        return redirect('agent/login');
     }
 }
 ?>
