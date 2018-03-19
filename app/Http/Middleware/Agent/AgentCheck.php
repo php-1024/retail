@@ -37,11 +37,9 @@ class AgentCheck{
             /****系统管理****/
 
             /****个人信息****/
-            case "proxy/persona/account_info":          //个人信息修改
-            case "proxy/persona/safe_password":         //安全密码修改
-            case "proxy/persona/password":              //登入密码修改
-            case "proxy/persona/myoperationlog":        //我的操作记录
-            case "proxy/persona/myloginlog":            //登入密码修改
+            case "agent/personal/account_info":          //个人信息修改
+            case "agent/personal/safe_password":         //安全密码修改
+            case "agent/personal/password":              //登入密码修改
             /****个人信息****/
 
             /****下级人员管理--权限角色****/

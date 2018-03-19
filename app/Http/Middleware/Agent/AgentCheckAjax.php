@@ -26,11 +26,11 @@ class AgentCheckAjax
 
 
 
-            case "proxy/ajax/account_info_check"://检测登录和权限和安全密码和公司信息是否为空
+            case "agent/ajax/account_info_check"://检测登录和权限和安全密码和公司信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndAccountInfo($request);
                 return self::format_response($re, $next);
                 break;
-            case "proxy/ajax/password_check"://检测登录和权限和安全密码和公司信息是否为空
+            case "agent/ajax/password_check"://检测登录和权限和安全密码和公司信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
