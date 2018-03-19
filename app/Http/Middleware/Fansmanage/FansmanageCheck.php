@@ -2,7 +2,7 @@
 /**
  * 检测是否登录的中间件
  */
-namespace App\Http\Middleware\Fansmagage;
+namespace App\Http\Middleware\Fansmanage;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
