@@ -34,12 +34,12 @@ class UserController extends Controller{
     }
     //添加会员标签功能提交
     public function label_add_check(Request $request){
+        dd($request);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
         $label_name = $request->label_name; //会员标签名称
         $fansmanage_id = $admin_data['organization_id'];//组织id
-        dd($fansmanage_id);
 
         $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
