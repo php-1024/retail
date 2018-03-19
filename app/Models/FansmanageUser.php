@@ -6,9 +6,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class StoreUser extends Model{
+class FansmanageUser extends Model{
     use SoftDeletes;
-    protected $table = 'store_user';
+    protected $table = 'fansmanage_user';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式

@@ -16,7 +16,7 @@ class User extends Model{
     //和账号多对多的关系
     public function storeUser()
     {
-        return $this->hasOne('App\Models\StoreUser','user_id','id');
+        return $this->hasOne('App\Models\FansmanageUser','user_id','id');
     }
     //和账号多对多的关系
     public function UserInfo()
