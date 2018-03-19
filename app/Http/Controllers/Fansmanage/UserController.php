@@ -149,7 +149,6 @@ class UserController extends Controller{
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
             $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['organization_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
-        dump($list);
         $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
         return view('Fansmanage/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
