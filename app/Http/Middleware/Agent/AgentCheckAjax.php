@@ -23,13 +23,12 @@ class AgentCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAgentInfo($request);
                 return self::format_response($re, $next);
                 break;
-
-
-
-            case "agent/ajax/account_info_check"://检测登录和权限和安全密码和公司信息是否为空
+            case "agent/ajax/account_info_check"://检测登录和权限和安全密码和个人信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndAccountInfo($request);
                 return self::format_response($re, $next);
                 break;
+
+
             case "agent/ajax/password_check"://检测登录和权限和安全密码和公司信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
@@ -359,7 +358,17 @@ class AgentCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测个人信息修改
+    public function checkAccountInfo($request){
 
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
 
 
 
@@ -463,18 +472,6 @@ class AgentCheckAjax
     }
 
 
-
-    //检测个人信息修改
-    public function checkAccountInfo($request){
-
-        if (empty($request->input('realname'))) {
-            return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
-        }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
     //检测登入密码修改
     public function checkPassword($request){
 

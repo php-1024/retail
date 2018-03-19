@@ -58,7 +58,7 @@
                                 个人信息修改
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('Agent/ajax/account_info_check') }}">
+                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('agent/ajax/account_info_check') }}">
                                     <input type="hidden" name="_token"  value="{{csrf_token()}}">
                                     <input type="hidden" name="id" value="{{$user['id']}}">
                                     <input type="hidden" name="organization_id" value="{{$user['organization_id']}}">
@@ -162,12 +162,13 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
             }
         });
     }
