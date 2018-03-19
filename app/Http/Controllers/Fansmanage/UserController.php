@@ -143,12 +143,12 @@ class UserController extends Controller{
 
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
-        $list = FansmanageUser::getPaginage([['store_id',$organization_id]],'10','id');
+        $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
             $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
-            $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['store_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
+            $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['fansmanage_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
         $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
         return view('Fansmanage/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
@@ -161,12 +161,12 @@ class UserController extends Controller{
 
         $label_id = $request->label_id;//会员标签id
         $user_id = $request->user_id;//用户id
-        $store_id = $request->store_id;//店铺id
+        $fansmanage_id = $request->fansmanage_id;//店铺id
         $nickname = $request->nickname;//微信昵称
 
         DB::beginTransaction();
         try {
-            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['store_id',$store_id]]);//查询粉丝标签关联表有没有数据
+            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['fansmanage_id',$fansmanage_id]]);//查询粉丝标签关联表有没有数据
 
             if(!empty($oneData)){
                 if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
@@ -184,7 +184,7 @@ class UserController extends Controller{
                 UserLabel::editUserLabel([['id',$oneData->id]],['label_id'=>$label_id]);//修改粉丝标签关联表Label_id
 
             }else{
-                UserLabel::addUserLabel(['label_id'=>$label_id,'user_id'=>$user_id,'store_id'=>$store_id,'branch_id'=>'0']);//粉丝与标签关系表
+                UserLabel::addUserLabel(['label_id'=>$label_id,'user_id'=>$user_id,'fansmanage_id'=>$fansmanage_id,'branch_id'=>'0']);//粉丝与标签关系表
                 $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
                 $number = $label_number+1;
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
@@ -312,8 +312,8 @@ class UserController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $store_id = $admin_data['organization_id'];//组织id
-        $list = StoreUserLog::getPaginage([['store_id',$store_id]],'5','id');
+        $fansmanage_id = $admin_data['organization_id'];//组织id
+        $list = StoreUserLog::getPaginage([['fansmanage_id',$fansmanage_id]],'5','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]],'nickname')->first();//微信昵称
         }
