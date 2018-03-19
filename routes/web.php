@@ -383,7 +383,7 @@ Route::group(['prefix'=>'agent'],function(){
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Agent\LoginController@login_check')->middleware('AgentCheckAjax');//提交登录数据
-        Route::post('proxy_info_check','Agent\SystemController@proxy_info_check')->middleware('AgentCheckAjax');//提交公司信息修改
+        Route::post('agent_info_check','Agent\SystemController@agent_info_check')->middleware('AgentCheckAjax');//提交公司信息修改
 
         Route::post('account_info_check','Proxy\PersonaController@account_info_check')->middleware('ProxyCheckAjax');//个人信息修改
         Route::post('safe_password_check','Proxy\PersonaController@safe_password_check')->middleware('ProxyCheckAjax');//安全密码设置

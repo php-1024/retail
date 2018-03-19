@@ -23,6 +23,10 @@ class SystemController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
             $list = Organization::getPaginage([['program_id','2']],20,'id');
+            dump($list);
+//            foreach($list as $key=>$value){
+//                $warzone = Warzone::getOne([['id', $value['warzoneAgent']['zone_id']]]);
+//            }
             return view('Agent/System/select_agent',['list'=>$list]);
         }else{
             $where = [['organization_id',$organization_id]];
