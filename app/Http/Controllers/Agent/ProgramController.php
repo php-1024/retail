@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
-use App\Models\Organization;
 use App\Models\OrganizationAssets;
 use App\Models\OrganizationAssetsallocation;
 use App\Models\Program;
