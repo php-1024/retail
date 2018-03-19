@@ -361,6 +361,7 @@ Route::group(['prefix'=>'agent'],function(){
 
     //下辖商户管理
     Route::group(['prefix'=>'fansmanage'],function(){
+        Route::get('fansmana_register','Agent\FansmanageController@fansmana_register')->middleware('AgentCheck');//商户注册列表
         Route::get('fansmanage_list','Agent\FansmanageController@fansmanage_list')->middleware('AgentCheck');//商户列表
         Route::get('fansmanage_structure','Agent\FansmanageController@fansmanage_structure')->middleware('AgentCheck');//店铺结构
         Route::get('fansmanage_program','Agent\FansmanageController@fansmanage_program')->middleware('AgentCheck');//程序划拨
