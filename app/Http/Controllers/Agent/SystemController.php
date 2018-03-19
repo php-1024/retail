@@ -90,6 +90,7 @@ class SystemController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
         $listorg = Organization::getOneAgent([['id',$organization_id]]);
+        dd($listorg);
         return view('Agent/System/agent_info',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //公司信息设置
