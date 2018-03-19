@@ -622,6 +622,16 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('profile_check','Fansmanage\AccountController@profile_check')->middleware('FansmanageCheckAjax');       //提交登录数据
         Route::post('safe_password_check','Fansmanage\AccountController@safe_password_check')->middleware('FansmanageCheckAjax');//安全密码数据提交
         Route::post('password_check','Fansmanage\AccountController@password_check')->middleware('FansmanageCheckAjax');     //安全密码数据提交
+
+
+        //用户管理
+        Route::post('label_add','Fansmanage\UserController@label_add')->middleware('FansmanageCheckAjax');                  //添加会员标签ajax显示页面
+        Route::post('label_add_check','Fansmanage\UserController@label_add_check')->middleware('FansmanageCheckAjax');      //添加会员标签功能提交
+        Route::post('label_edit','Fansmanage\UserController@label_edit')->middleware('FansmanageCheckAjax');                //编辑会员标签功能提交
+        Route::post('label_edit_check','Fansmanage\UserController@label_edit_check')->middleware('FansmanageCheckAjax');    //编辑会员标签功能提交
+        Route::post('label_delete','Fansmanage\UserController@label_delete')->middleware('FansmanageCheckAjax');            //删除会员标签功能提交
+        Route::post('label_delete_check','Fansmanage\UserController@label_delete_check')->middleware('FansmanageCheckAjax');//删除会员标签功能提交
+
     });
 });
 /**********************粉丝管理系统*********************/
