@@ -141,6 +141,7 @@ class UserController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//组织id
+        dump($organization_id);
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
         $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
