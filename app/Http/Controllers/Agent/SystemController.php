@@ -112,6 +112,7 @@ class SystemController extends Controller{
         try{
             $agent= Organization::getOneAgent([['id',$organization_id]]);
             $acc = Account::getOne([['id',$admin_data['id']]]);
+            dd($acc);
             $account_id = $acc['id'];
             if($agent['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$organization_id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
@@ -145,7 +146,7 @@ class SystemController extends Controller{
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
-        if($acc['idcard'] != $idcard || $list['mobile']!=$mobile){
+        if($acc['realname'] != $realname || $list['mobile']!=$mobile){
             if($admin_data['is_super'] == 2) {
                 \ZeroneRedis::create_agent_account_cache(1, $admin_data);//生成账号数据的Redis缓存
             }else{
