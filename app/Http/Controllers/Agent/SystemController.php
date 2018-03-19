@@ -8,8 +8,6 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
 use App\Models\OrganizationRole;
-use App\Models\Warzone;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -84,25 +82,15 @@ class SystemController extends Controller{
         return redirect('agent');
     }
 
-    //服务商参数设置
-    public function setup(Request $request)
-    {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        return view('Proxy/System/setup',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-    }
-
     //公司信息设置
-    public function proxy_info(Request $request){
+    public function agent_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
-        $listorg = Organization::getOneProxy([['id',$organization_id]]);
-        return view('Proxy/System/proxy_info',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $listorg = Organization::getOneAgent([['id',$organization_id]]);
+        return view('Agent/System/agent_info',['listorg'=>$listorg,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //公司信息设置
     public function proxy_info_check(Request $request){
