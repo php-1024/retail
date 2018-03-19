@@ -27,16 +27,16 @@ class AgentCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAccountInfo($request);
                 return self::format_response($re, $next);
                 break;
-
-
             case "agent/ajax/password_check"://检测登录和权限和安全密码和公司信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
-            case "proxy/ajax/safe_password_check"://设置安全密码
+            case "agent/ajax/safe_password_check"://设置安全密码
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
+
+
             case "proxy/ajax/company_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
@@ -369,7 +369,55 @@ class AgentCheckAjax
         }
         return self::res(1, $request);
     }
+    //检测登入密码修改
+    public function checkPassword($request){
 
+        if(empty($request->input('old_password'))){
+            return self::res(0,response()->json(['data' => '请输入原密码', 'status' => '0']));
+        }
+        if(empty($request->input('password'))){
+            return self::res(0,response()->json(['data' => '请输入新密码', 'status' => '0']));
+        }
+        if(empty($request->input('re_password'))){
+            return self::res(0,response()->json(['data' => '请重复新密码', 'status' => '0']));
+        }
+        if($request->input('password') <> $request->input('re_password')){
+            return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+    //检测修改设置安全密码
+    public function checkSafeEdit($request){
+        if(empty($request->input('is_editing'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+
+        if($request->input('is_editing')=='-1'){//设置安全密码时
+            if(empty($request->input('safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('re_safe_password'))){
+                return self::res(0,response()->json(['data' => '请重复安全密码', 'status' => '0']));
+            }
+            if($request->input('safe_password') <> $request->input('re_safe_password')){
+                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            }
+        }elseif($request->input('is_editing')=='1'){//修改安全密码时
+            if(empty($request->input('old_safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入新安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('re_safe_password'))){
+                return self::res(0,response()->json(['data' => '请重复新安全密码', 'status' => '0']));
+            }
+            if($request->input('safe_password') <> $request->input('re_safe_password')){
+                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
 
 
 
@@ -407,38 +455,7 @@ class AgentCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测修改设置安全密码
-    public function checkSafeEdit($request){
-        if(empty($request->input('is_editing'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
 
-        if($request->input('is_editing')=='-1'){//设置安全密码时
-            if(empty($request->input('safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
-            }
-            if(empty($request->input('re_safe_password'))){
-                return self::res(0,response()->json(['data' => '请重复安全密码', 'status' => '0']));
-            }
-            if($request->input('safe_password') <> $request->input('re_safe_password')){
-                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
-            }
-        }elseif($request->input('is_editing')=='1'){//修改安全密码时
-            if(empty($request->input('old_safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
-            }
-            if(empty($request->input('safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入新安全密码', 'status' => '0']));
-            }
-            if(empty($request->input('re_safe_password'))){
-                return self::res(0,response()->json(['data' => '请重复新安全密码', 'status' => '0']));
-            }
-            if($request->input('safe_password') <> $request->input('re_safe_password')){
-                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
-            }
-        }
-        return self::res(1,$request);
-    }
 
 
 
@@ -472,23 +489,7 @@ class AgentCheckAjax
     }
 
 
-    //检测登入密码修改
-    public function checkPassword($request){
 
-        if(empty($request->input('old_password'))){
-            return self::res(0,response()->json(['data' => '请输入原密码', 'status' => '0']));
-        }
-        if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入新密码', 'status' => '0']));
-        }
-        if(empty($request->input('re_password'))){
-            return self::res(0,response()->json(['data' => '请重复新密码', 'status' => '0']));
-        }
-        if($request->input('password') <> $request->input('re_password')){
-            return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
     //检测编辑下级人员数据
     public function checkSubordinateEdit($request){
         if(empty($request->input('id'))){
