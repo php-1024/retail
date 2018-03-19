@@ -76,13 +76,15 @@
                                             <td>
                                                 @if($val->status == 1)
                                                     <span class="label label-success">划入</span>
-                                                @else
+                                                @elseif($val->status == 0)
                                                     <span class="label label-danger">划出</span>
+                                                @else
+                                                    <span class="label label-danger">归还</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <div>
-                                                    {{--<span class="label label-danger"><i class="icon-code"></i>{{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}}套</span>--}}
+                                                    <span class="label label-danger"><i class="icon-code"></i>{{$val->program_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}}套</span>
                                                 </div>
 
                                             </td>

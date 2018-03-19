@@ -23,6 +23,11 @@ class OrganizationAssetsallocation extends Model{
         return $this->belongsTo('App\Models\Organization', 'to_organization_id','id');
     }
 
+    //和套餐表一对一的关系
+    public function program(){
+        return $this->belongsTo('App\Models\Program','program_id','id');
+    }
+
     //获取单条信息
     public static function getOne($where){
         return self::where($where)->first();
@@ -40,7 +45,7 @@ class OrganizationAssetsallocation extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$orWhere,$paginate,$orderby,$sort='DESC'){
-        return self::with('fr_organization')->with('to_organization')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('fr_organization')->with('to_organization')->with('program')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
