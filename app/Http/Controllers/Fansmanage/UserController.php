@@ -223,6 +223,8 @@ class UserController extends Controller{
         return view('Fansmanage/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
 
     }
+
+
     //粉丝用户管理编辑功能提交
     public function user_list_edit_check(Request $request){
 
@@ -246,6 +248,7 @@ class UserController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }
