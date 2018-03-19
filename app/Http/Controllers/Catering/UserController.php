@@ -30,6 +30,7 @@ class UserController extends Controller{
     //添加会员标签ajax显示页面
     public function label_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         return view('Catering/User/label_add',['admin_data'=>$admin_data]);
     }
     //添加会员标签功能提交
