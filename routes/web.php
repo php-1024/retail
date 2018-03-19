@@ -555,8 +555,8 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheck');//下级人员已经选中的权限出框
 
         //用户管理
-        Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheck');                  //添加会员标签ajax显示页面
-        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheck');      //添加会员标签功能提交
+        Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheckAjax');                  //添加会员标签ajax显示页面
+        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
         Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheck');                //编辑会员标签功能提交
         Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheck');    //编辑会员标签功能提交
         Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheck');            //删除会员标签功能提交
