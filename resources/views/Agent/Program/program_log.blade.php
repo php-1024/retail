@@ -82,7 +82,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <span class="label label-danger"><i class="icon-code"></i>{{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}}套</span>
+                                                    {{--<span class="label label-danger"><i class="icon-code"></i>{{$val->package->package_name}}</span> &nbsp;&nbsp; <span class="label label-primary">X{{$val->number}}套</span>--}}
                                                 </div>
 
                                             </td>
