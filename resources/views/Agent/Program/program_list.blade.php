@@ -60,37 +60,29 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>套餐名称</th>
-                                            <th>包含程序</th>
+                                            <th>程序名称</th>
+                                            <th>使用数量</th>
+                                            <th>剩余数量</th>
                                             <th>添加时间</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{--@foreach($list as $key=>$value)--}}
-                                            {{--<tr>--}}
-                                                {{--<td>{{$value->id}}</td>--}}
-                                                {{--<td>{{$value->package_name}}</td>--}}
-
-                                                {{--<td>--}}
-                                                    {{--@foreach($value->programs as $k=>$v)--}}
-                                                        {{--<div>--}}
-                                                            {{--<span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;--}}
-                                                            {{--<span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif套</span>&nbsp;&nbsp;--}}
-                                                            {{--<span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif套</span>&nbsp;&nbsp;--}}
-                                                        {{--</div>--}}
-                                                        {{--<div style=" margin-top: 20px;"></div>--}}
-                                                    {{--@endforeach--}}
-                                                {{--</td>--}}
-                                                {{--<td>{{$value->created_at}}</td>--}}
-                                            {{--</tr>--}}
-                                        {{--@endforeach--}}
+                                        @foreach($list as $key=>$value)
+                                            <tr>
+                                                <td>{{$value->id}}</td>
+                                                <td> <span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span> </td>
+                                                <td><span class="label label-primary"></span></td>
+                                                <td><span class="label label-warning">已用：套</span></td>
+                                                <td>{{$value->created_at}}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
 
                                         <tfoot>
                                         <tr>
                                             <td colspan="99">
                                                 <ul class="pagination pull-right">
-                                                    {{--{{$list->links()}}--}}
+                                                    {{$list->links()}}
                                                 </ul>
                                             </td>
                                         </tr>
