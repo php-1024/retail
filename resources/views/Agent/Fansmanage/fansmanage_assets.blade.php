@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('aent/ajax/fansmanage_assets_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('agent/ajax/fansmanage_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$oneFansmanage->id}}">
     <input type="hidden" name="program_id" value="{{$oneProgram->id}}">
