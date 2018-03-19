@@ -606,6 +606,13 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::get('message_setting', 'Fansmanage\AccountController@message_setting')->middleware('FansmanageCheck');       //消息推送设置
     });
 
+    //用户管理
+    Route::group(['prefix'=>'user'],function(){
+        Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('CateringCheck');                        //粉丝标签管理
+        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('CateringCheck');                      //粉丝用户管理
+        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('CateringCheck');              //粉丝用户足迹
+    });
+
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
