@@ -19,7 +19,7 @@
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Fansmanage/Public/Header')
+        @include('Fansmanage.Public.Header')
     </header>
     <section>
         <section class="hbox stretch">
