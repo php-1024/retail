@@ -60,7 +60,7 @@
                             <div class="col-sm-12">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <input type="hidden" name="organization_id" id="organization_id" value="{{$oneFansmanage->id}}">
-                                <input type="hidden" id="fansmanage_assets" value="{{ url('Agent/ajax/fansmanage_assets') }}">
+                                <input type="hidden" id="fansmanage_assets" value="{{ url('agent/ajax/fansmanage_assets') }}">
                                 <section class="panel">
                                     <header class="panel-heading">
                                         商户："{{$oneFansmanage->organization_name}}"程序划拨
