@@ -530,29 +530,29 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheck');             //提交登录数据
 
         //账号中心
-        Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheck');       //提交登录数据
-        Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheck');//安全密码数据提交
-        Route::post('password_check','Catering\AccountController@password_check')->middleware('CateringCheck');     //安全密码数据提交
+        Route::post('profile_check','Catering\AccountController@profile_check')->middleware('CateringCheckAjax');       //提交登录数据
+        Route::post('safe_password_check','Catering\AccountController@safe_password_check')->middleware('CateringCheckAjax');//安全密码数据提交
+        Route::post('password_check','Catering\AccountController@password_check')->middleware('CateringCheckAjax');     //安全密码数据提交
 
         //权限角色
-        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheck');        //提交添加权限角色数据
-        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheck');                  //编辑权限角色弹出框
-        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheck');      //编辑权限角色弹出框
-        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheck');              //删除权限角色弹出安全密码框
-        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheck');  //删除权限角色弹出安全密码框
+        Route::post('role_add_check','Catering\RoleController@role_add_check')->middleware('CateringCheckAjax');        //提交添加权限角色数据
+        Route::post('role_edit','Catering\RoleController@role_edit')->middleware('CateringCheckAjax');                  //编辑权限角色弹出框
+        Route::post('role_edit_check','Catering\RoleController@role_edit_check')->middleware('CateringCheckAjax');      //编辑权限角色弹出框
+        Route::post('role_delete','Catering\RoleController@role_delete')->middleware('CateringCheckAjax');              //删除权限角色弹出安全密码框
+        Route::post('role_delete_check','Catering\RoleController@role_delete_check')->middleware('CateringCheckAjax');  //删除权限角色弹出安全密码框
 
         //下属管理--添加组
-        Route::post('subordinate_add_check','Catering\SubordinateController@subordinate_add_check')->middleware('CateringCheck');//添加下级人员数据提交
-        Route::post('subordinate_edit','Catering\SubordinateController@subordinate_edit')->middleware('CateringCheck');//下级人员列表编辑用户弹出框
-        Route::post('subordinate_edit_check','Catering\SubordinateController@subordinate_edit_check')->middleware('CateringCheck');//下级人员列表编辑功能提交
-        Route::post('subordinate_authorize','Catering\SubordinateController@subordinate_authorize')->middleware('CateringCheck');//下级人员列表用户授权显示页面
-        Route::post('subordinate_authorize_check','Catering\SubordinateController@subordinate_authorize_check')->middleware('CateringCheck');//下级人员列表用户授权功能提交页面
-        Route::post('subordinate_delete','Catering\SubordinateController@subordinate_delete')->middleware('CateringCheck');//下级人员列表删除用户显示页面
-        Route::post('subordinate_lock','Catering\SubordinateController@subordinate_lock')->middleware('CateringCheck');//冻结下级人员显示页面
-        Route::post('subordinate_lock_check','Catering\SubordinateController@subordinate_lock_check')->middleware('CateringCheck');//冻结下级人员功能提交
+        Route::post('subordinate_add_check','Catering\SubordinateController@subordinate_add_check')->middleware('CateringCheckAjax');//添加下级人员数据提交
+        Route::post('subordinate_edit','Catering\SubordinateController@subordinate_edit')->middleware('CateringCheckAjax');//下级人员列表编辑用户弹出框
+        Route::post('subordinate_edit_check','Catering\SubordinateController@subordinate_edit_check')->middleware('CateringCheckAjax');//下级人员列表编辑功能提交
+        Route::post('subordinate_authorize','Catering\SubordinateController@subordinate_authorize')->middleware('CateringCheckAjax');//下级人员列表用户授权显示页面
+        Route::post('subordinate_authorize_check','Catering\SubordinateController@subordinate_authorize_check')->middleware('CateringCheckAjax');//下级人员列表用户授权功能提交页面
+        Route::post('subordinate_delete','Catering\SubordinateController@subordinate_delete')->middleware('CateringCheckAjax');//下级人员列表删除用户显示页面
+        Route::post('subordinate_lock','Catering\SubordinateController@subordinate_lock')->middleware('CateringCheckAjax');//冻结下级人员显示页面
+        Route::post('subordinate_lock_check','Catering\SubordinateController@subordinate_lock_check')->middleware('CateringCheckAjax');//冻结下级人员功能提交
 
-        Route::post('quick_rule','Catering\SubordinateController@quick_rule')->middleware('CateringCheck');//添加下级人员快速授权
-        Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheck');//下级人员已经选中的权限出框
+        Route::post('quick_rule','Catering\SubordinateController@quick_rule')->middleware('CateringCheckAjax');//添加下级人员快速授权
+        Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheckAjax');//下级人员已经选中的权限出框
 
         //用户管理
         Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheckAjax');                  //添加会员标签ajax显示页面
@@ -562,19 +562,19 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
         Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
 
-        Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheck');   //粉丝会员标签功能提交
-        Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheck');                 //列表编辑ajax显示
-        Route::post('user_list_edit_check','Catering\UserController@user_list_edit_check')->middleware('CateringCheck');     //列表编辑功能提交
-        Route::post('user_list_lock','Catering\UserController@user_list_lock')->middleware('CateringCheck');                 //列表冻结ajax显示
-        Route::post('user_list_lock_check','Catering\UserController@user_list_lock_check')->middleware('CateringCheck');     //列表冻结功能提交
-        Route::post('user_list_wallet','Catering\UserController@user_list_wallet')->middleware('CateringCheck');             //列表粉丝钱包ajax显示
+        Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheckAjax');   //粉丝会员标签功能提交
+        Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                 //列表编辑ajax显示
+        Route::post('user_list_edit_check','Catering\UserController@user_list_edit_check')->middleware('CateringCheckAjax');     //列表编辑功能提交
+        Route::post('user_list_lock','Catering\UserController@user_list_lock')->middleware('CateringCheckAjax');                 //列表冻结ajax显示
+        Route::post('user_list_lock_check','Catering\UserController@user_list_lock_check')->middleware('CateringCheckAjax');     //列表冻结功能提交
+        Route::post('user_list_wallet','Catering\UserController@user_list_wallet')->middleware('CateringCheckAjax');             //列表粉丝钱包ajax显示
 
         //总店管理
-        Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheck');//总分店添加功能提交
+        Route::post('branch_create_check','Catering\StoreController@branch_create_check')->middleware('CateringCheckAjax');//总分店添加功能提交
 
 
         //营销管理
-        Route::post('member_add_check','Catering\CardController@member_add_check')->middleware('CateringCheck');       //添加会员卡功能提交
+        Route::post('member_add_check','Catering\CardController@member_add_check')->middleware('CateringCheckAjax');       //添加会员卡功能提交
 
 
 
