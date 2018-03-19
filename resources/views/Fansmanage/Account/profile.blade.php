@@ -30,7 +30,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        {{--@include('Fansmanage/Public/Nav')--}}
+                        @include('Fansmanage/Public/Nav')
                     </section>
                 </section>
             </aside>
