@@ -40,6 +40,23 @@ class FansmanageCheck{
             case "fansmanage/account/message_setting":        //消息推送设置
             /****账号中心****/
 
+            /****公众号管理****/
+            //case "catering/subscription/setting":                   //公众号授权
+            case "api/fansmanage/store_auth"://公众号授权
+            case "api/fansmanage/material_image"://图片素材
+            case "api/fansmanage/material_article"://图文素材
+            case "api/fansmanage/material_article_add"://添加单条图文素材
+            case "api/fansmanage/material_articles_add"://添加多条图文素材
+            case "api/fansmanage/material_article_edit"://编辑单条图文素材
+            case "api/fansmanage/material_articles_edit"://编辑多条图文素材
+            case "fansmanage/subscription/material_writing":          //图文素材
+            case "fansmanage/subscription/material_writing_one":      //单条图文素材
+            case "fansmanage/subscription/material_writing_one_edit": //单条图文素材编辑
+            case "fansmanage/subscription/material_writing_many":     //多条图文素材
+            case "fansmanage/subscription/material_writing_many_edit"://多条图文素材编辑
+            /****公众号管理****/
+
+
 
 
             /****用户管理****/
