@@ -588,13 +588,13 @@ Route::group(['prefix'=>'catering'],function(){
 Route::group(['prefix'=>'fansmanage'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Fansmanage\LoginController@display')->middleware('CateringCheck');                               //登录页面路由
-        Route::get('captcha/{tmp}', 'Catering\LoginController@captcha');                                                //验证码路由
+        Route::get('/', 'Fansmanage\LoginController@display')->middleware('FansmanageCheck');                               //登录页面路由
+        Route::get('captcha/{tmp}', 'Fansmanage\LoginController@captcha');                                                //验证码路由
     });
 
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
-        Route::post('login_check','Catering\LoginController@login_check')->middleware('CateringCheck');             //提交登录数据
+        Route::post('login_check','Fansmanage\LoginController@login_check')->middleware('FansmanageCheckAjax');             //提交登录数据
     });
 });
 /**********************粉丝管理系统*********************/
