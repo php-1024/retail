@@ -117,7 +117,7 @@
                                             <tr>
                                                 <td>{{$value->id}}</td>
                                                 <td>{{$value->fansmanage_name}}</td>
-                                                <td>{{$value->warzone->zone_name}}</td>
+                                                {{--<td>{{$value->warzone->zone_name}}</td>--}}
                                                 <td>{{$value->fansmanage_owner}}</td>
 
                                                 <td>{{$value->fansmanage_owner_idcard}}</td>
