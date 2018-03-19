@@ -42,6 +42,7 @@ class SystemController extends Controller{
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
         $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+        dd($account_info);
         if(!empty($account_info)){
             //重新生成缓存的登录信息
             $admin_data = [
