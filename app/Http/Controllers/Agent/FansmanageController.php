@@ -111,7 +111,7 @@ class FansmanageController extends Controller{
         return view('Agent/Fansmanage/fansmanage_assets',['oneFansmanage'=>$oneFansmanage, 'oneProgram'=>$oneProgram ,'status'=>$status]);
     }
     //商户资产页面划入js显示
-    public function company_assets_check(Request $request){
+    public function fansmanage_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['is_super'] == 2){//超级管理员没有组织id，操作默认为零壹公司操作
             $to_organization_id = 1;
