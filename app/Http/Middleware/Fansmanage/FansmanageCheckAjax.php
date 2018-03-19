@@ -31,14 +31,20 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
-
+            /****粉丝标签添加、删除、编辑****/
             case "fansmanage/ajax/label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
             case "fansmanage/ajax/label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
             case "fansmanage/ajax/label_delete_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
                 return self::format_response($re,$next);
                 break;
+            /****粉丝标签添加、删除、编辑****/
 
+            /****粉丝信息编辑****/
+            case "fansmanage/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
+                return self::format_response($re,$next);
+            /****粉丝信息编辑****/
             case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
             case "fansmanage/ajax/label_edit":                //编辑会员标签显示页面
             case "fansmanage/ajax/label_delete":              //删除会员标签显示页面
