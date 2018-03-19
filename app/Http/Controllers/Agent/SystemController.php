@@ -26,7 +26,6 @@ class SystemController extends Controller{
             foreach($list as $key=>$value){
                 $list[$key]['warzone'] = Warzone::getPluck([['id', $value['warzoneAgent']['zone_id']]],'zone_name')->first();
             }
-            dump($list);
             return view('Agent/System/select_agent',['list'=>$list]);
         }else{
             $where = [['organization_id',$organization_id]];
