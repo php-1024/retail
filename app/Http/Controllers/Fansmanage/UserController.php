@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Label;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\StoreUser;
+use App\Models\FansmanageUser;
 use App\Models\StoreUserLog;
 use App\Models\User;
 use App\Models\UserInfo;
@@ -91,7 +91,7 @@ class UserController extends Controller{
         try {
             Label::editLabel(['id'=>$id],['label_name'=>$label_name]);
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$label_name);//保存操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -120,7 +120,7 @@ class UserController extends Controller{
         try {
             Label::where('id',$id)->forceDelete();
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$label_name);//保存操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -129,6 +129,11 @@ class UserController extends Controller{
         }
         return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
     }
+
+
+
+
+
     //粉丝用户管理
     public function user_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -138,14 +143,14 @@ class UserController extends Controller{
 
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
-        $list = StoreUser::getPaginage([['store_id',$organization_id]],'10','id');
+        $list = FansmanageUser::getPaginage([['store_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
             $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
             $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['store_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
-        $label = Label::ListLabel([['store_id',$organization_id]]);//会员标签
+        $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
         return view('Fansmanage/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户管理
@@ -205,7 +210,7 @@ class UserController extends Controller{
         $user_id = $request->id;//会员标签id
         $userInfo =  UserInfo::getOneUserInfo([['user_id',$user_id]]);//微信昵称
         $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
-        $data['mobile'] =  StoreUser::getPluck([['user_id',$user_id]],'mobile')->first();//手机号
+        $data['mobile'] =  FansmanageUser::getPluck([['user_id',$user_id]],'mobile')->first();//手机号
         $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
         if($yauntou == $organization_id){
             $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
@@ -228,7 +233,7 @@ class UserController extends Controller{
         $mobile = $request->mobile;//手机号
         $user_id = $request->user_id;//用户id
         $nickname = $request->nickname;//微信昵称
-        $re = StoreUser::checkRowExists([['mobile',$mobile],['user_id','<>',$user_id]]);
+        $re = FansmanageUser::checkRowExists([['mobile',$mobile],['user_id','<>',$user_id]]);
         if($re == 'true'){
             return response()->json(['data' => '手机号已存在', 'status' => '0']);
         }
