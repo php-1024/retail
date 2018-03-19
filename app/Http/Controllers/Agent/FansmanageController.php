@@ -105,9 +105,9 @@ class FansmanageController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
-        $listOrg = Organization::getOneFansmanage([['id',$organization_id]]);
-        $listPac = Program::getOne([['id',$package_id]]);
-        return view('Agent/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
+        $oneProgram = Program::getOne([['id',$package_id]]);
+        return view('Agent/Fansmanage/fansmanage_assets',['oneFansmanage'=>$oneFansmanage, 'oneProgram'=>$oneProgram ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function company_assets_check(Request $request){

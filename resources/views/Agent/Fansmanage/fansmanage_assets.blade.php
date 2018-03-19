@@ -1,7 +1,7 @@
 <form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('aent/ajax/fansmanage_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
-    <input type="hidden" name="program_id" value="{{$listPac->id}}">
+    <input type="hidden" name="organization_id" value="{{$oneFansmanage->id}}">
+    <input type="hidden" name="program_id" value="{{$oneProgram->id}}">
     <input type="hidden" name="status" value="{{$status}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -14,13 +14,13 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">商户名称</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{$listOrg->organization_name}}" placeholder="商户名称" class="form-control" disabled="">
+                            <input type="text" value="{{$oneFansmanage->organization_name}}" placeholder="商户名称" class="form-control" disabled="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">程序名称</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{$listPac->program_name}}" placeholder="程序名称" class="form-control" disabled="">
+                            <input type="text" value="{{$oneProgram->program_name}}" placeholder="程序名称" class="form-control" disabled="">
                         </div>
                     </div>
                     <div class="form-group">
