@@ -31,6 +31,15 @@ class FansmanageCheck{
             case "fansmanage/select_shop":                    //店铺超级管员进入操作
             /****店铺概况****/
 
+            /****账号中心****/
+            case "fansmanage/account/profile":                //账号信息
+            case "fansmanage/account/password":               //登入密码修改
+            case "fansmanage/account/safe_password":          //安全密码设置
+            case "fansmanage/account/message_setting":        //消息推送设置
+            case "fansmanage/account/operation_log":          //操作日记
+            case "fansmanage/account/login_log":              //登入日记
+                /****账号中心****/
+
                 $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
                 break;
