@@ -70,7 +70,7 @@
                                         @foreach($list as $key=>$value)
                                             <tr>
                                                 <td>{{$value->id}}</td>
-                                                <td> <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> </td>
+                                                <td> <span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span> </td>
                                                 <td><span class="label label-primary"></span></td>
                                                 <td><span class="label label-warning">已用：套</span></td>
                                                 <td>{{$value->created_at}}</td>
