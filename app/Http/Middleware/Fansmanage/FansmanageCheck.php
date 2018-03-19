@@ -12,115 +12,24 @@ class FansmanageCheck{
         $route_name = $request->path();//获取当前的页面路由
         switch($route_name){
             /*****登录页,如果已经登录则不需要再次登录*****/
-            case "catering/login"://登录页,如果已经登录则不需要再次登录
+            case "fansmanage/login"://登录页,如果已经登录则不需要再次登录
 //                获取用户登录存储的SessionId
-                $sess_key = Session::get('catering_account_id');
+                $sess_key = Session::get('fansmanage_account_id');
 //                如果不为空跳转到首页
                 if(!empty($sess_key)) {
-                    return redirect('catering');
+                    return redirect('fansmanage');
                 }
                 break;
-
-            case "catering/switch_status"://超级管理员切换服务商
+            case "fansmanage/switch_status"://超级管理员切换服务商
                 $this->checkLoginAndRuleAndSwitchStatus($request);//判断是否登录
                 break;
 
             /****仅检测是否登录及是否具有权限****/
 
             /****店铺概况****/
-            case "catering":                                //店铺后台首页
-            case "catering/select_shop":                    //店铺超级管员进入操作
-                /****店铺概况****/
-
-                /****账号中心****/
-            case "catering/account/profile":                //账号信息
-            case "catering/account/password":               //登入密码修改
-            case "catering/account/safe_password":          //安全密码设置
-            case "catering/account/message_setting":        //消息推送设置
-            case "catering/account/operation_log":          //操作日记
-            case "catering/account/login_log":              //登入日记
-                /****账号中心****/
-
-                /****公众号管理****/
-                //case "catering/subscription/setting":                   //公众号授权
-            case "api/catering/store_auth"://公众号授权
-            case "api/catering/material_image"://图片素材
-            case "api/catering/material_article"://图文素材
-            case "api/catering/material_article_add"://添加单条图文素材
-            case "api/catering/material_articles_add"://添加多条图文素材
-            case "api/catering/material_article_edit"://编辑单条图文素材
-            case "api/catering/material_articles_edit"://编辑多条图文素材
-            case "catering/subscription/material_writing":          //图文素材
-            case "catering/subscription/material_writing_one":      //单条图文素材
-            case "catering/subscription/material_writing_one_edit": //单条图文素材编辑
-            case "catering/subscription/material_writing_many":     //多条图文素材
-            case "catering/subscription/material_writing_many_edit"://多条图文素材编辑
-                /****公众号管理****/
-
-                /****公众号管理-消息管理****/
-            case "api/catering/auto_reply":                 //关键词自动回复
-            case "api/catering/subscribe_reply":                 //关键词自动回复
-            case "api/catering/default_reply":                 //关键词自动回复
-            case "catering/news/message":                   //关键词自动回复
-            case "catering/news/message_attention":         //关注后自动回复
-            case "catering/news/message_default":           //默认回复
-            case "catering/news/message_mass":              //消息群发
-                /****公众号管理-消息管理****/
-
-                /****公众号管理-菜单管理****/
-            case "api/catering/defined_menu":               //自定义菜单
-            case "catering/menu/menu_customize":            //自定义菜单
-            case "catering/menu/menu_different":            //个性化菜单
-                /****公众号管理-菜单管理****/
-
-                /****用户管理****/
-            case "catering/user/user_tag":                  //粉丝标签管理
-            case "catering/user/user_list":                 //粉丝用户管理
-            case "catering/user/user_timeline":             //粉丝用户足迹
-                /****用户管理****/
-
-                /****下属管理--权限角色****/
-            case "catering/role/role_add":                  //权限角色添加
-            case "catering/role/role_list":                 //权限角色列表
-                /****下属管理--权限角色****/
-
-                /****下级人员管理--添加组****/
-            case "catering/subordinate/subordinate_add":    //下级人员添加
-            case "catering/subordinate/subordinate_list":   //下级人员列表
-            case "catering/subordinate/quick_rule":         //添加下级人员快速授权
-                /****下级人员管理--添加组****/
-
-                /****财务管理****/
-            case "catering/finance/balance":                //余额管理
-            case "catering/finance/balance_recharge":       //余额详情
-            case "catering/finance/credit":                 //积分管理
-            case "catering/finance/credit_recharge":        //充值扣费
-            case "catering/finance/commission":             //佣金管理
-                /****财务管理****/
-
-                /****支付设置****/
-            case "catering/payment/wechat_setting":         //微信支付
-            case "catering/payment/zerone_setting":         //零舍壹得
-            case "catering/payment/sheng_setting":          //盛付通
-            case "catering/payment/kuai_setting":           //快付通
-                /****支付设置****/
-
-                /****支付设置****/
-            case "catering/goods/goods_category":           //商品分类查询
-            case "catering/goods/goods_list":               //商品查询
-            case "catering/goods/goods_detail":             //商品查看详情
-                /****支付设置****/
-
-                /****总分店管理****/
-            case "catering/store/branch_create":            //创建总分店
-            case "catering/store/branch_list":              //总分店管理
-                /****总分店管理****/
-
-                /****总分店管理****/
-            case "catering/card/card_add":                  //添加会员卡
-            case "catering/card/card_list":                 //会员卡管理
-            case "catering/card/card_goods":                //调整适用商品
-                /****总分店管理****/
+            case "fansmanage":                                //店铺后台首页
+            case "fansmanage/select_shop":                    //店铺超级管员进入操作
+            /****店铺概况****/
 
                 $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
