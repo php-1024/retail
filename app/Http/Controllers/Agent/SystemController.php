@@ -111,7 +111,6 @@ class SystemController extends Controller{
         try{
             $agent= Organization::getOneAgent([['id',$organization_id]]);
             $acc = Account::getOne([['id',$admin_data['id']]]);
-            dd($acc);
             $account_id = $acc['id'];
             if($agent['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$organization_id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
