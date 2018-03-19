@@ -271,7 +271,7 @@ class ZeroneRedis
     }
 
     public static function create_fansmanage_menu_cache($id){
-        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','7']],0,'id','asc');//获取粉丝管理系统的一级菜单
+        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','3']],0,'id','asc');//获取粉丝管理系统的一级菜单
 
         $son_menu = [];
         foreach($menu as $key=>$val){//获取一级菜单下的子菜单
