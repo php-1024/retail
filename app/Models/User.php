@@ -26,7 +26,7 @@ class User extends Model{
     //和店铺粉丝操作记录一对多
     public function StoreUserLog()
     {
-        return $this->hasMany('App\Models\StoreUserLog','user_id','id');
+        return $this->hasMany('App\Models\FansmanageUserLog','user_id','id');
     }
 
     //和餐饮店铺订单CateringOrder一对多
