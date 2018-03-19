@@ -153,7 +153,7 @@ class FansmanageController extends Controller{
                     'number'=>$number
                 ];
                 //添加操作日志
-                OrganizationAssetsallocation::addAssetsOperation($data);//保存操作记录
+                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
 //            else{//划出
 //                if(empty($re)){
