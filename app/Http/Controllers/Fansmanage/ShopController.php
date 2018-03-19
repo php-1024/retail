@@ -91,7 +91,7 @@ class ShopController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
-        $list = OperationLog::getProxyPaginate($where,10,'id');
+        $list = OperationLog::getAgentPaginate($where,10,'id');
         return view('Fansmanage/Shop/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
@@ -101,7 +101,7 @@ class ShopController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
-        $list = LoginLog::getProxyPaginate($where,15,'id');
+        $list = LoginLog::getAgentPaginate($where,15,'id');
         return view('Fansmanage/Shop/login_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
