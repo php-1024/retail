@@ -72,7 +72,7 @@
                                          @foreach($list as $key=>$val)
                                         <tr>
                                             <td>{{$val->id}}</td>
-                                            <td>{{$val->organization->organization_name}}</td>
+                                            <td>{{$val->to_organization_id->organization_name}}</td>
                                             <td>
                                                 @if($val->status == 1)
                                                     <span class="label label-success">划入</span>
@@ -86,7 +86,7 @@
                                                 </div>
 
                                             </td>
-                                            <th>{{$val->draw_organization->organization_name}}</th>
+                                            <th>{{$val->fr_organization_id ->organization_name}}</th>
                                             <td>{{$val->created_at}}</td>
                                         </tr>
                                         @endforeach
