@@ -160,6 +160,7 @@ class PersonalController extends Controller{
     //修改安全密码
     public function safe_password(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -228,7 +229,6 @@ class PersonalController extends Controller{
                     }
                     DB::commit();
                 } catch (\Exception $e) {
-                    dd($e);
                     DB::rollBack();//事件回滚
                     return response()->json(['data' => '安全密码修改失败，请检查', 'status' => '0']);
                 }
