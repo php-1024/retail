@@ -147,7 +147,7 @@ class UserController extends Controller{
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
             $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
-            $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['fansmanage_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
+            $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['organization_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
         dump($list);
         $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
