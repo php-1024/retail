@@ -41,38 +41,14 @@ class AgentCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
                 return self::format_response($re,$next);
                 break;
-            case "proxy/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
-                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
-                return self::format_response($re,$next);
-                break;
-            case "proxy/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
-                return self::format_response($re,$next);
-                break;
-            case "proxy/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
-                return self::format_response($re,$next);
-                break;
-            case "proxy/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
-                return self::format_response($re,$next);
-                break;
+
 
             case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
-            case "proxy/ajax/role_delete_check"://检测是否登录 权限 安全密码
-            case "proxy/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
+
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
             case "proxy/ajax/company_assets":   //商户资产划入检测弹出登入和权限
-            case "proxy/ajax/role_edit":        //编辑权限角色弹出框检测登入和权限
-            case "proxy/ajax/role_delete"://编辑权限角色弹出框检测登入和权限
-            case "proxy/ajax/quick_rule"://快速授权检测登入和权限
-            case "proxy/ajax/selected_rule"://快速授权检测登入和权限
-            case "proxy/ajax/subordinate_edit"://下级人员列表编辑用户弹出框
-            case "proxy/ajax/subordinate_lock":  //添加下级人员快速授权
-            case "proxy/ajax/subordinate_authorize":  //添加下级人员用户授权显示页面
-            case "proxy/ajax/subordinate_delete":  //添加下级人员用户授权显示页面
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -82,13 +58,13 @@ class AgentCheckAjax
     /******************************复合检测*********************************/
 
     /********公共部分**********/
-    //检测登录，权限，及修改安全密码的数据
-    public function checkLoginAndRuleAndSafepasswordEdit($request){
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafe($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
+            $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -113,11 +89,6 @@ class AgentCheckAjax
             }
         }
     }
-
-
-
-
-
     //检测登录和权限和安全密码和个人修改信息
     public function checkLoginAndRuleAndSafeAndAccountInfo($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
@@ -146,6 +117,26 @@ class AgentCheckAjax
             }
         }
     }
+    //检测是否登录 权限 修改安全密码
+    public function checkLoginAndRuleAndSafeEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录和权限
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSafeEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
+
+
+
+
 
 
 
@@ -179,20 +170,7 @@ class AgentCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafe($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
 
 
     //检测是否登录 权限 安全密码 数字不能为空
@@ -209,77 +187,7 @@ class AgentCheckAjax
             }
         }
     }
-    //检测是否登录 权限 安全密码--权限角色添加
-    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
-    //检测是否登录 权限 修改安全密码
-    public function checkLoginAndRuleAndSafeEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录和权限
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSafeEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAuthorize($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
     /******************************单项检测*********************************/
 
@@ -429,36 +337,6 @@ class AgentCheckAjax
 
 
 
-
-    //检测添加下级人员数据
-    public function checkSubordinateAdd($request){
-        if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入用户登录密码', 'status' => '0']));
-        }
-        if(empty($request->input('repassword'))){
-            return self::res(0,response()->json(['data' => '请再次输入用户登录密码', 'status' => '0']));
-        }
-        if($request->input('password')<>$request->input('repassword')){
-            return self::res(0,response()->json(['data' => '两次登录密码输入不一致', 'status' => '0']));
-        }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-
-
-
-
     //检测登录提交数据
     public function checkLoginPost($request)
     {
@@ -479,43 +357,7 @@ class AgentCheckAjax
 //            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
 //        }
     }
-  //检测是否登录 权限 安全密码--权限角色添加
-    public function checkRoleAdd($request)
-    {
-        if (empty($request->input('role_name'))) {
-            return self::res(0, response()->json(['data' => '角色名称', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
 
-
-
-    //检测编辑下级人员数据
-    public function checkSubordinateEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测编辑下级人员权限数据
-    public function checkSubordinateAuthorize($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
 
 
     //检测商户编辑表信息
