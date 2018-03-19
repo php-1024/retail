@@ -607,6 +607,13 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('label_delete','Fansmanage\UserController@label_delete')->middleware('FansmanageCheckAjax');            //删除会员标签功能提交
         Route::post('label_delete_check','Fansmanage\UserController@label_delete_check')->middleware('FansmanageCheckAjax');//删除会员标签功能提交
 
+        Route::post('store_label_add_check','Fansmanage\UserController@store_label_add_check')->middleware('FansmanageCheckAjax');   //粉丝会员标签功能提交
+        Route::post('user_list_edit','Fansmanage\UserController@user_list_edit')->middleware('FansmanageCheckAjax');                 //列表编辑ajax显示
+        Route::post('user_list_edit_check','Fansmanage\UserController@user_list_edit_check')->middleware('FansmanageCheckAjax');     //列表编辑功能提交
+        Route::post('user_list_lock','Fansmanage\UserController@user_list_lock')->middleware('FansmanageCheckAjax');                 //列表冻结ajax显示
+        Route::post('user_list_lock_check','Fansmanage\UserController@user_list_lock_check')->middleware('FansmanageCheckAjax');     //列表冻结功能提交
+        Route::post('user_list_wallet','Fansmanage\UserController@user_list_wallet')->middleware('FansmanageCheckAjax');             //列表粉丝钱包ajax显示
+
     });
 });
 /**********************粉丝管理系统*********************/
