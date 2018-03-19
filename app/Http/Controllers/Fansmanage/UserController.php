@@ -143,6 +143,7 @@ class UserController extends Controller{
 
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
+
         $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'10','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
