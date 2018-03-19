@@ -49,7 +49,7 @@ class UserController extends Controller{
         try {
             $dataLabel = [
                 'fansmanage_id'=>$fansmanage_id,
-                'branch_id'=>0,
+                'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
             ];
@@ -79,11 +79,11 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $store_id = $admin_data['organization_id'];//组织id
+        $fansmanage_id = $admin_data['organization_id'];//组织id
 
         $id = $request->id; //会员标签id
         $label_name = $request->label_name; //会员标签名称
-        $re = Label::checkRowExists([['store_id',$store_id],['label_name',$label_name]]);
+        $re = Label::checkRowExists([['store_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
