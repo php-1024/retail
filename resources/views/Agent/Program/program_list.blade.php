@@ -71,8 +71,8 @@
                                             <tr>
                                                 <td>{{$value->id}}</td>
                                                 <td> <span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span> </td>
-                                                <td><span class="label label-primary"></span></td>
-                                                <td><span class="label label-warning">已用：套</span></td>
+                                                <td><span class="label label-primary">剩余：@if($value['program_balance']){{$value['program_balance']}}@else 0 @endif套</span></td>
+                                                <td><span class="label label-warning">已用：@if($value['program_used_num']){{$value['program_used_num']}}@else 0 @endif套</span></td>
                                                 <td>{{$value->created_at}}</td>
                                             </tr>
                                         @endforeach
