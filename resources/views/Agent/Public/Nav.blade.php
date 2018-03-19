@@ -24,7 +24,7 @@
             </li>
             @endforeach
             <li>
-                <a href="{{ url('Agent/quit') }}">
+                <a href="{{ url('agent/quit') }}">
                     <i class="icon-power-off"></i>
                     <span>退出登录</span>
                 </a>
