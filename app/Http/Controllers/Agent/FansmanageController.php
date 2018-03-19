@@ -113,13 +113,8 @@ class FansmanageController extends Controller{
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if($admin_data['is_super'] == 2){//超级管理员没有组织id，操作默认为零壹公司操作
-            $to_organization_id = 1;
-            $operator_id = 1;
-        }else{
-            $to_organization_id = $admin_data['organization_id'];
-            $operator_id =$admin_data['id'];
-        }
+        $to_organization_id = $admin_data['organization_id'];
+        $operator_id =$admin_data['id'];
 
         $organization_id = $request->input('organization_id');//商户id
         $program_id = $request->input('program_id');//程序id
