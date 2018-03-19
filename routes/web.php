@@ -352,17 +352,6 @@ Route::group(['prefix'=>'agent'],function(){
         Route::get('safe_password','Agent\PersonalController@safe_password')->middleware('AgentCheck');//安全密码修改
         Route::get('password','Agent\PersonalController@password')->middleware('AgentCheck');//登入密码修改
     });
-    //下级人员管理--权限角色组
-    Route::group(['prefix'=>'role'],function(){
-        Route::get('role_add','Proxy\RoleController@role_add')->middleware('ProxyCheck');//添加权限角色
-        Route::get('role_list','Proxy\RoleController@role_list')->middleware('ProxyCheck');//权限角色列表
-    });
-    //下级人员管理--添加组
-    Route::group(['prefix'=>'subordinate'],function(){
-        Route::get('subordinate_add','Proxy\SubordinateController@subordinate_add')->middleware('ProxyCheck');//添加下级人员
-        Route::get('subordinate_list','Proxy\SubordinateController@subordinate_list')->middleware('ProxyCheck');//下级人员列表
-        Route::get('subordinate_structure','Proxy\SubordinateController@subordinate_structure')->middleware('ProxyCheck');//下级人员结构
-    });
 
     //系统资产管理
     Route::group(['prefix'=>'program'],function(){
@@ -390,20 +379,6 @@ Route::group(['prefix'=>'agent'],function(){
         Route::post('company_assets','Proxy\CompanyController@company_assets')->middleware('ProxyCheckAjax');//程序划入划出显示页面
         Route::post('company_assets_check','Proxy\CompanyController@company_assets_check')->middleware('ProxyCheckAjax');//程序划入划出功能提交
 
-        Route::post('role_add_check','Proxy\RoleController@role_add_check')->middleware('ProxyCheckAjax');;////提交添加权限角色数据
-        Route::post('role_edit','Proxy\RoleController@role_edit')->middleware('ProxyCheckAjax');//编辑权限角色弹出框
-        Route::post('role_edit_check','Proxy\RoleController@role_edit_check')->middleware('ProxyCheckAjax');//编辑权限角色弹出框
-        Route::post('role_delete','Proxy\RoleController@role_delete')->middleware('ProxyCheckAjax');;//删除权限角色弹出安全密码框
-        Route::post('role_delete_check','Proxy\RoleController@role_delete_check')->middleware('ProxyCheckAjax');//删除权限角色弹出安全密码框
-
-        Route::post('subordinate_add_check','Proxy\SubordinateController@subordinate_add_check')->middleware('ProxyCheckAjax');//添加下级人员数据提交
-        Route::post('subordinate_edit','Proxy\SubordinateController@subordinate_edit')->middleware('ProxyCheckAjax');//下级人员列表编辑用户弹出框
-        Route::post('subordinate_edit_check','Proxy\SubordinateController@subordinate_edit_check')->middleware('ProxyCheckAjax');//下级人员列表编辑功能提交
-        Route::post('subordinate_authorize','Proxy\SubordinateController@subordinate_authorize')->middleware('ProxyCheckAjax');//下级人员列表用户授权显示页面
-        Route::post('subordinate_authorize_check','Proxy\SubordinateController@subordinate_authorize_check')->middleware('ProxyCheckAjax');//下级人员列表用户授权功能提交页面
-        Route::post('subordinate_delete','Proxy\SubordinateController@subordinate_delete')->middleware('ProxyCheckAjax');//下级人员列表删除用户显示页面
-        Route::post('subordinate_lock','Proxy\SubordinateController@subordinate_lock')->middleware('ProxyCheckAjax');//冻结下级人员显示页面
-        Route::post('subordinate_lock_check','Proxy\SubordinateController@subordinate_lock_check')->middleware('ProxyCheckAjax');//冻结下级人员功能提交
 
         Route::post('quick_rule','Proxy\SubordinateController@quick_rule')->middleware('ProxyCheckAjax');//添加下级人员快速授权
         Route::post('selected_rule','Proxy\SubordinateController@selected_rule')->middleware('ProxyCheckAjax');//下级人员已经选中的权限出框
