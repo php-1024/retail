@@ -14,176 +14,21 @@ class FansmanageCheckAjax
     {
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
-            case "catering/ajax/login_check"://检测登录数据提交
+            case "fansmanage/ajax/login_check"://检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
 
-            case "catering/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
+            case "fansmanage/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProfile($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering/ajax/password_check"://检测登录和权限和安全密码和登入密码
+            case "fansmanage/ajax/password_check"://检测登录和权限和安全密码和登入密码
                 $re = $this->checkLoginAndRuleAndSafeAndPassword($request);
                 return self::format_response($re, $next);
                 break;
-            case "catering/ajax/safe_password_check"://设置安全密码
+            case "fansmanage/ajax/safe_password_check"://设置安全密码
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
-                return self::format_response($re, $next);
-                break;
-            case "catering/ajax/role_add_check"://检测是否登录 权限 安全密码 和角色名不能为空--权限角色添加
-                $re = $this->checkLoginAndRuleAndSafeAndRoleAdd($request);
-                return self::format_response($re,$next);
-                break;
-            case "catering/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
-                return self::format_response($re,$next);
-                break;
-            case "catering/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
-                return self::format_response($re,$next);
-                break;
-            case "catering/ajax/subordinate_authorize_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndSubordinateAuthorize($request);
-                return self::format_response($re,$next);
-                break;
-            case "catering/ajax/label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
-            case "catering/ajax/label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
-                return self::format_response($re,$next);
-                break;
-            case "catering/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
-                return self::format_response($re,$next);
-            case "catering/ajax/branch_create_check"://检测 登录 和 权限 和 安全密码 和 总分店添加数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndBranchCreate($request);
-                return self::format_response($re,$next);
-            case "catering/ajax/member_add_check"://检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
-                $re = $this->checkLoginAndRuleAndSafeAndMemberAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/material_article_add_check":  //单条文章素材上传检测
-                $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/material_articles_add_check":  //单条文章素材上传检测
-                $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/material_article_edit_check":  //单条文章素材上传检测
-                $re = $this->checkLoginAndRuleAndMaterialArticleEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/material_articles_edit_check":  //单条文章素材上传检测
-                $re = $this->checkLoginAndRuleAndMaterialArticlesEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/auto_reply_add_check"://检测添加自动回复关键字
-                $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/auto_reply_edit_text_check"://检测自动回复文章数据提交
-                $re = $this->checkLoginAndRuleAndAutoReplyEditText($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/auto_reply_edit_image_check"://检测自动回复图片素材啊数据提交
-                $re = $this->checkLoginAndRuleAndAutoReplyEditImage($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/auto_reply_edit_article_check"://检测自动回复图文素材啊数据提交
-                $re = $this->checkLoginAndRuleAndAutoReplyEditArticle($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/auto_reply_edit_check"://检测自动回复图文素材啊数据提交
-                $re = $this->checkLoginAndRuleAndAutoReplyEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/subscribe_reply_text_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndSubscribeReplyTextEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/subscribe_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndSubscribeReplyImageEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/subscribe_reply_article_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndSubscribeReplyArticleEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/default_reply_text_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndDefaultReplyTextEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/default_reply_image_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndDefaultReplyImageEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "api/ajax/default_reply_article_edit_check"://检测馆周后自动回复文本素材啊数据提交
-                $re = $this->checkLoginAndRuleAndDefaultReplyArticleEdit($request);
-                return self::format_response($re,$next);
-                break;
-
-            case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
-            case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
-            case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
-            case "catering/ajax/label_delete_check"://检测是否登录 权限 安全密码--删除会员标签
-            case "catering/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
-            case "api/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
-            case "api/ajax/material_article_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
-            case "api/ajax/auto_reply_delete_check"://检测是否登陆 权限 安全密码--删除关键字
-                $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re,$next);
-                break;
-            case "catering/ajax/role_edit":                 //编辑权限角色弹出框检测登入和权限
-            case "catering/ajax/role_delete":               //编辑权限角色弹出框检测登入和权限
-            case "catering/ajax/quick_rule":                //快速授权检测登入和权限
-            case "catering/ajax/selected_rule":             //快速授权检测登入和权限
-            case "catering/ajax/subordinate_edit":          //下级人员列表编辑用户弹出框
-            case "catering/ajax/subordinate_lock":          //添加下级人员快速授权
-            case "catering/ajax/subordinate_authorize":     //添加下级人员用户授权显示页面
-            case "catering/ajax/subordinate_delete":        //添加下级人员用户授权显示页面
-            case "catering/ajax/label_add":                 //添加会员标签显示页面
-            case "catering/ajax/label_edit":                //编辑会员标签显示页面
-            case "catering/ajax/label_delete":              //删除会员标签显示页面
-            case "catering/ajax/store_label_add_check":     //粉丝会员标签改变显示页面
-            case "catering/ajax/user_list_edit":            //会员列表编辑显示页面
-            case "catering/ajax/user_list_lock":            //会员列表冻结显示页面
-            case "catering/ajax/user_list_wallet":          //会员列表粉丝钱包显示页面
-            case "api/ajax/meterial_image_upload":          //图片上传弹窗
-            case "api/ajax/meterial_image_upload_check":   //图片上传检测
-            case "api/ajax/material_image_delete_comfirm": //图片上传确认弹窗
-            case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
-            case "api/ajax/material_image_select":        //图片选择弹窗
-            case "api/ajax/defined_menu_add":              //自定义菜单添加
-            case "api/ajax/defined_menu_get":              //自定义菜单添加
-            case "api/ajax/auto_reply_add":              //自定义菜单添加
-            case "api/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
-            case "api/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
-            case "api/ajax/auto_reply_edit_article":    //修改关键字回复图文内容
-            case "api/ajax/auto_reply_edit"://修改自动回复关键字
-            case "api/ajax/auto_reply_delete_confirm"://删除关键字弹窗
-            case "api/ajax/subscribe_reply_text_edit"://修改关注后文本回复弹窗
-            case "api/ajax/subscribe_reply_image_edit"://修改关注后图片回复弹窗
-            case "api/ajax/subscribe_reply_article_edit"://修改关注后图文回复弹窗
-            case "api/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
-            case "api/ajax/default_reply_image_edit"://修改关注后图片回复弹窗
-            case "api/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
-                $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
@@ -726,18 +571,19 @@ class FansmanageCheckAjax
     //检测是否登录
     public function checkIsLogin($request)
     {
-        $sess_key = Session::get('catering_account_id');
+        $sess_key = Session::get('fansmanage_account_id');
         //如果为空返回登录失效
         if (empty($sess_key)) {
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         } else {
-            $sess_key = Session::get('catering_account_id');//获取管理员ID
+            $sess_key = Session::get('fansmanage_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
-            Redis::connect('catering');//连接到我的缓存服务器
-            $admin_data = Redis::get('catering_system_admin_data_' . $sess_key);//获取管理员信息
+            Redis::connect('fansmanage');//连接到我的缓存服务器
+            $admin_data = Redis::get('fansmanage_system_admin_data_' . $sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data' => $admin_data]);//添加参数
             //把参数传递到下一个中间件
+            dd($request);
             return self::res(1, $request);
         }
     }
