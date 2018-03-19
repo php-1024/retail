@@ -64,28 +64,28 @@
                                 公司信息设置
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('Agent/ajax/Agent_info_check') }}">
+                                <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('agent/ajax/agent_info_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" name="organization_id" value="{{$listorg->id}}">
+                                    <input type="hidden" name="organization_id" value="{{$data->id}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">所属战区</label>
-                                        <div class="col-sm-10">{{$listorg->warzone['0']['zone_name']}}</div>
+                                        {{--<div class="col-sm-10">{{$data}}</div>--}}
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">公司名称</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$listorg->organization_name}}"></div>
+                                        <div class="col-sm-10"><input type="text" class="form-control" name="organization_name" value="{{$data->organization_name}}"></div>
                                     </div>
 
                                     <div class="form-group"><label class="col-sm-2 control-label">公司负责人</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$listorg->organizationAgentinfo->Agent_owner}}"></div>
+                                        <div class="col-sm-10"><input type="text" class="form-control" name="realname" value="{{$data->organizationAgentinfo->agent_owner}}"></div>
                                     </div>
 
                                     <div class="form-group"><label class="col-sm-2 control-label">负责人身份证号</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$listorg->organizationAgentinfo->Agent_owner_idcard}}"></div>
+                                        <div class="col-sm-10"><input type="text" class="form-control" name="idcard" value="{{$data->organizationAgentinfo->agent_owner_idcard}}"></div>
                                     </div>
 
 
                                     <div class="form-group"><label class="col-sm-2 control-label">联系方式</label>
-                                        <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$listorg->organizationAgentinfo->Agent_owner_mobile}}"></div>
+                                        <div class="col-sm-10"><input type="text" class="form-control" name="mobile" value="{{$data->organizationAgentinfo->agent_owner_mobile}}"></div>
                                     </div>
 
                                     <div class="form-group">
