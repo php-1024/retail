@@ -44,21 +44,22 @@
                                 操作日志列表
                             </header>
                             <div class="row wrapper">
-                                <form class="form-horizontal" method="get">
+                                <form method="get" role="form" id="searchForm" action="" onsubmit="return searchFormCheck();">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">时间范围</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm datepicker-input form-control" size="16" type="text" value="" data-date-format="yyyy-mm-dd">
+                                        <input type="text" name="time_st" class="form-control zerodate" value="{{$search_data['time_st']}}" placeholder="请选择日期">
                                     </div>
 
                                     <label class="col-sm-1 control-label">到</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm datepicker-input form-control" size="16" type="text" value="" data-date-format="yyyy-mm-dd">
+                                        <input type="text" name="time_nd" class="form-control zerodate"  value="{{$search_data['time_nd']}}"  placeholder="请选择日期">
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>
@@ -110,6 +111,35 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Zerone/library/datepicker')}}/js/bootstrap-datepicker.js"></script>
+<script>
+    $('.zerodate').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true,
+        format: 'yyyy-mm-dd'
+    });
+    function searchFormCheck(){
+        var url = $('#searchForm').attr('action');
+        var data = $('#searchForm').serialize();
+        $.get(url+'?'+data,function(json){
+            if(json.status==0){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                });
+                return false;
+            }else{
+                location.href=url+'?'+data;
+            }
+        });
+        return false;
+    }
+</script>
 </body>
 </html>
 
