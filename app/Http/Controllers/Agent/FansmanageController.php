@@ -177,7 +177,6 @@ class FansmanageController extends Controller{
                     'status'=>$status,
                     'number'=>$number
                 ];
-                dd($data);
                 //添加操作日志
                 OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
