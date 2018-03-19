@@ -146,7 +146,7 @@ class FansmanageController extends Controller{
 
                 $data = [
                     'operator_id'=>$operator_id,
-                    'fr_organization_id '=>$organization_id,
+                    'fr_organization_id'=>$organization_id,
                     'to_organization_id'=>$to_organization_id,
                     'program_id'=>$program_id,
                     'status'=>$status,
