@@ -102,9 +102,9 @@
                                         @foreach($list as $key=>$val)
                                             <td>{{$val->id}}</td>
                                             <td>{{$val->organization_name}}</td>
-                                            <td>{{$val->organizationCompanyinfo->company_owner}}</td>
+                                            <td>{{$val->fansmanageinfo->fansmanage_owner}}</td>
                                             <td>{{$val->account}}</td>
-                                            <td>{{$val->organizationCompanyinfo->company_owner_mobile}}</td>
+                                            <td>{{$val->fansmanageinfo->fansmanage_owner_mobile}}</td>
                                             <td>
                                                 @if($val->status ==1)
                                                 <label class="label label-primary">正常</label>
