@@ -14,12 +14,12 @@ class OrganizationAssetsallocation extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和组织表一对一的关系
-    public function fr_organization_id(){
+    public function fr_organization(){
         return $this->belongsTo('App\Models\Organization', 'fr_organization_id','id');
     }
 
     //和组织表一对一的关系
-    public function to_organization_id(){
+    public function to_organization(){
         return $this->belongsTo('App\Models\Organization', 'to_organization_id','id');
     }
 
@@ -40,7 +40,7 @@ class OrganizationAssetsallocation extends Model{
     }
     //获取分页数据
     public static function getPaginage($where,$orWhere,$paginate,$orderby,$sort='DESC'){
-        return self::with('fr_organization_id')->with('to_organization_id')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('fr_organization')->with('to_organization')->Where($where)->orWhere($orWhere)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
