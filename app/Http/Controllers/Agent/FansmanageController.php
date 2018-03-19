@@ -83,22 +83,22 @@ class FansmanageController extends Controller{
     }
 
     //程序划拨
-    public function company_program(Request $request){
+    public function fansmanage_program(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
-        $list = Package::getPaginage([],15,'id');
-        foreach ($list as $key=>$value){
-            foreach ($value['programs'] as $k=>$v){
-                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
-                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
-                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
-            }
-        }
-        return view('Proxy/Company/company_program',['listOrg'=>$listOrg,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
+//        $list = Package::getPaginage([],15,'id');
+//        foreach ($list as $key=>$value){
+//            foreach ($value['programs'] as $k=>$v){
+//                $re = Assets::getOne([['organization_id',$organization_id],['package_id',$value['id']],['program_id',$v['id']]]);
+//                $list[$key]['programs'][$k]['program_spare_num'] = $re['program_spare_num'];
+//                $list[$key]['programs'][$k]['program_use_num'] = $re['program_use_num'];
+//            }
+//        }
+        return view('Agent/Fansmanage/fansmanage_program',['oneFansmanage'=>$oneFansmanage,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //程序划拨
     public function company_assets(Request $request){

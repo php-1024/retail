@@ -59,11 +59,11 @@
                         <div class="panel-body">
                             <div class="col-sm-12">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <input type="hidden" name="organization_id" id="organization_id" value="{{$listOrg->id}}">
+                                <input type="hidden" name="organization_id" id="organization_id" value="{{$oneFansmanage->id}}">
                                 <input type="hidden" id="company_assets" value="{{ url('Agent/ajax/company_assets') }}">
                                 <section class="panel">
                                     <header class="panel-heading">
-                                        商户："{{$listOrg->organization_name}}"程序划拨
+                                        商户："{{$oneFansmanage->organization_name}}"程序划拨
                                     </header>
                                     <table class="table table-hover">
                                         <thead>
@@ -76,34 +76,34 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($list as $key=>$value)
-                                        <tr>
-                                            <td>{{$value->id}}</td>
-                                            <td>{{$value->package_name}}</td>
-                                            <td>
-                                                @foreach($value->programs as $k=>$v)
-                                                    <div>
-                                                        <span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;
-                                                        <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif 套</span>&nbsp;&nbsp;
-                                                        <span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif 套</span>&nbsp;&nbsp;
-                                                    </div>
-                                                    <div style=" margin-top: 30px;"></div>
-                                                @endforeach
+                                        {{--@foreach($list as $key=>$value)--}}
+                                        {{--<tr>--}}
+                                            {{--<td>{{$value->id}}</td>--}}
+                                            {{--<td>{{$value->package_name}}</td>--}}
+                                            {{--<td>--}}
+                                                {{--@foreach($value->programs as $k=>$v)--}}
+                                                    {{--<div>--}}
+                                                        {{--<span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span> &nbsp;&nbsp;--}}
+                                                        {{--<span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif 套</span>&nbsp;&nbsp;--}}
+                                                        {{--<span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif 套</span>&nbsp;&nbsp;--}}
+                                                    {{--</div>--}}
+                                                    {{--<div style=" margin-top: 30px;"></div>--}}
+                                                {{--@endforeach--}}
 
-                                            </td>
-                                            <td>{{$value->created_at}}</td>
-                                            <td class="text-right">
-                                                <button class="btn btn-info btn-xs" id="addBtn" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                                <button class="btn btn-primary btn-xs" id="minuBtn" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                        @endforeach
+                                            {{--</td>--}}
+                                            {{--<td>{{$value->created_at}}</td>--}}
+                                            {{--<td class="text-right">--}}
+                                                {{--<button class="btn btn-info btn-xs" id="addBtn" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>--}}
+                                                {{--<button class="btn btn-primary btn-xs" id="minuBtn" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>--}}
+                                            {{--</td>--}}
+                                        {{--</tr>--}}
+                                        {{--</tbody>--}}
+                                        {{--@endforeach--}}
                                         <tfoot>
                                         <tr>
                                             <td colspan="99">
                                                 <ul class="pagination pull-right">
-                                                    {{$list->links()}}
+                                                    {{--{{$list->links()}}--}}
                                                 </ul>
                                             </td>
                                         </tr>
