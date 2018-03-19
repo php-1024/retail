@@ -48,7 +48,7 @@ class AgentCheckAjax
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "proxy/ajax/company_assets":   //商户资产划入检测弹出登入和权限
+            case "agent/ajax/fansmanage_assets":   //商户资产划入检测弹出登入和权限
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

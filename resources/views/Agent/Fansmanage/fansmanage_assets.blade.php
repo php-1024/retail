@@ -1,8 +1,7 @@
-<link href="{{asset('public/Agent/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('Agent/ajax/company_assets_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('aent/ajax/fansmanage_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
-    <input type="hidden" name="package_id" value="{{$listPac->id}}">
+    <input type="hidden" name="program_id" value="{{$listPac->id}}">
     <input type="hidden" name="status" value="{{$status}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -19,19 +18,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">套餐名称</label>
-                        <div class="col-sm-9">
-                            <input type="text" value="{{$listPac->package_name}}" placeholder="套餐名称" class="form-control" disabled="">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-3 control-label">程序名称</label>
                         <div class="col-sm-9">
-                            <select class="form-control m-b" name="program_id">
-                                @foreach($listPac->programs as $key=>$value)
-                                    <option value="{{$value->id}}">{{$value->program_name}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" value="{{$listPac->program_name}}" placeholder="程序名称" class="form-control" disabled="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -57,7 +46,6 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Agent/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     //提交表单
     function postForm() {

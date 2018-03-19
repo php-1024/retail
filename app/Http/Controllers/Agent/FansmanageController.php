@@ -101,13 +101,13 @@ class FansmanageController extends Controller{
         return view('Agent/Fansmanage/fansmanage_program',['oneFansmanage'=>$oneFansmanage,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //程序划拨
-    public function company_assets(Request $request){
+    public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $package_id = $request->input('package_id');//套餐id
         $status = $request->input('status');//状态
-        $listOrg = Organization::getOneProxy([['id',$organization_id]]);
-        $listPac = Package::getOnePackage([['id',$package_id]]);
-        return view('Proxy/Company/company_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
+        $listOrg = Organization::getOneFansmanage([['id',$organization_id]]);
+        $listPac = Program::getOne([['id',$package_id]]);
+        return view('Agent/Fansmanage/fansmanage_assets',['listOrg'=>$listOrg, 'listPac'=>$listPac ,'status'=>$status]);
     }
     //商户资产页面划入js显示
     public function company_assets_check(Request $request){
