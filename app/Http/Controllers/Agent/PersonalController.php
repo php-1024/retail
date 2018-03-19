@@ -3,19 +3,14 @@ namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
-use App\Models\LoginLog;
 use App\Models\Module;
 use App\Models\OperationLog;
-use App\Models\Organization;
 use App\Models\OrganizationProxyinfo;
-use App\Models\OrganizationRole;
 use App\Models\ProgramModuleNode;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 class PersonalController extends Controller{
-
 
     //个人信息
     public function account_info(Request $request){
