@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Session;
 class FansmanageController extends Controller{
     //商户注册列表
-    public function fansmanagege_register(Request $request){
+    public function fansmanage_register(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -30,7 +30,7 @@ class FansmanageController extends Controller{
             $where[] = ['fansmanage_owner_mobile',$fansmanage_owner_mobile];
         }
         $list = Organizationfansmanageapply::getPaginage($where,'15','id');
-        return view('Agent/Fansmanagege/fansmanage_register',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/Fansmanage/fansmanage_register',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //商户列表
     public function fansmanage_list(Request $request){
@@ -39,7 +39,7 @@ class FansmanageController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
-        $list = Organization::getPaginagefansmanagege([['parent_id',$organization],['program_id',3]],10,'id');
+        $list = Organization::getPaginagefansmanage([['parent_id',$organization],['program_id',3]],10,'id');
         foreach ($list as $key=>$val){
             $list[$key]['account'] = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account')->first();
         }
