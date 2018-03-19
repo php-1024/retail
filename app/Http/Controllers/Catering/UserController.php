@@ -83,7 +83,7 @@ class UserController extends Controller{
 
         $id = $request->id; //会员标签id
         $label_name = $request->label_name; //会员标签名称
-        $re = Label::checkRowExists([['store_id',$fansmanage_id],['label_name',$label_name]]);
+        $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
