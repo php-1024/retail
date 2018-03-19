@@ -15,8 +15,8 @@ class ProgramController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
-        $list = Program::getPaginage([],15,'id');
-
+        $list = Program::getPaginage([['is_asset','1']],15,'id');
+        dump($list);
 //        foreach ($list as $key=>$value) {
 //            foreach ($value['programs'] as $k => $v) {
 //                $re = Assets::getOne([['organization_id', $organization_id], ['package_id', $value['id']], ['program_id', $v['id']]]);
