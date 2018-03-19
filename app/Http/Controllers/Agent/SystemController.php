@@ -136,9 +136,9 @@ class SystemController extends Controller{
 
             if($admin_data['is_super'] == 2) {
                 //添加操作日志
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在服务商系统修改了服务商：' . $list['organization_name']);//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在服务商系统修改了服务商：' . $agent['organization_name']);//保存操作记录
             }else{
-                OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商：' . $list['organization_name']);//保存操作记录
+                OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商：' . $agent['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
@@ -146,7 +146,7 @@ class SystemController extends Controller{
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
-        if($acc['realname'] != $realname || $list['mobile']!=$mobile){
+        if($acc['realname'] != $realname || $agent['mobile']!=$mobile){
             if($admin_data['is_super'] == 2) {
                 \ZeroneRedis::create_agent_account_cache(1, $admin_data);//生成账号数据的Redis缓存
             }else{
