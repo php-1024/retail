@@ -38,9 +38,9 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $label_name = $request->label_name; //会员标签名称
-        $store_id = $admin_data['organization_id'];//组织id
+        $fansmanage_id = $admin_data['organization_id'];//组织id
 
-        $re = Label::checkRowExists([['store_id',$store_id],['label_name',$label_name]]);
+        $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
@@ -48,7 +48,7 @@ class UserController extends Controller{
         DB::beginTransaction();
         try {
             $dataLabel = [
-                'store_id'=>$store_id,
+                'fansmanage_id'=>$fansmanage_id,
                 'branch_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,

@@ -25,8 +25,8 @@ class Label extends Model{
     //添加会员标签
     public static function addLabel($param){
         $model = new Label();
-        $model->store_id = $param['store_id'];//总店ID
-        $model->branch_id = $param['branch_id'];//分店id
+        $model->fansmanage_id = $param['fansmanage_id'];//粉丝管理系统ID
+        $model->store_id = $param['store_id'];//店铺id
         $model->label_name = $param['label_name'];//标签名称
         $model->label_number = $param['label_number'];//标签粉丝数量
         $model->save();
