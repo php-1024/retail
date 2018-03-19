@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Proxy;
+namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
@@ -14,7 +14,7 @@ use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
-class PersonaController extends Controller{
+class PersonalController extends Controller{
 
 
     //个人信息
@@ -52,7 +52,7 @@ class PersonaController extends Controller{
             }
         }
 
-        return view('Proxy/Persona/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/Personal/account_info',['user'=>$user,'module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改个人信息提交
@@ -119,7 +119,7 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Proxy/Persona/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/Personal/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
@@ -202,7 +202,7 @@ class PersonaController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Proxy/Persona/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/Personal/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改登入密码功能提交
@@ -246,31 +246,6 @@ class PersonaController extends Controller{
             return response()->json(['data' => '原密码不正确！', 'status' => '0']);
         }
 
-    }
-    //我的操作记录
-    public function myoperationlog(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
-        $list = OperationLog::getProxyPaginate($where,10,'id');
-        $roles = [];
-        foreach($list as $key=>$val){
-            $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
-        }
-        return view('Proxy/Persona/myoperationlog',['list'=>$list,'roles'=>$roles,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
-    }
-    //我的登入记录
-    public function myloginlog(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
-        $list = LoginLog::getProxyPaginate($where,15,'id');
-        return view('Proxy/Persona/myloginlog',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 }
