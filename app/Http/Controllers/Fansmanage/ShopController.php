@@ -5,6 +5,7 @@ use App\Models\Account;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Session;
 class ShopController extends Controller{
@@ -17,8 +18,7 @@ class ShopController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
             $organization_name  = $request->organization_name;
-            $where = ['type'=>'4'];
-//            $listOrg = Organization::where([['program_id','4']])->get();
+            $where = ['type'=>'3'];
             $listOrg = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //查询分店
             return view('Fansmanage/Shop/select_shop',['listOrg'=>$listOrg]);
         }else{
@@ -55,7 +55,7 @@ class ShopController extends Controller{
                 'safe_password'=>$admin_this['safe_password'],//安全密码-超级管理员
                 'account_status'=>$account_info->status,//用户状态
             ];
-            Session::put('catering_account_id',encrypt(1));//存储登录session_id为当前用户ID
+            Session::put('fansmanage_account_id',encrypt(1));//存储登录session_id为当前用户ID
             //构造用户缓存数据
             if(!empty( $account_info->account_info->realname)) {
                 $admin_data['realname'] = $account_info->account_info->realname;
@@ -70,8 +70,8 @@ class ShopController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-            \ZeroneRedis::create_catering_menu_cache(1);//生成对应账号的系统菜单
+            ZeroneRedis::create_fansmanage_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+            ZeroneRedis::create_fansmanage_menu_cache(1);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
 
         }else{
@@ -80,12 +80,12 @@ class ShopController extends Controller{
     }
     //超级管理员选择店铺
     public function switch_status(Request $request){
-        return redirect('catering');
+        return redirect('fansmanage');
     }
     //退出登录
     public function quit(Request $request){
-        Session::put('catering_account_id','');
-        return redirect('catering/login');
+        Session::put('fansmanage_account_id','');
+        return redirect('fansmanage/login');
     }
 }
 ?>
