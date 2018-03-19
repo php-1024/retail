@@ -126,8 +126,8 @@ class LoginController extends Controller
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
-                        \ZeroneRedis::create_fansmanage_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                        \ZeroneRedis::create_menu_cache($account_info->id,4);//生成对应账号的商户系统菜单
+                        ZeroneRedis::create_fansmanage_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        ZeroneRedis::create_menu_cache($account_info->id,7);//生成对应账号的商户系统菜单
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
                 }
