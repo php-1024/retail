@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/subordinate_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('Agent/ajax/subordinate_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">

@@ -1,5 +1,5 @@
-<link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/company_assets_check') }}">
+<link href="{{asset('public/Agent/library/iCheck')}}/css/custom.css" rel="stylesheet">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('Agent/ajax/company_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$listOrg->id}}">
     <input type="hidden" name="package_id" value="{{$listPac->id}}">
@@ -57,7 +57,7 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Agent/library/iCheck')}}/js/icheck.min.js"></script>
 <script>
     //提交表单
     function postForm() {

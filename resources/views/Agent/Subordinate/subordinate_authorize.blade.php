@@ -1,9 +1,9 @@
-<form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/subordinate_authorize_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('Agent/ajax/subordinate_authorize_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
-    <input type="hidden" id="quick_rule_url" value="{{ url('proxy/ajax/quick_rule') }}">
-    <input type="hidden" id="selected_rule_url" value="{{ url('proxy/ajax/selected_rule') }}">
+    <input type="hidden" id="quick_rule_url" value="{{ url('Agent/ajax/quick_rule') }}">
+    <input type="hidden" id="selected_rule_url" value="{{ url('Agent/ajax/selected_rule') }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">

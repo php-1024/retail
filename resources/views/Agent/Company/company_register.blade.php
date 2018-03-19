@@ -6,20 +6,20 @@
     <title>零壹新科技服务商管理平台</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{asset('public/Agent')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="{{asset('public/Agent')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Agent')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
-    <script src="{{asset('public/Proxy')}}/js/respond.min.js"></script>
+    <script src="{{asset('public/Agent')}}/js/html5shiv.js"></script>
+    <script src="{{asset('public/Agent')}}/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -28,12 +28,12 @@
 <section id="container" class="">
     <!--header start-->
     <header class="header white-bg">
-        @include('Proxy/Public/Header')
+        @include('Agent/Public/Header')
     </header>
     <!--header end-->
     <!--sidebar start-->
     <aside>
-        @include('Proxy/Public/Nav')
+        @include('Agent/Public/Nav')
     </aside>
     <section id="main-content">
         <section class="wrapper">
@@ -75,11 +75,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">商户名称</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" name="proxy_name" value="{{ $search_data['proxy_name'] }}" placeholder="商户名称">
+                                        <input type="text" class="form-control" name="Agent_name" value="{{ $search_data['Agent_name'] }}" placeholder="商户名称">
                                     </div>
                                     <label class="control-label col-lg-1" for="inputSuccess">手机号码</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" name="proxy_owner_mobile" value="{{ $search_data['proxy_owner_mobile'] }}" placeholder="手机号码">
+                                        <input type="text" class="form-control" name="Agent_owner_mobile" value="{{ $search_data['Agent_owner_mobile'] }}" placeholder="手机号码">
                                     </div>
                                     <div class="col-lg-2">
                                         <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
@@ -116,12 +116,12 @@
                                         @foreach($list as $key=>$value)
                                             <tr>
                                                 <td>{{$value->id}}</td>
-                                                <td>{{$value->proxy_name}}</td>
+                                                <td>{{$value->Agent_name}}</td>
                                                 <td>{{$value->warzone->zone_name}}</td>
-                                                <td>{{$value->proxy_owner}}</td>
+                                                <td>{{$value->Agent_owner}}</td>
 
-                                                <td>{{$value->proxy_owner_idcard}}</td>
-                                                <td>{{$value->proxy_owner_mobile}}</td>
+                                                <td>{{$value->Agent_owner_idcard}}</td>
+                                                <td>{{$value->Agent_owner_mobile}}</td>
                                                 <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
                                                     @elseif($value->status == 1)<label class="label label-primary">已通过</label>
                                                     @elseif($value->status == -1)<label class="label label-danger">已拒绝</label>
@@ -150,13 +150,13 @@
     <!--main content end-->
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Agent')}}/js/common-scripts.js"></script>
 </body>
 </html>
 
