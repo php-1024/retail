@@ -53,7 +53,7 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $request->input('organization_id');//当前组织ID，零壹管理平台组织只能为1
-        $oneAcc = Account::getOne([['organization_id',$organization_id],['parent_id',1]]);//查找服务商对应的负责人信息
+        $oneAcc = Account::getOne([['organization_id',$organization_id],['deepth',1]]);//查找服务商对应的负责人信息
         $parent_tree = $oneAcc['parent_tree'];//组织树
         //获取重Admin开始的的所有人员
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
