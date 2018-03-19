@@ -93,8 +93,7 @@ class SystemController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         $data = Organization::getOneAgent([['id',$organization_id]]);
         $warzone = Warzone::getOne([['id', $data['warzoneAgent']['zone_id']]]);
-        dump($warzone);
-        return view('Agent/System/agent_info',['data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/System/agent_info',['warzone'=>$warzone,'data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //公司信息设置
     public function proxy_info_check(Request $request){
