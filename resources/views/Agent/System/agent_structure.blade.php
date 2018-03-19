@@ -100,6 +100,32 @@
 <!--common script for all pages-->
 <script src="{{asset('public/Agent')}}/js/common-scripts.js"></script>
 <script src="{{asset('public/Agent')}}/js/jquery.nestable.js"></script>
+<script>
+    //owl carousel
+    $(document).ready(function() {
+        $('#nestable2').nestable();
 
+
+        $('#expand-all').click(function(){
+            $('.dd').nestable('expandAll');
+        });
+
+        $('#collapse-all').click(function(){
+            $('.dd').nestable('collapseAll');
+        });
+
+        $('#edit_btn').click(function(){
+            $("#myModal").modal();
+        });
+
+        $('#save_btn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "添加成功",
+                type: "success"
+            });
+        });
+    });
+</script>
 </body>
 </html>
