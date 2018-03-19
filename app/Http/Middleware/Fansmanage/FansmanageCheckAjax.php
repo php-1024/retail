@@ -34,6 +34,7 @@ class FansmanageCheckAjax
 
             case "fansmanage/ajax/label_add_check"://检测 登录 和 权限 和 安全密码 和 添加会员标签数据提交
             case "fansmanage/ajax/label_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
+            case "fansmanage/ajax/label_delete_check"://检测 登录 和 权限 和 安全密码 和 编辑会员标签数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndLabelAdd($request);
                 return self::format_response($re,$next);
                 break;
