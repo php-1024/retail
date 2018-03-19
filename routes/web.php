@@ -342,7 +342,7 @@ Route::group(['prefix'=>'agent'],function(){
     Route::group(['prefix'=>'system'],function(){
         Route::post('select_agent','Agent\SystemController@select_agent')->middleware('AgentCheck');//超级管理员选择登入的服务商
         Route::get('agent_info','Agent\SystemController@agent_info')->middleware('AgentCheck');//服务商信息设置
-        Route::get('proxy_structure','Agent\SystemController@proxy_structure')->middleware('AgentCheck');//服务商人员结构
+        Route::get('agent_structure','Agent\SystemController@agent_structure')->middleware('AgentCheck');//服务商人员结构
         Route::get('operationlog','Agent\SystemController@operationlog')->middleware('AgentCheck');//操作日志
         Route::get('loginlog','Agent\SystemController@loginlog')->middleware('AgentCheck');//登录日志
     });

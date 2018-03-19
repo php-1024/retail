@@ -111,7 +111,6 @@ class SystemController extends Controller{
         try{
             $agent= Organization::getOneAgent([['id',$organization_id]]);
             $acc = Account::getOne([['id',$admin_data['id']]]);
-            dd($acc);
             $account_id = $acc['id'];
             if($agent['organization_name']!=$organization_name){
                 Organization::editOrganization([['id',$organization_id]], ['organization_name'=>$organization_name]);//修改服务商表服务商名称
@@ -128,20 +127,16 @@ class SystemController extends Controller{
                 $admin_data['realname'] = $realname;
             }
 
-            if($acc['idcard'] != $idcard){
+            if($agent['organizationAgentinfo']['agent_owner_idcard'] != $idcard){
                 AccountInfo::editAccountInfo([['account_id',$account_id]],['idcard'=>$idcard]);//修改用户管理员信息表 身份证号
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id',$organization_id]],['agent_owner_idcard'=>$idcard]);//修改服务商信息表 身份证号
             }
 
-            if($admin_data['is_super'] == 2) {
-                //添加操作日志
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在服务商系统修改了服务商：' . $agent['organization_name']);//保存操作记录
-            }else{
+            if($admin_data['is_super'] != 2) {
                 OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商：' . $agent['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
@@ -156,7 +151,7 @@ class SystemController extends Controller{
 
     }
     //公司人员结构
-    public function proxy_structure(Request $request){
+    public function agent_structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -168,7 +163,7 @@ class SystemController extends Controller{
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
         //根据获取的人员组成结构树
         $structure = $this->create_structure($list,$oneAcc['id']);
-        return view('Proxy/System/select_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/System/agent_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     private function create_structure($list,$id){
         $structure = '';
