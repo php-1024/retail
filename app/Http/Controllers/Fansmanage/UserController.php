@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
+use App\Models\FansmanageUserLog;
 use App\Models\Label;
 use App\Models\OperationLog;
 use App\Models\Organization;
@@ -189,12 +190,11 @@ class UserController extends Controller{
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
             }
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
             }
             DB::commit();
 
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败！', 'status' => '0']);
         }
@@ -244,11 +244,10 @@ class UserController extends Controller{
             FansmanageUser::editStoreUser(['user_id'=>$user_id],['mobile'=>$mobile]);
             UserInfo::editUserInfo(['user_id'=>$user_id],['qq'=>$qq]);
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }
@@ -258,23 +257,17 @@ class UserController extends Controller{
 
     //粉丝用户管理粉丝钱包
     public function user_list_wallet(Request $request){
-
         $user_id = $request->id;//会员标签id
         $status = $request->status;//冻结或者解锁
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-
         return view('Fansmanage/User/user_list_wallet',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
-
     }
     //粉丝用户管理冻结功能显示
     public function user_list_lock(Request $request){
-
         $user_id = $request->id;//会员标签id
         $status = $request->status;//冻结或者解锁
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-
         return view('Fansmanage/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
-
     }
     //粉丝用户管理冻结功能提交
     public function user_list_lock_check(Request $request){
@@ -291,12 +284,12 @@ class UserController extends Controller{
             if($status == 1){
                 FansmanageUser::editStoreUser(['user_id'=>$user_id],['status'=>'0']);
                 if($admin_data['is_super'] != 2){
-                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了：'.$nickname);//保存操作记录
+                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了：'.$nickname);//保存操作记录
                 }
             }else{
                 FansmanageUser::editStoreUser(['user_id'=>$user_id],['status'=>'1']);
                 if($admin_data['is_super'] != 2){
-                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了：'.$nickname);//保存操作记录
+                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了：'.$nickname);//保存操作记录
                 }
             }
 
@@ -316,7 +309,7 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $fansmanage_id = $admin_data['organization_id'];//组织id
-        $list = StoreUserLog::getPaginage([['fansmanage_id',$fansmanage_id]],'5','id');
+        $list = FansmanageUserLog::getPaginage([['fansmanage_id',$fansmanage_id]],'5','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]],'nickname')->first();//微信昵称
         }
