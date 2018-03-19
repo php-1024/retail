@@ -55,7 +55,7 @@ class FansmanageCheck{
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限
-                \ZeroneRedis::create_catering_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+                \ZeroneRedis::create_fansmanage_account_cache(1,$admin_data);//生成账号数据的Redis缓存
                 return self::res(1,$request);
             }
         }
@@ -93,17 +93,17 @@ class FansmanageCheck{
     //普通页面检测用户是否登录
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
-        $sess_key = Session::get('catering_account_id');
+        $sess_key = Session::get('fansmanage_account_id');
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
-            return self::res(0,redirect('catering/login'));
+            return self::res(0,redirect('fansmanage/login'));
         }else{
-            $sess_key = Session::get('catering_account_id');//获取管理员ID
+            $sess_key = Session::get('fansmanage_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('catering_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('zerone_system_menu_4_'.$sess_key);
-            $son_menu_data = Redis::get('zerone_system_son_menu_4_'.$sess_key);
+            $admin_data = Redis::get('fansmanage_system_admin_data_'.$sess_key);//获取管理员信息
+            $menu_data = Redis::get('zerone_system_menu_7_'.$sess_key);
+            $son_menu_data = Redis::get('zerone_system_son_menu_7_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
