@@ -2,7 +2,7 @@
 /**
  * 检测中间件囖
  */
-namespace App\Http\Middleware\Fansmagage;
+namespace App\Http\Middleware\Fansmanage;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
