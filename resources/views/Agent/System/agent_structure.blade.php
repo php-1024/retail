@@ -75,9 +75,9 @@
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="2">
                                         <div class="dd-handle">
-                                            <span class="label label-primary"><i class="icon-user"></i></span> {{$oneAcc->account_info->realname}}-公司负责人
+                                            <span class="label label-primary"><i class="icon-user"></i></span> -公司负责人
                                         </div>
-                                        {!! $structure  !!}
+                                        {{--{!! $structure  !!}--}}
                                     </li>
 
                                 </ol>
