@@ -161,7 +161,7 @@ class ZeroneRedis
      * id - 用户的ID
      */
 
-    public static function create_proxy_menu_cache($id){
+    public static function create_agent_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','2']],0,'displayorder','asc')->toArray();//获取零壹管理系统的一级菜单
         $account_info = Account::getOne([['id',$id]]);
         /******************仍然需要修改*******************/
