@@ -112,7 +112,7 @@
                                                     <label class="label label-danger">冻结</label>
                                                 @endif
                                             </td>
-                                            <td>2017-08-08 10:30:30</td>
+                                            <td>{{$val->created_at}}</td>
                                             <td class="text-right">
                                                 <button type="button" id="peoplesBtn" onclick="location.href='{{url('agent/fansmanage/fansmanage_structure')}}?organization_id={{$val->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="icon-sitemap"></i>&nbsp;&nbsp;店铺结构</button>
                                                 <button type="button" id="programBtn" onclick="location.href='{{url('agent/fansmanage/fansmanage_program')}}?organization_id={{$val->id}}'" class="btn btn-outline btn-xs btn-info"><i class="icon-code"></i>&nbsp;&nbsp;程序划拨</button>
