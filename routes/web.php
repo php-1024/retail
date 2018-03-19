@@ -340,7 +340,7 @@ Route::group(['prefix'=>'agent'],function(){
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
-        Route::post('select_proxy','Agent\SystemController@select_proxy')->middleware('AgentCheck');//超级管理员选择登入的服务商
+        Route::post('select_agent','Agent\SystemController@select_agent')->middleware('AgentCheck');//超级管理员选择登入的服务商
         Route::get('setup','Agent\SystemController@setup')->middleware('AgentCheck');//服务商参数设置
         Route::get('proxy_info','Agent\SystemController@proxy_info')->middleware('AgentCheck');//服务商信息设置
         Route::get('proxy_structure','Agent\SystemController@proxy_structure')->middleware('AgentCheck');//服务商人员结构
