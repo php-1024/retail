@@ -149,7 +149,6 @@ class UserController extends Controller{
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
             $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['organization_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
-        dump($list);
         $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
         return view('Fansmanage/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
@@ -195,6 +194,7 @@ class UserController extends Controller{
             DB::commit();
 
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败！', 'status' => '0']);
         }
@@ -223,6 +223,8 @@ class UserController extends Controller{
         return view('Fansmanage/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
 
     }
+
+
     //粉丝用户管理编辑功能提交
     public function user_list_edit_check(Request $request){
 
@@ -246,6 +248,7 @@ class UserController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改资料失败！', 'status' => '0']);
         }
