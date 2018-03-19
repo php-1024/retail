@@ -5,35 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>零壹新科技服务商管理平台</title>
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet"/>
-    <link href="{{asset('public/Proxy')}}/css/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('public/Agent')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="{{asset('public/Agent')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet"/>
+    <link href="{{asset('public/Agent')}}/css/owl.carousel.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
-    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet"/>
-    <link href="{{asset('public/Proxy/library/wizard')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/style-responsive.css" rel="stylesheet"/>
+    <link href="{{asset('public/Agent/library/wizard')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Agent/library/iCheck')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/Agent/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
-    <script src="{{asset('public/Proxy')}}/js/respond.min.js"></script>
+    <script src="{{asset('public/Agent')}}/js/html5shiv.js"></script>
+    <script src="{{asset('public/Agent')}}/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
 <section id="container" class="">
     <!--header start-->
     <header class="header white-bg">
-        @include('Proxy/Public/Header')
+        @include('Agent/Public/Header')
     </header>
     <!--header end-->
     <!--sidebar start-->
     <aside>
-        @include('Proxy/Public/Nav')
+        @include('Agent/Public/Nav')
     </aside>
     <!--sidebar end-->
     <!--main content start-->
@@ -57,9 +57,9 @@
                         </header>
                         <div class="panel-body">
                             <form method="post" class="form-horizontal" role="form" id="currentForm"
-                                  action="{{ url('proxy/ajax/subordinate_add_check') }}">
+                                  action="{{ url('Agent/ajax/subordinate_add_check') }}">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                <input type="hidden" id="quick_rule_url" value="{{ url('proxy/ajax/quick_rule') }}">
+                                <input type="hidden" id="quick_rule_url" value="{{ url('Agent/ajax/quick_rule') }}">
                                 <div id="rootwizard">
                                     <ul>
                                         <li><a href="#tab1" data-toggle="tab"><span style="color:#999;"
@@ -141,16 +141,16 @@
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/Zerone/library/jquery')}}/js/jquery-2.1.1.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('public/Agent')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--common script for all pages-->
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
-<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.js"></script>
-<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Proxy/library/pace')}}/js/pace.min.js"></script>
-<script src="{{asset('public/Proxy/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Agent/library/wizard')}}/js/jquery.bootstrap.wizard.js"></script>
+<script src="{{asset('public/Agent/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Agent/library/pace')}}/js/pace.min.js"></script>
+<script src="{{asset('public/Agent/library/wizard')}}/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Agent/library/sweetalert')}}/js/sweetalert.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});

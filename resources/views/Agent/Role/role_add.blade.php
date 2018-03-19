@@ -6,23 +6,23 @@
     <title>零壹新科技服务商管理平台</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('public/Proxy')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/bootstrap-reset.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy/library/iCheck')}}/css/custom.css" rel="stylesheet" />
+    <link href="{{asset('public/Agent')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="{{asset('public/Agent/library/iCheck')}}/css/custom.css" rel="stylesheet" />
     <!--external css-->
-    <link href="{{asset('public/Proxy')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="{{asset('public/Proxy')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="{{asset('public/Proxy/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="{{asset('public/Agent')}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{asset('public/Agent/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
 
 
     <!-- Custom styles for this template -->
-    <link href="{{asset('public/Proxy')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('public/Proxy')}}/css/style-responsive.css" rel="stylesheet" />
+    <link href="{{asset('public/Agent')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/Agent')}}/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Proxy')}}/js/html5shiv.js"></script>
-    <script src="{{asset('public/Proxy')}}/js/respond.min.js"></script>
+    <script src="{{asset('public/Agent')}}/js/html5shiv.js"></script>
+    <script src="{{asset('public/Agent')}}/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -31,12 +31,12 @@
 <section id="container" class="">
     <!--header start-->
     <header class="header white-bg">
-        @include('Proxy/Public/Header')
+        @include('Agent/Public/Header')
     </header>
     <!--header end-->
     <!--sidebar start-->
     <aside>
-        @include('Proxy/Public/Nav')
+        @include('Agent/Public/Nav')
     </aside>
 
     <!--main content start-->
@@ -59,7 +59,7 @@
                             权限角色添加
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{url('proxy/ajax/role_add_check')}}">
+                            <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{url('Agent/ajax/role_add_check')}}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="hidden" name="organization_id" value="">
                                 <div class="form-group">
@@ -112,16 +112,16 @@
     <!--main content end-->
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 <!--common script for all pages-->
-<script src="{{asset('public/Proxy/library/iCheck')}}/js/icheck.min.js"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Agent/library/iCheck')}}/js/icheck.min.js"></script>
+<script src="{{asset('public/Agent/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/common-scripts.js"></script>
 <script>
     $(document).ready(function() {
         $('.i-checks').iCheck({

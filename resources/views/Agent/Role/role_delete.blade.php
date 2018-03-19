@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('proxy/ajax/role_delete_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('Agent/ajax/role_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">
@@ -23,15 +23,15 @@
     </div>
 </form>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="{{asset('public/Proxy')}}/js/jquery.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery-1.8.3.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.scrollTo.min.js"></script>
-<script src="{{asset('public/Proxy')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="{{asset('public/Proxy/library/sweetalert')}}/js/sweetalert.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.scrollTo.min.js"></script>
+<script src="{{asset('public/Agent')}}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('public/Agent/library/sweetalert')}}/js/sweetalert.min.js"></script>
 
 <!--common script for all pages-->
-<script src="{{asset('public/Proxy')}}/js/common-scripts.js"></script>
+<script src="{{asset('public/Agent')}}/js/common-scripts.js"></script>
 <script>
     //提交表单
     function postForm() {
