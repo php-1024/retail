@@ -334,18 +334,18 @@ Route::group(['prefix'=>'agent'],function(){
     });
 
 
-    Route::get('/', 'Agent\SystemController@display')->middleware('ProxyCheck');//系统首页
-    Route::get('switch_status', 'Agent\SystemController@switch_status')->middleware('ProxyCheck');//超级管理员切换服务商
+    Route::get('/', 'Agent\SystemController@display')->middleware('AgentCheck');//系统首页
+    Route::get('switch_status', 'Agent\SystemController@switch_status')->middleware('AgentCheck');//超级管理员切换服务商
     Route::get('quit', 'Agent\SystemController@quit');//退出系统
 
     //系统管理分组
     Route::group(['prefix'=>'system'],function(){
-        Route::post('select_proxy','Proxy\SystemController@select_proxy')->middleware('ProxyCheck');//超级管理员选择登入的服务商
-        Route::get('setup','Proxy\SystemController@setup')->middleware('ProxyCheck');//服务商参数设置
-        Route::get('proxy_info','Proxy\SystemController@proxy_info')->middleware('ProxyCheck');//服务商信息设置
-        Route::get('proxy_structure','Proxy\SystemController@proxy_structure')->middleware('ProxyCheck');//服务商人员结构
-        Route::get('operationlog','Proxy\SystemController@operationlog')->middleware('ProxyCheck');//操作日志
-        Route::get('loginlog','Proxy\SystemController@loginlog')->middleware('ProxyCheck');//登录日志
+        Route::post('select_proxy','Agent\SystemController@select_proxy')->middleware('AgentCheck');//超级管理员选择登入的服务商
+        Route::get('setup','Agent\SystemController@setup')->middleware('AgentCheck');//服务商参数设置
+        Route::get('proxy_info','Agent\SystemController@proxy_info')->middleware('AgentCheck');//服务商信息设置
+        Route::get('proxy_structure','Agent\SystemController@proxy_structure')->middleware('AgentCheck');//服务商人员结构
+        Route::get('operationlog','Agent\SystemController@operationlog')->middleware('AgentCheck');//操作日志
+        Route::get('loginlog','Agent\SystemController@loginlog')->middleware('AgentCheck');//登录日志
     });
     //个人信息分组
     Route::group(['prefix'=>'persona'],function(){
@@ -555,12 +555,12 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheck');//下级人员已经选中的权限出框
 
         //用户管理
-        Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheckAjax');                  //添加会员标签ajax显示页面
-        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
-        Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheckAjax');                //编辑会员标签功能提交
-        Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheckAjax');    //编辑会员标签功能提交
-        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
-        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
+        Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheck');                  //添加会员标签ajax显示页面
+        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheck');      //添加会员标签功能提交
+        Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheck');                //编辑会员标签功能提交
+        Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheck');    //编辑会员标签功能提交
+        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheck');            //删除会员标签功能提交
+        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheck');//删除会员标签功能提交
 
         Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheck');   //粉丝会员标签功能提交
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheck');                 //列表编辑ajax显示
