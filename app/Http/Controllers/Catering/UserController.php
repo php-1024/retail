@@ -29,8 +29,8 @@ class UserController extends Controller{
     }
     //添加会员标签ajax显示页面
     public function label_add(Request $request){
-
-        return view('Catering/User/label_add');
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        return view('Catering/User/label_add',['admin_data'=>$admin_data]);
     }
     //添加会员标签功能提交
     public function label_add_check(Request $request){
@@ -38,9 +38,9 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $label_name = $request->label_name; //会员标签名称
-        $store_id = $admin_data['organization_id'];//组织id
+        $fansmanage_id = $admin_data['organization_id'];//组织id
 
-        $re = Label::checkRowExists([['store_id',$store_id],['label_name',$label_name]]);
+        $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
@@ -48,8 +48,8 @@ class UserController extends Controller{
         DB::beginTransaction();
         try {
             $dataLabel = [
-                'store_id'=>$store_id,
-                'branch_id'=>0,
+                'fansmanage_id'=>$fansmanage_id,
+                'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
             ];
@@ -79,11 +79,11 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $store_id = $admin_data['organization_id'];//组织id
+        $fansmanage_id = $admin_data['organization_id'];//组织id
 
         $id = $request->id; //会员标签id
         $label_name = $request->label_name; //会员标签名称
-        $re = Label::checkRowExists([['store_id',$store_id],['label_name',$label_name]]);
+        $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }

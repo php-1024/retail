@@ -61,7 +61,6 @@ class CateringCheckAjax
             case "catering/ajax/member_add_check"://检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndMemberAdd($request);
                 return self::format_response($re,$next);
-
                 break;
 
             case "api/ajax/material_article_add_check":  //单条文章素材上传检测
