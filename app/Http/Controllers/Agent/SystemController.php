@@ -90,6 +90,7 @@ class SystemController extends Controller{
     //公司信息设置
     public function agent_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -137,7 +138,6 @@ class SystemController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
