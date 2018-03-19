@@ -43,7 +43,7 @@ class FansmanageController extends Controller{
         foreach ($list as $key=>$val){
             $list[$key]['account'] = Account::getPluck([['organization_id',$val['id']],['parent_id',1]],'account')->first();
         }
-        return view('Agent/fansmanage/fansmanage_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Agent/Fansmanage/fansmanage_list',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //店铺结构
     public function company_structure(Request $request){
