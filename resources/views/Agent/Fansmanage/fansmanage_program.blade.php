@@ -80,9 +80,9 @@
                                         @foreach($list as $key=>$value)
                                         <tr>
                                             <td>{{$value->id}}</td>
-                                            <td><span class="label label-danger"><i class="icon-code"></i> {{$v->program_name}}</span></td>
-                                            <td> <span class="label label-primary">剩余：@if(!empty($v->program_spare_num)){{$v->program_spare_num}}@else 0 @endif 套</span></td>
-                                            <td><span class="label label-warning">已用：@if(!empty($v->program_use_num)){{$v->program_use_num}}@else 0 @endif 套</span></td>
+                                            <td><span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span></td>
+                                            <td> <span class="label label-primary">剩余：@if($value->program_balance){{$value->program_balance}}@else 0 @endif 套</span></td>
+                                            <td><span class="label label-warning">已用：@if($value->program_used_num){{$value->program_used_num}}@else 0 @endif 套</span></td>
                                             <td>{{$value->created_at}}</td>
                                             <td class="text-right">
                                                 <button class="btn btn-info btn-xs" id="addBtn" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
