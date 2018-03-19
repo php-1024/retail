@@ -60,7 +60,7 @@ class Organization extends Model{
 
     //和WarzoneAgent表 warzone表 一对一的关系
     public function warzone(){
-        return $this->belongsToMany('App\Models\Warzone','warzone_proxy','agent_id','zone_id')->select('zone_name');
+        return $this->belongsToMany('App\Models\Warzone','warzone_agent','agent_id','zone_id')->select('zone_name');
     }
 
     //和RetailGoods表一对多的关系
@@ -89,7 +89,7 @@ class Organization extends Model{
     }
     //获取单条信息-服务商
     public static function getOneAgent($where){
-        return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->first();
+        return self::with('warzone')->with('organizationAgentinfo')->where($where)->first();
     }
     //获取单条信息-商户
     public static function getOneFansmanage($where){
