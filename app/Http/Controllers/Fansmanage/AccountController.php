@@ -8,6 +8,7 @@ use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\OrganizationStoreinfo;
 use App\Models\ProgramModuleNode;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -114,7 +115,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Catering/Account/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Account/safe_password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
 
@@ -130,7 +131,7 @@ class AccountController extends Controller{
         if($admin_data['is_super'] ==2){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.catering_safe_encrypt_key");//获取加密盐
+            $key = config("app.fansmanage_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密安全密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密安全密码第二重
@@ -143,13 +144,13 @@ class AccountController extends Controller{
                 $admin_data['safe_password'] = $encryptPwd;
                 if($admin_data['is_super'] == 2){
                     Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统设置了安全密码');//在零壹保存操作记录
-                    \ZeroneRedis::create_catering_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在粉丝管理系统设置了安全密码');//在零壹保存操作记录
+                    ZeroneRedis::create_fansmanage_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                 }else{
                     Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
-                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
-                    \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'设置了安全密码');//保存操作记录
+                    ZeroneRedis::create_fansmanage_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -164,13 +165,13 @@ class AccountController extends Controller{
                     $admin_data['safe_password'] = $encryptPwd;
                     if($admin_data['is_super'] == 2){
                         Account::editAccount([['id',1]],['safe_password' => $encryptPwd]);
-                        OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统修改了安全密码');//在零壹保存操作记录
-                        \ZeroneRedis::create_catering_account_cache(1, $admin_data);//生成账号数据的Redis缓存
+                        OperationLog::addOperationLog('1','1','1',$route_name,'在粉丝管理系统修改了安全密码');//在零壹保存操作记录
+                        ZeroneRedis::create_fansmanage_account_cache(1, $admin_data);//生成账号数据的Redis缓存
 
                     }else{
                         Account::editAccount([['id',$admin_data['id']]],['safe_password' => $encryptPwd]);
                         OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了安全密码');//保存操作记录
-                        \ZeroneRedis::create_catering_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
+                        ZeroneRedis::create_fansmanage_account_cache($admin_data['id'], $admin_data);//生成账号数据的Redis缓存
                     }
                     DB::commit();
                 } catch (\Exception $e) {
@@ -196,7 +197,7 @@ class AccountController extends Controller{
         }else{
             $oneAcc = Account::getOne([['id',$id]]);
         }
-        return view('Catering/Account/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Account/password',['oneAcc'=>$oneAcc,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
 
     }
     //修改登入密码功能提交
@@ -213,7 +214,7 @@ class AccountController extends Controller{
         if($admin_data['is_super'] == 2){
             $key = config("app.zerone_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.catering_encrypt_key");//获取加密盐
+            $key = config("app.fansmanage_encrypt_key");//获取加密盐
         }
 
         $encrypted = md5($password);//加密密码第一重---新密码
@@ -226,9 +227,9 @@ class AccountController extends Controller{
             try {
                 Account::editAccount([['id',$id ]],['password' => $encryptPwd]);
                 if($admin_data['is_super'] == 2){
-                    OperationLog::addOperationLog('1','1',$id,$route_name,'在店铺系统修改了登录密码');//保存操作记录-保存到零壹系统
+                    OperationLog::addOperationLog('1','1',$id,$route_name,'在粉丝管理系统修改了登录密码');//保存操作记录-保存到零壹系统
                 }else{
-                    OperationLog::addOperationLog('4',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
+                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$id,$route_name,'修改了登录密码');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -248,7 +249,7 @@ class AccountController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Catering/Account/message_setting',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Fansmanage/Account/message_setting',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
@@ -262,7 +263,7 @@ class AccountController extends Controller{
 
         $where = [['operation_log.organization_id',$admin_data['organization_id']],['operation_log.account_id',$admin_data['id']]];
         $list = OperationLog::getProxyPaginate($where,10,'id');
-        return view('Catering/Account/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Fansmanage/Account/operation_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
     //我的登入记录
     public function login_log(Request $request){
@@ -272,7 +273,7 @@ class AccountController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $where = [['login_log.organization_id',$admin_data['organization_id']],['login_log.account_id',$admin_data['id']]];
         $list = LoginLog::getProxyPaginate($where,15,'id');
-        return view('Catering/Account/login_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Fansmanage/Account/login_log',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 }
