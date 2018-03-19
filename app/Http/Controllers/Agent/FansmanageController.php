@@ -143,17 +143,6 @@ class FansmanageController extends Controller{
                     $agentNum = $oneAgent['program_balance'] - $number;//剩余数量
                     $agentUseNum = $oneAgent['program_used_num'] + $number;//使用数量
                 OrganizationAssets::editAssets([['id',$oneAgent['id']]],['program_balance'=>$agentNum,'program_used_num'=>$agentUseNum]);//修改服务商系统数量
-
-                $data = [
-                    'operator_id'=>$operator_id,
-                    'fr_organization_id'=>$organization_id,
-                    'to_organization_id'=>$to_organization_id,
-                    'program_id'=>$program_id,
-                    'status'=>$status,
-                    'number'=>$number
-                ];
-                //添加操作日志
-                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
             else{//划出
                 if(empty($re)){
@@ -169,17 +158,10 @@ class FansmanageController extends Controller{
                     $agentNum = $oneAgent['program_balance'] + $number;//剩余数量
                     $agentUseNum = $oneAgent['program_used_num'] - $number;//使用数量
                 OrganizationAssets::editAssets([['id',$oneAgent['id']]], ['program_balance' => $agentNum, 'program_used_num' => $agentUseNum]);//修改服务商系统数量
-                $data = [
-                    'operator_id'=>$operator_id,
-                    'fr_organization_id'=>$organization_id,
-                    'to_organization_id'=>$to_organization_id,
-                    'program_id'=>$program_id,
-                    'status'=>$status,
-                    'number'=>$number
-                ];
-                //添加操作日志
-                OrganizationAssetsallocation::addOrganizationAssetsallocation($data);//保存操作记录
             }
+            $data = ['operator_id' => $operator_id, 'fr_organization_id ' => $organization_id, 'to_organization_id' => $to_organization_id, 'program_id' => $program_id, 'status' => $status, 'number' => $number];
+            //添加操作日志
+            OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
