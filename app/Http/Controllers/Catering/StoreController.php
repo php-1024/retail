@@ -18,8 +18,9 @@ class StoreController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];
-        $onebranch = Organization::checkRowExists([['parent_id',$organization_id],['type',5]]); //查询有没有总店，如果有，接下来创建的都是分店
+        $onebranch = Organization::checkRowExists([['parent_id',$organization_id],['type',4]]); //查询有没有总店，如果有，接下来创建的都是分店
 //        $package_program = Package::getList(['id'=>1],0,'id','DESC');   //查询当前所选餐包含的程序 1为餐饮系统
+        dd($onebranch);
         return view('Catering/Store/branch_create',['onebranch'=>$onebranch,'onebranch'=>$onebranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
 
