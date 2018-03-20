@@ -584,6 +584,13 @@ Route::group(['prefix'=>'fansmanage'],function(){
     });
 
 
+    //总分店管理
+    Route::group(['prefix'=>'store'],function(){
+        Route::get('store_create','Fansmanage\StoreController@store_create')->middleware('FansmanageCheck');              //创建总分店
+        Route::get('store_list','Fansmanage\StoreController@store_list')->middleware('FansmanageCheck');                  //总分店管理
+    });
+
+
     //异步提交数据组
     Route::group(['prefix'=>'ajax'],function(){
         Route::post('login_check','Fansmanage\LoginController@login_check')->middleware('FansmanageCheckAjax');             //提交登录数据
