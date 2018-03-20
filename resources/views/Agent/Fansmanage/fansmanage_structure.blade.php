@@ -60,7 +60,7 @@
                     </section>
                     <section class="panel">
                         <header class="panel-heading">
-                            "{{$oneAcc->organization->organization_name}}"店铺结构
+                            {{--"{{$oneAcc->organization->organization_name}}"店铺结构--}}
                         </header>
                         <div class="panel-body">
                             <div class="dd" id="nestable2">
