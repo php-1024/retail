@@ -53,7 +53,7 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $organization_id = $request->input('organization_id');//当前组织ID，零壹管理平台组织只能为1
-        $oneAcc = Account::getOne([['organization_id',$organization_id],['parent_id',1]]);//查找服务商对应的负责人信息
+        $oneAcc = Account::getOne([['organization_id',$organization_id],['deepth',1]]);//查找服务商对应的负责人信息
         $parent_tree = $oneAcc['parent_tree'];//组织树
         //获取重Admin开始的的所有人员
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
@@ -114,15 +114,10 @@ class FansmanageController extends Controller{
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if($admin_data['is_super'] == 2){//超级管理员没有组织id，操作默认为零壹公司操作
-            $to_organization_id = 1;
-            $operator_id = 1;
-        }else{
-            $to_organization_id = $admin_data['organization_id'];
-            $operator_id =$admin_data['id'];
-        }
+        $to_organization_id = $admin_data['organization_id'];
+        $operator_id =$admin_data['id'];
 
-        $organization_id = $request->input('organization_id');//服务商id
+        $organization_id = $request->input('organization_id');//商户id
         $program_id = $request->input('program_id');//程序id
         $number = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
@@ -144,53 +139,32 @@ class FansmanageController extends Controller{
                     $agentNum = $oneAgent['program_balance'] - $number;//剩余数量
                     $agentUseNum = $oneAgent['program_used_num'] + $number;//使用数量
                 OrganizationAssets::editAssets([['id',$oneAgent['id']]],['program_balance'=>$agentNum,'program_used_num'=>$agentUseNum]);//修改服务商系统数量
-
-                $data = [
-                    'operator_id'=>$operator_id,
-                    'fr_organization_id '=>$organization_id,
-                    'to_organization_id'=>$to_organization_id,
-                    'program_id'=>$program_id,
-                    'status'=>$status,
-                    'number'=>$number
-                ];
-                //添加操作日志
-                OrganizationAssetsallocation::addAssetsOperation($data);//保存操作记录
             }
-//            else{//划出
-//                if(empty($re)){
-//                    return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
-//                }else{
-//                    if($re['program_spare_num'] >= $number){//划出数量小于或等于剩余数量
-//                        $num = $re['program_spare_num'] - $number;
-//                        OrganizationAssets::editAssets([['id',$id]],['program_spare_num'=>$num]);
-//                    }else{
-//                        return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
-//                    }
-//                }
-//                    $proxyNum = $oneProxy['program_spare_num'] + $number;//剩余数量
-//                    $proxyUseNum = $oneProxy['program_use_num'] - $number;//使用数量
-//                    Assets::editAssets([['id', $oneProxy['id']]], ['program_spare_num' => $proxyNum, 'program_use_num' => $proxyUseNum]);//修改服务商系统数量
-//                $data = [
-//                    'operator_id'=>$operator_id,
-//                    'fr_organization_id'=>$fr_organization_id,
-//                    'to_organization_id'=>$to_organization_id,
-//                    'program_id'=>$program_id,
-//                    'package_id'=>$package_id,
-//                    'status'=>$status,
-//                    'number'=>$number
-//                ];
-//                //添加操作日志
-//                AssetsOperation::addAssetsOperation($data);//保存操作记录
-//            }
+            else{//划出
+                if(empty($re)){
+                    return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
+                }else{
+                    if($re['program_balance'] >= $number){//划出数量小于或等于剩余数量
+                        $num = $re['program_balance'] - $number;
+                        OrganizationAssets::editAssets([['id',$id]],['program_balance'=>$num]);
+                    }else{
+                        return response()->json(['data' => '商户系统数量不足划出', 'status' => '0']);
+                    }
+                }
+                    $agentNum = $oneAgent['program_balance'] + $number;//剩余数量
+                    $agentUseNum = $oneAgent['program_used_num'] - $number;//使用数量
+                OrganizationAssets::editAssets([['id',$oneAgent['id']]], ['program_balance' => $agentNum, 'program_used_num' => $agentUseNum]);//修改服务商系统数量
+            }
+            $data = ['operator_id' => $operator_id, 'fr_organization_id ' => $organization_id, 'to_organization_id' => $to_organization_id, 'program_id' => $program_id, 'status' => $status, 'number' => $number];
+            //添加操作日志
+            OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-
 
 }
 ?>

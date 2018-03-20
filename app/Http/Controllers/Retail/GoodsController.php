@@ -88,9 +88,8 @@ class GoodsController extends Controller
         $where = [
             'retail_id' => $admin_data['organization_id'],
         ];
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $goods_thumb = RetailGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
-        $goods = RetailGoods::getOne(['id' => $goods_id, 'fansmanage_id' => $fansmanage_id, 'retail_id' => $admin_data['organization_id']]);
+        $goods = RetailGoods::getOne(['id' => $goods_id, 'retail_id' => $admin_data['organization_id']]);
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');
         return view('Retail/Goods/goods_edit', ['goods_thumb'=>$goods_thumb,'category' => $category, 'goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }

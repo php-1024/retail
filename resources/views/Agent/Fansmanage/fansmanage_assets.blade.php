@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('aent/ajax/fansmanage_assets_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm" action="{{ url('agent/ajax/fansmanage_assets_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="organization_id" value="{{$oneFansmanage->id}}">
     <input type="hidden" name="program_id" value="{{$oneProgram->id}}">
@@ -65,12 +65,21 @@
                     window.location.reload();
                 });
             }else{
+<<<<<<< HEAD
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 });
+=======
+               swal({
+                   title: "提示信息",
+                   text: json.data,
+                   confirmButtonColor: "#DD6B55",
+                   confirmButtonText: "确定"
+               });
+>>>>>>> bbd8c00e66a810e6ddc9bf96e3ad901731ad2f85
             }
         });
     }

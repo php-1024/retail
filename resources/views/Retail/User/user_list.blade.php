@@ -41,6 +41,11 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" id="store_label_add_check" value="{{ url('retail/ajax/store_label_add_check') }}">
+                                    <input type="hidden" id="user_list_edit" value="{{ url('retail/ajax/user_list_edit') }}">
+                                    <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
+                                    <input type="hidden" id="user_list_lock" value="{{ url('retail/ajax/user_list_lock') }}">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
@@ -67,31 +72,40 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><img src="{{url('public/Branch')}}/images/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
-                                        <td>100020</td>
-                                        <td>时光取名叫无心</td>
-                                        <td><label class="label label-success">是</label></td>
-                                        <td><label class="label label-info">联盟商户-刘记鸡煲王</label></td>
-                                        <td><label class="label label-primary">联盟用户-张老三</label></td>
-                                        <td>
-                                            <select style="width:100px" class="chosen-select2">
-                                                <option value="AK">无标签</option>
-                                                <option value="AK">粉丝标签1</option>
-                                                <option value="HI">粉丝标签2</option>
-                                                <option value="HI">粉丝标签3</option>
-                                                <option value="HI">粉丝标签4</option>
-                                            </select>
-                                        </td>
-                                        <td>2017-10-22 10:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
-                                            <button class="btn btn-warning btn-xs" id="lockBtn"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
-                                        </td>
-                                    </tr>
-
+                                    @foreach($list as $key=>$value)
+                                        <tr>
+                                            <td>{{$value->id}}</td>
+                                            <td><img src="{{asset('public/Fansmanage')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                            <td>{{$value->user->account}}</td>
+                                            <td>{{$value->nickname}}</td>
+                                            <td><label class="label label-success">是</label></td>
+                                            <td><label class="label label-info">
+                                                    @if($value->userOrigin->origin_id==$organization_id)
+                                                        {{$store_name}}
+                                                    @else
+                                                        零壹联盟
+                                                    @endif</label></td>
+                                            <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
+                                            <td>
+                                                <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->store_id}}','{{$value->nickname}}')">
+                                                    <option value="0">无标签</option>
+                                                    @foreach($label as $k=>$v)
+                                                        <option value="{{$v->id}}" @if($v->id == $value->label_id) selected @endif>{{$v->label_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>{{$value->created_at}}</td>
+                                            <td>
+                                                <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
+                                                <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
+                                                @if($value->status == 1 || $value->status == -1)
+                                                    <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('{{$value->id}}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                                @else
+                                                    <button class="btn btn-success btn-xs" id="lockBtn" onclick="getlockForm({{$value->id}},'{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;解结</button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -99,36 +113,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        <ul class="pagination pull-right">
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="first" href="#first">«</a>
-                                            </li>
-
-                                            <li class="footable-page-arrow disabled">
-                                                <a data-page="prev" href="#prev">‹</a>
-                                            </li>
-                                            <li class="footable-page active">
-                                                <a data-page="0" href="#">1</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">2</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">3</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">4</a>
-                                            </li>
-                                            <li class="footable-page">
-                                                <a data-page="1" href="#">5</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="next" href="#next">›</a>
-                                            </li>
-                                            <li class="footable-page-arrow">
-                                                <a data-page="last" href="#last">»</a>
-                                            </li>
-                                        </ul>
+                                        {{$list->links()}}
                                     </div>
                                 </div>
                             </footer>
@@ -139,226 +124,7 @@
         </section>
     </section>
 </section>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">添加粉丝标签</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">用户账号</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="100020" placeholder="标签名称" class="form-control" disabled="">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">微信昵称</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="时光取名叫无心" placeholder="安全密码" class="form-control" disabled="">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">源头</label>
-                            <div class="col-sm-10">
-                                <label class="label label-success">自有店铺-过桥米线</label>
-                                <label class="label label-primary">联盟商户-刘记鸡煲王</label>
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">推荐人</label>
-                            <div class="col-sm-10">
-                                <label class="label label-success">自行关注</label>
-                                <label class="label label-primary">联盟用户-张老三</label>
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="" placeholder="QQ号码" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">QQ号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="" placeholder="手机号码" class="form-control">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">粉丝钱包</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">用户账号</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="100020" placeholder="标签名称" class="form-control" disabled="">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">用户余额</label>
-                            <div class="col-sm-10">
-                                100元
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">用户积分</label>
-                            <div class="col-sm-10">
-                                1000分
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                    </form>
-                    <div class="table-responsive">
-                        <table class="table table-striped b-t b-light">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>会员卡名称</th>
-                                <th>适用店铺范围</th>
-                                <th>适用商品范围</th>
-                                <th>折扣率</th>
-                                <th>余额</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>钻石会员卡</td>
-                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                                <td>0.9</td>
-                                <td>10000.00元</td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>钻石会员卡</td>
-                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                                <td>0.9</td>
-                                <td>10000.00元</td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>钻石会员卡</td>
-                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                                <td>0.9</td>
-                                <td>10000.00元</td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>钻石会员卡</td>
-                                <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                                <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                                <td>0.9</td>
-                                <td>10000.00元</td>
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">冻结粉丝确认</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                                <span class="help-block m-b-none">
-                              <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
-                          </span>
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -373,18 +139,107 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
+
+
+
+    //粉丝钱包
+    function getwalletForm(id,status){
+        var url = $('#user_list_wallet').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-        $('#balanceBtn').click(function(){
-            $('#myModal2').modal();
+    }
+
+
+
+    //冻结粉丝
+    function getlockForm(id,status){
+        var url = $('#user_list_lock').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-        $('#lockBtn').click(function(){
-            $('#myModal3').modal();
+    }
+    //添加会员标签
+    function getEditForm(id){
+        var url = $('#user_list_edit').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
         });
-        $('.popovers').popover();
-    });
+    }
+
+    function changeUserTag(obj,user_id,store_id,nickname){
+        var label_id = $(obj).val();
+        var url = $('#store_label_add_check').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'store_id':store_id,'nickname':nickname};
+        $.post(url,data,function(json){
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>
