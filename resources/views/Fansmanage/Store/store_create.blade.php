@@ -45,8 +45,19 @@
                                 创建店铺
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/branch_create_check') }}">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('fansmanage/ajax/store_create_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">模式</label>
+                                        <div class="col-sm-10">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
+                                                <input type="radio" name="program_id" value="10"><i class="fa fa-check text-active"></i>零售版管理系统
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺名称</label>

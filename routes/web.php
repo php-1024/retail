@@ -616,6 +616,9 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('user_list_lock_check','Fansmanage\UserController@user_list_lock_check')->middleware('FansmanageCheckAjax');     //列表冻结功能提交
         Route::post('user_list_wallet','Fansmanage\UserController@user_list_wallet')->middleware('FansmanageCheckAjax');             //列表粉丝钱包ajax显示
 
+        //总店管理
+        Route::post('store_create_check','Fansmanage\StoreController@store_create_check')->middleware('FansmanageCheckAjax');//店铺添加功能提交
+
     });
 });
 /**********************粉丝管理系统*********************/

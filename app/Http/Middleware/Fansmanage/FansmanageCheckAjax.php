@@ -62,6 +62,10 @@ class FansmanageCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "fansmanage/ajax/store_create_check"://检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
+                $re = $this->checkLoginAndRuleAndSafeAndStoreCreate($request);
+                return self::format_response($re,$next);
+
         }
     }
     /******************************复合检测*********************************/
@@ -469,13 +473,13 @@ class FansmanageCheckAjax
             }
         }
     }
-    //检测 登录 和 权限 和 安全密码 和 分店添加数据提交
-    public function checkLoginAndRuleAndSafeAndBranchCreate($request){
+    //检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
+    public function checkLoginAndRuleAndSafeAndStoreCreate($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
-            $re2 = $this->checkBranchCreate($re['response']);//检测数据是否为空
+            $re2 = $this->checkStoreCreate($re['response']);//检测数据是否为空
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -717,13 +721,13 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测添加总分店数数据
-    public function checkBranchCreate($request){
+    //检测添加店铺数数据
+    public function checkStoreCreate($request){
         if(empty($request->input('program_id'))){
             return self::res(0,response()->json(['data' => '请选择程序模式', 'status' => '0']));
         }
         if(empty($request->input('organization_name'))){
-            return self::res(0,response()->json(['data' => '请输入分店名称', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入店铺名称', 'status' => '0']));
         }
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入手机号', 'status' => '0']));
@@ -732,7 +736,7 @@ class FansmanageCheckAjax
             return self::res(0,response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
         }
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入登入密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入登录密码', 'status' => '0']));
         }
         if(empty($request->input('re_password'))){
             return self::res(0,response()->json(['data' => '请输入重复密码', 'status' => '0']));
