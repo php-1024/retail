@@ -1221,7 +1221,21 @@ class WechatController extends Controller{
                                 break;
                         }
                     }else{//默认回复
-                        $result = $this->zerone_response_text($param,'这里是默认回复');
+                        $re_default = WechatDefaultReply::getOne([['authorizer_appid',$appid]]);
+                        if(!empty($re_default)){
+                            switch($re_default['reply_type']){
+                                case "1":
+                                    $result = $this->zerone_response_text($param,$re_default['text_info']);
+                                    break;
+                                case "2":
+                                    $result = $this->zerone_response_image($param,$re_default['image_media_id']);
+                                    break;
+                                case "3":
+                                    $article_data = $this->get_article_info_data($re_default['organization_id'],$re_default['article_media_id']);
+                                    $result = $this->zerone_response_article($param,$article_data);
+                                    break;
+                            }
+                        }
                     }
                 }
                 break;
