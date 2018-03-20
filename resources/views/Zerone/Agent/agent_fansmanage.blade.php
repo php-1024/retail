@@ -147,8 +147,6 @@
 
     //商户划入
     function getAddFansmanageForm(organization_id){
-        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        // activate Nestable for list 2
         var url = $('#agent_fansmanage_add').val();
         var token = $('#_token').val();
         if(organization_id==''){
