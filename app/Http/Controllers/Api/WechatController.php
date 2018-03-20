@@ -1235,6 +1235,8 @@ class WechatController extends Controller{
                                     $result = $this->zerone_response_article($param,$article_data);
                                     break;
                             }
+                        }else{
+                            $result = $this->zerone_response_text($param,'欢迎光临');
                         }
                     }
                 }
@@ -1242,11 +1244,28 @@ class WechatController extends Controller{
 
             case "event":
                     switch($param['Event']){
-                        case "subscribe":
+                        case "subscribe"://关注事件
+                            $re_subscribe = WechatDefaultReply::getOne([['authorizer_appid',$appid]]);
+                            if(!empty($re_subscribe)){
+                                switch($re_subscribe['reply_type']){
+                                    case "1":
+                                        $result = $this->zerone_response_text($param,$re_subscribe['text_info']);
+                                        break;
+                                    case "2":
+                                        $result = $this->zerone_response_image($param,$re_subscribe['image_media_id']);
+                                        break;
+                                    case "3":
+                                        $article_data = $this->get_article_info_data($re_subscribe['organization_id'],$re_subscribe['article_media_id']);
+                                        $result = $this->zerone_response_article($param,$article_data);
+                                        break;
+                                }
+                            }else{
+                                $result = $this->zerone_response_text($param,'欢迎光临');
+                            }
                             break;
-                        case "unsubscribe":
+                        case "unsubscribe"://取消关注事件
                             break;
-                        case "CLICK":
+                        case "CLICK"://点击事件
                             $content = trim($param['EventKey']);
                             //精确回复
                             $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['type','1'],['keyword',$content]]);
@@ -1264,7 +1283,7 @@ class WechatController extends Controller{
                                         break;
                                 }
                             }else{//模糊关键字回复
-                                $re_about = WechatReply::getOne([['authorizer_appid',$appid],['type','2'],['keyword','like','%'.$content.'%']]);
+                                $re_about = WechatReply::getOne([['authorizer_appid',$appid],['type','2']]);
                                 if(!empty($re_about)){
                                     switch($re_about['reply_type']){
                                         case "1":
@@ -1298,6 +1317,7 @@ class WechatController extends Controller{
                             }
                             break;
                         default:
+                            $result = $this->zerone_response_text($param,'欢迎光临');
                             break;
                     }
                 break;
