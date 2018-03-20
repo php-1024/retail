@@ -24,7 +24,7 @@ class WechatController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $this->get_article_info_data(6,'bosoFPsCynb5D_7F_IPAPHPaXt84Dbc4Z-tTFfvPAlI');
+        $this->get_article_info_data(6,'bosoFPsCynb5D_7F_IPAPMJc-KtVJTm03EKxFImh01g');
 
         $url = "";
         if(WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]])){
