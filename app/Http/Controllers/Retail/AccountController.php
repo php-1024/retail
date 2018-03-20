@@ -26,7 +26,6 @@ class AccountController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $user = Account::getOne(['id'=>$admin_data['id']]);
         $account_id = $admin_data['id'];//当前登录账号ID
-        dump($request);
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(5, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
@@ -218,15 +217,6 @@ class AccountController extends Controller{
         }else{
             return response()->json(['data' => '原密码不正确！', 'status' => '1']);
         }
-    }
-
-    public function message_setting(Request $request)
-    {
-        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();                 //获取当前的页面路由
-        return view('Retail/Account/message_setting',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 

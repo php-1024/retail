@@ -143,33 +143,12 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => 2,
         ],
-        //定义一个自己的缓存的服务器，商户平台使用
-        'company' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 3,
-        ],
         //定义一个自己的缓存的服务器，店鋪平台使用
         'catering' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 4,
-        ],
-        //定义一个自己的缓存的服务器，餐饮分店平台简版使用
-        'catering_branch' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 5,
-        ],
-        //定义一个自己的缓存的服务器，分店平台使用
-        'branch' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 6,
         ],
         //定义一个自己的缓存的服务器，粉丝管理平台使用
         'fansmanage' => [
@@ -178,14 +157,7 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => 7,
         ],
-        //定义一个自己的缓存的服务器，总店平台使用
-        'retail_old' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 9,
-        ],
-        //定义一个自己的缓存的服务器，商超分店平台简版使用
+        //定义一个自己的缓存的服务器，零售店铺平台简版使用
         'retail' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
