@@ -1189,7 +1189,7 @@ class WechatController extends Controller{
     private function zerone_response($jm,$param,$appid,$encrypt_type,$timestamp,$nonce){
         switch($param['MsgType']){
             case "text":
-                $content = trim($param['Content'],'');
+                $content = trim($param['Content']);
                 //精确回复
                 $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['keyword',$content]]);
                 if(!empty($re_accurate)){
