@@ -1220,7 +1220,7 @@ class WechatController extends Controller{
                                 $result = $this->zerone_response_article($param,$article_data);
                                 break;
                         }
-                    }else{
+                    }else{//默认回复
                         $result = $this->zerone_response_text($param,'这里是默认回复');
                     }
                 }
