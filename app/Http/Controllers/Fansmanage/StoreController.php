@@ -98,6 +98,7 @@ class StoreController extends Controller{
             }
             OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num,'program_used_num'=>$used_num]);
             $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            dd($module_node_list);
             foreach($module_node_list as $key=>$val){
                 foreach($val->program_nodes as $k=>$v) {
                     AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
