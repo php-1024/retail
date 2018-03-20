@@ -464,6 +464,18 @@ class WechatApi{
     }
 
     /*
+     * 获取图文信息
+     */
+    public function get_article_info($authorizer_access_token,$media_id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/material/get_material?access_token='.$authorizer_access_token;
+        $data['media_id'] = $media_id;
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re,true);
+        return $re;
+    }
+
+    /*
      * 返回加密解密类
      */
     public function WXBizMsgCrypt(){
