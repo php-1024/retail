@@ -90,6 +90,7 @@ class StoreController extends Controller{
             AccountInfo::addAccountInfo($accdatainfo);
             //创建后减少程序剩余数量
             $num = $organization_assets['program_balance'] - 1;
+            dd($num);
             OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num]);
             //添加操作日志
             if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
