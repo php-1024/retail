@@ -727,7 +727,7 @@ class FansmanageCheckAjax
             return self::res(0,response()->json(['data' => '请选择程序模式', 'status' => '0']));
         }
         if(empty($request->input('organization_name'))){
-            return self::res(0,response()->json(['data' => '请输入分店名称', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入店铺名称', 'status' => '0']));
         }
         if(empty($request->input('mobile'))){
             return self::res(0,response()->json(['data' => '请输入手机号', 'status' => '0']));
@@ -736,7 +736,7 @@ class FansmanageCheckAjax
             return self::res(0,response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
         }
         if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入登入密码', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '请输入登录密码', 'status' => '0']));
         }
         if(empty($request->input('re_password'))){
             return self::res(0,response()->json(['data' => '请输入重复密码', 'status' => '0']));
