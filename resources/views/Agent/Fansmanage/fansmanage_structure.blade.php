@@ -68,10 +68,10 @@
                                     <li class="dd-item" data-id="1">
                                          @foreach($list as $key=>$value)
                                         <div class="dd-handle">
-                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】{{$value->organization_name}}[ {{$value->oneAcc->account_info->realname}}，{{$value->account}}]
+                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】{{$value->organization_name}}[ {{$value->oneAcc->account_info->realname}}，{{$value->oneAcc->account}}]
                                         </div>
                                         <ol class="dd-list">
-                                            {!! $structure  !!}
+                                            {!! $value->structure  !!}
                                         </ol>
                                          @endforeach
                                     </li>
