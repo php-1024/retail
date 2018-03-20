@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
+use App\Models\AccountNode;
+use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAssets;
@@ -95,6 +97,12 @@ class StoreController extends Controller{
                 return response()->json(['data' => '创建店铺失败，您暂无剩余的资产程序了！', 'status' => '0']);
             }
             OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num,'program_used_num'=>$used_num]);
+            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            foreach($module_node_list as $key=>$val){
+                foreach($val->program_nodes as $k=>$v) {
+                    AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
+                }
+            }
             //添加操作日志
             if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在粉丝管理系统创建了店铺：'.$organization_name);    //保存操作记录
