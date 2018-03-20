@@ -1,11 +1,11 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/user_list_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{url('retail/ajax/user_list_edit_check')}}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="user_id" value="{{$userInfo['user_id']}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">添加粉丝标签</h4>
+                <h4 class="modal-title">添加粉丝标签1</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
