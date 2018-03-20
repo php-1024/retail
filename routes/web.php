@@ -378,11 +378,6 @@ Route::group(['prefix'=>'agent'],function(){
 
         Route::post('fansmanage_assets','Agent\FansmanageController@fansmanage_assets')->middleware('AgentCheckAjax');//程序划入划出显示页面
         Route::post('fansmanage_assets_check','Agent\FansmanageController@fansmanage_assets_check')->middleware('AgentCheckAjax');//程序划入划出功能提交
-
-
-        Route::post('quick_rule','Proxy\SubordinateController@quick_rule')->middleware('ProxyCheckAjax');//添加下级人员快速授权
-        Route::post('selected_rule','Proxy\SubordinateController@selected_rule')->middleware('ProxyCheckAjax');//下级人员已经选中的权限出框
-
     });
 });
 /********************服务商管理系统*************************/
