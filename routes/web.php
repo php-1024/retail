@@ -639,7 +639,6 @@ Route::group(['prefix'=>'retail'],function(){
     Route::group(['prefix'=>'account'],function(){
         Route::get('profile', 'Retail\AccountController@profile')->middleware('RetailCheck'); //账号中心-账户信息
         Route::get('safe_password', 'Retail\AccountController@safe_password')->middleware('RetailCheck');//安全密码
-        Route::get('message_setting', 'Retail\AccountController@message_setting')->middleware('RetailCheck');//消息接收设置
         Route::get('password', 'Retail\AccountController@password')->middleware('RetailCheck');          //登录密码页面
     });
 
