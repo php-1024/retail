@@ -30,7 +30,7 @@ class StoreController extends Controller{
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $organization_id = $admin_data['organization_id']; //组织id
-        $oneOrganization =Organization::getOneCatering([['id',$organization_id]]);
+        $oneOrganization =Organization::getOneStore([['id',$organization_id]]);
         dd($oneOrganization);
         $organization_parent_id = $organization_id;        //组织上级id
         $parent_tree = $oneOrganization['parent_tree'].$organization_id.',';//树型关系

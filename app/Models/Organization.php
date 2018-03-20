@@ -97,9 +97,9 @@ class Organization extends Model{
             $query->where('deepth','1');
         }]))->with('fansmanageinfo')->where($where)->first();
     }
-    //获取单条信息-总店
-    public static function getOneCatering($where){
-        return self::with('organizationbranchinfo')->where($where)->first();
+    //获取单条信息-店铺
+    public static function getOneStore($where){
+        return self::with('organizationbranchinfo')->with('OrganizationRetailinfo')->where($where)->first();
     }
 
     //获取-服务商列表
