@@ -63,6 +63,7 @@ class FansmanageController extends Controller{
             //根据获取的人员组成结构树
             $list[$key]['structure']= $this->create_structure($accList,$oneAcc['id']);
         }
+        dump($list);
         return view('Agent/Fansmanage/fansmanage_structure',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
