@@ -52,13 +52,13 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">模式</label>
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
-                                                @foreach($package_program as $key=>$val)
-                                                    @foreach($val->programs as $kk=>$vv)
-                                                        <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                            <input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}
-                                                        </label>
-                                                    @endforeach
-                                                @endforeach
+                                                {{--@foreach($package_program as $key=>$val)--}}
+                                                    {{--@foreach($val->programs as $kk=>$vv)--}}
+                                                        {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
+                                                            {{--<input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}--}}
+                                                        {{--</label>--}}
+                                                    {{--@endforeach--}}
+                                                {{--@endforeach--}}
                                             </div>
                                         </div>
                                     </div>
