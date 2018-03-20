@@ -45,7 +45,7 @@
                                 创建店铺
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/branch_create_check') }}">
+                                <form class="form-horizontal" method="post" id="currentForm" action="{{ url('fansmanage/ajax/store_create_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
