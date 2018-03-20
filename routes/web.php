@@ -709,6 +709,13 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('order_status_check', 'Retail\OrderController@order_status_check')->middleware('RetailCheckAjax');             //修改订单状态检测
         Route::any('goods_thumb', 'Retail\GoodsController@goods_thumb')->middleware('RetailCheckAjax');                           //商品规格异步加载页面
         Route::post('upload_thumb_check', 'Retail\GoodsController@upload_thumb_check')->middleware('RetailCheckAjax');             //上传文件检测
+
+
+        Route::post('user_list_edit','Retail\UserController@user_list_edit')->middleware('RetailCheckAjax');                 //列表编辑ajax显示
+        Route::post('user_list_edit_check','Retail\UserController@user_list_edit_check')->middleware('RetailCheckAjax');     //列表编辑功能提交
+        Route::post('user_list_lock','Retail\UserController@user_list_lock')->middleware('RetailCheckAjax');                 //列表冻结ajax显示
+        Route::post('user_list_lock_check','Retail\UserController@user_list_lock_check')->middleware('RetailCheckAjax');     //列表冻结功能提交
+        Route::post('user_list_wallet','Retail\UserController@user_list_wallet')->middleware('RetailCheckAjax');             //列表粉丝钱包ajax显示
     });
 });
 /**********************零售版店铺管理系统*********************/
