@@ -49,6 +49,17 @@
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">模式</label>
+                                        <div class="col-sm-10">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
+                                                <input type="radio" name="program_id" value="10"><i class="fa fa-check text-active"></i>零售版管理系统
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">店铺名称</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control"  name="organization_name" id="input-id-1" value="">
