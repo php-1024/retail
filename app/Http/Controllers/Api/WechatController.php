@@ -1191,7 +1191,7 @@ class WechatController extends Controller{
             case "text":
                 $content = trim($param['Content']);
                 //精确回复
-                $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['keyword',$content]]);
+                $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['type','1'],['keyword',$content]]);
                 if(!empty($re_accurate)){
                     switch($re_accurate['reply_type']){
                         case "1":
@@ -1206,7 +1206,7 @@ class WechatController extends Controller{
                             break;
                     }
                 }else{//模糊关键字回复
-                    $re_about = WechatReply::getOne([['authorizer_appid',$appid],['type'=>'2'],['keyword','like','%'.$content.'%']]);
+                    $re_about = WechatReply::getOne([['authorizer_appid',$appid],['type','2'],['keyword','like','%'.$content.'%']]);
                     if(!empty($re_about)){
                         switch($re_about['reply_type']){
                             case "1":
