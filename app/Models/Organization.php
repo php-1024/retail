@@ -181,7 +181,7 @@ class Organization extends Model{
     }
     //获取分页数据-分店
     public static function getstore($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organizationBranchinfo')->with('OrganizationRetailinfo')->with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return self::with('OrganizationRetailinfo')->with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
