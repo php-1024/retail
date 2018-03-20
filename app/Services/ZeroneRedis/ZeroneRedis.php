@@ -27,15 +27,6 @@ class ZeroneRedis
         Redis::set($data_key,$admin_data);
     }
     /*
-     * 商户平台
-     */
-    public static function create_company_account_cache($key_id,$admin_data){
-        $admin_data = serialize($admin_data);//序列化数组数据
-        Redis::connection('zeo');//连接到我的redis服务器-商户平台使用
-        $data_key = 'company_system_admin_data_'.$key_id;
-        Redis::set($data_key,$admin_data);
-    }
-    /*
      * 总店平台
      */
     public static function create_catering_account_cache($key_id,$admin_data){
@@ -74,19 +65,7 @@ class ZeroneRedis
     }
 
     /*
-     * 零售总店平台旧版方法加了后缀_old
-     * 待修改
-     */
-    public static function create_retail_account_cache_old($key_id,$admin_data){
-        $admin_data = serialize($admin_data);//序列化数组数据
-        Redis::connection('zeo');//连接到我的redis服务器-餐饮分店平台使用
-        $data_key = 'retail_old_system_admin_data_'.$key_id;
-        Redis::set($data_key,$admin_data);
-    }
-
-
-    /*
-     * 零售版店铺（重写的新版简版）
+     * 零售版店铺管理系统（重写的新版简版）
      */
     public static function create_retail_account_cache($key_id,$admin_data){
         $admin_data = serialize($admin_data);//序列化数组数据
@@ -219,32 +198,6 @@ class ZeroneRedis
         Redis::set($son_menu_key,$son_menu);
     }
 
-
-    //内部方法，生成商户系统账号的菜单
-    /*
-     * id - 用户的ID
-     */
-    public static function create_company_menu_cache($id){
-        $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','3']],0,'id','asc');//获取商户系统的一级菜单
-        $son_menu = [];
-        foreach($menu as $key=>$val){//获取一级菜单下的子菜单
-            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
-        }
-        if($id <> 1){
-            /**
-             * 未完成，这里准备查询用户权限。
-             */
-        }
-        $menu = serialize($menu);
-        $son_menu = serialize($son_menu);
-        Redis::connection('company');//连接到我的redis服务器——商户平台使用
-        $menu_key = 'company_system_menu_'.$id;  //一级菜单的Redis主键。
-        $son_menu_key = 'company_system_son_menu_'.$id;//子菜单的Redis主键
-        Redis::set($menu_key,$menu);
-        Redis::set($son_menu_key,$son_menu);
-    }
-
-
     //内部方法，生成总店系统账号的菜单
     /*
      * id - 用户的ID
@@ -270,6 +223,7 @@ class ZeroneRedis
         Redis::set($son_menu_key,$son_menu);
     }
 
+    //内部方法，生成粉丝管理系统账号的菜单
     public static function create_fansmanage_menu_cache($id){
         $menu = ProgramMenu::getList([[ 'parent_id',0],['program_id','3']],0,'id','asc');//获取粉丝管理系统的一级菜单
 
