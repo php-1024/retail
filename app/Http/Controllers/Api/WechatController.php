@@ -1212,6 +1212,20 @@ class WechatController extends Controller{
     }
 
     /*
+     * 获取公众号默认回复内容
+     */
+    private function get_default_reply($appid){
+        if(!empty($appid)){
+            $info = WechatDefaultReply::getOne([['authorizer_appid',$appid]]);
+            if($info['reply_type']=='1'){//文字回复
+                return [1,trim($info['text_info'])];
+            }
+        }else{
+            return [1,''];
+        }
+    }
+
+    /*
      * 回复文本消息
      */
     private function zerone_response_text($param,$contentStr){
