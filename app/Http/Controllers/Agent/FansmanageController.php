@@ -61,7 +61,7 @@ class FansmanageController extends Controller{
             //获取重Admin开始的的所有人员
             $list = Account::getList([['organization_id',$value['id']],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
             //根据获取的人员组成结构树
-            $structure = $this->create_structure($list,$oneAcc['id']);
+            $structure[] = $this->create_structure($list,$oneAcc['id']);
         }
         dump($structure);
         return view('Agent/Fansmanage/fansmanage_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
