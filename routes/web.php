@@ -586,8 +586,8 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('branch_create','Fansmanage\StoreController@branch_create')->middleware('FansmanageCheck');              //创建总分店
-        Route::get('branch_list','Fansmanage\StoreController@branch_list')->middleware('FansmanageCheck');                  //总分店管理
+        Route::get('store_create','Fansmanage\StoreController@store_create')->middleware('FansmanageCheck');              //创建总分店
+        Route::get('store_list','Fansmanage\StoreController@store_list')->middleware('FansmanageCheck');                  //总分店管理
     });
 
 
