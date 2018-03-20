@@ -26,7 +26,6 @@ class AccountController extends Controller{
         $route_name = $request->path();                     //获取当前的页面路由
         $user = Account::getOne(['id'=>$admin_data['id']]);
         $account_id = $admin_data['id'];//当前登录账号ID
-        dump($request);
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(5, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
