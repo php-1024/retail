@@ -1191,7 +1191,7 @@ class WechatController extends Controller{
             case "text":
                 $content = trim($param['Content']);
                 //精确回复
-                $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['type'=>'1'],['keyword',$content]]);
+                $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['keyword',$content]]);
                 if(!empty($re_accurate)){
                     switch($re_accurate['reply_type']){
                         case "1":
