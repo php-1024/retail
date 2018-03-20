@@ -1190,13 +1190,13 @@ class WechatController extends Controller{
         switch($param['MsgType']){
             case "text":
                 $content = trim($param['Content'],'');
-                $re = $this->get_default_reply($appid);
-                if($re[0]==1){
-                    $result = $this->zerone_response_text($param,$re[1]);
-                }elseif($re[0]==3){
-                    $result = $this->zerone_response_article($param,$data);
+                //精确回复
+                $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['keyword',$content]]);
+                if(!empty($re_accurate)){
+
+                }else{
+
                 }
-                //$result = $this->zerone_response_text($param,$content.$appid);
                 break;
 
             case "event":
