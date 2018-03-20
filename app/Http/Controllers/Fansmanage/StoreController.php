@@ -5,6 +5,7 @@ use App\Models\Account;
 use App\Models\AccountInfo;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\OrganizationAssets;
 use App\Models\OrganizationBranchinfo;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Package;
@@ -40,6 +41,8 @@ class StoreController extends Controller{
         $realname = $request->realname;            //负责人姓名
         $mobile = $request->mobile;       //负责人电话
         $user = Account::max('account');
+        //程序剩余数量
+        $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$program_id]])->first();
         $account  = $user+1;//用户账号
         $password = $request->password;
         $key = config("app.branch_encrypt_key");//获取加密盐
@@ -85,6 +88,9 @@ class StoreController extends Controller{
             ];
             //在管理员表添加信息
             AccountInfo::addAccountInfo($accdatainfo);
+            //创建后减少程序剩余数量
+            $num = $organization_assets['program_balance'] - 1;
+            OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num]);
             //添加操作日志
             if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在粉丝管理系统创建了店铺：'.$organization_name);    //保存操作记录
