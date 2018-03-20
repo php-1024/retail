@@ -1193,6 +1193,8 @@ class WechatController extends Controller{
                 $re = $this->get_default_reply($appid);
                 if($re[0]==1){
                     $result = $this->zerone_response_text($param,$re[1]);
+                }elseif($re[0]==3){
+                    $result = $this->zerone_response_article($param,$data);
                 }
                 //$result = $this->zerone_response_text($param,$content.$appid);
                 break;
@@ -1249,7 +1251,7 @@ class WechatController extends Controller{
                     'url'=>$val['url'],
                 ];
             }
-            dump($article_data);
+            return $article_data;
         }else{
             return false;
         }
