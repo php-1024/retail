@@ -24,7 +24,7 @@ class WechatController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $this->get_article_info_data('wx77212e03020bd1dd','bosoFPsCynb5D_7F_IPAPHPaXt84Dbc4Z-tTFfvPAlI');
+        $this->get_article_info_data(6,'bosoFPsCynb5D_7F_IPAPHPaXt84Dbc4Z-tTFfvPAlI');
 
         $url = "";
         if(WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]])){
@@ -1235,9 +1235,8 @@ class WechatController extends Controller{
         }
     }
 
-    private function get_article_info_data($appid,$media_id){
-        $authorization = WechatAuthorization::getOne([['authorizer_appid',$appid]]);
-        $auth_info = \Wechat::refresh_authorization_info($authorization['organization_id']);//刷新并获取授权令牌
+    private function get_article_info_data($organization_id,$media_id){
+        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::get_article_info($auth_info['authorizer_access_token'],$media_id);
         dump($re);
     }
