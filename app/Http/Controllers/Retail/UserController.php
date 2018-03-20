@@ -147,14 +147,14 @@ class UserController extends Controller
         $user_id = $request->id;//会员标签id
         $status = $request->status;//冻结或者解锁
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-        return view('Fansmanage/User/user_list_wallet',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
+        return view('Retail/User/user_list_wallet',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
     }
     //粉丝用户管理冻结功能显示
     public function user_list_lock(Request $request){
         $user_id = $request->id;//会员标签id
         $status = $request->status;//冻结或者解锁
         $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-        return view('Fansmanage/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
+        return view('Retail/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
     }
     //粉丝用户管理冻结功能提交
     public function user_list_lock_check(Request $request){
