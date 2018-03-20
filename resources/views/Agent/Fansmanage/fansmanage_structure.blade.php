@@ -71,7 +71,7 @@
                                             <span class="label label-info"><i class="icon-user"></i></span> 【商户】{{$value->organization_name}}[ {{$value->oneAcc->account_info->realname}}，{{$value->account}}]
                                         </div>
                                         <ol class="dd-list">
-                                            {!! $$value->$structure  !!}
+                                            {!! $value->structure  !!}
                                         </ol>
                                          @endforeach
                                     </li>
