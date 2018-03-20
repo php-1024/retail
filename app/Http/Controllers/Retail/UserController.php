@@ -17,6 +17,7 @@ use App\Models\UserLabel;
 use App\Models\UserOrigin;
 use App\Models\UserRecommender;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class UserController extends Controller
