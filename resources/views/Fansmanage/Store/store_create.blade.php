@@ -38,51 +38,18 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">创建总分店</h3>
+                            <h3 class="m-b-none">创建店铺</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading font-bold">
-                                创建总分店
+                                创建店铺
                             </header>
                             <div class="panel-body">
                                 <form class="form-horizontal" method="post" id="currentForm" action="{{ url('catering/ajax/branch_create_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">模式</label>
-                                        <div class="col-sm-10">
-                                            <div class="btn-group" data-toggle="buttons">
-                                                {{--@foreach($package_program as $key=>$val)--}}
-                                                    {{--@foreach($val->programs as $kk=>$vv)--}}
-                                                        {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
-                                                            {{--<input type="radio" name="program_id" value="{{$vv->id}}"><i class="fa fa-check text-active"></i>{{$vv->program_name}}--}}
-                                                        {{--</label>--}}
-                                                    {{--@endforeach--}}
-                                                {{--@endforeach--}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">类型</label>
-                                        <div class="col-sm-10">
-                                            <div class="btn-group" data-toggle="buttons">
-                                                @if($onebranch != 'true')
-                                                    <label class="btn btn-sm btn-success active">
-                                                        <input type="radio" name="type" value="0" checked="checked"><i class="fa fa-check text-active"></i> 总店
-                                                    </label>
-                                                @else
-                                                    <label class="btn btn-sm btn-info active" style="margin-left: 10px;">
-                                                        <input type="radio" name="type" value="1" checked="checked"><i class="fa fa-check text-active"></i> 分店
-                                                    </label>
-                                                @endif
-                                            </div>
-                                            <span class="help-block m-b-none">创建的首个分店默认为总店，其他默认为分店</span>
-                                        </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">分店名称</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">店铺名称</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control"  name="organization_name" id="input-id-1" value="">
                                         </div>
