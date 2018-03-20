@@ -1187,7 +1187,8 @@ class WechatController extends Controller{
     private function zerone_response($jm,$param,$appid,$encrypt_type,$timestamp,$nonce){
         switch($param['MsgType']){
             case "text":
-                $result = $this->zerone_response_text($param,'您推送的是文本消息');
+                $content = trim($param['Content'],'');
+                $result = $this->zerone_response_text($param,$content.$appid);
                 break;
 
             case "event":
