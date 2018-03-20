@@ -1240,7 +1240,16 @@ class WechatController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::get_article_info($auth_info['authorizer_access_token'],$media_id);
         if(empty($re['errcode'])){
-            dump($re);
+            $article_data = [];
+            foreach($re['news_item'] as $key=>$val){
+                $article_data[$key] = [
+                    'title'=>$val['title'],
+                    'description'=>$val['digest'],
+                    'picurl'=>$val['thumb_url'],
+                    'url'=>$val['url'],
+                ];
+            }
+            dump($article_data);
         }else{
             return false;
         }
