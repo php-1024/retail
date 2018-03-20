@@ -108,7 +108,6 @@ class RetailCheck{
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('retail_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_10_'.$sess_key);
-            dd($menu_data);
             $son_menu_data = Redis::get('zerone_system_son_menu_10_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
