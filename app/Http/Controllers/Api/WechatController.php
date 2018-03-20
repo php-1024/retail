@@ -1182,6 +1182,7 @@ class WechatController extends Controller{
      * $appid - 哪个公众号内传过来的消息
      * $encrypt_type - 是否密文传输
      * $timestamp,$nonce - 加密消息要用的数据
+     *
      */
     private function zerone_response($jm,$param,$appid,$encrypt_type,$timestamp,$nonce){
         switch($param['MsgType']){
