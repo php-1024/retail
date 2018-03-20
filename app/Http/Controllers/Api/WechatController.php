@@ -1206,7 +1206,7 @@ class WechatController extends Controller{
                             break;
                     }
                 }else{
-                    $re_about = WechatReply::getOne([['authorizer_appid',$appid],['keyword','like','%',$content.'%']]);
+                    $re_about = WechatReply::getOne([['authorizer_appid',$appid],['keyword','like','%'.$content.'%']]);
                     if(!empty($re_about)){
                         switch($re_about['reply_type']){
                             case "1":
