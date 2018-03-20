@@ -99,7 +99,7 @@ class Organization extends Model{
     }
     //获取单条信息-店铺
     public static function getOneStore($where){
-        return self::with('organizationbranchinfo')->with('OrganizationRetailinfo')->where($where)->first();
+        return self::with('OrganizationRetailinfo')->where($where)->first();
     }
 
     //获取-服务商列表
