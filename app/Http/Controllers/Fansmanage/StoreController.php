@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 class StoreController extends Controller{
-    //创建总分店
+    //创建店铺页面
     public function store_create(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -25,7 +25,7 @@ class StoreController extends Controller{
         return view('Fansmanage/Store/store_create',['onebranch'=>$onebranch,'onebranch'=>$onebranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
 
-    //创建总分店功能提交
+    //创建店铺功能提交
     public function store_create_check(Request $request){
 
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
@@ -112,7 +112,7 @@ class StoreController extends Controller{
 
 
 
-    //分店店管理
+    //分店店管理列表
     public function store_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -121,7 +121,7 @@ class StoreController extends Controller{
         $organization_id = $admin_data['organization_id'];
         $listBranch = Organization::getbranch([['parent_id',$organization_id],['type',5]],'10','id'); //查询有没有总店，如果有，接下来创建的都是分店
 
-        return view('Catering/Store/store_list',['listBranch'=>$listBranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Store/store_list',['listBranch'=>$listBranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
 }
