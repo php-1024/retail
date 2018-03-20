@@ -94,7 +94,7 @@ class StoreController extends Controller{
             if ($num<0){
                 return response()->json(['data' => '创建店铺失败，您暂无剩余的资产程序了！', 'status' => '0']);
             }
-            OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num],['program_used_num'=>$used_num]);
+            OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num,'program_used_num'=>$used_num]);
             //添加操作日志
             if ($admin_data['is_super'] == 2){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在粉丝管理系统创建了店铺：'.$organization_name);    //保存操作记录
