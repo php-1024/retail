@@ -57,7 +57,10 @@ class FansmanageCheck{
             /****公众号管理****/
 
 
-
+            /****总分店管理****/
+            case "fansmanage/store/store_create":            //创建总分店
+            case "fansmanage/store/store_list":              //总分店管理
+            /****总分店管理****/
 
             /****用户管理****/
             case "fansmanage/user/user_tag":                  //粉丝标签管理
