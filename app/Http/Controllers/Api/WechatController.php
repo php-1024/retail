@@ -1188,7 +1188,11 @@ class WechatController extends Controller{
         switch($param['MsgType']){
             case "text":
                 $content = trim($param['Content'],'');
-                $result = $this->zerone_response_text($param,$content.$appid);
+                $re = $this->get_default_reply($appid);
+                if($re[0]==1){
+                    $result = $this->zerone_response_text($param,$re[1]);
+                }
+                //$result = $this->zerone_response_text($param,$content.$appid);
                 break;
 
             case "event":
