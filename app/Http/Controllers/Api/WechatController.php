@@ -1235,10 +1235,15 @@ class WechatController extends Controller{
         }
     }
 
+    //通过微信接口获取图文信息详情
     private function get_article_info_data($organization_id,$media_id){
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::get_article_info($auth_info['authorizer_access_token'],$media_id);
-        dump($re);
+        if(empty($re['errcode'])){
+
+        }else{
+            return false;
+        }
     }
 
     /*
