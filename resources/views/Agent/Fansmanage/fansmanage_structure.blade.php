@@ -60,18 +60,20 @@
                     </section>
                     <section class="panel">
                         <header class="panel-heading">
-                            "{{$oneAcc->organization->organization_name}}"店铺结构
+                            {{--"{{$oneAcc->organization->organization_name}}"店铺结构--}}
                         </header>
                         <div class="panel-body">
                             <div class="dd" id="nestable2">
                                 <ol class="dd-list">
                                     <li class="dd-item" data-id="1">
+                                         @foreach($list as $key=>$value)
                                         <div class="dd-handle">
-                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】{{$oneAcc->organization->organization_name}}[ {{$oneAcc->account_info->realname}}，{{$oneAcc->account}}]
+                                            <span class="label label-info"><i class="icon-user"></i></span> 【商户】{{$value->organization_name}}[ {{$value->account_info->realname}}，{{$value->account}}]
                                         </div>
                                         <ol class="dd-list">
                                             {!! $structure  !!}
                                         </ol>
+                                         @endforeach
                                     </li>
                                 </ol>
                             </div>

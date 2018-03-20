@@ -54,16 +54,17 @@ class FansmanageController extends Controller{
 
         $organization_id = $request->input('organization_id');//当前组织ID，零壹管理平台组织只能为1
         $list = Organization::getList([['parent_id',$organization_id]]);
-        dump($list);
-
-        $oneAcc = Account::getOne([['organization_id',$organization_id],['deepth',1]]);//查找服务商对应的负责人信息
-
-        $parent_tree = $oneAcc['parent_tree'];//组织树
-        //获取重Admin开始的的所有人员
-        $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
-        //根据获取的人员组成结构树
-        $structure = $this->create_structure($list,$oneAcc['id']);
-        return view('Agent/Fansmanage/fansmanage_structure',['oneAcc'=>$oneAcc,'structure'=>$structure,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        foreach($list as $key=>$value){
+            $oneAcc = Account::getOne([['organization_id',$value['id']],['deepth',1]]);//查找服务商对应的负责人信息
+            $list[$key]['oneAcc']=$oneAcc;
+            $parent_tree = $oneAcc['parent_tree'];//组织树
+            //获取重Admin开始的的所有人员
+            $accList = Account::getList([['organization_id',$value['id']],['parent_tree','like','%'.$parent_tree.$oneAcc['id'].',%']],0,'id','asc')->toArray();
+            //根据获取的人员组成结构树
+            $list[$key]['structure']= $this->create_structure($accList,$oneAcc['id']);
+        }
+        dd($list);
+        return view('Agent/Fansmanage/fansmanage_structure',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     private function create_structure($list,$id){
