@@ -21,11 +21,8 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $admin_data['organization_id'];
-        $onebranch = Organization::checkRowExists([['parent_id',$organization_id],['type',4]]); //查询有没有总店，如果有，接下来创建的都是分店
-        dump($organization_id);
-        return view('Fansmanage/Store/store_create',['onebranch'=>$onebranch,'onebranch'=>$onebranch,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-        }
+        return view('Fansmanage/Store/store_create',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
 
     //创建店铺功能提交
     public function store_create_check(Request $request){
