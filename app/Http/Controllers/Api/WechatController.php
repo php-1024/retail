@@ -1210,13 +1210,13 @@ class WechatController extends Controller{
                     if(!empty($re_about)){
                         switch($re_about['reply_type']){
                             case "1":
-                                $result = $this->zerone_response_text($param,$re_accurate['reply_info']);
+                                $result = $this->zerone_response_text($param,$re_about['reply_info']);
                                 break;
                             case "2":
-                                $result = $this->zerone_response_image($param,$re_accurate['media_id']);
+                                $result = $this->zerone_response_image($param,$re_about['media_id']);
                                 break;
                             case "3":
-                                $article_data = $this->get_article_info_data($re_accurate['organization_id'],$re_accurate['media_id']);
+                                $article_data = $this->get_article_info_data($re_about['organization_id'],$re_about['media_id']);
                                 $result = $this->zerone_response_article($param,$article_data);
                                 break;
                         }
