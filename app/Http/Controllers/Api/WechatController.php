@@ -1224,13 +1224,17 @@ class WechatController extends Controller{
             if($info['reply_type']=='1'){//文字回复
                 return [1,trim($info['text_info'])];
             }elseif($info['reply_type']=='2'){
-                return [2,trim($info['image_media_id'])];
+                return [2,$info['image_media_id']];
             }elseif($info['reply_type']=='2'){
                 return [3,trim($info['article_media_id'])];
             }
         }else{
             return [1,''];
         }
+    }
+
+    private function get_article_info_data($appid,$media_id){
+        $authorization = WechatAuthorization::
     }
 
     /*
