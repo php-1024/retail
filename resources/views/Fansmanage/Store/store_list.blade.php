@@ -40,7 +40,7 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">总分店管理</h3>
                         </div>
-                        @foreach($listBranch as $key=>$value)
+                        @foreach($list as $key=>$value)
                         <div class="col-sm-2">
                             <section class="panel panel-default"   style="height: 280px;">
                                 <header class="panel-heading bg-light no-border">
@@ -59,7 +59,7 @@
                                 <div class="panel-body ">
                                     <div>
                                         分店类型：<label class="label label-success pull-right">
-                                            @if($value->organizationBranchinfo->type == '0')
+                                            @if($value->OrganizationRetailinfo->type == '0')
                                                 总店
                                             @else
                                                 分店
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="panel-body" style="text-align:center;">
                                     <button class="btn btn-s-md btn-danger">
-                                        @if($value->organizationBranchinfo->type == '0')
+                                        @if($value->OrganizationRetailinfo->type == '0')
                                             进入总店
                                         @else
                                             进入分店

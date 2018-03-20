@@ -37,7 +37,7 @@ class Organization extends Model{
         return $this->hasOne('App\Models\OrganizationBranchinfo', 'organization_id');
     }
 
-    //和organizationRetailinfo表一对一的关系
+    //和OrganizationRetailinfo表一对一的关系
     public function OrganizationRetailinfo(){
         return $this->hasOne('App\Models\OrganizationRetailinfo', 'organization_id');
     }
@@ -180,8 +180,8 @@ class Organization extends Model{
         return self::with(['program'])->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
     //获取分页数据-分店
-    public static function getbranch($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('organizationBranchinfo')->with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getstore($where,$paginate,$orderby,$sort='DESC'){
+        return self::with('organizationBranchinfo')->with('OrganizationRetailinfo')->with('account')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
