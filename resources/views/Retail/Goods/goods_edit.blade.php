@@ -50,7 +50,7 @@
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/goods_edit_check') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                            <input type="hidden" name="goods_id" value="{{$goods_id}}">
+                                            <input type="hidden" name="goods_id" value="{{$goods->id}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
