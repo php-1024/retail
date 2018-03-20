@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <textarea id="form-content" class="editor" name="reply_info" cols="30" rows="10">{{$info['reply_info']}}</textarea>
+                        <textarea id="form-content" class="editor" name="reply_info" cols="30" rows="10">@if($info['reply_type']=='1'){{$info['reply_info']}}@endif</textarea>
                     </div>
                 </form>
             </div>
