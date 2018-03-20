@@ -62,10 +62,10 @@ class RetailCheckAjax{
             case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/role_delete_check":       //检测是否登录 权限 安全密码
             case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
-            $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re,$next);
-                break;
-
+            case "retail/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                    return self::format_response($re,$next);
+                    break;
             case "retail/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re,$next);
