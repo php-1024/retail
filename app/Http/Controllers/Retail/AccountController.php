@@ -108,7 +108,7 @@ class AccountController extends Controller{
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         }else{
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.branch_safe_encrypt_key");//获取安全密码加密盐（分店专用）
+            $key = config("app.retail_safe_encrypt_key");//获取安全密码加密盐（分店专用）
         }
         //原安全密码处理
         $old_encrypted = md5($old_safe_password);//加密原安全密码第一重
