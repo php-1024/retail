@@ -1238,7 +1238,8 @@ class WechatController extends Controller{
     private function get_article_info_data($appid,$media_id){
         $authorization = WechatAuthorization::getOne([['authorizer_appid',$appid]]);
         $auth_info = \Wechat::refresh_authorization_info($authorization['organization_id']);//刷新并获取授权令牌
-        dump($auth_info);
+        $re = \Wechat::get_article_info($auth_info['authorizer_access_token'],$media_id);
+        dump($re);
     }
 
     /*
