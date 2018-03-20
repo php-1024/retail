@@ -107,7 +107,7 @@ class UserController extends Controller
             $list =  User::getOneUser([['id',$recommender_id]]);
             $data['recommender_name'] = $list->UserInfo->nickname;
         }
-        return view('Fansmanage/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
+        return view('Retail/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
     }
 
 
