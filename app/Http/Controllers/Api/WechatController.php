@@ -1193,9 +1193,20 @@ class WechatController extends Controller{
                 //精确回复
                 $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['keyword',$content]]);
                 if(!empty($re_accurate)){
-
+                    switch($re_accurate['reply_type']){
+                        case "1":
+                            $result = $this->zerone_response_text($param,$re_accurate['reply_info']);
+                            break;
+                        case "2":
+                            $result = $this->zerone_response_image($param,$re_accurate['media_id']);
+                            break;
+                        case "3":
+                            $article_data = $this->get_article_info_data($re_accurate['organization_id'],$re_accurate['media_id']);
+                            $result = $this->zerone_response_article($param,$article_data);
+                            break;
+                    }
                 }else{
-
+                    $result = $this->zerone_response_text($param,'这里是默认回复');
                 }
                 break;
 
@@ -1203,9 +1214,9 @@ class WechatController extends Controller{
                 $result = $this->zerone_response_text($param,'您推送的是事件信息');
                 break;
 
-            default:
                 $result = $this->zerone_response_text($param,'欢迎光临');
                 break;
+            default:
         }
         //$result = $this->zerone_response_text($param,'测试回复内容|'.$appid);
         //$result = $this->zerone_response_image($param,'bosoFPsCynb5D_7F_IPAPKd_FOPDaqpXw62tH8u_t8Q');
