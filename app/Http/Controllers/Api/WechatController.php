@@ -1236,7 +1236,7 @@ class WechatController extends Controller{
     }
 
     private function get_article_info_data($appid,$media_id){
-        $authorization = WechatAuthorization::getOne([['appid',$appid]]);
+        $authorization = WechatAuthorization::getOne([['authorizer_appid',$appid]]);
         dump($authorization);
     }
 
