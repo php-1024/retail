@@ -68,28 +68,6 @@ class FansmanageCheck{
             case "fansmanage/user/user_timeline":             //粉丝用户足迹
             /****用户管理****/
 
-            /****公众号管理****/
-            //case "catering/subscription/setting":                   //公众号授权
-            case "api/fansmanage/store_auth"://公众号授权
-            case "api/fansmanage/material_image"://图片素材
-            case "api/fansmanage/material_article"://图文素材
-            case "api/fansmanage/material_article_add"://添加单条图文素材
-            case "api/fansmanage/material_articles_add"://添加多条图文素材
-            case "api/fansmanage/material_article_edit"://编辑单条图文素材
-            case "api/fansmanage/material_articles_edit"://编辑多条图文素材
-            case "fansmanage/subscription/material_writing":          //图文素材
-            case "fansmanage/subscription/material_writing_one":      //单条图文素材
-            case "fansmanage/subscription/material_writing_one_edit": //单条图文素材编辑
-            case "fansmanage/subscription/material_writing_many":     //多条图文素材
-            case "fansmanage/subscription/material_writing_many_edit"://多条图文素材编辑
-            /****公众号管理****/
-
-            /****公众号管理-菜单管理****/
-            case "api/fansmanage/defined_menu":               //自定义菜单
-            case "fansmanage/menu/menu_customize":            //自定义菜单
-            case "fansmanage/menu/menu_different":            //个性化菜单
-            /****公众号管理-菜单管理****/
-
                 $re = $this->checkLoginAndRule($request);   //判断是否登录
                 return self::format_response($re,$next);
                 break;
