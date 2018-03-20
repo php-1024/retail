@@ -92,7 +92,7 @@ class RetailCheckAjax{
                 break;
 
             /****粉丝信息编辑****/
-            case "fansmanage/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
+            case "retail/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re,$next);
             /****粉丝信息编辑****/
