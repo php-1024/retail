@@ -1241,7 +1241,65 @@ class WechatController extends Controller{
                 break;
 
             case "event":
-                $result = $this->zerone_response_text($param,'您推送的是事件信息');
+                    switch($param['Event']){
+                        case "subscribe":
+                            break;
+                        case "unsubscribe":
+                            break;
+                        case "CLICK":
+                            $content = trim($param['EventKey']);
+                            //精确回复
+                            $re_accurate = WechatReply::getOne([['authorizer_appid',$appid],['type','1'],['keyword',$content]]);
+                            if(!empty($re_accurate)){
+                                switch($re_accurate['reply_type']){
+                                    case "1":
+                                        $result = $this->zerone_response_text($param,$re_accurate['reply_info']);
+                                        break;
+                                    case "2":
+                                        $result = $this->zerone_response_image($param,$re_accurate['media_id']);
+                                        break;
+                                    case "3":
+                                        $article_data = $this->get_article_info_data($re_accurate['organization_id'],$re_accurate['media_id']);
+                                        $result = $this->zerone_response_article($param,$article_data);
+                                        break;
+                                }
+                            }else{//模糊关键字回复
+                                $re_about = WechatReply::getOne([['authorizer_appid',$appid],['type','2'],['keyword','like','%'.$content.'%']]);
+                                if(!empty($re_about)){
+                                    switch($re_about['reply_type']){
+                                        case "1":
+                                            $result = $this->zerone_response_text($param,$re_about['reply_info']);
+                                            break;
+                                        case "2":
+                                            $result = $this->zerone_response_image($param,$re_about['media_id']);
+                                            break;
+                                        case "3":
+                                            $article_data = $this->get_article_info_data($re_about['organization_id'],$re_about['media_id']);
+                                            $result = $this->zerone_response_article($param,$article_data);
+                                            break;
+                                    }
+                                }else{//默认回复
+                                    $re_default = WechatDefaultReply::getOne([['authorizer_appid',$appid]]);
+                                    if(!empty($re_default)){
+                                        switch($re_default['reply_type']){
+                                            case "1":
+                                                $result = $this->zerone_response_text($param,$re_default['text_info']);
+                                                break;
+                                            case "2":
+                                                $result = $this->zerone_response_image($param,$re_default['image_media_id']);
+                                                break;
+                                            case "3":
+                                                $article_data = $this->get_article_info_data($re_default['organization_id'],$re_default['article_media_id']);
+                                                $result = $this->zerone_response_article($param,$article_data);
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 break;
             default:
                 $result = $this->zerone_response_text($param,'欢迎光临');
