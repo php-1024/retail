@@ -45,7 +45,7 @@ class StoreController extends Controller{
         $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$program_id]])->first();
         $account  = $user+1;//用户账号
         $password = $request->password;
-        $key = config("app.branch_encrypt_key");//获取加密盐
+        $key = config("app.retail_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
         DB::beginTransaction();
