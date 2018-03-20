@@ -37,6 +37,7 @@ class UserController extends Controller
             $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['organization_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
         }
         $label = Label::ListLabel([['fansmanage_id',$organization_id]]);//会员标签
+        dump($list);
         return view('Retail/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //粉丝用户管理
