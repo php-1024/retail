@@ -555,13 +555,13 @@ class WechatController extends Controller{
                 if ($vv['id'] == $val['parent_id'] && $val['parent_id'] != 0) {
                     $vv['so_menu']['id'] = $val['id'];
                     $vv['so_menu']['menu_name'] = $val['menu_name'];
-                    $menus[] = $vv;
+                    $defined_menu[] = $vv;
                 }
             }
         }
 
         dump($list);
-        dump($menus);
+        dump($defined_menu);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
