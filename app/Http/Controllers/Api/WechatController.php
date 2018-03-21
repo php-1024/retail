@@ -583,7 +583,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
-
+        $menu_id = $request->get('menu_id');
         dd($request);
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
@@ -626,7 +626,7 @@ class WechatController extends Controller{
         }
         DB::beginTransaction();
         try {
-            WechatDefinedMenu::addDefinedMenu($defined_menu);
+            WechatDefinedMenu::editDefinedMenu([['id',$menu_id]],$defined_menu);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统添加了公众号自定义菜单！');//保存操作记录

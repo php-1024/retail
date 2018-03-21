@@ -4,6 +4,7 @@
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="defined_menu_edit_check" action="{{ url('api/ajax/defined_menu_edit_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="menu_id" id="menu_id" value="{{$definedmenu->id}}">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
