@@ -557,9 +557,9 @@ class WechatController extends Controller{
         foreach($list as $key=>$val){
             if($val['parent_id'] != $id) {
                 unset($list[$key]);
-                dump($list);
             }
         }
+        dump($list);
         return $structure;
     }
 
