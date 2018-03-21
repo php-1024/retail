@@ -170,6 +170,7 @@ class CateringCheckAjax
             case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
             case "api/ajax/material_image_select":        //图片选择弹窗
             case "api/ajax/defined_menu_add":              //自定义菜单添加
+            case "api/ajax/defined_menu_add_check":              //自定义菜单添加
             case "api/ajax/defined_menu_get":              //自定义菜单添加
             case "api/ajax/auto_reply_add":              //自定义菜单添加
             case "api/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
