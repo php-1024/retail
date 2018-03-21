@@ -560,7 +560,6 @@ class WechatController extends Controller{
                 }
             }
         }
-        dump($defined_menu);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list,'defined_menu'=>$defined_menu]);
     }
 
