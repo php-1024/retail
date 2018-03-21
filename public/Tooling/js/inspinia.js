@@ -17,7 +17,7 @@ $(document).ready(function () {
     }
 
     // MetsiMenu
-    $('#side-menu').metisMenu('show');
+    $('#side-menu').metisMenu();
 
     // Collapse ibox function
     $('.collapse-link').click(function () {
@@ -54,7 +54,7 @@ $(document).ready(function () {
     // Close menu in canvas mode
     $('.close-canvas-menu').click(function () {
         $("body").toggleClass("mini-navbar");
-        SmoothlyMenu();
+
     });
 
     // Run menu of canvas
