@@ -1,62 +1,30 @@
 @if(!empty($list))
 <div class="dd" id="nestable1">
     <ol class="dd-list">
+        @foreach($defined_menu as $key=>$val)
         <li class="dd-item" data-id="2">
             <div class="dd-handle">
                   <span class="pull-right">
                     <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                     <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                   </span>
-                主菜单1
+                {{$val->menu_name}}
             </div>
             <ol class="dd-list">
+                @foreach($val->so_menu as $kk=>$vv)
                 <li class="dd-item" data-id="3">
                     <div class="dd-handle">
                           <span class="pull-right">
                             <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                             <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                           </span>
-                        子菜单1
+                        {{$vv->menu_name}}
                     </div>
                 </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
+                @endforeach
             </ol>
         </li>
+        @endforeach
     </ol>
 </div>
 @else

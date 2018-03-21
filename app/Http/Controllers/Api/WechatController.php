@@ -552,17 +552,14 @@ class WechatController extends Controller{
         }
         foreach ($list as $key=>$val){
             foreach ($menus as $kk=>$vv){
-                if ($vv['id'] == $val['parent_id'] && $val['parent_id'] != 0) {
+                if ($vv['id'] == $val['parent_id']) {
                     $vv['so_menu']['id'] = $val['id'];
                     $vv['so_menu']['menu_name'] = $val['menu_name'];
                     $defined_menu[] = $vv;
                 }
             }
         }
-
-        dump($list);
-        dump($defined_menu);
-        return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
+        return view('Wechat/Catering/defined_menu_get',['list'=>$list,'defined_menu'=>$defined_menu]);
     }
 
     /*
