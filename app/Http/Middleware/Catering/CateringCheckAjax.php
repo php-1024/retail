@@ -152,6 +152,7 @@ class CateringCheckAjax
             case "api/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
             case "api/ajax/material_article_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
             case "api/ajax/auto_reply_delete_check"://检测是否登陆 权限 安全密码--删除关键字
+            case "api/ajax/defined_menu_delete_check"://检测是否登陆 权限 安全密码--删除自定义菜单
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -176,6 +177,7 @@ class CateringCheckAjax
             case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
             case "api/ajax/material_image_select":        //图片选择弹窗
             case "api/ajax/defined_menu_add":              //自定义菜单添加
+            case "api/ajax/defined_menu_delete":           //自定义菜单删除
             case "api/ajax/defined_menu_edit":              //自定义菜单编辑
             case "api/ajax/defined_menu_get":              //自定义菜单添加
             case "api/ajax/auto_reply_add":              //自定义菜单添加

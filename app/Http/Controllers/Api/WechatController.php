@@ -642,6 +642,13 @@ class WechatController extends Controller{
         return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
     }
 
+
+    //自定义菜单删除弹窗
+    public function defined_menu_delete(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $id = $request->get('id');
+        return view('Wechat/Catering/defined_menu_delete',['id'=>$id]);
+    }
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
 
 

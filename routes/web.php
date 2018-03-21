@@ -789,6 +789,9 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('defined_menu_add','Api\WechatController@defined_menu_add')->middleware('CateringCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_add_check','Api\WechatController@defined_menu_add_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
 
+        Route::any('defined_menu_delete','Api\WechatController@defined_menu_delete')->middleware('CateringCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_delete_check','Api\WechatController@defined_menu_delete_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
+
         Route::any('defined_menu_edit','Api\WechatController@defined_menu_edit')->middleware('CateringCheckAjax');//编辑自定义菜单板块
         Route::any('defined_menu_edit_check','Api\WechatController@defined_menu_edit_check')->middleware('CateringCheckAjax');//编辑自定义菜单板块
 
