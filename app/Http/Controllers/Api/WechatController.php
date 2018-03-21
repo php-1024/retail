@@ -485,9 +485,9 @@ class WechatController extends Controller{
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
         if ($parent_id == 0){
-            $parent_tree = 0;
+            $parent_tree = '0,';
         }else{
-            $parent_tree = '0,'.$parent_id;
+            $parent_tree = '0,'.$parent_id.',';
         }
         $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
