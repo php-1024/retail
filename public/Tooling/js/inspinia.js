@@ -46,13 +46,15 @@ $(document).ready(function () {
         $('body').toggleClass('fullscreen-ibox-mode');
         button.toggleClass('fa-expand').toggleClass('fa-compress');
         ibox.toggleClass('fullscreen');
-
+        setTimeout(function () {
+            $(window).trigger('resize');
+        }, 100);
     });
 
     // Close menu in canvas mode
     $('.close-canvas-menu').click(function () {
         $("body").toggleClass("mini-navbar");
-        SmoothlyMenu();
+
     });
 
     // Run menu of canvas
