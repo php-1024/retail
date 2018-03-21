@@ -273,7 +273,7 @@ class AgentController extends Controller {
         DB::beginTransaction();
         try {
             $list = Organization::getOneagent(['id' => $id]);
-            $acc = Account::getOne(['organization_id' => $id, 'parent_id' => '1']);
+            $acc = Account::getOne(['organization_id' => $id, 'deepth' => '0']);
             $account_id = $acc['id'];
             if ($list['organization_name'] != $organization_name) {
                 Organization::editOrganization([['id', $id]], ['organization_name' => $organization_name]); //修改服务商表服务商名称
@@ -287,7 +287,6 @@ class AgentController extends Controller {
 
             if ($list['organizationagentinfo']['agent_owner'] != $realname) {
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner' => $realname]); //修改服务商用户信息表 用户姓名
-                dd($account_id);
                 AccountInfo::editAccountInfo([['account_id', $account_id]], ['realname' => $realname]); //修改用户管理员信息表 用户名
             }
             if ($acc['idcard'] != $idcard) {
