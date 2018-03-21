@@ -463,20 +463,29 @@ class WechatController extends Controller{
     public function defined_menu_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
-        dump($wechatreply);
-        dump($list);
         return view('Wechat/Catering/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
     }
 
     //添加自定义菜单检测
     public function defined_menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+
+        $organization_id = $admin_data['organization_id'];  //组织ID
+        $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
+        $menu_name = $request->get('menu_name');    //获取菜单名称
+        $parent_id = $request->get('parent_id');    //获取上级菜单ID
+        $event_type = $request->get('event_type');  //获取事件类型
+        $response_url = $request->get('response_url');  //获取响应网址
+        $response_keyword = $request->get('response_keyword');  //获取响应关键字
+
+//        $parent_tree = $request->get('parent_id');    //获取上级菜单ID
+
         dd($request);
     }
 
