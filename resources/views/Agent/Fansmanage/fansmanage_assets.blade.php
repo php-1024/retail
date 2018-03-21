@@ -65,21 +65,12 @@
                     window.location.reload();
                 });
             }else{
-<<<<<<< HEAD
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 });
-=======
-               swal({
-                   title: "提示信息",
-                   text: json.data,
-                   confirmButtonColor: "#DD6B55",
-                   confirmButtonText: "确定"
-               });
->>>>>>> bbd8c00e66a810e6ddc9bf96e3ad901731ad2f85
             }
         });
     }
