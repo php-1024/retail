@@ -7,8 +7,8 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
-                <select name="account" class="form-control m-b">
-                    <option>无</option>
+                <select name="parent_id" class="form-control m-b">
+                        <option value ="0">无</option>
                     @foreach($list as $key=>$val)
                         <option value ="{{$val->id}}">{{$val->menu_name}}</option>
                     @endforeach
@@ -21,7 +21,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">菜单名称</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="input-id-1" value="测试菜单1">
+                <input type="text" class="form-control" name="menu_name" value="">
             </div>
         </div>
 
@@ -31,35 +31,35 @@
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-sm btn-info active" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options" checked=""><i class="fa fa-check text-active"></i> 链接
+                        <input type="radio" name="event_type" value="1" checked=""><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options" checked=""><i class="fa fa-check text-active"></i> 模拟关键字
+                        <input type="radio" name="event_type" value="2" checked=""><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options"><i class="fa fa-check text-active"></i> 扫码
+                        <input type="radio" name="event_type" value="3"><i class="fa fa-check text-active"></i> 扫码
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options"><i class="fa fa-check text-active"></i> 扫码(带等待信息)
+                        <input type="radio" name="event_type" value="4"><i class="fa fa-check text-active"></i> 扫码(带等待信息)
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options"><i class="fa fa-check text-active"></i> 拍照发图
+                        <input type="radio" name="event_type" value="5"><i class="fa fa-check text-active"></i> 拍照发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;"">
-                    <input type="radio" name="options"><i class="fa fa-check text-active"></i> 拍照或者相册发图
+                    <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options"><i class="fa fa-check text-active"></i> 微信相册发图
+                        <input type="radio" name="event_type" value="7"><i class="fa fa-check text-active"></i> 微信相册发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="options"><i class="fa fa-check text-active"></i> 地理位置
+                        <input type="radio" name="event_type" value="8"><i class="fa fa-check text-active"></i> 地理位置
                     </label>
                 </div>
                                                         <span class="help-block m-b-none">
