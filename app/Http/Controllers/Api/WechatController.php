@@ -542,6 +542,7 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        $menu_data = [];
         foreach ($list as $key=>$val){
             if ($val['parent_id'] == 0) {
                 $menu['id'] = $val['id'];
