@@ -485,9 +485,9 @@ class WechatController extends Controller{
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
         if ($parent_id == 0){
-            $parent_tree = 0;
+            $parent_tree = '0,';
         }else{
-            $parent_tree = '0,'.$parent_id;
+            $parent_tree = '0,'.$parent_id.',';
         }
         $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
@@ -542,7 +542,8 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
-        $structure = $this->create_structure($list,0);
+        $structure = $this->create_menu_data($list);
+        dump($structure);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
@@ -551,75 +552,16 @@ class WechatController extends Controller{
      * $list - 结构所有人员的无序列表
      * $id - 上级ID
      */
-    private function create_structure($list,$id){
-        $structure = '';
-        foreach($list as $key=>$val){
-            if($val['parent_id'] == $id) {
-                unset($list[$key]);
-                $val['sonlist'] = $this->create_structure($list, $val['id']);
-                //$arr[] = $val;
-                dump($list);
-                $structure .= '<ol class="dd-list">
-        <li class="dd-item" data-id="2">
-            <div class="dd-handle">
-                  <span class="pull-right">
-                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                  </span>
-                主菜单1
-            </div>
-            <ol class="dd-list">
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-                <li class="dd-item" data-id="3">
-                    <div class="dd-handle">
-                          <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
-                          </span>
-                        子菜单1
-                    </div>
-                </li>
-            </ol>
-        </li>
-    </ol>';
+    private function create_menu_data($list){
+        foreach ($list as $key=>$val){
+            if ($val['parent_id'] == 0){
+                $menu_data['id'] = $val['id'];
+                $menu_data['menu_name'] = $val['menu_name'];
+            }else{
+                $menu_data['son_menu_data']['id'] = $val['id'];
+                $menu_data['son_menu_data']['menu_name'] = $val['menu_name'];
             }
         }
-        return $structure;
     }
 
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
