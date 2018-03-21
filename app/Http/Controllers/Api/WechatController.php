@@ -569,7 +569,6 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->get('id');
         $definedmenu = WechatDefinedMenu::getOne([['id',$id]]);
-        dd($definedmenu);
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
