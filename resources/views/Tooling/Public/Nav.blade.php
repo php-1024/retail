@@ -38,8 +38,6 @@
                 <ul class="nav nav-second-level collapse">
                     <li @if ($route_name=='tooling/program/program_add')class="active"@endif><a href="{{ url('tooling/program/program_add') }}">添加程序</a></li>
                     <li @if ($route_name=='tooling/program/program_list' || $route_name == 'tooling/program/menu_list')class="active"@endif><a href="{{ url('tooling/program/program_list') }}">程序列表</a></li>
-                    <li @if ($route_name=='tooling/program/package_add')class="active"@endif><a href="{{ url('tooling/program/package_add') }}">添加程序套餐</a></li>
-                    <li @if ($route_name=='tooling/program/package_list')class="active"@endif><a href="{{ url('tooling/program/package_list') }}">程序套餐列表</a></li>
                 </ul>
             </li>
             <li @if ($action_name=='module')class="active"@endif>

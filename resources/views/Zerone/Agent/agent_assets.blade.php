@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
                         <div class="col-sm-2">
-                            <input type="text" value="0" name="number" class="form-control" >
+                            <input type="text" value="1" name="number" class="form-control" >
                         </div>
                         <label class="col-sm-2 control-label">套</label>
                     </div>

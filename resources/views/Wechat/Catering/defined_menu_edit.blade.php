@@ -1,8 +1,8 @@
-<header class="panel-heading font-bold">
-    自定义菜单设置
+<header class="panel-heading font-bold" style="color:#FF0000">
+    自定义菜单修改
 </header>
 <div class="panel-body">
-    <form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('api/ajax/defined_menu_add_check') }}">
+    <form class="form-horizontal" role="form" id="defined_menu_edit_check" action="{{ url('api/ajax/defined_menu_edit_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
@@ -21,7 +21,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">菜单名称</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="menu_name" value="">
+                <input type="text" class="form-control" name="menu_name" value="{{$definedmenu->menu_name}}">
             </div>
         </div>
 
@@ -31,35 +31,35 @@
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="1"><i class="fa fa-check text-active"></i> 链接
+                        <input type="radio" name="event_type" value="1"@if($definedmenu->event_type == 1) checked @endif><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
+                        <input type="radio" name="event_type" value="2"@if($definedmenu->event_type == 2) checked @endif><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="3"><i class="fa fa-check text-active"></i> 扫码
+                        <input type="radio" name="event_type" value="3"@if($definedmenu->event_type == 3) checked @endif><i class="fa fa-check text-active"></i> 扫码
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="4"><i class="fa fa-check text-active"></i> 扫码(带等待信息)
+                        <input type="radio" name="event_type" value="4"@if($definedmenu->event_type == 4) checked @endif><i class="fa fa-check text-active"></i> 扫码(带等待信息)
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="5"><i class="fa fa-check text-active"></i> 拍照发图
+                        <input type="radio" name="event_type" value="5"@if($definedmenu->event_type == 5) checked @endif><i class="fa fa-check text-active"></i> 拍照发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                    <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
+                    <input type="radio" name="event_type" value="6"@if($definedmenu->event_type == 6) checked @endif><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="7"><i class="fa fa-check text-active"></i> 微信相册发图
+                        <input type="radio" name="event_type" value="7"@if($definedmenu->event_type == 7) checked @endif><i class="fa fa-check text-active"></i> 微信相册发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="8"><i class="fa fa-check text-active"></i> 地理位置
+                        <input type="radio" name="event_type" value="8"@if($definedmenu->event_type == 8) checked @endif><i class="fa fa-check text-active"></i> 地理位置
                     </label>
                 </div>
                                                         <span class="help-block m-b-none">
@@ -83,7 +83,7 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
-                                <input type="text" class="form-control" name="response_url" value="" placeholder="跳转链接">
+                                <input type="text" class="form-control" name="response_url" value="{{$definedmenu->response_url}}" placeholder="跳转链接">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
@@ -92,7 +92,7 @@
                                 <select style="width:260px" name="response_keyword" class="chosen-select2">
                                     <option value ="">请选择关键字</option>
                                     @foreach($wechatreply as $key=>$val)
-                                        <option value ="{{$val->id}}">{{$val->keyword}}</option>
+                                        <option value ="{{$val->id}}" @if($definedmenu->response_keyword == $val->id)selected @endif>{{$val->keyword}}</option>
                                     @endforeach
                                 </select>
                                  <span class="help-block m-b-none">
@@ -122,7 +122,7 @@
 
 <script>
     function addPostForm(){
-        var target = $("#defined_menu_add_check");
+        var target = $("#defined_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){

@@ -138,6 +138,12 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+            case "api/ajax/defined_menu_add_check":              //自定义菜单数据添加提交
+            case "api/ajax/defined_menu_edit_check":              //自定义菜单数据添加提交
+                $re = $this->checkLoginAndRuleAndDefinedMenuAdd($request);
+                return self::format_response($re,$next);
+                break;
+
             case "catering/ajax/role_edit_check"://检测是否登录 权限 安全密码
             case "catering/ajax/role_delete_check"://检测是否登录 权限 安全密码
             case "catering/ajax/subordinate_lock_check"://检测是否登录 权限 安全密码
@@ -170,6 +176,7 @@ class CateringCheckAjax
             case "api/ajax/material_article_delete_comfirm": //文章上传确认弹窗
             case "api/ajax/material_image_select":        //图片选择弹窗
             case "api/ajax/defined_menu_add":              //自定义菜单添加
+            case "api/ajax/defined_menu_edit":              //自定义菜单编辑
             case "api/ajax/defined_menu_get":              //自定义菜单添加
             case "api/ajax/auto_reply_add":              //自定义菜单添加
             case "api/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
@@ -190,6 +197,21 @@ class CateringCheckAjax
         }
     }
     /******************************复合检测*********************************/
+    //检测登陆，权限，自定义菜单数据添加提交
+    public function checkLoginAndRuleAndDefinedMenuAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefinedMenuAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     //检测登陆，权限，修改关注后自动回复图文内容
     public function checkLoginAndRuleAndDefaultReplyArticleEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -912,6 +934,20 @@ class CateringCheckAjax
         }
         if(empty($request->input('content'))){
             return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测自定义菜单数据的内容
+    public function checkDefinedMenuAdd($request){
+        if(empty($request->input('menu_name'))){
+            return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
+        }
+        if(empty($request->input('event_type'))){
+            return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
+        }
+        if($request->input('event_type') == '1' && empty($request->input('response_url'))){
+            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
         }
         return self::res(1,$request);
     }
