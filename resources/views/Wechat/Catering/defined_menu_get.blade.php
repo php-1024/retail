@@ -1,5 +1,5 @@
+@if(!empty($list))
 <div class="dd" id="nestable1">
-    @if(!empty($list))
     <ol class="dd-list">
         <li class="dd-item" data-id="2">
             <div class="dd-handle">
@@ -170,7 +170,7 @@
             </ol>
         </li>
     </ol>
-    @else
-    请添加菜单
-    @endif
 </div>
+@else
+    请添加菜单
+@endif
