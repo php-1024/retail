@@ -668,8 +668,9 @@ class ZeroneCheckAjax
         if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         if (empty($request->input('agent_password'))) {
             return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
