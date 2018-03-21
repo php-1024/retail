@@ -42,10 +42,10 @@ class WechatDefinedMenu extends Model{
         $model = new WechatDefinedMenu();
         $model->organization_id = $param['organization_id'];
         $model->authorizer_appid = $param['authorizer_appid'];
-        $model->authorizer_access_token = $param['authorizer_access_token'];
-        $model->authorizer_refresh_token = $param['authorizer_refresh_token'];
-        $model->origin_data = $param['origin_data'];
-        $model->status = $param['status'];
+        $model->menu_name = $param['menu_name'];
+        $model->parent_id = $param['parent_id'];
+        $model->parent_tree = $param['parent_tree'];
+        $model->event_type = $param['event_type'];
         $model->expire_time = $param['expire_time'];
         $model->save();
         return $model->id;
