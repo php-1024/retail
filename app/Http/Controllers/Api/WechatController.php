@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+use App\Models\WechatDefinedMenu;
 use App\Models\WechatReply;
 use App\Models\WechatSubscribeReply;
 use App\Models\WechatDefaultReply;
@@ -468,6 +469,7 @@ class WechatController extends Controller{
     public function defined_menu_get(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        WechatDefinedMenu::getOne();
         return view('Wechat/Catering/defined_menu_get');
     }
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
