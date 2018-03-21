@@ -464,9 +464,13 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        //获取触发关键字列表
+        $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        dump($wechatreply);
         dump($list);
-        return view('Wechat/Catering/defined_menu_add',['list'=>$list]);
+        return view('Wechat/Catering/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
     }
 
     //添加自定义菜单检测

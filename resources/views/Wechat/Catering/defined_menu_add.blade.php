@@ -30,12 +30,12 @@
             <label class="col-sm-2 control-label" for="input-id-1">事件类型</label>
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-info active" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="1" checked=""><i class="fa fa-check text-active"></i> 链接
+                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                        <input type="radio" name="event_type" value="1"><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="2" checked=""><i class="fa fa-check text-active"></i> 模拟关键字
+                        <input type="radio" name="event_type" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
@@ -50,7 +50,7 @@
                         <input type="radio" name="event_type" value="5"><i class="fa fa-check text-active"></i> 拍照发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;"">
+                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
                     <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
@@ -83,17 +83,17 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
-                                <input type="text" class="form-control" id="input-id-1" value="" placeholder="跳转链接">
+                                <input type="text" class="form-control" name="response_url" value="" placeholder="跳转链接">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
                             </div>
                             <div class="tab-pane fade in" id="text_response">
-                                <select style="width:260px" class="chosen-select2">
-                                    <option value="AK">请选择关键字</option>
-                                    <option value="HI">关键字1</option>
-                                    <option value="HI">关键字2</option>
-                                    <option value="HI">关键字3</option>
+                                <select style="width:260px" name="response_keyword" class="chosen-select2">
+                                    <option value ="">请选择关键字</option>
+                                    @foreach($wechatreply as $key=>$val)
+                                        <option value ="{{$val->id}}">{{$val->keyword}}</option>
+                                    @endforeach
                                 </select>
                                  <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要执行的操作, 你可以在这里输入关键字, 那么点击这个菜单时就就相当于发送这个内容至公众号</p>
