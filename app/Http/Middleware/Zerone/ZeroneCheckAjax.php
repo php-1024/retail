@@ -521,8 +521,9 @@ class ZeroneCheckAjax
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1,$request);
     }
@@ -610,8 +611,9 @@ class ZeroneCheckAjax
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
         }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1,$request);
     }
@@ -629,8 +631,9 @@ class ZeroneCheckAjax
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         if(empty($request->input('role_id'))){
             return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
@@ -690,8 +693,9 @@ class ZeroneCheckAjax
         if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
     }
@@ -722,8 +726,9 @@ class ZeroneCheckAjax
         if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         if (empty($request->input('fansmanage_password'))) {
             return self::res(0, response()->json(['data' => '请输入服务商登录密码', 'status' => '0']));
@@ -743,8 +748,9 @@ class ZeroneCheckAjax
         if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        if (empty($request->input('mobile'))) {
-            return self::res(0, response()->json(['data' => '请输入手机号码', 'status' => '0']));
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
     }
