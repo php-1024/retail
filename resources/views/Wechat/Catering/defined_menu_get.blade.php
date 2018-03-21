@@ -18,7 +18,7 @@
                 <li class="dd-item" data-id="3">
                     <div class="dd-handle">
                           <span class="pull-right">
-                            <button type="button" class="btn btn-success btn-xs" onclick="getEditForm('{{$val['id']}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                            <button type="button" class="btn btn-success btn-xs" onclick="getEditForm('{{$vv['id']}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                             <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                           </span>
                         {{$vv['menu_name']}}
