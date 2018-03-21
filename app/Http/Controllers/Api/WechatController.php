@@ -552,7 +552,7 @@ class WechatController extends Controller{
             }
             $menu_datas[] = $menu_data;
         }
-        dump($menu_datas);
+        dump($list);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
