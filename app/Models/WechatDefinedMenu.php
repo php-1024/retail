@@ -47,7 +47,8 @@ class WechatDefinedMenu extends Model{
         $model->parent_tree = $param['parent_tree'];
         $model->event_type = $param['event_type'];
         $model->response_type = $param['response_type'];
-        $model->response_content = $param['response_content'];
+        $model->response_url = $param['response_url'];
+        $model->response_keyword = $param['response_keyword'];
         $model->save();
         return $model->id;
     }
