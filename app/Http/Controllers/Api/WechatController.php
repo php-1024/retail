@@ -625,7 +625,7 @@ class WechatController extends Controller{
         }
         DB::beginTransaction();
         try {
-            WechatDefinedMenu::editDefinedMenu([['id',$menu_id]],$defined_menu);
+            WechatDefinedMenu::editDefinedMenu([['id'=>$menu_id]],$defined_menu);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统添加了公众号自定义菜单！');//保存操作记录
