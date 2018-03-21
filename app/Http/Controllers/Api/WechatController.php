@@ -567,14 +567,15 @@ class WechatController extends Controller{
     //自定义菜单编辑页面
     public function defined_menu_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->get('meun_id');
+        WechatDefinedMenu::getOne([['id'=>$id]]);
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-        return view('Wechat/Catering/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
+        return view('Wechat/Catering/defined_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply]);
     }
 
     //编辑自定义菜单检测
