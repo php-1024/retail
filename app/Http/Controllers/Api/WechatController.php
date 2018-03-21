@@ -543,7 +543,7 @@ class WechatController extends Controller{
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         dump($list);
-        $structure = $this->create_structure($list,'0,');
+        $structure = $this->create_structure($list,'0');
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
