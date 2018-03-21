@@ -494,8 +494,10 @@ class WechatController extends Controller{
         switch ($event_type) {
             case "1":   //处理链接类型
                 $defined_menu['response_url'] = $response_url;
+                $defined_menu['response_keyword'] = '';
                 break;
             case "2":   //处理链接类型
+                $defined_menu['response_url'] = '';
                 $defined_menu['response_keyword'] = $response_keyword;
                 break;
             case "3":   //处理链接类型
