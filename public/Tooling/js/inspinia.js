@@ -54,7 +54,7 @@ $(document).ready(function () {
     // Close menu in canvas mode
     $('.close-canvas-menu').click(function () {
         $("body").toggleClass("mini-navbar");
-
+        SmoothlyMenu();
     });
 
     // Run menu of canvas
