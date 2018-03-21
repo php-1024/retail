@@ -542,7 +542,6 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
-        dump($list);
         $structure = $this->create_structure($list,0);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
@@ -557,22 +556,9 @@ class WechatController extends Controller{
         foreach($list as $key=>$val){
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
-                $val['sonlist'] = $this->create_structure($list, $val['id']);
+                dump($list);
                 //$arr[] = $val;
-//                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
-//                $structure .= '<div class="dd-handle">';
-//                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
-//                $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-//                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
-//                if(!empty($val['account_roles'])){
-//                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
-//                }
-//                $structure .= '</div>';
-//                $son_menu = $this->create_structure($list, $val['id']);
-//                if (!empty($son_menu)) {
-//                    $structure .=  $son_menu;
-//                }
-//                $structure .= '</li></ol>';
+                $structure .= '';
             }
         }
         return $structure;
