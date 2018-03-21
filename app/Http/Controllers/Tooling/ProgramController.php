@@ -153,7 +153,6 @@ class ProgramController extends Controller{
                 ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'编辑了程序'.$program_name);//保存操作记录
                 DB::commit();//提交事务
             }catch (\Exception $e) {
-                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '编辑程序失败，请检查', 'status' => '0']);
             }
