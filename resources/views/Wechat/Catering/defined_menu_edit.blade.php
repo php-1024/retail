@@ -110,7 +110,7 @@
 
         <div class="form-group">
             <div class="col-sm-12 col-sm-offset-3">
-                <button type="button" class="btn btn-success" onclick="addPostForm()">添加菜单</button>
+                <button type="button" class="btn btn-success" onclick="EditPostForm()">修改菜单</button>
                 <button type="button" class="btn btn-primary" id="addBtn">一键创建默认自定义菜单</button>
                 <button type="button" class="btn btn-dark" id="addBtn">一键同步到微信公众号</button>
             </div>
@@ -121,7 +121,7 @@
 
 
 <script>
-    function addPostForm(){
+    function EditPostForm(){
         var target = $("#defined_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
