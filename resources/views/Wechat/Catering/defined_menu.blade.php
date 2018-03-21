@@ -61,7 +61,7 @@
                         <section class="vbox">
                             <section class="scrollable padder-lg">
                                 <div class="panel-body">
-                                    <button type="button" id="addBtn" class="btn btn-s-md btn-info" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加粉丝标签</button>
+                                    <button type="button" id="addBtn" class="btn btn-s-md btn-info" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加自定义菜单</button>
                                 </div>
                                 <div class="col-sm-4" id="menu_box">
 
