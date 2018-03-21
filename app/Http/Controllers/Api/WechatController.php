@@ -583,8 +583,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
-        $menu_id = $request->get('menu_id');
-        dd($request);
+        $menu_id = $request->get('menu_id');    //菜单ID
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
@@ -635,7 +634,6 @@ class WechatController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
         }
