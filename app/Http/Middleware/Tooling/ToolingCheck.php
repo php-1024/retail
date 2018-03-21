@@ -51,8 +51,6 @@ class ToolingCheck{
             case "tooling/program/program_list"://程序列表
             case "tooling/personal/password_edit"://修改登录密码
             case "tooling/program/menu_list"://程序菜单列表
-            case "tooling/program/package_add"://添加程序配套
-            case "tooling/program/package_list"://程序配套列表
             case "tooling"://后台首页
                 $re = $this->checkIsLogin($request);//判断是否登录
                 return self::format_response($re,$next);

@@ -92,16 +92,7 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndMenuEdit($request);
                 return self::format_response($re,$next);
                 break;
-            //检测添加套餐数据是否合法
-            case "tooling/ajax/package_add_check":
-                $re = $this->checkLoginAndPackageAdd($request);
-                return self::format_response($re,$next);
-                break;
-            //检测修改套餐数据是否合法
-            case "tooling/ajax/package_edit_check":
-                $re = $this->checkLoginAndPackageEdit($request);
-                return self::format_response($re,$next);
-                break;
+
             //检测软删除节点数据是否合法
             case "tooling/ajax/node_delete":
                 $re = $this->checkLoginAndNodeDelete($request);
@@ -122,19 +113,6 @@ class ToolingCheckAjax {
                 $re = $this->checkLoginAndSuperAndModuleRemove($request);
                 return self::format_response($re,$next);
                 break;
-
-
-            //检测软删除套餐数据是否合法
-            case "tooling/ajax/package_delete":
-                $re = $this->checkLoginAndPackageDelete($request);
-                return self::format_response($re,$next);
-                break;
-            //检测硬删除套餐数据是否合法
-            case "tooling/ajax/package_remove":
-                $re = $this->checkLoginAndSuperAndPackageRemove($request);
-                return self::format_response($re,$next);
-                break;
-
             //检测软删除菜单数据是否合法
             case "tooling/ajax/menu_delete":
                 $re = $this->checkLoginAndMenuDelete($request);
@@ -172,7 +150,6 @@ class ToolingCheckAjax {
             case "tooling/ajax/menu_add"://是否允许弹出添加页面
             case "tooling/ajax/menu_second_get"://是否允许获取二级菜单
             case "tooling/ajax/menu_edit"://是否允许弹出修改菜单页面
-            case "tooling/ajax/package_edit";//是否允许弹出修改套餐的页面
                 $re = $this->checkIsLogin($request);
                 return self::format_response($re,$next);
                 break;
@@ -390,34 +367,7 @@ class ToolingCheckAjax {
         }
     }
 
-    //添加程序套餐 检测是否登录 输入数据是否正确
-    public function checkLoginAndPackageAdd($request){
-        $re = $this->checkIsLogin($request);//判断是否登录
-        if($re['status']=='0'){
-            return $re;
-        }else{
-            $re2 = $this->checkPackageAdd($re['response']);//判断菜单添加数据
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //编辑程序套餐 检测是否登录 输入数据是否正确
-    public function checkLoginAndPackageEdit($request){
-        $re = $this->checkIsLogin($request);//判断是否登录
-        if($re['status']=='0'){
-            return $re;
-        }else{
-            $re2 = $this->checkPackageEdit($re['response']);//判断菜单添加数据
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
     //软删除节点 检测是否登录 输入数据是否正确
     public function checkLoginAndNodeDelete($request){
         $re = $this->checkIsLogin($request);//判断是否登录
@@ -475,34 +425,7 @@ class ToolingCheckAjax {
         }
     }
 
-    //软删除套餐 检测是否登录 输入数据是否正确
-    public function checkLoginAndPackageDelete($request){
-        $re = $this->checkIsLogin($request);//判断是否登录
-        if($re['status']=='0'){
-            return $re;
-        }else{
-            $re2 = $this->checkPackageDelete($re['response']);//判断菜单添加数据
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //硬删除套餐 检测是否登录 输入数据是否正确
-    public function checkLoginAndSuperAndPackageRemove($request){
-        $re = $this->checkLoginAndSuper($request);//判断是否登录
-        if($re['status']=='0'){
-            return $re;
-        }else{
-            $re2 = $this->checkPackageRemove($re['response']);//判断菜单添加数据
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
+
 
     //软删除套餐 检测是否登录 输入数据是否正确
     public function checkLoginAndMenuDelete($request){
@@ -608,20 +531,7 @@ class ToolingCheckAjax {
         return self::res(1,$request);
     }
 
-    //检测硬删除菜单数据提交
-    public function checkPackageRemove($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测软删除套餐数据提交
-    public function checkPackageDelete($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
     //检测硬删除模块数据提交
     public function checkModuleRemove($request){
         if(empty($request->input('id'))){
@@ -650,35 +560,7 @@ class ToolingCheckAjax {
         }
         return self::res(1,$request);
     }
-    //检测编辑程序套餐数据提交
-    public function checkPackageEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        if(empty($request->input('package_name'))){
-            return self::res(0,response()->json(['data' => '请输入程序套餐名称', 'status' => '0']));
-        }
-        if (empty($request->input('package_price'))) {
-            return self::res(0, response()->json(['data' => '请输入程序套餐价格', 'status' => '0']));
-        }
-        if (empty($request->input('program_ids'))) {
-            return self::res(0, response()->json(['data' => '请选择套餐程序', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测添加程序套餐数据提交
-    public function checkPackageAdd($request){
-        if(empty($request->input('package_name'))){
-            return self::res(0,response()->json(['data' => '请输入程序套餐名称', 'status' => '0']));
-        }
-        if (empty($request->input('package_price'))) {
-            return self::res(0, response()->json(['data' => '请输入程序套餐价格', 'status' => '0']));
-        }
-        if (empty($request->input('program_ids'))) {
-            return self::res(0, response()->json(['data' => '请选择套餐程序', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
 
     //检测编辑菜单数据提交
     public function checkMenuEdit($request){
