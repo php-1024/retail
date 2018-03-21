@@ -40,10 +40,11 @@
     </div>
 @endif
 <script>
-    function getEditForm(){
+    function getEditForm(menu_id){
         var target = $("#defined_menu_edit");
         var url = target.attr("action");
-        var data = target.serialize();
+        var token = $('#_token').val();
+        var data = {'_token':token,'menu_id':menu_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
