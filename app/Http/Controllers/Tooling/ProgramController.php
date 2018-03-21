@@ -166,6 +166,7 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'displayorder','asc');
+        dump($list);
         $son_menu = [];
         $third_menu = [];
         foreach($list as $key=>$val){
