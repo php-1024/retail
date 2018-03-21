@@ -543,16 +543,14 @@ class WechatController extends Controller{
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         foreach ($list as $key=>$val){
-            if ($val['parent_id'] == 0){
-                $menu_data['id'] = $val['id'];
-                $menu_data['menu_name'] = $val['menu_name'];
-            }else{
-                $menu_data['son_menu_data']['id'] = $val['id'];
-                $menu_data['son_menu_data']['menu_name'] = $val['menu_name'];
+            if ($val['parent_id'] == 0) {
+                $menu['id'] = $val['id'];
+                $menu['menu_name'] = $val['menu_name'];
             }
-            $menu_datas[] = $menu_data;
+            $menu_data[] = $menu;
         }
         dump($list);
+        dump($menu_data);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
