@@ -44,7 +44,7 @@
         var target = $("#defined_menu_edit");
         var url = target.attr("action");
         var data = target.serialize();
-        $.post(url,data,function(json){
+        $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
                     title: "提示信息",
