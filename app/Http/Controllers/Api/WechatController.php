@@ -637,9 +637,9 @@ class WechatController extends Controller{
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
+        return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
     }
 
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
