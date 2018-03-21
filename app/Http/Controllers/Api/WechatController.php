@@ -555,7 +555,7 @@ class WechatController extends Controller{
                 if ($vv['id'] == $val['parent_id'] && $val['parent_id'] != 0) {
                     $vv['so_menu']['id'] = $val['id'];
                     $vv['so_menu']['menu_name'] = $val['menu_name'];
-                    $menus[] = $vv['so_menu'];
+                    $menus[] = $vv;
                 }
             }
         }
