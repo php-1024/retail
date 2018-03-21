@@ -464,7 +464,9 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']]]);
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        dump($wechatreply);
         dump($list);
         return view('Wechat/Catering/defined_menu_add',['list'=>$list]);
     }

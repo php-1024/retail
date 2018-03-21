@@ -83,13 +83,13 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
-                                <input type="text" class="form-control" id="input-id-1" value="" placeholder="跳转链接">
+                                <input type="text" class="form-control" name="response_content" value="" placeholder="跳转链接">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
                             </div>
                             <div class="tab-pane fade in" id="text_response">
-                                <select style="width:260px" class="chosen-select2">
+                                <select style="width:260px" name="response_content" class="chosen-select2">
                                     <option value="AK">请选择关键字</option>
                                     <option value="HI">关键字1</option>
                                     <option value="HI">关键字2</option>
