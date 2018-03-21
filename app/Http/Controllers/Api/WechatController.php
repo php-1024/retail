@@ -485,18 +485,22 @@ class WechatController extends Controller{
         $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
         $defined_menu = [
-            '$organization_id' => $organization_id,
-            '$authorization' => $authorization,
-            '$menu_name' => $menu_name,
-            '$parent_id' => $parent_id,
+            'organization_id' => $organization_id,
+            'authorizer_appid' => $authorization['authorizer_appid'],
+            'menu_name' => $menu_name,
+            'parent_id' => $parent_id,
         ];
         //处理菜单
         switch ($event_type) {
             case "1":   //处理链接类型
+                $defined_menu['event_type'] = $event_type;
+                $defined_menu['response_type'] = $event_type;
                 $defined_menu['response_url'] = $response_url;
                 $defined_menu['response_keyword'] = '';
                 break;
             case "2":   //处理链接类型
+                $defined_menu['event_type'] = $event_type;
+                $defined_menu['response_type'] = $event_type;
                 $defined_menu['response_url'] = '';
                 $defined_menu['response_keyword'] = $response_keyword;
                 break;
