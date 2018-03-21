@@ -90,10 +90,10 @@
                             </div>
                             <div class="tab-pane fade in" id="text_response">
                                 <select style="width:260px" name="response_content" class="chosen-select2">
-                                    <option value="AK">请选择关键字</option>
-                                    <option value="HI">关键字1</option>
-                                    <option value="HI">关键字2</option>
-                                    <option value="HI">关键字3</option>
+                                    <option>请选择关键字</option>
+                                    @foreach($wechatreply as $key=>$val)
+                                        <option value ="{{$val->id}}">{{$val->keyword}}</option>
+                                    @endforeach
                                 </select>
                                  <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要执行的操作, 你可以在这里输入关键字, 那么点击这个菜单时就就相当于发送这个内容至公众号</p>
