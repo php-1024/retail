@@ -542,17 +542,6 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
-        $structure = $this->create_menu_data($list);
-        dump($structure);
-        return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
-    }
-
-    /*
-     * 递归生成菜单结构的方法
-     * $list - 结构所有人员的无序列表
-     * $id - 上级ID
-     */
-    private function create_menu_data($list){
         foreach ($list as $key=>$val){
             if ($val['parent_id'] == 0){
                 $menu_data['id'] = $val['id'];
@@ -562,6 +551,17 @@ class WechatController extends Controller{
                 $menu_data['son_menu_data']['menu_name'] = $val['menu_name'];
             }
         }
+        dump($list);
+        return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
+    }
+
+    /*
+     * 递归生成菜单结构的方法
+     * $list - 结构所有人员的无序列表
+     * $id - 上级ID
+     */
+    private function create_menu_data($list){
+
         return $menu_data;
     }
 
