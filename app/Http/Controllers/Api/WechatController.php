@@ -584,6 +584,7 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
 
+        dd($request);
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
