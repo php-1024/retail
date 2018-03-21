@@ -547,12 +547,11 @@ class WechatController extends Controller{
             if ($val['parent_id'] == 0){
                 $menu_data['id'] = $val['id'];
                 $menu_data['menu_name'] = $val['menu_name'];
-                $menu_datas[] = $menu_data;
             }else{
                 $menu_data['son_menu_data']['id'] = $val['id'];
                 $menu_data['son_menu_data']['menu_name'] = $val['menu_name'];
-                $menu_datas[] = $menu_data;
             }
+            $menu_datas[] = $menu_data;
         }
         dump($menu_datas);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
