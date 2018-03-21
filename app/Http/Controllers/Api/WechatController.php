@@ -478,7 +478,6 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
 
-
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
@@ -505,31 +504,18 @@ class WechatController extends Controller{
                 $defined_menu['response_url'] = $response_url;
                 $defined_menu['response_keyword'] = '';
                 break;
-            case "2":   //处理链接类型
+            case "2":   //处理模拟关键字类型
+            case "3":   //处理扫码类型
+            case "4":   //处理扫码(带等待信息)类型
+            case "5":   //处理拍照发图类型
+            case "6":   //处理拍照或者相册发图类型
+            case "7":   //处理微信相册发图类型
+            case "8":   //处理地理位置类型
                 $defined_menu['event_type'] = $event_type;
                 $defined_menu['response_type'] = $event_type;
                 $defined_menu['response_url'] = '';
                 $defined_menu['response_keyword'] = $response_keyword;
                 break;
-            case "3":   //处理链接类型
-                dd('3');
-                break;
-            case "4":   //处理链接类型
-                dd('4');
-                break;
-            case "5":   //处理链接类型
-                dd('5');
-                break;
-            case "6":   //处理链接类型
-                dd('6');
-                break;
-            case "7":   //处理链接类型
-                dd('7');
-                break;
-            case "8":   //处理链接类型
-                dd('8');
-                break;
-
         }
         DB::beginTransaction();
         try {
