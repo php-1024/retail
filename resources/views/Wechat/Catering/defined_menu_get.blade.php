@@ -45,7 +45,7 @@
         var target = $("#defined_menu_edit");
         var url = target.attr("action");
         var token = $('#_token').val();
-        var data = {'_token':token,'menu_id':menu_id};
+        var data = {'_token':token,'id':menu_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
