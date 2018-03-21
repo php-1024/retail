@@ -548,8 +548,8 @@ class WechatController extends Controller{
                 $menu_data[]['id'] = $val['id'];
                 $menu_data[]['menu_name'] = $val['menu_name'];
             }else{
-                $menu_data[]['son_menu_data']['id'] = $val['id'];
-                $menu_data[]['son_menu_data']['menu_name'] = $val['menu_name'];
+                $menu_data['son_menu_data']['id'] = $val['id'];
+                $menu_data['son_menu_data']['menu_name'] = $val['menu_name'];
             }
         }
         dump($menu_data);
