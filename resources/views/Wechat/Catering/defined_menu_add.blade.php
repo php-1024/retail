@@ -9,9 +9,9 @@
             <div class="col-sm-10">
                 <select name="account" class="form-control m-b">
                     <option>无</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
+                    @foreach($list as $key=>$val)
+                        <option value ="{{$val->id}}">{{$val->menu_name}}</option>
+                    @endforeach
                 </select>
 
             </div>
