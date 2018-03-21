@@ -475,14 +475,43 @@ class WechatController extends Controller{
     //添加自定义菜单检测
     public function defined_menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $event_type = $request->get('event_type');  //获取事件类型
 
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
+
         $menu_name = $request->get('menu_name');    //获取菜单名称
         $parent_id = $request->get('parent_id');    //获取上级菜单ID
-        $event_type = $request->get('event_type');  //获取事件类型
         $response_url = $request->get('response_url');  //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
+        //处理菜单
+        switch ($event_type) {
+            case "1":   //处理链接类型
+                dd('我是链接');
+                break;
+            case "2":   //处理链接类型
+                dd('2');
+                break;
+            case "3":   //处理链接类型
+                dd('3');
+                break;
+            case "4":   //处理链接类型
+                dd('4');
+                break;
+            case "5":   //处理链接类型
+                dd('5');
+                break;
+            case "6":   //处理链接类型
+                dd('6');
+                break;
+            case "7":   //处理链接类型
+                dd('7');
+                break;
+            case "8":   //处理链接类型
+                dd('8');
+                break;
+
+        }
 
 //        $parent_tree = $request->get('parent_id');    //获取上级菜单ID
 
