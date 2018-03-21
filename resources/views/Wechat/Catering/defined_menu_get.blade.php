@@ -81,6 +81,7 @@
                 return;
             }else{
                 $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
