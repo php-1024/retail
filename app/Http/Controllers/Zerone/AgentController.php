@@ -287,15 +287,12 @@ class AgentController extends Controller {
 
             if ($list['organizationagentinfo']['agent_owner'] != $realname) {
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner' => $realname]); //修改服务商用户信息表 用户姓名
-                dd(1);
-
+                dd($account_id);
                 AccountInfo::editAccountInfo([['account_id', $account_id]], ['realname' => $realname]); //修改用户管理员信息表 用户名
-
             }
             if ($acc['idcard'] != $idcard) {
                 AccountInfo::editAccountInfo([['account_id', $account_id]], ['idcard' => $idcard]); //修改用户管理员信息表 身份证号
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner_idcard' => $idcard]); //修改服务商信息表 身份证号
-
             }
             $waprlist = Warzoneagent::getOne([['agent_id', $id]]);
             if ($waprlist['zone_id'] != $zone_id) {
