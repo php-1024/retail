@@ -83,7 +83,7 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
-                                <input type="text" class="form-control" name="response_url" value="" placeholder="跳转链接">
+                                <input type="text" class="form-control" name="response_url" value="{{$definedmenu->response_url}}" placeholder="跳转链接">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
@@ -92,7 +92,7 @@
                                 <select style="width:260px" name="response_keyword" class="chosen-select2">
                                     <option value ="">请选择关键字</option>
                                     @foreach($wechatreply as $key=>$val)
-                                        <option value ="{{$val->id}}">{{$val->keyword}}</option>
+                                        <option value ="{{$val->id}}" @if($definedmenu->response_keyword == $val->id)selected @endif>{{$val->keyword}}</option>
                                     @endforeach
                                 </select>
                                  <span class="help-block m-b-none">
