@@ -30,35 +30,35 @@
             <label class="col-sm-2 control-label" for="input-id-1">事件类型</label>
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 1) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="1"@if($definedmenu->event_type == 1) checked @endif><i class="fa fa-check text-active"></i> 链接
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 2) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="2"@if($definedmenu->event_type == 2) checked @endif><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 3) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="3"@if($definedmenu->event_type == 3) checked @endif><i class="fa fa-check text-active"></i> 扫码
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 4) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="4"@if($definedmenu->event_type == 4) checked @endif><i class="fa fa-check text-active"></i> 扫码(带等待信息)
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 5) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="5"@if($definedmenu->event_type == 5) checked @endif><i class="fa fa-check text-active"></i> 拍照发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 6) active @endif" style="margin-right: 5px;margin-top: 10px;">
                     <input type="radio" name="event_type" value="6"@if($definedmenu->event_type == 6) checked @endif><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 7) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="7"@if($definedmenu->event_type == 7) checked @endif><i class="fa fa-check text-active"></i> 微信相册发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 8) active @endif" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="8"@if($definedmenu->event_type == 8) checked @endif><i class="fa fa-check text-active"></i> 地理位置
                     </label>
                 </div>
