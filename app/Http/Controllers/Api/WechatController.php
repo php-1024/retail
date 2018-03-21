@@ -542,6 +542,7 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        $menus = [];
         foreach ($list as $key=>$val){
             if ($val['parent_id'] == 0) {
                 $menu['id'] = $val['id'];
@@ -549,26 +550,17 @@ class WechatController extends Controller{
                 $menus[] = $menu;
             }
         }
-        foreach ($list as $key=>$val){
-            if ($val['parent_id'] != 0) {
-                $so_menu['id'] = $val['id'];
-                $so_menu['menu_name'] = $val['menu_name'];
-                $so_menus[] = $so_menu;
-            }
-        }
 
-
-        foreach ($menus as $kk=>$vv){
-            if ($vv['id'] == $val['parent_id']) {
-                $vv['so_menu']['id'] = $val['id'];
-                $vv['so_menu']['menu_name'] = $val['menu_name'];
-            }
-        }
+//        foreach ($menus as $kk=>$vv){
+//            if ($vv['id'] == $val['parent_id']) {
+//                $vv['so_menu']['id'] = $val['id'];
+//                $vv['so_menu']['menu_name'] = $val['menu_name'];
+//            }
+//        }
 
 
         dump($list);
         dump($menus);
-        dump($so_menus);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
