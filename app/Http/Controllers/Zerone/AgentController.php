@@ -463,7 +463,7 @@ class AgentController extends Controller {
             OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
 
             //添加操作日志
-            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state.'程序-'. $program_name .'*'.$number.' -服务商商：' . $agent_name);
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state.'程序--'. $program_name .'*'.$number.' --服务商：' . $agent_name);
             DB::commit(); //提交事务
 
         }
