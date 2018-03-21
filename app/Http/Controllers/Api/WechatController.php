@@ -558,6 +558,7 @@ class WechatController extends Controller{
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
                 $arr[] = $val;
+                dump($arr);
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
@@ -566,7 +567,6 @@ class WechatController extends Controller{
                 $structure .= '</li></ol>';
             }
         }
-        dump($arr);
         return $structure;
     }
 
