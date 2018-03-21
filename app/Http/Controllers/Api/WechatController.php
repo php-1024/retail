@@ -478,10 +478,16 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
 
+
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
+        if ($parent_id == 0){
+            $parent_tree = 0;
+        }else{
+            $parent_tree = '0,'.$parent_id;
+        }
         $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
         $defined_menu = [
@@ -489,6 +495,7 @@ class WechatController extends Controller{
             'authorizer_appid' => $authorization['authorizer_appid'],
             'menu_name' => $menu_name,
             'parent_id' => $parent_id,
+            'parent_tree' => $parent_tree,
         ];
         //处理菜单
         switch ($event_type) {
