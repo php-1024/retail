@@ -12,6 +12,7 @@
                   </span>
                 {{$val['menu_name']}}
             </div>
+
             <ol class="dd-list">
                 @foreach($val['so_menu'] as $kk=>$vv)
                 <li class="dd-item" data-id="3">
