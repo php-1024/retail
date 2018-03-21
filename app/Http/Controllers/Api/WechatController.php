@@ -557,9 +557,12 @@ class WechatController extends Controller{
         foreach($list as $key=>$val){
             if($val['parent_id'] != $id) {
                 unset($list[$key]);
+                $structure .= '<div class="dd-handle"><span class="pull-right">';
+                $structure .= '<button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>';
+                $structure .= '<button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>';
+                $structure .= '</span>'.$val['menu_name'].'</div>';
             }
         }
-        dump($list);
         return $structure;
     }
 
