@@ -80,7 +80,7 @@
                 });
                 return;
             }else{
-                $('#ctrl_box').html(response);
+                $('#myModal').html(response);
             }
         });
     }
