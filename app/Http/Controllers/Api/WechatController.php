@@ -468,6 +468,14 @@ class WechatController extends Controller{
         dump($list);
         return view('Wechat/Catering/defined_menu_add',['list'=>$list]);
     }
+
+    //添加自定义菜单检测
+    public function defined_menu_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        dd($request);
+    }
+
     public function defined_menu_get(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
