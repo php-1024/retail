@@ -1,4 +1,4 @@
-<header class="panel-heading font-bold text-danger">
+<header class="panel-heading font-bold" style="color:#FF0000">
     自定义菜单修改
 </header>
 <div class="panel-body">
