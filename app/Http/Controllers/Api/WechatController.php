@@ -558,12 +558,20 @@ class WechatController extends Controller{
             if($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
-                $arr[] = $val;
+                dump($list);
                 $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
                 $structure .= '<div class="dd-handle">';
                 $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
                 $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
                 $structure .=  $val['account']. '-'.$val['account_info']['realname'];
+                if(!empty($val['account_roles'])){
+                    $structure.='【'.$val['account_roles'][0]['role_name'].'】';
+                }
+                $structure .= '</div>';
+                $son_menu = $this->create_structure($list, $val['id']);
+                if (!empty($son_menu)) {
+                    $structure .=  $son_menu;
+                }
                 $structure .= '</li></ol>';
             }
         }
