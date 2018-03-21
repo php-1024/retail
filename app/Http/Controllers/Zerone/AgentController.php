@@ -273,7 +273,7 @@ class AgentController extends Controller {
         DB::beginTransaction();
         try {
             $list = Organization::getOneagent(['id' => $id]);
-            $acc = Account::getOne(['organization_id' => $id, 'deepth' => '0']);
+            $acc = Account::getOne(['organization_id' => $id, 'deepth' => '1']);
             $account_id = $acc['id'];
             if ($list['organization_name'] != $organization_name) {
                 Organization::editOrganization([['id', $id]], ['organization_name' => $organization_name]); //修改服务商表服务商名称
