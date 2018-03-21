@@ -175,7 +175,7 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title">
-                请在右侧添加菜单
+                <h1 style="color:#FF0000">请在右侧添加菜单</h1>
             </div>
         </div>
     </div>
