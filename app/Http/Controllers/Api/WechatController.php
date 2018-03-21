@@ -544,26 +544,31 @@ class WechatController extends Controller{
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         foreach ($list as $key=>$val){
             if ($val['parent_id'] == 0) {
-                $defined_menu['id'] = $val['id'];
-                $defined_menu['menu_name'] = $val['menu_name'];
-                $menus[] = $defined_menu;
+                $menu['id'] = $val['id'];
+                $menu['menu_name'] = $val['menu_name'];
+                $menus[] = $menu;
             }
         }
         foreach ($list as $key=>$val){
             if ($val['parent_id'] != 0) {
-                $defined_menu['id'] = $val['id'];
-                $defined_menu['menu_name'] = $val['menu_name'];
-                $menus[] = $defined_menu;
-                foreach ($menus as $kk=>$vv){
-                    if ($vv['id'] == $val['parent_id']) {
-                        $vv['so_menu']['id'] = $val['id'];
-                        $vv['so_menu']['menu_name'] = $val['menu_name'];
-                    }
-                }
+                $so_menu['id'] = $val['id'];
+                $so_menu['menu_name'] = $val['menu_name'];
+                $so_menus[] = $so_menu;
             }
         }
+
+
+        foreach ($menus as $kk=>$vv){
+            if ($vv['id'] == $val['parent_id']) {
+                $vv['so_menu']['id'] = $val['id'];
+                $vv['so_menu']['menu_name'] = $val['menu_name'];
+            }
+        }
+
+
         dump($list);
         dump($menus);
+        dump($so_menus);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
