@@ -125,19 +125,23 @@
         var target = $("#defined_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        $.post(url,data,function(json){
+            if(json.status==1){
                 swal({
                     title: "提示信息",
-                    text: response.data,
+                    text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
-                return;
             }else{
-                $('#ctrl_box').html(response);
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }
