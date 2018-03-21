@@ -43,6 +43,7 @@ class PersonalController extends Controller{
                 unset($module);
             }
         }
+        dump($module_node_list);
         return view('Zerone/Personal/display',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
     }
 
