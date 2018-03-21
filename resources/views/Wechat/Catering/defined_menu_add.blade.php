@@ -21,7 +21,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">菜单名称</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="menu_name" value="">
+                <input type="text" class="form-control" placeholder="限制四个字" name="menu_name" value="">
             </div>
         </div>
 
