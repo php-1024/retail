@@ -650,7 +650,7 @@ class WechatController extends Controller{
     }
 
     //自定义菜单删除检测
-    public function defined_menu_edit_check(Request $request){
+    public function defined_menu_delete_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->get('id');
