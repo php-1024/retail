@@ -172,5 +172,11 @@
     </ol>
 </div>
 @else
-    请添加菜单
+    <div class="flex-center position-ref full-height">
+        <div class="content">
+            <div class="title">
+                请在右侧添加菜单
+            </div>
+        </div>
+    </div>
 @endif
