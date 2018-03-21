@@ -559,12 +559,64 @@ class WechatController extends Controller{
                 $val['sonlist'] = $this->create_structure($list, $val['id']);
                 //$arr[] = $val;
                 dump($list);
-                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">' ;
-                $structure .= '<div class="dd-handle">';
-                $structure .= '<span class="pull-right">创建时间：'.date('Y-m-d,H:i:s',$val['created_at']).'</span>';
-                $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure .=  $val['account']. '-'.$val['account_info']['realname'];
-                $structure .= '</li></ol>';
+                $structure .= '<ol class="dd-list">
+        <li class="dd-item" data-id="2">
+            <div class="dd-handle">
+                  <span class="pull-right">
+                    <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                    <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                  </span>
+                主菜单1
+            </div>
+            <ol class="dd-list">
+                <li class="dd-item" data-id="3">
+                    <div class="dd-handle">
+                          <span class="pull-right">
+                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                          </span>
+                        子菜单1
+                    </div>
+                </li>
+                <li class="dd-item" data-id="3">
+                    <div class="dd-handle">
+                          <span class="pull-right">
+                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                          </span>
+                        子菜单1
+                    </div>
+                </li>
+                <li class="dd-item" data-id="3">
+                    <div class="dd-handle">
+                          <span class="pull-right">
+                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                          </span>
+                        子菜单1
+                    </div>
+                </li>
+                <li class="dd-item" data-id="3">
+                    <div class="dd-handle">
+                          <span class="pull-right">
+                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                          </span>
+                        子菜单1
+                    </div>
+                </li>
+                <li class="dd-item" data-id="3">
+                    <div class="dd-handle">
+                          <span class="pull-right">
+                            <button type="button" class="btn btn-success btn-xs" id="edit_btn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                            <button type="button" class="btn btn-success btn-xs delete_btn" id="edit_btn"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                          </span>
+                        子菜单1
+                    </div>
+                </li>
+            </ol>
+        </li>
+    </ol>';
             }
         }
         return $structure;
