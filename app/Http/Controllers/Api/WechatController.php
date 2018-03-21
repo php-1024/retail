@@ -475,22 +475,28 @@ class WechatController extends Controller{
     //添加自定义菜单检测
     public function defined_menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
 
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
-
-        $menu_name = $request->get('menu_name');    //获取菜单名称
-        $parent_id = $request->get('parent_id');    //获取上级菜单ID
-        $response_url = $request->get('response_url');  //获取响应网址
+        $menu_name = $request->get('menu_name');                //获取菜单名称
+        $parent_id = $request->get('parent_id');                //获取上级菜单ID
+        $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
+        $defined_menu = [
+            '$organization_id' => $organization_id,
+            '$authorization' => $authorization,
+            '$menu_name' => $menu_name,
+            '$parent_id' => $parent_id,
+        ];
         //处理菜单
         switch ($event_type) {
             case "1":   //处理链接类型
-                dd('我是链接');
+                $defined_menu['response_url'] = $response_url;
                 break;
             case "2":   //处理链接类型
-                dd('2');
+                $defined_menu['response_keyword'] = $response_keyword;
                 break;
             case "3":   //处理链接类型
                 dd('3');
@@ -512,10 +518,22 @@ class WechatController extends Controller{
                 break;
 
         }
-
-//        $parent_tree = $request->get('parent_id');    //获取上级菜单ID
-
-        dd($request);
+        DB::beginTransaction();
+        try {
+            WechatDefinedMenu::addDefinedMenu($defined_menu);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统添加了公众号自定义菜单！');//保存操作记录
+            }else{//商户本人操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了公众号自定义菜单！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
     }
 
     public function defined_menu_get(Request $request){
