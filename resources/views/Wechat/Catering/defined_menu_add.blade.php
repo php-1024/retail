@@ -30,12 +30,12 @@
             <label class="col-sm-2 control-label" for="input-id-1">事件类型</label>
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-info active" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="1" checked=""><i class="fa fa-check text-active"></i> 链接
+                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                        <input type="radio" name="event_type" value="1"><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="2" checked=""><i class="fa fa-check text-active"></i> 模拟关键字
+                        <input type="radio" name="event_type" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
@@ -50,7 +50,7 @@
                         <input type="radio" name="event_type" value="5"><i class="fa fa-check text-active"></i> 拍照发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;"">
+                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
                     <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
