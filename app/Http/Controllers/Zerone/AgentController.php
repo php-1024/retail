@@ -273,7 +273,7 @@ class AgentController extends Controller {
         DB::beginTransaction();
         try {
             $list = Organization::getOneagent(['id' => $id]);
-            $acc = Account::getOne(['organization_id' => $id, 'parent_id' => '1']);
+            $acc = Account::getOne(['organization_id' => $id, 'deepth' => '1']);
             $account_id = $acc['id'];
             if ($list['organization_name'] != $organization_name) {
                 Organization::editOrganization([['id', $id]], ['organization_name' => $organization_name]); //修改服务商表服务商名称
@@ -284,15 +284,14 @@ class AgentController extends Controller {
                 Account::editAccount([['organization_id', $id]], ['mobile' => $mobile]); //修改用户管理员信息表 手机号
 
             }
+
             if ($list['organizationagentinfo']['agent_owner'] != $realname) {
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner' => $realname]); //修改服务商用户信息表 用户姓名
                 AccountInfo::editAccountInfo([['account_id', $account_id]], ['realname' => $realname]); //修改用户管理员信息表 用户名
-
             }
             if ($acc['idcard'] != $idcard) {
                 AccountInfo::editAccountInfo([['account_id', $account_id]], ['idcard' => $idcard]); //修改用户管理员信息表 身份证号
                 OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner_idcard' => $idcard]); //修改服务商信息表 身份证号
-
             }
             $waprlist = Warzoneagent::getOne([['agent_id', $id]]);
             if ($waprlist['zone_id'] != $zone_id) {
@@ -418,6 +417,7 @@ class AgentController extends Controller {
     }
     //服务商程序管理页面划入划出检测
     public function agent_assets_check(Request $request) {
+        $route_name = $request->path(); //获取当前的页面路由
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         if ($admin_data['organization_id'] == 0) { //超级管理员没有组织id，操作默认为零壹公司操作
             $to_organization_id = 1;
@@ -425,7 +425,9 @@ class AgentController extends Controller {
             $to_organization_id = $admin_data['organization_id'];
         }
         $organization_id = $request->input('organization_id'); //服务商id
+        $agent_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//服务商名字
         $program_id = $request->input('program_id'); //程序id
+        $program_name = Program::getPluck([['id',$program_id]],'program_name')->first();//程序名字
         $number = $request->input('number'); //数量
         $status = $request->input('status'); //判断划入或者划出
         DB::beginTransaction();
@@ -433,13 +435,16 @@ class AgentController extends Controller {
             $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
             $id = $re['id'];
             if ($status == '1') { //划入
+                $state = '划入';
                 if (empty($re)) {
                     OrganizationAssets::addAssets(['organization_id' => $organization_id, 'program_id' => $program_id, 'program_balance' => $number, 'program_used_num' => '0']);
                 } else {
                     $num = $re['program_balance'] + $number;
                     OrganizationAssets::editAssets([['id', $id]], ['program_balance' => $num]);
                 }
+
             } else { //划出
+                $state = '划出';
                 if (empty($re)) {
                     return response()->json(['data' => '数量不足', 'status' => '0']);
                 } else {
@@ -452,8 +457,11 @@ class AgentController extends Controller {
                 }
             }
             $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $organization_id, 'to_organization_id' => $to_organization_id, 'program_id' => $program_id, 'status' => $status, 'number' => $number];
-            //添加操作日志
+            //添加程序操作记录
             OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
+
+            //添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state.'程序--'. $program_name .'*'.$number.' --服务商：' . $agent_name);
             DB::commit(); //提交事务
 
         }
