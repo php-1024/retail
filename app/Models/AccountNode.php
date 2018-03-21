@@ -51,6 +51,7 @@ class AccountNode extends Model
         $organization_list = Organization::where('program_id',$program_id)->get();
         foreach($organization_list as $key=>$val){
             $main_account = Account::where('organization_id',$val['id'])->where('deepth',1)->first();
+            dd($main_account);
             foreach($nodes as $k=>$v){
                 AccountNode::addAccountNode(['account_id'=>$main_account['id'],'node_id'=>$v]);
             }
