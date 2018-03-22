@@ -79,7 +79,9 @@
                             <li class="active"><a href="#link_response" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
                             <li><a href="#text_response" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
                         </ul>
-                        <span class="hidden-sm">&nbsp;</span>
+                        <span class="hidden-sm">&nbsp;
+                        <input type="hidden" name="response_type" value="666">
+                        </span>
                     </header>
                     <div class="panel-body">
                         <div class="tab-content">
