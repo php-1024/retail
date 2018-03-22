@@ -51,7 +51,7 @@
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                    <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
+                        <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
