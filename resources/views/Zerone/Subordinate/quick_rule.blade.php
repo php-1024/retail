@@ -5,13 +5,13 @@
         <group class="checked_box_group_{{ $val['id'] }}">
             <div>
                 <label class="i-checks">
-                    <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" @if(in_array($val['id'],$selected_modules)) checked="checked" @endif value="{{ $val['id'] }}"> {{ $val['module_show_name'] }}
+                    <input type="checkbox" class="checkbox_module_name checkbox_module_name_{{ $val['id'] }}" @if(in_array($val['id'],$selected_modules)) checked="checked" @endif value="{{ $val['id'] }}"> {{ $val['module_name'] }}
                 </label>
             </div>
             <div>
                 @foreach($val['program_nodes'] as $kk=>$vv)
                     <label class="checkbox-inline i-checks" style="margin-left: 0px; margin-right: 10px; margin-bottom: 10px;">
-                        <input type="checkbox"  data-group_id="{{ $val['id'] }}" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_show_name'] }}
+                        <input type="checkbox"  data-group_id="{{ $val['id'] }}" @if(in_array($vv['id'],$selected_nodes)) checked="checked" @endif class="checkbox_node_name checkbox_node_name_{{ $val['id'] }}" name="module_node_ids[]" value="{{ $vv['id'] }}"> {{ $vv['node_name'] }}
                     </label>
                 @endforeach
             </div>
