@@ -102,19 +102,17 @@ class GoodsController extends Controller
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
-        $where = [
-            'id' => $goods_id,
-        ];
+        $where = ['id' => $goods_id];
         //商品数据
         $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name,'price' => $price,'stock' => $stock,'displayorder' => $displayorder,'details' => $details];
         DB::beginTransaction();
         try {
             $goods_id = RetailGoods::editRetailGoods($where,$goods_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统编辑了商品！');//保存操作记录
-            } else {//商户本人操作记录
-                OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统编辑了商品！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -129,7 +127,7 @@ class GoodsController extends Controller
     public function goods_thumb(Request $request)
     {
         $goods_id = $request->get('goods_id');              //商品的ID
-        $goods_thumb = RetailGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');
+        $goods_thumb = RetailGoodsThumb::getList(['goods_id'=>$goods_id],0,'created_at','DESC');    //商品图片
         return view('Retail/Goods/goods_thumb', ['goods_thumb'=>$goods_thumb]);
     }
 
@@ -139,52 +137,43 @@ class GoodsController extends Controller
     {
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
-        $goods_id = $request->get('goods_id');
-        $file = $request->file('upload_thumb');
-        if ($file->isValid()) {
+        $goods_id = $request->get('goods_id');              //获取商品ID
+        $file = $request->file('upload_thumb');             //获取上传文件
+        $file_path = '';                                        //初始化文件路径
+        if ($request->hasFile('upload_thumb') && $file->isValid()){
             //检验文件是否有效
-            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
+            $entension = $file->getClientOriginalExtension();                           //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $path = $file->move(base_path() . '/uploads/catering/', $new_name);   //$path上传后的文件路径
+            $file->move(base_path() . '/uploads/catering/', $new_name);         //$path上传后的文件路径
             $file_path =  'uploads/catering/'.$new_name;
-            $goods_thumb = [
-                'goods_id' => $goods_id,
-                'thumb' => $file_path,
-            ];
-            DB::beginTransaction();
-            try {
-                RetailGoodsThumb::addGoodsThumb($goods_thumb);
-                //添加操作日志
-                if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统上传了商品图片！');//保存操作记录
-                } else {//分店本人操作记录
-                    OperationLog::addOperationLog('5', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
-                }
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
-            }
-            return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
-
-        } else {
-            return response()->json(['status' => '0']);
         }
+        $goods_thumb = ['goods_id' => $goods_id,'thumb' => $file_path];         //商品图片信息
+        DB::beginTransaction();
+        try {
+            RetailGoodsThumb::addGoodsThumb($goods_thumb);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员零售商品图片添加的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统上传了商品图片！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
     }
-
-
 
     //商品列表
     public function goods_list(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $where = [
-            'retail_id' => $admin_data['organization_id'],
-        ];
-        $goods = RetailGoods::getPaginage($where, '10', 'displayorder', 'DESC');
+        $where = ['retail_id' => $admin_data['organization_id']];
+        $goods = RetailGoods::getPaginage($where, '10', 'displayorder', 'DESC');//查询商品信息
         return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
@@ -201,14 +190,14 @@ class GoodsController extends Controller
     {
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
-        $goods_id = $request->get('goods_id');        //获取分类栏目ID
+        $goods_id = $request->get('goods_id');              //获取分类栏目ID
         DB::beginTransaction();
         try {
             RetailGoods::select_delete($goods_id);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录
-            } else {//分店本人操作记录
+            } else {//零售店铺本人操作记录
                 OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
             }
             DB::commit();
