@@ -500,28 +500,9 @@ class WechatController extends Controller{
             'event_type' => $event_type,
             'response_type' => $response_type,
             'response_url' => $response_keyword,
+            'response_keyword' => $response_keyword,
         ];
-        //处理菜单
-        switch ($event_type) {
-            case "1":   //处理链接类型
-                $defined_menu['event_type'] = $event_type;
-                $defined_menu['response_type'] = $event_type;
-                $defined_menu['response_url'] = $response_url;
-                $defined_menu['response_keyword'] = $response_keyword;
-                break;
-            case "2":   //处理模拟关键字类型
-            case "3":   //处理扫码类型
-            case "4":   //处理扫码(带等待信息)类型
-            case "5":   //处理拍照发图类型
-            case "6":   //处理拍照或者相册发图类型
-            case "7":   //处理微信相册发图类型
-            case "8":   //处理地理位置类型
-                $defined_menu['event_type'] = $event_type;
-                $defined_menu['response_type'] = $event_type;
-                $defined_menu['response_url'] = '';
-                $defined_menu['response_keyword'] = $response_keyword;
-                break;
-        }
+
         DB::beginTransaction();
         try {
             WechatDefinedMenu::addDefinedMenu($defined_menu);
