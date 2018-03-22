@@ -52,27 +52,10 @@
 <script>
     $(document).ready(function() {
         $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
-        // activate Nestable for list 2
-        $('#addBtn').click(function(){
-            $('#myModal2').modal();
-        });
-
-        $('#removeBtn').click(function(){
-            $('#myModal').modal();
-        });
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, { color: '#1AB394' });
         var elem = document.querySelector('.js-switch2');
         var switchery = new Switchery(elem, { color: '#1AB394' });
-        $('.saveBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            },function(){
-                window.location.reload();
-            });
-        });
     });
 
     //提交表单
