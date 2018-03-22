@@ -1,6 +1,6 @@
 <?php
 /**
- *餐饮分店管理系统
+ * 零售管理系统
  * 登录界面
  **/
 
@@ -9,12 +9,7 @@ namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
-use App\Models\AccountNode;
-use App\Models\Module;
 use App\Models\OperationLog;
-use App\Models\OrganizationRole;
-use App\Models\ProgramModuleNode;
-use App\Models\RoleAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -24,29 +19,24 @@ class SubordinateController extends Controller
     //下属添加
     public function subordinate_add(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
         return view('Retail/Subordinate/subordinate_add',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //快速授权功能
-    public function quick_rule(Request $request){
-    }
-
-
     //添加下级人员数据提交
     public function subordinate_add_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        $admin_data = $request->get('admin_data');  //中间件产生的管理员数据参数
+        $route_name = $request->path();                 //获取当前的页面路由
 
-        $password = $request->input('password');//登录密码
-        $realname = $request->input('realname');//用户真实姓名
-        $mobile = $request->input('mobile');//用户手机号码
+        $password = $request->input('password');    //登录密码
+        $realname = $request->input('realname');    //用户真实姓名
+        $mobile = $request->input('mobile');        //用户手机号码
 
-        $key = config("app.retail_encrypt_key");//获取加密盐
-        $encrypted = md5($password);//加密密码第一重
+        $key = config("app.retail_encrypt_key");    //获取加密盐
+        $encrypted = md5($password);                    //加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
         $parent_id = $admin_data['id'];//上级ID是当前用户ID
@@ -87,10 +77,10 @@ class SubordinateController extends Controller
 
     //下属列表
     public function subordinate_list(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');        //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        $route_name = $request->path();                     //获取当前的页面路由
         $account = $request->input('account');
         $search_data = ['account'=>$account];
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
