@@ -123,7 +123,9 @@
 
 <script>
     $(function(){
+        $('#type_1').click(function(){
 
+        });
     });
     function addPostForm(){
         var target = $("#defined_menu_add_check");
