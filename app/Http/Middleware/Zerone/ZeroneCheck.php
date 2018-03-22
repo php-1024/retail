@@ -91,14 +91,13 @@ class ZeroneCheck{
             //暂定所有用户都有权限
             //return self::res(1,redirect('zerone'));
             $route_name = $request->path();//获取当前的页面路由
-
+            dump($route_name);
             //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$admin_data['id']]]);
             $account_routes = [];
             foreach($account_info->nodes as $key=>$val){
                 $account_routes[] = $val->route_name;
             }
-            dump($account_routes);
             //查询该程序下所有节点的路由
             $program_info = Program::getOne([['id',1]]);
             $program_routes = [];
