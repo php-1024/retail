@@ -50,7 +50,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">用户账号</label>
-                                <input type="text" id="account" name="account" value="{{ $search_data['account'] }}" placeholder="用户账号" class="form-control">
+                                <input type="text" name="account" value="{{ $search_data['account'] }}" placeholder="用户账号" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
