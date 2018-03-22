@@ -124,12 +124,10 @@
 <script>
     $(function(){
         $('#type_1').click(function(){
-            $('#text_type').removeClass('active');
-            $('#link_type').addClass('active');
+            $('#link_type').click();
         });
         $('#type_2').click(function(){
-            $('#link_type').removeClass('active');
-            $('#text_type').addClass('active');
+            $('#text_type').click();
         });
     });
     function addPostForm(){
