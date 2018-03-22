@@ -542,11 +542,11 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id','0']],0,'id','DESC');
+        $son_menu = [];
         foreach ($list as $key=>$val){
-            $so_menu[] = WechatDefinedMenu::getOne([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]]);
-            $val->so_menu = $so_menu;
+            $so_menu[$val->id] = WechatDefinedMenu::getOne([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]]);
         }
-        return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
+        return view('Wechat/Catering/defined_menu_get',['list'=>$list,'son_menu'=>$son_menu]);
     }
 
 
