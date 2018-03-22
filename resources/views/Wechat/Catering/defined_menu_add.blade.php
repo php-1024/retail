@@ -4,6 +4,7 @@
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('api/ajax/defined_menu_add_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="response_id" id="response_id" value="1">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
@@ -75,8 +76,8 @@
                 <section class="panel panel-default">
                     <header class="panel-heading text-right bg-light">
                         <ul class="nav nav-tabs pull-left">
-                            <li class="active"><a href="#link_response" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
-                            <li><a href="#text_response" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
+                            <li class="active"><a href="#link_response" onclick="$('#response_id').val(1)" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
+                            <li><a href="#text_response" onclick="$('#response_id').val(2)" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
                         </ul>
                         <span class="hidden-sm">&nbsp;</span>
                     </header>
