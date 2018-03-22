@@ -1,7 +1,7 @@
 <?php
 /**
  * program_module_node表的模型
- *
+ * 程序模块节点
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;

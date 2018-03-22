@@ -1,6 +1,7 @@
 <?php
 /**
- * program_admin表的模型
+ * account_info表的模型
+ * 存储后台管理系统的账号信息
  *
  */
 namespace App\Models;
