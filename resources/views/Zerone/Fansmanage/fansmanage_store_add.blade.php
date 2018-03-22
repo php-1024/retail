@@ -50,6 +50,14 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        $('.chosen-select').chosen({width:"100%",no_results_text:'对不起，没有找到结果！关键词：'});
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        var elem = document.querySelector('.js-switch2');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+    });
+
     //提交表单
     function postForm() {
         var target = $("#currentForm");
