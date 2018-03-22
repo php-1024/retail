@@ -94,12 +94,11 @@ class ZeroneCheck{
 
             //查询用户所具备的所有节点的路由
             $account_info = Account::getOne([['id',$admin_data['id']]]);
-            dump($account_info);
             $account_routes = [];
             foreach($account_info->nodes as $key=>$val){
                 $account_routes[] = $val->route_name;
             }
-
+            dump($account_routes);
             //查询该程序下所有节点的路由
             $program_info = Program::getOne([['id',1]]);
             $program_routes = [];
