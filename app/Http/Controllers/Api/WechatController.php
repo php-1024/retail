@@ -544,7 +544,7 @@ class WechatController extends Controller{
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id','0']],0,'id','DESC');
         foreach ($list as $key=>$val){
             $so_menu = WechatDefinedMenu::getOne([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]]);
-            $val['so_menu'][$key] = $so_menu;
+            $val[]['so_menu'] = $so_menu;
         }
         dd($list);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
@@ -555,6 +555,7 @@ class WechatController extends Controller{
     public function defined_menu_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->get('id');
+        
         $definedmenu = WechatDefinedMenu::getOne([['id',$id]]);
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
