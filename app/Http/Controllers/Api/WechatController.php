@@ -546,6 +546,7 @@ class WechatController extends Controller{
             $so_menu[] = WechatDefinedMenu::getOne([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]]);
             $val->so_menu = $so_menu;
         }
+        dump($list);
         return view('Wechat/Catering/defined_menu_get',['list'=>$list]);
     }
 
