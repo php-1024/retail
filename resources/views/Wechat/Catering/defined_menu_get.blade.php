@@ -15,7 +15,8 @@
             </div>
 
             <ol class="dd-list">
-                @foreach($val['so_menu'] as $kk=>$vv)
+
+                @foreach($son_menu as $kk=>$vv)
                     @if(empty($vv->id))
                     @endif
                 <li class="dd-item" data-id="3">
