@@ -124,13 +124,17 @@
 <script>
     $(function(){
         $('#type_1').click(function(){
-            alert(123);
             $('#text_type').removeClass('active');
+            $('#text_response').removeClass('active');
             $('#link_type').addClass('active');
+            $('#link_response').addClass('active');
+
         });
         $('#type_2').click(function(){
             $('#link_type').removeClass('active');
+            $('#link_response').removeClass('active');
             $('#text_type').addClass('active');
+            $('#text_response').addClass('active');
         });
     });
     function addPostForm(){
