@@ -4,7 +4,7 @@
 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 <div class="dd" id="nestable1">
     <ol class="dd-list">
-        @foreach($defined_menu as $key=>$val)
+        @foreach($list as $key=>$val)
         <li class="dd-item" data-id="2">
             <div class="dd-handle">
                   <span class="pull-right">
