@@ -504,7 +504,7 @@ class WechatController extends Controller{
                 $defined_menu['event_type'] = $event_type;
                 $defined_menu['response_type'] = $event_type;
                 $defined_menu['response_url'] = $response_url;
-                $defined_menu['response_keyword'] = '';
+                $defined_menu['response_keyword'] = $response_keyword;
                 break;
             case "2":   //处理模拟关键字类型
             case "3":   //处理扫码类型

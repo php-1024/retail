@@ -9,9 +9,9 @@
             <div class="col-sm-10">
                 <select name="parent_id" class="form-control m-b">
                         <option value ="0">无</option>
-                    @foreach($list as $key=>$val)
-                        <option value ="{{$val->id}}">{{$val->menu_name}}</option>
-                    @endforeach
+                        @foreach($list as $key=>$val)
+                            <option value ="{{$val->id}}">{{$val->menu_name}}</option>
+                        @endforeach
                 </select>
 
             </div>
@@ -62,9 +62,9 @@
                         <input type="radio" name="event_type" value="8"><i class="fa fa-check text-active"></i> 地理位置
                     </label>
                 </div>
-                                                        <span class="help-block m-b-none">
-                                            <p class="text-danger">事件类型为"链接"时，响应类型必须为跳转链接</p>
-                                        </span>
+                  <span class="help-block m-b-none">
+                      <p class="text-danger">事件类型为"链接"时，响应类型必须为跳转链接</p>
+                  </span>
             </div>
         </div>
 
