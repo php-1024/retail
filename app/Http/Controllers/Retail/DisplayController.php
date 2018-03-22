@@ -67,8 +67,7 @@ class DisplayController extends Controller
     public function retail_select(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $account_id = $request->account_id;                     //获取当前选择店铺的组织
-        dd($account_id);
+        $account_id = $request->account_id;                     //获取当前店铺的管理员id
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
         if ($admin_data['is_super'] == '1' && $admin_data['organization_id'] == 0){
             $this->superadmin_login($account_id);      //超级管理员选择身份登录
@@ -80,7 +79,7 @@ class DisplayController extends Controller
 
     //超级管理员退出当前店铺（切换店铺）
     public function retail_switch(Request $request){
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');                //中间件产生的管理员数据参数
         $admin_data['organization_id'] = 0;
         ZeroneRedis::create_retail_account_cache(1,$admin_data);//清空所选组织
         return redirect('retail');
@@ -120,8 +119,8 @@ class DisplayController extends Controller
         } else {
             $admin_data['role_name'] = '角色未设置';
         }
-        ZeroneRedis::create_retail_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-        ZeroneRedis::create_retail_menu_cache(1);//生成对应账号的商户系统菜单
+        ZeroneRedis::create_retail_account_cache(1, $admin_data);   //生成账号数据的Redis缓存
+        ZeroneRedis::create_retail_menu_cache(1);                       //生成对应账号的零售系统菜单
     }
 
     //店铺信息编辑检测
@@ -132,14 +131,14 @@ class DisplayController extends Controller
         $organization_id = $request->get('organization_id');            //获取姓名
         $organization_name = $request->get('organization_name');        //获取组织ID
         $retail_owner = $request->get('retail_owner');                  //获取负责人姓名
-        $retail_owner_mobile = $request->get('mobile');    //获取负责人手机号码
+        $retail_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
         $retail_address = $request->get('retail_address');              //获取店铺地址
         $file = $request->file('retail_logo');
         if ($file->isValid()) {
             //检验文件是否有效
-            $entension = $file->getClientOriginalExtension(); //获取上传文件后缀名
+            $entension = $file->getClientOriginalExtension();                          //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $path = $file->move(base_path() . '/uploads/retail/', $new_name);   //$path上传后的文件路径
+            $path = $file->move(base_path() . '/uploads/retail/', $new_name); //$path上传后的文件路径
             $file_path =  'uploads/retail/'.$new_name;
             $retail_info = [
                 'retail_logo' => $file_path,
@@ -152,9 +151,9 @@ class DisplayController extends Controller
                 Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
                 OrganizationRetailinfo::editOrganizationRetailinfo([['organization_id',$organization_id]],$retail_info);
                 //添加操作日志
-                if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售店铺管理系统修改了店铺信息！');//保存操作记录
-                } else {//分店本人操作记录
+                if ($admin_data['is_super'] == 1) {//超级管理员修改店铺信息的记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售管理系统修改了店铺信息！');//保存操作记录
+                } else {//店铺本人操作记录
                     OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺信息！');//保存操作记录
                 }
                 DB::commit();
