@@ -134,6 +134,7 @@ class DisplayController extends Controller
         $retail_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
         $retail_address = $request->get('retail_address');              //获取店铺地址
         $file = $request->file('retail_logo');
+        $file_path =  '';
         if ($request->hasFile('image')){
             if ($file->isValid()) {
                 //检验文件是否有效
