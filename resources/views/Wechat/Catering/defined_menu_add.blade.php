@@ -124,6 +124,7 @@
 <script>
     $(function(){
         $('#type_1').click(function(){
+            alert(123);
             $('#link_type').click();
         });
         $('#type_2').click(function(){
