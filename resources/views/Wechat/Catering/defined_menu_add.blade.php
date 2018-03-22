@@ -123,11 +123,11 @@
 
 <script>
     $(function(){
-        $('#type_1').click(function(){
+        $('#type_1').checked(function(){
             alert(123);
             $('#link_type').click();
         });
-        $('#type_2').click(function(){
+        $('#type_2').checked(function(){
             $('#text_type').click();
         });
     });
