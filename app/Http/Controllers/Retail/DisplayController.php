@@ -135,7 +135,7 @@ class DisplayController extends Controller
         $retail_address = $request->get('retail_address');              //获取店铺地址
         $file = $request->file('retail_logo');
         $file_path =  '';
-        if ($request->hasFile('image')){
+        if ($request->hasFile('retail_logo')){
             if ($file->isValid()) {
                 //检验文件是否有效
                 $entension = $file->getClientOriginalExtension();                          //获取上传文件后缀名
