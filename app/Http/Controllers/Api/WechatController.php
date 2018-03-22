@@ -522,12 +522,12 @@ class WechatController extends Controller{
 
     public function defined_menu_get(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id','0']],0,'id','DESC');
-        dump($list);
-        $son_menu = [];
         foreach ($list as $key=>$val){
-            $sm = WechatDefinedMenu::getOne([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]]);
+            $sm = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]]);
+            dump($sm);
             if(!empty($sm)){
                 $son_menu[$val->id] = $sm;
             }
