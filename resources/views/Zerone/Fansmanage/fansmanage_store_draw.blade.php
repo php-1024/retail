@@ -42,6 +42,21 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        var elem = document.querySelector('.js-switch2');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        $('.saveBtn').click(function(){
+            swal({
+                title: "温馨提示",
+                text: "操作成功",
+                type: "success"
+            },function(){
+                window.location.reload();
+            });
+        });
+    });
     //提交表单
     function postForm() {
         var target = $("#currentForm");
