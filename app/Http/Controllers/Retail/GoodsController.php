@@ -22,8 +22,8 @@ class GoodsController extends Controller
     public function goods_add(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
             'retail_id' => $admin_data['organization_id'],
@@ -35,7 +35,7 @@ class GoodsController extends Controller
     //添加商品数据操作
     public function goods_add_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $category_id = $request->get('category_id');        //栏目ID
         $name = $request->get('name');                      //商品名称
@@ -47,17 +47,9 @@ class GoodsController extends Controller
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $goods_data = [
-            'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
-            'created_by' => $admin_data['id'],
-            'category_id' => $category_id,
-            'name' => $name,
-            'price' => $price,
-            'stock' => $stock,
-            'displayorder' => $displayorder,
-            'details' => $details,
-        ];
+
+        //商品数据
+        $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'],'category_id' => $category_id,'name' => $name, 'price' => $price, 'stock' => $stock, 'displayorder' => $displayorder, 'details' => $details];
         DB::beginTransaction();
         try {
             $goods_id = RetailGoods::addRetailGoods($goods_data);
@@ -113,18 +105,8 @@ class GoodsController extends Controller
         $where = [
             'id' => $goods_id,
         ];
-        $goods_data = [
-            'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
-            'created_by' => $admin_data['id'],
-            'category_id' => $category_id,
-            'name' => $name,
-            'price' => $price,
-            'stock' => $stock,
-            'displayorder' => $displayorder,
-            'details' => $details,
-        ];
-
+        //商品数据
+        $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name,'price' => $price,'stock' => $stock,'displayorder' => $displayorder,'details' => $details];
         DB::beginTransaction();
         try {
             $goods_id = RetailGoods::editRetailGoods($where,$goods_data);
