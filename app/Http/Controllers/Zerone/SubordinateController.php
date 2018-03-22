@@ -61,7 +61,6 @@ class SubordinateController extends Controller{
                 $selected_nodes[] = $val->node_id;
             }
         }
-        dd($module_node_list);
         return view('Zerone/Subordinate/quick_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
