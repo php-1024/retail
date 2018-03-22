@@ -946,7 +946,7 @@ class CateringCheckAjax
             return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
         }
         if(strlen($request->input('menu_name'))>12){
-            return self::res(0,response()->json(['data' => '您输入的菜单名称超长', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
         }
         if(empty($request->input('event_type'))){
             return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
