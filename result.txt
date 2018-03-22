@@ -1,0 +1,13 @@
+<xml>
+                <ToUserName><![CDATA[oyhbt1I_Gpz3u8JYxWP_NIugQhaQ]]></ToUserName>
+                <FromUserName><![CDATA[gh_81c86180e7e7]]></FromUserName>
+                <CreateTime>1521342917</CreateTime>
+                <MsgType><![CDATA[news]]></MsgType>
+                <ArticleCount>1</ArticleCount>
+                <Articles><item>
+<Title><![CDATA[今天礼拜天]]></Title>
+<Description><![CDATA[礼拜天人很少]]></Description>
+<PicUrl><![CDATA[http://mmbiz.qpic.cn/mmbiz_jpg/Ft65fsDXhHpXW7QhsteXl5j1FX5ia9kCWwApHTWEfVrOibuZmSwaYhlxRS0ibPiccGv5lGGxSWCmnbBwuhVzCq0vvw/0?wx_fmt=jpeg]]></PicUrl>
+<Url><![CDATA[http://o2o.01nnt.com]]></Url>
+</item></Articles>
+                </xml> 
