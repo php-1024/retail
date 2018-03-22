@@ -166,7 +166,6 @@ class ProgramController extends Controller{
         $id = $request->input('id');
         $info = Program::find($id);
         $list = ProgramMenu::getList([[ 'parent_id',0],['program_id',$id]],0,'displayorder','asc');
-        dump($list);
         $son_menu = [];
         $third_menu = [];
         foreach($list as $key=>$val){
@@ -279,7 +278,6 @@ class ProgramController extends Controller{
             ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info[0].'的菜单排序');//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改菜单排序失败，请检查', 'status' => '0']);
         }

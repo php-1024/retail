@@ -10,10 +10,7 @@ use Gregwar\Captcha\CaptchaBuilder;
 use App\Models\Account;
 use App\Models\ErrorLog;
 use App\Models\LoginLog;
-use App\Models\ProgramMenu;
-use App\Models\Program;
 use Session;
-use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller{
     /*
@@ -23,6 +20,7 @@ class LoginController extends Controller{
     {
         return view('Zerone/Login/display');
     }
+
     /*
      * 生成验证码
      */
@@ -42,7 +40,9 @@ class LoginController extends Controller{
         $builder->output();
     }
 
-    //检测登录
+    /*
+    * 检测登录
+    */
     public function login_check(){
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
@@ -55,16 +55,15 @@ class LoginController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
-        //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip',$ip]]);//查询该IP下的错误记录
-        //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
+        /* 如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟。*/
         if(empty($error_log) || $error_log['error_time'] <  $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time()-strtotime($error_log['updated_at']) >= 600)) {
-            if($account_info = Account::getOneForLogin($username)){
+            if($account_info = Account::getOneForLogin($username)){//查询账号或者手机号是否存在
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
-                    ErrorLog::addErrorTimes($ip,1);
+                    ErrorLog::addErrorTimes($ip,1);//访问者IP添加错误次数+1
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif($account_info->status<>'1'){//查询账号状态
-                    ErrorLog::addErrorTimes($ip,1);
+                    ErrorLog::addErrorTimes($ip,1);//访问者IP添加错误次数+1
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 }else {
                     //登录成功要生成缓存的登录信息
@@ -85,7 +84,7 @@ class LoginController extends Controller{
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
                         if($account_info->organization->program_id <> '1'){//如果账号不属于零壹平台管理系统，则报错，不能登录。1是零壹凭条管理系统的ID
-                            ErrorLog::addErrorTimes($ip,1);
+                            ErrorLog::addErrorTimes($ip,1);//访问者IP添加错误次数+1
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         }else{
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
