@@ -3,9 +3,7 @@
  * 零售版店铺
  * 首页
  **/
-
 namespace App\Http\Controllers\Retail;
-
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\LoginLog;
@@ -13,7 +11,6 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Program;
-use App\Models\RetailGoodsThumb;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,14 +18,12 @@ use Session;
 
 class DisplayController extends Controller
 {
-    /*
-     * 首页
-     */
+    //首页
     public function display(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         //只查询自己相关的数据
         $where = [
@@ -38,10 +33,10 @@ class DisplayController extends Controller
         ];
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
-        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){    //如果是超级管理员并且组织ID等于零则进入选择组织页面
+        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){ //如果是超级管理员并且组织ID等于零则进入选择组织页面
             return redirect('retail/retail_list');
         }
-        if (empty($admin_data['safe_password'])){           //先设置安全密码
+        if (empty($admin_data['safe_password'])){//先设置安全密码
             return redirect('retail/account/password');
         }else{
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
@@ -54,12 +49,12 @@ class DisplayController extends Controller
     //零售店铺列表（超级管理员使用）
     public function retail_list(Request $request)
     {
-        $admin_data = $request->get('admin_data');                          //中间件产生的管理员数据参数
-        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){      //如果是超级管理员并且已经切换身份成功则跳转
+        $admin_data = $request->get('admin_data');                      //中间件产生的管理员数据参数
+        if($admin_data['id'] != 1 && $admin_data['organization_id'] != 0){  //如果是超级管理员并且已经切换身份成功则跳转
             return redirect('retail');
         }
         $organization_name  = $request->organization_name;
-        $where = [['program_id','10'],['type','4']];//program_id=10为零售版本程序，type=4为店铺类型的组织
+        $where = [['program_id','10'],['type','4']];                        //program_id=10为零售版本程序，type=4为店铺类型的组织
         $organization = Organization::getOrganizationAndAccount($organization_name,$where,20,'id','ASC'); //所有零售版本店铺
         foreach ($organization as $key=>$val){
             $catering = Organization::getOneStore(['id'=>$val->parent_id]);
@@ -73,6 +68,7 @@ class DisplayController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $account_id = $request->account_id;                     //获取当前选择店铺的组织
+        dd($admin_data);
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
         if ($admin_data['is_super'] == '1' && $admin_data['organization_id'] == 0){
             $this->superadmin_login($account_id);      //超级管理员选择身份登录
