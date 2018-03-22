@@ -133,9 +133,9 @@ class DisplayController extends Controller
         $retail_owner = $request->get('retail_owner');                  //获取负责人姓名
         $retail_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
         $retail_address = $request->get('retail_address');              //获取店铺地址
-        $file = $request->file('retail_logo');
-        $file_path =  '';
-        if ($request->hasFile('retail_logo')){
+        $file = $request->file('retail_logo');                          //获取店铺logo
+        $file_path =  '';       //初始化文件路径为空
+        if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
             if ($file->isValid()) {
                 //检验文件是否有效
                 $entension = $file->getClientOriginalExtension();                          //获取上传文件后缀名
@@ -146,6 +146,7 @@ class DisplayController extends Controller
                 $file_path =  '';
             }
         }
+
         $retail_info = [
             'retail_logo' => $file_path,
             'retail_owner' => $retail_owner,
