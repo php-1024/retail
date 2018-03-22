@@ -1,7 +1,18 @@
+<<<<<<< HEAD
 <xml><ToUserName><![CDATA[gh_81c86180e7e7]]></ToUserName>
 <FromUserName><![CDATA[oyhbt1FnEqVkQjMyvgsyDeKcc894]]></FromUserName>
 <CreateTime>1521684955</CreateTime>
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA[1234]]></Content>
 <MsgId>6535587116971546246</MsgId>
+=======
+<xml><ToUserName><![CDATA[gh_881c5b0c3f79]]></ToUserName>
+<FromUserName><![CDATA[ofQev1OWqJlglQRmt__3rZRe26JM]]></FromUserName>
+<CreateTime>1520904600</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[LOCATION]]></Event>
+<Latitude>22.720640</Latitude>
+<Longitude>114.249680</Longitude>
+<Precision>65.000000</Precision>
+>>>>>>> 8756e683e6f3f8cf1f20c117a2b73278950b2642
 </xml>
