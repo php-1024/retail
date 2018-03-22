@@ -98,7 +98,7 @@ class ZeroneCheck{
             foreach($account_info->nodes as $key=>$val){
                 $account_routes[] = $val->route_name;
             }
-
+            dump($account_routes);
             //查询该程序下所有节点的路由
             $program_info = Program::getOne([['id',1]]);
             $program_routes = [];
