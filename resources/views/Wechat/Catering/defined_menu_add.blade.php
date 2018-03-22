@@ -124,6 +124,7 @@
 <script>
     $(function(){
         $('#type_1').click(function(){
+            alert(123);
             $('#text_type').removeClass('active');
             $('#link_type').addClass('active');
         });
