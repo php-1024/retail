@@ -138,34 +138,33 @@ class DisplayController extends Controller
             //检验文件是否有效
             $entension = $file->getClientOriginalExtension();                          //获取上传文件后缀名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $path = $file->move(base_path() . '/uploads/retail/', $new_name); //$path上传后的文件路径
+            $file->move(base_path() . '/uploads/retail/', $new_name);          //上传文件操作
             $file_path =  'uploads/retail/'.$new_name;
-            $retail_info = [
-                'retail_logo' => $file_path,
-                'retail_owner' => $retail_owner,
-                'retail_owner_mobile' => $retail_owner_mobile,
-                'retail_address' => $retail_address,
-            ];
-            DB::beginTransaction();
-            try {
-                Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
-                OrganizationRetailinfo::editOrganizationRetailinfo([['organization_id',$organization_id]],$retail_info);
-                //添加操作日志
-                if ($admin_data['is_super'] == 1) {//超级管理员修改店铺信息的记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售管理系统修改了店铺信息！');//保存操作记录
-                } else {//店铺本人操作记录
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺信息！');//保存操作记录
-                }
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '修改店铺信息失败，请检查', 'status' => '0']);
-            }
-            return response()->json(['data' => '修改店铺信息成功','file_path' => $file_path, 'status' => '1']);
-
         } else {
-            return response()->json(['data' => '修改店铺信息失败，请添加logo！', 'status' => '0']);
+            $file_path =  '';
         }
+        $retail_info = [
+            'retail_logo' => $file_path,
+            'retail_owner' => $retail_owner,
+            'retail_owner_mobile' => $retail_owner_mobile,
+            'retail_address' => $retail_address,
+        ];
+        DB::beginTransaction();
+        try {
+            Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
+            OrganizationRetailinfo::editOrganizationRetailinfo([['organization_id',$organization_id]],$retail_info);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员修改店铺信息的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售管理系统修改了店铺信息！');//保存操作记录
+            } else {//店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺信息！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改店铺信息失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改店铺信息成功','file_path' => $file_path, 'status' => '1']);
     }
 }
 
