@@ -32,11 +32,11 @@
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="1"><i class="fa fa-check text-active"></i> 链接
+                        <input type="radio" name="event_type" id="type_1" value="1"><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
-                        <input type="radio" name="event_type" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
+                        <input type="radio" name="event_type" id="type_2" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
                     <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
@@ -122,6 +122,9 @@
 
 
 <script>
+    $(function(){
+
+    });
     function addPostForm(){
         var target = $("#defined_menu_add_check");
         var url = target.attr("action");
