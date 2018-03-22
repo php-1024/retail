@@ -82,6 +82,8 @@ return [
     'zerone_route_except'=>[
         'zerone',//零壹管理平台首页
         'zerone/ajax/proxy_list_frozen',//冻结服务商弹出安全密码输入框
+        'zerone/agent/agent_fansmanage',//冻结服务商弹出安全密码输入框
+
     ],
 
     /*
