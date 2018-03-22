@@ -497,6 +497,9 @@ class WechatController extends Controller{
             'menu_name' => $menu_name,
             'parent_id' => $parent_id,
             'parent_tree' => $parent_tree,
+            'event_type' => $event_type,
+            'response_type' => $response_type,
+            'response_url' => $response_keyword,
         ];
         //处理菜单
         switch ($event_type) {
