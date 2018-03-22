@@ -68,7 +68,7 @@ class DisplayController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $account_id = $request->account_id;                     //获取当前选择店铺的组织
-        dd($admin_data);
+        dd($account_id);
         //如果是超级管理员且商户组织ID有值并且当前管理员的组织ID为空
         if ($admin_data['is_super'] == '1' && $admin_data['organization_id'] == 0){
             $this->superadmin_login($account_id);      //超级管理员选择身份登录
