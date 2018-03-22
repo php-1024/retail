@@ -191,7 +191,6 @@ class SubordinateController extends Controller{
             $info->account_role = $val->id;
         }
         $role_list = OrganizationRole::getList([['program_id',1],['created_by',$admin_data['id']]],0,'id');
-        dump($role_list);
         return view('Zerone/Subordinate/subordinate_authorize',['info'=>$info,'role_list'=>$role_list]);
     }
 
@@ -229,6 +228,7 @@ class SubordinateController extends Controller{
             $selected_modules[] = $val->module_id;
             $selected_nodes[] = $val->node_id;
         }
+        dd($selected_node_list);
         return view('Zerone/Subordinate/selected_rule',['module_node_list'=>$module_node_list,'selected_nodes'=>$selected_nodes,'selected_modules'=>$selected_modules]);
     }
 
