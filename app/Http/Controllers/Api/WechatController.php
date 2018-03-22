@@ -479,7 +479,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $event_type = $request->get('event_type');  //获取事件类型
-
+        $response_type = $request->get('response_type'); //获取响应类型
         $organization_id = $admin_data['organization_id'];  //组织ID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
@@ -497,6 +497,9 @@ class WechatController extends Controller{
             'menu_name' => $menu_name,
             'parent_id' => $parent_id,
             'parent_tree' => $parent_tree,
+            'event_type' => $event_type,
+            'response_type' => $response_type,
+            'response_url' => $response_keyword,
         ];
         //处理菜单
         switch ($event_type) {
