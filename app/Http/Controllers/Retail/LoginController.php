@@ -1,7 +1,7 @@
 <?php
 /**
  * 零售版店铺
- * 登录界面
+ * 登录处理
  **/
 
 namespace App\Http\Controllers\Retail;
@@ -17,17 +17,13 @@ use Session;
 
 class LoginController extends Controller
 {
-    /*
-     * 登录页面
-     */
+    //登录处理
     public function display()
     {
         return view('Retail/Login/display');
     }
 
-    /*
-     * 生成验证码
-     */
+    //生成验证码
     public function captcha()
     {
         //生成验证码图片的Builder对象，配置相应属性
