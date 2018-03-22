@@ -164,7 +164,7 @@ class DisplayController extends Controller
             return response()->json(['data' => '修改店铺信息成功','file_path' => $file_path, 'status' => '1']);
 
         } else {
-            return response()->json(['status' => '0']);
+            return response()->json(['data' => '修改店铺信息失败，请添加logo！', 'status' => '0']);
         }
     }
 }
