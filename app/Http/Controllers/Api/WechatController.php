@@ -499,7 +499,7 @@ class WechatController extends Controller{
             'parent_tree' => $parent_tree,
             'event_type' => $event_type,
             'response_type' => $response_type,
-            'response_url' => $response_keyword,
+            'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
 
