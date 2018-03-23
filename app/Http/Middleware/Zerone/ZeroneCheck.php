@@ -86,13 +86,12 @@ class ZeroneCheck{
         }
     }
 
-    //部分页面检测用户是否admin，否则检测是否有权限
+    /*
+    * 部分页面检测用户是否admin，否则检测是否有权限
+    */
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         if($admin_data['id']<>1){
-            //暂定所有用户都有权限
-            //return self::res(1,redirect('zerone'));
             $route_name = $request->path();//获取当前的页面路由
 
             //查询用户所具备的所有节点的路由
@@ -110,6 +109,7 @@ class ZeroneCheck{
 
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
+            dump($unset_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
             if(!in_array($route_name,$program_routes) && !in_array($route_name,config('app.zerone_route_except'))){
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
