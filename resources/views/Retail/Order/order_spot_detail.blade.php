@@ -193,19 +193,17 @@
                                         </thead>
                                         <tbody>
 
-                                        @foreach($order_goods as $key=>$val)
+                                        @foreach($order->RetailOrderGoods as $key=>$val)
                                         <tr>
-                                            <td>{{$val->id}}</td>
+                                            <td>{{$val->goods_id}}</td>
                                             <td>
-                                                @if(!empty($val->order_goods->name))
-                                                {{$val->order_goods->name}}
-                                                @endif
+                                                {{$val->title}}
                                             </td>
                                             <td>
                                                 {{$val->total}}
                                             </td>
                                             <td>
-                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="@if(!empty($val->order_goods->price)){{$val->order_goods->price}}@endif">
+                                                <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->price}}">
                                             </td>
                                             <th>
                                                 @if($val->status == 0)

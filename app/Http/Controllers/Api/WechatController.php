@@ -502,11 +502,21 @@ class WechatController extends Controller{
             'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
+<<<<<<< HEAD
 
         if(empty($parent_id)){
 
         }
 
+=======
+        $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+        if($parent_id == '0' && $count >= 3){
+            return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
+        }
+        if($parent_id <> '0' && $count >= 5){
+            return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+        }
+>>>>>>> 64f42713b6f78b5a79ead60b9a8f7b6a397bf62c
         DB::beginTransaction();
         try {
             WechatDefinedMenu::addDefinedMenu($defined_menu);
@@ -551,6 +561,7 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
         return view('Wechat/Catering/defined_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply,'definedmenu'=>$definedmenu]);

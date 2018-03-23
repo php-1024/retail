@@ -33,10 +33,7 @@ class RetailGoods extends Model{
         return $this->hasMany('App\Models\RetailGoodsThumb','goods_id','id');
     }
 
-    //和RetailOrder表多对多的关系
-    public function RetailOrder(){
-        return $this->belongsToMany('App\Models\RetailOrder','retail_order_goods','goods_id','order_id');
-    }
+
 
     //获取单条餐饮商品信息
     public static function getOne($where){
@@ -58,6 +55,7 @@ class RetailGoods extends Model{
         $model->name = $param['name'];
         $model->details = $param['details'];
         $model->price = $param['price'];
+        $model->barcode = $param['barcode'];
         $model->stock = $param['stock'];
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
@@ -86,7 +84,7 @@ class RetailGoods extends Model{
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
         $model = Self::find($id);
-        return $model->delete();
+        return $model->forceDelete();
     }
 }
 ?>

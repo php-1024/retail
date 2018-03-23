@@ -84,7 +84,7 @@
                                             {{$val->price}}
                                         </td>
                                         <td>
-                                            <label class="label label-info">{{$val->category->name}}</label>
+                                            <label class="label label-info">@if(!empty($val->category->name)){{$val->category->name}}@else其他@endif</label>
                                         </td>
                                         <td>
                                             {{$val->stock}}

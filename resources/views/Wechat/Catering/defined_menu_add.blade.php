@@ -31,11 +31,11 @@
             <label class="col-sm-2 control-label" for="input-id-1">事件类型</label>
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;"  id="type_1" >
                         <input type="radio" name="event_type" value="1"><i class="fa fa-check text-active"></i> 链接
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;" id="type_2" >
                         <input type="radio" name="event_type" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
@@ -76,8 +76,8 @@
                 <section class="panel panel-default">
                     <header class="panel-heading text-right bg-light">
                         <ul class="nav nav-tabs pull-left">
-                            <li class="active"><a href="#link_response" onclick="$('#response_type').val(1)" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
-                            <li><a href="#text_response" onclick="$('#response_type').val(2)" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
+                            <li id="link_type" class="active"><a href="#link_response" onclick="$('#response_type').val(1)" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
+                            <li id="text_type"><a href="#text_response" onclick="$('#response_type').val(2)" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
                         </ul>
                         <span class="hidden-sm">&nbsp;</span>
                     </header>
@@ -122,6 +122,21 @@
 
 
 <script>
+    $(function(){
+        $('#type_1').click(function(){
+            $('#text_type').removeClass('active');
+            $('#text_response').removeClass('active');
+            $('#link_type').addClass('active');
+            $('#link_response').addClass('active');
+
+        });
+        $('#type_2').click(function(){
+            $('#link_type').removeClass('active');
+            $('#link_response').removeClass('active');
+            $('#text_type').addClass('active');
+            $('#text_response').addClass('active');
+        });
+    });
     function addPostForm(){
         var target = $("#defined_menu_add_check");
         var url = target.attr("action");
