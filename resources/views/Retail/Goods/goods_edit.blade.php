@@ -91,7 +91,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品条码</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="barcode">
+                                                    <input type="text" class="form-control" name="barcode" value="{{$goods->barcode}}">
                                                 </div>
                                             </div>
 
