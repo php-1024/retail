@@ -133,7 +133,9 @@ class ZeroneCheck{
         if(empty($sess_key)) {
             return self::res(0,redirect('zerone/login'));
         }else{
+            $sess_key = Session::get('zerone_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
+            dump($sess_key);
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_1_'.$sess_key);
