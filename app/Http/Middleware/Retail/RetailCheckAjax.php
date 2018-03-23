@@ -6,6 +6,7 @@
 namespace App\Http\Middleware\Retail;
 
 use App\Models\Account;
+use App\Models\Program;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
