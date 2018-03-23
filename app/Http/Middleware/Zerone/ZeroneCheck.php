@@ -69,7 +69,9 @@ class ZeroneCheck{
         return $next($request);
     }
 
-    //检测是否admin或是否有权限
+    /*
+     * 检测是否admin或是否有权限是否登入
+     */
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
@@ -121,10 +123,13 @@ class ZeroneCheck{
         }
     }
 
-    //普通页面检测用户是否登录
+    /*
+    * 普通页面检测用户是否登录
+    */
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_account_id');
+        dump($sess_key);
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
             return self::res(0,redirect('zerone/login'));
