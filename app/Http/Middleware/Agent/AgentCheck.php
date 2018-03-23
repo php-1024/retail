@@ -13,9 +13,9 @@ class AgentCheck{
         switch($route_name){
             /*****登录页,如果已经登录则不需要再次登录*****/
             case "agent/login"://登录页,如果已经登录则不需要再次登录
-//                获取用户登录存储的SessionId
+                //获取用户登录存储的SessionId
                 $sess_key = Session::get('agent_account_id');
-//                如果不为空跳转到首页
+                //如果不为空跳转到首页
                 if(!empty($sess_key)) {
                     return redirect('agent');
                 }
@@ -62,8 +62,9 @@ class AgentCheck{
     }
 
 
-
-    //检测是否admin或是否有权限
+    /**
+     * 检测是否admin或是否有权限
+     */
     public function checkLoginAndRuleAndSwitchStatus($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
