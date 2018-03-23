@@ -48,7 +48,7 @@ class NodeController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $node_name = $request->input('node_name');
         $search_data = ['node_name'=>$node_name];
-        dump($node_name);
+        dump($search_data);
         $list = Node::getPaginage([[ 'node_name','like','%'.$node_name.'%' ]],15,'id');
         return view('Tooling/Node/node_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'node']);
     }
