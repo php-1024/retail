@@ -118,7 +118,6 @@ class RetailCheck{
             $menu_data =  unserialize($menu_data);                  //解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);          //解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]); //添加参数
-            dd($menu_data);
             return self::res(1,$request);                     //把参数传递到下一个中间件
         }else{                                                      //如果为空跳转到登录页面
             return self::res(0,redirect('retail/login'));
