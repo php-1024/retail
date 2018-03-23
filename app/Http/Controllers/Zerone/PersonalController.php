@@ -22,6 +22,7 @@ class PersonalController extends Controller{
      */
     public function display(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -57,13 +58,14 @@ class PersonalController extends Controller{
      */
     public function personal_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $realname = $request->input('realname');//获取真实姓名
         $mobile = $request->input('mobile');//获取手机号
         DB::beginTransaction();
         try {
-            Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
-            AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
+            Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);//修改手机号
+            AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);//修改真实姓名
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了个人信息');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
