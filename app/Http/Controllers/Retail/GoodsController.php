@@ -41,7 +41,6 @@ class GoodsController extends Controller
         $name = $request->get('name');                      //商品名称
         $price = $request->get('price');                    //商品价格
         $barcode = $request->get('barcode');                //商品条码
-        dd($barcode);
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
