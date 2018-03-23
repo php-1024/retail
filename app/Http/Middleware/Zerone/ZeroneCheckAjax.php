@@ -826,9 +826,9 @@ class ZeroneCheckAjax
             }
             //如果没有权限，则报错
             if(in_array($route_name,$unset_routes)){
+                echo 1;exit;
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
             }
-            echo 1;exit;
             return self::res(1,$request);
         }else{
             return self::res(1,$request);
