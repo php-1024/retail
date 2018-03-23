@@ -1,4 +1,8 @@
 <?php
+/**
+ *下级人员--添加角色
+ *
+ **/
 namespace App\Http\Controllers\Zerone;
 Use App\Http\Controllers\Controller;
 Use Illuminate\Http\Request;
@@ -12,7 +16,10 @@ Use App\Models\RoleAccount;
 Use Session;
 
 class RoleController extends Controller{
-    //添加权限角色
+
+    /**
+     * 添加角色
+     */
     public function role_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -43,7 +50,9 @@ class RoleController extends Controller{
         return view('Zerone/Role/role_add',['module_node_list'=>$module_node_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //提交添加权限假设数据
+    /**
+     * 提交添加权限数据
+     */
     public function role_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -68,15 +77,17 @@ class RoleController extends Controller{
         }
     }
 
-    //权限角色列表
+    /**
+     * 权限角色列表
+     */
     public function role_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $role_name = $request->input('role_name');
-        $search_data = ['role_name'=>$role_name];
+        $role_name = $request->input('role_name');//获取角色名称
+        $search_data = ['role_name'=>$role_name];//分页搜索使用
         //查询所有角色列表
         $list = OrganizationRole::getPaginage([['created_by',$admin_data['id']],['program_id',1],[ 'role_name','like','%'.$role_name.'%' ]],15,'id');
 
@@ -101,7 +112,9 @@ class RoleController extends Controller{
         }
        return $module_nodes;
     }
-    //编辑权限角色
+    /**
+     * 编辑权限角色
+     */
     public function role_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->input('id');//权限角色ID
@@ -140,7 +153,9 @@ class RoleController extends Controller{
         return view('Zerone/Role/role_edit',['info'=>$info,'selected_modules'=>$selected_modules,'selected_nodes'=>$selected_nodes,'module_node_list'=>$module_node_list]);
     }
 
-    //编辑权限角色提交
+    /**
+     * 编辑权限角色提交
+     */
     public function role_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由

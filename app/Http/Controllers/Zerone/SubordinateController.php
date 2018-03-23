@@ -1,4 +1,8 @@
 <?php
+/**
+ *下级人员--下级人员
+ *
+ **/
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +17,10 @@ use App\Models\RoleAccount;
 use App\Models\OperationLog;
 use Session;
 class SubordinateController extends Controller{
-    //添加下级人员
+
+    /**
+     * 添加下级人员
+     */
     public function subordinate_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -24,7 +31,9 @@ class SubordinateController extends Controller{
         return view('Zerone/Subordinate/subordinate_add',['role_list'=>$role_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //快速授权功能
+    /**
+     * 快速授权功能
+     */
     public function quick_rule(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $account_id = $admin_data['id'];//当前登录账号ID
