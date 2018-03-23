@@ -22,6 +22,8 @@ class PersonalController extends Controller{
      */
     public function display(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
+
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -57,7 +59,6 @@ class PersonalController extends Controller{
      */
     public function personal_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $realname = $request->input('realname');//获取真实姓名
         $mobile = $request->input('mobile');//获取手机号
