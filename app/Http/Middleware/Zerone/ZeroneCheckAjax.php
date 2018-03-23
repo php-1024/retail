@@ -240,7 +240,9 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码 修改登录密码
+    /**
+     * 检测登录和权限和安全密码 和 修改登录密码
+     */
     public function checkLoginAndRuleAndSafeAndPasswordEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -532,7 +534,9 @@ class ZeroneCheckAjax
 
 
     /*****个人中心******/
-    //检测编辑个人信息数据
+    /**
+     * 检测编辑个人信息数据
+     */
     public function checkPersonalEdit(Request $request){
         if(empty($request->input('realname'))){
             return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
@@ -544,7 +548,9 @@ class ZeroneCheckAjax
         return self::res(1,$request);
     }
 
-    //检测修改登录密码
+    /**
+     * 检测修改登录密码
+     */
     public function checkPasswordEdit($request){
         if(empty($request->input('password'))){
             return self::res(0,response()->json(['data' => '请输入原登录密码', 'status' => '0']));
