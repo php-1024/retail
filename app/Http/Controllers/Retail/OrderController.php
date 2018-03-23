@@ -53,7 +53,7 @@ class OrderController extends Controller
             $price = $val->total*$val->price;
             $order_price += $price;        //计算订单总价
         }
-        return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
