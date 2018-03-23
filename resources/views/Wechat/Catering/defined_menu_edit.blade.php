@@ -63,9 +63,7 @@
                         <input type="radio" name="event_type" value="8"@if($definedmenu->event_type == 8) checked @endif><i class="fa fa-check text-active"></i> 地理位置
                     </label>
                 </div>
-                                                        <span class="help-block m-b-none">
-                                            <p class="text-danger">事件类型为"链接"时，响应类型必须为跳转链接</p>
-                                        </span>
+                <span class="help-block m-b-none"><p class="text-danger">事件类型为"链接"时，响应类型必须为跳转链接</p></span>
             </div>
         </div>
 
@@ -128,24 +126,26 @@
         var target = $("#defined_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
-        $.post(url,data,function(json){
-            if(json.status==1){
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }
-        });
+        console.log(data);
+//        $.post(url,data,function(json){
+//            if(json.status==1){
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                console.log(json);
+////                swal({
+////                    title: "提示信息",
+////                    text: json.data,
+////                    confirmButtonColor:"#DD6B55",
+////                    confirmButtonText: "确定"
+////                });
+//            }
+//        });
     }
 </script>
