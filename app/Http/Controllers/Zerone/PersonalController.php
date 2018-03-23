@@ -171,7 +171,9 @@ class PersonalController extends Controller{
             }
         }
     }
-    //个人中心——我的操作日志
+    /**
+     * 我的操作日志
+     */
     public function operation_log(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -189,12 +191,13 @@ class PersonalController extends Controller{
         $where = [
             ['account_id',$admin_data['id']]
         ];
-        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];//分页参数
         $operation_log_list = OperationLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//操作记录
         return view('Zerone/Personal/operation_log',['search_data'=>$search_data,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-
-    //个人中心——我的登录日志
+    /**
+     * 我的登录日志
+     */
     public function login_log(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -212,7 +215,7 @@ class PersonalController extends Controller{
         $where = [
             ['account_id',$admin_data['id']]
         ];
-        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];
+        $search_data = ['time_st'=>$time_st,'time_nd'=>$time_nd,'account'=>$account];//分页参数
         $login_log_list = LoginLog::getPaginate($where,$time_st_format,$time_nd_format,10,'id');//登录记录
         return view('Zerone/Personal/login_log',['search_data'=>$search_data,'login_log_list'=>$login_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
