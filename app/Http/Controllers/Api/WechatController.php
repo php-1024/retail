@@ -549,6 +549,7 @@ class WechatController extends Controller{
         $id = $request->get('id');
 
         $definedmenu = WechatDefinedMenu::getOne([['id',$id]]);
+        dump($definedmenu);
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
