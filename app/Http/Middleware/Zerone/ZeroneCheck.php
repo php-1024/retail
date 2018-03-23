@@ -129,16 +129,15 @@ class ZeroneCheck{
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_account_id');
-        dump($sess_key);
         //如果为空跳转到登录页面
         if(empty($sess_key)) {
             return self::res(0,redirect('zerone/login'));
         }else{
-            $sess_key = Session::get('zerone_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
             $menu_data = Redis::get('zerone_system_menu_1_'.$sess_key);
+            dump($menu_data);
             $son_menu_data = Redis::get('zerone_system_son_menu_1_'.$sess_key);
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
