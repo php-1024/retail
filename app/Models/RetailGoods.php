@@ -58,6 +58,7 @@ class RetailGoods extends Model{
         $model->name = $param['name'];
         $model->details = $param['details'];
         $model->price = $param['price'];
+        $model->barcode = $param['barcode'];
         $model->stock = $param['stock'];
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
