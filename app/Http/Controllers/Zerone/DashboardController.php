@@ -46,7 +46,7 @@ class DashboardController extends Controller{
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone'=>$zerone]);
     }
-    
+
     /**
      * 战区管理首页
      */
@@ -60,10 +60,14 @@ class DashboardController extends Controller{
         $warzone = Warzone::getPaginage([[ 'zone_name','like','%'.$zone_name.'%' ]],15,'id');//战区列表
         return view('Zerone/Dashboard/warzone',['zone_name'=>$zone_name,'search_data'=>$search_data,'warzone'=>$warzone,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
-    //战区管理编辑弹出
+
+    /**
+     * 战区管理编辑弹出
+     */
     public function warzone_edit(Request $request){
-        $zone_id = $request->input('id');
+        $zone_id = $request->input('id');//获取战区id
         $zone_info = Warzone::getOne(['id'=>$zone_id]);
+        dump($zone_info);
         $province = Province::getList([],0,'id','asc');
         foreach ($zone_info->province as $key=>$val){
             $selected_province[] = $val->id;
