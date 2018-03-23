@@ -254,7 +254,7 @@ class RetailCheckAjax
     {
         dump($request);
         $admin_data = $request->get('admin_data');
-        if($admin_data['id']<>1){
+        if($admin_data['id']<>1 && $admin_data['is_super']<>1){
             //暂定所有用户都有权限
             //return self::res(1,redirect('zerone'));
             $route_name = $request->path();//获取当前的页面路由
