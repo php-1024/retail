@@ -555,6 +555,7 @@ class WechatController extends Controller{
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
+        dump($list);
         return view('Wechat/Catering/defined_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply,'definedmenu'=>$definedmenu]);
     }
 

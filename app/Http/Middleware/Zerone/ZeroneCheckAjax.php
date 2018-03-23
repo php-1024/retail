@@ -277,7 +277,9 @@ class ZeroneCheckAjax
 
 
     /*****下级管理******/
-    //检测登录和权限和安全密码和添加权限角色
+    /**
+     * 检测登录和权限和安全密码和添加权限角色
+     */
     public function checkLoginAndRuleAndSafeAndRoleAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -292,6 +294,9 @@ class ZeroneCheckAjax
         }
     }
     //检测登录和权限和安全密码和编辑角色
+    /**
+     * 编辑权限角色提交
+     */
     public function checkLoginAndRuleAndSafeAndRoleEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -606,7 +611,9 @@ class ZeroneCheckAjax
     }
 
     /*****下级管理******/
-    //检测添加权限角色数据
+    /**
+     * 检测添加权限角色数据
+     */
     public function checkRoleAdd($request){
         if(empty($request->input('role_name'))){
             return self::res(0,response()->json(['data' => '请输入角色名称', 'status' => '0']));
