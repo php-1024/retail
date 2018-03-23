@@ -21,7 +21,6 @@ class OrderController extends Controller
     //订单管理-现场订单
     public function order_spot(Request $request)
     {
-        dump($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
@@ -33,6 +32,9 @@ class OrderController extends Controller
             'retail_id' => $admin_data['organization_id'],
         ];
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
+        dump($request);
+        dump($restaurant_id);
+        dump($list);
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
