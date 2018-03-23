@@ -68,13 +68,15 @@ class DashboardController extends Controller{
         $zone_id = $request->input('id');//获取战区id
         $zone_info = Warzone::getOne(['id'=>$zone_id]);//当前战区信息
         $province = Province::getList([],0,'id','asc');
-        dump($province);
         foreach ($zone_info->province as $key=>$val){
             $selected_province[] = $val->id;
         }
         return view('Zerone/Dashboard/warzone_edit',['zone_info'=>$zone_info,'province'=>$province,'selected_province'=>$selected_province]);
     }
-    //战区管理编辑数据提交
+
+    /**
+     * 战区管理编辑数据提交
+     */
     public function warzone_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -106,12 +108,17 @@ class DashboardController extends Controller{
         return response()->json(['data' => '编辑战区成功', 'status' => '1']);
     }
 
-    //战区管理添加战区弹出
+    /**
+     * 战区管理添加战区弹出
+     */
     public function warzone_add(Request $request){
         $province = Province::getList([],0,'id','asc');//获取所有战区可选省份
         return view('Zerone/Dashboard/warzone_add',['province'=>$province]);
     }
-    //战区管理添加数据提交
+
+    /**
+     * 战区管理添加数据提交
+     */
     public function warzone_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -133,7 +140,9 @@ class DashboardController extends Controller{
         return response()->json(['data' => '添加战区成功！', 'status' => '1']);
     }
 
-    //战区管理删除确认弹出框
+    /**
+     * 战区管理删除确认弹出框
+     */
     public function warzone_delete_confirm(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $account = $admin_data['account'];//要操作的管理员的账号,用于记录
@@ -142,7 +151,9 @@ class DashboardController extends Controller{
         return view('Zerone/Dashboard/warzone_delete_confirm',['id'=>$id,'zone_name'=>$zone_name,'account'=>$account]);
     }
 
-    //战区管理确认删除
+    /**
+     * 战区管理确认删除
+     */
     public function warzone_delete(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -162,7 +173,9 @@ class DashboardController extends Controller{
         return response()->json(['data' => '删除战区成功！', 'status' => '1']);
     }
 
-    //所有操作记录
+    /**
+     * 所有操作记录
+     */
     public function operation_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -177,15 +190,19 @@ class DashboardController extends Controller{
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
+        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];//分页参数
         $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
+        dump($list);
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
         }
         return view('Zerone/Dashboard/operation_log',['list'=>$list,'roles'=>$roles,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //所有登录记录
+
+    /**
+     * 所有登录记录
+     */
     public function login_log(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -205,21 +222,22 @@ class DashboardController extends Controller{
         return view('Zerone/Dashboard/login_log',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //系统人员结构
+    /**
+     * 系统人员结构
+     */
     public function structure(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = 1;//当前组织ID，零壹管理平台组织只能为1
-        //获取重Admin开始的的所有人员
+        //获取Admin开始的的所有人员
         $list = Account::getList([['organization_id',$organization_id],['parent_tree','like','%'.'0,1,'.'%']],0,'id','asc')->toArray();
-        //根据获取的人员组成结构树
-        $structure = $this->create_structure($list,1);
+        $structure = $this->create_structure($list,1);//根据获取的人员组成结构树
         return view('Zerone/Dashboard/structure',['structure'=>$structure ,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    /*
+    /**
      * 递归生成人员结构的方法
      * $list - 结构所有人员的无序列表
      * $id - 上级ID
@@ -246,7 +264,10 @@ class DashboardController extends Controller{
         }
         return $structure;
     }
-    //退出登录
+
+    /**
+     * 退出登录
+     */
     public function quit(Request $request){
         Session::put('zerone_account_id','');
         return redirect('zerone/login');
