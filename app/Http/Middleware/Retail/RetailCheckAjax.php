@@ -252,6 +252,7 @@ class RetailCheckAjax
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request)
     {
+        dump($request);
         $admin_data = $request->get('admin_data');
         if($admin_data['id']<>1){
             //暂定所有用户都有权限
