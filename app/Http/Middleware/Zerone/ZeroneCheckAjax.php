@@ -419,7 +419,9 @@ class ZeroneCheckAjax
 
 
     /*****公用部分******/
-    //检测登录和权限
+    /**
+     * 检测登录和权限
+     */
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -775,7 +777,10 @@ class ZeroneCheckAjax
         }
         return self::res(1,$request);
     }
-    //部分页面检测用户是否admin，否则检测是否有权限
+    
+    /**
+     * 部分页面检测用户是否admin，否则检测是否有权限
+     */
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['id']<>1){
@@ -813,25 +818,30 @@ class ZeroneCheckAjax
             return self::res(1,$request);
         }
     }
-    //检测是否登录
+
+    /**
+     * 检测是否登录
+     */
     public function checkIsLogin($request)
     {
-        $sess_key = Session::get('zerone_account_id');
+        $sess_key = Session::get('zerone_account_id');//获取管理员ID
         //如果为空返回登录失效
         if (empty($sess_key)) {
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
         } else {
-            $sess_key = Session::get('zerone_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员信息
+            $admin_data = Redis::get('zerone_system_admin_data_' . $sess_key);//获取管理员信息-序列信息
             $admin_data = unserialize($admin_data);//解序列我的信息
             $request->attributes->add(['admin_data' => $admin_data]);//添加参数
             //把参数传递到下一个中间件
             return self::res(1, $request);
         }
     }
-    //检测登录提交数据
+
+    /**
+     * 检测登录提交数据
+     */
     public function checkLoginPost($request)
     {
         if (empty($request->input('username'))) {
@@ -844,14 +854,15 @@ class ZeroneCheckAjax
             return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
         }
         if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
-            //把参数传递到下一个程序
-            return self::res(1, $request);
+            return self::res(1, $request);//把参数传递到下一个程序
         } else {
-            //用户输入验证码错误
-            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));//用户输入验证码错误
         }
     }
-    //检测登录提交数据
+
+    /**
+     * 检测登录提交数据
+     */
     public function checkID($request)
     {
         if (empty($request->input('id'))) {
@@ -859,12 +870,18 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
-    //工厂方法返回结果
+
+    /**
+     * 工厂方法返回结果
+     */
     public static function res($status, $response)
     {
         return ['status' => $status, 'response' => $response];
     }
-    //格式化返回值
+
+    /**
+     * 格式化返回值
+     */
     public static function format_response($re, Closure $next)
     {
         if ($re['status'] == '0') {

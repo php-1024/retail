@@ -69,7 +69,7 @@ class ZeroneCheck{
         return $next($request);
     }
 
-    /*
+    /**
      * 检测是否admin或是否有权限是否登入
      */
     public function checkLoginAndRule($request){
@@ -86,9 +86,10 @@ class ZeroneCheck{
         }
     }
 
-    /*
-    * 部分页面检测用户是否admin，否则检测是否有权限
-    */
+
+    /**
+     * 部分页面检测用户是否admin，否则检测是否有权限
+     */
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['id']<>1){
@@ -106,7 +107,6 @@ class ZeroneCheck{
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
             }
-            dump($program_routes);
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
@@ -123,9 +123,10 @@ class ZeroneCheck{
         }
     }
 
-    /*
-    * 普通页面检测用户是否登录
-    */
+
+    /**
+     * 普通页面检测用户是否登录
+     */
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_account_id');
@@ -147,11 +148,17 @@ class ZeroneCheck{
         }
     }
 
-    //工厂方法返回结果
+    /**
+     * 工厂方法返回结果
+     */
     public static function res($status,$response){
         return ['status'=>$status,'response'=>$response];
     }
-    //格式化返回值
+
+
+    /**
+     * 格式化返回值
+     */
     public static function format_response($re,Closure $next){
         if($re['status']=='0'){
             return $re['response'];

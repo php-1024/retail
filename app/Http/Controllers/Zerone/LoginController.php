@@ -13,15 +13,16 @@ use App\Models\LoginLog;
 use Session;
 
 class LoginController extends Controller{
-    /*
-     * 登录页面
-     */
+
+    /**
+    * 登录页面
+    */
     public function display()
     {
         return view('Zerone/Login/display');
     }
 
-    /*
+    /**
      * 生成验证码
      */
     public function captcha()
@@ -39,10 +40,9 @@ class LoginController extends Controller{
         header('Content-Type: image/jpeg');
         $builder->output();
     }
-
-    /*
-    * 检测登录
-    */
+    /**
+     * 检测登录
+     */
     public function login_check(){
         $ip = Request::getClientIp();//获取访问者IP
         $addr_arr = \IP2Attr::find($ip);//获取访问者地址
