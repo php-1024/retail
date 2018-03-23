@@ -44,9 +44,10 @@ class OrderController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $id = $request->get('id');
-        $order = RetailOrder::getOne([['id',$id]]);
-        $user = User::getOneUser([['id',$order->user_id]]);        //查询处理订单信息和用户信息
+        $id = $request->get('id');                          //获取订单id
+        $order = RetailOrder::getOne([['id',$id]]);             //查询订单信息
+        dump($order);
+        $user = User::getOneUser([['id',$order->user_id]]);
         $order->user = $user;
         $order_goods = RetailOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         $order_price = 0.00;    //设置订单的初始总价
