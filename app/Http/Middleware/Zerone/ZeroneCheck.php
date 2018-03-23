@@ -106,10 +106,9 @@ class ZeroneCheck{
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
             }
-
+            dump($program_routes);
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
-            dump($unset_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
             if(!in_array($route_name,$program_routes) && !in_array($route_name,config('app.zerone_route_except'))){
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
