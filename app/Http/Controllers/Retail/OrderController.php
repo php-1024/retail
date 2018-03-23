@@ -48,13 +48,10 @@ class OrderController extends Controller
         $order = RetailOrder::getOne([['id',$id]]);             //查询订单信息
         $user = User::getOneUser([['id',$order->user_id]]);
         $order->user = $user;
-        dd($order);
-        $order_goods = RetailOrderGoods::getList([['order_id',$order->id]],0,'id','DESC');
         $order_price = 0.00;    //设置订单的初始总价
-        foreach ($order_goods as $key=>$val){
-            $goods = RetailGoods::getOne([['id',$val->goods_id]]);
-            $val->order_goods = $goods;
-            $order_price += $val->price;        //计算订单总价
+        foreach ($order->RetailOrderGoods as $key=>$val){
+            $price = $val->total*$val->price;
+            $order_price += $price;        //计算订单总价
         }
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order_goods'=>$order_goods,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
