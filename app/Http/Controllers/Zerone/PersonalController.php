@@ -1,4 +1,8 @@
 <?php
+/**
+ *个人中心
+ *
+ **/
 namespace App\Http\Controllers\Zerone;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
@@ -9,18 +13,20 @@ use App\Models\Module;
 use App\Models\AccountInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 use Session;
 
 class PersonalController extends Controller{
-    //个人中心——个人资料
+
+    /**
+     * 个人资料
+     */
     public function display(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $account_id = $admin_data['id'];//当前登录账号ID
-        $user = Account::getOne([['id',$admin_data['id']]]);
+        $user = Account::getOne([['id',$admin_data['id']]]);//获取用户信息
         if($account_id == 1) {//如果是超级管理员
             $module_node_list = Module::getListProgram(1, [], 0, 'id');//获取当前系统的所有模块和节点
         }else{
@@ -46,12 +52,14 @@ class PersonalController extends Controller{
         return view('Zerone/Personal/display',['user'=>$user,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name,'module_node_list'=>$module_node_list]);
     }
 
-    //个人中心 - 修改个人资料
+    /**
+     * 修改个人资料
+     */
     public function personal_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $realname = $request->input('realname');
-        $mobile = $request->input('mobile');
+        $realname = $request->input('realname');//获取真实姓名
+        $mobile = $request->input('mobile');//获取手机号
         DB::beginTransaction();
         try {
             Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
