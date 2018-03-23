@@ -256,7 +256,9 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录，权限，及修改安全密码的数据
+    /**
+     * 检测登录，权限，及修改安全密码的数据
+     */
     public function checkLoginAndRuleAndSafepasswordEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -567,7 +569,10 @@ class ZeroneCheckAjax
         return self::res(1,$request);
     }
 
-    //检测修改设置安全密码
+
+    /**
+     * 检测修改设置安全密码
+     */
     public function checkSafepasswordEdit($request){
         if(empty($request->input('is_editing'))){
             return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));

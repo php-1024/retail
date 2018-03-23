@@ -125,7 +125,9 @@ class PersonalController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         return view('Zerone/Personal/safe_password',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
-    //个人中心——安全密码修改(设置)
+    /**
+     * 安全密码修改(设置)功能提交
+     */
     public function safe_password_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
