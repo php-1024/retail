@@ -224,7 +224,9 @@ class ZeroneCheckAjax
 
 
     /*****个人中心******/
-    //检测 登录 和 权限 和 安全密码 和 及修改个人信息提交数据
+    /**
+     * 检测 登录 和 权限 和 安全密码 和 及修改个人信息提交数据
+     */
     public function checkLoginAndRuleAndSafeAndPersonalEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
