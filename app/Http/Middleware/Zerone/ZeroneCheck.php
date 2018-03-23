@@ -89,6 +89,7 @@ class ZeroneCheck{
     //部分页面检测用户是否admin，否则检测是否有权限
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         if($admin_data['id']<>1){
             //暂定所有用户都有权限
             //return self::res(1,redirect('zerone'));
@@ -135,10 +136,9 @@ class ZeroneCheck{
         }else{
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('zerone_system_menu_1_'.$sess_key);
-            dump($menu_data);
-            $son_menu_data = Redis::get('zerone_system_son_menu_1_'.$sess_key);
+            $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取序列管理员信息
+            $menu_data = Redis::get('zerone_system_menu_1_'.$sess_key);//获取序列一级菜单
+            $son_menu_data = Redis::get('zerone_system_son_menu_1_'.$sess_key);//获取序列子菜单
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
