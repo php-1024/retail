@@ -96,6 +96,7 @@ class GoodsController extends Controller
         $category_id = $request->get('category_id');        //栏目ID
         $name = $request->get('name');                      //商品名称
         $price = $request->get('price');                    //商品价格
+        $barcode = $request->get('barcode');                //商品条码
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
@@ -105,7 +106,7 @@ class GoodsController extends Controller
         }
         $where = ['id' => $goods_id];
         //商品数据
-        $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name,'price' => $price,'stock' => $stock,'displayorder' => $displayorder,'details' => $details];
+        $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name,'price' => $price,'barcode'=>$barcode,'stock' => $stock,'displayorder' => $displayorder,'details' => $details];
         DB::beginTransaction();
         try {
             $goods_id = RetailGoods::editRetailGoods($where,$goods_data);
