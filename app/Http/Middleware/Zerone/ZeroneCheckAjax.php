@@ -23,11 +23,11 @@ class ZeroneCheckAjax
 
 
             //系统管理
-            case "zerone/ajax/warzone_add_check"://检测战区名称 战区省份 安全密码是否为空
+            case "zerone/ajax/warzone_add_check"://检测添加战区名称 战区省份 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndWarzoneAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/warzone_edit_check"://检测战区名称 战区省份 安全密码是否为空
+            case "zerone/ajax/warzone_edit_check"://检测修改战区名称 战区省份 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndWarzoneEdit($request);
                 return self::format_response($re,$next);
                 break;
@@ -188,7 +188,9 @@ class ZeroneCheckAjax
     /******************************复合检测*********************************/
 
     /*****系统管理******/
-    //检测 登录 和 权限 和 安全密码 和 添加战区的数据提交
+    /**
+     * 检测 登录 和 权限 和 安全密码 和 添加战区的数据提交
+     */
     public function checkLoginAndRuleAndSafeAndWarzoneAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -202,7 +204,9 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
+    /**
+     * 检测 登录 和 权限 和 安全密码 和 修改战区的数据提交
+     */
     public function checkLoginAndRuleAndSafeAndWarzoneEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -496,7 +500,9 @@ class ZeroneCheckAjax
     /******************************单项检测*********************************/
 
     /*****系统管理******/
-    //检测战区添加表信息
+    /**
+     * 检测战区添加表信息
+     */
     public function checkWarzoneAdd($request){
         if (empty($request->input('zone_name'))) {
             return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
@@ -509,7 +515,9 @@ class ZeroneCheckAjax
         }
         return self::res(1, $request);
     }
-    //检测战区编辑表信息
+    /**
+     * 检测战区编辑表信息
+     */
     public function checkWarzoneEdit($request){
         if (empty($request->input('zone_name'))) {
             return self::res(0, response()->json(['data' => '请输入战区名称', 'status' => '0']));
