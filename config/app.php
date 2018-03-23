@@ -81,15 +81,13 @@ return [
      */
     'zerone_route_except'=>[
         'zerone',//零壹管理平台首页
-        'zerone/ajax/proxy_list_frozen',//冻结服务商弹出安全密码输入框
-
     ],
 
     /*
     * 服务商管理系统无需检验权限的路由
     */
-    'proxy_route_except'=>[
-        'proxy',//零壹管理平台首页
+    'agent_route_except'=>[
+        'agent',//零壹管理平台首页
     ],
 
     /*
