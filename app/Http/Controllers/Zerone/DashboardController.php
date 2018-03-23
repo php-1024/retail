@@ -191,8 +191,7 @@ class DashboardController extends Controller{
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
         $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];//分页参数
-        $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');
-        dump($list);
+        $list = OperationLog::getUnionPaginate($account,$time_st_format,$time_nd_format,10,'id');//所有操作记录
         $roles = [];
         foreach($list as $key=>$val){
             $roles[$val->id] = OrganizationRole::getLogsRoleName($val->account_id);
@@ -217,8 +216,8 @@ class DashboardController extends Controller{
             $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
             $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
         }
-        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];
-        $list = LoginLog::getUnionPaginate($account,$time_st_format,$time_nd_format,15,'id');
+        $search_data = ['account'=>$account,'time_st'=>$time_st,'time_nd'=>$time_nd];//分页参数
+        $list = LoginLog::getUnionPaginate($account,$time_st_format,$time_nd_format,15,'id');//所有登入记录
         return view('Zerone/Dashboard/login_log',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
