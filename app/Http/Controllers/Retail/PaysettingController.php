@@ -1,7 +1,7 @@
 <?php
 /**
  * 零售管理系统
- * 登录界面
+ * 支付设置
  **/
 
 namespace App\Http\Controllers\Retail;
