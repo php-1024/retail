@@ -503,6 +503,10 @@ class WechatController extends Controller{
             'response_keyword' => $response_keyword,
         ];
 
+        if(empty($parent_id)){
+
+        }
+
         DB::beginTransaction();
         try {
             WechatDefinedMenu::addDefinedMenu($defined_menu);
