@@ -55,6 +55,7 @@ class RetailGoods extends Model{
         $model->name = $param['name'];
         $model->details = $param['details'];
         $model->price = $param['price'];
+        $model->barcode = $param['barcode'];
         $model->stock = $param['stock'];
         $model->created_by = $param['created_by'];
         $model->category_id = $param['category_id'];
@@ -83,7 +84,7 @@ class RetailGoods extends Model{
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
         $model = Self::find($id);
-        return $model->delete();
+        return $model->forceDelete();
     }
 }
 ?>

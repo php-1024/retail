@@ -139,8 +139,11 @@ class CateringCheckAjax
                 break;
 
             case "api/ajax/defined_menu_add_check":              //自定义菜单数据添加提交
-            case "api/ajax/defined_menu_edit_check":              //自定义菜单数据添加提交
                 $re = $this->checkLoginAndRuleAndDefinedMenuAdd($request);
+                return self::format_response($re,$next);
+                break;
+            case "api/ajax/defined_menu_edit_check":              //自定义菜单数据添加提交
+                $re = $this->checkLoginAndRuleAndDefinedMenuEdit($request);
                 return self::format_response($re,$next);
                 break;
 
@@ -206,6 +209,21 @@ class CateringCheckAjax
             return $re;
         }else{
             $re2 = $this->checkDefinedMenuAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测登陆，权限，自定义菜单数据编辑提交
+    public function checkLoginAndRuleAndDefinedMenuEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefinedMenuEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -946,13 +964,36 @@ class CateringCheckAjax
             return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
         }
         if(strlen($request->input('menu_name'))>12){
-            return self::res(0,response()->json(['data' => '您输入的菜单名称超长', 'status' => '0']));
+            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
         }
         if(empty($request->input('event_type'))){
             return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
         }
-        if($request->input('event_type') == '1' && $request->input('response_type') == '1'){
-            return self::res(0,response()->json(['data' => '', 'status' => '0']));
+        if($request->input('event_type') == '1' && $request->input('response_type') <> '1'){
+            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+        }
+        if($request->input('event_type') == '1' && empty($request->input('response_url'))){
+            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    //检测自定义菜单编辑数据的内容
+    public function checkDefinedMenuEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输！', 'status' => '0']));
+        }
+        if(empty($request->input('menu_name'))){
+            return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
+        }
+        if(strlen($request->input('menu_name'))>12){
+            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
+        }
+        if(empty($request->input('event_type'))){
+            return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
+        }
+        if($request->input('event_type') == '1' && $request->input('response_type') <> '1'){
+            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
         }
         if($request->input('event_type') == '1' && empty($request->input('response_url'))){
             return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));

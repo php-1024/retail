@@ -502,7 +502,13 @@ class WechatController extends Controller{
             'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
-
+        $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+        if($parent_id == '0' && $count >= 3){
+            return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
+        }
+        if($parent_id <> '0' && $count >= 5){
+            return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
             WechatDefinedMenu::addDefinedMenu($defined_menu);

@@ -69,7 +69,9 @@ class ZeroneCheck{
         return $next($request);
     }
 
-    //检测是否admin或是否有权限
+    /**
+     * 检测是否admin或是否有权限是否登入
+     */
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){
@@ -84,12 +86,13 @@ class ZeroneCheck{
         }
     }
 
-    //部分页面检测用户是否admin，否则检测是否有权限
+
+    /**
+     * 部分页面检测用户是否admin，否则检测是否有权限
+     */
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['id']<>1){
-            //暂定所有用户都有权限
-            //return self::res(1,redirect('zerone'));
             $route_name = $request->path();//获取当前的页面路由
 
             //查询用户所具备的所有节点的路由
@@ -98,14 +101,12 @@ class ZeroneCheck{
             foreach($account_info->nodes as $key=>$val){
                 $account_routes[] = $val->route_name;
             }
-            dump($account_routes);
             //查询该程序下所有节点的路由
             $program_info = Program::getOne([['id',1]]);
             $program_routes = [];
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
             }
-
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
@@ -122,7 +123,10 @@ class ZeroneCheck{
         }
     }
 
-    //普通页面检测用户是否登录
+
+    /**
+     * 普通页面检测用户是否登录
+     */
     public function checkIsLogin($request){
         //获取用户登录存储的SessionId
         $sess_key = Session::get('zerone_account_id');
@@ -130,12 +134,11 @@ class ZeroneCheck{
         if(empty($sess_key)) {
             return self::res(0,redirect('zerone/login'));
         }else{
-            $sess_key = Session::get('zerone_account_id');//获取管理员ID
             $sess_key = decrypt($sess_key);//解密管理员ID
             Redis::connect('zeo');//连接到我的缓存服务器
-            $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('zerone_system_menu_1_'.$sess_key);
-            $son_menu_data = Redis::get('zerone_system_son_menu_1_'.$sess_key);
+            $admin_data = Redis::get('zerone_system_admin_data_'.$sess_key);//获取序列管理员信息
+            $menu_data = Redis::get('zerone_system_menu_1_'.$sess_key);//获取序列一级菜单
+            $son_menu_data = Redis::get('zerone_system_son_menu_1_'.$sess_key);//获取序列子菜单
             $admin_data = unserialize($admin_data);//解序列我的信息
             $menu_data =  unserialize($menu_data);//解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);//解序列子菜单
@@ -145,11 +148,17 @@ class ZeroneCheck{
         }
     }
 
-    //工厂方法返回结果
+    /**
+     * 工厂方法返回结果
+     */
     public static function res($status,$response){
         return ['status'=>$status,'response'=>$response];
     }
-    //格式化返回值
+
+
+    /**
+     * 格式化返回值
+     */
     public static function format_response($re,Closure $next){
         if($re['status']=='0'){
             return $re['response'];
