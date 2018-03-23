@@ -19,7 +19,9 @@ use App\Models\OrganizationRole;
 
 class DashboardController extends Controller{
 
-    //系统管理首页
+    /**
+     * 系统管理首页
+     */
     public function display(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -27,6 +29,7 @@ class DashboardController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $list = Statistics::pluck('item_value')->toArray();    //所有数据
+        dump($list);
         $zerone = [
             'system_personnel'        => $list['0'],     //零壹管理系统人员数量
             'service_providers'       => $list['1'],     //服务商系统人员数量

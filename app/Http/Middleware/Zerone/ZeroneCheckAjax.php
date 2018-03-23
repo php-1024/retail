@@ -435,7 +435,9 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测登录和权限和安全密码
+    /**
+     * 检测登录和权限和安全密码
+     */
     public function checkLoginAndRuleAndSafe($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -449,7 +451,9 @@ class ZeroneCheckAjax
             }
         }
     }
-    //检测是否登录 权限 安全密码 数字不能为空
+    /**
+     * 检测是否登录 权限 安全密码 数字不能为空
+     */
     public function checkLoginAndRuleAndSafeAndAssets($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -759,33 +763,35 @@ class ZeroneCheckAjax
 
 
     /*****公用部分******/
-    //检测安全密码是否输入正确
+
+    /**
+     * 检测安全密码是否输入正确
+     */
     public function checkSafePassword($request){
-        $admin_data = $request->get('admin_data');
-        $safe_password = $request->input('safe_password');
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $safe_password = $request->input('safe_password');//获取安全密码
         $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        if(empty($safe_password)){
+        if(empty($safe_password)){//检测安全密码是否为空
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
-        if(empty($admin_data['safe_password'])){
+        if(empty($admin_data['safe_password'])){//如果缓存里的安全密码为空
             return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
         }
-        if($encryptPwd != $admin_data['safe_password']){
+        if($encryptPwd != $admin_data['safe_password']){//如果和缓存里的安全密码不相等
             return self::res(0,response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
         }
         return self::res(1,$request);
     }
-    
+
     /**
      * 部分页面检测用户是否admin，否则检测是否有权限
      */
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         if($admin_data['id']<>1){
-            //暂定所有用户都有权限
-            //return self::res(1,redirect('zerone'));
+
             $route_name = $request->path();//获取当前的页面路由
 
             //查询用户所具备的所有节点的路由
