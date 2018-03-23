@@ -93,7 +93,6 @@ class RetailCheck{
             if(in_array($route_name,$unset_routes)){
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
             }
-            dd(1);
             return self::res(1,$request);
         }else{
             return self::res(1,$request);
@@ -119,6 +118,7 @@ class RetailCheck{
             $menu_data =  unserialize($menu_data);                  //解序列一级菜单
             $son_menu_data =  unserialize($son_menu_data);          //解序列子菜单
             $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]); //添加参数
+            dd($menu_data);
             return self::res(1,$request);                     //把参数传递到下一个中间件
         }else{                                                      //如果为空跳转到登录页面
             return self::res(0,redirect('retail/login'));
