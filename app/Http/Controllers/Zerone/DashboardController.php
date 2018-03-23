@@ -28,8 +28,7 @@ class DashboardController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $list = Statistics::pluck('item_value')->toArray();    //所有数据
-        dump($list);
+        $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
             'system_personnel'        => $list['0'],     //零壹管理系统人员数量
             'service_providers'       => $list['1'],     //服务商系统人员数量
@@ -47,7 +46,10 @@ class DashboardController extends Controller{
         $operation_log_list = OperationLog::getList($where,10,'id');//操作记录
         return view('Zerone/Dashboard/display',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'zerone'=>$zerone]);
     }
-    //战区管理首页
+    
+    /**
+     * 战区管理首页
+     */
     public function warzone(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
