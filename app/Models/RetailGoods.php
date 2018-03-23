@@ -33,10 +33,7 @@ class RetailGoods extends Model{
         return $this->hasMany('App\Models\RetailGoodsThumb','goods_id','id');
     }
 
-    //和RetailOrder表多对多的关系
-    public function RetailOrder(){
-        return $this->belongsToMany('App\Models\RetailOrder','retail_order_goods','goods_id','order_id');
-    }
+
 
     //获取单条餐饮商品信息
     public static function getOne($where){
