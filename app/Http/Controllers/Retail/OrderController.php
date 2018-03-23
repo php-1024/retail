@@ -6,11 +6,8 @@
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
-use App\Models\RetailGoods;
 use App\Models\RetailOrder;
-use App\Models\RetailOrderGoods;
 use App\Models\OperationLog;
-use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +19,8 @@ class OrderController extends Controller
     public function order_spot(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $where = [
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
@@ -41,8 +38,8 @@ class OrderController extends Controller
     public function order_spot_detail(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');                          //获取订单id
         $order = RetailOrder::getOne([['id',$id]]);             //查询订单信息
@@ -68,17 +65,17 @@ class OrderController extends Controller
     //修改订单状态确认操作
     public function order_status_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
-        $route_name = $request->path();                          //获取当前的页面路由
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
         DB::beginTransaction();
         try {
             RetailOrder::editOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
-            } else {//分店本人操作记录
+            } else {//零售店铺本人操作记录
                 OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了订单状态！');//保存操作记录
             }
             DB::commit();
