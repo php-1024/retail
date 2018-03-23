@@ -283,7 +283,6 @@ class RetailCheckAjax
             if(in_array($route_name,$unset_routes)){
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
             }
-            dd($request);
             return self::res(1,$request);
         }else{
             return self::res(1,$request);
