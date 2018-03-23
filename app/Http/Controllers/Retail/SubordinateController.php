@@ -1,7 +1,7 @@
 <?php
 /**
  * 零售管理系统
- * 登录界面
+ * 下属管理
  **/
 
 namespace App\Http\Controllers\Retail;
@@ -35,7 +35,7 @@ class SubordinateController extends Controller
         $realname = $request->input('realname');    //用户真实姓名
         $mobile = $request->input('mobile');        //用户手机号码
 
-        $key = config("app.retail_encrypt_key");    //获取加密盐
+        $key = config("app.retail_encrypt_key");    //获取加密盐（零售系统加密盐）
         $encrypted = md5($password);                    //加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
@@ -99,17 +99,17 @@ class SubordinateController extends Controller
     //编辑下级人员数据提交
     public function subordinate_edit_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//要编辑的人员的ID
+        $admin_data = $request->get('admin_data');  //中间件产生的管理员数据参数
+        $route_name = $request->path();                 //获取当前的页面路由
+        $id = $request->input('id');                //要编辑的人员的ID
         $account = $request->input('account');
-        $password = $request->input('password');//登录密码
-        $realname = $request->input('realname');//真实姓名
-        $mobile = $request->input('mobile');//手机号码
+        $password = $request->input('password');    //登录密码
+        $realname = $request->input('realname');    //真实姓名
+        $mobile = $request->input('mobile');        //手机号码
         $organization_id = $admin_data['organization_id'];
         if (!empty($password)) {
             $key = config("app.retail_encrypt_key");//获取加密盐
-            $encrypted = md5($password);//加密密码第一重
+            $encrypted = md5($password);                //加密密码第一重
             $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
             $data['password'] = $encryptPwd;
         }
@@ -130,10 +130,10 @@ class SubordinateController extends Controller
                 }
                 if($admin_data['is_super'] == 2){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在分店系统编辑了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统编辑了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name,'编辑了下级人员：'.$account);//保存操作记录
                 }
                 //添加操作日志
                 DB::commit();
@@ -147,37 +147,37 @@ class SubordinateController extends Controller
 
     //输入安全密码判断是否能冻结的页面
     public function subordinate_lock(Request $request){
-        $id = $request->input('id');//要操作的用户的ID
-        $account = $request->input('account');//要操作的管理员的账号,用于记录
-        $status = $request->input('status');//当前用户的状态
+        $id = $request->input('id');            //要操作的用户的ID
+        $account = $request->input('account');  //要操作的管理员的账号,用于记录
+        $status = $request->input('status');    //当前用户的状态
         return view('Retail/Subordinate/subordinate_lock',['id'=>$id,'account'=>$account,'status'=>$status]);
     }
     //冻结解冻下级人员
     public function subordinate_lock_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//要操作的用户的ID
-        $account = $request->input('account');//要操作的用户的账号,用于记录
-        $status = $request->input('status');//当前用户的状态
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        $id = $request->input('id');                    //要操作的用户的ID
+        $account = $request->input('account');          //要操作的用户的账号,用于记录
+        $status = $request->input('status');            //当前用户的状态
         DB::beginTransaction();
         try{
             if($status==1) {
                 Account::editAccount([['id',$id]],['status'=>'0']);
                 if($admin_data['is_super'] == 1){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在分店系统冻结了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统冻结了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了下级人员：'.$account);//保存操作记录
                 }
             }else{
                 Account::editAccount([['id',$id]],['status'=>'1']);
                 if($admin_data['is_super'] == 1){
                     //添加操作日志
-                    OperationLog::addOperationLog('1','1','1',$route_name,'在店铺系统解冻了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统解冻了下级人员：'.$account);//保存操作记录
                 }else{
                     //添加操作日志
-                    OperationLog::addOperationLog('5',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
+                    OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了下级人员：'.$account);//保存操作记录
                 }
             }
             DB::commit();
@@ -190,8 +190,8 @@ class SubordinateController extends Controller
 
     //删除下级人员确定
     public function subordinate_delete(Request $request){
-        $id = $request->input('id');//要操作的用户的ID
-        $account = $request->input('account');//要操作的管理员的账号,用于记录
+        $id = $request->input('id');            //要操作的用户的ID
+        $account = $request->input('account');  //要操作的管理员的账号,用于记录
         return view('Catering/Subordinate/subordinate_delete',['id'=>$id,'account'=>$account]);
     }
 
