@@ -83,6 +83,7 @@ class RetailCheck{
             foreach($program_info->nodes as $key=>$val){
                 $program_routes[] = $val->route_name;
             }
+
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes,$account_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
