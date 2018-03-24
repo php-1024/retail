@@ -625,6 +625,7 @@ class WechatController extends Controller{
     //自定义菜单删除弹窗
     public function defined_menu_delete(Request $request){
         $id = $request->get('id');
+        dump($id);
         return view('Wechat/Catering/defined_menu_delete',['id'=>$id]);
     }
 
@@ -633,6 +634,7 @@ class WechatController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $id = $request->get('id');
+        dd($id);
         DB::beginTransaction();
         try {
             WechatDefinedMenu::removeDefinedMenu($id);
