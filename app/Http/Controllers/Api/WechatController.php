@@ -462,14 +462,13 @@ class WechatController extends Controller{
         $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0']]);
         foreach($list as $key=>$value){
             $parent_tree = $value['parent_tree'].$value['id'].',';
-            $re = WechatDefinedMenu::getOne([['parent_tree',$parent_tree]])->pluck('menu_name','response_url');
-            dd($re);
+            $re = WechatDefinedMenu::where([['parent_tree',$parent_tree]])->select('menu_name','response_url')->get();
             if($re){
-                $data['button']['name'] = $value['menu_name'];
-                $data['button']['sub_button'] = $value['menu_name'];
+                $data[$key]['button']['name'] = $value['menu_name'];
+                $data[$key]['button']['sub_button'] = $re;
             }
         }
-        dump($data);
+        dump(json_encode($data));
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
