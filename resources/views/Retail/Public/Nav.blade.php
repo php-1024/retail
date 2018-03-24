@@ -5,7 +5,7 @@
                 <!-- nav -->
                 <nav class="nav-primary  hidden-xs">
                     <ul class="nav" data-ride="collapse">
-                        <li>
+                        <li @if($route_name == 'retail') class="active" @endif>
                             <a href="{{ url('retail') }}" class="auto">
                                 <i class="fa fa-bar-chart-o  text-success"></i>
                                 <span>零售系统</span>
