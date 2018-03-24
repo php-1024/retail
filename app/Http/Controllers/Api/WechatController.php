@@ -459,7 +459,20 @@ class WechatController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
-        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0']]);
+        return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    //自定义菜单添加页面
+    public function wechat_menu_add(Request $request){
+
+        return view('Wechat/Catering/wechat_menu_add');
+    }
+
+    //自定义菜单添加页面
+    public function wechat_menu_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $organization_id = $admin_data['organization_id'];
+        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0'],['organization_id',$organization_id]]);
         foreach($list as $key=>$value){
             $parent_tree = $value['parent_tree'].$value['id'].',';
             $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
@@ -544,14 +557,10 @@ class WechatController extends Controller{
                 }
             }
         }
-        dump(json_encode($data));
-        return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-    }
+        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
 
-    //自定义菜单添加页面
-    public function wechat_menu_add(Request $request){
-
-        return view('Wechat/Catering/wechat_menu_add');
+        $re = \Wechat::create_menu($auth_info,$data);
+        dd($re);
     }
 
     //自定义菜单添加页面
