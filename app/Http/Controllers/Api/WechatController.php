@@ -466,15 +466,15 @@ class WechatController extends Controller{
             if($re){
                 if($re['event_type']==1){
                     $data[$key]['button']['name'] = $value['menu_name'];
-                    $data[$key]['button']['sub_button'] = [
+                    $data[$key]['button']['sub_button'] = [[
                         'name'=>$re['menu_name'],
                         'key' =>$re['response_keyword']
-                    ];
+                    ]];
                 }else{
-                    $data[$key]['button']['sub_button'] = [
+                    $data[$key]['button']['sub_button'] = [[
                         'name'=>$re['menu_name'],
                         'type' =>$re['response_type']
-                    ];
+                    ]];
                 }
 
             }
