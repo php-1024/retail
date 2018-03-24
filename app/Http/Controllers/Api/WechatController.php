@@ -469,7 +469,7 @@ class WechatController extends Controller{
                     if($v['event_type']==1){
                         $data[$key]['button'][$k]['sub_button'] = [
                             'name'=>$v['menu_name'],
-                            'key' =>$v['response_keyword']
+                            'key' =>$v['response_url']
                         ];
                     }else{
                         $data[$key]['button'][$k]['sub_button'] = [[
