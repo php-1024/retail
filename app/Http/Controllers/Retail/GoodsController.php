@@ -178,7 +178,7 @@ class GoodsController extends Controller
         $goods = RetailGoods::getPaginage($where, '10', 'displayorder', 'DESC');//查询商品信息
         $category = RetailCategory::getList([['retail_id',$admin_data['organization_id']]],0,'created_at','DESC');
         dump($category);
-        return view('Retail/Goods/goods_list', ['goods' => $goods, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('Retail/Goods/goods_list', ['goods' => $goods, 'category'=>$category,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
 

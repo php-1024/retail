@@ -43,10 +43,11 @@
                                         {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
                                     {{--</div>--}}
                                     <div class="col-sm-2">
-                                        <select name="account" class="form-control m-b">
-                                            <option value="AK">所有分类</option>
-                                            <option value="AK">主食</option>
-                                            <option value="HI">饮料</option>
+                                        <select name="category" class="form-control m-b">
+                                            <option value="0">所有分类</option>
+                                            @foreach($category as $key=>$val)
+                                                <option value="{{$val->id}}">{{$val->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <label class="col-sm-1 control-label">商品标题</label>
