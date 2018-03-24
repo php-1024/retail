@@ -83,7 +83,6 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
                                 <input type="text" class="form-control" name="response_url" value="{{$definedmenu->response_url}}" placeholder="跳转链接">
-                                <input type="hidden" name="response_type" value="{{$definedmenu->event_type}}">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
@@ -125,7 +124,7 @@
         var target = $("#defined_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
-        console.log(data);
+        console.log(data.event_type);
         $.post(url,data,function(json){
             if(json.status==1){
                 swal({
