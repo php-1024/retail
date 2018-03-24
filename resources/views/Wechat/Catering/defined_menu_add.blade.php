@@ -113,7 +113,7 @@
         <div class="form-group">
             <div class="col-sm-12 col-sm-offset-3">
                 <button type="button" class="btn btn-success" onclick="addPostForm()">添加菜单</button>
-                <button type="button" class="btn btn-dark" onclick="addMenuForm">一键同步到微信公众号</button>
+                <button type="button" class="btn btn-dark" onclick="addMenuForm()">一键同步到微信公众号</button>
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -165,8 +165,7 @@
             }
         });
     }
-
-    //编辑
+    
     function addMenuForm(){
         var url = $('#wechat_menu_add').val();
         var token = $('#_token').val();
