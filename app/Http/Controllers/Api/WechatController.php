@@ -462,21 +462,24 @@ class WechatController extends Controller{
         $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0']]);
         foreach($list as $key=>$value){
             $parent_tree = $value['parent_tree'].$value['id'].',';
-            $re = WechatDefinedMenu::getOne([['parent_tree',$parent_tree]]);
+            $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->Array();
+            dd($re);
             if($re){
-                if($re['event_type']==1){
-                    $v=$key+1;
-                    $data[$key]['button']['name'][$v] = $value['menu_name'];
-                    $data[$key]['button']['sub_button'] = [
-                        'name'=>$re['menu_name'],
-                        'key' =>$re['response_keyword']
-                    ];
-                }else{
-                    $data[$key]['button']['sub_button'][$v] = [[
-                        'name'=>$re['menu_name'],
-                        'type' =>$re['response_type']
-                    ]];
+                foreach($re as $k=>$v){
+                    if($re['event_type']==1){
+                        $data[$key]['button'][$v]['name'] = $value['menu_name'];
+                        $data[$key]['button']['sub_button'] = [
+                            'name'=>$re['menu_name'],
+                            'key' =>$re['response_keyword']
+                        ];
+                    }else{
+                        $data[$key]['button'][$v]['sub_button'] = [[
+                            'name'=>$re['menu_name'],
+                            'type' =>$re['response_type']
+                        ]];
+                    }
                 }
+
 
             }
         }
