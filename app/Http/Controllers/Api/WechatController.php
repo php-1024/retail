@@ -557,8 +557,8 @@ class WechatController extends Controller{
                 }
             }
         }
+        dd($organization_id);
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        dd($auth_info);
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$data);
         dd($re);
     }
