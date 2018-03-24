@@ -467,22 +467,27 @@ class WechatController extends Controller{
                 foreach($re as $k=>$v){
                     $data[$key]['button']['name'] = $value['menu_name'];
                     if($v['event_type']==1){
-                        $data[$key]['button'][$k]['sub_button'] = [
+                        $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
                             'key' =>$v['response_url']
                         ];
                     }else{
-                        $data[$key]['button'][$k]['sub_button'] = [[
+                        $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
                             'type' =>$v['response_type']
-                        ]];
+                        ];
                     }
                 }
-
-
+            }else{
+                $data[$key]['button']['name'] = $value['menu_name'];
+                if($value['event_type'] == 1){
+                    $data[$key]['button']['key']= $value['response_url'];
+                }else{
+                    $data[$key]['button']['type']= $value['response_type'];
+                }
             }
         }
-        dump($data);
+        dump(json_encode($data));
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
