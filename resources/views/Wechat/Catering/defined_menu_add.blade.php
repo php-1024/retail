@@ -35,15 +35,15 @@
                         <input type="radio" name="event_type" value="1"><i class="fa fa-check text-active"></i> 链接
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;" id="type_2" onclick="$('#response_type').val(2)">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;" id="type_2">
                         <input type="radio" name="event_type" value="2"><i class="fa fa-check text-active"></i> 模拟关键字
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="3"><i class="fa fa-check text-active"></i> 扫码
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="4"><i class="fa fa-check text-active"></i> 扫码(带等待信息)
                     </label>
 
@@ -123,6 +123,9 @@
 
 <script>
     $(function(){
+        $('.onclick').click(function(){
+            $('#response_type').val(2);
+        }
         $('#type_1').click(function(){
             $('#text_type').removeClass('active');
             $('#text_response').removeClass('active');
@@ -141,24 +144,25 @@
         var target = $("#defined_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
-        $.post(url,data,function(json){
-            if(json.status==1){
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }
-        });
+        console.log(data);
+//        $.post(url,data,function(json){
+//            if(json.status==1){
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
+//            }
+//        });
     }
 </script>
