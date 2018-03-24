@@ -125,7 +125,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         var data = target.serializeArray();
-        console.log(data[4]);
+        console.log(data[4][event_type]);
 //        $.post(url,data,function(json){
 //            if(json.status==1){
 //                swal({
