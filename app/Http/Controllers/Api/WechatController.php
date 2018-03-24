@@ -462,7 +462,7 @@ class WechatController extends Controller{
         $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0']]);
         foreach($list as $key=>$value){
             $parent_tree = $value['parent_tree'].$value['id'].',';
-            $re = WechatDefinedMenu::getOne([['parent_tree',$parent_tree]]);
+            $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]]);
             if($re){
                 foreach($re as $k=>$v){
                     if($re['event_type']==1){
