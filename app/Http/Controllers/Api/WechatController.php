@@ -639,6 +639,7 @@ class WechatController extends Controller{
             WechatDefinedMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
             $data = WechatDefinedMenu::getOne([['id',$id]]);//菜单详情信息
             if($data['parent_id'] == '0'){//如果是最上级
+                dd(1);
                 $parent_tree = '0,'.$id.',';//树形结构
                 WechatDefinedMenu::removeDefinedMenu([['parent_tree',$parent_tree]]);//删除子级菜单
             }
