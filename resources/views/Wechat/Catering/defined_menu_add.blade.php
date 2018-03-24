@@ -47,19 +47,19 @@
                         <input type="radio" name="event_type" value="4"><i class="fa fa-check text-active"></i> 扫码(带等待信息)
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="5"><i class="fa fa-check text-active"></i> 拍照发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="6"><i class="fa fa-check text-active"></i> 拍照或者相册发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="7"><i class="fa fa-check text-active"></i> 微信相册发图
                     </label>
 
-                    <label class="btn btn-sm btn-info" style="margin-right: 5px;margin-top: 10px;">
+                    <label class="btn btn-sm btn-info onclick" style="margin-right: 5px;margin-top: 10px;">
                         <input type="radio" name="event_type" value="8"><i class="fa fa-check text-active"></i> 地理位置
                     </label>
                 </div>
@@ -144,25 +144,24 @@
         var target = $("#defined_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
-        console.log(data);
-//        $.post(url,data,function(json){
-//            if(json.status==1){
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定"
-//                },function(){
-//                    window.location.reload();
-//                });
-//            }else{
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor:"#DD6B55",
-//                    confirmButtonText: "确定"
-//                });
-//            }
-//        });
+        $.post(url,data,function(json){
+            if(json.status==1){
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
     }
 </script>
