@@ -28,6 +28,11 @@ class WechatDefinedMenu extends Model{
     {
         return self::where($where)->first();
     }
+    //简易型查询单条数据关联查询
+    public static function ListWechatDefinedMenu($where)
+    {
+        return self::where($where)->get();
+    }
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){

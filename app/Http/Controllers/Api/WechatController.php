@@ -458,6 +458,10 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+
+        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0']]);
+        dump($list);
+
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -614,7 +618,6 @@ class WechatController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
         }
