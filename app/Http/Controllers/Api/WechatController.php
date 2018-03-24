@@ -472,10 +472,10 @@ class WechatController extends Controller{
                             'key' =>$v['response_url']
                         ];
                     }else{
-                        $data[$key]['button']['sub_button'][] = [[
+                        $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
                             'type' =>$v['response_type']
-                        ]];
+                        ];
                     }
                 }
             }else{
