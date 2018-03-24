@@ -636,13 +636,12 @@ class WechatController extends Controller{
 
         DB::beginTransaction();
         try {
-            WechatDefinedMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
             $data = WechatDefinedMenu::getOne([['id',$id]]);//菜单详情信息
-            if($data['parent_id'] == '0'){//如果是最上级
-                dd(1);
+            if($data['parent_id'] == 0){//如果是最上级
                 $parent_tree = '0,'.$id.',';//树形结构
                 WechatDefinedMenu::removeDefinedMenu([['parent_tree',$parent_tree]]);//删除子级菜单
             }
+            WechatDefinedMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统删除了公众号自定义菜单！');//保存操作记录
