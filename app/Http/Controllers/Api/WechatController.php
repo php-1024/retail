@@ -460,8 +460,11 @@ class WechatController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
         $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0']]);
+        foreach($list as $key=>$value){
+            $parent_tree = $value['parent_tree'].$value['id'].',';
+            $list[$key]['sub_button'] = WechatDefinedMenu::getOne([['parent_tree',$parent_tree]]);
+        }
         dump($list);
-
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
