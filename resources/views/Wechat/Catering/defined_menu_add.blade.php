@@ -142,7 +142,7 @@
         });
     });
     function addPostForm(){
-        var target = $("#menu_add");
+        var target = $("#defined_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){

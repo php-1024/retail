@@ -2,6 +2,7 @@
 namespace App\Services\Wechat;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatAuthorization;
+use App\Services\Curl\HttpCurl;
 use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 /*
     微信开放平台操作相关接口
