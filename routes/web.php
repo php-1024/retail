@@ -756,6 +756,7 @@ Route::group(['prefix'=>'api'],function() {
 
 
     //粉丝管理系统授权页面
+    /*
     Route::group(['prefix' => 'fansmanage'] , function(){
         Route::any('store_auth', 'Api\WechatController@store_auth')->middleware('FansmanageCheck');//开放平台控制公众平台回复函数
         Route::any('material_image', 'Api\WechatController@material_image')->middleware('FansmanageCheck');//图片素材
@@ -769,7 +770,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('subscribe_reply','Api\WechatController@subscribe_reply')->middleware('FansmanageCheck');//关注事件自动回复
         Route::any('default_reply','Api\WechatController@default_reply')->middleware('FansmanageCheck');//默认回复
     });
-
+*/
     //微信接口中页面使用Ajax的部分
     Route::group(['prefix' => 'ajax'] , function(){
         Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
