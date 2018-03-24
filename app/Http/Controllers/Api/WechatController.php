@@ -467,12 +467,12 @@ class WechatController extends Controller{
                 foreach($re as $k=>$v){
                     $data[$key]['button']['name'] = $value['menu_name'];
                     if($v['event_type']==1){
-                        $data[$key]['button'][$k]['sub_button'] = [
+                        $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
                             'key' =>$v['response_url']
                         ];
                     }else{
-                        $data[$key]['button'][$k]['sub_button'] = [[
+                        $data[$key]['button']['sub_button'][] = [[
                             'name'=>$v['menu_name'],
                             'type' =>$v['response_type']
                         ]];
