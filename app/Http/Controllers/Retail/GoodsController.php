@@ -174,11 +174,12 @@ class GoodsController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+        $goods_name = $request->get('goods_name');
         $where = ['retail_id' => $admin_data['organization_id']];
         $goods = RetailGoods::getPaginage($where, '10', 'displayorder', 'DESC');//查询商品信息
         $category = RetailCategory::getList([['retail_id',$admin_data['organization_id']]],0,'created_at','DESC');
         dump($category);
-        return view('Retail/Goods/goods_list', ['goods' => $goods, 'category'=>$category,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('Retail/Goods/goods_list', ['goods' => $goods, 'category'=>$category,'goods_name'=>$goods_name,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
 
