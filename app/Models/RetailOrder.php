@@ -38,29 +38,22 @@ class RetailOrder extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加组织栏目分类
-    public static function addOrder($param){
-        $model = new RetailOrder();
-        $model->name = $param['name'];
-        $model->fansmanage_id = $param['fansmanage_id'];
-        $model->retail_id = $param['retail_id'];
-        $model->save();
-        return $model->id;
-    }
-
-    //修改数据
-    public static function editOrder($where,$param){
-        if($model = self::where($where)->first()){
-            foreach($param as $key=>$val){
-                $model->$key=$val;
-            }
-            $model->save();
-        }
-    }
-
     //获取分页列表
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('User')->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
+        $model = self::with('User');
+        if(!empty($search_data['user_id'])){
+            $model = $model->where([['user_id',$search_data['user_id']]]);
+        }
+        if(!empty($search_data['ordersn'])){
+            $model = $model->where([['ordersn',$search_data['ordersn']]]);
+        }
+        if(!empty($search_data['paytype'])){
+            $model = $model->where([['paytype',$search_data['paytype']]]);
+        }
+        if(!empty($search_data['status'])){
+            $model = $model->where([['status',$search_data['status']]]);
+        }
+        return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>
