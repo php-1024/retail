@@ -41,7 +41,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                         <label class="col-sm-1 control-label">用户账号</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-1">
                                             <input class="input-sm form-control" size="16" type="text" value="">
                                         </div>
                                         <label class="col-sm-1 control-label">订单编号</label>
@@ -50,7 +50,7 @@
                                             <input class="input-sm form-control" size="16" type="text" value="">
                                         </div>
                                         <label class="col-sm-1 control-label">支付方式</label>
-                                        <div class="col-sm-1">
+                                        <div class="col-sm-2">
                                             <select name="account" class="form-control m-b">
                                                 <option>在线余额支付</option>
                                                 <option>在线支付</option>
