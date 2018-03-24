@@ -457,7 +457,94 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
+        $organization_id = $admin_data['organization_id'];
+        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0'],['organization_id',$organization_id]]);
+        foreach($list as $key=>$value){
+            $parent_tree = $value['parent_tree'].$value['id'].',';
+            $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
+            if($re){
+                foreach($re as $k=>$v){
+                    switch ($v['event_type'])
+                    {
+                        case 1:
+                            $type='click';
+                            break;
+                        case 2:
+                            $type='view';
+                            break;
+                        case 3:
+                            $type='scancode_push';
+                            break;
+                        case 4:
+                            $type='scancode_waitmsg';
+                            break;
+                        case 5:
+                            $type='pic_sysphoto';
+                            break;
+                        case 6:
+                            $type='pic_photo_or_album';
+                            break;
+                        case 7:
+                            $type='pic_weixin';
+                            break;
+                        case 8:
+                            $type='location_select';
+                            break;
+                    }
+                    $data[$key]['button']['name'] = $value['menu_name'];
+                    if($v['event_type']==1){
+                        $data[$key]['button']['sub_button'][] = [
+                            'name'=>$v['menu_name'],
+                            'type'=>$type,
+                            'url' =>$v['response_url']
+                        ];
+                    }else{
+                        $data[$key]['button']['sub_button'][] = [
+                            'name'=>$v['menu_name'],
+                            'type'=>$type,
+                            'key' =>$v['response_keyword']
+                        ];
+                    }
+                }
+            }else{
+                switch ($value['event_type'])
+                {
+                    case 1:
+                        $type='click';
+                        break;
+                    case 2:
+                        $type='view';
+                        break;
+                    case 3:
+                        $type='scancode_push';
+                        break;
+                    case 4:
+                        $type='scancode_waitmsg';
+                        break;
+                    case 5:
+                        $type='pic_sysphoto';
+                        break;
+                    case 6:
+                        $type='pic_photo_or_album';
+                        break;
+                    case 7:
+                        $type='pic_weixin';
+                        break;
+                    case 8:
+                        $type='location_select';
+                        break;
+                }
+                $data[$key]['button']['name'] = $value['menu_name'];
+                $data[$key]['button']['type'] = $type;
+                if($value['event_type'] == 1){
+                    $data[$key]['button']['url']= $value['response_url'];
+                }else{
+                    $data[$key]['button']['key']= $value['response_keyword'];
+                }
+            }
+        }
+        dump($data);
+        
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
