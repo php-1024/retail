@@ -50,9 +50,9 @@
                                         <div class="col-sm-2">
                                             <input class="input-sm form-control" size="16" type="text" value="">
                                         </div>
+                                        <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
                                             <select name="account" class="form-control m-b">
-                                                <option>支付方式</option>
                                                 <option>在线余额支付</option>
                                                 <option>在线支付</option>
                                                 <option>003</option>
@@ -61,9 +61,9 @@
                                         </div>
                                     </div>
                                     <div>
+                                        <label class="col-sm-1 control-label">订单状态</label>
                                         <div class="col-sm-2">
                                             <select name="account" class="form-control m-b">
-                                                <option>订单状态</option>
                                                 <option>未支付</option>
                                                 <option>已支付</option>
                                                 <option>已完成</option>
