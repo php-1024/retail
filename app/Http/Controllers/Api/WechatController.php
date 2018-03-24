@@ -571,6 +571,18 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
+
+        $menu_parent_id =WechatDefinedMenu::getPluck([['id',$menu_id]],'parent_id')->first();//获取菜单的上级id
+        if($menu_parent_id !=$parent_id){//如果id有改变
+            $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+            if($parent_id == '0' && $count >= 3){
+                return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
+            }
+            if($parent_id <> '0' && $count >= 5){
+                return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+            }
+        }
+        
         if ($parent_id == 0){
             $parent_tree = '0,';
         }else{
@@ -586,13 +598,7 @@ class WechatController extends Controller{
             'parent_tree' => $parent_tree,
         ];
 
-        $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
-        if($parent_id == '0' && $count >= 3){
-            return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
-        }
-        if($parent_id <> '0' && $count >= 5){
-            return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
-        }
+
 
         dd(1);
         DB::beginTransaction();
