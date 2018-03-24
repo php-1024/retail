@@ -975,6 +975,9 @@ class CateringCheckAjax
         if($request->input('event_type') == '1' && empty($request->input('response_url'))){
             return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
         }
+        if($request->input('event_type') == '2' && $request->input('response_type') <> '2'){
+            return self::res(0,response()->json(['data' => '您选择的模拟关键字，请选择关键字回复！', 'status' => '0']));
+        }
         if($request->input('event_type') == '2' && empty($request->input('response_keyword'))){
             return self::res(0,response()->json(['data' => '您选择的模拟关键字，请选择关键字！', 'status' => '0']));
         }
