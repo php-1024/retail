@@ -468,7 +468,7 @@ class WechatController extends Controller{
                 $data[$key]['button']['sub_button'] = $re;
             }
         }
-        dump($data);
+        dump(json_decode($data));
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
