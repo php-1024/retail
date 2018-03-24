@@ -465,9 +465,9 @@ class WechatController extends Controller{
             $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
             if($re){
                 foreach($re as $k=>$v){
+                    $data[$key]['button']['name'] = $value['menu_name'];
                     if($v['event_type']==1){
-                        $data[$key]['button'][$k]['name'] = $value['menu_name'];
-                        $data[$key]['button']['sub_button'] = [
+                        $data[$key]['button'][$k]['sub_button'] = [
                             'name'=>$v['menu_name'],
                             'key' =>$v['response_keyword']
                         ];
