@@ -192,6 +192,7 @@ class WechatApi{
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $origin_re =  \HttpCurl::doPost($url,$data);
         $re = json_decode($origin_re,true);
+        dd($re);
         if(!empty($re['authorizer_access_token'])){
             $authorizer_access_token = $re['authorizer_access_token'];
             $authorizer_refresh_token = $re['authorizer_refresh_token'];
