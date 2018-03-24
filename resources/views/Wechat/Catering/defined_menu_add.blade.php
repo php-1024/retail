@@ -169,10 +169,8 @@
 
     //编辑
     function addMenuForm(){
-
         var url = $('#wechat_menu_add').val();
         var token = $('#_token').val();
-
         var data = {'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
@@ -186,7 +184,6 @@
                 });
                 return;
             }else{
-
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }

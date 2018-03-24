@@ -549,6 +549,12 @@ class WechatController extends Controller{
     }
 
     //自定义菜单添加页面
+    public function wechat_menu_add(Request $request){
+
+        return view('Wechat/ajax/wechat_menu_add');
+    }
+
+    //自定义菜单添加页面
     public function defined_menu_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
