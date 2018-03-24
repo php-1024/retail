@@ -594,7 +594,7 @@ class WechatController extends Controller{
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
 
-
+        dd(1);
         DB::beginTransaction();
         try {
             WechatDefinedMenu::editDefinedMenu(['id'=>$menu_id],$defined_menu);
