@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="category_delete_check" method="post" action="{{url('api/ajax/wechat_menu_add_check')}}">
+<form class="form-horizontal" id="wechat_menu_add_check" method="post" action="{{url('api/ajax/wechat_menu_add_check')}}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content">
