@@ -463,7 +463,6 @@ class WechatController extends Controller{
         foreach($list as $key=>$value){
             $parent_tree = $value['parent_tree'].$value['id'].',';
             $re = WechatDefinedMenu::where([['parent_tree',$parent_tree]])->select('menu_name','response_url')->get();
-            dd($re);
             if($re){
                 $data['button']['name'] = $value['menu_name'];
                 $data['button']['sub_button'] = $value['menu_name'];
