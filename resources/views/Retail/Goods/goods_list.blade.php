@@ -46,14 +46,14 @@
                                         <select name="category" class="form-control m-b">
                                             <option value="0">所有分类</option>
                                             @foreach($category as $key=>$val)
-                                                <option value="{{$val->id}}">{{$val->name}}</option>
+                                                <option value="{{$val->id}}" @if($search_data['category_id'] == $val->id)selected@endif>{{$val->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <label class="col-sm-1 control-label">商品标题</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" name="goods_name" value="{{$goods_name}}">
+                                        <input class="input-sm form-control" size="16" type="text" name="goods_name" value="{{$search_data['goods_name']}}">
                                     </div>
 
                                     <div class="col-sm-3">
