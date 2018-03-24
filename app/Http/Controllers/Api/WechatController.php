@@ -574,8 +574,6 @@ class WechatController extends Controller{
         if ($parent_id == 0){
             $parent_tree = '0,';
         }else{
-            $oneMenu = WechatDefinedMenu::getOne([['id',$parent_id]]);
-            dd($oneMenu);
             $parent_tree = '0,'.$parent_id.',';
         }
         $response_url = $request->get('response_url');          //获取响应网址
@@ -587,27 +585,16 @@ class WechatController extends Controller{
             'parent_id' => $parent_id,
             'parent_tree' => $parent_tree,
         ];
-        //处理菜单
-        switch ($event_type) {
-            case "1":   //处理链接类型
-                $defined_menu['event_type'] = $event_type;
-                $defined_menu['response_type'] = $event_type;
-                $defined_menu['response_url'] = $response_url;
-                $defined_menu['response_keyword'] = '';
-                break;
-            case "2":   //处理模拟关键字类型
-            case "3":   //处理扫码类型
-            case "4":   //处理扫码(带等待信息)类型
-            case "5":   //处理拍照发图类型
-            case "6":   //处理拍照或者相册发图类型
-            case "7":   //处理微信相册发图类型
-            case "8":   //处理地理位置类型
-                $defined_menu['event_type'] = $event_type;
-                $defined_menu['response_type'] = $event_type;
-                $defined_menu['response_url'] = '';
-                $defined_menu['response_keyword'] = $response_keyword;
-                break;
+
+        $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+        if($parent_id == '0' && $count >= 3){
+            return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
         }
+        if($parent_id <> '0' && $count >= 5){
+            return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+        }
+
+
         DB::beginTransaction();
         try {
             WechatDefinedMenu::editDefinedMenu(['id'=>$menu_id],$defined_menu);
