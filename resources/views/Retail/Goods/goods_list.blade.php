@@ -43,20 +43,21 @@
                                         {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
                                     {{--</div>--}}
                                     <div class="col-sm-2">
-                                        <select name="account" class="form-control m-b">
-                                            <option value="AK">所有分类</option>
-                                            <option value="AK">主食</option>
-                                            <option value="HI">饮料</option>
+                                        <select name="category_id" class="form-control m-b">
+                                            <option value="0">所有分类</option>
+                                            @foreach($category as $key=>$val)
+                                                <option value="{{$val->id}}" @if($val->id == $search_data['category_id']) selected @endif >{{$val->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <label class="col-sm-1 control-label">商品标题</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                        <input class="input-sm form-control" size="16" type="text" name="goods_name" value="{{$search_data['goods_name']}}">
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>

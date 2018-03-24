@@ -40,40 +40,40 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <div>
                                         <label class="col-sm-1 control-label">用户账号</label>
-                                        <div class="col-sm-2">
-                                            <input class="input-sm form-control" size="16" type="text" value="">
+                                        <div class="col-sm-1">
+                                            <input class="input-sm form-control" name="account" size="16" type="text" value="{{$search_data['account']}}">
                                         </div>
                                         <label class="col-sm-1 control-label">订单编号</label>
 
                                         <div class="col-sm-2">
-                                            <input class="input-sm form-control" size="16" type="text" value="">
+                                            <input class="input-sm form-control" name="ordersn" size="16" type="text" value="{{$search_data['ordersn']}}">
                                         </div>
+                                        <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
-                                            <select name="account" class="form-control m-b">
-                                                <option>支付方式</option>
-                                                <option>在线余额支付</option>
-                                                <option>在线支付</option>
-                                                <option>003</option>
-                                                <option>004</option>
+                                            <select name="paytype" class="form-control m-b">
+                                                <option value="1" @if($search_data['paytype']==1) selected @endif >余额支付</option>
+                                                <option value="2" @if($search_data['paytype']==2) selected @endif >在线支付</option>
+                                                <option value="3" @if($search_data['paytype']==3) selected @endif >货到付款</option>
+                                                <option value="4" @if($search_data['paytype']==4) selected @endif >现场现金支付</option>
+                                                <option value="5" @if($search_data['paytype']==5) selected @endif >现场刷卡支付</option>
+                                                <option value="6" @if($search_data['paytype']==6) selected @endif >现场支付宝支付</option>
+                                                <option value="7" @if($search_data['paytype']==7) selected @endif >现场微信支付</option>
+                                                <option value="8" @if($search_data['paytype']==8) selected @endif >线上手动确认付款</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="col-sm-2">
-                                            <select name="account" class="form-control m-b">
-                                                <option>订单状态</option>
-                                                <option>未支付</option>
-                                                <option>已支付</option>
-                                                <option>已完成</option>
-                                                <option>已取消</option>
+                                        <label class="col-sm-1 control-label">订单状态</label>
+                                        <div class="col-sm-1">
+                                            <select name="status" class="form-control m-b">
+                                                <option value="0" @if($search_data['status']==0) selected @endif >未支付</option>
+                                                <option value="1" @if($search_data['status']==1) selected @endif >已支付</option>
+                                                <option value="3" @if($search_data['status']==3) selected @endif >已完成</option>
+                                                <option value="-1" @if($search_data['status']==-1) selected @endif >已取消</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                            <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                         </div>
-                                    </div>
                                 </form>
                             </div>
                             <div class="table-responsive">

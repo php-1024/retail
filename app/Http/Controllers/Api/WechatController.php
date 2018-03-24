@@ -458,7 +458,109 @@ class WechatController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
+
+    //自定义菜单添加页面
+    public function wechat_menu_add(Request $request){
+
+        return view('Wechat/Catering/wechat_menu_add');
+    }
+
+    //自定义菜单添加页面
+    public function wechat_menu_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $organization_id = $admin_data['organization_id'];
+        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0'],['organization_id',$organization_id]]);
+        foreach($list as $key=>$value){
+            $parent_tree = $value['parent_tree'].$value['id'].',';
+            $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
+            if($re){
+                foreach($re as $k=>$v){
+                    switch ($v['event_type'])
+                    {
+                        case 1:
+                            $type='click';
+                            break;
+                        case 2:
+                            $type='view';
+                            break;
+                        case 3:
+                            $type='scancode_push';
+                            break;
+                        case 4:
+                            $type='scancode_waitmsg';
+                            break;
+                        case 5:
+                            $type='pic_sysphoto';
+                            break;
+                        case 6:
+                            $type='pic_photo_or_album';
+                            break;
+                        case 7:
+                            $type='pic_weixin';
+                            break;
+                        case 8:
+                            $type='location_select';
+                            break;
+                    }
+                    $data[$key]['button']['name'] = $value['menu_name'];
+                    if($v['event_type']==1){
+                        $data[$key]['button']['sub_button'][] = [
+                            'name'=>$v['menu_name'],
+                            'type'=>$type,
+                            'url' =>$v['response_url']
+                        ];
+                    }else{
+                        $data[$key]['button']['sub_button'][] = [
+                            'name'=>$v['menu_name'],
+                            'type'=>$type,
+                            'key' =>$v['response_keyword']
+                        ];
+                    }
+                }
+            }else{
+                switch ($value['event_type'])
+                {
+                    case 1:
+                        $type='click';
+                        break;
+                    case 2:
+                        $type='view';
+                        break;
+                    case 3:
+                        $type='scancode_push';
+                        break;
+                    case 4:
+                        $type='scancode_waitmsg';
+                        break;
+                    case 5:
+                        $type='pic_sysphoto';
+                        break;
+                    case 6:
+                        $type='pic_photo_or_album';
+                        break;
+                    case 7:
+                        $type='pic_weixin';
+                        break;
+                    case 8:
+                        $type='location_select';
+                        break;
+                }
+                $data[$key]['button']['name'] = $value['menu_name'];
+                $data[$key]['button']['type'] = $type;
+                if($value['event_type'] == 1){
+                    $data[$key]['button']['url']= $value['response_url'];
+                }else{
+                    $data[$key]['button']['key']= $value['response_keyword'];
+                }
+            }
+        }
+        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
+        dd($auth_info);
+        $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$data);
+        dd($re);
     }
 
     //自定义菜单添加页面
@@ -502,13 +604,7 @@ class WechatController extends Controller{
             'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
-<<<<<<< HEAD
 
-        if(empty($parent_id)){
-
-        }
-
-=======
         $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
         if($parent_id == '0' && $count >= 3){
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
@@ -516,7 +612,7 @@ class WechatController extends Controller{
         if($parent_id <> '0' && $count >= 5){
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
->>>>>>> 64f42713b6f78b5a79ead60b9a8f7b6a397bf62c
+
         DB::beginTransaction();
         try {
             WechatDefinedMenu::addDefinedMenu($defined_menu);
@@ -577,6 +673,18 @@ class WechatController extends Controller{
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
+
+        $menu_parent_id =WechatDefinedMenu::getPluck([['id',$menu_id]],'parent_id')->first();//获取菜单的上级id
+        if($menu_parent_id !=$parent_id){//如果id有改变
+            $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+            if($parent_id == '0' && $count >= 3){
+                return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
+            }
+            if($parent_id <> '0' && $count >= 5){
+                return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+            }
+        }
+
         if ($parent_id == 0){
             $parent_tree = '0,';
         }else{
@@ -584,34 +692,18 @@ class WechatController extends Controller{
         }
         $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
+        $response_type = $request->get('response_type'); //获取响应类型
         $defined_menu = [
             'organization_id' => $organization_id,
             'authorizer_appid' => $authorization['authorizer_appid'],
             'menu_name' => $menu_name,
             'parent_id' => $parent_id,
             'parent_tree' => $parent_tree,
+            'event_type' => $event_type,
+            'response_type' => $response_type,
+            'response_url' => $response_url,
+            'response_keyword' => $response_keyword,
         ];
-        //处理菜单
-        switch ($event_type) {
-            case "1":   //处理链接类型
-                $defined_menu['event_type'] = $event_type;
-                $defined_menu['response_type'] = $event_type;
-                $defined_menu['response_url'] = $response_url;
-                $defined_menu['response_keyword'] = '';
-                break;
-            case "2":   //处理模拟关键字类型
-            case "3":   //处理扫码类型
-            case "4":   //处理扫码(带等待信息)类型
-            case "5":   //处理拍照发图类型
-            case "6":   //处理拍照或者相册发图类型
-            case "7":   //处理微信相册发图类型
-            case "8":   //处理地理位置类型
-                $defined_menu['event_type'] = $event_type;
-                $defined_menu['response_type'] = $event_type;
-                $defined_menu['response_url'] = '';
-                $defined_menu['response_keyword'] = $response_keyword;
-                break;
-        }
         DB::beginTransaction();
         try {
             WechatDefinedMenu::editDefinedMenu(['id'=>$menu_id],$defined_menu);
@@ -624,7 +716,6 @@ class WechatController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
         }
@@ -642,10 +733,16 @@ class WechatController extends Controller{
     public function defined_menu_delete_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $id = $request->get('id');
+        $id = $request->get('id');//菜单id
+
         DB::beginTransaction();
         try {
-            WechatDefinedMenu::removeDefinedMenu($id);
+            $data = WechatDefinedMenu::getOne([['id',$id]]);//菜单详情信息
+            if($data['parent_id'] == 0){//如果是最上级
+                $parent_tree = '0,'.$id.',';//树形结构
+                WechatDefinedMenu::removeDefinedMenu([['parent_tree',$parent_tree]]);//删除子级菜单
+            }
+            WechatDefinedMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统删除了公众号自定义菜单！');//保存操作记录
@@ -654,7 +751,6 @@ class WechatController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '删除自定义菜单失败，请检查', 'status' => '0']);
         }

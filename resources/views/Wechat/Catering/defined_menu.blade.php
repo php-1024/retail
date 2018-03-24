@@ -82,13 +82,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label" for="input-id-1">外卖系统入口</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="input-id-1" disabled="" value="http://o2o.01nnt.com/diancan-12">
+                                                        <input type="text" class="form-control"  disabled="" value="http://o2o.01nnt.com/diancan-12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label" for="input-id-1">预约系统入口</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="input-id-1" disabled="" value="http://o2o.01nnt.com/diancan-13">
+                                                        <input type="text" class="form-control" disabled="" value="http://o2o.01nnt.com/diancan-13">
                                                     </div>
                                                 </div>
                                                 <div class="line line-dashed b-b line-lg pull-in"></div>

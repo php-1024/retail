@@ -5,6 +5,12 @@
                 <!-- nav -->
                 <nav class="nav-primary  hidden-xs">
                     <ul class="nav" data-ride="collapse">
+                        <li @if($route_name == 'retail') class="active" @endif>
+                            <a href="{{ url('retail') }}" class="auto">
+                                <i class="fa fa-bar-chart-o  text-success"></i>
+                                <span>零售系统</span>
+                            </a>
+                        </li>
                         @foreach($menu_data as $key=>$val)
                             @if(!empty($val['menu_route']))
                                 <li @if($route_name==$val['menu_route']) class="active" @endif>

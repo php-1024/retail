@@ -156,6 +156,7 @@ class CateringCheckAjax
             case "api/ajax/material_article_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
             case "api/ajax/auto_reply_delete_check"://检测是否登陆 权限 安全密码--删除关键字
             case "api/ajax/defined_menu_delete_check"://检测是否登陆 权限 安全密码--删除自定义菜单
+            case "api/ajax/wechat_menu_add_check"://检测是否登陆 权限 安全密码--一键同步到微信菜单
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -195,6 +196,7 @@ class CateringCheckAjax
             case "api/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
             case "api/ajax/default_reply_image_edit"://修改关注后图片回复弹窗
             case "api/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
+            case "api/ajax/wechat_menu_add"://一键同步到微信菜单
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -969,18 +971,28 @@ class CateringCheckAjax
         if(empty($request->input('event_type'))){
             return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
         }
-        if($request->input('event_type') == '1' && $request->input('response_type') <> '1'){
-            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+        if($request->input('parent_id') != '0'){
+
+            if($request->input('event_type') == '1' && $request->input('response_type') <> '1'){
+                return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if($request->input('event_type') == '1' && empty($request->input('response_url'))){
+                return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if($request->input('event_type') != '1' && $request->input('response_type') <> '2'){
+                return self::res(0,response()->json(['data' => '请选择关键字回复！', 'status' => '0']));
+            }
+            if($request->input('event_type') != '1' && empty($request->input('response_keyword'))){
+                return self::res(0,response()->json(['data' => '请选择关键字！', 'status' => '0']));
+            }
         }
-        if($request->input('event_type') == '1' && empty($request->input('response_url'))){
-            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
-        }
+
         return self::res(1,$request);
     }
 
     //检测自定义菜单编辑数据的内容
     public function checkDefinedMenuEdit($request){
-        if(empty($request->input('id'))){
+        if(empty($request->input('menu_id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输！', 'status' => '0']));
         }
         if(empty($request->input('menu_name'))){
@@ -992,11 +1004,20 @@ class CateringCheckAjax
         if(empty($request->input('event_type'))){
             return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
         }
-        if($request->input('event_type') == '1' && $request->input('response_type') <> '1'){
-            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
-        }
-        if($request->input('event_type') == '1' && empty($request->input('response_url'))){
-            return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+        if($request->input('parent_id') != '0') {
+
+            if ($request->input('event_type') == '1' && $request->input('response_type') <> '1') {
+                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if ($request->input('event_type') == '1' && empty($request->input('response_url'))) {
+                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if ($request->input('event_type') != '1' && $request->input('response_type') <> '2') {
+                return self::res(0, response()->json(['data' => '请选择关键字回复！', 'status' => '0']));
+            }
+            if ($request->input('event_type') != '1' && empty($request->input('response_keyword'))) {
+                return self::res(0, response()->json(['data' => '请选择关键字！', 'status' => '0']));
+            }
         }
         return self::res(1,$request);
     }
