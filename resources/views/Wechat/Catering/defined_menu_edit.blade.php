@@ -32,8 +32,8 @@
             <label class="col-sm-2 control-label" for="input-id-1">事件类型</label>
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 1) active @endif" style="margin-right: 5px;margin-top: 10px;" onclick="$('#response_type').val(1)">
-                        <input type="radio" name="event_type" value="1"@if($definedmenu->event_type == 1) checked @endif id="type_1"><i class="fa fa-check text-active"></i> 链接
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 1) active @endif" style="margin-right: 5px;margin-top: 10px;" onclick="$('#response_type').val(1)" id="type_1">
+                        <input type="radio" name="event_type" value="1"@if($definedmenu->event_type == 1) checked @endif ><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info onclick type_2 @if($definedmenu->event_type == 2) active @endif" style="margin-right: 5px;margin-top: 10px;">
