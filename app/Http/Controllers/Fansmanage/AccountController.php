@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
-use App\Models\LoginLog;
 use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\OrganizationStoreinfo;
@@ -15,11 +14,11 @@ use Session;
 class AccountController extends Controller{
     //账号信息
     public function profile(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        if($admin_data['is_super'] == 2){//如果是超级管理员
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');        //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的子菜单数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        if($admin_data['is_super'] == 2){                   //如果是超级管理员
             $user = Account::getOne([['id',1]]);
         }else{
             $user = Account::getOne([['id',$admin_data['id']]]);
@@ -27,7 +26,7 @@ class AccountController extends Controller{
         
         $account_id = Account::getPluck([['organization_id',$admin_data['organization_id']],['parent_id',1]],'id')->first();
         if($account_id == $admin_data['id']) {
-            $module_node_list = Module::getListProgram(3, [], 0, 'id');//获取当前系统的所有模块和节点
+            $module_node_list = Module::getListProgram(3, [], 0, 'id');          //获取当前系统的所有模块和节点
         }else{
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(3,$admin_data['id']);//获取当前用户具有权限的节点
             $modules = [];

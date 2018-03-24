@@ -8,7 +8,6 @@ use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAssets;
-use App\Models\OrganizationBranchinfo;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Package;
 use Illuminate\Http\Request;
