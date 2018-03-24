@@ -177,15 +177,11 @@ class GoodsController extends Controller
 
         $goods_name = $request->get('goods_name');          //接收搜索参数
         $category_id = $request->get('category_id');        //接收搜索参数
-
+        $search_data = ['goods_name' => $goods_name,'category_id' => $category_id]; //处理搜索参数
 
         $where = ['retail_id' => $admin_data['organization_id']];
-        $goods = RetailGoods::getPaginage($where, '10', 'displayorder', 'DESC');//查询商品信息
         $category = RetailCategory::getList($where,0,'created_at','DESC');
-
-
-        $search_data = ['goods_name' => $goods_name,'category_id' => $category_id]; //处理搜索参数
-        $goods = RetailCategory::getPaginage($where,$search_data,'10','displayorder','DESC');
+        $goods = RetailGoods::getPaginage($where,$search_data,'10','displayorder','DESC'); //查询商品信息
 
         dump($search_data);
         return view('Retail/Goods/goods_list', ['goods' => $goods,'search_data'=>$search_data,'category'=>$category,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
