@@ -40,7 +40,6 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <div>
                                         <label class="col-sm-1 control-label">用户账号</label>
                                         <div class="col-sm-2">
                                             <input class="input-sm form-control" size="16" type="text" value="">
@@ -59,8 +58,6 @@
                                                 <option>004</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div>
                                         <label class="col-sm-1 control-label">订单状态</label>
                                         <div class="col-sm-2">
                                             <select name="account" class="form-control m-b">
@@ -73,7 +70,6 @@
                                         <div class="col-sm-2">
                                             <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                         </div>
-                                    </div>
                                 </form>
                             </div>
                             <div class="table-responsive">
