@@ -582,7 +582,7 @@ class WechatController extends Controller{
                 return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
             }
         }
-        
+
         if ($parent_id == 0){
             $parent_tree = '0,';
         }else{
@@ -596,11 +596,11 @@ class WechatController extends Controller{
             'menu_name' => $menu_name,
             'parent_id' => $parent_id,
             'parent_tree' => $parent_tree,
+            'event_type' => $event_type,
+            'response_type' => $response_type,
+            'response_url' => $response_url,
+            'response_keyword' => $response_keyword,
         ];
-
-
-
-        dd(1);
         DB::beginTransaction();
         try {
             WechatDefinedMenu::editDefinedMenu(['id'=>$menu_id],$defined_menu);
