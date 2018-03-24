@@ -93,7 +93,7 @@
                                 <select style="width:260px" name="response_keyword" class="chosen-select2">
                                     <option value ="">请选择关键字</option>
                                     @foreach($wechatreply as $key=>$val)
-                                        <option value ="{{$val->id}}">{{$val->keyword}}</option>
+                                        <option value ="{{$val->keyword}}">{{$val->keyword}}</option>
                                     @endforeach
                                 </select>
                                  <span class="help-block m-b-none">
