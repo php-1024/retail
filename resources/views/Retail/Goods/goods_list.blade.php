@@ -46,7 +46,7 @@
                                         <select name="category" class="form-control m-b">
                                             <option value="0">所有分类</option>
                                             @foreach($category as $key=>$val)
-                                                <option value="{{$val->id}}" @if($search_data['category_id'] == $val->id)selected@endif>{{$val->name}}</option>
+                                                <option value="{{$val->id}}" @if($val->id == $search_data['category_id'])selected @endif>{{$val->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
