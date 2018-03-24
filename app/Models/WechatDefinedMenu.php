@@ -54,8 +54,8 @@ class WechatDefinedMenu extends Model{
     }
 
     //删除菜单
-    public static function removeDefinedMenu($id){
-        return self::where('id',$id)->forceDelete();
+    public static function removeDefinedMenu($where){
+        return self::where($where)->forceDelete();
     }
 
     public static function editDefinedMenu($where,$param){
