@@ -195,6 +195,7 @@ class CateringCheckAjax
             case "api/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
             case "api/ajax/default_reply_image_edit"://修改关注后图片回复弹窗
             case "api/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
+            case "api/ajax/wechat_menu_add"://一键同步到微信菜单
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
