@@ -1,7 +1,7 @@
 @if(!empty($list))
 <form class="form-horizontal" role="form" id="defined_menu_edit" action="{{ url('api/ajax/defined_menu_edit') }}">
 <input type="hidden" id="defined_menu_delete" value="{{ url('api/ajax/defined_menu_delete') }}">
-<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+<input type="hidden" name="_token" class="_token" value="{{csrf_token()}}">
 <div class="dd" id="nestable1">
     <ol class="dd-list">
         @foreach($list as $key=>$val)
@@ -49,7 +49,7 @@
     function getEditForm(menu_id){
         var target = $("#defined_menu_edit");
         var url = target.attr("action");
-        var token = $('#_token').val();
+        var token = $('._token').val();
         var data = {'_token':token,'id':menu_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){

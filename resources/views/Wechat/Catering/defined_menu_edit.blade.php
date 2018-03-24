@@ -3,7 +3,7 @@
 </header>
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="defined_menu_edit_check" action="{{ url('api/ajax/defined_menu_edit_check') }}">
-        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="menu_id" id="menu_id" value="{{$definedmenu->id}}">
         <input type="hidden" name="response_type" id="response_type" value="2">
         <div class="form-group">
