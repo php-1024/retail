@@ -574,6 +574,8 @@ class WechatController extends Controller{
         if ($parent_id == 0){
             $parent_tree = '0,';
         }else{
+            $oneMenu = WechatDefinedMenu::getOne([['id','$parent_id']]);
+            dd($oneMenu);
             $parent_tree = '0,'.$parent_id.',';
         }
         $response_url = $request->get('response_url');          //获取响应网址
