@@ -469,21 +469,24 @@ class WechatController extends Controller{
                     if($v['event_type']==1){
                         $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
-                            'key' =>$v['response_url']
+                            'type'=>$v['event_type'],
+                            'url' =>$v['response_url']
                         ];
                     }else{
                         $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
-                            'type' =>$v['response_type']
+                            'type'=>$v['event_type'],
+                            'key' =>$v['response_keyword']
                         ];
                     }
                 }
             }else{
                 $data[$key]['button']['name'] = $value['menu_name'];
+                $data[$key]['button']['type'] = $value['event_type'];
                 if($value['event_type'] == 1){
-                    $data[$key]['button']['key']= $value['response_url'];
+                    $data[$key]['button']['url']= $value['response_url'];
                 }else{
-                    $data[$key]['button']['type']= $value['response_type'];
+                    $data[$key]['button']['key']= $value['response_keyword'];
                 }
             }
         }
