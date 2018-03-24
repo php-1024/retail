@@ -32,8 +32,8 @@
             <label class="col-sm-2 control-label" for="input-id-1">事件类型</label>
             <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 1) active @endif" style="margin-right: 5px;margin-top: 10px;" onclick="$('#response_type').val(1)">
-                        <input type="radio" name="event_type" value="1"@if($definedmenu->event_type == 1) checked @endif id="type_1"><i class="fa fa-check text-active"></i> 链接
+                    <label class="btn btn-sm btn-info @if($definedmenu->event_type == 1) active @endif" style="margin-right: 5px;margin-top: 10px;" onclick="$('#response_type').val(1)" id="type_1">
+                        <input type="radio" name="event_type" value="1"@if($definedmenu->event_type == 1) checked @endif ><i class="fa fa-check text-active"></i> 链接
                     </label>
 
                     <label class="btn btn-sm btn-info onclick type_2 @if($definedmenu->event_type == 2) active @endif" style="margin-right: 5px;margin-top: 10px;">
@@ -82,13 +82,13 @@
                     </header>
                     <div class="panel-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="link_response">
+                            <div class="tab-pane fade in @if($definedmenu->response_type == 1) active @endif" id="link_response">
                                 <input type="text" class="form-control" name="response_url" value="{{$definedmenu->response_url}}" placeholder="跳转链接">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
                             </div>
-                            <div class="tab-pane fade in" id="text_response">
+                            <div class="tab-pane fade in @if($definedmenu->response_type == 2) active @endif" id="text_response">
                                 <select style="width:260px" name="response_keyword" class="chosen-select2">
                                     <option value ="">请选择关键字</option>
                                     @foreach($wechatreply as $key=>$val)
