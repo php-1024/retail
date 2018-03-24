@@ -42,12 +42,12 @@
                                 <form class="form-horizontal" method="get">
                                         <label class="col-sm-1 control-label">用户账号</label>
                                         <div class="col-sm-1">
-                                            <input class="input-sm form-control" size="16" type="text" value="">
+                                            <input class="input-sm form-control" name="account" size="16" type="text" value="">
                                         </div>
                                         <label class="col-sm-1 control-label">订单编号</label>
 
                                         <div class="col-sm-2">
-                                            <input class="input-sm form-control" size="16" type="text" value="">
+                                            <input class="input-sm form-control" name="ordersn" size="16" type="text" value="">
                                         </div>
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
@@ -64,7 +64,7 @@
                                         </div>
                                         <label class="col-sm-1 control-label">订单状态</label>
                                         <div class="col-sm-1">
-                                            <select name="account" class="form-control m-b">
+                                            <select name="status" class="form-control m-b">
                                                 <option value="0">未支付</option>
                                                 <option value="1">已支付</option>
                                                 <option value="3">已完成</option>
@@ -72,7 +72,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                            <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                         </div>
                                 </form>
                             </div>
