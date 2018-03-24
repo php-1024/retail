@@ -491,15 +491,15 @@ class WechatController extends Controller{
                             $type='location_select';
                             break;
                     }
-                    $data[$key]['button']['name'] = $value['menu_name'];
+                    $data['button'][$key]['name'] = $value['menu_name'];
                     if($v['event_type']==1){
-                        $data[$key]['button']['sub_button'][] = [
+                        $data['button'][$key]['sub_button'][] = [
                             'name'=>$v['menu_name'],
                             'type'=>$type,
                             'url' =>$v['response_url']
                         ];
                     }else{
-                        $data[$key]['button']['sub_button'][] = [
+                        $data['button'][$key]['sub_button'][] = [
                             'name'=>$v['menu_name'],
                             'type'=>$type,
                             'key' =>$v['response_keyword']
@@ -534,17 +534,17 @@ class WechatController extends Controller{
                         $type='location_select';
                         break;
                 }
-                $data[$key]['button']['name'] = $value['menu_name'];
-                $data[$key]['button']['type'] = $type;
+                $data['button'][$key]['name'] = $value['menu_name'];
+                $data['button'][$key]['type'] = $type;
                 if($value['event_type'] == 1){
-                    $data[$key]['button']['url']= $value['response_url'];
+                    $data['button'][$key]['url']= $value['response_url'];
                 }else{
-                    $data[$key]['button']['key']= $value['response_keyword'];
+                    $data['button'][$key]['key']= $value['response_keyword'];
                 }
             }
         }
         dump($data);
-        
+
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
