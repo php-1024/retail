@@ -478,8 +478,13 @@ class WechatController extends Controller{
                         ]];
                     }
                 }
-
-
+            }else{
+                $data[$key]['button']['name'] = $value['menu_name'];
+                if($value['event_type'] == 1){
+                    $data[$key]['button']['key']= $value['response_url'];
+                }else{
+                    $data[$key]['button']['type']= $value['response_type'];
+                }
             }
         }
         dump($data);
