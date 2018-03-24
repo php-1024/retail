@@ -83,7 +83,6 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
                                 <input type="text" class="form-control" name="response_url" value="{{$definedmenu->response_url}}" placeholder="跳转链接">
-                                <input type="hidden" name="response_type" value="{{$definedmenu->event_type}}">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
@@ -126,25 +125,26 @@
         var url = target.attr("action");
         var data = target.serialize();
         console.log(data);
-        $.post(url,data,function(json){
-            if(json.status==1){
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                console.log(json);
+
+//        $.post(url,data,function(json){
+//            if(json.status==1){
 //                swal({
 //                    title: "提示信息",
 //                    text: json.data,
-//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonColor: "#DD6B55",
 //                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
 //                });
-            }
-        });
+//            }else{
+//                console.log(json);
+////                swal({
+////                    title: "提示信息",
+////                    text: json.data,
+////                    confirmButtonColor:"#DD6B55",
+////                    confirmButtonText: "确定"
+////                });
+//            }
+//        });
     }
 </script>
