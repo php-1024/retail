@@ -125,7 +125,7 @@
     $(function(){
         $('.onclick').click(function(){
             $('#response_type').val(2);
-        }
+        });
         $('#type_1').click(function(){
             $('#text_type').removeClass('active');
             $('#text_response').removeClass('active');
