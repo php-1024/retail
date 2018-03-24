@@ -465,24 +465,78 @@ class WechatController extends Controller{
             $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
             if($re){
                 foreach($re as $k=>$v){
+                    switch ($v['event_type'])
+                    {
+                        case 1:
+                            $type='click';
+                            break;
+                        case 2:
+                            $type='view';
+                            break;
+                        case 3:
+                            $type='scancode_push';
+                            break;
+                        case 4:
+                            $type='scancode_waitmsg';
+                            break;
+                        case 5:
+                            $type='pic_sysphoto';
+                            break;
+                        case 6:
+                            $type='pic_photo_or_album';
+                            break;
+                        case 7:
+                            $type='pic_weixin';
+                            break;
+                        case 8:
+                            $type='location_select';
+                            break;
+                    }
                     $data[$key]['button']['name'] = $value['menu_name'];
                     if($v['event_type']==1){
                         $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
-                            'type'=>$v['event_type'],
+                            'type'=>$type,
                             'url' =>$v['response_url']
                         ];
                     }else{
                         $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
-                            'type'=>$v['event_type'],
+                            'type'=>$type,
                             'key' =>$v['response_keyword']
                         ];
                     }
                 }
             }else{
+                switch ($value['event_type'])
+                {
+                    case 1:
+                        $type='click';
+                        break;
+                    case 2:
+                        $type='view';
+                        break;
+                    case 3:
+                        $type='scancode_push';
+                        break;
+                    case 4:
+                        $type='scancode_waitmsg';
+                        break;
+                    case 5:
+                        $type='pic_sysphoto';
+                        break;
+                    case 6:
+                        $type='pic_photo_or_album';
+                        break;
+                    case 7:
+                        $type='pic_weixin';
+                        break;
+                    case 8:
+                        $type='location_select';
+                        break;
+                }
                 $data[$key]['button']['name'] = $value['menu_name'];
-                $data[$key]['button']['type'] = $value['event_type'];
+                $data[$key]['button']['type'] = $type;
                 if($value['event_type'] == 1){
                     $data[$key]['button']['url']= $value['response_url'];
                 }else{
