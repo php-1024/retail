@@ -980,7 +980,7 @@ class CateringCheckAjax
 
     //检测自定义菜单编辑数据的内容
     public function checkDefinedMenuEdit($request){
-        if(empty($request->input('id'))){
+        if(empty($request->input('menu_id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输！', 'status' => '0']));
         }
         if(empty($request->input('menu_name'))){
