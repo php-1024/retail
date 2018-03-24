@@ -65,10 +65,10 @@
                                         <label class="col-sm-1 control-label">订单状态</label>
                                         <div class="col-sm-1">
                                             <select name="account" class="form-control m-b">
-                                                <option>未支付</option>
-                                                <option>已支付</option>
-                                                <option>已完成</option>
-                                                <option>已取消</option>
+                                                <option value="0">未支付</option>
+                                                <option value="1">已支付</option>
+                                                <option value="3">已完成</option>
+                                                <option value="-1">已取消</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
