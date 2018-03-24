@@ -51,11 +51,15 @@
                                         </div>
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
-                                            <select name="account" class="form-control m-b">
-                                                <option>在线余额支付</option>
-                                                <option>在线支付</option>
-                                                <option>003</option>
-                                                <option>004</option>
+                                            <select name="paytype" class="form-control m-b">
+                                                <option value="1">余额支付</option>
+                                                <option value="2">在线支付</option>
+                                                <option value="3">货到付款</option>
+                                                <option value="4">现场现金支付</option>
+                                                <option value="5">现场刷卡支付</option>
+                                                <option value="6">现场支付宝支付</option>
+                                                <option value="7">现场微信支付</option>
+                                                <option value="8">线上手动确认付款</option>
                                             </select>
                                         </div>
                                         <label class="col-sm-1 control-label">订单状态</label>
