@@ -83,13 +83,13 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="link_response">
                                 <input type="text" class="form-control" name="response_url" value="{{$definedmenu->response_url}}" placeholder="跳转链接">
-                                <input type="hidden" name="response_type" value="1">
+                                <input type="hidden" name="response_type" value="2">
                                 <span class="help-block m-b-none">
                                     <p>指定点击此菜单时要跳转的链接（注：链接需加http://）</p>
                                 </span>
                             </div>
                             <div class="tab-pane fade in" id="text_response">
-                                <input type="hidden" name="response_type" value="2">
+                                <input type="hidden" name="response_type" value="1">
                                 <select style="width:260px" name="response_keyword" class="chosen-select2">
                                     <option value ="">请选择关键字</option>
                                     @foreach($wechatreply as $key=>$val)

@@ -996,8 +996,6 @@ class CateringCheckAjax
             return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
         }
         if($request->input('event_type') == '1' && empty($request->input('response_url'))){
-            dd(1);
-
             return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
         }
         return self::res(1,$request);
