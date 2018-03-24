@@ -22,6 +22,12 @@ class OrderController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+
+        $account = $request->get('account');                //接收搜索账号
+        $ordersn = $request->get('ordersn');                //接收订单编号
+        $paytype = $request->get('paytype');                //接收支付方式
+        $status = $request->get('status');                  //接收订单状态
+        $search_data = ['account' => $account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = [
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'retail_id' => $admin_data['organization_id'],
@@ -33,7 +39,7 @@ class OrderController extends Controller
         }
 
 
-        return view('Retail/Order/order_spot',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Order/order_spot',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //订单管理-现场订单详情
