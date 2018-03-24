@@ -504,7 +504,7 @@ class WechatController extends Controller{
                             $type='location_select';
                             break;
                     }
-                    $data[$key]['button']['name'] = $value['menu_name'];
+                    $data['button'][$key]['name'] = $value['menu_name'];
                     if($v['event_type']==1){
                         $data[$key]['button']['sub_button'][] = [
                             'name'=>$v['menu_name'],
@@ -547,8 +547,8 @@ class WechatController extends Controller{
                         $type='location_select';
                         break;
                 }
-                $data[$key]['button']['name'] = $value['menu_name'];
-                $data[$key]['button']['type'] = $type;
+                $data['button'][$key]['name'] = $value['menu_name'];
+                $data['button'][$key]['type'] = $type;
                 if($value['event_type'] == 1){
                     $data[$key]['button']['url']= $value['response_url'];
                 }else{
@@ -556,6 +556,7 @@ class WechatController extends Controller{
                 }
             }
         }
+        dd($data);
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$data);
         dd($re);
