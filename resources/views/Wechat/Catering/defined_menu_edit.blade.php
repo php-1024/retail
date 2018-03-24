@@ -75,8 +75,8 @@
                 <section class="panel panel-default">
                     <header class="panel-heading text-right bg-light">
                         <ul class="nav nav-tabs pull-left">
-                            <li class="active" id="link_type"><a href="#link_response" onclick="$('#response_type').val(1)" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
-                            <li id="text_type"><a href="#text_response" onclick="$('#response_type').val(2)" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
+                            <li @if($definedmenu->response_type == 1) class="active" @endif  id="link_type"><a href="#link_response" onclick="$('#response_type').val(1)" data-toggle="tab"><i class="fa fa-file-text-o text-muted"></i>&nbsp;&nbsp;跳转链接</a></li>
+                            <li @if($definedmenu->response_type == 2) class="active" @endif  id="text_type"><a href="#text_response" onclick="$('#response_type').val(2)" data-toggle="tab"><i class="icon icon-picture text-muted"></i>&nbsp;&nbsp;关键字回复</a></li>
                         </ul>
                         <span class="hidden-sm">&nbsp;</span>
                     </header>
