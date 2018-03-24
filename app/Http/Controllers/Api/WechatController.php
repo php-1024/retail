@@ -590,6 +590,7 @@ class WechatController extends Controller{
         }
         $response_url = $request->get('response_url');          //获取响应网址
         $response_keyword = $request->get('response_keyword');  //获取响应关键字
+        $response_type = $request->get('response_type'); //获取响应类型
         $defined_menu = [
             'organization_id' => $organization_id,
             'authorizer_appid' => $authorization['authorizer_appid'],
