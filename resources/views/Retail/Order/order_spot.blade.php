@@ -41,7 +41,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                         <label class="col-sm-1 control-label">用户账号</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-1">
                                             <input class="input-sm form-control" size="16" type="text" value="">
                                         </div>
                                         <label class="col-sm-1 control-label">订单编号</label>
