@@ -80,7 +80,7 @@ class RetailGoods extends Model{
     public static function getPaginage($where,$category_name,$paginate,$orderby,$sort='DESC'){
         $model = self::with('Organization');
         if(!empty($category_id)){
-            $model = $model->where([['category_id'=>$category_id]]);
+            $model = $model->where([['category_id',$category_id]]);
         }
         if(!empty($category_name)){
             $model = $model->where('name','like','%'.$category_name.'%');
