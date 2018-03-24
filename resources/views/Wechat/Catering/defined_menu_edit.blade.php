@@ -124,7 +124,7 @@
         var target = $("#defined_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
-        console.log(data);
+        console.log(data.event_type);
 //        $.post(url,data,function(json){
 //            if(json.status==1){
 //                swal({
