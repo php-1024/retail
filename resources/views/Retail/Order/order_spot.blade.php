@@ -40,7 +40,6 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <div>
                                         <label class="col-sm-1 control-label">用户账号</label>
                                         <div class="col-sm-2">
                                             <input class="input-sm form-control" size="16" type="text" value="">
@@ -50,20 +49,18 @@
                                         <div class="col-sm-2">
                                             <input class="input-sm form-control" size="16" type="text" value="">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <label class="col-sm-1 control-label">支付方式</label>
+                                        <div class="col-sm-1">
                                             <select name="account" class="form-control m-b">
-                                                <option>支付方式</option>
                                                 <option>在线余额支付</option>
                                                 <option>在线支付</option>
                                                 <option>003</option>
                                                 <option>004</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="col-sm-2">
+                                        <label class="col-sm-1 control-label">订单状态</label>
+                                        <div class="col-sm-1">
                                             <select name="account" class="form-control m-b">
-                                                <option>订单状态</option>
                                                 <option>未支付</option>
                                                 <option>已支付</option>
                                                 <option>已完成</option>
@@ -73,7 +70,6 @@
                                         <div class="col-sm-2">
                                             <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                         </div>
-                                    </div>
                                 </form>
                             </div>
                             <div class="table-responsive">
