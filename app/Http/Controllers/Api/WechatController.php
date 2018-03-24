@@ -551,7 +551,7 @@ class WechatController extends Controller{
     //自定义菜单添加页面
     public function wechat_menu_add(Request $request){
 
-        return view('Wechat/ajax/wechat_menu_add');
+        return view('Wechat/Catering/wechat_menu_add');
     }
 
     //自定义菜单添加页面

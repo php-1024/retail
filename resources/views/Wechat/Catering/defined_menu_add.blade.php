@@ -165,7 +165,7 @@
             }
         });
     }
-    
+
     function addMenuForm(){
         var url = $('#wechat_menu_add').val();
         var token = $('#_token').val();
