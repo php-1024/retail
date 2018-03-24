@@ -4,6 +4,7 @@
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('api/ajax/defined_menu_add_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" id="wechat_menu_add" value="{{ url('api/ajax/wechat_menu_add') }}">
         <input type="hidden" name="response_type" id="response_type" value="1">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
@@ -112,13 +113,14 @@
         <div class="form-group">
             <div class="col-sm-12 col-sm-offset-3">
                 <button type="button" class="btn btn-success" onclick="addPostForm()">添加菜单</button>
-                <button type="button" class="btn btn-primary" id="addBtn">一键创建默认自定义菜单</button>
+                <button type="button" class="btn btn-primary" onclick="addMenuForm">一键创建默认自定义菜单</button>
                 <button type="button" class="btn btn-dark">一键同步到微信公众号</button>
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
     </form>
 </div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 
 <script>
@@ -141,7 +143,7 @@
         });
     });
     function addPostForm(){
-        var target = $("#defined_menu_add_check");
+        var target = $("#menu_add");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){
@@ -161,6 +163,32 @@
                     confirmButtonColor:"#DD6B55",
                     confirmButtonText: "确定"
                 });
+            }
+        });
+    }
+
+    //编辑
+    function addMenuForm(){
+
+        var url = $('#wechat_menu_add').val();
+        var token = $('#_token').val();
+
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
