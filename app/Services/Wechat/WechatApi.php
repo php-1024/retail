@@ -154,9 +154,7 @@ class WechatApi{
      */
     public function create_fans_tag_list($authorizer_access_token){
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/get?access_token='.$authorizer_access_token;
-        dd($url);
-        $re = \HttpCurl::doPost($url);
-        dd($re);
+        $re = \HttpCurl::doGet($url);
         return $re;
     }
 
