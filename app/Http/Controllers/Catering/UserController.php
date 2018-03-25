@@ -165,6 +165,21 @@ class UserController extends Controller{
         }
         return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
     }
+
+    //微信同步粉丝标签ajax显示页面
+    public function label_wechat(Request $request){
+        return view('Catering/User/label_wechat');
+    }
+    //微信同步粉丝标签功能提交
+    public function label_wechat_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $fansmanage_id = $admin_data['organization_id'];//组织id
+        $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+        $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
+        dd($re);
+    }
+
+
     //粉丝用户管理
     public function user_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -184,17 +199,7 @@ class UserController extends Controller{
         $label = Label::ListLabel([['store_id',$organization_id]]);//会员标签
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //微信同步粉丝标签ajax显示页面
-    public function label_wechat(Request $request){
-        return view('Catering/User/label_wechat');
-    }
-    //微信同步粉丝标签功能提交
-    public function label_wechat_check(Request $request){
-        $auth_info = \Wechat::refresh_authorization_info('6');//刷新并获取授权令牌
-        $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
-        dd($re);
 
-    }
 
     //粉丝用户管理
     public function store_label_add_check(Request $request){
