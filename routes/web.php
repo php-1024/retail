@@ -528,6 +528,7 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheck');    //编辑会员标签功能提交
         Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheck');            //删除会员标签功能提交
         Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheck');//删除会员标签功能提交
+        Route::post('label_wechat','Catering\UserController@label_wechat')->middleware('CateringCheck');            //微信同步会员标签
 
         Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheckAjax');   //粉丝会员标签功能提交
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                 //列表编辑ajax显示
