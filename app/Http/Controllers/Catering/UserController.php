@@ -179,14 +179,38 @@ class UserController extends Controller{
         $re = json_decode($re,true);
         $list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
         foreach($list as $key=>$value){
-            $b[] = $value['label_name'];
+            $local_label[] = $value['label_name'];
         }
-        foreach($re['tags'] as $ke=>$val){
-            $a[]=$val['name'];
+        foreach($re['tags'] as $key=>$val){
+            $wechat_label[]=$val['name'];
         }
-        
-        $unset_routes = array_diff($a,$b);
-        dd($unset_routes);
+        $data = array_diff($wechat_label,$local_label);
+
+        DB::beginTransaction();
+        try {
+            foreach($re['tags'] as $key=>$val){
+                if(in_array($val['name'],$data)){
+                    dd($val);
+                    $dataLabel = [
+                        'fansmanage_id'=>$fansmanage_id,
+                        'store_id'=>0,
+                        'label_name'=>$val['name'],
+                        'label_number'=>$val['count'],
+                        'wechat_id'=>$key['id'],
+                    ];
+                    Label::addLabel($dataLabel);
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
+
+
+
+
     }
 
 
