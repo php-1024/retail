@@ -48,8 +48,8 @@ class UserController extends Controller{
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
-            dd($re);
             $re = json_decode($re,true);
+            dd($re);
             $dataLabel = [
                 'fansmanage_id'=>'6',
                 'store_id'=>0,
