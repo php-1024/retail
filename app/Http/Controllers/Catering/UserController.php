@@ -69,8 +69,6 @@ class UserController extends Controller{
     }
     //编辑会员标签ajax显示页面
     public function label_edit(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         $id = $request->id; //会员标签id
         $oneLabel = Label::getOneLabel([['id',$id]]);
         return view('Catering/User/label_edit',['oneLabel'=>$oneLabel]);
