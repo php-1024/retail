@@ -86,8 +86,20 @@ class WechatApi{
      * $authorizer_access_token 第三方平台调用接口凭证
      */
     public function delete_menu($authorizer_access_token){
-        $url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='.$authorizer_access_token;
-        $re = \HttpCurl::doGet($url);
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token='.$authorizer_access_token;
+        $re = \HttpCurl::doPost($url);
+        return $re;
+    }
+
+    /*
+     * 创建个性化菜单
+     * $authorizer_access_token 第三方平台调用接口凭证
+     * $menu_data 创建的菜单数据
+     */
+    public function create_bardian_menu($authorizer_access_token,$menu_data){
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$authorizer_access_token;
+        $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url,$data);
         return $re;
     }
 
