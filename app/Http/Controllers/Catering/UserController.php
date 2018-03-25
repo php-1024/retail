@@ -148,6 +148,13 @@ class UserController extends Controller{
         $label = Label::ListLabel([['store_id',$organization_id]]);//会员标签
         return view('Catering/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
+    //微信同步粉丝标签ajax显示页面
+    public function label_wechat(Request $request){
+        $id = $request->id; //会员标签id
+        $oneLabel = Label::getOneLabel([['id',$id]]);
+        return view('Catering/User/label_wechat',['oneLabel'=>$oneLabel]);
+    }
+
     //粉丝用户管理
     public function store_label_add_check(Request $request){
 
