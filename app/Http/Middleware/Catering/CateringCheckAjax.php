@@ -158,6 +158,7 @@ class CateringCheckAjax
             case "api/ajax/defined_menu_delete_check"://检测是否登陆 权限 安全密码--删除自定义菜单
             case "api/ajax/wechat_menu_add_check"://检测是否登陆 权限 安全密码--一键同步到微信菜单
             case "catering/user/label_wechat_check"://检测是否登陆 权限 安全密码--同步粉丝标签
+                dd(1);
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
