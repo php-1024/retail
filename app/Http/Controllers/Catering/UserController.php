@@ -190,7 +190,6 @@ class UserController extends Controller{
         try {
             foreach($re['tags'] as $key=>$val){
                 if(in_array($val['name'],$data)){
-                    dd($val);
                     $dataLabel = [
                         'fansmanage_id'=>$fansmanage_id,
                         'store_id'=>0,
