@@ -156,7 +156,7 @@ class UserController extends Controller{
     public function label_wechat_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $fansmanage_id = $admin_data['organization_id'];//组织id
-        $list = Label::getPaginage([['fansmanage_id',$fansmanage_id]],'10','id');
+        $list = Label::ListLabel([['fansmanage_id',$fansmanage_id]]);
         dd($list);
     }
 
