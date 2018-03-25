@@ -177,11 +177,14 @@ class UserController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         $re = json_decode($re,true);
-        $list = Label::where(['fansmanage_id'=>$fansmanage_id])->select('label_name')->get()->toArray();
-        foreach($re['tags'] as $key=>$val){
+        $list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
+        foreach($list as $key=>$value){
+            $b[] = $value['label_name'];
+        }
+        foreach($re['tags'] as $ke=>$val){
             $a[]=$val['name'];
         }
-        $unset_routes = array_diff($list,$a);
+        $unset_routes = array_diff($b,$a);
         dd($unset_routes);
     }
 
