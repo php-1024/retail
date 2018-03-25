@@ -25,7 +25,7 @@ class UserController extends Controller{
         $fansmanage_id = $admin_data['organization_id'];//组织id
         $list = Label::getPaginage([['fansmanage_id',$fansmanage_id]],'10','id');
 
-        return view('Catering/User/user_tag',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Catering/User/user_tag',['fansmanage_id'=>$fansmanage_id,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //添加会员标签ajax显示页面
     public function label_add(Request $request){
@@ -151,14 +151,12 @@ class UserController extends Controller{
     }
     //微信同步粉丝标签ajax显示页面
     public function label_wechat(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        return view('Catering/User/label_wechat');
+        $fansmanage_id = $request->fansmanage_id;
+        return view('Catering/User/label_wechat',['fansmanage_id'=>$fansmanage_id]);
     }
     //微信同步粉丝标签功能提交
     public function label_wechat_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
-        $fansmanage_id = $admin_data['organization_id'];//组织id
+        $fansmanage_id = $request->fansmanage_id;
         $list = Label::ListLabel([['fansmanage_id',$fansmanage_id]]);
         dd($list);
     }
