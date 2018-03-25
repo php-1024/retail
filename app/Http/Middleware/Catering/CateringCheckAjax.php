@@ -756,6 +756,7 @@ class CateringCheckAjax
         if($encryptPwd != $admin_data['safe_password']){
             return self::res(0,response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
         }
+        dd($request);
         return self::res(1,$request);
     }
     //部分页面检测用户是否admin，否则检测是否有权限
