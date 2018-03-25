@@ -18,6 +18,8 @@ class UserController extends Controller{
     //粉丝标签管理
     public function user_tag(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
+
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -151,7 +153,6 @@ class UserController extends Controller{
     //微信同步粉丝标签ajax显示页面
     public function label_wechat(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         return view('Catering/User/label_wechat');
     }
     //微信同步粉丝标签功能提交
