@@ -30,7 +30,6 @@ class UserController extends Controller{
     //添加会员标签ajax显示页面
     public function label_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
         return view('Catering/User/label_add',['admin_data'=>$admin_data]);
     }
     //添加会员标签功能提交
@@ -45,27 +44,28 @@ class UserController extends Controller{
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
-
         DB::beginTransaction();
         try {
             $dataLabel = [
-                'fansmanage_id'=>$fansmanage_id,
+                'fansmanage_id'=>'6',
                 'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
             ];
            Label::addLabel($dataLabel);
-            $auth_info = \Wechat::refresh_authorization_info($data['fansmanage_id']);//刷新并获取授权令牌
-            $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$data['label_name']);
-            if($re['name'] == $data['label_name']){
-                return response()->json(['data' => '添加成功！', 'status' => '1']);
+
+            $auth_info = \Wechat::refresh_authorization_info('6');//刷新并获取授权令牌
+            $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
+            dd($re);
+            if($re['name'] == $label_name) {
+                if ($admin_data['is_super'] != 2) {
+                    OperationLog::addOperationLog('4', $admin_data['organization_id'], $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
+                }
             }else{
-                return response()->json(['data' => '添加失败！', 'status' => '1']);
-            }
-            if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'创建会员标签成功：'.$label_name);//保存操作记录
+                return response()->json(['data' => '创建会员标签失败！', 'status' => '1']);
             }
             DB::commit();
+
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
