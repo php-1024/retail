@@ -149,6 +149,16 @@ class WechatApi{
     }
 
     /*
+     * 获取公众号已创建的标签
+     * organization_id 绑定授权组织的ID
+     */
+    public function create_fans_tag_list($authorizer_access_token,$tag_name){
+        $url = 'https://api.weixin.qq.com/cgi-bin/tags/get?access_token='.$authorizer_access_token;
+        $re = \HttpCurl::doPost($url);
+        return $re;
+    }
+
+    /*
      * 获取授权方基本信息
      * 授权方APPID
      */
