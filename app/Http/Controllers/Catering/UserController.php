@@ -142,13 +142,12 @@ class UserController extends Controller{
         $label_name = $request->label_name; //会员标签名称
         $fansmanage_id = $admin_data['organization_id'];//组织id
         $wechat_id = Label::getPluck([['id',$id]],'wechat_id')->first();
-        dd($wechat_id);
         DB::beginTransaction();
         try {
-
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
             $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'],$label_name,$wechat_id);
             $re = json_decode($re,true);
+            dd($re);
             if(!empty($re['errcode'])){
                 if($re['errcode'] == '45057'){
                     return response()->json(['data' => '该标签下粉丝数超过10w，不允许直接删除', 'status' => '0']);
