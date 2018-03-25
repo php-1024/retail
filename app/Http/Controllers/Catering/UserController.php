@@ -152,6 +152,10 @@ class UserController extends Controller{
     public function label_wechat(Request $request){
         return view('Catering/User/label_wechat');
     }
+    //微信同步粉丝标签功能提交
+    public function label_wechat_check(Request $request){
+
+    }
 
     //粉丝用户管理
     public function store_label_add_check(Request $request){

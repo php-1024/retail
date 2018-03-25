@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/label_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/label_wechat_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -44,13 +44,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
