@@ -49,7 +49,13 @@ class UserController extends Controller{
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
             $re = json_decode($re,true);
-            dd($re);
+            if($re['errcode'] == 45157){
+                return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
+            }elseif ($re['errcode'] == 45158){
+                return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
+            }elseif ($re['errcode'] == 45156){
+                return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
+            }
             $dataLabel = [
                 'fansmanage_id'=>'6',
                 'store_id'=>0,
