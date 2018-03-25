@@ -202,14 +202,11 @@ class UserController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
+            return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
-        return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
-
-
-
-
+        return response()->json(['data' => '同步成功！', 'status' => '1']);
     }
 
 
