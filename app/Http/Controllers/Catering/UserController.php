@@ -184,7 +184,8 @@ class UserController extends Controller{
         foreach($re['tags'] as $ke=>$val){
             $a[]=$val['name'];
         }
-        $unset_routes = array_diff($b,$a);
+        
+        $unset_routes = array_diff($a,$b);
         dd($unset_routes);
     }
 
