@@ -142,7 +142,7 @@ class UserController extends Controller{
         $label_name = $request->label_name; //会员标签名称
         $fansmanage_id = $admin_data['organization_id'];//组织id
         $wechat_id = Label::getPluck([['id',$id]],'wechat_id')->first();
-
+        dd($wechat_id);
         DB::beginTransaction();
         try {
 
