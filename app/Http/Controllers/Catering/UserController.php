@@ -155,8 +155,8 @@ class UserController extends Controller{
     //微信同步粉丝标签功能提交
     public function label_wechat_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data);
         $fansmanage_id = $admin_data['organization_id'];//组织id
-        dd($fansmanage_id);
         $list = Label::ListLabel([['fansmanage_id',$fansmanage_id]]);
         dd($list);
     }
