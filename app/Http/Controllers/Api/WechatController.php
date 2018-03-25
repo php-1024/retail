@@ -542,7 +542,11 @@ class WechatController extends Controller{
                     $data['button'][$key]['key']= $value['response_keyword'];
                 }
             }
+
         }
+        $data['matchrule'] = [
+            'tag_id'=>'2'
+        ];
         dump(json_encode($data));
 
         return view('Wechat/Catering/defined_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
