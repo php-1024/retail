@@ -773,6 +773,7 @@ class CateringCheckAjax
     public function checkIsLogin($request)
     {
         $sess_key = Session::get('catering_account_id');
+        dd($sess_key);
         //如果为空返回登录失效
         if (empty($sess_key)) {
             return self::res(0, response()->json(['data' => '登录状态失效', 'status' => '-1']));
