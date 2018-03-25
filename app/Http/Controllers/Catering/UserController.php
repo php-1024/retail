@@ -77,7 +77,6 @@ class UserController extends Controller{
     public function label_edit(Request $request){
 
         $id = $request->id; //会员标签id
-        dump($id);
         $oneLabel = Label::getOneLabel([['id',$id]]);
         return view('Catering/User/label_edit',['oneLabel'=>$oneLabel]);
     }
