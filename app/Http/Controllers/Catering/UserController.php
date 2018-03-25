@@ -145,9 +145,8 @@ class UserController extends Controller{
         DB::beginTransaction();
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
-            $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'],$label_name,$wechat_id);
+            $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'],$wechat_id);
             $re = json_decode($re,true);
-            dd($re);
             if(!empty($re['errcode'])){
                 if($re['errcode'] == '45057'){
                     return response()->json(['data' => '该标签下粉丝数超过10w，不允许直接删除', 'status' => '0']);
