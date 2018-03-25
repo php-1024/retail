@@ -522,14 +522,14 @@ Route::group(['prefix'=>'catering'],function(){
         Route::post('selected_rule','Catering\SubordinateController@selected_rule')->middleware('CateringCheckAjax');//下级人员已经选中的权限出框
 
         //用户管理
-        Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheck');                  //添加会员标签ajax显示页面
-        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheck');      //添加会员标签功能提交
-        Route::post('label_edit','Catering\UserController@label_edit')->middleware('FansmanageCheck');                //编辑会员标签功能提交
-        Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheck');    //编辑会员标签功能提交
-        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheck');            //删除会员标签功能提交
-        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheck');//删除会员标签功能提交
-        Route::post('label_wechat','Catering\UserController@label_wechat')->middleware('CateringCheck');            //微信同步会员标签
-        Route::post('label_wechat_check','Catering\UserController@label_wechat_check')->middleware('CateringCheck');//微信同步会员标签功能提交
+        Route::post('label_add','Catering\UserController@label_add')->middleware('CateringCheckAjax');                  //添加会员标签ajax显示页面
+        Route::post('label_add_check','Catering\UserController@label_add_check')->middleware('CateringCheckAjax');      //添加会员标签功能提交
+        Route::post('label_edit','Catering\UserController@label_edit')->middleware('CateringCheckAjax');                //编辑会员标签功能提交
+        Route::post('label_edit_check','Catering\UserController@label_edit_check')->middleware('CateringCheckAjax');    //编辑会员标签功能提交
+        Route::post('label_delete','Catering\UserController@label_delete')->middleware('CateringCheckAjax');            //删除会员标签功能提交
+        Route::post('label_delete_check','Catering\UserController@label_delete_check')->middleware('CateringCheckAjax');//删除会员标签功能提交
+        Route::post('label_wechat','Catering\UserController@label_wechat')->middleware('CateringCheckAjax');            //微信同步会员标签
+        Route::post('label_wechat_check','Catering\UserController@label_wechat_check')->middleware('CateringCheckAjax');//微信同步会员标签功能提交
 
         Route::post('store_label_add_check','Catering\UserController@store_label_add_check')->middleware('CateringCheckAjax');   //粉丝会员标签功能提交
         Route::post('user_list_edit','Catering\UserController@user_list_edit')->middleware('CateringCheckAjax');                 //列表编辑ajax显示
