@@ -109,8 +109,8 @@ class UserController extends Controller{
                     return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
                 } elseif($re['errcode'] == '45158'){
                     return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
-                } elseif($re['errcode'] == '45056'){
-                    return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
+                } elseif($re['errcode'] == '45058'){
+                    return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
                 }
             }
             Label::editLabel(['id'=>$id],['label_name'=>$label_name]);
