@@ -151,14 +151,15 @@ class UserController extends Controller{
     }
     //微信同步粉丝标签ajax显示页面
     public function label_wechat(Request $request){
-        $fansmanage_id = $request->fansmanage_id;
-        return view('Catering/User/label_wechat',['fansmanage_id'=>$fansmanage_id]);
+        $label_id = $request->label_id;
+        return view('Catering/User/label_wechat',['label_id'=>$label_id]);
     }
     //微信同步粉丝标签功能提交
     public function label_wechat_check(Request $request){
-        $fansmanage_id = $request->fansmanage_id;
-        $list = Label::ListLabel([['fansmanage_id',$fansmanage_id]]);
-        dd($list);
+        $label_id = $request->label_id;
+        $data = Label::getOneLabel([['id',$label_id]]);
+        dd($data);
+
     }
 
     //粉丝用户管理

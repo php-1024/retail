@@ -55,7 +55,7 @@
 
                                     <div class="col-sm-12">
                                         <button type="button" id="addBtn" class="btn btn-s-md btn-info" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加粉丝标签</button>
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="getWeChatAddForm('{{$fansmanage_id}}')"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签</button>
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="getWeChatAddForm1()"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签</button>
                                     </div>
                                 </form>
                             </div>
@@ -80,6 +80,7 @@
                                         <td>
                                             <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm('{{$value->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm('{{$value->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getWeChatAddForm('{{$value->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;添加到微信标签</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -185,10 +186,10 @@
         });
     }
     //标签同步到微信
-    function getWeChatAddForm(fansmanage_id){
+    function getWeChatAddForm(label_id){
         var url = $('#label_wechat').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'fansmanage_id':fansmanage_id};
+        var data = {'_token':token,'label_id':label_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
