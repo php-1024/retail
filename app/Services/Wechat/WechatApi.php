@@ -149,6 +149,23 @@ class WechatApi{
     }
 
     /*
+     * 创建粉丝标签
+     * organization_id 绑定授权组织的ID
+     */
+    public function create_fans_tag_edit($authorizer_access_token,$tag_name,$id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/tags/update?access_token='.$authorizer_access_token;
+        $data = [
+            'tag'=>[
+                'id'  =>$id,
+                'name'=>$tag_name,
+            ],
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url,$data);
+        return $re;
+    }
+
+    /*
      * 获取公众号已创建的标签
      * organization_id 绑定授权组织的ID
      */

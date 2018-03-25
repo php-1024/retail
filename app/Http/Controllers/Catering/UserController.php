@@ -66,14 +66,11 @@ class UserController extends Controller{
                 'wechat_id'=>$re['tag']['id'],
             ];
            Label::addLabel($dataLabel);
-
             if ($admin_data['is_super'] != 2) {
                 OperationLog::addOperationLog('4', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
             }
             DB::commit();
-
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
         }
@@ -100,9 +97,23 @@ class UserController extends Controller{
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
+        $wechat_id = Label::getPluck([['id',$id]],'wechat_id');
         DB::beginTransaction();
         try {
+            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+            $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'],$label_name,$wechat_id);
+            $re = json_decode($re,true);
+            if(!empty($re['errcode'])){
+                if($re['errcode'] == '45157'){
+                    return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
+                } elseif($re['errcode'] == '45158'){
+                    return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
+                } elseif($re['errcode'] == '45056'){
+                    return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
+                }
+            }
             Label::editLabel(['id'=>$id],['label_name'=>$label_name]);
+
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$label_name);//保存操作记录
             }
