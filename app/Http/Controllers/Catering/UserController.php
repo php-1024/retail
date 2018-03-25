@@ -158,7 +158,10 @@ class UserController extends Controller{
     public function label_wechat_check(Request $request){
         $label_id = $request->label_id;
         $data = Label::getOneLabel([['id',$label_id]]);
-        dd($data);
+
+        $auth_info = \Wechat::refresh_authorization_info($data['fansmanage_id']);//刷新并获取授权令牌
+        $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$data['label_name']);
+        dd($re);
 
     }
 
