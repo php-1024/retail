@@ -55,7 +55,7 @@
 
                                     <div class="col-sm-12">
                                         <button type="button" id="addBtn" class="btn btn-s-md btn-info" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加粉丝标签</button>
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="getWeChatAddForm()"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签到本地</button>
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="getWeChatAddForm()"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签</button>
                                     </div>
                                 </form>
                             </div>
@@ -185,10 +185,10 @@
         });
     }
     //标签同步到微信
-    function getWeChatAddForm(id){
+    function getWeChatAddForm(){
         var url = $('#label_wechat').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'id':id};
+        var data = {'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({

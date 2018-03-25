@@ -1,24 +1,13 @@
 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('catering/ajax/label_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" value="{{$oneLabel->id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">编辑粉丝标签</h4>
+                <h4 class="modal-title">同步微信粉丝标签</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">标签名称</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="{{$oneLabel->label_name}}" placeholder="标签名称" class="form-control" name="label_name">
-                        </div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
