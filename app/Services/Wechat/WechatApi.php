@@ -149,7 +149,7 @@ class WechatApi{
     }
 
     /*
-     * 创建粉丝标签
+     * 修改粉丝标签
      * organization_id 绑定授权组织的ID
      */
     public function create_fans_tag_edit($authorizer_access_token,$tag_name,$id){
@@ -158,6 +158,22 @@ class WechatApi{
             'tag'=>[
                 'id'  =>$id,
                 'name'=>$tag_name,
+            ],
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url,$data);
+        return $re;
+    }
+
+    /*
+     * 删除粉丝标签
+     * organization_id 绑定授权组织的ID
+     */
+    public function create_fans_tag_delete($authorizer_access_token,$id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/tags/delete?access_token='.$authorizer_access_token;
+        $data = [
+            'tag'=>[
+                'id'  =>$id,
             ],
         ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
