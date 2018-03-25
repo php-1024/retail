@@ -51,11 +51,11 @@ class UserController extends Controller{
             $re = json_decode($re,true);
             $aa = $re['errcode'];
             dd($aa);
-            if(!empty($re['errcode']) == 45157){
+            if($aa == '45157'){
                 return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
-            } elseif(!empty($re['errcode']) == 45158){
+            } elseif($aa == '45158'){
                 return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
-            } elseif(!empty($re['errcode']) == 45056){
+            } elseif($aa == '45056'){
                 return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
             }else{
                 $dataLabel = [
