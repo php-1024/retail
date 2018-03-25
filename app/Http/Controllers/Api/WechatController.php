@@ -479,10 +479,10 @@ class WechatController extends Controller{
                     switch ($v['event_type'])
                     {
                         case 1:
-                            $type='click';
+                            $type='view';
                             break;
                         case 2:
-                            $type='view';
+                            $type='click';
                             break;
                         case 3:
                             $type='scancode_push';
@@ -555,7 +555,6 @@ class WechatController extends Controller{
                 }
             }
         }
-        dd(json_encode($data));
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$data);
         dd($re);
