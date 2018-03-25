@@ -179,8 +179,9 @@ class UserController extends Controller{
         $re = json_decode($re,true);
         $list = Label::where(['fansmanage_id'=>$fansmanage_id])->select('label_name')->get();
         foreach($re['tags'] as $key=>$val){
-            dd($val);
+            $a[]=$val['name'];
         }
+        dd($a);
     }
 
 
