@@ -782,6 +782,7 @@ class CateringCheckAjax
             Redis::connect('zeo');//连接到我的缓存服务器
             $admin_data = Redis::get('catering_system_admin_data_' . $sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);//解序列我的信息
+            dump($admin_data);
             $request->attributes->add(['admin_data' => $admin_data]);//添加参数
             //把参数传递到下一个中间件
             return self::res(1, $request);
