@@ -58,19 +58,18 @@ class UserController extends Controller{
                     return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
                 }
             }
-                $dataLabel = [
-                    'fansmanage_id'=>$fansmanage_id,
-                    'store_id'=>0,
-                    'label_name'=>$label_name,
-                    'label_number'=>0,
-                    'wechat_id'=>$re['tag']['id'],
-                ];
-               Label::addLabel($dataLabel);
+            $dataLabel = [
+                'fansmanage_id'=>$fansmanage_id,
+                'store_id'=>0,
+                'label_name'=>$label_name,
+                'label_number'=>0,
+                'wechat_id'=>$re['tag']['id'],
+            ];
+           Label::addLabel($dataLabel);
 
-                if ($admin_data['is_super'] != 2) {
-                    OperationLog::addOperationLog('4', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
-                }
-
+            if ($admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('4', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
+            }
             DB::commit();
 
         } catch (\Exception $e) {
@@ -79,9 +78,6 @@ class UserController extends Controller{
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
         }
         return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
-
-
-
     }
     //编辑会员标签ajax显示页面
     public function label_edit(Request $request){
