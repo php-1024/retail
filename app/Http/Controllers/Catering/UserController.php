@@ -98,6 +98,7 @@ class UserController extends Controller{
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
         $wechat_id = Label::getPluck([['id',$id]],'wechat_id');
+        dd($wechat_id);
         DB::beginTransaction();
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
