@@ -522,10 +522,10 @@ class WechatController extends Controller{
                 switch ($value['event_type'])
                 {
                     case 1:
-                        $type='click';
+                        $type='view';
                         break;
                     case 2:
-                        $type='view';
+                        $type='click';
                         break;
                     case 3:
                         $type='scancode_push';
