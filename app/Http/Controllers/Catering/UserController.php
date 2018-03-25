@@ -41,6 +41,7 @@ class UserController extends Controller{
         $fansmanage_id = $admin_data['organization_id'];//组织id
 
         $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
+        dd($re);
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
@@ -57,7 +58,7 @@ class UserController extends Controller{
                 return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
             }
             $dataLabel = [
-                'fansmanage_id'=>'6',
+                'fansmanage_id'=>$fansmanage_id,
                 'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
