@@ -195,7 +195,7 @@ class UserController extends Controller{
                         'store_id'=>0,
                         'label_name'=>$val['name'],
                         'label_number'=>$val['count'],
-                        'wechat_id'=>$key['id'],
+                        'wechat_id'=>$val['id'],
                     ];
                     Label::addLabel($dataLabel);
                 }
