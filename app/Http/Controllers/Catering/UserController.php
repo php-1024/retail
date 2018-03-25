@@ -178,7 +178,6 @@ class UserController extends Controller{
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         $re = json_decode($re,true);
         $list = Label::where(['fansmanage_id'=>$fansmanage_id])->select('label_name')->get();
-        dd($list);
         foreach($re['tags'] as $key=>$val){
             dd($val);
         }
