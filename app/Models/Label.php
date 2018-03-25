@@ -29,6 +29,7 @@ class Label extends Model{
         $model->store_id = $param['store_id'];//店铺id
         $model->label_name = $param['label_name'];//标签名称
         $model->label_number = $param['label_number'];//标签粉丝数量
+        $model->wechat_id = $param['wechat_id'];//微信公众号粉丝标签id
         $model->save();
         return $model->id;
     }

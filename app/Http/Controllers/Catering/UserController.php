@@ -46,24 +46,22 @@ class UserController extends Controller{
         }
         DB::beginTransaction();
         try {
+            $auth_info = \Wechat::refresh_authorization_info('6');//刷新并获取授权令牌
+            $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
+            $re = json_decode($re,true);
             $dataLabel = [
                 'fansmanage_id'=>'6',
                 'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
+                'wechat_id'=>$re['tag']['id'],
             ];
            Label::addLabel($dataLabel);
 
-            $auth_info = \Wechat::refresh_authorization_info('6');//刷新并获取授权令牌
-            $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
-            $re = json_decode($re,true);
-            if($re['tag']['name'] == $label_name) {
-                if ($admin_data['is_super'] != 2) {
-                    OperationLog::addOperationLog('4', '6', '4', $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
-                }
-            }else{
-                return response()->json(['data' => '创建会员标签失败！', 'status' => '1']);
+            if ($admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('4', '6', '4', $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
             }
+
             DB::commit();
 
         } catch (\Exception $e) {
