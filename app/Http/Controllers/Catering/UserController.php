@@ -165,11 +165,11 @@ class UserController extends Controller{
     }
     //微信同步粉丝标签ajax显示页面
     public function label_wechat(Request $request){
+        dd(1);
         return view('Catering/User/label_wechat');
     }
     //微信同步粉丝标签功能提交
     public function label_wechat_check(Request $request){
-        dd(1);
         $auth_info = \Wechat::refresh_authorization_info('6');//刷新并获取授权令牌
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         dd($re);
