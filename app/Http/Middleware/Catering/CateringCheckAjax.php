@@ -171,7 +171,6 @@ class CateringCheckAjax
             case "catering/ajax/subordinate_delete":        //添加下级人员用户授权显示页面
             case "catering/ajax/label_add":                 //添加会员标签显示页面
             case "catering/ajax/label_edit":                //编辑会员标签显示页面
-                dd(1);
             case "catering/ajax/label_delete":              //删除会员标签显示页面
             case "catering/ajax/label_wechat":              //同步粉丝标签
             case "catering/ajax/store_label_add_check":     //粉丝会员标签改变显示页面
@@ -773,7 +772,6 @@ class CateringCheckAjax
     //检测是否登录
     public function checkIsLogin($request)
     {
-        dd(1);
         $sess_key = Session::get('catering_account_id');
         //如果为空返回登录失效
         if (empty($sess_key)) {
