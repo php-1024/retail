@@ -651,11 +651,11 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::any('wechat_menu_add_check','Fansmanage\ApiController@wechat_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
 
         //公众号管理--消息管理
-        Route::any('defined_menu_get','Api\MessageController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
+        Route::any('defined_menu_get','Fansmanage\MessageController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::any('auto_reply_add','Fansmanage\MessageController@auto_reply_add')->middleware('FansmanageCheckAjax');//添加关键字ajax显示
         Route::any('auto_reply_add_check','Fansmanage\MessageController@auto_reply_add_check')->middleware('FansmanageCheckAjax');//添加关键字功能提交
-        Route::any('auto_reply_edit_text','Api\WechatController@auto_reply_edit_text')->middleware('FansmanageCheckAjax');
-        Route::any('auto_reply_edit_text_check','Api\WechatController@auto_reply_edit_text_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_text','Fansmanage\MessageController@auto_reply_edit_text')->middleware('FansmanageCheckAjax');
+        Route::any('auto_reply_edit_text_check','Fansmanage\MessageController@auto_reply_edit_text_check')->middleware('FansmanageCheckAjax');
         Route::any('auto_reply_edit_image','Api\WechatController@auto_reply_edit_image')->middleware('CateringCheckAjax');
         Route::any('auto_reply_edit_image_check','Api\WechatController@auto_reply_edit_image_check')->middleware('CateringCheckAjax');
         Route::any('auto_reply_edit_article','Api\WechatController@auto_reply_edit_article')->middleware('CateringCheckAjax');
