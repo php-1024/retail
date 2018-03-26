@@ -25,7 +25,7 @@ class MessageController extends Controller{
      * 添加关键字
      */
     public function auto_reply_add(Request $request){
-        return view('Wechat/Catering/auto_reply_add');
+        return view('Fansmanage/Message/auto_reply_add');
     }
 
     /*
