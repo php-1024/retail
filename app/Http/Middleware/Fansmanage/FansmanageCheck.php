@@ -48,13 +48,23 @@ class FansmanageCheck{
             case "fansmanage/api/material_articles_add"://添加多条图文素材
             case "fansmanage/api/material_article_edit"://编辑单条图文素材
             case "fansmanage/api/material_articles_edit"://编辑多条图文素材
-            case "fansmanage/subscription/material_writing":          //图文素材
-            case "fansmanage/subscription/material_writing_one":      //单条图文素材
-            case "fansmanage/subscription/material_writing_one_edit": //单条图文素材编辑
-            case "fansmanage/subscription/material_writing_many":     //多条图文素材
-            case "fansmanage/subscription/material_writing_many_edit"://多条图文素材编辑
             /****公众号管理****/
 
+            /****公众号管理-消息管理****/
+            case "fansmanage/message/auto_reply":                 //关键词自动回复
+            case "fansmanage/message/subscribe_reply":            //关键词自动回复
+            case "fansmanage/message/default_reply":              //关键词自动回复
+            case "fansmanage/message/message":                   //关键词自动回复
+            case "fansmanage/message/message_attention":         //关注后自动回复
+            case "fansmanage/message/message_default":           //默认回复
+            case "fansmanage/message/message_mass":              //消息群发
+            /****公众号管理-消息管理****/
+
+            /****公众号管理-菜单管理****/
+            case "api/catering/defined_menu":               //自定义菜单
+            case "catering/menu/menu_customize":            //自定义菜单
+            case "catering/menu/menu_different":            //个性化菜单
+            /****公众号管理-菜单管理****/
 
             /****总分店管理****/
             case "fansmanage/store/store_create":            //创建总分店

@@ -582,11 +582,19 @@ Route::group(['prefix'=>'fansmanage'],function(){
     Route::group(['prefix'=>'api'],function(){
         Route::get('store_auth', 'Fansmanage\ApiController@store_auth')->middleware('FansmanageCheck');                 //公众号管理
         Route::get('material_image', 'Fansmanage\ApiController@material_image')->middleware('FansmanageCheck');         //公众号管理
-        Route::any('material_article','Fansmanage\ApiController@material_article')->middleware('FansmanageCheck');//图文素材列表
-        Route::any('material_article_add','Fansmanage\ApiController@material_article_add')->middleware('FansmanageCheck');//图文素材列表
-        Route::any('material_articles_add','Fansmanage\ApiController@material_articles_add')->middleware('FansmanageCheck');//添加多条图文列表
-        Route::any('material_article_edit','Fansmanage\ApiController@material_article_edit')->middleware('FansmanageCheck');//添加多条图文列表
-        Route::any('material_articles_edit','Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//添加多条图文列表
+        Route::get('material_article','Fansmanage\ApiController@material_article')->middleware('FansmanageCheck');//图文素材列表
+        Route::get('material_article_add','Fansmanage\ApiController@material_article_add')->middleware('FansmanageCheck');//图文素材列表
+        Route::get('material_articles_add','Fansmanage\ApiController@material_articles_add')->middleware('FansmanageCheck');//添加多条图文列表
+        Route::get('material_article_edit','Fansmanage\ApiController@material_article_edit')->middleware('FansmanageCheck');//添加多条图文列表
+        Route::get('material_articles_edit','Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//添加多条图文列表
+    });
+
+    //公众号管理
+    Route::group(['prefix'=>'message'],function(){
+        Route::get('defined_menu','Fansmanage\MessageController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
+        Route::get('auto_reply','Fansmanage\MessageController@auto_reply')->middleware('FansmanageCheck');//关键词自动回复
+        Route::get('subscribe_reply','Fansmanage\MessageController@subscribe_reply')->middleware('FansmanageCheck');//关注事件自动回复
+        Route::get('default_reply','Fansmanage\MessageController@default_reply')->middleware('FansmanageCheck');//默认回复
     });
 
 
