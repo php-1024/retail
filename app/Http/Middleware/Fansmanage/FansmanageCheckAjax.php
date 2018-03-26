@@ -45,6 +45,18 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re,$next);
             /****粉丝信息编辑****/
+
+
+
+            /****图文素材****/
+            case "fansmanage/ajax/material_article_add_check":  //单条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
+                return self::format_response($re,$next);
+                break;
+            /****图文素材****/
+
+
+
             case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
             case "fansmanage/ajax/label_edit":                //编辑会员标签显示页面
             case "fansmanage/ajax/label_delete":              //删除会员标签显示页面
@@ -112,505 +124,13 @@ class FansmanageCheckAjax
         }
     }
     /******************************复合检测*********************************/
-    //检测登陆，权限，修改关注后自动回复图文内容
-    public function checkLoginAndRuleAndDefaultReplyArticleEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkDefaultReplyArticleEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改关注后自动回复文本内容
-    public function checkLoginAndRuleAndDefaultReplyImageEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkDefaultReplyImageEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改关注后自动回复文本内容
-    public function checkLoginAndRuleAndDefaultReplyTextEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkDefaultReplyTextEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测登陆，权限，修改关注后自动回复图文内容
-    public function checkLoginAndRuleAndSubscribeReplyArticleEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubscribeReplyArticleEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改关注后自动回复文本内容
-    public function checkLoginAndRuleAndSubscribeReplyImageEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubscribeReplyImageEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改关注后自动回复文本内容
-    public function checkLoginAndRuleAndSubscribeReplyTextEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubscribeReplyTextEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测登陆，权限，修改关键字
-    public function checkLoginAndRuleAndAutoReplyEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAutoReplyEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改关键字自动回复图文内容
-    public function checkLoginAndRuleAndAutoReplyEditArticle($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAutoReplyEditArticle($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改关键字自动回复图片内容
-    public function checkLoginAndRuleAndAutoReplyEditImage($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAutoReplyEditImage($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，修改自动回复关键字文本内容
-    public function checkLoginAndRuleAndAutoReplyEditText($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAutoReplyEditText($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，添加自动回复关键字
-    public function checkLoginAndRuleAndAutoReplyAdd($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkAutoReplyAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，和多条图文修改
-    public function checkLoginAndRuleAndMaterialArticlesEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkMaterialArticlesEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限，和图文修改
-    public function checkLoginAndRuleAndMaterialArticleEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkMaterialArticleEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限和上传多条图文素材
-    public function checkLoginAndRuleAndMaterialArticleAdd($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登陆，权限和上传图文素材
-    public function checkLoginAndRuleAndMaterialArticlesAdd($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登录，权限，及修改安全密码的数据
-    public function checkLoginAndRuleAndSafepasswordEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSafepasswordEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-
-    //检测登录和权限和安全密码和服务商修改信息
-    public function checkLoginAndRuleAndSafeAndProfile($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkProfile($re['response']);//检测参数是否为空
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测登录和权限和安全密码和登入密码修改信息
-    public function checkLoginAndRuleAndSafeAndPassword($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkPassword($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-
-
-    //检测登录和权限和安全密码和ID是否为空
-    public function checkLoginAndRuleAndSafeAndID($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkID($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-
-    //检测登录和权限
-    public function checkLoginAndRule($request){
-        $re = $this->checkIsLogin($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkHasRule($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafe($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSafePassword($re['response']);//检测安全密码是否正确
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测是否登录 权限 安全密码--权限角色添加
-    public function checkLoginAndRuleAndSafeAndRoleAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkRoleAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-
-    //检测是否登录 权限 修改安全密码
-    public function checkLoginAndRuleAndSafeEdit($request){
-        $re = $this->checkLoginAndRule($request);//判断是否登录和权限
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSafeEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAdd($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 编辑下级人员权限数据提交
-    public function checkLoginAndRuleAndSafeAndSubordinateAuthorize($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkSubordinateAuthorize($re['response']);//检测数据是否为空
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 会员标签添加数据提交
-    public function checkLoginAndRuleAndSafeAndLabelAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkLabelAdd($re['response']);//检测数据是否为空
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和粉丝用户管理编辑数据提交
-    public function checkLoginAndRuleAndSafeAndUserEdit($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkUserEdit($re['response']);//检测数据是否为空
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
-    public function checkLoginAndRuleAndSafeAndStoreCreate($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkStoreCreate($re['response']);//检测数据是否为空
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
-    //检测 登录 和 权限 和 安全密码 和 会员卡添加数据提交
-    public function checkLoginAndRuleAndSafeAndMemberAdd($request){
-        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
-            return $re;
-        }else{
-            $re2 = $this->checkMemberAdd($re['response']);//检测数据是否为空
-            if($re2['status']=='0'){
-                return $re2;
-            }else{
-                return self::res(1,$re2['response']);
-            }
-        }
-    }
 
 
 
 
 
-    //检测添加下级人员数据
-    public function checkSubordinateAdd($request){
-        if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入用户登录密码', 'status' => '0']));
-        }
-        if(empty($request->input('repassword'))){
-            return self::res(0,response()->json(['data' => '请再次输入用户登录密码', 'status' => '0']));
-        }
-        if($request->input('password')<>$request->input('repassword')){
-            return self::res(0,response()->json(['data' => '两次登录密码输入不一致', 'status' => '0']));
-        }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入用户手机号码', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请为用户选择权限角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限节点', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    /******************************单项检测*********************************/
 
-
-
-    //检测修改设置安全密码
-    public function checkSafeEdit($request){
-        if(empty($request->input('is_editing'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-
-        if($request->input('is_editing')=='-1'){//设置安全密码时
-            if(empty($request->input('safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
-            }
-            if(empty($request->input('re_safe_password'))){
-                return self::res(0,response()->json(['data' => '请重复安全密码', 'status' => '0']));
-            }
-            if($request->input('safe_password') <> $request->input('re_safe_password')){
-                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
-            }
-        }elseif($request->input('is_editing')=='1'){//修改安全密码时
-            if(empty($request->input('old_safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
-            }
-            if(empty($request->input('safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入新安全密码', 'status' => '0']));
-            }
-            if(empty($request->input('re_safe_password'))){
-                return self::res(0,response()->json(['data' => '请重复新安全密码', 'status' => '0']));
-            }
-            if($request->input('safe_password') <> $request->input('re_safe_password')){
-                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
-            }
-        }
-        return self::res(1,$request);
-    }
-
+    /********公共部分********/
 
     //检测安全密码是否输入正确
     public function checkSafePassword($request){
@@ -619,7 +139,7 @@ class FansmanageCheckAjax
         if($admin_data['is_super'] == '2'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.catering_safe_encrypt_key");//获取加密盐
+            $key = config("app.fansnamage_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
@@ -683,14 +203,238 @@ class FansmanageCheckAjax
 //            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
 //        }
     }
-    //检测是否登录 权限 安全密码--权限角色添加
-    public function checkRoleAdd($request)
-    {
-        if (empty($request->input('role_name'))) {
-            return self::res(0, response()->json(['data' => '角色名称不能为空', 'status' => '0']));
+
+    //检测登录和权限和安全密码
+    public function checkLoginAndRuleAndSafe($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSafePassword($re['response']);//检测安全密码是否正确
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
         }
-        return self::res(1, $request);
     }
+
+
+    //检测登录和权限
+    public function checkLoginAndRule($request){
+        $re = $this->checkIsLogin($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkHasRule($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    /********公共部分********/
+
+
+
+
+
+    //检测登录和权限和安全密码和商户修改信息
+    public function checkLoginAndRuleAndSafeAndProfile($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkProfile($re['response']);//检测参数是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
+    //检测登录和权限和安全密码和登入密码修改信息
+    public function checkLoginAndRuleAndSafeAndPassword($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkPassword($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测是否登录 权限 修改安全密码
+    public function checkLoginAndRuleAndSafeEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录和权限
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSafeEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    //检测 登录 和 权限 和 安全密码 和 会员标签添加数据提交
+    public function checkLoginAndRuleAndSafeAndLabelAdd($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkLabelAdd($re['response']);//检测数据是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和粉丝用户管理编辑数据提交
+    public function checkLoginAndRuleAndSafeAndUserEdit($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkUserEdit($re['response']);//检测数据是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    //检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
+    public function checkLoginAndRuleAndSafeAndStoreCreate($request){
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkStoreCreate($re['response']);//检测数据是否为空
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
+
+    /********图文素材********/
+
+    //检测登陆，权限和上传多条图文素材
+    public function checkLoginAndRuleAndMaterialArticleAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    /********图文素材********/
+
+
+
+
+
+
+
+    /******************************单项检测*********************************/
+
+
+
+
+    /********图文素材********/
+    //检测上传单条图文素材
+    public function checkMaterialArticleAdd($request){
+        if(empty($request->input('img_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('thumb_media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        if(empty($request->input('title'))){
+            return self::res(0,response()->json(['data' => '请输入文章标题', 'status' => '0']));
+        }
+        if(empty($request->input('author'))){
+            return self::res(0,response()->json(['data' => '请填写文章作者', 'status' => '0']));
+        }
+
+        if(empty($request->input('content'))){
+            return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+    /********图文素材********/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //检测修改设置安全密码
+    public function checkSafeEdit($request){
+        if(empty($request->input('is_editing'))){
+            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+        }
+
+        if($request->input('is_editing')=='-1'){//设置安全密码时
+            if(empty($request->input('safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('re_safe_password'))){
+                return self::res(0,response()->json(['data' => '请重复安全密码', 'status' => '0']));
+            }
+            if($request->input('safe_password') <> $request->input('re_safe_password')){
+                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            }
+        }elseif($request->input('is_editing')=='1'){//修改安全密码时
+            if(empty($request->input('old_safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('safe_password'))){
+                return self::res(0,response()->json(['data' => '请输入新安全密码', 'status' => '0']));
+            }
+            if(empty($request->input('re_safe_password'))){
+                return self::res(0,response()->json(['data' => '请重复新安全密码', 'status' => '0']));
+            }
+            if($request->input('safe_password') <> $request->input('re_safe_password')){
+                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
+
+
+
+
+
+
 
 
     //检测账号中心-账号信息是否为空
@@ -789,31 +533,7 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测添加会员卡数据
-    public function checkMemberAdd($request){
-        if(empty($request->input('member_name'))){
-            return self::res(0,response()->json(['data' => '请输入会员卡名称', 'status' => '0']));
-        }
-        if(empty($request->input('discount'))){
-            return self::res(0,response()->json(['data' => '请输入折扣比例', 'status' => '0']));
-        }
-        if(empty($request->input('issue_mun'))){
-            return self::res(0,response()->json(['data' => '请输入发行数量', 'status' => '0']));
-        }
-        if(empty($request->input('card_price'))){
-            return self::res(0,response()->json(['data' => '请输入会员卡价格', 'status' => '0']));
-        }
-        if(empty($request->input('start_time'))){
-            return self::res(0,response()->json(['data' => '请选择开始时间', 'status' => '0']));
-        }
-        if(empty($request->input('expire_time'))){
-            return self::res(0,response()->json(['data' => '请选择结束时间', 'status' => '0']));
-        }
-        if(empty($request->input('adapt_store'))){
-            return self::res(0,response()->json(['data' => '请选择适用的分店', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
 
     //检测编辑多条图文素材
     public function checkMaterialArticleEdit($request){
@@ -961,26 +681,7 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
-    //检测上传单条图文素材
-    public function checkMaterialArticleAdd($request){
-        if(empty($request->input('img_id'))){
-            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
-        }
-        if(empty($request->input('thumb_media_id'))){
-            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
-        }
-        if(empty($request->input('title'))){
-            return self::res(0,response()->json(['data' => '请输入文章标题', 'status' => '0']));
-        }
-        if(empty($request->input('author'))){
-            return self::res(0,response()->json(['data' => '请填写文章作者', 'status' => '0']));
-        }
 
-        if(empty($request->input('content'))){
-            return self::res(0,response()->json(['data' => '请输入文章内容', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
 
     //检测上传多条图文素材
     public function checkMaterialArticlesAdd($request){
