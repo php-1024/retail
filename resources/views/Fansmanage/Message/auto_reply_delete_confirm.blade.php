@@ -6,11 +6,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">选择图片素材</h4>
+                <h4 class="modal-title">删除关键字</h4>
             </div>
             <div class="modal-body">
                 <div class="row row-sm">
-
+                    安全密码
+                </div>
+                <div class="row row-sm">
+                    <input type="password" name="salepassword"  value="">
                 </div>
             </div>
             <div class="modal-footer">
