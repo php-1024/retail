@@ -205,7 +205,7 @@ class MessageController extends Controller{
    */
     public function auto_reply_delete_confirm(Request $request){
         $id = $request->input('id');
-        return view('Wechat/Catering/auto_reply_delete_confirm',['id'=>$id]);
+        return view('Fansmanage/Message/auto_reply_delete_confirm',['id'=>$id]);
     }
     /*
      * 删除图文回复数据提交
