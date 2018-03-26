@@ -5,6 +5,7 @@ use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\WechatImage;
+use App\Models\WechatReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
