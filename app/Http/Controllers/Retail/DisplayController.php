@@ -45,8 +45,6 @@ class DisplayController extends Controller
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
             $program = Program::getOne([['id',$organization->program_id]]);
             $organization->program_name = $program;
-
-
             $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
             $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id]);//查询当前店铺粉丝数量
             $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'status'=>'3'],'0','id','DESC');
@@ -57,12 +55,7 @@ class DisplayController extends Controller
                 $operating_receipt += $val->order_price;
             }
             //简单数据统计
-            $statistics = [
-                'fans' => $fans,
-                'operating_receipt' => $operating_receipt,
-                'goods' => $goods,
-                'order_spot' => $order_spot,
-            ];
+            $statistics = ['fans' => $fans,'operating_receipt' => $operating_receipt,'goods' => $goods,'order_spot' => $order_spot];
             return view('Retail/Display/display',['organization'=>$organization,'statistics'=>$statistics,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
