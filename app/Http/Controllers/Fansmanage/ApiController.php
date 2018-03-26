@@ -71,6 +71,7 @@ class ApiController extends Controller{
      */
     public function meterial_image_upload_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dd($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $file = $request->file('image');
         if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
