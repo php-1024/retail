@@ -53,6 +53,10 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndMaterialArticleAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "fansmanage/ajax/material_articles_add_check":  //多条文章素材上传检测
+                $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
+                return self::format_response($re,$next);
+                break;
             /****图文素材****/
 
 
@@ -132,7 +136,9 @@ class FansmanageCheckAjax
 
     /********公共部分********/
 
-    //检测安全密码是否输入正确
+    /*
+     * 检测安全密码是否输入正确
+     */
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
@@ -154,7 +160,10 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
-    //部分页面检测用户是否admin，否则检测是否有权限
+
+    /*
+     * 部分页面检测用户是否admin，否则检测是否有权限
+     */
     public function checkHasRule($request){
         $admin_data = $request->get('admin_data');
         if($admin_data['id']!=1){
@@ -165,7 +174,10 @@ class FansmanageCheckAjax
             return self::res(1,$request);
         }
     }
-    //检测是否登录
+
+    /*
+     * 检测是否登录
+     */
     public function checkIsLogin($request)
     {
         $sess_key = Session::get('fansmanage_account_id');
@@ -183,7 +195,10 @@ class FansmanageCheckAjax
             return self::res(1, $request);
         }
     }
-    //检测登录提交数据
+
+    /*
+     * 检测登录提交数据
+     */
     public function checkLoginPost($request)
     {
         if (empty($request->input('username'))) {
@@ -204,7 +219,9 @@ class FansmanageCheckAjax
 //        }
     }
 
-    //检测登录和权限和安全密码
+    /*
+     * 检测登录和权限和安全密码
+     */
     public function checkLoginAndRuleAndSafe($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -219,8 +236,9 @@ class FansmanageCheckAjax
         }
     }
 
-
-    //检测登录和权限
+    /*
+     * 检测登录和权限
+     */
     public function checkLoginAndRule($request){
         $re = $this->checkIsLogin($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -239,9 +257,9 @@ class FansmanageCheckAjax
 
 
 
-
-
-    //检测登录和权限和安全密码和商户修改信息
+    /*
+     * 检测登录和权限和安全密码和商户修改信息
+     */
     public function checkLoginAndRuleAndSafeAndProfile($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -256,8 +274,9 @@ class FansmanageCheckAjax
         }
     }
 
-
-    //检测登录和权限和安全密码和登入密码修改信息
+    /*
+     * 检测登录和权限和安全密码和登入密码修改信息
+     */
     public function checkLoginAndRuleAndSafeAndPassword($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -272,7 +291,9 @@ class FansmanageCheckAjax
         }
     }
 
-    //检测是否登录 权限 修改安全密码
+    /*
+     * 检测是否登录 权限 修改安全密码
+     */
     public function checkLoginAndRuleAndSafeEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录和权限
         if($re['status']=='0'){//检测是否登录
@@ -287,7 +308,9 @@ class FansmanageCheckAjax
         }
     }
 
-    //检测 登录 和 权限 和 安全密码 和 会员标签添加数据提交
+    /*
+     * 检测 登录 和 权限 和 安全密码 和 会员标签添加数据提交
+     */
     public function checkLoginAndRuleAndSafeAndLabelAdd($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -301,7 +324,10 @@ class FansmanageCheckAjax
             }
         }
     }
-    //检测 登录 和 权限 和 安全密码 和粉丝用户管理编辑数据提交
+
+    /*
+     * 检测 登录 和 权限 和 安全密码 和粉丝用户管理编辑数据提交
+     */
     public function checkLoginAndRuleAndSafeAndUserEdit($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -315,7 +341,10 @@ class FansmanageCheckAjax
             }
         }
     }
-    //检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
+
+    /*
+     * 检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
+     */
     public function checkLoginAndRuleAndSafeAndStoreCreate($request){
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
@@ -333,14 +362,32 @@ class FansmanageCheckAjax
 
 
     /********图文素材********/
-
-    //检测登陆，权限和上传多条图文素材
+    /*
+     * 检测登陆，权限和上传图文素材--单条
+     */
     public function checkLoginAndRuleAndMaterialArticleAdd($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
             $re2 = $this->checkMaterialArticleAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    /*
+     * 检测登陆，权限和上传图文素材--多条
+     */
+    public function checkLoginAndRuleAndMaterialArticlesAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticlesAdd($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -362,7 +409,10 @@ class FansmanageCheckAjax
 
 
     /********图文素材********/
-    //检测上传单条图文素材
+
+    /*
+     * 检测上传图文素材--单条
+     */
     public function checkMaterialArticleAdd($request){
         if(empty($request->input('img_id'))){
             return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
@@ -382,10 +432,64 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
+    
+    /*
+     * 检测上传图文素材--多条
+     */
+    public function checkMaterialArticlesAdd($request){
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
+
+
     /********图文素材********/
 
 
 
+    //检测编辑单条图文素材
+    public function checkMaterialArticlesEdit($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        $num = $request->input('num');
+        for($i=1;$i<=$num;$i++){
+            if(empty($request->input('img_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('thumb_media_id_'.$i))){
+                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
+            }
+            if(empty($request->input('title_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
+            }
+            if(empty($request->input('author_'.$i))){
+                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
+            }
+
+            if(empty($request->input('content_'.$i))){
+                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
 
 
 
@@ -654,58 +758,7 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
-    //检测编辑单条图文素材
-    public function checkMaterialArticlesEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        $num = $request->input('num');
-        for($i=1;$i<=$num;$i++){
-            if(empty($request->input('img_id_'.$i))){
-                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
-            }
-            if(empty($request->input('thumb_media_id_'.$i))){
-                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
-            }
-            if(empty($request->input('title_'.$i))){
-                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
-            }
-            if(empty($request->input('author_'.$i))){
-                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
-            }
 
-            if(empty($request->input('content_'.$i))){
-                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
-            }
-        }
-        return self::res(1,$request);
-    }
-
-
-
-    //检测上传多条图文素材
-    public function checkMaterialArticlesAdd($request){
-        $num = $request->input('num');
-        for($i=1;$i<=$num;$i++){
-            if(empty($request->input('img_id_'.$i))){
-                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
-            }
-            if(empty($request->input('thumb_media_id_'.$i))){
-                return self::res(0,response()->json(['data' => '请选择第'.$i.'篇文章的图片素材', 'status' => '0']));
-            }
-            if(empty($request->input('title_'.$i))){
-                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章标题', 'status' => '0']));
-            }
-            if(empty($request->input('author_'.$i))){
-                return self::res(0,response()->json(['data' => '请填写第'.$i.'篇文章的文章作者', 'status' => '0']));
-            }
-
-            if(empty($request->input('content_'.$i))){
-                return self::res(0,response()->json(['data' => '请输入第'.$i.'篇文章的文章内容', 'status' => '0']));
-            }
-        }
-        return self::res(1,$request);
-    }
 
     //检测登录提交数据
     public function checkID($request)

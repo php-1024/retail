@@ -68,7 +68,7 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "api/ajax/material_articles_add_check":  //单条文章素材上传检测
+            case "api/ajax/material_articles_add_check":  //多条文章素材上传检测
                 $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
                 return self::format_response($re,$next);
                 break;
