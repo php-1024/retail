@@ -31,9 +31,9 @@ class UserController extends Controller
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $admin_data['organization_id'];  //组织id
         $account = $request->get('account');            //接收用户账号
-        $user_id = User::getPluck(['account'=>$account],'id')->first();      //获取用户id
-        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id')->first();    //获取粉丝管理平台的组织id
-        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
+        $user_id = User::getPluck(['account'=>$account],'id')->first();                                 //获取用户id
+        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id')->first();         //获取粉丝管理平台的组织id
+        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first(); //组织名称
         $list = FansmanageUser::getPaginage([['fansmanage_id',$fansmanage_id],['store_id',$organization_id]],$user_id,'10','id','DESC');
         foreach ($list as $key => $value) {
             $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]], 'nickname')->first();//微信昵称
@@ -44,7 +44,6 @@ class UserController extends Controller
         $label = Label::ListLabel([['fansmanage_id', $organization_id]]);//会员标签
         return view('Retail/User/user_list', ['list' => $list, 'account'=>$account, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
-
 
     //粉丝用户管理
     public function store_label_add_check(Request $request)
