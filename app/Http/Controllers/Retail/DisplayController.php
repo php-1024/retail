@@ -43,13 +43,13 @@ class DisplayController extends Controller
         foreach ($order as $key=>$val){
             $operating_receipt += $val->order_price;
         }
+        //简单数据统计
         $statistics = [
             'fans' => $fans,
             'operating_receipt' => $operating_receipt,
             'goods' => $goods,
             'order_spot' => $order_spot,
         ];
-        dump($statistics);
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){ //如果是超级管理员并且组织ID等于零则进入选择组织页面
