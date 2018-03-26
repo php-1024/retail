@@ -73,7 +73,7 @@ class FansmanageUser extends Model{
     //查询粉丝数量
     public static function getCount($where)
     {
-        return self::where($where)->get();
+        return self::where($where)->get()->count();
     }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){

@@ -32,12 +32,12 @@ class DisplayController extends Controller
             ['program_id','10'], //查询program_id(10)零售管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
-        $fansmanage_id = Organization::getPluck(['organization_id'=>$admin_data['organization_id']],'parent_id');
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id]);//查询当前店铺粉丝数量
 //        $statistics = [
 //            'fans' => $fans,
 //        ];
-        dump($fansmanage_id);
+        dump($fans);
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){ //如果是超级管理员并且组织ID等于零则进入选择组织页面
