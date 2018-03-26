@@ -149,6 +149,7 @@
     function deleteData(id){
         var url = $('#module_delete_url').val();
         var token = $('#_token').val();
+        var data = {'id':id,'_token':token};
         if(id==''){
             swal({
                 title: "提示信息",
@@ -160,16 +161,21 @@
             });
             return;
         }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
+        swal({
+            title: "提示信息",
+            text: '确定删除该模块吗？',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            $.post(url,data,function(response){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
             });
         });
     }
@@ -177,6 +183,7 @@
     function removeData(id){
         var url = $('#module_remove_url').val();
         var token = $('#_token').val();
+        var data = {'id':id,'_token':token};
         if(id==''){
             swal({
                 title: "提示信息",
@@ -188,16 +195,21 @@
             });
             return;
         }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
+        swal({
+            title: "提示信息",
+            text: '确定彻底删除该模块吗？',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            $.post(url,data,function(response){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
             });
         });
     }
