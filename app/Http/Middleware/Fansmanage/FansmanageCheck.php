@@ -61,9 +61,9 @@ class FansmanageCheck{
             /****公众号管理-消息管理****/
 
             /****公众号管理-菜单管理****/
-            case "api/catering/defined_menu":               //自定义菜单
-            case "catering/menu/menu_customize":            //自定义菜单
-            case "catering/menu/menu_different":            //个性化菜单
+            case "fansmanage/wehcatmenu/defined_menu":               //自定义菜单
+            case "fansmanage/wehcatmenu/menu_customize":            //自定义菜单
+            case "fansmanage/wehcatmenu/menu_different":            //个性化菜单
             /****公众号管理-菜单管理****/
 
             /****总分店管理****/
