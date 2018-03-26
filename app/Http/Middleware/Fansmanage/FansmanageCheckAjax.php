@@ -73,6 +73,10 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "api/ajax/auto_reply_edit_text_check"://检测自动回复文章数据提交
+                $re = $this->checkLoginAndRuleAndAutoReplyEditText($request);
+                return self::format_response($re,$next);
+                break;
             /****消息管理****/
 
             case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
@@ -466,6 +470,24 @@ class FansmanageCheckAjax
         }
     }
 
+    /*
+     * 检测登陆，权限，修改自动回复关键字文本内容
+     */
+    public function checkLoginAndRuleAndAutoReplyEditText($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyEditText($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
     /********消息管理********/
 
 
@@ -593,6 +615,20 @@ class FansmanageCheckAjax
     public function checkAutoReplyAdd($request){
         if(empty($request->input('keyword'))){
             return self::res(0,response()->json(['data' => '请输入关键字', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+
+    /*
+     * 检测关键字自定义回复文本内容
+     */
+    public function checkAutoReplyEditText($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('reply_info'))){
+            return self::res(0,response()->json(['data' => '请输入自动回复文本内容', 'status' => '0']));
         }
         return self::res(1,$request);
     }
@@ -831,16 +867,7 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测关键字自定义回复文本内容
-    public function checkAutoReplyEditText($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        if(empty($request->input('reply_info'))){
-            return self::res(0,response()->json(['data' => '请输入自动回复文本内容', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
 
 
 

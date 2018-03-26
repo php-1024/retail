@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{asset('public/Catering')}}/trumbowyg/design/css/trumbowyg.css">
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_edit_text_check') }}">
+<link rel="stylesheet" href="{{asset('public/Fansmanage')}}/trumbowyg/design/css/trumbowyg.css">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/auto_reply_edit_text_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">
@@ -22,9 +22,9 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script src="{{asset('public/Fansmanage')}}/trumbowyg/trumbowyg.js"></script>
+<script src="{{asset('public/Fansmanage')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="{{asset('public/Fansmanage')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
     $(function(){
         $('#form-content').trumbowyg({
