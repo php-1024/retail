@@ -48,10 +48,10 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" id="input-id-1" value="" placeholder="用户账号">
+                                        <input type="text" class="form-control" name="account" value="{{$account}}" placeholder="用户账号">
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>
