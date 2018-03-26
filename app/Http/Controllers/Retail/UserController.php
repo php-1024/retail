@@ -36,6 +36,7 @@ class UserController extends Controller
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
 
 
+        dump($organization_id);
         dump($account);
         dump($user_id);
         dump($fansmanage_id);
