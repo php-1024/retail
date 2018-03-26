@@ -36,7 +36,7 @@ class DisplayController extends Controller
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id]);//查询当前店铺粉丝数量
         $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC');
-        $operating_receipt = 0;//营业收入
+        $operating_receipt = 0.00;//营业收入
         foreach ($order as $key=>$val){
             $operating_receipt += $val->order_price;
         }
