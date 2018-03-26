@@ -227,17 +227,26 @@
             return;
         }
 
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            swal({
-                title: "提示信息",
-                text: response.data,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
+        swal({
+            title: "提示信息",
+            text: '确定删除该节点吗？',
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+        },function(){
+            window.location.reload();
         });
+
+        var data = {'id':id,'_token':token};
+//        $.post(url,data,function(response){
+//            swal({
+//                title: "提示信息",
+//                text: response.data,
+//                confirmButtonColor: "#DD6B55",
+//                confirmButtonText: "确定",
+//            },function(){
+//                window.location.reload();
+//            });
+//        });
     }
     //提交表单
     function postForm() {
