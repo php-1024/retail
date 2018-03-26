@@ -221,6 +221,7 @@
     function removeData(id){
         var url = $('#node_remove_url').val();
         var token = $('#_token').val();
+        var data = {'id':id,'_token':token};
         if(id==''){
             swal({
                 title: "提示信息",
@@ -232,27 +233,23 @@
             });
             return;
         }
-
         swal({
             title: "提示信息",
-            text: '确定删除该节点吗？',
+            text: '确定彻底删除该节点吗？',
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "确定",
         },function(){
-            window.location.reload();
+            $.post(url,data,function(response){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            });
         });
-
-        var data = {'id':id,'_token':token};
-//        $.post(url,data,function(response){
-//            swal({
-//                title: "提示信息",
-//                text: response.data,
-//                confirmButtonColor: "#DD6B55",
-//                confirmButtonText: "确定",
-//            },function(){
-//                window.location.reload();
-//            });
-//        });
     }
     //提交表单
     function postForm() {
