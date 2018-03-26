@@ -578,6 +578,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::get('message_setting', 'Fansmanage\AccountController@message_setting')->middleware('FansmanageCheck');   //消息推送设置
     });
 
+
     //公众号管理
     Route::group(['prefix'=>'api'],function(){
         Route::get('store_auth', 'Fansmanage\ApiController@store_auth')->middleware('FansmanageCheck');                 //公众号管理
@@ -589,13 +590,19 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::get('material_articles_edit','Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//添加多条图文列表
     });
 
-    //公众号管理
+    //公众号管理--消息管理
     Route::group(['prefix'=>'message'],function(){
         Route::get('defined_menu','Fansmanage\MessageController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
         Route::get('auto_reply','Fansmanage\MessageController@auto_reply')->middleware('FansmanageCheck');//关键词自动回复
         Route::get('subscribe_reply','Fansmanage\MessageController@subscribe_reply')->middleware('FansmanageCheck');//关注事件自动回复
         Route::get('default_reply','Fansmanage\MessageController@default_reply')->middleware('FansmanageCheck');//默认回复
     });
+
+    //公众号管理--菜单管理
+    Route::group(['prefix'=>'message'],function(){
+        Route::get('defined_menu','Fansmanage\WechatmenuController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
+    });
+
 
 
 
@@ -807,14 +814,14 @@ Route::group(['prefix'=>'api'],function() {
 
     //微信通用路由组
     Route::group(['prefix' => 'wechat'], function () {
-        Route::any('response/{appid}', 'Api\WechatController@response');//开放平台控制公众平台回复函数
-        Route::any('open', 'Api\WechatController@open');//接受公众号收授权推送消息
-        Route::any('auth', 'Api\WechatController@auth');//公众号授权链接页面
-        Route::any('redirect', 'Api\WechatController@redirect');//公众号授权回调链接
-        Route::any('web_redirect', 'Api\WechatController@web_redirect');//网页授权回调路由
-        Route::any('open_web_redirect','Api\WechatController@open_web_redirect');
-        Route::any('pull_authorizer_data', 'Api\WechatController@pull_authorizer_data');//获取微信平台的授权信息
-        Route::any('test', 'Api\WechatController@test');//测试函数
+        Route::any('response/{appid}', 'Fansmanage\WechatController@response');//开放平台控制公众平台回复函数
+        Route::any('open', 'Fansmanage\WechatController@open');//接受公众号收授权推送消息
+        Route::any('auth', 'Fansmanage\WechatController@auth');//公众号授权链接页面
+        Route::any('redirect', 'Fansmanage\WechatController@redirect');//公众号授权回调链接
+        Route::any('web_redirect', 'Fansmanage\WechatController@web_redirect');//网页授权回调路由
+        Route::any('open_web_redirect','Fansmanage\WechatController@open_web_redirect');
+        Route::any('pull_authorizer_data', 'Fansmanage\WechatController@pull_authorizer_data');//获取微信平台的授权信息
+        Route::any('test', 'Fansmanage\WechatController@test');//测试函数
     });
 
     //餐饮版店铺授权页面
