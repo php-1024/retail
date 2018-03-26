@@ -664,8 +664,8 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('auto_reply_edit_check','Fansmanage\MessageController@auto_reply_edit_check')->middleware('FansmanageCheckAjax');//编辑自动回复关键字功能提交
         Route::post('auto_reply_delete_confirm','Fansmanage\MessageController@auto_reply_delete_confirm')->middleware('FansmanageCheckAjax');//删除关键字ajax显示
         Route::post('auto_reply_delete_check','Fansmanage\MessageController@auto_reply_delete_check')->middleware('FansmanageCheckAjax');//删除关键字功能提交
-        Route::post('subscribe_reply_text_edit','Api\WechatController@subscribe_reply_text_edit')->middleware('CateringCheckAjax');
-        Route::post('subscribe_reply_text_edit_check','Api\WechatController@subscribe_reply_text_edit_check')->middleware('CateringCheckAjax');
+        Route::post('subscribe_reply_text_edit','Fansmanage\MessageController@subscribe_reply_text_edit')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材ajax显示
+        Route::post('subscribe_reply_text_edit_check','Fansmanage\MessageController@subscribe_reply_text_edit_check')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材功能提交
         Route::post('subscribe_reply_image_edit','Api\WechatController@subscribe_reply_image_edit')->middleware('CateringCheckAjax');
         Route::post('subscribe_reply_image_edit_check','Api\WechatController@subscribe_reply_image_edit_check')->middleware('CateringCheckAjax');
         Route::post('subscribe_reply_article_edit','Api\WechatController@subscribe_reply_article_edit')->middleware('CateringCheckAjax');
