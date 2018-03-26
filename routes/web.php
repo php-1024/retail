@@ -615,21 +615,21 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('safe_password_check','Fansmanage\AccountController@safe_password_check')->middleware('FansmanageCheckAjax');//安全密码数据提交
         Route::post('password_check','Fansmanage\AccountController@password_check')->middleware('FansmanageCheckAjax');     //安全密码数据提交
 
-        //公众号管理
+        //公众号管理--图文素材
         Route::post('meterial_image_upload','Fansmanage\ApiController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
-        Route::any('meterial_image_upload_check', 'Fansmanage\ApiController@meterial_image_upload_check')->middleware('FansmanageCheckAjax');//上传图片素材
-        Route::any('material_image_delete_comfirm', 'Fansmanage\ApiController@material_image_delete_comfirm')->middleware('FansmanageCheckAjax');//删除图片素材弹窗
-        Route::any('material_image_delete_check', 'Fansmanage\ApiController@material_image_delete_check')->middleware('FansmanageCheckAjax');//检测删除图片素材数据
-        Route::any('material_image_select', 'Fansmanage\ApiController@material_image_select')->middleware('FansmanageCheckAjax');//弹出图片选择框
-        Route::any('material_article_add_check','Fansmanage\ApiController@material_article_add_check')->middleware('FansmanageCheckAjax');//添加单条图文检测
-        Route::any('material_articles_add_check','Fansmanage\ApiController@material_articles_add_check')->middleware('FansmanageCheckAjax');//添加多条图文检测
-        Route::any('material_article_delete_comfirm','Fansmanage\ApiController@material_article_delete_comfirm')->middleware('FansmanageCheckAjax');//删除图文ajax显示
-        Route::any('material_article_delete_check','Fansmanage\ApiController@material_article_delete_check')->middleware('FansmanageCheckAjax');//删除图文功能提交
-        Route::any('material_article_edit_check','Fansmanage\ApiController@material_article_edit_check')->middleware('FansmanageCheckAjax');//编辑图文ajax显示
-        Route::any('material_articles_edit_check','Fansmanage\ApiController@material_articles_edit_check')->middleware('FansmanageCheckAjax');//编辑图文功能提交
+        Route::post('meterial_image_upload_check', 'Fansmanage\ApiController@meterial_image_upload_check')->middleware('FansmanageCheckAjax');//上传图片素材
+        Route::post('material_image_delete_comfirm', 'Fansmanage\ApiController@material_image_delete_comfirm')->middleware('FansmanageCheckAjax');//删除图片素材弹窗
+        Route::post('material_image_delete_check', 'Fansmanage\ApiController@material_image_delete_check')->middleware('FansmanageCheckAjax');//检测删除图片素材数据
+        Route::post('material_image_select', 'Fansmanage\ApiController@material_image_select')->middleware('FansmanageCheckAjax');//弹出图片选择框
+        Route::post('material_article_add_check','Fansmanage\ApiController@material_article_add_check')->middleware('FansmanageCheckAjax');//添加单条图文检测
+        Route::post('material_articles_add_check','Fansmanage\ApiController@material_articles_add_check')->middleware('FansmanageCheckAjax');//添加多条图文检测
+        Route::post('material_article_delete_comfirm','Fansmanage\ApiController@material_article_delete_comfirm')->middleware('FansmanageCheckAjax');//删除图文ajax显示
+        Route::post('material_article_delete_check','Fansmanage\ApiController@material_article_delete_check')->middleware('FansmanageCheckAjax');//删除图文功能提交
+        Route::post('material_article_edit_check','Fansmanage\ApiController@material_article_edit_check')->middleware('FansmanageCheckAjax');//编辑图文ajax显示
+        Route::post('material_articles_edit_check','Fansmanage\ApiController@material_articles_edit_check')->middleware('FansmanageCheckAjax');//编辑图文功能提交
 
 
-
+        //公众号管理
         Route::any('defined_menu_add','Fansmanage\ApiController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_add_check','Fansmanage\ApiController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
 
