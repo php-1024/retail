@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
+use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\WechatImage;
