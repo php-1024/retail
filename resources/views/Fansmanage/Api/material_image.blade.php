@@ -62,7 +62,7 @@
                                     <button class="btn btn-s-md btn-success" type="button" onclick="getUploadForm();" id="addBtn">上传图片 &nbsp;&nbsp;<i class="fa fa-upload"></i></button>
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="material_image_upload_url" value="{{ url('fansmanage/ajax/meterial_image_upload') }}">
-                                    <input type="hidden" id="material_image_delete_comfirm_url" value="{{ url('api/ajax/material_image_delete_comfirm') }}">
+                                    <input type="hidden" id="material_image_delete_comfirm_url" value="{{ url('fansmanage/ajax/material_image_delete_comfirm') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <div class="row row-sm">
