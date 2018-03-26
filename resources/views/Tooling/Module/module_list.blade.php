@@ -162,10 +162,14 @@
             return;
         }
         swal({
-            title: "提示信息",
-            text: '确定删除该模块吗？',
+            title: "确定删除吗？",
+            text: "请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
+            confirmButtonText: "确定删除！",
+            cancelButtonText: "取消删除！",
+            closeOnConfirm: false
         },function(){
             $.post(url,data,function(response){
                 swal({
@@ -196,10 +200,14 @@
             return;
         }
         swal({
-            title: "提示信息",
-            text: '确定彻底删除该模块吗？',
+            title: "确定删除吗？",
+            text: "请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
+            confirmButtonText: "确定删除！",
+            cancelButtonText: "取消删除！",
+            closeOnConfirm: false
         },function(){
             $.post(url,data,function(response){
                 swal({
