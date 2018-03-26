@@ -146,7 +146,7 @@
                                         <i class="fa fa-money"></i>
                                     </div>
                                     <div class="value">
-                                        <h1>168888.03</h1>
+                                        <h1>{{$statistics['operating_receipt']}}</h1>
                                         <p>元营收</p>
                                     </div>
                                 </section>
@@ -158,7 +158,7 @@
                                     <i class="icon icon-user"></i>
                                 </div>
                                 <div class="value">
-                                    <h1>1680</h1>
+                                    <h1>{{$statistics['fans']}}</h1>
                                     <p>个粉丝用户</p>
                                 </div>
                             </section>
@@ -170,7 +170,7 @@
                                 <i class="icon icon-basket-loaded"></i>
                             </div>
                             <div class="value">
-                                <h1>100</h1>
+                                <h1>{{$statistics['goods']}}</h1>
                                 <p>个商品</p>
                             </div>
                         </section>
@@ -186,35 +186,12 @@
                                     <i class="fa fa-list"></i>
                                 </div>
                                 <div class="value">
-                                    <h1>666</h1>
+                                    <h1>{{$statistics['order_spot']}}</h1>
                                     <p>现场订单数</p>
                                 </div>
                             </section>
                         </div>
 
-                        <div class="col-lg-4 state-overview">
-                        <section class="panel">
-                            <div class="symbol bg-primary">
-                                <i class="icon icon-list"></i>
-                            </div>
-                            <div class="value">
-                                <h1>888</h1>
-                                <p>外卖订单</p>
-                            </div>
-                        </section>
-                        </div>
-
-                        <div class="col-lg-4 state-overview">
-                        <section class="panel">
-                            <div class="symbol bg-dark">
-                                <i class="icon icon-printer"></i>
-                            </div>
-                            <div class="value">
-                                <h1>5</h1>
-                                <p>台打印机</p>
-                            </div>
-                        </section>
-                        </div>
                         </div>
 
                         <div class="col-lg-12">
