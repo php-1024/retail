@@ -143,7 +143,7 @@ class UserController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//组织id
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
-        $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'10','id');
+        $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'','10','id');
         foreach($list as $key=>$value){
             $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
             $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
