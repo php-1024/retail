@@ -32,7 +32,7 @@ class UserController extends Controller
         $organization_id = $admin_data['organization_id'];  //组织id
         $account = $request->get('account');            //接收用户账号
         $user_id = User::getPluck(['account'=>$account],'id');      //获取用户id
-        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id');    //获取粉丝管理平台的组织id
+        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id')->first();    //获取粉丝管理平台的组织id
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
 
 
