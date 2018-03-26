@@ -599,7 +599,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
     });
 
     //公众号管理--菜单管理
-    Route::group(['prefix'=>'message'],function(){
+    Route::group(['prefix'=>'wechatmenu'],function(){
         Route::get('defined_menu','Fansmanage\WechatmenuController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
     });
 
