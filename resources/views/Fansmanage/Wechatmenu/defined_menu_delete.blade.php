@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('api/ajax/defined_menu_delete_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('fansmanage/ajax/defined_menu_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="modal-dialog modal-lg">

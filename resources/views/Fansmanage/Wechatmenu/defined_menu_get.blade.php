@@ -1,6 +1,6 @@
 @if(!empty($list))
-<form class="form-horizontal" role="form" id="defined_menu_edit" action="{{ url('api/ajax/defined_menu_edit') }}">
-<input type="hidden" id="defined_menu_delete" value="{{ url('api/ajax/defined_menu_delete') }}">
+<form class="form-horizontal" role="form" id="defined_menu_edit" action="{{ url('fansmanage/ajax/defined_menu_edit') }}">
+<input type="hidden" id="defined_menu_delete" value="{{ url('fansmanage/ajax/defined_menu_delete') }}">
 <input type="hidden" name="_token" class="_token" value="{{csrf_token()}}">
 <div class="dd" id="nestable1">
     <ol class="dd-list">
