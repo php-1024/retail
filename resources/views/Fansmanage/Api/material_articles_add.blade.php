@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总分店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/trumbowyg/design/css/trumbowyg.css">
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/trumbowyg/design/css/trumbowyg.css">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Catering/Public/Header')
+        @include('Fansmanage/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
@@ -30,7 +30,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        @include('Catering/Public/Nav')
+                        @include('Fansmanage/Public/Nav')
                     </section>
                 </section>
             </aside>
@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('api/catering/material_image')}}" class="list-group-item">
+                                    <a href="{{url('fansmanage/api/material_image')}}" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="{{url('api/catering/material_article')}}" class="list-group-item active">
+                                    <a href="{{url('fansmanage/api/material_article')}}" class="list-group-item active">
                                         图文素材
                                     </a>
 
@@ -59,14 +59,14 @@
                             <section class="scrollable padder-lg">
                                 <h2 class="font-thin m-b">添加多条图文</h2>
                                 <div class="row row-sm">
-                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('api/catering/material_article')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
+                                    <button class="btn btn-s-md btn-success" type="button" onclick="location.href='{{url('fansmanage/api/material_article')}}'"><i class="fa fa-reply"></i>&nbsp;&nbsp;返回列表</button>
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn"><i class="fa fa-plus"></i>&nbsp;&nbsp;新增一条图文</button>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
-                                    <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('api/ajax/material_articles_add_check') }}">
-                                        <input autocomplete="off" type="hidden" id="material_image_select_url" value="{{ url('api/ajax/material_image_select') }}">
-                                        <input autocomplete="off" type="hidden" id="material_article_url" value="{{ url('api/catering/material_article') }}">
+                                    <form class="form-horizontal tasi-form" id="currentForm" method="post" action="{{ url('fansmanage/ajax/material_articles_add_check') }}">
+                                        <input autocomplete="off" type="hidden" id="material_image_select_url" value="{{ url('fansmanage/ajax/material_image_select') }}">
+                                        <input autocomplete="off" type="hidden" id="material_article_url" value="{{ url('fansmanage/api/material_article') }}">
                                         <input autocomplete="off" type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <input  autocomplete="off" type="hidden" name="num" id="num" value="1">
                                         <div class="panel-group m-b" id="target_box" >
@@ -201,30 +201,30 @@
     </div>
 
 </div>
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/app.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 
-<script src="{{asset('public/Catering')}}/js/wysiwyg/jquery.hotkeys.js"></script>
-<script src="{{asset('public/Catering')}}/js/wysiwyg/bootstrap-wysiwyg.js"></script>
-<script src="{{asset('public/Catering')}}/js/wysiwyg/demo.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/wysiwyg/jquery.hotkeys.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/wysiwyg/bootstrap-wysiwyg.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/wysiwyg/demo.js"></script>
 
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/file-input/bootstrap-filestyle.min.js"></script>
 <!-- Ladda -->
-<script src="{{asset('public/Catering')}}/trumbowyg/trumbowyg.js"></script>
+<script src="{{asset('public/Fansmanage')}}/trumbowyg/trumbowyg.js"></script>
 
 
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="{{asset('public/Fansmanage')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 
-<script src="{{asset('public/Catering')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script src="{{asset('public/Fansmanage')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 
 
 
