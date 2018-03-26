@@ -24,11 +24,11 @@
         </div>
     </div>
 </form>
-<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/file-input/bootstrap-filestyle.min.js"></script>
 <!-- Ladda -->
-<script src="{{asset('public/Catering')}}/ladda/spin.min.js"></script>
-<script src="{{asset('public/Catering')}}/ladda/ladda.min.js"></script>
-<script src="{{asset('public/Catering')}}/ladda/ladda.jquery.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/ladda/spin.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/ladda/ladda.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/ladda/ladda.jquery.min.js"></script>
 <script>
     $(function(){
 
