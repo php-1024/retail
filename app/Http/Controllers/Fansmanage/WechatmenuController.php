@@ -238,7 +238,7 @@ class WechatmenuController extends Controller{
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-        return view('Wechat/Catering/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
+        return view('Fansmanage/Wechatmenu/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
     }
 
     //添加自定义菜单检测
@@ -308,7 +308,7 @@ class WechatmenuController extends Controller{
             }
             unset($sm);
         }
-        return view('Wechat/Catering/defined_menu_get',['list'=>$list,'son_menu'=>$son_menu]);
+        return view('Fansmanage/Wechatmenu/defined_menu_get',['list'=>$list,'son_menu'=>$son_menu]);
     }
 
 
@@ -325,7 +325,7 @@ class WechatmenuController extends Controller{
 
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-        return view('Wechat/Catering/defined_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply,'definedmenu'=>$definedmenu]);
+        return view('Fansmanage/Wechatmenu/defined_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply,'definedmenu'=>$definedmenu]);
     }
 
     //编辑自定义菜单检测
@@ -391,7 +391,7 @@ class WechatmenuController extends Controller{
     //自定义菜单删除弹窗
     public function defined_menu_delete(Request $request){
         $id = $request->get('id');
-        return view('Wechat/Catering/defined_menu_delete',['id'=>$id]);
+        return view('Fansmanage/Wechatmenu/defined_menu_delete',['id'=>$id]);
     }
 
     //自定义菜单删除检测
