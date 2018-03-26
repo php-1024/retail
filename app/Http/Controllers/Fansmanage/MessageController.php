@@ -64,7 +64,7 @@ class MessageController extends Controller{
     public function auto_reply_edit_text(Request $request){
         $id = $request->input('id');
         $info = WechatReply::getOne([['id',$id]]);
-        return view('Wechat/Catering/auto_reply_edit_text',['id'=>$id,'info'=>$info]);
+        return view('Fansmanage/Message/auto_reply_edit_text',['id'=>$id,'info'=>$info]);
     }
 
     /*
