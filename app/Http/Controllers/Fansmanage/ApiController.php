@@ -250,7 +250,7 @@ class ApiController extends Controller{
     //直接输入安全密码操作的页面--删除
     public function material_article_delete_comfirm(Request $request){
         $id = $request->input('id');
-        return view('Wechat/Catering/material_article_delete_comfirm',['id'=>$id]);
+        return view('Fansmanage/Api/material_article_delete_comfirm',['id'=>$id]);
     }
     public function material_article_delete_check(Request $request){
         $id = $request->input('id');
@@ -287,7 +287,7 @@ class ApiController extends Controller{
         $image_info = WechatImage::getOne([['media_id',$article_info['content']['articles'][0]['thumb_media_id']]]);
 
         $info = $article_info['content']['articles'][0];
-        return view('Wechat/Catering/material_article_edit',['info'=>$info,'id'=>$id,'image_info'=>$image_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Api/material_article_edit',['info'=>$info,'id'=>$id,'image_info'=>$image_info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     /*
      * 编辑单条图文数据提交
