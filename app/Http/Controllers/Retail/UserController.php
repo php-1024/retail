@@ -30,10 +30,11 @@ class UserController extends Controller
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $admin_data['organization_id'];  //组织id
-        $account = $request->get('account');
+        $account = $request->get('account');            //接收用户账号
+        $user_id = User::getPluck(['account'=>$account],'id');      //获取用户id
         $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id');    //获取粉丝管理平台的组织id
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
-        $list = FansmanageUser::getPaginage([['fansmanage_id', $fansmanage_id],['store_id', $organization_id],['account',$account]], '10', 'id');
+        $list = FansmanageUser::getPaginage([['fansmanage_id', $fansmanage_id],['store_id', $organization_id]], $user_id,'10', 'id');
         foreach ($list as $key => $value) {
             $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]], 'nickname')->first();//微信昵称
             $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
@@ -41,7 +42,7 @@ class UserController extends Controller
             $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();//粉丝对应的标签id
         }
         $label = Label::ListLabel([['fansmanage_id', $organization_id]]);//会员标签
-        return view('Retail/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Retail/User/user_list', ['list' => $list, 'account'=>$account, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
 
