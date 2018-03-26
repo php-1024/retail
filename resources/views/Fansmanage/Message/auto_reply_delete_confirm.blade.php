@@ -8,14 +8,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">删除关键字</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="col-sm-2 text-right">负责人</label>
-                    <div class="col-sm-10">
-                        <input type="text" value="张老三" placeholder="负责人" class="form-control">
-                    </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 text-right">安全密码</label>
+                <div class="col-sm-10">
+                    <input type="password" value="" class="form-control" name="safepassword">
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
                 <button class="btn btn-success" type="button" id="save_btn" onclick="return postForm();">确定</button>
@@ -24,13 +24,6 @@
     </div>
 </form>
 <script>
-    function select_img(obj){
-        var target = $(obj);
-        var media_id = target.data('media_id');
-        $('#media_id').val(media_id);
-        $('.item').find('.item-overlay').hide();
-        target.find('.item-overlay').show();
-    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");
