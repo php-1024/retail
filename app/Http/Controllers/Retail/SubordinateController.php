@@ -88,6 +88,7 @@ class SubordinateController extends Controller
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
         $list = Account::getPaginage([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%'], ['account', 'like', '%' . $account . '%']], 15, 'id');
+        dump($list);
         return view('Retail/Subordinate/subordinate_list', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 

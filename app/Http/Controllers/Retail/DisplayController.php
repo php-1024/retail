@@ -36,20 +36,20 @@ class DisplayController extends Controller
         ];
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id]);//查询当前店铺粉丝数量
-        $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC');
+        $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'status'=>'3'],'0','id','DESC');
         $order_spot = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'order_type'=>'1'],'0','id','DESC')->count();
         $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
         $operating_receipt = 0.00;//营业收入
         foreach ($order as $key=>$val){
             $operating_receipt += $val->order_price;
         }
+        //简单数据统计
         $statistics = [
             'fans' => $fans,
             'operating_receipt' => $operating_receipt,
             'goods' => $goods,
             'order_spot' => $order_spot,
         ];
-        dump($statistics);
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){ //如果是超级管理员并且组织ID等于零则进入选择组织页面
