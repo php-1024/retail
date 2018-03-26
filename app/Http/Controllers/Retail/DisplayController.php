@@ -26,7 +26,7 @@ class DisplayController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $user_statistics = FansmanageUser::where([['store_id',12]])->get();
+        $user_statistics = FansmanageUser::where([['store_id',12]])->get()->count();
         dump($user_statistics);
         dump($admin_data);
         //只查询自己相关的数据
