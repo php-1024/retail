@@ -26,15 +26,18 @@ class DisplayController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $user_statistics = FansmanageUser::where([['store_id',12]])->get()->count();
-        dump($user_statistics);
-        dump($admin_data);
         //只查询自己相关的数据
         $where = [
             ['account_id',$admin_data['id']],
             ['program_id','10'], //查询program_id(10)零售管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
+        $fansmanage_id = Organization::getPluck(['organization_id'=>$admin_data['organization_id']],'parent_id');
+        $fans = FansmanageUser::getCount([['store_id',$admin_data['organization_id']],['fansmanage_id',$fansmanage_id]])//查询当前店铺粉丝数量
+        $statistics = [
+            'fans' => $fans,
+        ];
+        dump($fans);
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){ //如果是超级管理员并且组织ID等于零则进入选择组织页面
@@ -46,7 +49,7 @@ class DisplayController extends Controller
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
             $program = Program::getOne([['id',$organization->program_id]]);
             $organization->program_name = $program;
-            return view('Retail/Display/display',['organization'=>$organization,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Retail/Display/display',['organization'=>$organization,'statistics'=>$statistics,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
 
