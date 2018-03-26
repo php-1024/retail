@@ -69,6 +69,12 @@ class FansmanageUser extends Model{
     public static function getPluck($where,$pluck){
         return self::where($where)->pluck($pluck);
     }
+
+    //查询粉丝数量
+    public static function getCount($where)
+    {
+        return self::where($where)->get();
+    }
     //获取分页数据
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         return self::where($where)->with('userOrigin')->with('user')->with('userRecommender')->orderBy($orderby,$sort)->paginate($paginate);
