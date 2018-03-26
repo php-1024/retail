@@ -48,7 +48,7 @@
                                     <label class="col-sm-1 control-label">下属账号</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" name="account" type="text" value="">
+                                        <input class="input-sm form-control" size="16" name="account" type="text" value="{{$search_data['account']}}">
                                     </div>
 
                                     <div class="col-sm-3">
