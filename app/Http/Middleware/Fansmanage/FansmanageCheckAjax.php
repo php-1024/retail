@@ -120,7 +120,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/defined_menu_edit":              //自定义菜单编辑
             case "fansmanage/ajax/defined_menu_get":              //自定义菜单添加
             case "fansmanage/ajax/auto_reply_add":                //自定义菜单添加
-            case "afansmanagepi/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
+            case "fansmanage/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
             case "fansmanage/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
             case "fansmanage/ajax/auto_reply_edit_article":    //修改关键字回复图文内容
             case "fansmanage/ajax/auto_reply_edit"://修改自动回复关键字
