@@ -93,6 +93,10 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndSubscribeReplyTextEdit($request);
                 return self::format_response($re,$next);
                 break;
+            case "fansmanage/ajax/subscribe_reply_image_edit_check"://检测关注后自动回复图片素材数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyImageEdit($request);
+                return self::format_response($re,$next);
+                break;
             /****消息管理****/
 
             case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
@@ -571,6 +575,22 @@ class FansmanageCheckAjax
         }
     }
 
+    /*
+     * 检测登陆，权限，修改关注后自动回复图片内容
+     */
+    public function checkLoginAndRuleAndSubscribeReplyImageEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     /********消息管理********/
 
@@ -765,6 +785,17 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
+
+    /*
+     * 检测关注后自动回复图片消息的内容
+     */
+    public function checkSubscribeReplyImageEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
     /********消息管理********/
 
 
@@ -953,13 +984,6 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
-    //检测关注后自动回复文本消息的内容
-    public function checkSubscribeReplyImageEdit($request){
-        if(empty($request->input('media_id'))){
-            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
 
 
 

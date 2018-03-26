@@ -281,7 +281,7 @@ class MessageController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/subscribe_reply_image_edit',['list'=>$list,'info'=>$info]);
+        return view('Fansmanage/Message/subscribe_reply_image_edit',['list'=>$list,'info'=>$info]);
     }
     //关注后图片回复保存
     public function subscribe_reply_image_edit_check(Request $request){
@@ -310,7 +310,6 @@ class MessageController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了关注自动回复'.$info['keyword'].'的图片回复内容');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改关注自动回复的图片回复内容失败，请检查', 'status' => '0']);
         }
