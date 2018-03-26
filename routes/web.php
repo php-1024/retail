@@ -612,10 +612,10 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
         //公众号管理
         Route::post('meterial_image_upload','Fansmanage\ApiController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
-        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
-        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
-        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
-        Route::any('material_image_delete_comfirm', 'Api\WechatController@material_image_delete_comfirm')->middleware('CateringCheckAjax');//删除图片素材弹窗
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('FansmanageCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('FansmanageCheckAjax');//上传图片素材
+        Route::any('material_image_delete_comfirm', 'Api\WechatController@material_image_delete_comfirm')->middleware('FansmanageCheckAjax');//删除图片素材弹窗
         Route::any('material_image_delete_check', 'Api\WechatController@material_image_delete_check')->middleware('CateringCheckAjax');//检测删除图片素材数据
         Route::any('material_image_select', 'Api\WechatController@material_image_select')->middleware('CateringCheckAjax');//弹出图片选择框
         Route::any('material_article_add_check','Api\WechatController@material_article_add_check')->middleware('CateringCheckAjax');//添加单条图文检测
