@@ -645,6 +645,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
 
         //公众号管理
+        Route::post('defined_menu_get','Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::post('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_delete','Fansmanage\WechatmenuController@defined_menu_delete')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
@@ -655,7 +656,6 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('wechat_menu_add_check','Fansmanage\WechatmenuController@wechat_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
 
         //公众号管理--消息管理
-        Route::post('defined_menu_get','Fansmanage\MessageController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::post('auto_reply_add','Fansmanage\MessageController@auto_reply_add')->middleware('FansmanageCheckAjax');//添加关键字ajax显示
         Route::post('auto_reply_add_check','Fansmanage\MessageController@auto_reply_add_check')->middleware('FansmanageCheckAjax');//添加关键字功能提交
         Route::post('auto_reply_edit_text','Fansmanage\MessageController@auto_reply_edit_text')->middleware('FansmanageCheckAjax');//检测自动回复文章ajax显示
