@@ -32,7 +32,7 @@ class DisplayController extends Controller
             ['program_id','10'], //查询program_id(10)零售管理系统的操作日志
             ['organization_id',$admin_data['organization_id']]
         ];
-        $fansmanage_id = Organization::getPluck(['organization_id'=>$admin_data['organization_id']],'parent_id');
+        $fansmanage_id = Organization::getPluck(['organization_id'=>'12'],'parent_id');
         $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id]);//查询当前店铺粉丝数量
 //        $statistics = [
 //            'fans' => $fans,
