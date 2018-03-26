@@ -44,10 +44,10 @@ class FansmanageCheck{
             case "fansmanage/api/store_auth":                 //公众号授权
             case "fansmanage/api/material_image":             //图片素材
             case "fansmanage/api/material_article":           //图文素材
-            case "fansmanage/api/material_article_add"://添加单条图文素材
-            case "fansmanage/api/material_articles_add"://添加多条图文素材
-            case "fansmanage/api/material_article_edit"://编辑单条图文素材
-            case "fansmanage/api/material_articles_edit"://编辑多条图文素材
+            case "fansmanage/api/material_article_add":       //添加单条图文素材
+            case "fansmanage/api/material_articles_add":      //添加多条图文素材
+            case "fansmanage/api/material_article_edit":      //编辑单条图文素材
+            case "fansmanage/api/material_articles_edit":     //编辑多条图文素材
             /****公众号管理****/
 
             /****公众号管理-消息管理****/
