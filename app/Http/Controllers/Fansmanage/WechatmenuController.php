@@ -231,7 +231,7 @@ class WechatmenuController extends Controller{
     //自定义菜单添加页面
     public function defined_menu_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        dd($admin_data);
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
