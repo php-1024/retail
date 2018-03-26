@@ -8,14 +8,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">删除关键字</h4>
             </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 text-right">安全密码</label>
-                <div class="col-sm-10">
-                    <input type="password" value="" class="form-control" name="safepassword">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 text-right">安全密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" value="" class="form-control" name="safepassword">
+                    </div>
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
                 <button class="btn btn-success" type="button" id="save_btn" onclick="return postForm();">确定</button>
