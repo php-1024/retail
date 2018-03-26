@@ -432,7 +432,7 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
-    
+
     /*
      * 检测上传图文素材--多条
      */
