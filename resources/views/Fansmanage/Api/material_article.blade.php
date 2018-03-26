@@ -160,7 +160,7 @@
         });
     });
 
-    //获取删除权限角色删除密码确认框
+    //获取删除图文删除密码确认框
     function getDeleteComfirmForm(id){
         var url = $('#material_article_delete_comfirm_url').val();
         var token = $('#_token').val();
