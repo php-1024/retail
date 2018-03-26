@@ -670,12 +670,12 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('subscribe_reply_image_edit_check','Fansmanage\MessageController@subscribe_reply_image_edit_check')->middleware('FansmanageCheckAjax');//关注后图片回复功能提交
         Route::post('subscribe_reply_article_edit','Fansmanage\MessageController@subscribe_reply_article_edit')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材ajax显示
         Route::post('subscribe_reply_article_edit_check','Fansmanage\MessageController@subscribe_reply_article_edit_check')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材功能提交
-        Route::post('default_reply_text_edit','Api\WechatController@default_reply_text_edit')->middleware('CateringCheckAjax');
-        Route::post('default_reply_text_edit_check','Api\WechatController@default_reply_text_edit_check')->middleware('CateringCheckAjax');
-        Route::post('default_reply_image_edit','Api\WechatController@default_reply_image_edit')->middleware('CateringCheckAjax');
-        Route::post('default_reply_image_edit_check','Api\WechatController@default_reply_image_edit_check')->middleware('CateringCheckAjax');
-        Route::post('default_reply_article_edit','Api\WechatController@default_reply_article_edit')->middleware('CateringCheckAjax');
-        Route::post('default_reply_article_edit_check','Api\WechatController@default_reply_article_edit_check')->middleware('CateringCheckAjax');
+        Route::post('default_reply_text_edit','Fansmanage\MessageController@default_reply_text_edit')->middleware('FansmanageCheckAjax');//默认回复文字回复ajax显示
+        Route::post('default_reply_text_edit_check','Fansmanage\MessageController@default_reply_text_edit_check')->middleware('FansmanageCheckAjax');//默认回复文字回复功能提交
+        Route::post('default_reply_image_edit','Fansmanage\MessageController@default_reply_image_edit')->middleware('FansmanageCheckAjax');//默认回复图片素材ajax显示
+        Route::post('default_reply_image_edit_check','Fansmanage\MessageController@default_reply_image_edit_check')->middleware('FansmanageCheckAjax');//默认回复图片素材功能提交
+        Route::post('default_reply_article_edit','Fansmanage\MessageController@default_reply_article_edit')->middleware('FansmanageCheckAjax');//默认回复图文素材ajax显示
+        Route::post('default_reply_article_edit_check','Fansmanage\MessageController@default_reply_article_edit_check')->middleware('FansmanageCheckAjax');//默认回复图文素材能提交
 
 
 

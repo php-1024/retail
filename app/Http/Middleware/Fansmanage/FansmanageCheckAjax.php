@@ -101,6 +101,18 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndSubscribeReplyArticleEdit($request);
                 return self::format_response($re,$next);
                 break;
+            case "fansmanage/ajax/default_reply_text_edit_check"://检测默认回复文字
+                $re = $this->checkLoginAndRuleAndDefaultReplyTextEdit($request);
+                return self::format_response($re,$next);
+                break;
+            case "fansmanage/ajax/default_reply_image_edit_check"://检测默认回复图片素材
+                $re = $this->checkLoginAndRuleAndDefaultReplyImageEdit($request);
+                return self::format_response($re,$next);
+                break;
+            case "fansmanage/ajax/default_reply_article_edit_check"://检测默认回复图文素材
+                $re = $this->checkLoginAndRuleAndDefaultReplyArticleEdit($request);
+                return self::format_response($re,$next);
+                break;
             /****消息管理****/
 
             case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
@@ -613,6 +625,55 @@ class FansmanageCheckAjax
         }
     }
 
+    /*
+     * 检测登陆，权限，默认回复图文素材
+     */
+    public function checkLoginAndRuleAndDefaultReplyArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyArticleEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    /*
+     * 检测登陆，权限，默认回复图片素材
+     */
+    public function checkLoginAndRuleAndDefaultReplyImageEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    /*
+     * 检测登陆，权限，默认回复文字回复
+     */
+    public function checkLoginAndRuleAndDefaultReplyTextEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefaultReplyTextEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
     /********消息管理********/
 
 
@@ -827,6 +888,37 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
+    /*
+     * 检测非关键字默认自动回复文本素材的内容
+     */
+    public function checkDefaultReplyArticleEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    /*
+     * 检测关注后自动回复图片素材的内容
+     */
+    public function checkDefaultReplyImageEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    /*
+     * 检测关注后自动回复文字的内容
+     */
+    public function checkDefaultReplyTextEdit($request){
+        if(empty($request->input('text_info'))){
+            return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+
     /********消息管理********/
 
 
@@ -982,30 +1074,6 @@ class FansmanageCheckAjax
 
 
 
-
-    //检测非关键字默认自动回复文本消息的内容
-    public function checkDefaultReplyArticleEdit($request){
-        if(empty($request->input('media_id'))){
-            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-
-    //检测关注后自动回复文本消息的内容
-    public function checkDefaultReplyImageEdit($request){
-        if(empty($request->input('media_id'))){
-            return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-
-    //检测关注后自动回复文本消息的内容
-    public function checkDefaultReplyTextEdit($request){
-        if(empty($request->input('text_info'))){
-            return self::res(0,response()->json(['data' => '文本内容不能为空', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
 
 
 
