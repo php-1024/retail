@@ -42,13 +42,13 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('fansmanage/massege/auto_reply')}}" class="list-group-item">
+                                    <a href="{{url('fansmanage/message/auto_reply')}}" class="list-group-item">
                                         关键词自动回复
                                     </a>
-                                    <a href="{{url('fansmanage/massege/subscribe_reply')}}" class="list-group-item ">
+                                    <a href="{{url('fansmanage/message/subscribe_reply')}}" class="list-group-item ">
                                         关注后自动回复
                                     </a>
-                                    <a href="{{url('fansmanage/massege/default_reply')}}" class="list-group-item active">
+                                    <a href="{{url('fansmanage/message/default_reply')}}" class="list-group-item active">
                                         默认回复
                                     </a>
                                 </div>
