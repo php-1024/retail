@@ -3,26 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总分店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/nestable/nestable.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/chosen/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/nestable/nestable.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/chosen/chosen.css" type="text/css" />
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Catering/Public/Header')
+        @include('Fansmanage/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
@@ -31,7 +31,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        @include('Catering/Public/Nav')
+                        @include('Fansmanage/Public/Nav')
                     </section>
                 </section>
             </aside>
@@ -43,14 +43,14 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('api/catering/defined_menu')}}" class="list-group-item active">
+                                    <a href="{{url('fansmanage/wewhatmenu/defined_menu')}}" class="list-group-item active">
                                         自定义菜单
                                     </a>
-                                    <a href="{{url('api/catering/style_menu')}}" class="list-group-item">
+                                    <a href="{{url('fansmanage/wewhatmenu/style_menu')}}" class="list-group-item">
                                         个性化菜单
                                     </a>
-                                    <input type="hidden" id="defined_menu_add_url" value="{{ url('api/ajax/defined_menu_add') }}">
-                                    <input type="hidden" id="defined_menu_get_url" value="{{ url('api/ajax/defined_menu_get') }}">
+                                    <input type="hidden" id="defined_menu_add_url" value="{{ url('fansmanage/ajax/defined_menu_add') }}">
+                                    <input type="hidden" id="defined_menu_get_url" value="{{ url('fansmanage/ajax/defined_menu_get') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 </div>
                             </section>
@@ -105,19 +105,19 @@
     </section>
 </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/nestable/jquery.nestable.js"></script>
-<script src="{{asset('public/Catering')}}/js/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/app.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/nestable/jquery.nestable.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/chosen/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(function(){
         $('#addBtn').click(function(){
