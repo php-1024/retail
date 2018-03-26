@@ -650,11 +650,11 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::any('wechat_menu_add','Fansmanage\ApiController@wechat_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
         Route::any('wechat_menu_add_check','Fansmanage\ApiController@wechat_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
 
-
-        Route::any('defined_menu_get','Api\WechatController@defined_menu_get')->middleware('CateringCheckAjax');//获取自定义菜单数据
-        Route::any('auto_reply_add','Api\WechatController@auto_reply_add')->middleware('CateringCheckAjax');
-        Route::any('auto_reply_add_check','Api\WechatController@auto_reply_add_check')->middleware('CateringCheckAjax');
-        Route::any('auto_reply_edit_text','Api\WechatController@auto_reply_edit_text')->middleware('CateringCheckAjax');
+        //公众号管理--消息管理
+        Route::any('defined_menu_get','Api\MessageController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
+        Route::any('auto_reply_add','Fansmanage\MessageController@auto_reply_add')->middleware('FansmanageCheckAjax');//添加关键字ajax显示
+        Route::any('auto_reply_add_check','Fansmanage\MessageController@auto_reply_add_check')->middleware('FansmanageCheckAjax');//添加关键字功能提交
+        Route::any('auto_reply_edit_text','Api\WechatController@auto_reply_edit_text')->middleware('FansmanageCheckAjax');
         Route::any('auto_reply_edit_text_check','Api\WechatController@auto_reply_edit_text_check')->middleware('CateringCheckAjax');
         Route::any('auto_reply_edit_image','Api\WechatController@auto_reply_edit_image')->middleware('CateringCheckAjax');
         Route::any('auto_reply_edit_image_check','Api\WechatController@auto_reply_edit_image_check')->middleware('CateringCheckAjax');
