@@ -66,6 +66,49 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndStoreCreate($request);
                 return self::format_response($re,$next);
 
+            /****公众号管理****/
+            case "fansmanage/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
+            case "fansmanage/ajax/material_article_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
+            case "fansmanage/ajax/auto_reply_delete_check"://检测是否登陆 权限 安全密码--删除关键字
+            case "fansmanage/ajax/defined_menu_delete_check"://检测是否登陆 权限 安全密码--删除自定义菜单
+            case "fansmanage/ajax/wechat_menu_add_check"://检测是否登陆 权限 安全密码--一键同步到微信菜单
+            case "fansmanage/ajax/label_wechat_check"://检测是否登陆 权限 安全密码--同步粉丝标签
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
+            case "fansmanage/ajax/meterial_image_upload":          //图片上传弹窗
+            case "fansmanage/ajax/meterial_image_upload_check":   //图片上传检测
+            case "fansmanage/ajax/material_image_delete_comfirm": //图片上传确认弹窗
+            case "fansmanage/ajax/material_article_delete_comfirm": //文章上传确认弹窗
+            case "fansmanage/ajax/material_image_select":        //图片选择弹窗
+            case "fansmanage/ajax/defined_menu_add":              //自定义菜单添加
+            case "fansmanage/ajax/defined_menu_delete":           //自定义菜单删除
+            case "fansmanage/ajax/defined_menu_edit":              //自定义菜单编辑
+            case "fansmanage/ajax/defined_menu_get":              //自定义菜单添加
+            case "fansmanage/ajax/auto_reply_add":              //自定义菜单添加
+            case "afansmanagepi/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
+            case "fansmanage/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
+            case "fansmanage/ajax/auto_reply_edit_article":    //修改关键字回复图文内容
+            case "fansmanage/ajax/auto_reply_edit"://修改自动回复关键字
+            case "fansmanage/ajax/auto_reply_delete_confirm"://删除关键字弹窗
+            case "fansmanage/ajax/subscribe_reply_text_edit"://修改关注后文本回复弹窗
+            case "fansmanage/ajax/subscribe_reply_image_edit"://修改关注后图片回复弹窗
+            case "fansmanage/ajax/subscribe_reply_article_edit"://修改关注后图文回复弹窗
+            case "fansmanage/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
+            case "fansmanage/ajax/default_reply_image_edit"://修改关注后图片回复弹窗
+            case "fansmanage/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
+            case "fansmanage/ajax/wechat_menu_add"://一键同步到微信菜单
+                $re = $this->checkLoginAndRule($request);
+                return self::format_response($re, $next);
+                break;
+            /****公众号管理****/
+
+
+
+
+
+
+
         }
     }
     /******************************复合检测*********************************/

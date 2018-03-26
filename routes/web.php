@@ -610,6 +610,61 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('safe_password_check','Fansmanage\AccountController@safe_password_check')->middleware('FansmanageCheckAjax');//安全密码数据提交
         Route::post('password_check','Fansmanage\AccountController@password_check')->middleware('FansmanageCheckAjax');     //安全密码数据提交
 
+        //公众号管理
+        Route::post('meterial_image_upload','Fansmanage\ApiController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload', 'Api\WechatController@meterial_image_upload')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('meterial_image_upload_check', 'Api\WechatController@meterial_image_upload_check')->middleware('CateringCheckAjax');//上传图片素材
+        Route::any('material_image_delete_comfirm', 'Api\WechatController@material_image_delete_comfirm')->middleware('CateringCheckAjax');//删除图片素材弹窗
+        Route::any('material_image_delete_check', 'Api\WechatController@material_image_delete_check')->middleware('CateringCheckAjax');//检测删除图片素材数据
+        Route::any('material_image_select', 'Api\WechatController@material_image_select')->middleware('CateringCheckAjax');//弹出图片选择框
+        Route::any('material_article_add_check','Api\WechatController@material_article_add_check')->middleware('CateringCheckAjax');//添加单条图文检测
+        Route::any('material_articles_add_check','Api\WechatController@material_articles_add_check')->middleware('CateringCheckAjax');//添加多条图文检测
+        Route::any('material_article_delete_comfirm','Api\WechatController@material_article_delete_comfirm')->middleware('CateringCheckAjax');//添加单条图文检测
+        Route::any('material_article_delete_check','Api\WechatController@material_article_delete_check')->middleware('CateringCheckAjax');//添加单条图文检测
+        Route::any('material_article_edit_check','Api\WechatController@material_article_edit_check')->middleware('CateringCheckAjax');//添加单条图文检测
+        Route::any('material_articles_edit_check','Api\WechatController@material_articles_edit_check')->middleware('CateringCheckAjax');//添加多条图文检测
+
+        Route::any('defined_menu_add','Api\WechatController@defined_menu_add')->middleware('CateringCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_add_check','Api\WechatController@defined_menu_add_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
+
+        Route::any('defined_menu_delete','Api\WechatController@defined_menu_delete')->middleware('CateringCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_delete_check','Api\WechatController@defined_menu_delete_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
+
+        Route::any('defined_menu_edit','Api\WechatController@defined_menu_edit')->middleware('CateringCheckAjax');//编辑自定义菜单板块
+        Route::any('defined_menu_edit_check','Api\WechatController@defined_menu_edit_check')->middleware('CateringCheckAjax');//编辑自定义菜单板块
+
+        Route::any('wechat_menu_add','Api\WechatController@wechat_menu_add')->middleware('CateringCheckAjax');//一键同步到微信菜单
+        Route::any('wechat_menu_add_check','Api\WechatController@wechat_menu_add_check')->middleware('CateringCheckAjax');//一键同步到微信菜单
+
+
+        Route::any('defined_menu_get','Api\WechatController@defined_menu_get')->middleware('CateringCheckAjax');//获取自定义菜单数据
+        Route::any('auto_reply_add','Api\WechatController@auto_reply_add')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_add_check','Api\WechatController@auto_reply_add_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_text','Api\WechatController@auto_reply_edit_text')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_text_check','Api\WechatController@auto_reply_edit_text_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_image','Api\WechatController@auto_reply_edit_image')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_image_check','Api\WechatController@auto_reply_edit_image_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_article','Api\WechatController@auto_reply_edit_article')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_article_check','Api\WechatController@auto_reply_edit_article_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit','Api\WechatController@auto_reply_edit')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_edit_check','Api\WechatController@auto_reply_edit_check')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_delete_confirm','Api\WechatController@auto_reply_delete_confirm')->middleware('CateringCheckAjax');
+        Route::any('auto_reply_delete_check','Api\WechatController@auto_reply_delete_check')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_text_edit','Api\WechatController@subscribe_reply_text_edit')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_text_edit_check','Api\WechatController@subscribe_reply_text_edit_check')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_image_edit','Api\WechatController@subscribe_reply_image_edit')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_image_edit_check','Api\WechatController@subscribe_reply_image_edit_check')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_article_edit','Api\WechatController@subscribe_reply_article_edit')->middleware('CateringCheckAjax');
+        Route::any('subscribe_reply_article_edit_check','Api\WechatController@subscribe_reply_article_edit_check')->middleware('CateringCheckAjax');
+        Route::any('default_reply_text_edit','Api\WechatController@default_reply_text_edit')->middleware('CateringCheckAjax');
+        Route::any('default_reply_text_edit_check','Api\WechatController@default_reply_text_edit_check')->middleware('CateringCheckAjax');
+        Route::any('default_reply_image_edit','Api\WechatController@default_reply_image_edit')->middleware('CateringCheckAjax');
+        Route::any('default_reply_image_edit_check','Api\WechatController@default_reply_image_edit_check')->middleware('CateringCheckAjax');
+        Route::any('default_reply_article_edit','Api\WechatController@default_reply_article_edit')->middleware('CateringCheckAjax');
+        Route::any('default_reply_article_edit_check','Api\WechatController@default_reply_article_edit_check')->middleware('CateringCheckAjax');
+
+
 
         //用户管理
         Route::post('label_add','Fansmanage\UserController@label_add')->middleware('FansmanageCheckAjax');                  //添加会员标签ajax显示页面
