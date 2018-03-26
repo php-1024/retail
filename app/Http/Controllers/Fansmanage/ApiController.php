@@ -64,7 +64,63 @@ class ApiController extends Controller{
     public function meterial_image_upload(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        return view('Wechat/Catering/material_image_upload',['admin_data'=>$admin_data,'route_name'=>$route_name]);
+        return view('Fansmanage/Api/material_image_upload',['admin_data'=>$admin_data,'route_name'=>$route_name]);
+    }
+    /*
+     * 图片上传检测
+     */
+    public function meterial_image_upload_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $file = $request->file('image');
+        if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
+            return response()->json(['status' => '0','data'=>'错误的图片格式']);
+        }
+        if ($file->isValid()) {
+            //检验文件是否有效
+            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();  //重命名
+            $path = $file->move(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/', $new_name);   //$path上传后的文件路径
+            $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+            $re = \Wechat::uploadimg($auth_info['authorizer_access_token'],base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
+            if(!empty($re['media_id'])) {
+                $data = [
+                    'organization_id' => $admin_data['organization_id'],
+                    'filename' => $new_name,
+                    'filepath' => base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name,
+                    'media_id' => $re['media_id'],
+                    'wechat_url' => $re['url']
+                ];
+                WechatImage::addWechatImage($data);
+            }else{
+                @unlink(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
+            }
+            return response()->json(['data' => '上传商品图片信息成功', 'status' => '1']);
+        } else {
+            return response()->json(['data'=>'上传图片失败','status' => '0']);
+        }
+    }
+    /*
+     * 删除图片
+     *
+     */
+    //直接输入安全密码操作的页面--删除
+    public function material_image_delete_comfirm(Request $request){
+        $id = $request->input('id');
+        return view('Fansmanage/Api/material_image_delete_comfirm',['id'=>$id]);
+    }
+    public function material_image_delete_check(Request $request){
+        $id = $request->input('id');
+        $image_info = WechatImage::getOne([['id',$id]]);
+        $auth_info = \Wechat::refresh_authorization_info($image_info['organization_id']);//刷新并获取授权令牌
+
+        $re = \Wechat::delete_meterial($auth_info['authorizer_access_token'],$image_info['media_id']);
+        if($re['errcode']=='0'){
+            @unlink($image_info['filepath']);
+            WechatImage::where('id',$id)->forceDelete();
+            return response()->json(['data'=>'删除图片素材成功','status' => '1']);
+        }else{
+            return response()->json(['data'=>'删除图片素材失败','status' => '0']);
+        }
     }
 
 
