@@ -115,6 +115,17 @@ class FansmanageCheckAjax
                 break;
             /****消息管理****/
 
+            /****菜单管理****/
+            case "fansmanage/ajax/defined_menu_add_check":              //自定义菜单数据添加提交
+                $re = $this->checkLoginAndRuleAndDefinedMenuAdd($request);
+                return self::format_response($re,$next);
+                break;
+            case "fansmanage/ajax/defined_menu_edit_check":              //自定义菜单数据添加提交
+                $re = $this->checkLoginAndRuleAndDefinedMenuEdit($request);
+                return self::format_response($re,$next);
+                break;
+            /****菜单管理****/
+
             case "fansmanage/ajax/label_add":                 //添加会员标签显示页面
             case "fansmanage/ajax/label_edit":                //编辑会员标签显示页面
             case "fansmanage/ajax/label_delete":              //删除会员标签显示页面
@@ -677,6 +688,44 @@ class FansmanageCheckAjax
     /********消息管理********/
 
 
+    /********菜单管理********/
+    /*
+     * 检测登陆，权限，自定义菜单数据添加提交
+     */
+    public function checkLoginAndRuleAndDefinedMenuAdd($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefinedMenuAdd($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    /*
+     * 检测登陆，权限，自定义菜单数据编辑提交
+     */
+    public function checkLoginAndRuleAndDefinedMenuEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkDefinedMenuEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    /********菜单管理********/
+
+
 
     /******************************单项检测*********************************/
 
@@ -922,6 +971,75 @@ class FansmanageCheckAjax
     /********消息管理********/
 
 
+    /********菜单管理********/
+    /*
+     * 检测自定义菜单数据的内容
+     */
+    public function checkDefinedMenuAdd($request){
+        if(empty($request->input('menu_name'))){
+            return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
+        }
+        if(strlen($request->input('menu_name'))>12){
+            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
+        }
+        if(empty($request->input('event_type'))){
+            return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
+        }
+        if($request->input('parent_id') != '0'){
+
+            if($request->input('event_type') == '1' && $request->input('response_type') <> '1'){
+                return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if($request->input('event_type') == '1' && empty($request->input('response_url'))){
+                return self::res(0,response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if($request->input('event_type') != '1' && $request->input('response_type') <> '2'){
+                return self::res(0,response()->json(['data' => '请选择关键字回复！', 'status' => '0']));
+            }
+            if($request->input('event_type') != '1' && empty($request->input('response_keyword'))){
+                return self::res(0,response()->json(['data' => '请选择关键字！', 'status' => '0']));
+            }
+        }
+
+        return self::res(1,$request);
+    }
+
+    /*
+     * 检测自定义菜单编辑数据的内容
+     */
+    public function checkDefinedMenuEdit($request){
+        if(empty($request->input('menu_id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输！', 'status' => '0']));
+        }
+        if(empty($request->input('menu_name'))){
+            return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
+        }
+        if(strlen($request->input('menu_name'))>12){
+            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
+        }
+        if(empty($request->input('event_type'))){
+            return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
+        }
+        if($request->input('parent_id') != '0') {
+
+            if ($request->input('event_type') == '1' && $request->input('response_type') <> '1') {
+                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if ($request->input('event_type') == '1' && empty($request->input('response_url'))) {
+                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+            }
+            if ($request->input('event_type') != '1' && $request->input('response_type') <> '2') {
+                return self::res(0, response()->json(['data' => '请选择关键字回复！', 'status' => '0']));
+            }
+            if ($request->input('event_type') != '1' && empty($request->input('response_keyword'))) {
+                return self::res(0, response()->json(['data' => '请选择关键字！', 'status' => '0']));
+            }
+        }
+        return self::res(1,$request);
+    }
+    /********菜单管理********/
+
+
 
 
 
@@ -1002,32 +1120,7 @@ class FansmanageCheckAjax
         }
         return self::res(1, $request);
     }
-    //检测编辑下级人员数据
-    public function checkSubordinateEdit($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('realname'))){
-            return self::res(0,response()->json(['data' => '请输入真实姓名', 'status' => '0']));
-        }
-        if(empty($request->input('mobile'))){
-            return self::res(0,response()->json(['data' => '请输入联系方式', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
-    //检测编辑下级人员权限数据
-    public function checkSubordinateAuthorize($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
-        }
-        if(empty($request->input('role_id'))){
-            return self::res(0,response()->json(['data' => '请选择用户角色', 'status' => '0']));
-        }
-        if(empty($request->input('module_node_ids'))){
-            return self::res(0,response()->json(['data' => '请勾选用户权限', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
     //检测添加会员标签
     public function checkLabelAdd($request){
         if(empty($request->input('label_name'))){
