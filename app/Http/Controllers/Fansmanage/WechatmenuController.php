@@ -125,7 +125,7 @@ class WechatmenuController extends Controller{
 
     //自定义菜单添加页面
     public function wechat_menu_add(Request $request){
-
+        dd(1);
         return view('Fansmanage/Wechatmenu/wechat_menu_add');
     }
 
@@ -231,7 +231,6 @@ class WechatmenuController extends Controller{
     //自定义菜单添加页面
     public function defined_menu_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
