@@ -12,6 +12,7 @@ use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Program;
+use App\Models\RetailOrder;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,10 +35,16 @@ class DisplayController extends Controller
         ];
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id]);//查询当前店铺粉丝数量
-//        $statistics = [
-//            'fans' => $fans,
-//        ];
-        dump($fans);
+        $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC');
+        $operating_receipt = 0;//营业收入
+        foreach ($order as $key=>$val){
+            $operating_receipt += $val->order_price;
+        }
+        $statistics = [
+            'fans' => $fans,
+            'operating_receipt' => $operating_receipt,
+        ];
+        dump($statistics);
         $login_log_list = LoginLog::getList($where,10,'created_at','DESC');
         $operation_log_list = OperationLog::getList($where,10,'created_at','DESC');//操作记录
         if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0){ //如果是超级管理员并且组织ID等于零则进入选择组织页面
@@ -49,7 +56,7 @@ class DisplayController extends Controller
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
             $program = Program::getOne([['id',$organization->program_id]]);
             $organization->program_name = $program;
-            return view('Retail/Display/display',['organization'=>$organization,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+            return view('Retail/Display/display',['organization'=>$organization,'statistics'=>$statistics,'login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
 
