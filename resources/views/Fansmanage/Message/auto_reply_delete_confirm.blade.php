@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/subscribe_reply_image_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/auto_reply_delete_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
     <input type="hidden" name="media_id" id="media_id" value="">
@@ -10,20 +10,7 @@
             </div>
             <div class="modal-body">
                 <div class="row row-sm">
-                    @foreach($list as $key=>$val)
-                        <div class="col-lg-2">
-                            <div class="item" data-id="{{$val->id}}" onclick="select_img(this)" data-media_id="{{$val->media_id}}">
-                                <div class="pos-rlt">
-                                    <div class="item-overlay opacity bg-black" style="height: 100px; width: 100px; @if($info['media_id']==$val['media_id'])display:block;@endif">
-                                        <div class="text-info padder m-t-sm text-sm">
-                                            <i class="fa fa-check text-success"></i>
-                                        </div>
-                                    </div>
-                                    <a href="javascript:;"><img  src="{{asset('uploads/wechat/'.$val['organization_id'].'/'.$val->filename)}}" alt="" style="height: 100px; width: 100px;"></a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+
                 </div>
             </div>
             <div class="modal-footer">
