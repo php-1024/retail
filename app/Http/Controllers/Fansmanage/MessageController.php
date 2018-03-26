@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
+use App\Models\OperationLog;
 use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;

@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('api/ajax/auto_reply_add_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/auto_reply_add_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <div class="modal-dialog">
         <div class="modal-content">
