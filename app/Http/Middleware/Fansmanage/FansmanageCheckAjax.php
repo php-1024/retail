@@ -61,6 +61,10 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndMaterialArticlesAdd($request);
                 return self::format_response($re,$next);
                 break;
+            case "fansmanage/ajax/material_articles_edit_check":  //文章素材编辑检测--多条
+                $re = $this->checkLoginAndRuleAndMaterialArticlesEdit($request);
+                return self::format_response($re,$next);
+                break;
 
             /****图文素材****/
 
@@ -417,6 +421,23 @@ class FansmanageCheckAjax
             }
         }
     }
+
+    /*
+    * 检测登陆，权限，和图文修改--多条
+    */
+    public function checkLoginAndRuleAndMaterialArticlesEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkMaterialArticlesEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
     /********图文素材********/
 
 
@@ -506,12 +527,9 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
-
-    /********图文素材********/
-
-
-
-    //检测编辑单条图文素材
+    /*
+     * 检测编辑图文素材--多条
+     */
     public function checkMaterialArticlesEdit($request){
         if(empty($request->input('id'))){
             return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
@@ -537,6 +555,13 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
+
+
+    /********图文素材********/
+
+
+
+
 
 
 
