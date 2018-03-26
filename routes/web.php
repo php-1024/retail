@@ -686,6 +686,21 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
 
 
+        //公众号管理--菜单管理
+        Route::any('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('CateringCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
+
+        Route::any('defined_menu_delete','Fansmanage\WechatController@defined_menu_delete')->middleware('CateringCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_delete_check','Fansmanage\WechatController@defined_menu_delete_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
+
+        Route::any('defined_menu_edit','Api\WechatController@defined_menu_edit')->middleware('CateringCheckAjax');//编辑自定义菜单板块
+        Route::any('defined_menu_edit_check','Api\WechatController@defined_menu_edit_check')->middleware('CateringCheckAjax');//编辑自定义菜单板块
+
+        Route::any('wechat_menu_add','Api\WechatController@wechat_menu_add')->middleware('CateringCheckAjax');//一键同步到微信菜单
+        Route::any('wechat_menu_add_check','Api\WechatController@wechat_menu_add_check')->middleware('CateringCheckAjax');//一键同步到微信菜单
+
+
+
         //用户管理
         Route::post('label_add','Fansmanage\UserController@label_add')->middleware('FansmanageCheckAjax');                  //添加会员标签ajax显示页面
         Route::post('label_add_check','Fansmanage\UserController@label_add_check')->middleware('FansmanageCheckAjax');      //添加会员标签功能提交
