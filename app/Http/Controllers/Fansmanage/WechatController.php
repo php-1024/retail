@@ -425,7 +425,7 @@ class WechatController extends Controller{
                 'expire_time' => time() + 7200,
             );
             $id = WechatAuthorization::addAuthorization($auth_data);
-            return view('Wechat/Api/redirect',['organization_id'=>$organization_id,'id'=>$id,'redirect_url'=>$redirect_url]);
+            return view('Fansmanage/Api/redirect',['organization_id'=>$organization_id,'id'=>$id,'redirect_url'=>$redirect_url]);
         }
     }
 
