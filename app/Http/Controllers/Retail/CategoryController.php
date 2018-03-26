@@ -72,7 +72,7 @@ class CategoryController extends Controller
         $where = [
             'retail_id' => $admin_data['organization_id'],
         ];
-        $category = RetailCategory::getPaginage($where,$category_name,'10','displayorder','DESC');
+        $category = RetailCategory::getPaginage($where,$category_name,'10','displayorder','ASC');
         return view('Retail/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
