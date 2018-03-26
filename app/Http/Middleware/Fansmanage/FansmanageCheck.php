@@ -51,9 +51,9 @@ class FansmanageCheck{
             /****公众号管理****/
 
             /****公众号管理-消息管理****/
-            case "fansmanage/message/auto_reply":                 //关键词自动回复
-            case "fansmanage/message/subscribe_reply":            //关键词自动回复
-            case "fansmanage/message/default_reply":              //关键词自动回复
+            case "fansmanage/message/auto_reply":                //关键词自动回复
+            case "fansmanage/message/subscribe_reply":           //关键词自动回复
+            case "fansmanage/message/default_reply":             //关键词自动回复
             case "fansmanage/message/message":                   //关键词自动回复
             case "fansmanage/message/message_attention":         //关注后自动回复
             case "fansmanage/message/message_default":           //默认回复
@@ -61,7 +61,7 @@ class FansmanageCheck{
             /****公众号管理-消息管理****/
 
             /****公众号管理-菜单管理****/
-            case "fansmanage/wechatmenu/defined_menu":               //自定义菜单
+            case "fansmanage/wechatmenu/defined_menu":              //自定义菜单
             case "fansmanage/wehcatmenu/menu_customize":            //自定义菜单
             case "fansmanage/wehcatmenu/menu_different":            //个性化菜单
             /****公众号管理-菜单管理****/

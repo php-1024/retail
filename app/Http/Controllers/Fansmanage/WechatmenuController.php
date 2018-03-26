@@ -10,6 +10,7 @@ use App\Models\ProgramModuleNode;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
 use App\Models\WechatDefaultReply;
+use App\Models\WechatDefinedMenu;
 use App\Models\WechatReply;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -125,7 +126,7 @@ class WechatmenuController extends Controller{
     //自定义菜单添加页面
     public function wechat_menu_add(Request $request){
 
-        return view('Wechat/Catering/wechat_menu_add');
+        return view('Fansmanage/Wechatmenu/wechat_menu_add');
     }
 
     //自定义菜单添加页面
