@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 总分店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Catering')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Catering')}}/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Catering')}}/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Fansmanage')}}/ladda/ladda-themeless.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Catering')}}/js/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/respond.min.js"></script>
-    <script src="{{asset('public/Catering')}}/js/ie/excanvas.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/respond.min.js"></script>
+    <script src="{{asset('public/Fansmanage')}}/js/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-        @include('Catering/Public/Header')
+        @include('Fansmanage/Public/Header')
     </header>
     <section>
         <section class="hbox stretch">
@@ -30,7 +30,7 @@
             <aside class="bg-black dk aside hidden-print" id="nav">
                 <section class="vbox">
                     <section class="w-f-md scrollable">
-                        @include('Catering/Public/Nav')
+                        @include('Fansmanage/Public/Nav')
                     </section>
                 </section>
             </aside>
@@ -42,10 +42,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('api/catering/material_image')}}" class="list-group-item">
+                                    <a href="{{url('fansmanage/api/material_image')}}" class="list-group-item">
                                         图片素材
                                     </a>
-                                    <a href="{{url('api/catering/material_article')}}" class="list-group-item active">
+                                    <a href="{{url('fansmanage/api/material_article')}}" class="list-group-item active">
                                         图文素材
                                     </a>
 
@@ -61,7 +61,7 @@
                                 <div class="row row-sm">
                                     <button class="btn btn-s-md btn-success" type="button" id="addBtn">添加图文 &nbsp;&nbsp;<i class="fa fa-plus"></i></button>
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="material_article_delete_comfirm_url" value="{{ url('api/ajax/material_article_delete_comfirm') }}">
+                                    <input type="hidden" id="material_article_delete_comfirm_url" value="{{ url('fansmanage/ajax/material_article_delete_comfirm') }}">
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                                 <section class="panel panel-default">
@@ -94,7 +94,7 @@
                                                 </td>
                                                 <td>{{$val->created_at}}</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" onclick="location.href='@if($val->type == '1'){{ url('api/catering/material_article_edit?id='.$val->id)}}@else{{ url('api/catering/material_articles_edit?id='.$val->id)}}@endif'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                    <button class="btn btn-info btn-xs" onclick="location.href='@if($val->type == '1'){{ url('fansmanage/api/material_article_edit?id='.$val->id)}}@else{{ url('fansmanage/api/material_articles_edit?id='.$val->id)}}@endif'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                     <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="return getDeleteComfirmForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                                 </td>
                                             </tr>
@@ -129,8 +129,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group text-center">
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('api/catering/material_article_add')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-info" type="button" onclick="location.href='{{url('api/catering/material_articles_add')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('fansmanage/api/material_article_add')}}'"><i class="fa fa-circle"></i>&nbsp;&nbsp;单条图文</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-info" type="button" onclick="location.href='{{url('fansmanage/api/material_articles_add')}}'"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;多条图文</button>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
@@ -140,18 +140,18 @@
     </form>
 </div>
 
-<script src="{{asset('public/Catering')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Catering')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Catering')}}/js/app.js"></script>
-<script src="{{asset('public/Catering')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/app.plugin.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/js/jPlayer/demo.js"></script>
-<script type="text/javascript" src="{{asset('public/Catering')}}/sweetalert/sweetalert.min.js"></script>
-<script src="{{asset('public/Catering')}}/js/file-input/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/app.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/app.plugin.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
+<script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Fansmanage')}}/js/file-input/bootstrap-filestyle.min.js"></script>
 
 <script type="text/javascript">
     $(function(){
