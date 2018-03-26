@@ -237,13 +237,13 @@ class MessageController extends Controller{
         return view('Fansmanage/Message/subscribe_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //关注后文本回复内容弹窗
+    //关注后文字回复内容弹窗
     public function subscribe_reply_text_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         return view('Fansmanage/Message/subscribe_reply_text_edit',['info'=>$info]);
     }
-    //关注后文本回复保存
+    //关注后文字回复保存
     public function subscribe_reply_text_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -320,7 +320,7 @@ class MessageController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/subscribe_reply_article_edit',['list'=>$list,'info'=>$info]);
+        return view('Fansmanage/Message/subscribe_reply_article_edit',['list'=>$list,'info'=>$info]);
     }
     //关注后图文回复保存
     public function subscribe_reply_article_edit_check(Request $request){
@@ -349,7 +349,6 @@ class MessageController extends Controller{
             OperationLog::addOperationLog('1',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改了关注自动回复'.$info['keyword'].'的图文回复内容');//保存操作记录
             DB::commit();
         } catch (\Exception $e) {
-            dump($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改关注自动回复的图文回复内容失败，请检查', 'status' => '0']);
         }

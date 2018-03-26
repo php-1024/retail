@@ -89,12 +89,16 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndAutoReplyEdit($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/subscribe_reply_text_edit_check"://检测关注后自动回复文本素材数据提交
+            case "fansmanage/ajax/subscribe_reply_text_edit_check"://检测关注后自动回复文字数据提交
                 $re = $this->checkLoginAndRuleAndSubscribeReplyTextEdit($request);
                 return self::format_response($re,$next);
                 break;
             case "fansmanage/ajax/subscribe_reply_image_edit_check"://检测关注后自动回复图片素材数据提交
                 $re = $this->checkLoginAndRuleAndSubscribeReplyImageEdit($request);
+                return self::format_response($re,$next);
+                break;
+            case "fansmanage/ajax/subscribe_reply_article_edit_check"://检测关注后自动回复文本素材数据提交
+                $re = $this->checkLoginAndRuleAndSubscribeReplyArticleEdit($request);
                 return self::format_response($re,$next);
                 break;
             /****消息管理****/
@@ -145,7 +149,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/auto_reply_edit_article":    //修改关键字回复图文内容
             case "fansmanage/ajax/auto_reply_edit"://修改自动回复关键字
             case "fansmanage/ajax/auto_reply_delete_confirm"://删除关键字弹窗
-            case "fansmanage/ajax/subscribe_reply_text_edit"://修改关注后文本回复弹窗
+            case "fansmanage/ajax/subscribe_reply_text_edit"://修改关注后文字回复弹窗
             case "fansmanage/ajax/subscribe_reply_image_edit"://修改关注后图片回复弹窗
             case "fansmanage/ajax/subscribe_reply_article_edit"://修改关注后图文回复弹窗
             case "fansmanage/ajax/default_reply_text_edit"://修改关注后文本回复弹窗
@@ -559,7 +563,7 @@ class FansmanageCheckAjax
     }
 
     /*
-     * 检测登陆，权限，修改关注后自动回复文本内容
+     * 检测登陆，权限，修改关注后自动回复文字内容
      */
     public function checkLoginAndRuleAndSubscribeReplyTextEdit($request){
         $re = $this->checkLoginAndRule($request);//判断是否登录
@@ -584,6 +588,23 @@ class FansmanageCheckAjax
             return $re;
         }else{
             $re2 = $this->checkSubscribeReplyImageEdit($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    /*
+     * 检测登陆，权限，修改关注后自动回复图文内容
+     */
+    public function checkLoginAndRuleAndSubscribeReplyArticleEdit($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkSubscribeReplyArticleEdit($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -777,7 +798,7 @@ class FansmanageCheckAjax
     }
 
     /*
-     * 检测关注后自动回复文本消息的内容
+     * 检测关注后自动回复文字消息的内容
      */
     public function checkSubscribeReplyTextEdit($request){
         if(empty($request->input('text_info'))){
@@ -792,6 +813,16 @@ class FansmanageCheckAjax
     public function checkSubscribeReplyImageEdit($request){
         if(empty($request->input('media_id'))){
             return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    /*
+     * 检测关注后自动回复文本消息的内容
+     */
+    public function checkSubscribeReplyArticleEdit($request){
+        if(empty($request->input('media_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
         }
         return self::res(1,$request);
     }
@@ -976,13 +1007,7 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
-    //检测关注后自动回复文本消息的内容
-    public function checkSubscribeReplyArticleEdit($request){
-        if(empty($request->input('media_id'))){
-            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
 
 
 
