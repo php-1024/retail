@@ -9,11 +9,11 @@
                 <h4 class="modal-title">删除关键字</h4>
             </div>
             <div class="modal-body">
-                <div class="row row-sm">
-                    安全密码
-                </div>
-                <div class="row row-sm">
-                    <input type="password" name="salepassword"  value="">
+                <div class="form-group">
+                    <label class="col-sm-2 text-right">负责人</label>
+                    <div class="col-sm-10">
+                        <input type="text" value="张老三" placeholder="负责人" class="form-control">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
