@@ -52,6 +52,7 @@
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
+                                                <option value="1" @if($search_data['paytype']==0) selected @endif >请选择</option>
                                                 <option value="1" @if($search_data['paytype']==1) selected @endif >余额支付</option>
                                                 <option value="2" @if($search_data['paytype']==2) selected @endif >在线支付</option>
                                                 <option value="3" @if($search_data['paytype']==3) selected @endif >货到付款</option>
