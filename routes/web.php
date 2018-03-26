@@ -581,6 +581,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
     //公众号管理
     Route::group(['prefix'=>'api'],function(){
         Route::get('store_auth', 'Fansmanage\ApiController@store_auth')->middleware('FansmanageCheck');                 //公众号管理
+        Route::get('material_image', 'Fansmanage\ApiController@material_image')->middleware('FansmanageCheck');         //公众号管理
     });
 
 
