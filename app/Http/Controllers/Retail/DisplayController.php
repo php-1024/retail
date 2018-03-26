@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\FansmanageUser;
 use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
@@ -21,6 +22,8 @@ class DisplayController extends Controller
     //首页
     public function display(Request $request)
     {
+        $user_statistics = FansmanageUser::all();
+        dump($user_statistics);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
