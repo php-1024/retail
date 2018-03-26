@@ -72,7 +72,7 @@ class ApiController extends Controller{
      */
     public function meterial_image_upload_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+
         $file = $request->file('image');
         if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
             return response()->json(['status' => '0','data'=>'错误的图片格式']);
@@ -153,7 +153,6 @@ class ApiController extends Controller{
      */
     public function material_article_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
 
         $thumb_media_id = $request->input('thumb_media_id');
         $title = $request->input('title');
@@ -211,7 +210,6 @@ class ApiController extends Controller{
      */
     public function material_articles_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
 
         $num = $request->get('num');
         $data['articles'] = [];
@@ -293,8 +291,6 @@ class ApiController extends Controller{
      * 编辑单条图文数据提交
      */
     public function material_article_edit_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
 
         $id = $request->input('id');
         $thumb_media_id = $request->input('thumb_media_id');
@@ -374,7 +370,7 @@ class ApiController extends Controller{
         }
         $num = count($articles);
 
-        return view('Wechat/Catering/material_articles_edit',['id'=>$id,'num'=>$num,'articles'=>$articles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Api/material_articles_edit',['id'=>$id,'num'=>$num,'articles'=>$articles,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
     /*
@@ -382,7 +378,7 @@ class ApiController extends Controller{
      */
     public function material_articles_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+
         $id = $request->input('id');
 
         $num = $request->get('num');
