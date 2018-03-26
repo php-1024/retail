@@ -33,7 +33,7 @@ class DisplayController extends Controller
             ['organization_id',$admin_data['organization_id']]
         ];
         $fansmanage_id = Organization::getPluck(['organization_id'=>$admin_data['organization_id']],'parent_id');
-        $fans = FansmanageUser::getCount([['store_id',$admin_data['organization_id']],['fansmanage_id',$fansmanage_id]])//查询当前店铺粉丝数量
+        $fans = FansmanageUser::getCount(['store_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id])//查询当前店铺粉丝数量
 //        $statistics = [
 //            'fans' => $fans,
 //        ];
