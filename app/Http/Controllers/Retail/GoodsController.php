@@ -179,7 +179,7 @@ class GoodsController extends Controller
         $search_data = ['goods_name' => $goods_name,'category_id' => $category_id]; //处理搜索参数
         $where = ['retail_id' => $admin_data['organization_id']];
         $category = RetailCategory::getList($where,0,'created_at','DESC');
-        $goods = RetailGoods::getPaginage($where,$search_data,'10','displayorder','DESC'); //查询商品信息
+        $goods = RetailGoods::getPaginage($where,$search_data,'10','displayorder','ASC'); //查询商品信息
         return view('Retail/Goods/goods_list', ['goods' => $goods,'search_data'=>$search_data,'category'=>$category,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
