@@ -73,7 +73,7 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndAutoReplyAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "api/ajax/auto_reply_edit_text_check"://检测自动回复文章数据提交
+            case "fansmanage/ajax/auto_reply_edit_text_check"://检测自动回复文章数据提交
                 $re = $this->checkLoginAndRuleAndAutoReplyEditText($request);
                 return self::format_response($re,$next);
                 break;
