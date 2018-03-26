@@ -41,8 +41,7 @@ class FansmanageCheck{
             /****账号中心****/
 
             /****公众号管理****/
-            //case "catering/subscription/setting":                   //公众号授权
-            case "api/fansmanage/store_auth"://公众号授权
+            case "fansmanage/api/store_auth":                 //公众号授权
             case "api/fansmanage/material_image"://图片素材
             case "api/fansmanage/material_article"://图文素材
             case "api/fansmanage/material_article_add"://添加单条图文素材

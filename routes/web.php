@@ -557,39 +557,46 @@ Route::group(['prefix'=>'catering'],function(){
 Route::group(['prefix'=>'fansmanage'],function(){
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
-        Route::get('/', 'Fansmanage\LoginController@display')->middleware('FansmanageCheck');                               //登录页面路由
-        Route::get('captcha/{tmp}', 'Fansmanage\LoginController@captcha');                                                //验证码路由
+        Route::get('/', 'Fansmanage\LoginController@display')->middleware('FansmanageCheck');                           //登录页面路由
+        Route::get('captcha/{tmp}', 'Fansmanage\LoginController@captcha');                                              //验证码路由
     });
 
     //切换公众号粉丝平台
-    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');                                    //系统首页
-    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');                  //超级管理员切换代理
-    Route::get('quit', 'Fansmanage\ShopController@quit');                                                                   //退出系统
-    Route::post('select_shop','Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');                      //超级管理员选择登入的代理
-    Route::get('operation_log', 'Fansmanage\ShopController@operation_log')->middleware('FansmanageCheck');           //操作日记
-    Route::get('login_log', 'Fansmanage\ShopController@login_log')->middleware('FansmanageCheck');                   //登入日记
+    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');                                //系统首页
+    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');              //超级管理员切换代理
+    Route::get('quit', 'Fansmanage\ShopController@quit');                                                               //退出系统
+    Route::post('select_shop','Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');                  //超级管理员选择登入的代理
+    Route::get('operation_log', 'Fansmanage\ShopController@operation_log')->middleware('FansmanageCheck');              //操作日记
+    Route::get('login_log', 'Fansmanage\ShopController@login_log')->middleware('FansmanageCheck');                      //登入日记
 
 
     //账号中心
     Route::group(['prefix'=>'account'],function(){
-        Route::get('profile', 'Fansmanage\AccountController@profile')->middleware('FansmanageCheck');                       //账号信息
-        Route::get('password', 'Fansmanage\AccountController@password')->middleware('FansmanageCheck');                     //登入密码修改
-        Route::get('safe_password', 'Fansmanage\AccountController@safe_password')->middleware('FansmanageCheck');           //安全密码设置
-        Route::get('message_setting', 'Fansmanage\AccountController@message_setting')->middleware('FansmanageCheck');       //消息推送设置
+        Route::get('profile', 'Fansmanage\AccountController@profile')->middleware('FansmanageCheck');                   //账号信息
+        Route::get('password', 'Fansmanage\AccountController@password')->middleware('FansmanageCheck');                 //登入密码修改
+        Route::get('safe_password', 'Fansmanage\AccountController@safe_password')->middleware('FansmanageCheck');       //安全密码设置
+        Route::get('message_setting', 'Fansmanage\AccountController@message_setting')->middleware('FansmanageCheck');   //消息推送设置
     });
+
+    //公众号管理
+    Route::group(['prefix'=>'api'],function(){
+        Route::get('store_auth', 'Fansmanage\ApiController@store_auth')->middleware('FansmanageCheck');                 //公众号管理
+    });
+
+
 
     //用户管理
     Route::group(['prefix'=>'user'],function(){
-        Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('FansmanageCheck');                        //粉丝标签管理
-        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                      //粉丝用户管理
-        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');              //粉丝用户足迹
+        Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('FansmanageCheck');                    //粉丝标签管理
+        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                  //粉丝用户管理
+        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 
 
     //总分店管理
     Route::group(['prefix'=>'store'],function(){
-        Route::get('store_create','Fansmanage\StoreController@store_create')->middleware('FansmanageCheck');              //创建总分店
-        Route::get('store_list','Fansmanage\StoreController@store_list')->middleware('FansmanageCheck');                  //总分店管理
+        Route::get('store_create','Fansmanage\StoreController@store_create')->middleware('FansmanageCheck');            //创建总分店
+        Route::get('store_list','Fansmanage\StoreController@store_list')->middleware('FansmanageCheck');                //总分店管理
     });
 
 
