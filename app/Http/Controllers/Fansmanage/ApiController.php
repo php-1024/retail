@@ -71,7 +71,6 @@ class ApiController extends Controller{
      */
     public function meterial_image_upload_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dd($admin_data);
         $route_name = $request->path();//获取当前的页面路由
         $file = $request->file('image');
         if(!in_array( strtolower($file->getClientOriginalExtension()),['jpeg','jpg','gif','gpeg','png'])){
@@ -80,7 +79,6 @@ class ApiController extends Controller{
         if ($file->isValid()) {
             //检验文件是否有效
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();  //重命名
-            dd($new_name);
             $path = $file->move(base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/', $new_name);   //$path上传后的文件路径
             $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
             $re = \Wechat::uploadimg($auth_info['authorizer_access_token'],base_path() . '/uploads/wechat/'.$admin_data['organization_id'].'/'.$new_name);
