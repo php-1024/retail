@@ -5,6 +5,7 @@ use App\Models\OperationLog;
 use App\Models\WechatArticle;
 use App\Models\WechatAuthorization;
 use App\Models\WechatAuthorizerInfo;
+use App\Models\WechatDefaultReply;
 use App\Models\WechatImage;
 use App\Models\WechatReply;
 use App\Models\WechatSubscribeReply;
@@ -227,7 +228,9 @@ class MessageController extends Controller{
         return response()->json(['data' => '删除自动回复关键字成功', 'status' => '1']);
     }
 
-    //关注后回复
+    /*
+     * 关注后回复
+     */
     public function subscribe_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -237,13 +240,18 @@ class MessageController extends Controller{
         return view('Fansmanage/Message/subscribe_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //关注后文字回复内容弹窗
+    /*
+     * 关注后文字回复内容弹窗
+     */
     public function subscribe_reply_text_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         return view('Fansmanage/Message/subscribe_reply_text_edit',['info'=>$info]);
     }
-    //关注后文字回复保存
+
+    /*
+     * 关注后文字回复保存
+     */
     public function subscribe_reply_text_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -276,14 +284,19 @@ class MessageController extends Controller{
         return response()->json(['data' => '修改关注自动回复的文本回复内容成功', 'status' => '1']);
     }
 
-    //关注后图片回复内容弹窗
+    /*
+     * 关注后图片回复内容弹窗
+     */
     public function subscribe_reply_image_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
         return view('Fansmanage/Message/subscribe_reply_image_edit',['list'=>$list,'info'=>$info]);
     }
-    //关注后图片回复保存
+
+    /*
+     * 关注后图片回复保存
+     */
     public function subscribe_reply_image_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -315,14 +328,20 @@ class MessageController extends Controller{
         }
         return response()->json(['data' => '修改关注自动回复的图片回复内容成功', 'status' => '1']);
     }
-    //关注后图文回复内容弹窗
+
+    /*
+     * 关注后图文回复内容弹窗
+     */
     public function subscribe_reply_article_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatSubscribeReply::getOne([['organization_id',$admin_data['organization_id']]]);
         $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
         return view('Fansmanage/Message/subscribe_reply_article_edit',['list'=>$list,'info'=>$info]);
     }
-    //关注后图文回复保存
+
+    /*
+     * 关注后图文回复保存
+     */
     public function subscribe_reply_article_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -355,23 +374,31 @@ class MessageController extends Controller{
         return response()->json(['data' => '修改关注自动回复的图文回复内容成功', 'status' => '1']);
     }
 
-    //默认回复
+
+    /*
+     * 默认回复
+     */
     public function default_reply(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
-        return view('Wechat/Catering/default_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Message/default_reply',['info'=>$info,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
-    //默认文本回复内容弹窗
+    /*
+     * 默认文本回复内容弹窗
+     */
     public function default_reply_text_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $info = WechatDefaultReply::getOne([['organization_id',$admin_data['organization_id']]]);
-        return view('Wechat/Catering/default_reply_text_edit',['info'=>$info]);
+        return view('Fansmanage/Message/default_reply_text_edit',['info'=>$info]);
     }
-    //默认文本回复保存
+
+    /*
+     * 默认文本回复保存
+     */
     public function default_reply_text_edit_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
