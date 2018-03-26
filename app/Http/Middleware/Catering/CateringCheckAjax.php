@@ -98,7 +98,7 @@ class CateringCheckAjax
                 return self::format_response($re,$next);
                 break;
 
-            case "api/ajax/auto_reply_edit_article_check"://检测自动回复图文素材啊数据提交
+            case "api/ajax/auto_reply_edit_article_check"://检测自动回复图文素材数据提交
                 $re = $this->checkLoginAndRuleAndAutoReplyEditArticle($request);
                 return self::format_response($re,$next);
                 break;

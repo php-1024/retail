@@ -77,8 +77,12 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndAutoReplyEditText($request);
                 return self::format_response($re,$next);
                 break;
-            case "fansmanage/ajax/auto_reply_edit_image_check"://检测自动回复图片素材啊数据提交
+            case "fansmanage/ajax/auto_reply_edit_image_check"://检测自动回复图片素材数据提交
                 $re = $this->checkLoginAndRuleAndAutoReplyEditImage($request);
+                return self::format_response($re,$next);
+                break;
+            case "fansmanage/ajax/auto_reply_edit_article_check"://检测自动回复图文素材数据提交
+                $re = $this->checkLoginAndRuleAndAutoReplyEditArticle($request);
                 return self::format_response($re,$next);
                 break;
             /****消息管理****/
@@ -508,6 +512,23 @@ class FansmanageCheckAjax
         }
     }
 
+    /*
+     * 检测登陆，权限，修改关键字自动回复图文内容
+     */
+    public function checkLoginAndRuleAndAutoReplyEditArticle($request){
+        $re = $this->checkLoginAndRule($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkAutoReplyEditArticle($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
 
     /********消息管理********/
 
@@ -663,6 +684,19 @@ class FansmanageCheckAjax
         }
         if(empty($request->input('image_id'))){
             return self::res(0,response()->json(['data' => '请选择图片素材', 'status' => '0']));
+        }
+        return self::res(1,$request);
+    }
+
+    /*
+     * 检测关键字自定义回复图文内容
+     */
+    public function checkAutoReplyEditArticle($request){
+        if(empty($request->input('id'))){
+            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
+        }
+        if(empty($request->input('article_id'))){
+            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
         }
         return self::res(1,$request);
     }
@@ -881,16 +915,7 @@ class FansmanageCheckAjax
         }
         return self::res(1,$request);
     }
-    //检测关键字自定义回复图文内容
-    public function checkAutoReplyEditArticle($request){
-        if(empty($request->input('id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输', 'status' => '0']));
-        }
-        if(empty($request->input('article_id'))){
-            return self::res(0,response()->json(['data' => '请选择图文素材', 'status' => '0']));
-        }
-        return self::res(1,$request);
-    }
+
 
 
 

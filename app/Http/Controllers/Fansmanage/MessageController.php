@@ -138,7 +138,7 @@ class MessageController extends Controller{
         $id = $request->input('id');
         $info = WechatReply::getOne([['id',$id]]);
         $list = WechatArticle::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/auto_reply_edit_article',['id'=>$id,'info'=>$info,'list'=>$list]);
+        return view('Fansmanage/Message/auto_reply_edit_article',['id'=>$id,'info'=>$info,'list'=>$list]);
     }
     /*
     * 编辑自动回复图文内容
