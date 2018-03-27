@@ -43,10 +43,10 @@
                         <section class="vbox animated fadeInUp">
                             <section class="scrollable hover">
                                 <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                    <a href="{{url('fansmanage/wechatmenu/defined_menu')}}" class="list-group-item active">
+                                    <a href="{{url('fansmanage/wechatmenu/defined_menu')}}" class="list-group-item">
                                         自定义菜单
                                     </a>
-                                    <a href="{{url('fansmanage/wechatmenu/conditional_menu')}}" class="list-group-item">
+                                    <a href="{{url('fansmanage/wechatmenu/conditional_menu')}}" class="list-group-item active">
                                         个性化菜单
                                     </a>
                                     <input type="hidden" id="defined_menu_add_url" value="{{ url('fansmanage/ajax/defined_menu_add') }}">
@@ -60,7 +60,7 @@
                     <section>
                         <section class="vbox">
                             <section class="scrollable padder-lg">
-                                <h2 class="font-thin m-b">自定义菜单</h2>
+                                <h2 class="font-thin m-b">个性化菜单</h2>
                                 <div class="col-sm-4" id="menu_box">
 
                                 </div>
