@@ -481,7 +481,6 @@ class WechatmenuController extends Controller{
                 'menu_name'=>'无'
             ];
             foreach($list as $k=>$v){
-                dd($v);
             }
         }else{
             //获取授权APPID
