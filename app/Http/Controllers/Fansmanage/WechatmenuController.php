@@ -313,7 +313,7 @@ class WechatmenuController extends Controller{
     }
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
 
-    public function style_menu(Request $request){
+    public function conditional_menu(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
@@ -451,7 +451,7 @@ class WechatmenuController extends Controller{
 //
 //        dump($re);
 
-        return view('Fansmanage/Wechatmenu/style_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/Wechatmenu/conditional_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
 
    public function test(){

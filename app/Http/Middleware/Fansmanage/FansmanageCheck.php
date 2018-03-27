@@ -62,7 +62,7 @@ class FansmanageCheck{
 
             /****公众号管理-菜单管理****/
             case "fansmanage/wechatmenu/defined_menu":           //自定义菜单
-            case "fansmanage/wechatmenu/style_menu":             //个性化菜单
+            case "fansmanage/wechatmenu/conditional_menu":       //个性化菜单
             /****公众号管理-菜单管理****/
 
             /****总分店管理****/
