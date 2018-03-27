@@ -90,7 +90,7 @@
                                 <form class="form-horizontal" method="get">
 
 
-                                    <label class="col-sm-1 control-label">商&nbsp;   &nbsp;&nbsp;品</label>
+                                    <label class="col-sm-1 control-label">商&nbsp;   &nbsp;  &nbsp;品</label>
 
 
                                     <div class="col-sm-2">
