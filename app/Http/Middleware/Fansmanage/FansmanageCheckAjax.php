@@ -165,6 +165,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/defined_menu_add":              //自定义菜单添加
             case "fansmanage/ajax/defined_menu_delete":           //自定义菜单删除
             case "fansmanage/ajax/defined_menu_edit":              //自定义菜单编辑
+                dd(1);
             case "fansmanage/ajax/defined_menu_get":              //自定义菜单添加
             case "fansmanage/ajax/auto_reply_add":                //自定义菜单添加
             case "fansmanage/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
