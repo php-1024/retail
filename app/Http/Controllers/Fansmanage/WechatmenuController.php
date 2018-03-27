@@ -475,7 +475,7 @@ class WechatmenuController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
 
         $tag_id = $request->tag_id;//会员标签id
-        if($tag_id){
+        if(!empty($tag_id)){
             $list = [
                 'id'=> '0',
                 'label_name'=>'无'
