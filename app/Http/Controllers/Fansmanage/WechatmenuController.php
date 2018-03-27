@@ -549,7 +549,6 @@ class WechatmenuController extends Controller{
         $tag_id = $request->label_id;//会员标签id
         //获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id'],['tag_id',$tag_id]],['parent_id','0']],0,'id','asc');
-        dd($list);
         $son_menu = [];
         foreach ($list as $key=>$val){
             $sm = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id'],['tag_id',$tag_id]],['parent_id',$val->id]],0,'id','asc');
@@ -559,6 +558,7 @@ class WechatmenuController extends Controller{
             }
             unset($sm);
         }
+        dd($son_menu);
         return view('Fansmanage/Wechatmenu/conditional_menu_get',['list'=>$list,'son_menu'=>$son_menu]);
     }
 
