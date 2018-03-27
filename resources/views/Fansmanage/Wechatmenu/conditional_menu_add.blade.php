@@ -139,8 +139,9 @@
 <script>
     function changeConditionalMenu(){
         var url = $('#conditional_menu_get').val();
-        var token = $('._token').val();
+        var token = $('#_token').val();
         var data = {'_token':token};
+
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
