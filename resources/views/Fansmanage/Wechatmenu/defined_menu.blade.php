@@ -120,19 +120,6 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(function(){
-        $('#addBtn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-        $('.delete_btn').click(function(){
-            $(this).parent().parent().parent().remove();
-        });
-        $('#nestable1').nestable();
-        $('.chosen-select2').chosen({width:"100%"});
-
         get_menu_add_box();
         get_menu();
     });
