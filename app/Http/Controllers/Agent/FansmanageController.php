@@ -98,8 +98,7 @@ class FansmanageController extends Controller{
         $organization_id = $request->input('organization_id');//服务商id
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
         $data = Program::getOne([['id',$oneFansmanage['asset_id']]]);
-        $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$oneFansmanage['id']]]);
-        dump($re);
+        $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$data['id']]]);
         $data['program_balance'] = $re['program_balance'];
         $data['program_used_num'] = $re['program_used_num'];
 
