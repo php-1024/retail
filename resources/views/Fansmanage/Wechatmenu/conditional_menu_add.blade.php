@@ -2,7 +2,7 @@
     自定义菜单设置
 </header>
 
-<form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('fansmanage/ajax/conditional_menu_add_check') }}">
+<form class="form-horizontal" role="form" id="conditional_menu_add_check" action="{{ url('fansmanage/ajax/conditional_menu_add_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
     <input type="hidden" name="response_type" id="response_type" value="1">
@@ -148,20 +148,10 @@
         });
     }
 
-
-
-
-
-
-
-
-
-
-
     function changeConditionalMenu(obj){
         var label_id = $(obj).val();
         var url = $('#conditional_menu_get').val();
-        var menu_url = $('#menu_url').val();
+        var menu_url = $('#conditional_menu_list').val();
         var token = $('#_token').val();
         var data = {'_token':token,'label_id':label_id};
         $.post(url,data,function(response){
@@ -215,7 +205,7 @@
         });
     });
     function addPostForm(){
-        var target = $("#defined_menu_add_check");
+        var target = $("#conditional_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){
