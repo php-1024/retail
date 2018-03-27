@@ -163,6 +163,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/material_article_delete_comfirm": //文章上传确认弹窗
             case "fansmanage/ajax/material_image_select":        //图片选择弹窗
             case "fansmanage/ajax/defined_menu_add":              //自定义菜单添加
+                dd(1);
             case "fansmanage/ajax/defined_menu_delete":           //自定义菜单删除
             case "fansmanage/ajax/defined_menu_edit":              //自定义菜单编辑
             case "fansmanage/ajax/defined_menu_get":              //自定义菜单添加
