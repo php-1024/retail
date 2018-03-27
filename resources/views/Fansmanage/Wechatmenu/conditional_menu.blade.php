@@ -254,31 +254,31 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        get_menu_add_box();
-//        get_menu();
-    });
-
-    function get_menu_add_box(){
-        var url = $('#defined_menu_add_url').val();
-        var token = $('#_token').val();
-        var data = {'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#ctrl_box').html(response);
-            }
-        });
-    }
+//    $(function(){
+//        get_menu_add_box();
+////        get_menu();
+//    });
+//
+//    function get_menu_add_box(){
+//        var url = $('#defined_menu_add_url').val();
+//        var token = $('#_token').val();
+//        var data = {'_token':token};
+//        $.post(url,data,function(response){
+//            if(response.status=='-1'){
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//                return;
+//            }else{
+//                $('#ctrl_box').html(response);
+//            }
+//        });
+//    }
 
 //    function get_menu(){
 //        var url = $('#defined_menu_get_url').val();
