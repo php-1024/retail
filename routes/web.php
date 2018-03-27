@@ -675,10 +675,10 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::any('defined_menu_get','Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::any('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
-        Route::any('defined_menu_delete','Fansmanage\WechatController@defined_menu_delete')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
-        Route::any('defined_menu_delete_check','Fansmanage\WechatController@defined_menu_delete_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
-        Route::any('defined_menu_edit','Fansmanage\WechatController@defined_menu_edit')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
-        Route::any('defined_menu_edit_check','Fansmanage\WechatController@defined_menu_edit_check')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
+        Route::any('defined_menu_delete','Fansmanage\WechatmenuController@defined_menu_delete')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_delete_check','Fansmanage\WechatmenuController@defined_menu_delete_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_edit','Fansmanage\WechatmenuController@defined_menu_edit')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
+        Route::any('defined_menu_edit_check','Fansmanage\WechatmenuController@defined_menu_edit_check')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
         Route::any('wechat_menu_add','Api\WechatController@wechat_menu_add')->middleware('CateringCheckAjax');//一键同步到微信菜单
         Route::any('wechat_menu_add_check','Api\WechatController@wechat_menu_add_check')->middleware('CateringCheckAjax');//一键同步到微信菜单
 
