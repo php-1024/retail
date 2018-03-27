@@ -477,11 +477,12 @@ class WechatmenuController extends Controller{
         $tag_id = $request->tag_id;//会员标签id
         if(empty($tag_id)){
             $list[] = [
-
                 'id'=> '0',
                 'menu_name'=>'无'
             ];
-            dd($list);
+            foreach($list as $k=>$v){
+                dd($v);
+            }
         }else{
             //获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
