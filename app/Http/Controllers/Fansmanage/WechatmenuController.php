@@ -125,6 +125,7 @@ class WechatmenuController extends Controller{
 
     //自定义菜单添加页面
     public function wechat_menu_add(Request $request){
+        dd(11);
         return view('Fansmanage/Wechatmenu/wechat_menu_add');
     }
 
