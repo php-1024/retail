@@ -31,22 +31,18 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">粉丝标签管理</h3>
+                            <h3 class="m-b-none">进出开单</h3>
                         </div>
 
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                粉丝标签管理
+                                进出开单
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <div class="col-sm-12">
-                                        <button type="button" id="addBtn" class="btn btn-s-md btn-info"><i
-                                                    class="fa fa-plus"></i>&nbsp;&nbsp;添加粉丝标签
-                                        </button>
-                                        <button type="button" class="btn btn-s-md btn-info"><i
-                                                    class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签到本地
-                                        </button>
+                                        <button type="button" class="btn btn-s-md btn-info">供应商到货开单</button>
+                                        <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;退供应商货开单</button>
                                     </div>
                                 </form>
                             </div>
