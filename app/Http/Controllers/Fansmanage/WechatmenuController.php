@@ -459,16 +459,14 @@ class WechatmenuController extends Controller{
     //自定义菜单添加页面
     public function conditional_menu_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $fansmanage_id = $admin_data['organization_id'];
-        $label_list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
+        $label_list = Label::ListLabel(['fansmanage_id'=>$admin_data['organization_id']]);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
-        //获取菜单列表
-        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-        return view('Fansmanage/Wechatmenu/conditional_menu_add',['list'=>$list,'label_list'=>$label_list,'wechatreply'=>$wechatreply]);
+
+        return view('Fansmanage/Wechatmenu/conditional_menu_add',['label_list'=>$label_list,'wechatreply'=>$wechatreply]);
     }
 
     //显示上级菜单
