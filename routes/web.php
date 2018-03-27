@@ -644,15 +644,16 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('material_articles_edit_check','Fansmanage\ApiController@material_articles_edit_check')->middleware('FansmanageCheckAjax');//编辑图文功能提交
 
 
-        //公众号管理
-        Route::any('defined_menu_get','Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
-        Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
-        Route::any('defined_menu_delete','Fansmanage\WechatmenuController@defined_menu_delete')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
-        Route::post('defined_menu_delete_check','Fansmanage\WechatmenuController@defined_menu_delete_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
-        Route::post('defined_menu_edit','Fansmanage\WechatmenuController@defined_menu_edit')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
-        Route::post('defined_menu_edit_check','Fansmanage\WechatmenuController@defined_menu_edit_check')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
-        Route::post('wechat_menu_add','Fansmanage\WechatmenuController@wechat_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
-        Route::post('wechat_menu_add_check','Fansmanage\WechatmenuController@wechat_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
+//        //公众号管理
+//        Route::any('defined_menu_get','Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
+//        Route::any('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+//        Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+//        Route::any('defined_menu_delete','Fansmanage\WechatmenuController@defined_menu_delete')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+//        Route::post('defined_menu_delete_check','Fansmanage\WechatmenuController@defined_menu_delete_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+//        Route::post('defined_menu_edit','Fansmanage\WechatmenuController@defined_menu_edit')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
+//        Route::post('defined_menu_edit_check','Fansmanage\WechatmenuController@defined_menu_edit_check')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
+//        Route::post('wechat_menu_add','Fansmanage\WechatmenuController@wechat_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
+//        Route::post('wechat_menu_add_check','Fansmanage\WechatmenuController@wechat_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
 
         //公众号管理--消息管理
         Route::post('auto_reply_add','Fansmanage\MessageController@auto_reply_add')->middleware('FansmanageCheckAjax');//添加关键字ajax显示
@@ -683,8 +684,9 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
 
         //公众号管理--菜单管理
-        Route::any('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('CateringCheckAjax');//添加自定义菜单板块
-        Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_get','Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
+        Route::any('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
+        Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
 
         Route::any('defined_menu_delete','Fansmanage\WechatController@defined_menu_delete')->middleware('CateringCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_delete_check','Fansmanage\WechatController@defined_menu_delete_check')->middleware('CateringCheckAjax');//添加自定义菜单板块
