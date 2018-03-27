@@ -2,11 +2,9 @@
     自定义菜单设置
 </header>
 <div class="panel-body">
-    <form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('fansmanage/ajax/defined_menu_add_check') }}">
         <input type="hidden" id="_token" value="{{csrf_token()}}">
         <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
         <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
-        <input type="hidden" name="response_type" id="response_type" value="1">
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
@@ -131,7 +129,6 @@
             {{--</div>--}}
         {{--</div>--}}
         {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
-    </form>
 </div>
 {{--<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>--}}
 
@@ -141,23 +138,21 @@
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
         var data = {'_token':token};
-
-        console.log(data);
-//        $.post(url,data,function(response){
-//            if(response.status=='-1'){
-//                swal({
-//                    title: "提示信息",
-//                    text: response.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                },function(){
-//                    window.location.reload();
-//                });
-//                return;
-//            }else{
-//                $('#ctrl_box').html(response);
-//            }
-//        });
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#ctrl_box').html(response);
+            }
+        });
     }
 
 
