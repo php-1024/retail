@@ -467,7 +467,7 @@ class WechatmenuController extends Controller{
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-        return view('Fansmanage/Wechatmenu/defined_menu_add',['list'=>$list,'label_list'=>$label_list,'wechatreply'=>$wechatreply]);
+        return view('Fansmanage/Wechatmenu/conditional_menu_add',['list'=>$list,'label_list'=>$label_list,'wechatreply'=>$wechatreply]);
     }
 
     //添加自定义菜单检测
