@@ -398,10 +398,8 @@ class WechatmenuController extends Controller{
             }
             WechatDefinedMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统删除了公众号自定义菜单！');//保存操作记录
-            }else{//商户本人操作记录
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了公众号自定义菜单！');//保存操作记录
+            if ($admin_data['is_super'] != 2){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了公众号自定义菜单！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -538,12 +536,10 @@ class WechatmenuController extends Controller{
            ]
        ];
 
+        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
 
-       dump(json_encode($menu_data_test));
-//        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-
-//        $re = \Wechat::create_bardian_menu($auth_info['authorizer_access_token'],$data);
-//        dd($re);
+        $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'],$data);
+        dump($re);
        return view('Fansmanage/Wechatmenu/style_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
 
