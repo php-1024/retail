@@ -501,7 +501,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('default_reply_article_edit_check','Fansmanage\MessageController@default_reply_article_edit_check')->middleware('FansmanageCheckAjax');//默认回复图文素材能提交
 
 
-        //公众号管理--菜单管理
+        //公众号管理--菜单管理--自定义
         Route::any('defined_menu_get','Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::any('defined_menu_add','Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
         Route::any('defined_menu_add_check','Fansmanage\WechatmenuController@defined_menu_add_check')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
@@ -511,6 +511,11 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::any('defined_menu_edit_check','Fansmanage\WechatmenuController@defined_menu_edit_check')->middleware('FansmanageCheckAjax');//编辑自定义菜单板块
         Route::any('wechat_menu_add','Fansmanage\WechatmenuController@wechat_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
         Route::any('wechat_menu_add_check','Fansmanage\WechatmenuController@wechat_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
+        //公众号管理--菜单管理--自定义
+        Route::any('conditional_menu_get','Fansmanage\WechatmenuController@conditional_menu_get')->middleware('FansmanageCheckAjax');//获取个性化菜单数据
+        Route::any('conditional_menu_add','Fansmanage\WechatmenuController@conditional_menu_add')->middleware('FansmanageCheckAjax');//添加个性化菜单板块
+
+
 
 
 
