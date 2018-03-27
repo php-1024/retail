@@ -476,7 +476,8 @@ class WechatmenuController extends Controller{
 
         $tag_id = $request->tag_id;//会员标签id
         if(empty($tag_id)){
-            $list = [
+            $list[] = [
+
                 'id'=> '0',
                 'menu_name'=>'无'
             ];
