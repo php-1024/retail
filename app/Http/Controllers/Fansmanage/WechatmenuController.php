@@ -222,14 +222,14 @@ class WechatmenuController extends Controller{
     //自定义菜单添加页面
     public function defined_menu_add(Request $request){
         dd(1);
-//        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-//        //获取授权APPID
-//        $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
-//        //获取触发关键字列表
-//        $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
-//        //获取菜单列表
-//        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-//        return view('Fansmanage/Wechatmenu/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        //获取授权APPID
+        $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        //获取触发关键字列表
+        $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        //获取菜单列表
+        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
+        return view('Fansmanage/Wechatmenu/defined_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
     }
 
     //添加自定义菜单检测
