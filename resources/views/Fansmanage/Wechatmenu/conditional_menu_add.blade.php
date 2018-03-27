@@ -138,7 +138,6 @@
 
 <script>
     function changeConditionalMenu(){
-        var target = $("#defined_menu_add_check");
         var url = $('#conditional_menu_get').val();
         var token = $('._token').val();
         var data = {'_token':token};
