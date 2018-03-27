@@ -538,7 +538,7 @@ class WechatmenuController extends Controller{
 
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
 
-        $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'],$data);
+        $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'],$menu_data_test);
         dump($re);
        return view('Fansmanage/Wechatmenu/style_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
