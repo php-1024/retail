@@ -475,6 +475,7 @@ class WechatmenuController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        dump($authorization);
         //获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
         return view('Fansmanage/Wechatmenu/conditional_menu_list',['list'=>$list]);
