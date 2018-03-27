@@ -5,12 +5,13 @@
     <form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('fansmanage/ajax/defined_menu_add_check') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
         <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
+        <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
         <input type="hidden" name="response_type" id="response_type" value="1">
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
-                <select name="parent_id" class="form-control m-b" onchange="changeUserTag(this)">
+                <select name="parent_id" class="form-control m-b" onchange="changeConditionalMenu()">
                     <option value ="0">kbzz</option>
                     <option value ="0">果粒橙</option>
                     <option value ="0">龙的传人</option>
@@ -136,52 +137,10 @@
 
 
 <script>
-    $(function(){
-        $('.onclick').click(function(){
-            $('#response_type').val(2);
-        });
-        $('#type_1').click(function(){
-            $('#text_type').removeClass('active');
-            $('#text_response').removeClass('active');
-            $('#link_type').addClass('active');
-            $('#link_response').addClass('active');
-
-        });
-        $('.type_2').click(function(){
-            $('#link_type').removeClass('active');
-            $('#link_response').removeClass('active');
-            $('#text_type').addClass('active');
-            $('#text_response').addClass('active');
-        });
-    });
-    function addPostForm(){
-        var target = $("#defined_menu_add_check");
+    function changeConditionalMenu(){
+        var target = $("#conditional_menu_get");
         var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url,data,function(json){
-            if(json.status==1){
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor:"#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }
-        });
-    }
-
-    function addMenuForm(){
-        var url = $('#wechat_menu_add').val();
-        var token = $('#_token').val();
+        var token = $('._token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
@@ -195,9 +154,90 @@
                 });
                 return;
             }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
+                $('#ctrl_box').html(response);
             }
         });
     }
+
+
+
+
+//    $(function(){
+//        $('.onclick').click(function(){
+//            $('#response_type').val(2);
+//        });
+//        $('#type_1').click(function(){
+//            $('#text_type').removeClass('active');
+//            $('#text_response').removeClass('active');
+//            $('#link_type').addClass('active');
+//            $('#link_response').addClass('active');
+//
+//        });
+//        $('.type_2').click(function(){
+//            $('#link_type').removeClass('active');
+//            $('#link_response').removeClass('active');
+//            $('#text_type').addClass('active');
+//            $('#text_response').addClass('active');
+//        });
+//    });
+//    function addPostForm(){
+//        var target = $("#defined_menu_add_check");
+//        var url = target.attr("action");
+//        var data = target.serialize();
+//        $.post(url,data,function(json){
+//            if(json.status==1){
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor:"#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
+//            }
+//        });
+//    }
+
+//    function addMenuForm(){
+//        var url = $('#wechat_menu_add').val();
+//        var token = $('#_token').val();
+//        var data = {'_token':token};
+//        $.post(url,data,function(response){
+//            if(response.status=='-1'){
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//                return;
+//            }else{
+//                $('#myModal').html(response);
+//                $('#myModal').modal();
+//            }
+//        });
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>

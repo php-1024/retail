@@ -49,8 +49,8 @@
                                     <a href="{{url('fansmanage/wechatmenu/conditional_menu')}}" class="list-group-item active">
                                         个性化菜单
                                     </a>
-                                    <input type="hidden" id="defined_menu_add_url" value="{{ url('fansmanage/ajax/conditional_menu_add') }}">
-                                    <input type="hidden" id="defined_menu_get_url" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
+                                    <input type="hidden" id="conditional_menu_add" value="{{ url('fansmanage/ajax/conditional_menu_add') }}">
+                                    <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 </div>
                             </section>
@@ -125,7 +125,7 @@
     });
 
     function get_menu_add_box(){
-        var url = $('#defined_menu_add_url').val();
+        var url = $('#conditional_menu_add').val();
         var token = $('#_token').val();
         var data = {'_token':token};
         $.post(url,data,function(response){
