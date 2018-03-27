@@ -104,7 +104,7 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <script src="{{asset('public/Fansmanage')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Fansmanage')}}/js/bootstrap.js"></script>
@@ -145,26 +145,26 @@
         });
     }
 
-    function get_menu(){
-        var url = $('#defined_menu_get_url').val();
-        var token = $('#_token').val();
-        var data = {'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#menu_box').html(response);
-            }
-        });
-    }
+//    function get_menu(){
+//        var url = $('#defined_menu_get_url').val();
+//        var token = $('#_token').val();
+//        var data = {'_token':token};
+//        $.post(url,data,function(response){
+//            if(response.status=='-1'){
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//                return;
+//            }else{
+//                $('#menu_box').html(response);
+//            }
+//        });
+//    }
 </script>
 </body>
 </html>
