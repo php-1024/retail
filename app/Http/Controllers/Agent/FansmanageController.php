@@ -97,14 +97,12 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
-        dump($oneFansmanage);
-        $list = Program::getPaginage([['id',$oneFansmanage['asset_id']]],15,'id');
-        foreach ($list as $key=>$value) {
-            $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$value['id']]]);
-            $list[$key]['program_balance'] = $re['program_balance'];
-            $list[$key]['program_used_num'] = $re['program_used_num'];
-        }
-        return view('Agent/Fansmanage/fansmanage_program',['oneFansmanage'=>$oneFansmanage,'list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $data = Program::getOne([['id',$oneFansmanage['asset_id']]]);
+        $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$oneFansmanage['id']]]);
+        $data['program_balance'] = $re['program_balance'];
+        $data['program_used_num'] = $re['program_used_num'];
+
+        return view('Agent/Fansmanage/fansmanage_program',['oneFansmanage'=>$oneFansmanage,'data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
     //程序划拨
     public function fansmanage_assets(Request $request){

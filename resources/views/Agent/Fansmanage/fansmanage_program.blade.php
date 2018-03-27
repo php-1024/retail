@@ -77,29 +77,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($list as $key=>$value)
                                         <tr>
-                                            <td>{{$value->id}}</td>
-                                            <td><span class="label label-danger"><i class="icon-code"></i> {{$value->program_name}}</span></td>
-                                            <td> <span class="label label-primary">剩余：@if($value->program_balance){{$value->program_balance}}@else 0 @endif 套</span></td>
-                                            <td><span class="label label-warning">已用：@if($value->program_used_num){{$value->program_used_num}}@else 0 @endif 套</span></td>
-                                            <td>{{$value->created_at}}</td>
+                                            <td>{{$data->id}}</td>
+                                            <td><span class="label label-danger"><i class="icon-code"></i> {{$data->program_name}}</span></td>
+                                            <td> <span class="label label-primary">剩余：@if($data->program_balance){{$data->program_balance}}@else 0 @endif 套</span></td>
+                                            <td><span class="label label-warning">已用：@if($data->program_used_num){{$data->program_used_num}}@else 0 @endif 套</span></td>
+                                            <td>{{$data->created_at}}</td>
                                             <td class="text-right">
-                                                <button class="btn btn-info btn-xs" id="addBtn" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划给</button>
-                                                <button class="btn btn-primary btn-xs" id="minuBtn" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序收回</button>
+                                                <button class="btn btn-info btn-xs" id="addBtn" onclick="getAssetsAdd('{{$data->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划给</button>
+                                                <button class="btn btn-primary btn-xs" id="minuBtn" onclick="getAssetsReduce('{{$data->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序收回</button>
                                             </td>
                                         </tr>
                                         </tbody>
-                                        @endforeach
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="99">
-                                                <ul class="pagination pull-right">
-                                                    {{$list->links()}}
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
+                                 
                                     </table>
                                 </section>
                             </div>
