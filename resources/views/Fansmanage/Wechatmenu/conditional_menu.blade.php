@@ -121,7 +121,6 @@
 <script type="text/javascript">
     $(function(){
         get_menu_add_box();
-        get_menu();
     });
 
     function get_menu_add_box(){
