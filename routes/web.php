@@ -585,6 +585,11 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('order_appointment', 'Retail\OrderController@order_appointment')->middleware('RetailCheck');         //预约管理
     });
 
+    //进销存管理
+    Route::group(['prefix'=>'invoicing'],function(){
+        Route::get('import', 'Retail\InvoicingController@import')->middleware('RetailCheck');        //进出开单
+    });
+
     //用户管理
     Route::group(['prefix'=>'user'],function(){
         Route::get('user_list', 'Retail\UserController@user_list')->middleware('RetailCheck');          //用户管理-粉丝用户管理
