@@ -459,8 +459,15 @@ class WechatmenuController extends Controller{
     public function conditional_menu_add(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $fansmanage_id = $admin_data['organization_id'];
-        $list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
-        return view('Fansmanage/Wechatmenu/conditional_menu_add',['list'=>$list]);
+        $label_list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        //获取授权APPID
+        $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        //获取触发关键字列表
+        $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        //获取菜单列表
+        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
+        return view('Fansmanage/Wechatmenu/defined_menu_add',['list'=>$list,'label_list'=>$label_list,'wechatreply'=>$wechatreply]);
     }
 
     //添加自定义菜单检测

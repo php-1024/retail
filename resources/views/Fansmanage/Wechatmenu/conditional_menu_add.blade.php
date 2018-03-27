@@ -12,7 +12,7 @@
         <div class="col-sm-10">
             <select name="parent_id" class="form-control m-b" onchange="changeConditionalMenu(this)">
                 <option value ="0">kbzz</option>
-                @foreach($list as $key=>$value)
+                @foreach($label_list as $key=>$value)
                     <option value ="{{$value->id}}">{{$value->label_name}}</option>
                 @endforeach
             </select>
