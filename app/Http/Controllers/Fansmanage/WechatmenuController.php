@@ -481,6 +481,7 @@ class WechatmenuController extends Controller{
                 'id'=> '0',
                 'menu_name'=>'无'
             ];
+            dd($list);
         }else{
             //获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
