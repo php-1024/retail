@@ -48,85 +48,219 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-striped b-t b-light">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>标签名称</th>
-                                        <th>标签粉丝数</th>
-                                        <th>操作时间</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>广东粉丝</td>
-                                        <td>260</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
-                                            </button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i
-                                                        class="fa fa-times"></i>&nbsp;&nbsp;删除
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>河南粉丝</td>
-                                        <td>260</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
-                                            </button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i
-                                                        class="fa fa-times"></i>&nbsp;&nbsp;删除
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>广西粉丝</td>
-                                        <td>260</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
-                                            </button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i
-                                                        class="fa fa-times"></i>&nbsp;&nbsp;删除
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>湖南粉丝</td>
-                                        <td>260</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
-                                            </button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i
-                                                        class="fa fa-times"></i>&nbsp;&nbsp;删除
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>吉林粉丝</td>
-                                        <td>260</td>
-                                        <td>2017-08-09 11:11:11</td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
-                                            </button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn"><i
-                                                        class="fa fa-times"></i>&nbsp;&nbsp;删除
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+
+                            <div class="line line-border b-b pull-in"></div>
+
+                            <div class="col-sm-12">
+                                <form class="form-horizontal" method="get">
+
+
+                                    <label class="col-sm-1 control-label">用户账号</label>
+
+                                    <div class="col-sm-1">
+                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                    </div>
+                                    <label class="col-sm-1 control-label">订单编号</label>
+
+                                    <div class="col-sm-2">
+                                        <input class="input-sm form-control" size="16" type="text" value="">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <select name="account" class="form-control m-b">
+                                            <option>支付方式</option>
+                                            <option>在线余额支付</option>
+                                            <option>在线支付</option>
+                                            <option>003</option>
+                                            <option>004</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <select name="account" class="form-control m-b">
+                                            <option>订单状态</option>
+                                            <option>未支付</option>
+                                            <option>已支付</option>
+                                            <option>已完成</option>
+                                            <option>已取消</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-1">
+
+                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div style="clear:both"></div>
+                            <div class="line line-border b-b pull-in"></div>
+                            <div class="tab-pane">
+
+                                <div class="col-lg-7">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading font-bold">
+                                            选择商品
+                                        </header>
+
+                                        <table class="table table-striped table-bordered ">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>商品标题</th>
+                                                <th>商品价格</th>
+                                                <th>库存</th>
+
+                                                <th>规格</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>奇味鸡煲</td>
+                                                <td>
+                                                    100000.00
+                                                </td>
+                                                <td>
+                                                    999
+                                                </td>
+                                                <td>
+                                                    <select name="account" class="form-control m-b">
+                                                        <option>无</option>
+                                                        <option>option 2</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
+                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>奇味鸡煲</td>
+                                                <td>
+                                                    100000.00
+                                                </td>
+                                                <td>
+                                                    999
+                                                </td>
+                                                <td>
+                                                    <select name="account" class="form-control m-b">
+                                                        <option>无</option>
+                                                        <option>option 2</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
+                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>奇味鸡煲</td>
+                                                <td>
+                                                    100000.00
+                                                </td>
+                                                <td>
+                                                    999
+                                                </td>
+                                                <td>
+                                                    <select name="account" class="form-control m-b">
+                                                        <option>无</option>
+                                                        <option>option 2</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
+                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>奇味鸡煲</td>
+                                                <td>
+                                                    100000.00
+                                                </td>
+                                                <td>
+                                                    999
+                                                </td>
+                                                <td>
+                                                    <select name="account" class="form-control m-b">
+                                                        <option>无</option>
+                                                        <option>option 2</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
+                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>奇味鸡煲</td>
+                                                <td>
+                                                    100000.00
+                                                </td>
+                                                <td>
+                                                    999
+                                                </td>
+                                                <td>
+                                                    <select name="account" class="form-control m-b">
+                                                        <option>无</option>
+                                                        <option>option 2</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
+                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>奇味鸡煲</td>
+                                                <td>
+                                                    100000.00
+                                                </td>
+                                                <td>
+                                                    999
+                                                </td>
+                                                <td>
+                                                    <select name="account" class="form-control m-b">
+                                                        <option>无</option>
+                                                        <option>option 2</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
+                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="clear: both;"></div>
+                                    </section>
+                                </div>
+
+                                <div style="clear: both;"></div>
                             </div>
                             <footer class="panel-footer">
                                 <div class="row">
@@ -175,8 +309,6 @@
 </section>
 
 
-
-
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
@@ -196,7 +328,7 @@
 
     //编辑店铺信息
     function EditStore() {
-        var formData = new FormData($( "#store_edit" )[0]);
+        var formData = new FormData($("#store_edit")[0]);
         $.ajax({
             url: '{{ url('retail/ajax/store_edit_check') }}',
             type: 'post',
@@ -208,16 +340,16 @@
             success: function (json) {
                 if (json.status == -1) {
                     window.location.reload();
-                } else if(json.status == 1) {
+                } else if (json.status == 1) {
                     swal({
                         title: "提示信息",
                         text: json.data,
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "确定",
-                    },function(){
+                    }, function () {
                         window.location.reload();
                     });
-                }else{
+                } else {
                     swal({
                         title: "提示信息",
                         text: json.data,
