@@ -43,6 +43,8 @@
                                     <div class="col-sm-12">
                                         <button type="button" class="btn btn-s-md btn-info">供应商到货开单</button>
                                         <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;退供应商货开单</button>
+                                        <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;报损开单</button>
+                                        <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;盘点开单</button>
                                     </div>
                                 </form>
                             </div>
