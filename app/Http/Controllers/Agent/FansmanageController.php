@@ -97,7 +97,6 @@ class FansmanageController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
-        dump($oneFansmanage);
         $data = Program::getOne([['id',$oneFansmanage['asset_id']]]);
         $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$oneFansmanage['id']]]);
         $data['program_balance'] = $re['program_balance'];
@@ -109,6 +108,7 @@ class FansmanageController extends Controller{
     public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $program_id = $request->input('program_id');//套餐id
+        dump($program_id);
         $status = $request->input('status');//状态
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
         $oneProgram = Program::getOne([['id',$program_id]]);
