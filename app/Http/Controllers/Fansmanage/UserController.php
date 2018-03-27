@@ -172,7 +172,7 @@ class UserController extends Controller{
 
     //微信同步粉丝标签ajax显示页面
     public function label_wechat(Request $request){
-        return view('Catering/User/label_wechat');
+        return view('Fansmanage/User/label_wechat');
     }
     //微信同步粉丝标签功能提交
     public function label_wechat_check(Request $request){
