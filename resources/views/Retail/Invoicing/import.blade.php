@@ -41,7 +41,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-s-md btn-info">供应商到货开单</button>
+                                        <button type="button" class="btn btn-s-md btn-success">供应商到货开单</button>
                                         <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;退供应商货开单</button>
                                         <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;报损开单</button>
                                         <button type="button" class="btn btn-s-md btn-info">&nbsp;&nbsp;盘点开单</button>
@@ -134,8 +134,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -157,8 +156,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -180,8 +178,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -203,8 +200,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -226,8 +222,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -249,8 +244,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
