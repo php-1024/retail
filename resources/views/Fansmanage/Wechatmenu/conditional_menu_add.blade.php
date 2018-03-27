@@ -10,7 +10,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
         <div class="col-sm-10">
-            <select name="parent_id" class="form-control m-b" onchange="changeConditionalMenu(this)">
+            <select  class="form-control m-b" onchange="changeConditionalMenu(this)" name="label_id">
                 <option value ="0">kbzz</option>
                 @foreach($label_list as $key=>$value)
                     <option value ="{{$value->id}}">{{$value->label_name}}</option>
@@ -23,9 +23,6 @@
         <div class="col-sm-10">
             <select name="parent_id" class="form-control m-b">
                 <option value ="0">无</option>
-                @foreach($list as $key=>$val)
-                    <option value ="{{$val->id}}">{{$val->menu_name}}</option>
-                @endforeach
             </select>
 
         </div>
@@ -125,12 +122,10 @@
     <div class="form-group">
         <div class="col-sm-12 col-sm-offset-3">
             <button type="button" class="btn btn-success" onclick="addPostForm()">添加菜单</button>
-            <button type="button" class="btn btn-dark" onclick="addMenuForm()">一键同步到微信公众号</button>
         </div>
     </div>
     <div class="line line-dashed b-b line-lg pull-in"></div>
 </form>
-<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 <script>
     function changeConditionalMenu(obj){
@@ -197,30 +192,4 @@
             }
         });
     }
-
-    function addMenuForm(){
-        var url = $('#wechat_menu_add').val();
-        var token = $('#_token').val();
-        var data = {'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
-
-
-
 </script>
