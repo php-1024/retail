@@ -3,7 +3,7 @@
 </header>
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="defined_menu_add_check" action="{{ url('fansmanage/ajax/defined_menu_add_check') }}">
-        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" id="_token" value="{{csrf_token()}}">
         <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
         <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
         <input type="hidden" name="response_type" id="response_type" value="1">
@@ -142,21 +142,22 @@
         var token = $('#_token').val();
         var data = {'_token':token};
 
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#ctrl_box').html(response);
-            }
-        });
+        console.log(data);
+//        $.post(url,data,function(response){
+//            if(response.status=='-1'){
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    window.location.reload();
+//                });
+//                return;
+//            }else{
+//                $('#ctrl_box').html(response);
+//            }
+//        });
     }
 
 
