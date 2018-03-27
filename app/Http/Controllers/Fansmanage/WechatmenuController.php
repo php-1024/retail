@@ -537,10 +537,11 @@ class WechatmenuController extends Controller{
                 "language"            =>"zh_CN"
            ]
        ];
-        
+
 
        dump(json_encode($menu_data_test));
 //        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
+
 //        $re = \Wechat::create_bardian_menu($auth_info['authorizer_access_token'],$data);
 //        dd($re);
        return view('Fansmanage/Wechatmenu/style_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
