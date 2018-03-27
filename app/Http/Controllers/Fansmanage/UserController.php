@@ -99,9 +99,23 @@ class UserController extends Controller{
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
+        $wechat_id = Label::getPluck([['id',$id]],'wechat_id')->first();
         DB::beginTransaction();
         try {
+            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+            $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'],$label_name,$wechat_id);
+            $re = json_decode($re,true);
+            if(!empty($re['errcode'])){
+                if($re['errcode'] == '45157'){
+                    return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
+                } elseif($re['errcode'] == '45158'){
+                    return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
+                } elseif($re['errcode'] == '45058'){
+                    return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
+                }
+            }
             Label::editLabel(['id'=>$id],['label_name'=>$label_name]);
+
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$label_name);//保存操作记录
             }
@@ -113,8 +127,10 @@ class UserController extends Controller{
         return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
 
     }
-
-    //删除会员标签ajax显示页面
+    
+    /*
+     * 删除会员标签ajax显示页面
+     */
     public function label_delete(Request $request){
         $id = $request->id; //会员标签id
         $oneLabel = Label::getOneLabel([['id',$id]]);
@@ -128,11 +144,23 @@ class UserController extends Controller{
 
         $id = $request->id; //会员标签id
         $label_name = $request->label_name; //会员标签名称
+        $fansmanage_id = $admin_data['organization_id'];//组织id
+        $wechat_id = Label::getPluck([['id',$id]],'wechat_id')->first();
         DB::beginTransaction();
         try {
+            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+            $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'],$wechat_id);
+            $re = json_decode($re,true);
+            if(!empty($re['errcode'])){
+                if($re['errcode'] == '45057'){
+                    return response()->json(['data' => '该标签下粉丝数超过10w，不允许直接删除', 'status' => '0']);
+                } elseif($re['errcode'] == '45058'){
+                    return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
+                }
+            }
             Label::where('id',$id)->forceDelete();
             if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$label_name);//保存操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
