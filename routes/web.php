@@ -691,6 +691,8 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::post('label_edit_check','Fansmanage\UserController@label_edit_check')->middleware('FansmanageCheckAjax');    //编辑会员标签功能提交
         Route::post('label_delete','Fansmanage\UserController@label_delete')->middleware('FansmanageCheckAjax');            //删除会员标签功能提交
         Route::post('label_delete_check','Fansmanage\UserController@label_delete_check')->middleware('FansmanageCheckAjax');//删除会员标签功能提交
+        Route::post('label_wechat','Fansmanage\UserController@label_wechat')->middleware('FansmanageCheckAjax');            //微信同步会员标签
+        Route::post('label_wechat_check','Fansmanage\UserController@label_wechat_check')->middleware('FansmanageCheckAjax');//微信同步会员标签功能提交
 
         Route::post('store_label_add_check','Fansmanage\UserController@store_label_add_check')->middleware('FansmanageCheckAjax');   //粉丝会员标签功能提交
         Route::post('user_list_edit','Fansmanage\UserController@user_list_edit')->middleware('FansmanageCheckAjax');                 //列表编辑ajax显示

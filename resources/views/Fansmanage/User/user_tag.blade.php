@@ -50,11 +50,13 @@
                                     <input type="hidden" id="label_add" value="{{ url('fansmanage/ajax/label_add') }}">
                                     <input type="hidden" id="label_edit" value="{{ url('fansmanage/ajax/label_edit') }}">
                                     <input type="hidden" id="label_delete" value="{{ url('fansmanage/ajax/label_delete') }}">
+                                    <input type="hidden" id="label_wechat" value="{{ url('fansmanage/ajax/label_wechat') }}">
+
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 
                                     <div class="col-sm-12">
                                         <button type="button" id="addBtn" class="btn btn-s-md btn-info" onclick="getAddForm()"><i class="fa fa-plus"></i>&nbsp;&nbsp;添加粉丝标签</button>
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签到本地</button>
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="getWeChatAddForm()"><i class="icon icon-cloud-download"></i>&nbsp;&nbsp;同步微信标签到本地</button>
                                     </div>
                                 </form>
                             </div>
@@ -166,6 +168,28 @@
         var url = $('#label_delete').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+    //标签同步到微信
+    function getWeChatAddForm(){
+        var url = $('#label_wechat').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({

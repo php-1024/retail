@@ -127,7 +127,7 @@ class UserController extends Controller{
         return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
 
     }
-    
+
     /*
      * 删除会员标签ajax显示页面
      */
@@ -170,7 +170,47 @@ class UserController extends Controller{
         return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
     }
 
+    //微信同步粉丝标签ajax显示页面
+    public function label_wechat(Request $request){
+        return view('Catering/User/label_wechat');
+    }
+    //微信同步粉丝标签功能提交
+    public function label_wechat_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $fansmanage_id = $admin_data['organization_id'];//组织id
+        $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+        $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
+        $re = json_decode($re,true);
+        $list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
+        foreach($list as $key=>$value){
+            $local_label[] = $value['label_name'];
+        }
+        foreach($re['tags'] as $key=>$val){
+            $wechat_label[]=$val['name'];
+        }
+        $data = array_diff($wechat_label,$local_label);
 
+        DB::beginTransaction();
+        try {
+            foreach($re['tags'] as $key=>$val){
+                if(in_array($val['name'],$data)){
+                    $dataLabel = [
+                        'fansmanage_id'=>$fansmanage_id,
+                        'store_id'=>0,
+                        'label_name'=>$val['name'],
+                        'label_number'=>$val['count'],
+                        'wechat_id'=>$val['id'],
+                    ];
+                    Label::addLabel($dataLabel);
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '同步失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '同步成功！', 'status' => '1']);
+    }
 
 
 
