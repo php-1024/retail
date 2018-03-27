@@ -1108,6 +1108,7 @@ class FansmanageCheckAjax
      * 检测个性化菜单编辑数据的内容
      */
     public function checkConditionalMenuEdit($request){
+        dd(1);
         if($request->input('label_id') == 0){
             return self::res(0,response()->json(['data' => '会员标签不能为空！', 'status' => '0']));
         }
