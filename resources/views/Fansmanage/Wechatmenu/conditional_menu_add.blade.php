@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
-                <select name="parent_id" class="form-control m-b">
+                <select name="parent_id" class="form-control m-b" onchange="changeUserTag(this)">
                     <option value ="0">kbzz</option>
                     <option value ="0">果粒橙</option>
                     <option value ="0">龙的传人</option>
