@@ -546,11 +546,12 @@ class WechatmenuController extends Controller{
 
     public function conditional_menu_get(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $tag_id = $request->label_id;//会员标签id
         //获取菜单列表
-        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id','0']],0,'id','asc');
+        $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id'],['tag_id',$tag_id]],['parent_id','0']],0,'id','asc');
         $son_menu = [];
         foreach ($list as $key=>$val){
-            $sm = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]],0,'id','asc');
+            $sm = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id'],['tag_id',$tag_id]],['parent_id',$val->id]],0,'id','asc');
 
             if(!empty($sm)){
                 $son_menu[$val->id] = $sm;
