@@ -601,6 +601,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
     //公众号管理--菜单管理
     Route::group(['prefix'=>'wechatmenu'],function(){
         Route::get('defined_menu','Fansmanage\WechatmenuController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
+        Route::get('style_menu','Fansmanage\WechatmenuController@style_menu')->middleware('FansmanageCheck');//个性化义菜单管理页面
     });
 
 

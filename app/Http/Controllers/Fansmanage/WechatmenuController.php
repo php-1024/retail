@@ -412,6 +412,106 @@ class WechatmenuController extends Controller{
     }
     /**************************************************************************自定义菜单，个性化菜单结束*********************************************************************************/
 
+    public function style_menu(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+//        $organization_id = $admin_data['organization_id'];
+//        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0'],['organization_id',$organization_id]]);
+//        foreach($list as $key=>$value){
+//            $parent_tree = $value['parent_tree'].$value['id'].',';
+//            $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
+//            if($re){
+//                foreach($re as $k=>$v){
+//                    switch ($v['event_type'])
+//                    {
+//                        case 1:
+//                            $type='view';
+//                            break;
+//                        case 2:
+//                            $type='click';
+//                            break;
+//                        case 3:
+//                            $type='scancode_push';
+//                            break;
+//                        case 4:
+//                            $type='scancode_waitmsg';
+//                            break;
+//                        case 5:
+//                            $type='pic_sysphoto';
+//                            break;
+//                        case 6:
+//                            $type='pic_photo_or_album';
+//                            break;
+//                        case 7:
+//                            $type='pic_weixin';
+//                            break;
+//                        case 8:
+//                            $type='location_select';
+//                            break;
+//                    }
+//                    $data['button'][$key]['name'] = $value['menu_name'];
+//                    if($v['event_type']==1){
+//                        $data['button'][$key]['sub_button'][] = [
+//                            'name'=>$v['menu_name'],
+//                            'type'=>$type,
+//                            'url' =>$v['response_url']
+//                        ];
+//                    }else{
+//                        $data['button'][$key]['sub_button'][] = [
+//                            'name'=>$v['menu_name'],
+//                            'type'=>$type,
+//                            'key' =>$v['response_keyword']
+//                        ];
+//                    }
+//                }
+//            }else{
+//                switch ($value['event_type'])
+//                {
+//                    case 1:
+//                        $type='view';
+//                        break;
+//                    case 2:
+//                        $type='click';
+//                        break;
+//                    case 3:
+//                        $type='scancode_push';
+//                        break;
+//                    case 4:
+//                        $type='scancode_waitmsg';
+//                        break;
+//                    case 5:
+//                        $type='pic_sysphoto';
+//                        break;
+//                    case 6:
+//                        $type='pic_photo_or_album';
+//                        break;
+//                    case 7:
+//                        $type='pic_weixin';
+//                        break;
+//                    case 8:
+//                        $type='location_select';
+//                        break;
+//                }
+//                $data['button'][$key]['name'] = $value['menu_name'];
+//                $data['button'][$key]['type'] = $type;
+//                if($value['event_type'] == 1){
+//                    $data['button'][$key]['url']= $value['response_url'];
+//                }else{
+//                    $data['button'][$key]['key']= $value['response_keyword'];
+//                }
+//            }
+//
+//        }
+//        $data['matchrule'] = [
+//            'tag_id'=>'2'
+//        ];
+//        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
+//        $re = \Wechat::create_bardian_menu($auth_info['authorizer_access_token'],$data);
+//        dd($re);
+        return view('Fansmanage/Wechatmenu/style_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+    }
 
     public function test(){
         $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
