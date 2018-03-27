@@ -40,6 +40,8 @@ class RetailCheck{
             case "retail/order/order_spot":             //订单管理-现场订单
             case "retail/order/order_spot_detail":      //订单管理-现场订单详情
 
+            case "retail/invoicing/import":             //进销存管理
+
             case "retail/user/user_list":               //用户管理-粉丝用户管理
 
             case "retail/paysetting/wechat_setting":    //支付设置-微信支付
