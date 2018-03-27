@@ -558,7 +558,6 @@ class WechatmenuController extends Controller{
             }
             unset($sm);
         }
-        dd($son_menu);
         return view('Fansmanage/Wechatmenu/conditional_menu_get',['list'=>$list,'son_menu'=>$son_menu]);
     }
 
