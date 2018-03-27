@@ -476,18 +476,17 @@ class WechatmenuController extends Controller{
 
         $tag_id = $request->tag_id;//会员标签id
         if(empty($tag_id)){
-            $label_list = [
+            $list = [
                 'id'=> '0',
-                'label_name'=>'无'
+                'menu_name'=>'无'
             ];
         }else{
             //获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
             //获取菜单列表
-            $label_list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['tag_id',$tag_id]],0,'id','DESC');
+            $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['tag_id',$tag_id]],0,'id','DESC');
         }
-
-        return view('Fansmanage/Wechatmenu/conditional_menu_list',['label_list'=>$label_list]);
+        return view('Fansmanage/Wechatmenu/conditional_menu_list',['list'=>$list]);
     }
 
 
