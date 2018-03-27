@@ -7,6 +7,7 @@
     <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
     <input type="hidden" name="response_type" id="response_type" value="1">
     <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
+    <input type="hidden" id="conditional_menu_list" value="{{ url('fansmanage/ajax/conditional_menu_list') }}">
     <div class="form-group">
         <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
         <div class="col-sm-10">
@@ -18,15 +19,7 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
-        <div class="col-sm-10">
-            <select name="parent_id" class="form-control m-b">
-                <option value ="0">无</option>
-            </select>
-
-        </div>
-    </div>
+    <div class="form-group" id="menu"></div>
 
     <div class="line line-dashed b-b line-lg pull-in"></div>
     <div class="form-group">
@@ -128,9 +121,47 @@
 </form>
 
 <script>
+    $(function() {
+        get_menu();
+    })
+
+
+
+    function get_menu(){
+        var url = $('#conditional_menu_list').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#menu').html(response);
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
     function changeConditionalMenu(obj){
         var label_id = $(obj).val();
         var url = $('#conditional_menu_get').val();
+        var menu_url = $('#menu_url').val();
         var token = $('#_token').val();
         var data = {'_token':token,'label_id':label_id};
         $.post(url,data,function(response){
@@ -146,6 +177,21 @@
                 return;
             }else{
                 $('#menu_box').html(response);
+            }
+        });
+        $.post(menu_url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#menu').html(response);
             }
         });
     }

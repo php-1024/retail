@@ -514,6 +514,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
         //公众号管理--菜单管理--自定义
         Route::any('conditional_menu_get','Fansmanage\WechatmenuController@conditional_menu_get')->middleware('FansmanageCheckAjax');//获取个性化菜单数据
         Route::any('conditional_menu_add','Fansmanage\WechatmenuController@conditional_menu_add')->middleware('FansmanageCheckAjax');//添加个性化菜单板块
+        Route::any('conditional_menu_list','Fansmanage\WechatmenuController@conditional_menu_list')->middleware('FansmanageCheckAjax');//显示上级菜单
 
 
 

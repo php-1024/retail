@@ -177,6 +177,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/defined_menu_get":              //自定义菜单添加
             case "fansmanage/ajax/conditional_menu_get":              //个性化菜单添加
             case "fansmanage/ajax/conditional_menu_add":              //个性化菜单添加
+            case "fansmanage/ajax/conditional_menu_list":             //显示上级菜单
             case "fansmanage/ajax/auto_reply_add":                //自定义菜单添加
             case "fansmanage/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
             case "fansmanage/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
