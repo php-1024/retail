@@ -7,19 +7,21 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
         <div class="col-sm-10">
-            <select name="parent_id" class="form-control m-b" onchange="changeConditionalMenu()">
+            <select name="parent_id" class="form-control m-b" onchange="changeConditionalMenu(this)">
                 <option value ="0">kbzz</option>
-                <option value ="0">果粒橙</option>
-                <option value ="0">龙的传人</option>
+                @foreach($list as $key=>$value)
+                <option value ="{{$value->id}}">{{$value->label_name}}</option>
+                @endforeach
             </select>
         </div>
     </div>
 </div>
 <script>
-    function changeConditionalMenu(){
+    function changeConditionalMenu(obj){
+        var label_id = $(obj).val();
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
-        var data = {'_token':token};
+        var data = {'_token':token,'label_id':label_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
