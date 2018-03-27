@@ -552,7 +552,6 @@ class WechatmenuController extends Controller{
         $son_menu = [];
         foreach ($list as $key=>$val){
             $sm = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['tag_id',$tag_id],['parent_id',$val->id]],0,'id','asc');
-
             if(!empty($sm)){
                 $son_menu[$val->id] = $sm;
             }
