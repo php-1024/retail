@@ -108,7 +108,6 @@ class FansmanageController extends Controller{
     public function fansmanage_assets(Request $request){
         $organization_id = $request->input('organization_id');//服务商id
         $program_id = $request->input('program_id');//套餐id
-        dump($program_id);
         $status = $request->input('status');//状态
         $oneFansmanage = Organization::getOneFansmanage([['id',$organization_id]]);
         $oneProgram = Program::getOne([['id',$program_id]]);
@@ -121,6 +120,7 @@ class FansmanageController extends Controller{
         $operator_id =$admin_data['id'];
 
         $organization_id = $request->input('organization_id');//商户id
+        dd($organization_id);
         $program_id = $request->input('program_id');//程序id
         $number = $request->input('num');//数量
         $status = $request->input('status');//判断划入或者划出
