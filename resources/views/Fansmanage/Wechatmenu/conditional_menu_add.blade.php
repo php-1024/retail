@@ -148,20 +148,10 @@
         });
     }
 
-
-
-
-
-
-
-
-
-
-
     function changeConditionalMenu(obj){
         var label_id = $(obj).val();
         var url = $('#conditional_menu_get').val();
-        var menu_url = $('#menu_url').val();
+        var menu_url = $('#conditional_menu_list').val();
         var token = $('#_token').val();
         var data = {'_token':token,'label_id':label_id};
         $.post(url,data,function(response){
