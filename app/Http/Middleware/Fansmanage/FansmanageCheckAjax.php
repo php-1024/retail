@@ -1075,6 +1075,9 @@ class FansmanageCheckAjax
      * 检测自定义菜单数据的内容
      */
     public function checkConditionalMenuAdd($request){
+        if($request->input('label_id') == 0){
+            return self::res(0,response()->json(['data' => '会员标签不能为空！', 'status' => '0']));
+        }
         if(empty($request->input('menu_name'))){
             return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
         }
@@ -1104,43 +1107,42 @@ class FansmanageCheckAjax
     }
 
 
-    /*
-     * 检测个性化菜单编辑数据的内容
-     */
-    public function checkConditionalMenuEdit($request){
-        dd(1);
-        if($request->input('label_id') == 0){
-            return self::res(0,response()->json(['data' => '会员标签不能为空！', 'status' => '0']));
-        }
-        if(empty($request->input('menu_id'))){
-            return self::res(0,response()->json(['data' => '错误的数据传输！', 'status' => '0']));
-        }
-        if(empty($request->input('menu_name'))){
-            return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
-        }
-        if(strlen($request->input('menu_name'))>12){
-            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
-        }
-        if(empty($request->input('event_type'))){
-            return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
-        }
-        if($request->input('parent_id') != '0') {
-
-            if ($request->input('event_type') == '1' && $request->input('response_type') <> '1') {
-                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
-            }
-            if ($request->input('event_type') == '1' && empty($request->input('response_url'))) {
-                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
-            }
-            if ($request->input('event_type') != '1' && $request->input('response_type') <> '2') {
-                return self::res(0, response()->json(['data' => '请选择关键字回复！', 'status' => '0']));
-            }
-            if ($request->input('event_type') != '1' && empty($request->input('response_keyword'))) {
-                return self::res(0, response()->json(['data' => '请选择关键字！', 'status' => '0']));
-            }
-        }
-        return self::res(1,$request);
-    }
+//    /*
+//     * 检测个性化菜单编辑数据的内容
+//     */
+//    public function checkConditionalMenuEdit($request){
+//        if($request->input('label_id') == 0){
+//            return self::res(0,response()->json(['data' => '会员标签不能为空！', 'status' => '0']));
+//        }
+//        if(empty($request->input('menu_id'))){
+//            return self::res(0,response()->json(['data' => '错误的数据传输！', 'status' => '0']));
+//        }
+//        if(empty($request->input('menu_name'))){
+//            return self::res(0,response()->json(['data' => '请输入菜单名称！', 'status' => '0']));
+//        }
+//        if(strlen($request->input('menu_name'))>12){
+//            return self::res(0,response()->json(['data' => '您输入的菜单名称超出指定长度', 'status' => '0']));
+//        }
+//        if(empty($request->input('event_type'))){
+//            return self::res(0,response()->json(['data' => '请选择事件类型！', 'status' => '0']));
+//        }
+//        if($request->input('parent_id') != '0') {
+//
+//            if ($request->input('event_type') == '1' && $request->input('response_type') <> '1') {
+//                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+//            }
+//            if ($request->input('event_type') == '1' && empty($request->input('response_url'))) {
+//                return self::res(0, response()->json(['data' => '您选择的事件类型为链接，请输入跳转链接！', 'status' => '0']));
+//            }
+//            if ($request->input('event_type') != '1' && $request->input('response_type') <> '2') {
+//                return self::res(0, response()->json(['data' => '请选择关键字回复！', 'status' => '0']));
+//            }
+//            if ($request->input('event_type') != '1' && empty($request->input('response_keyword'))) {
+//                return self::res(0, response()->json(['data' => '请选择关键字！', 'status' => '0']));
+//            }
+//        }
+//        return self::res(1,$request);
+//    }
 
     /********菜单管理********/
 
