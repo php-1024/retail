@@ -1,18 +1,10 @@
 <?php
 namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
-use App\Models\Account;
-use App\Models\AccountInfo;
-use App\Models\Module;
 use App\Models\OperationLog;
-use App\Models\OrganizationStoreinfo;
-use App\Models\ProgramModuleNode;
 use App\Models\WechatAuthorization;
-use App\Models\WechatAuthorizerInfo;
-use App\Models\WechatDefaultReply;
 use App\Models\WechatDefinedMenu;
 use App\Models\WechatReply;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -125,7 +117,6 @@ class WechatmenuController extends Controller{
 
     //自定义菜单添加页面
     public function wechat_menu_add(Request $request){
-        dd(11);
         return view('Fansmanage/Wechatmenu/wechat_menu_add');
     }
 
