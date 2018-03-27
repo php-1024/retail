@@ -318,8 +318,8 @@ class WechatmenuController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $admin_data['organization_id'];
-        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0'],['organization_id',$organization_id]]);
+//        $organization_id = $admin_data['organization_id'];
+//        $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id','0'],['organization_id',$organization_id]]);
 //        foreach($list as $key=>$value){
 //            $parent_tree = $value['parent_tree'].$value['id'].',';
 //            $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree',$parent_tree]])->toArray();
@@ -445,11 +445,11 @@ class WechatmenuController extends Controller{
 //        dump($re);
 
 
-        $organization_id = $admin_data['organization_id'];
-        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        $re = \Wechat::search_menu($auth_info['authorizer_access_token']);
-
-        dump($re);
+//        $organization_id = $admin_data['organization_id'];
+//        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
+//        $re = \Wechat::search_menu($auth_info['authorizer_access_token']);
+//
+//        dump($re);
 
         return view('Fansmanage/Wechatmenu/style_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
