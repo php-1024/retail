@@ -12,7 +12,7 @@
         <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
         <div class="col-sm-10">
             <select  class="form-control m-b" onchange="changeConditionalMenu(this)" name="label_id">
-                <option value ="0">kbzz</option>
+                <option value ="0">无</option>
                 @foreach($label_list as $key=>$value)
                     <option value ="{{$value->id}}">{{$value->label_name}}</option>
                 @endforeach
