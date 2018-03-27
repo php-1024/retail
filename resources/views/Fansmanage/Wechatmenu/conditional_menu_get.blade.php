@@ -1,6 +1,6 @@
 @if(!empty($list))
-<form class="form-horizontal" role="form" id="defined_menu_edit" action="{{ url('fansmanage/ajax/defined_menu_edit') }}">
-<input type="hidden" id="defined_menu_delete" value="{{ url('fansmanage/ajax/defined_menu_delete') }}">
+<form class="form-horizontal" role="form" id="conditional_menu_edit" action="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
+<input type="hidden" id="conditional_menu_delete" value="{{ url('fansmanage/ajax/conditional_menu_delete') }}">
 <input type="hidden" name="_token" class="_token" value="{{csrf_token()}}">
 <div class="dd" id="nestable1">
     <ol class="dd-list">
@@ -47,7 +47,7 @@
 @endif
 <script>
     function getEditForm(menu_id){
-        var target = $("#defined_menu_edit");
+        var target = $("#conditional_menu_edit");
         var url = target.attr("action");
         var token = $('._token').val();
         var data = {'_token':token,'id':menu_id};
@@ -69,7 +69,7 @@
     }
 
     function getDeleteForm(menu_id){
-        var url = $("#defined_menu_delete").val();
+        var url = $("#conditional_menu_delete").val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':menu_id};
         $.post(url,data,function(response){
