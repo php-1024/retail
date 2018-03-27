@@ -150,7 +150,7 @@
                 });
                 return;
             }else{
-                $('#ctrl_box').html(response);
+                $('#menu_box').html(response);
             }
         });
     }
