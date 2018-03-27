@@ -482,6 +482,7 @@ class WechatmenuController extends Controller{
             //获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
             //获取菜单列表
+            dd($tag_id);
             $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['tag_id',$tag_id]],0,'id','DESC');
         }
         return view('Fansmanage/Wechatmenu/conditional_menu_list',['list'=>$list]);
