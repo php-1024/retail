@@ -19,6 +19,7 @@
 <script>
     function changeConditionalMenu(obj){
         var label_id = $(obj).val();
+        alert(label_id);
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
         var data = {'_token':token,'label_id':label_id};
