@@ -454,7 +454,92 @@ class WechatmenuController extends Controller{
         return view('Fansmanage/Wechatmenu/conditional_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
 
-   public function test(){
+    //自定义菜单添加页面
+    public function conditional_menu_add(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        //获取授权APPID
+        $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+        //获取触发关键字列表
+        $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
+        //获取菜单列表
+        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
+        return view('Fansmanage/Wechatmenu/conditional_menu_add',['list'=>$list,'wechatreply'=>$wechatreply]);
+    }
+
+    //添加自定义菜单检测
+    public function conditional_menu_add_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $event_type = $request->get('event_type');  //获取事件类型
+        $response_type = $request->get('response_type'); //获取响应类型
+        $organization_id = $admin_data['organization_id'];  //组织ID
+        $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
+        $menu_name = $request->get('menu_name');                //获取菜单名称
+        $parent_id = $request->get('parent_id');                //获取上级菜单ID
+        if ($parent_id == 0){
+            $parent_tree = '0,';
+        }else{
+            $parent_tree = '0,'.$parent_id.',';
+        }
+        $response_url = $request->get('response_url');          //获取响应网址
+        $response_keyword = $request->get('response_keyword');  //获取响应关键字
+        $defined_menu = [
+            'organization_id' => $organization_id,
+            'authorizer_appid' => $authorization['authorizer_appid'],
+            'menu_name' => $menu_name,
+            'parent_id' => $parent_id,
+            'parent_tree' => $parent_tree,
+            'event_type' => $event_type,
+            'response_type' => $response_type,
+            'response_url' => $response_url,
+            'response_keyword' => $response_keyword,
+        ];
+
+        $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+        if($parent_id == '0' && $count >= 3){
+            return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
+        }
+        if($parent_id <> '0' && $count >= 5){
+            return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+        }
+
+        DB::beginTransaction();
+        try {
+            WechatDefinedMenu::addDefinedMenu($defined_menu);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统添加了公众号自定义菜单！');//保存操作记录
+            }else{//商户本人操作记录
+                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了公众号自定义菜单！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
+    }
+
+
+    public function conditional_menu_get(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        //获取菜单列表
+        $list = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id','0']],0,'id','asc');
+        $son_menu = [];
+        foreach ($list as $key=>$val){
+            $sm = WechatDefinedMenu::getList([['organization_id',$admin_data['organization_id']],['parent_id',$val->id]],0,'id','asc');
+
+            if(!empty($sm)){
+                $son_menu[$val->id] = $sm;
+            }
+            unset($sm);
+        }
+        return view('Fansmanage/Wechatmenu/conditional_menu_get',['list'=>$list,'son_menu'=>$son_menu]);
+    }
+
+
+
+    public function test(){
        $auth_info = \Wechat::refresh_authorization_info(1);//刷新并获取授权令牌
 
        /*获取授权方公众号信息*/
