@@ -323,7 +323,7 @@ class WechatmenuController extends Controller{
 
 
         $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-        $re2 = \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1C__b9gvm_wg9bf5aFika48');
+        $re2 = \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1I_Gpz3u8JYxWP_NIugQhaQ');
         dump($re2);
         $re = \Wechat::get_fans_list($auth_info['authorizer_access_token']);
         dump($re);
