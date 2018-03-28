@@ -320,40 +320,6 @@ class WechatmenuController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-//       $menu_data_test = [
-//           'button'=>[
-//                   [
-//                      'name'=>'菜单1',
-//                       'sub_button'=>[
-//                           [
-//                               'type'=>'click',
-//                               'name'=>'点击事件',
-//                               'key'=>'1234',
-//                           ],
-//                           [
-//                               'type'=>'view',
-//                               'name'=>'链接事件',
-//                               'url'=>'http://www.01nnt.com',
-//                           ],
-//                       ]
-//                   ],
-//           ],
-//           'matchrule'=>[
-//               "tag_id"               =>"2",
-//                "sex"                 =>"1",
-//                "country"             =>"中国",
-//                "province"            =>"广东",
-//                "city"                =>"广州",
-//                "client_platform_type"=>"2",
-//                "language"            =>"zh_CN"
-//           ]
-//       ];
-//        $organization_id = $admin_data['organization_id'];
-//        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-//        $re = \Wechat::search_menu($auth_info['authorizer_access_token']);
-//
-//        dump($re);
-
         return view('Fansmanage/Wechatmenu/conditional_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
 
@@ -668,10 +634,10 @@ class WechatmenuController extends Controller{
         $data['matchrule'] = [
             'tag_id'=>$tag_id
         ];
-        dd(json_encode($data));
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
-        $re = \Wechat::create_menu($auth_info['authorizer_access_token'],$data);
+        $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'],$data);
         $re = json_decode($re,true);
+        dd($re);
         if($re['errmsg'] == 'ok'){
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         }else{
