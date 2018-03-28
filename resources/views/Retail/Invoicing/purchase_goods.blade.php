@@ -298,7 +298,6 @@
         })
         if(hasGoods==false) { //订单中没有该商品
             price=parseFloat(price);
-            console.log(price);
             var goods = {
                 id: id,
                 number: 1,
