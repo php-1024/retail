@@ -236,8 +236,6 @@
                                                     <td>
                                                         <label class="label label-danger" id="totalnumber">0</label>件
                                                     </td>
-                                                </tr>
-                                                <tr>
                                                     <td>
                                                         <label class="label label-danger" id="totalmoney">0</label>元
                                                     </td>
