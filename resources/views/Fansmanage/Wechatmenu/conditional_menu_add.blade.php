@@ -19,6 +19,7 @@
             </select>
         </div>
     </div>
+    <div class="line line-dashed b-b line-lg pull-in"></div>
     <div class="form-group" id="menu"></div>
 
     <div class="line line-dashed b-b line-lg pull-in"></div>
