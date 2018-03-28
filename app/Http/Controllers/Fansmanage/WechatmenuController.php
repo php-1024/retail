@@ -634,6 +634,37 @@ class WechatmenuController extends Controller{
         return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
     }
 
+    //自定义菜单删除弹窗
+    public function conditional_menu_delete(Request $request){
+        $id = $request->get('id');
+        return view('Fansmanage/Wechatmenu/conditional_menu_delete',['id'=>$id]);
+    }
+
+    //自定义菜单删除检测
+    public function conditional_menu_delete_check(Request $request){
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        $route_name = $request->path();//获取当前的页面路由
+        $id = $request->get('id');//菜单id
+
+        DB::beginTransaction();
+        try {
+            $data = WechatConditionalMenu::getOne([['id',$id]]);//菜单详情信息
+            if($data['parent_id'] == 0){//如果是最上级
+                $parent_tree = '0,'.$id.',';//树形结构
+                WechatConditionalMenu::removeDefinedMenu([['parent_tree',$parent_tree]]);//删除子级菜单
+            }
+            WechatConditionalMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
+            //添加操作日志
+            if ($admin_data['is_super'] != 2){//超级管理员操作商户的记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了公众号自定义菜单！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除自定义菜单失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除自定义菜单成功！', 'status' => '1']);
+    }
 
 
 
