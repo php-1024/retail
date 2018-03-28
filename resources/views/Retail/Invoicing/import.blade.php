@@ -288,10 +288,6 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $('#editBtn').click(function () {
-        $('#myModal').modal();
-    });
-
     //编辑店铺信息
     function EditStore() {
         var formData = new FormData($("#store_edit")[0]);
@@ -330,5 +326,161 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+
+    var ordersObj = {	//生成订单
+        clerk: {},//店员
+        supply: {},//顾客
+        goods: []//商品
+    };
+
+
+    var selectedopnames=[];
+
+
+
+
+    function canculate(){
+        var totalnumber=0;
+        var totalmoney=0;
+        ordersObj.goods.map(function(a_goods, index) {
+            totalnumber+=a_goods.number;
+            totalmoney+=parseFloat(a_goods.number*a_goods.price);
+        })
+        totalmoney=totalmoney.toFixed(2);
+        $("#totalnumber").html(totalnumber);
+        $("#totalmoney").html(totalmoney);
+    }
+
+    function goodsSelect(id) {
+
+        var name = $('#' + id + ' .name').html();
+        var price = $('#' + id + ' .price').html();
+        var optionname = $('#' + id + ' .option option:selected').text();
+        var optionid = $('#' + id + ' .option').val();
+        // alert(optionid)
+        //如果没有规格，直接隐藏
+        if(optionid ==undefined || optionid==null || optionid=='') {
+            optionid =0;
+            $('#'+id).hide();
+        }else {
+            optionid=parseInt(optionid);
+            var thisoption = {
+                optionid: optionid,
+                optionname: optionname
+            }
+            selectedopnames.push(thisoption); //先存起来
+            $('#dxop'+optionid).remove();//删除
+            var selectid=id+'select';
+            var objSelect=document.getElementById(selectid);
+            if(objSelect.length==0){
+                $('#'+id).hide();
+            }
+        }
+
+        var hasGoods = false;
+        ordersObj.goods.map(function(a_goods, index) { //订单中有该商品
+            if(a_goods.id == id && a_goods.optionid == optionid) {
+                hasGoods = true;
+                ordersObj.goods[index].number += 1;
+                var goodsNumber = ordersObj.goods[index].number;
+                $('#hs'+ id+'_'+optionid + ' .goods-number-input').val(goodsNumber);
+                return;  //跳出map
+            }
+        })
+        if(hasGoods==false) { //订单中没有该商品
+            price=parseFloat(price);
+            var goods = {
+                id: id,
+                number: 1,
+                optionid: optionid,
+                price:price
+            }
+            ordersObj.goods.push(goods);
+            $('.goods-table2 tbody').append('<tr id="hs'+id+'_'+optionid+'"><td>'+id+'</td><td class="search-goods-name">'+name+'</td><td>'+price+'</td><td>'+optionname+'</td><td class="search-goods-action"><a class="goods-number-sub" onclick="goodsSub('+id+','+optionid+')">-</a><input id="input'+id+'_'+optionid+'" onchange="update_num('+id+','+optionid+')" type="tel" class="goods-number-input" value="" style="border-radius: 0;" /><a class="goods-number-add" onclick="goodsAdd('+id+','+optionid+')">+</a><a style="color: red;cursor: pointer;" onclick="goodsCancel('+id+','+optionid+')">删除</a></td></tr>');
+            $('#input'+id+'_'+optionid).val('1');
+        }
+        canculate();
+    }
+
+    function goodsAdd(id,optionid) {
+
+        ordersObj.goods.map(function(a_goods, index) { //订单中有该商品
+            if(a_goods.id == id && a_goods.optionid == optionid) {
+                ordersObj.goods[index].number =parseInt(ordersObj.goods[index].number) + 1;
+                var goodsNumber = ordersObj.goods[index].number;
+                $('#input'+id+'_'+optionid).val(goodsNumber);
+                //$('#hs'+id+'_'+optionid + ' .goods-number-input').val(goodsNumber);
+                return;  //跳出map
+            }
+        })
+        canculate();
+    }
+
+    function update_num(id,optionid){
+        ordersObj.goods.map(function(a_goods, index) {
+            if(a_goods.id == id && a_goods.optionid == optionid) {
+                //var newnum=$('#hs'+id+'_'+optionid + ' .goods-number-input').val();
+                var newnum=$('#input'+id+'_'+optionid).val();
+                ordersObj.goods[index].number =parseInt(newnum);
+                return; //跳出map
+            }
+        })
+        canculate();
+    }
+
+    function goodsSub(id,optionid) {
+        ordersObj.goods.map(function(a_goods, index) {
+            if(a_goods.id == id && a_goods.optionid == optionid) {
+                if(a_goods.number == 1) {
+                    return;
+                }else {
+                    ordersObj.goods[index].number =parseInt(ordersObj.goods[index].number) - 1;
+                    $('#input'+id+'_'+optionid).val(ordersObj.goods[index].number);
+                    return; //跳出map
+                }
+            }
+        })
+        canculate();
+    }
+
+    function goodsCancel(id,optionid) {
+        $('#hs'+id+'_'+optionid).remove();
+        $('#'+id).show();
+
+        if(optionid>0){
+            var dxoption='dxop'+optionid;
+            var objOption=document.getElementById(dxoption);
+            if(!objOption){
+                var selectid=id+'select';
+                var objSelect=document.getElementById(selectid);
+
+                var op=document.createElement("option");      // 新建OPTION (op)
+                op.id = 'dxop'+optionid;
+                op.value = optionid;
+
+                for(i=0;i<selectedopnames.length;i++){
+                    if(selectedopnames[i].optionid==optionid){
+                        var op_names = selectedopnames[i].optionname;
+                        break;
+                    }
+                }
+                op.innerHTML = op_names;
+                objSelect.appendChild(op);
+            }
+        }
+
+        ordersObj.goods.map(function(a_goods, index) {
+            if(a_goods.id == id && a_goods.optionid == optionid) {
+                ordersObj.goods.splice(index, 1);
+                return;
+            }
+        });
+        canculate();
+    }
+
+</script>
+
 </body>
 </html>
