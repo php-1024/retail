@@ -58,19 +58,16 @@
                                     <label class="col-sm-1 control-label">供应商</label>
 
                                     <div class="col-sm-1">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="供应商id">
+                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="供应商id">
                                     </div>
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="公司名称或联系人姓名">
+                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="公司名称或联系人姓名">
                                     </div>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="联系人手机">
+                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="联系人手机">
                                     </div>
 
 
@@ -109,8 +106,7 @@
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="关键字或条码">
+                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="关键字或条码">
                                     </div>
                                     <div class="col-sm-1">
 
@@ -136,9 +132,9 @@
                                                 <th>商品ID</th>
                                                 <th>商品标题</th>
                                                 <th>商品价格</th>
-                                                <th>库存</th>
 
-                                                <th>规格</th>
+
+
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
@@ -149,20 +145,10 @@
                                                 <td>
                                                     100000.00
                                                 </td>
+
+
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -172,20 +158,10 @@
                                                 <td>
                                                     100000.00
                                                 </td>
+
+
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -195,20 +171,10 @@
                                                 <td>
                                                     100000.00
                                                 </td>
+
+
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -218,20 +184,10 @@
                                                 <td>
                                                     100000.00
                                                 </td>
+
+
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -241,20 +197,10 @@
                                                 <td>
                                                     100000.00
                                                 </td>
+
+
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -264,20 +210,10 @@
                                                 <td>
                                                     100000.00
                                                 </td>
+
+
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -299,7 +235,7 @@
                                                     <th>商品ID</th>
                                                     <th>商品标题</th>
                                                     <th>商品价格</th>
-                                                    <th>规格</th>
+
 
                                                     <th>操作</th>
                                                 </tr>
@@ -311,17 +247,12 @@
                                                     <td>
                                                         100000.00
                                                     </td>
-                                                    <td>
-                                                        米饭 + 辣
-                                                    </td>
+
 
                                                     <td>
-                                                        <button type="button" class="btn btn-success btn-xs"><i
-                                                                    class="fa fa-plus"></i></button>
-                                                        <input type="text" id="exampleInputPassword2"
-                                                               class="text-center" value="1000" size="4">
-                                                        <button type="button" class="btn btn-danger btn-xs"><i
-                                                                    class="fa fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
+                                                        <input type="text" id="exampleInputPassword2" class="text-center" value="1000" size="4">
+                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
                                                     </td>
                                                 </tr>
 
