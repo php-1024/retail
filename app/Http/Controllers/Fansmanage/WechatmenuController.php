@@ -560,13 +560,15 @@ class WechatmenuController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->get('id');
         $conditionalmenu = WechatConditionalMenu::getOne([['id',$id]]);
+
+        $label_name = Label::getPluck([['id',$conditionalmenu['tag_id']]],'label_name')->first();
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']]],0,'id','DESC');
         //获取菜单列表
-        $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0']],0,'id','DESC');
-        return view('Fansmanage/Wechatmenu/conditional_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply,'conditionalmenu'=>$conditionalmenu]);
+        $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['id','<>',$conditionalmenu['id']]],0,'id','DESC');
+        return view('Fansmanage/Wechatmenu/conditional_menu_edit',['list'=>$list,'wechatreply'=>$wechatreply,'conditionalmenu'=>$conditionalmenu,'label_name'=>$label_name]);
     }
 
     //编辑个性化菜单检测

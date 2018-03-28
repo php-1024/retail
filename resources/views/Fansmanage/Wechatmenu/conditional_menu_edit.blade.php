@@ -1,11 +1,22 @@
 <header class="panel-heading font-bold" style="color:#FF0000">
-    自定义菜单修改
+    个性化菜单修改
 </header>
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="defined_menu_edit_check" action="{{ url('fansmanage/ajax/defined_menu_edit_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="menu_id" id="menu_id" value="{{$conditionalmenu->id}}">
         <input type="hidden" name="response_type" id="response_type" value="{{$conditionalmenu->response_type}}">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
+            <div class="col-sm-10">
+                <select  class="form-control m-b">
+                    <option>{{$label_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
