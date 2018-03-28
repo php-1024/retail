@@ -124,7 +124,25 @@
                             <div class="tab-pane">
 
                                 <div class="col-lg-7">
-                                    @include('Retail/Invoicing/goods_list')
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading font-bold">
+                                            选择商品
+                                        </header>
+                                        <table class="table table-striped table-bordered ">
+                                            <thead>
+                                            <tr>
+                                                <th>商品ID</th>
+                                                <th>商品标题</th>
+                                                <th>商品价格</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="goods_list">
+
+                                            </tbody>
+                                        </table>
+                                        <div style="clear: both;"></div>
+                                    </section>
                                 </div>
 
                                 <div class="col-lg-5">
