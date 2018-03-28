@@ -590,7 +590,9 @@ Route::group(['prefix'=>'retail'],function(){
 
     //进销存管理
     Route::group(['prefix'=>'invoicing'],function(){
-        Route::get('import', 'Retail\InvoicingController@import')->middleware('RetailCheck');        //进出开单
+        Route::get('purchase_goods', 'Retail\InvoicingController@purchase_goods')->middleware('RetailCheck');        //进出开单
+        Route::get('return_goods', 'Retail\InvoicingController@return_goods')->middleware('RetailCheck');        //进出开单
+        Route::get('loss_goods', 'Retail\InvoicingController@loss_goods')->middleware('RetailCheck');        //进出开单
     });
 
     //用户管理
