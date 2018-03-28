@@ -353,6 +353,7 @@
         $("#totalmoney").html(totalmoney);
     }
 
+    //选择商品
     function goodsSelect(id) {
 
         var name = $('#' + id + ' .name').html();       //商品标题
@@ -390,7 +391,6 @@
                 return;  //跳出map
             }
         })
-        console.log('123123');
         if(hasGoods==false) { //订单中没有该商品
             price=parseFloat(price);
             var goods = {
@@ -406,6 +406,7 @@
         canculate();
     }
 
+    //增加商品
     function goodsAdd(id,optionid) {
 
         ordersObj.goods.map(function(a_goods, index) { //订单中有该商品
@@ -420,6 +421,7 @@
         canculate();
     }
 
+    //手动输入修改商品
     function update_num(id,optionid){
         ordersObj.goods.map(function(a_goods, index) {
             if(a_goods.id == id && a_goods.optionid == optionid) {
@@ -432,6 +434,7 @@
         canculate();
     }
 
+    //减少商品
     function goodsSub(id,optionid) {
         ordersObj.goods.map(function(a_goods, index) {
             if(a_goods.id == id && a_goods.optionid == optionid) {
@@ -447,6 +450,7 @@
         canculate();
     }
 
+    //移除商品
     function goodsCancel(id,optionid) {
         $('#hs'+id+'_'+optionid).remove();
         $('#'+id).show();
