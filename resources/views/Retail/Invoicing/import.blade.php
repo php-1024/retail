@@ -387,7 +387,7 @@
                 ordersObj.goods[index].number += 1;
                 var goodsNumber = ordersObj.goods[index].number;
                 $('#hs'+ id+'_'+optionid + ' .goods-number-input').val(goodsNumber);
-                return;  //跳出map
+//                return;  //跳出map
                 console.log('123123');
             }
         })
