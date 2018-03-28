@@ -36,7 +36,7 @@
 
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                退供应商货开单
+                                报损开单
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
