@@ -1,5 +1,6 @@
 <form class="form-horizontal" id="wechat_conditional_menu_add_check" method="post" action="{{url('fansmanage/ajax/wechat_conditional_menu_add_check')}}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    <input type="hidden" name="tag_id" id="_token" value="{{$tag_id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
