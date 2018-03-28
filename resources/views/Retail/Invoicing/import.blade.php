@@ -243,7 +243,7 @@
                                                     <td></td>
                                                     <td><label class="label label-info">总计件数：</label></td>
                                                     <td>
-                                                        <label class="label label-danger" id="totalnumber">0件</label>
+                                                        <label class="label label-danger" id="totalnumber">0</label>件
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -252,7 +252,7 @@
                                                     <td></td>
                                                     <td><label class="label label-info">总计金额</label></td>
                                                     <td>
-                                                        <label class="label label-danger" id="totalmoney">0元</label>
+                                                        <label class="label label-danger" id="totalmoney">0</label>元
                                                     </td>
                                                 </tr>
                                                 {{--<tr id="hs1_0">--}}
