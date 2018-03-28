@@ -73,9 +73,14 @@ class InvoicingController extends Controller
         $category_id = $request->get('category_id');    //栏目分类id
         $goods_name = $request->get('goods_name');      //商品名称
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
-        $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
-        dd($goods);
-        return  view('Retail/Invoicing/goods_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        if (!empty($category_id)){
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'category_id'=>$category_id],'0','id','DESC')->count();
+        }elseif (!empty($goods_name)){
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'name'=>$goods_name],'0','id','DESC')->count();
+        }else{
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
+        }
+        return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
     }
 }
 
