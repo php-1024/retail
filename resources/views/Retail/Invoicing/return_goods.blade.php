@@ -41,10 +41,10 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='retail/invoicing/purchase_goods'">供应商到货开单</button>
-                                        <button type="button" class="btn btn-s-md btn-success" onclick="window.location='retail/invoicing/return_goods'">&nbsp;&nbsp;退供应商货开单</button>
-                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='retail/invoicing/loss_goods'">&nbsp;&nbsp;报损开单</button>
-                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='retail/invoicing/purchase_goods'">&nbsp;&nbsp;盘点开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='purchase_goods'">供应商到货开单</button>
+                                        <button type="button" class="btn btn-s-md btn-success" onclick="window.location='return_goods'">&nbsp;&nbsp;退供应商货开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='loss_goods'">&nbsp;&nbsp;报损开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='purchase_goods'">&nbsp;&nbsp;盘点开单</button>
                                     </div>
                                 </form>
                             </div>
