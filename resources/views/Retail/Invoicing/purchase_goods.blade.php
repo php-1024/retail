@@ -94,28 +94,21 @@
 
 
                                     <div class="col-sm-2">
-                                        <select name="account" class="form-control m-b">
+                                        <select name="category_id" class="form-control m-b">
                                             <option value="0">请选择分类</option>
-                                            <option value="5970">美妆</option>
-                                            <option value="5974">面膜</option>
-                                            <option value="5977">跨境</option>
-                                            <option value="5963">护肤</option>
-                                            <option value="6360">香水</option>
-                                            <option value="5990">个护</option>
-                                            <option value="5981">内衣</option>
-                                            <option value="5985">养生</option>
+                                            @foreach($category as $key=>$val)
+                                                <option value="{{$val->id}}">{{$val->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="关键字或条码">
+                                        <input class="input-sm form-control" size="16" type="text" value="" name="goods_name" placeholder="关键字或条码">
                                     </div>
                                     <div class="col-sm-1">
 
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
-                                        </button>
+                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>
