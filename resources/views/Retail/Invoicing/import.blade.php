@@ -240,14 +240,12 @@
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
                                                     <td><label class="label label-info">总计件数：</label></td>
                                                     <td>
                                                         <label class="label label-danger" id="totalnumber">0</label>件
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td><label class="label label-info">总计金额</label></td>
