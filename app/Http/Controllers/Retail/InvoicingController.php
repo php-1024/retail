@@ -69,7 +69,6 @@ class InvoicingController extends Controller
     //零售进销存开单--商品列表
     public function goods_list(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('category_id');    //栏目分类id
         $goods_name = $request->get('goods_name');      //商品名称
@@ -81,7 +80,7 @@ class InvoicingController extends Controller
         }else{
             $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC');
         }
-        return  view('Retail/Invoicing/goods_list',['admin_data'=>$admin_data,'goods'=>$goods]);
+        return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
     }
 }
 

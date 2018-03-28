@@ -200,16 +200,16 @@
             if (response.status == -1) {
                 window.location.reload();
             } else if(response.status == 1) {
-                console.log(response);
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    console.log(response);
-                    $('#goods_list').html(response);
-                });
+                $('#goods_list').html(response);
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                },function(){
+//                    console.log(response);
+//                    $('#goods_list').html(response);
+//                });
             }else{
                 swal({
                     title: "提示信息",
