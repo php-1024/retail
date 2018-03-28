@@ -245,7 +245,6 @@
                                                     <td>
                                                         <label class="label label-danger" id="totalnumber">0件</label>
                                                     </td>
-                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -255,7 +254,6 @@
                                                     <td>
                                                         <label class="label label-danger" id="totalmoney">0元</label>
                                                     </td>
-                                                    <td></td>
                                                 </tr>
                                                 {{--<tr id="hs1_0">--}}
                                                     {{--<td>1</td>--}}
