@@ -52,9 +52,8 @@
                             <div class="line line-border b-b pull-in"></div>
 
                             <div class="col-sm-12">
-                                <form class="form-horizontal" method="get">
-
-
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/goods_list') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
 
 
@@ -193,39 +192,29 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     //编辑店铺信息
-    function EditStore() {
-        var formData = new FormData($("#store_edit")[0]);
-        $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}',
-            type: 'post',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (json) {
-                if (json.status == -1) {
-                    window.location.reload();
-                } else if (json.status == 1) {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    }, function () {
-                        window.location.reload();
-                    });
-                } else {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定"
-                    });
-                }
-            },
-            error: function (json) {
-                console.log(json);
+    function search_goods() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    $('#goods_list').html(response);
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
             }
         });
     }
