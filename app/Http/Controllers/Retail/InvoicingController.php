@@ -21,7 +21,7 @@ use Session;
 
 class InvoicingController extends Controller
 {
-    //零售店铺列表（超级管理员使用）
+    //零售进销存开单
     public function import(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
