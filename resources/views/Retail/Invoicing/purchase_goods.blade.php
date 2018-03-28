@@ -206,6 +206,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
+                    console.log(response);
                     $('#goods_list').html(response);
                 });
             }else{
