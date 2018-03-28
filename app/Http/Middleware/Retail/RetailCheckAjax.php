@@ -38,11 +38,6 @@ class RetailCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-
-            case "retail/ajax/goods_list":        //会员列表粉丝钱包显示页面
-                $re = $this->checkIsLogin($request);
-                return self::format_response($re, $next);
-                break;
             case "retail/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
                 return self::format_response($re, $next);
@@ -101,10 +96,10 @@ class RetailCheckAjax
             /*********商品添加和商品编辑*********/
 
             /*********进销存商品选择列表*********/
-//            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
-//                $re = $this->checkLoginAndRuleAndSearch($request);
-//                return self::format_response($re, $next);
-//                break;
+            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
+                $re = $this->checkLoginAndRuleAndSearch($request);
+                return self::format_response($re, $next);
+                break;
             /*********进销存商品选择列表*********/
 
             /****粉丝信息编辑****/
