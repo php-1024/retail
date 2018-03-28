@@ -41,10 +41,10 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-s-md btn-success">供应商到货开单</button>
-                                        <button type="button" class="btn btn-s-md btn">&nbsp;&nbsp;退供应商货开单</button>
-                                        <button type="button" class="btn btn-s-md btn">&nbsp;&nbsp;报损开单</button>
-                                        <button type="button" class="btn btn-s-md btn">&nbsp;&nbsp;盘点开单</button>
+                                        <button type="button" class="btn btn-s-md btn-success" onclick="window.location='retail/invoicing/purchase_goods'">供应商到货开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='retail/invoicing/return_goods'">&nbsp;&nbsp;退供应商货开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='retail/invoicing/loss_goods'">&nbsp;&nbsp;报损开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='retail/invoicing/return_goods'">&nbsp;&nbsp;盘点开单</button>
                                     </div>
                                 </form>
                             </div>
@@ -123,21 +123,17 @@
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                             <div class="tab-pane">
-
                                 <div class="col-lg-7">
                                     <section class="panel panel-default">
                                         <header class="panel-heading font-bold">
                                             选择商品
                                         </header>
-
                                         <table class="table table-striped table-bordered ">
                                             <thead>
                                             <tr>
                                                 <th>商品ID</th>
                                                 <th>商品标题</th>
                                                 <th>商品价格</th>
-
-
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
@@ -248,25 +244,10 @@
                                                     <th>商品ID</th>
                                                     <th>商品标题</th>
                                                     <th>商品价格</th>
-
-
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {{--<tr id="hs1_0">--}}
-                                                    {{--<td>1</td>--}}
-                                                    {{--<td>性感女人香水</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--88.00--}}
-                                                    {{--</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--<button type="button" class="btn btn-danger btn-xs" onclick="goodsSub(1,0)"><i class="fa fa-minus"></i></button>--}}
-                                                        {{--<input type="text" id="input1_0" onchange="update_num(1,0)" class="text-center" value="1000" size="4">--}}
-                                                        {{--<button type="button" class="btn btn-success btn-xs" onclick="goodsAdd(1,0)"><i class="fa fa-plus"></i></button>--}}
-                                                        {{--<button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel(4461,0)">删除</button>--}}
-                                                    {{--</td>--}}
-                                                {{--</tr>--}}
                                                 </tbody>
                                             </table>
                                         </div>
