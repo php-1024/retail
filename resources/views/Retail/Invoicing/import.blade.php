@@ -247,7 +247,7 @@
                                                         <button type="button" class="btn btn-success btn-xs" onclick="goodsSub(1,0)"><i class="fa fa-plus"></i></button>
                                                         <input type="text" id="input1_0" onchange="update_num(1,0)" class="text-center" value="1000" size="4">
                                                         <button type="button" class="btn btn-danger btn-xs" onclick="goodsAdd(1,0)"><i class="fa fa-minus"></i></button>
-                                                        <button type="button" class="btn btn-danger" onclick="goodsCancel(4461,0)">删除</button>
+                                                        <button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel(4461,0)">删除</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
