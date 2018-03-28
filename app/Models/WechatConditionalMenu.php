@@ -20,7 +20,7 @@ class WechatConditionalMenu extends Model{
         return self::where($where)->first();
     }
     //简易型查询单条数据关联查询
-    public static function ListWechatDefinedMenu($where)
+    public static function ListConditionalMenu($where)
     {
         return self::where($where)->get();
     }
