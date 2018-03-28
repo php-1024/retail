@@ -494,6 +494,7 @@ class WechatmenuController extends Controller{
         $event_type = $request->get('event_type');  //获取事件类型
         $response_type = $request->get('response_type'); //获取响应类型
         $organization_id = $admin_data['organization_id'];  //组织ID
+        $tag_id = $admin_data['label_id'];  //会员标签id
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
@@ -507,6 +508,7 @@ class WechatmenuController extends Controller{
         $defined_menu = [
             'organization_id' => $organization_id,
             'authorizer_appid' => $authorization['authorizer_appid'],
+            'tag_id' => $tag_id,
             'menu_name' => $menu_name,
             'parent_id' => $parent_id,
             'parent_tree' => $parent_tree,
@@ -516,7 +518,7 @@ class WechatmenuController extends Controller{
             'response_keyword' => $response_keyword,
         ];
 
-        $count = WechatDefinedMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+        $count = WechatConditionalMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
         if($parent_id == '0' && $count >= 3){
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
         }
@@ -526,15 +528,14 @@ class WechatmenuController extends Controller{
 
         DB::beginTransaction();
         try {
-            WechatDefinedMenu::addDefinedMenu($defined_menu);
+            WechatConditionalMenu::addConditionalMenu($defined_menu);
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统添加了公众号自定义菜单！');//保存操作记录
-            }else{//商户本人操作记录
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了公众号自定义菜单！');//保存操作记录
+            if ($admin_data['is_super'] != 2){
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了公众号自定义菜单！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
         }
