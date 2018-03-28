@@ -557,7 +557,7 @@ class WechatmenuController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $tag_id = $request->tag_id;
         if($tag_id == '0'){
-            return response()->json(['data' => '同步失败', 'status' => '0']);
+            return response()->json(['data' => '请先选择粉丝标签', 'status' => '0']);
         }
         $organization_id = $admin_data['organization_id'];
         $list = WechatConditionalMenu::ListConditionalMenu([['parent_id','0'],['tag_id',$tag_id],['organization_id',$organization_id]]);
