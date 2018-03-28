@@ -96,7 +96,7 @@
                             <div class="tab-pane fade in @if($conditionalmenu->response_type == 1) active @endif" id="link_response">
                                 <input type="text" class="form-control" name="response_url" value="{{$conditionalmenu->response_url}}" placeholder="跳转链接">
                                 <span class="help-block m-b-none">
-                                    <p>指定点击此菜单时要跳转的链接（注：链接需加<span class="red">http://</span>）</p>
+                                    <p>指定点击此菜单时要跳转的链接（注：链接需加<span style="color: red">http://</span>）</p>
                                 </span>
                             </div>
                             <div class="tab-pane fade in @if($conditionalmenu->response_type == 2) active @endif" id="text_response">
