@@ -224,7 +224,7 @@
                                             开单商品列表 操作人员：刘新文
                                         </header>
                                         <div class="panel-body">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped goods-table2">
                                                 <thead>
                                                 <tr>
                                                     <th>商品ID</th>
@@ -400,7 +400,7 @@
                 price:price
             }
             ordersObj.goods.push(goods);
-            $('.goods-table2 tbody').append('<tr id="hs'+id+'_'+optionid+'"><td>'+id+'</td><td class="search-goods-name">'+name+'</td><td>'+price+'</td><td>'+optionname+'</td><td class="search-goods-action"><a class="goods-number-sub" onclick="goodsSub('+id+','+optionid+')">-</a><input id="input'+id+'_'+optionid+'" onchange="update_num('+id+','+optionid+')" type="tel" class="goods-number-input" value="" style="border-radius: 0;" /><a class="goods-number-add" onclick="goodsAdd('+id+','+optionid+')">+</a><a style="color: red;cursor: pointer;" onclick="goodsCancel('+id+','+optionid+')">删除</a></td></tr>');
+            $('.goods-table2 tbody').append('<tr id="hs'+id+'_'+optionid+'"><td>'+id+'</td><td class="search-goods-name">'+name+'</td><td>'+price+'</td><td class="search-goods-action"><a class="goods-number-sub" onclick="goodsSub('+id+','+optionid+')">-</a><input id="input'+id+'_'+optionid+'" onchange="update_num('+id+','+optionid+')" type="tel" class="goods-number-input" value="" style="border-radius: 0;" /><a class="goods-number-add" onclick="goodsAdd('+id+','+optionid+')">+</a><a style="color: red;cursor: pointer;" onclick="goodsCancel('+id+','+optionid+')">删除</a></td></tr>');
             $('#input'+id+'_'+optionid).val('1');
         }
         canculate();
