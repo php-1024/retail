@@ -200,7 +200,8 @@
             if (response.status == -1) {
                 window.location.reload();
             }else{
-                $('#goods_list').html(response);
+                console.log(response);
+//                $('#goods_list').html(response);
             }
         });
     }
