@@ -558,6 +558,7 @@ class WechatmenuController extends Controller{
     //个性化菜单编辑页面
     public function conditional_menu_edit(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        dump($admin_data);
         $id = $request->get('id');
         $conditionalmenu = WechatConditionalMenu::getOne([['id',$id]]);
 
@@ -582,9 +583,14 @@ class WechatmenuController extends Controller{
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
 
-        $menu_parent_id =WechatConditionalMenu::getPluck([['id',$menu_id]],'parent_id')->first();//获取菜单的上级id
-        if($menu_parent_id !=$parent_id){//如果id有改变
-            $count = WechatConditionalMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id]]);
+        $data =WechatConditionalMenu::getOne([['id',$menu_id]]);//获取菜单的信息
+        $ziparent_tree = $data['parent_tree'].$data['id'].',';
+        $re = WechatConditionalMenu::checkRowExists([['organization_id',$admin_data['organization_id'],['tag_id',$data['tag_id']]['parent_tree',$ziparent_tree]]);
+        if($re){
+            return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
+        }
+        if($data['$parent_id'] !=$parent_id){//如果id有改变
+            $count = WechatConditionalMenu::getCount([['organization_id',$admin_data['organization_id']],['parent_id',$parent_id],['tag_id',$data['tag_id']]]);
             if($parent_id == '0' && $count >= 3){
                 return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
             }
