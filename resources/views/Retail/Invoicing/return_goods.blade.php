@@ -170,9 +170,7 @@
                             </div>
                             <footer class="panel-footer">
                                 <div class="row">
-
                                     <div class="col-sm-12 col-sm-offset-6">
-
                                         <button type="button" class="btn btn-success" id="addBtn">确认提交</button>
                                     </div>
                                 </div>
