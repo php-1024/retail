@@ -90,7 +90,7 @@
                                 <form class="form-horizontal" method="get">
 
 
-                                    <label class="col-sm-1 control-label">商&nbsp;   &nbsp;  &nbsp;品</label>
+                                    <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
 
 
                                     <div class="col-sm-2">
@@ -133,7 +133,7 @@
                                         <table class="table table-striped table-bordered ">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>商品ID</th>
                                                 <th>商品标题</th>
                                                 <th>商品价格</th>
                                                 <th>库存</th>
@@ -287,6 +287,50 @@
                                     </section>
                                 </div>
 
+                                <div class="col-lg-5">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading font-bold">
+                                            开单商品列表 操作人员：刘新文
+                                        </header>
+                                        <div class="panel-body">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>商品ID</th>
+                                                    <th>商品标题</th>
+                                                    <th>商品价格</th>
+                                                    <th>规格</th>
+
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>奇味鸡煲</td>
+                                                    <td>
+                                                        100000.00
+                                                    </td>
+                                                    <td>
+                                                        米饭 + 辣
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="button" class="btn btn-success btn-xs"><i
+                                                                    class="fa fa-plus"></i></button>
+                                                        <input type="text" id="exampleInputPassword2"
+                                                               class="text-center" value="1000" size="4">
+                                                        <button type="button" class="btn btn-danger btn-xs"><i
+                                                                    class="fa fa-minus"></i></button>
+                                                    </td>
+                                                </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
                                 <div style="clear: both;"></div>
                             </div>
                             <footer class="panel-footer">
