@@ -651,19 +651,20 @@ class WechatmenuController extends Controller{
             $data = WechatConditionalMenu::getOne([['id',$id]]);//菜单详情信息
             if($data['parent_id'] == 0){//如果是最上级
                 $parent_tree = '0,'.$id.',';//树形结构
-                WechatConditionalMenu::removeDefinedMenu([['parent_tree',$parent_tree]]);//删除子级菜单
+                WechatConditionalMenu::removeConditionalMenu([['parent_tree',$parent_tree]]);//删除子级菜单
             }
-            WechatConditionalMenu::removeDefinedMenu([['id',$id]]);//删除顶级菜单
+            WechatConditionalMenu::removeConditionalMenu([['id',$id]]);//删除顶级菜单
             //添加操作日志
             if ($admin_data['is_super'] != 2){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了公众号自定义菜单！');//保存操作记录
+                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了公众号个性化菜单！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '删除自定义菜单失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '删除个性化菜单失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '删除自定义菜单成功！', 'status' => '1']);
+        return response()->json(['data' => '删除个性化菜单成功！', 'status' => '1']);
     }
 
 
