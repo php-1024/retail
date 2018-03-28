@@ -210,7 +210,6 @@ class WechatApi{
     public function add_fans_tag_label($authorizer_access_token,$data){
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token='.$authorizer_access_token;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-        dd($data);
         $re = \HttpCurl::doPost($url,$data);
         return $re;
     }
