@@ -236,25 +236,20 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
+
+                                                <tr id="hs1_0">
                                                     <td>1</td>
-                                                    <td>奇味鸡煲</td>
+                                                    <td>性感女人香水</td>
                                                     <td>
-                                                        100000.00
+                                                        88.00
                                                     </td>
-
-
                                                     <td>
-                                                        <button type="button" class="btn btn-success btn-xs"><i
-                                                                    class="fa fa-plus"></i></button>
-                                                        <input type="text" id="exampleInputPassword2"
-                                                               class="text-center" value="1000" size="4">
-                                                        <button type="button" class="btn btn-danger btn-xs"><i
-                                                                    class="fa fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-success btn-xs" onclick="goodsSub(1,0)"><i class="fa fa-plus"></i></button>
+                                                        <input type="text" id="input1_0" onchange="update_num(1,0)" class="text-center" value="1000" size="4">
+                                                        <button type="button" class="btn btn-danger btn-xs" onclick="goodsAdd(1,0)"><i class="fa fa-minus"></i></button>
+                                                        <a style="color: red;cursor: pointer;" onclick="goodsCancel(4461,0)">删除</a>
                                                     </td>
                                                 </tr>
-
-
                                                 </tbody>
                                             </table>
                                         </div>
