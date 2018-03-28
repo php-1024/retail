@@ -599,7 +599,6 @@ class WechatmenuController extends Controller{
                 return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
             }
         }
-
         if ($parent_id == 0){
             $parent_tree = '0,';
         }else{
@@ -629,7 +628,6 @@ class WechatmenuController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
         }
@@ -637,15 +635,7 @@ class WechatmenuController extends Controller{
     }
 
 
-
-
-
-
-
-
-
-
-
+    
 
 
 
