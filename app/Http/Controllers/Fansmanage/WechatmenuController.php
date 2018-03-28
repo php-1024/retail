@@ -317,8 +317,6 @@ class WechatmenuController extends Controller{
 
     public function conditional_menu(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        dump($admin_data);
-
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -624,13 +622,12 @@ class WechatmenuController extends Controller{
             WechatDefinedMenu::editDefinedMenu(['id'=>$menu_id],$defined_menu);
             //添加操作日志
 
-            if ($admin_data['is_super'] == 1){//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在餐饮系统修改了公众号自定义菜单！');//保存操作记录
-            }else{//商户本人操作记录
+            if ($admin_data['is_super'] != 1){//超级管理员操作商户的记录
                 OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了公众号自定义菜单！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
         }
