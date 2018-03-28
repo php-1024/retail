@@ -43,6 +43,7 @@ class RetailCheck{
             case "retail/invoicing/purchase_goods":     //进销存管理--供应商到货开单
             case "retail/invoicing/return_goods":       //进销存管理--供应商退货开单
             case "retail/invoicing/loss_goods":         //进销存管理--报损开单
+            case "retail/invoicing/check_goods":        //进销存管理--盘点核对开单
 
             case "retail/user/user_list":               //用户管理-粉丝用户管理
 

@@ -593,6 +593,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('purchase_goods', 'Retail\InvoicingController@purchase_goods')->middleware('RetailCheck');        //进出开单
         Route::get('return_goods', 'Retail\InvoicingController@return_goods')->middleware('RetailCheck');        //进出开单
         Route::get('loss_goods', 'Retail\InvoicingController@loss_goods')->middleware('RetailCheck');        //进出开单
+        Route::get('check_goods', 'Retail\InvoicingController@check_goods')->middleware('RetailCheck');        //盘点商品
     });
 
     //用户管理
