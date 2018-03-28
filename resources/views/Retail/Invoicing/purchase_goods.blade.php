@@ -200,6 +200,7 @@
             if (response.status == -1) {
                 window.location.reload();
             } else if(response.status == 1) {
+                console.log(response);
                 swal({
                     title: "提示信息",
                     text: response.data,
