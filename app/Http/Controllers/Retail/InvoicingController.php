@@ -74,13 +74,13 @@ class InvoicingController extends Controller
         $goods_name = $request->get('goods_name');      //商品名称
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
         if (!empty($category_id)){
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'category_id'=>$category_id],'0','id','DESC')->count();
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'category_id'=>$category_id],'0','id','DESC');
         }elseif (!empty($goods_name)){
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'name'=>$goods_name],'0','id','DESC')->count();
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'name'=>$goods_name],'0','id','DESC');
         }else{
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC');
         }
-        dump($goods);
+        dd($goods);
         return  view('Retail/Invoicing/goods_list',['admin_data'=>$admin_data,'goods'=>$goods]);
     }
 }
