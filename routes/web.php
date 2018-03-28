@@ -517,6 +517,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::any('conditional_menu_add','Fansmanage\WechatmenuController@conditional_menu_add')->middleware('FansmanageCheckAjax');//添加个性化菜单板块
         Route::any('conditional_menu_add_check','Fansmanage\WechatmenuController@conditional_menu_add_check')->middleware('FansmanageCheckAjax');//添加个性化菜单功能提交
         Route::any('conditional_menu_edit','Fansmanage\WechatmenuController@conditional_menu_edit')->middleware('FansmanageCheckAjax');//修改个性化菜单ajax显示
+        Route::any('conditional_menu_edit_check','Fansmanage\WechatmenuController@conditional_menu_edit_check')->middleware('FansmanageCheckAjax');//修改个性化菜单功能提交
 
 
 
