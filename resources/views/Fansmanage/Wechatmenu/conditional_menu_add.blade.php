@@ -1,7 +1,6 @@
 <header class="panel-heading font-bold">
     自定义菜单设置
 </header>
-
 <form class="form-horizontal" role="form" id="conditional_menu_add_check" action="{{ url('fansmanage/ajax/conditional_menu_add_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
@@ -116,6 +115,7 @@
     <div class="form-group">
         <div class="col-sm-12 col-sm-offset-3">
             <button type="button" class="btn btn-success" onclick="addPostForm()">添加菜单</button>
+            <button type="button" id="show" type="hidden" class="btn btn-dark" onclick="addMenuForm()">一键同步到微信公众号</button>
         </div>
     </div>
     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -185,6 +185,14 @@
                 $('#menu').html(response);
             }
         });
+
+
+        if($("#show").css("display")=='hidden'){
+            $("#show").css("display","block");//show的display属性设置为block（显示）
+        }else{//如果show是显示的
+            $("#show").css("display","hidden");//show的display属性设置为none（隐藏）
+
+        }
     }
 
     $(function(){
@@ -229,4 +237,5 @@
             }
         });
     }
+
 </script>
