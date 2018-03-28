@@ -3,10 +3,11 @@
 </header>
 <form class="form-horizontal" role="form" id="conditional_menu_add_check" action="{{ url('fansmanage/ajax/conditional_menu_add_check') }}">
     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-    <input type="hidden" id="wechat_menu_add" value="{{ url('fansmanage/ajax/wechat_menu_add') }}">
+    <input type="hidden" id="wechat_conditional_menu_add" value="{{ url('fansmanage/ajax/wechat_conditional_menu_add') }}">
     <input type="hidden" name="response_type" id="response_type" value="1">
     <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
     <input type="hidden" id="conditional_menu_list" value="{{ url('fansmanage/ajax/conditional_menu_list') }}">
+    <input type="hidden" id="tag_id" value="0">
     <div class="form-group">
         <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
         <div class="col-sm-10">
@@ -115,7 +116,7 @@
     <div class="form-group">
         <div class="col-sm-12 col-sm-offset-3">
             <button type="button" class="btn btn-success" onclick="addPostForm()">添加菜单</button>
-            <button type="button" id="show" type="hidden" class="btn btn-dark" onclick="addMenuForm()">一键同步到微信公众号</button>
+            <button type="button" class="btn btn-dark" onclick="addConditionalMenuForm()">一键同步到微信公众号</button>
         </div>
     </div>
     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -151,6 +152,7 @@
 
     function changeConditionalMenu(obj){
         var label_id = $(obj).val();
+        $('#tag_id').val(label_id)
         var url = $('#conditional_menu_get').val();
         var menu_url = $('#conditional_menu_list').val();
         var token = $('#_token').val();
@@ -185,14 +187,6 @@
                 $('#menu').html(response);
             }
         });
-
-
-        if($("#show").css("display")=='hidden'){
-            $("#show").css("display","block");//show的display属性设置为block（显示）
-        }else{//如果show是显示的
-            $("#show").css("display","hidden");//show的display属性设置为none（隐藏）
-
-        }
     }
 
     $(function(){
@@ -234,6 +228,28 @@
                     confirmButtonColor:"#DD6B55",
                     confirmButtonText: "确定"
                 });
+            }
+        });
+    }
+    function addConditionalMenuForm(){
+        var url = $('#wechat_conditional_menu_add').val();
+        var token = $('#_token').val();
+        var tag_id = $('#tag_id').val();
+        var data = {'_token':token,'tag_id':tag_id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }

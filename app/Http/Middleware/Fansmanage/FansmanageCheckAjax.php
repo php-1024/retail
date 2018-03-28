@@ -171,6 +171,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/defined_menu_delete_check"://检测是否登陆 权限 安全密码--删除自定义菜单
             case "fansmanage/ajax/conditional_menu_delete_check"://检测是否登陆 权限 安全密码--删除个性化菜单
             case "fansmanage/ajax/wechat_menu_add_check"://检测是否登陆 权限 安全密码--一键同步到微信菜单
+            case "fansmanage/ajax/wechat_conditional_menu_add_check"://检测是否登陆 权限 安全密码--一键同步到微信菜单
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -188,6 +189,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/conditional_menu_list":             //显示上级菜单
             case "fansmanage/ajax/conditional_menu_edit":             //修改个性化菜单
             case "fansmanage/ajax/conditional_menu_delete":             //删除个性化菜单
+            case "fansmanage/ajax/wechat_conditional_menu_add":         //一键同步到微信菜单
             case "fansmanage/ajax/auto_reply_add":                //自定义菜单添加
             case "fansmanage/ajax/auto_reply_edit_text":       //修改关键字回复文本内容
             case "fansmanage/ajax/auto_reply_edit_image":      //修改关键字回复图片内容
