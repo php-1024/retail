@@ -80,7 +80,8 @@ class InvoicingController extends Controller
         }else{
             $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
         }
-        return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
+        dump($goods);
+        return  view('Retail/Invoicing/goods_list',['admin_data'=>$admin_data,'goods'=>$goods]);
     }
 }
 
