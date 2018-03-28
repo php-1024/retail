@@ -326,7 +326,7 @@ class WechatmenuController extends Controller{
 
         $data = [
             'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI'],
-            'tagid' =>'3'
+            'tagid' =>'35'
         ];
         $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
         $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],'');
