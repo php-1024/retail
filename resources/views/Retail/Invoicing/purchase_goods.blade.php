@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col-sm-1">
 
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_goods()"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>
@@ -116,8 +116,7 @@
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                             <div class="tab-pane">
-                                <div class="col-lg-7">
-                                    @include('Retail/Invoicing/goods_list')
+                                <div class="col-lg-7" id="goods_list">
                                 </div>
 
                                 <div class="col-lg-5">
