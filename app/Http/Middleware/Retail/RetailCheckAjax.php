@@ -181,6 +181,7 @@ class RetailCheckAjax
         } else {
             $re2 = $this->checkSearch($re['response']);   //检测添加商品数据
             if ($re2['status'] == '0') {
+                dd($re2);
                 return $re2;
             } else {
                 return self::res(1, $re2['response']);
