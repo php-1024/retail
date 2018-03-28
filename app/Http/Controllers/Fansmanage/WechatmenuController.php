@@ -585,8 +585,8 @@ class WechatmenuController extends Controller{
         $data =WechatConditionalMenu::getOne([['id',$menu_id]]);//获取菜单的信息
 
         $ziparent_tree = $data['parent_tree'].$data['id'].',';
-        
-        $re = WechatConditionalMenu::checkRowExists( ['organization_id',$admin_data['organization_id'],['tag_id',$data['tag_id']],['parent_tree',$ziparent_tree]]);
+
+        $re = WechatConditionalMenu::checkRowExists( [['organization_id',$admin_data['organization_id']],['tag_id',$data['tag_id']],['parent_tree',$ziparent_tree]]]);
         if($re){
             return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
         }
