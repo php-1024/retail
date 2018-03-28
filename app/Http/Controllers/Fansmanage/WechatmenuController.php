@@ -655,7 +655,7 @@ class WechatmenuController extends Controller{
         if(!empty($re['menuid'])){
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         }else{
-            return response()->json(['data' => '同步失败！', 'status' => '1']);
+            return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
     }
 
