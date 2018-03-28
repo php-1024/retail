@@ -199,15 +199,8 @@
         $.post(url, data, function (response) {
             if (response.status == -1) {
                 window.location.reload();
-            } else if(response.status == 1) {
-                $('#goods_list').html(response);
             }else{
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+                $('#goods_list').html(response);
             }
         });
     }
