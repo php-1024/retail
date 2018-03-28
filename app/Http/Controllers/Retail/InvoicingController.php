@@ -69,6 +69,7 @@ class InvoicingController extends Controller
     //零售进销存开单--商品列表
     public function goods_list(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('category_id');    //栏目分类id
         $goods_name = $request->get('goods_name');      //商品名称
