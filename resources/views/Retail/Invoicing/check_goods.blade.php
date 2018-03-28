@@ -59,7 +59,7 @@
 
                                     <div class="col-sm-2">
                                         <select name="account" class="form-control m-b">
-                                            <option value="0">请选择一级分类</option>
+                                            <option value="0">请选择分类</option>
                                             <option value="5970">美妆</option>
                                             <option value="5974">面膜</option>
                                             <option value="5977">跨境</option>

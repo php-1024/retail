@@ -50,52 +50,12 @@
                             </div>
 
                             <div class="line line-border b-b pull-in"></div>
-
                             <div class="col-sm-12">
                                 <form class="form-horizontal" method="get">
-
-
-                                    <label class="col-sm-1 control-label">供应商</label>
-
-                                    <div class="col-sm-1">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="供应商id">
-                                    </div>
-
-
-                                    <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="公司名称或联系人姓名">
-                                    </div>
-
-                                    <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="联系人手机">
-                                    </div>
-
-
-                                    <div class="col-sm-1">
-
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-
-
-                            <div style="clear:both"></div>
-                            <div class="line line-border b-b pull-in"></div>
-
-                            <div class="col-sm-12">
-                                <form class="form-horizontal" method="get">
-
-
                                     <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
-
-
                                     <div class="col-sm-2">
                                         <select name="account" class="form-control m-b">
-                                            <option value="0">请选择一级分类</option>
+                                            <option value="0">请选择分类</option>
                                             <option value="5970">美妆</option>
                                             <option value="5974">面膜</option>
                                             <option value="5977">跨境</option>
@@ -106,11 +66,8 @@
                                             <option value="5985">养生</option>
                                         </select>
                                     </div>
-
-
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="关键字或条码">
+                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="关键字或条码">
                                     </div>
                                     <div class="col-sm-1">
 
