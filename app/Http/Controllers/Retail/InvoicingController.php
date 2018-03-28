@@ -18,14 +18,12 @@ use App\Models\RetailOrder;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
 
 class InvoicingController extends Controller
 {
     //零售进销存开单--供应商到货开单
     public function purchase_goods(Request $request)
     {
-        dump(Session::all());
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
