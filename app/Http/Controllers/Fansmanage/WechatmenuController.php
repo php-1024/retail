@@ -576,7 +576,6 @@ class WechatmenuController extends Controller{
 
     //自定义菜单添加页面
     public function wechat_conditional_menu_add_check(Request $request){
-        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $tag_id = $request->tag_id;
         $organization_id = $admin_data['organization_id'];
