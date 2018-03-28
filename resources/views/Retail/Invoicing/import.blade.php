@@ -58,16 +58,19 @@
                                     <label class="col-sm-1 control-label">供应商</label>
 
                                     <div class="col-sm-1">
-                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="供应商id">
+                                        <input class="input-sm form-control" size="16" type="text" value=""
+                                               placeholder="供应商id">
                                     </div>
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="公司名称或联系人姓名">
+                                        <input class="input-sm form-control" size="16" type="text" value=""
+                                               placeholder="公司名称或联系人姓名">
                                     </div>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="联系人手机">
+                                        <input class="input-sm form-control" size="16" type="text" value=""
+                                               placeholder="联系人手机">
                                     </div>
 
 
@@ -106,7 +109,8 @@
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="" placeholder="关键字或条码">
+                                        <input class="input-sm form-control" size="16" type="text" value=""
+                                               placeholder="关键字或条码">
                                     </div>
                                     <div class="col-sm-1">
 
@@ -134,86 +138,77 @@
                                                 <th>商品价格</th>
 
 
-
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="1">
+                                                <td class="id">1</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-
-
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(1);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="2">
+                                                <td class="id">2</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-
-
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(2);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="3">
+                                                <td class="id">3</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-
-
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(3);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="4">
+                                                <td class="id">4</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-
-
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(4);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="5">
+                                                <td class="id">5</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-
-
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(5);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="6">
+                                                <td class="id">6</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
+                                                    <button onclick="goodsSelect(6);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
                                                 </td>
-
-
+                                            </tr>
+                                            <tr id="7">
+                                                <td class="id">7</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(7);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -250,9 +245,12 @@
 
 
                                                     <td>
-                                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
-                                                        <input type="text" id="exampleInputPassword2" class="text-center" value="1000" size="4">
-                                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-success btn-xs"><i
+                                                                    class="fa fa-plus"></i></button>
+                                                        <input type="text" id="exampleInputPassword2"
+                                                               class="text-center" value="1000" size="4">
+                                                        <button type="button" class="btn btn-danger btn-xs"><i
+                                                                    class="fa fa-minus"></i></button>
                                                     </td>
                                                 </tr>
 
