@@ -90,7 +90,7 @@
                                 <form class="form-horizontal" method="get">
 
 
-                                    <label class="col-sm-1 control-label">商&nbsp;   &nbsp;  &nbsp;品</label>
+                                    <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
 
 
                                     <div class="col-sm-2">
@@ -133,151 +133,82 @@
                                         <table class="table table-striped table-bordered ">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>商品ID</th>
                                                 <th>商品标题</th>
                                                 <th>商品价格</th>
-                                                <th>库存</th>
 
-                                                <th>规格</th>
+
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="1">
+                                                <td class="id">1</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(1);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="2">
+                                                <td class="id">2</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(2);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="3">
+                                                <td class="id">3</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(3);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="4">
+                                                <td class="id">4</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(4);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="5">
+                                                <td class="id">5</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
-                                                </td>
-                                                <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(5);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>奇味鸡煲</td>
+                                            <tr id="6">
+                                                <td class="id">6</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    100000.00
+                                                    <button onclick="goodsSelect(6);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    </button>
                                                 </td>
+                                            </tr>
+                                            <tr id="7">
+                                                <td class="id">7</td>
+                                                <td class="name">性感女人香水</td>
+                                                <td class="price">88.00</td>
                                                 <td>
-                                                    999
-                                                </td>
-                                                <td>
-                                                    <select name="account" class="form-control m-b">
-                                                        <option>无</option>
-                                                        <option>option 2</option>
-                                                        <option>option 3</option>
-                                                        <option>option 4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs" id="editBtn" type="button"><i
-                                                                class="fa fa-plus"></i>&nbsp;&nbsp;选择
+                                                    <button onclick="goodsSelect(7);" class="btn btn-info btn-xs" type="button">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;选择
                                                     </button>
                                                 </td>
                                             </tr>
@@ -287,6 +218,43 @@
                                     </section>
                                 </div>
 
+                                <div class="col-lg-5">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading font-bold">
+                                            开单商品列表 操作人员：刘新文
+                                        </header>
+                                        <div class="panel-body">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>商品ID</th>
+                                                    <th>商品标题</th>
+                                                    <th>商品价格</th>
+
+
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                <tr id="hs1_0">
+                                                    <td>1</td>
+                                                    <td>性感女人香水</td>
+                                                    <td>
+                                                        88.00
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-danger btn-xs" onclick="goodsSub(1,0)"><i class="fa fa-minus"></i></button>
+                                                        <input type="text" id="input1_0" onchange="update_num(1,0)" class="text-center" value="1000" size="4">
+                                                        <button type="button" class="btn btn-success btn-xs" onclick="goodsAdd(1,0)"><i class="fa fa-plus"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel(4461,0)">删除</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
                                 <div style="clear: both;"></div>
                             </div>
                             <footer class="panel-footer">
