@@ -355,11 +355,12 @@
 
     function goodsSelect(id) {
 
-        var name = $('#' + id + ' .name').html();
-        var price = $('#' + id + ' .price').html();
-        var optionname = $('#' + id + ' .option option:selected').text();
-        var optionid = $('#' + id + ' .option').val();
-        // alert(optionid)
+        var name = $('#' + id + ' .name').html();       //商品标题
+        var price = $('#' + id + ' .price').html();     //商品价格
+
+        var optionname = $('#' + id + ' .option option:selected').text();   //商品规格
+        var optionid = $('#' + id + ' .option').val();                      //商品规格
+
         //如果没有规格，直接隐藏
         if(optionid ==undefined || optionid==null || optionid=='') {
             optionid =0;
@@ -387,6 +388,7 @@
                 var goodsNumber = ordersObj.goods[index].number;
                 $('#hs'+ id+'_'+optionid + ' .goods-number-input').val(goodsNumber);
                 return;  //跳出map
+                console.log('123123');
             }
         })
         if(hasGoods==false) { //订单中没有该商品
