@@ -197,9 +197,25 @@ class WechatApi{
      * 获取公众号已创建的标签
      * organization_id 绑定授权组织的ID
      */
-    public function create_fans_tag_list($authorizer_access_token){
+    public function create_fans_tag_list($authorizer_access_token,$data){
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/get?access_token='.$authorizer_access_token;
-        $re = \HttpCurl::doGet($url);
+        $re = \HttpCurl::doPost($url,$data);
+        return $re;
+    }
+
+    /*
+     * 批量为用户打标签
+     * organization_id 绑定授权组织的ID
+     */
+    public function add_fans_tag_label($authorizer_access_token,$id){
+        $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token='.$authorizer_access_token;
+        $data = [
+            'tag'=>[
+                'id'  =>$id,
+            ],
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $re = \HttpCurl::doPost($url,$data);
         return $re;
     }
 
