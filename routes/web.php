@@ -522,7 +522,7 @@ Route::group(['prefix'=>'fansmanage'],function(){
         Route::any('conditional_menu_delete_check','Fansmanage\WechatmenuController@conditional_menu_delete_check')->middleware('FansmanageCheckAjax');//删除个性化菜单板块
 
         Route::any('wechat_conditional_menu_add','Fansmanage\WechatmenuController@wechat_conditional_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
-        Route::any('wechat_conditional_menu_add_check','Fansmanage\WechatmenuController@wechat_conditional_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
+        Route::any('wechat_conditional_menu_add_check','Fansmanage\WechatmenuController@wechat_conditional_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
 
 
 
