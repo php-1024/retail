@@ -157,8 +157,6 @@
                                                     <th>商品ID</th>
                                                     <th>商品标题</th>
                                                     <th>商品价格</th>
-
-
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
