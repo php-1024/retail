@@ -196,13 +196,13 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var data = target.serialize();
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
+        $.post(url, data, function (response) {
+            if (response.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if(response.status == 1) {
                 swal({
                     title: "提示信息",
-                    text: json.data,
+                    text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
@@ -211,7 +211,7 @@
             }else{
                 swal({
                     title: "提示信息",
-                    text: json.data,
+                    text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 });

@@ -537,7 +537,6 @@ class RetailCheckAjax
         if (empty($request->input('category_id')) && empty($request->input('goods_name'))) {
             return self::res(0, response()->json(['data' => '请选择商品分类，或者输入商品名称进行搜索!', 'status' => '0']));
         }
-
         return self::res(1, $request);
     }
 
