@@ -65,6 +65,18 @@ class InvoicingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         return  view('Retail/Invoicing/check_goods',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
+
+    //零售进销存开单--商品列表
+    public function goods_list(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $category_id = $request->get('category_id');    //栏目分类id
+        $goods_name = $request->get('goods_name');      //商品名称
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
+        dd($goods);
+        return  view('Retail/Invoicing/goods_list',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
 }
 
 ?>
