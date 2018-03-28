@@ -494,8 +494,7 @@ class WechatmenuController extends Controller{
         $event_type = $request->get('event_type');  //获取事件类型
         $response_type = $request->get('response_type'); //获取响应类型
         $organization_id = $admin_data['organization_id'];  //组织ID
-        $tag_id = $admin_data['label_id'];  //会员标签id
-        dd($tag_id);
+        $tag_id = $request->label_id;  //会员标签id
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
