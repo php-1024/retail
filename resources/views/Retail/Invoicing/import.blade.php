@@ -224,6 +224,26 @@
                                             开单商品列表 操作人员：刘新文
                                         </header>
                                         <div class="panel-body">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th><label class="label label-info">总计件数：</label></th>
+                                                    <th><label class="label label-info">总计金额</label></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger" id="totalnumber">0</label>件
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger" id="totalmoney">0</label>元
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                             <table class="table table-striped goods-table2">
                                                 <thead>
                                                 <tr>
@@ -236,23 +256,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td><label class="label label-info">总计件数：</label></td>
-                                                    <td>
-                                                        <label class="label label-danger" id="totalnumber">0</label>件
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td><label class="label label-info">总计金额</label></td>
-                                                    <td>
-                                                        <label class="label label-danger" id="totalmoney">0</label>元
-                                                    </td>
-                                                </tr>
                                                 {{--<tr id="hs1_0">--}}
                                                     {{--<td>1</td>--}}
                                                     {{--<td>性感女人香水</td>--}}
