@@ -44,7 +44,7 @@
                                         <button type="button" class="btn btn-s-md btn" onclick="window.location='purchase_goods'">供应商到货开单</button>
                                         <button type="button" class="btn btn-s-md btn-success" onclick="window.location='return_goods'">&nbsp;&nbsp;退供应商货开单</button>
                                         <button type="button" class="btn btn-s-md btn" onclick="window.location='loss_goods'">&nbsp;&nbsp;报损开单</button>
-                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='purchase_goods'">&nbsp;&nbsp;盘点开单</button>
+                                        <button type="button" class="btn btn-s-md btn" onclick="window.location='check_goods'">&nbsp;&nbsp;盘点开单</button>
                                     </div>
                                 </form>
                             </div>
@@ -95,7 +95,7 @@
 
                                     <div class="col-sm-2">
                                         <select name="account" class="form-control m-b">
-                                            <option value="0">请选择一级分类</option>
+                                            <option value="0">请选择分类</option>
                                             <option value="5970">美妆</option>
                                             <option value="5974">面膜</option>
                                             <option value="5977">跨境</option>
