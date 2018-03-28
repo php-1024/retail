@@ -617,6 +617,8 @@ class WechatmenuController extends Controller{
             'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
+
+        dd($defined_menu);
         DB::beginTransaction();
         try {
             WechatDefinedMenu::editDefinedMenu(['id'=>$menu_id],$defined_menu);
