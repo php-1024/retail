@@ -326,14 +326,13 @@ class WechatmenuController extends Controller{
 
         $data = [
             'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI'],
-            'tagid' =>'35'
+            'tagid' =>'1'
         ];
-        dump(json_encode($data));
 
-//        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-////        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
-//        $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
-
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+//        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
+        $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
+        dump($re);
         return view('Fansmanage/Wechatmenu/conditional_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
 
