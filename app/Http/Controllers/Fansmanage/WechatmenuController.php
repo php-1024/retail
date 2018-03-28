@@ -322,15 +322,17 @@ class WechatmenuController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
 
 
-//        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-//       \Wechat::get_fans_info($auth_info['authorizer_access_token'],'');
-//        oyhbt1PNT38bzuM5rvwF71ePtUFI
+
 
         $data = [
             'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI'],
-            'tagid' =>'3'
+            'tagid' =>'35'
         ];
-        dd(json_encode($data));
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+//        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
+        $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
+        dump(json_encode($re));
+
         return view('Fansmanage/Wechatmenu/conditional_menu',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
    }
 
@@ -555,6 +557,9 @@ class WechatmenuController extends Controller{
     public function wechat_conditional_menu_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $tag_id = $request->tag_id;
+        if($tag_id == '0'){
+            return response()->json(['data' => '请先选择粉丝标签', 'status' => '0']);
+        }
         $organization_id = $admin_data['organization_id'];
         $list = WechatConditionalMenu::ListConditionalMenu([['parent_id','0'],['tag_id',$tag_id],['organization_id',$organization_id]]);
         foreach($list as $key=>$value){
@@ -648,11 +653,10 @@ class WechatmenuController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'],$data);
         $re = json_decode($re,true);
-        dd($re);
-        if($re['errmsg'] == 'ok'){
+        if(!empty($re['menuid'])){
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         }else{
-            return response()->json(['data' => '同步失败！', 'status' => '1']);
+            return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
     }
 

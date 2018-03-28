@@ -207,13 +207,8 @@ class WechatApi{
      * 批量为用户打标签
      * organization_id 绑定授权组织的ID
      */
-    public function add_fans_tag_label($authorizer_access_token,$id){
+    public function add_fans_tag_label($authorizer_access_token,$data){
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token='.$authorizer_access_token;
-        $data = [
-            'tag'=>[
-                'id'  =>$id,
-            ],
-        ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url,$data);
         return $re;
