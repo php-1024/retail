@@ -583,8 +583,9 @@ class WechatmenuController extends Controller{
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
 
         $data =WechatConditionalMenu::getOne([['id',$menu_id]]);//获取菜单的信息
+        dd($menu_id);
+
         $ziparent_tree = $data['parent_tree'].$data['id'].',';
-        dd($ziparent_tree);
 
         $re = WechatConditionalMenu::checkRowExists([['organization_id',$admin_data['organization_id'],['tag_id',$data['tag_id']],['parent_tree',$ziparent_tree]]]);
         if($re){
