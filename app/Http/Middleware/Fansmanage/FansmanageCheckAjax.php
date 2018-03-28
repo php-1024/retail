@@ -179,7 +179,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/defined_menu_delete":           //自定义菜单删除
             case "fansmanage/ajax/defined_menu_edit":              //自定义菜单编辑
             case "fansmanage/ajax/defined_menu_get":              //自定义菜单添加
-            case "fansmanage/ajax/conditional_menu_get":              //个性化菜单添加
+            case "fansmanage/ajax/conditional_menu_get":              //显示个性化菜单
             case "fansmanage/ajax/conditional_menu_add":              //个性化菜单添加
             case "fansmanage/ajax/conditional_menu_list":             //显示上级菜单
             case "fansmanage/ajax/conditional_menu_edit":             //修改个性化菜单
