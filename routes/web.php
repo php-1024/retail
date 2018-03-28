@@ -632,6 +632,8 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('subordinate_lock', 'Retail\SubordinateController@subordinate_lock')->middleware('RetailCheckAjax');            //下属冻结页面
         Route::post('subordinate_lock_check', 'Retail\SubordinateController@subordinate_lock_check')->middleware('RetailCheckAjax');//下属冻结检测
 
+        Route::any('goods_list', 'Retail\InvoicingController@goods_list')->middleware('RetailCheckAjax');           //进出开单商品列表
+
         Route::post('category_add_check', 'Retail\CategoryController@category_add_check')->middleware('RetailCheckAjax');          //栏目添加检测
         Route::post('category_delete', 'Retail\CategoryController@category_delete')->middleware('RetailCheckAjax');          //栏目添加检测
         Route::post('category_delete_check', 'Retail\CategoryController@category_delete_check')->middleware('RetailCheckAjax');          //栏目添加检测

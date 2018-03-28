@@ -95,6 +95,13 @@ class RetailCheckAjax
                 break;
             /*********商品添加和商品编辑*********/
 
+            /*********进销存商品选择列表*********/
+            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
+                $re = $this->checkLoginAndRuleAndSearch($request);
+                return self::format_response($re, $next);
+                break;
+            /*********进销存商品选择列表*********/
+
             /****粉丝信息编辑****/
             case "retail/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
@@ -156,6 +163,23 @@ class RetailCheckAjax
             return $re;
         } else {
             $re2 = $this->checkGoodsAdd($re['response']);   //检测添加商品数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
+
+
+    //检测登录，权限，及搜索商品的数据
+    public function checkLoginAndRuleAndSearch($request)
+    {
+        $re = $this->checkLoginAndRule($request);//检测登录、权限
+        if ($re['status'] == '0') {//检测是否登录
+            return $re;
+        } else {
+            $re2 = $this->checkSearch($re['response']);   //检测添加商品数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
@@ -503,6 +527,15 @@ class RetailCheckAjax
     {
         if (empty($request->input('name'))) {
             return self::res(0, response()->json(['data' => '请输入商品名称!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+    //检测搜索商品的数据
+    public function checkSearch($request)
+    {
+        if (empty($request->input('category_id')) || empty($request->input('goods_name'))) {
+            return self::res(0, response()->json(['data' => '请选择商品分类，或者输入商品名称进行搜索!', 'status' => '0']));
         }
         return self::res(1, $request);
     }
