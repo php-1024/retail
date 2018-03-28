@@ -237,6 +237,26 @@
                                                 </thead>
                                                 <tbody>
 
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><label class="label label-info">总计件数：</label></td>
+                                                    <td>
+                                                        <label class="label label-danger" id="totalnumber">0件</label>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><label class="label label-info">总计金额</label></td>
+                                                    <td>
+                                                        <label class="label label-danger" id="totalmoney">0元</label>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
                                                 {{--<tr id="hs1_0">--}}
                                                     {{--<td>1</td>--}}
                                                     {{--<td>性感女人香水</td>--}}
