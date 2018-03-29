@@ -20,13 +20,6 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $chars = md5(uniqid(mt_rand(), true));
-        $uuid  = substr($chars,0,8) . '-';
-        $uuid .= substr($chars,8,4) . '-';
-        $uuid .= substr($chars,12,4) . '-';
-        $uuid .= substr($chars,16,4) . '-';
-        $uuid .= substr($chars,20,12);
-        echo $uuid;
         return view('Fansmanage/Store/store_create',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -66,9 +59,13 @@ class StoreController extends Controller{
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
-        $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
-        $uuid = md5(substr($randStr,0,6));//店铺独有的加密id
-
+        $chars = md5(uniqid(mt_rand(), true));
+        $uuid  = substr($chars,0,8) . '-';
+        $uuid .= substr($chars,8,4) . '-';
+        $uuid .= substr($chars,12,4) . '-';
+        $uuid .= substr($chars,16,4) . '-';
+        $uuid .= substr($chars,20,12);
+        
         DB::beginTransaction();
         try{
             $organization = [
