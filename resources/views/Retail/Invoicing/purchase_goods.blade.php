@@ -263,7 +263,7 @@
                 });
             }else{
                 $('#select_company').html(response);
-                ordersObj.supply.id = $('#company_id').val();//设置保存供应商id
+                ordersObj.company.id = $('#company_id').val();//设置保存供应商id
             }
         });
     }
@@ -295,8 +295,8 @@
 
 
     var ordersObj = {	//生成订单
-        clerk: {},//店员
-        supply: {},//顾客
+        operator: {},//操作人员
+        company: {},//供应商
         goods: []//商品
     };
 
@@ -305,8 +305,8 @@
 
 
     function setClerk() {
-        var clerk_id = $('#operator_id').val();
-        ordersObj.clerk.id=parseInt(clerk_id);
+        var operator_id = $('#operator_id').val();
+        ordersObj.operator.id=parseInt(operator_id);
     }
 
 
