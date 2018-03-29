@@ -27,7 +27,7 @@ class RetailSupplier extends Model{
         if(!empty($contactmobile)){
             $model = $model->where('contactmobile','like','%'.$contactmobile.'%');
         }
-        return $model->where($where)->first();
+        return $model->where($where)->get();
     }
 
     //获取列表
