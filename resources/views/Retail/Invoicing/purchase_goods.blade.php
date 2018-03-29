@@ -249,23 +249,23 @@
 
     //供应商开单（进货）
     function PostForm() {
-        var target = $("#purchase_goods");
-        var url = target.attr("action");
-        var data = target.serialize();
-        $.post(url, data, function (response) {
-            if (response.status == -1) {
-                window.location.reload();
-            } else if(response.status == 0) {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }else{
-//                $('#goods_list').html(response);
-            }
-        });
+//        var target = $("#purchase_goods");
+//        var url = target.attr("action");
+//        var data = target.serialize();
+//        $.post(url, data, function (response) {
+//            if (response.status == -1) {
+//                window.location.reload();
+//            } else if(response.status == 0) {
+//                swal({
+//                    title: "提示信息",
+//                    text: response.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
+//            }else{
+////                $('#goods_list').html(response);
+//            }
+//        });
     }
 
 
