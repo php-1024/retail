@@ -102,8 +102,7 @@ class InvoicingController extends Controller
 
     public function purchase_goods_check(Request $request)
     {
-//        dd($request->get('company_name'));
-        dd($request->get('goods'));
+        dd($request->get('orders'));
     }
 }
 
