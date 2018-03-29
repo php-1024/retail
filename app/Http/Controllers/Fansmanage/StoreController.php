@@ -44,6 +44,10 @@ class StoreController extends Controller{
             return response()->json(['data' => '创建店铺失败，您暂无剩余的资产程序了！', 'status' => '0']);
         }
         $organization_name = $request->organization_name;
+        $re = Organization::checkRowExists([['organization_name',$organization_name]]);
+        if($re){
+            return response()->json(['data' => '平台已存在该名称', 'status' => '0']);
+        }
         $type = '4';                                    //店铺组织为4
         $realname = $request->realname;            //负责人姓名
         $mobile = $request->mobile;       //负责人电话
