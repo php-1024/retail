@@ -36,6 +36,43 @@ class ImportController extends Controller
         return  view('Retail/Import/supplier_add',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //零售进销存管理--供应商添加数据操作
+    public function supplier_add_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $company_name = $request->get('company_name');      //公司名称
+        $contactname = $request->get('contactname');        //联系人姓名
+        $contactmobile = $request->get('contactmobile');    //联系人电话
+        if (empty($displayorder)){
+            $displayorder = '0';
+        }
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $supplier_data = [
+            'company_name' => $company_name,
+            'contactname' => $contactname,
+            'contactmobile' => $contactmobile,
+            'displayorder' => $displayorder,
+            'fansmanage_id' => $fansmanage_id,
+            'retail_id' => $admin_data['organization_id'],
+        ];
+        DB::beginTransaction();
+        try {
+            RetailSupplier::addSupplier($supplier_data);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员添加零售店铺供应商的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了供应商！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了供应商！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加供应商失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加供应商成功', 'status' => '1']);
+    }
+
     //零售进销存管理--供应商列表
     public function supplier_list(Request $request)
     {
