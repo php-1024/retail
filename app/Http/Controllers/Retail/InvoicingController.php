@@ -99,6 +99,11 @@ class InvoicingController extends Controller
         }
         return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
     }
+
+    public function purchase_goods_check(Request $request)
+    {
+        dd($request);
+    }
 }
 
 ?>
