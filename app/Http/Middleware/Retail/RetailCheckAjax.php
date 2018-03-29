@@ -216,7 +216,7 @@ class RetailCheckAjax
         if ($re['status'] == '0') {//检测是否登录
             return $re;
         } else {
-            $re2 = $this->checkSearch($re['response']);   //检测添加商品数据
+            $re2 = $this->checkSearch($re['response']);   //检测选择商品数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
