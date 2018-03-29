@@ -221,7 +221,7 @@
                     confirmButtonText: "确定"
                 });
             }else{
-                $('#select_company').html(response);
+                $('#goods_list').html(response);
             }
         });
     }
@@ -242,7 +242,7 @@
                     confirmButtonText: "确定"
                 });
             }else{
-                $('#goods_list').html(response);
+                $('#select_company').html(response);
             }
         });
     }
