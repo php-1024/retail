@@ -79,6 +79,15 @@ class RetailCheckAjax
                 break;
             /*********下级人员编辑*********/
 
+            /*********供应商添加和编辑*********/
+            case "retail/ajax/supplier_add_check"://检测登录，权限，及添加栏目分类的数据
+            case "retail/ajax/supplier_edit_check"://检测登录，权限，及编辑栏目分类的数据
+                $re = $this->checkLoginAndRuleAndSupplier($request);
+                return self::format_response($re, $next);
+                break;
+            /*********供应商添加和编辑*********/
+
+
             /*********栏目分类添加和编辑*********/
             case "retail/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
             case "retail/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
@@ -121,6 +130,27 @@ class RetailCheckAjax
             return $re;
         } else {
             $re2 = $this->checkPasswordEdit($re['response']);//检测修改登录密码
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                $re3 = $this->checkSafePassword($re2['response']);//检测安全密码是否输入正确
+                if ($re3['status'] == '0') {
+                    return $re3;
+                } else {
+                    return self::res(1, $re3['response']);
+                }
+            }
+        }
+    }
+
+    //检测登录，权限，及添加编辑供应商的数据
+    public function checkLoginAndRuleAndSupplier($request)
+    {
+        $re = $this->checkLoginAndRule($request);//检测登录、权限
+        if ($re['status'] == '0') {
+            return $re;
+        } else {
+            $re2 = $this->checkSupplier($re['response']);//检测供应商数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
@@ -508,6 +538,21 @@ class RetailCheckAjax
         }
         if ($request->input('new_password') != $request->input('news_password')) {
             return self::res(0, response()->json(['data' => '新密码和重复密码不一致', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+    //检测添加栏目分类数据
+    public function checkSupplier($request)
+    {
+        if (empty($request->input('company_name'))) {
+            return self::res(0, response()->json(['data' => '请输入公司名称！', 'status' => '0']));
+        }
+        if (empty($request->input('contactname'))) {
+            return self::res(0, response()->json(['data' => '请输入联系人姓名！', 'status' => '0']));
+        }
+        if (empty($request->input('contactmobile'))) {
+            return self::res(0, response()->json(['data' => '请输入联系人电话！', 'status' => '0']));
         }
         return self::res(1, $request);
     }

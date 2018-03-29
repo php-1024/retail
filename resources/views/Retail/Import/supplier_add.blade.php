@@ -40,12 +40,12 @@
                                 添加商品供应商
                             </header>
                             <div class="panel-body">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/category_add_check') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/supplier_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">公司名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="companyname" value="">
+                                            <input type="text" class="form-control" name="company_name" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
