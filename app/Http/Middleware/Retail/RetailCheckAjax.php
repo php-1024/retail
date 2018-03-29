@@ -644,7 +644,7 @@ class RetailCheckAjax
     //检测供应商进货开单的数据
     public function checkPurchaseGoods($request)
     {
-        dd($request->orders);
+        dd($request);
         if (empty($request->orders['company'])) {
             return self::res(0, response()->json(['data' => '请选择供应商!', 'status' => '0']));
         }
