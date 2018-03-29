@@ -46,9 +46,6 @@ class InvoicingController extends Controller
         $contactmobile = $request->get('contactmobile');      //供应商ID
         $company = RetailSupplier::SearchCompany($company_id,$company_name,$contactmobile);
         dump($company);
-        dump($company_id);
-        dump($company_name);
-        dd($contactmobile);
     }
 
     //零售进销存开单--退供应商货物开单
