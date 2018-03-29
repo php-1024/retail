@@ -114,13 +114,16 @@
                                                 <tr>
                                                     <th><button type="button" class="btn btn-s-md btn-danger"><i class="fa fa-user"></i>&nbsp;&nbsp;操作人员
                                                         </button></th>
-                                                    <th><select name="category_id" class="form-control">
-                                                            <option value="0">请选择分类</option>
-                                                            <option value="12">米饭</option>
-                                                            <option value="13">盖饭</option>
-                                                            <option value="11">面条</option>
-                                                            <option value="14">火锅</option>
-                                                        </select></th>
+                                                    <th>
+                                                        <select id="operator_id" name="operator_id" onchange="setClerk()" class="form-control">
+                                                            <option value="0">请选择人员</option>
+                                                            <option value="2063">楼兰美容养生一一阮桂莲13713895860</option>
+                                                            <option value="4252">晴栀@</option>
+                                                            <option value="18547">🇨🇳</option>
+                                                            <option value="19682">掌尚易商</option>
+                                                            <option value="24777">一生所爱</option>
+                                                        </select>
+                                                    </th>
                                                 </tr>
                                                 </thead>
 
