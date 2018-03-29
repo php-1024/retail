@@ -436,7 +436,7 @@ class WechatmenuController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $id = $request->get('id');
         $conditionalmenu = WechatConditionalMenu::getOne([['id',$id]]);
-
+        dd($conditionalmenu);
         $label_name = Label::getPluck([['tag_id',$conditionalmenu['tag_id']]],'label_name')->first();
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
