@@ -251,7 +251,12 @@
     function PostForm() {
         var target = $("#purchase_goods");
         var url = target.attr("action");
-        var data = target.serialize();
+        var _token = $('_token').val();
+        var goods = ordersObj.goods;
+        var company_id = $('#company_id').val();
+        var company_name = $('#company_name').val();
+        var contactmobile = $('#contactmobile').val();
+        var data = {'_token':_token,'goods':goods,'company_id':company_id,'company_name':company_name,'contactmobile':contactmobile}
         $.post(url, data, function (response) {
             if (response.status == -1) {
                 window.location.reload();
