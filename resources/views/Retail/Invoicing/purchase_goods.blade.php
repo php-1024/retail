@@ -109,7 +109,7 @@
 
                             </div>
                             <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/purchase_goods_check') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type="hidden" name="_tokens" value="{{csrf_token()}}">
                                 <div class="tab-pane">
                                 <div class="col-lg-7">
                                     <section class="panel panel-default">
@@ -251,7 +251,7 @@
     function PostForm() {
         var target = $("#purchase_goods");
         var url = target.attr("action");
-        var _token = $('_token').val();
+        var _token = $('_tokens').val();
         var goods = ordersObj.goods;
         var company_id = $('#company_id').val();
         var company_name = $('#company_name').val();
