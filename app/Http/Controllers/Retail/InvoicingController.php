@@ -45,15 +45,15 @@ class InvoicingController extends Controller
         $company_name = $request->get('company_name');      //供应商ID
         $contactmobile = $request->get('contactmobile');      //供应商ID
         if (!empty($request->get('company_id'))){
-            $company = RetailSupplier::getOne(['id'=>$request->get('company_id')]);
+            $company = RetailSupplier::getOne(['id'=>$company_id]);
             dd($company);
         }
         if (!empty($request->get('company_name'))){
-            $companys = RetailSupplier::getOne('company_name','like','%'.$request->get('company_name').'%');
+            $companys = RetailSupplier::getOne('company_name','like','%'.$company_name.'%');
             dd($companys);
         }
         if (!empty($request->get('contactmobile'))){
-            $company = RetailSupplier::getOne('contactmobile','like','%'.$request->get('contactmobile').'%');
+            $company = RetailSupplier::getOne('contactmobile','like','%'.$contactmobile.'%');
             dd($company);
         }
     }
