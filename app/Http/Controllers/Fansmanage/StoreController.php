@@ -22,7 +22,7 @@ class StoreController extends Controller{
         $route_name = $request->path();//获取当前的页面路由
         $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
         $rand = md5(substr($randStr,0,6));
-        dump(md5($rand));
+        dump($rand);
         return view('Fansmanage/Store/store_create',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
