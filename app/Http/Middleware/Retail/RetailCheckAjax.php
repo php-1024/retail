@@ -35,7 +35,6 @@ class RetailCheckAjax
             case "retail/ajax/user_list_edit":          //会员列表编辑显示页面
             case "retail/ajax/user_list_lock":          //会员列表冻结显示页面
             case "retail/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
-            case "retail/ajax/search_company":          //供应商搜索处理
             case "retail/ajax/select_company":          //选择供应商处理
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -109,6 +108,13 @@ class RetailCheckAjax
             /*********进销存商品选择列表*********/
             case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
                 $re = $this->checkLoginAndRuleAndSearch($request);
+                return self::format_response($re, $next);
+                break;
+            /*********进销存商品选择列表*********/
+
+            /*********进销存商品选择列表*********/
+            case "retail/ajax/search_company":          //检测登录，权限，及供应商搜索的数据处理
+            $re = $this->checkLoginAndRuleAndSearchCompany($request);
                 return self::format_response($re, $next);
                 break;
             /*********进销存商品选择列表*********/
@@ -219,6 +225,22 @@ class RetailCheckAjax
             return $re;
         } else {
             $re2 = $this->checkSearch($re['response']);   //检测选择商品数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
+
+    //检测登录，权限，及搜索供应商的数据
+    public function checkLoginAndRuleAndSearchCompany($request)
+    {
+        $re = $this->checkLoginAndRule($request);//检测登录、权限
+        if ($re['status'] == '0') {//检测是否登录
+            return $re;
+        } else {
+            $re2 = $this->checkSearchCompany($re['response']);   //检测选择商品数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
@@ -606,6 +628,15 @@ class RetailCheckAjax
     {
         if (empty($request->input('goods'))) {
             return self::res(0, response()->json(['data' => '请选择商品以及商品数量!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+    //检测搜索供应商的数据
+    public function checkSearchCompany($request)
+    {
+        if (empty($request->input('company_id')) && empty($request->input('company_name')) && empty($request->input('contactmobile'))) {
+            return self::res(0, response()->json(['data' => '请输入相应供应商信息进行搜索!', 'status' => '0']));
         }
         return self::res(1, $request);
     }
