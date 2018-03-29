@@ -15,6 +15,7 @@ use App\Models\Program;
 use App\Models\RetailCategory;
 use App\Models\RetailGoods;
 use App\Models\RetailOrder;
+use App\Models\RetailSupplier;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,9 +48,8 @@ class ImportController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
-//        $supplier = Supp
-        $category = RetailCategory::getPaginage($where,'','0', 'displayorder', 'DESC');   //栏目
-        return  view('Retail/Import/supplier_list',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $supplier = RetailSupplier::getPaginage($where,'','0', 'displayorder', 'DESC');   //栏目
+        return  view('Retail/Import/supplier_list',['supplier'=>$supplier,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }
 
