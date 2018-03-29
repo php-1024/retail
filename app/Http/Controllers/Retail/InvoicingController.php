@@ -45,6 +45,14 @@ class InvoicingController extends Controller
             $company = RetailSupplier::getOne(['id'=>$request->get('company_id')]);
             dd($company);
         }
+        if (!empty($request->get('company_name'))){
+            $company = RetailSupplier::getOne('company_name','like','%'.$request->get('company_name').'%');
+            dd($company);
+        }
+        if (!empty($request->get('contactmobile'))){
+            $company = RetailSupplier::getOne('contactmobile','like','%'.$request->get('contactmobile').'%');
+            dd($company);
+        }
     }
 
     //零售进销存开单--退供应商货物开单
