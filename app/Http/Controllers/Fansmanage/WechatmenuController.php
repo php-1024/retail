@@ -348,6 +348,7 @@ class WechatmenuController extends Controller{
     public function conditional_menu_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $tag_id = $request->label_id;//会员标签id
+        dd($tag_id);
         if(empty($tag_id)){
             $list = [];
         }else{
