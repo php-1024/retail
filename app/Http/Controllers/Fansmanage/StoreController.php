@@ -35,20 +35,21 @@ class StoreController extends Controller{
         $parent_tree = $oneOrganization['parent_tree'].$organization_id.',';//树型关系
 
         $program_id = $request->get('program_id');     //选择资产程序id
-        $organization_name = $request->organization_name;
-        $type = '4';                                    //店铺组织为4
-        $realname = $request->realname;            //负责人姓名
-        $mobile = $request->mobile;       //负责人电话
-        $user = Account::max('account');
         //程序剩余数量
         $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$program_id]])->first();
-        dd($organization_assets);
         //创建后减少程序剩余数量
         $num = $organization_assets['program_balance'] - 1;
         $used_num = $organization_assets['program_used_num'] + 1;
         if ($num<0){
             return response()->json(['data' => '创建店铺失败，您暂无剩余的资产程序了！', 'status' => '0']);
         }
+        $organization_name = $request->organization_name;
+        $type = '4';                                    //店铺组织为4
+        $realname = $request->realname;            //负责人姓名
+        $mobile = $request->mobile;       //负责人电话
+        $user = Account::max('account');
+
+
         $account  = $user+1;//用户账号
         $password = $request->password;
         $key = config("app.retail_encrypt_key");//获取加密盐
