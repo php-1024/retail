@@ -55,10 +55,10 @@ class RetailSupplier extends Model{
     }
 
     //获取分页列表
-    public static function getPaginage($where,$category_name,$paginate,$orderby,$sort='DESC'){
+    public static function getPaginage($where,$contactname,$paginate,$orderby,$sort='DESC'){
         $model = self::with('Organization');
-        if(!empty($category_name)){
-            $model = $model->where('name','like','%'.$category_name.'%');
+        if(!empty($contactname)){
+            $model = $model->where('contactname','like','%'.$contactname.'%');
         }
         return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
