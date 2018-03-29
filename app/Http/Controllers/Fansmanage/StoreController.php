@@ -120,6 +120,7 @@ class StoreController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建店铺失败，请稍后再试！', 'status' => '0']);
         }
