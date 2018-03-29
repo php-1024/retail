@@ -1,7 +1,7 @@
 <div class="col-sm-12 form-horizontal">
     <label class="col-sm-1 control-label"></label>
     <div class="col-sm-1">
-        <input class="input-sm form-control" size="16" type="text" name="company_id" value="{{$company->id}}" display="" disabled="">
+        <input class="input-sm form-control" size="16" type="text" name="company_id" value="{{$company->id}}" id="company_id" disabled="">
     </div>
     <div class="col-sm-2">
         <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$company->company_name}}" disabled="">
