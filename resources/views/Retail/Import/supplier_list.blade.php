@@ -41,8 +41,8 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="category_edit_url" value="{{ url('retail/ajax/category_edit') }}">
-                                    <input type="hidden" id="category_delete_comfirm_url" value="{{ url('retail/ajax/category_delete') }}">
+                                    <input type="hidden" id="supplier_edit_url" value="{{ url('retail/ajax/supplier_edit') }}">
+                                    <input type="hidden" id="supplier_delete_comfirm_url" value="{{ url('retail/ajax/supplier_delete') }}">
                                     <label class="col-sm-1 control-label">供应商名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$company_name}}">
@@ -102,85 +102,6 @@
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">拷贝其他分店分类到本店</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped b-t b-light">
-                            <thead>
-                            <tr>
-                                <th style="width:20px;"><label class="checkbox m-n i-checks"><input
-                                                type="checkbox"><i></i></label></th>
-                                <th>ID</th>
-                                <th>分类名称</th>
-                                <th>分类来源</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
-                                                                                name="post[]"><i></i></label></td>
-                                <td>1</td>
-                                <td>主食</td>
-                                <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
-                                <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
-                                                                                name="post[]"><i></i></label></td>
-                                <td>1</td>
-                                <td>主食</td>
-                                <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
-                                <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
-                                                                                name="post[]"><i></i></label></td>
-                                <td>1</td>
-                                <td>主食</td>
-                                <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
-                                <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label class="checkbox m-n i-checks"><input type="checkbox"
-                                                                                name="post[]"><i></i></label></td>
-                                <td>1</td>
-                                <td>主食</td>
-                                <td><label class="label label-info">刘记鸡煲王【宝能店】</label></td>
-                                <td>
-                                    <button class="btn btn-info btn-xs" id="editBtn"><i class="fa fa-edit"></i>&nbsp;&nbsp;拷贝
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="addBtn">拷贝已勾选</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
@@ -193,9 +114,10 @@
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script>
+
     //编辑分类信息
     function getEditForm(id) {
-        var url = $('#category_edit_url').val();
+        var url = $('#supplier_edit_url').val();
         var token = $('#_token').val();
         var data = {'id': id, '_token': token};
         $.post(url, data, function (response) {
@@ -219,7 +141,7 @@
 
     //删除分类信息
     function getDeleteForm(id){
-        var url = $('#category_delete_comfirm_url').val();
+        var url = $('#supplier_delete_comfirm_url').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id};
         $.post(url,data,function(response){
