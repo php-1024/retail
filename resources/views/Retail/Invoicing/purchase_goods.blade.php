@@ -263,7 +263,7 @@
                     confirmButtonText: "确定"
                 });
             }else{
-                $('#goods_list').html(response);
+//                $('#goods_list').html(response);
             }
         });
     }
