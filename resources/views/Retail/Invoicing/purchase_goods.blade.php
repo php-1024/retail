@@ -102,9 +102,12 @@
                                     </div>
                                 </form>
                             </div>
-
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
+                            {{--选择供应商--}}
+                            <div id="select_company">
+
+                            </div>
                             <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/purchase_goods_check') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="tab-pane">
@@ -218,7 +221,7 @@
                     confirmButtonText: "确定"
                 });
             }else{
-                $('#goods_list').html(response);
+                $('#select_company').html(response);
             }
         });
     }
