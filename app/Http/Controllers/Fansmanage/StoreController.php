@@ -20,9 +20,7 @@ class StoreController extends Controller{
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
-        $rand = md5(substr($randStr,0,6));
-        dump($rand);
+
         return view('Fansmanage/Store/store_create',['admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
 
@@ -49,6 +47,10 @@ class StoreController extends Controller{
         $key = config("app.retail_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+
+        $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
+        $uuid = md5(substr($randStr,0,6));//店铺独有的加密id
+
         DB::beginTransaction();
         try{
             $organization = [
@@ -78,6 +80,7 @@ class StoreController extends Controller{
                 'account'          =>$account,
                 'password'         =>$encryptPwd,
                 'mobile'           =>$mobile,
+                'uuid'             =>$uuid
             ];
             //在管理员表添加信息
             $account_id = Account::addAccount($accdata);
