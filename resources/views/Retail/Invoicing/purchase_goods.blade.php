@@ -273,7 +273,7 @@
         var target = $("#purchase_goods");
         var url = target.attr("action");
         var _token = "{{csrf_token()}}";
-        var orders = ordersObj;
+        var orders = ordersObj; //  进货订单信息
         var data = {'_token':_token,'orders':orders}
         console.log(data);
         $.post(url, data, function (response) {
