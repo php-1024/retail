@@ -120,6 +120,7 @@ class Account extends Model{
         $model->account = $param['account'];//登录账号（零壹平台,自动生成）
         $model->password = $param['password'];//登录密码（MD5默认32位长度）
         $model->mobile = $param['mobile'];//管理员绑定的手机号码
+        $model->uuid = $param['uuid'];//管理员绑定的手机号码
         $model->save();
         return $model->id;
     }
