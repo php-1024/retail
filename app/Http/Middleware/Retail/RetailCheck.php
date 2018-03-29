@@ -45,6 +45,9 @@ class RetailCheck{
             case "retail/invoicing/loss_goods":         //进销存管理--报损开单
             case "retail/invoicing/check_goods":        //进销存管理--盘点核对开单
 
+            case "retail/import/supplier_add":        //进销存管理--添加供应商
+            case "retail/import/supplier_list":        //进销存管理--供应商列表
+
             case "retail/user/user_list":               //用户管理-粉丝用户管理
 
             case "retail/paysetting/wechat_setting":    //支付设置-微信支付
