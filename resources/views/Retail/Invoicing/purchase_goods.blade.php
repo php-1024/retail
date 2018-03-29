@@ -263,6 +263,7 @@
                 });
             }else{
                 $('#select_company').html(response);
+                ordersObj.supply.id = $('#company_id').val();//设置保存供应商id
             }
         });
     }
