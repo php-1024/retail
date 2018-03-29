@@ -348,7 +348,7 @@ class WechatmenuController extends Controller{
     public function conditional_menu_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $label_id = $request->label_id;//会员标签id
-        if(empty($tag_id)){
+        if(empty($label_id)){
             $list = [];
         }else{
             //获取授权APPID
@@ -356,7 +356,6 @@ class WechatmenuController extends Controller{
             $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->frist();
             //获取菜单列表
             $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['tag_id',$tag_id]],0,'id','DESC');
-            dd($list);
         }
         return view('Fansmanage/Wechatmenu/conditional_menu_list',['list'=>$list]);
     }
