@@ -15,6 +15,7 @@ use App\Models\Program;
 use App\Models\RetailCategory;
 use App\Models\RetailGoods;
 use App\Models\RetailOrder;
+use App\Models\RetailSupplier;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,10 @@ class InvoicingController extends Controller
     //零售进销存开单--供应商搜索
     public function search_company(Request $request)
     {
-        dd($request);
+        if (!empty($request->get('company_id'))){
+            $company = RetailSupplier::getOne(['id'=>$request->get('company_id')]);
+            dd($company);
+        }
     }
 
     //零售进销存开单--退供应商货物开单
