@@ -68,14 +68,14 @@ class Organization extends Model{
         return $this->hasMany('App\Models\RetailGoods', 'restaurant_id');
     }
 
-    //和CateringCategory表一对多的关系
-    public function CateringCategory(){
-        return $this->hasMany('App\Models\CateringCategory', 'fansmanage_id');
-    }
-
     //和RetailCategory表一对多的关系
     public function RetailCategory(){
         return $this->hasMany('App\Models\RetailCategory', 'retail_id');
+    }
+
+    //和RetailSupplier表一对多的关系
+    public function RetailSupplier(){
+        return $this->hasMany('App\Models\RetailSupplier', 'retail_id');
     }
 
     //和Program表一对一的关系
