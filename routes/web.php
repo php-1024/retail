@@ -598,6 +598,13 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('return_goods', 'Retail\InvoicingController@return_goods')->middleware('RetailCheck');        //进出开单
         Route::get('loss_goods', 'Retail\InvoicingController@loss_goods')->middleware('RetailCheck');        //进出开单
         Route::get('check_goods', 'Retail\InvoicingController@check_goods')->middleware('RetailCheck');        //盘点商品
+        Route::get('import', 'Retail\ImportController@import')->middleware('RetailCheck');        //进出管理
+    });
+
+    //进出管理
+    Route::group(['prefix'=>'import'],function(){
+        Route::get('supplier_add', 'Retail\ImportController@supplier_add')->middleware('RetailCheck');        //添加供应商
+        Route::get('supplier_list', 'Retail\ImportController@supplier_list')->middleware('RetailCheck');      //供应商列表
     });
 
     //用户管理
