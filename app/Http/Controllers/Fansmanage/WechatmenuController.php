@@ -356,6 +356,7 @@ class WechatmenuController extends Controller{
             $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->frist();
             //获取菜单列表
             $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['tag_id',$tag_id]],0,'id','DESC');
+            dd($list);
         }
         return view('Fansmanage/Wechatmenu/conditional_menu_list',['list'=>$list]);
     }
