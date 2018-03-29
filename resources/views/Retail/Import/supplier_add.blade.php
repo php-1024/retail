@@ -52,13 +52,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">联系人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="contactname" value="0">
+                                            <input type="text" class="form-control" name="contactname">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">联系人电话</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="contactmobile" value="0">
+                                            <input type="text" class="form-control" name="contactmobile">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">排序</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="displayorder" value="0">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
