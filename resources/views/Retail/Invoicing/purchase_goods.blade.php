@@ -251,7 +251,7 @@
     function PostForm() {
         var target = $("#purchase_goods");
         var url = target.attr("action");
-        var _token = $('#_tokens').val();
+        var _token = "{{csrf_token()}}";
         var goods = ordersObj.goods;
         var company_id = $('#company_id').val();
         var company_name = $('#company_name').val();
