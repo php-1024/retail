@@ -366,7 +366,8 @@ class WechatmenuController extends Controller{
         $event_type = $request->get('event_type');  //获取事件类型
         $response_type = $request->get('response_type'); //获取响应类型
         $organization_id = $admin_data['organization_id'];  //组织ID
-        $tag_id = $request->label_id;  //会员标签id
+        $label_id = $request->label_id;  //会员标签id
+        $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->frist();
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]); //获取授权APPID
         $menu_name = $request->get('menu_name');                //获取菜单名称
         $parent_id = $request->get('parent_id');                //获取上级菜单ID
@@ -415,7 +416,8 @@ class WechatmenuController extends Controller{
 
     public function conditional_menu_get(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $tag_id = $request->label_id;//会员标签id
+        $label_id = $request->label_id;//会员标签id
+        $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->frist();
         //获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['tag_id',$tag_id],['parent_id','0']],0,'id','asc');
         $son_menu = [];
@@ -435,7 +437,7 @@ class WechatmenuController extends Controller{
         $id = $request->get('id');
         $conditionalmenu = WechatConditionalMenu::getOne([['id',$id]]);
 
-        $label_name = Label::getPluck([['id',$conditionalmenu['tag_id']]],'label_name')->first();
+        $label_name = Label::getPluck([['tag_id',$conditionalmenu['tag_id']]],'label_name')->first();
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
         //获取触发关键字列表
