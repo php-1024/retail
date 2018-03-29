@@ -646,6 +646,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('goods_list', 'Retail\InvoicingController@goods_list')->middleware('RetailCheckAjax');           //进出开单商品列表
         Route::post('supplier_add_check', 'Retail\ImportController@supplier_add_check')->middleware('RetailCheckAjax');          //栏目添加检测
         Route::post('purchase_goods_check', 'Retail\InvoicingController@purchase_goods_check')->middleware('RetailCheckAjax');        //进出开单检测
+        Route::post('search_company', 'Retail\InvoicingController@search_company')->middleware('RetailCheckAjax');        //进出开单检测
 
 
         Route::post('category_add_check', 'Retail\CategoryController@category_add_check')->middleware('RetailCheckAjax');          //栏目添加检测

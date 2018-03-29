@@ -81,7 +81,8 @@
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                             <div class="col-sm-12">
-                                <form class="form-horizontal" method="get">
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/search_company') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">供应商</label>
                                     <div class="col-sm-1">
                                         <input class="input-sm form-control" size="16" type="text" value=""
@@ -96,7 +97,7 @@
                                                placeholder="联系人手机">
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_company()"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
                                         </button>
                                     </div>
                                 </form>
@@ -201,9 +202,30 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    //编辑店铺信息
+    //搜索商品信息
     function search_goods() {
         var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (response) {
+            if (response.status == -1) {
+                window.location.reload();
+            } else if(response.status == 0) {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }else{
+                $('#goods_list').html(response);
+            }
+        });
+    }
+
+    //搜索供应商信息
+    function search_company() {
+        var target = $("#search_company");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (response) {

@@ -37,6 +37,12 @@ class InvoicingController extends Controller
         return  view('Retail/Invoicing/purchase_goods',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //零售进销存开单--供应商搜索
+    public function search_company(Request $request)
+    {
+        dd($request);
+    }
+
     //零售进销存开单--退供应商货物开单
     public function return_goods(Request $request)
     {
