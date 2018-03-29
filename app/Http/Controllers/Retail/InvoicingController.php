@@ -44,18 +44,8 @@ class InvoicingController extends Controller
         $company_id = $request->get('company_id');      //供应商ID
         $company_name = $request->get('company_name');      //供应商ID
         $contactmobile = $request->get('contactmobile');      //供应商ID
-//        if (!empty($request->get('company_id'))){
-//            $company = RetailSupplier::getOne(['id'=>$company_id]);
-//            dd($company);
-//        }
-        if (!empty($request->get('company_name'))){
-            $companys = RetailSupplier::getOne('company_name','like','%'.$company_name.'%');
-            dd($companys);
-        }
-        if (!empty($request->get('contactmobile'))){
-            $company = RetailSupplier::getOne('contactmobile','like','%'.$contactmobile.'%');
-            dd($company);
-        }
+        $company = RetailSupplier::getOne(['id'=>$company_id],$company_name,$contactmobile);
+        dd($company);
     }
 
     //零售进销存开单--退供应商货物开单

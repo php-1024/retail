@@ -19,8 +19,15 @@ class RetailSupplier extends Model{
     }
 
     //获取单条信息
-    public static function getOne($where){
-        return self::where($where)->first();
+    public static function getOne($where,$company_name,$contactmobile){
+        $model = new RetailSupplier();
+        if(!empty($company_name)){
+            $model = $model->where('company_name','like','%'.$company_name.'%');
+        }
+        if(!empty($contactmobile)){
+            $model = $model->where('contactmobile','like','%'.$contactmobile.'%');
+        }
+        return $model->where($where)->first();
     }
 
     //获取列表
