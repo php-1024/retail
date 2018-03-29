@@ -1,7 +1,7 @@
 <?php
 /**
  * 零售版店铺
- * 进销存管理
+ * 进销存管理-进出开单
  **/
 namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
