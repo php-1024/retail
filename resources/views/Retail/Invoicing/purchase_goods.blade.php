@@ -108,8 +108,8 @@
                             <div id="select_company">
 
                             </div>
-                            <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/purchase_goods_check') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            {{--<form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/purchase_goods_check') }}">--}}
+                                {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
                                 <div class="tab-pane">
                                 <div class="col-lg-7">
                                     <section class="panel panel-default">
@@ -174,7 +174,6 @@
                                 </div>
                                 <div style="clear: both;"></div>
                             </div>
-                            </form>
 
                                 <footer class="panel-footer">
                                 <div class="row">
