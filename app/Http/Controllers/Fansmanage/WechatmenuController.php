@@ -556,6 +556,7 @@ class WechatmenuController extends Controller{
         if($tag_id == '0'){
             return response()->json(['data' => '请先选择粉丝标签', 'status' => '0']);
         }
+        $tag_id = Label::getPluck([['id',$tag_id]],'wechat_id')->first();
         $organization_id = $admin_data['organization_id'];
         $list = WechatConditionalMenu::ListConditionalMenu([['parent_id','0'],['tag_id',$tag_id],['organization_id',$organization_id]]);
         foreach($list as $key=>$value){
@@ -649,6 +650,7 @@ class WechatmenuController extends Controller{
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'],$data);
         $re = json_decode($re,true);
+        dd($re);
         if(!empty($re['menuid'])){
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         }else{
