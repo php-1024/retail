@@ -65,7 +65,7 @@ class StoreController extends Controller{
         $uuid .= substr($chars,12,4) . '-';
         $uuid .= substr($chars,16,4) . '-';
         $uuid .= substr($chars,20,12);
-        
+
         DB::beginTransaction();
         try{
             $organization = [

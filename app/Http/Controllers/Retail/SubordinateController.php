@@ -45,6 +45,13 @@ class SubordinateController extends Controller
         $deepth = $admin_data['deepth'] + 1;
         $organization_id = $admin_data['organization_id'];//当前平台组织id
 
+        $chars = md5(uniqid(mt_rand(), true));
+        $uuid  = substr($chars,0,8) . '-';
+        $uuid .= substr($chars,8,4) . '-';
+        $uuid .= substr($chars,12,4) . '-';
+        $uuid .= substr($chars,16,4) . '-';
+        $uuid .= substr($chars,20,12);
+
         $account = Account::max('account');
         $account = $account + 1;
         if (Account::checkRowExists([['account', $account]])) {//判断零壹管理平台中 ，判断组织中账号是否存在
@@ -57,7 +64,7 @@ class SubordinateController extends Controller
             DB::beginTransaction();
             try {
                 //添加用户
-                $account_id = Account::addAccount(['organization_id' => $organization_id, 'parent_id' => $parent_id, 'parent_tree' => $parent_tree, 'deepth' => $deepth, 'account' => $account, 'password' => $encryptPwd, 'mobile' => $mobile]);
+                $account_id = Account::addAccount(['organization_id' => $organization_id, 'parent_id' => $parent_id, 'parent_tree' => $parent_tree, 'deepth' => $deepth, 'account' => $account, 'password' => $encryptPwd, 'mobile' => $mobile,'uuid' =>$uuid]);
                 //添加用户个人信息
                 AccountInfo::addAccountInfo(['account_id' => $account_id, 'realname' => $realname]);
                 if ($admin_data['is_super'] == 1) {
