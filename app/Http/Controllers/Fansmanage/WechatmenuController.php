@@ -418,6 +418,7 @@ class WechatmenuController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $label_id = $request->label_id;//会员标签id
         $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->frist();
+        dd($tag_id);
         //获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['tag_id',$tag_id],['parent_id','0']],0,'id','asc');
         $son_menu = [];
