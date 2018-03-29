@@ -29,27 +29,33 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">添加商品分类</h3>
+                            <h3 class="m-b-none">添加供应商</h3>
                         </div>
                         <section class="panel panel-default">
 
                             <header class="panel-heading font-bold">
-                                添加商品分类
+                                添加商品供应商
                             </header>
                             <div class="panel-body">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/category_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">分类名称</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">公司名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="category_name" value="">
+                                            <input type="text" class="form-control" name="companyname" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">分类排序</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">联系人姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="category_sort" value="0">
+                                            <input type="text" class="form-control" name="contactname" value="0">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">联系人电话</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="contactmobile" value="0">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
