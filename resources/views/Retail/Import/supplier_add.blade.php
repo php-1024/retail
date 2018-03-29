@@ -36,6 +36,10 @@
                             <header class="panel-heading font-bold">
                                 添加商品供应商
                             </header>
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-s-md btn" onclick="window.location='supplier_list'">供应商列表</button>
+                                <button type="button" class="btn btn-s-md btn-success" onclick="window.location='supplier_add'">&nbsp;&nbsp;添加供应商</button>
+                            </div>
                             <div class="panel-body">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/category_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">

@@ -35,6 +35,10 @@
                             <header class="panel-heading">
                                 供应商列表
                             </header>
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-s-md btn-success" onclick="window.location='supplier_list'">供应商列表</button>
+                                <button type="button" class="btn btn-s-md btn" onclick="window.location='supplier_add'">&nbsp;&nbsp;添加供应商</button>
+                            </div>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
