@@ -38,11 +38,6 @@ class RetailCheckAjax
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-
-            case "retail/ajax/goods_list":        //会员列表粉丝钱包显示页面
-                $re = $this->checkIsLogin($request);
-                return self::format_response($re, $next);
-                break;
             case "retail/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
                 return self::format_response($re, $next);
@@ -101,10 +96,10 @@ class RetailCheckAjax
             /*********商品添加和商品编辑*********/
 
             /*********进销存商品选择列表*********/
-//            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
-//                $re = $this->checkLoginAndRuleAndSearch($request);
-//                return self::format_response($re, $next);
-//                break;
+            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
+                $re = $this->checkLoginAndRuleAndSearch($request);
+                return self::format_response($re, $next);
+                break;
             /*********进销存商品选择列表*********/
 
             /****粉丝信息编辑****/
@@ -539,7 +534,7 @@ class RetailCheckAjax
     //检测搜索商品的数据
     public function checkSearch($request)
     {
-        if (empty($request->input('category_id')) || empty($request->input('goods_name'))) {
+        if (empty($request->input('category_id')) && empty($request->input('goods_name'))) {
             return self::res(0, response()->json(['data' => '请选择商品分类，或者输入商品名称进行搜索!', 'status' => '0']));
         }
         return self::res(1, $request);

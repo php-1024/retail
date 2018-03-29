@@ -124,7 +124,25 @@
                             <div class="tab-pane">
 
                                 <div class="col-lg-7">
-                                    @include('Retail/Invoicing/goods_list')
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading font-bold">
+                                            选择商品
+                                        </header>
+                                        <table class="table table-striped table-bordered ">
+                                            <thead>
+                                            <tr>
+                                                <th>商品ID</th>
+                                                <th>商品标题</th>
+                                                <th>商品价格</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="goods_list">
+
+                                            </tbody>
+                                        </table>
+                                        <div style="clear: both;"></div>
+                                    </section>
                                 </div>
 
                                 <div class="col-lg-5">
@@ -157,25 +175,10 @@
                                                     <th>商品ID</th>
                                                     <th>商品标题</th>
                                                     <th>商品价格</th>
-
-
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {{--<tr id="hs1_0">--}}
-                                                    {{--<td>1</td>--}}
-                                                    {{--<td>性感女人香水</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--88.00--}}
-                                                    {{--</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--<button type="button" class="btn btn-danger btn-xs" onclick="goodsSub(1,0)"><i class="fa fa-minus"></i></button>--}}
-                                                        {{--<input type="text" id="input1_0" onchange="update_num(1,0)" class="text-center" value="1000" size="4">--}}
-                                                        {{--<button type="button" class="btn btn-success btn-xs" onclick="goodsAdd(1,0)"><i class="fa fa-plus"></i></button>--}}
-                                                        {{--<button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel(4461,0)">删除</button>--}}
-                                                    {{--</td>--}}
-                                                {{--</tr>--}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -185,9 +188,7 @@
                             </div>
                             <footer class="panel-footer">
                                 <div class="row">
-
                                     <div class="col-sm-12 col-sm-offset-6">
-
                                         <button type="button" class="btn btn-success" id="addBtn">确认提交</button>
                                     </div>
                                 </div>
