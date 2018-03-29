@@ -644,8 +644,8 @@ class RetailCheckAjax
     //检测供应商进货开单的数据
     public function checkPurchaseGoods($request)
     {
-        if (empty($request->input('category_id')) && empty($request->input('goods_name'))) {
-            return self::res(0, response()->json(['data' => '请选择商品以及商品数量，以及供货商信息!', 'status' => '0']));
+        if (empty($request->input('company_id')) && empty($request->input('company_name')) && empty($request->input('company_name'))) {
+            return self::res(0, response()->json(['data' => '请选择供应商信息!', 'status' => '0']));
         }
         return self::res(1, $request);
     }
