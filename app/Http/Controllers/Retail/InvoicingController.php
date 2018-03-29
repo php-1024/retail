@@ -102,7 +102,7 @@ class InvoicingController extends Controller
 
     public function purchase_goods_check(Request $request)
     {
-        dd($request);
+        dd($request->goods);
     }
 }
 
