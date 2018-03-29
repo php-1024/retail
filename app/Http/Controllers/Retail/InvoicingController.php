@@ -41,6 +41,9 @@ class InvoicingController extends Controller
     //零售进销存开单--供应商搜索
     public function search_company(Request $request)
     {
+        $company_id = $request->get('company_id');      //供应商ID
+        $company_name = $request->get('company_name');      //供应商ID
+        $contactmobile = $request->get('contactmobile');      //供应商ID
         if (!empty($request->get('company_id'))){
             $company = RetailSupplier::getOne(['id'=>$request->get('company_id')]);
             dd($company);
