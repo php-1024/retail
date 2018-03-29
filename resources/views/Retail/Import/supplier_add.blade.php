@@ -78,7 +78,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
-                                            <button type="button" class="btn btn-success" id="addBtn" onclick="return postForm();">保存信息</button>
+                                            <button type="button" class="btn btn-success" onclick="return postForm();">保存信息</button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -120,7 +120,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    window.location.href='retail/import/supplier_list',
+                    window.location.href='supplier_list';
                 });
             }else{
                 swal({
