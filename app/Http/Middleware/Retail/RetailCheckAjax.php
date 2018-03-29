@@ -645,7 +645,7 @@ class RetailCheckAjax
     public function checkPurchaseGoods($request)
     {
         if (empty($request->input('company_id')) && empty($request->input('company_name')) && empty($request->input('company_name'))) {
-            return self::res(0, response()->json(['data' => '请选择供应商信息!', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '请选择供应商!', 'status' => '0']));
         }
         return self::res(1, $request);
     }
