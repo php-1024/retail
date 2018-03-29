@@ -252,12 +252,12 @@
         var target = $("#purchase_goods");
         var url = target.attr("action");
         var _token = $('_token').val();
-        console.log(_token);
         var goods = ordersObj.goods;
         var company_id = $('#company_id').val();
         var company_name = $('#company_name').val();
         var contactmobile = $('#contactmobile').val();
         var data = {'_token':_token,'goods':goods,'company_id':company_id,'company_name':company_name,'contactmobile':contactmobile}
+        console.log(data);
         $.post(url, data, function (response) {
             if (response.status == -1) {
                 window.location.reload();
