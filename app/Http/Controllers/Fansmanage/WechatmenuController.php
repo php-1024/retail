@@ -347,13 +347,13 @@ class WechatmenuController extends Controller{
     //显示上级菜单
     public function conditional_menu_list(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $tag_id = $request->label_id;//会员标签id
-        dd($tag_id);
+        $label_id = $request->label_id;//会员标签id
         if(empty($tag_id)){
             $list = [];
         }else{
             //获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id',$admin_data['organization_id']]]);
+            $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->frist();
             //获取菜单列表
             $list = WechatConditionalMenu::getList([['organization_id',$admin_data['organization_id']],['authorizer_appid',$authorization['authorizer_appid']],['parent_id','0'],['tag_id',$tag_id]],0,'id','DESC');
         }
