@@ -174,6 +174,7 @@
                                 </div>
                                 <div style="clear: both;"></div>
                             </div>
+                            </form>
 
                                 <footer class="panel-footer">
                                 <div class="row">
@@ -182,7 +183,6 @@
                                     </div>
                                 </div>
                             </footer>
-                            </form>
                         </section>
                     </section>
                 </section>
