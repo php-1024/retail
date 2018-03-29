@@ -25,7 +25,7 @@ class RetailSupplier extends Model{
             $model = $model->where(['company_name'=>$company_name]);
         }
         if(!empty($contactmobile)){
-            $model = $model->where('contactmobile'=>$contactmobile);
+            $model = $model->where(['contactmobile'=>$contactmobile]);
         }
         return $model->where($where)->first();
     }
