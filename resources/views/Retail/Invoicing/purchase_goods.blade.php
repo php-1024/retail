@@ -247,7 +247,7 @@
         });
     }
 
-    //编辑店铺信息
+    //供应商开单（进货）
     function PostForm() {
         var target = $("#purchase_goods");
         var url = target.attr("action");
