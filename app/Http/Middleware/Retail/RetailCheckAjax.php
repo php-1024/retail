@@ -636,7 +636,7 @@ class RetailCheckAjax
     public function checkSearchCompany($request)
     {
         if (empty($request->input('company_id')) && empty($request->input('company_name')) && empty($request->input('contactmobile'))) {
-            return self::res(0, response()->json(['data' => '请输入相应供应商信息进行搜索!', 'status' => '0']));
+            return self::res(0, response()->json(['data' => '请输入相应供应商信息进行搜索选择!', 'status' => '0']));
         }
         return self::res(1, $request);
     }
