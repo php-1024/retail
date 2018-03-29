@@ -44,6 +44,7 @@ class ImportController extends Controller
         $company_name = $request->get('company_name');      //公司名称
         $contactname = $request->get('contactname');        //联系人姓名
         $contactmobile = $request->get('contactmobile');    //联系人电话
+        $displayorder = $request->get('displayorder');      //排序
         if (empty($displayorder)){
             $displayorder = '0';
         }
@@ -67,6 +68,7 @@ class ImportController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加供应商失败，请检查', 'status' => '0']);
         }
