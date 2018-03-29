@@ -85,15 +85,15 @@
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">供应商</label>
                                     <div class="col-sm-1">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
+                                        <input class="input-sm form-control" size="16" type="text" name="company_id" value=""
                                                placeholder="供应商id">
                                     </div>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="公司名称或联系人姓名">
+                                        <input class="input-sm form-control" size="16" type="text" name="company_name" value=""
+                                               placeholder="公司名称">
                                     </div>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
+                                        <input class="input-sm form-control" size="16" type="text" name="contactmobile" value=""
                                                placeholder="联系人手机">
                                     </div>
                                     <div class="col-sm-1">
