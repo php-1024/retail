@@ -44,7 +44,7 @@ class InvoicingController extends Controller
         $company_id = $request->get('company_id');      //供应商ID
         $company_name = $request->get('company_name');      //供应商ID
         $contactmobile = $request->get('contactmobile');      //供应商ID
-        $company = RetailSupplier::getOne(['id'=>$company_id],$company_name,$contactmobile);
+        $company = RetailSupplier::SearchCompany($company_id,$company_name,$contactmobile);
         dump($company);
         dump($company_id);
         dump($company_name);

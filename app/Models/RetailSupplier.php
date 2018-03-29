@@ -18,13 +18,19 @@ class RetailSupplier extends Model{
         return $this->belongsto('App\Models\Organization','retail_id');
     }
 
-    //获取单条信息
-    public static function getOne($where,$company_name,$contactmobile){
+    //搜索供应商信息
+    public static function SearchCompany($company_id,$company_name,$contactmobile){
         $model = new RetailSupplier();
-        if(!empty($company_name)){
-            $model = $model->where(['company_name'=>$company_name]);
+        if(!empty($company_id)){
+            $model = $model->where(['id'=>$company_id]);
         }
-        return $model->where($where)->first();
+        if(!empty($company_name)){
+            $model = $model->where('company_name','like','%'.$company_name.'%');
+        }
+        if(!empty($contactmobile)){
+            $model = $model->where('contactmobile','like','%'.$contactmobile.'%');
+        }
+        return $model->first();
     }
 
     //获取列表
