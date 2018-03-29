@@ -42,7 +42,7 @@
                                     <input type="hidden" id="category_delete_comfirm_url" value="{{ url('retail/ajax/category_delete') }}">
                                     <label class="col-sm-1 control-label">分类名称</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" name="name" value="{{$category_name}}">
+                                        <input class="input-sm form-control" size="16" type="text" name="name" value="">
                                     </div>
 
                                     <div class="col-sm-3">
