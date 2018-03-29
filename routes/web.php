@@ -604,6 +604,7 @@ Route::group(['prefix'=>'retail'],function(){
     //进出管理
     Route::group(['prefix'=>'import'],function(){
         Route::get('supplier_add', 'Retail\ImportController@supplier_add')->middleware('RetailCheck');        //添加供应商
+        Route::get('supplier_edit', 'Retail\ImportController@supplier_edit')->middleware('RetailCheck');      //编辑供应商
         Route::get('supplier_list', 'Retail\ImportController@supplier_list')->middleware('RetailCheck');      //供应商列表
     });
 
