@@ -29,16 +29,15 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">供应商列表</h3>
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-s-md btn-success" onclick="window.location='supplier_list'">供应商列表</button>
+                                <button type="button" class="btn btn-s-md btn" onclick="window.location='supplier_add'">&nbsp;&nbsp;添加供应商</button>
+                            </div>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
                                 供应商列表
                             </header>
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-s-md btn-success" onclick="window.location='supplier_list'">供应商列表</button>
-                                <button type="button" class="btn btn-s-md btn" onclick="window.location='supplier_add'">&nbsp;&nbsp;添加供应商</button>
-                            </div>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
