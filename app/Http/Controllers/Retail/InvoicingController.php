@@ -47,7 +47,7 @@ class InvoicingController extends Controller
         }
         if (!empty($request->get('company_name'))){
             $company = RetailSupplier::getOne('company_name','like','%'.$request->get('company_name').'%');
-            dd($company);
+            dd($request->get('company_name'));
         }
         if (!empty($request->get('contactmobile'))){
             $company = RetailSupplier::getOne('contactmobile','like','%'.$request->get('contactmobile').'%');
