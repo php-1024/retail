@@ -119,6 +119,22 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                 <tr>
+                                                    <th><button type="button" class="btn btn-s-md btn-danger"><i class="fa fa-user"></i>&nbsp;&nbsp;操作人员
+                                                        </button></th>
+                                                    <th><select name="category_id" class="form-control">
+                                                            <option value="0">请选择分类</option>
+                                                            <option value="12">米饭</option>
+                                                            <option value="13">盖饭</option>
+                                                            <option value="11">面条</option>
+                                                            <option value="14">火锅</option>
+                                                        </select></th>
+                                                </tr>
+                                                </thead>
+
+                                            </table>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
                                                     <th><label class="label label-info">总计件数：</label></th>
                                                     <th><label class="label label-info">总计金额</label></th>
                                                 </tr>
