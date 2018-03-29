@@ -32,7 +32,7 @@ class ImportController extends Controller
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        return  view('Retail/Invoicing/supplier_add',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return  view('Retail/Import/supplier_add',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }
 
