@@ -1,13 +1,13 @@
 <div class="col-sm-12 form-horizontal">
     <label class="col-sm-1 control-label"></label>
     <div class="col-sm-1">
-        <input class="input-sm form-control" size="16" type="text" name="company_id" value="2" display="" disabled="">
+        <input class="input-sm form-control" size="16" type="text" name="company_id" value="{{$company->id}}" display="" disabled="">
     </div>
     <div class="col-sm-2">
-        <input class="input-sm form-control" size="16" type="text" name="company_name" value="韦小宝" disabled="">
+        <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$company->company_name}}" disabled="">
     </div>
     <div class="col-sm-2">
-        <input class="input-sm form-control" size="16" type="text" name="contactmobile" value="18872849065" disabled="">
+        <input class="input-sm form-control" size="16" type="text" name="contactmobile" value="{{$company->contactmobile}}" disabled="">
     </div>
 </div>
 <div style="clear:both"></div>

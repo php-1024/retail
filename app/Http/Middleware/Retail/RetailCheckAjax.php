@@ -36,6 +36,7 @@ class RetailCheckAjax
             case "retail/ajax/user_list_lock":          //会员列表冻结显示页面
             case "retail/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
             case "retail/ajax/search_company":          //供应商搜索处理
+            case "retail/ajax/select_company":          //选择供应商处理
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

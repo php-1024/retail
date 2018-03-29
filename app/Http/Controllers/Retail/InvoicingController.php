@@ -48,7 +48,7 @@ class InvoicingController extends Controller
         if ($company == null){
             return response()->json(['data' => '商户不存在！请重新选择！', 'status' => '0']);
         }else{
-            return response()->json(['data' => '选择商户成功！', 'status' => '1']);
+            return view('retail/Invoicing/select_company',['company'=>$company]);
         }
     }
 
