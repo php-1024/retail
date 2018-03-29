@@ -81,7 +81,7 @@
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                             <div class="col-sm-12">
-                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/search_company') }}">
+                                <form method="post" class="form-horizontal"  role="form" id="search_company" action="{{ url('retail/ajax/search_company') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">供应商</label>
                                     <div class="col-sm-1">
