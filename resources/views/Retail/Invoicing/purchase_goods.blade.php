@@ -109,7 +109,6 @@
 
                             </div>
                             <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/purchase_goods_check') }}">
-                                <input type="hidden" name="_tokens" value="{{csrf_token()}}">
                                 <div class="tab-pane">
                                 <div class="col-lg-7">
                                     <section class="panel panel-default">
