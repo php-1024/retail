@@ -80,32 +80,22 @@
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-
                             <div class="col-sm-12">
                                 <form class="form-horizontal" method="get">
-
-
                                     <label class="col-sm-1 control-label">供应商</label>
-
                                     <div class="col-sm-1">
                                         <input class="input-sm form-control" size="16" type="text" value=""
                                                placeholder="供应商id">
                                     </div>
-
-
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value=""
                                                placeholder="公司名称或联系人姓名">
                                     </div>
-
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value=""
                                                placeholder="联系人手机">
                                     </div>
-
-
                                     <div class="col-sm-1">
-
                                         <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
                                         </button>
                                     </div>
@@ -114,7 +104,9 @@
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-                            <div class="tab-pane">
+                            <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/purchase_goods_check') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <div class="tab-pane">
                                 <div class="col-lg-7">
                                     <section class="panel panel-default">
                                         <header class="panel-heading font-bold">
@@ -179,15 +171,14 @@
                                 <div style="clear: both;"></div>
                             </div>
 
-                            <footer class="panel-footer">
+                                <footer class="panel-footer">
                                 <div class="row">
-
                                     <div class="col-sm-12 col-sm-offset-6">
-
-                                        <button type="button" class="btn btn-success" id="addBtn">确认提交</button>
+                                        <button type="button" class="btn btn-success" onclick="PostForm()">确认提交</button>
                                     </div>
                                 </div>
                             </footer>
+                            </form>
                         </section>
                     </section>
                 </section>
@@ -230,9 +221,29 @@
             }
         });
     }
-</script>
 
-<script type="text/javascript">
+    //编辑店铺信息
+    function PostForm() {
+        var target = $("#purchase_goods");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (response) {
+            if (response.status == -1) {
+                window.location.reload();
+            } else if(response.status == 0) {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }else{
+                $('#goods_list').html(response);
+            }
+        });
+    }
+
+
 
     var ordersObj = {	//生成订单
         clerk: {},//店员
