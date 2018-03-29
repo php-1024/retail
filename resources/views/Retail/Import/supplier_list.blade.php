@@ -45,7 +45,7 @@
                                     <input type="hidden" id="category_delete_comfirm_url" value="{{ url('retail/ajax/category_delete') }}">
                                     <label class="col-sm-1 control-label">供应商名称</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" name="name" value="">
+                                        <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$company_name}}">
                                     </div>
 
                                     <div class="col-sm-3">
@@ -59,19 +59,19 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>分类名称</th>
-                                        <th>分类排序</th>
-                                        <th>添加时间</th>
+                                        <th>公司名称</th>
+                                        <th>联系人姓名</th>
+                                        <th>联系人电话</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($category as $key=>$val)
+                                    @foreach($supplier as $key=>$val)
                                         <tr>
                                             <td>{{ $val->id }}</td>
-                                            <td>{{ $val->name }}</td>
-                                            <td>{{ $val->displayorder }}</td>
-                                            <td>{{ $val->created_at }}</td>
+                                            <td>{{ $val->company_name }}</td>
+                                            <td>{{ $val->contactname }}</td>
+                                            <td>{{ $val->contactmobile }}</td>
                                             <td>
                                                 <button class="btn btn-info btn-xs" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
                                                 </button>
@@ -87,7 +87,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {!! $category->links() !!}
+                                        {!! $supplier->links() !!}
                                     </div>
                                 </div>
                             </footer>
