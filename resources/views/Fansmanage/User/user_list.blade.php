@@ -81,7 +81,13 @@
                                     @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td><img src="{{asset('public/Fansmanage')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;"></td>
+                                        <td>
+                                            @if($value->head_imgurl)
+                                                <img src="{{asset('public/Fansmanage')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
+                                            @else
+                                                <img src="{{$value->head_imgurl}}" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
+                                            @endif
+                                        </td>
                                         <td>{{$value->user->account}}</td>
                                         <td>{{$value->nickname}}</td>
                                         <td><label class="label label-success">是</label></td>
