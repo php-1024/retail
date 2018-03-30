@@ -253,7 +253,6 @@ class UserController extends Controller{
         $user_id = $request->user_id;//用户id
         $fansmanage_id = $request->fansmanage_id;//店铺id
         $nickname = $request->nickname;//微信昵称
-
         DB::beginTransaction();
         try {
             $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['fansmanage_id',$fansmanage_id]]);//查询粉丝标签关联表有没有数据
