@@ -31,7 +31,6 @@ class BillingController extends Controller
             'fansmanage_id' => $fansmanage_id,
         ];
         $list = RetailPurchaseOrder::getPaginage($where,$search_data,'1','created_at','DESC');
-        dump($list);
         return view('Retail/Billing/purchase_goods',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
