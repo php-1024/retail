@@ -127,10 +127,16 @@ class InvoicingController extends Controller
         try {
             $id = RetailPurchaseOrder::addOrder($order_data);
             //进货开单对应商品信息处理
-            $order_goods_data = [
-                'order_id' => $id,
-                'goods_id' => $id,
-            ];
+            foreach ($orders['goods'] as $key=>$val){
+                $goods = RetailGoods::getOne(['id'=>$val->id]);
+                dd($goods);
+                $order_goods_data = [
+                    'order_id' => $id,
+                    'goods_id' => $val->id,
+                    'total' => $val->number,
+                    'price' => $val->price,
+                ];
+            }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员在零售店进货开单的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了进货开单！');//保存操作记录
