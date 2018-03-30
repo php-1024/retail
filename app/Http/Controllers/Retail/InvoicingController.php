@@ -237,6 +237,64 @@ class InvoicingController extends Controller
         }
         return response()->json(['data' => $tips.'成功,等待审核确认', 'status' => '1']);
     }
+
+
+    //盘点开单的数据处理
+    public function check_goods_check(Request $request)
+    {
+        dd($request);
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
+        $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
+        if ($type == 4){
+            $tips = '盘点操作';
+        }else{
+            $tips = '开单操作(操作类型未知)';
+        }
+        $orders = $request->get('orders');                  //接收订单信息
+        //报损开单订单信息整理
+        $order_data = [
+            'ordersn' => $ordersn,
+            'order_price' => $orders['order_price'],
+            'remarks' => '',
+            'operator_id' => $orders['operator_id'],
+            'type' => $type,  //3为报损开单
+            'fansmanage_id' => $fansmanage_id,
+            'retail_id' => $admin_data['organization_id'],
+        ];
+        DB::beginTransaction();
+        try {
+            $id = RetailLossOrder::addOrder($order_data);
+            //进货开单对应商品信息处理
+            foreach ($orders['goods'] as $key=>$val){
+                $goods = RetailGoods::getOne(['id'=>$val['id']]);
+                $order_goods_data = [
+                    'order_id' => $id,
+                    'goods_id' => $val['id'],
+                    'total' => $val['number'],
+                    'price' => $goods->price,
+                    'title' => $goods->name,
+                    'thumb' => '',
+                    'details' => $goods->details,
+                ];
+                RetailLossOrderGoods::addOrderGoods($order_goods_data);
+            }
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员在零售店报损开单的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了'.$tips.'！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了'.$tips.'！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => $tips.'成功,等待审核确认', 'status' => '1']);
+    }
 }
 
 ?>
