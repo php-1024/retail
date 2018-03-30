@@ -257,7 +257,7 @@ class UserController extends Controller{
         DB::beginTransaction();
         try {
             $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['fansmanage_id',$fansmanage_id]]);//查询粉丝标签关联表有没有数据
-
+            dd($oneData);
             if(!empty($oneData)){
                 if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
                     //减少原粉丝标签的人数
