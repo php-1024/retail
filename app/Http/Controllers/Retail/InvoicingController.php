@@ -180,7 +180,7 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,请前往进出管理一栏进行审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,请前往开单管理进行审核确认', 'status' => '1']);
     }
 
 
@@ -237,7 +237,7 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,请前往进出管理一栏进行审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,请前往开单管理进行审核确认', 'status' => '1']);
     }
 
 
@@ -294,7 +294,7 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,请前往进出管理一栏进行审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,请前往开单管理进行审核确认', 'status' => '1']);
     }
 }
 
