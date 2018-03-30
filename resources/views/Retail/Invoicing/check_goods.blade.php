@@ -80,7 +80,7 @@
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-                            <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/loss_goods_check') }}">
+                            <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/check_goods_check') }}">
                                 <div class="tab-pane">
                                     <div class="col-lg-7">
                                         <section class="panel panel-default">
