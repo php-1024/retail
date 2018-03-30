@@ -35,13 +35,13 @@ class BillingController extends Controller
         return view('Retail/Billing/purchase_goods',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-    //粉丝用户管理冻结功能显示
-    public function purchase_list_lock(Request $request)
+    //审核订单页面
+    public function purchase_list_confirm(Request $request)
     {
         $user_id = $request->id;        //会员标签id
         $status = $request->status;     //冻结或者解锁
         $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();    //微信昵称
-        return view('Retail//user_list_lock', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
+        return view('Retail/Billing/purchase_list_confirm', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
     }
 
     //添加商品分类操作
