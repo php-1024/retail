@@ -18,6 +18,11 @@ class RetailSupplier extends Model{
         return $this->belongsto('App\Models\Organization','retail_id');
     }
 
+    //和组织表RetailPurchaseOrder表多对一的关系
+    public function RetailPurchaseOrder(){
+        return $this->hasMany('App\Models\RetailPurchaseOrder','company_id');
+    }
+
     //搜索供应商信息
     public static function SearchCompany($company_id,$company_name,$contactmobile){
         $model = new RetailSupplier();

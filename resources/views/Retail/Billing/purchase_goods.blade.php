@@ -77,9 +77,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>201803301524216863</td>
-                                        <td>进货</td>
+                                        <td>{{$val->ordersn}}</td>
+                                        <td>
+                                            @if($val->type == 1)
+                                            进货
+                                            @elseif($val->type == 2)
+                                            退货
+                                            @else
+                                            未知
+                                            @endif
+                                        </td>
                                         <td><label class="label label-success">刘记鸡煲</label></td>
                                         <td><label class="label label-info">
                                                 刘兴文
@@ -99,6 +108,7 @@
 
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -106,7 +116,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {{--{{$list->links()}}--}}
+                                        {{$list->links()}}
                                     </div>
                                 </div>
                             </footer>

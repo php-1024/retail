@@ -15,7 +15,7 @@ class RetailPurchaseOrder extends Model{
 
     //和User表多对一的关系
     public function User(){
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->belongsTo('App\Models\RetailSupplier','company_id','id');
     }
 
     //和RetailOrderGoods表一对多的关系
