@@ -13,8 +13,8 @@ class RetailPurchaseOrder extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和User表多对一的关系
-    public function User(){
+    //和BillingController表多对一的关系
+    public function BillingController(){
         return $this->belongsTo('App\Models\RetailSupplier','company_id','id');
     }
 
@@ -42,7 +42,7 @@ class RetailPurchaseOrder extends Model{
 
     public static function getOne($where)
     {
-        $model = self::with('User')->with('RetailPurchaseOrderGoods');
+        $model = self::with('BillingController')->with('RetailPurchaseOrderGoods');
         return $model->where($where)->first();
     }
 
@@ -57,7 +57,7 @@ class RetailPurchaseOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('User');
+        $model = self::with('BillingController');
         if(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
         }
