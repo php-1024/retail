@@ -109,7 +109,7 @@ class InvoicingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
 
         //生成订单编号
-        $ordersn = date('YmdHis');
+        $ordersn = date('YmdHis').rand(100,999);
         $orders = $request->get('orders');                  //接收订单信息
         dump($ordersn);
         dd($orders);
