@@ -121,7 +121,8 @@ class RetailCheckAjax
             /*********进销存--供应商到货开单处理*********/
 
             /*********进销存--报损开单处理*********/
-            case "retail/ajax/loss_goods_check"://检测登录，权限，及报损、盘点开单的数据
+            case "retail/ajax/loss_goods_check"://检测登录，权限，及报损开单的数据
+            case "retail/ajax/check_goods_check"://检测登录，权限，及盘点开单的数据
                 $re = $this->checkLoginAndRuleAndLossAndCheckGoods($request);
                 return self::format_response($re, $next);
                 break;
