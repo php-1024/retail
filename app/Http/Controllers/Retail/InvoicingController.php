@@ -122,6 +122,7 @@ class InvoicingController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
+        dd($order_data);
         DB::beginTransaction();
         try {
             RetailPurchaseOrder::addOrder($order_data);
