@@ -72,8 +72,11 @@ class BillingController extends Controller
     {
         $order_id = $request->get('id');        //订单ID
         $type = $request->get('type');          //订单类型type（1和2为从供应商进货退货开单类型，3为报损订单类型，4为盘点订单类型）
-        dd($type);
-        $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+        if ($type == 1 || $type == 2){
+            $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+        }elseif($type == 3){
+            $order = RetailLossOrder::getOne(['id'=>$order_id])->first();       //获取订单信息
+        }
         return view('Retail/Billing/order_list_details', ['order' => $order]);
     }
 
