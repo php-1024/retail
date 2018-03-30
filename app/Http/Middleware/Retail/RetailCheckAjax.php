@@ -65,6 +65,7 @@ class RetailCheckAjax
             case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             case "retail/ajax/user_list_lock_check":    //检测是否登录 权限 安全密码--冻结粉丝标签
             case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
+            case "retail/ajax/loss_list_confirm_check":       //审核订单安全密码确认
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
