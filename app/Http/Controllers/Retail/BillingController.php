@@ -68,6 +68,15 @@ class BillingController extends Controller
     }
 
     //审核订单页面
+    public function loss_list_confirm(Request $request)
+    {
+        $order_id = $request->get('id');        //会员标签id
+        $status = $request->status;                 //冻结或者解锁
+        $order = RetailLossOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+        return view('Retail/Billing/loss_list_confirm', ['order' => $order,'status' => $status]);
+    }
+
+    //审核订单页面
     public function order_list_details(Request $request)
     {
         $order_id = $request->get('id');        //订单ID
