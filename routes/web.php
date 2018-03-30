@@ -607,6 +607,14 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('check_goods', 'Retail\InvoicingController@check_goods')->middleware('RetailCheck');        //盘点开单
     });
 
+    //进出开单管理
+    Route::group(['prefix'=>'billing'],function(){
+        Route::get('purchase_goods', 'Retail\BillingController@purchase_goods')->middleware('RetailCheck');    //从供应商进货开单管理
+        Route::get('return_goods', 'Retail\BillingController@return_goods')->middleware('RetailCheck');        //从供应商退货开单管理
+        Route::get('loss_goods', 'Retail\BillingController@loss_goods')->middleware('RetailCheck');           //报损开单管理
+        Route::get('check_goods', 'Retail\BillingController@check_goods')->middleware('RetailCheck');        //盘点开单管理
+    });
+
     //用户管理
     Route::group(['prefix'=>'user'],function(){
         Route::get('user_list', 'Retail\UserController@user_list')->middleware('RetailCheck');          //用户管理-粉丝用户管理
@@ -644,12 +652,16 @@ Route::group(['prefix'=>'retail'],function(){
 
 
         Route::post('goods_list', 'Retail\InvoicingController@goods_list')->middleware('RetailCheckAjax');                       //开单异步加载部分（商品列表）
-        Route::post('supplier_add_check', 'Retail\ImportController@supplier_add_check')->middleware('RetailCheckAjax');          //供应商添加检测
+        Route::post('supplier_add_check', 'Retail\SupplierController@supplier_add_check')->middleware('RetailCheckAjax');          //供应商添加检测
         Route::post('purchase_goods_check', 'Retail\InvoicingController@purchase_goods_check')->middleware('RetailCheckAjax');   //从供应商进货、退货开单检测
         Route::post('loss_goods_check', 'Retail\InvoicingController@loss_goods_check')->middleware('RetailCheckAjax');          //报损开单检测
         Route::post('check_goods_check', 'Retail\InvoicingController@check_goods_check')->middleware('RetailCheckAjax');        //盘点开单检测
         Route::post('search_company', 'Retail\InvoicingController@search_company')->middleware('RetailCheckAjax');              //搜索供应商检测
         Route::post('select_company', 'Retail\InvoicingController@select_company')->middleware('RetailCheckAjax');              //选择供应商检测
+
+
+        Route::post('purchase_list_confirm','Retail\BillingController@purchase_list_confirm')->middleware('RetailCheckAjax');           //列表冻结ajax显示
+        Route::post('purchase_list_confirm_check','Retail\BillingController@purchase_list_confirm_check')->middleware('RetailCheckAjax');     //列表冻结功能提交
 
 
         Route::post('category_add_check', 'Retail\CategoryController@category_add_check')->middleware('RetailCheckAjax');          //栏目添加检测
