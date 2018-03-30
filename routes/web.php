@@ -704,7 +704,7 @@ Route::group(['prefix'=>'api'],function() {
 
     //微信通用路由组
     Route::group(['prefix' => 'androidapi'], function () {
-        Route::any('display', 'Api\AppController@display');//接受公众号收授权推送消息
+        Route::any('display', 'Api\AndroidApiController@display');//接受公众号收授权推送消息
     });
 });
 /*********************接口路由*************************/
