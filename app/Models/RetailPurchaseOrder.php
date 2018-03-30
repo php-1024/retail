@@ -39,11 +39,22 @@ class RetailPurchaseOrder extends Model{
         return $model->id;
     }
 
+    //修改数据
+    public static function editOrder($where,$param)
+    {
+        if ($model = self::where($where)->first()) {
+            foreach ($param as $key => $val) {
+                $model->$key = $val;
+            }
+            $model->save();
+        }
+    }
+
 
     public static function getOne($where)
     {
         $model = self::with('RetailSupplier')->with('RetailPurchaseOrderGoods');
-        return $model->where($where)->first();
+        return $model->where($where)->get();
     }
 
     //获取列表

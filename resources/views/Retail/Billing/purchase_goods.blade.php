@@ -48,12 +48,12 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
+                                    <input type="hidden" id="order_list_details" value="{{ url('retail/ajax/order_list_details') }}">
                                     <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="ordersn" value="订单编号" placeholder="订单编号">
+                                        <input type="text" class="form-control" name="ordersn" value="{{$ordersn}}" placeholder="订单编号">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -151,9 +151,9 @@
 
 
 
-    //粉丝钱包
+    //订单详情
     function getwalletForm(id,status){
-        var url = $('#user_list_wallet').val();
+        var url = $('#order_list_details').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
@@ -193,6 +193,7 @@
                 });
                 return;
             }else{
+                console.log(response);
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }

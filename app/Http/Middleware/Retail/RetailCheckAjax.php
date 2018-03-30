@@ -37,6 +37,8 @@ class RetailCheckAjax
             case "retail/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
             case "retail/ajax/select_company":          //选择供应商处理
             case "retail/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
+            case "retail/ajax/purchase_list_confirm":   //审核订单
+            case "retail/ajax/order_list_details":      //订单详细信息列表
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
@@ -60,7 +62,8 @@ class RetailCheckAjax
             case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
-            case "retail/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
+            case "retail/ajax/user_list_lock_check":    //检测是否登录 权限 安全密码--冻结粉丝标签
+            case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
