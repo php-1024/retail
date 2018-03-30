@@ -36,7 +36,8 @@ class RetailCheckAjax
             case "retail/ajax/user_list_lock":          //会员列表冻结显示页面
             case "retail/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
             case "retail/ajax/select_company":          //选择供应商处理
-                $re = $this->checkLoginAndRule($request);
+            case "retail/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
             case "retail/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
@@ -106,13 +107,6 @@ class RetailCheckAjax
             /*********商品添加和商品编辑*********/
 
             /*********进销存商品选择列表*********/
-            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
-                $re = $this->checkLoginAndRuleAndSearch($request);
-                return self::format_response($re, $next);
-                break;
-            /*********进销存商品选择列表*********/
-
-            /*********进销存商品选择列表*********/
             case "retail/ajax/search_company":          //检测登录，权限，及供应商搜索的数据处理
             $re = $this->checkLoginAndRuleAndSearchCompany($request);
                 return self::format_response($re, $next);
@@ -125,6 +119,14 @@ class RetailCheckAjax
                 return self::format_response($re, $next);
                 break;
             /*********进销存--供应商到货开单处理*********/
+
+            /*********进销存--报损开单处理*********/
+            case "retail/ajax/loss_goods_check"://检测登录，权限，及报损开单的数据
+            case "retail/ajax/check_goods_check"://检测登录，权限，及盘点开单的数据
+                $re = $this->checkLoginAndRuleAndLossAndCheckGoods($request);
+                return self::format_response($re, $next);
+                break;
+            /*********进销存--报损开单处理*********/
 
             /****粉丝信息编辑****/
             case "retail/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
@@ -216,23 +218,6 @@ class RetailCheckAjax
         }
     }
 
-
-    //检测登录，权限，及搜索商品的数据
-    public function checkLoginAndRuleAndSearch($request)
-    {
-        $re = $this->checkLoginAndRule($request);//检测登录、权限
-        if ($re['status'] == '0') {//检测是否登录
-            return $re;
-        } else {
-            $re2 = $this->checkSearch($re['response']);   //检测选择商品数据
-            if ($re2['status'] == '0') {
-                return $re2;
-            } else {
-                return self::res(1, $re2['response']);
-            }
-        }
-    }
-
     //检测登录，权限，及搜索供应商的数据
     public function checkLoginAndRuleAndSearchCompany($request)
     {
@@ -249,14 +234,30 @@ class RetailCheckAjax
         }
     }
 
-    //检测登录，权限，及搜索商品的数据
+    //检测登录，权限，及进货退货开单的数据
     public function checkLoginAndRuleAndPurchaseGoods($request)
     {
         $re = $this->checkLoginAndRule($request);//检测登录、权限
         if ($re['status'] == '0') {//检测是否登录
             return $re;
         } else {
-            $re2 = $this->checkPurchaseGoods($re['response']);   //检测添加商品数据
+            $re2 = $this->checkPurchaseGoods($re['response']);   //检测进货退货开单的数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
+
+    //检测登录，权限，及报损、盘点开单的数据
+    public function checkLoginAndRuleAndLossAndCheckGoods($request)
+    {
+        $re = $this->checkLoginAndRule($request);//检测登录、权限
+        if ($re['status'] == '0') {//检测是否登录
+            return $re;
+        } else {
+            $re2 = $this->checkLossAndCheckGoods($re['response']);   //检测报损、盘点开单的数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
@@ -623,15 +624,6 @@ class RetailCheckAjax
         return self::res(1, $request);
     }
 
-    //检测搜索商品的数据
-    public function checkSearch($request)
-    {
-        if (empty($request->input('category_id')) && empty($request->input('goods_name'))) {
-            return self::res(0, response()->json(['data' => '请选择商品分类，或者输入商品名称进行搜索!!', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-
     //检测搜索供应商的数据
     public function checkSearchCompany($request)
     {
@@ -641,7 +633,7 @@ class RetailCheckAjax
         return self::res(1, $request);
     }
 
-    //检测供应商进货开单的数据
+    //检测供应商进货退货开单的数据
     public function checkPurchaseGoods($request)
     {
         if (empty($request->orders['goods'])) {
@@ -649,6 +641,18 @@ class RetailCheckAjax
         }
         if (empty($request->orders['company_id'])) {
             return self::res(0, response()->json(['data' => '请选择供应商!', 'status' => '0']));
+        }
+        if (empty($request->orders['operator_id'])) {
+            return self::res(0, response()->json(['data' => '请选择操作人员!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+    //检测报损、盘点开单的数据
+    public function checkLossAndCheckGoods($request)
+    {
+        if (empty($request->orders['goods'])) {
+            return self::res(0, response()->json(['data' => '请选择商品!', 'status' => '0']));
         }
         if (empty($request->orders['operator_id'])) {
             return self::res(0, response()->json(['data' => '请选择操作人员!', 'status' => '0']));

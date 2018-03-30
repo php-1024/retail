@@ -6,9 +6,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class RetailPurchaseOrder extends Model{
+class RetailLossOrder extends Model{
     use SoftDeletes;
-    protected $table = 'retail_purchase_order';
+    protected $table = 'retail_loss_order';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -19,17 +19,16 @@ class RetailPurchaseOrder extends Model{
     }
 
     //和RetailOrderGoods表一对多的关系
-    public function RetailPurchaseOrderGoods(){
-        return $this->hasMany('App\Models\RetailPurchaseOrderGoods','order_id','id');
+    public function RetailLossOrderGoods(){
+        return $this->hasMany('App\Models\RetailLossOrderGoods','order_id','id');
     }
 
     //创建订单
     public static function addOrder($param){
-        $model = new RetailPurchaseOrder();
+        $model = new RetailLossOrder();
         $model->ordersn = $param['ordersn'];
         $model->order_price = $param['order_price'];
         $model->remarks = $param['remarks'];
-        $model->company_id = $param['company_id'];
         $model->operator_id = $param['operator_id'];
         $model->type = $param['type'];
         $model->status = '0';
@@ -42,13 +41,13 @@ class RetailPurchaseOrder extends Model{
 
     public static function getOne($where)
     {
-        $model = self::with('User')->with('RetailPurchaseOrderGoods');
+        $model = self::with('User')->with('RetailLossOrderGoods');
         return $model->where($where)->first();
     }
 
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new RetailPurchaseOrder();
+        $model = new RetailLossOrder();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -70,7 +69,7 @@ class RetailPurchaseOrder extends Model{
         if(!empty($search_data['status'])){
             $model = $model->where([['status',$search_data['status']]]);
         }
-        return $model->with('RetailPurchaseOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->with('RetailLossOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 }
 ?>

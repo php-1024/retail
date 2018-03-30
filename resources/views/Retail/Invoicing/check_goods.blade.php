@@ -50,150 +50,131 @@
                             </div>
 
                             <div class="line line-border b-b pull-in"></div>
+
                             <div class="col-sm-12">
-                                <form class="form-horizontal" method="get">
-
-
+                                <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('retail/ajax/goods_list') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
 
 
                                     <div class="col-sm-2">
-                                        <select name="account" class="form-control m-b">
+                                        <select name="category_id" class="form-control m-b">
                                             <option value="0">请选择分类</option>
-                                            <option value="5970">美妆</option>
-                                            <option value="5974">面膜</option>
-                                            <option value="5977">跨境</option>
-                                            <option value="5963">护肤</option>
-                                            <option value="6360">香水</option>
-                                            <option value="5990">个护</option>
-                                            <option value="5981">内衣</option>
-                                            <option value="5985">养生</option>
+                                            @foreach($category as $key=>$val)
+                                                <option value="{{$val->id}}">{{$val->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value=""
-                                               placeholder="关键字或条码">
+                                        <input class="input-sm form-control" size="16" type="text" value="" name="goods_name" placeholder="关键字或条码">
                                     </div>
                                     <div class="col-sm-1">
 
-                                        <button type="button" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
-                                        </button>
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_goods()"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
                             </div>
 
+
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-                            <div class="tab-pane">
-
-                                <div class="col-lg-7">
-                                    <section class="panel panel-default">
-                                        <header class="panel-heading font-bold">
-                                            选择商品
-                                        </header>
-                                        <table class="table table-striped table-bordered ">
-                                            <thead>
-                                            <tr>
-                                                <th>商品ID</th>
-                                                <th>商品标题</th>
-                                                <th>商品价格</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="goods_list">
-
-                                            </tbody>
-                                        </table>
-                                        <div style="clear: both;"></div>
-                                    </section>
-                                </div>
-
-                                <div class="col-lg-5">
-                                    <section class="panel panel-default">
-                                        <header class="panel-heading font-bold">
-                                            开单商品列表 操作人员：刘新文
-                                        </header>
-                                        <div class="panel-body">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th><button type="button" class="btn btn-s-md btn-danger"><i class="fa fa-user"></i>&nbsp;&nbsp;操作人员
-                                                        </button></th>
-                                                    <th>
-                                                        <select id="operator_id" name="operator_id" onchange="setClerk()" class="form-control">
-                                                            <option value="0">请选择人员</option>
-                                                            <option value="2063">楼兰美容养生一一阮桂莲13713895860</option>
-                                                            <option value="4252">晴栀@</option>
-                                                            <option value="18547">🇨🇳</option>
-                                                            <option value="19682">掌尚易商</option>
-                                                            <option value="24777">一生所爱</option>
-                                                        </select>
-                                                    </th>
-                                                </tr>
-                                                </thead>
-
-                                            </table>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th><label class="label label-info">总计件数：</label></th>
-                                                    <th><label class="label label-info">总计金额</label></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <label class="label label-danger" id="totalnumber">0</label>件
-                                                    </td>
-                                                    <td>
-                                                        <label class="label label-danger" id="totalmoney">0</label>元
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <table class="table table-striped goods-table2">
+                            <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('retail/ajax/check_goods_check') }}">
+                                <div class="tab-pane">
+                                    <div class="col-lg-7">
+                                        <section class="panel panel-default">
+                                            <header class="panel-heading font-bold">
+                                                选择商品
+                                            </header>
+                                            <table class="table table-striped table-bordered ">
                                                 <thead>
                                                 <tr>
                                                     <th>商品ID</th>
                                                     <th>商品标题</th>
                                                     <th>商品价格</th>
-
-
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                {{--<tr id="hs1_0">--}}
-                                                    {{--<td>1</td>--}}
-                                                    {{--<td>性感女人香水</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--88.00--}}
-                                                    {{--</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--<button type="button" class="btn btn-danger btn-xs" onclick="goodsSub(1,0)"><i class="fa fa-minus"></i></button>--}}
-                                                        {{--<input type="text" id="input1_0" onchange="update_num(1,0)" class="text-center" value="1000" size="4">--}}
-                                                        {{--<button type="button" class="btn btn-success btn-xs" onclick="goodsAdd(1,0)"><i class="fa fa-plus"></i></button>--}}
-                                                        {{--<button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel(4461,0)">删除</button>--}}
-                                                    {{--</td>--}}
-                                                {{--</tr>--}}
+                                                <tbody id="goods_list">
+
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div style="clear: both;"></div>
-                            </div>
-                            <footer class="panel-footer">
-                                <div class="row">
-
-                                    <div class="col-sm-12 col-sm-offset-6">
-
-                                        <button type="button" class="btn btn-success" id="addBtn">确认提交</button>
+                                            <div style="clear: both;"></div>
+                                        </section>
                                     </div>
+
+                                    <div class="col-lg-5">
+                                        <section class="panel panel-default">
+                                            <header class="panel-heading font-bold">
+                                                开单商品列表
+                                            </header>
+                                            <div class="panel-body">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><button type="button" class="btn btn-s-md btn-danger"><i class="fa fa-user"></i>&nbsp;&nbsp;操作人员
+                                                            </button></th>
+                                                        <th>
+                                                            <select id="operator_id" name="operator_id" onchange="setClerk()" class="form-control">
+                                                                <option value="0">请选择人员</option>
+                                                                <option value="2063">楼兰美容养生一一阮桂莲13713895860</option>
+                                                                <option value="4252">晴栀@</option>
+                                                                <option value="18547">🇨🇳</option>
+                                                                <option value="19682">掌尚易商</option>
+                                                                <option value="24777">一生所爱</option>
+                                                            </select>
+
+
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+
+                                                </table>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><label class="label label-info">总计件数：</label></th>
+                                                        <th><label class="label label-info">总计金额</label></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-danger" id="totalnumber">0</label>件
+                                                        </td>
+                                                        <td>
+                                                            <label class="label label-danger" id="totalmoney">0</label>元
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="table table-striped goods-table2">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>商品ID</th>
+                                                        <th>商品标题</th>
+                                                        <th>商品价格</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div style="clear: both;"></div>
                                 </div>
-                            </footer>
+
+                                <footer class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-sm-offset-6">
+                                            <button type="button" class="btn btn-success" onclick="PostForm('4')">确认提交</button>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </form>
                         </section>
                     </section>
                 </section>
@@ -216,57 +197,75 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-    //编辑店铺信息
-    function EditStore() {
-        var formData = new FormData($("#store_edit")[0]);
-        $.ajax({
-            url: '{{ url('retail/ajax/store_edit_check') }}',
-            type: 'post',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (json) {
-                if (json.status == -1) {
-                    window.location.reload();
-                } else if (json.status == 1) {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    }, function () {
-                        window.location.reload();
-                    });
-                } else {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定"
-                    });
-                }
-            },
-            error: function (json) {
-                console.log(json);
+    //搜索商品信息
+    function search_goods() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var data = target.serialize();
+        $.post(url, data, function (response) {
+            if (response.status == -1) {
+                window.location.reload();
+            } else if(response.status == 0) {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }else{
+                $('#goods_list').html(response);
             }
         });
     }
-</script>
 
-<script type="text/javascript">
+    //供应商开单（进货）
+    function PostForm(type) {
+        var target = $("#purchase_goods");
+        var url = target.attr("action");
+        var _token = "{{csrf_token()}}";
+        var orders = ordersObj; //  进货订单信息
+        var data = {'_token':_token,'type':type,'orders':orders}
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    {{--window.location.href = "{{asset("retail/goods/goods_edit?goods_id=")}}"+json.goods_id;--}}
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+
+
 
     var ordersObj = {	//生成订单
-        clerk: {},//店员
-        supply: {},//顾客
-        goods: []//商品
+        operator_id: {},//操作人员
+        company_id: {},//供应商
+        goods: [],//商品
+        order_price: {}
     };
 
 
     var selectedopnames=[];
 
 
+    function setClerk() {
+        var operator_id = $('#operator_id').val();
+        ordersObj.operator_id=parseInt(operator_id);
+    }
 
 
     function canculate(){
@@ -279,6 +278,7 @@
         totalmoney=totalmoney.toFixed(2);
         $("#totalnumber").html(totalnumber);
         $("#totalmoney").html(totalmoney);
+        ordersObj.order_price=parseInt(totalmoney);
     }
 
     //选择商品

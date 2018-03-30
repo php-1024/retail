@@ -135,7 +135,7 @@
                                 <div class="col-lg-5">
                                     <section class="panel panel-default">
                                         <header class="panel-heading font-bold">
-                                            开单商品列表 操作人员：刘新文
+                                            开单商品列表
                                         </header>
                                         <div class="panel-body">
                                             <table class="table table-striped">
@@ -198,7 +198,7 @@
                                 <footer class="panel-footer">
                                 <div class="row">
                                     <div class="col-sm-12 col-sm-offset-6">
-                                        <button type="button" class="btn btn-success" onclick="PostForm()">确认提交</button>
+                                        <button type="button" class="btn btn-success" onclick="PostForm('1')">确认提交</button>
                                     </div>
                                 </div>
                             </footer>
@@ -269,25 +269,32 @@
     }
 
     //供应商开单（进货）
-    function PostForm() {
+    function PostForm(type) {
         var target = $("#purchase_goods");
         var url = target.attr("action");
         var _token = "{{csrf_token()}}";
         var orders = ordersObj; //  进货订单信息
-        var data = {'_token':_token,'orders':orders}
-        console.log(data);
-        $.post(url, data, function (response) {
-            if (response.status == -1) {
+        var data = {'_token':_token,'type':type,'orders':orders}
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
                 window.location.reload();
-            } else if(response.status == 0) {
+            } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
-                    text: response.data,
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    {{--window.location.href = "{{asset("retail/goods/goods_edit?goods_id=")}}"+json.goods_id;--}}
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 });
-            }else{
-//                $('#goods_list').html(response);
             }
         });
     }
