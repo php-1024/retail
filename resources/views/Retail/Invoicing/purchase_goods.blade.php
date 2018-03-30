@@ -198,7 +198,7 @@
                                 <footer class="panel-footer">
                                 <div class="row">
                                     <div class="col-sm-12 col-sm-offset-6">
-                                        <button type="button" class="btn btn-success" onclick="PostForm()">确认提交</button>
+                                        <button type="button" class="btn btn-success" onclick="PostForm('1')">确认提交</button>
                                     </div>
                                 </div>
                             </footer>
@@ -269,12 +269,12 @@
     }
 
     //供应商开单（进货）
-    function PostForm() {
+    function PostForm(order_type) {
         var target = $("#purchase_goods");
         var url = target.attr("action");
         var _token = "{{csrf_token()}}";
         var orders = ordersObj; //  进货订单信息
-        var data = {'_token':_token,'orders':orders}
+        var data = {'_token':_token,'order_type':order_type,'orders':orders}
         console.log(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
