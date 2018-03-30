@@ -32,7 +32,7 @@ class FansmanageUser extends Model{
     }
 
     //简易型查询单条数据关联查询
-    public static function getOneStoreUser($where)
+    public static function getOneFansmanageUser($where)
     {
         return self::where($where)->first();
     }
