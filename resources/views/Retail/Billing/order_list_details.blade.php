@@ -38,6 +38,7 @@
                         <tr>
                             <th>ID</th>
                             <th>商品名称</th>
+                            <th>商品ID</th>
                             <th>数量</th>
                             <th>价格</th>
                         </tr>
@@ -45,8 +46,9 @@
                         <tbody>
                         @foreach($order->RetailPurchaseOrderGoods as $key=>$val)
                         <tr>
-                            <td>{{$val->goods_id}}</td>
+                            <td>{{$val->id}}</td>
                             <td>{{$val->title}}</td>
+                            <td>{{$val->goods_id}}</td>
                             <td>{{$val->total}}</td>
                             <td>{{$val->price}}</td>
                         </tr>
