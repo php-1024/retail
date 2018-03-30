@@ -66,8 +66,6 @@
                                     <tr>
                                         <th>订单编号</th>
                                         <th>类型</th>
-                                        <th>供应商</th>
-                                        <th>供应商联系方式</th>
                                         <th>经手操作人员ID</th>
                                         <th>订单总金额</th>
                                         <th>审核</th>
@@ -87,10 +85,6 @@
                                             @else
                                             未知
                                             @endif
-                                        </td>
-                                        <td><label class="label label-success">{{$val->RetailSupplier->company_name}}</label></td>
-                                        <td>
-                                                {{$val->RetailSupplier->contactmobile}}
                                         </td>
                                         <td>
                                             <label class="label label-info">
