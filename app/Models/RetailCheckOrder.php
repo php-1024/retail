@@ -41,7 +41,7 @@ class RetailCheckOrder extends Model{
 
     public static function getOne($where)
     {
-        $model = self::with('User')->with('RetailCheckOrderGoods');
+        $model = self::with('RetailCheckOrderGoods');
         return $model->where($where)->first();
     }
 
