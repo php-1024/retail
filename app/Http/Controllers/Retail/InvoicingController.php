@@ -13,6 +13,8 @@ use App\Models\Organization;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Program;
 use App\Models\RetailCategory;
+use App\Models\RetailCheckOrder;
+use App\Models\RetailCheckOrderGoods;
 use App\Models\RetailGoods;
 use App\Models\RetailLossOrder;
 use App\Models\RetailLossOrderGoods;
@@ -178,7 +180,7 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,等待审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,请前往进出管理一栏进行审核确认', 'status' => '1']);
     }
 
 
@@ -235,14 +237,13 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,等待审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,请前往进出管理一栏进行审核确认', 'status' => '1']);
     }
 
 
     //盘点开单的数据处理
     public function check_goods_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
@@ -266,7 +267,7 @@ class InvoicingController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $id = RetailLossOrder::addOrder($order_data);
+            $id = RetailCheckOrder::addOrder($order_data);
             //进货开单对应商品信息处理
             foreach ($orders['goods'] as $key=>$val){
                 $goods = RetailGoods::getOne(['id'=>$val['id']]);
@@ -279,10 +280,10 @@ class InvoicingController extends Controller
                     'thumb' => '',
                     'details' => $goods->details,
                 ];
-                RetailLossOrderGoods::addOrderGoods($order_goods_data);
+                RetailCheckOrderGoods::addOrderGoods($order_goods_data);
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员在零售店报损开单的记录
+            if ($admin_data['is_super'] == 1){//超级管理员在零售店报盘点单的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了'.$tips.'！');//保存操作记录
             }else{//零售店铺本人操作记录
                 OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了'.$tips.'！');//保存操作记录
@@ -293,7 +294,7 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,等待审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,请前往进出管理一栏进行审核确认', 'status' => '1']);
     }
 }
 
