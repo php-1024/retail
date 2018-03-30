@@ -1,4 +1,7 @@
 <?php
+/**
+ * Android接口
+ */
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
@@ -9,9 +12,9 @@ class AndroidApiController extends Controller{
      * 登入检测
      */
     public function login(Request $request){
-        $account = $request->account;
-        $password = $request->password;
-        $data = Account::where([['account',$account]])->orWhere([['mobile',$account]])->first();
+        $account = $request->account;//登入账号
+        $password = $request->password;//登入密码
+        $data = Account::where([['account',$account]])->orWhere([['mobile',$account]])->first();//根据账号进行查询
         if(empty($data)){
             return response()->json(['data' => '用户不存在', 'status' => '0']);
         }
