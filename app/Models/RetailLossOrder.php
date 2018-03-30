@@ -13,9 +13,9 @@ class RetailLossOrder extends Model{
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //和User表多对一的关系
-    public function User(){
-        return $this->belongsTo('App\Models\User','user_id','id');
+    //和RetailSupplier表多对一的关系
+    public function RetailSupplier(){
+        return $this->belongsTo('App\Models\RetailSupplier','company_id','id');
     }
 
     //和RetailOrderGoods表一对多的关系
@@ -41,8 +41,8 @@ class RetailLossOrder extends Model{
 
     public static function getOne($where)
     {
-        $model = self::with('User')->with('RetailLossOrderGoods');
-        return $model->where($where)->first();
+        $model = self::with('RetailSupplier')->with('RetailPurchaseOrderGoods');
+        return $model->where($where)->get();
     }
 
     //获取列表
@@ -56,7 +56,7 @@ class RetailLossOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('User');
+        $model = self::with('RetailSupplier');
         if(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
         }
