@@ -21,25 +21,25 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">类型</label>
                         <div class="col-sm-10">
-                            <input type="text" value="@if($val->type == 1)进货@elseif($val->type == 2)退货@else未知@endif" class="form-control" disabled="" name="type">
+                            <input type="text" value="@if($order->type == 1)进货@elseif($order->type == 2)退货@else未知@endif" class="form-control" disabled="" name="type">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 text-right">供应商</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$val->RetailSupplier->company_name}}" class="form-control" disabled="" name="company_name">
+                            <input type="text" value="{{$order->RetailSupplier->company_name}}" class="form-control" disabled="" name="company_name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 text-right">供应商联系方式</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$val->RetailSupplier->contactmobile}}" class="form-control" disabled="" name="contactmobile">
+                            <input type="text" value="{{$order->RetailSupplier->contactmobile}}" class="form-control" disabled="" name="contactmobile">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 text-right">经手操作人员</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$val->operator_id}}" class="form-control" disabled="" name="operator_id">
+                            <input type="text" value="{{$order->operator_id}}" class="form-control" disabled="" name="operator_id">
                         </div>
                     </div>
                     <div class="form-group">
@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">开单时间</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$val->created_at}}" class="form-control" disabled="" name="created_at">
+                            <input type="text" value="{{$order->created_at}}" class="form-control" disabled="" name="created_at">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
