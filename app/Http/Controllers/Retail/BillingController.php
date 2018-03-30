@@ -173,40 +173,33 @@ class BillingController extends Controller
         }
     }
 
-    //添加商品分类操作
-    public function category_add_check(Request $request)
+    //盘点订单审核确认
+    public function check_list_confirm_check(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $category_name = $request->get('category_name');    //栏目名称
-        $category_sort = $request->get('category_sort');    //栏目排序
-        if (empty($category_sort)){
-            $category_sort = '0';
-        }
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $category_data = [
-            'name' => $category_name,
-            'created_by' => $admin_data['id'],
-            'displayorder' => $category_sort,
-            'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
-        ];
-        DB::beginTransaction();
-        try {
-            RetailCategory::addCategory($category_data);
-            //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员添加零售店铺分类的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了栏目分类！');//保存操作记录
-            }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了栏目分类！');//保存操作记录
+        $order_id = $request->get('order_id');        //会员标签id
+        $status = $request->get('status');            //接收订单当前状态
+        if ($status == 0){
+            DB::beginTransaction();
+            try {
+                RetailCheckOrder::editOrder(['id'=>$order_id],['status'=>'1']);
+                //添加操作日志
+                if ($admin_data['is_super'] == 1){//超级管理员审核订单操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统审核了盘点订单！');//保存操作记录
+                }else{//零售店铺本人操作记录
+                    OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '审核了盘点订单！');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '审核盘点订单失败，请检查', 'status' => '0']);
             }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '审核盘点订单成功', 'status' => '1']);
         }
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
     }
+
+
 }
 
 ?>
