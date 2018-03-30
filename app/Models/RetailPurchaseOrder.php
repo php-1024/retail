@@ -29,6 +29,7 @@ class RetailPurchaseOrder extends Model{
         $model->ordersn = $param['ordersn'];
         $model->order_price = $param['order_price'];
         $model->remarks = $param['remarks'];
+        $model->company_id = $param['company_id'];
         $model->operator_id = $param['operator_id'];
         $model->order_type = $param['order_type'];
         $model->status = '0';
