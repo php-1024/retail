@@ -177,6 +177,7 @@ class InvoicingController extends Controller
     //报损开单的数据处理
     public function loss_goods_check(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
