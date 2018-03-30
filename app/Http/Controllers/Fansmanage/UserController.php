@@ -277,7 +277,7 @@ class UserController extends Controller{
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
             }
             $dataUser = FansmanageUser::getOneFansmanageUser([['id',$user_id]]);
-            $tag_id = Label::getPluck([['id',$label_id]],'wecaht_id')->first();
+            $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->first();
             if($label_id != 0){ //选择无标签的时候 不执行
                 $data = [
                     'openid_list'=>[$dataUser['open_id']],
