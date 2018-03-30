@@ -647,10 +647,10 @@ class RetailCheckAjax
         if (empty($request->orders['goods'])) {
             return self::res(0, response()->json(['data' => '请选择商品!', 'status' => '0']));
         }
-        if (empty($request->orders['company'])) {
+        if (empty($request->orders['company_id'])) {
             return self::res(0, response()->json(['data' => '请选择供应商!', 'status' => '0']));
         }
-        if (empty($request->orders['operator'])) {
+        if (empty($request->orders['operator_id'])) {
             return self::res(0, response()->json(['data' => '请选择操作人员!', 'status' => '0']));
         }
         return self::res(1, $request);
