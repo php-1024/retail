@@ -6,34 +6,50 @@
                 <h4 class="modal-title">订单详情</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">用户账号</label>
+                        <label class="col-sm-2 text-right">订单编号</label>
                         <div class="col-sm-10">
-                            <input type="text" value="100020" placeholder="标签名称" class="form-control" disabled="">
+                            <input type="text" value="{{$order->ordersn}}" class="form-control" disabled="" name="ordersn">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="@if($order->type == 1)进货@elseif($order->type == 2)退货@else未知@endif" class="form-control" disabled="" name="type">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">供应商</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$order->RetailSupplier->company_name}}" class="form-control" disabled="" name="company_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">供应商联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$order->RetailSupplier->contactmobile}}" class="form-control" disabled="" name="contactmobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">经手操作人员</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$order->operator_id}}" class="form-control" disabled="" name="operator_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">订单金额</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$order->order_price}}" class="form-control" disabled="" name="order_price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">开单时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$order->created_at}}" class="form-control" disabled="" name="created_at">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">用户余额</label>
-                        <div class="col-sm-10">
-                            100元
-                        </div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">用户积分</label>
-                        <div class="col-sm-10">
-                            1000分
-                        </div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                </form>
                 <div class="table-responsive">
                     <table class="table table-striped b-t b-light">
                         <thead>
