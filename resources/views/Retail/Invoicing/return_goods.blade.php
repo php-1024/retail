@@ -269,12 +269,12 @@
     }
 
     //供应商开单（进货）
-    function PostForm(order_type) {
+    function PostForm(type) {
         var target = $("#purchase_goods");
         var url = target.attr("action");
         var _token = "{{csrf_token()}}";
         var orders = ordersObj; //  进货订单信息
-        var data = {'_token':_token,'order_type':order_type,'orders':orders}
+        var data = {'_token':_token,'type':type,'orders':orders}
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
