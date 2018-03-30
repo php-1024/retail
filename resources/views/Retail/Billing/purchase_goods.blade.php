@@ -101,13 +101,13 @@
                                         </td>
                                         <td>
                                             <label class="label label-danger">
-                                                84654.25元
+                                                {{$val->order_price}}
                                             </label>
                                         </td>
                                         <td>
                                             <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('1','1')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
                                         </td>
-                                        <td>2018-03-09 16:12:45</td>
+                                        <td>{{$val->created_at}}</td>
                                         <td>
 
                                             <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
