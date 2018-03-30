@@ -44,6 +44,32 @@ class BillingController extends Controller
         return view('Retail/Billing/purchase_list_confirm', ['order' => $order,'status' => $status]);
     }
 
+    //审核订单确认
+    public function purchase_list_confirm_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $order_id = $request->get('order_id');        //会员标签id
+        $status = $request->get('status');            //接收订单当前状态
+        if ($status == 0){
+            DB::beginTransaction();
+            try {
+                RetailPurchaseOrder::editOrder(['id'=>$order_id],['status'=>'1']);
+                //添加操作日志
+                if ($admin_data['is_super'] == 1){//超级管理员审核订单操作记录
+                    OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统审核了供应商订单！');//保存操作记录
+                }else{//零售店铺本人操作记录
+                    OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '审核了供应商订单！');//保存操作记录
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '审核供应商订单失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '审核供应商订单成功', 'status' => '1']);
+        }
+    }
+
     //添加商品分类操作
     public function category_add_check(Request $request)
     {
