@@ -34,6 +34,12 @@
                         <div class="m-b-md">
                             <h3 class="m-b-none">开单管理-供应商到货处理</h3>
                         </div>
+                        <div class="row wrapper">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-s-md btn-success" onclick="window.location='supplier_list'">供应商列表</button>
+                                <button type="button" class="btn btn-s-md btn" onclick="window.location='supplier_add'">&nbsp;&nbsp;添加供应商</button>
+                            </div>
+                        </div>
 
                         <section class="panel panel-default">
                             <header class="panel-heading">
