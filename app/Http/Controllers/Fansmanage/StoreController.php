@@ -65,7 +65,9 @@ class StoreController extends Controller{
         $uuid .= substr($chars,12,4) . '-';
         $uuid .= substr($chars,16,4) . '-';
         $uuid .= substr($chars,20,12);
-
+        if(Account::checkRowExists([['uuid',$uuid]])){
+            return response()->json(['data' => 'uuid重复，请重新操作！', 'status' => '0']);
+        }
         DB::beginTransaction();
         try{
             $organization = [
@@ -123,7 +125,6 @@ class StoreController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建店铺失败，请稍后再试！', 'status' => '0']);
         }
