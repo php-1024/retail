@@ -120,7 +120,6 @@ class InvoicingController extends Controller
     //从供应商进货、退货开单的数据处理
     public function purchase_goods_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
@@ -183,8 +182,8 @@ class InvoicingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
-        $order_type = $request->get('order_type');          //接收订单类型  1：为进货订单、2为退货订单
-        if ($order_type == 1){
+        $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
+        if ($type == 1){
             $tips = '进货开单';
         }else{
             $tips = '退货开单';
