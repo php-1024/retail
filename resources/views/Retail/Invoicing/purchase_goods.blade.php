@@ -275,7 +275,6 @@
         var _token = "{{csrf_token()}}";
         var orders = ordersObj; //  进货订单信息
         var data = {'_token':_token,'order_type':order_type,'orders':orders}
-        console.log(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();

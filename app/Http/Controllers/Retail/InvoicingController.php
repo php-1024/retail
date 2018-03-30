@@ -112,11 +112,11 @@ class InvoicingController extends Controller
 
     public function purchase_goods_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
+        $order_type = $request->get('order_type');          //接收订单类型  1：为进货订单、2为退货订单
         $orders = $request->get('orders');                  //接收订单信息
         //进货开单订单信息整理
         $order_data = [
@@ -125,7 +125,7 @@ class InvoicingController extends Controller
             'remarks' => '',
             'company_id' => $orders['company_id'],
             'operator_id' => $orders['operator_id'],
-            'order_type' => '1',  //1：为进货订单、2为退货订单
+            'order_type' => $order_type,  //1：为进货订单、2为退货订单
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
