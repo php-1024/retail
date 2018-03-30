@@ -607,6 +607,14 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('check_goods', 'Retail\InvoicingController@check_goods')->middleware('RetailCheck');        //盘点开单
     });
 
+    //进出开单管理
+    Route::group(['prefix'=>'billing'],function(){
+        Route::get('purchase_goods', 'Retail\BillingController@purchase_goods')->middleware('RetailCheck');    //从供应商进货开单管理
+        Route::get('return_goods', 'Retail\BillingController@return_goods')->middleware('RetailCheck');        //从供应商退货开单管理
+        Route::get('loss_goods', 'Retail\BillingController@loss_goods')->middleware('RetailCheck');           //报损开单管理
+        Route::get('check_goods', 'Retail\BillingController@check_goods')->middleware('RetailCheck');        //盘点开单管理
+    });
+
     //用户管理
     Route::group(['prefix'=>'user'],function(){
         Route::get('user_list', 'Retail\UserController@user_list')->middleware('RetailCheck');          //用户管理-粉丝用户管理
