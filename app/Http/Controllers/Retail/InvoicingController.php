@@ -105,7 +105,43 @@ class InvoicingController extends Controller
 
     public function purchase_goods_check(Request $request)
     {
-        dd($request->get('orders'));
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+
+        //生成订单编号
+        $ordersn = date('YmdHis');
+        $orders = $request->get('orders');                  //接收订单信息
+        dump($ordersn);
+        dd($orders);
+
+        $category_name = $request->get('category_name');    //栏目名称
+        $category_sort = $request->get('category_sort');    //栏目排序
+        if (empty($category_sort)){
+            $category_sort = '0';
+        }
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $category_data = [
+            'name' => $category_name,
+            'created_by' => $admin_data['id'],
+            'displayorder' => $category_sort,
+            'fansmanage_id' => $fansmanage_id,
+            'retail_id' => $admin_data['organization_id'],
+        ];
+        DB::beginTransaction();
+        try {
+            RetailCategory::addCategory($category_data);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员添加零售店铺分类的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了栏目分类！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了栏目分类！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
     }
 }
 
