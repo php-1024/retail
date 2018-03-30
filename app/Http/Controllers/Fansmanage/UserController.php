@@ -276,7 +276,7 @@ class UserController extends Controller{
                 $number = $label_number+1;
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
             }
-            $dataUser = User::getOneUser([['id',$user_id]]);
+            $dataUser = FansmanageUser::getOneFansmanageUser([['id',$user_id]]);
             dd($dataUser);
             if($label_id != 0){ //选择无标签的时候 不执行
                 $data = [
