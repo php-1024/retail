@@ -12,6 +12,7 @@ class AndroidApiController extends Controller{
         $account = $request->account;
         $password = $request->password;
         $data = Account::where([['account',$account]])->orWhere([['mobile',$account]])->first();
+        dd($data);
         if(empty($data)){
             return response()->json(['data' => '用户不存在', 'status' => '0']);
         }
