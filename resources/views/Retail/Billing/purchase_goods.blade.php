@@ -105,12 +105,16 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('1','1')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
+                                            @if($val->status == 0)
+                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
+                                            @else
+                                                <button class="btn btn-success btn-xs" onclick="getlockForm({{$val->id}},'{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;已审核</button>
+                                            @endif
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
 
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
 
                                         </td>
                                     </tr>
