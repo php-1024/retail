@@ -71,6 +71,7 @@ class WechatController extends Controller{
         $input = file_get_contents('php://input');
         file_put_contents('test.txt',$input);
         $paramArr = $this->xml2array($input);
+        dd($paramArr);
 
         $jm = \Wechat::WXBizMsgCrypt();
         $format = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[%s]]></Encrypt></xml>";
