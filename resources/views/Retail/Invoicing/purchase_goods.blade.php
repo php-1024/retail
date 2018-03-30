@@ -297,7 +297,8 @@
     var ordersObj = {	//生成订单
         operator: {},//操作人员
         company: {},//供应商
-        goods: []//商品
+        goods: [],//商品
+        order_price: {}
     };
 
 
@@ -320,6 +321,7 @@
         totalmoney=totalmoney.toFixed(2);
         $("#totalnumber").html(totalnumber);
         $("#totalmoney").html(totalmoney);
+        ordersObj.order_price=parseInt(totalmoney);
     }
 
     //选择商品
