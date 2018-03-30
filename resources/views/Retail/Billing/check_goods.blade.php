@@ -78,8 +78,8 @@
                                     <tr>
                                         <td>{{$val->ordersn}}</td>
                                         <td>
-                                            @if($val->type == 3)
-                                            报损
+                                            @if($val->type == 4)
+                                            盘点
                                             @else
                                             未知
                                             @endif
