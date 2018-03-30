@@ -40,6 +40,8 @@ class RetailCheck{
             case "retail/order/order_spot":             //订单管理-现场订单
             case "retail/order/order_spot_detail":      //订单管理-现场订单详情
 
+            case "retail/billing/purchase_goods":     //从供应商进货管理
+
             case "retail/invoicing/purchase_goods":     //进销存管理--供应商到货开单
             case "retail/invoicing/return_goods":       //进销存管理--供应商退货开单
             case "retail/invoicing/loss_goods":         //进销存管理--报损开单
