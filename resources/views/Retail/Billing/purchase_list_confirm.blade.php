@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
+                            <input type="text" value="" placeholder="输入安全密码确认审核" class="form-control" name="safe_password">
                             <span class="help-block m-b-none">
                                @if($status == '0')
                                     <p class="text-danger">确定要审核该订单吗？审核后将不可更改！</p>
