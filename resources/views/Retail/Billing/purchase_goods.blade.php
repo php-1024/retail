@@ -194,8 +194,8 @@
                 return;
             }else{
                 console.log(response);
-//                $('#myModal').html(response);
-//                $('#myModal').modal();
+                $('#myModal').html(response);
+                $('#myModal').modal();
             }
         });
     }
