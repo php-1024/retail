@@ -122,6 +122,10 @@ class InvoicingController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
+        foreach ($orders['goods'] as $key=>$val){
+            $goods = RetailGoods::getOne(['id'=>$val->id]);
+            dd($goods);
+        }
         DB::beginTransaction();
         try {
             $id = RetailPurchaseOrder::addOrder($order_data);
@@ -129,12 +133,12 @@ class InvoicingController extends Controller
             foreach ($orders['goods'] as $key=>$val){
                 $goods = RetailGoods::getOne(['id'=>$val->id]);
                 dd($goods);
-//                $order_goods_data = [
-//                    'order_id' => $id,
-//                    'goods_id' => $val->id,
-//                    'total' => $val->number,
-//                    'price' => $val->price,
-//                ];
+                $order_goods_data = [
+                    'order_id' => $id,
+                    'goods_id' => $val->id,
+                    'total' => $val->number,
+                    'price' => $val->price,
+                ];
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员在零售店进货开单的记录
