@@ -69,10 +69,10 @@
                                         <th>订单编号</th>
                                         <th>类型</th>
                                         <th>供应商</th>
-                                        <th>源头商家</th>
-                                        <th>推荐人</th>
+                                        <th>经手操作人员</th>
+                                        <th>订单总金额</th>
                                         <th>审核</th>
-                                        <th>注册时间</th>
+                                        <th>开单时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -80,19 +80,23 @@
                                     <tr>
                                         <td>201803301524216863</td>
                                         <td>进货</td>
-                                        <td><label class="label label-success">是</label></td>
+                                        <td><label class="label label-success">刘记鸡煲</label></td>
                                         <td><label class="label label-info">
-                                                鲜果超市
+                                                刘兴文
                                             </label></td>
-                                        <td><label class="label label-primary">推荐人-kbzz</label></td>
                                         <td>
-                                            <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('1','1')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <label class="label label-danger">
+                                                84654.25元
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('1','1')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
                                         </td>
                                         <td>2018-03-09 16:12:45</td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm(1)"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情</button>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包</button>
-                                            <button class="btn btn-warning btn-xs" id="lockBtn" onclick="getlockForm('1','1')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+
+                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+
                                         </td>
                                     </tr>
                                     </tbody>
