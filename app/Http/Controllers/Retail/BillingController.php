@@ -20,12 +20,11 @@ class BillingController extends Controller
     //添加商品分类页面
     public function purchase_goods(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id')->first();         //获取粉丝管理平台的组织id
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();         //获取粉丝管理平台的组织id
         $search_data = [];
         $where = [
             'retail' => $admin_data['organization_id'],
