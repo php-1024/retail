@@ -245,7 +245,6 @@ class UserController extends Controller{
     }
     //粉丝用户管理
     public function store_label_add_check(Request $request){
-
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
@@ -253,7 +252,6 @@ class UserController extends Controller{
         $user_id = $request->user_id;//用户id
         $fansmanage_id = $request->fansmanage_id;//店铺id
         $nickname = $request->nickname;//微信昵称
-
         DB::beginTransaction();
         try {
             $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['fansmanage_id',$fansmanage_id]]);//查询粉丝标签关联表有没有数据
@@ -285,6 +283,7 @@ class UserController extends Controller{
             DB::commit();
 
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '操作失败！', 'status' => '0']);
         }
