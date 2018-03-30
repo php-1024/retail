@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
 use App\Models\RetailCategory;
 use App\Models\Organization;
+use App\Models\RetailPurchaseOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -23,7 +24,15 @@ class BillingController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Retail/Billing/purchase_goods',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id')->first();         //获取粉丝管理平台的组织id
+        $search_data = [];
+        $where = [
+            'retail' => $admin_data['organization_id'],
+            'fansmanage_id' => $fansmanage_id,
+        ];
+        $list = RetailPurchaseOrder::getPaginage($where,$search_data,'1','created_at','DESC');
+        dump($list);
+        return view('Retail/Billing/purchase_goods',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //添加商品分类操作
