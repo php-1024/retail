@@ -108,8 +108,8 @@ class InvoicingController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
 
-        //生成订单编号
-        $ordersn = date('YmdHis').rand(100,999);
+
+        $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
         $orders = $request->get('orders');                  //接收订单信息
         dump($ordersn);
         dd($orders);
