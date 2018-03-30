@@ -48,7 +48,7 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
+                                    <input type="hidden" id="order_list_details" value="{{ url('retail/ajax/order_list_details') }}">
                                     <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
@@ -153,7 +153,7 @@
 
     //粉丝钱包
     function getwalletForm(id,status){
-        var url = $('#user_list_wallet').val();
+        var url = $('#order_list_details').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
