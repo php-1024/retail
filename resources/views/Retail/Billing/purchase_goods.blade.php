@@ -113,9 +113,7 @@
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
-
                                             <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
-
                                         </td>
                                     </tr>
                                     @endforeach
