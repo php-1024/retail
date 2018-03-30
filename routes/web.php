@@ -701,5 +701,10 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('pull_authorizer_data', 'Fansmanage\WechatController@pull_authorizer_data');//获取微信平台的授权信息
         Route::any('test', 'Fansmanage\WechatController@test');//测试函数
     });
+
+    //微信通用路由组
+    Route::group(['prefix' => 'androidapi'], function () {
+        Route::any('display', 'Api\AndroidApiController@display');//接受公众号收授权推送消息
+    });
 });
 /*********************接口路由*************************/
