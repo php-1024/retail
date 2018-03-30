@@ -11,7 +11,6 @@ class AndroidApiController extends Controller{
     public function login(Request $request){
         $account = $request->account;
         $password = $request->password;
-        dd($password);
         $data = Account::where([['account',$account]])->orWhere([['mobile',$account]])->first();
         if(empty($data)){
             return response()->json(['data' => '用户不存在', 'status' => '0']);
@@ -19,6 +18,8 @@ class AndroidApiController extends Controller{
         $key = config("app.retail_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
+        dd($encryptPwd);
+//        f964c24293ce996ca3c1532714340262
         if($encryptPwd!=$data['passwrd']){
             return response()->json(['data' => '密码错误', 'status' => '0']);
         }
