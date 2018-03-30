@@ -250,11 +250,11 @@ class UserController extends Controller{
 
         $label_id = $request->label_id;//会员标签id
         $user_id = $request->user_id;//用户id
-        $fansmanage_id = $request->fansmanage_id;//店铺id
+        $organization_id = $admin_data['organization_id'];//组织id
         $nickname = $request->nickname;//微信昵称
         DB::beginTransaction();
         try {
-            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['fansmanage_id',$fansmanage_id]]);//查询粉丝标签关联表有没有数据
+            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['organization_id',$organization_id]]);//查询粉丝标签关联表有没有数据
             dd($oneData);
             if(!empty($oneData)){
                 if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
