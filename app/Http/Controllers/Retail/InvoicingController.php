@@ -123,10 +123,6 @@ class InvoicingController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
-        foreach ($orders['goods'] as $key=>$val){
-            $goods = RetailGoods::getOne(['id'=>$val['id']]);
-            dd($goods);
-        }
         DB::beginTransaction();
         try {
             $id = RetailPurchaseOrder::addOrder($order_data);
