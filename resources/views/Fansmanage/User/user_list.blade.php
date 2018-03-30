@@ -82,7 +82,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>
-                                            @if($value->head_imgurl)
+                                            @if(!$value->head_imgurl)
                                                 <img src="{{asset('public/Fansmanage')}}/img/m1.jpg" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
                                             @else
                                                 <img src="{{$value->head_imgurl}}" alt="" class="r r-2x img-full" style="width: 50px; height: 50px;">
