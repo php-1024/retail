@@ -11,6 +11,7 @@ use App\Models\OperationLog;
 use App\Models\RetailCategory;
 use App\Models\Organization;
 use App\Models\RetailPurchaseOrder;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -32,6 +33,15 @@ class BillingController extends Controller
         ];
         $list = RetailPurchaseOrder::getPaginage($where,$search_data,'10','created_at','DESC'); //订单信息
         return view('Retail/Billing/purchase_goods',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    //粉丝用户管理冻结功能显示
+    public function purchase_list_lock(Request $request)
+    {
+        $user_id = $request->id;        //会员标签id
+        $status = $request->status;     //冻结或者解锁
+        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();    //微信昵称
+        return view('Retail//user_list_lock', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
     }
 
     //添加商品分类操作

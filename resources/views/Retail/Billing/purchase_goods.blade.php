@@ -48,10 +48,8 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="store_label_add_check" value="{{ url('retail/ajax/store_label_add_check') }}">
-                                    <input type="hidden" id="user_list_edit" value="{{ url('retail/ajax/user_list_edit') }}">
                                     <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
-                                    <input type="hidden" id="purchase_list_lock" value="{{ url('retail/ajax/purchase_list_lock') }}">
+                                    <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
@@ -180,7 +178,7 @@
 
     //审核订单
     function getlockForm(id,status){
-        var url = $('#purchase_list_lock').val();
+        var url = $('#purchase_list_confirm').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
@@ -189,7 +187,7 @@
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
