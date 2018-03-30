@@ -51,7 +51,9 @@ class SubordinateController extends Controller
         $uuid .= substr($chars,12,4) . '-';
         $uuid .= substr($chars,16,4) . '-';
         $uuid .= substr($chars,20,12);
-
+        if(Account::checkRowExists([['uuid',$uuid]])){
+            return response()->json(['data' => 'uuid重复，请重新操作！', 'status' => '0']);
+        }
         $account = Account::max('account');
         $account = $account + 1;
         if (Account::checkRowExists([['account', $account]])) {//判断零壹管理平台中 ，判断组织中账号是否存在
