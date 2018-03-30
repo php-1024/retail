@@ -277,12 +277,13 @@ class UserController extends Controller{
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
             }
             $dataUser = FansmanageUser::getOneFansmanageUser([['id',$user_id]]);
-            dd($dataUser['open_id']);
+            $tag_id = Label::getPluck([['id',$label_id]],'wecaht_id')->first();
             if($label_id != 0){ //选择无标签的时候 不执行
                 $data = [
-                    'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI','oyhbt1C__b9gvm_wg9bf5aFika48'],
-                    'tagid' =>'117'
+                    'openid_list'=>[$dataUser['open_id']],
+                    'tagid' =>$tag_id
                 ];
+                dd(json_encode($data));
                 }
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
