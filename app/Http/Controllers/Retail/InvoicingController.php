@@ -40,23 +40,6 @@ class InvoicingController extends Controller
         return  view('Retail/Invoicing/purchase_goods',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-    //零售进销存开单--供应商搜索
-    public function search_company(Request $request)
-    {
-        $company_id = $request->get('company_id');      //供应商ID
-        $company_name = $request->get('company_name');      //供应商ID
-        $contactmobile = $request->get('contactmobile');      //供应商ID
-        $company = RetailSupplier::SearchCompany($company_id,$company_name,$contactmobile);
-        if ($company == null){
-            return response()->json(['data' => '商户不存在！请重新选择！', 'status' => '0']);
-        }else{
-            return view('Retail/Invoicing/select_company',['company'=>$company]);
-        }
-    }
-
-
-
-
     //零售进销存开单--退供应商货物开单
     public function return_goods(Request $request)
     {
@@ -72,6 +55,22 @@ class InvoicingController extends Controller
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
         return  view('Retail/Invoicing/return_goods',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
+
+    //零售进销存开单--供应商搜索
+    public function search_company(Request $request)
+    {
+        $company_id = $request->get('company_id');      //供应商ID
+        $company_name = $request->get('company_name');      //供应商ID
+        $contactmobile = $request->get('contactmobile');      //供应商ID
+        $company = RetailSupplier::SearchCompany($company_id,$company_name,$contactmobile);
+        if ($company == null){
+            return response()->json(['data' => '商户不存在！请重新选择！', 'status' => '0']);
+        }else{
+            return view('Retail/Invoicing/select_company',['company'=>$company]);
+        }
+    }
+
+
 
     //零售进销存开单--报损开单
     public function loss_goods(Request $request)
