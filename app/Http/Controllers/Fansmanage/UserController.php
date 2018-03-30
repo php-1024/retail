@@ -272,7 +272,6 @@ class UserController extends Controller{
 
             }else{
                 UserLabel::addUserLabel(['label_id'=>$label_id,'user_id'=>$user_id,'organization_id'=>$organization_id]);//粉丝与标签关系表
-                dd(1);
                 $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
                 $number = $label_number+1;
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
