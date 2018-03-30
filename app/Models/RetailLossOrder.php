@@ -33,6 +33,17 @@ class RetailLossOrder extends Model{
         return $model->id;
     }
 
+    //修改数据
+    public static function editOrder($where,$param)
+    {
+        if ($model = self::where($where)->first()) {
+            foreach ($param as $key => $val) {
+                $model->$key = $val;
+            }
+            $model->save();
+        }
+    }
+
 
     public static function getOne($where)
     {
