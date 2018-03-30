@@ -11,7 +11,6 @@ use App\Models\OperationLog;
 use App\Models\RetailCategory;
 use App\Models\Organization;
 use App\Models\RetailPurchaseOrder;
-use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
