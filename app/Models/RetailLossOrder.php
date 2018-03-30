@@ -29,7 +29,6 @@ class RetailLossOrder extends Model{
         $model->ordersn = $param['ordersn'];
         $model->order_price = $param['order_price'];
         $model->remarks = $param['remarks'];
-        $model->company_id = $param['company_id'];
         $model->operator_id = $param['operator_id'];
         $model->type = $param['type'];
         $model->status = '0';
