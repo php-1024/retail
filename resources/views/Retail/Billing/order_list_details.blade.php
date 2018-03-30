@@ -47,7 +47,7 @@
                         @foreach($order->RetailPurchaseOrderGoods as $key=>$val)
                         <tr>
                             <td>{{$val->id}}</td>
-                            <td><a href="retail/goods/goods_edit?goods_id={{$val->id}}">{{$val->title}}</a></td>
+                            <td><a href="{{url('retail/goods/goods_edit?goods_id='.$val->id)}}">{{$val->title}}</a></td>
                             <td>{{$val->goods_id}}</td>
                             <td>{{$val->total}}</td>
                             <td>{{$val->price}}</td>
