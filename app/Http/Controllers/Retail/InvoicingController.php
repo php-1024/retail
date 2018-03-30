@@ -123,7 +123,7 @@ class InvoicingController extends Controller
             'retail_id' => $admin_data['organization_id'],
         ];
         foreach ($orders['goods'] as $key=>$val){
-            $goods = RetailGoods::getOne(['id'=>$val->id]);
+            $goods = RetailGoods::getOne(['id'=>$val['id']]);
             dd($goods);
         }
         DB::beginTransaction();
