@@ -52,6 +52,9 @@ class InvoicingController extends Controller
         }
     }
 
+
+
+
     //零售进销存开单--退供应商货物开单
     public function return_goods(Request $request)
     {
