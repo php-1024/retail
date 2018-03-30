@@ -34,17 +34,16 @@ class RetailPurchaseOrderGoods extends Model{
         return $model->with('RetailPurchaseOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //创建订单
-    public static function addOrder($param){
+    //保存创建订单的商品快照数据
+    public static function addOrderGoods($param){
         $model = new RetailPurchaseOrderGoods();
-        $model->ordersn = $param['ordersn'];
-        $model->order_price = $param['order_price'];
-        $model->remarks = $param['remarks'];
-        $model->operator_id = $param['operator_id'];
-        $model->order_type = $param['order_type'];
-        $model->status = '0';
-        $model->fansmanage_id = $param['fansmanage_id'];
-        $model->retail_id = $param['retail_id'];
+        $model->order_id = $param['order_id'];
+        $model->goods_id = $param['goods_id'];
+        $model->title = $param['title'];
+        $model->thumb = $param['thumb'];
+        $model->details = $param['details'];
+        $model->total = $param['total'];
+        $model->price = $param['price'];
         $model->save();
         return $model->id;
     }

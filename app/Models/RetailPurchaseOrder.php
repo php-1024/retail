@@ -23,6 +23,22 @@ class RetailPurchaseOrder extends Model{
         return $this->hasMany('App\Models\RetailPurchaseOrderGoods','order_id','id');
     }
 
+    //创建订单
+    public static function addOrder($param){
+        $model = new RetailPurchaseOrderGoods();
+        $model->ordersn = $param['ordersn'];
+        $model->order_price = $param['order_price'];
+        $model->remarks = $param['remarks'];
+        $model->operator_id = $param['operator_id'];
+        $model->order_type = $param['order_type'];
+        $model->status = '0';
+        $model->fansmanage_id = $param['fansmanage_id'];
+        $model->retail_id = $param['retail_id'];
+        $model->save();
+        return $model->id;
+    }
+
+
     public static function getOne($where)
     {
         $model = self::with('User')->with('RetailPurchaseOrderGoods');
