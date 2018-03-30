@@ -32,12 +32,12 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">粉丝用户管理</h3>
+                            <h3 class="m-b-none">开单管理-供应商到货处理</h3>
                         </div>
 
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                粉丝用户管理
+                                供应商到货处理
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
@@ -46,9 +46,9 @@
                                     <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
                                     <input type="hidden" id="user_list_lock" value="{{ url('retail/ajax/user_list_lock') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <label class="col-sm-1 control-label">用户账号</label>
+                                    <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="account" value="用户账号" placeholder="用户账号">
+                                        <input type="text" class="form-control" name="ordersn" value="订单编号" placeholder="订单编号">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -59,9 +59,7 @@
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
-
-
-                                        <th>订单单号</th>
+                                        <th>订单编号</th>
                                         <th>类型</th>
                                         <th>供应商</th>
                                         <th>源头商家</th>
@@ -73,10 +71,8 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-
-
-                                        <td>10000</td>
-                                        <td>果粒橙</td>
+                                        <td>201803301524216863</td>
+                                        <td>进货</td>
                                         <td><label class="label label-success">是</label></td>
                                         <td><label class="label label-info">
                                                 鲜果超市
