@@ -38,7 +38,7 @@ class BillingController extends Controller
     //审核订单页面
     public function purchase_list_confirm(Request $request)
     {
-        $order_id = $request->id;        //会员标签id
+        $order_id = $request->get('id');        //会员标签id
         $status = $request->status;     //冻结或者解锁
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
         dd($order);
