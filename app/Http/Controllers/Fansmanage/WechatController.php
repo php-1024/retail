@@ -63,13 +63,13 @@ class WechatController extends Controller{
      */
     public function response($appid,Request $request){
         $timestamp = empty($_GET['timestamp']) ? '' : trim($_GET['timestamp']);
-        dd($timestamp);
         $nonce = empty($_GET['nonce']) ? '' : trim($_GET ['nonce']);
         $msgSign = empty($_GET['msg_signature']) ? '' : trim($_GET['msg_signature']);
         $signature = empty($_GET['signature']) ? '' : trim($_GET['signature']);
         $encryptType = empty($_GET['encrypt_type']) ? '' : trim($_GET['encrypt_type']);
         $openid = $appid;
         $input = file_get_contents('php://input');
+        dd($input);
         file_put_contents('test.txt',$input);
         $paramArr = $this->xml2array($input);
 
