@@ -19,24 +19,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">供应商</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="{{$order->RetailSupplier->company_name}}" class="form-control" disabled="" name="company_name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">供应商联系方式</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="{{$order->RetailSupplier->contactmobile}}" class="form-control" disabled="" name="contactmobile">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 text-right">经手操作人员</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="{{$order->operator_id}}" class="form-control" disabled="" name="operator_id">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-2 text-right">订单金额</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$order->order_price}}" class="form-control" disabled="" name="order_price">
