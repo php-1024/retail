@@ -19,9 +19,39 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 text-right">类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="@if($val->type == 1)进货@elseif($val->type == 2)退货@else未知@endif" class="form-control" disabled="" name="type">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">供应商</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$val->RetailSupplier->company_name}}" class="form-control" disabled="" name="company_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">供应商联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$val->RetailSupplier->contactmobile}}" class="form-control" disabled="" name="contactmobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">经手操作人员</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$val->operator_id}}" class="form-control" disabled="" name="operator_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 text-right">订单金额</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$order->order_price}}" class="form-control" disabled="" name="order_price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">开单时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$val->created_at}}" class="form-control" disabled="" name="created_at">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
