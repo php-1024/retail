@@ -38,10 +38,11 @@ class BillingController extends Controller
     //审核订单页面
     public function purchase_list_confirm(Request $request)
     {
-        $user_id = $request->id;        //会员标签id
+        $order_id = $request->id;        //会员标签id
         $status = $request->status;     //冻结或者解锁
-        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();    //微信昵称
-        return view('Retail/Billing/purchase_list_confirm', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
+        $order = RetailPurchaseOrder::getOne([['id'=>$order_id]])->first();    //获取订单信息
+        dd($order);
+        return view('Retail/Billing/purchase_list_confirm', ['order' => $order,'status' => $status]);
     }
 
     //添加商品分类操作

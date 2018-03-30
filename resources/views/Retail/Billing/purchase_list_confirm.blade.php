@@ -7,19 +7,21 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">
-                   @if($status == '1')
-                        冻结粉丝确认
-                   @else
-                        解冻粉丝确认
-                   @endif
+                   审核订单确认
                 </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">微信昵称</label>
+                        <label class="col-sm-2 text-right">订单编号</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$nickname}}" placeholder="安全密码" class="form-control" disabled="" name="$nickname">
+                            <input type="text" value="{{$nickname}}" class="form-control" disabled="" name="$nickname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">订单金额</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$nickname}}" class="form-control" disabled="" name="$nickname">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
