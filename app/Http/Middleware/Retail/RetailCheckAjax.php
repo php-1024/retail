@@ -36,7 +36,8 @@ class RetailCheckAjax
             case "retail/ajax/user_list_lock":          //会员列表冻结显示页面
             case "retail/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
             case "retail/ajax/select_company":          //选择供应商处理
-                $re = $this->checkLoginAndRule($request);
+            case "retail/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
             case "retail/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
@@ -104,13 +105,6 @@ class RetailCheckAjax
                 return self::format_response($re, $next);
                 break;
             /*********商品添加和商品编辑*********/
-
-            /*********进销存商品选择列表*********/
-            case "retail/ajax/goods_list"://检测登录，权限，及添搜索商品的数据
-                $re = $this->checkLoginAndRuleAndSearch($request);
-                return self::format_response($re, $next);
-                break;
-            /*********进销存商品选择列表*********/
 
             /*********进销存商品选择列表*********/
             case "retail/ajax/search_company":          //检测登录，权限，及供应商搜索的数据处理
@@ -208,23 +202,6 @@ class RetailCheckAjax
             return $re;
         } else {
             $re2 = $this->checkGoodsAdd($re['response']);   //检测添加商品数据
-            if ($re2['status'] == '0') {
-                return $re2;
-            } else {
-                return self::res(1, $re2['response']);
-            }
-        }
-    }
-
-
-    //检测登录，权限，及搜索商品的数据
-    public function checkLoginAndRuleAndSearch($request)
-    {
-        $re = $this->checkLoginAndRule($request);//检测登录、权限
-        if ($re['status'] == '0') {//检测是否登录
-            return $re;
-        } else {
-            $re2 = $this->checkSearch($re['response']);   //检测选择商品数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
@@ -619,15 +596,6 @@ class RetailCheckAjax
     {
         if (empty($request->input('name'))) {
             return self::res(0, response()->json(['data' => '请输入商品名称!', 'status' => '0']));
-        }
-        return self::res(1, $request);
-    }
-
-    //检测搜索商品的数据
-    public function checkSearch($request)
-    {
-        if (empty($request->input('category_id')) && empty($request->input('goods_name'))) {
-            return self::res(0, response()->json(['data' => '请选择商品分类，或者输入商品名称进行搜索!!', 'status' => '0']));
         }
         return self::res(1, $request);
     }
