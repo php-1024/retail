@@ -14,7 +14,7 @@ class RetailPurchaseOrderGoods extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
 
-    //和RetailOrder表多对一的关系
+    //和RetailPurchaseOrder表多对一的关系
     public function RetailPurchaseOrder(){
         return $this->belongsTo('App\Models\RetailPurchaseOrder', 'order_id','id');
     }
@@ -34,12 +34,17 @@ class RetailPurchaseOrderGoods extends Model{
         return $model->with('RetailPurchaseOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加商品到购物车
+    //创建订单
     public static function addOrder($param){
         $model = new RetailPurchaseOrderGoods();
-        $model->name = $param['name'];
+        $model->ordersn = $param['ordersn'];
+        $model->order_price = $param['order_price'];
+        $model->remarks = $param['remarks'];
+        $model->operator_id = $param['operator_id'];
+        $model->order_type = $param['order_type'];
+        $model->status = '0';
         $model->fansmanage_id = $param['fansmanage_id'];
-        $model->restaurant_id = $param['restaurant_id'];
+        $model->retail_id = $param['retail_id'];
         $model->save();
         return $model->id;
     }
