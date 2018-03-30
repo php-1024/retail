@@ -283,8 +283,13 @@ class UserController extends Controller{
                     'openid_list'=>[$dataUser['open_id']],
                     'tagid' =>$tag_id
                 ];
-                dd(json_encode($data));
+                $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+                $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
+                $re = json_decode($re,true);
+                if($re['errmsg']!='ok'){
+                    return response()->json(['data' => '操作失败！', 'status' => '0']);
                 }
+            }
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
             }
