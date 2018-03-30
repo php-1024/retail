@@ -259,7 +259,6 @@ class UserController extends Controller{
                 if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
                     //减少原粉丝标签的人数
                     $label_number = Label::getPluck([['id',$oneData->label_id]],'label_number')->first();//获取原粉丝标签的人数
-                    dd($label_number);
                     $number = $label_number-1;
                     Label::editLabel([['id',$oneData->label_id]],['label_number'=>$number]);//修改粉丝标签的人数
                 }
@@ -277,6 +276,14 @@ class UserController extends Controller{
                 $number = $label_number+1;
                 Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
             }
+            $dataUser = User::getOneUser([['id',$user_id]]);
+            dd($dataUser);
+            if($label_id != 0){ //选择无标签的时候 不执行
+                $data = [
+                    'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI','oyhbt1C__b9gvm_wg9bf5aFika48'],
+                    'tagid' =>'117'
+                ];
+                }
             if($admin_data['is_super'] != 2){
                 OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
             }
