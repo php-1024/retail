@@ -261,7 +261,7 @@ class InvoicingController extends Controller
             'order_price' => $orders['order_price'],
             'remarks' => '',
             'operator_id' => $orders['operator_id'],
-            'type' => $type,  //3为报损开单
+            'type' => $type,  //4为盘点开单
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
