@@ -37,50 +37,20 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>会员卡名称</th>
-                            <th>适用店铺范围</th>
-                            <th>适用商品范围</th>
-                            <th>折扣率</th>
-                            <th>余额</th>
+                            <th>商品名称</th>
+                            <th>数量</th>
+                            <th>价格</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($order->RetailPurchaseOrderGoods as $key=>$val)
                         <tr>
-                            <td>1</td>
-                            <td>钻石会员卡</td>
-                            <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                            <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                            <td>0.9</td>
-                            <td>10000.00元</td>
-
+                            <td>{{$val->goods_id}}</td>
+                            <td>{{$val->title}}</td>
+                            <td>{{$val->total}}</td>
+                            <td>{{$val->price}}</td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>钻石会员卡</td>
-                            <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                            <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                            <td>0.9</td>
-                            <td>10000.00元</td>
-
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>钻石会员卡</td>
-                            <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                            <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                            <td>0.9</td>
-                            <td>10000.00元</td>
-
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>钻石会员卡</td>
-                            <td><button type="button" data-original-title="适用分店" data-content="所有分店" data-placement="top" data-trigger="hover" class="btn btn-info btn-xs popovers">4个分店</button></td>
-                            <td><label class="label label-success">所有</label>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" id="listBtn"><i class="fa fa-list"></i>&nbsp;&nbsp;查看列表</button></td>
-                            <td>0.9</td>
-                            <td>10000.00元</td>
-
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
