@@ -44,6 +44,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @if($order->type == 1 || $order->type == 2)
                         @foreach($order->RetailPurchaseOrderGoods as $key=>$val)
                         <tr>
                             <td>{{$val->id}}</td>
@@ -53,6 +54,17 @@
                             <td>{{$val->price}}</td>
                         </tr>
                         @endforeach
+                        @elseif($order->type == 3)
+                            @foreach($order->RetailLossOrderGoods as $key=>$val)
+                                <tr>
+                                    <td>{{$val->id}}</td>
+                                    <td><a href="{{url('retail/goods/goods_edit?goods_id='.$val->id)}}">{{$val->title}}</a></td>
+                                    <td>{{$val->goods_id}}</td>
+                                    <td>{{$val->total}}</td>
+                                    <td>{{$val->price}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
