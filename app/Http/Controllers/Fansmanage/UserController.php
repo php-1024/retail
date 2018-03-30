@@ -221,10 +221,21 @@ class UserController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//组织id
+
+//                $data = [
+//            'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI','oyhbt1C__b9gvm_wg9bf5aFika48'],
+//            'tagid' =>'117'
+//        ];
+//        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+//        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
+//        $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
+//        dump($re);
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
         $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'','10','id');
         foreach($list as $key=>$value){
-            $list[$key]['nickname'] =  UserInfo::getPluck([['user_id',$value->user_id]],'nickname')->first();//微信昵称
+            $re =  UserInfo::getOneUserInfo([['user_id',$value->user_id]]);
+            $list[$key]['nickname'] = $re['nickname'];//微信昵称
+            $list[$key]['head_imgurl'] = $re['head_imgurl'];//微信头像
             $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
             $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
             $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['organization_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
