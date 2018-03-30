@@ -163,7 +163,7 @@ class InvoicingController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功,等待审核确认', 'status' => '1']);
     }
 }
 
