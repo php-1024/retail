@@ -27,7 +27,7 @@ class BillingController extends Controller
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();         //获取粉丝管理平台的组织id
         $search_data = [];
         $where = [
-            'retail' => $admin_data['organization_id'],
+            'retail_id' => $admin_data['organization_id'],
             'fansmanage_id' => $fansmanage_id,
         ];
         $list = RetailPurchaseOrder::getPaginage($where,$search_data,'1','created_at','DESC');
