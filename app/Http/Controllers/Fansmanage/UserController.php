@@ -226,8 +226,8 @@ class UserController extends Controller{
 //            'openid_list'=>['oyhbt1PNT38bzuM5rvwF71ePtUFI','oyhbt1C__b9gvm_wg9bf5aFika48'],
 //            'tagid' =>'117'
 //        ];
-//        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-//        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
+        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
 //        $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
 //        dump($re);
         $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
