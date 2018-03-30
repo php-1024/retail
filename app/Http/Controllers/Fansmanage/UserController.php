@@ -245,7 +245,7 @@ class UserController extends Controller{
     }
     //粉丝用户管理
     public function store_label_add_check(Request $request){
-
+        dd(1);
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
 
@@ -256,7 +256,6 @@ class UserController extends Controller{
         DB::beginTransaction();
         try {
             $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['fansmanage_id',$fansmanage_id]]);//查询粉丝标签关联表有没有数据
-            dd($oneData);
             if(!empty($oneData)){
                 if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
                     //减少原粉丝标签的人数
