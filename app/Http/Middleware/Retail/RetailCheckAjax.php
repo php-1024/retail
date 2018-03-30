@@ -39,6 +39,7 @@ class RetailCheckAjax
             case "retail/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
             case "retail/ajax/purchase_list_confirm":   //进货退货审核弹窗
             case "retail/ajax/loss_list_confirm":       //报损订单审核弹窗
+            case "retail/ajax/check_list_confirm":      //盘点订单审核弹窗
             case "retail/ajax/order_list_details":      //订单详细信息列表
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
@@ -66,6 +67,7 @@ class RetailCheckAjax
             case "retail/ajax/user_list_lock_check":    //检测是否登录 权限 安全密码--冻结粉丝标签
             case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
             case "retail/ajax/loss_list_confirm_check":       //审核订单安全密码确认
+            case "retail/ajax/check_list_confirm_check":      //审核订单安全密码确认
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;

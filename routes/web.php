@@ -660,11 +660,13 @@ Route::group(['prefix'=>'retail'],function(){
         Route::post('select_company', 'Retail\InvoicingController@select_company')->middleware('RetailCheckAjax');              //选择供应商检测
 
 
-        Route::post('purchase_list_confirm','Retail\BillingController@purchase_list_confirm')->middleware('RetailCheckAjax');           //审核订单弹出页面
-        Route::post('purchase_list_confirm_check','Retail\BillingController@purchase_list_confirm_check')->middleware('RetailCheckAjax');     //列表冻结功能提交
-        Route::post('loss_list_confirm','Retail\BillingController@loss_list_confirm')->middleware('RetailCheckAjax');           //审核订单弹出页面
-        Route::post('loss_list_confirm_check','Retail\BillingController@loss_list_confirm_check')->middleware('RetailCheckAjax');           //审核订单弹出页面
-        Route::post('order_list_details','Retail\BillingController@order_list_details')->middleware('RetailCheckAjax');                       //订单详细信息列表
+        Route::post('purchase_list_confirm','Retail\BillingController@purchase_list_confirm')->middleware('RetailCheckAjax');           //进货退货审核订单弹出页面
+        Route::post('purchase_list_confirm_check','Retail\BillingController@purchase_list_confirm_check')->middleware('RetailCheckAjax');//进货退货审核订单操作
+        Route::post('loss_list_confirm','Retail\BillingController@loss_list_confirm')->middleware('RetailCheckAjax');               //报损审核订单弹出页面
+        Route::post('loss_list_confirm_check','Retail\BillingController@loss_list_confirm_check')->middleware('RetailCheckAjax');   //报损审核订单操作
+        Route::post('check_list_confirm','Retail\BillingController@check_list_confirm')->middleware('RetailCheckAjax');             //盘点审核订单弹出页面
+        Route::post('loss_list_confirm_check','Retail\BillingController@loss_list_confirm_check')->middleware('RetailCheckAjax');   //盘点审核订单操作
+        Route::post('order_list_details','Retail\BillingController@order_list_details')->middleware('RetailCheckAjax');             //订单详细信息列表
 
         Route::post('category_add_check', 'Retail\CategoryController@category_add_check')->middleware('RetailCheckAjax');          //栏目添加检测
         Route::post('category_delete', 'Retail\CategoryController@category_delete')->middleware('RetailCheckAjax');          //栏目添加检测
