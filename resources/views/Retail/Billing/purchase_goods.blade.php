@@ -51,7 +51,7 @@
                                     <input type="hidden" id="store_label_add_check" value="{{ url('retail/ajax/store_label_add_check') }}">
                                     <input type="hidden" id="user_list_edit" value="{{ url('retail/ajax/user_list_edit') }}">
                                     <input type="hidden" id="user_list_wallet" value="{{ url('retail/ajax/user_list_wallet') }}">
-                                    <input type="hidden" id="user_list_lock" value="{{ url('retail/ajax/user_list_lock') }}">
+                                    <input type="hidden" id="purchase_list_lock" value="{{ url('retail/ajax/purchase_list_lock') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
@@ -113,7 +113,7 @@
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-xs" id="balanceBtn" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -178,9 +178,9 @@
 
 
 
-    //冻结粉丝
+    //审核订单
     function getlockForm(id,status){
-        var url = $('#user_list_lock').val();
+        var url = $('#purchase_list_lock').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
