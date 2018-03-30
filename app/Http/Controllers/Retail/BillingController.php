@@ -48,7 +48,6 @@ class BillingController extends Controller
     {
         $order_id = $request->get('id');        //会员标签id
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
-        dump($order);
         return view('Retail/Billing/order_list_details', ['order' => $order]);
     }
 
