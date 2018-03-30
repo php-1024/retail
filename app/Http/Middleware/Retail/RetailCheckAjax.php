@@ -120,6 +120,13 @@ class RetailCheckAjax
                 break;
             /*********进销存--供应商到货开单处理*********/
 
+            /*********进销存--报损开单处理*********/
+            case "retail/ajax/loss_goods_check"://检测登录，权限，及报损、盘点开单的数据
+                $re = $this->checkLoginAndRuleAndLossAndCheckGoods($request);
+                return self::format_response($re, $next);
+                break;
+            /*********进销存--报损开单处理*********/
+
             /****粉丝信息编辑****/
             case "retail/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
@@ -226,14 +233,30 @@ class RetailCheckAjax
         }
     }
 
-    //检测登录，权限，及搜索商品的数据
+    //检测登录，权限，及进货退货开单的数据
     public function checkLoginAndRuleAndPurchaseGoods($request)
     {
         $re = $this->checkLoginAndRule($request);//检测登录、权限
         if ($re['status'] == '0') {//检测是否登录
             return $re;
         } else {
-            $re2 = $this->checkPurchaseGoods($re['response']);   //检测添加商品数据
+            $re2 = $this->checkPurchaseGoods($re['response']);   //检测进货退货开单的数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
+
+    //检测登录，权限，及报损、盘点开单的数据
+    public function checkLoginAndRuleAndLossAndCheckGoods($request)
+    {
+        $re = $this->checkLoginAndRule($request);//检测登录、权限
+        if ($re['status'] == '0') {//检测是否登录
+            return $re;
+        } else {
+            $re2 = $this->checkLossAndCheckGoods($re['response']);   //检测报损、盘点开单的数据
             if ($re2['status'] == '0') {
                 return $re2;
             } else {
@@ -609,7 +632,7 @@ class RetailCheckAjax
         return self::res(1, $request);
     }
 
-    //检测供应商进货开单的数据
+    //检测供应商进货退货开单的数据
     public function checkPurchaseGoods($request)
     {
         if (empty($request->orders['goods'])) {
@@ -617,6 +640,18 @@ class RetailCheckAjax
         }
         if (empty($request->orders['company_id'])) {
             return self::res(0, response()->json(['data' => '请选择供应商!', 'status' => '0']));
+        }
+        if (empty($request->orders['operator_id'])) {
+            return self::res(0, response()->json(['data' => '请选择操作人员!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+    //检测报损、盘点开单的数据
+    public function checkLossAndCheckGoods($request)
+    {
+        if (empty($request->orders['goods'])) {
+            return self::res(0, response()->json(['data' => '请选择商品!', 'status' => '0']));
         }
         if (empty($request->orders['operator_id'])) {
             return self::res(0, response()->json(['data' => '请选择操作人员!', 'status' => '0']));
