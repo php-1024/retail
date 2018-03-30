@@ -42,7 +42,7 @@ class RetailCheckOrder extends Model{
     public static function getOne($where)
     {
         $model = self::with('RetailCheckOrderGoods');
-        return $model->where($where)->first();
+        return $model->where($where)->get();
     }
 
     //获取列表
