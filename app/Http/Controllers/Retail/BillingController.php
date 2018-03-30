@@ -109,6 +109,7 @@ class BillingController extends Controller
         }elseif($type == 4){
             $order = RetailCheckOrder::getOne(['id'=>$order_id])->first();       //获取订单信息
         }
+        dump($order);
         return view('Retail/Billing/order_list_details', ['order' => $order]);
     }
 
