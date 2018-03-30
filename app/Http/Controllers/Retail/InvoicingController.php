@@ -189,14 +189,14 @@ class InvoicingController extends Controller
             $tips = '退货开单';
         }
         $orders = $request->get('orders');                  //接收订单信息
-        //进货开单订单信息整理
+        //报损开单订单信息整理
         $order_data = [
             'ordersn' => $ordersn,
             'order_price' => $orders['order_price'],
             'remarks' => '',
             'company_id' => $orders['company_id'],
             'operator_id' => $orders['operator_id'],
-            'order_type' => $order_type,  //1：为进货订单、2为退货订单
+            'type' => $type,  //3为报损开单
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
