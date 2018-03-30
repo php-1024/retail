@@ -24,14 +24,17 @@ class BillingController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+        $ordersn = $request->get('ordersn');                //订单编号
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();         //获取粉丝管理平台的组织id
-        $search_data = [];
+        $search_data = [
+            'ordersn' => $ordersn,
+        ];
         $where = [
             'retail_id' => $admin_data['organization_id'],
             'fansmanage_id' => $fansmanage_id,
         ];
         $list = RetailPurchaseOrder::getPaginage($where,$search_data,'10','created_at','DESC'); //订单信息
-        return view('Retail/Billing/purchase_goods',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Billing/purchase_goods',['ordersn'=>$ordersn,'list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //审核订单页面

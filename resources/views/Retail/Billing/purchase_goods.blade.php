@@ -53,7 +53,7 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="ordersn" value="订单编号" placeholder="订单编号">
+                                        <input type="text" class="form-control" name="ordersn" value="{{$ordersn}}" placeholder="订单编号">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
