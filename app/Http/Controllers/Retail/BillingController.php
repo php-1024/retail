@@ -43,6 +43,15 @@ class BillingController extends Controller
         return view('Retail/Billing/purchase_list_confirm', ['order' => $order,'status' => $status]);
     }
 
+    //审核订单页面
+    public function order_list_details(Request $request)
+    {
+        $order_id = $request->get('id');        //会员标签id
+        $status = $request->status;     //冻结或者解锁
+        $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+        return view('Retail/Billing/order_list_details', ['order' => $order,'status' => $status]);
+    }
+
     //审核订单确认
     public function purchase_list_confirm_check(Request $request)
     {

@@ -151,7 +151,7 @@
 
 
 
-    //粉丝钱包
+    //订单详情
     function getwalletForm(id,status){
         var url = $('#order_list_details').val();
         var token = $('#_token').val();
