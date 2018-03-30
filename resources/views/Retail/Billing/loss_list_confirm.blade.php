@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">类型</label>
                         <div class="col-sm-10">
-                            <input type="text" value="@if($order->type == 1)进货@elseif($order->type == 2)退货@elseif($order->type == 3)报损@else未知@endif" class="form-control" disabled="" name="type">
+                            <input type="text" value="@if($order->type == 1)进货@elseif($order->type == 2)退货@elseif($order->type == 3)报损@elseif($order->type == 4)盘点@else未知@endif" class="form-control" disabled="" name="type">
                         </div>
                     </div>
                     <div class="form-group">
