@@ -1,6 +1,6 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/user_list_lock_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/purchase_list_confirm_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="user_id" value="{{$user_id}}">
+    <input type="hidden" name="order_id" value="{{$order->id}}">
     <input type="hidden" name="status" value="{{$status}}">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -15,13 +15,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">订单编号</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$nickname}}" class="form-control" disabled="" name="$nickname">
+                            <input type="text" value="{{$order->ordersn}}" class="form-control" disabled="" name="ordersn">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 text-right">订单金额</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$nickname}}" class="form-control" disabled="" name="$nickname">
+                            <input type="text" value="{{$order->order_price}}" class="form-control" disabled="" name="order_price">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -31,16 +31,13 @@
                         <div class="col-sm-10">
                             <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
                             <span class="help-block m-b-none">
-                               @if($status == '1')
-                                    <p class="text-danger">冻结了粉丝，粉丝将不能继续在店里消费。粉丝去其他联盟商家里消费也没有提成</p>
-                                @else
-                                    <p class="text-danger">解冻了粉丝，粉丝能继续在店里消费。粉丝去其他联盟商家里消费有提成</p>
+                               @if($status == '0')
+                                    <p class="text-danger">确定要审核该订单吗？审核后将不可更改！</p>
                                 @endif
                           </span>
                         </div>
                     </div>
                     <div style="clear:both;"></div>
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -64,7 +61,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
@@ -73,8 +70,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
