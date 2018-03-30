@@ -117,6 +117,11 @@ class InvoicingController extends Controller
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
         $order_type = $request->get('order_type');          //接收订单类型  1：为进货订单、2为退货订单
+        if ($order_type == 1){
+            $tips = '进货开单';
+        }else{
+            $tips = '退货开单';
+        }
         $orders = $request->get('orders');                  //接收订单信息
         //进货开单订单信息整理
         $order_data = [
@@ -148,17 +153,17 @@ class InvoicingController extends Controller
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员在零售店进货开单的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了进货开单！');//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了'.$tips.'！');//保存操作记录
             }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了进货开单！');//保存操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了'.$tips.'！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '进货开单失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '进货开单成功', 'status' => '1']);
+        return response()->json(['data' => $tips.'成功', 'status' => '1']);
     }
 }
 
