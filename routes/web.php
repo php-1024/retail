@@ -592,20 +592,19 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('order_appointment', 'Retail\OrderController@order_appointment')->middleware('RetailCheck');         //预约管理
     });
 
-    //进销存管理
-    Route::group(['prefix'=>'invoicing'],function(){
-        Route::get('purchase_goods', 'Retail\InvoicingController@purchase_goods')->middleware('RetailCheck');        //进出开单
-        Route::get('return_goods', 'Retail\InvoicingController@return_goods')->middleware('RetailCheck');        //进出开单
-        Route::get('loss_goods', 'Retail\InvoicingController@loss_goods')->middleware('RetailCheck');        //进出开单
-        Route::get('check_goods', 'Retail\InvoicingController@check_goods')->middleware('RetailCheck');        //盘点商品
-        Route::get('import', 'Retail\ImportController@import')->middleware('RetailCheck');        //进出管理
+    //进销存开单处理
+    Route::group(['prefix'=>'supplier'],function(){
+        Route::get('supplier_add', 'Retail\SupplierController@supplier_add')->middleware('RetailCheck');        //添加供应商
+        Route::get('supplier_edit', 'Retail\SupplierController@supplier_edit')->middleware('RetailCheck');      //编辑供应商
+        Route::get('supplier_list', 'Retail\SupplierController@supplier_list')->middleware('RetailCheck');      //供应商列表
     });
 
-    //进出管理
-    Route::group(['prefix'=>'import'],function(){
-        Route::get('supplier_add', 'Retail\ImportController@supplier_add')->middleware('RetailCheck');        //添加供应商
-        Route::get('supplier_edit', 'Retail\ImportController@supplier_edit')->middleware('RetailCheck');      //编辑供应商
-        Route::get('supplier_list', 'Retail\ImportController@supplier_list')->middleware('RetailCheck');      //供应商列表
+    //进销存供应商管理
+    Route::group(['prefix'=>'invoicing'],function(){
+        Route::get('purchase_goods', 'Retail\InvoicingController@purchase_goods')->middleware('RetailCheck');    //从供应商进货开单
+        Route::get('return_goods', 'Retail\InvoicingController@return_goods')->middleware('RetailCheck');        //从供应商退货开单
+        Route::get('loss_goods', 'Retail\InvoicingController@loss_goods')->middleware('RetailCheck');           //报损开单
+        Route::get('check_goods', 'Retail\InvoicingController@check_goods')->middleware('RetailCheck');        //盘点开单
     });
 
     //用户管理
