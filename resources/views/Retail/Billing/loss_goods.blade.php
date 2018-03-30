@@ -103,7 +103,7 @@
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('{{$val->id}}','{{$val->type}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -144,10 +144,10 @@
 
 
     //订单详情
-    function getwalletForm(id,status){
+    function getwalletForm(id,type){
         var url = $('#order_list_details').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'id':id,'status':status};
+        var data = {'_token':token,'id':id,'type':type};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
