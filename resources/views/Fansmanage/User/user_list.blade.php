@@ -99,7 +99,7 @@
                                                 @endif</label></td>
                                         <td><label class="label label-primary">{{$value->recommender_name}}</label></td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->store_id}}','{{$value->nickname}}')">
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->nickname}}')">
                                                     <option value="0">无标签</option>
                                                 @foreach($label as $k=>$v)
                                                     <option value="{{$v->id}}" @if($v->id == $value->label_id) selected @endif>{{$v->label_name}}</option>
@@ -223,11 +223,11 @@
         });
     }
 
-    function changeUserTag(obj,user_id,store_id,nickname){
+    function changeUserTag(obj,user_id,nickname){
         var label_id = $(obj).val();
         var url = $('#store_label_add_check').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'store_id':store_id,'nickname':nickname};
+        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'nickname':nickname};
         $.post(url,data,function(json){
             if (json.status == -1) {
                 window.location.reload();
