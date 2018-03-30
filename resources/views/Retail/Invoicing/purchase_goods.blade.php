@@ -135,7 +135,7 @@
                                 <div class="col-lg-5">
                                     <section class="panel panel-default">
                                         <header class="panel-heading font-bold">
-                                            开单商品列表 操作人员：刘新文
+                                            开单商品列表
                                         </header>
                                         <div class="panel-body">
                                             <table class="table table-striped">
