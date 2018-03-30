@@ -33,6 +33,7 @@ class UserLabel extends Model{
 
     //粉丝与会员标签关联
     public static function addUserLabel($param){
+        dd($param);
         $model = new UserLabel();
         $model->store_id = $param['organization_id'];//组织ID
         $model->label_id = $param['label_id'];//标签id
