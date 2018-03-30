@@ -78,10 +78,8 @@
                                     <tr>
                                         <td>{{$val->ordersn}}</td>
                                         <td>
-                                            @if($val->type == 1)
-                                            进货
-                                            @elseif($val->type == 2)
-                                            退货
+                                            @if($val->type == 3)
+                                            报损
                                             @else
                                             未知
                                             @endif
