@@ -116,7 +116,7 @@ class AndroidApiController extends Controller{
                     $data = [
                         'order_id'=>$order_id,
                         'goods_id'=>$v['id'],
-                        'title'=>$v['name'],
+                        'title'=>$v['title'],
                         'thumb'=>$v['thumb'],
                         'details'=>$v['details'],
                         'total'=>$v['total'],
