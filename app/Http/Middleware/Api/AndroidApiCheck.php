@@ -63,8 +63,8 @@ class AndroidApiCheck{
      */
     public function checkGoodsListData($request){
         if (empty($request->input('organization_id'))) {
-            return self::res(0, response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
             echo 1;exit;
+            return self::res(0, response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
         }
             echo 1;exit;
             return self::res(1,$request);
