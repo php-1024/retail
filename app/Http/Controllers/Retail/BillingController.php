@@ -152,6 +152,7 @@ class BillingController extends Controller
                         'type' => $type,
                         'status' => '1',
                     ];
+
                     RetailStockLog::addStockLog($stock_data);
                 }
                 RetailPurchaseOrder::editOrder(['id'=>$order_id],['status'=>'1']);
