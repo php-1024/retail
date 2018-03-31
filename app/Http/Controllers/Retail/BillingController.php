@@ -152,7 +152,6 @@ class BillingController extends Controller
                         'type' => $type,
                         'status' => '1',
                     ];
-
                     RetailStockLog::addStockLog($stock_data);
                 }
                 RetailPurchaseOrder::editOrder(['id'=>$order_id],['status'=>'1']);
@@ -164,6 +163,7 @@ class BillingController extends Controller
                 }
                 DB::commit();
             } catch (\Exception $e) {
+                dd($e);
                 DB::rollBack();//事件回滚
                 return response()->json(['data' => '审核供应商订单失败，请检查', 'status' => '0']);
             }
