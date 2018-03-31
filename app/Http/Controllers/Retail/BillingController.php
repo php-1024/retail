@@ -223,9 +223,9 @@ class BillingController extends Controller
             $stock_data = [
                 'fansmanage_id' => $fansmanage_id,
                 'retail_id' => $admin_data['organization_id'],
-                'category_id' => $val['category_id'],
-                'goods_id' => $val['id'],
-                'stock' => $val['stock'],
+                'category_id' => $val->category_id,
+                'goods_id' => $val->id,
+                'stock' => $val->stock,
             ];
             RetailStock::addStock($stock_data);
         }
