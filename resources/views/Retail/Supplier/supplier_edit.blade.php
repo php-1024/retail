@@ -1,6 +1,6 @@
     <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/supplier_edit_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="supplide_id" value="{{$supplier->id}}">
+        <input type="hidden" name="supplier_id" value="{{$supplier->id}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
