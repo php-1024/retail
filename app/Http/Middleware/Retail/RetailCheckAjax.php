@@ -69,6 +69,7 @@ class RetailCheckAjax
             case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
             case "retail/ajax/loss_list_confirm_check":       //审核订单安全密码确认
             case "retail/ajax/check_list_confirm_check":      //审核订单安全密码确认
+            case "retail/ajax/supplier_edit_check":           //审核供应商修改安全密码确认
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
