@@ -78,12 +78,12 @@ class AndroidApiCheck{
         if (empty($request->input('timestamp'))) {
             return self::res(0, response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
         }
-        echo 1;exit;
         $account_id = $request->account_id;//用户账号id
 //        $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//当前时间戳
-        return response()->json(['msg' => $account_id, 'status' => '0']);
+
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
+        print_r($data);
         if(empty($data)){
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
