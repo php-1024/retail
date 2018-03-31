@@ -51,32 +51,33 @@
                                     </div>
                                 </form>
                             </div>
+
                             <div class="table-responsive">
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>商品标题</th>
-                                        <th>联系人姓名</th>
-                                        <th>联系人电话</th>
-                                        <th>操作</th>
+                                        <th>商品条码</th>
+                                        <th>商品编号</th>
+                                        <th>库存</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($supplier as $key=>$val)
-                                        <tr>
-                                            <td>{{ $val->id }}</td>
-                                            <td>{{ $val->company_name }}</td>
-                                            <td>{{ $val->contactname }}</td>
-                                            <td>{{ $val->contactmobile }}</td>
-                                            <td>
-                                                <button class="btn btn-info btn-xs" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
-                                                </button>
-                                                <button class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    <tr>
+                                        <td>1</td>
+                                        <td>刘家豆干</td>
+                                        <td>20180331103348245</td>
+                                        <td>2018033</td>
+                                        <td>458</td>
+
+                                    </tr>
+
+
+
+
+
                                     </tbody>
                                 </table>
                             </div>
