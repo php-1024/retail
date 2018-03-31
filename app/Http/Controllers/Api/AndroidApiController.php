@@ -81,11 +81,13 @@ class AndroidApiController extends Controller{
         $remarks = $request->remarks;//备注
         $order_type = $request->order_type;//订单类型
         $goodsdata = json_decode($request->goodsdata);//商品数组
-        print_r($goodsdata);exit;
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
-            $order_price += $value['price'];
+            foreach($value as $k=>$v){
+                $order_price += $value['price'];
+            }
         }
+        echo $order_price;exit;
         $fansmanage_id = Organization::getPluck([['id',$organization_id]],'parent_id');
         $num = RetailOrder::where([['fansmanage_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
         if(!$num){
@@ -129,7 +131,7 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '提交订单成功', 'data' => '']);
     }
 
-    
+
 
 }
 ?>
