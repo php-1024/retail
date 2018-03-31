@@ -83,7 +83,9 @@ class AndroidApiCheck{
         if (empty($request->input('token'))) {
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
-        echo(microtime());exit;
+        list($t1, $t2) = explode(' ', microtime());
+        echo (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);exit;
+
 //        if(time()-$request->input('timestamp')>120){
 //            return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
 //        }
