@@ -16,7 +16,7 @@ class AndroidApiController extends Controller{
         $password = $request->password;//登入密码
         $data = Account::where([['account',$account]])->orWhere([['mobile',$account]])->first();//根据账号进行查询
         if(empty($data)){
-            return response()->json(['msg' => '用户不存在', 'status' => '0']);
+            return response()->json(['msg' => '用户不存在', 'status' => '0','data'=>'']);
         }
         $key = config("app.retail_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
