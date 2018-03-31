@@ -38,6 +38,11 @@ class RetailSupplier extends Model{
         return $model->first();
     }
 
+    //获取单挑数据
+    public static function getOne($where){
+        return self::where($where)->first();
+    }
+
     //获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new RetailSupplier();
