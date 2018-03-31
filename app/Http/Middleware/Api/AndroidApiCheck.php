@@ -32,6 +32,7 @@ class AndroidApiCheck{
      */
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//
+        echo $re;exit;
         if($re['response']['status']=='0'){//
             return $re['response'];
         }else{
