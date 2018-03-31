@@ -66,18 +66,12 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>刘家豆干</td>
-                                        <td>20180331103348245</td>
-                                        <td>2018033</td>
-                                        <td>458</td>
-
+                                        <td>{{$stock_list->id}}</td>
+                                        <td>{{$stock_list->name}}</td>
+                                        <td>{{$stock_list->barcode}}</td>
+                                        <td>{{$stock_list->number}}</td>
+                                        <td>{{$stock_list->stock}}</td>
                                     </tr>
-
-
-
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -85,7 +79,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {!! $supplier->links() !!}
+                                        {!! $stock_list->links() !!}
                                     </div>
                                 </div>
                             </footer>
