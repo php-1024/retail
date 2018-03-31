@@ -136,7 +136,7 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '提交订单成功', 'data' => '']);
     }
 
-//{"data":[{"id":1,"total":1,"thumb":1,"name":"\u9178\u83dc\u8089\u4e1d\u9762","category_id":1,"details":"\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762","price":"10.00","stock":1001,"category_name":"\u9762\u6761"},{"id":2,"name":"\u8304\u5b50\u8c46\u89d2","category_id":8,"details":"\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2","price":"12.00","stock":1001,"category_name":"\u76d6\u6d47\u996d"}]}
+//account_id=76&organization_id=5&timestamp=1522485361983&token=e71eaa006f6854ca6c86380a7e94e853&goodsdata={"data":[{"id":1,"total":"1","thumb":"jhsdfdsjkfdsjkfjskdjfkdsjfksdjfk","name":"\u9178\u83dc\u8089\u4e1d\u9762","category_id":1,"details":"\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762","price":"10.00","stock":1001,"category_name":"\u9762\u6761"},{"id":2,"total":"1","thumb":"jhsdfdsjkfdsjkfjskdjfkdsjfksdjfk","name":"\u8304\u5b50\u8c46\u89d2","category_id":8,"details":"\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2","price":"12.00","stock":1001,"category_name":"\u76d6\u6d47\u996d"}]}
 
 }
 ?>
