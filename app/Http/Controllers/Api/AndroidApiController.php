@@ -106,7 +106,7 @@ class AndroidApiController extends Controller{
             'retail_id' => $organization_id,
             'user_id' => $user_id,
             'operator_id' => $account_id,
-            'status' => 0,
+            'status' => '0',
         ];
         DB::beginTransaction();
         try{
