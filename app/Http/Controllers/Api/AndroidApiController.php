@@ -80,6 +80,7 @@ class AndroidApiController extends Controller{
         $remarks = $request->remarks;//备注
         $order_type = $request->order_type;//订单类型
         $goodsdata = json_encode($request->goodsdata);//商品数组
+        echo $goodsdata;exit;
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
             $order_price += $value['price'];

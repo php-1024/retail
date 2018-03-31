@@ -129,7 +129,6 @@ class AndroidApiCheck{
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
         if (empty(json_encode($request->input('goodsdata')))) {
-            echo 1;exit;
             return self::res(0, response()->json(['msg' => '提交的数据不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
@@ -171,7 +170,6 @@ class AndroidApiCheck{
         }
 
         $store_token = base64_encode($store_token.$data['uuid']).'lingyi2018';//第一次加密
-
         $store_token = md5($store_token);//第二次加密
         if($store_token !=$token){
             return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));
