@@ -32,7 +32,7 @@ class AndroidApiController extends Controller{
      * 商品分类接口
      */
     public function goodslist(Request $request){
-        dd(1);
+
         $organization_id = $request->organization_id;//店铺id
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
@@ -43,6 +43,7 @@ class AndroidApiController extends Controller{
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
         $sort = array($data['account'],time(),$data['uuid']);
+        dd(sort($sort));
 
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
