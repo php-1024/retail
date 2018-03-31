@@ -178,9 +178,29 @@ class BillingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $order_id = $request->get('order_id');        //会员标签id
         $status = $request->get('status');            //接收订单当前状态
+
+        $order = RetailLossOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+        $order_goods = $order->RetailLossOrderGoods;    //订单对应的商品
+        $type = $order->type;                               //订单类型
         if ($status == 0){
             DB::beginTransaction();
             try {
+                $this->edit_stock($order_goods,$type);
+                //添加库存操作记录日志
+                foreach($order_goods as $key=>$val){
+                    $stock_data = [
+                        'fansmanage_id' => $order->fansmanage_id,
+                        'retail_id' => $order->retail_id,
+                        'goods_id' => $val->goods_id,
+                        'amount' => $val->total,
+                        'ordersn' => $order->ordersn,
+                        'operator_id' => $order->operator_id,
+                        'remark' => $order->remarks,
+                        'type' => $type,
+                        'status' => '1',
+                    ];
+                    RetailStockLog::addStockLog($stock_data);
+                }
                 RetailLossOrder::editOrder(['id'=>$order_id],['status'=>'1']);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员审核订单操作记录
@@ -264,7 +284,7 @@ class BillingController extends Controller
             //1、更新商品信息中的库存
             RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
             //2、更新库存表的库存
-            RetailStock::editStock(['id'=>$val->goods_id],['stock'=>$new_stock]);
+            RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
         }
     }
 }
