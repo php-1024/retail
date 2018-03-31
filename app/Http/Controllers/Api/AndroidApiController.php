@@ -80,6 +80,9 @@ class AndroidApiController extends Controller{
         $account_id = $request->account_id;//操作员id
         $remarks = $request->remarks;//备注
         $order_type = $request->order_type;//订单类型
+        if(!$order_type){
+            $order_type =1;
+        }
         $goodsdata = json_decode($request->goodsdata,TRUE);//商品数组
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
