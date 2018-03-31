@@ -212,13 +212,13 @@ class BillingController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_name = $request->get('goods_name');         //获取供应商名称
-        $search_data = ['goods_name' => $goods_name];          //处理搜索参数
+        $goods_id = RetailGoods::getPluck(['name'=>$goods_name],'id')->first();
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
-        $stock_list = RetailGoods::getPaginage($where,$search_data,'10','displayorder','ASC'); //查询商品信息
+        $stock_list = RetailStock::getPaginage($where,$goods_id,'10','displayorder','ASC'); //查询商品信息
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }
