@@ -33,12 +33,11 @@ class AndroidApiCheck{
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
-            echo $re['response'];exit;
             return $re['response'];
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
-                return $re2['response'];
+                echo $re2['response'];exit;
             }else{
                 return self::res(1,$re2['response']);
             }
