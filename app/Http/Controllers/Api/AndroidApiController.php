@@ -45,7 +45,13 @@ class AndroidApiController extends Controller{
      */
     public function goodslist(Request $request){
         $organization_id = $request->organization_id;//店铺id
-        $goodslist = RetailGoods::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','category_id','details','price','stock']);
+        $keyword = $request->keyword;//关键字
+        $scan_code = $request->scan_code;//条码
+        $where = [['fansmanage_id',$organization_id]];
+        if($keyword){
+            $where =[['keywords'],'liks',$keyword];
+        }
+        $goodslist = RetailGoods::getList([],'0','displayorder','asc',['id','name','category_id','details','price','stock']);
         foreach($goodslist as $key=>$value){
             $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
         }
