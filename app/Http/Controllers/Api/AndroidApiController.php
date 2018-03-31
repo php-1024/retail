@@ -35,13 +35,7 @@ class AndroidApiController extends Controller{
     public function goodscategory(Request $request){
 
         $organization_id = $request->organization_id;//店铺id
-        $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc');
-        foreach($categorylist as $key=>$value){
-            unset($categorylist[$key]['created_at']);
-            unset($categorylist[$key]['updated_at']);
-            unset($categorylist[$key]['deleted_at']);
-            unset($categorylist[$key]['retail_id']);
-        }
+        $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','displayorder']);
         $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
         return response()->json($data);
     }
