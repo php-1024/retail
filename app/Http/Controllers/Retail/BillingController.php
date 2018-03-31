@@ -130,12 +130,10 @@ class BillingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();//获取粉丝管理平台的组织id
         $order_id = $request->get('order_id');        //会员标签id
         $status = $request->get('status');            //接收订单当前状态
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
         $order_goods = $order->RetailPurchaseOrderGoods;    //订单对应的商品
-        dd($order_goods);
         $type = $order->type;                               //订单类型
         if ($status == 0){
             DB::beginTransaction();
@@ -144,10 +142,15 @@ class BillingController extends Controller
                 //添加库存操作记录日志
                 foreach($order_goods as $key=>$val){
                     $stock_data = [
-                        'fansmanage_id' => $fansmanage_id,
-                        'retail' => $admin_data['organization_id'],
+                        'fansmanage_id' => $order->fansmanage_id,
+                        'retail_id' => $order->retail_id,
                         'goods_id' => $val->goods_id,
-                        'amount' => $val->goods_id,
+                        'amount' => $val->total,
+                        'ordersn' => $order->ordersn,
+                        'operator_id' => $order->operator_id,
+                        'remark' => $order->remarks,
+                        'type' => $type,
+                        'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);
                 }
