@@ -35,7 +35,7 @@ class AndroidApiController extends Controller{
     public function goodscategory(Request $request){
 
         $organization_id = $request->organization_id;//店铺id
-        $categorylist = RetailCategory::where([['fansmanage_id',$organization_id]])->select([['id'],['category_name'],['displayorder']])->get();
+        $categorylist = RetailCategory::where([['fansmanage_id',$organization_id]])->select(['id'])->get();
         $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
         return response()->json($data);
     }
