@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\RetailCategory;
 use App\Models\RetailGoods;
+use App\Models\RetailOrder;
 use Illuminate\Http\Request;
 use Session;
 class AndroidApiController extends Controller{
@@ -70,13 +71,20 @@ class AndroidApiController extends Controller{
         $user_id = $request->user_id;//用户id 散客为0
         $account_id = $request->account_id;//操作员id
         $goodsdata = json_encode($request->goodsdata);//商品数组
-
-        $goodslist = RetailGoods::getList($where,'0','displayorder','asc',['id','name','category_id','details','price','stock']);
-        foreach($goodslist as $key=>$value){
-            $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
-        }
-        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
-        return response()->json($data);
+        $ordersn ='LS'.date("Ymd",time());
+        echo $ordersn;
+//        DB::beginTransaction();
+//        try{
+//            RetailOrder::addRetailOrder();
+//            DB::commit();//提交事务
+//        }catch (\Exception $e) {
+//            dd($e);
+//            DB::rollBack();//事件回滚
+//            return response()->json(['msg' => '修改失败', 'status' => '0', 'data'=>'']);
+//        }
+//
+//        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
+//        return response()->json($data);
     }
 
 }
