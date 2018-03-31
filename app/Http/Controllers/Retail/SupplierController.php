@@ -94,7 +94,32 @@ class SupplierController extends Controller
     //供应商编辑操作
     public function supplier_edit_check(Request $request)
     {
-        dd($request);
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $supplier_id = $request->get('supplier_id');        //接收供应商id
+        $company_name = $request->get('company_name');        //接收供应商名称
+        $contactname = $request->get('contactname');        //接收供应商联系人姓名
+        $contactmobile = $request->get('contactmobile');    //接收供应商联系人手机号码
+        $supplier_data = [
+            'company_name' => $company_name,
+            'contactname' => $contactname,
+            'contactmobile' => $contactmobile,
+        ];
+        DB::beginTransaction();
+        try {
+            RetailSupplier::editSupplier(['id'=>$supplier_id],$supplier_data);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员修改零售店铺供应商的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统修改了供应商信息！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了供应商信息！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改供应商失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改供应商成功', 'status' => '1']);
     }
 }
 
