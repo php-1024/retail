@@ -83,7 +83,7 @@ class AndroidApiCheck{
         if (empty($request->input('token'))) {
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
-        if(time()-$request->input('timestamp')>120){
+        if(microtime()-$request->input('timestamp')>120000){
             return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
         }
         $account_id = $request->account_id;//用户账号id
