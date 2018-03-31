@@ -47,7 +47,8 @@ class AndroidApiController extends Controller{
             'time'=>time() ,
             'uuid'=>$data['uuid']
         ];
-        dump(sort($sort));
+        return response()->json(['msg' => sort($sort), 'status' => '0']);
+
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重
 //        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
