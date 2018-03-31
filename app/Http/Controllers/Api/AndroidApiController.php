@@ -83,9 +83,7 @@ class AndroidApiController extends Controller{
         $goodsdata = json_decode($request->goodsdata);//商品数组
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
-
             foreach($value as $k=>$v){
-                print_r($v);exit;
                 echo $v['price'];exit;
             }
         }
