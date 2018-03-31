@@ -95,7 +95,7 @@ class AndroidApiCheck{
             return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
 
         }
-        $sort = array($data['account'],$data['password'],$timestamp,$data['uuid']);
+        $sort = array($data['account'],$timestamp,$data['uuid']);
         sort($sort);//字典排序
         $store_token = '';
         foreach($sort as $key=>$value){//拼接token
