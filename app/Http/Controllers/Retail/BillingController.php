@@ -227,7 +227,16 @@ class BillingController extends Controller
                 'goods_id' => $val->id,
                 'stock' => $val->stock,
             ];
-            RetailStock::addStock($stock_data);
+            DB::beginTransaction();
+            try {
+                RetailStock::addStock($stock_data);
+                DB::commit();
+            } catch (\Exception $e) {
+                dd($e);
+                DB::rollBack();//事件回滚
+                return response()->json(['data' => '库存查询更新失败，请检查', 'status' => '0']);
+            }
+            return response()->json(['data' => '库存查询更新成功', 'status' => '1']);
         }
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
