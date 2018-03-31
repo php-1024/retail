@@ -1,6 +1,6 @@
 <?php
 /**
- * retail_order表的模型
+ * retail_stock_log表的模型
  *
  */
 namespace App\Models;
@@ -18,37 +18,20 @@ class RetailStockLog extends Model{
         return $this->belongsTo('App\Models\RetailGoods','order_id','id');
     }
 
-    public static function getOne($where)
-    {
-        $model = self::with('User')->with('RetailGoods');
-        return $model->where($where)->first();
-    }
-
-    //获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    //添加库存
+    public static function addStockLog($param){
         $model = new RetailStockLog();
-        if(!empty($limit)){
-            $model = $model->limit($limit);
-        }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
-    }
-
-    //获取分页列表
-    public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('RetailGoods');
-        if(!empty($search_data['user_id'])){
-            $model = $model->where([['user_id',$search_data['user_id']]]);
-        }
-        if(!empty($search_data['ordersn'])){
-            $model = $model->where([['ordersn',$search_data['ordersn']]]);
-        }
-        if(!empty($search_data['paytype'])){
-            $model = $model->where([['paytype',$search_data['paytype']]]);
-        }
-        if(!empty($search_data['status'])){
-            $model = $model->where([['status',$search_data['status']]]);
-        }
-        return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        $model->goods_id = $param['goods_id'];
+        $model->amount = $param['amount'];
+        $model->ordersn = $param['ordersn'];
+        $model->operator_id = $param['operator_id'];
+        $model->remark = $param['remark'];
+        $model->type = $param['type'];
+        $model->status = $param['status'];
+        $model->fansmanage_id = $param['fansmanage_id'];
+        $model->retail_id = $param['retail_id'];
+        $model->save();
+        return $model->id;
     }
 }
 ?>
