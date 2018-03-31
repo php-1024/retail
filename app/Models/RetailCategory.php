@@ -66,6 +66,11 @@ class RetailCategory extends Model{
         }
     }
 
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
+    }
+
     //获取分页列表
     public static function getPaginage($where,$category_name,$paginate,$orderby,$sort='DESC'){
         $model = self::with('Organization');
