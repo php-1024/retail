@@ -13,7 +13,6 @@ class AndroidApiController extends Controller{
      */
     public function login(Request $request){
         $account = $request->account;//登入账号
-        echo $account;
         $password = $request->password;//登入密码
         $data = Account::where([['account',$account]])->orWhere([['mobile',$account]])->first();//根据账号进行查询
         if(empty($data)){
