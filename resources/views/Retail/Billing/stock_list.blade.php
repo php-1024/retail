@@ -33,14 +33,14 @@
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                供应商列表
+                                库存列表
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get" id="searchForm" action="">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="supplier_edit_url" value="{{ url('retail/ajax/supplier_edit') }}">
                                     <input type="hidden" id="supplier_delete_comfirm_url" value="{{ url('retail/ajax/supplier_delete') }}">
-                                    <label class="col-sm-1 control-label">供应商名称</label>
+                                    <label class="col-sm-1 control-label">商品名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$company_name}}">
                                     </div>
@@ -56,7 +56,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>公司名称</th>
+                                        <th>商品标题</th>
                                         <th>联系人姓名</th>
                                         <th>联系人电话</th>
                                         <th>操作</th>
