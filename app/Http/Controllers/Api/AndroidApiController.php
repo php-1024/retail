@@ -80,14 +80,14 @@ class AndroidApiController extends Controller{
         $account_id = $request->account_id;//操作员id
         $remarks = $request->remarks;//备注
         $order_type = $request->order_type;//订单类型
-        $goodsdata = json_decode($request->goodsdata);//商品数组
+        $goodsdata = json_decode($request->goodsdata,TRUE);//商品数组
+        print_r($goodsdata);
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
             foreach($value as $k=>$v){
                 $order_price += $v->price;
             }
         }
-        echo $order_price;exit;
         $fansmanage_id = Organization::getPluck([['id',$organization_id]],'parent_id');
         $num = RetailOrder::where([['fansmanage_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
         if(!$num){
