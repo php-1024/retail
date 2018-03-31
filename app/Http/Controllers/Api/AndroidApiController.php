@@ -43,8 +43,8 @@ class AndroidApiController extends Controller{
 //        }
 //        return $model->where($where)->select('')->get();
 //
-//        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
-//        return response()->json($data);
+        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
+        return response()->json($data);
     }
 
 }
