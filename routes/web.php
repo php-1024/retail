@@ -613,6 +613,7 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('return_goods', 'Retail\BillingController@return_goods')->middleware('RetailCheck');        //从供应商退货开单管理
         Route::get('loss_goods', 'Retail\BillingController@loss_goods')->middleware('RetailCheck');           //报损开单管理
         Route::get('check_goods', 'Retail\BillingController@check_goods')->middleware('RetailCheck');        //盘点开单管理
+        Route::get('stock_list', 'Retail\BillingController@stock_list')->middleware('RetailCheck');         //库存查询
     });
 
     //用户管理

@@ -13,6 +13,7 @@ use App\Models\Organization;
 use App\Models\RetailCheckOrder;
 use App\Models\RetailLossOrder;
 use App\Models\RetailPurchaseOrder;
+use App\Models\RetailSupplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -197,6 +198,24 @@ class BillingController extends Controller
             }
             return response()->json(['data' => '审核盘点订单成功', 'status' => '1']);
         }
+    }
+
+
+    //库存查询
+    public function stock_list(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $company_name = $request->get('company_name');         //获取供应商名称
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $where = [
+            'fansmanage_id' => $fansmanage_id,
+            'retail_id' => $admin_data['organization_id'],
+        ];
+        $supplier = RetailSupplier::getPaginage($where,$company_name,'0', 'displayorder', 'DESC');   //供应商信息
+        return  view('Retail/Billing/stock_list',['supplier'=>$supplier,'company_name'=>$company_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
