@@ -134,7 +134,23 @@ class BillingController extends Controller
         $status = $request->get('status');            //接收订单当前状态
 
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
-        dd($order->RetailPurchaseOrderGoods);
+
+
+        /**
+         * 进货后处理商品库存
+         * 1、处理商品信息的库存
+         * 2、处理库存表的库存
+         **/
+
+        $order_goods = $order->RetailPurchaseOrderGoods;
+        foreach ($order_goods as $key=>$val){
+            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
+            $new_stock = $old_stock+$val->total;                //新的库存
+            //1、更新商品信息中的库存
+            RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
+            //2、更新库存表的库存
+            RetailStock::editStock(['id'=>$val->goods_id],['stock'=>$new_stock]);
+        }
 
         if ($status == 0){
             DB::beginTransaction();
