@@ -42,12 +42,9 @@ class AndroidApiController extends Controller{
         if(empty($data)){
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
-        $sort = [
-            '0'=> $data['account'],
-            '1'=>time() ,
-            '2'=>$data['uuid']
-        ];
-        return response()->json(['msg' => sort($sort), 'status' => '0']);
+        $sort = array($data['account'],time(),$data['uuid']);
+        sort($sort);
+        dd($sort);
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重
