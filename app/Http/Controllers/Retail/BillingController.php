@@ -13,6 +13,7 @@ use App\Models\Organization;
 use App\Models\RetailCheckOrder;
 use App\Models\RetailLossOrder;
 use App\Models\RetailPurchaseOrder;
+use App\Models\RetailSupplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
