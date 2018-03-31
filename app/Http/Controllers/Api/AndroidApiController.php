@@ -35,25 +35,8 @@ class AndroidApiController extends Controller{
 
         $organization_id = $request->organization_id;//店铺id
         $account_id = $request->account_id;//用户账号id
-        $token = $request->token;//店铺令牌
-        $timestamp = $request->timestamp;//当前时间戳
 
-        $data = Account::where([['id',$account_id]])->first();//根据账号进行查询
-        if(empty($data)){
-            return response()->json(['msg' => '用户不存在', 'status' => '0']);
-        }
-        $sort = array($data['account'],$data['password'],time(),$data['uuid']);
-        sort($sort);
-        $store_token = '';
-        foreach($sort as $key=>$value){
-            $store_token .= $value;
-        }
-        $store_token = base64_encode($store_token).'lingyi2018';
-        $store_token = md5($store_token);
-        dd($store_token);
-        if($store_token !=$token){
-            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
-        }
+
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重
