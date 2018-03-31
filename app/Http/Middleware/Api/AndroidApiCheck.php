@@ -37,6 +37,7 @@ class AndroidApiCheck{
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
+                echo $re2;exit;
                 return $re2;
             }else{
                 return self::res(1,$re2['response']);
@@ -63,7 +64,6 @@ class AndroidApiCheck{
      */
     public function checkGoodsListData($request){
         if (empty($request->input('organization_id'))) {
-            echo 1;exit;
             return self::res(0, response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
         }
             echo 1;exit;
