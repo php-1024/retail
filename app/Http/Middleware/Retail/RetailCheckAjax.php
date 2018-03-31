@@ -38,6 +38,7 @@ class RetailCheckAjax
             case "retail/ajax/select_company":          //选择供应商处理
             case "retail/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
             case "retail/ajax/purchase_list_confirm":   //进货退货审核弹窗
+            case "retail/ajax/supplier_edit":           //进销存管理--编辑供应商
             case "retail/ajax/loss_list_confirm":       //报损订单审核弹窗
             case "retail/ajax/check_list_confirm":      //盘点订单审核弹窗
             case "retail/ajax/order_list_details":      //订单详细信息列表
