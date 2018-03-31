@@ -79,6 +79,7 @@ class AndroidApiCheck{
             return self::res(0, response()->json(['msg' => '当前时间戳不能为空', 'status' => '0', 'data' => '']));
         }
         if (empty($request->input('token'))) {
+            echo 1;exit;
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
         $account_id = $request->account_id;//用户账号id
