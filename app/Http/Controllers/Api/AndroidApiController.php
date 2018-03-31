@@ -129,5 +129,7 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '提交订单成功', 'data' => '']);
     }
 
+    
+
 }
 ?>
