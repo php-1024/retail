@@ -23,33 +23,19 @@ class RetailStock extends Model{
         return $this->hasOne('App\Models\RetailCategory','category_id','id');
     }
 
-    //获取单条信息
-    public static function getOne($where){
-        return self::where($where)->first();
-    }
-
-    //获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new RetailCategory();
-        if(!empty($limit)){
-            $model = $model->limit($limit);
-        }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
-    }
-
-    //添加组织栏目分类
-    public static function addCategory($param){
-        $model = new RetailCategory();
-        $model->name = $param['name'];
-        $model->created_by = $param['created_by'];
-        $model->displayorder = $param['displayorder'];
+    //添加库存
+    public static function addStock($param){
+        $model = new RetailStock();
+        $model->category_id = $param['category_id'];
+        $model->goods_id = $param['goods_id'];
+        $model->stock = $param['stock'];
         $model->fansmanage_id = $param['fansmanage_id'];
         $model->retail_id = $param['retail_id'];
         $model->save();
         return $model->id;
     }
-    //修改数据
-    public static function editCategory($where,$param){
+    //修改库存
+    public static function editStock($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
@@ -60,11 +46,11 @@ class RetailStock extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$category_name,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('Organization');
+        $model = new RetailStock();
         if(!empty($category_name)){
             $model = $model->where('name','like','%'.$category_name.'%');
         }
-        return $model->with('create_account')->with('Organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->with('RetailGoods')->with('RetailCategory')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //查询出模型，再删除模型 一定要查询到才能删除
