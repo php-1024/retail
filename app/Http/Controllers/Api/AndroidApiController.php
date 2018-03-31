@@ -113,7 +113,6 @@ class AndroidApiController extends Controller{
             $order_id = RetailOrder::addRetailOrder($orderData);
             foreach($goodsdata as $key=>$value){
                 foreach($value as $k=>$v){
-                    print_r($v);exit;
                     $data = [
                         'order_id'=>$order_id,
                         'goods_id'=>$v['id'],

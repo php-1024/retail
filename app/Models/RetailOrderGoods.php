@@ -42,6 +42,7 @@ class RetailOrderGoods extends Model{
         $model->goods_id = $param['goods_id'];//商品id
         $model->total = $param['total'];//商品数量
         $model->price = $param['price'];//商品价格
+        $model->thumb = $param['thumb'];//商品图片主图
         if($param['details']){
             $model->details = $param['details'];//商品详情
         }
