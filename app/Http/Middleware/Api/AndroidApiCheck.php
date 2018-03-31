@@ -80,9 +80,9 @@ class AndroidApiCheck{
         }
 
         $account_id = $request->account_id;//用户账号id
-        $token = $request->token;//店铺令牌
+//        $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//当前时间戳
-
+        return response()->json(['msg' => $account_id, 'status' => '0']);
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
         if(empty($data)){
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
@@ -98,9 +98,9 @@ class AndroidApiCheck{
 
         return response()->json(['msg' => $store_token, 'status' => '0']);
 
-        if($store_token !=$token){
-            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
-        }
+//        if($store_token !=$token){
+//            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
+//        }
         return self::res(1,$request);
     }
 
