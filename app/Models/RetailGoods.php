@@ -40,6 +40,11 @@ class RetailGoods extends Model{
         return self::with('category')->with('RetailGoodsThumb')->where($where)->first();
     }
 
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
+    }
+
     //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = new RetailGoods();
