@@ -11,6 +11,7 @@ use App\Models\OperationLog;
 use App\Models\RetailCategory;
 use App\Models\Organization;
 use App\Models\RetailCheckOrder;
+use App\Models\RetailGoods;
 use App\Models\RetailLossOrder;
 use App\Models\RetailPurchaseOrder;
 use App\Models\RetailSupplier;
@@ -208,14 +209,15 @@ class BillingController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $company_name = $request->get('company_name');         //获取供应商名称
+        $goods_name = $request->get('goods_name');         //获取供应商名称
+        $search_data = ['goods_name' => $goods_name,'category_id' => $category_id]; //处理搜索参数
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
-        $supplier = RetailSupplier::getPaginage($where,$company_name,'0', 'displayorder', 'DESC');   //供应商信息
-        return  view('Retail/Billing/stock_list',['supplier'=>$supplier,'company_name'=>$company_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $stock_list = RetailGoods::getPaginage($where,$search_data,'10','displayorder','ASC'); //查询商品信息
+        return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
