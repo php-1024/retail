@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Organization;
 use App\Models\RetailCategory;
 use App\Models\RetailGoods;
+use App\Models\RetailGoodsThumb;
 use App\Models\RetailOrder;
 use App\Models\RetailOrderGoods;
 use Illuminate\Http\Request;
@@ -60,6 +61,7 @@ class AndroidApiController extends Controller{
         $goodslist = RetailGoods::getList($where,'0','displayorder','asc',['id','name','category_id','details','price','stock']);
         foreach($goodslist as $key=>$value){
             $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
+            $goodslist[$key]['thumb']=RetailGoodsThumb::where([['goods_id',$value['id']]])->get();
         }
         $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
         return response()->json($data);
