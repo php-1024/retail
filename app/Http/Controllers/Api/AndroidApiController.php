@@ -122,6 +122,7 @@ class AndroidApiController extends Controller{
                         'total'=>$v['total'],
                         'price'=>$v['price'],
                     ];
+                    print_r($data);exit;
                 }
 
                 RetailOrderGoods::addOrderGoods($data);
