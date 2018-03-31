@@ -217,7 +217,7 @@ class BillingController extends Controller
             'fansmanage_id' => $fansmanage_id,
         ];
         $list = RetailLossOrder::getPaginage($where,$search_data,'10','created_at','DESC'); //订单信息
-        return view('Retail/Billing/loss_goods',['ordersn'=>$ordersn,'list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Billing/stock_list',['ordersn'=>$ordersn,'list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 
