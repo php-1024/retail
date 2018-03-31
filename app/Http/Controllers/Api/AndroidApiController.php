@@ -42,7 +42,7 @@ class AndroidApiController extends Controller{
         if(empty($data)){
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
-        $sort = array($data['account'],time(),$data['uuid']);
+        $sort = array($data['account'],$data['password'],time(),$data['uuid']);
         sort($sort);
         $store_token = '';
         foreach($sort as $key=>$value){
