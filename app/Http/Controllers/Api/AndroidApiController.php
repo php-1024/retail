@@ -48,6 +48,7 @@ class AndroidApiController extends Controller{
         foreach($sort as $key=>$value){
             $store_token .= $value;
         }
+        $store_token = base64_encode($store_token.'lingyi2018');
         dd($store_token);
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
