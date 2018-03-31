@@ -303,7 +303,7 @@ class InvoicingController extends Controller
         DB::beginTransaction();
         try {
             $id = RetailCheckOrder::addOrder($order_data);
-            //进货开单对应商品信息处理
+            //盘点开单对应商品信息处理
             foreach ($orders['goods'] as $key=>$val){
                 $goods = RetailGoods::getOne(['id'=>$val['id']]);
                 $order_goods_data = [
@@ -316,6 +316,23 @@ class InvoicingController extends Controller
                     'details' => $goods->details,
                 ];
                 RetailCheckOrderGoods::addOrderGoods($order_goods_data);
+            }
+            $order = RetailCheckOrder::getOne(['id'=>$id])->first();    //获取订单信息
+            $order_goods = $order->RetailCheckOrderGoods;    //订单对应的商品
+            //添加库存操作记录日志
+            foreach($order_goods as $key=>$val){
+                $stock_data = [
+                    'fansmanage_id' => $order->fansmanage_id,
+                    'retail_id' => $order->retail_id,
+                    'goods_id' => $val->goods_id,
+                    'amount' => $val->total,
+                    'ordersn' => $order->ordersn,
+                    'operator_id' => $order->operator_id,
+                    'remark' => $order->remarks,
+                    'type' => $type,
+                    'status' => '0',
+                ];
+                RetailStockLog::addStockLog($stock_data);
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员在零售店报盘点单的记录
