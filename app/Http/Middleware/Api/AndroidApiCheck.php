@@ -83,7 +83,6 @@ class AndroidApiCheck{
         $timestamp = $request->timestamp;//当前时间戳
 
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
-        print_r($data);
         if(empty($data)){
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
