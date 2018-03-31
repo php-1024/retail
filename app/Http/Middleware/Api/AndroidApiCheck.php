@@ -33,6 +33,7 @@ class AndroidApiCheck{
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
+            echo $re['response'];exit;
             return $re['response'];
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//检测是否具有权限
@@ -65,7 +66,6 @@ class AndroidApiCheck{
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
         }
-            echo 1;exit;
             return self::res(1,$request);
     }
 
