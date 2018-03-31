@@ -31,7 +31,6 @@ class AndroidApiCheck{
      * 检测token值 And 商品列表接口店铺id是否为空
      */
     public function checkTokenAndGoodsListData($request){
-        echo 1;exit;
         $re = $this->checkToken($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
@@ -79,7 +78,7 @@ class AndroidApiCheck{
         if (empty($request->input('timestamp'))) {
             return self::res(0, response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
         }
-
+        echo 1;exit;
         $account_id = $request->account_id;//用户账号id
 //        $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//当前时间戳
