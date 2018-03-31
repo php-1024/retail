@@ -18,7 +18,7 @@ class VerifyCsrfToken extends Middleware
 
         /****Android接口****/
         'api/androidapi/login',
-        'api/androidapi/goodslist'
+        'api/androidapi/goodscategory'
         /****Android接口****/
 
     ];

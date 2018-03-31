@@ -31,12 +31,10 @@ class AndroidApiController extends Controller{
     /**
      * 商品分类接口
      */
-    public function goodslist(Request $request){
+    public function goodscategory(Request $request){
 
         $organization_id = $request->organization_id;//店铺id
         $account_id = $request->account_id;//用户账号id
-        echo 1;exit;
-
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重

@@ -18,7 +18,7 @@ class AndroidApiCheck{
                 return self::format_response($re, $next);
                 break;
             /****登录****/
-            case "api/androidapi/goodslist"://检测登入提交数据
+            case "api/androidapi/goodscategory"://检测登入提交数据
                 $re = $this->checkTokenAndGoodsListData($request);
                 return self::format_response($re, $next);
                 break;
