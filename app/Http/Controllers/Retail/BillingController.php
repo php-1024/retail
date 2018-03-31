@@ -130,15 +130,27 @@ class BillingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();//获取粉丝管理平台的组织id
         $order_id = $request->get('order_id');        //会员标签id
         $status = $request->get('status');            //接收订单当前状态
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
-        dd($order);
+        $order_goods = $order->RetailPurchaseOrderGoods;    //订单对应的商品
+        dd($order_goods);
+        $type = $order->type;                               //订单类型
         if ($status == 0){
             DB::beginTransaction();
             try {
-                $order_goods = $order->RetailPurchaseOrderGoods;
-                $this->add_stock($order_goods,$type);
+                $this->edit_stock($order_goods,$type);
+                //添加库存操作记录日志
+                foreach($order_goods as $key=>$val){
+                    $stock_data = [
+                        'fansmanage_id' => $fansmanage_id,
+                        'retail' => $admin_data['organization_id'],
+                        'goods_id' => $val->goods_id,
+                        'amount' => $val->goods_id,
+                    ];
+                    RetailStockLog::addStockLog($stock_data);
+                }
                 RetailPurchaseOrder::editOrder(['id'=>$order_id],['status'=>'1']);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员审核订单操作记录
@@ -228,17 +240,23 @@ class BillingController extends Controller
 
 
     /**
-     * 添加库存处理
+     * 修改库存处理
      * 进货后处理商品库存
      * 1、处理商品信息的库存
      * 2、处理库存表的库存
+     * 需要的参数：
+     * $order_goods（订单商品）
+     * $type（订单类型）
      **/
-    public static function add_stock($order_goods,$type)
+    public static function edit_stock($order_goods,$type)
     {
         foreach ($order_goods as $key=>$val){
             $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
-            if ($type == 0)
-            $new_stock = $old_stock+$val->total;                //新的库存
+            if ($type == 1){        //加库存：type=1、进货类型
+                $new_stock = $old_stock+$val->total;                //新的库存
+            }elseif($type == 2 || $type == 3){    //减库存：type=2|type=3、退货类型|报损类型
+                $new_stock = $old_stock-$val->total;                //新的库存
+            }
             //1、更新商品信息中的库存
             RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
             //2、更新库存表的库存
