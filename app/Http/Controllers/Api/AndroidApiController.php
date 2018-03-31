@@ -43,9 +43,9 @@ class AndroidApiController extends Controller{
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
         $sort = [
-            'account'=> $data['account'],
-            'time'=>time() ,
-            'uuid'=>$data['uuid']
+            '0'=> $data['account'],
+            '1'=>time() ,
+            '2'=>$data['uuid']
         ];
         return response()->json(['msg' => sort($sort), 'status' => '0']);
 
