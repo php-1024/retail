@@ -36,6 +36,7 @@ class AndroidApiController extends Controller{
 
         $organization_id = $request->organization_id;//店铺id
         $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc');
+
         foreach($categorylist as $key=>$value){
 
         }
