@@ -552,11 +552,13 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
 /**********************零售版店铺管理系统*********************/
 Route::group(['prefix'=>'retail'],function(){
+
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Retail\LoginController@display')->middleware('RetailCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Retail\LoginController@captcha');//验证码路由
     });
+
     Route::get('/', 'Retail\DisplayController@display')->middleware('RetailCheck');//分店首页
     Route::get('quit', 'Retail\LoginController@quit');                                                 //退出系统
     Route::get('retail_list', 'Retail\DisplayController@retail_list')->middleware('RetailCheck');      //分店列表
@@ -568,7 +570,6 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('safe_password', 'Retail\AccountController@safe_password')->middleware('RetailCheck');//安全密码
         Route::get('password', 'Retail\AccountController@password')->middleware('RetailCheck');          //登录密码页面
     });
-
 
     //栏目管理
     Route::group(['prefix'=>'category'],function(){
@@ -595,7 +596,6 @@ Route::group(['prefix'=>'retail'],function(){
     //进销存开单处理
     Route::group(['prefix'=>'supplier'],function(){
         Route::get('supplier_add', 'Retail\SupplierController@supplier_add')->middleware('RetailCheck');        //添加供应商
-        Route::get('supplier_edit', 'Retail\SupplierController@supplier_edit')->middleware('RetailCheck');      //编辑供应商
         Route::get('supplier_list', 'Retail\SupplierController@supplier_list')->middleware('RetailCheck');      //供应商列表
     });
 
@@ -654,6 +654,7 @@ Route::group(['prefix'=>'retail'],function(){
 
         Route::post('goods_list', 'Retail\InvoicingController@goods_list')->middleware('RetailCheckAjax');                       //开单异步加载部分（商品列表）
         Route::post('supplier_add_check', 'Retail\SupplierController@supplier_add_check')->middleware('RetailCheckAjax');          //供应商添加检测
+        Route::get('supplier_edit', 'Retail\SupplierController@supplier_edit')->middleware('RetailCheck');                          //编辑供应商弹窗
         Route::post('purchase_goods_check', 'Retail\InvoicingController@purchase_goods_check')->middleware('RetailCheckAjax');   //从供应商进货、退货开单检测
         Route::post('loss_goods_check', 'Retail\InvoicingController@loss_goods_check')->middleware('RetailCheckAjax');          //报损开单检测
         Route::post('check_goods_check', 'Retail\InvoicingController@check_goods_check')->middleware('RetailCheckAjax');        //盘点开单检测
