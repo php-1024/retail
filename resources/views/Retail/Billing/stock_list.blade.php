@@ -61,7 +61,6 @@
                                         <th>商品条码</th>
                                         <th>商品编号</th>
                                         <th>库存</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
