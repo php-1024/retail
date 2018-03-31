@@ -90,6 +90,12 @@ class SupplierController extends Controller
         $supplier = RetailSupplier::getOne(['id'=>$supplier_id]);
         return view('Retail/Supplier/supplier_edit',['supplier'=>$supplier]);
     }
+
+    //供应商编辑操作
+    public function supplier_edit_check(Request $request)
+    {
+        dd($request);
+    }
 }
 
 ?>
