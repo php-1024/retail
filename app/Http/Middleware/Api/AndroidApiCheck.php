@@ -32,6 +32,7 @@ class AndroidApiCheck{
      */
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//判断是否登录
+        echo 1;exit;
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
@@ -72,16 +73,15 @@ class AndroidApiCheck{
      * 检测token值
      */
     public function checkToken($request){
-        if (empty($request->input('account'))) {
-            return self::res(0, response()->json(['mas' => '店铺令牌不能为空', 'status' => '0']));
-        }
-        if (empty($request->input('password'))) {
+        if (empty($request->input('account_id'))) {
             return self::res(0, response()->json(['mas' => '用户id不能为空', 'status' => '0']));
         }
         if (empty($request->input('timestamp'))) {
             return self::res(0, response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
         }
-
+        if (empty($request->input('token'))) {
+            return self::res(0, response()->json(['mas' => 'token值不能为空', 'status' => '0']));
+        }
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//当前时间戳
@@ -98,6 +98,7 @@ class AndroidApiCheck{
         }
         $store_token = base64_encode($store_token).'lingyi2018';//第一次加密
         $store_token = md5($store_token);//第二次加密
+
         if($store_token !=$token){
             return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
         }
