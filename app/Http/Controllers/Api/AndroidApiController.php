@@ -105,6 +105,7 @@ class AndroidApiController extends Controller{
             'operator_id' => $account_id,
             'status' => 0,
         ];
+        print_r($orderData);
         DB::beginTransaction();
         try{
             $order_id = RetailOrder::addRetailOrder($orderData);
