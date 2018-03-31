@@ -552,11 +552,13 @@ Route::group(['prefix'=>'fansmanage'],function(){
 
 /**********************零售版店铺管理系统*********************/
 Route::group(['prefix'=>'retail'],function(){
+
     //登录页面组
     Route::group(['prefix'=>'login'],function(){
         Route::get('/', 'Retail\LoginController@display')->middleware('RetailCheck');//登录页面路由
         Route::get('captcha/{tmp}', 'Retail\LoginController@captcha');//验证码路由
     });
+
     Route::get('/', 'Retail\DisplayController@display')->middleware('RetailCheck');//分店首页
     Route::get('quit', 'Retail\LoginController@quit');                                                 //退出系统
     Route::get('retail_list', 'Retail\DisplayController@retail_list')->middleware('RetailCheck');      //分店列表
@@ -568,7 +570,6 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('safe_password', 'Retail\AccountController@safe_password')->middleware('RetailCheck');//安全密码
         Route::get('password', 'Retail\AccountController@password')->middleware('RetailCheck');          //登录密码页面
     });
-
 
     //栏目管理
     Route::group(['prefix'=>'category'],function(){

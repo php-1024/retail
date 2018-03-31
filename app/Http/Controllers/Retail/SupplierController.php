@@ -82,6 +82,12 @@ class SupplierController extends Controller
         $supplier = RetailSupplier::getPaginage($where,$company_name,'0', 'displayorder', 'DESC');   //供应商信息
         return  view('Retail/Supplier/supplier_list',['supplier'=>$supplier,'company_name'=>$company_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
+
+    //供应商编辑
+    public function supplier_edit(Request $request)
+    {
+        dd($request);
+    }
 }
 
 ?>
