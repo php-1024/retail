@@ -42,15 +42,6 @@ class RetailCategory extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //Android接口
-    public static function getListapi($where,$limit=0,$orderby,$sort='DESC'){
-        $model = new RetailCategory();
-        if(!empty($limit)){
-            $model = $model->limit($limit);
-        }
-        return $model->where($where)->orderBy($orderby,$sort)->select('')->get();
-    }
-
     //添加组织栏目分类
     public static function addCategory($param){
         $model = new RetailCategory();
