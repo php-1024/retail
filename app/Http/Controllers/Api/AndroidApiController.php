@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\RetailCategory;
+use App\Models\RetailGoods;
 use Illuminate\Http\Request;
 use Session;
 class AndroidApiController extends Controller{
@@ -33,10 +34,19 @@ class AndroidApiController extends Controller{
      * 商品分类接口
      */
     public function goodscategory(Request $request){
-
         $organization_id = $request->organization_id;//店铺id
         $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','displayorder']);
         $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
+        return response()->json($data);
+    }
+
+    /**
+     * 商品列表接口
+     */
+    public function goodslist(Request $request){
+        $organization_id = $request->organization_id;//店铺id
+        $goodslist = RetailGoods::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','category_id','detail','price','stock']);
+        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
         return response()->json($data);
     }
 

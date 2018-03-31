@@ -18,7 +18,11 @@ class AndroidApiCheck{
                 return self::format_response($re, $next);
                 break;
             /****登录****/
-            case "api/androidapi/goodscategory"://检测登入提交数据
+            case "api/androidapi/goodscategory"://检测Token和商品分类数据
+                $re = $this->checkTokenAndGoodsCategoryData($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/androidapi/goodslist"://检测Token和商品列表数据
                 $re = $this->checkTokenAndGoodsListData($request);
                 return self::format_response($re, $next);
                 break;
@@ -28,6 +32,23 @@ class AndroidApiCheck{
 
 
     /******************************复合检测*********************************/
+
+    /**
+     * 检测token值 And 商品列表接口店铺id是否为空
+     */
+    public function checkTokenAndGoodsCategoryData($request){
+        $re = $this->checkToken($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            $re2 = $this->checkGoodsCategoryData($re['response']);//检测是否具有权限
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
 
     /**
      * 检测token值 And 商品列表接口店铺id是否为空
@@ -63,11 +84,21 @@ class AndroidApiCheck{
     /**
      * 普通页面检测商品列表接口数据是否为空
      */
-    public function checkGoodsListData($request){
+    public function checkGoodsCategoryData($request){
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
             return self::res(1,$request);
+    }
+
+    /**
+     * 普通页面检测商品列表接口数据是否为空
+     */
+    public function checkGoodsListData($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
     }
 
     /**
