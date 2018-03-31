@@ -32,14 +32,14 @@ class AndroidApiCheck{
      */
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//
-        if($re['status']=='0'){//
+        if($re['response']['status']=='0'){//
             return $re['response'];
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//
-            if($re2['status']=='0'){
-                echo $re2['response'];exit;
+            if($re2['response']['status']=='0'){
+                return $re2['response'];
             }else{
-                return self::res(1,$re2['response']);
+                return self::res($re2['response']);
             }
         }
     }
@@ -50,12 +50,12 @@ class AndroidApiCheck{
      */
     public function checkLogin($request){
         if (empty($request->input('account'))) {
-            return self::res(0, response()->json(['mas' => '请输入用户名', 'status' => '0']));
+            return self::res(response()->json(['mas' => '请输入用户名', 'status' => '0']));
         }
         if (empty($request->input('password'))) {
-            return self::res(0, response()->json(['mas' => '请输入密码', 'status' => '0']));
+            return self::res(response()->json(['mas' => '请输入密码', 'status' => '0']));
         }
-        return self::res(1,$request);
+        return self::res($request);
     }
 
     /**
@@ -63,9 +63,9 @@ class AndroidApiCheck{
      */
     public function checkGoodsListData($request){
         if (empty($request->input('organization_id'))) {
-            return self::res(0, response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
+            return self::res(response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
         }
-            return self::res(1,$request);
+            return self::res($request);
     }
 
     /**
@@ -73,13 +73,13 @@ class AndroidApiCheck{
      */
     public function checkToken($request){
         if (empty($request->input('account_id'))) {
-            return self::res(0, response()->json(['mas' => '用户id不能为空', 'status' => '0']));
+            return self::res(response()->json(['mas' => '用户id不能为空', 'status' => '0']));
         }
         if (empty($request->input('timestamp'))) {
-            return self::res(0, response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
+            return self::res(response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
         }
         if (empty($request->input('token'))) {
-            return self::res(0, response()->json(['mas' => 'token值不能为空', 'status' => '0']));
+            return self::res(response()->json(['mas' => 'token值不能为空', 'status' => '0']));
         }
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
@@ -107,8 +107,8 @@ class AndroidApiCheck{
     /**
      * 工厂方法返回结果
      */
-    public static function res($status,$response){
-        return ['status'=>$status,'response'=>$response];
+    public static function res($response){
+        return ['response'=>$response];
     }
 
     /**
