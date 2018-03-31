@@ -78,8 +78,11 @@ class AndroidApiCheck{
         if (empty($request->input('timestamp'))) {
             return self::res(0, response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
         }
+        if (empty($request->input('token'))) {
+            return self::res(0, response()->json(['mas' => 'token值不能为空', 'status' => '0']));
+        }
         $account_id = $request->account_id;//用户账号id
-//        $token = $request->token;//店铺令牌
+        $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//当前时间戳
 
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
@@ -94,12 +97,11 @@ class AndroidApiCheck{
         }
         $store_token = base64_encode($store_token).'lingyi2018';//第一次加密
         $store_token = md5($store_token);//第二次加密
-        echo $store_token;exit;
-        return response()->json(['msg' => $store_token, 'status' => '0']);
 
-//        if($store_token !=$token){
-//            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
-//        }
+        if($store_token !=$token){
+            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
+        }
+        echo 1;exit;
         return self::res(1,$request);
     }
 
