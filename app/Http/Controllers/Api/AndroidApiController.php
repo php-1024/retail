@@ -43,9 +43,8 @@ class AndroidApiController extends Controller{
             return response()->json(['msg' => '用户不存在', 'status' => '0']);
         }
         $sort = array($data['account'],time(),$data['uuid']);
-
-        print_r($sort);
-        return response()->json(['msg' => sort($sort), 'status' => '0']);
+        dd(sort($sort));
+     
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重
