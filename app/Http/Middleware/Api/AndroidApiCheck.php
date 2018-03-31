@@ -32,7 +32,7 @@ class AndroidApiCheck{
      */
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//判断是否登录
-        echo 1;exit;
+        echo 2;exit;
         if($re['status']=='0'){//检测是否登录
             echo 1;exit;
             echo $re['response'];exit;
