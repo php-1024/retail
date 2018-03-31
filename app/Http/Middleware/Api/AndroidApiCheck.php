@@ -102,7 +102,7 @@ class AndroidApiCheck{
         if($store_token !=$token){
             return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
         }
-        return self::res(1,$request);
+        return self::res($request);
     }
 
     /**
