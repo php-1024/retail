@@ -218,8 +218,8 @@ class BillingController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
-        $stock_list = RetailStock::getPaginage($where,$goods_id,'10','created_at','ASC'); //查询商品信息
-        dd($goods_name);
+        $stock_list = RetailStock::getPaginage($where,'','10','created_at','ASC'); //查询商品信息
+        dd($stock_list);
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'goods_name'=>$goods_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 }
