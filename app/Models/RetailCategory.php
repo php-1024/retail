@@ -39,7 +39,7 @@ class RetailCategory extends Model{
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby,$sort)->get('id,displayorder,category_name');
     }
 
     //添加组织栏目分类
