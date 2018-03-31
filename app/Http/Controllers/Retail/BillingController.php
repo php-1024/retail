@@ -132,6 +132,10 @@ class BillingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $order_id = $request->get('order_id');        //会员标签id
         $status = $request->get('status');            //接收订单当前状态
+
+        $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+        dd($order);
+
         if ($status == 0){
             DB::beginTransaction();
             try {
