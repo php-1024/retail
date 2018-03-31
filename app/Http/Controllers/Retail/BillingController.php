@@ -229,6 +229,7 @@ class BillingController extends Controller
             ];
             RetailStock::addStock($stock_data);
         }
+
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
