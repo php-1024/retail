@@ -264,7 +264,7 @@ class BillingController extends Controller
             //1、更新商品信息中的库存
             RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
             //2、更新库存表的库存
-            RetailStock::editStock(['id'=>$val->goods_id],['stock'=>$new_stock]);
+            RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
         }
     }
 }
