@@ -709,6 +709,7 @@ Route::group(['prefix'=>'api'],function() {
     //微信通用路由组
     Route::group(['prefix' => 'androidapi'], function () {
         Route::any('login', 'Api\AndroidApiController@login')->middleware('AndroidApiCheck');//接受公众号收授权推送消息
+        Route::any('goodslist', 'Api\AndroidApiController@goodslist')->middleware('AndroidApiCheck');//接受公众号收授权推送消息
     });
 });
 /*********************接口路由*************************/

@@ -16,6 +16,9 @@ class AndroidApiCheck{
                 $this->checkLogin($request);
                 break;
             /****登录****/
+            case "api/androidapi/goodslist"://检测登入提交数据
+                $this->checkGoodsListData($request);
+                break;
 
         }
         return $next($request);
@@ -27,11 +30,31 @@ class AndroidApiCheck{
      */
     public function checkLogin($request){
         if (empty($request->input('account'))) {
-            return self::res(0, response()->json(['data' => '请输入用户名', 'status' => '0']));
+            return self::res(0, response()->json(['mas' => '请输入用户名', 'status' => '0']));
         }
         if (empty($request->input('password'))) {
-            return self::res(0, response()->json(['data' => '请输入密码', 'status' => '0']));
+            return self::res(0, response()->json(['mas' => '请输入密码', 'status' => '0']));
         }
+        return self::res(1,$request);
+    }
+
+    /**
+     * 普通页面检测商品列表接口数据是否为空
+     */
+    public function checkGoodsListData($request){
+        if (empty($request->input('account_id'))) {
+            return self::res(0, response()->json(['mas' => '用户id不能为空', 'status' => '0']));
+        }
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['mas' => '店铺id不能为空', 'status' => '0']));
+        }
+        if (empty($request->input('timestamp'))) {
+            return self::res(0, response()->json(['mas' => '当前时间戳不能为空', 'status' => '0']));
+        }
+        if (empty($request->input('token'))) {
+            return self::res(0, response()->json(['mas' => '店铺令牌不能为空', 'status' => '0']));
+        }
+
         return self::res(1,$request);
     }
 
