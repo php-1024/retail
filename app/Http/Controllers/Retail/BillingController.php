@@ -134,7 +134,6 @@ class BillingController extends Controller
         $status = $request->get('status');            //接收订单当前状态
 
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
-        dd($order->RetailPurchaseOrderGoods);
 
 
         /**
