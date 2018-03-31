@@ -84,7 +84,7 @@ class AndroidApiController extends Controller{
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
             foreach($value as $k=>$v){
-                echo $value['price'];exit;
+                $order_price += $v['price'];
             }
         }
         echo $order_price;exit;
