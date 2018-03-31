@@ -58,6 +58,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>商品标题</th>
+                                        <th>分类</th>
                                         <th>商品条码</th>
                                         <th>商品编号</th>
                                         <th>库存</th>
@@ -66,10 +67,11 @@
                                     <tbody>
                                     @foreach($stock_list as $key=>$val)
                                     <tr>
-                                        <td>{{$val->id}}</td>
-                                        <td>{{$val->name}}</td>
-                                        <td>{{$val->barcode}}</td>
-                                        <td>{{$val->number}}</td>
+                                        <td>{{$val->goods_id}}</td>
+                                        <td>{{$val->RetailGoods->name}}</td>
+                                        <td>{{$val->RetailCategory->name}}</td>
+                                        <td>{{$val->RetailGoods->barcode}}</td>
+                                        <td>{{$val->RetailGoods->number}}</td>
                                         <td>{{$val->stock}}</td>
                                     </tr>
                                     @endforeach
