@@ -44,7 +44,11 @@ class AndroidApiController extends Controller{
         }
         $sort = array($data['account'],time(),$data['uuid']);
         sort($sort);
-        dd($sort);
+        $store_token = '';
+        foreach($sort as $key=>$value){
+            $store_token .= $value;
+        }
+        dd($store_token);
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重
