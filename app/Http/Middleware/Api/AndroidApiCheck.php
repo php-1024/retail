@@ -37,8 +37,7 @@ class AndroidApiCheck{
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
-                echo 1;exit;
-                return $re2['response'];
+                echo $re2['response'];exit;
             }else{
                 return self::res(1,$re2['response']);
             }
