@@ -35,7 +35,7 @@ class AndroidApiController extends Controller{
     public function goodscategory(Request $request){
 
         $organization_id = $request->organization_id;//店铺id
-        $categorylist = RetailCategory::where([['fansmanage_id',$organization_id]])->orderBy('displayorder','asc')->orderBy('id','desc')->lists('id,displayorder,category_name')->get();
+        $categorylist = RetailCategory::where([['fansmanage_id',$organization_id]])->orderBy('displayorder','asc')->orderBy('id','desc')->get('id,displayorder,category_name');
 //
 //        $model = new RetailCategory();
 //        if(!empty($limit)){
