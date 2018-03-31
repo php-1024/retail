@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Models\RetailCategory;
 use App\Models\RetailGoods;
 use App\Models\RetailOrder;
+use App\Models\RetailOrderGoods;
 use Illuminate\Http\Request;
 use Session;
 class AndroidApiController extends Controller{
@@ -88,7 +89,7 @@ class AndroidApiController extends Controller{
         }
         $sort = 100000 + $num;
         $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;
-        $data = [
+        $orderData = [
             'ordersn' => $ordersn,
             'order_price' => $order_price,
             'remarks' => $remarks,
@@ -99,19 +100,30 @@ class AndroidApiController extends Controller{
             'operator_id' => $account_id,
             'status' => 0,
         ];
-        RetailOrder::addRetailOrder($data);
-//        DB::beginTransaction();
-//        try{
-//            RetailOrder::addRetailOrder();
-//            DB::commit();//提交事务
-//        }catch (\Exception $e) {
-//            dd($e);
-//            DB::rollBack();//事件回滚
-//            return response()->json(['msg' => '修改失败', 'status' => '0', 'data'=>'']);
-//        }
-//
-//        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
-//        return response()->json($data);
+
+        DB::beginTransaction();
+        try{
+            $order_id = RetailOrder::addRetailOrder($orderData);
+            foreach($goodsdata as $key=>$value){
+                $data = [
+                    'order_id'=>$order_id,
+                    'goods_id'=>$value['id'],
+                    'title'=>$value['name'],
+                    'thumb'=>$value['thumb'],
+                    'details'=>$value['details'],
+                    'total'=>$value['total'],
+                    'price'=>$value['price'],
+                ];
+                RetailOrderGoods::addOrderGoods($data);
+            }
+
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data'=>'']);
+        }
+        return response()->json(['status' => '1', 'msg' => '提交订单成功', 'data' => '']);
     }
 
 }

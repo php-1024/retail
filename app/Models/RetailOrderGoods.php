@@ -34,12 +34,17 @@ class RetailOrderGoods extends Model{
         return $model->with('RetailOrder')->where($where)->orderBy($orderby,$sort)->get();
     }
 
-    //添加商品到购物车
-    public static function addOrder($param){
+    //添加订单商品快照
+    public static function addOrderGoods($param){
         $model = new RetailOrderGoods();
-        $model->name = $param['name'];
-        $model->fansmanage_id = $param['fansmanage_id'];
-        $model->restaurant_id = $param['restaurant_id'];
+        $model->title = $param['title'];//商品名称
+        $model->order_id = $param['order_id'];//订单id
+        $model->goods_id = $param['goods_id'];//商品id
+        $model->total = $param['total'];//商品数量
+        $model->price = $param['price'];//商品价格
+        if($param['details']){
+            $model->details = $param['details'];//商品详情
+        }
         $model->save();
         return $model->id;
     }
