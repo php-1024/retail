@@ -71,7 +71,7 @@ class AndroidApiController extends Controller{
         $user_id = $request->user_id;//用户id 散客为0
         $account_id = $request->account_id;//操作员id
         $goodsdata = json_encode($request->goodsdata);//商品数组
-        $ordersn ='LS'.date("YmdH",time());
+        $ordersn ='LS'.date("Ymd",time());
         echo $ordersn;
 //        DB::beginTransaction();
 //        try{
