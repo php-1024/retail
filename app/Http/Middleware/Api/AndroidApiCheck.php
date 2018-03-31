@@ -50,10 +50,10 @@ class AndroidApiCheck{
      */
     public function checkLogin($request){
         if (empty($request->input('account'))) {
-            return self::res(0, response()->json(['msg' => '请输入用户名', 'status' => '0','data'=>'']));
+            return self::res(0, response()->json(['msg' => '请输入用户名', 'status' => '0', 'data' => '']));
         }
         if (empty($request->input('password'))) {
-            return self::res(0, response()->json(['msg' => '请输入密码', 'status' => '0','data'=>'']));
+            return self::res(0, response()->json(['msg' => '请输入密码', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
     }
@@ -63,7 +63,7 @@ class AndroidApiCheck{
      */
     public function checkGoodsListData($request){
         if (empty($request->input('organization_id'))) {
-            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0']));
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
             return self::res(1,$request);
     }
@@ -73,13 +73,13 @@ class AndroidApiCheck{
      */
     public function checkToken($request){
         if (empty($request->input('account_id'))) {
-            return self::res(0, response()->json(['msg' => '用户id不能为空', 'status' => '0']));
+            return self::res(0, response()->json(['msg' => '用户id不能为空', 'status' => '0', 'data' => '']));
         }
         if (empty($request->input('timestamp'))) {
-            return self::res(0, response()->json(['msg' => '当前时间戳不能为空', 'status' => '0']));
+            return self::res(0, response()->json(['msg' => '当前时间戳不能为空', 'status' => '0', 'data' => '']));
         }
         if (empty($request->input('token'))) {
-            return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0']));
+            return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
@@ -87,7 +87,8 @@ class AndroidApiCheck{
 
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
         if(empty($data)){
-            return response()->json(['msg' => '用户不存在', 'status' => '0']);
+            return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
+
         }
         $sort = array($data['account'],$data['password'],$timestamp,$data['uuid']);
         sort($sort);//字典排序
@@ -99,7 +100,7 @@ class AndroidApiCheck{
         $store_token = md5($store_token);//第二次加密
 
         if($store_token !=$token){
-            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
+            return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
     }
