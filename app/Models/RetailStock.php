@@ -20,7 +20,7 @@ class RetailStock extends Model{
 
     //和零售分类RetailGoods表一对多的关系
     public function RetailCategory(){
-        return $this->hasOne('App\Models\RetailCategory','category_id','id');
+        return $this->hasOne('App\Models\RetailCategory','id','category_id');
     }
 
     //添加库存
