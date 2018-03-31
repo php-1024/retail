@@ -72,10 +72,7 @@ class AndroidApiCheck{
      * 检测token值
      */
     public function checkToken($request){
-        if (empty($request->input('account'))) {
-            return self::res(0, response()->json(['mas' => '店铺令牌不能为空', 'status' => '0']));
-        }
-        if (empty($request->input('password'))) {
+        if (empty($request->input('account_id'))) {
             return self::res(0, response()->json(['mas' => '用户id不能为空', 'status' => '0']));
         }
         if (empty($request->input('timestamp'))) {
@@ -98,7 +95,7 @@ class AndroidApiCheck{
         }
         $store_token = base64_encode($store_token).'lingyi2018';//第一次加密
         $store_token = md5($store_token);//第二次加密
-        
+
         return response()->json(['msg' => $store_token, 'status' => '0']);
 
         if($store_token !=$token){
