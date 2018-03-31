@@ -62,5 +62,22 @@ class AndroidApiController extends Controller{
         return response()->json($data);
     }
 
+    /**
+     * 商品列表接口
+     */
+    public function order_check(Request $request){
+        $organization_id = $request->organization_id;//店铺id
+        $user_id = $request->user_id;//用户id 散客为0
+        $account_id = $request->account_id;//操作员id
+        $goodsdata = json_encode($request->goodsdata);//商品数组
+
+        $goodslist = RetailGoods::getList($where,'0','displayorder','asc',['id','name','category_id','details','price','stock']);
+        foreach($goodslist as $key=>$value){
+            $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
+        }
+        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
+        return response()->json($data);
+    }
+
 }
 ?>
