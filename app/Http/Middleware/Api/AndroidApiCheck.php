@@ -50,10 +50,10 @@ class AndroidApiCheck{
      */
     public function checkLogin($request){
         if (empty($request->input('account'))) {
-            return self::res(0, response()->json(['msg' => '请输入用户名', 'status' => '0']));
+            return self::res(0, response()->json(['msg' => '请输入用户名', 'status' => '0','data'=>'']));
         }
         if (empty($request->input('password'))) {
-            return self::res(0, response()->json(['msg' => '请输入密码', 'status' => '0']));
+            return self::res(0, response()->json(['msg' => '请输入密码', 'status' => '0','data'=>'']));
         }
         return self::res(1,$request);
     }
