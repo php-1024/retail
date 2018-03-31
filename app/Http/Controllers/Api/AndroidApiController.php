@@ -83,8 +83,9 @@ class AndroidApiController extends Controller{
         $goodsdata = json_decode($request->goodsdata);//商品数组
         $order_price = 0;
         foreach($goodsdata as $key=>$value){
-            print_r($value);exit;
+
             foreach($value as $k=>$v){
+                print_r($v);exit;
                 echo $v['price'];exit;
             }
         }
@@ -132,7 +133,7 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '提交订单成功', 'data' => '']);
     }
 
-
+//{"data":[{"id":1,"name":"\u9178\u83dc\u8089\u4e1d\u9762","category_id":1,"details":"\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762\u91cd\u5e86\u5c0f\u9762","price":"10.00","stock":1001,"category_name":"\u9762\u6761"},{"id":2,"name":"\u8304\u5b50\u8c46\u89d2","category_id":8,"details":"\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2\u8304\u5b50\u8c46\u89d2","price":"12.00","stock":1001,"category_name":"\u76d6\u6d47\u996d"}]}
 
 }
 ?>
