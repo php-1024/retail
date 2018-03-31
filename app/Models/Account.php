@@ -63,6 +63,7 @@ class Account extends Model{
     {
         return self::with('organization')->with('nodes')->with('account_info')->with('account_roles')->where($where)->first();
     }
+
     //查询获取列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC'){
         $model = self::with('organization')->with('account_info')->with('account_roles');

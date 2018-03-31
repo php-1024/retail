@@ -15,6 +15,11 @@ class VerifyCsrfToken extends Middleware
         //
         'api/wechat/response/*',
         'api/wechat/open',
-        'api/androidapi/login'
+
+        /****Android接口****/
+        'api/androidapi/login',
+        'api/androidapi/goodslist'
+        /****Android接口****/
+
     ];
 }
