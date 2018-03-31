@@ -87,7 +87,8 @@ class AndroidApiCheck{
 
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
         if(empty($data)){
-            return response()->json(['msg' => '用户不存在', 'status' => '0']);
+            return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
+
         }
         $sort = array($data['account'],$data['password'],$timestamp,$data['uuid']);
         sort($sort);//字典排序
@@ -99,8 +100,7 @@ class AndroidApiCheck{
         $store_token = md5($store_token);//第二次加密
 
         if($store_token !=$token){
-            echo 1;exit;
-            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0', 'data' => '']);
+            return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
     }
