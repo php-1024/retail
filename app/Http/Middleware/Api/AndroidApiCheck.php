@@ -37,7 +37,6 @@ class AndroidApiCheck{
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//检测是否具有权限
             if($re2['status']=='0'){
-                echo 11;exit;
                 return $re2;
             }else{
                 return self::res(1,$re2['response']);
@@ -103,6 +102,7 @@ class AndroidApiCheck{
         if($store_token !=$token){
             return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));
         }
+        echo 1;exit;
         return self::res(1,$request);
     }
 
