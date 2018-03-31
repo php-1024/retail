@@ -12,6 +12,7 @@ use App\Models\RetailGoods;
 use App\Models\RetailGoodsThumb;
 use App\Models\OperationLog;
 use App\Models\Organization;
+use App\Models\RetailStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -48,12 +49,14 @@ class GoodsController extends Controller
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-
         //商品数据
         $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'],'category_id' => $category_id,'name' => $name, 'price' => $price, 'stock' => $stock, 'barcode'=>$barcode,'displayorder' => $displayorder, 'details' => $details];
         DB::beginTransaction();
         try {
-            $goods_id = RetailGoods::addRetailGoods($goods_data);
+            $goods_id = RetailGoods::addRetailGoods($goods_data);   //添加商品基本信息
+            //商品库存信息
+            $stock_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'category_id' => $category_id,'goods_id' => $goods_id, 'stock' => $stock,];
+            RetailStock::addStock($stock_data); //添加商品库信息存到库存表
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品！');//保存操作记录
