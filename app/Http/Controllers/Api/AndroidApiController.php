@@ -50,6 +50,7 @@ class AndroidApiController extends Controller{
         }
         $store_token = base64_encode($store_token).'lingyi2018';
         $store_token = md5($store_token);
+        dd($store_token);
         if($store_token !=$token){
             return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
         }
