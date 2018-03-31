@@ -42,7 +42,7 @@
                                     <input type="hidden" id="supplier_delete_comfirm_url" value="{{ url('retail/ajax/supplier_delete') }}">
                                     <label class="col-sm-1 control-label">商品名称</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" name="goods_name" value="{{$search_data['goods_name']}}">
+                                        <input class="input-sm form-control" size="16" type="text" name="goods_name" value="{{$goods_name}}">
                                     </div>
 
                                     <div class="col-sm-3">
