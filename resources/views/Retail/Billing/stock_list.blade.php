@@ -85,7 +85,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {!! $supplier->links() !!}
+                                        {!! $stock_list->links() !!}
                                     </div>
                                 </div>
                             </footer>
