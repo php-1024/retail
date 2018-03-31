@@ -71,11 +71,11 @@ class AndroidApiController extends Controller{
         $user_id = $request->user_id;//用户id 散客为0
         $account_id = $request->account_id;//操作员id
         $goodsdata = json_encode($request->goodsdata);//商品数组
-        $re = RetailOrder::where([['fansmanage_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();
-        echo $re;exit;
-//        if()
-//        $account = $account + 1;
-        $shuzi = '100000';
+        $re = RetailOrder::where([['fansmanage_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        if($re){
+            $re ='1';
+        }
+        $shuzi = '100000'+$re;
         $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$shuzi;
         echo $ordersn;
 //        DB::beginTransaction();
