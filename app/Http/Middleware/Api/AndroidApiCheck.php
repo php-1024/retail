@@ -94,7 +94,7 @@ class AndroidApiCheck{
         }
         $store_token = base64_encode($store_token).'lingyi2018';//第一次加密
         $store_token = md5($store_token);//第二次加密
-
+        echo $store_token;exit;
         return response()->json(['msg' => $store_token, 'status' => '0']);
 
 //        if($store_token !=$token){
