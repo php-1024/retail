@@ -51,7 +51,6 @@ class RetailCheck{
             case "retail/invoicing/check_goods":        //进销存管理--盘点核对开单
 
             case "retail/supplier/supplier_add":        //进销存管理--添加供应商
-            case "retail/ajax/supplier_edit":           //进销存管理--编辑供应商
             case "retail/supplier/supplier_list":        //进销存管理--供应商列表
 
             case "retail/user/user_list":               //用户管理-粉丝用户管理

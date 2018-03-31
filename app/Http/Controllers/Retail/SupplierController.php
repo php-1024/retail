@@ -86,7 +86,9 @@ class SupplierController extends Controller
     //供应商编辑
     public function supplier_edit(Request $request)
     {
-        dd($request);
+        $supplier_id = $request->get('id');
+        $supplier = RetailSupplier::getOne(['id'=>$supplier_id]);
+        dd($supplier);
     }
 }
 

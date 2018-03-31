@@ -654,7 +654,7 @@ Route::group(['prefix'=>'retail'],function(){
 
         Route::post('goods_list', 'Retail\InvoicingController@goods_list')->middleware('RetailCheckAjax');                       //开单异步加载部分（商品列表）
         Route::post('supplier_add_check', 'Retail\SupplierController@supplier_add_check')->middleware('RetailCheckAjax');          //供应商添加检测
-        Route::get('supplier_edit', 'Retail\SupplierController@supplier_edit')->middleware('RetailCheck');                          //编辑供应商弹窗
+        Route::post('supplier_edit', 'Retail\SupplierController@supplier_edit')->middleware('RetailCheck');                          //编辑供应商弹窗
         Route::post('purchase_goods_check', 'Retail\InvoicingController@purchase_goods_check')->middleware('RetailCheckAjax');   //从供应商进货、退货开单检测
         Route::post('loss_goods_check', 'Retail\InvoicingController@loss_goods_check')->middleware('RetailCheckAjax');          //报损开单检测
         Route::post('check_goods_check', 'Retail\InvoicingController@check_goods_check')->middleware('RetailCheckAjax');        //盘点开单检测
