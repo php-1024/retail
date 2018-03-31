@@ -117,7 +117,7 @@ class AndroidApiController extends Controller{
                         'order_id'=>$order_id,
                         'goods_id'=>$v['id'],
                         'title'=>$v['name'],
-                        'thumb'=>$v['thumb'],
+//                        'thumb'=>$v['thumb'],
                         'details'=>$v['details'],
                         'total'=>$v['total'],
                         'price'=>$v['price'],
