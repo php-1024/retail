@@ -29,7 +29,7 @@ class AndroidApiController extends Controller{
     }
 
     /**
-     * 登入检测
+     * 商品分类接口
      */
     public function goodslist(Request $request){
 
@@ -47,7 +47,7 @@ class AndroidApiController extends Controller{
             'time'=>time() ,
             'uuid'=>$data['uuid']
         ];
-        dd(sort($sort));
+        dump(sort($sort));
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重
 //        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
