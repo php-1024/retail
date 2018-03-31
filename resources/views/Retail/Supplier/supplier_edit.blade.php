@@ -1,25 +1,33 @@
     <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/supplier_edit_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="category_id" value="{{$category->id}}">
+        <input type="hidden" name="supplide_id" value="{{$supplier->id}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">分类信息编辑</h4>
+                    <h4 class="modal-title">供应商信息编辑</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">分类名称</label>
+                            <label class="col-sm-2 control-label" for="input-id-1">供应商名称</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="category_name" value="{{$category->name}}">
+                                <input type="text" class="form-control" name="company_name" value="{{$supplier->company_name}}">
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">分类排序</label>
+                            <label class="col-sm-2 control-label" for="input-id-1">联系人姓名</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="displayorder" value="{{$category->displayorder}}">
+                                <input type="text" class="form-control" name="contactname" value="{{$supplier->contactname}}">
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-id-1">联系人电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="contactmobile" value="{{$supplier->contactmobile}}">
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -47,13 +55,13 @@
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
-//                window.location.reload();
+                window.location.reload();
             } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
+                    confirmButtonText: "确定"
                 },function(){
                     window.location.reload();
                 });
@@ -62,8 +70,7 @@
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });

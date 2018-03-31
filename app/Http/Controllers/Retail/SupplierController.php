@@ -88,7 +88,7 @@ class SupplierController extends Controller
     {
         $supplier_id = $request->get('id');
         $supplier = RetailSupplier::getOne(['id'=>$supplier_id]);
-        dd($supplier);
+        return view('Retail/Supplier/supplier_edit',['supplier'=>$supplier]);
     }
 }
 
