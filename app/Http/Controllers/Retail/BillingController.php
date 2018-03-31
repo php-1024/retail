@@ -221,8 +221,6 @@ class BillingController extends Controller
         $stock_list = RetailGoods::getPaginage($where,$search_data,'10','displayorder','ASC'); //查询商品信息
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
-
-
 }
 
 ?>
