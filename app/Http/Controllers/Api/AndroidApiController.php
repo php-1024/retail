@@ -122,9 +122,9 @@ class AndroidApiController extends Controller{
                         'total'=>$v['total'],
                         'price'=>$v['price'],
                     ];
+                    RetailOrderGoods::addOrderGoods($data);
                 }
 
-                RetailOrderGoods::addOrderGoods($data);
             }
 
             DB::commit();//提交事务
