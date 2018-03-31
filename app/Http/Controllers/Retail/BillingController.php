@@ -210,7 +210,7 @@ class BillingController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_name = $request->get('goods_name');         //获取供应商名称
-        $search_data = ['goods_name' => $goods_name,'category_id' => $category_id]; //处理搜索参数
+        $search_data = ['goods_name' => $goods_name];          //处理搜索参数
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
