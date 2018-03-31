@@ -48,8 +48,11 @@ class AndroidApiController extends Controller{
         foreach($sort as $key=>$value){
             $store_token .= $value;
         }
-        $store_token = base64_encode($store_token.'lingyi2018');
-        dd($store_token);
+        $store_token = base64_encode($store_token).'lingyi2018';
+        $store_token = md5($store_token);
+        if($store_token !=$token){
+            return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
+        }
 
 //        $key = config("app.retail_encrypt_key");//获取加密盐
 //        $encrypted = md5($password);//加密密码第一重

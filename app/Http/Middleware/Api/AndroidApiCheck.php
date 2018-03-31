@@ -54,7 +54,24 @@ class AndroidApiCheck{
         if (empty($request->input('token'))) {
             return self::res(0, response()->json(['mas' => '店铺令牌不能为空', 'status' => '0']));
         }
+        $re = $this->checkToken($request);//判断是否登录
+        if($re['status']=='0'){//检测是否登录
+            return $re;
+        }else{
+            return self::res(1,$request);
+        }
+    }
 
+    /**
+     * 普通页面检测用户是否登录
+     */
+    public function checkToken($request){
+        if (empty($request->input('account'))) {
+            return self::res(0, response()->json(['mas' => '请输入用户名', 'status' => '0']));
+        }
+        if (empty($request->input('password'))) {
+            return self::res(0, response()->json(['mas' => '请输入密码', 'status' => '0']));
+        }
         return self::res(1,$request);
     }
 
