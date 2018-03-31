@@ -26,6 +26,10 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndGoodsListData($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/androidapi/order_check"://检测Token和订单提交数据
+                $re = $this->checkTokenAndOrderCheck($request);
+                return self::format_response($re, $next);
+                break;
         }
         return $next($request);
     }
@@ -37,11 +41,11 @@ class AndroidApiCheck{
      * 检测token值 And 商品列表接口店铺id是否为空
      */
     public function checkTokenAndGoodsCategoryData($request){
-        $re = $this->checkToken($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkGoodsCategoryData($re['response']);//检测是否具有权限
+            $re2 = $this->checkGoodsCategoryData($re['response']);//检测数据提交
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -54,11 +58,27 @@ class AndroidApiCheck{
      * 检测token值 And 商品列表接口店铺id是否为空
      */
     public function checkTokenAndGoodsListData($request){
-        $re = $this->checkToken($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
             return $re;
         }else{
-            $re2 = $this->checkGoodsListData($re['response']);//检测是否具有权限
+            $re2 = $this->checkGoodsListData($re['response']);//检测数据提交
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+    /**
+     * 检测token值 And 商品列表接口店铺id是否为空
+     */
+    public function checkTokenAndOrderCheck($request){
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkOrderCheck($re['response']);//检测数据提交
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -100,6 +120,20 @@ class AndroidApiCheck{
         }
         return self::res(1,$request);
     }
+
+    /**
+     * 普通页面检测商品列表接口数据是否为空
+     */
+    public function checkOrderCheck($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty(json_encode($request->input('goodsdata')))) {
+            return self::res(0, response()->json(['msg' => '提交的数据不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
+    }
+
 
     /**
      * 检测token值
