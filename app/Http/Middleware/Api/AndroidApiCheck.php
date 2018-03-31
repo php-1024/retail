@@ -31,6 +31,7 @@ class AndroidApiCheck{
      * 检测token值 And 商品列表接口店铺id是否为空
      */
     public function checkTokenAndGoodsListData($request){
+        echo 1;exit;
         $re = $this->checkToken($request);//判断是否登录
         if($re['status']=='0'){//检测是否登录
             return $re;
