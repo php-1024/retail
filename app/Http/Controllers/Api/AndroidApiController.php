@@ -111,17 +111,20 @@ class AndroidApiController extends Controller{
         DB::beginTransaction();
         try{
             $order_id = RetailOrder::addRetailOrder($orderData);
-            echo $order_id;exit;
             foreach($goodsdata as $key=>$value){
-                $data = [
-                    'order_id'=>$order_id,
-                    'goods_id'=>$value['id'],
-                    'title'=>$value['name'],
-                    'thumb'=>$value['thumb'],
-                    'details'=>$value['details'],
-                    'total'=>$value['total'],
-                    'price'=>$value['price'],
-                ];
+                foreach($value as $k=>$v){
+                    $v['thumb'] = 1;
+                    $data = [
+                        'order_id'=>$order_id,
+                        'goods_id'=>$v['id'],
+                        'title'=>$v['name'],
+                        'thumb'=>$v['thumb'],
+                        'details'=>$v['details'],
+                        'total'=>$v['total'],
+                        'price'=>$v['price'],
+                    ];
+                }
+
                 RetailOrderGoods::addOrderGoods($data);
             }
 
