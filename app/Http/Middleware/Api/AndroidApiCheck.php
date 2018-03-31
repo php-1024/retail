@@ -37,7 +37,7 @@ class AndroidApiCheck{
         }else{
             $re2 = $this->checkGoodsListData($re['response']);//
             if($re2['status']=='0'){
-                return $re2['response'];
+                echo $re2['response'];exit;
             }else{
                 return self::res(1,$re2['response']);
             }
