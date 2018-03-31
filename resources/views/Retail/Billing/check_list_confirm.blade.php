@@ -50,7 +50,7 @@
                             <input type="text" value="" placeholder="输入安全密码确认审核" class="form-control" name="safe_password">
                             <span class="help-block m-b-none">
                                @if($status == '0')
-                                    <p class="text-danger">确定要审核该订单吗？审核后将不可更改！</p>
+                                    <p class="text-danger">确定要审核该订单吗？审核后将修改库存！</p>
                                 @endif
                           </span>
                         </div>
