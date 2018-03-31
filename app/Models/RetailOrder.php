@@ -40,16 +40,23 @@ class RetailOrder extends Model{
 
     //添加数据
     public static function addRetailOrder($param){
-        $organization = new RetailOrder();//实例化程序模型
-        $organization->organization_name = $param['organization_name'];//组织名称
-        $organization->parent_id = $param['parent_id'];//多级组织的关系
-        $organization->parent_tree = $param['parent_tree'];//上级程序
-        $organization->program_id = $param['program_id'];//组织关系树
-        $organization->asset_id = $param['asset_id'];//下级组织使用程序id（商户使用）
-        $organization->type = $param['type'];//类型 2为服务商
-        $organization->status = $param['status'];//状态 1-正常 0-冻结
-        $organization->save();
-        return $organization->id;
+        $retailorder = new RetailOrder();//实例化程序模型
+        $retailorder->ordersn = $param['ordersn'];//订单编号
+        $retailorder->order_price = $param['order_price'];//订单价格
+        $retailorder->user_id = $param['user_id'];//订单人id
+        $retailorder->order_type = $param['order_type'];//订单类型
+        $retailorder->status = $param['status'];//订单状态
+        $retailorder->operator_id = $param['operator_id'];//操作人员id
+        $retailorder->fansmanage_id = $param['fansmanage_id'];//管理平台id
+        $retailorder->retail_id = $param['retail_id'];//店铺所属组织ID
+        if($param['paytype']){
+            $retailorder->paytype = $param['paytype'];//付款方式
+        }
+        if($param['remarks']){
+            $retailorder->remarks = $param['remarks'];//备注信息
+        }
+        $retailorder->save();
+        return $retailorder->id;
     }
 
     //获取分页列表

@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Organization;
 use App\Models\RetailCategory;
 use App\Models\RetailGoods;
 use App\Models\RetailOrder;
@@ -69,15 +70,36 @@ class AndroidApiController extends Controller{
     public function order_check(Request $request){
         $organization_id = $request->organization_id;//店铺id
         $user_id = $request->user_id;//用户id 散客为0
+        if(!$user_id){
+            $user_id = 0;
+        }
         $account_id = $request->account_id;//操作员id
+        $remarks = $request->remarks;//备注
+        $order_type = $request->order_type;//订单类型
         $goodsdata = json_encode($request->goodsdata);//商品数组
+        $order_price = 0;
+        foreach($goodsdata as $key=>$value){
+            $order_price += $value['price'];
+        }
+        $fansmanage_id = Organization::getPluck([['id',$organization_id]],'parent_id');
         $num = RetailOrder::where([['fansmanage_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
         if(!$num){
             $num = 1;
         }
         $sort = 100000 + $num;
         $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;
-        echo $ordersn;
+        $data = [
+            'ordersn' => $ordersn,
+            'order_price' => $order_price,
+            'remarks' => $remarks,
+            'order_type' => $order_type,
+            'fansmanage_id' => $fansmanage_id,
+            'retail_id' => $organization_id,
+            'user_id' => $user_id,
+            'operator_id' => $account_id,
+            'status' => 0,
+        ];
+        RetailOrder::addRetailOrder($data);
 //        DB::beginTransaction();
 //        try{
 //            RetailOrder::addRetailOrder();
