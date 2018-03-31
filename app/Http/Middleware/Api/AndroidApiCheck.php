@@ -14,11 +14,13 @@ class AndroidApiCheck{
         switch($route_name){
             /*****登录*****/
             case "api/androidapi/login"://检测登入提交数据
-                $this->checkLogin($request);
+                $re = $this->checkLogin($request);
+                return self::format_response($re, $next);
                 break;
             /****登录****/
             case "api/androidapi/goodslist"://检测登入提交数据
-                $this->checkTokenAndGoodsListData($request);
+                $re = $this->checkTokenAndGoodsListData($request);
+                return self::format_response($re, $next);
                 break;
         }
         return $next($request);
