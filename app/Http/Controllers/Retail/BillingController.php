@@ -144,7 +144,7 @@ class BillingController extends Controller
 
         $order_goods = $order->RetailPurchaseOrderGoods;
         foreach ($order_goods as $key=>$val){
-            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock'); //查询原来商品的库存
+            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
             $new_stock = $old_stock+$val->total;                //新的库存
             dd($old_stock);
             //1、更新商品信息中的库存
