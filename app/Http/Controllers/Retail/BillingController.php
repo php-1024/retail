@@ -14,6 +14,7 @@ use App\Models\RetailCheckOrder;
 use App\Models\RetailGoods;
 use App\Models\RetailLossOrder;
 use App\Models\RetailPurchaseOrder;
+use App\Models\RetailStockLog;
 use App\Models\RetailSupplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -217,6 +218,8 @@ class BillingController extends Controller
             'retail_id' => $admin_data['organization_id'],
         ];
         $stock_list = RetailGoods::getPaginage($where,$search_data,'10','displayorder','ASC'); //查询商品信息
+        foreach ($stock_list as $key=>$val){
+        }
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
