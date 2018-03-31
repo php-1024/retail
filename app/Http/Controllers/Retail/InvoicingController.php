@@ -21,6 +21,7 @@ use App\Models\RetailLossOrderGoods;
 use App\Models\RetailOrder;
 use App\Models\RetailPurchaseOrder;
 use App\Models\RetailPurchaseOrderGoods;
+use App\Models\RetailStockLog;
 use App\Models\RetailSupplier;
 use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
@@ -168,6 +169,23 @@ class InvoicingController extends Controller
                     'details' => $goods->details,
                 ];
                 RetailPurchaseOrderGoods::addOrderGoods($order_goods_data);
+            }
+            $order = RetailPurchaseOrder::getOne(['id'=>$id])->first();    //获取订单信息
+            $order_goods = $order->RetailPurchaseOrderGoods;    //订单对应的商品
+            //添加库存操作记录日志
+            foreach($order_goods as $key=>$val){
+                $stock_data = [
+                    'fansmanage_id' => $order->fansmanage_id,
+                    'retail_id' => $order->retail_id,
+                    'goods_id' => $val->goods_id,
+                    'amount' => $val->total,
+                    'ordersn' => $order->ordersn,
+                    'operator_id' => $order->operator_id,
+                    'remark' => $order->remarks,
+                    'type' => $type,
+                    'status' => '0',
+                ];
+                RetailStockLog::addStockLog($stock_data);
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员在零售店进货开单的记录
