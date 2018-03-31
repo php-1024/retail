@@ -100,9 +100,7 @@ class AndroidApiCheck{
         $store_token = md5($store_token);//第二次加密
 
         if($store_token !=$token){
-            $aa =  response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']); 
-            //        return response()->json($data);
-            echo $aa ;exit;
+            return response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']);
         }
         return self::res($request);
     }
