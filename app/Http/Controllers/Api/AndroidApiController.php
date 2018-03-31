@@ -71,8 +71,12 @@ class AndroidApiController extends Controller{
         $user_id = $request->user_id;//用户id 散客为0
         $account_id = $request->account_id;//操作员id
         $goodsdata = json_encode($request->goodsdata);//商品数组
-        $shuzi = '100000';
-        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$shuzi;
+        $num = RetailOrder::where([['fansmanage_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        if(!$num){
+            $num = 1;
+        }
+        $sort = 100000 + $num;
+        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;
         echo $ordersn;
 //        DB::beginTransaction();
 //        try{
