@@ -132,29 +132,13 @@ class BillingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $order_id = $request->get('order_id');        //会员标签id
         $status = $request->get('status');            //接收订单当前状态
-
         $order = RetailPurchaseOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
-
-
-        /**
-         * 进货后处理商品库存
-         * 1、处理商品信息的库存
-         * 2、处理库存表的库存
-         **/
-
-        $order_goods = $order->RetailPurchaseOrderGoods;
-        foreach ($order_goods as $key=>$val){
-            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
-            $new_stock = $old_stock+$val->total;                //新的库存
-            //1、更新商品信息中的库存
-            RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
-            //2、更新库存表的库存
-            RetailStock::editStock(['id'=>$val->goods_id],['stock'=>$new_stock]);
-        }
-
+        dd($order);
         if ($status == 0){
             DB::beginTransaction();
             try {
+                $order_goods = $order->RetailPurchaseOrderGoods;
+                $this->add_stock($order_goods,$type);
                 RetailPurchaseOrder::editOrder(['id'=>$order_id],['status'=>'1']);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1){//超级管理员审核订单操作记录
@@ -240,6 +224,26 @@ class BillingController extends Controller
         ];
         $stock_list = RetailStock::getPaginage($where,$goods_id,'10','created_at','ASC'); //查询商品信息
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'goods_name'=>$goods_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+
+    /**
+     * 添加库存处理
+     * 进货后处理商品库存
+     * 1、处理商品信息的库存
+     * 2、处理库存表的库存
+     **/
+    public static function add_stock($order_goods,$type)
+    {
+        foreach ($order_goods as $key=>$val){
+            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
+            if ($type == 0)
+            $new_stock = $old_stock+$val->total;                //新的库存
+            //1、更新商品信息中的库存
+            RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
+            //2、更新库存表的库存
+            RetailStock::editStock(['id'=>$val->goods_id],['stock'=>$new_stock]);
+        }
     }
 }
 
