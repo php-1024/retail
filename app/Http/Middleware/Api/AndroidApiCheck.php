@@ -128,7 +128,7 @@ class AndroidApiCheck{
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
-        if (empty(json_decode($request->input('goodsdata')))) {
+        if (empty(json_decode($request->input('goodsdata'),TRUE))) {
             return self::res(0, response()->json(['msg' => '提交的数据不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
