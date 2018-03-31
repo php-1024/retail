@@ -214,6 +214,7 @@ class BillingController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
+        dd($admin_data['organization_id']);
         $supplier = RetailSupplier::getPaginage($where,$company_name,'0', 'displayorder', 'DESC');   //供应商信息
         return  view('Retail/Billing/stock_list',['supplier'=>$supplier,'company_name'=>$company_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
