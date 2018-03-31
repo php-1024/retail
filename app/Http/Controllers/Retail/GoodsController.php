@@ -59,7 +59,7 @@ class GoodsController extends Controller
             RetailStock::addStock($stock_data); //添加商品库信息存到库存表
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统添加了商品！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统添加了商品！');//保存操作记录
             } else {//商户本人操作记录
                 OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
             }
