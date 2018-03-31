@@ -32,6 +32,7 @@ class AndroidApiCheck{
      */
     public function checkTokenAndGoodsListData($request){
         $re = $this->checkToken($request);//判断是否登录
+        dd(1);
         if($re['status']=='0'){//检测是否登录
             return $re;
         }else{
@@ -101,7 +102,6 @@ class AndroidApiCheck{
         if($store_token !=$token){
             return response()->json(['msg' => 'token值不正确，无权访问', 'status' => '0']);
         }
-        echo 1;exit;
         return self::res(1,$request);
     }
 
