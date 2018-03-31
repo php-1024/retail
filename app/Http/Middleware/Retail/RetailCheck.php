@@ -43,12 +43,12 @@ class RetailCheck{
             case "retail/billing/purchase_goods":     //从供应商进货管理
             case "retail/billing/loss_goods":         //进销存管理--报损开单管理
             case "retail/billing/check_goods":        //进销存管理--盘点核对开单管理
+            case "retail/billing/stock_list":         //进销存管理--库存列表
 
             case "retail/invoicing/purchase_goods":     //进销存管理--供应商到货开单
             case "retail/invoicing/return_goods":       //进销存管理--供应商退货开单
             case "retail/invoicing/loss_goods":         //进销存管理--报损开单
             case "retail/invoicing/check_goods":        //进销存管理--盘点核对开单
-            case "retail/invoicing/stock_list":         //进销存管理--库存列表
 
             case "retail/supplier/supplier_add":        //进销存管理--添加供应商
             case "retail/supplier/supplier_list":        //进销存管理--供应商列表
