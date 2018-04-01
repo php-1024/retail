@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Organization;
 use App\Models\RetailCategory;
+use App\Models\RetailConfig;
 use App\Models\RetailGoods;
 use App\Models\RetailGoodsThumb;
 use App\Models\RetailOrder;
@@ -108,11 +109,18 @@ class AndroidApiController extends Controller{
             'operator_id' => $account_id,
             'status' => '0',
         ];
+        $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
             $order_id = RetailOrder::addRetailOrder($orderData);
             foreach($goodsdata as $key=>$value){
                 foreach($value as $k=>$v){
+                    if($config != '1'){
+                        $stock = RetailGoods::getPluck([['id',$v['id']]],'stock');//查询商品库存数量
+                        if($stock - $v['total'] < 0){
+                            return response()->json(['msg' => '商品'.$v['name'].'库存不足', 'status' => '0', 'data' => '']);
+                        }
+                    }
                     $data = [
                         'order_id'=>$order_id,
                         'goods_id'=>$v['id'],
@@ -122,9 +130,12 @@ class AndroidApiController extends Controller{
                         'total'=>$v['total'],
                         'price'=>$v['price'],
                     ];
-                    RetailOrderGoods::addOrderGoods($data);
-                }
+                    RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
+                    $stock = RetailGoods::getPluck([['id',$v['id']]],'stock');//查询商品库存数量
+                    $stock = $stock -$v['total'];
+                    RetailGoods::editRetailGoods([['id',$v['id']]],['stock'=>$stock]);//修改商品库存
+                }
             }
 
             DB::commit();//提交事务
