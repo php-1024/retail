@@ -93,9 +93,8 @@ class AndroidApiController extends Controller{
         }
         $fansmanage_id = Organization::getPluck([['id',$organization_id]],'parent_id')->first();
         $num = RetailOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
-        if(!$num){
-            $num = 1;
-        }
+        $num += 1;
+        echo $num;exit;
         $sort = 100000 + $num;
         $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;
         $orderData = [
