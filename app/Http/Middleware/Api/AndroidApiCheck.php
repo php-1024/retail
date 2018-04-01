@@ -30,6 +30,11 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndOrderCheck($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/androidapi/cancel_order"://检测Token和订单提交数据
+                $re = $this->checkTokenAndCancelOrder($request);
+                return self::format_response($re, $next);
+                break;
+
             case "api/androidapi/cash_payment"://检测Token和现金支付数据
                 $re = $this->checkTokenAndCashPayment($request);
                 return self::format_response($re, $next);
@@ -76,7 +81,7 @@ class AndroidApiCheck{
         }
     }
     /**
-     * 检测token值 And 商品列表接口店铺id是否为空
+     * 检测token值 And 提交订单接口店铺id是否为空
      */
     public function checkTokenAndOrderCheck($request){
         $re = $this->checkToken($request);//判断Token值是否正确
@@ -91,6 +96,24 @@ class AndroidApiCheck{
             }
         }
     }
+
+    /**
+     * 检测token值 And 取消订单接口店铺id是否为空
+     */
+    public function checkTokenAndCancelOrder($request){
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkCancelOrder($re['response']);//检测数据提交
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
 
     /**
      * 检测token值 And 现金支付接口数据是否为空
@@ -145,7 +168,7 @@ class AndroidApiCheck{
     }
 
     /**
-     * 普通页面检测商品列表接口数据是否为空
+     * 普通页面检测提交订单接口数据是否为空
      */
     public function checkOrderCheck($request){
         if (empty($request->input('organization_id'))) {
@@ -156,6 +179,20 @@ class AndroidApiCheck{
         }
         return self::res(1,$request);
     }
+
+    /**
+     * 普通页面检测取消订单接口数据是否为空
+     */
+    public function checkCancelOrder($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('order_id'))) {
+            return self::res(0, response()->json(['msg' => '订单id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
+    }
+
 
     /**
      * 普通页面检测商品列表接口数据是否为空

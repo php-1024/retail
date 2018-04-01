@@ -151,13 +151,40 @@ class AndroidApiController extends Controller{
 
 
     /**
+     * 取消订单接口
+     */
+    public function cancel_order(Request $request){
+        $order_id = $request->order_id;//订单id
+        $organization_id = $request->organization_id;//店铺
+        $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是否可零库存开单
+        DB::beginTransaction();
+        try{
+            if($power!= '1'){
+                $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
+                foreach($list as $key=>$value){
+                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
+                    $num = $goods['stock'] + $value['total'];//把库存加回去
+                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
+                }
+            }
+            RetailOrder::editRetailOrder([['id',$order_id]],['status'=>'-1']);
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['msg' => '取消订单失败', 'status' => '0', 'data' => '']);
+        }
+        return response()->json(['status' => '1', 'msg' => '取消订单成功', 'data' => ['order_id' => $order_id]]);
+    }
+
+    /**
      * 现金支付接口
      */
     public function cash_payment(Request $request){
         $order_id = $request->order_id;//订单id
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
-        $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是否可零库存开单
+        $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是开单前减库存还是开单后
         DB::beginTransaction();
         try{
             if($power){
@@ -176,7 +203,35 @@ class AndroidApiController extends Controller{
             return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
         }
         return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
+    }
 
+    /**
+     * 其他支付方式接口
+     */
+    public function other_payment(Request $request){
+        $order_id = $request->order_id;//订单id
+        $organization_id = $request->organization_id;//店铺
+        $paytype = $request->paytype;//支付方式
+        $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是开单前减库存还是开单后
+        DB::beginTransaction();
+        try{
+            if($power){
+                $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
+                foreach($list as $key=>$value){
+                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
+                    $num = $goods['stock'] - $value['total'];//减库存
+                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
+                }
+            }
+
+            RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1']);
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
+        }
+        return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
     }
 }
 ?>
