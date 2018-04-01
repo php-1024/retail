@@ -138,7 +138,6 @@ class AndroidApiController extends Controller{
 
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
@@ -147,5 +146,16 @@ class AndroidApiController extends Controller{
 
 //account_id=76&organization_id=5&timestamp=1522485361983&token=e71eaa006f6854ca6c86380a7e94e853&goodsdata={"data":[{"id":1,"num":"1","price":"10.00"},{"id":2,"num":"1","price":"12.00"}]}
 
+
+    /**
+     * 现金支付接口
+     */
+    public function cash_payment(Request $request){
+        $order_id = $request->order_id;//订单id
+        echo $order_id;
+//        $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','displayorder']);
+//        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
+//        return response()->json($data);
+    }
 }
 ?>

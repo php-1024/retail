@@ -30,6 +30,11 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndOrderCheck($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/androidapi/cash_payment"://检测Token和现金支付数据
+                $re = $this->checkTokenAndCashPayment($request);
+                return self::format_response($re, $next);
+                break;
+
         }
         return $next($request);
     }
@@ -87,6 +92,24 @@ class AndroidApiCheck{
         }
     }
 
+    /**
+     * 检测token值 And 现金支付接口数据是否为空
+     */
+    public function checkTokenAndCashPayment($request){
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkCashPayment($re['response']);//检测数据提交
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
     /******************************单项检测*********************************/
     /**
      * 普通页面检测用户是否登录
@@ -130,6 +153,22 @@ class AndroidApiCheck{
         }
         if (empty(json_decode($request->input('goodsdata'),TRUE))) {
             return self::res(0, response()->json(['msg' => '提交的数据不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
+    }
+
+    /**
+     * 普通页面检测商品列表接口数据是否为空
+     */
+    public function checkCashPayment($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('order_id'))) {
+            return self::res(0, response()->json(['msg' => '订单id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('paytype'))) {
+            return self::res(0, response()->json(['msg' => '支付方式不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
     }
