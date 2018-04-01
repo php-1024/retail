@@ -22,6 +22,7 @@ class VerifyCsrfToken extends Middleware
         'api/androidapi/goodslist',//商品列表
         'api/androidapi/order_check',//订单提交接口
         'api/androidapi/cancel_order',//取消订单接口
+        'api/androidapi/order_list',//订单列表接口
         'api/androidapi/cash_payment',//现金支付接口
         /****Android接口****/
 
