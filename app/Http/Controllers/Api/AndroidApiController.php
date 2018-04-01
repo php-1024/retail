@@ -159,7 +159,7 @@ class AndroidApiController extends Controller{
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
-            if($power!= '1'){
+            if($power != '1'){
                 $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
                 foreach($list as $key=>$value){
                     $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
