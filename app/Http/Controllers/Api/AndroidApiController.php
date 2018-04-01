@@ -117,7 +117,7 @@ class AndroidApiController extends Controller{
                     $thumb=RetailGoodsThumb::getPluck([['goods_id',$v['id']]],'thumb')->first();//商品图片一张
                     if($config != '1'){
                         if($onedata['stock'] - $v['num'] < 0){
-                            return response()->json(['msg' => '商品'.$v['name'].'库存不足', 'status' => '0', 'data' => '']);
+                            return response()->json(['msg' => '商品'.$onedata['name'].'库存不足', 'status' => '0', 'data' => '']);
                         }
                     }
                     $data = [
