@@ -131,14 +131,16 @@ class AndroidApiController extends Controller{
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
-                    $stock = $onedata['stock'] -$v['num'];
-                    RetailGoods::editRetailGoods([['id',$v['id']]],['stock'=>$stock]);//修改商品库存
+                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是开单前减库存还是单后
+                    if($power != '1') {
+                        $stock = $onedata['stock'] - $v['num'];
+                        RetailGoods::editRetailGoods([['id', $v['id']]], ['stock' => $stock]);//修改商品库存
+                    }
                 }
             }
 
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
@@ -155,10 +157,10 @@ class AndroidApiController extends Controller{
         $order_id = $request->order_id;//订单id
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
-        $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
+        $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
-            if($config){
+            if($power){
                 $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
                 foreach($list as $key=>$value){
                     $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
