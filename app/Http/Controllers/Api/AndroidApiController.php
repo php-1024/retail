@@ -116,7 +116,7 @@ class AndroidApiController extends Controller{
             foreach($goodsdata as $key=>$value){
                 foreach($value as $k=>$v){
                     if($config != '1'){
-                        $stock = RetailGoods::getPluck([['id',$v['id']]],'stock')->fitst();//查询商品库存数量
+                        $stock = RetailGoods::getPluck([['id',$v['id']]],'stock')->first();//查询商品库存数量
                         if($stock - $v['total'] < 0){
                             return response()->json(['msg' => '商品'.$v['name'].'库存不足', 'status' => '0', 'data' => '']);
                         }
