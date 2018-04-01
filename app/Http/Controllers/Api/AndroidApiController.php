@@ -114,7 +114,7 @@ class AndroidApiController extends Controller{
             foreach($goodsdata as $key=>$value){
                 foreach($value as $k=>$v){
                     $onedata = RetailGoods::getOne([['id',$v['id']]]);//查询商品库存数量
-                    $thumb=RetailGoodsThumb::where([['goods_id',$v['id']]])->select('thumb')->first();//商品图片一张
+                    $thumb=RetailGoodsThumb::where([['goods_id',$v['id']]])->first();//商品图片一张
                     echo $thumb;exit;
                     if($config != '1'){
                         if($onedata['stock'] - $v['num'] < 0){
