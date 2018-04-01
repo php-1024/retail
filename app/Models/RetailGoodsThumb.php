@@ -59,5 +59,12 @@ class RetailGoodsThumb extends Model{
         }
     }
 
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
+    }
+
+
+
 }
 ?>
