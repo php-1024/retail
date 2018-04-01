@@ -152,7 +152,28 @@ class AndroidApiController extends Controller{
      */
     public function cash_payment(Request $request){
         $order_id = $request->order_id;//订单id
-        echo $order_id;
+        $organization_id = $request->organization_id;//店铺
+        $paytype = $request->paytype;//支付方式
+        $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
+        DB::beginTransaction();
+        try{
+            if($config){
+                $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
+                foreach($list as $key=>$value){
+                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
+                    $num = $goods['stock'] - $value['total'];//减库存
+                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
+                }
+            }
+            RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1']);
+            DB::commit();//提交事务
+        }catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
+        }
+        return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
+
 //        $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','displayorder']);
 //        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]];
 //        return response()->json($data);

@@ -38,6 +38,17 @@ class RetailOrder extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
+
+    //修改账号
+    public static function editRetailOrder($where,$param){
+        $model = self::where($where)->first();
+        foreach($param as $key=>$val){
+            $model->$key=$val;
+        }
+        $model->save();
+    }
+
+
     //添加数据
     public static function addRetailOrder($param){
         $retailorder = new RetailOrder();//实例化程序模型
