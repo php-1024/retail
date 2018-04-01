@@ -115,32 +115,31 @@ class AndroidApiController extends Controller{
             $order_id = RetailOrder::addRetailOrder($orderData);
             foreach($goodsdata as $key=>$value){
                 foreach($value as $k=>$v){
+                    $onedata = RetailGoods::getOne([['id',$v['id']]]);//查询商品库存数量
+                    $thumb=RetailGoodsThumb::where([['goods_id',$v['id']]])->select('thumb')->first();//商品图片一张
                     if($config != '1'){
-                        $stock = RetailGoods::getPluck([['id',$v['id']]],'stock')->first();//查询商品库存数量
-                        if($stock - $v['total'] < 0){
+                        if($onedata['stock'] - $v['total'] < 0){
                             return response()->json(['msg' => '商品'.$v['name'].'库存不足', 'status' => '0', 'data' => '']);
                         }
                     }
                     $data = [
                         'order_id'=>$order_id,
                         'goods_id'=>$v['id'],
-                        'title'=>$v['name'],
-                        'thumb'=>$v['thumb'],
-                        'details'=>$v['details'],
-                        'total'=>$v['total'],
+                        'title'=>$onedata['name'],
+                        'thumb'=>$thumb,
+                        'details'=>$onedata['details'],
+                        'total'=>$v['num'],
                         'price'=>$v['price'],
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
-                    $stock = RetailGoods::getPluck([['id',$v['id']]],'stock')->first();//查询商品库存数量
-                    $stock = $stock -$v['total'];
+                    $stock = $onedata['stock'] -$v['num'];
                     RetailGoods::editRetailGoods([['id',$v['id']]],['stock'=>$stock]);//修改商品库存
                 }
             }
 
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
