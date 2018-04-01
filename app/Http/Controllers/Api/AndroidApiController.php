@@ -118,7 +118,7 @@ class AndroidApiController extends Controller{
                     $onedata = RetailGoods::getOne([['id',$v['id']]]);//查询商品库存数量
                     $thumb=RetailGoodsThumb::where([['goods_id',$v['id']]])->select('thumb')->first();//商品图片一张
                     if($config != '1'){
-                        if($onedata['stock'] - $v['total'] < 0){
+                        if($onedata['stock'] - $v['num'] < 0){
                             return response()->json(['msg' => '商品'.$v['name'].'库存不足', 'status' => '0', 'data' => '']);
                         }
                     }
