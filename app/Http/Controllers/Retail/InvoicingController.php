@@ -46,7 +46,7 @@ class InvoicingController extends Controller
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
         $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
         dump($account);
-        return  view('Retail/Invoicing/purchase_goods',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return  view('Retail/Invoicing/purchase_goods',['account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //零售进销存开单--退供应商货物开单
