@@ -60,6 +60,7 @@ class OrderController extends Controller
             $price = $val->total*$val->price;
             $order_price += $price;        //计算订单总价
         }
+        dump($order);
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -90,7 +91,6 @@ class OrderController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
         }
