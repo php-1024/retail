@@ -12,6 +12,7 @@ use App\Models\RetailGoods;
 use App\Models\RetailGoodsThumb;
 use App\Models\RetailOrder;
 use App\Models\RetailOrderGoods;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -213,21 +214,26 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
         $order_id = $request->order_id;//订单id
 
-        $orderdata = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
-        $ordergoods = $orderdata['retail_order_goods'];
-        foreach($ordergoods as $key=>$value){
-            unset($ordergoods[$key]['order_id']);
-            unset($ordergoods[$key]['goods_id']);
-            unset($ordergoods[$key]['status']);
-            unset($ordergoods[$key]['created_at']);
-            unset($ordergoods[$key]['updated_at']);
-            unset($ordergoods[$key]['deleted_at']);
-        }
-        unset($orderdata['updated_at']);
-        unset($orderdata['deleted_at']);
-        unset($orderdata['user']);
-        unset($orderdata['retail_order_goods']);
-        print_r($ordergoods);
+        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
+        $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();
+        $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();
+        $goodsdata = $order['retail_order_goods'];
+        $orderdata = [
+            'id' => $order['id'],
+            'ordersn' => $order['ordersn'],
+            'order_price' => $order['order_price'],
+            'remarks' => $order['remarks'],
+            'user_id' => $order['user_id'],
+            'user_account' => $user_account,
+            'payment_company' => $order['payment_company'],
+            'order_type' => $order['order_type'],
+            'status' => $order['status'],
+            'paytype' => $order['paytype'],
+            'operator_id' => $order['operator_id'],
+            'retail_id' => $order['retail_id'],
+            'operator_account' => $operator_account,
+            ];
+        print_r($orderdata);
 
 //        $data = [
 //            'orderlist'=>$orderlist,
