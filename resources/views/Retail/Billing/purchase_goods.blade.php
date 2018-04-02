@@ -94,7 +94,7 @@
                                         </td>
                                         <td>
                                             <label class="label label-info">
-                                                {{$val->operator_id}}
+                                                {{$val->account_info->realname}}
                                             </label>
                                         </td>
                                         <td>
