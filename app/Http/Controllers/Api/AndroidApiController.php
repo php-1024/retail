@@ -317,7 +317,7 @@ class AndroidApiController extends Controller{
         }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
-        $payment＿company = $request->payment＿company;//支付公司名字
+        $payment_company = $request->payment_company;//支付公司名字
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
         $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
@@ -335,7 +335,7 @@ class AndroidApiController extends Controller{
                     RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
                 }
             }
-            RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1','payment＿company'=>$payment＿company]);//修改订单状态
+            RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1','payment_company'=>$payment_company]);//修改订单状态
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);

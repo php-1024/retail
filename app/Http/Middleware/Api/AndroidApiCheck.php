@@ -355,7 +355,7 @@ class AndroidApiCheck{
         if (empty($request->input('paytype'))) {
             return self::res(0, response()->json(['msg' => '支付方式不能为空', 'status' => '0', 'data' => '']));
         }
-        if (empty($request->input('payment＿company'))) {
+        if (empty($request->input('payment_company'))) {
             return self::res(0, response()->json(['msg' => '支付公司名字不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
