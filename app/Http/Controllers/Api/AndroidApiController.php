@@ -44,7 +44,7 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺id
         $categorylist = RetailCategory::getList([['fansmanage_id',$organization_id]],'0','displayorder','asc',['id','name','displayorder']);
         if(empty($categorylist->toArray())){
-            return response()->json(['status' => '0', 'msg' => '没有设置分类', 'data' => '']);
+            return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
     }
@@ -64,6 +64,9 @@ class AndroidApiController extends Controller{
             $where =[['barcode',$scan_code]];
         }
         $goodslist = RetailGoods::getList($where,'0','displayorder','asc',['id','name','category_id','details','price','stock']);
+        if(empty($goodslist->toArray())){
+            return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
+        }
         foreach($goodslist as $key=>$value){
             $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
             $goodslist[$key]['thumb']=RetailGoodsThumb::where([['goods_id',$value['id']]])->select('thumb')->get();
