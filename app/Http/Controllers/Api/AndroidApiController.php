@@ -222,7 +222,7 @@ class AndroidApiController extends Controller{
         }
         $order = $order->toArray();
         $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();//粉丝账号
-        $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();//操作人员账号
+        $operator_account = Account::getPluck([['id',$order['operator_id']]],'account')->first();//操作人员账号
         $goodsdata = $order['retail_order_goods'];//订单商品列表
         foreach($goodsdata as $key=>$value){
             $ordergoods[$key]['goods_id']=$value['goods_id'];
