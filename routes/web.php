@@ -717,6 +717,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('order_check', 'Api\AndroidApiController@order_check')->middleware('AndroidApiCheck');//订单提交接口
         Route::any('cancel_order', 'Api\AndroidApiController@cancel_order')->middleware('AndroidApiCheck');//取消订单接口
         Route::any('order_list', 'Api\AndroidApiController@order_list')->middleware('AndroidApiCheck');//订单列表接口
+        Route::any('order_detail', 'Api\AndroidApiController@order_detail')->middleware('AndroidApiCheck');//订单详情接口
         Route::any('cash_payment', 'Api\AndroidApiController@cash_payment')->middleware('AndroidApiCheck');//现金支付接口
     });
 });

@@ -182,7 +182,7 @@ class AndroidApiController extends Controller{
      */
     public function order_list(Request $request){
         $organization_id = $request->organization_id;//店铺
-        $status = $request->status;//店铺
+        $status = $request->status;//订单状态
         $where = [['retail_id',$organization_id]];
         if($status){
             $where = [['status',$status]];
@@ -206,6 +206,24 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
     }
 
+    /**
+     * 订单列表接口
+     */
+    public function order_detail(Request $request){
+        $organization_id = $request->organization_id;//店铺
+        $order_id = $request->order_id;//订单id
+
+        $orderdata = RetailOrder::getOne([['id',$order_id]]);
+
+        print_r($orderdata);
+
+//        $data = [
+//            'orderlist'=>$orderlist,
+//            'total_num'=>$total_num,
+//            'total_amount'=>$total_amount,
+//        ];
+//        return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
+    }
 
 
 
