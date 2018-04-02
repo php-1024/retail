@@ -67,7 +67,7 @@ class AndroidApiController extends Controller{
         foreach($goodslist as $key=>$value){
             $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
             $re = RetailGoodsThumb::where([['goods_id',$value['id']]])->select('thumb')->get();
-            foreach($re as $k=>$v){
+            foreach($re->toArray() as $k=>$v){
                 print_r($v);
 //                $goodslist[$key]['thumb'][$k]='http://o2o.01nnt.com/'.$v['thumb'];
             }
