@@ -50,7 +50,10 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndAllowZeroStock($request);
                 return self::format_response($re, $next);
                 break;
-
+            case "api/androidapi/change_stock_role"://检测Token和下单减库存/付款减库存
+                $re = $this->checkTokenAndChangeStockRole($request);
+                return self::format_response($re, $next);
+                break;
         }
         return $next($request);
     }
@@ -193,6 +196,23 @@ class AndroidApiCheck{
             }
         }
     }
+    /**
+     * 检测token值 And 下单减库存/付款减库存
+     */
+    public function checkTokenAndChangeStockRole($request){
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkChangeStockRole($re['response']);//检测数据提交
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
 
 
 
@@ -301,6 +321,19 @@ class AndroidApiCheck{
      * 普通页面检测开启/关闭零库存开单接口数据是否为空
      */
     public function checkAllowZeroStock($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('cfg_value'))) {
+            return self::res(0, response()->json(['msg' => 'cfg_value值不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
+    }
+
+    /**
+     * 普通页面检测开启/关闭零库存开单接口数据是否为空
+     */
+    public function checkChangeStockRole($request){
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }

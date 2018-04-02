@@ -304,7 +304,7 @@ class AndroidApiController extends Controller{
             RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1']);
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
+
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
         }
@@ -329,6 +329,28 @@ class AndroidApiController extends Controller{
         }
         return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['vfg_value' => $cfg_value, 'cfg_name' => 'allow_zero_stock']]);
     }
+
+    /**
+     * 下单减库存/付款减库存接口
+     */
+    public function change_stock_role(Request $request){
+        $cfg_value = $request->cfg_value;//开启或关闭值
+        $organization_id = $request->organization_id;//店铺
+
+        $re = RetailConfig::getOne([['retail_id',$organization_id],['cfg_name','change_stock_role']]);//查看店铺change_stock_role值是否存在
+        if(!empty($re)){//如果存在
+            if($cfg_value == $re['cfg_value']){//如果状态一致
+                return response()->json(['msg' => '状态一致，无效操作', 'status' => '0', 'data' => '']);
+            }
+            RetailConfig::editRetailConfig([['id',$re['id']]],['cfg_value' => $cfg_value]);//修改状态值
+        }else{
+            RetailConfig::addRetailConfig(['retail_id' => $organization_id, 'cfg_name' => 'change_stock_role', 'cfg_value' => $cfg_value]);//添加配置项
+        }
+        return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['vfg_value' => $cfg_value, 'cfg_name' => 'change_stock_role']]);
+    }
+
+
+
 
 }
 ?>
