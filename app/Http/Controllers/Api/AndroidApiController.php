@@ -349,7 +349,25 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['vfg_value' => $cfg_value, 'cfg_name' => 'change_stock_role']]);
     }
 
+    /**
+     * 查询店铺设置
+     */
+    public function stock_cfg(Request $request){
+        $organization_id = $request->organization_id;//店铺
 
+        $re = RetailConfig::getList([['retail_id',$organization_id]],0,'id');//查看店铺配设置项
+        if(empty($re->toArray())){
+            return response()->json(['status' => '0', 'msg' => '该店铺没有设置配置项', 'data' =>'']);
+        }
+        foreach($re as $key=>$value){
+            $cfglist[$key] = [
+                'id'=>$value['id'],
+                'cfg_name'=>$value['cfg_name'],
+                'cfg_value'=>$value['cfg_value'],
+            ];
+        }
+        return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['cfglist' => $cfglist]]);
+    }
 
 
 }
