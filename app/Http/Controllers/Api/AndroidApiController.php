@@ -227,7 +227,7 @@ class AndroidApiController extends Controller{
         foreach($goodsdata as $key=>$value){
             $ordergoods[$key]['goods_id']=$value['goods_id'];
             $ordergoods[$key]['title']=$value['title'];
-            $ordergoods[$key]['thumb']='http://o2o.01nnt.com/'.$value['thumb'];
+            $ordergoods[$key]['thumb']=$value['thumb'];
             $ordergoods[$key]['details']=$value['details'];
             $ordergoods[$key]['total']=$value['total'];
             $ordergoods[$key]['price']=$value['price'];
