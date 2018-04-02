@@ -232,7 +232,7 @@ class AndroidApiController extends Controller{
             $ordergoods[$key]['total']=$value['total'];
             $ordergoods[$key]['price']=$value['price'];
         }
-
+        //防止值为null
         if(empty($order['remarks'])){
             $order['remarks'] = '';
         }
