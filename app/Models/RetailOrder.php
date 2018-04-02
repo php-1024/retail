@@ -69,7 +69,6 @@ class RetailOrder extends Model{
         if($param['remarks']){
             $retailorder->remarks = $param['remarks'];//备注信息
         }
-        print_r($param);exit;
         $retailorder->save();
         return $retailorder->id;
     }
