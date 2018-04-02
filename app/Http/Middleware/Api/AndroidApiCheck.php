@@ -42,9 +42,12 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndOrderDetail($request);
                 return self::format_response($re, $next);
                 break;
-
             case "api/androidapi/cash_payment"://检测Token和现金支付数据
                 $re = $this->checkTokenAndCashPayment($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/androidapi/allow_zero_stock"://检测Token和开启/关闭零库存开单
+                $re = $this->checkTokenAndAllowZeroStock($request);
                 return self::format_response($re, $next);
                 break;
 
@@ -174,6 +177,24 @@ class AndroidApiCheck{
         }
     }
 
+    /**
+     * 检测token值 And 开启/关闭零库存开单
+     */
+    public function checkTokenAndAllowZeroStock($request){
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkAllowZeroStock($re['response']);//检测数据提交
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+
 
     /******************************单项检测*********************************/
     /**
@@ -272,6 +293,19 @@ class AndroidApiCheck{
         }
         if (empty($request->input('paytype'))) {
             return self::res(0, response()->json(['msg' => '支付方式不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
+    }
+
+    /**
+     * 普通页面检测开启/关闭零库存开单接口数据是否为空
+     */
+    public function checkAllowZeroStock($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('cfg_value'))) {
+            return self::res(0, response()->json(['msg' => 'cfg_value值不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1,$request);
     }
