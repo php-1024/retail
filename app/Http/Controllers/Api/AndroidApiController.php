@@ -219,7 +219,7 @@ class AndroidApiController extends Controller{
         unset($orderdata['deleted_at']);
         unset($orderdata['user']);
         unset($orderdata['retail_order_goods']);
-        print_r($orderdata);
+        print_r($ordergoods);
 
 //        $data = [
 //            'orderlist'=>$orderlist,
