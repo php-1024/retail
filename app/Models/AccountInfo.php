@@ -25,6 +25,11 @@ class AccountInfo extends Model
         return $this->belongsTo('App\Models\RetailPurchaseOrder', 'id','operator_id');
     }
 
+    //和RetailLossOrder表是一对一的关系
+    public function RetailLossOrder(){
+        return $this->belongsTo('App\Models\RetailLossOrder', 'id','operator_id');
+    }
+
     //修改账号
     public static function editAccountInfo($where,$param){
         $model = self::where($where)->first();
