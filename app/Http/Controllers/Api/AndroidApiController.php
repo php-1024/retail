@@ -76,7 +76,7 @@ class AndroidApiController extends Controller{
     }
 
     /**
-     * 商品列表接口
+     * 提单提交接口
      */
     public function order_check(Request $request){
         $organization_id = $request->organization_id;//店铺id

@@ -99,7 +99,7 @@ class AndroidApiCheck{
         }
     }
     /**
-     * 检测token值 And 提交订单接口店铺id是否为空
+     * 检测token值 And 提交订单接口
      */
     public function checkTokenAndOrderCheck($request){
         $re = $this->checkToken($request);//判断Token值是否正确
