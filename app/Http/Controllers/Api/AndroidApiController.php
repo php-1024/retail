@@ -232,6 +232,19 @@ class AndroidApiController extends Controller{
             $ordergoods[$key]['total']=$value['total'];
             $ordergoods[$key]['price']=$value['price'];
         }
+
+        if(empty($order['remarks'])){
+            $order['remarks'] = '';
+        }
+        if(empty($order['user_account'])){
+            $order['user_account'] = '';
+        }
+        if(empty($order['payment_company'])){
+            $order['payment_company'] = '';
+        }
+        if(empty($order['paytype'])){
+            $order['paytype'] = '';
+        }
         $orderdata = [
             'id' => $order['id'],
             'ordersn' => $order['ordersn'],
