@@ -38,14 +38,14 @@ class InvoicingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
+        //查询操作人员信息
+        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
-        dump($account);
         return  view('Retail/Invoicing/purchase_goods',['account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -56,13 +56,17 @@ class InvoicingController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
+        $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
+        $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
+        //查询操作人员信息
+        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        return  view('Retail/Invoicing/return_goods',['category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return  view('Retail/Invoicing/return_goods',['account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //零售进销存开单--供应商搜索

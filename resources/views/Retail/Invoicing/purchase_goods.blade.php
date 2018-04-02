@@ -150,8 +150,6 @@
                                                                 <option value="{{$val->account_info->id}}">{{$val->account_info->realname}}</option>
                                                             @endforeach
                                                         </select>
-
-
                                                     </th>
                                                 </tr>
                                                 </thead>
