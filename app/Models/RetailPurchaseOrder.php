@@ -18,6 +18,11 @@ class RetailPurchaseOrder extends Model{
         return $this->belongsTo('App\Models\RetailSupplier','company_id','id');
     }
 
+    //和Account表多对一的关系
+    public function Account(){
+        return $this->belongsTo('App\Models\Account','operator_id','id');
+    }
+
     //和RetailOrderGoods表一对多的关系
     public function RetailPurchaseOrderGoods(){
         return $this->hasMany('App\Models\RetailPurchaseOrderGoods','order_id','id');
@@ -68,7 +73,7 @@ class RetailPurchaseOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('RetailSupplier');
+        $model = self::with('RetailSupplier')->with('Account');
         if(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
         }
