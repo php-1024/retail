@@ -112,7 +112,7 @@ class GoodsController extends Controller
         $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name,'price' => $price,'barcode'=>$barcode,'stock' => $stock,'displayorder' => $displayorder,'details' => $details];
         DB::beginTransaction();
         try {
-            $goods_id = RetailGoods::editRetailGoods($where,$goods_data);
+            RetailGoods::editRetailGoods($where,$goods_data);
             $stock_data = ['category_id' => $category_id,'stock' => $stock,];
             RetailStock::editStock(['goods_id'=>$goods_id],$stock_data); //修改商品库信息存到库存表
             //添加操作日志
