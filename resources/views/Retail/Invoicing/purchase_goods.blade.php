@@ -146,14 +146,10 @@
                                                     <th>
                                                         <select id="operator_id" name="operator_id" onchange="setClerk()" class="form-control">
                                                             <option value="0">请选择人员</option>
-                                                            <option value="2063">楼兰美容养生一一阮桂莲13713895860</option>
-                                                            <option value="4252">晴栀@</option>
-                                                            <option value="18547">🇨🇳</option>
-                                                            <option value="19682">掌尚易商</option>
-                                                            <option value="24777">一生所爱</option>
+                                                            @foreach($account as $key=>$val)
+                                                                <option value="{{$val->account_info->id}}">{{$val->account_info->realname}}</option>
+                                                            @endforeach
                                                         </select>
-
-
                                                     </th>
                                                 </tr>
                                                 </thead>
