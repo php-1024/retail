@@ -60,6 +60,7 @@ class OrderController extends Controller
             $price = $val->total*$val->price;
             $order_price += $price;        //计算订单总价
         }
+        dump($order);
         return view('Retail/Order/order_spot_detail',['order_price'=>$order_price,'order'=>$order,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -81,7 +82,7 @@ class OrderController extends Controller
         $status = $request->get('status');              //订单状态
         DB::beginTransaction();
         try {
-            RetailOrder::editOrder(['id'=>$order_id],['status'=>$status]);
+            RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录

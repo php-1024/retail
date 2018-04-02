@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="category_delete_check" method="post" action="{{url('retail/ajax/supplier_delete_check')}}">
+<form class="form-horizontal" id="supplier_delete_check" method="post" action="{{url('retail/ajax/supplier_delete_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
      <input type="hidden" name="supplier_id" id="_token" value="{{$supplier_id}}">
         <div class="modal-dialog">
@@ -15,7 +15,6 @@
                                 <input type="text" class="form-control" name="safe_password" value="">
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
