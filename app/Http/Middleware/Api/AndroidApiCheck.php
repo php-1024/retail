@@ -38,6 +38,10 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndOrderList($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/androidapi/order_detail"://检测Token和订单详情
+                $re = $this->checkTokenAndOrderDetail($request);
+                return self::format_response($re, $next);
+                break;
 
             case "api/androidapi/cash_payment"://检测Token和现金支付数据
                 $re = $this->checkTokenAndCashPayment($request);
@@ -119,7 +123,7 @@ class AndroidApiCheck{
     }
 
     /**
-     * 检测token值 And 订单列表接口店铺id是否为空
+     * 检测token值 And 订单列表接口
      */
     public function checkTokenAndOrderList($request){
         $re = $this->checkToken($request);//判断Token值是否正确
@@ -127,6 +131,23 @@ class AndroidApiCheck{
             return $re;
         }else{
             $re2 = $this->checkOrderList($re['response']);//检测数据提交
+            if($re2['status']=='0'){
+                return $re2;
+            }else{
+                return self::res(1,$re2['response']);
+            }
+        }
+    }
+
+    /**
+     * 检测token值 And 订单详情
+     */
+    public function checkTokenAndOrderDetail($request){
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if($re['status']=='0'){
+            return $re;
+        }else{
+            $re2 = $this->checkOrderDetail($re['response']);//检测数据提交
             if($re2['status']=='0'){
                 return $re2;
             }else{
@@ -223,6 +244,20 @@ class AndroidApiCheck{
         }
         return self::res(1,$request);
     }
+
+    /**
+     * 普通页面检测订单详情接口数据是否为空
+     */
+    public function checkOrderDetail($request){
+        if (empty($request->input('organization_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('order_id'))) {
+            return self::res(0, response()->json(['msg' => '订单id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1,$request);
+    }
+
 
 
     /**

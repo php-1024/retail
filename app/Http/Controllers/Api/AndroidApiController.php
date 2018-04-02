@@ -182,12 +182,12 @@ class AndroidApiController extends Controller{
      */
     public function order_list(Request $request){
         $organization_id = $request->organization_id;//店铺
-        $status = $request->status;//店铺
+        $status = $request->status;//订单状态
         $where = [['retail_id',$organization_id]];
         if($status){
             $where = [['status',$status]];
         }
-        $orderlist = RetailOrder::where($where)->select(['id','ordersn','order_price','status','created_at'])->get()->toArray();
+        $orderlist = RetailOrder::getList($where,'0','id','',['id','ordersn','order_price','status','created_at'])->toArray();
         if($orderlist){
             $total_num = count($orderlist);//订单数量
             $total_amount = 0;
@@ -203,9 +203,31 @@ class AndroidApiController extends Controller{
             'total_num'=>$total_num,
             'total_amount'=>$total_amount,
             ];
-        return response()->json(['status' => '1', 'msg' => '取消订单成功', 'data' => $data]);
+        return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
     }
 
+    /**
+     * 订单详情接口
+     */
+    public function order_detail(Request $request){
+        $organization_id = $request->organization_id;//店铺
+        $order_id = $request->order_id;//订单id
+
+        $orderdata = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
+        $ordergoods = $orderdata['retail_order_goods'];
+        unset($orderdata['updated_at']);
+        unset($orderdata['deleted_at']);
+        unset($orderdata['user']);
+        unset($orderdata['retail_order_goods']);
+        print_r($ordergoods);
+
+//        $data = [
+//            'orderlist'=>$orderlist,
+//            'total_num'=>$total_num,
+//            'total_amount'=>$total_amount,
+//        ];
+//        return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
+    }
 
 
 
