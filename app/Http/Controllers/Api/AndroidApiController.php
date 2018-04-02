@@ -207,13 +207,13 @@ class AndroidApiController extends Controller{
     }
 
     /**
-     * 订单列表接口
+     * 订单详情接口
      */
     public function order_detail(Request $request){
         $organization_id = $request->organization_id;//店铺
         $order_id = $request->order_id;//订单id
 
-        $orderdata = RetailOrder::getOne([['id',$order_id]]);
+        $orderdata = RetailOrder::getOne([['id',$order_id]])->toArray();
 
         print_r($orderdata);
 
