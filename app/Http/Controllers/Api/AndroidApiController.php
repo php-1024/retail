@@ -215,6 +215,9 @@ class AndroidApiController extends Controller{
         $order_id = $request->order_id;//订单id
 
         $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();//订单详情
+        if(empty($order)){
+            return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
+        }
         $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();//粉丝账号
         $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();//操作人员账号
         $goodsdata = $order['retail_order_goods'];//订单商品列表
@@ -226,7 +229,6 @@ class AndroidApiController extends Controller{
             $ordergoods[$key]['total']=$value['total'];
             $ordergoods[$key]['price']=$value['price'];
         }
-        print_r($ordergoods);
         $orderdata = [
             'id' => $order['id'],
             'ordersn' => $order['ordersn'],
@@ -242,13 +244,11 @@ class AndroidApiController extends Controller{
             'retail_id' => $order['retail_id'],
             'operator_account' => $operator_account,
             ];
-
-//        $data = [
-//            'orderlist'=>$orderlist,
-//            'total_num'=>$total_num,
-//            'total_amount'=>$total_amount,
-//        ];
-//        return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
+        $data = [
+            'orderdata'=>$orderdata,
+            'ordergoods'=>$ordergoods,
+        ];
+        return response()->json(['status' => '1', 'msg' => '订单详情查询成功', 'data' => $data]);
     }
 
 
