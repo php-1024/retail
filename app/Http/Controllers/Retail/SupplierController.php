@@ -91,6 +91,14 @@ class SupplierController extends Controller
         return view('Retail/Supplier/supplier_edit',['supplier'=>$supplier]);
     }
 
+    //供应商编辑
+    public function supplier_delete(Request $request)
+    {
+        $supplier_id = $request->get('id');
+        $supplier = RetailSupplier::getOne(['id'=>$supplier_id]);
+        return view('Retail/Supplier/supplier_delete',['supplier'=>$supplier]);
+    }
+
     //供应商编辑操作
     public function supplier_edit_check(Request $request)
     {
