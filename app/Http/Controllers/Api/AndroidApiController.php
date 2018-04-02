@@ -214,10 +214,22 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
         $order_id = $request->order_id;//订单id
 
-        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
-        $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();
-        $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();
-        $goodsdata = $order['retail_order_goods'];
+        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]]);//订单详情
+        if(empty($order)){
+            return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
+        }
+        $order = $order->toArray();
+        $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();//粉丝账号
+        $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();//操作人员账号
+        $goodsdata = $order['retail_order_goods'];//订单商品列表
+        foreach($goodsdata as $key=>$value){
+            $ordergoods[$key]['goods_id']=$value['goods_id'];
+            $ordergoods[$key]['title']=$value['title'];
+            $ordergoods[$key]['thumb']='http://o2o.01nnt.com/'.$value['thumb'];
+            $ordergoods[$key]['details']=$value['details'];
+            $ordergoods[$key]['total']=$value['total'];
+            $ordergoods[$key]['price']=$value['price'];
+        }
         $orderdata = [
             'id' => $order['id'],
             'ordersn' => $order['ordersn'],
@@ -233,14 +245,11 @@ class AndroidApiController extends Controller{
             'retail_id' => $order['retail_id'],
             'operator_account' => $operator_account,
             ];
-        print_r($orderdata);
-
-//        $data = [
-//            'orderlist'=>$orderlist,
-//            'total_num'=>$total_num,
-//            'total_amount'=>$total_amount,
-//        ];
-//        return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
+        $data = [
+            'orderdata'=>$orderdata,
+            'ordergoods'=>$ordergoods,
+        ];
+        return response()->json(['status' => '1', 'msg' => '订单详情查询成功', 'data' => $data]);
     }
 
 
