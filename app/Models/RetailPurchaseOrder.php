@@ -18,9 +18,9 @@ class RetailPurchaseOrder extends Model{
         return $this->belongsTo('App\Models\RetailSupplier','company_id','id');
     }
 
-    //和Account表多对一的关系
-    public function Account(){
-        return $this->belongsTo('App\Models\Account','operator_id','id');
+    //和个人信息表一对一的关系
+    public function account_info(){
+        return $this->hasOne('App\Models\AccountInfo', 'operator_id');
     }
 
     //和RetailOrderGoods表一对多的关系
