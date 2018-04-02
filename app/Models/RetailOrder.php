@@ -42,7 +42,7 @@ class RetailOrder extends Model{
     }
 
 
-    //修改账号
+    //修改订单信息
     public static function editRetailOrder($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
