@@ -22,7 +22,7 @@ class AccountInfo extends Model
 
     //和RetailPurchaseOrder表是一对一的关系
     public function RetailPurchaseOrder(){
-        return $this->belongsTo('App\Models\RetailPurchaseOrder', 'operator_id');
+        return $this->belongsTo('App\Models\RetailPurchaseOrder', 'id','operator_id');
     }
 
     //修改账号
