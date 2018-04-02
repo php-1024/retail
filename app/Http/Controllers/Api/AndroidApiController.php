@@ -214,7 +214,7 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
         $order_id = $request->order_id;//订单id
 
-        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();//订单详情
+        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]]);//订单详情
         if(empty($order)){
             return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
         }
