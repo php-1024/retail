@@ -8,7 +8,6 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
-use App\Models\RetailCategory;
 use App\Models\Organization;
 use App\Models\RetailCheckOrder;
 use App\Models\RetailGoods;
@@ -16,7 +15,6 @@ use App\Models\RetailLossOrder;
 use App\Models\RetailPurchaseOrder;
 use App\Models\RetailStock;
 use App\Models\RetailStockLog;
-use App\Models\RetailSupplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -224,8 +222,6 @@ class BillingController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $order_id = $request->get('order_id');        //会员标签id
         $status = $request->get('status');            //接收订单当前状态
-
-
         $order = RetailCheckOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
         $order_goods = $order->RetailCheckOrderGoods;    //订单对应的商品
         $type = $order->type;                               //订单类型
