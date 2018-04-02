@@ -121,8 +121,8 @@ class AndroidApiController extends Controller{
                 foreach($value as $k=>$v){
                     $onedata = RetailGoods::getOne([['id',$v['id']]]);//查询商品库存数量
                     $thumb=RetailGoodsThumb::getPluck([['goods_id',$v['id']]],'thumb')->first();//商品图片一张
-                    if($config != '1'){
-                        if($onedata['stock'] - $v['num'] < 0){
+                    if($config != '1'){//如果允许零库存开单
+                        if($onedata['stock'] - $v['num'] < 0){//库存小于0 打回
                             return response()->json(['msg' => '商品'.$onedata['name'].'库存不足', 'status' => '0', 'data' => '']);
                         }
                     }
@@ -137,8 +137,8 @@ class AndroidApiController extends Controller{
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
-                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是开单前减库存还是单后
-                    if($power != '1') {
+                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
+                    if($power != '1') {//说明下单减库存
                         $stock = $onedata['stock'] - $v['num'];
                         RetailGoods::editRetailGoods([['id', $v['id']]], ['stock' => $stock]);//修改商品库存
                     }
@@ -146,7 +146,6 @@ class AndroidApiController extends Controller{
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
@@ -176,7 +175,6 @@ class AndroidApiController extends Controller{
             RetailOrder::editRetailOrder([['id',$order_id]],['status'=>'-1']);
             DB::commit();//提交事务
         }catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '取消订单失败', 'status' => '0', 'data' => '']);
         }
