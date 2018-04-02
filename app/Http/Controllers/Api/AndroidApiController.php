@@ -356,7 +356,7 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
 
         $re = RetailConfig::getList([['retail_id',$organization_id]],0,'id');//查看店铺配设置项
-        if(empty($re)){
+        if(empty($re->toArray())){
             return response()->json(['status' => '0', 'msg' => '该店铺没有设置配置项', 'data' =>'']);
         }
         foreach($re as $key=>$value){
