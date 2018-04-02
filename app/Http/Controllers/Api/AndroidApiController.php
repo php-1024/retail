@@ -318,7 +318,7 @@ class AndroidApiController extends Controller{
         $cfg_value = $request->cfg_value;//开启或关闭值
         $organization_id = $request->organization_id;//店铺
 
-        $re = RetailConfig::getOne([['retail_id',$organization_id],['cfg','allow_zero_stock']]);//查看店铺allow_zero_stock值是否存在
+        $re = RetailConfig::getOne([['retail_id',$organization_id],['cfg_name','allow_zero_stock']]);//查看店铺allow_zero_stock值是否存在
         if(!empty($re)){//如果存在
             if($cfg_value == $re['cfg_value']){//如果状态一致
                 return response()->json(['msg' => '状态一致，无效操作', 'status' => '0', 'data' => '']);
