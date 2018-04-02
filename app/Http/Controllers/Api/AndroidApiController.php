@@ -68,12 +68,13 @@ class AndroidApiController extends Controller{
             $goodslist[$key]['category_name']=RetailCategory::getPluck([['id',$value['category_id']]],'name')->first();
             $re = RetailGoodsThumb::where([['goods_id',$value['id']]])->select('thumb')->get();
             foreach($re as $k=>$v){
-                $goodslist[$key]['thumb'][$k]='http://o2o.01nnt.com/'.$v['thumb'];
+                print_r($v);
+//                $goodslist[$key]['thumb'][$k]='http://o2o.01nnt.com/'.$v['thumb'];
             }
 
         }
-        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
-        return response()->json($data);
+//        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
+//        return response()->json($data);
     }
 
     /**
