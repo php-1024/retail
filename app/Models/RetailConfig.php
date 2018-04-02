@@ -43,7 +43,7 @@ class RetailConfig extends Model{
     public static function addRetailConfig($param){
         $model = new RetailConfig();
         $model->retail_id = $param['retail_id'];//组织ID
-        $model->cfg_name = $param['cfg_name'];//配置项名
+//        $model->cfg_name = $param['cfg_name'];//配置项名
 //        $model->cfg_value = $param['cfg_value'];//配置项状态值
         $model->save();
         return $model->id;
