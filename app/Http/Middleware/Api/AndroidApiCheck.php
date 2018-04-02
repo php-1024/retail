@@ -235,9 +235,8 @@ class AndroidApiCheck{
         }
     }
 
-
-
     /******************************单项检测*********************************/
+
     /**
      * 普通页面检测用户是否登录
      */
@@ -364,9 +363,9 @@ class AndroidApiCheck{
         }
         list($t1, $t2) = explode(' ', microtime());
         $time = (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);
-        if($time - $request->input('timestamp')>120000){
-            return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
-        }
+//        if($time - $request->input('timestamp')>120000){
+//            return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
+//        }
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//当前时间戳
