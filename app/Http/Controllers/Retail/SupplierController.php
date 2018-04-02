@@ -83,7 +83,7 @@ class SupplierController extends Controller
         return  view('Retail/Supplier/supplier_list',['supplier'=>$supplier,'company_name'=>$company_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
-    //供应商编辑
+    //供应商编辑弹窗
     public function supplier_edit(Request $request)
     {
         $supplier_id = $request->get('id');
@@ -91,11 +91,17 @@ class SupplierController extends Controller
         return view('Retail/Supplier/supplier_edit',['supplier'=>$supplier]);
     }
 
-    //供应商编辑
+    //供应商删除弹窗
     public function supplier_delete(Request $request)
     {
         $supplier_id = $request->get('id');
         return view('Retail/Supplier/supplier_delete',['supplier_id'=>$supplier_id]);
+    }
+
+    //供应商删除操作
+    public function supplier_delete_check(Request $request)
+    {
+        dd($request);
     }
 
     //供应商编辑操作
