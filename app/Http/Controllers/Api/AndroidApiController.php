@@ -289,12 +289,11 @@ class AndroidApiController extends Controller{
                             return response()->json(['msg' => '商品'.$goods['name'].'库存不足', 'status' => '0', 'data' => '']);
                         }
                     }
-
                     $num = $goods['stock'] - $value['total'];//减库存
                     RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
                 }
             }
-            RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1']);
+            RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1']);//修改订单状态
             DB::commit();//提交事务
         }catch (\Exception $e) {
             dd($e);
