@@ -18,6 +18,11 @@ class RetailLossOrder extends Model{
         return $this->hasMany('App\Models\RetailLossOrderGoods','order_id','id');
     }
 
+    //和个人信息表一对一的关系
+    public function account_info(){
+        return $this->hasOne('App\Models\AccountInfo', 'id','operator_id');
+    }
+
     //创建订单
     public static function addOrder($param){
         $model = new RetailLossOrder();

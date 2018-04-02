@@ -66,7 +66,7 @@
                                     <tr>
                                         <th>订单编号</th>
                                         <th>类型</th>
-                                        <th>经手操作人员ID</th>
+                                        <th>经手操作人员</th>
                                         <th>订单总金额</th>
                                         <th>审核</th>
                                         <th>开单时间</th>
@@ -86,7 +86,7 @@
                                         </td>
                                         <td>
                                             <label class="label label-info">
-                                                {{$val->operator_id}}
+                                                {{$val->account_info->realname}}
                                             </label>
                                         </td>
                                         <td>

@@ -23,6 +23,11 @@ class RetailCheckOrder extends Model{
         return $this->hasMany('App\Models\RetailCheckOrderGoods','order_id','id');
     }
 
+    //和个人信息表一对一的关系
+    public function account_info(){
+        return $this->hasOne('App\Models\AccountInfo', 'id','operator_id');
+    }
+
     //创建订单
     public static function addOrder($param){
         $model = new RetailCheckOrder();
@@ -67,7 +72,7 @@ class RetailCheckOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('User');
+        $model = self::with('account_info');
         if(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
         }

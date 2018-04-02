@@ -20,7 +20,7 @@ class RetailPurchaseOrder extends Model{
 
     //和个人信息表一对一的关系
     public function account_info(){
-        return $this->hasOne('App\Models\AccountInfo', 'operator_id');
+        return $this->hasOne('App\Models\AccountInfo', 'id','operator_id');
     }
 
     //和RetailOrderGoods表一对多的关系
