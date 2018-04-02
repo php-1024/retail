@@ -30,10 +30,13 @@ class RetailOrder extends Model{
     }
 
     //获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    public static function getList($where,$limit=0,$orderby,$sort='DESC',$select=[]){
         $model = new RetailOrder();
         if(!empty($limit)){
             $model = $model->limit($limit);
+        }
+        if(!empty($select)){
+            $model = $model->select($select);
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
