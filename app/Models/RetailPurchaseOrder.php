@@ -73,7 +73,7 @@ class RetailPurchaseOrder extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('RetailSupplier')->with('Account');
+        $model = self::with('RetailSupplier')->with('account_info');
         if(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
         }
