@@ -63,9 +63,9 @@ class RetailOrder extends Model{
         $retailorder->operator_id = $param['operator_id'];//操作人员id
         $retailorder->fansmanage_id = $param['fansmanage_id'];//管理平台id
         $retailorder->retail_id = $param['retail_id'];//店铺所属组织ID
-//        if($param['paytype']){
-//            $retailorder->paytype = $param['paytype'];//付款方式
-//        }
+        if($param['paytype']){
+            $retailorder->paytype = $param['paytype'];//付款方式
+        }
         if($param['remarks']){
             $retailorder->remarks = $param['remarks'];//备注信息
         }

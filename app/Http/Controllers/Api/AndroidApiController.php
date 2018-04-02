@@ -101,7 +101,7 @@ class AndroidApiController extends Controller{
         $num = RetailOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
         $num += 1;
         $sort = 100000 + $num;
-        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;
+        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
         $orderData = [
             'ordersn' => $ordersn,
             'order_price' => $order_price,
@@ -116,7 +116,7 @@ class AndroidApiController extends Controller{
         $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
-            $order_id = RetailOrder::addRetailOrder($orderData);
+            $order_id = RetailOrder::addRetailOrder($orderData);//添加入订单表
             foreach($goodsdata as $key=>$value){
                 foreach($value as $k=>$v){
                     $onedata = RetailGoods::getOne([['id',$v['id']]]);//查询商品库存数量
@@ -137,14 +137,13 @@ class AndroidApiController extends Controller{
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
-                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_around_stock']],'cfg_value')->first();//查询是开单前减库存还是单后
+                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是开单前减库存还是单后
                     if($power != '1') {
                         $stock = $onedata['stock'] - $v['num'];
                         RetailGoods::editRetailGoods([['id', $v['id']]], ['stock' => $stock]);//修改商品库存
                     }
                 }
             }
-
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
