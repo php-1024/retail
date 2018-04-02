@@ -362,18 +362,17 @@ class AndroidApiCheck{
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
         list($t1, $t2) = explode(' ', microtime());
-        $time = (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);
-//        if($time - $request->input('timestamp')>120000){
+        $time = (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);//获取当前的时间戳--13位
+//        if($time - $request->input('timestamp')>120000){//如果超过两分钟
 //            return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
 //        }
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
-        $timestamp = $request->timestamp;//当前时间戳
+        $timestamp = $request->timestamp;//app传过来的时间戳
 
         $data = Account::where([['id',$account_id]])->first();//查询用户信息
         if(empty($data)){
             return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
-
         }
         $sort = array($data['account'],$timestamp);
         ksort($sort);//字典排序
