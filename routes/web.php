@@ -721,6 +721,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('order_list', 'Api\AndroidApiController@order_list')->middleware('AndroidApiCheck');//订单列表接口
         Route::any('order_detail', 'Api\AndroidApiController@order_detail')->middleware('AndroidApiCheck');//订单详情接口
         Route::any('cash_payment', 'Api\AndroidApiController@cash_payment')->middleware('AndroidApiCheck');//现金支付接口
+        Route::any('other_payment', 'Api\AndroidApiController@other_payment')->middleware('AndroidApiCheck');//其他支付接口
         Route::any('allow_zero_stock', 'Api\AndroidApiController@allow_zero_stock')->middleware('AndroidApiCheck');//开启/关闭零库存开单接口
         Route::any('change_stock_role', 'Api\AndroidApiController@change_stock_role')->middleware('AndroidApiCheck');//下单减库存/付款减库存接口
         Route::any('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidApiCheck');//查询店铺设置
