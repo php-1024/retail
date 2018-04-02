@@ -95,8 +95,7 @@ class SupplierController extends Controller
     public function supplier_delete(Request $request)
     {
         $supplier_id = $request->get('id');
-        $supplier = RetailSupplier::getOne(['id'=>$supplier_id]);
-        return view('Retail/Supplier/supplier_delete',['supplier'=>$supplier]);
+        return view('Retail/Supplier/supplier_delete',['supplier_id'=>$supplier_id]);
     }
 
     //供应商编辑操作
