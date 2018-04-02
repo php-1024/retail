@@ -710,7 +710,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('test', 'Fansmanage\WechatController@test');//测试函数
     });
 
-    //微信通用路由组
+    //android-app接口
     Route::group(['prefix' => 'androidapi'], function () {
         Route::any('login', 'Api\AndroidApiController@login')->middleware('AndroidApiCheck');//登入接口
         Route::any('goodscategory', 'Api\AndroidApiController@goodscategory')->middleware('AndroidApiCheck');//商品分类接口
