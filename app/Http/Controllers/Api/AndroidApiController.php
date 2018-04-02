@@ -218,7 +218,15 @@ class AndroidApiController extends Controller{
         $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();//粉丝账号
         $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();//操作人员账号
         $goodsdata = $order['retail_order_goods'];//订单商品列表
-        print_r($goodsdata);
+        foreach($goodsdata as $key=>$value){
+            $ordergoods[$key]['goods_id']=$value['goods_id'];
+            $ordergoods[$key]['title']=$value['title'];
+            $ordergoods[$key]['thumb']='http://o2o.01nnt.com/'.$value['thumb'];
+            $ordergoods[$key]['details']=$value['details'];
+            $ordergoods[$key]['total']=$value['total'];
+            $ordergoods[$key]['price']=$value['price'];
+        }
+        print_r($ordergoods);
         $orderdata = [
             'id' => $order['id'],
             'ordersn' => $order['ordersn'],
