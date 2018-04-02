@@ -359,11 +359,13 @@ class AndroidApiController extends Controller{
         if(empty($re)){
             return response()->json(['status' => '0', 'msg' => '该店铺没有设置配置项', 'data' =>'']);
         }
-        $cfglist = [
-            'id'=>$re['id'],
-            'cfg_name'=>$re['cfg_name'],
-            'cfg_value'=>$re['cfg_value'],
-        ];
+        foreach($re as $key=>$value){
+            $cfglist[$key] = [
+                'id'=>$value['id'],
+                'cfg_name'=>$value['cfg_name'],
+                'cfg_value'=>$value['cfg_value'],
+            ];
+        }
         return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['cfglist' => $cfglist]]);
     }
 
