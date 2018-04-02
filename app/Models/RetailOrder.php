@@ -66,7 +66,7 @@ class RetailOrder extends Model{
         if(!empty($param['paytype'])){
             $retailorder->paytype = $param['paytype'];//付款方式
         }
-        if($param['remarks']){
+        if(!empty($param['remarks'])){
             $retailorder->remarks = $param['remarks'];//备注信息
         }
         $retailorder->save();
