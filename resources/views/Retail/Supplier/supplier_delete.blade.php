@@ -1,6 +1,6 @@
 <form class="form-horizontal" id="category_delete_check" method="post" action="{{url('retail/ajax/supplier_delete_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     <input type="hidden" name="supplier_id" id="_token" value="{{$supplier_id}}">
+     <input type="hidden" name="supplier_id" id="_token" value="{{$supplier->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
