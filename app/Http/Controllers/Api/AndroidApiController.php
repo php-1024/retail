@@ -274,6 +274,10 @@ class AndroidApiController extends Controller{
      */
     public function cash_payment(Request $request){
         $order_id = $request->order_id;//订单id
+        $order_status = RetailOrder::getPluck([['id',$order_id]],'status')->first();
+        if($order_status != '0'){
+            return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
+        }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
@@ -307,6 +311,10 @@ class AndroidApiController extends Controller{
      */
     public function other_payment(Request $request){
         $order_id = $request->order_id;//订单id
+        $order_status = RetailOrder::getPluck([['id',$order_id]],'status')->first();
+        if($order_status != '0'){
+            return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
+        }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $payment＿company = $request->payment＿company;//支付公司名字
