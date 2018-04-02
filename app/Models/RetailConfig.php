@@ -31,7 +31,7 @@ class RetailConfig extends Model{
 
 
     //修改数据
-    public static function editAccount($where,$param){
+    public static function editRetailConfig($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
             $model->$key=$val;
@@ -40,18 +40,11 @@ class RetailConfig extends Model{
     }
 
     //添加用户
-    public static function addAccount($param){
-        $model = new Account();
-        $model->organization_id = $param['organization_id'];//组织ID
-        $model->parent_id = $param['parent_id'];//上级用户ID
-        $model->parent_tree = $param['parent_tree'];//组织树
-        $model->deepth = $param['deepth'];//用户在该组织里的深度
-        $model->account = $param['account'];//登录账号（零壹平台,自动生成）
-        $model->password = $param['password'];//登录密码（MD5默认32位长度）
-        $model->mobile = $param['mobile'];//管理员绑定的手机号码
-        if($param['uuid']){
-            $model->uuid = $param['uuid'];
-        }
+    public static function addRetailConfig($param){
+        $model = new RetailConfig();
+        $model->retail_id = $param['retail_id'];//组织ID
+        $model->cfg_name = $param['cfg_name'];//配置项名
+        $model->cfg_value = $param['cfg_value'];//配置项状态值
         $model->save();
         return $model->id;
     }

@@ -310,5 +310,25 @@ class AndroidApiController extends Controller{
         }
         return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
     }
+
+    /**
+     * 开启/关闭零库存开单接口
+     */
+    public function allow_zero_stock(Request $request){
+        $cfg_value = $request->cfg_value;//开启或关闭值
+        $organization_id = $request->organization_id;//店铺
+
+        $re = RetailConfig::getOne([['retail_id',$organization_id],['cfg','allow_zero_stock']]);//查看店铺allow_zero_stock值是否存在
+        if(!empty($re)){//如果存在
+            if($cfg_value == $re['cfg_value']){//如果状态一致
+                return response()->json(['msg' => '状态一致，无效操作', 'status' => '0', 'data' => '']);
+            }
+            RetailConfig::editRetailConfig([['id',$re['id']]],['cfg_value' => $cfg_value]);//修改状态值
+        }else{
+            RetailConfig::addRetailConfig(['retail_id' => $organization_id, 'cfg_name' => 'allow_zero_stock', 'cfg_value' => $cfg_value]);//添加配置项
+        }
+        return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['vfg_value' => $cfg_value, 'cfg_name' => 'allow_zero_stock']]);
+    }
+
 }
 ?>
