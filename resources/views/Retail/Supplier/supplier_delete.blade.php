@@ -1,6 +1,6 @@
 <form class="form-horizontal" id="category_delete_check" method="post" action="{{url('retail/ajax/supplier_delete_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     <input type="hidden" name="category_id" id="_token" value="{{$category_id}}">
+     <input type="hidden" name="supplier_id" id="_token" value="{{$supplier_id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,10 +11,8 @@
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="safe_password" value="">
-                                <span class="help-block m-b-none text-danger">删除分类后，原分类下的商品的分类默认为其他</span>
                             </div>
                         </div>
 
@@ -22,7 +20,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" onclick="DeleteCategory()">确定</button>
+                    <button class="btn btn-success" type="button" onclick="DeleteSupplier()">确定</button>
                 </div>
             </div>
         </div>
@@ -30,8 +28,8 @@
 
  <script>
      //删除分类信息提交
-     function DeleteCategory(){
-         var target = $("#category_delete_check");
+     function DeleteSupplier(){
+         var target = $("#supplier_delete_check");
          var url = target.attr("action");
          var data = target.serialize();
          $.post(url,data,function(response){
