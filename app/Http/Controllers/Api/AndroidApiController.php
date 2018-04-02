@@ -283,6 +283,7 @@ class AndroidApiController extends Controller{
             if($power == '1'){//说明付款减库存
                 $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
                 foreach($list as $key=>$value){
+                    print_r($value);
                     $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
                     if($config != '1'){//如果不允许零库存开单
                         if($goods['stock'] - $value['num'] < 0){//库存小于0 打回
