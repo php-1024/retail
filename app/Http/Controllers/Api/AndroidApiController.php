@@ -215,6 +215,14 @@ class AndroidApiController extends Controller{
 
         $orderdata = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
         $ordergoods = $orderdata['retail_order_goods'];
+        foreach($ordergoods as $key=>$value){
+            unset($ordergoods[$key]['order_id']);
+            unset($ordergoods[$key]['goods_id']);
+            unset($ordergoods[$key]['status']);
+            unset($ordergoods[$key]['created_at']);
+            unset($ordergoods[$key]['updated_at']);
+            unset($ordergoods[$key]['deleted_at']);
+        }
         unset($orderdata['updated_at']);
         unset($orderdata['deleted_at']);
         unset($orderdata['user']);
