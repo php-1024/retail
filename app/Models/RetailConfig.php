@@ -39,7 +39,7 @@ class RetailConfig extends Model{
         $model->save();
     }
 
-    //添加用户
+    //添加数据
     public static function addRetailConfig($param){
         $model = new RetailConfig();
         $model->retail_id = $param['retail_id'];//组织ID

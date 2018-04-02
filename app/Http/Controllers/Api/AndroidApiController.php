@@ -325,7 +325,7 @@ class AndroidApiController extends Controller{
             }
             RetailConfig::editRetailConfig([['id',$re['id']]],['cfg_value' => $cfg_value]);//修改状态值
         }else{
-            RetailConfig::addRetailConfig(['retail_id' => $organization_id, 'cfg_name' => 'allow_zero_stock', 'cfg_value' =>'2']);//添加配置项
+            RetailConfig::addRetailConfig(['retail_id' => $organization_id, 'cfg_name' => 'allow_zero_stock', 'cfg_value' => '121313']);//添加配置项
         }
         return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['vfg_value' => $cfg_value, 'cfg_name' => 'allow_zero_stock']]);
     }
