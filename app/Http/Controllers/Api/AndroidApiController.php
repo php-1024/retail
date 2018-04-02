@@ -214,10 +214,11 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
         $order_id = $request->order_id;//订单id
 
-        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
-        $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();
-        $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();
-        $goodsdata = $order['retail_order_goods'];
+        $order = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();//订单详情
+        $user_account = User::getPluck([['id',$order['user_id']]],'account')->first();//粉丝账号
+        $operator_account = User::getPluck([['id',$order['operator_id']]],'account')->first();//操作人员账号
+        $goodsdata = $order['retail_order_goods'];//订单商品列表
+        print_r($goodsdata);
         $orderdata = [
             'id' => $order['id'],
             'ordersn' => $order['ordersn'],
@@ -233,7 +234,6 @@ class AndroidApiController extends Controller{
             'retail_id' => $order['retail_id'],
             'operator_account' => $operator_account,
             ];
-        print_r($orderdata);
 
 //        $data = [
 //            'orderlist'=>$orderlist,
