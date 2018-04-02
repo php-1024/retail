@@ -286,7 +286,6 @@
                     confirmButtonText: "确定",
                 },function(){
                     window.location.href = "{{url('retail/billing/purchase_goods')}}";
-//                    window.location.reload();
                 });
             }else{
                 swal({
