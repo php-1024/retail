@@ -213,8 +213,12 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
         $order_id = $request->order_id;//订单id
 
-        $orderdata = RetailOrder::getOne([['id',$order_id]])->toArray();
-
+        $orderdata = RetailOrder::getOne([['id',$order_id],['retail_id',$organization_id]])->toArray();
+        $ordergoods = $orderdata['retail_order_goods'];
+        unset($orderdata['updated_at']);
+        unset($orderdata['deleted_at']);
+        unset($orderdata['user']);
+        unset($orderdata['retail_order_goods']);
         print_r($orderdata);
 
 //        $data = [
