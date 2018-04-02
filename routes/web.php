@@ -721,6 +721,7 @@ Route::group(['prefix'=>'api'],function() {
         Route::any('cash_payment', 'Api\AndroidApiController@cash_payment')->middleware('AndroidApiCheck');//现金支付接口
         Route::any('allow_zero_stock', 'Api\AndroidApiController@allow_zero_stock')->middleware('AndroidApiCheck');//开启/关闭零库存开单接口
         Route::any('change_stock_role', 'Api\AndroidApiController@change_stock_role')->middleware('AndroidApiCheck');//下单减库存/付款减库存接口
+        Route::any('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidApiCheck');//查询店铺设置
     });
 });
 /*********************接口路由*************************/
