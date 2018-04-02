@@ -400,7 +400,7 @@ class AndroidApiController extends Controller{
                 'cfg_value'=>$value['cfg_value'],
             ];
         }
-        return response()->json(['status' => '1', 'msg' => '设置成功', 'data' => ['cfglist' => $cfglist]]);
+        return response()->json(['status' => '1', 'msg' => '查询成功', 'data' => ['cfglist' => $cfglist]]);
     }
 
 
