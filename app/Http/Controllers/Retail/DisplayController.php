@@ -151,7 +151,7 @@ class DisplayController extends Controller
         $lng = $request->lng;                          //获取店铺logo
         $lat = $request->lat;                          //获取店铺logo
         dd($lng);
-        $this->bd_decrypt('114.270207','22.718905')
+        $this->bd_decrypt('114.270207','22.718905');
 
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
