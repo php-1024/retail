@@ -406,7 +406,6 @@
         bmap.init({});
 
         if ($('#address').val()) {
-            alert(11);
             bmap.searchMapByAddress($('#address').val());
 
         }
