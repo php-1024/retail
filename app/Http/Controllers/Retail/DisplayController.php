@@ -148,11 +148,11 @@ class DisplayController extends Controller
         $retail_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
         $retail_address = $request->get('retail_address');              //获取店铺地址
         $file = $request->file('retail_logo');                          //获取店铺logo
-        $lng = $request->lng;                          //获取店铺logo
-        $lat = $request->lat;                          //获取店铺logo
-        dd($lng);
-        $this->bd_decrypt('114.270207','22.718905');
+        $lng = $request->lng;    //lon 百度经度
+        $lat = $request->lat;    //lat 百度纬度
 
+        $bd_gcj = $this->bd_decrypt($lng,$lat);
+        dd($bd_gcj);
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
             if ($file->isValid()) {
