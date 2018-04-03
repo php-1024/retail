@@ -148,6 +148,13 @@ class DisplayController extends Controller
         $retail_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
         $retail_address = $request->get('retail_address');              //获取店铺地址
         $file = $request->file('retail_logo');                          //获取店铺logo
+        $lng = $request->file('lng');                          //获取店铺logo
+        $lat = $request->file('lat');                          //获取店铺logo
+        dump($lng);
+        dump($lat);
+
+
+
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
             if ($file->isValid()) {
@@ -167,6 +174,7 @@ class DisplayController extends Controller
             'retail_owner_mobile' => $retail_owner_mobile,
             'retail_address' => $retail_address,
         ];
+
         DB::beginTransaction();
         try {
             Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
@@ -184,6 +192,33 @@ class DisplayController extends Controller
         }
         return response()->json(['data' => '修改店铺信息成功','file_path' => $file_path, 'status' => '1']);
     }
+
+
+    private static $pi = 3.14159265358979324;  // 圆周率
+    private static $a = 6378245.0; // WGS 长轴半径
+    private static $ee = 0.00669342162296594323; // WGS 偏心率的平方
+
+    /**
+     * 将百度坐标系 BD-09 坐标 转换成 火星坐标系GCJ-02 坐标
+     * @param $bd_loc 火星坐标点(Class Coordinate)
+     *  @return $bg_loc Coordinate对象，火星坐标系经纬度坐标
+     */
+    public static function bd_gcj($bd_loc)
+    {
+        define('X_PI',3.14159265358979324 * 3000.0 / 180.0);
+        $x_pi = X_PI;
+        $x = $bd_loc->x - 0.0065;
+        $y = $bd_loc->y - 0.006;
+        $z = sqrt($x * $x + $y * $y) - 0.00002 * sin($y * $x_pi);
+        $theta = atan2($y, $x) - 0.000003 * cos($x * $x_pi);
+        $gc_x = $z * cos($theta);
+        $gc_y = $z * sin($theta);
+        $gc_loc =['lng'=> $gc_x, 'lat'=>$gc_y];
+        return $gc_loc;
+    }
+
+
 }
+
 
 ?>
