@@ -150,8 +150,7 @@ class DisplayController extends Controller
         $file = $request->file('retail_logo');                          //获取店铺logo
         $lng = $request->file('lng');                          //获取店铺logo
         $lat = $request->file('lat');                          //获取店铺logo
-        $bd =['x'=>'114.270207','y'=>'22.718905'];
-        dd($this->bd_gcj($bd));
+        dd($this->bd_decrypt('114.270207','22.718905'));
 
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
@@ -192,27 +191,20 @@ class DisplayController extends Controller
     }
 
 
-    private static $pi = 3.14159265358979324;  // 圆周率
-    private static $a = 6378245.0; // WGS 长轴半径
-    private static $ee = 0.00669342162296594323; // WGS 偏心率的平方
-
-    /**
-     * 将百度坐标系 BD-09 坐标 转换成 火星坐标系GCJ-02 坐标
-     * @param $bd_loc 火星坐标点(Class Coordinate)
-     *  @return $bg_loc Coordinate对象，火星坐标系经纬度坐标
-     */
-    private function  bd_gcj($bd_loc)
-    {
-        define('X_PI',3.14159265358979324 * 3000.0 / 180.0);
-        $x_pi = X_PI;
-        $x = $bd_loc->x - 0.0065;
-        $y = $bd_loc->y - 0.006;
+    function bd_decrypt($bd_lon,$bd_lat){
+        $x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        $x = $bd_lon - 0.0065;
+        $y = $bd_lat - 0.006;
         $z = sqrt($x * $x + $y * $y) - 0.00002 * sin($y * $x_pi);
         $theta = atan2($y, $x) - 0.000003 * cos($x * $x_pi);
-        $gc_x = $z * cos($theta);
-        $gc_y = $z * sin($theta);
-        $gc_loc =['lng'=> $gc_x, 'lat'=>$gc_y];
-        return $gc_loc;
+        // $data['gg_lon'] = $z * cos($theta);
+        // $data['gg_lat'] = $z * sin($theta);
+        $gg_lon = $z * cos($theta);
+        $gg_lat = $z * sin($theta);
+        // 保留小数点后六位
+        $data['gg_lon'] = round($gg_lon, 6);
+        $data['gg_lat'] = round($gg_lat, 6);
+        return $data;
     }
 
 
