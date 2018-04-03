@@ -170,6 +170,8 @@ class DisplayController extends Controller
             'retail_owner' => $retail_owner,
             'retail_owner_mobile' => $retail_owner_mobile,
             'retail_address' => $retail_address,
+            'lng' => $bd_gcj['gg_lon'],
+            'lat' => $bd_gcj['lat'],
         ];
 
         DB::beginTransaction();
