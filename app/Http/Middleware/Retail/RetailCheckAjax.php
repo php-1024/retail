@@ -631,6 +631,9 @@ class RetailCheckAjax
         if (empty($request->input('name'))) {
             return self::res(0, response()->json(['data' => '请输入商品名称!', 'status' => '0']));
         }
+        if (empty($request->input('details'))) {
+            return self::res(0, response()->json(['data' => '请填写商品详情!', 'status' => '0']));
+        }
         if (!empty($request->input('price')) && !is_numeric($request->input('price'))){
             return self::res(0, response()->json(['data' => '请正确输入价格!', 'status' => '0']));
         }
