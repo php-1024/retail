@@ -204,12 +204,10 @@ class GoodsController extends Controller
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //获取分类栏目ID
-        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id');
-        dd($id);
+        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id')->first();
         DB::beginTransaction();
         try {
             RetailGoods::select_delete($goods_id);
-
             RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
