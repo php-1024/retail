@@ -150,8 +150,8 @@ class DisplayController extends Controller
         $file = $request->file('retail_logo');                          //获取店铺logo
         $lng = $request->file('lng');                          //获取店铺logo
         $lat = $request->file('lat');                          //获取店铺logo
-        dump($lng);
-        dump($lat);
+        dd($lng);
+        dd($lat);
 
 
 
