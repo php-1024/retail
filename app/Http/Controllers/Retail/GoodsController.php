@@ -49,7 +49,7 @@ class GoodsController extends Controller
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
         if (!is_numeric($price)){
-            return response()->json(['data' => '对不起，输入的不是数字类型', 'status' => '0']);
+            return response()->json(['data' => '请正确输入价格！', 'status' => '0']);
         }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         //商品数据
