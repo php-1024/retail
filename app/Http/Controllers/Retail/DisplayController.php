@@ -148,9 +148,10 @@ class DisplayController extends Controller
         $retail_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
         $retail_address = $request->get('retail_address');              //获取店铺地址
         $file = $request->file('retail_logo');                          //获取店铺logo
-        $lng = $request->file('lng');                          //获取店铺logo
-        $lat = $request->file('lat');                          //获取店铺logo
-        dd($this->bd_decrypt('114.270207','22.718905'));
+        $lng = $request->lng;                          //获取店铺logo
+        $lat = $request->lat;                          //获取店铺logo
+        dd($lng);
+        $this->bd_decrypt('114.270207','22.718905')
 
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
@@ -191,6 +192,9 @@ class DisplayController extends Controller
     }
 
 
+    //BD-09(百度)坐标转换成GCJ-02(火星，高德)坐标
+    //@param bd_lon 百度经度
+    //@param bd_lat 百度纬度
     function bd_decrypt($bd_lon,$bd_lat){
         $x_pi = 3.14159265358979324 * 3000.0 / 180.0;
         $x = $bd_lon - 0.0065;
