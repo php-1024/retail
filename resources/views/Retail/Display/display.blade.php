@@ -433,7 +433,7 @@
 
 
 
-            'point' : {'lng' : 116.403851, 'lat' : 39.915177}
+            'point' : {'lng' : {{$organization->OrganizationRetailinfo->lng}}, 'lat' : {{$organization->OrganizationRetailinfo->lng}}}
 
 
 
