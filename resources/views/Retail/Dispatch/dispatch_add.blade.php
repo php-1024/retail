@@ -42,14 +42,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">运费模板名称</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="category_name" value="">
+                                            <input type="text" class="form-control" name="dispatch_name" value="">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">排序</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="category_sort" value="0">
+                                            <input type="text" class="form-control" name="displayorder" value="0">
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>

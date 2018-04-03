@@ -30,18 +30,19 @@ class DispatchController extends Controller
     //添加运费模板操作
     public function dispatch_add_check(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $category_name = $request->get('category_name');    //栏目名称
-        $category_sort = $request->get('category_sort');    //栏目排序
-        if (empty($category_sort)){
-            $category_sort = '0';
+        $dispatch_name = $request->get('dispatch_name');    //栏目名称
+        $displayorder = $request->get('displayorder');    //栏目排序
+        if (empty($displayorder)){
+            $displayorder = '0';
         }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         $category_data = [
-            'name' => $category_name,
+            'name' => $dispatch_name,
             'created_by' => $admin_data['id'],
-            'displayorder' => $category_sort,
+            'displayorder' => $displayorder,
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
