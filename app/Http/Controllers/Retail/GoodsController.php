@@ -48,6 +48,11 @@ class GoodsController extends Controller
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
+        if (is_numeric($price)){
+            return response()->json(['data' => '输入的类型为数字类型', 'status' => '0']);
+        }else{
+            return response()->json(['data' => '对不起，输入的不是数字类型', 'status' => '0']);
+        }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
         //商品数据
         $goods_data = ['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'created_by' => $admin_data['id'],'category_id' => $category_id,'name' => $name, 'price' => $price, 'stock' => $stock, 'barcode'=>$barcode,'displayorder' => $displayorder, 'details' => $details];
