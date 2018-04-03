@@ -593,6 +593,11 @@ Route::group(['prefix'=>'retail'],function(){
         Route::get('order_appointment', 'Retail\OrderController@order_appointment')->middleware('RetailCheck');         //预约管理
     });
 
+    //订单管理
+    Route::group(['prefix'=>'dispatch'],function(){
+        Route::get('add_dispatch', 'Retail\DispatchController@add_dispatch')->middleware('RetailCheck');                       //订单管理-现场订单
+    });
+
     //进销存开单处理
     Route::group(['prefix'=>'supplier'],function(){
         Route::get('supplier_add', 'Retail\SupplierController@supplier_add')->middleware('RetailCheck');        //添加供应商
