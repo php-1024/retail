@@ -69,13 +69,11 @@
                                     <tr>
                                         <td>{{$val->goods_id}}</td>
                                         <td>{{$val->RetailGoods->name}}</td>
-                                        <td>
-                                            @if($val->RetailCategory == null)
-                                                栏目已删除
-                                            @else
-                                                {{$val->RetailCategory->name}}
-                                            @endif
-                                        </td>
+                                        @if($val->RetailCategory == null)
+                                        <td style="color:#FF0000">栏目已删除</td>
+                                        @else
+                                        <td>{{$val->RetailCategory->name}}</td>
+                                        @endif
                                         <td>{{$val->RetailGoods->barcode}}</td>
                                         <td>{{$val->RetailGoods->number}}</td>
                                         <td>{{$val->stock}}</td>
