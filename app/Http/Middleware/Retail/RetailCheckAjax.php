@@ -631,13 +631,13 @@ class RetailCheckAjax
         if (empty($request->input('name'))) {
             return self::res(0, response()->json(['data' => '请输入商品名称!', 'status' => '0']));
         }
-        if (!is_numeric($request->input('price'))){
+        if (!empty($request->input('price')) && !is_numeric($request->input('price'))){
             return self::res(0, response()->json(['data' => '请正确输入价格!', 'status' => '0']));
         }
-        if (!is_numeric($request->input('barcode'))){
+        if (!empty($request->input('barcode')) && !is_numeric($request->input('barcode'))){
             return self::res(0, response()->json(['data' => '请正确输入商品条码!', 'status' => '0']));
         }
-        if (!is_numeric($request->input('stock'))){
+        if (!empty($request->input('stock')) && !is_numeric($request->input('stock'))){
             return self::res(0, response()->json(['data' => '请正确输入库存!', 'status' => '0']));
         }
         return self::res(1, $request);
