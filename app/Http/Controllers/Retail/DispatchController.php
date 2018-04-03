@@ -30,7 +30,6 @@ class DispatchController extends Controller
     //添加运费模板操作
     public function dispatch_add_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //栏目名称
@@ -49,6 +48,7 @@ class DispatchController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
+        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
         DB::beginTransaction();
         try {
             RetailCategory::addCategory($category_data);
