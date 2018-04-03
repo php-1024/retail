@@ -48,7 +48,6 @@ class DispatchController extends Controller
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
         DB::beginTransaction();
         try {
             RetailCategory::addCategory($category_data);
