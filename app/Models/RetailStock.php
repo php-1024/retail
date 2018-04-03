@@ -53,6 +53,11 @@ class RetailStock extends Model{
         return $model->with('RetailGoods')->with('RetailCategory')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
+    //获取单行数据的其中一列
+    public static function getPluck($where,$pluck){
+        return self::where($where)->pluck($pluck);
+    }
+
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
         $model = Self::find($id);
