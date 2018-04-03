@@ -312,7 +312,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="lng" id="lng" value=""  class="span3" /> - <input type="text" id="lat" name="lat" value=""  class="span3" />
+                        <input type="text" name="lng" id="lng" value="114.270207"  class="span3" /> - <input type="text" id="lat" name="lat" value="22.718905"  class="span3" />
                     </div>
 
 

@@ -150,10 +150,8 @@ class DisplayController extends Controller
         $file = $request->file('retail_logo');                          //获取店铺logo
         $lng = $request->file('lng');                          //获取店铺logo
         $lat = $request->file('lat');                          //获取店铺logo
-        dd($lng);
-        dd($lat);
-
-
+        $bd =['x'=>'114.270207','y'=>'22.718905'];
+        dd($this->bd_gcj($bd));
 
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
@@ -203,7 +201,7 @@ class DisplayController extends Controller
      * @param $bd_loc 火星坐标点(Class Coordinate)
      *  @return $bg_loc Coordinate对象，火星坐标系经纬度坐标
      */
-    public static function bd_gcj($bd_loc)
+    private function  bd_gcj($bd_loc)
     {
         define('X_PI',3.14159265358979324 * 3000.0 / 180.0);
         $x_pi = X_PI;
