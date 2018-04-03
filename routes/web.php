@@ -595,7 +595,7 @@ Route::group(['prefix'=>'retail'],function(){
 
     //订单管理
     Route::group(['prefix'=>'dispatch'],function(){
-        Route::get('add_dispatch', 'Retail\DispatchController@add_dispatch')->middleware('RetailCheck');                       //订单管理-现场订单
+        Route::get('dispatch_add', 'Retail\DispatchController@dispatch_add')->middleware('RetailCheck');                       //订单管理-现场订单
     });
 
     //进销存开单处理
