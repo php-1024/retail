@@ -308,6 +308,7 @@
                         <div class="col-sm-10">
                             <input type="text" value="{{$organization->OrganizationRetailinfo->retail_address}}" name="retail_address" placeholder="店铺地址" class="form-control">
                         </div>
+                        <div id="baidumap" style="width:550px; height:300px;"></div>
                     </div>
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
