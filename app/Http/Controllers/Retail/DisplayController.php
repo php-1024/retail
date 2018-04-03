@@ -152,7 +152,6 @@ class DisplayController extends Controller
         $lat = $request->lat;    //lat 百度纬度
 
         $bd_gcj = $this->bd_decrypt($lng,$lat);
-        dd($bd_gcj);
         $file_path =  '';       //初始化文件路径为空
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
             if ($file->isValid()) {

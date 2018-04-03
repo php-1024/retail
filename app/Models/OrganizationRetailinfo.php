@@ -26,6 +26,12 @@ class OrganizationRetailinfo extends Model{
         $program->retail_owner = $param['retail_owner'];//分店负责人姓名
         $program->retail_owner_idcard = $param['retail_owner_idcard'];//分店负责人身份证
         $program->retail_owner_mobile = $param['retail_owner_mobile'];//分店负责人手机号
+        if(!empty($param['lng'])){
+            $program->lng = $param['lng'];//百度经度
+        }
+        if(!empty($param['lat'])){
+            $program->lat = $param['lat'];//百度纬度
+        }
         $program->save();
         return $program->id;
     }
