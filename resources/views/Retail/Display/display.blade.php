@@ -598,7 +598,7 @@
 
         'searchMapByAddress' : function(address) {
 
-
+            alert(1);
 
             var $this = this;
 
