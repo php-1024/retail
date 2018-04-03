@@ -14,7 +14,7 @@ class Dispatch extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //添加运费模板名称
-    public static function addCategory($param){
+    public static function addDispatch($param){
         $model = new Dispatch();
         $model->fansmanage_id = $param['fansmanage_id'];
         $model->store_id = $param['store_id'];

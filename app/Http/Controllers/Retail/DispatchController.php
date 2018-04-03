@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dispatch;
 use App\Models\OperationLog;
 use App\Models\RetailCategory;
 use App\Models\Organization;
@@ -34,6 +35,8 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //栏目名称
         $displayorder = $request->get('displayorder');    //栏目排序
+        $number = date('Ymdhis');
+        dd($number);
         if (empty($dispatch_name)){
             return response()->json(['data' => '请输入运费模板名称！', 'status' => '0']);
         }
@@ -41,16 +44,16 @@ class DispatchController extends Controller
             $displayorder = '0';
         }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $category_data = [
+        $dispatch_data = [
             'name' => $dispatch_name,
-            'created_by' => $admin_data['id'],
+            'number' => $number,
             'displayorder' => $displayorder,
             'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
+            'store_id' => $admin_data['organization_id'],
         ];
         DB::beginTransaction();
         try {
-            RetailCategory::addCategory($category_data);
+            Dispatch::addDispatch($dispatch_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员添加零售店铺分类的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了栏目分类！');//保存操作记录
