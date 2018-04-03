@@ -35,6 +35,9 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //栏目名称
         $displayorder = $request->get('displayorder');    //栏目排序
+        if (empty($dispatch_name)){
+            return response()->json(['data' => '请输入运费模板名称！', 'status' => '0']);
+        }
         if (empty($displayorder)){
             $displayorder = '0';
         }
