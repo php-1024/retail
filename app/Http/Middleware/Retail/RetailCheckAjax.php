@@ -70,7 +70,6 @@ class RetailCheckAjax
             case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
             case "retail/ajax/loss_list_confirm_check":       //审核订单安全密码确认
             case "retail/ajax/check_list_confirm_check":      //审核订单安全密码确认
-            case "retail/ajax/supplier_edit_check":           //审核供应商修改安全密码确认
             case "retail/ajax/supplier_delete_check":         //进销存管理--删除供应商确认
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
@@ -631,6 +630,15 @@ class RetailCheckAjax
     {
         if (empty($request->input('name'))) {
             return self::res(0, response()->json(['data' => '请输入商品名称!', 'status' => '0']));
+        }
+        if (!is_numeric($request->input('price'))){
+            return response()->json(['data' => '请正确输入价格！', 'status' => '0']);
+        }
+        if (!is_numeric($request->input('barcode'))){
+            return response()->json(['data' => '请正确输入商品条码！', 'status' => '0']);
+        }
+        if (!is_numeric($request->input('stock'))){
+            return response()->json(['data' => '请正确输入库存！', 'status' => '0']);
         }
         return self::res(1, $request);
     }
