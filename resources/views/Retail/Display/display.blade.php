@@ -310,6 +310,10 @@
                         </div>
                         <div id="baidumap" style="width:550px; height:300px;"></div>
                     </div>
+
+                    <div class="form-group">
+                        <input type="text" name="lng" id="lng" value="114.270207"  class="span3" /> - <input type="text" id="lat" name="lat" value="22.718905"  class="span3" />
+                    </div>
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
