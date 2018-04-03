@@ -31,12 +31,11 @@ class DispatchController extends Controller
     //添加运费模板操作
     public function dispatch_add_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //栏目名称
-        $displayorder = $request->get('displayorder');    //栏目排序
-        $number = date('Ymdhis');
-        dd($number);
+        $displayorder = $request->get('displayorder');      //栏目排序
+        $number = date('Ymdhis').rand(1000,9999);        //时间加上4为随机数，一共18位数
         if (empty($dispatch_name)){
             return response()->json(['data' => '请输入运费模板名称！', 'status' => '0']);
         }
