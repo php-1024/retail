@@ -27,6 +27,8 @@ class SftController extends Controller{
             'exts'=>'',
         ];
 
+        $data =  json_encode($data, JSON_UNESCAPED_UNICODE);;
+
         dump($data);
 
     }
