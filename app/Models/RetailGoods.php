@@ -45,6 +45,16 @@ class RetailGoods extends Model{
         return self::where($where)->pluck($pluck);
     }
 
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where){
+        $row = self::getPluck($where,'id')->toArray();
+        if(empty($row)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC',$select=[]){
         $model = new RetailGoods();
