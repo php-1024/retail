@@ -113,21 +113,23 @@ class WechatmenuController extends CommonController
         try {
             // 添加微信自定义菜单
             WechatDefinedMenu::addDefinedMenu($defined_menu);
-            if ($this->admin_data['is_super'] == 1) {
-                // 超级管理员操作商户的记录
-                // 添加操作日志
-                $this->insertOperationLog("1", "在餐饮系统添加了公众号自定义菜单！", "1", "1");
-            } else {
-                // 商户本人操作记录
-                // 保存操作记录
-                $this->insertOperationLog("4", "添加了公众号自定义菜单！");
-            }
+//            if ($this->admin_data['is_super'] == 1) {
+//                // 超级管理员操作商户的记录
+//                // 添加操作日志
+//                $this->insertOperationLog("1", "在餐饮系统添加了公众号自定义菜单！", "1", "1");
+//            } else {
+//                // 商户本人操作记录
+//                // 保存操作记录
+//                $this->insertOperationLog("4", "添加了公众号自定义菜单！");
+//            }
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
         }
+
+
         return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
     }
 
