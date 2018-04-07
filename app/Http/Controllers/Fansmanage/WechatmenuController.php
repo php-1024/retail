@@ -133,6 +133,7 @@ class WechatmenuController extends CommonController
     }
 
     /**
+     * 获取菜单列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function defined_menu_get()
