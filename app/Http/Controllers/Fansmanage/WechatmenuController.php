@@ -769,4 +769,3 @@ class WechatmenuController extends Controller{
 
 
 }
-?>
