@@ -139,10 +139,8 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
         // 获取主菜单列表
         $list = WechatDefinedMenu::getList([['organization_id', $this->admin_data['organization_id']], ['parent_id', '0']], 0, 'id', 'asc');
-
         // 处理菜单数据
         $son_menu = [];
         foreach ($list as $key => $val) {
@@ -168,14 +166,15 @@ class WechatmenuController extends CommonController
         $this->getRequestInfo();
         // 获取编辑的数据的id
         $id = request()->get('id');
+        // 获取要修改的菜单的数据
         $definedmenu = WechatDefinedMenu::getOne([['id', $id]]);
-        //获取授权APPID
+        // 获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
-        //获取触发关键字列表
+        // 获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']]], 0, 'id', 'DESC');
-
-        //获取菜单列表
+        // 获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0']], 0, 'id', 'DESC');
+        // 渲染页面
         return view('Fansmanage/Wechatmenu/defined_menu_edit', ['list' => $list, 'wechatreply' => $wechatreply, 'definedmenu' => $definedmenu]);
     }
 
