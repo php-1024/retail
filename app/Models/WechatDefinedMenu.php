@@ -54,8 +54,8 @@ class WechatDefinedMenu extends Model
     public static function addDefinedMenu($param)
     {
         $res = self::create($param);
-        $res_arr = $res->toArray();
-        return $res_arr;
+//        $res_arr = $res->toArray();
+        return $res;
     }
 
     //删除菜单
