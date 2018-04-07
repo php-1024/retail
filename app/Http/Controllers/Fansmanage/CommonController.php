@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Fansmanage;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\OperationLog;
 
 class CommonController extends Controller
 {
@@ -33,6 +34,12 @@ class CommonController extends Controller
         $this->route_name = request()->path();
     }
 
+    /**
+     * 返回消息提示
+     * @param string $status 状态码
+     * @param string $data 状态信息
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getResponseMsg($status, $data)
     {
         $responseData = [
@@ -40,5 +47,16 @@ class CommonController extends Controller
             "data" => $data
         ];
         return response()->json($responseData);
+    }
+
+    /**
+     * 添加操作记录
+     * @param $program_id
+     * @param $info
+     */
+    public function insertOperationLog($program_id, $info)
+    {
+        $this->getRequestInfo();
+        OperationLog::addOperationLog($program_id, $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, $info);
     }
 }

@@ -27,7 +27,6 @@ class MessageController extends CommonController
      */
     public function auto_reply()
     {
-        dump($this->getResponseMsg("1","3213132"));
         // 中间件参数 集合
         $this->getRequestInfo();
         // 获取微信公众号关键字回复信息 并且 进行分页
@@ -71,23 +70,25 @@ class MessageController extends CommonController
         // 是：添加过就进行 已添加 的消息提示
         // 否：进行添加
         if (WechatReply::checkRowExists([['organization_id', $organization_id], ['keyword', $keyword]])) {//判断是否添加过相同的的角色
-            return response()->json(['data' => '您添加的关键字已经存在', 'status' => '0']);
+            return $this->getResponseMsg("0", "您添加的关键字已经存在");
         } else {
             // 事务处理
             DB::beginTransaction();
-
             try {
+                // 成功就进行数据提交，并且添加操作记录
                 $data = ['organization_id' => $organization_id, 'authorizer_appid' => $authorizer_appid, 'keyword' => $keyword, 'type' => $type];
                 // 添加到 关键字回复表
                 WechatReply::addWechatReply($data);
-                // 添加操作记录
-                OperationLog::addOperationLog('1', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '添加了自动回复关键字' . $keyword);//保存操作记录
+                // 保存操作记录
+                $this->insertOperationLog("1", '添加了自动回复关键字' . $keyword);
                 DB::commit();
             } catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加关键字失败，请检查', 'status' => '0']);
+                // 失败就进行数据回滚，然后返回 添加失败 的提示
+                DB::rollBack();
+                return $this->getResponseMsg("0", "添加关键字失败，请检查");
             }
-            return response()->json(['data' => '添加关键字成功', 'status' => '1']);
+            // 返回添加成功的提示
+            return $this->getResponseMsg("1", "添加关键字成功");
         }
     }
 
