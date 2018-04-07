@@ -104,8 +104,11 @@
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td>
                                             <label class="label label-info">
-                                        @if($val->paytype=='1')
-                                            支付宝扫码
+
+                                        @if($val->paytype == '0' )
+                                            银行卡支付
+                                        @elseif($val->paytype=='1')
+                                            支付宝扫码000
                                         @elseif($val->paytype == '2' )
                                             支付宝二维码
                                         @elseif($val->paytype == '3' )
